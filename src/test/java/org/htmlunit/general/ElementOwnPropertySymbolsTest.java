@@ -141,6 +141,9 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                 + "    @font-face { font-family: Delicious; src: url('Delicious-Bold.otf'); };\n"
                 + "  </style>\n"
                 + "  <style>\n"
+                + "    @import 'imp.css';\n"
+                + "  </style>\n"
+                + "  <style>\n"
                 + "    h3 { color: blue;  }\n"
                 + "  </style>\n"
 
@@ -3852,6 +3855,18 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test CSSImportRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSImportRule]",
+            IE = "exception")
+    public void cssImportRule() throws Exception {
+        testString("", "document.styleSheets[3].cssRules[0]");
+    }
+
+    /**
      * Test CSSRule.
      *
      * @throws Exception if the test fails
@@ -3860,6 +3875,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSStyleRule]",
             IE = "exception")
     public void cssStyleRule() throws Exception {
-        testString("", "document.styleSheets[3].cssRules[0]");
+        testString("", "document.styleSheets[4].cssRules[0]");
     }
 }

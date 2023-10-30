@@ -15,6 +15,9 @@
                 some impact for the backward compatibility.
             </action>
             <action type="update" dev="rbri">
+                Properties ownerNode and href moved from CSSStyleSheet to StyleSheet.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.15.0.
             </action>
             <action type="remove" dev="rbri">

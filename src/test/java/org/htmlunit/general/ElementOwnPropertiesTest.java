@@ -148,6 +148,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "    @font-face { font-family: Delicious; src: url('Delicious-Bold.otf'); };\n"
                 + "  </style>\n"
                 + "  <style>\n"
+                + "    @import 'imp.css';\n"
+                + "  </style>\n"
+                + "  <style>\n"
                 + "    h3 { color: blue;  }\n"
                 + "  </style>\n"
 
@@ -18573,6 +18576,24 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test CSSImportRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "constructor(),href[GCE],layerName[GCE],media[GSCE],styleSheet[GCE]",
+            FF = "constructor(),href[GCE],layerName[GCE],media[GSCE],styleSheet[GCE],supportsText[GCE]",
+            FF_ESR = "constructor(),href[GCE],layerName[GCE],media[GSCE],styleSheet[GCE],supportsText[GCE]",
+            IE = "constructor[],href[GCE],media[GCE],styleSheet[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),href[GCE],media[GCE],styleSheet[GCE]",
+            EDGE = "constructor(),href[GCE],media[GCE],styleSheet[GCE]",
+            FF = "constructor(),href[GCE],media[GCE],styleSheet[GCE]",
+            FF_ESR = "constructor(),href[GCE],media[GCE],styleSheet[GCE]")
+    public void cssImportRule() throws Exception {
+        testString("", "document.styleSheets[3].cssRules[0]");
+    }
+
+    /**
      * Test CSSRule.
      *
      * @throws Exception if the test fails
@@ -18588,6 +18609,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),selectorText[GSCE],style[GCE]",
             FF_ESR = "constructor(),selectorText[GSCE],style[GCE]")
     public void cssStyleRule() throws Exception {
-        testString("", "document.styleSheets[3].cssRules[0]");
+        testString("", "document.styleSheets[4].cssRules[0]");
     }
 }

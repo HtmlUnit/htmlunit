@@ -148,6 +148,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "    @font-face { font-family: Delicious; src: url('Delicious-Bold.otf'); };\n"
                 + "  </style>\n"
                 + "  <style>\n"
+                + "    @import 'imp.css';\n"
+                + "  </style>\n"
+                + "  <style>\n"
                 + "    h3 { color: blue;  }\n"
                 + "  </style>\n"
 
@@ -9474,10 +9477,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ownerRule,parentStyleSheet,removeRule(),replace(),replaceSync(),rules,title,type",
             IE = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,"
                 + "owningElement,removeRule(),rules")
-    @HtmlUnitNYI(CHROME = "addRule(),cssRules,deleteRule(),insertRule(),removeRule(),rules",
-        EDGE = "addRule(),cssRules,deleteRule(),insertRule(),removeRule(),rules",
-        FF = "addRule(),cssRules,deleteRule(),insertRule(),removeRule(),rules",
-        FF_ESR = "addRule(),cssRules,deleteRule(),insertRule(),removeRule(),rules")
+    @HtmlUnitNYI(CHROME = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,removeRule(),rules",
+            EDGE = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,removeRule(),rules",
+            FF = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,removeRule(),rules",
+            FF_ESR = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,removeRule(),rules")
     public void cssStyleSheet() throws Exception {
         testString("", "document.styleSheets[0]");
     }
@@ -9543,6 +9546,40 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test CSSImportRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,layerName,media,MEDIA_RULE,NAMESPACE_RULE,"
+                + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,type",
+            FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,layerName,media,MEDIA_RULE,NAMESPACE_RULE,"
+                + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,supportsText,type",
+            FF_ESR = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,layerName,media,MEDIA_RULE,NAMESPACE_RULE,"
+                + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,supportsText,type",
+            IE = "CHARSET_RULE,cssText,FONT_FACE_RULE,href,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,type,"
+                + "UNKNOWN_RULE,VIEWPORT_RULE")
+    @HtmlUnitNYI(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,type",
+            EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,type",
+            FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,type",
+            FF_ESR = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,type")
+    public void cssImportRule() throws Exception {
+        testString("", "document.styleSheets[3].cssRules[0]");
+    }
+
+    /**
      * Test CSSRule.
      *
      * @throws Exception if the test fails
@@ -9552,13 +9589,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,"
                 + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,"
                 + "style,STYLE_RULE,styleMap,SUPPORTS_RULE,type",
-            FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
+            FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
+                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,"
+                + "style,STYLE_RULE,SUPPORTS_RULE,type",
+            FF_ESR = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type",
-            FF_ESR = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
-                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
-                + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,"
-                + "STYLE_RULE,SUPPORTS_RULE,type",
             IE = "CHARSET_RULE,cssText,FONT_FACE_RULE,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
                 + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,readOnly,selectorText,style,"
                 + "STYLE_RULE,type,UNKNOWN_RULE,VIEWPORT_RULE")
@@ -9568,10 +9605,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type",
-            FF_ESR = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
+            FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type")
     public void cssStyleRule() throws Exception {
-        testString("", "document.styleSheets[3].cssRules[0]");
+        testString("", "document.styleSheets[4].cssRules[0]");
     }
 }

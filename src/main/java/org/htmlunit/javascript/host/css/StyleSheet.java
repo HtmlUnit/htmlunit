@@ -14,14 +14,26 @@
  */
 package org.htmlunit.javascript.host.css;
 
+import static org.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlLink;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * A JavaScript object for {@code StyleSheet}.
@@ -32,10 +44,72 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 @JsxClass
 public class StyleSheet extends HtmlUnitScriptable {
 
+    private static final Log LOG = LogFactory.getLog(StyleSheet.class);
+
+    /** The HTML element which owns this stylesheet. */
+    private final HTMLElement ownerNode_;
+
     /**
      * Default constructor.
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public StyleSheet() {
+        ownerNode_ = null;
+    }
+
+    public StyleSheet(final HTMLElement ownerNode) {
+        ownerNode_ = ownerNode;
+    }
+
+    /**
+     * Returns the owner node.
+     * @return the owner node
+     */
+    @JsxGetter
+    public HTMLElement getOwnerNode() {
+        return ownerNode_;
+    }
+
+    /**
+     * Returns the URL of the stylesheet.
+     * @return the URL of the stylesheet
+     */
+    @JsxGetter
+    public String getHref() {
+        if (ownerNode_ != null) {
+            final DomNode node = ownerNode_.getDomNodeOrDie();
+            if (node instanceof HtmlStyle) {
+                return null;
+            }
+            if (node instanceof HtmlLink) {
+                // <link rel="stylesheet" type="text/css" href="..." />
+                final HtmlLink link = (HtmlLink) node;
+                final String href = link.getHrefAttribute();
+                if ("".equals(href) && getBrowserVersion().hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
+                    return null;
+                }
+                // Expand relative URLs.
+                try {
+                    final HtmlPage page = (HtmlPage) link.getPage();
+                    final URL url = page.getFullyQualifiedUrl(href);
+                    return url.toExternalForm();
+                }
+                catch (final MalformedURLException e) {
+                    // Log the error and fall through to the return values below.
+                    LOG.warn(e.getMessage(), e);
+                }
+            }
+        }
+
+        return getUri();
+    }
+
+    /**
+     * Returns this stylesheet's URI (used to resolved contained @import rules).
+     * For inline styles this is the page uri.
+     * @return this stylesheet's URI (used to resolved contained @import rules)
+     */
+    public String getUri() {
+        return null;
     }
 }

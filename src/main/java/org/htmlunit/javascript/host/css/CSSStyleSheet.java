@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.STYLESHEET_ADD_RULE_RETURNS_POS;
-import static org.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -24,11 +23,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,9 +38,6 @@ import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.html.DomNode;
-import org.htmlunit.html.HtmlLink;
-import org.htmlunit.html.HtmlPage;
-import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -71,14 +64,8 @@ public class CSSStyleSheet extends StyleSheet {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
 
-    private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
-    private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
-
     /** The parsed stylesheet which this host object wraps. */
     private final CssStyleSheet styleSheet_;
-
-    /** The HTML element which owns this stylesheet. */
-    private final HTMLElement ownerNode_;
 
     /** The collection of rules defined in this style sheet. */
     private CSSRuleList cssRules_;
@@ -89,8 +76,8 @@ public class CSSStyleSheet extends StyleSheet {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CSSStyleSheet() {
+        super(null);
         styleSheet_ = new CssStyleSheet(null, (InputSource) null, null);
-        ownerNode_ = null;
     }
 
     /**
@@ -100,11 +87,12 @@ public class CSSStyleSheet extends StyleSheet {
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public CSSStyleSheet(final HTMLElement element, final InputSource source, final String uri) {
+        super(element);
+
         setParentScope(element.getWindow());
         setPrototype(getPrototype(CSSStyleSheet.class));
 
         styleSheet_ = new CssStyleSheet(element.getDomNodeOrDie(), source, uri);
-        ownerNode_ = element;
     }
 
     /**
@@ -114,6 +102,8 @@ public class CSSStyleSheet extends StyleSheet {
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public CSSStyleSheet(final HTMLElement element, final String styleSheet, final String uri) {
+        super(element);
+
         final Window win = element.getWindow();
 
         CssStyleSheet css = null;
@@ -128,7 +118,6 @@ public class CSSStyleSheet extends StyleSheet {
         setPrototype(getPrototype(CSSStyleSheet.class));
 
         styleSheet_ = css;
-        ownerNode_ = element;
     }
 
     /**
@@ -139,10 +128,11 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public CSSStyleSheet(final HTMLElement element, final Scriptable parentScope,
             final CssStyleSheet cssStyleSheet) {
+        super(element);
+
         setParentScope(parentScope);
         setPrototype(getPrototype(CSSStyleSheet.class));
         styleSheet_ = cssStyleSheet;
-        ownerNode_ = element;
     }
 
     /**
@@ -158,8 +148,9 @@ public class CSSStyleSheet extends StyleSheet {
      * @return the owner node
      */
     @JsxGetter(IE)
+    @Override
     public HTMLElement getOwnerNode() {
-        return ownerNode_;
+        return super.getOwnerNode();
     }
 
     /**
@@ -168,7 +159,7 @@ public class CSSStyleSheet extends StyleSheet {
      */
     @JsxGetter(IE)
     public HTMLElement getOwningElement() {
-        return ownerNode_;
+        return getOwnerNode();
     }
 
     /**
@@ -191,37 +182,12 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * Returns the URL of the stylesheet.
-     * @return the URL of the stylesheet
+     * {@inheritDoc}
      */
     @JsxGetter(IE)
+    @Override
     public String getHref() {
-        if (ownerNode_ != null) {
-            final DomNode node = ownerNode_.getDomNodeOrDie();
-            if (node instanceof HtmlStyle) {
-                return null;
-            }
-            if (node instanceof HtmlLink) {
-                // <link rel="stylesheet" type="text/css" href="..." />
-                final HtmlLink link = (HtmlLink) node;
-                final String href = link.getHrefAttribute();
-                if ("".equals(href) && getBrowserVersion().hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
-                    return null;
-                }
-                // Expand relative URLs.
-                try {
-                    final HtmlPage page = (HtmlPage) link.getPage();
-                    final URL url = page.getFullyQualifiedUrl(href);
-                    return url.toExternalForm();
-                }
-                catch (final MalformedURLException e) {
-                    // Log the error and fall through to the return values below.
-                    LOG.warn(e.getMessage(), e);
-                }
-            }
-        }
-
-        return getUri();
+        return super.getHref();
     }
 
     /**
@@ -371,6 +337,7 @@ public class CSSStyleSheet extends StyleSheet {
      * For inline styles this is the page uri.
      * @return this stylesheet's URI (used to resolved contained @import rules)
      */
+    @Override
     public String getUri() {
         return getCssStyleSheet().getUri();
     }
