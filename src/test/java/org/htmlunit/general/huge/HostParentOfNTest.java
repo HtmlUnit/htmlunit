@@ -1945,8 +1945,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF_ESR = "true")
+    @Alerts("false")
     public void _OfflineResourceList_OfflineResourceList() throws Exception {
         test("OfflineResourceList", "OfflineResourceList");
     }
