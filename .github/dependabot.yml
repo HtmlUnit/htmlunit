@@ -9,8 +9,3 @@ updates:
       - dependency-name: "org.apache.maven.plugins:maven-site-plugin"
       - dependency-name: "com.puppycrawl.tools:checkstyle"
         versions: ["10.x"]
-
-      # ignore because changing the logger configuration at runtime
-      # does not work any longer - have to investigate this
-      - dependency-name: "org.apache.logging.log4j:*"
-        versions: ["2.21.0"]
