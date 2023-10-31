@@ -704,7 +704,6 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF_ESR = "false",
             IE = "false")
     public void _RTCSctpTransport_RTCSctpTransport() throws Exception {
         test("RTCSctpTransport", "RTCSctpTransport");
