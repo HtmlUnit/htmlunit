@@ -56,6 +56,7 @@ import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebClient.PooledCSS3Parser;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
@@ -1011,9 +1012,9 @@ public class CssStyleSheet implements Serializable {
      */
     private static CSSStyleSheetImpl parseCSS(final InputSource source, final WebClient client) {
         CSSStyleSheetImpl ss;
-        try {
+        try (PooledCSS3Parser pooledParser = client.getCSS3ParserFromPool()) {
             final CSSErrorHandler errorHandler = client.getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+            final CSSOMParser parser = new CSSOMParser(pooledParser.css3Parser());
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null);
         }
@@ -1031,9 +1032,45 @@ public class CssStyleSheet implements Serializable {
      * method returns an empty MediaList list.
      *
      * @param mediaString the source from which to retrieve the media to be parsed
-     * @param errorHandler the {@link CSSErrorHandler} to be used
+     * @param webClient the {@link WebClient} to be used
      * @return the media parsed from the specified input source
      */
+    public static MediaListImpl parseMedia(final String mediaString, final WebClient webClient) {
+        MediaListImpl media = media_.get(mediaString);
+        if (media != null) {
+            return media;
+        }
+
+        try (PooledCSS3Parser pooledParser = webClient.getCSS3ParserFromPool()) {
+            final CSSOMParser parser = new CSSOMParser(pooledParser.css3Parser());
+            parser.setErrorHandler(webClient.getCssErrorHandler());
+
+            media = new MediaListImpl(parser.parseMedia(mediaString));
+            media_.put(mediaString, media);
+            return media;
+        }
+        catch (final Exception e) {
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
+            }
+        }
+
+        media = new MediaListImpl(null);
+        media_.put(mediaString, media);
+        return media;
+    }
+
+    /**
+     * Parses the given media string. If anything at all goes wrong, this
+     * method returns an empty MediaList list.
+     *
+     * @param mediaString the source from which to retrieve the media to be parsed
+     * @param errorHandler the {@link CSSErrorHandler} to be used
+     * @return the media parsed from the specified input source
+     *
+     * @deprecated as of version 3.8.0; use {@link #parseMedia(String, WebClient)} instead
+     */
+    @Deprecated
     public static MediaListImpl parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
         MediaListImpl media = media_.get(mediaString);
         if (media != null) {
@@ -1241,7 +1278,7 @@ public class CssStyleSheet implements Serializable {
         }
 
         final WebWindow webWindow = owner_.getPage().getEnclosingWindow();
-        final MediaListImpl mediaList = parseMedia(webWindow.getWebClient().getCssErrorHandler(), media);
+        final MediaListImpl mediaList = parseMedia(media, webWindow.getWebClient());
         return isActive(mediaList, webWindow);
     }
 

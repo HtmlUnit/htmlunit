@@ -32,13 +32,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.IncorrectnessListener;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebClient.PooledCSS3Parser;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -49,7 +49,6 @@ import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.CSSParseException;
-import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
@@ -1835,14 +1834,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public DomNodeList<DomNode> querySelectorAll(final String selectors) {
         try {
-            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-            final SelectorList selectorList = getSelectorList(selectors, browserVersion);
+            final WebClient webClient = getPage().getWebClient();
+            final SelectorList selectorList = getSelectorList(selectors, webClient);
 
             final List<DomNode> elements = new ArrayList<>();
             if (selectorList != null) {
                 for (final DomElement child : getDomElementDescendants()) {
                     for (final Selector selector : selectorList) {
-                        if (CssStyleSheet.selects(browserVersion, selector, child, null, true, true)) {
+                        if (CssStyleSheet.selects(webClient.getBrowserVersion(), selector, child, null, true, true)) {
                             elements.add(child);
                             break;
                         }
@@ -1859,34 +1858,36 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns the {@link SelectorList}.
      * @param selectors the selectors
-     * @param browserVersion the {@link BrowserVersion}
+     * @param webClient the {@link WebClient}
      * @return the {@link SelectorList}
      * @throws IOException if an error occurs
      */
-    protected SelectorList getSelectorList(final String selectors, final BrowserVersion browserVersion)
+    protected SelectorList getSelectorList(final String selectors, final WebClient webClient)
             throws IOException {
-        final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-        final CheckErrorHandler errorHandler = new CheckErrorHandler();
-        parser.setErrorHandler(errorHandler);
+        try (PooledCSS3Parser pooledParser = webClient.getCSS3ParserFromPool()) {
+            final CSSOMParser parser = new CSSOMParser(pooledParser.css3Parser());
+            final CheckErrorHandler errorHandler = new CheckErrorHandler();
+            parser.setErrorHandler(errorHandler);
 
-        final SelectorList selectorList = parser.parseSelectors(selectors);
-        // in case of error parseSelectors returns null
-        if (errorHandler.errorDetected()) {
-            throw new CSSException("Invalid selectors: '" + selectors + "'");
-        }
-
-        if (selectorList != null) {
-            int documentMode = 9;
-            if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                final Object sobj = getPage().getScriptableObject();
-                if (sobj instanceof HTMLDocument) {
-                    documentMode = ((HTMLDocument) sobj).getDocumentMode();
-                }
+            final SelectorList selectorList = parser.parseSelectors(selectors);
+            // in case of error parseSelectors returns null
+            if (errorHandler.errorDetected()) {
+                throw new CSSException("Invalid selectors: '" + selectors + "'");
             }
-            CssStyleSheet.validateSelectors(selectorList, documentMode, this);
 
+            if (selectorList != null) {
+                int documentMode = 9;
+                if (webClient.getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+                    final Object sobj = getPage().getScriptableObject();
+                    if (sobj instanceof HTMLDocument) {
+                        documentMode = ((HTMLDocument) sobj).getDocumentMode();
+                    }
+                }
+                CssStyleSheet.validateSelectors(selectorList, documentMode, this);
+
+            }
+            return selectorList;
         }
-        return selectorList;
     }
 
     /**
@@ -2009,15 +2010,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public DomElement closest(final String selectorString) {
         try {
-            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-            final SelectorList selectorList = getSelectorList(selectorString, browserVersion);
+            final WebClient webClient = getPage().getWebClient();
+            final SelectorList selectorList = getSelectorList(selectorString, webClient);
 
             DomNode current = this;
             if (selectorList != null) {
                 do {
                     for (final Selector selector : selectorList) {
                         final DomElement elem = (DomElement) current;
-                        if (CssStyleSheet.selects(browserVersion, selector, elem, null, true, true)) {
+                        if (CssStyleSheet.selects(webClient.getBrowserVersion(), selector, elem, null, true, true)) {
                             return elem;
                         }
                     }

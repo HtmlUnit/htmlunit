@@ -1593,12 +1593,12 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public boolean matches(final String selectorString) {
         try {
-            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-            final SelectorList selectorList = getSelectorList(selectorString, browserVersion);
+            final WebClient webClient = getPage().getWebClient();
+            final SelectorList selectorList = getSelectorList(selectorString, webClient);
 
             if (selectorList != null) {
                 for (final Selector selector : selectorList) {
-                    if (CssStyleSheet.selects(browserVersion, selector, this, null, true, true)) {
+                    if (CssStyleSheet.selects(webClient.getBrowserVersion(), selector, this, null, true, true)) {
                         return true;
                     }
                 }

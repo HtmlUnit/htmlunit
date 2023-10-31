@@ -27,6 +27,7 @@ import static org.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static org.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
 
 import java.io.BufferedInputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,12 +72,13 @@ import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSErrorHandler;
+import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.FrameWindow;
-import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.FrameWindow.PageDenied;
+import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
@@ -203,6 +205,10 @@ public class WebClient implements Serializable, AutoCloseable {
     private CSSErrorHandler cssErrorHandler_ = new DefaultCssErrorHandler();
     private OnbeforeunloadHandler onbeforeunloadHandler_;
     private Cache cache_ = new Cache();
+
+    // mini pool to save resource when parsing css
+    private transient PooledCSS3Parser firstPooledCSS3Parser_ = new PooledCSS3Parser();
+    private transient PooledCSS3Parser secondPooledCSS3Parser_ = new PooledCSS3Parser();
 
     /** target "_blank". */
     public static final String TARGET_BLANK = "_blank";
@@ -2943,5 +2949,51 @@ public class WebClient implements Serializable, AutoCloseable {
 
         htmlParser.parse(webResponse, page, true, false);
         return page;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @return CSS3Parser from pool
+     */
+    public PooledCSS3Parser getCSS3ParserFromPool() {
+        if (!firstPooledCSS3Parser_.inUse_) {
+            if (firstPooledCSS3Parser_.open()) {
+                return firstPooledCSS3Parser_;
+            }
+        }
+        if (!secondPooledCSS3Parser_.inUse_) {
+            if (secondPooledCSS3Parser_.open()) {
+                return secondPooledCSS3Parser_;
+            }
+        }
+
+        return new PooledCSS3Parser();
+    }
+
+    public static class PooledCSS3Parser implements Closeable {
+        private final CSS3Parser css3Parser_;
+        private boolean inUse_;
+
+        public PooledCSS3Parser() {
+            css3Parser_ = new CSS3Parser();
+        }
+
+        public CSS3Parser css3Parser() {
+            return css3Parser_;
+        }
+
+        public synchronized boolean open() {
+            if (inUse_) {
+                return false;
+            }
+            inUse_ = true;
+            return true;
+        }
+
+        @Override
+        public void close() throws IOException {
+            inUse_ = false;
+        }
     }
 }

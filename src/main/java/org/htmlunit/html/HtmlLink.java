@@ -372,7 +372,7 @@ public class HtmlLink extends HtmlElement {
             }
 
             final MediaListImpl mediaList =
-                    CssStyleSheet.parseMedia(getPage().getWebClient().getCssErrorHandler(), media);
+                    CssStyleSheet.parseMedia(media, getPage().getWebClient());
             return CssStyleSheet.isActive(mediaList, getPage().getEnclosingWindow());
         }
         return false;

@@ -21,7 +21,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.dom.MediaListImpl;
-import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -60,8 +59,7 @@ public class StyleMedia extends HtmlUnitScriptable {
     @JsxFunction
     public boolean matchMedium(final String media) {
         final WebWindow webWindow = getWindow().getWebWindow();
-        final CSSErrorHandler errorHandler = webWindow.getWebClient().getCssErrorHandler();
-        final MediaListImpl mediaList = CssStyleSheet.parseMedia(errorHandler, media);
+        final MediaListImpl mediaList = CssStyleSheet.parseMedia(media, webWindow.getWebClient());
         return CssStyleSheet.isActive(mediaList, webWindow);
     }
 

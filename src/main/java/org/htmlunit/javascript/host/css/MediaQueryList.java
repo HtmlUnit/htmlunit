@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.dom.MediaListImpl;
-import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -72,8 +71,7 @@ public class MediaQueryList extends EventTarget {
     @JsxGetter
     public boolean isMatches() {
         final WebWindow webWindow = getWindow().getWebWindow();
-        final CSSErrorHandler errorHandler = webWindow.getWebClient().getCssErrorHandler();
-        final MediaListImpl mediaList = CssStyleSheet.parseMedia(errorHandler, media_);
+        final MediaListImpl mediaList = CssStyleSheet.parseMedia(media_, webWindow.getWebClient());
         return CssStyleSheet.isActive(mediaList, webWindow);
     }
 
