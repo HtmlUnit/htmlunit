@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
     <suppress>
-        <filePath regex="true">.*commons-io-2\.10\.0\.jar</filePath>
-        <cve>CVE-2021-37533</cve>
-    </suppress>
-
-    <suppress>
-        <filePath regex="true">.*commons-codec-1\.15\.jar</filePath>
-        <cve>CVE-2021-37533</cve>
-    </suppress>
-
-    <suppress>
-        <filePath regex="true">.*commons-logging-1.2\.jar</filePath>
-        <cve>CVE-2021-37533</cve>
-    </suppress>
-
-    <suppress>
-        <filePath regex="true">.*commons-text-1\.10\.0\.jar</filePath>
-        <cve>CVE-2021-37533</cve>
-    </suppress>
-
-    <suppress>
         <packageUrl regex="true">^pkg:maven/xerces/xercesImpl@.*$</packageUrl>
         <cve>CVE-2017-10355</cve>
-    </suppress>
-    <suppress>
-        <packageUrl regex="true">^pkg:maven/xml-apis/xml-apis@.*$</packageUrl>
-        <cve>CVE-2021-37533</cve>
     </suppress>
 </suppressions>
