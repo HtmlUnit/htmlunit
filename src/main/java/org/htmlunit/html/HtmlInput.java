@@ -634,7 +634,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         }
 
         if (TYPE_ATTRIBUTE.equals(qualifiedNameLC)) {
-            setType(attributeValue, true);
+            changeType(attributeValue, true);
             return;
         }
 
@@ -1150,12 +1150,16 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Sets the value of the attribute {@code type}.
-     * Note: this replace the DOM node with a new one.
+     * Changes the type of the current HtmlInput. Because there are several subclasses of HtmlInput,
+     * changing the type attribute is not sufficient, this will replace the HtmlInput element in the
+     * DOM tree with a new one (at least of the newType is different from the old one).<br>
+     * The js peer object is still the same (there is only a HTMLInputElement without any sublcasses).<br>
+     * This returns the new (or the old) HtmlInput element to ease the use of this method.
      * @param newType the new type to set
      * @param setThroughAttribute set type value through setAttribute()
+     * @return the new or the old HtmlInput element
      */
-    public void setType(String newType, final boolean setThroughAttribute) {
+    public HtmlInput changeType(String newType, final boolean setThroughAttribute) {
         final String currentType = getAttributeDirect(TYPE_ATTRIBUTE);
 
         final SgmlPage page = getPage();
@@ -1227,10 +1231,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 setScriptableObject(null);
                 scriptable.setDomNode(newInput, true);
 
-                return;
+                return newInput;
             }
             super.setAttributeNS(null, TYPE_ATTRIBUTE, newType, true, true);
         }
+        return this;
     }
 
     protected void adjustValueAfterTypeChange(final HtmlInput oldInput, final BrowserVersion browserVersion) {

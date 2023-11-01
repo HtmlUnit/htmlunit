@@ -507,6 +507,40 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception
+     *         if the test fails
+     */
+    @Test
+    @Alerts({"text", "x", "x", "hidden", "x", "x"})
+    public void setType() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='text' id='foo' value='x'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("foo");
+        assertEquals(getExpectedAlerts()[0], input.getType());
+        assertEquals(getExpectedAlerts()[1], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[2], input.getValue());
+
+        input.changeType("hidden", true);
+        assertEquals(getExpectedAlerts()[0], input.getType());
+        assertEquals(getExpectedAlerts()[1], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[2], input.getValue());
+
+        final HtmlInput newInput = (HtmlInput) page.getElementById("foo");
+        assertEquals(getExpectedAlerts()[3], newInput.getType());
+        assertEquals(getExpectedAlerts()[4], newInput.getValueAttribute());
+        assertEquals(getExpectedAlerts()[5], newInput.getValue());
+
+        assertNotSame(input, newInput);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
