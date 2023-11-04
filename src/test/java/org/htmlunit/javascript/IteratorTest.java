@@ -17,7 +17,6 @@ package org.htmlunit.javascript;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,11 +32,7 @@ public class IteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  {"undefined", "undefined"},
-            CHROME = {"function", "function"},
-            EDGE = {"function", "function"})
-    @HtmlUnitNYI(CHROME =  {"undefined", "undefined"},
-            EDGE =  {"undefined", "undefined"})
+    @Alerts({"undefined", "undefined"})
     public void windowIterator() throws Exception {
         final String html
             = "<html>\n"

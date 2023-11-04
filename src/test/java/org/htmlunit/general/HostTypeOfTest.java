@@ -4539,11 +4539,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
-    @HtmlUnitNYI(CHROME = "undefined",
-            EDGE = "undefined")
+    @Alerts("undefined")
     public void iterator() throws Exception {
         test("Iterator");
     }

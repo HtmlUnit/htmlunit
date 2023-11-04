@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.8.0" date="November xx, 2023" description="Bugfixes, Documentation updates">
+        <release version="3.8.0" date="November xx, 2023" description="Chrome/Edge 119, Bugfixes">
             <action type="update" dev="rbri" issue="#658">"
                 Internal method HtmlInput.setType(String, boolean) renamed to changeType(String, boolean) and
                 a return value added. Please check the javadoc if you use this.

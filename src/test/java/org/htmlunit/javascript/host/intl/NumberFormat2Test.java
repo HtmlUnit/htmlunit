@@ -334,7 +334,6 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "31,415.927",
-            EDGE = "31\u00a0415,927",
             FF = "31\u00a0415,927",
             FF_ESR = "31\u00a0415,927",
             IE = "31\u00a0415,927")
@@ -347,7 +346,6 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "31,415.927",
-            EDGE = "31\u00a0415,927",
             FF = "31\u00a0415,927",
             FF_ESR = "31\u00a0415,927",
             IE = "31\u00a0415,927")
@@ -976,7 +974,6 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "31,415.927",
-            EDGE = "31.415,927",
             FF = "31.415,927",
             FF_ESR = "31.415,927",
             IE = "31.415,927")
@@ -989,7 +986,6 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "31,415.927",
-            EDGE = "31.415,927",
             FF = "31.415,927",
             FF_ESR = "31.415,927",
             IE = "31.415,927")
@@ -1119,7 +1115,6 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "31,415.927",
-            EDGE = "31.415,927",
             FF = "31.415,927",
             FF_ESR = "31.415,927",
             IE = "31.415,927")
@@ -1132,7 +1127,6 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "31,415.927",
-            EDGE = "31.415,927",
             FF = "31.415,927",
             FF_ESR = "31.415,927",
             IE = "31.415,927")
