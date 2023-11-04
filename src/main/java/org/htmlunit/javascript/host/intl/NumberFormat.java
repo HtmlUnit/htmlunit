@@ -53,7 +53,6 @@ public class NumberFormat extends HtmlUnitScriptable {
     private transient NumberFormatHelper formatter_;
 
     static {
-
         final Map<String, String> commonFormats = new HashMap<>();
         commonFormats.put("", "");
         commonFormats.put("ar", "\u066c\u066b\u0660");
@@ -101,13 +100,13 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("ar-SD", "\u066c\u066b\u0660");
         commonFormats.put("ar-SY", "\u066c\u066b\u0660");
         commonFormats.put("ar-YE", "\u066c\u066b\u0660");
+        commonFormats.put("be", ",.");
+        commonFormats.put("mk", ",.");
+        commonFormats.put("is", ",.");
 
         CHROME_FORMATS_.putAll(commonFormats);
         EDGE_FORMATS_.putAll(commonFormats);
 
-        CHROME_FORMATS_.put("be", ",.");
-        CHROME_FORMATS_.put("mk", ",.");
-        CHROME_FORMATS_.put("is", ",.");
         CHROME_FORMATS_.put("sq", ",.");
     }
 

@@ -93,8 +93,8 @@ public abstract class WebWindowImpl implements WebWindow {
             outerWidth_ = innerWidth_ + 12;
         }
         else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_131)) {
-            outerHeight_ = innerHeight_ + 131;
-            outerWidth_ = innerWidth_ + 71;
+            outerHeight_ = innerHeight_ + 138;
+            outerWidth_ = innerWidth_ + 64;
         }
         else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_138)) {
             outerHeight_ = innerHeight_ + 138;

@@ -984,7 +984,7 @@ public enum BrowserVersionFeatures {
     JS_FORM_REJECT_INVALID_ENCODING,
 
     /** Calling form.submit() twice forces double download. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature(IE)
     JS_FORM_SUBMIT_FORCES_DOWNLOAD,
 
     /** Support for document.formName('inputName'). */

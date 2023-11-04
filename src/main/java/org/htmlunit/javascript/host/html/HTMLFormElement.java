@@ -65,7 +65,7 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.MimeType;
 
 /**
- * A JavaScript object for {@code HTMLFormElement}.
+ * A JavaScript object {@code HTMLFormElement}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler

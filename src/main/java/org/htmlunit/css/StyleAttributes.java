@@ -1347,7 +1347,7 @@ public final class StyleAttributes implements Serializable {
                 ff("none")),
 
         /** The style property {@code gridArea}. */
-        GRID_AREA("gridArea", "grid-area", chromeAndEdge("auto / auto / auto / auto"), ff("auto")),
+        GRID_AREA("gridArea", "grid-area", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code grid-area}. */
         GRID_AREA_("grid-area", "grid-area", ff("auto")),
@@ -1371,7 +1371,7 @@ public final class StyleAttributes implements Serializable {
         GRID_AUTO_ROWS_("grid-auto-rows", "grid-auto-rows", ff("auto")),
 
         /** The style property {@code gridColumn}. */
-        GRID_COLUMN("gridColumn", "grid-column", chromeAndEdge("auto / auto"), ff("auto")),
+        GRID_COLUMN("gridColumn", "grid-column", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code grid-column}. */
         GRID_COLUMN_("grid-column", "grid-column", ff("auto")),
@@ -1401,7 +1401,7 @@ public final class StyleAttributes implements Serializable {
         GRID_GAP_("grid-gap", "grid-gap", ff("normal")),
 
         /** The style property {@code gridRow}. */
-        GRID_ROW("gridRow", "grid-row", chromeAndEdge("auto / auto"), ff("auto")),
+        GRID_ROW("gridRow", "grid-row", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code grid-row}. */
         GRID_ROW_("grid-row", "grid-row", ff("auto")),
@@ -1425,7 +1425,7 @@ public final class StyleAttributes implements Serializable {
         GRID_ROW_START_("grid-row-start", "grid-row-start", ff("auto")),
 
         /** The style property {@code gridTemplate}. */
-        GRID_TEMPLATE("gridTemplate", "grid-template", chromeAndEdge("none / none / none"),
+        GRID_TEMPLATE("gridTemplate", "grid-template", chromeAndEdge("none"),
                 ff("none")),
 
         /** The style property {@code grid-template}. */
@@ -2615,7 +2615,7 @@ public final class StyleAttributes implements Serializable {
         OFFSET_PATH_("offset-path", "offset-path", ffNone()),
 
         /** The style property {@code offsetPosition}. */
-        OFFSET_POSITION("offsetPosition", "offset-position", chromeAndEdgeAuto()),
+        OFFSET_POSITION("offsetPosition", "offset-position", chromeAndEdgeNormal()),
 
         /** The style property {@code offsetRotate}. */
         OFFSET_ROTATE("offsetRotate", "offset-rotate", chromeAndEdge("auto 0deg"), ff("auto")),
@@ -2886,10 +2886,10 @@ public final class StyleAttributes implements Serializable {
         PIXEL_WIDTH("pixelWidth", "pixel-width", ie("")),
 
         /** The style property {@code placeContent}. */
-        PLACE_CONTENT("placeContent", "place-content", chromeAndEdgeNormal(), ff("normal")),
+        PLACE_CONTENT("placeContent", "place-content", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code place-content}. */
-        PLACE_CONTENT_("place-content", "place-content", ff("normal")),
+        PLACE_CONTENT_("place-content", "place-content", ffNormal()),
 
         /** The style property {@code placeItems}. */
         PLACE_ITEMS("placeItems", "place-items", chromeAndEdgeNormal(), ff("normal legacy")),
@@ -3148,10 +3148,10 @@ public final class StyleAttributes implements Serializable {
         SCROLL_SNAP_ALIGN_("scroll-snap-align", "scroll-snap-align", ffNone()),
 
         /** The style property {@code scrollSnapStop}. */
-        SCROLL_SNAP_STOP("scrollSnapStop", "scroll-snap-stop", chromeAndEdgeNormal(), ff("normal")),
+        SCROLL_SNAP_STOP("scrollSnapStop", "scroll-snap-stop", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code scroll-snap-stop}. */
-        SCROLL_SNAP_STOP_("scroll-snap-stop", "scroll-snap-stop", ff("normal")),
+        SCROLL_SNAP_STOP_("scroll-snap-stop", "scroll-snap-stop", ffNormal()),
 
         /** The style property {@code scrollSnapType}. */
         SCROLL_SNAP_TYPE("scrollSnapType", "scroll-snap-type", chromeAndEdgeNone(), ffNone()),
