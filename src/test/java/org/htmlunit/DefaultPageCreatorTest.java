@@ -15,6 +15,8 @@
 package org.htmlunit;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,6 +103,68 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
                 }
                 writer.write("><body>foo</body></html>");
             }
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeXhtml() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeXhtmlServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final XHtmlPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeLargeXhtmlHeader()}.
+     */
+    public static class NoContentTypeXhtmlServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n"
+                    + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" "
+                            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\r\n"
+                    + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"lt\" lang=\"lt\">\r\n"
+                    + "<body>Hello World</body>\r\n"
+                    + "</html>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeXhtmlLeadingBlank() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeXhtmlLeadingBlankServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final XHtmlPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeLargeXhtmlHeader()}.
+     */
+    public static class NoContentTypeXhtmlLeadingBlankServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write(" <?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n"
+                    + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" "
+                            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\r\n"
+                    + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"lt\" lang=\"lt\">\r\n"
+                    + "<body>Hello World</body>\r\n"
+                    + "</html>");
         }
     }
 
@@ -258,6 +322,63 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             final Writer writer = response.getWriter();
             writer.write("<html><head><title>\u00d3</title></head><body></body></html>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeBomUtf8() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeBomUtf8Servlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final TextPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeBomUtf8()}.
+     */
+    public static class NoContentTypeBomUtf8Servlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("\u00ef\u00bb\u00bf<html><head></head><body></body></html>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeBomUtf16() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeBomUtf16Servlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final TextPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeBomUtf16()}.
+     */
+    public static class NoContentTypeBomUtf16Servlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final OutputStream output = response.getOutputStream();
+            output.write('\u00fe');
+            output.write('\u00ff');
+            output.flush();
+            final Writer writer = new OutputStreamWriter(output, "UTF16");
+            writer.write("<html><head></head><body></body></html>");
+            writer.flush();
         }
     }
 }
