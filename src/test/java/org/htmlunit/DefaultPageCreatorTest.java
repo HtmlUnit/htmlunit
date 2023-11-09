@@ -172,6 +172,60 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void noContentTypeXml() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeXmlServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final XmlPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeLargeXmlHeader()}.
+     */
+    public static class NoContentTypeXmlServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n"
+                    + "<root>Hello World</root>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeXmlLeadingBlank() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeXmlLeadingBlankServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final XmlPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeLargeXmlHeader()}.
+     */
+    public static class NoContentTypeXmlLeadingBlankServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write(" <?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
+                    + "<root>Hello World</root>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void noContentTypeDoctype() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeDoctypeServlet.class);
