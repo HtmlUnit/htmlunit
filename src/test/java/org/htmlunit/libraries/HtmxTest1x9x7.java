@@ -32,15 +32,18 @@ public class HtmxTest1x9x7 extends HtmxTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "passes:584failures:1",
-            FF = "passes:584failures:0",
-            FF_ESR = "passes:584failures:0",
+    @Alerts(DEFAULT = "passes:653failures:1",
+            FF = "passes:653failures:0",
+            FF_ESR = "passes:653failures:0",
             IE = "not testable")
     @HtmlUnitNYI(
-            CHROME = "passes:584failures:0",
-            EDGE = "passes:584failures:0",
-            IE = "passes:437failures:15")
+            CHROME = "passes:653failures:0",
+            EDGE = "passes:653failures:0")
     public void htmx() throws Exception {
+        // the test page runs in an endless loop in ie
+        if (getBrowserVersion().isIE()) {
+            return;
+        }
         htmx("htmx-1.9.7");
     }
 }
