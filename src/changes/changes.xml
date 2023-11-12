@@ -8,6 +8,19 @@
 
     <body>
         <release version="3.8.0" date="November xx, 2023" description="Chrome/Edge 119, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: hashbang support added.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: handling of object indices more in line with the spec. This repaces the fix
+                we had since 3.4.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: allow updating of 'name' of a function, as required by the standard.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: javascript 'Set' cannot handle wrapped java objects properly.
+            </action>
             <action type="fix" dev="rbri" issue="#663">"
                 Improved detection onf XML/XHtml content when not content type header is set.
             </action>
