@@ -1014,7 +1014,7 @@ public class CssStyleSheet implements Serializable {
         CSSStyleSheetImpl ss;
 
         // use a pooled parser, if any available to avoid expensive recreation
-        try (final PooledCSS3Parser pooledParser = client.getCSS3Parser()) {
+        try (PooledCSS3Parser pooledParser = client.getCSS3Parser()) {
             final CSSErrorHandler errorHandler = client.getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(pooledParser);
             parser.setErrorHandler(errorHandler);
@@ -1044,7 +1044,7 @@ public class CssStyleSheet implements Serializable {
         }
 
         // get us a pooled parser for efficiency because a new parser is expensive
-        try (final PooledCSS3Parser pooledParser = webClient.getCSS3Parser()) {
+        try (PooledCSS3Parser pooledParser = webClient.getCSS3Parser()) {
             final CSSOMParser parser = new CSSOMParser(pooledParser);
             parser.setErrorHandler(webClient.getCssErrorHandler());
 

@@ -208,7 +208,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private Cache cache_ = new Cache();
 
     // mini pool to save resource when parsing CSS
-    private transient CSS3ParserPool css3ParserPool = new CSS3ParserPool();
+    private transient CSS3ParserPool css3ParserPool_ = new CSS3ParserPool();
 
     /** target "_blank". */
     public static final String TARGET_BLANK = "_blank";
@@ -2958,7 +2958,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * try-with-resource concept
      */
     public PooledCSS3Parser getCSS3Parser() {
-        return this.css3ParserPool.get();
+        return this.css3ParserPool_.get();
     }
 
     /**
@@ -2978,37 +2978,37 @@ public class WebClient implements Serializable, AutoCloseable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      */
     public static class CSS3ParserPool {
-    	/*
-    	 * Our pool. We only hold data when it is available. In addition, synchronization against
-    	 * this deque is cheap.
-    	 */
-    	private ConcurrentLinkedDeque<PooledCSS3Parser> parsers = new ConcurrentLinkedDeque<>();
+        /*
+         * Our pool. We only hold data when it is available. In addition, synchronization against
+         * this deque is cheap.
+         */
+        private ConcurrentLinkedDeque<PooledCSS3Parser> parsers_ = new ConcurrentLinkedDeque<>();
 
-    	/**
-    	 * Fetch a new or recycled CSS3parser. Make sure you use the try-with-resource concept
-    	 * to automatically return it after use because a parser creation is expensive.
-    	 * We won't get a leak, if you don't do so, but that will remove the advantage.
-    	 *
-    	 * @return a parser
-    	 */
-    	public PooledCSS3Parser get() {
-    		// see if we have one, LIFO
-    		final PooledCSS3Parser parser = parsers.pollLast();
+        /**
+         * Fetch a new or recycled CSS3parser. Make sure you use the try-with-resource concept
+         * to automatically return it after use because a parser creation is expensive.
+         * We won't get a leak, if you don't do so, but that will remove the advantage.
+         *
+         * @return a parser
+         */
+        public PooledCSS3Parser get() {
+            // see if we have one, LIFO
+            final PooledCSS3Parser parser = parsers_.pollLast();
 
-    		// if we don't have one, get us one
-    		return parser != null ? parser.markInUse(this) : new PooledCSS3Parser(this);
-    	}
+            // if we don't have one, get us one
+            return parser != null ? parser.markInUse(this) : new PooledCSS3Parser(this);
+        }
 
-    	/**
-    	 * Return a parser. Normally you don't have to use that method explicitly.
-    	 * Prefer to user the AutoCloseable interface of the PooledParser by
-    	 * using a try-with-resource statement.
-    	 *
-    	 * @param parser the parser to recycle
-    	 */
-    	protected void recycle(final PooledCSS3Parser parser) {
-    		parsers.addLast(parser);
-    	}
+        /**
+         * Return a parser. Normally you don't have to use that method explicitly.
+         * Prefer to user the AutoCloseable interface of the PooledParser by
+         * using a try-with-resource statement.
+         *
+         * @param parser the parser to recycle
+         */
+        protected void recycle(final PooledCSS3Parser parser) {
+            parsers_.addLast(parser);
+        }
     }
 
     /**
@@ -3019,55 +3019,56 @@ public class WebClient implements Serializable, AutoCloseable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      */
     public static class PooledCSS3Parser extends CSS3Parser implements AutoCloseable {
-    	/**
-    	 * The pool we want to return us to
-    	 */
-    	private CSS3ParserPool pool;
+        /**
+         * The pool we want to return us to
+         */
+        private CSS3ParserPool pool_;
 
-    	/**
-    	 * Create a new poolable parser
-    	 *
-    	 * @param pool the pool the parser should return to when it is closed
-    	 */
-    	protected PooledCSS3Parser(final CSS3ParserPool pool) {
-    		super();
-    		this.pool = pool;
-    	}
-
-    	/**
-    	 * Resets the parser's pool state so it can be safely returned again
-    	 *
-    	 * @param pool the pool the parser should return to when it is closed
-    	 */
-        protected PooledCSS3Parser markInUse(final CSS3ParserPool pool) {
-        	// ensure we detect programming mistakes, Java will optimize this
-        	// null check away when it never happens
-        	if (this.pool == null) {
-        		this.pool = pool;
-        	}
-        	else {
-        		throw new IllegalStateException("This PooledParser was not returned to the pool properly");
-        	}
-
-        	return this;
+        /**
+         * Create a new poolable parser.
+         *
+         * @param pool the pool the parser should return to when it is closed
+         */
+        protected PooledCSS3Parser(final CSS3ParserPool pool) {
+            super();
+            this.pool_ = pool;
         }
 
-    	/**
-    	 * Implements the AutoClosable interface. The return method ensures that
-    	 * we are notified when we incorrectly close it twice which indicates a
-    	 * programming flow defect.
-    	 *
-    	 * @throws IllegalStateException in case the parser is closed several times
-    	 */
+        /**
+         * Resets the parser's pool state so it can be safely returned again.
+         *
+         * @param pool the pool the parser should return to when it is closed
+         * @return this
+         */
+        protected PooledCSS3Parser markInUse(final CSS3ParserPool pool) {
+            // ensure we detect programming mistakes, Java will optimize this
+            // null check away when it never happens
+            if (this.pool_ == null) {
+                this.pool_ = pool;
+            }
+            else {
+                throw new IllegalStateException("This PooledParser was not returned to the pool properly");
+            }
+
+            return this;
+        }
+
+        /**
+         * Implements the AutoClosable interface. The return method ensures that
+         * we are notified when we incorrectly close it twice which indicates a
+         * programming flow defect.
+         *
+         * @throws IllegalStateException in case the parser is closed several times
+         */
         @Override
         public void close() {
-        	if (this.pool != null) {
-        		this.pool.recycle(this);
-        		this.pool = null;
-        	}
-        	else {
-        		throw new IllegalStateException("This PooledParser was returned already");
-        	}
+            if (this.pool_ != null) {
+                this.pool_.recycle(this);
+                this.pool_ = null;
+            }
+            else {
+                throw new IllegalStateException("This PooledParser was returned already");
+            }
         }
     }
 }

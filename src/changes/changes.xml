@@ -8,6 +8,11 @@
 
     <body>
         <release version="3.8.0" date="November xx, 2023" description="Chrome/Edge 119, Bugfixes">
+            <action type="add" dev="René Schwietzke">
+                Updated CSS3Parser pool implementation with a different concept to allow more pooling,
+                lighter synchronization, and avoid leaks when not auto-closed. It also uses AutoCloseable
+                instead of Closeable (this is for IO, not for try-with-resource in general).
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: hashbang support added.
             </action>
