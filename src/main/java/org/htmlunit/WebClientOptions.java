@@ -85,6 +85,7 @@ public class WebClientOptions implements Serializable {
     private int webSocketMaxBinaryMessageBufferSize_ = -1;
 
     private boolean isFetchPolyfillEnabled_;
+    private boolean isLoadFramesEnabled_ = true;
 
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of
@@ -857,5 +858,17 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isFetchPolyfillEnabled() {
         return isFetchPolyfillEnabled_;
+    }
+
+    public boolean isLoadFramesEnabled() {
+        return isLoadFramesEnabled_;
+    }
+
+    /**
+     * Sets whether or not fetch frames in the HTML page as separate requests
+     * @param enabled true to enable loading of frames
+     */
+    public void setLoadFramesEnabled(boolean enabled) {
+        this.isLoadFramesEnabled_ = enabled;
     }
 }

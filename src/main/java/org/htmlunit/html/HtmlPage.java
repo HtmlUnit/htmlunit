@@ -281,7 +281,9 @@ public class HtmlPage extends SgmlPage {
 
         executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
 
-        loadFrames();
+        if (getWebClient().getOptions().isLoadFramesEnabled()) {
+            loadFrames();
+        }
 
         // don't set the ready state if we really load the blank page into the window
         // see Node.initInlineFrameIfNeeded()

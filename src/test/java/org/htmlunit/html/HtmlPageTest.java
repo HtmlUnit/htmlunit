@@ -1971,4 +1971,29 @@ public class HtmlPageTest extends SimpleWebTestCase {
         page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST.toString() + path));
         assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void framesAreNotLoadedWhenDisabled() throws Exception {
+        final String firstContent
+                = "<html><head><title>First</title></head><body>\n"
+                + "<iframe id='iframe1' src='" + URL_SECOND + "'>\n"
+                + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final WebClient client = getWebClientWithMockWebConnection();
+        client.getOptions().setLoadFramesEnabled(false);
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("First", page.getTitleText());
+
+        final HtmlInlineFrame iframe = page.getHtmlElementById("iframe1");
+        assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
+        assertNull(((HtmlPage) iframe.getEnclosedPage()).getTextContent());
+    }
 }
