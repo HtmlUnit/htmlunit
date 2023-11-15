@@ -1864,8 +1864,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected SelectorList getSelectorList(final String selectors, final WebClient webClient)
             throws IOException {
-        try (PooledCSS3Parser pooledParser = webClient.getCSS3ParserFromPool()) {
-            final CSSOMParser parser = new CSSOMParser(pooledParser.css3Parser());
+
+    	// get us a CSS3Parser from the pool so the chance of reusing it are high
+        try (final PooledCSS3Parser pooledParser = webClient.getCSS3Parser()) {
+            final CSSOMParser parser = new CSSOMParser(pooledParser);
             final CheckErrorHandler errorHandler = new CheckErrorHandler();
             parser.setErrorHandler(errorHandler);
 

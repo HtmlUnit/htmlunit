@@ -1012,9 +1012,11 @@ public class CssStyleSheet implements Serializable {
      */
     private static CSSStyleSheetImpl parseCSS(final InputSource source, final WebClient client) {
         CSSStyleSheetImpl ss;
-        try (PooledCSS3Parser pooledParser = client.getCSS3ParserFromPool()) {
+
+        // use a pooled parser, if any available to avoid expensive recreation
+        try (final PooledCSS3Parser pooledParser = client.getCSS3Parser()) {
             final CSSErrorHandler errorHandler = client.getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(pooledParser.css3Parser());
+            final CSSOMParser parser = new CSSOMParser(pooledParser);
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null);
         }
@@ -1041,8 +1043,9 @@ public class CssStyleSheet implements Serializable {
             return media;
         }
 
-        try (PooledCSS3Parser pooledParser = webClient.getCSS3ParserFromPool()) {
-            final CSSOMParser parser = new CSSOMParser(pooledParser.css3Parser());
+        // get us a pooled parser for efficiency because a new parser is expensive
+        try (final PooledCSS3Parser pooledParser = webClient.getCSS3Parser()) {
+            final CSSOMParser parser = new CSSOMParser(pooledParser);
             parser.setErrorHandler(webClient.getCssErrorHandler());
 
             media = new MediaListImpl(parser.parseMedia(mediaString));
