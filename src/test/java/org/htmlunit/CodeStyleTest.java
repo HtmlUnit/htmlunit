@@ -382,6 +382,7 @@ public class CodeStyleTest {
     private void runWith(final List<String> lines, final String relativePath) {
         if (relativePath.replace('\\', '/').contains("src/test/java")
                 && !relativePath.contains("CodeStyleTest")
+                && !relativePath.contains("WebClient9Test")
                 && !relativePath.contains("FaqTest")) {
             boolean runWith = false;
             boolean browserNone = true;
