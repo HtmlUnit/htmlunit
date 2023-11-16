@@ -214,7 +214,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final StyleElement element = getStyleElement(name);
         if (element != null && element.getValue() != null) {
             final String value = element.getValue();
-            if (!value.contains("url")) {
+            if (!"content".equals(name)
+                    && !value.contains("url")) {
                 return org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(value);
             }
             return value;

@@ -3729,4 +3729,28 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("\"abCD\"")
+    public void content() throws Exception {
+        final String html =
+            "<html>\n"
+            + "</head>\n"
+            + "  <style type='text/css'>#myDiv::before { content: 'abCD' }</style>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    var myDivStyle = window.getComputedStyle(myDiv, '::before');\n"
+            + "    log(myDivStyle.content);\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
