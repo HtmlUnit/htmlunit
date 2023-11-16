@@ -8,8 +8,11 @@
 
     <body>
         <release version="3.8.0" date="November xx, 2023" description="Chrome/Edge 119, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: support trailing commas in function parameters.
+            </action>
             <action type="fix" dev="rbri" issue="#667">
-                Content attribute value of a pseudo-attribute is no longer changed in lower case.
+                Content attribute value of a pseudo-attribute is no longer changed to lower case.
             </action>
             <action type="add" dev="René Schwietzke">
                 Updated CSS3Parser pool implementation with a different concept to allow more pooling,
