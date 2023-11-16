@@ -521,7 +521,7 @@ public abstract class WebServerTestCase extends WebTestCase {
 
         final Server server = new Server(threadPool);
 
-        final ServerConnector connector = new ServerConnector(server);
+        final ServerConnector connector = new ServerConnector(server, 1, -1, new HttpConnectionFactory());
         connector.setPort(port);
         server.setConnectors(new Connector[] {connector});
 
