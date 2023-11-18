@@ -1,6 +1,6 @@
 # HtmlUnit
 
-Version 3.7.0 / October 30, 2023
+Version 3.8.0 / November 18, 2023
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -38,7 +38,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>3.7.0</version>
+    <version>3.8.0</version>
 </dependency>
 ```
 
@@ -47,7 +47,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.7.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.8.0'
 ```
 
 ## Vulnerabilities
@@ -122,7 +122,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>org.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>3.8.0-SNAPSHOT</version>
+          <version>3.9.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -141,7 +141,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.8.0-SNAPSHOT'
+    implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.9.0-SNAPSHOT'
   // ...
 }
 ```
@@ -159,7 +159,7 @@ This project is licensed under the Apache 2.0 License
 [![Stargazers](https://starchart.cc/HtmlUnit/htmlunit.svg)](https://starchart.cc/HtmlUnit/htmlunit)
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/3.7.0/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/3.8.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/view/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://www.htmlunit.org "https://www.htmlunit.org"
