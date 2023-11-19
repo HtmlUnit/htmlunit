@@ -124,7 +124,8 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule jsxConstantReturnType = fields()
             .that().areAnnotatedWith(JsxConstant.class)
-            .should().notHaveRawType("short");
+            .should().notHaveRawType("short")
+            .andShould().notHaveRawType("float");
 
     /**
      * JsxGetter/Setter/Functions should not return a short.
@@ -134,7 +135,8 @@ public class ArchitectureTest {
             .that().areAnnotatedWith(JsxGetter.class)
                     .or().areAnnotatedWith(JsxSetter.class)
                     .or().areAnnotatedWith(JsxFunction.class)
-            .should().notHaveRawReturnType("short");
+            .should().notHaveRawReturnType("short")
+            .andShould().notHaveRawReturnType("float");
 
     /**
      * JsxGetter/Setter/Functions should not use a short as parameter.
@@ -144,7 +146,8 @@ public class ArchitectureTest {
             .that().areAnnotatedWith(JsxGetter.class)
                     .or().areAnnotatedWith(JsxSetter.class)
                     .or().areAnnotatedWith(JsxFunction.class)
-            .should().notHaveRawParameterTypes("short");
+            .should().notHaveRawParameterTypes("short")
+            .andShould().notHaveRawParameterTypes("float");
 
     /**
      * Every JsxGetter has to be named get... or is....

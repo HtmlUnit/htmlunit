@@ -52,8 +52,8 @@ public class SVGPathElement extends SVGGeometryElement {
      * @return the length of the path
      */
     @JsxFunction
-    public float getTotalLength() {
+    public double getTotalLength() {
         // just a fake for the moment
-        return 1.0f;
+        return 1.0d;
     }
 }
