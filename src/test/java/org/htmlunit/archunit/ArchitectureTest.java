@@ -119,6 +119,34 @@ public class ArchitectureTest {
             .orShould().beDeclaredInClassesThat().areAnnotatedWith(JsxClasses.class);
 
     /**
+     * JsxConstants should not defined as short.
+     */
+    @ArchTest
+    public static final ArchRule jsxConstantReturnType = fields()
+            .that().areAnnotatedWith(JsxConstant.class)
+            .should().notHaveRawType("short");
+
+    /**
+     * JsxGetter/Setter/Functions should not return a short.
+     */
+    @ArchTest
+    public static final ArchRule jsxAnnotationReturnType = methods()
+            .that().areAnnotatedWith(JsxGetter.class)
+                    .or().areAnnotatedWith(JsxSetter.class)
+                    .or().areAnnotatedWith(JsxFunction.class)
+            .should().notHaveRawReturnType("short");
+
+    /**
+     * JsxGetter/Setter/Functions should not use a short as parameter.
+     */
+    @ArchTest
+    public static final ArchRule jsxAnnotationParameterType = methods()
+            .that().areAnnotatedWith(JsxGetter.class)
+                    .or().areAnnotatedWith(JsxSetter.class)
+                    .or().areAnnotatedWith(JsxFunction.class)
+            .should().notHaveRawParameterTypes("short");
+
+    /**
      * Every JsxGetter has to be named get... or is....
      */
     @ArchTest

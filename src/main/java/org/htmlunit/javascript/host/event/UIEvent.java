@@ -50,7 +50,7 @@ public class UIEvent extends Event {
 
     /** Constant. */
     @JsxConstant({FF, FF_ESR})
-    public static final short SCROLL_PAGE_UP = 0xFFFF8000;
+    public static final int SCROLL_PAGE_UP = 0xFFFF8000;
 
     /** Specifies some detail information about the event. */
     private long detail_;

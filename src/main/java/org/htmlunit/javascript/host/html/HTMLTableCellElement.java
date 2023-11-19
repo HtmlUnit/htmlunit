@@ -116,7 +116,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533549.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public Integer getCellIndex() {
+    public int getCellIndex() {
         final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
         final HtmlTableRow row = cell.getEnclosingRow();
         if (row == null) { // a not attached document.createElement('TD')

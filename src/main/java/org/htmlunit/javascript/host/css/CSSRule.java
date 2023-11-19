@@ -60,85 +60,85 @@ public class CSSRule extends HtmlUnitScriptable {
      * The rule is a {@code CSSUnknownRule}.
      */
     @JsxConstant(IE)
-    public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
+    public static final int UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
      * The rule is a {@code CSSStyleRule}.
      */
     @JsxConstant
-    public static final short STYLE_RULE                = org.w3c.dom.css.CSSRule.STYLE_RULE;
+    public static final int STYLE_RULE                = org.w3c.dom.css.CSSRule.STYLE_RULE;
 
     /**
      * The rule is a {@code CSSCharsetRule}.
      */
     @JsxConstant
-    public static final short CHARSET_RULE              = org.w3c.dom.css.CSSRule.CHARSET_RULE;
+    public static final int CHARSET_RULE              = org.w3c.dom.css.CSSRule.CHARSET_RULE;
 
     /**
      * The rule is a {@code CSSImportRule}.
      */
     @JsxConstant
-    public static final short IMPORT_RULE               = org.w3c.dom.css.CSSRule.IMPORT_RULE;
+    public static final int IMPORT_RULE               = org.w3c.dom.css.CSSRule.IMPORT_RULE;
 
     /**
      * The rule is a {@code CSSMediaRule}.
      */
     @JsxConstant
-    public static final short MEDIA_RULE                = org.w3c.dom.css.CSSRule.MEDIA_RULE;
+    public static final int MEDIA_RULE                = org.w3c.dom.css.CSSRule.MEDIA_RULE;
 
     /**
      * The rule is a {@code CSSFontFaceRule}.
      */
     @JsxConstant
-    public static final short FONT_FACE_RULE            = org.w3c.dom.css.CSSRule.FONT_FACE_RULE;
+    public static final int FONT_FACE_RULE            = org.w3c.dom.css.CSSRule.FONT_FACE_RULE;
 
     /**
      * The rule is a {@code CSSPageRule}.
      */
     @JsxConstant
-    public static final short PAGE_RULE                 = org.w3c.dom.css.CSSRule.PAGE_RULE;
+    public static final int PAGE_RULE                 = org.w3c.dom.css.CSSRule.PAGE_RULE;
 
     /**
      * The rule is a {@code CSSKeyframesRule}.
      */
     @JsxConstant
-    public static final short KEYFRAMES_RULE            = 7;
+    public static final int KEYFRAMES_RULE            = 7;
 
     /**
      * The rule is a {@code CSSKeyframeRule}.
      */
     @JsxConstant
-    public static final short KEYFRAME_RULE             = 8;
+    public static final int KEYFRAME_RULE             = 8;
 
     /**
      * The rule is a {@code CSSNamespaceRule}.
      */
     @JsxConstant
-    public static final short NAMESPACE_RULE           = 10;
+    public static final int NAMESPACE_RULE           = 10;
 
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
     @JsxConstant({CHROME, EDGE, FF, FF_ESR})
-    public static final short COUNTER_STYLE_RULE        = 11;
+    public static final int COUNTER_STYLE_RULE        = 11;
 
     /**
      * The rule is a {@code CSSSupportsRule}.
      */
     @JsxConstant({CHROME, EDGE, FF, FF_ESR})
-    public static final short SUPPORTS_RULE             = 12;
+    public static final int SUPPORTS_RULE             = 12;
 
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
     @JsxConstant({CHROME, EDGE, FF, FF_ESR})
-    public static final short FONT_FEATURE_VALUES_RULE  = 14;
+    public static final int FONT_FEATURE_VALUES_RULE  = 14;
 
     /**
      * The rule is a {@code CSSViewportRule}.
      */
     @JsxConstant(IE)
-    public static final short VIEWPORT_RULE  = 15;
+    public static final int VIEWPORT_RULE  = 15;
 
     private final CSSStyleSheet stylesheet_;
 
@@ -221,7 +221,7 @@ public class CSSRule extends HtmlUnitScriptable {
      * @return the type of the rule.
      */
     @JsxGetter
-    public short getType() {
+    public int getType() {
         if (rule_ instanceof CSSCharsetRuleImpl) {
             return CSSRule.CHARSET_RULE;
         }

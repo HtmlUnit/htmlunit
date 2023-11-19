@@ -78,34 +78,6 @@ public class MethodWrapper extends ScriptableObject implements Function {
      */
     @Override
     public Object call(final Context context, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        final Object javaResp;
-        if (thisObj instanceof ScriptableWrapper) {
-            final ScriptableWrapper wrapper = (ScriptableWrapper) thisObj;
-            final Object wrappedObject = wrapper.getWrappedObject();
-            if (clazz_.isInstance(wrappedObject)) {
-                // convert arguments
-                final Object[] javaArgs = convertJSArgsToJavaArgs(context, scope, args);
-                try {
-                    javaResp = method_.invoke(wrappedObject, javaArgs);
-                }
-                catch (final Exception e) {
-                    throw Context.reportRuntimeError("Exception calling wrapped function "
-                            + method_.getName() + ": " + e.getMessage());
-                }
-            }
-            else {
-                throw buildInvalidCallException(thisObj);
-            }
-
-        }
-        else {
-            throw buildInvalidCallException(thisObj);
-        }
-
-        return Context.javaToJS(javaResp, ScriptableObject.getTopLevelScope(scope));
-    }
-
-    private RuntimeException buildInvalidCallException(final Scriptable thisObj) {
         return Context.reportRuntimeError("Function " + method_.getName()
                 + " called on incompatible object: " + thisObj);
     }

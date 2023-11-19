@@ -60,15 +60,15 @@ public class FileReader extends EventTarget {
 
     /** No data has been loaded yet. */
     @JsxConstant
-    public static final short EMPTY = 0;
+    public static final int EMPTY = 0;
 
     /** Data is currently being loaded. */
     @JsxConstant
-    public static final short LOADING = 1;
+    public static final int LOADING = 1;
 
     /** The entire read request has been completed. */
     @JsxConstant
-    public static final short DONE = 2;
+    public static final int DONE = 2;
 
     private int readyState_ = EMPTY;
     private Object result_;

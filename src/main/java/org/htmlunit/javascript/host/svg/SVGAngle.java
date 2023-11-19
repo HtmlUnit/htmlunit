@@ -35,23 +35,23 @@ public class SVGAngle extends HtmlUnitScriptable {
 
     /** Invalid unit type. */
     @JsxConstant
-    public static final short SVG_ANGLETYPE_UNKNOWN = 0;
+    public static final int SVG_ANGLETYPE_UNKNOWN = 0;
 
     /** Unspecified unit type. */
     @JsxConstant
-    public static final short SVG_ANGLETYPE_UNSPECIFIED = 1;
+    public static final int SVG_ANGLETYPE_UNSPECIFIED = 1;
 
     /** Degree unit type. */
     @JsxConstant
-    public static final short SVG_ANGLETYPE_DEG = 2;
+    public static final int SVG_ANGLETYPE_DEG = 2;
 
     /** Radian unit type. */
     @JsxConstant
-    public static final short SVG_ANGLETYPE_RAD = 3;
+    public static final int SVG_ANGLETYPE_RAD = 3;
 
     /** Grad unit type. */
     @JsxConstant
-    public static final short SVG_ANGLETYPE_GRAD = 4;
+    public static final int SVG_ANGLETYPE_GRAD = 4;
 
     /**
      * Creates an instance.

@@ -43,22 +43,22 @@ public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
     @JsxConstant
-    public static final short UNCACHED = 0;
+    public static final int UNCACHED = 0;
     /** The application cache is not in the process of being updated. */
     @JsxConstant
-    public static final short IDLE = 1;
+    public static final int IDLE = 1;
     /** The application cache manifest is being fetched and checked for updates. */
     @JsxConstant
-    public static final short CHECKING = 2;
+    public static final int CHECKING = 2;
     /** Resources are being downloaded to be added to the cache. */
     @JsxConstant
-    public static final short DOWNLOADING = 3;
+    public static final int DOWNLOADING = 3;
     /** There is a new version of the application cache available. */
     @JsxConstant
-    public static final short UPDATEREADY = 4;
+    public static final int UPDATEREADY = 4;
     /** The application cache group is now obsolete. */
     @JsxConstant
-    public static final short OBSOLETE = 5;
+    public static final int OBSOLETE = 5;
 
     /**
      * Returns the event listener to be called when fetching the application cache manifest and checking for updates.
@@ -216,7 +216,7 @@ public class ApplicationCache extends EventTarget {
      * @return the status of the application cache
      */
     @JsxGetter
-    public short getStatus() {
+    public int getStatus() {
         return UNCACHED;
     }
 

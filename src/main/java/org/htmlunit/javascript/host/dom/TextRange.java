@@ -268,14 +268,14 @@ public class TextRange extends HtmlUnitScriptable {
         }
 
         final org.w3c.dom.Node start = range_.getStartContainer();
-        final short startComparison = start.compareDocumentPosition(otherStart);
+        final int startComparison = start.compareDocumentPosition(otherStart);
         final boolean startNodeBefore = startComparison == 0
                 || (startComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
                 || (startComparison & Node.DOCUMENT_POSITION_PRECEDING) != 0;
         if (startNodeBefore && (start != otherStart || range_.getStartOffset() <= otherRange.getStartOffset())) {
             final org.w3c.dom.Node end = range_.getEndContainer();
             final org.w3c.dom.Node otherEnd = otherRange.getEndContainer();
-            final short endComparison = end.compareDocumentPosition(otherEnd);
+            final int endComparison = end.compareDocumentPosition(otherEnd);
             final boolean endNodeAfter = endComparison == 0
                     || (endComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0
                     || (endComparison & Node.DOCUMENT_POSITION_FOLLOWING) != 0;

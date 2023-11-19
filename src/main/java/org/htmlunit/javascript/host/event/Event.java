@@ -530,19 +530,19 @@ public class Event extends HtmlUnitScriptable {
 
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF_ESR})
-    public static final short NONE = 0;
+    public static final int NONE = 0;
 
     /** The first event phase: the capturing phase. */
     @JsxConstant
-    public static final short CAPTURING_PHASE = 1;
+    public static final int CAPTURING_PHASE = 1;
 
     /** The second event phase: at the event target. */
     @JsxConstant
-    public static final short AT_TARGET = 2;
+    public static final int AT_TARGET = 2;
 
     /** The third (and final) event phase: the bubbling phase. */
     @JsxConstant
-    public static final short BUBBLING_PHASE = 3;
+    public static final int BUBBLING_PHASE = 3;
 
     /** Constant. */
     @JsxConstant({FF, FF_ESR})

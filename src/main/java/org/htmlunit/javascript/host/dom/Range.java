@@ -56,19 +56,19 @@ public class Range extends AbstractRange {
 
     /** Comparison mode for compareBoundaryPoints. */
     @JsxConstant
-    public static final short START_TO_START = 0;
+    public static final int START_TO_START = 0;
 
     /** Comparison mode for compareBoundaryPoints. */
     @JsxConstant
-    public static final short START_TO_END = 1;
+    public static final int START_TO_END = 1;
 
     /** Comparison mode for compareBoundaryPoints. */
     @JsxConstant
-    public static final short END_TO_END = 2;
+    public static final int END_TO_END = 2;
 
     /** Comparison mode for compareBoundaryPoints. */
     @JsxConstant
-    public static final short END_TO_START = 3;
+    public static final int END_TO_START = 3;
 
     /**
      * Creates an instance.

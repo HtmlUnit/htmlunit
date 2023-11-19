@@ -227,7 +227,7 @@ public class XMLDOMNode extends MSXMLScriptable {
      * @return the XML Document Object Model (DOM) node type
      */
     @JsxGetter
-    public short getNodeType() {
+    public int getNodeType() {
         final DomNode domNode = getDomNodeOrDie();
         return domNode.getNodeType();
     }

@@ -154,11 +154,11 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     /** To be documented. */
     @JsxConstant({CHROME, EDGE})
-    public static final short TEMPORARY = 0;
+    public static final int TEMPORARY = 0;
 
     /** To be documented. */
     @JsxConstant({CHROME, EDGE})
-    public static final short PERSISTENT = 1;
+    public static final int PERSISTENT = 1;
 
     private Document document_;
     private DocumentProxy documentProxy_;

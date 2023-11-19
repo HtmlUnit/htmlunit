@@ -64,7 +64,7 @@ public class CSSKeyframesRule extends CSSRule {
      */
     @Override
     @JsxGetter
-    public short getType() {
+    public int getType() {
         return KEYFRAMES_RULE;
     }
 }

@@ -41,19 +41,19 @@ public class NodeFilter extends HtmlUnitScriptable {
      * Accept the node.
      */
     @JsxConstant
-    public static final short FILTER_ACCEPT = org.w3c.dom.traversal.NodeFilter.FILTER_ACCEPT;
+    public static final int FILTER_ACCEPT = org.w3c.dom.traversal.NodeFilter.FILTER_ACCEPT;
 
     /**
      * Reject the node.
      */
     @JsxConstant
-    public static final short FILTER_REJECT = org.w3c.dom.traversal.NodeFilter.FILTER_REJECT;
+    public static final int FILTER_REJECT = org.w3c.dom.traversal.NodeFilter.FILTER_REJECT;
 
     /**
      * Skip the node.
      */
     @JsxConstant
-    public static final short FILTER_SKIP = org.w3c.dom.traversal.NodeFilter.FILTER_SKIP;
+    public static final int FILTER_SKIP = org.w3c.dom.traversal.NodeFilter.FILTER_SKIP;
 
     /** Show all nodes. */
     @JsxConstant

@@ -74,75 +74,75 @@ public class Node extends EventTarget {
 
     /** @see org.w3c.dom.Node#ELEMENT_NODE */
     @JsxConstant
-    public static final short ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
+    public static final int ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
 
     /** @see org.w3c.dom.Node#ATTRIBUTE_NODE */
     @JsxConstant
-    public static final short ATTRIBUTE_NODE = org.w3c.dom.Node.ATTRIBUTE_NODE;
+    public static final int ATTRIBUTE_NODE = org.w3c.dom.Node.ATTRIBUTE_NODE;
 
     /** @see org.w3c.dom.Node#TEXT_NODE */
     @JsxConstant
-    public static final short TEXT_NODE = org.w3c.dom.Node.TEXT_NODE;
+    public static final int TEXT_NODE = org.w3c.dom.Node.TEXT_NODE;
 
     /** @see org.w3c.dom.Node#CDATA_SECTION_NODE */
     @JsxConstant
-    public static final short CDATA_SECTION_NODE = org.w3c.dom.Node.CDATA_SECTION_NODE;
+    public static final int CDATA_SECTION_NODE = org.w3c.dom.Node.CDATA_SECTION_NODE;
 
     /** @see org.w3c.dom.Node#ENTITY_REFERENCE_NODE */
     @JsxConstant
-    public static final short ENTITY_REFERENCE_NODE = org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
+    public static final int ENTITY_REFERENCE_NODE = org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
 
     /** @see org.w3c.dom.Node#ENTITY_NODE */
     @JsxConstant
-    public static final short ENTITY_NODE = org.w3c.dom.Node.ENTITY_NODE;
+    public static final int ENTITY_NODE = org.w3c.dom.Node.ENTITY_NODE;
 
     /** @see org.w3c.dom.Node#PROCESSING_INSTRUCTION_NODE */
     @JsxConstant
-    public static final short PROCESSING_INSTRUCTION_NODE = org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
+    public static final int PROCESSING_INSTRUCTION_NODE = org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
 
     /** @see org.w3c.dom.Node#COMMENT_NODE */
     @JsxConstant
-    public static final short COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
+    public static final int COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_NODE */
     @JsxConstant
-    public static final short DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
+    public static final int DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_TYPE_NODE */
     @JsxConstant
-    public static final short DOCUMENT_TYPE_NODE = org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
+    public static final int DOCUMENT_TYPE_NODE = org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE */
     @JsxConstant
-    public static final short DOCUMENT_FRAGMENT_NODE = org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
+    public static final int DOCUMENT_FRAGMENT_NODE = org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
 
     /** @see org.w3c.dom.Node#NOTATION_NODE */
     @JsxConstant
-    public static final short NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
+    public static final int NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_DISCONNECTED */
     @JsxConstant
-    public static final short DOCUMENT_POSITION_DISCONNECTED = org.w3c.dom.Node.DOCUMENT_POSITION_DISCONNECTED;
+    public static final int DOCUMENT_POSITION_DISCONNECTED = org.w3c.dom.Node.DOCUMENT_POSITION_DISCONNECTED;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_PRECEDING */
     @JsxConstant
-    public static final short DOCUMENT_POSITION_PRECEDING = org.w3c.dom.Node.DOCUMENT_POSITION_PRECEDING;
+    public static final int DOCUMENT_POSITION_PRECEDING = org.w3c.dom.Node.DOCUMENT_POSITION_PRECEDING;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_FOLLOWING */
     @JsxConstant
-    public static final short DOCUMENT_POSITION_FOLLOWING = org.w3c.dom.Node.DOCUMENT_POSITION_FOLLOWING;
+    public static final int DOCUMENT_POSITION_FOLLOWING = org.w3c.dom.Node.DOCUMENT_POSITION_FOLLOWING;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINS */
     @JsxConstant
-    public static final short DOCUMENT_POSITION_CONTAINS = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINS;
+    public static final int DOCUMENT_POSITION_CONTAINS = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINS;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINED_BY */
     @JsxConstant
-    public static final short DOCUMENT_POSITION_CONTAINED_BY = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINED_BY;
+    public static final int DOCUMENT_POSITION_CONTAINED_BY = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINED_BY;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC */
     @JsxConstant
-    public static final short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
+    public static final int DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
         = org.w3c.dom.Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */
@@ -161,7 +161,7 @@ public class Node extends EventTarget {
      * @return the node type
      */
     @JsxGetter
-    public short getNodeType() {
+    public int getNodeType() {
         return getDomNodeOrDie().getNodeType();
     }
 
@@ -626,7 +626,7 @@ public class Node extends EventTarget {
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
     @JsxFunction
-    public short compareDocumentPosition(final Object node) {
+    public int compareDocumentPosition(final Object node) {
         if (!(node instanceof Node)) {
             throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
         }
