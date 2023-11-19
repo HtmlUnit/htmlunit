@@ -577,7 +577,7 @@ public class Event extends HtmlUnitScriptable {
      * The current event phase. This is a W3C standard attribute. One of {@link #NONE},
      * {@link #CAPTURING_PHASE}, {@link #AT_TARGET} or {@link #BUBBLING_PHASE}.
      */
-    private short eventPhase_;
+    private int eventPhase_;
 
     /**
      * Whether or not the event bubbles. The value of this attribute depends on the event type. To
@@ -886,7 +886,7 @@ public class Event extends HtmlUnitScriptable {
      *
      * @param phase the phase the event is in
      */
-    public void setEventPhase(final short phase) {
+    public void setEventPhase(final int phase) {
         if (phase != CAPTURING_PHASE && phase != AT_TARGET && phase != BUBBLING_PHASE) {
             throw new IllegalArgumentException("Illegal phase specified: " + phase);
         }

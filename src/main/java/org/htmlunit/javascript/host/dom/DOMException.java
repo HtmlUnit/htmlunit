@@ -35,6 +35,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class DOMException extends HtmlUnitScriptable {
@@ -120,7 +121,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxConstant(IE)
     public static final int SERIALIZE_ERR = 82;
 
-    private final short code_;
+    private final int code_;
     private final String message_;
     private int lineNumber_;
     private String fileName_;
@@ -139,7 +140,7 @@ public class DOMException extends HtmlUnitScriptable {
      * @param message the exception message
      * @param errorCode the error code
      */
-    public DOMException(final String message, final short errorCode) {
+    public DOMException(final String message, final int errorCode) {
         code_ = errorCode;
         message_ = message;
     }

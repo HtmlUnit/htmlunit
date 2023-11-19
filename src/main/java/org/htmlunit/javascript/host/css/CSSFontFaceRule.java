@@ -65,7 +65,7 @@ public class CSSFontFaceRule extends CSSRule {
      * {@inheritDoc}
      */
     @Override
-    public short getType() {
+    public int getType() {
         return FONT_FACE_RULE;
     }
 
