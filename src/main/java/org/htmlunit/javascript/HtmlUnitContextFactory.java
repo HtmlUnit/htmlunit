@@ -37,7 +37,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.WrapFactory;
 import org.htmlunit.corejs.javascript.debug.Debugger;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
@@ -60,7 +59,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private final BrowserVersion browserVersion_;
     private long timeout_;
     private Debugger debugger_;
-    private final WrapFactory wrapFactory_ = new HtmlUnitWrapFactory();
     private boolean deminifyFunctionCode_;
 
     /**
@@ -293,7 +291,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setInstructionObserverThreshold(INSTRUCTION_COUNT_THRESHOLD);
 
         cx.setErrorReporter(new HtmlUnitErrorReporter(webClient_.getJavaScriptErrorListener()));
-        cx.setWrapFactory(wrapFactory_);
+        // We don't want to wrap String & Co.
+        cx.getWrapFactory().setJavaPrimitiveWrap(false);
 
         if (debugger_ != null) {
             cx.setDebugger(debugger_, null);
