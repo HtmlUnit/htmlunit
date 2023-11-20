@@ -7,6 +7,16 @@
     </properties>
 
     <body>
+        <release version="3.9.0" date="December xx, 2023" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.22.0.
+            </action>
+            <action type="add" dev="rbri">
+                Some cleanup/simplification done for the way java objects are mapped to js objects.
+            </action>
+        </release>
+
+
         <release version="3.8.0" date="November 18, 2023" description="Chrome/Edge 119, Bugfixes">
             <action type="add" dev="RhinoTeam">
                 core-js: support trailing commas in function parameters.
