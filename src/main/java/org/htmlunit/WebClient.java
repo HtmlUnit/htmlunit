@@ -2977,7 +2977,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      */
-    public static class CSS3ParserPool {
+    static class CSS3ParserPool {
         /*
          * Our pool. We only hold data when it is available. In addition, synchronization against
          * this deque is cheap.
@@ -3020,9 +3020,10 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public static class PooledCSS3Parser extends CSS3Parser implements AutoCloseable {
         /**
-         * The pool we want to return us to
+         * The pool we want to return us to. Because multiple threads can use this, we
+         * have to ensure that we see the action here.
          */
-        private CSS3ParserPool pool_;
+        private volatile CSS3ParserPool pool_;
 
         /**
          * Create a new poolable parser.
@@ -3038,11 +3039,10 @@ public class WebClient implements Serializable, AutoCloseable {
          * Resets the parser's pool state so it can be safely returned again.
          *
          * @param pool the pool the parser should return to when it is closed
-         * @return this
+         * @return this parser for fluid programming
          */
         protected PooledCSS3Parser markInUse(final CSS3ParserPool pool) {
-            // ensure we detect programming mistakes, Java will optimize this
-            // null check away when it never happens
+            // ensure we detect programming mistakes
             if (this.pool_ == null) {
                 this.pool_ = pool;
             }
@@ -3063,8 +3063,13 @@ public class WebClient implements Serializable, AutoCloseable {
         @Override
         public void close() {
             if (this.pool_ != null) {
-                this.pool_.recycle(this);
+            	final CSS3ParserPool oldPool = this.pool_;
+                // set null first and recycle later to avoid exposing a broken state
+                // volatile guarantees visibility
                 this.pool_ = null;
+
+                // return
+                oldPool.recycle(this);
             }
             else {
                 throw new IllegalStateException("This PooledParser was returned already");
