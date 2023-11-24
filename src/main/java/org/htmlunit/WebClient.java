@@ -3063,7 +3063,7 @@ public class WebClient implements Serializable, AutoCloseable {
         @Override
         public void close() {
             if (this.pool_ != null) {
-            	final CSS3ParserPool oldPool = this.pool_;
+                final CSS3ParserPool oldPool = this.pool_;
                 // set null first and recycle later to avoid exposing a broken state
                 // volatile guarantees visibility
                 this.pool_ = null;

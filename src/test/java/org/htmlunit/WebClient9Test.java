@@ -14,7 +14,13 @@
  */
 package org.htmlunit;
 
+import java.io.StringReader;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.htmlunit.WebClient.PooledCSS3Parser;
+import org.htmlunit.cssparser.parser.CSSOMParser;
+import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
@@ -24,6 +30,7 @@ import org.junit.runner.RunWith;
  * Tests for {@link WebClient} and its CSS3Parser pool.
  *
  * @author René Schwietzke
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebClient9Test extends SimpleWebTestCase {
@@ -132,5 +139,43 @@ public class WebClient9Test extends SimpleWebTestCase {
                 }
             }
         }
+    }
+
+    @Test
+    public void multithreading() throws InterruptedException {
+
+        final String css = "body { background-color: green; }";
+
+        final int numberOfThreads = 10;
+
+        final AtomicInteger errorCount = new AtomicInteger();
+        final CountDownLatch latch = new CountDownLatch(numberOfThreads);
+
+        final WebClient webClient = new WebClient();
+        for (int i = 0; i < numberOfThreads; i++) {
+            new Thread(() -> {
+                try {
+                    for (int j = 0; j < 100_000; j++) {
+                        try (PooledCSS3Parser pooledParser = webClient.getCSS3Parser()) {
+                            assertNotNull(pooledParser);
+
+                            try (InputSource source = new InputSource(new StringReader(css))) {
+                                final CSSOMParser parser = new CSSOMParser(pooledParser);
+                                parser.parseStyleSheet(source, null);
+                            }
+                        }
+                    }
+                }
+                catch (final Exception e) {
+                    errorCount.addAndGet(1);
+                }
+                latch.countDown();
+            }).start();
+        }
+
+        latch.await();
+        webClient.close();
+
+        assertEquals(0, errorCount.get());
     }
 }
