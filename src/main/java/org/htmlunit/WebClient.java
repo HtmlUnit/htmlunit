@@ -3023,7 +3023,7 @@ public class WebClient implements Serializable, AutoCloseable {
          * The pool we want to return us to. Because multiple threads can use this, we
          * have to ensure that we see the action here.
          */
-        private volatile CSS3ParserPool pool_;
+        private CSS3ParserPool pool_;
 
         /**
          * Create a new poolable parser.
