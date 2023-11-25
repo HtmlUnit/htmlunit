@@ -143,7 +143,6 @@ public class WebClient9Test extends SimpleWebTestCase {
 
     @Test
     public void multithreading() throws InterruptedException {
-
         final String css = "body { background-color: green; }";
 
         final int numberOfThreads = 10;

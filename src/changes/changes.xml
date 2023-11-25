@@ -8,6 +8,26 @@
 
     <body>
         <release version="3.9.0" date="December xx, 2023" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Resolve only link tags having a 'stylesheet' rel attribute when searching
+                for all styles of a page.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang3 to 3.14.0.
+            </action>
+            <action type="fix" dev="René Schwietzke" issue="#669">
+                The new CSS3Parser pool implementation throws sometimes an illegal state exception
+                under load (regression from 3.8.0).
+            </action>
+            <action type="fix" dev="René Schwietzke" issue="#54">
+                neko: incorrect handling of &amp;#x and &amp;#x; fixed.
+            </action>
+            <action type="fix" dev="René Schwietzke" issue="#54">
+                neko: some incorrect HTML named entity definitions fixed.
+            </action>
+            <action type="update" dev="René Schwietzke" issue="#54">
+                neko: new HTML named entities parser that is up to 20x faster for common entities.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache log4j-api to 2.22.0.
             </action>

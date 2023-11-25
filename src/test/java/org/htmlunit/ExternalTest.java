@@ -58,7 +58,7 @@ public class ExternalTest {
     static String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static String EDGE_DRIVER_ = "119.0.2151.44";
+    static String EDGE_DRIVER_ = "119.0.2151.72";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -166,14 +166,14 @@ public class ExternalTest {
         try (WebClient webClient = buildWebClient()) {
             final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
             String content = page.asNormalizedText();
-            content = content.substring(content.indexOf("Recent versions"));
+            content = content.substring(content.indexOf("Current general public release channel."));
             content = content.replace("\r\n", "");
 
             String version = "0.0.0.0";
             final Pattern regex =
-                    Pattern.compile("Version: ("
+                    Pattern.compile("Version ("
                                 + BrowserVersion.EDGE.getBrowserVersionNumeric()
-                                + "\\.\\d*\\.\\d*\\.\\d*):\\sx86\\s\\|\\sx64");
+                                + "\\.\\d*\\.\\d*\\.\\d*)\\sLinux");
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
