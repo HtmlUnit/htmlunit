@@ -24,11 +24,6 @@
         <src>/images/htmlunit.png</src>
         <href>https://www.htmlunit.org</href>
     </bannerLeft>
-    <bannerRight>
-        <name>Gargoyle Software Inc.</name>
-        <src>/images/GargoyleSoftwareLogo.jpg</src>
-        <href>http://www.GargoyleSoftware.com/</href>
-    </bannerRight>
 
     <body>
         <menu name="GitHub">
