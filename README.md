@@ -154,7 +154,7 @@ This project is licensed under the Apache 2.0 License
 
 ## Development
 
-### some useful mvn command lines
+### useful mvn command lines
 setup as or refresh the eclipse project
 
 ```
@@ -173,7 +173,10 @@ check dependencies for known security problems
 mvn dependency-check:check
 ```
 
+### Contributing
 
+I welcome contributions, especially in the form of pull requests.
+Please try to keep your pull requests small (don't bundle unrelated changes) and try to include test cases.
 
 ## Some insights
 [HtmlUnit at openhub][5]
