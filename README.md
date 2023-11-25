@@ -152,6 +152,29 @@ dependencies {
 This project is licensed under the Apache 2.0 License
 
 
+## Development
+
+### some useful mvn command lines
+setup as or refresh the eclipse project
+
+```
+mvn eclipse:eclipse -DdownloadSources=true
+```
+
+run the whole core test suite (no huge tests, no libary tests)
+
+```
+mvn test -U -P without-library-and-huge-tests -Dgpg.skip -Djava.awt.headless=true
+```
+
+check dependencies for known security problems
+
+```
+mvn dependency-check:check
+```
+
+
+
 ## Some insights
 [HtmlUnit at openhub][5]
 
