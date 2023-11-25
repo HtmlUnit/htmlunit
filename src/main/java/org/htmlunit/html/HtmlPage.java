@@ -2730,7 +2730,10 @@ public class HtmlPage extends SgmlPage {
                 }
 
                 if (htmlElement instanceof HtmlLink) {
-                    styles.add(((HtmlLink) htmlElement).getSheet());
+                    final HtmlLink link = (HtmlLink) htmlElement;
+                    if (link.isStyleSheetLink()) {
+                        styles.add(link.getSheet());
+                    }
                 }
             }
         }
