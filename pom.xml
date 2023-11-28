@@ -28,6 +28,7 @@
         <htmlunitcssparser.version>3.8.0</htmlunitcssparser.version>
         <htmlunitneko.version>3.9.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>3.8.0</htmlunitxpath.version>
+        <htmlunitcsp.version>3.9.0-SNAPSHOT</htmlunitcsp.version>
         <htmlunitcorejs.version>3.8.0</htmlunitcorejs.version>
 
         <htmlunitdriver.version>4.15.0</htmlunitdriver.version>
@@ -1155,6 +1156,12 @@
             <version>${htmlunitxpath.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.htmlunit</groupId>
+            <artifactId>htmlunit-csp</artifactId>
+            <version>${htmlunitcsp.version}</version>
+        </dependency>
+        
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
@@ -1195,17 +1202,7 @@
             <artifactId>dec</artifactId>
             <version>0.1.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.shapesecurity</groupId>
-            <artifactId>salvation2</artifactId>
-            <version>3.0.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>jsr305</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+
         <!-- Jetty -->
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>

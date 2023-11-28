@@ -70,6 +70,8 @@ import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.csp.Policy;
+import org.htmlunit.csp.url.URI;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
@@ -104,9 +106,6 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.webstart.WebStartHandler;
-
-import com.shapesecurity.salvation2.Policy;
-import com.shapesecurity.salvation2.URLs.URI;
 
 /**
  * The main starting point in HtmlUnit: this class simulates a web browser.

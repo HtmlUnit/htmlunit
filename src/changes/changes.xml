@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.9.0" date="December xx, 2023" description="Bugfixes">
+            <action type="add" dev="rbri">
+                New subproject htmlunit-csp. This replaces shapesecurity/salvation.
+            </action>
             <action type="fix" dev="rbri">
                 Enable FEATURE_SECURE_PROCESSING for the MSXML XSLProcessor.
             </action>
