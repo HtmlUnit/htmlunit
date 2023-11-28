@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.9.0" date="December xx, 2023" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Enable FEATURE_SECURE_PROCESSING for the MSXML XSLProcessor.
+            </action>
             <action type="fix" dev="René Schwietzke">
                 neko: fix wrong error processing for some unicode entities.
             </action>

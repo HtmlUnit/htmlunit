@@ -20,6 +20,7 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -180,7 +181,15 @@ public class XSLProcessor extends MSXMLScriptable {
 
             final DOMResult result = new DOMResult(containerElement);
 
-            final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
+            final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+
+            // By default, the JDK turns on FSP for DOM and SAX parsers and XML schema validators,
+            // which sets a number of processing limits on the processors. Conversely, by default,
+            // the JDK turns off FSP for transformers and XPath, which enables extension functions for XSLT and XPath.
+            transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+            final Transformer transformer = transformerFactory.newTransformer(xsltSource);
+
             for (final Map.Entry<String, Object> entry : parameters_.entrySet()) {
                 transformer.setParameter(entry.getKey(), entry.getValue());
             }

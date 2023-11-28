@@ -156,4 +156,56 @@ public class XSLProcessorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(createTestHTML(html));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = {"preparation done", "exception"})
+    public void testSecurity() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + ACTIVEX_CHECK
+            + "    try {"
+            + "      var xmlDoc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "1'") + ";\n"
+            + "      var xslDoc = new ActiveXObject('Msxml2.FreeThreadedDOMDocument.3.0');\n"
+            + "      xslDoc.async = false;\n"
+            + "      xslDoc.load('" + URL_SECOND + "2');\n"
+            + "      var xslt = new ActiveXObject('Msxml2.XSLTemplate.3.0');\n"
+            + "      xslt.stylesheet = xslDoc;\n"
+            + "      var xslProc = xslt.createProcessor();\n"
+            + "      xslProc.input = xmlDoc;\n"
+            + "      log('preparation done');\n"
+            + "      xslProc.transform();\n"
+            + "      log(newxslProc.output);\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "  }\n"
+            + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION
+            + "</script></head>"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n"
+            + "<s></s>";
+
+        final String xsl
+            = " <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" "
+                    + "xmlns:rt=\"http://xml.apache.org/xalan/java/java.lang.Runtime\" "
+                    + "xmlns:ob=\"http://xml.apache.org/xalan/java/java.lang.Object\">\r\n"
+            + "    <xsl:template match='/'>\n"
+            + "      <xsl:variable name='rtobject' select='rt:getRuntime()'/>\n"
+            + "      <xsl:variable name=\"rtString\" select=\"ob:toString($rtobject)\"/>\n"
+            + "      <xsl:value-of select=\"$rtString\"/>\n"
+            + "    </xsl:template>\r\n"
+            + "  </xsl:stylesheet>";
+
+        getMockWebConnection().setResponse(new URL(URL_SECOND, "1"), xml, MimeType.TEXT_XML);
+        getMockWebConnection().setResponse(new URL(URL_SECOND, "2"), xsl, MimeType.TEXT_XML);
+
+        loadPageVerifyTitle2(html);
+    }
 }
