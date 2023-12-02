@@ -63,6 +63,9 @@ public class ArchitectureTest {
         .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.AwtFontUtil")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.FontUtil")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.NoOpFontUtil")
+
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.csp.Utils")
+
         .should().resideInAPackage("org.htmlunit.util");
 
     /**
