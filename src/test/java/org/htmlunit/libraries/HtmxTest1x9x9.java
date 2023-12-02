@@ -42,7 +42,7 @@ public class HtmxTest1x9x9 extends HtmxTest {
     public void htmx() throws Exception {
         // the test page runs in an endless loop in ie
         if (getBrowserVersion().isIE()) {
-             return;
+            return;
         }
         htmx("htmx-1.9.9");
     }
