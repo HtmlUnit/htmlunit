@@ -1126,6 +1126,10 @@
                     <groupId>commons-codec</groupId>
                     <artifactId>commons-codec</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
