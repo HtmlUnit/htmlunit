@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.9.0" date="December xx, 2023" description="Bugfixes">
+        <release version="3.9.0" date="December 03, 2023" description="Bugfixes, htmlunit-csp, CVE-2023-49093, improved neko">
             <action type="update" dev="rbri">
                 Upgrade commons-logging to 1.3.0
             </action>
@@ -18,7 +18,7 @@
                 New subproject htmlunit-csp. This replaces shapesecurity/salvation.
             </action>
             <action type="fix" dev="rbri">
-                Enable FEATURE_SECURE_PROCESSING for the MSXML XSLProcessor.
+                Enable FEATURE_SECURE_PROCESSING for the MSXML XSLProcessor (CVE-2023-49093).
             </action>
             <action type="fix" dev="René Schwietzke">
                 neko: fix wrong error processing for some unicode entities.
