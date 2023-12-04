@@ -44,7 +44,7 @@
         <pmd.version>6.50.0</pmd.version>
         <junit.version>4.13.2</junit.version>
         <archunit.version>1.2.0</archunit.version>
-        <dependencycheck.version>8.4.3</dependencycheck.version>
+        <dependencycheck.version>9.0.2</dependencycheck.version>
     </properties>
 
     <build>
@@ -163,7 +163,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.6.3</version>
                 <configuration>
                     <quiet>true</quiet>
                     <doclint>html,missing,reference,syntax</doclint>
@@ -612,7 +612,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.6.3</version>
                 <configuration>
                     <quiet>true</quiet>
                     <doclint>html,missing,reference,syntax</doclint>
