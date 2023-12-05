@@ -39,7 +39,7 @@
         <log4j.version>2.22.0</log4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>9.3</checkstyle.version>
+        <checkstyle.version>10.12.5</checkstyle.version>
         <spotbugs.version>4.8.2</spotbugs.version>
         <pmd.version>6.50.0</pmd.version>
         <junit.version>4.13.2</junit.version>
