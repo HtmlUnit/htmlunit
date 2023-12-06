@@ -31,7 +31,7 @@
         <htmlunitcsp.version>3.9.0</htmlunitcsp.version>
         <htmlunitcorejs.version>3.9.0</htmlunitcorejs.version>
 
-        <htmlunitdriver.version>4.15.0</htmlunitdriver.version>
+        <htmlunitdriver.version>4.15.1</htmlunitdriver.version>
         <selenium.version>4.15.0</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
