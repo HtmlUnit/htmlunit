@@ -28,7 +28,7 @@
         <htmlunitcssparser.version>3.9.0</htmlunitcssparser.version>
         <htmlunitneko.version>3.9.0</htmlunitneko.version>
         <htmlunitxpath.version>3.9.0</htmlunitxpath.version>
-        <htmlunitcsp.version>3.9.0</htmlunitcsp.version>
+        <htmlunitcsp.version>3.10.0-SNAPSHOT</htmlunitcsp.version>
         <htmlunitcorejs.version>3.9.0</htmlunitcorejs.version>
 
         <htmlunitdriver.version>4.15.0</htmlunitdriver.version>
