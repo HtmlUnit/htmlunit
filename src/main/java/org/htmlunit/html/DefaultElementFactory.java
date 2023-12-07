@@ -16,7 +16,10 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.KEYGEN_AS_BLOCK;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -55,7 +58,7 @@ public class DefaultElementFactory implements ElementFactory {
     /**
      * You can generate your own test cases by looking into ElementTestSource.generateTestForHtmlElements.
      */
-    public static final String[] SUPPORTED_TAGS_ = {
+    public static final List<String> SUPPORTED_TAGS_ = Collections.unmodifiableList(Arrays.asList(
         KEYGEN_, HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
         HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME,
         HtmlArticle.TAG_NAME, HtmlAside.TAG_NAME, HtmlAudio.TAG_NAME,
@@ -107,7 +110,7 @@ public class DefaultElementFactory implements ElementFactory {
         HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTemplate.TAG_NAME, HtmlTime.TAG_NAME,
         HtmlTitle.TAG_NAME, HtmlTrack.TAG_NAME, HtmlUnderlined.TAG_NAME, HtmlUnorderedList.TAG_NAME,
         HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME, HtmlWordBreak.TAG_NAME, HtmlExample.TAG_NAME
-    };
+    ));
 
     /**
      * @param page the owning page

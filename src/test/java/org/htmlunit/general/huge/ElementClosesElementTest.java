@@ -17,7 +17,6 @@ package org.htmlunit.general.huge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.htmlunit.WebClient;
@@ -79,7 +78,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final List<String> strings = new LinkedList<>(Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_));
+        final List<String> strings = DefaultElementFactory.SUPPORTED_TAGS_;
 
         for (final String parent : strings) {
             for (final String child : strings) {

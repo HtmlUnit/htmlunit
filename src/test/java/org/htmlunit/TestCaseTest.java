@@ -19,7 +19,6 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -68,7 +67,7 @@ public final class TestCaseTest {
                             final String relativePath = file.getAbsolutePath().substring(
                                     new File(".").getAbsolutePath().length() - 1);
                             final HashSet<String> tags =
-                                    new HashSet<>(Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_));
+                                    new HashSet<>(DefaultElementFactory.SUPPORTED_TAGS_);
                             // title tag is special
                             tags.remove(HtmlTitle.TAG_NAME);
                             checkLines(relativePath, line, lines, "xmp", tags);
