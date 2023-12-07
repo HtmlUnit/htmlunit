@@ -591,4 +591,31 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(content);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "myDiv1",
+            IE = "error")
+    public void abcd() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var res = '';\n"
+            + "    var result = document.evaluate('//div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE);\n"
+            + "    log(result.singleNodeValue.id);\n"
+            + "  } catch (e) {log('error' + e)}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv1'>div1</div>\n"
+            + "  <div id='myDiv2'>div1</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
 }
