@@ -32,7 +32,7 @@
         <htmlunitcorejs.version>3.9.0</htmlunitcorejs.version>
 
         <htmlunitdriver.version>4.16.0</htmlunitdriver.version>
-        <selenium.version>4.16.0</selenium.version>
+        <selenium.version>4.16.1</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <jetty.version>9.4.53.v20231009</jetty.version>
