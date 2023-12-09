@@ -89,9 +89,9 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(119, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(120, "FF");
 
-    private static final int FIREFOX_ESR_NUMERIC = 109; // FF ESR 115 reports itself as 109
+    private static final int FIREFOX_ESR_NUMERIC = 115;
 
     /** Firefox ESR. */
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
@@ -104,10 +104,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Edge. */
-    public static final BrowserVersion EDGE = new BrowserVersion(119, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(120, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(119, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(120, "Chrome");
 
     /**
      * Array with all supported browsers.
@@ -125,8 +125,7 @@ public final class BrowserVersion implements Serializable {
     /* Register plugins for the browser versions. */
     static {
         FIREFOX_ESR.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_ESR.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
-                                    + FIREFOX_ESR.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
+        FIREFOX_ESR.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/"
                                     + FIREFOX_ESR.getBrowserVersionNumeric() + ".0";
         FIREFOX_ESR.buildId_ = "20181001000000";
         FIREFOX_ESR.productSub_ = "20100101";
@@ -159,7 +158,8 @@ public final class BrowserVersion implements Serializable {
             140, 141, 143, 143, 144, 145, 146, 148};
 
         FIREFOX.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/"
+        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
+                                            + FIREFOX.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
                                             + FIREFOX.getBrowserVersionNumeric() + ".0";
         FIREFOX.buildId_ = "20181001000000";
         FIREFOX.productSub_ = "20100101";
@@ -252,9 +252,9 @@ public final class BrowserVersion implements Serializable {
         CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
-        CHROME.secClientHintUserAgentHeader_ = "\"Google Chrome\";v=\""
-                        + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                        + CHROME.getBrowserVersionNumeric() + "\", \"Not?A_Brand\";v=\"24\"";
+        CHROME.secClientHintUserAgentHeader_ = "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\""
+                        + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
+                        + CHROME.getBrowserVersionNumeric() + "\"";
         CHROME.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
             27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,
@@ -299,9 +299,9 @@ public final class BrowserVersion implements Serializable {
         EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
-        EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\""
-                            + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                            + EDGE.getBrowserVersionNumeric() + "\", \"Not?A_Brand\";v=\"24\"";
+        EDGE.secClientHintUserAgentHeader_ = "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\""
+                            + EDGE.getBrowserVersionNumeric() + "\", \"Microsoft Edge\";v=\""
+                            + EDGE.getBrowserVersionNumeric() + "\"";
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
             27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,
