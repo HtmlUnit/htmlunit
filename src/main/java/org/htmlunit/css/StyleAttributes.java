@@ -318,12 +318,6 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code background-repeat}. */
         BACKGROUND_REPEAT_("background-repeat", "background-repeat", ff("repeat")),
 
-        /** The style property {@code backgroundRepeatX}. */
-        BACKGROUND_REPEAT_X("backgroundRepeatX", "background-repeat-x", chromeAndEdge("repeat")),
-
-        /** The style property {@code backgroundRepeatY}. */
-        BACKGROUND_REPEAT_Y("backgroundRepeatY", "background-repeat-y", chromeAndEdge("repeat")),
-
         /** The style property {@code backgroundSize}. */
         BACKGROUND_SIZE("backgroundSize", "background-size", ff("auto"),
                 ie("auto"), chromeAndEdgeAuto()),
@@ -1736,37 +1730,37 @@ public final class StyleAttributes implements Serializable {
         MASK("mask", "mask", ffNone(), ie("none"), chromeAndEdgeNone()),
 
         /** The style property {@code maskClip}. */
-        MASK_CLIP("maskClip", "mask-clip", ff("border-box")),
+        MASK_CLIP("maskClip", "mask-clip", ff("border-box"), chromeAndEdge("border-box")),
 
         /** The style property {@code mask-clip}. */
         MASK_CLIP_("mask-clip", "mask-clip", ff("border-box")),
 
         /** The style property {@code maskComposite}. */
-        MASK_COMPOSITE("maskComposite", "mask-composite", ff("add")),
+        MASK_COMPOSITE("maskComposite", "mask-composite", ff("add"), chromeAndEdge("add")),
 
         /** The style property {@code mask-composite}. */
         MASK_COMPOSITE_("mask-composite", "mask-composite", ff("add")),
 
         /** The style property {@code maskImage}. */
-        MASK_IMAGE("maskImage", "mask-image", ffNone()),
+        MASK_IMAGE("maskImage", "mask-image", ffNone(), chromeAndEdgeNone()),
 
         /** The style property {@code mask-image}. */
         MASK_IMAGE_("mask-image", "mask-image", ffNone()),
 
         /** The style property {@code maskMode}. */
-        MASK_MODE("maskMode", "mask-mode", ff("match-source")),
+        MASK_MODE("maskMode", "mask-mode", ff("match-source"), chromeAndEdge("match-source")),
 
         /** The style property {@code mask-mode}. */
         MASK_MODE_("mask-mode", "mask-mode", ff("match-source")),
 
         /** The style property {@code maskOrigin}. */
-        MASK_ORIGIN("maskOrigin", "mask-origin", ff("border-box")),
+        MASK_ORIGIN("maskOrigin", "mask-origin", ff("border-box"), chromeAndEdge("border-box")),
 
         /** The style property {@code mask-origin}. */
         MASK_ORIGIN_("mask-origin", "mask-origin", ff("border-box")),
 
         /** The style property {@code maskPosition}. */
-        MASK_POSITION("maskPosition", "mask-position", ff("0% 0%")),
+        MASK_POSITION("maskPosition", "mask-position", ff("0% 0%"), chromeAndEdge("0% 0%")),
 
         /** The style property {@code mask-position}. */
         MASK_POSITION_("mask-position", "mask-position", ff("0% 0%")),
@@ -1784,13 +1778,13 @@ public final class StyleAttributes implements Serializable {
         MASK_POSITION_Y_("mask-position-y", "mask-position-y", ff("0%")),
 
         /** The style property {@code maskRepeat}. */
-        MASK_REPEAT("maskRepeat", "mask-repeat", ff("repeat")),
+        MASK_REPEAT("maskRepeat", "mask-repeat", ff("repeat"), chromeAndEdge("repeat")),
 
         /** The style property {@code mask-repeat}. */
         MASK_REPEAT_("mask-repeat", "mask-repeat", ff("repeat")),
 
         /** The style property {@code maskSize}. */
-        MASK_SIZE("maskSize", "mask-size", ff("auto")),
+        MASK_SIZE("maskSize", "mask-size", ff("auto"), chromeAndEdgeAuto()),
 
         /** The style property {@code mask-size}. */
         MASK_SIZE_("mask-size", "mask-size", ff("auto")),
@@ -4216,7 +4210,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_MARGIN_START("webkitMarginStart", "webkit-margin-start", chromeAndEdge("0px")),
 
         /** The style property {@code webkitMask}. */
-        WEBKIT_MASK("webkitMask", "webkit-mask", chromeAndEdgeEmpty(), ffNone()),
+        WEBKIT_MASK("webkitMask", "webkit-mask", chromeAndEdgeNone(), ffNone()),
 
         /** The style property {@code WebkitMask}. */
         WEBKIT_MASK_("WebkitMask", "webkit-mask", ffNone()),
@@ -4253,7 +4247,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_MASK_CLIP__("-webkit-mask-clip", "webkit-mask-clip", ff("border-box")),
 
         /** The style property {@code webkitMaskComposite}. */
-        WEBKIT_MASK_COMPOSITE("webkitMaskComposite", "webkit-mask-composite", chromeAndEdge("source-over"), ff("add")),
+        WEBKIT_MASK_COMPOSITE("webkitMaskComposite", "webkit-mask-composite", chromeAndEdge("add"), ff("add")),
 
         /** The style property {@code WebkitMaskComposite}. */
         WEBKIT_MASK_COMPOSITE_("WebkitMaskComposite", "webkit-mask-composite", ff("add")),
@@ -4314,12 +4308,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code -webkit-mask-repeat}. */
         WEBKIT_MASK_REPEAT__("-webkit-mask-repeat", "webkit-mask-repeat", ff("repeat")),
-
-        /** The style property {@code webkitMaskRepeatX}. */
-        WEBKIT_MASK_REPEAT_X("webkitMaskRepeatX", "webkit-mask-repeat-x", chromeAndEdgeEmpty()),
-
-        /** The style property {@code webkitMaskRepeatY}. */
-        WEBKIT_MASK_REPEAT_Y("webkitMaskRepeatY", "webkit-mask-repeat-y", chromeAndEdgeEmpty()),
 
         /** The style property {@code webkitMaskSize}. */
         WEBKIT_MASK_SIZE("webkitMaskSize", "webkit-mask-size", chromeAndEdgeAuto(), ff("auto")),
