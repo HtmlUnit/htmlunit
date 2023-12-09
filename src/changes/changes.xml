@@ -9,12 +9,12 @@
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
             <action type="update" dev="rbri">
-                Because the naming of the method and parametes is misleading, the method 
+                Because the naming of the method and parametes is misleading, the method
                 WebClientOptions.setSSLClientCertificate(InputStream, String, String) is deprecated. Please use
                 WebClientOptions.setSSLClientCertificateKeyStore(InputStream, String, String) instead.
             </action>
             <action type="update" dev="rbri">
-                Because the naming of the method and parametes is misleading, the method 
+                Because the naming of the method and parametes is misleading, the method
                 WebClientOptions.setSSLClientCertificate(URL, String, String) is deprecated. Please use
                 WebClientOptions.setSSLClientCertificateKeyStore(URL, String, String) instead.
             </action>
