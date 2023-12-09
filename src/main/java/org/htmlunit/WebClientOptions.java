@@ -154,44 +154,15 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the SSL client certificate to use. The needed parameters are used to
-     * construct a {@link java.security.KeyStore}.
+     * Sets the SSL client certificate {@link KeyStore} to use.
      * <p>
      * If the web server requires Renegotiation, you have to set system property
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
      * <p>
-     * In some cases the impl seems to pick old certificats from the KeyStore. To avoid
-     * that, wrap your keystore inside your own KeyStore impl and filter out outdated
-     * certificates. Provide the Keystore to the options instead of the input stream.
-     *
-     * @param certificateInputStream the input stream which represents the certificate
-     * @param certificatePassword the certificate password
-     * @param certificateType the type of certificate, usually {@code jks} or {@code pkcs12}
-     */
-    public void setSSLClientCertificate(final InputStream certificateInputStream, final String certificatePassword,
-            final String certificateType) {
-        try {
-            setSSLClientCertificateKeyStore(
-                    getKeyStore(certificateInputStream, certificatePassword, certificateType),
-                    certificatePassword.toCharArray());
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Sets the SSL client certificate keystore to use.
-     * <p>
-     * If the web server requires Renegotiation, you have to set system property
-     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
-     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
-     * TLS Renegotiation Issue</a>.
-     * <p>
-     * In some cases the impl seems to pick old certificats from the KeyStore. To avoid
-     * that, wrap your keystore inside your own KeyStore impl and filter out outdated
+     * In some cases the impl seems to pick old certificates from the {@link KeyStore}. To avoid
+     * that, wrap your {@link KeyStore} inside your own {@link KeyStore} impl and filter out outdated
      * certificates.
      *
      * @param keyStore {@link KeyStore} to use
@@ -214,12 +185,94 @@ public class WebClientOptions implements Serializable {
      * @param certificateUrl the URL which locates the certificate
      * @param certificatePassword the certificate password
      * @param certificateType the type of certificate, usually {@code jks} or {@code pkcs12}
+     *
+     * @deprecated as of version 3.10.0; use {@link #setSSLClientCertificateKeyStore(URL, String, String)} instead
      */
+    @Deprecated
     public void setSSLClientCertificate(final URL certificateUrl, final String certificatePassword,
             final String certificateType) {
-        try (InputStream is = certificateUrl.openStream()) {
-            sslClientCertificateStore_ = getKeyStore(is, certificatePassword, certificateType);
-            sslClientCertificatePassword_ = certificatePassword == null ? null : certificatePassword.toCharArray();
+        setSSLClientCertificateKeyStore(certificateUrl, certificatePassword, certificateType);
+    }
+
+    /**
+     * Sets the SSL client certificate to use.
+     * The needed parameters are used to construct a {@link java.security.KeyStore}.
+     * <p>
+     * If the web server requires Renegotiation, you have to set system property
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
+     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * TLS Renegotiation Issue</a>.
+     *
+     * @param keyStoreUrl the URL which locates the certificate {@link KeyStore}
+     * @param keyStorePassword the certificate {@link KeyStore} password
+     * @param keyStoreType the type of certificate {@link KeyStore}, usually {@code jks} or {@code pkcs12}
+     *
+     */
+    public void setSSLClientCertificateKeyStore(final URL keyStoreUrl, final String keyStorePassword,
+            final String keyStoreType) {
+        try (InputStream is = keyStoreUrl.openStream()) {
+            sslClientCertificateStore_ = getKeyStore(is, keyStorePassword, keyStoreType);
+            sslClientCertificatePassword_ = keyStorePassword == null ? null : keyStorePassword.toCharArray();
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Sets the SSL client certificate to use. The needed parameters are used to
+     * construct a {@link java.security.KeyStore}.
+     * <p>
+     * If the web server requires Renegotiation, you have to set system property
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
+     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * TLS Renegotiation Issue</a>.
+     * <p>
+     * In some cases the impl seems to pick old certificats from the KeyStore. To avoid
+     * that, wrap your keystore inside your own KeyStore impl and filter out outdated
+     * certificates. Provide the Keystore to the options instead of the input stream.
+     *
+     * @param certificateInputStream the input stream which represents the certificate
+     * @param certificatePassword the certificate password
+     * @param certificateType the type of certificate, usually {@code jks} or {@code pkcs12}
+     *
+     * @deprecated as of version 3.10.0;
+     * use {@link #setSSLClientCertificateKeyStore(InputStream, String, String)} instead
+     */
+    @Deprecated
+    public void setSSLClientCertificate(final InputStream certificateInputStream, final String certificatePassword,
+            final String certificateType) {
+        try {
+            setSSLClientCertificateKeyStore(certificateInputStream, certificatePassword, certificateType);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Sets the SSL client certificate {@link KeyStore} to use. The parameters are used to
+     * construct the {@link KeyStore}.
+     * <p>
+     * If the web server requires Renegotiation, you have to set system property
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
+     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * TLS Renegotiation Issue</a>.
+     * <p>
+     * In some cases the impl seems to pick old certificates from the {@link KeyStore}. To avoid
+     * that, wrap your {@link KeyStore} inside your own {@link KeyStore} impl and filter out outdated
+     * certificates. Provide the {@link KeyStore} to the options instead of the input stream.
+     *
+     * @param keyStoreInputStream the input stream which represents the {@link KeyStore} holding the certificates
+     * @param keyStorePassword the {@link KeyStore} password
+     * @param keyStoreType the type of {@link KeyStore}, usually {@code jks} or {@code pkcs12}
+     */
+    public void setSSLClientCertificateKeyStore(final InputStream keyStoreInputStream,
+            final String keyStorePassword, final String keyStoreType) {
+        try {
+            setSSLClientCertificateKeyStore(
+                    getKeyStore(keyStoreInputStream, keyStorePassword, keyStoreType),
+                    keyStorePassword.toCharArray());
         }
         catch (final Exception e) {
             throw new RuntimeException(e);
