@@ -5141,8 +5141,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),open[GSCE]",
-            EDGE = "constructor(),open[GSCE]",
+    @Alerts(CHROME = "constructor(),name[GSCE],open[GSCE]",
+            EDGE = "constructor(),name[GSCE],open[GSCE]",
             FF = "constructor(),open[GSCE]",
             FF_ESR = "constructor(),open[GSCE]",
             IE = "constructor,namedRecordset(),recordset")

@@ -131,4 +131,52 @@ public class HTMLDetailsElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "null", "", "null", "abc", "null", "abc", "blah", "abc", "null"},
+            CHROME = {"", "null", "", "", "abc", "abc", "blah", "blah", "", "null"},
+            EDGE = {"", "null", "", "", "abc", "abc", "blah", "blah", "", "null"})
+    public void name() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var det = document.getElementById('detail');\n"
+            + "        log(det.name);\n"
+            + "        log(det.getAttribute('name'));\n"
+
+            + "        det.name = '';\n"
+            + "        log(det.name);\n"
+            + "        log(det.getAttribute('name'));\n"
+
+            + "        det.name = 'abc';\n"
+            + "        log(det.name);\n"
+            + "        log(det.getAttribute('name'));\n"
+
+            + "        det.setAttribute('name', 'blah');\n"
+            + "        log(det.name);\n"
+            + "        log(det.getAttribute('name'));\n"
+
+            + "        det.removeAttribute('name');\n"
+            + "        log(det.name);\n"
+            + "        log(det.getAttribute('name'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <details id='detail'>\n"
+            + "      <summary>Automated Status: Operational</summary>\n"
+            + "      <p>Velocity: 12m/s</p>\n"
+            + "      <p>Direction: North</p>\n"
+            + "    </details>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

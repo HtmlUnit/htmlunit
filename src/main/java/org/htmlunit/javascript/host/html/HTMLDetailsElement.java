@@ -61,4 +61,24 @@ public class HTMLDetailsElement extends HTMLElement {
 
         ((HtmlDetails) getDomNodeOrDie()).setOpen(bool);
     }
+
+    /**
+     * Returns the {@code name} property.
+     * @return the {@code name} property
+     */
+    @JsxGetter({CHROME, EDGE})
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    /**
+     * Sets the name attribute.
+     * @param newValue the new value to set
+     */
+    @JsxSetter
+    @Override
+    public void setName(final String newValue) {
+        super.setName(newValue);
+    }
 }
