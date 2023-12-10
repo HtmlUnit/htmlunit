@@ -516,15 +516,51 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter
     public void setProtocol(final String protocol) throws Exception {
-        final String bareProtocol = StringUtils.substringBefore(protocol, ":");
-        if (UrlUtils.isValidScheme(bareProtocol)
-                && (getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)
-                    || UrlUtils.isSpecialScheme(protocol))) {
-            setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol));
+        if (protocol.isEmpty()) {
+            if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
+                throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
+            }
             return;
         }
-        if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
-            throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
+
+        String bareProtocol = StringUtils.substringBefore(protocol, ":");
+        if (getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)) {
+            if (!UrlUtils.isValidScheme(bareProtocol)) {
+                if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
+                    throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
+                }
+                return;
+            }
+
+            try {
+                URL url = UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol);
+                url = UrlUtils.removeRedundantPort(url);
+                setUrl(url);
+            }
+            catch (final MalformedURLException e) {
+                if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
+                    throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
+                }
+            }
+
+            return;
+        }
+
+        bareProtocol = bareProtocol.trim();
+        if (!UrlUtils.isValidScheme(bareProtocol)) {
+            return;
+        }
+        if (!UrlUtils.isSpecialScheme(bareProtocol)) {
+            return;
+        }
+
+        try {
+            URL url = UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol);
+            url = UrlUtils.removeRedundantPort(url);
+            setUrl(url);
+        }
+        catch (final MalformedURLException e) {
+            // ignore
         }
     }
 

@@ -355,16 +355,37 @@ public class URL extends HtmlUnitScriptable {
 
     @JsxSetter
     public void setProtocol(final String protocol) throws MalformedURLException {
-        if (url_ == null || protocol.isEmpty() || !UrlUtils.isValidScheme(protocol)) {
+        if (url_ == null || protocol.isEmpty()) {
             return;
         }
-        if (!getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)
-                && !UrlUtils.isSpecialScheme(protocol)) {
+
+        String bareProtocol = StringUtils.substringBefore(protocol, ":");
+        if (getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)) {
+            if (!UrlUtils.isValidScheme(bareProtocol)) {
+                return;
+            }
+
+            try {
+                url_ = UrlUtils.getUrlWithNewProtocol(url_, bareProtocol);
+                url_ = UrlUtils.removeRedundantPort(url_);
+            }
+            catch (final MalformedURLException e) {
+                // ignore
+            }
+
+            return;
+        }
+
+        bareProtocol = bareProtocol.trim();
+        if (!UrlUtils.isValidScheme(bareProtocol)) {
+            return;
+        }
+        if (!UrlUtils.isSpecialScheme(bareProtocol)) {
             return;
         }
 
         try {
-            url_ = UrlUtils.getUrlWithNewProtocol(url_, protocol);
+            url_ = UrlUtils.getUrlWithNewProtocol(url_, bareProtocol);
             url_ = UrlUtils.removeRedundantPort(url_);
         }
         catch (final MalformedURLException e) {

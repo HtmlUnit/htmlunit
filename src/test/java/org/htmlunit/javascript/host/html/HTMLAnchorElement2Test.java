@@ -1454,6 +1454,66 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"http:", "https:", "https://§§URL§§/foo.html#O"})
+    public void readWriteProtocolIncludingColon() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var tester = document.getElementById('tester');\n"
+            + "        log(tester.protocol);\n"
+
+            + "        tester.protocol = 'https:';\n"
+            + "        log(tester.protocol);\n"
+            + "        log(tester.href);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  <head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <a id='tester' href='foo.html#O'>link 1</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables("localhost:" + PORT);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"http:", "https:", "https://§§URL§§/foo.html#O"})
+    public void readWriteProtocolWithUrl() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var tester = document.getElementById('tester');\n"
+            + "        log(tester.protocol);\n"
+
+            + "        tester.protocol = 'https://www.htmlunit.org';\n"
+            + "        log(tester.protocol);\n"
+            + "        log(tester.href);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  <head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <a id='tester' href='foo.html#O'>link 1</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables("localhost:" + PORT);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"http:", "http:", "http://§§URL§§/foo.html#O",
                        "http:", "http://§§URL§§/abc_xyz://localhost/foo.html"},
             IE = {"http:", "invalid argument",

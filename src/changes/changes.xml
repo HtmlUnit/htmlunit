@@ -9,7 +9,10 @@
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
             <action type="fix" dev="rbri">
-                URL.protocol setter validates (FF, Chrome, Edge).
+                URL and anchor tag 'protocol' setter accepts also complete urls as parameter.
+            </action>
+            <action type="fix" dev="rbri">
+                URL 'protocol' setter validates (FF, Chrome, Edge).
             </action>
             <action type="add" dev="rbri">
                 Details name property support added (Chrome/Edge).

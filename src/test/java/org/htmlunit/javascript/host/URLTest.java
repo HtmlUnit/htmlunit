@@ -592,11 +592,13 @@ public class URLTest extends WebDriverTestCase {
                        "http:", "http://mydomain.com/svn/Repos/",
                        "http:", "http://mydomain.com/svn/Repos/",
                        "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
                        "ex-unknown"},
             FF_ESR = {"https:",
                       "http:", "http://mydomain.com/svn/Repos/",
                       "http:", "http://mydomain.com/svn/Repos/",
                       "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
                       "http:", "http://mydomain.com/svn/Repos/",
                       "http:", "http://mydomain.com/svn/Repos/",
                       "http:", "http://mydomain.com/svn/Repos/",
@@ -630,11 +632,167 @@ public class URLTest extends WebDriverTestCase {
                         + "        log(u.protocol);\n"
                         + "        log(u.toString());\n"
 
+                        + "        u.protocol = ' http ';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
                         + "        u.protocol = 'axdeg ';\n"
                         + "        log(u.protocol);\n"
                         + "        log(u.toString());\n"
 
                         + "        u.protocol = ' axdeg ';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        try {\n"
+                        + "        u.protocol = null;\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+                        + "        } catch(e) { log('ex-null') }\n"
+
+                        + "        try {\n"
+                        + "        u.protocol = unknown;\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+                        + "        } catch(e) { log('ex-unknown') }\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  </script>\n"
+                        + "</head>\n"
+                        + "<body onload='test()'>\n"
+                        + "</body>\n"
+                        + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"https:",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "ex-unknown"},
+            FF_ESR = {"https:",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                      "null:", "null://mydomain.com/svn/Repos/",
+                      "ex-unknown"},
+            IE = {})
+    public void protocol2() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "<head>\n"
+                        + "  <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "    function test() {\n"
+                        + "      if (typeof window.URL === 'function') {\n"
+                        + "        var u = new URL('https://mydomain.com:80/svn/Repos/');\n"
+                        + "        log(u.protocol);\n"
+
+                        + "        u.protocol = 'http:';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = '';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'axdeg:';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'hTTp:';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'axdeg: ';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = ' axdeg: ';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        try {\n"
+                        + "        u.protocol = null;\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+                        + "        } catch(e) { log('ex-null') }\n"
+
+                        + "        try {\n"
+                        + "        u.protocol = unknown;\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+                        + "        } catch(e) { log('ex-unknown') }\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  </script>\n"
+                        + "</head>\n"
+                        + "<body onload='test()'>\n"
+                        + "</body>\n"
+                        + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"https:",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "ex-unknown"},
+            FF_ESR = {"https:",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                      "null:", "null://mydomain.com/svn/Repos/",
+                      "ex-unknown"},
+            IE = {})
+    public void protocol3() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "<head>\n"
+                        + "  <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "    function test() {\n"
+                        + "      if (typeof window.URL === 'function') {\n"
+                        + "        var u = new URL('https://mydomain.com:80/svn/Repos/');\n"
+                        + "        log(u.protocol);\n"
+
+                        + "        u.protocol = 'http://www.htmlunit.org';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = '';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'axdeg://www.htmlunit.org';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'hTTp://www.htmlunit.org';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'axdeg://www.htmlunit.org ';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = ' axdeg://www.htmlunit.org ';\n"
                         + "        log(u.protocol);\n"
                         + "        log(u.toString());\n"
 
