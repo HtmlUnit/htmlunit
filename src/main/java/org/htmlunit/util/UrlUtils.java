@@ -963,6 +963,30 @@ public final class UrlUtils {
     }
 
     /**
+     * Returns true if specified string is a special scheme.
+     * <p>
+     * https://url.spec.whatwg.org/#special-scheme
+     * <p>
+     *
+     * @param scheme the scheme string to check
+     * @return true if special
+     */
+    public static boolean isSpecialScheme(final String scheme) {
+        final int length = scheme.length();
+        if (length < 2 || length > 5) {
+            return false;
+        }
+
+        final String schemeLC = scheme.toLowerCase(Locale.ROOT);
+        return "ftp".equals(schemeLC)
+                || "file".equals(schemeLC)
+                || "http".equals(schemeLC)
+                || "https".equals(schemeLC)
+                || "ws".equals(schemeLC)
+                || "wss".equals(schemeLC);
+    }
+
+    /**
      * Resolves a given relative URL against a base URL using the algorithm
      * depicted in <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>:
      * <p>

@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
+import static org.htmlunit.BrowserVersionFeatures.URL_IGNORE_SPECIAL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -355,6 +356,10 @@ public class URL extends HtmlUnitScriptable {
     @JsxSetter
     public void setProtocol(final String protocol) throws MalformedURLException {
         if (url_ == null || protocol.isEmpty() || !UrlUtils.isValidScheme(protocol)) {
+            return;
+        }
+        if (!getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)
+                && !UrlUtils.isSpecialScheme(protocol)) {
             return;
         }
 

@@ -23,6 +23,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_B
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_INVALID_THROWS;
+import static org.htmlunit.BrowserVersionFeatures.URL_IGNORE_SPECIAL;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -516,10 +517,13 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setProtocol(final String protocol) throws Exception {
         final String bareProtocol = StringUtils.substringBefore(protocol, ":");
-        if (UrlUtils.isValidScheme(bareProtocol)) {
+        if (UrlUtils.isValidScheme(bareProtocol)
+                && (getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)
+                    || UrlUtils.isSpecialScheme(protocol))) {
             setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol));
+            return;
         }
-        else if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
+        if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
             throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
         }
     }

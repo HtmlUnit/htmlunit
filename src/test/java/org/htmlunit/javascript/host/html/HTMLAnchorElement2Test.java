@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,7 +39,6 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.UrlUtils;
 import org.junit.Test;
@@ -786,8 +784,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "0,0"},
-            IE = {"", "0,0,0,0"})
-    @NotYetImplemented(IE)
+            IE = {"", "0,0", "0,0"})
+    @HtmlUnitNYI(IE = {"", "0,0"})
     public void coords() throws Exception {
         attribute("coords", "0,0");
     }
@@ -1425,9 +1423,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"http:", "axdeg:", "axdeg://§§URL§§/foo.html#O"},
             CHROME = {"http:", "http:", "http://§§URL§§/foo.html#O"},
-            EDGE = {"http:", "http:", "http://§§URL§§/foo.html#O"})
-    @HtmlUnitNYI(CHROME = {"http:", "axdeg:", "axdeg://§§URL§§/foo.html#O"},
-            EDGE = {"http:", "axdeg:", "axdeg://§§URL§§/foo.html#O"})
+            EDGE = {"http:", "http:", "http://§§URL§§/foo.html#O"},
+            FF = {"http:", "http:", "http://§§URL§§/foo.html#O"})
     public void readWriteProtocolUnknown() throws Exception {
         final String html =
               "<html>\n"

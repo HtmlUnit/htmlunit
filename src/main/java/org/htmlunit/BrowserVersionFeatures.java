@@ -1664,6 +1664,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     URL_AUTH_CREDENTIALS,
 
+    /** The protocol setter does not check for special protocols. */
+    @BrowserFeature({FF_ESR, IE})
+    URL_IGNORE_SPECIAL,
+
     /** Replace only ' ' with %20 when encode the query part of an url. */
     @BrowserFeature(IE)
     URL_MINIMAL_QUERY_ENCODING,
