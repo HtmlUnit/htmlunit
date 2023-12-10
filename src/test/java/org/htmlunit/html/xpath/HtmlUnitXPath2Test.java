@@ -598,7 +598,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "myDiv1",
             IE = "error")
-    public void abcd() throws Exception {
+    public void documentEvaluateFirst() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -608,7 +608,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "    var res = '';\n"
             + "    var result = document.evaluate('//div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE);\n"
             + "    log(result.singleNodeValue.id);\n"
-            + "  } catch (e) {log('error' + e)}\n"
+            + "  } catch (e) {log('error')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
