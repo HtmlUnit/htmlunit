@@ -36,6 +36,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.impl.SelectableTextInput;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.dom.MutationObserver;
 import org.htmlunit.javascript.host.event.Event;
@@ -970,7 +971,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public final boolean hasEventHandlers(final String eventName) {
         if (getPage().getWebClient().isJavaScriptEngineEnabled()) {
-            final Object jsObj = getScriptableObject();
+            final HtmlUnitScriptable jsObj = getScriptableObject();
             if (jsObj instanceof EventTarget) {
                 return ((EventTarget) jsObj).hasEventHandlers(eventName);
             }
@@ -1280,7 +1281,7 @@ public abstract class HtmlElement extends DomElement {
             return;
         }
 
-        final Object document = page.getScriptableObject();
+        final HtmlUnitScriptable document = page.getScriptableObject();
 
         if (document instanceof HTMLDocument) {
             final HTMLDocument doc = (HTMLDocument) document;

@@ -533,7 +533,7 @@ public class Document extends Node {
      * @return the imported node that belongs to this Document
      */
     @JsxFunction
-    public Object importNode(final Node importedNode, final boolean deep) {
+    public HtmlUnitScriptable importNode(final Node importedNode, final boolean deep) {
         DomNode domNode = importedNode.getDomNodeOrDie();
         domNode = domNode.cloneNode(deep);
         domNode.processImportNode(this);
@@ -4251,7 +4251,7 @@ public class Document extends Node {
      * @return the element with the specified ID, as long as it is an HTML element; {@code null} otherwise
      */
     @JsxFunction
-    public Object getElementById(final String id) {
+    public HtmlUnitScriptable getElementById(final String id) {
         final DomNode domNode = getDomNodeOrDie();
         final Object domElement = domNode.getFirstByXPath("//*[@id = \"" + id + "\"]");
         if (domElement != null) {

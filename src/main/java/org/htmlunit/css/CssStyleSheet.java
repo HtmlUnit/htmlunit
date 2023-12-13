@@ -107,6 +107,7 @@ import org.htmlunit.html.HtmlRadioButtonInput;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.ValidatableElement;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.host.css.MediaList;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -757,7 +758,7 @@ public class CssStyleSheet implements Serializable {
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final Condition condition, final DomElement element) {
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-            final Object sobj = element.getPage().getScriptableObject();
+            final HtmlUnitScriptable sobj = element.getPage().getScriptableObject();
             if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
                 return false;
             }

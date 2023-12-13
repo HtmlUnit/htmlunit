@@ -18,6 +18,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomDocumentType;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.w3c.dom.NamedNodeMap;
@@ -119,7 +120,7 @@ public class XMLDOMDocumentType extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    public Object getParentNode() {
+    public HtmlUnitScriptable getParentNode() {
         final DomDocumentType domDocumentType = getDomNodeOrDie();
         return domDocumentType.getPage().getScriptableObject();
     }

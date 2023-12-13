@@ -33,6 +33,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlAttributeChangeListener;
 import org.htmlunit.html.HtmlElement;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -109,7 +110,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @param description a text useful for debugging
      */
     public XMLDOMNodeList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        this((ScriptableObject) parentScope.getScriptableObject(), attributeChangeSensitive, description);
+        this(parentScope.getScriptableObject(), attributeChangeSensitive, description);
         setDomNode(parentScope, false);
     }
 
@@ -119,7 +120,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @param initialElements the initial content for the cache
      */
     protected XMLDOMNodeList(final DomNode parentScope, final List<DomNode> initialElements) {
-        this((ScriptableObject) parentScope.getScriptableObject(), true, null);
+        this(parentScope.getScriptableObject(), true, null);
         cachedElements_ = new ArrayList<>(initialElements);
     }
 
@@ -147,8 +148,8 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @return the next node in the collection
      */
     @JsxFunction
-    public Object nextNode() {
-        final Object nextNode;
+    public HtmlUnitScriptable nextNode() {
+        final HtmlUnitScriptable nextNode;
         final List<DomNode> elements = getElements();
         if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
             nextNode = elements.get(currentIndex_).getScriptableObject();

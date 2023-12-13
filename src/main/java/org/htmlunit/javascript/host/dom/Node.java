@@ -41,6 +41,7 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -594,7 +595,7 @@ public class Node extends EventTarget {
      * @return the document
      */
     @JsxGetter
-    public Object getOwnerDocument() {
+    public HtmlUnitScriptable getOwnerDocument() {
         final Object document = getDomNodeOrDie().getOwnerDocument();
         if (document != null) {
             return ((SgmlPage) document).getScriptableObject();
@@ -776,7 +777,7 @@ public class Node extends EventTarget {
         int counter = 0;
         for (final DomNode child : getDomNodeOrDie().getChildren()) {
             if (child != null) {
-                final Scriptable scriptable = child.getScriptableObject();
+                final HtmlUnitScriptable scriptable = child.getScriptableObject();
                 if (scriptable instanceof Element) {
                     counter++;
                 }
@@ -801,7 +802,7 @@ public class Node extends EventTarget {
 
         for (final DomNode child : domNode.getChildren()) {
             if (child != null) {
-                final Scriptable scriptable = child.getScriptableObject();
+                final HtmlUnitScriptable scriptable = child.getScriptableObject();
                 if (scriptable instanceof Element) {
                     return (Element) scriptable;
                 }
@@ -826,7 +827,7 @@ public class Node extends EventTarget {
 
         Element result = null;
         for (final DomNode child : domNode.getChildren()) {
-            final Scriptable scriptable = child.getScriptableObject();
+            final HtmlUnitScriptable scriptable = child.getScriptableObject();
             if (scriptable instanceof Element) {
                 result = (Element) scriptable;
             }

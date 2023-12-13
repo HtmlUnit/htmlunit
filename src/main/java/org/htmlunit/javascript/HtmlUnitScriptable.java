@@ -220,9 +220,9 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
 
         final DomNode domNode = (DomNode) object;
 
-        final Object scriptObject = domNode.getScriptableObject();
+        final HtmlUnitScriptable scriptObject = domNode.getScriptableObject();
         if (scriptObject != null) {
-            return (HtmlUnitScriptable) scriptObject;
+            return scriptObject;
         }
         return makeScriptableFor(domNode);
     }

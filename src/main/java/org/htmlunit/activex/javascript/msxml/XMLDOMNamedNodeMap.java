@@ -19,6 +19,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -97,7 +98,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
      * @param name attribute name
      * @return the attribute node, {@code null} if the attribute is not defined
      */
-    public Object getNamedItemWithoutSyntheticClassAttr(final String name) {
+    public HtmlUnitScriptable getNamedItemWithoutSyntheticClassAttr(final String name) {
         if (attributes_ != null) {
             final DomNode attr = (DomNode) attributes_.getNamedItem(name);
             if (attr != null) {
@@ -127,7 +128,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
      * @return the item at the specified index
      */
     @JsxFunction
-    public Object item(final int index) {
+    public HtmlUnitScriptable item(final int index) {
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
             return attr.getScriptableObject();
@@ -150,7 +151,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
      * @return the node removed from the collection or {@code null} if the named node is not an attribute
      */
     @JsxFunction
-    public Object removeNamedItem(final String name) {
+    public HtmlUnitScriptable removeNamedItem(final String name) {
         if (name == null || "null".equals(name)) {
             throw Context.reportRuntimeError("Type mismatch.");
         }

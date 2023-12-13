@@ -116,6 +116,7 @@ import org.htmlunit.html.HtmlUnderlined;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
 import org.htmlunit.html.serializer.HtmlSerializerInnerOuterText;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -625,7 +626,7 @@ public class HTMLElement extends Element {
      * @return the attribute node for the specified attribute
      */
     @Override
-    public Object getAttributeNode(final String attributeName) {
+    public HtmlUnitScriptable getAttributeNode(final String attributeName) {
         return getAttributes().getNamedItem(attributeName);
     }
 
@@ -1792,7 +1793,7 @@ public class HTMLElement extends Element {
         if ("inherit".equals(attribute)) {
             final DomNode parent = getDomNodeOrDie().getParentNode();
             if (parent != null) {
-                final Object parentScriptable = parent.getScriptableObject();
+                final HtmlUnitScriptable parentScriptable = parent.getScriptableObject();
                 if (parentScriptable instanceof HTMLElement) {
                     return ((HTMLElement) parentScriptable).isIsContentEditable();
                 }

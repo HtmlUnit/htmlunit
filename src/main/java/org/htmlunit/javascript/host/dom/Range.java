@@ -25,11 +25,11 @@ import java.util.HashSet;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.impl.SimpleRange;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -302,7 +302,7 @@ public class Range extends AbstractRange {
      * documentation</a>
      */
     @JsxFunction
-    public Object createContextualFragment(final String valueAsString) {
+    public HtmlUnitScriptable createContextualFragment(final String valueAsString) {
         final SgmlPage page = internGetStartContainer().getDomNodeOrDie().getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
         try {
@@ -323,7 +323,7 @@ public class Range extends AbstractRange {
      * @return the new document fragment containing the range contents
      */
     @JsxFunction
-    public Object extractContents() {
+    public HtmlUnitScriptable extractContents() {
         try {
             return getSimpleRange().extractContents().getScriptableObject();
         }
@@ -392,7 +392,7 @@ public class Range extends AbstractRange {
      * @return a clone
      */
     @JsxFunction
-    public Object cloneContents() {
+    public HtmlUnitScriptable cloneContents() {
         try {
             return getSimpleRange().cloneContents().getScriptableObject();
         }
@@ -494,7 +494,7 @@ public class Range extends AbstractRange {
         try {
             // simple impl for now
             for (final DomNode node : getSimpleRange().containedNodes()) {
-                final ScriptableObject scriptable = node.getScriptableObject();
+                final HtmlUnitScriptable scriptable = node.getScriptableObject();
                 if (scriptable instanceof HTMLElement) {
                     final ClientRect rect = new ClientRect(0, 0, 1, 1);
                     rect.setParentScope(w);
@@ -524,7 +524,7 @@ public class Range extends AbstractRange {
         try {
             // simple impl for now
             for (final DomNode node : getSimpleRange().containedNodes()) {
-                final ScriptableObject scriptable = node.getScriptableObject();
+                final HtmlUnitScriptable scriptable = node.getScriptableObject();
                 if (scriptable instanceof HTMLElement) {
                     final ClientRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();
                     rect.setTop(Math.min(rect.getTop(), childRect.getTop()));

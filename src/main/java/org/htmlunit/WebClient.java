@@ -69,7 +69,6 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import org.htmlunit.attachment.AttachmentHandler;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.csp.Policy;
 import org.htmlunit.csp.url.URI;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
@@ -89,6 +88,7 @@ import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.DefaultJavaScriptErrorListener;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptErrorListener;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
@@ -1161,7 +1161,7 @@ public class WebClient implements Serializable, AutoCloseable {
             if (page != null && page.isHtmlPage()) {
                 try {
                     final FrameWindow frame = ((HtmlPage) page).getFrameByName(name);
-                    final ScriptableObject scriptable = frame.getFrameElement().getScriptableObject();
+                    final HtmlUnitScriptable scriptable = frame.getFrameElement().getScriptableObject();
                     if (scriptable instanceof HTMLIFrameElement) {
                         ((HTMLIFrameElement) scriptable).onRefresh();
                     }

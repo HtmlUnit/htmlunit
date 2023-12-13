@@ -25,7 +25,6 @@ import java.util.function.Supplier;
 
 import org.htmlunit.corejs.javascript.ExternalArrayData;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomChangeEvent;
 import org.htmlunit.html.DomChangeListener;
 import org.htmlunit.html.DomElement;
@@ -108,7 +107,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
             final List<DomNode> initialElements) {
         if (domNode != null) {
             setDomNode(domNode, false);
-            final ScriptableObject parentScope = domNode.getScriptableObject();
+            final HtmlUnitScriptable parentScope = domNode.getScriptableObject();
             if (parentScope != null) {
                 setParentScope(parentScope);
                 setPrototype(getPrototype(getClass()));

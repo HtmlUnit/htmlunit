@@ -210,7 +210,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    public Object getOwnerDocument() {
+    public HtmlUnitScriptable getOwnerDocument() {
         return null;
     }
 

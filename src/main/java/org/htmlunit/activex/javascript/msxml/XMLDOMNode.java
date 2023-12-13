@@ -31,6 +31,7 @@ import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -261,7 +262,7 @@ public class XMLDOMNode extends MSXMLScriptable {
      * @return the root of the document that contains the node
      */
     @JsxGetter
-    public Object getOwnerDocument() {
+    public HtmlUnitScriptable getOwnerDocument() {
         final DomNode domNode = getDomNodeOrDie();
         final Object document = domNode.getOwnerDocument();
         if (document == null) {
@@ -275,7 +276,7 @@ public class XMLDOMNode extends MSXMLScriptable {
      * @return the parent node
      */
     @JsxGetter
-    public Object getParentNode() {
+    public HtmlUnitScriptable getParentNode() {
         final DomNode domNode = getDomNodeOrDie();
         return getJavaScriptNode(domNode.getParentNode());
     }

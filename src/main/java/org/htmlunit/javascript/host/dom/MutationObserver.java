@@ -20,7 +20,6 @@ import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.html.CharacterDataChangeEvent;
 import org.htmlunit.html.CharacterDataChangeListener;
@@ -135,7 +134,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      */
     @Override
     public void characterDataChanged(final CharacterDataChangeEvent event) {
-        final ScriptableObject target = event.getCharacterData().getScriptableObject();
+        final HtmlUnitScriptable target = event.getCharacterData().getScriptableObject();
         if (subtree_ || target == node_) {
             final MutationRecord mutationRecord = new MutationRecord();
             final Scriptable scope = getParentScope();

@@ -136,7 +136,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * This is the JavaScript object corresponding to this DOM node. It may
      * be null if there isn't a corresponding JavaScript object.
      */
-    private Object scriptObject_;
+    private HtmlUnitScriptable scriptObject_;
 
     /** The ready state is an IE-only value that is available to a large number of elements. */
     private String readyState_;
@@ -275,7 +275,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param scriptObject the JavaScript object
      */
-    public void setScriptableObject(final Object scriptObject) {
+    public void setScriptableObject(final HtmlUnitScriptable scriptObject) {
         scriptObject_ = scriptObject;
     }
 
@@ -885,7 +885,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return the JavaScript object that corresponds to this node
      */
     @SuppressWarnings("unchecked")
-    public <T> T getScriptableObject() {
+    public <T extends HtmlUnitScriptable> T getScriptableObject() {
         if (scriptObject_ == null) {
             final SgmlPage page = getPage();
             if (this == page) {
@@ -905,10 +905,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
                 throw new IllegalStateException(msg.toString());
             }
-            final Object o = page.getScriptableObject();
-            if (o instanceof HtmlUnitScriptable) {
-                scriptObject_ = ((HtmlUnitScriptable) o).makeScriptableFor(this);
-            }
+            scriptObject_ = page.getScriptableObject().makeScriptableFor(this);
         }
         return (T) scriptObject_;
     }
@@ -1562,7 +1559,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
              */
             final Document doc = getOwnerDocument();
             if (doc instanceof XmlPage) {
-                final ScriptableObject scriptable = ((XmlPage) doc).getScriptableObject();
+                final HtmlUnitScriptable scriptable = ((XmlPage) doc).getScriptableObject();
                 if (ScriptableObject.hasProperty(scriptable, "getProperty")) {
                     final Object selectionNS =
                             ScriptableObject.callMethod(scriptable, "getProperty", new Object[]{"SelectionNamespaces"});
@@ -1880,7 +1877,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (selectorList != null) {
                 int documentMode = 9;
                 if (webClient.getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                    final Object sobj = getPage().getScriptableObject();
+                    final HtmlUnitScriptable sobj = getPage().getScriptableObject();
                     if (sobj instanceof HTMLDocument) {
                         documentMode = ((HTMLDocument) sobj).getDocumentMode();
                     }

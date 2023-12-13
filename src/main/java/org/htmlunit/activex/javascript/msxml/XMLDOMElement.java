@@ -28,6 +28,7 @@ import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -187,7 +188,7 @@ public class XMLDOMElement extends XMLDOMNode {
      *     on this element
      */
     @JsxFunction
-    public Object getAttributeNode(final String name) {
+    public HtmlUnitScriptable getAttributeNode(final String name) {
         if (name == null || "null".equals(name)) {
             throw Context.reportRuntimeError("Type mismatch.");
         }

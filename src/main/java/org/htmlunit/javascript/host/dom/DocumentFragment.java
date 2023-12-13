@@ -25,6 +25,7 @@ import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -143,7 +144,7 @@ public class DocumentFragment extends Node {
      * @return the element, or {@code null} if it could not be found
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public Object getElementById(final Object id) {
+    public HtmlUnitScriptable getElementById(final Object id) {
         if (id == null || Undefined.isUndefined(id)) {
             return null;
         }

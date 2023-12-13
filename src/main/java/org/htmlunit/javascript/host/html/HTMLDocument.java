@@ -44,7 +44,6 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -525,7 +524,7 @@ public class HTMLDocument extends Document {
             // reset isAttachedToPageDuringOnload_ to trigger the onload event for chrome also
             if (window instanceof FrameWindow) {
                 final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
-                final ScriptableObject scriptable = frame.getScriptableObject();
+                final HtmlUnitScriptable scriptable = frame.getScriptableObject();
                 if (scriptable instanceof HTMLIFrameElement) {
                     ((HTMLIFrameElement) scriptable).onRefresh();
                 }
@@ -573,7 +572,7 @@ public class HTMLDocument extends Document {
      */
     @JsxFunction
     @Override
-    public Object getElementById(final String id) {
+    public HtmlUnitScriptable getElementById(final String id) {
         implicitCloseIfNecessary();
         final DomElement domElement = getPage().getElementById(id);
         if (null == domElement) {
@@ -584,7 +583,7 @@ public class HTMLDocument extends Document {
             return null;
         }
 
-        final Object jsElement = getScriptableFor(domElement);
+        final HtmlUnitScriptable jsElement = getScriptableFor(domElement);
         if (jsElement == NOT_FOUND) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("getElementById(" + id
@@ -828,7 +827,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    public Object elementFromPoint(final int x, final int y) {
+    public HtmlUnitScriptable elementFromPoint(final int x, final int y) {
         final HtmlElement element = getPage().getElementFromPoint(x, y);
         return element == null ? null : element.getScriptableObject();
     }

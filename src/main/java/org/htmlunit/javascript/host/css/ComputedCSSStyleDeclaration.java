@@ -70,7 +70,6 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssPixelValueConverter;
 import org.htmlunit.css.CssPixelValueConverter.CssValue;
@@ -107,6 +106,7 @@ import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.HtmlTextInput;
 import org.htmlunit.html.HtmlTime;
 import org.htmlunit.html.HtmlUnknownElement;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
@@ -1360,7 +1360,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             left = 0;
             DomNode prev = getDomElement().getPreviousSibling();
             while (prev != null) {
-                final Scriptable prevScriptable = prev.getScriptableObject();
+                final HtmlUnitScriptable prevScriptable = prev.getScriptableObject();
                 if (prevScriptable instanceof HTMLElement) {
                     final HTMLElement e = (HTMLElement) prevScriptable;
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);

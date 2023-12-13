@@ -262,8 +262,7 @@ public class HtmlLink extends HtmlElement {
     }
 
     private void executeEvent(final String type) {
-        final Object scriptable = getScriptableObject();
-        final HTMLLinkElement link = (HTMLLinkElement) scriptable;
+        final HTMLLinkElement link = getScriptableObject();
         final Event event = new Event(this, type);
         link.executeEventLocally(event);
     }

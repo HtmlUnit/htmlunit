@@ -57,6 +57,7 @@ import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
 import org.htmlunit.html.HtmlTemplate;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -275,7 +276,7 @@ public class Element extends Node {
      * @return the XMLAttr node with the specified name or {@code null} if there is no such attribute
      */
     @JsxFunction
-    public Object getAttributeNode(final String name) {
+    public HtmlUnitScriptable getAttributeNode(final String name) {
         final Map<String, DomAttr> attributes = getDomNodeOrDie().getAttributesMap();
         for (final DomAttr attr : attributes.values()) {
             if (attr.getName().equals(name)) {
@@ -639,7 +640,7 @@ public class Element extends Node {
      * @return the specified attribute, {@code null} if the attribute is not defined
      */
     @JsxFunction
-    public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
+    public HtmlUnitScriptable getAttributeNodeNS(final String namespaceURI, final String localName) {
         return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptableObject();
     }
 

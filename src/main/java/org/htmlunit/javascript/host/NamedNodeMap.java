@@ -114,7 +114,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      * @param name attribute name
      * @return the attribute node, {@code null} if the attribute is not defined
      */
-    public Object getNamedItemWithoutSytheticClassAttr(final String name) {
+    public HtmlUnitScriptable getNamedItemWithoutSytheticClassAttr(final String name) {
         if (attributes_ != null) {
             final DomNode attr = (DomNode) attributes_.getNamedItem(name);
             if (attr != null) {
@@ -131,7 +131,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      * @return the attribute node, {@code null} if the attribute is not defined
      */
     @JsxFunction
-    public Object getNamedItem(final String name) {
+    public HtmlUnitScriptable getNamedItem(final String name) {
         return getNamedItemWithoutSytheticClassAttr(name);
     }
 
@@ -197,7 +197,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      * @return the item at the specified index
      */
     @JsxFunction
-    public Object item(final int index) {
+    public HtmlUnitScriptable item(final int index) {
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
             return attr.getScriptableObject();

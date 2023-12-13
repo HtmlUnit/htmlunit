@@ -76,7 +76,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
@@ -1856,16 +1855,13 @@ public class HtmlPage extends SgmlPage {
                 && !(element instanceof HtmlObject)) {
             // second try are JavaScript attributes
             // ...but applets/objects are a bit special so ignore them
-            final Object o = element.getScriptableObject();
-            if (o instanceof ScriptableObject) {
-                final ScriptableObject scriptObject = (ScriptableObject) o;
-                // we have to make sure the scriptObject has a slot for the given attribute.
-                // just using get() may use e.g. getWithPreemption().
-                if (scriptObject.has(attribute, scriptObject)) {
-                    final Object jsValue = scriptObject.get(attribute, scriptObject);
-                    if (jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
-                        value = (String) jsValue;
-                    }
+            final HtmlUnitScriptable scriptObject = element.getScriptableObject();
+            // we have to make sure the scriptObject has a slot for the given attribute.
+            // just using get() may use e.g. getWithPreemption().
+            if (scriptObject.has(attribute, scriptObject)) {
+                final Object jsValue = scriptObject.get(attribute, scriptObject);
+                if (jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
+                    value = (String) jsValue;
                 }
             }
         }
@@ -2015,7 +2011,7 @@ public class HtmlPage extends SgmlPage {
         // we need the ScriptObject clone before cloning the kids.
         final HtmlPage result = (HtmlPage) super.cloneNode(false);
         if (getWebClient().isJavaScriptEnabled()) {
-            final HtmlUnitScriptable jsObjClone = ((HtmlUnitScriptable) getScriptableObject()).clone();
+            final HtmlUnitScriptable jsObjClone = getScriptableObject().clone();
             jsObjClone.setDomNode(result);
         }
 

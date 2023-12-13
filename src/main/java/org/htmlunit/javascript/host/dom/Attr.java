@@ -26,6 +26,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomText;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -101,7 +102,7 @@ public class Attr extends Node {
      * @return the owner element
      */
     @JsxGetter
-    public Object getOwnerElement() {
+    public HtmlUnitScriptable getOwnerElement() {
         final DomElement parent = getDomNodeOrDie().getOwnerElement();
         if (parent != null) {
             return parent.getScriptableObject();

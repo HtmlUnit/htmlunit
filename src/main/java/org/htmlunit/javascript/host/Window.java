@@ -929,7 +929,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return {@code null} for a top level window
      */
     @JsxGetter
-    public Object getFrameElement() {
+    public HtmlUnitScriptable getFrameElement() {
         final WebWindow window = getWebWindow();
         if (window instanceof FrameWindow) {
             return ((FrameWindow) window).getFrameElement().getScriptableObject();
