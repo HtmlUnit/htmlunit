@@ -1825,7 +1825,7 @@ public class HtmlPage extends SgmlPage {
 
     private void addElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
             final String attribute, final boolean recurse) {
-        final String value = getAttributeValue(element, attribute);
+        final String value = element.getAttribute(attribute);
 
         if (ATTRIBUTE_NOT_DEFINED != value) {
             SortedSet<DomElement> elements = map.get(value);
@@ -1843,29 +1843,6 @@ public class HtmlPage extends SgmlPage {
                 addElement(map, child, attribute, true);
             }
         }
-    }
-
-    private String getAttributeValue(final DomElement element, final String attribute) {
-        // first try real attributes
-        String value = element.getAttribute(attribute);
-
-        if (ATTRIBUTE_NOT_DEFINED == value
-                && getWebClient().isJavaScriptEngineEnabled()
-                && !(element instanceof HtmlApplet)
-                && !(element instanceof HtmlObject)) {
-            // second try are JavaScript attributes
-            // ...but applets/objects are a bit special so ignore them
-            final HtmlUnitScriptable scriptObject = element.getScriptableObject();
-            // we have to make sure the scriptObject has a slot for the given attribute.
-            // just using get() may use e.g. getWithPreemption().
-            if (scriptObject.has(attribute, scriptObject)) {
-                final Object jsValue = scriptObject.get(attribute, scriptObject);
-                if (jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
-                    value = (String) jsValue;
-                }
-            }
-        }
-        return value;
     }
 
     /**
@@ -1891,7 +1868,7 @@ public class HtmlPage extends SgmlPage {
 
     private void removeElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
             final String attribute, final boolean recurse) {
-        final String value = getAttributeValue(element, attribute);
+        final String value = element.getAttribute(attribute);
 
         if (ATTRIBUTE_NOT_DEFINED != value) {
             final SortedSet<DomElement> elements = map.remove(value);
