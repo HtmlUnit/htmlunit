@@ -168,7 +168,7 @@ public class HtmlTable extends HtmlElement {
                 return row;
             }
         }
-        throw new ElementNotFoundException("tr", "id", id);
+        throw new ElementNotFoundException("tr", DomElement.ID_ATTRIBUTE, id);
     }
 
     /**

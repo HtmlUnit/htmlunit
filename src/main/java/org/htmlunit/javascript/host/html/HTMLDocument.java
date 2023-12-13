@@ -697,7 +697,7 @@ public class HTMLDocument extends Document {
                 event -> {
                     final String attributeName = event.getName();
                     if (DomElement.NAME_ATTRIBUTE.equals(attributeName)
-                            || (forIDAndOrName && "id".equals(attributeName))) {
+                            || (forIDAndOrName && DomElement.ID_ATTRIBUTE.equals(attributeName))) {
                         return EffectOnCache.RESET;
                     }
 

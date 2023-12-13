@@ -55,7 +55,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getIdAttribute() {
-        return getAttributeDirect("id");
+        return getAttributeDirect(DomElement.ID_ATTRIBUTE);
     }
 
     /**

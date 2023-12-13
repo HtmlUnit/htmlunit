@@ -79,6 +79,9 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     private static final Log LOG = LogFactory.getLog(DomElement.class);
 
+    /** id. */
+    public static final String ID_ATTRIBUTE = "id";
+
     /** name. */
     public static final String NAME_ATTRIBUTE = "name";
 
@@ -714,7 +717,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the identifier of this element
      */
     public final String getId() {
-        return getAttributeDirect("id");
+        return getAttributeDirect(ID_ATTRIBUTE);
     }
 
     /**
@@ -723,7 +726,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param newId the new identifier of this element
      */
     public final void setId(final String newId) {
-        setAttribute("id", newId);
+        setAttribute(ID_ATTRIBUTE, newId);
     }
 
     /**
