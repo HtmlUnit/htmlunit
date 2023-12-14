@@ -366,18 +366,24 @@ public class HtmlPage extends SgmlPage {
         if (cleaning_) {
             return;
         }
+
         cleaning_ = true;
-        super.cleanUp();
-        executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
-        deregisterFramesIfNeeded();
-        cleaning_ = false;
-        if (autoCloseableList_ != null) {
-            for (final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
-                try {
-                    closeable.close();
-                }
-                catch (final Exception e) {
-                    throw new RuntimeException(e);
+        try {
+            super.cleanUp();
+            executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
+            deregisterFramesIfNeeded();
+        }
+        finally {
+            cleaning_ = false;
+
+            if (autoCloseableList_ != null) {
+                for (final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
+                    try {
+                        closeable.close();
+                    }
+                    catch (final Exception e) {
+                        LOG.error("Closing the autoclosable " + closeable + " failed", e);
+                    }
                 }
             }
         }

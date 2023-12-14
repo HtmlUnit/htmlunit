@@ -50,7 +50,6 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
-import org.htmlunit.javascript.host.WebSocket;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
@@ -1927,7 +1926,12 @@ public class HtmlPageTest extends SimpleWebTestCase {
         page.addAutoCloseable(new AutoCloseable() {
             @Override
             public void close() throws Exception {
-                page.addAutoCloseable(new WebSocket());
+                page.addAutoCloseable(new AutoCloseable() {
+                    @Override
+                    public void close() throws Exception {
+                        throw new NullPointerException("close failed");
+                    }
+                });
             }
         });
         page.cleanUp();
