@@ -9,6 +9,10 @@
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
             <action type="update" dev="rbri">
+                Make closing of windows more robust by making sure the deregistration is done also in case of errors.
+                This should fix some more memory leaks.
+            </action>
+            <action type="update" dev="rbri">
                 The return value of the (internal) method DomNode.getScriptableObject() was changed from
                 &lt;T&gt; to &lt;T extends HtmlUnitScriptable&gt;. This should remove some casts and
                 makes the code a bit more clean.
