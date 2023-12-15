@@ -1283,6 +1283,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * @param error the error
+     * @param message the message
+     * @return a new EcmaError
+     */
+    public static EcmaError constructError(final String error, final String message) {
+        return ScriptRuntime.constructError(error, message);
+    }
+
+    /**
      * Create an array with a specified initial length.
      *
      * @param scope the scope to create the object in

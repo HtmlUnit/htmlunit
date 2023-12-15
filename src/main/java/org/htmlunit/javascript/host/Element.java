@@ -43,7 +43,6 @@ import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSException;
@@ -1994,7 +1993,7 @@ public class Element extends Node {
             return domNode != null && ((DomElement) domNode).matches(selectorString);
         }
         catch (final CSSException e) {
-            throw ScriptRuntime.constructError("SyntaxError",
+            throw JavaScriptEngine.constructError("SyntaxError",
                     "An invalid or illegal selector was specified (selector: '"
                     + selectorString + "' error: " + e.getMessage() + ").");
         }
@@ -2065,7 +2064,7 @@ public class Element extends Node {
             return elem.getScriptableObject();
         }
         catch (final CSSException e) {
-            throw ScriptRuntime.constructError("SyntaxError",
+            throw JavaScriptEngine.constructError("SyntaxError",
                     "An invalid or illegal selector was specified (selector: '"
                     + selectorString + "' error: " + e.getMessage() + ").");
         }

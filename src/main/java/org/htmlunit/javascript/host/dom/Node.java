@@ -33,7 +33,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Interpreter;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.RhinoException;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
@@ -318,7 +317,7 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                throw ScriptRuntime.constructError("ReferenceError",
+                throw JavaScriptEngine.constructError("ReferenceError",
                         "Node cannot be inserted at the specified point in the hierarchy");
             }
 
@@ -327,7 +326,7 @@ public class Node extends EventTarget {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
                     if (!isNodeInsertable(child.getScriptableObject())) {
-                        throw ScriptRuntime.constructError("ReferenceError",
+                        throw JavaScriptEngine.constructError("ReferenceError",
                                 "Node cannot be inserted at the specified point in the hierarchy");
                     }
                 }
@@ -357,7 +356,7 @@ public class Node extends EventTarget {
                 domNode.insertBefore(newChildNode, refChildNode);
             }
             catch (final org.w3c.dom.DOMException e) {
-                throw ScriptRuntime.constructError("ReferenceError", e.getMessage());
+                throw JavaScriptEngine.constructError("ReferenceError", e.getMessage());
             }
             insertedChild = newChild;
         }

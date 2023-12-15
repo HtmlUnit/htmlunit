@@ -75,7 +75,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeFunction;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.cssparser.parser.CSSException;
@@ -1050,7 +1049,7 @@ public class Document extends Node {
             return null;
         }
         catch (final CSSException e) {
-            throw ScriptRuntime.constructError("SyntaxError",
+            throw JavaScriptEngine.constructError("SyntaxError",
                     "An invalid or illegal selector was specified (selector: '"
                             + selectors + "' error: " + e.getMessage() + ").");
         }
@@ -2336,7 +2335,7 @@ public class Document extends Node {
     @JsxGetter(IE)
     public Object getFrames() {
         if (ScriptableObject.getTopLevelScope(this) == null) {
-            throw ScriptRuntime.constructError("Error", "Not implemented");
+            throw JavaScriptEngine.constructError("Error", "Not implemented");
         }
         return getWindow().getFrames_js();
     }

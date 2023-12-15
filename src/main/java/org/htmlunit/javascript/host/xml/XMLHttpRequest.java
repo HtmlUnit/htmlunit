@@ -75,7 +75,6 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.json.JsonParser;
@@ -602,7 +601,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             fireJavascriptEvent(Event.TYPE_LOAD_END);
         }
 
-        // ScriptRuntime.constructError("NetworkError",
+        // JavaScriptEngine.constructError("NetworkError",
         //         "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '" + webRequest_.getUrl() + "'");
 
         setState(UNSENT);
@@ -1077,7 +1076,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             if (!async_ && aborted_
                     && browserVersion.hasFeature(XHR_SEND_NETWORK_ERROR_IF_ABORTED)) {
-                throw ScriptRuntime.constructError("Error",
+                throw JavaScriptEngine.constructError("Error",
                         "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '" + webRequest_.getUrl() + "'");
             }
 

@@ -19,8 +19,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -218,7 +218,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
         final double determinant = scaleX_ * scaleY_ - shearX_ * shearY_;
 
         if (Math.abs(determinant) < 1E-10) {
-            throw ScriptRuntime.constructError("Error",
+            throw JavaScriptEngine.constructError("Error",
                     "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.");
         }
 
@@ -284,7 +284,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
     @JsxFunction
     public SVGMatrix rotateFromVector(final double x, final double y) {
         if (x == 0 || y == 0) {
-            throw ScriptRuntime.constructError("Error",
+            throw JavaScriptEngine.constructError("Error",
                     "Failed to execute 'rotateFromVector' on 'SVGMatrix': Arguments cannot be zero.");
         }
 
