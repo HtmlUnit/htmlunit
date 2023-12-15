@@ -216,7 +216,7 @@ public class FormData extends HtmlUnitScriptable {
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public Scriptable getAll(final String name) {
         if (StringUtils.isEmpty(name)) {
-            return Context.getCurrentContext().newArray(this, 0);
+            return JavaScriptEngine.newArray(this, 0);
         }
 
         final List<Object> values = new ArrayList<>();
@@ -227,7 +227,7 @@ public class FormData extends HtmlUnitScriptable {
         }
 
         final Object[] stringValues = values.toArray(new Object[0]);
-        return Context.getCurrentContext().newArray(this, stringValues);
+        return JavaScriptEngine.newArray(this, stringValues);
     }
 
     /**

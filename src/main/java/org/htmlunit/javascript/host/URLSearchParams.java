@@ -354,7 +354,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
             }
         }
 
-        return Context.getCurrentContext().newArray(getWindow(this), result.toArray());
+        return JavaScriptEngine.newArray(getWindow(this), result.toArray());
     }
 
     /**

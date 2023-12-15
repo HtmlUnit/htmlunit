@@ -19,8 +19,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -89,7 +89,7 @@ public class Performance extends EventTarget {
      */
     @JsxFunction
     public Scriptable getEntries() {
-        return Context.getCurrentContext().newArray(this, 0);
+        return JavaScriptEngine.newArray(this, 0);
     }
 
     /**
@@ -101,7 +101,7 @@ public class Performance extends EventTarget {
      */
     @JsxFunction
     public Scriptable getEntriesByName() {
-        return Context.getCurrentContext().newArray(this, 0);
+        return JavaScriptEngine.newArray(this, 0);
     }
 
     /**
@@ -111,6 +111,6 @@ public class Performance extends EventTarget {
      */
     @JsxFunction
     public Scriptable getEntriesByType() {
-        return Context.getCurrentContext().newArray(this, 0);
+        return JavaScriptEngine.newArray(this, 0);
     }
 }

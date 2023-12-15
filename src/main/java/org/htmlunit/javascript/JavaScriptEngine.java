@@ -1277,6 +1277,30 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return RuntimeException as dummy the method always throws
      */
     public static EcmaError typeError(final String message) {
-        return JavaScriptEngine.typeError(message);
+        return ScriptRuntime.typeError(message);
+    }
+
+    /**
+     * Create an array with a specified initial length.
+     *
+     * @param scope the scope to create the object in
+     * @param length the initial length (JavaScript arrays may have additional properties added
+     *     dynamically).
+     * @return the new array object
+     */
+    public static Scriptable newArray(final Scriptable scope, final int length) {
+        return Context.getCurrentContext().newArray(scope, length);
+    }
+
+    /**
+     * Create an array with a specified initial length.
+     *
+     * @param scope the scope to create the object in
+     * @param elements the initial elements. Each object in this array must be an acceptable
+     *     JavaScript type and type of array should be exactly Object[], not SomeObjectSubclass[].
+     * @return the new array object
+     */
+    public static Scriptable newArray(final Scriptable scope, final Object[] elements) {
+        return Context.getCurrentContext().newArray(scope, elements);
     }
 }

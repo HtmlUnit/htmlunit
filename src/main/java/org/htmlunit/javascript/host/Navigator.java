@@ -26,9 +26,9 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.PluginConfiguration;
 import org.htmlunit.WebClient;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -126,7 +126,7 @@ public class Navigator extends HtmlUnitScriptable {
     public Scriptable getLanguages() {
         final String acceptLang = getBrowserVersion().getAcceptLanguageHeader();
         if (StringUtils.isEmpty(acceptLang)) {
-            return Context.getCurrentContext().newArray(this, 0);
+            return JavaScriptEngine.newArray(this, 0);
         }
 
         final ArrayList<String> res = new ArrayList<>();
@@ -140,7 +140,7 @@ public class Navigator extends HtmlUnitScriptable {
             }
         }
 
-        return Context.getCurrentContext().newArray(this, res.toArray());
+        return JavaScriptEngine.newArray(this, res.toArray());
     }
 
     /**
