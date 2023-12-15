@@ -19,7 +19,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -47,7 +47,7 @@ public class AudioNode extends EventTarget {
     @JsxConstructor
     public void jsConstructor(final Object baCtx) {
         if (!(baCtx instanceof BaseAudioContext)) {
-            throw ScriptRuntime.typeError(
+            throw JavaScriptEngine.typeError(
                     "Failed to construct '" + getClass().getSimpleName()
                         + "': first parameter is not of type 'BaseAudioContext'.");
         }

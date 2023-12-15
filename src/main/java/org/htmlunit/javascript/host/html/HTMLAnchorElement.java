@@ -41,7 +41,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAnchor;
@@ -518,7 +517,7 @@ public class HTMLAnchorElement extends HTMLElement {
     public void setProtocol(final String protocol) throws Exception {
         if (protocol.isEmpty()) {
             if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
-                throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
+                throw JavaScriptEngine.typeError("Invalid protocol '" + protocol + "'.");
             }
             return;
         }
@@ -527,7 +526,7 @@ public class HTMLAnchorElement extends HTMLElement {
         if (getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)) {
             if (!UrlUtils.isValidScheme(bareProtocol)) {
                 if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
-                    throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
+                    throw JavaScriptEngine.typeError("Invalid protocol '" + protocol + "'.");
                 }
                 return;
             }
@@ -539,7 +538,7 @@ public class HTMLAnchorElement extends HTMLElement {
             }
             catch (final MalformedURLException e) {
                 if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
-                    throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
+                    throw JavaScriptEngine.typeError("Invalid protocol '" + protocol + "'.");
                 }
             }
 

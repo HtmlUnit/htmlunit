@@ -23,7 +23,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomCDataSection;
@@ -166,7 +165,7 @@ public class XMLDOMNode extends MSXMLScriptable {
      */
     @JsxSetter
     public void setFirstChild(final Object ignored) {
-        throw ScriptRuntime.typeError("Wrong number of arguments or invalid property assignment");
+        throw JavaScriptEngine.typeError("Wrong number of arguments or invalid property assignment");
     }
 
     /**
@@ -185,7 +184,7 @@ public class XMLDOMNode extends MSXMLScriptable {
      */
     @JsxSetter
     public void setLastChild(final Object ignored) {
-        throw ScriptRuntime.typeError("Wrong number of arguments or invalid property assignment");
+        throw JavaScriptEngine.typeError("Wrong number of arguments or invalid property assignment");
     }
 
     /**

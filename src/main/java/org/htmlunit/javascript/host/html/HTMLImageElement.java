@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
@@ -70,7 +69,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+        throw JavaScriptEngine.typeError("Invalid constructor.");
     }
 
     /**

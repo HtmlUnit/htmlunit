@@ -25,7 +25,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -83,7 +82,7 @@ public class URL extends HtmlUnitScriptable {
             url_ = UrlUtils.removeRedundantPort(url_);
         }
         catch (final MalformedURLException e) {
-            throw ScriptRuntime.typeError(e.toString());
+            throw JavaScriptEngine.typeError(e.toString());
         }
     }
 

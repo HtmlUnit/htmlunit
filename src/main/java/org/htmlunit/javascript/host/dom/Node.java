@@ -299,7 +299,7 @@ public class Node extends EventTarget {
      */
     protected Object insertBeforeImpl(final Object[] args) {
         if (args.length < 1) {
-            throw ScriptRuntime.typeError(
+            throw JavaScriptEngine.typeError(
                     "Failed to execute 'insertBefore' on 'Node': 2 arguments required, but only 0 present.");
         }
 
@@ -340,7 +340,7 @@ public class Node extends EventTarget {
                     refChildNode = null;
                 }
                 else {
-                    throw ScriptRuntime.typeError(
+                    throw JavaScriptEngine.typeError(
                             "Failed to execute 'insertBefore' on 'Node': 2 arguments required, but only 1 present.");
                 }
             }
@@ -896,7 +896,7 @@ public class Node extends EventTarget {
     protected static void append(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         if (!(thisObj instanceof Element)) {
-            throw ScriptRuntime.typeError("Illegal invocation");
+            throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
@@ -919,7 +919,7 @@ public class Node extends EventTarget {
     protected static void prepend(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         if (!(thisObj instanceof Element)) {
-            throw ScriptRuntime.typeError("Illegal invocation");
+            throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
@@ -947,7 +947,7 @@ public class Node extends EventTarget {
     protected static void replaceChildren(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         if (!(thisObj instanceof Element)) {
-            throw ScriptRuntime.typeError("Illegal invocation");
+            throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();

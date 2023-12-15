@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.HttpHeader;
 import org.htmlunit.corejs.javascript.NativeArray;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
@@ -152,7 +151,7 @@ public class MessageEvent extends Event {
             ports_ = ports;
         }
         else {
-            throw ScriptRuntime.typeError(
+            throw JavaScriptEngine.typeError(
                     "Argument 8 of MessageEvent.initMessageEvent can't be converted to a sequence.");
         }
     }

@@ -154,7 +154,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
             url_.setSearch(resolveParams(params));
         }
         catch (final EcmaError e) {
-            throw ScriptRuntime.typeError("Failed to construct 'URLSearchParams': " + e.getErrorMessage());
+            throw JavaScriptEngine.typeError("Failed to construct 'URLSearchParams': " + e.getErrorMessage());
         }
         catch (final MalformedURLException e) {
             LOG.error(e.getMessage(), e);
@@ -176,10 +176,10 @@ public class URLSearchParams extends HtmlUnitScriptable {
             try (IteratorLikeIterable itr = buildIteratorLikeIterable(cx, paramsScriptable)) {
                 for (final Object nameValue : itr) {
                     if (!(nameValue instanceof Scriptable)) {
-                        throw ScriptRuntime.typeError("The provided value cannot be converted to a sequence.");
+                        throw JavaScriptEngine.typeError("The provided value cannot be converted to a sequence.");
                     }
                     if (!ScriptableObject.hasProperty((Scriptable) nameValue, SymbolKey.ITERATOR)) {
-                        throw ScriptRuntime.typeError("The object must have a callable @@iterator property.");
+                        throw JavaScriptEngine.typeError("The object must have a callable @@iterator property.");
                     }
 
                     try (IteratorLikeIterable nameValueItr = buildIteratorLikeIterable(cx, (Scriptable) nameValue)) {
@@ -193,7 +193,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
                         if (name == Scriptable.NOT_FOUND
                                 || value == Scriptable.NOT_FOUND
                                 || nameValueIterator.hasNext()) {
-                            throw ScriptRuntime.typeError("Sequence initializer must only contain pair elements.");
+                            throw JavaScriptEngine.typeError("Sequence initializer must only contain pair elements.");
                         }
 
                         nameValuePairs.add(new NameValuePair(
@@ -424,7 +424,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
     @JsxFunction
     public void forEach(final Object callback) {
         if (!(callback instanceof Function)) {
-            throw ScriptRuntime.typeError(
+            throw JavaScriptEngine.typeError(
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 

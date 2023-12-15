@@ -26,7 +26,6 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
@@ -326,7 +325,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxGetter
     public String getUrl() {
         if (url_ == null) {
-            throw ScriptRuntime.typeError("invalid call");
+            throw JavaScriptEngine.typeError("invalid call");
         }
         return url_.toString();
     }

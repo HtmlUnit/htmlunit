@@ -20,9 +20,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -52,12 +52,12 @@ public class AudioProcessingEvent extends Event {
     public void jsConstructor(final String type, final ScriptableObject details) {
         if (getBrowserVersion().hasFeature(JS_AUDIO_PROCESSING_EVENT_CTOR)) {
             if (details == null || Undefined.isUndefined(details)) {
-                throw ScriptRuntime.typeError("AudioProcessingEvent ctor requires two arguments");
+                throw JavaScriptEngine.typeError("AudioProcessingEvent ctor requires two arguments");
             }
 
             super.jsConstructor(type, details);
         }
 
-        throw ScriptRuntime.typeError("AudioProcessingEvent ctor is not available");
+        throw JavaScriptEngine.typeError("AudioProcessingEvent ctor is not available");
     }
 }

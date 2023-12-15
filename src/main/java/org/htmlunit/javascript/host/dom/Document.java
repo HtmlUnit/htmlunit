@@ -660,7 +660,7 @@ public class Document extends Node {
                 xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
             }
             else {
-                throw ScriptRuntime.typeError("Argument 5 of Document.evaluate has to be an XPathResult or null.");
+                throw JavaScriptEngine.typeError("Argument 5 of Document.evaluate has to be an XPathResult or null.");
             }
 
             PrefixResolver prefixResolver = null;
@@ -1844,7 +1844,7 @@ public class Document extends Node {
                 if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
                     return super.call(cx, scope, thisObj, args);
                 }
-                throw ScriptRuntime.typeError("document.forms is not a function");
+                throw JavaScriptEngine.typeError("document.forms is not a function");
             }
         };
 
@@ -1867,7 +1867,7 @@ public class Document extends Node {
                 if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
                     return super.call(cx, scope, thisObj, args);
                 }
-                throw ScriptRuntime.typeError("document.embeds is not a function");
+                throw JavaScriptEngine.typeError("document.embeds is not a function");
             }
         };
 
@@ -1888,7 +1888,7 @@ public class Document extends Node {
                 if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
                     return super.call(cx, scope, thisObj, args);
                 }
-                throw ScriptRuntime.typeError("document.images is not a function");
+                throw JavaScriptEngine.typeError("document.images is not a function");
             }
         };
 
@@ -1909,7 +1909,7 @@ public class Document extends Node {
                 if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
                     return super.call(cx, scope, thisObj, args);
                 }
-                throw ScriptRuntime.typeError("document.scripts is not a function");
+                throw JavaScriptEngine.typeError("document.scripts is not a function");
             }
         };
 

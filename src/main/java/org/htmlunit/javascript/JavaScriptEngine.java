@@ -57,6 +57,7 @@ import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
+import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.IdFunctionObject;
@@ -1267,5 +1268,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static RuntimeException reportRuntimeError(final String message) {
         throw Context.reportRuntimeError(message);
+    }
+
+    /**
+     * Report a runtime error using the error reporter for the current thread.
+     *
+     * @param message the error message to report
+     * @return RuntimeException as dummy the method always throws
+     */
+    public static EcmaError typeError(final String message) {
+        return JavaScriptEngine.typeError(message);
     }
 }

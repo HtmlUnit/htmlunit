@@ -248,7 +248,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor(final String type, final ScriptableObject details) {
-        throw ScriptRuntime.typeError("CSSStyleDeclaration ctor is not available");
+        throw JavaScriptEngine.typeError("CSSStyleDeclaration ctor is not available");
     }
 
     /**

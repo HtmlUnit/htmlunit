@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.security.SecureRandom;
 import java.util.Locale;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.typedarrays.NativeTypedArrayView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -76,7 +75,7 @@ public class Crypto extends HtmlUnitScriptable {
     @JsxFunction
     public NativeTypedArrayView<?> getRandomValues(final NativeTypedArrayView<?> array) {
         if (array == null) {
-            throw ScriptRuntime.typeError("Argument 1 of Crypto.getRandomValues is not an object.");
+            throw JavaScriptEngine.typeError("Argument 1 of Crypto.getRandomValues is not an object.");
         }
         if (array.getByteLength() > 65_536) {
             throw JavaScriptEngine.reportRuntimeError("Error: Failed to execute 'getRandomValues' on 'Crypto': "

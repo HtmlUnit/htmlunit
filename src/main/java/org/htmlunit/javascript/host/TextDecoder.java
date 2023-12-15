@@ -24,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
@@ -363,7 +362,7 @@ public class TextDecoder extends HtmlUnitScriptable {
             encoding_ = charset.name();
             return;
         }
-        throw ScriptRuntime.typeError("Argument 1 '" + enc + "' is not a supported encoding");
+        throw JavaScriptEngine.typeError("Argument 1 '" + enc + "' is not a supported encoding");
     }
 
     /**
@@ -400,7 +399,7 @@ public class TextDecoder extends HtmlUnitScriptable {
             return new String(arrayBuffer.getBuffer(), Charset.forName(encoding_));
         }
 
-        throw ScriptRuntime.typeError("Argument 1 of TextDecoder.decode could not be"
+        throw JavaScriptEngine.typeError("Argument 1 of TextDecoder.decode could not be"
                                 + " converted to any of: ArrayBufferView, ArrayBuffer.");
     }
 }

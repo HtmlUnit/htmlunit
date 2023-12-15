@@ -38,7 +38,6 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
@@ -367,14 +366,14 @@ public class HTMLFormElement extends HTMLElement implements Function {
             }
 
             if (submittable != null && subHtmlElement.getForm() != this) {
-                throw ScriptRuntime.typeError(
+                throw JavaScriptEngine.typeError(
                         "Failed to execute 'requestSubmit' on 'HTMLFormElement': "
                         + "The specified element is not owned by this form element.");
             }
         }
 
         if (submittable == null) {
-            throw ScriptRuntime.typeError(
+            throw JavaScriptEngine.typeError(
                     "Failed to execute 'requestSubmit' on 'HTMLFormElement': "
                     + "The specified element is not a submit button.");
         }

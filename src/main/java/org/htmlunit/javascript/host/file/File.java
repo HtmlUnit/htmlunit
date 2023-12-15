@@ -30,9 +30,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.NativeArray;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -116,7 +116,7 @@ public class File extends Blob {
                 || Undefined.isUndefined(fileBits)
                 || fileName == null
                 || Undefined.isUndefined(fileName)) {
-            throw ScriptRuntime.typeError("Failed to construct 'File': 2 arguments required.");
+            throw JavaScriptEngine.typeError("Failed to construct 'File': 2 arguments required.");
         }
 
         setBackend(InMemoryBackend.create(fileBits, fileName,

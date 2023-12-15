@@ -1986,7 +1986,7 @@ public class Element extends Node {
     public static boolean matches(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
-            throw ScriptRuntime.typeError("Illegal invocation");
+            throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         final String selectorString = (String) args[0];
@@ -2050,7 +2050,7 @@ public class Element extends Node {
     public static Element closest(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
-            throw ScriptRuntime.typeError("Illegal invocation");
+            throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         final String selectorString = (String) args[0];
@@ -2118,7 +2118,7 @@ public class Element extends Node {
     public static void append(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
-            throw ScriptRuntime.typeError("Illegal invocation");
+            throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         Node.append(context, thisObj, args, function);
@@ -2137,7 +2137,7 @@ public class Element extends Node {
     public static void prepend(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
-            throw ScriptRuntime.typeError("Illegal invocation");
+            throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         Node.prepend(context, thisObj, args, function);
@@ -2156,7 +2156,7 @@ public class Element extends Node {
     public static void replaceChildren(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
-            throw ScriptRuntime.typeError("Illegal invocation");
+            throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
         Node.replaceChildren(context, thisObj, args, function);

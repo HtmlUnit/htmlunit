@@ -68,7 +68,6 @@ import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeConsole.Level;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Slot;
@@ -213,7 +212,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
-        throw ScriptRuntime.typeError("Illegal constructor");
+        throw JavaScriptEngine.typeError("Illegal constructor");
     }
 
     /**
@@ -1670,7 +1669,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxFunction
     public ComputedCSSStyleDeclaration getComputedStyle(final Object element, final String pseudoElement) {
         if (!(element instanceof Element)) {
-            throw ScriptRuntime.typeError("parameter 1 is not of type 'Element'");
+            throw JavaScriptEngine.typeError("parameter 1 is not of type 'Element'");
         }
         final Element e = (Element) element;
 
@@ -1992,7 +1991,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
         // support the structured clone algorithm
         if (args.length < 1) {
-            throw ScriptRuntime.typeError("message not provided");
+            throw JavaScriptEngine.typeError("message not provided");
         }
         final Object message = args[0];
 

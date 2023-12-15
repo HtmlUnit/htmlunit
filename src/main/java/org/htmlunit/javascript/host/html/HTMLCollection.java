@@ -36,7 +36,6 @@ import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
@@ -152,7 +151,7 @@ public class HTMLCollection extends AbstractList implements Callable {
             return object;
         }
 
-        throw ScriptRuntime.typeError("HTMLCollection does nont support function like access");
+        throw JavaScriptEngine.typeError("HTMLCollection does nont support function like access");
     }
 
     /**

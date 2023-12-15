@@ -100,7 +100,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
     public static Object setTimeout(final Context context, final Scriptable thisObj,
             final Object[] args, final Function function) {
         if (args.length < 1) {
-            throw ScriptRuntime.typeError("Function not provided");
+            throw JavaScriptEngine.typeError("Function not provided");
         }
 
         final int timeout = ScriptRuntime.toInt32((args.length > 1) ? args[1] : Undefined.instance);
@@ -124,7 +124,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
     public static Object setInterval(final Context context, final Scriptable thisObj,
             final Object[] args, final Function function) {
         if (args.length < 1) {
-            throw ScriptRuntime.typeError("Function not provided");
+            throw JavaScriptEngine.typeError("Function not provided");
         }
 
         final int timeout = ScriptRuntime.toInt32((args.length > 1) ? args[1] : Undefined.instance);

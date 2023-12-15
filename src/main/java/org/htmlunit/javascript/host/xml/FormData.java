@@ -32,7 +32,6 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -321,7 +320,7 @@ public class FormData extends HtmlUnitScriptable {
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public void forEach(final Object callback) {
         if (!(callback instanceof Function)) {
-            throw ScriptRuntime.typeError(
+            throw JavaScriptEngine.typeError(
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 

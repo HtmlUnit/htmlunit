@@ -16,7 +16,6 @@ package org.htmlunit.activex.javascript.msxml;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomText;
@@ -104,7 +103,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
      */
     @JsxSetter
     public void setName(final Object ignored) {
-        throw ScriptRuntime.typeError("Wrong number of arguments or invalid property assignment");
+        throw JavaScriptEngine.typeError("Wrong number of arguments or invalid property assignment");
     }
 
     /**

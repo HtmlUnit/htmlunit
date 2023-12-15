@@ -30,7 +30,6 @@ import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomDocumentFragment;
@@ -136,7 +135,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxSetter
     public void setDoctype(final Object ignored) {
-        throw ScriptRuntime.typeError("Wrong number of arguments or invalid property assignment");
+        throw JavaScriptEngine.typeError("Wrong number of arguments or invalid property assignment");
     }
 
     /**
@@ -191,7 +190,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxSetter
     public void setImplementation(final Object ignored) {
-        throw ScriptRuntime.typeError("Wrong number of arguments or invalid property assignment");
+        throw JavaScriptEngine.typeError("Wrong number of arguments or invalid property assignment");
     }
 
     /**
@@ -234,7 +233,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxSetter
     public void setParseError(final Object ignored) {
-        throw ScriptRuntime.typeError("Wrong number of arguments or invalid property assignment");
+        throw JavaScriptEngine.typeError("Wrong number of arguments or invalid property assignment");
     }
 
     /**

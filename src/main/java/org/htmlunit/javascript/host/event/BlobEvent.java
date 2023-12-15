@@ -20,7 +20,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -62,19 +61,19 @@ public class BlobEvent extends Event {
             final Object dataObj = details.get("data", details);
             if (NOT_FOUND == dataObj) {
                 if (getBrowserVersion().hasFeature(JS_BLOB_EVENT_REQUIRES_DATA)) {
-                    throw ScriptRuntime.typeError("BlobEvent data is required.");
+                    throw JavaScriptEngine.typeError("BlobEvent data is required.");
                 }
             }
             else {
                 if (!(dataObj instanceof Blob)) {
-                    throw ScriptRuntime.typeError("BlobEvent data has to be a Blob.");
+                    throw JavaScriptEngine.typeError("BlobEvent data has to be a Blob.");
                 }
                 data_ = (Blob) dataObj;
             }
         }
         else {
             if (getBrowserVersion().hasFeature(JS_BLOB_EVENT_REQUIRES_DATA)) {
-                throw ScriptRuntime.typeError("BlobEvent data is required.");
+                throw JavaScriptEngine.typeError("BlobEvent data is required.");
             }
         }
     }

@@ -16,9 +16,9 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -48,7 +48,7 @@ public class Enumerator extends HtmlUnitScriptable {
         if (Undefined.isUndefined(o)) {
             return;
         }
-        throw ScriptRuntime.typeError("object is not enumerable");
+        throw JavaScriptEngine.typeError("object is not enumerable");
     }
 
     /**

@@ -17,8 +17,8 @@ package org.htmlunit.javascript.host.event;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -46,6 +46,6 @@ public class TimeEvent extends Event {
     @Override
     @JsxConstructor
     public void jsConstructor(final String type, final ScriptableObject details) {
-        throw ScriptRuntime.typeError("TimeEvent ctor is not available");
+        throw JavaScriptEngine.typeError("TimeEvent ctor is not available");
     }
 }

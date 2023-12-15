@@ -104,7 +104,7 @@ public class CSSGroupingRule extends CSSRule {
                 positionInt = 0;
             }
             else {
-                throw ScriptRuntime.typeError("Failed to execute 'insertRule' on 'CSSGroupingRule':"
+                throw JavaScriptEngine.typeError("Failed to execute 'insertRule' on 'CSSGroupingRule':"
                         + " 2 arguments required, but only 1 present.");
             }
         }
