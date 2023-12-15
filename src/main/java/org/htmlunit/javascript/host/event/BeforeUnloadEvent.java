@@ -22,9 +22,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -57,7 +57,7 @@ public class BeforeUnloadEvent extends Event {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
     }
 
     /**

@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlTableColumn;
 import org.htmlunit.html.HtmlTableColumnGroup;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -79,11 +78,9 @@ public class HTMLTableColElement extends HTMLTableComponent {
         if (i < 1) {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 final Exception e = new Exception("Cannot set the span property to invalid value: " + span);
-                Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
-            else {
-                i = 1;
-            }
+            i = 1;
         }
         getDomNodeOrDie().setAttribute("span", Integer.toString(i));
     }

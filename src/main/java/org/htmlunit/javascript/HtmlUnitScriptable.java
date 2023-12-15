@@ -381,7 +381,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             // but HTMLElement is not in the prototype chain of any element
             final Object prototype = get("prototype", this);
             if (!(prototype instanceof ScriptableObject)) {
-                Context.throwAsScriptRuntimeEx(new Exception("Null prototype"));
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(new Exception("Null prototype"));
             }
             return ((ScriptableObject) prototype).hasInstance(instance);
         }

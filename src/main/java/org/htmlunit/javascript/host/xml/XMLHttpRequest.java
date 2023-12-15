@@ -788,8 +788,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return;
         }
         if (!async_ && timeout_ > 0) {
-            Context.throwAsScriptRuntimeEx(new RuntimeException("Synchronous requests must not set a timeout."));
-            return;
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(
+                    new RuntimeException("Synchronous requests must not set a timeout."));
         }
 
         prepareRequestContent(content);
@@ -901,7 +901,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     }
                 }
                 catch (final Exception e) {
-                    Context.throwAsScriptRuntimeEx(e);
+                    throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
                 }
             }
             else if (content instanceof FormData) {
@@ -997,9 +997,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
-                    Context.throwAsScriptRuntimeEx(
+                    throw JavaScriptEngine.throwAsScriptRuntimeEx(
                             new RuntimeException("No permitted \"Access-Control-Allow-Origin\" header."));
-                    return;
                 }
             }
 
@@ -1142,7 +1141,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     fireJavascriptEvent(Event.TYPE_LOAD_END);
                 }
 
-                Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
         }
     }

@@ -48,7 +48,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
@@ -1200,7 +1199,7 @@ public class HTMLElement extends Element {
             if (error) {
                 final Exception e = new Exception("Cannot set the '" + attributeName
                         + "' property to invalid value: '" + value + "'");
-                Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
         }
         getDomNodeOrDie().setAttribute(attributeName, value);

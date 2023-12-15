@@ -400,7 +400,8 @@ public class Node extends EventTarget {
         final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
 
         if (!getDomNodeOrDie().isAncestorOf(childNode)) {
-            Context.throwAsScriptRuntimeEx(new Exception("NotFoundError: Failed to execute 'removeChild' on '"
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(
+                    new Exception("NotFoundError: Failed to execute 'removeChild' on '"
                         + this + "': The node to be removed is not a child of this node."));
         }
         // Remove the child from the parent node

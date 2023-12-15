@@ -40,7 +40,6 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebClient.PooledCSS3Parser;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
@@ -56,6 +55,7 @@ import org.htmlunit.html.serializer.HtmlSerializerNormalizedText;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText;
 import org.htmlunit.html.xpath.XPathHelper;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.SerializableLock;
@@ -916,12 +916,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     @Override
     public DomNode appendChild(final Node node) {
         if (node == this) {
-            Context.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
-            return this;
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
         }
         final DomNode domNode = (DomNode) node;
         if (domNode.isAncestorOf(this)) {
-            Context.throwAsScriptRuntimeEx(new Exception("Can not add (grand)parent to itself " + this));
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(new Exception("Can not add (grand)parent to itself " + this));
         }
 
         if (domNode instanceof DomDocumentFragment) {

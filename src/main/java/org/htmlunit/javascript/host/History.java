@@ -25,7 +25,6 @@ import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -90,7 +89,7 @@ public class History extends HtmlUnitScriptable {
             getWindow().getWebWindow().getHistory().back();
         }
         catch (final IOException e) {
-            Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -103,7 +102,7 @@ public class History extends HtmlUnitScriptable {
             getWindow().getWebWindow().getHistory().forward();
         }
         catch (final IOException e) {
-            Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -117,7 +116,7 @@ public class History extends HtmlUnitScriptable {
             getWindow().getWebWindow().getHistory().go(relativeIndex);
         }
         catch (final IOException e) {
-            Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -134,7 +133,7 @@ public class History extends HtmlUnitScriptable {
             w.getHistory().replaceState(object, buildNewStateUrl(w, url));
         }
         catch (final MalformedURLException e) {
-            Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -151,7 +150,7 @@ public class History extends HtmlUnitScriptable {
             w.getHistory().pushState(object, buildNewStateUrl(w, url));
         }
         catch (final IOException e) {
-            Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 

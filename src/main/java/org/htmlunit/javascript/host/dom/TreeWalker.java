@@ -20,7 +20,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlDomTreeWalker;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -81,7 +80,7 @@ public class TreeWalker extends HtmlUnitScriptable {
                       final org.w3c.dom.traversal.NodeFilter filter,
                       final boolean expandEntityReferences) throws DOMException {
         if (root == null) {
-            Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                                    "root must not be null"));
         }
         walker_ = new HtmlDomTreeWalker(root.getDomNodeOrDie(), whatToShow, filter, expandEntityReferences);

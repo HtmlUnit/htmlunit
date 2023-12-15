@@ -1265,9 +1265,8 @@ public class Document extends Node {
             }
         }
         if (clazz == null) {
-            Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                 "Event Type is not supported: " + eventType));
-            return null; // to stop eclipse warning
         }
         try {
             final Event event = clazz.newInstance();

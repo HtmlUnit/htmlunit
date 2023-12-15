@@ -905,8 +905,7 @@ public class Element extends Node {
             return getInnerHTML(domNode);
         }
         catch (final IllegalStateException e) {
-            Context.throwAsScriptRuntimeEx(e);
-            return "";
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -921,8 +920,7 @@ public class Element extends Node {
             domNode = getDomNodeOrDie();
         }
         catch (final IllegalStateException e) {
-            Context.throwAsScriptRuntimeEx(e);
-            return;
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
 
         String html = null;

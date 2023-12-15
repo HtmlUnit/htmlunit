@@ -1064,7 +1064,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
             }
             catch (final Exception e) {
-                Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
         }
     }

@@ -204,7 +204,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
                     wrappedActiveX_.setParentScope(getParentScope());
                 }
                 catch (final Exception e) {
-                    Context.throwAsScriptRuntimeEx(e);
+                    throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
                 }
             }
         }

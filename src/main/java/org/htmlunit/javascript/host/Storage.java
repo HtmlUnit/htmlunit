@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -161,10 +160,9 @@ public class Storage extends HtmlUnitScriptable {
     public void setItem(final String key, final String data) {
         final long storeSize = storeSize_ + data.length();
         if (storeSize > STORE_SIZE_KIMIT) {
-            Context.throwAsScriptRuntimeEx(
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(
                     new DOMException((short) 22, "QuotaExceededError: Failed to execute 'setItem' on 'Storage': "
                             + "Setting the value of '" + key + "' exceeded the quota."));
-            return;
         }
         storeSize_ = storeSize;
         store_.put(key, data);

@@ -570,9 +570,8 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
-                    Context.throwAsScriptRuntimeEx(
+                    throw JavaScriptEngine.throwAsScriptRuntimeEx(
                             new RuntimeException("No permitted \"Access-Control-Allow-Origin\" header."));
-                    return;
                 }
             }
             final WebResponse webResponse = wc.loadWebResponse(webRequest_);
