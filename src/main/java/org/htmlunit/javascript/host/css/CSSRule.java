@@ -24,7 +24,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
 import org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl;
@@ -34,6 +33,7 @@ import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
 import org.htmlunit.cssparser.dom.CSSStyleRuleImpl;
 import org.htmlunit.cssparser.dom.CSSUnknownRuleImpl;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -157,7 +157,7 @@ public class CSSRule extends HtmlUnitScriptable {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw Context.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 
     /**

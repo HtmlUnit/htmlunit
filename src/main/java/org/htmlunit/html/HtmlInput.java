@@ -45,8 +45,8 @@ import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.html.HTMLInputElement;
@@ -1176,7 +1176,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                     newType = "text";
                 }
                 else if (browser.hasFeature(JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION)) {
-                    throw Context.reportRuntimeError("Invalid argument '" + newType
+                    throw JavaScriptEngine.reportRuntimeError("Invalid argument '" + newType
                             + "' for setting property type.");
                 }
             }

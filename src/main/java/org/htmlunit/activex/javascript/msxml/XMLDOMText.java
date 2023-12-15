@@ -16,8 +16,8 @@ package org.htmlunit.activex.javascript.msxml;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomText;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 
@@ -55,13 +55,15 @@ public class XMLDOMText extends XMLDOMCharacterData {
     @JsxFunction
     public Object splitText(final int offset) {
         if (offset < 0) {
-            throw Context.reportRuntimeError("The offset must be 0 or a positive number that is not greater than the "
+            throw JavaScriptEngine.reportRuntimeError(
+                    "The offset must be 0 or a positive number that is not greater than the "
                     + "number of characters in the data.");
         }
 
         final DomText domText = getDomNodeOrDie();
         if (offset > domText.getLength()) {
-            throw Context.reportRuntimeError("The offset must be 0 or a positive number that is not greater than the "
+            throw JavaScriptEngine.reportRuntimeError(
+                    "The offset must be 0 or a positive number that is not greater than the "
                     + "number of characters in the data.");
         }
 

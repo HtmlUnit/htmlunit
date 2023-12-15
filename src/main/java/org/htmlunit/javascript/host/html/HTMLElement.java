@@ -117,6 +117,7 @@ import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
 import org.htmlunit.html.serializer.HtmlSerializerInnerOuterText;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -1292,7 +1293,7 @@ public class HTMLElement extends Element {
             return;
         }
 
-        throw Context.reportRuntimeError("Cannot set the align property to invalid value: '" + align + "'");
+        throw JavaScriptEngine.reportRuntimeError("Cannot set the align property to invalid value: '" + align + "'");
     }
 
     /**
@@ -1330,7 +1331,7 @@ public class HTMLElement extends Element {
             }
         }
         else {
-            throw Context.reportRuntimeError("Cannot set the vAlign property to invalid value: " + vAlign);
+            throw JavaScriptEngine.reportRuntimeError("Cannot set the vAlign property to invalid value: " + vAlign);
         }
     }
 

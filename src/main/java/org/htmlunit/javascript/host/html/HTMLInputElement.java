@@ -41,6 +41,7 @@ import org.htmlunit.html.HtmlNumberInput;
 import org.htmlunit.html.HtmlRadioButtonInput;
 import org.htmlunit.html.HtmlTextInput;
 import org.htmlunit.html.impl.SelectableTextInput;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -113,7 +114,7 @@ public class HTMLInputElement extends HTMLElement {
         final String val = Context.toString(newValue);
         if ("file".equalsIgnoreCase(getType())) {
             if (StringUtils.isNotEmpty(val) &&  getBrowserVersion().hasFeature(JS_SELECT_FILE_THROWS)) {
-                throw Context.reportRuntimeError("InvalidStateError: "
+                throw JavaScriptEngine.reportRuntimeError("InvalidStateError: "
                         + "Failed to set the 'value' property on 'HTMLInputElement'.");
             }
             return;
@@ -237,7 +238,8 @@ public class HTMLInputElement extends HTMLElement {
         if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_SELECTION_START_END_NULL)) {
             return null;
         }
-        throw Context.reportRuntimeError("Failed to read the 'selectionStart' property from 'HTMLInputElement': "
+        throw JavaScriptEngine.reportRuntimeError(
+                "Failed to read the 'selectionStart' property from 'HTMLInputElement': "
                 + "The input element's type (" + getType() + ") does not support selection.");
     }
 
@@ -251,7 +253,7 @@ public class HTMLInputElement extends HTMLElement {
         if (dom instanceof SelectableTextInput) {
             if ("number".equalsIgnoreCase(getType())
                     && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_SELECTION_START_END_NULL)) {
-                throw Context.reportRuntimeError("Failed to set the 'selectionStart' property"
+                throw JavaScriptEngine.reportRuntimeError("Failed to set the 'selectionStart' property"
                         + "from 'HTMLInputElement': "
                         + "The input element's type ('number') does not support selection.");
             }
@@ -260,7 +262,8 @@ public class HTMLInputElement extends HTMLElement {
             return;
         }
 
-        throw Context.reportRuntimeError("Failed to set the 'selectionStart' property from 'HTMLInputElement': "
+        throw JavaScriptEngine.reportRuntimeError(
+                "Failed to set the 'selectionStart' property from 'HTMLInputElement': "
                 + "The input element's type (" + getType() + ") does not support selection.");
     }
 
@@ -283,7 +286,7 @@ public class HTMLInputElement extends HTMLElement {
         if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_SELECTION_START_END_NULL)) {
             return null;
         }
-        throw Context.reportRuntimeError("Failed to read the 'selectionEnd' property from 'HTMLInputElement': "
+        throw JavaScriptEngine.reportRuntimeError("Failed to read the 'selectionEnd' property from 'HTMLInputElement': "
                 + "The input element's type (" + getType() + ") does not support selection.");
     }
 
@@ -297,7 +300,7 @@ public class HTMLInputElement extends HTMLElement {
         if (dom instanceof SelectableTextInput) {
             if ("number".equalsIgnoreCase(getType())
                     && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_SELECTION_START_END_NULL)) {
-                throw Context.reportRuntimeError("Failed to set the 'selectionEnd' property"
+                throw JavaScriptEngine.reportRuntimeError("Failed to set the 'selectionEnd' property"
                         + "from 'HTMLInputElement': "
                         + "The input element's type ('number') does not support selection.");
             }
@@ -306,7 +309,7 @@ public class HTMLInputElement extends HTMLElement {
             return;
         }
 
-        throw Context.reportRuntimeError("Failed to set the 'selectionEnd' property from 'HTMLInputElement': "
+        throw JavaScriptEngine.reportRuntimeError("Failed to set the 'selectionEnd' property from 'HTMLInputElement': "
                 + "The input element's type (" + getType() + ") does not support selection.");
     }
 

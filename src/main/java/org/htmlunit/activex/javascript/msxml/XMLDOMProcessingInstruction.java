@@ -18,6 +18,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomProcessingInstruction;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -80,12 +81,13 @@ public final class XMLDOMProcessingInstruction extends XMLDOMNode {
     @JsxSetter
     public void setData(final String data) {
         if (data == null || "null".equals(data)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         final DomProcessingInstruction domProcessingInstruction = getDomNodeOrDie();
         if (XML_DECLARATION_TARGET.equalsIgnoreCase(domProcessingInstruction.getTarget())) {
-            throw Context.reportRuntimeError("This operation cannot be performed with a node of type XMLDECL.");
+            throw JavaScriptEngine.reportRuntimeError(
+                    "This operation cannot be performed with a node of type XMLDECL.");
         }
         domProcessingInstruction.setData(data);
     }
@@ -98,7 +100,8 @@ public final class XMLDOMProcessingInstruction extends XMLDOMNode {
     public void setNodeValue(final String newValue) {
         final DomProcessingInstruction domProcessingInstruction = getDomNodeOrDie();
         if (XML_DECLARATION_TARGET.equalsIgnoreCase(domProcessingInstruction.getTarget())) {
-            throw Context.reportRuntimeError("This operation cannot be performed with a node of type XMLDECL.");
+            throw JavaScriptEngine.reportRuntimeError(
+                    "This operation cannot be performed with a node of type XMLDECL.");
         }
 
         super.setNodeValue(newValue);

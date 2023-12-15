@@ -28,6 +28,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentType;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -57,7 +58,7 @@ public class DocumentType extends Node {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw Context.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 
     /**

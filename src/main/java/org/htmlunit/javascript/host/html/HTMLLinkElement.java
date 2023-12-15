@@ -23,12 +23,12 @@ import java.net.MalformedURLException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.html.HtmlLink;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -166,14 +166,14 @@ public class HTMLLinkElement extends HTMLElement {
                 if (LOG.isErrorEnabled()) {
                     LOG.error("RuntimeException loading stylesheet", e);
                 }
-                throw Context.reportRuntimeError("Exception: " + e);
+                throw JavaScriptEngine.reportRuntimeError("Exception: " + e);
             }
             catch (final Exception e) {
                 // Got something unexpected; we can throw an exception in this case.
                 if (LOG.isErrorEnabled()) {
                     LOG.error("Exception loading stylesheet", e);
                 }
-                throw Context.reportRuntimeError("Exception: " + e);
+                throw JavaScriptEngine.reportRuntimeError("Exception: " + e);
             }
         }
         return sheet_;

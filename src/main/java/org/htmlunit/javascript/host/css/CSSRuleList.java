@@ -23,9 +23,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -55,7 +55,7 @@ public class CSSRuleList extends HtmlUnitScriptable {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw Context.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 
     /**

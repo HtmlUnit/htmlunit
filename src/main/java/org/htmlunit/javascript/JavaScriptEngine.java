@@ -1218,4 +1218,24 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public void setJavaScriptTimeout(final long timeout) {
         getContextFactory().setTimeout(timeout);
     }
+
+    /**
+     * Rethrow the exception wrapping it as the script runtime exception.
+     *
+     * @param e the exception to rethrow
+     * @return RuntimeException as dummy the method always throws
+     */
+    public static RuntimeException throwAsScriptRuntimeEx(final Throwable e) {
+        throw Context.throwAsScriptRuntimeEx(e);
+    }
+
+    /**
+     * Report a runtime error using the error reporter for the current thread.
+     *
+     * @param message the error message to report
+     * @return RuntimeException as dummy the method always throws
+     */
+    public static RuntimeException reportRuntimeError(final String message) {
+        throw Context.reportRuntimeError(message);
+    }
 }

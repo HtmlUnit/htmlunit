@@ -20,6 +20,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * An implementation of native ActiveX components using <a href="http://jacob-project.wiki.sourceforge.net/">Jacob</a>.
@@ -91,7 +92,7 @@ public class ActiveXObjectImpl extends HtmlUnitScriptable {
                         return wrapIfNecessary(rv);
                     }
                     catch (final Exception ex) {
-                        throw Context.throwAsScriptRuntimeEx(ex);
+                        throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);
                     }
                 }
 
@@ -205,7 +206,7 @@ public class ActiveXObjectImpl extends HtmlUnitScriptable {
             setMethod.invoke(object_, name, Context.toString(value));
         }
         catch (final Exception e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 }

@@ -23,9 +23,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlMenu;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -85,7 +85,7 @@ public class HTMLMenuElement extends HTMLListElement {
             if (StringUtils.isEmpty(type)) {
                 return;
             }
-            throw Context.reportRuntimeError("Cannot set the type property to invalid value: '" + type + "'");
+            throw JavaScriptEngine.reportRuntimeError("Cannot set the type property to invalid value: '" + type + "'");
         }
 
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_PASS)) {

@@ -16,10 +16,10 @@ package org.htmlunit.activex.javascript.msxml;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -116,7 +116,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
     @JsxFunction
     public Object getNamedItem(final String name) {
         if (name == null || "null".equals(name)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         return getNamedItemWithoutSyntheticClassAttr(name);
@@ -153,7 +153,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
     @JsxFunction
     public HtmlUnitScriptable removeNamedItem(final String name) {
         if (name == null || "null".equals(name)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         final DomNode attr = (DomNode) attributes_.removeNamedItem(name);
@@ -179,7 +179,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
     @JsxFunction
     public Object setNamedItem(final XMLDOMNode node) {
         if (node == null) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         attributes_.setNamedItem(node.getDomNodeOrDie());

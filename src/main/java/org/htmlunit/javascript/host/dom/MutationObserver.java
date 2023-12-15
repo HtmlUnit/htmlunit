@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
@@ -78,10 +77,10 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
     @JsxFunction
     public void observe(final Node node, final NativeObject options) {
         if (node == null) {
-            throw Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Node is undefined"));
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException("Node is undefined"));
         }
         if (options == null) {
-            throw Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Options is undefined"));
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException("Options is undefined"));
         }
 
         node_ = node;
@@ -95,7 +94,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
         final boolean childList = Boolean.TRUE.equals(options.get("childList"));
 
         if (!attaributes_ && !childList && !characterData_) {
-            throw Context.throwAsScriptRuntimeEx(new IllegalArgumentException(
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException(
                         "One of childList, attributes, od characterData must be set"));
         }
 

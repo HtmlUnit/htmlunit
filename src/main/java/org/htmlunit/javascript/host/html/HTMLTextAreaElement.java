@@ -29,6 +29,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlTextArea;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -138,7 +139,7 @@ public class HTMLTextAreaElement extends HTMLElement {
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
-                throw Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
             getDomNodeOrDie().setAttribute("cols", "20");
         }
@@ -178,7 +179,7 @@ public class HTMLTextAreaElement extends HTMLElement {
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION)) {
-                throw Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
 
             getDomNodeOrDie().setAttribute("rows", "2");
@@ -316,7 +317,7 @@ public class HTMLTextAreaElement extends HTMLElement {
             final int i = Integer.parseInt(maxLength);
 
             if (i < 0 && getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION)) {
-                throw Context.throwAsScriptRuntimeEx(
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(
                     new NumberFormatException("New value for maxLength '" + maxLength + "' is smaller than zero."));
             }
             getDomNodeOrDie().setAttribute("maxLength", maxLength);
@@ -352,7 +353,7 @@ public class HTMLTextAreaElement extends HTMLElement {
             final int i = Integer.parseInt(minLength);
 
             if (i < 0) {
-                throw Context.throwAsScriptRuntimeEx(
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(
                     new NumberFormatException("New value for minLength '" + minLength + "' is smaller than zero."));
             }
             getDomNodeOrDie().setAttribute("minLength", minLength);

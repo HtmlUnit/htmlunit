@@ -28,7 +28,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
@@ -38,6 +37,7 @@ import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -216,10 +216,10 @@ public class CSSStyleSheet extends StyleSheet {
                     return position;
                 }
                 catch (final DOMException ex) {
-                    throw Context.throwAsScriptRuntimeEx(ex);
+                    throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);
                 }
             }
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -277,7 +277,7 @@ public class CSSStyleSheet extends StyleSheet {
             refreshCssRules();
         }
         catch (final DOMException e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -306,7 +306,7 @@ public class CSSStyleSheet extends StyleSheet {
                 refreshCssRules();
             }
             catch (final DOMException ex) {
-                throw Context.throwAsScriptRuntimeEx(ex);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);
             }
         }
         if (getBrowserVersion().hasFeature(STYLESHEET_ADD_RULE_RETURNS_POS)) {
@@ -328,7 +328,7 @@ public class CSSStyleSheet extends StyleSheet {
             refreshCssRules();
         }
         catch (final DOMException e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 

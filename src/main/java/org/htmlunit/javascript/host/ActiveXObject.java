@@ -30,6 +30,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -84,10 +85,10 @@ public class ActiveXObject extends HtmlUnitScriptable {
                     "ActiveXObject Error: constructor must have one or two String parameters.");
         }
         if (Undefined.isUndefined(args[0])) {
-            throw Context.reportRuntimeError("ActiveXObject Error: constructor parameter is undefined.");
+            throw JavaScriptEngine.reportRuntimeError("ActiveXObject Error: constructor parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {
-            throw Context.reportRuntimeError("ActiveXObject Error: constructor parameter must be a String.");
+            throw JavaScriptEngine.reportRuntimeError("ActiveXObject Error: constructor parameter must be a String.");
         }
         final String activeXName = (String) args[0];
 
@@ -111,7 +112,8 @@ public class ActiveXObject extends HtmlUnitScriptable {
                     return Context.toObject(object, ctorObj);
                 }
                 catch (final Exception e) {
-                    throw Context.reportRuntimeError("ActiveXObject Error: failed instantiating class " + xClassString
+                    throw JavaScriptEngine.reportRuntimeError(
+                            "ActiveXObject Error: failed instantiating class " + xClassString
                             + " because " + e.getMessage() + ".");
                 }
             }
@@ -128,7 +130,7 @@ public class ActiveXObject extends HtmlUnitScriptable {
         if (LOG.isWarnEnabled()) {
             LOG.warn("Automation server can't create object for '" + activeXName + "'.");
         }
-        throw Context.reportRuntimeError("Automation server can't create object for '" + activeXName + "'.");
+        throw JavaScriptEngine.reportRuntimeError("Automation server can't create object for '" + activeXName + "'.");
     }
 
     /**

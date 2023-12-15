@@ -33,6 +33,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTable;
 import org.htmlunit.html.HtmlTableRow;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -158,7 +159,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
             }
             return getScriptableFor(newCell);
         }
-        throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
+        throw JavaScriptEngine.reportRuntimeError("Index or size is negative or greater than the allowed amount");
     }
 
     /**
@@ -175,7 +176,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
             position = (int) Context.toNumber(index);
         }
         else if (getBrowserVersion().hasFeature(JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX)) {
-            throw Context.reportRuntimeError("No enough arguments");
+            throw JavaScriptEngine.reportRuntimeError("No enough arguments");
         }
 
         final HtmlTableRow htmlRow = (HtmlTableRow) getDomNodeOrDie();
@@ -185,7 +186,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         }
         final boolean indexValid = position >= -1 && position <= htmlRow.getCells().size();
         if (!indexValid) {
-            throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
+            throw JavaScriptEngine.reportRuntimeError("Index or size is negative or greater than the allowed amount");
         }
 
         htmlRow.getCell(position).remove();
@@ -197,7 +198,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      */
     @Override
     public void setOuterHTML(final Object value) {
-        throw Context.reportRuntimeError("outerHTML is read-only for tag 'tr'");
+        throw JavaScriptEngine.reportRuntimeError("outerHTML is read-only for tag 'tr'");
     }
 
     /**

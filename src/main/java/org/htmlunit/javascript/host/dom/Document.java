@@ -107,6 +107,7 @@ import org.htmlunit.html.UnknownElementFactory;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -334,7 +335,7 @@ public class Document extends Node {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw Context.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 
     /**
@@ -450,7 +451,7 @@ public class Document extends Node {
         final boolean inherit = browserVersion.hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
         if (inherit) {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
-                throw Context.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
+                throw JavaScriptEngine.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
             }
 
             if ("on".equalsIgnoreCase(mode)) {
@@ -674,7 +675,7 @@ public class Document extends Node {
             return xPathResult;
         }
         catch (final Exception e) {
-            throw Context.reportRuntimeError("Failed to execute 'evaluate': " + e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError("Failed to execute 'evaluate': " + e.getMessage());
         }
     }
 
@@ -692,7 +693,7 @@ public class Document extends Node {
                     LOG.info("createElement: Provided string '"
                                 + tagName + "' contains an invalid character; '<' and '>' are not allowed");
                 }
-                throw Context.reportRuntimeError("String contains an invalid character");
+                throw JavaScriptEngine.reportRuntimeError("String contains an invalid character");
             }
             else if (tagName.length() > 0 && tagName.charAt(0) == '<' && tagName.endsWith(">")) {
                 tagName = tagName.substring(1, tagName.length() - 1);
@@ -702,7 +703,7 @@ public class Document extends Node {
                     if (LOG.isInfoEnabled()) {
                         LOG.info("createElement: Provided string '" + tagName + "' contains an invalid character");
                     }
-                    throw Context.reportRuntimeError("String contains an invalid character");
+                    throw JavaScriptEngine.reportRuntimeError("String contains an invalid character");
                 }
             }
 
@@ -758,7 +759,7 @@ public class Document extends Node {
     @JsxFunction
     public Object createElementNS(final String namespaceURI, final String qualifiedName) {
         if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
-            throw Context.reportRuntimeError("XUL not available");
+            throw JavaScriptEngine.reportRuntimeError("XUL not available");
         }
 
         final org.w3c.dom.Element element;
@@ -947,7 +948,7 @@ public class Document extends Node {
             }
             return;
         }
-        throw Context.reportRuntimeError("Failed to set the 'body' property on 'Document': "
+        throw JavaScriptEngine.reportRuntimeError("Failed to set the 'body' property on 'Document': "
                 + "The new body element is of type '" +  htmlElement.getTagName() + "'. "
                 + "It must be either a 'BODY' or 'FRAMESET' element.");
     }
@@ -1069,7 +1070,7 @@ public class Document extends Node {
             return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+            throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }
@@ -1276,7 +1277,7 @@ public class Document extends Node {
             return event;
         }
         catch (final InstantiationException | IllegalAccessException e) {
-            throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
+            throw JavaScriptEngine.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
                             + "' for event type of '" + eventType + "': " + e.getMessage());
         }
     }
@@ -1311,7 +1312,7 @@ public class Document extends Node {
                 }
                 else {
                     if (filterFunctionOnly) {
-                        throw Context.reportRuntimeError("only a function is allowed as filter");
+                        throw JavaScriptEngine.reportRuntimeError("only a function is allowed as filter");
                     }
                     response = ScriptableObject.callMethod(filter, "acceptNode", args);
                 }
@@ -1446,7 +1447,7 @@ public class Document extends Node {
         // IE doesn't allow to set domain of about:blank
         if (UrlUtils.URL_ABOUT_BLANK == getPage().getUrl()
             && browserVersion.hasFeature(JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
-            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \""
+            throw JavaScriptEngine.reportRuntimeError("Illegal domain value, cannot set domain from \""
                     + UrlUtils.URL_ABOUT_BLANK + "\" to: \""
                     + newDomain + "\".");
         }
@@ -1459,13 +1460,13 @@ public class Document extends Node {
         }
 
         if (newDomain.indexOf('.') == -1) {
-            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
+            throw JavaScriptEngine.reportRuntimeError("Illegal domain value, cannot set domain from: \""
                     + currentDomain + "\" to: \"" + newDomain + "\" (new domain has to contain a dot).");
         }
 
         if (currentDomain.indexOf('.') > -1
                 && !currentDomain.toLowerCase(Locale.ROOT).endsWith("." + newDomain.toLowerCase(Locale.ROOT))) {
-            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
+            throw JavaScriptEngine.reportRuntimeError("Illegal domain value, cannot set domain from: \""
                     + currentDomain + "\" to: \"" + newDomain + "\"");
         }
 

@@ -16,10 +16,10 @@ package org.htmlunit.activex.javascript.msxml;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Base class for MSXML's (ActiveX) JavaScript host objects in HtmlUnit.
@@ -72,7 +72,7 @@ public class MSXMLScriptable extends HtmlUnitScriptable {
                 scriptable = javaScriptClass.newInstance();
             }
             catch (final Exception e) {
-                throw Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
         }
         initParentScope(domNode, scriptable);

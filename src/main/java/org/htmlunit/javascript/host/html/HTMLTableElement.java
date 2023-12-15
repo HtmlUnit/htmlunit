@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlTable;
@@ -36,6 +35,7 @@ import org.htmlunit.html.HtmlTableBody;
 import org.htmlunit.html.HtmlTableFooter;
 import org.htmlunit.html.HtmlTableHeader;
 import org.htmlunit.html.HtmlTableRow;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -87,7 +87,7 @@ public class HTMLTableElement extends RowContainer {
     @JsxSetter
     public void setCaption(final Object o) {
         if (!(o instanceof HTMLTableCaptionElement)) {
-            throw Context.reportRuntimeError("Not a caption");
+            throw JavaScriptEngine.reportRuntimeError("Not a caption");
         }
 
         // remove old caption (if any)
@@ -119,7 +119,7 @@ public class HTMLTableElement extends RowContainer {
     public void setTFoot(final Object o) {
         if (!(o instanceof HTMLTableSectionElement
             && "TFOOT".equals(((HTMLTableSectionElement) o).getTagName()))) {
-            throw Context.reportRuntimeError("Not a tFoot");
+            throw JavaScriptEngine.reportRuntimeError("Not a tFoot");
         }
 
         // remove old caption (if any)
@@ -151,7 +151,7 @@ public class HTMLTableElement extends RowContainer {
     public void setTHead(final Object o) {
         if (!(o instanceof HTMLTableSectionElement
             && "THEAD".equals(((HTMLTableSectionElement) o).getTagName()))) {
-            throw Context.reportRuntimeError("Not a tHead");
+            throw JavaScriptEngine.reportRuntimeError("Not a tHead");
         }
 
         // remove old caption (if any)
@@ -494,7 +494,7 @@ public class HTMLTableElement extends RowContainer {
         if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
             rules = rules.toLowerCase(Locale.ROOT);
             if (!rules.isEmpty() && !VALID_RULES_.contains(rules)) {
-                throw Context.throwAsScriptRuntimeEx(new Exception("Invalid argument"));
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(new Exception("Invalid argument"));
             }
         }
         setAttribute("rules", rules);

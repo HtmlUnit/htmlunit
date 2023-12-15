@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -78,9 +78,9 @@ public class XMLDOMElement extends XMLDOMNode {
     @Override
     public void setNodeValue(final String newValue) {
         if (newValue == null || "null".equals(newValue)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
-        throw Context.reportRuntimeError("This operation cannot be performed with a node of type ELEMENT.");
+        throw JavaScriptEngine.reportRuntimeError("This operation cannot be performed with a node of type ELEMENT.");
     }
 
     /**
@@ -114,7 +114,7 @@ public class XMLDOMElement extends XMLDOMNode {
     @Override
     public void setText(final Object value) {
         if (value == null || "null".equals(value)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         super.setText(value);
@@ -168,10 +168,10 @@ public class XMLDOMElement extends XMLDOMNode {
     @JsxFunction
     public Object getAttribute(final String name) {
         if (name == null || "null".equals(name)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
         if (StringUtils.isEmpty(name)) {
-            throw Context.reportRuntimeError("The empty string '' is not a valid name.");
+            throw JavaScriptEngine.reportRuntimeError("The empty string '' is not a valid name.");
         }
 
         final String value = getDomNodeOrDie().getAttribute(name);
@@ -190,10 +190,10 @@ public class XMLDOMElement extends XMLDOMNode {
     @JsxFunction
     public HtmlUnitScriptable getAttributeNode(final String name) {
         if (name == null || "null".equals(name)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
         if (StringUtils.isEmpty(name)) {
-            throw Context.reportRuntimeError("The empty string '' is not a valid name.");
+            throw JavaScriptEngine.reportRuntimeError("The empty string '' is not a valid name.");
         }
 
         final Map<String, DomAttr> attributes = getDomNodeOrDie().getAttributesMap();
@@ -212,10 +212,10 @@ public class XMLDOMElement extends XMLDOMNode {
     @JsxFunction
     public void removeAttribute(final String name) {
         if (name == null || "null".equals(name)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
         if (StringUtils.isEmpty(name)) {
-            throw Context.reportRuntimeError("The empty string '' is not a valid name.");
+            throw JavaScriptEngine.reportRuntimeError("The empty string '' is not a valid name.");
         }
 
         getDomNodeOrDie().removeAttribute(name);
@@ -230,7 +230,7 @@ public class XMLDOMElement extends XMLDOMNode {
     @JsxFunction
     public XMLDOMAttribute removeAttributeNode(final XMLDOMAttribute att) {
         if (att == null) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         final String name = att.getName();
@@ -254,13 +254,13 @@ public class XMLDOMElement extends XMLDOMNode {
     @JsxFunction
     public void setAttribute(final String name, final String value) {
         if (name == null || "null".equals(name)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
         if (StringUtils.isEmpty(name)) {
-            throw Context.reportRuntimeError("The empty string '' is not a valid name.");
+            throw JavaScriptEngine.reportRuntimeError("The empty string '' is not a valid name.");
         }
         if (value == null || "null".equals(value)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         getDomNodeOrDie().setAttribute(name, value);
@@ -274,7 +274,7 @@ public class XMLDOMElement extends XMLDOMNode {
     @JsxFunction
     public XMLDOMAttribute setAttributeNode(final XMLDOMAttribute newAtt) {
         if (newAtt == null) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         final String name = newAtt.getBaseName();
@@ -299,7 +299,7 @@ public class XMLDOMElement extends XMLDOMNode {
     @JsxFunction
     public XMLDOMNodeList getElementsByTagName(final String tagName) {
         if (tagName == null || "null".equals(tagName)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         final String tagNameTrimmed = tagName.trim();

@@ -25,6 +25,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlTableColumn;
 import org.htmlunit.html.HtmlTableColumnGroup;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -128,7 +129,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @Override
     public void setOuterHTML(final Object value) {
-        throw Context.reportRuntimeError("outerHTML is read-only for tag '"
+        throw JavaScriptEngine.reportRuntimeError("outerHTML is read-only for tag '"
                             + getDomNodeOrDie().getNodeName() + "'");
     }
 }

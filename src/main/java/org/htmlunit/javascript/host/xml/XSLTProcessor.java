@@ -40,11 +40,11 @@ import javax.xml.transform.stream.StreamResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -204,7 +204,7 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             throw re;
         }
         catch (final Exception e) {
-            throw Context.reportRuntimeError("Exception: " + e);
+            throw JavaScriptEngine.reportRuntimeError("Exception: " + e);
         }
     }
 

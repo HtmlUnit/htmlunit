@@ -20,8 +20,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -52,7 +52,7 @@ public class SVGElement extends Element {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw Context.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 
     /**

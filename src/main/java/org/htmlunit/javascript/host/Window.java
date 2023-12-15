@@ -919,7 +919,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public void setOpener(final Object newValue) {
         if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
             && newValue != null && !Undefined.isUndefined(newValue) && !(newValue instanceof Window)) {
-            throw Context.reportRuntimeError("Can't set opener to something other than a window!");
+            throw JavaScriptEngine.reportRuntimeError("Can't set opener to something other than a window!");
         }
         opener_ = newValue;
     }
@@ -1734,7 +1734,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             return jsDialog.get("returnValue", jsDialog);
         }
         catch (final IOException e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -1756,7 +1756,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             return dialog.getScriptableObject();
         }
         catch (final IOException e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -2024,7 +2024,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                     targetURL = new URL(targetOrigin);
                 }
                 catch (final Exception e) {
-                    throw Context.throwAsScriptRuntimeEx(
+                    throw JavaScriptEngine.throwAsScriptRuntimeEx(
                             new Exception(
                                     "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
                                             + targetOrigin + "' was specified (reason: " + e.getMessage() + "."));
@@ -2048,7 +2048,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             origin = UrlUtils.removeRedundantPort(originUrl).toExternalForm();
         }
         catch (final MalformedURLException e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
 
         final MessageEvent event = new MessageEvent();

@@ -22,11 +22,11 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.FrameWindow;
 import org.htmlunit.html.FrameWindow.PageDenied;
 import org.htmlunit.html.HtmlInlineFrame;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -85,7 +85,7 @@ public class HTMLIFrameElement extends HTMLElement {
         final FrameWindow frameWindow = getFrame().getEnclosedWindow();
         if (PageDenied.NONE != frameWindow.getPageDenied()) {
             if (getBrowserVersion().hasFeature(JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS)) {
-                throw Context.reportRuntimeError("Error access denied");
+                throw JavaScriptEngine.reportRuntimeError("Error access denied");
             }
             return null;
         }

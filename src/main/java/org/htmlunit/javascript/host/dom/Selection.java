@@ -22,10 +22,10 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -208,7 +208,7 @@ public class Selection extends HtmlUnitScriptable {
     public Range getRangeAt(final int index) {
         final List<SimpleRange> ranges = getRanges();
         if (index < 0 || index >= ranges.size()) {
-            throw Context.reportRuntimeError("Invalid range index: " + index);
+            throw JavaScriptEngine.reportRuntimeError("Invalid range index: " + index);
         }
         final SimpleRange range = ranges.get(index);
         final Range jsRange = new Range(range);

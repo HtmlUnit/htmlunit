@@ -26,6 +26,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTableRow;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -117,7 +118,7 @@ public class RowContainer extends HTMLElement {
         }
 
         if (r < 0 || r > rowCount) {
-            throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount "
+            throw JavaScriptEngine.reportRuntimeError("Index or size is negative or greater than the allowed amount "
                     + "(index: " + rowIndex + ", " + rowCount + " rows)");
         }
 

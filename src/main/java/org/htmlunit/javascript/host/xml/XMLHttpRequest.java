@@ -297,11 +297,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxSetter
     public void setResponseType(final String responseType) {
         if (state_ == LOADING || state_ == DONE) {
-            throw Context.reportRuntimeError("InvalidStateError");
+            throw JavaScriptEngine.reportRuntimeError("InvalidStateError");
         }
 
         if (state_ == UNSENT && getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT)) {
-            throw Context.reportRuntimeError("InvalidStateError");
+            throw JavaScriptEngine.reportRuntimeError("InvalidStateError");
         }
 
         if (RESPONSE_TYPE_DEFAULT.equals(responseType)
@@ -679,7 +679,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     public void open(final String method, final Object urlParam, final Object asyncParam,
         final Object user, final Object password) {
         if ((urlParam == null || "".equals(urlParam)) && !getBrowserVersion().hasFeature(XHR_OPEN_ALLOW_EMTPY_URL)) {
-            throw Context.reportRuntimeError("URL for XHR.open can't be empty!");
+            throw JavaScriptEngine.reportRuntimeError("URL for XHR.open can't be empty!");
         }
 
         // async defaults to true if not specified
@@ -696,7 +696,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         try {
             final URL fullUrl = containingPage.getFullyQualifiedUrl(url);
             if (!isAllowCrossDomainsFor(fullUrl)) {
-                throw Context.reportRuntimeError("Access to restricted URI denied");
+                throw JavaScriptEngine.reportRuntimeError("Access to restricted URI denied");
             }
 
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
@@ -1238,7 +1238,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             webRequest_.setAdditionalHeader(name, value);
         }
         else {
-            throw Context.reportRuntimeError("The open() method must be called before setRequestHeader().");
+            throw JavaScriptEngine.reportRuntimeError("The open() method must be called before setRequestHeader().");
         }
     }
 
@@ -1269,7 +1269,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public void overrideMimeType(final String mimeType) {
         if (state_ != UNSENT && state_ != OPENED) {
-            throw Context.reportRuntimeError("Property 'overrideMimeType' not writable after sent.");
+            throw JavaScriptEngine.reportRuntimeError("Property 'overrideMimeType' not writable after sent.");
         }
         overriddenMimeType_ = mimeType;
     }

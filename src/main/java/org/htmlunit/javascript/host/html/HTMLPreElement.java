@@ -22,10 +22,10 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlExample;
 import org.htmlunit.html.HtmlListing;
 import org.htmlunit.html.HtmlPreformattedText;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -121,7 +121,7 @@ public class HTMLPreElement extends HTMLElement {
     @JsxSetter(IE)
     public void setClear(final String clear) {
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
-            throw Context.reportRuntimeError("Invalid clear property value: '" + clear + "'.");
+            throw JavaScriptEngine.reportRuntimeError("Invalid clear property value: '" + clear + "'.");
         }
         getDomNodeOrDie().setAttribute("clear", clear);
     }

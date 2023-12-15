@@ -29,6 +29,7 @@ import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Provides an implementation of Proxy Auto-Config (PAC).
@@ -170,7 +171,7 @@ public final class ProxyAutoConfig {
             return InetAddress.getLocalHost().getHostAddress();
         }
         catch (final Exception e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 

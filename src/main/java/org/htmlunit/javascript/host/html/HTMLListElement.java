@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.JS_TYPE_ACCEPTS_ARBITRARY_VALUES;
 
 import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -89,6 +90,6 @@ public class HTMLListElement extends HTMLElement {
             return;
         }
 
-        throw Context.reportRuntimeError("Cannot set the type property to invalid value: '" + type + "'");
+        throw JavaScriptEngine.reportRuntimeError("Cannot set the type property to invalid value: '" + type + "'");
     }
 }

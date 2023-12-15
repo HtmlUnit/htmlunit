@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -85,7 +84,7 @@ public class XMLDocument extends Document {
                 setDomNode(page);
             }
             catch (final IOException e) {
-                throw Context.reportRuntimeError("IOException: " + e);
+                throw JavaScriptEngine.reportRuntimeError("IOException: " + e);
             }
         }
     }
@@ -163,7 +162,7 @@ public class XMLDocument extends Document {
                     scriptable = javaScriptClass.newInstance();
                 }
                 catch (final Exception e) {
-                    throw Context.throwAsScriptRuntimeEx(e);
+                    throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
                 }
             }
             else {

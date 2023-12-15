@@ -53,6 +53,7 @@ import org.htmlunit.html.HtmlImageInput;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.SubmittableElement;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -298,7 +299,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 && !FormEncodingType.URL_ENCODED.getName().equals(enctype)
                 && !FormEncodingType.MULTIPART.getName().equals(enctype)
                 && !FormEncodingType.TEXT_PLAIN.getName().equals(enctype)) {
-            throw Context.reportRuntimeError("Cannot set the encoding property to invalid value: '" + enctype + "'");
+            throw JavaScriptEngine.reportRuntimeError(
+                    "Cannot set the encoding property to invalid value: '" + enctype + "'");
         }
         getHtmlForm().setEnctypeAttribute(enctype);
     }
@@ -585,7 +587,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTION)) {
-            throw Context.reportRuntimeError("Not a function.");
+            throw JavaScriptEngine.reportRuntimeError("Not a function.");
         }
         if (args.length > 0) {
             final Object arg = args[0];
@@ -605,7 +607,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTION)) {
-            throw Context.reportRuntimeError("Not a function.");
+            throw JavaScriptEngine.reportRuntimeError("Not a function.");
         }
         return null;
     }

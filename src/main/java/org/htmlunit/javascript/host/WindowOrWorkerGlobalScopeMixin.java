@@ -27,6 +27,7 @@ import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
 
@@ -174,6 +175,6 @@ public final class WindowOrWorkerGlobalScopeMixin {
             return webWindow.getJobManager().addJob(job, page);
         }
 
-        throw Context.reportRuntimeError("Unknown type for function.");
+        throw JavaScriptEngine.reportRuntimeError("Unknown type for function.");
     }
 }

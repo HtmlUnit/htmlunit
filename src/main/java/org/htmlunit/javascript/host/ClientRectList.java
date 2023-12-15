@@ -24,9 +24,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -84,7 +84,7 @@ public class ClientRectList extends HtmlUnitScriptable {
             return clientRects_.get(index);
         }
         if (getBrowserVersion().hasFeature(JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND)) {
-            throw Context.reportRuntimeError("Invalid index '" + index + "'");
+            throw JavaScriptEngine.reportRuntimeError("Invalid index '" + index + "'");
         }
         return null;
     }

@@ -57,6 +57,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlScript;
 import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -126,7 +127,7 @@ public class HTMLDocument extends Document {
             return super.getDomNodeOrDie();
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError("No node attached to this object");
+            throw JavaScriptEngine.reportRuntimeError("No node attached to this object");
         }
     }
 
@@ -205,7 +206,7 @@ public class HTMLDocument extends Document {
         if (window.getBrowserVersion().hasFeature(HTMLDOCUMENT_FUNCTION_DETACHED)) {
             return (HTMLDocument) window.getDocument();
         }
-        throw Context.reportRuntimeError("Function can't be used detached from document");
+        throw JavaScriptEngine.reportRuntimeError("Function can't be used detached from document");
     }
 
     /**
@@ -552,7 +553,7 @@ public class HTMLDocument extends Document {
                 close();
             }
             catch (final IOException e) {
-                throw Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
         }
     }
@@ -562,7 +563,7 @@ public class HTMLDocument extends Document {
      */
     @Override
     public Object appendChild(final Object childObject) {
-        throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
+        throw JavaScriptEngine.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
     }
 
     /**

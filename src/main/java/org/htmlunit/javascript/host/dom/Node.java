@@ -42,6 +42,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -440,7 +441,8 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
+                throw JavaScriptEngine.reportRuntimeError(
+                        "Node cannot be inserted at the specified point in the hierarchy");
             }
 
             // Get XML nodes for the DOM nodes passed in
@@ -629,7 +631,7 @@ public class Node extends EventTarget {
     @JsxFunction
     public int compareDocumentPosition(final Object node) {
         if (!(node instanceof Node)) {
-            throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
+            throw JavaScriptEngine.reportRuntimeError("Could not convert JavaScript argument arg 0");
         }
         return getDomNodeOrDie().compareDocumentPosition(((Node) node).getDomNodeOrDie());
     }
@@ -699,7 +701,7 @@ public class Node extends EventTarget {
             if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
                 return false;
             }
-            throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
+            throw JavaScriptEngine.reportRuntimeError("Could not convert JavaScript argument arg 0");
         }
 
         if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
@@ -707,7 +709,7 @@ public class Node extends EventTarget {
                 return false;
             }
             if (this instanceof CharacterData) {
-                throw Context.reportRuntimeError("Function 'contains' not available for text nodes.");
+                throw JavaScriptEngine.reportRuntimeError("Function 'contains' not available for text nodes.");
             }
         }
 

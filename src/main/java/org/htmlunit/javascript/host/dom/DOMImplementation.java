@@ -53,6 +53,7 @@ import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -264,7 +265,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
     public HTMLDocument createHTMLDocument(final Object titleObj) {
         if (Undefined.isUndefined(titleObj)
                 && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE)) {
-            throw Context.reportRuntimeError("Title is required");
+            throw JavaScriptEngine.reportRuntimeError("Title is required");
         }
 
         // a similar impl is in
@@ -298,7 +299,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             return page.getScriptableObject();
         }
         catch (final IOException e) {
-            throw Context.reportRuntimeError("Parsing failed" + e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError("Parsing failed" + e.getMessage());
         }
     }
 }

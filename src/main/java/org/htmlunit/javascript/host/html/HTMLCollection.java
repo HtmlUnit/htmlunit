@@ -43,6 +43,7 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlInput;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -139,7 +140,7 @@ public class HTMLCollection extends AbstractList implements Callable {
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (supportsParentheses()) {
             if (args.length == 0) {
-                throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
+                throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
             }
             final Object object = getIt(args[0]);
             if (object == NOT_FOUND) {

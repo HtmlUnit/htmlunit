@@ -25,6 +25,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomCharacterData;
 import org.htmlunit.html.DomElement;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -94,12 +95,12 @@ public class CharacterData extends Node {
     @JsxFunction
     public void deleteData(final int offset, final int count) {
         if (offset < 0) {
-            throw Context.reportRuntimeError("Provided offset: " + offset + " is less than zero.");
+            throw JavaScriptEngine.reportRuntimeError("Provided offset: " + offset + " is less than zero.");
         }
 
         if (getBrowserVersion().hasFeature(JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT)) {
             if (count < 0) {
-                throw Context.reportRuntimeError("Provided count: " + count + " is less than zero.");
+                throw JavaScriptEngine.reportRuntimeError("Provided count: " + count + " is less than zero.");
             }
             if (count == 0) {
                 return;
@@ -108,7 +109,7 @@ public class CharacterData extends Node {
 
         final DomCharacterData domCharacterData = getDomCharacterDataOrDie();
         if (offset > domCharacterData.getLength()) {
-            throw Context.reportRuntimeError("Provided offset: " + offset + " is greater than length.");
+            throw JavaScriptEngine.reportRuntimeError("Provided offset: " + offset + " is greater than length.");
         }
 
         domCharacterData.deleteData(offset, count);

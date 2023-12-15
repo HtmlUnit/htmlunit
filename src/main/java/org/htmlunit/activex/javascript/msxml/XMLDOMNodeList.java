@@ -34,6 +34,7 @@ import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlAttributeChangeListener;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -198,7 +199,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (args.length == 0) {
-            throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
+            throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
         }
         return nullIfNotFound(getIt(args[0]));
     }

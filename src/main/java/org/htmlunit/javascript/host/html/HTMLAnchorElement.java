@@ -41,13 +41,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -867,7 +867,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getProtocolLong() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
     /**
@@ -876,7 +876,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter(propertyName = "Methods", value = IE)
     public String getMethods_js() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
     /**
@@ -885,7 +885,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter(propertyName = "Methods", value = IE)
     public void setMethods_js(final String methods) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
     /**
@@ -894,7 +894,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getMimeType() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
     /**
@@ -903,7 +903,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter(IE)
     public void setMimeType(final String mimeType) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
     /**
@@ -912,7 +912,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getNameProp() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
     /**
@@ -921,7 +921,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getUrn() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
     /**
@@ -930,6 +930,6 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter(IE)
     public void setUrn(final String urn) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 }

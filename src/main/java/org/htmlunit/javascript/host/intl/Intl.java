@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.intl;
 import static org.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -55,7 +54,7 @@ public class Intl extends HtmlUnitScriptable {
             functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
         }
         catch (final Exception e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
         }
     }
 }

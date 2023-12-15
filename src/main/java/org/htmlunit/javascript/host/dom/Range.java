@@ -30,6 +30,7 @@ import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -140,7 +141,7 @@ public class Range extends AbstractRange {
     @JsxFunction
     public void setStart(final Node refNode, final int offset) {
         if (refNode == null) {
-            throw Context.reportRuntimeError("It is illegal to call Range.setStart() with a null node.");
+            throw JavaScriptEngine.reportRuntimeError("It is illegal to call Range.setStart() with a null node.");
         }
         internSetStartContainer(refNode);
         internSetStartOffset(offset);
@@ -153,7 +154,7 @@ public class Range extends AbstractRange {
     @JsxFunction
     public void setStartAfter(final Node refNode) {
         if (refNode == null) {
-            throw Context.reportRuntimeError("It is illegal to call Range.setStartAfter() with a null node.");
+            throw JavaScriptEngine.reportRuntimeError("It is illegal to call Range.setStartAfter() with a null node.");
         }
         internSetStartContainer(refNode.getParent());
         internSetStartOffset(getPositionInContainer(refNode) + 1);
@@ -166,7 +167,7 @@ public class Range extends AbstractRange {
     @JsxFunction
     public void setStartBefore(final Node refNode) {
         if (refNode == null) {
-            throw Context.reportRuntimeError("It is illegal to call Range.setStartBefore() with a null node.");
+            throw JavaScriptEngine.reportRuntimeError("It is illegal to call Range.setStartBefore() with a null node.");
         }
         internSetStartContainer(refNode.getParent());
         internSetStartOffset(getPositionInContainer(refNode));
@@ -200,7 +201,7 @@ public class Range extends AbstractRange {
     @JsxFunction
     public void setEnd(final Node refNode, final int offset) {
         if (refNode == null) {
-            throw Context.reportRuntimeError("It is illegal to call Range.setEnd() with a null node.");
+            throw JavaScriptEngine.reportRuntimeError("It is illegal to call Range.setEnd() with a null node.");
         }
         internSetEndContainer(refNode);
         internSetEndOffset(offset);
@@ -213,7 +214,7 @@ public class Range extends AbstractRange {
     @JsxFunction
     public void setEndAfter(final Node refNode) {
         if (refNode == null) {
-            throw Context.reportRuntimeError("It is illegal to call Range.setEndAfter() with a null node.");
+            throw JavaScriptEngine.reportRuntimeError("It is illegal to call Range.setEndAfter() with a null node.");
         }
         internSetEndContainer(refNode.getParent());
         internSetEndOffset(getPositionInContainer(refNode) + 1);
@@ -226,7 +227,7 @@ public class Range extends AbstractRange {
     @JsxFunction
     public void setEndBefore(final Node refNode) {
         if (refNode == null) {
-            throw Context.reportRuntimeError("It is illegal to call Range.setEndBefore() with a null node.");
+            throw JavaScriptEngine.reportRuntimeError("It is illegal to call Range.setEndBefore() with a null node.");
         }
         internSetStartContainer(refNode.getParent());
         internSetStartOffset(getPositionInContainer(refNode));
@@ -311,7 +312,7 @@ public class Range extends AbstractRange {
         }
         catch (final Exception e) {
             LogFactory.getLog(Range.class).error("Unexpected exception occurred in createContextualFragment", e);
-            throw Context.reportRuntimeError("Unexpected exception occurred in createContextualFragment: "
+            throw JavaScriptEngine.reportRuntimeError("Unexpected exception occurred in createContextualFragment: "
                     + e.getMessage());
         }
 

@@ -31,6 +31,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -450,7 +451,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             return DataURLConnection.DATA_PREFIX + type + ";base64," + getRenderingBackend().encodeToString(type);
         }
         catch (final IOException ioe) {
-            throw Context.throwAsScriptRuntimeEx(ioe);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(ioe);
         }
     }
 
@@ -562,7 +563,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public TextMetrics measureText(final Object text) {
         if (text == null || Undefined.isUndefined(text)) {
-            throw Context.throwAsScriptRuntimeEx(
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(
                     new RuntimeException("Missing argument for CanvasRenderingContext2D.measureText()."));
         }
 

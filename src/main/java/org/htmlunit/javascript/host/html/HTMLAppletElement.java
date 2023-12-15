@@ -26,6 +26,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlApplet;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -86,7 +87,7 @@ public class HTMLAppletElement extends HTMLElement {
                         return method.invoke(applet, realArgs);
                     }
                     catch (final Exception e) {
-                        throw Context.throwAsScriptRuntimeEx(e);
+                        throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
                     }
                 }
             };

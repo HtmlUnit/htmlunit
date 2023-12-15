@@ -46,6 +46,7 @@ import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -219,7 +220,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
             if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH)) {
                 return;
             }
-            throw Context.reportRuntimeError("Length is negative");
+            throw JavaScriptEngine.reportRuntimeError("Length is negative");
         }
 
         final int currentLength = htmlSelect_.getOptionSize();
@@ -316,7 +317,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
                 return;
             }
             if (index < 0 && getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV)) {
-                throw Context.reportRuntimeError("Invalid index for option collection: " + index);
+                throw JavaScriptEngine.reportRuntimeError("Invalid index for option collection: " + index);
             }
         }
 

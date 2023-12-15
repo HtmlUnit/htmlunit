@@ -25,12 +25,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlImage;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -191,7 +191,7 @@ public class HTMLImageElement extends HTMLElement {
             return;
         }
 
-        throw Context.reportRuntimeError("Cannot set the align property to invalid value: '" + align + "'");
+        throw JavaScriptEngine.reportRuntimeError("Cannot set the align property to invalid value: '" + align + "'");
     }
 
     /**

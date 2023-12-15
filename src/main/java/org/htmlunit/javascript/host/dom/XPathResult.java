@@ -21,10 +21,10 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -129,7 +129,7 @@ public class XPathResult extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw Context.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 
     /**
@@ -176,7 +176,7 @@ public class XPathResult extends HtmlUnitScriptable {
     @JsxGetter
     public int getSnapshotLength() {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
-            throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
+            throw JavaScriptEngine.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
         }
         return result_.size();
     }
@@ -188,7 +188,7 @@ public class XPathResult extends HtmlUnitScriptable {
     @JsxGetter
     public Node getSingleNodeValue() {
         if (resultType_ != ANY_UNORDERED_NODE_TYPE && resultType_ != FIRST_ORDERED_NODE_TYPE) {
-            throw Context.reportRuntimeError("Cannot get singleNodeValue for type: " + resultType_);
+            throw JavaScriptEngine.reportRuntimeError("Cannot get singleNodeValue for type: " + resultType_);
         }
         if (!result_.isEmpty()) {
             return ((DomNode) result_.get(0)).getScriptableObject();
@@ -213,7 +213,7 @@ public class XPathResult extends HtmlUnitScriptable {
     @JsxFunction
     public Node iterateNext() {
         if (resultType_ != UNORDERED_NODE_ITERATOR_TYPE && resultType_ != ORDERED_NODE_ITERATOR_TYPE) {
-            throw Context.reportRuntimeError("Cannot get iterateNext for type: " + resultType_);
+            throw JavaScriptEngine.reportRuntimeError("Cannot get iterateNext for type: " + resultType_);
         }
         if (iteratorIndex_ < result_.size()) {
             return ((DomNode) result_.get(iteratorIndex_++)).getScriptableObject();
@@ -230,7 +230,7 @@ public class XPathResult extends HtmlUnitScriptable {
     @JsxFunction
     public Node snapshotItem(final int index) {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
-            throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
+            throw JavaScriptEngine.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
         }
         if (index >= 0 && index < result_.size()) {
             return ((DomNode) result_.get(index)).getScriptableObject();
@@ -245,7 +245,7 @@ public class XPathResult extends HtmlUnitScriptable {
     @JsxGetter
     public double getNumberValue() {
         if (resultType_ != NUMBER_TYPE) {
-            throw Context.reportRuntimeError("Cannot get numberValue for type: " + resultType_);
+            throw JavaScriptEngine.reportRuntimeError("Cannot get numberValue for type: " + resultType_);
         }
 
         if (result_.size() == 1) {
@@ -276,7 +276,7 @@ public class XPathResult extends HtmlUnitScriptable {
     @JsxGetter
     public boolean getBooleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
-            throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
+            throw JavaScriptEngine.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
 
         if (result_.size() == 1) {
@@ -307,7 +307,7 @@ public class XPathResult extends HtmlUnitScriptable {
     @JsxGetter
     public String getStringValue() {
         if (resultType_ != STRING_TYPE) {
-            throw Context.reportRuntimeError("Cannot get stringValue for type: " + resultType_);
+            throw JavaScriptEngine.reportRuntimeError("Cannot get stringValue for type: " + resultType_);
         }
         return asString();
     }

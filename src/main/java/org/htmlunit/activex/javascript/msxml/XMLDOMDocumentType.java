@@ -16,9 +16,9 @@ package org.htmlunit.activex.javascript.msxml;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomDocumentType;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.w3c.dom.NamedNodeMap;
@@ -96,9 +96,9 @@ public class XMLDOMDocumentType extends XMLDOMNode {
     @Override
     public void setNodeValue(final String newValue) {
         if (newValue == null || "null".equals(newValue)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
-        throw Context.reportRuntimeError("This operation cannot be performed with a node of type DTD.");
+        throw JavaScriptEngine.reportRuntimeError("This operation cannot be performed with a node of type DTD.");
     }
 
     /**
@@ -141,9 +141,9 @@ public class XMLDOMDocumentType extends XMLDOMNode {
     @Override
     public void setText(final Object value) {
         if (value == null || "null".equals(value)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
-        throw Context.reportRuntimeError("This operation cannot be performed with a node of type DTD.");
+        throw JavaScriptEngine.reportRuntimeError("This operation cannot be performed with a node of type DTD.");
     }
 
     /**

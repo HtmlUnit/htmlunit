@@ -19,8 +19,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -47,7 +47,7 @@ public class OfflineAudioContext extends BaseAudioContext {
     @JsxConstructor
     public void jsConstructor(final ScriptableObject optionsOrNumberOfChannels) {
         if (optionsOrNumberOfChannels == null) {
-            throw Context.reportRuntimeError("Illegal constructor.");
+            throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
         }
     }
 

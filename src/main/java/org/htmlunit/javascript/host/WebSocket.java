@@ -201,7 +201,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             if (LOG.isErrorEnabled()) {
                 LOG.error("WebSocket Error: 'url' parameter '" + url + "' is invalid.", e);
             }
-            throw Context.reportRuntimeError("WebSocket Error: 'url' parameter '" + url + "' is invalid.");
+            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter '" + url + "' is invalid.");
         }
     }
 
@@ -222,14 +222,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     "WebSocket Error: constructor must have one or two String parameters.");
         }
         if (Undefined.isUndefined(args[0])) {
-            throw Context.reportRuntimeError("WebSocket Error: 'url' parameter is undefined.");
+            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {
-            throw Context.reportRuntimeError("WebSocket Error: 'url' parameter must be a String.");
+            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter must be a String.");
         }
         final String url = (String) args[0];
         if (StringUtils.isBlank(url)) {
-            throw Context.reportRuntimeError("WebSocket Error: 'url' parameter must be not empty.");
+            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter must be not empty.");
         }
         return new WebSocket(url, getWindow(ctorObj));
     }

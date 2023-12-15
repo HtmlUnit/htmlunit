@@ -58,6 +58,7 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlElement.DisplayStyle;
 import org.htmlunit.html.HtmlTemplate;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -350,7 +351,7 @@ public class Element extends Node {
     public ClientRect getBoundingClientRect() {
         if (!getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
-            throw Context.reportRuntimeError("Element is not attache to a page");
+            throw JavaScriptEngine.reportRuntimeError("Element is not attache to a page");
         }
 
         final ClientRect textRectangle = new ClientRect(1, 1, 1, 1);
@@ -550,7 +551,7 @@ public class Element extends Node {
             return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+            throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }
@@ -570,7 +571,7 @@ public class Element extends Node {
             return null;
         }
         catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+            throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }
@@ -754,7 +755,7 @@ public class Element extends Node {
             }
             return insertedElement;
         }
-        throw Context.reportRuntimeError("Passed object is not an element: " + insertedElement);
+        throw JavaScriptEngine.reportRuntimeError("Passed object is not an element: " + insertedElement);
     }
 
     /**
@@ -831,7 +832,7 @@ public class Element extends Node {
             }
         }
         else {
-            throw Context.reportRuntimeError("Illegal position value: \"" + where + "\"");
+            throw JavaScriptEngine.reportRuntimeError("Illegal position value: \"" + where + "\"");
         }
 
         if (append) {
@@ -875,7 +876,7 @@ public class Element extends Node {
         }
         catch (final IOException | SAXException e) {
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
+            throw JavaScriptEngine.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                     + e.getMessage());
         }
     }
@@ -935,7 +936,7 @@ public class Element extends Node {
         }
         catch (final IOException | SAXException e) {
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
+            throw JavaScriptEngine.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                     + e.getMessage());
         }
     }
@@ -984,7 +985,7 @@ public class Element extends Node {
                 domNode.removeAllChildren();
             }
             if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROWS_FOR_DETACHED)) {
-                throw Context.reportRuntimeError("outerHTML is readonly for detached nodes");
+                throw JavaScriptEngine.reportRuntimeError("outerHTML is readonly for detached nodes");
             }
             return;
         }

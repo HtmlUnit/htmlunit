@@ -194,7 +194,7 @@ public class NodeList extends AbstractList implements Callable {
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (args.length == 0) {
-            throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
+            throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
         }
         final Object object = getIt(args[0]);
         if (object == NOT_FOUND) {

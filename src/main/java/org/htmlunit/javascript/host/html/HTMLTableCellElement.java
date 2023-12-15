@@ -27,12 +27,12 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlTableCell;
 import org.htmlunit.html.HtmlTableRow;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -211,7 +211,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
-                throw Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
             getDomNodeOrDie().setAttribute("colSpan", "1");
         }
@@ -251,7 +251,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         }
         catch (final NumberFormatException e) {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
-                throw Context.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
                 getDomNodeOrDie().setAttribute("rowSpan", "0");
@@ -347,7 +347,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @Override
     public void setOuterHTML(final Object value) {
-        throw Context.reportRuntimeError("outerHTML is read-only for tag '"
+        throw JavaScriptEngine.reportRuntimeError("outerHTML is read-only for tag '"
                         + getDomNodeOrDie().getTagName() + "'");
     }
 

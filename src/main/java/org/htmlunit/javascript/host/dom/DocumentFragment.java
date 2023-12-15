@@ -19,13 +19,13 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -66,7 +66,7 @@ public class DocumentFragment extends Node {
             return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+            throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }
@@ -86,7 +86,7 @@ public class DocumentFragment extends Node {
             return null;
         }
         catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+            throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }

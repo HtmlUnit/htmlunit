@@ -32,6 +32,7 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -250,7 +251,7 @@ public class XMLDOMNode extends MSXMLScriptable {
     @JsxSetter
     public void setNodeValue(final String value) {
         if (value == null || "null".equals(value)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         final DomNode domNode = getDomNodeOrDie();
@@ -358,7 +359,7 @@ public class XMLDOMNode extends MSXMLScriptable {
     @JsxFunction
     public Object appendChild(final Object newChild) {
         if (newChild == null || "null".equals(newChild)) {
-            throw Context.reportRuntimeError("Type mismatch.");
+            throw JavaScriptEngine.reportRuntimeError("Type mismatch.");
         }
 
         Object appendedChild = null;
@@ -463,7 +464,7 @@ public class XMLDOMNode extends MSXMLScriptable {
             // IE accepts non standard calls with only one arg
             if (Undefined.isUndefined(refChildObject)) {
                 if (args.length > 1) {
-                    throw Context.reportRuntimeError("Invalid argument.");
+                    throw JavaScriptEngine.reportRuntimeError("Invalid argument.");
                 }
                 refChildNode = null;
             }
