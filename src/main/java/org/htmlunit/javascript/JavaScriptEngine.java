@@ -57,6 +57,7 @@ import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
+import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
@@ -1336,5 +1337,22 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static boolean isUndefined(final Object obj) {
         return Undefined.isUndefined(obj);
+    }
+
+    /**
+     * Tries to uncompress the JavaScript code in the provided response.
+     * @param scriptSource the souce
+     * @param scriptName the name
+     * @return the uncompressed JavaScript code
+     */
+    public static String uncompressJavaScript(final String scriptSource, final String scriptName) {
+        final ContextFactory factory = new ContextFactory();
+        final ContextAction<Object> action = cx -> {
+            cx.setOptimizationLevel(-1);
+            final Script script = cx.compileString(scriptSource, scriptName, 0, null);
+            return cx.decompileScript(script, 4);
+        };
+
+        return (String) factory.call(action);
     }
 }

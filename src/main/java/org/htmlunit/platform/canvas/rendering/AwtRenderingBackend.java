@@ -46,7 +46,6 @@ import javax.imageio.ImageReader;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.javascript.host.canvas.ImageData;
 import org.htmlunit.platform.image.ImageIOImageData;
 import org.htmlunit.util.StringUtils;
 
@@ -666,7 +665,8 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void putImageData(final ImageData imageData,
+    public void putImageData(final byte[] imageDataBytes,
+            final int imageDataWidth, final int imageDataHeight,
             final int dx, final int dy, final int dirtyX, final int dirtyY,
             final int dirtyWidth, final int dirtyHeight) {
 
@@ -676,12 +676,11 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         final Color orgColor = graphics2D_.getColor();
 
-        final int width = dx + imageData.getWidth();
-        final int height = dy + imageData.getHeight();
+        final int width = dx + imageDataWidth;
+        final int height = dy + imageDataHeight;
         final int imageWidth = dirtyX + dirtyWidth;
         final int imageHeight = dirtyY + dirtyHeight;
 
-        final byte[] bytes = imageData.getData().getBuffer().getBuffer();
         int byteIdx = 0;
         int imageX = 0;
         int imageY = 0;
@@ -691,10 +690,10 @@ public class AwtRenderingBackend implements RenderingBackend {
                         && 0 <= insertY && insertY < image_.getHeight()
                         && dirtyX <= imageX && imageX < imageWidth
                         && dirtyY <= imageY && imageY < imageHeight) {
-                    final int r = bytes[byteIdx++] & 0xFF;
-                    final int g = bytes[byteIdx++] & 0xFF;
-                    final int b = bytes[byteIdx++] & 0xFF;
-                    final int a = bytes[byteIdx++] & 0xFF;
+                    final int r = imageDataBytes[byteIdx++] & 0xFF;
+                    final int g = imageDataBytes[byteIdx++] & 0xFF;
+                    final int b = imageDataBytes[byteIdx++] & 0xFF;
+                    final int a = imageDataBytes[byteIdx++] & 0xFF;
                     final Color color = new Color(r, g, b, a);
                     graphics2D_.setColor(color);
                     graphics2D_.drawLine(insertX, insertY, insertX, insertY);
@@ -704,7 +703,7 @@ public class AwtRenderingBackend implements RenderingBackend {
                 }
 
                 imageX++;
-                if (imageX == imageData.getWidth()) {
+                if (imageX == imageDataWidth) {
                     imageX = 0;
                     imageY++;
                 }

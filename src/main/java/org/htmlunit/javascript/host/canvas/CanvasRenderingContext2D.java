@@ -623,7 +623,9 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             dirtyHeightArg = (int) JavaScriptEngine.toInteger(dirtyHeight);
         }
 
-        getRenderingBackend().putImageData(imageData, dx, dy, dirtyXArg, dirtyYArg, dirtyWidthArg, dirtyHeightArg);
+        getRenderingBackend().putImageData(
+                imageData.getData().getBuffer().getBuffer(), imageData.getHeight(), imageData.getWidth(),
+                dx, dy, dirtyXArg, dirtyYArg, dirtyWidthArg, dirtyHeightArg);
     }
 
     /**

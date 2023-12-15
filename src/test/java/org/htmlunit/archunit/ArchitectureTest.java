@@ -339,11 +339,8 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog$1")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.DebuggingWebConnection")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.util.WebClientUtils")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter")
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
 
             .and().resideOutsideOfPackage("org.htmlunit.javascript..")
             .and().resideOutsideOfPackage("org.htmlunit.activex.javascript..")
