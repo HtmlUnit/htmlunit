@@ -26,7 +26,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlImage;
@@ -314,8 +313,8 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         }
 
         if (args.length > 1) {
-            final int width = Math.abs((int) ScriptRuntime.toInteger(args, 0));
-            final int height = Math.abs((int) ScriptRuntime.toInteger(args, 1));
+            final int width = Math.abs((int) JavaScriptEngine.toInteger(args, 0));
+            final int height = Math.abs((int) JavaScriptEngine.toInteger(args, 1));
             final ImageData imageData = new ImageData(null, 0, 0, width, height);
             imageData.setParentScope(canvas.getParentScope());
             imageData.setPrototype(canvas.getPrototype(imageData.getClass()));
@@ -408,8 +407,8 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                 // 5 arguments
                 //   void ctx.drawImage(image, dx, dy, dWidth, dHeight);
                 else if (Undefined.isUndefined(dx)) {
-                    final int dWidthI = ScriptRuntime.toInt32(sWidth);
-                    final int dHeightI = ScriptRuntime.toInt32(sHeight);
+                    final int dWidthI = JavaScriptEngine.toInt32(sWidth);
+                    final int dHeightI = JavaScriptEngine.toInt32(sHeight);
 
                     getRenderingBackend().drawImage(imageData, 0, 0, null, null, sx, sy, dWidthI, dHeightI);
                 }
@@ -417,13 +416,13 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                 // all 9 arguments
                 //   void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
                 else {
-                    final int sWidthI = ScriptRuntime.toInt32(sWidth);
-                    final int sHeightI = ScriptRuntime.toInt32(sHeight);
+                    final int sWidthI = JavaScriptEngine.toInt32(sWidth);
+                    final int sHeightI = JavaScriptEngine.toInt32(sHeight);
 
-                    final int dxI = ScriptRuntime.toInt32(dx);
-                    final int dyI = ScriptRuntime.toInt32(dy);
-                    final int dWidthI = ScriptRuntime.toInt32(dWidth);
-                    final int dHeightI = ScriptRuntime.toInt32(dHeight);
+                    final int dxI = JavaScriptEngine.toInt32(dx);
+                    final int dyI = JavaScriptEngine.toInt32(dy);
+                    final int dWidthI = JavaScriptEngine.toInt32(dWidth);
+                    final int dHeightI = JavaScriptEngine.toInt32(dHeight);
 
                     getRenderingBackend().drawImage(imageData,
                             sx, sy, sWidthI, sHeightI, dxI, dyI, dWidthI, dHeightI);
@@ -612,7 +611,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         int dirtyHeightArg = imageData.getHeight();
 
         if (!Undefined.isUndefined(dirtyX)) {
-            dirtyXArg = (int) ScriptRuntime.toInteger(dirtyX);
+            dirtyXArg = (int) JavaScriptEngine.toInteger(dirtyX);
 
             if (Undefined.isUndefined(dirtyY)
                     || Undefined.isUndefined(dirtyWidth)
@@ -620,9 +619,9 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                 throw JavaScriptEngine.reportRuntimeError(
                         "CanvasRenderingContext2D.putImageData() failed - seven parameters expected");
             }
-            dirtyYArg = (int) ScriptRuntime.toInteger(dirtyY);
-            dirtyWidthArg = (int) ScriptRuntime.toInteger(dirtyWidth);
-            dirtyHeightArg = (int) ScriptRuntime.toInteger(dirtyHeight);
+            dirtyYArg = (int) JavaScriptEngine.toInteger(dirtyY);
+            dirtyWidthArg = (int) JavaScriptEngine.toInteger(dirtyWidth);
+            dirtyHeightArg = (int) JavaScriptEngine.toInteger(dirtyHeight);
         }
 
         getRenderingBackend().putImageData(imageData, dx, dy, dirtyXArg, dirtyYArg, dirtyWidthArg, dirtyHeightArg);

@@ -23,7 +23,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.ArrayList;
 
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
@@ -145,32 +144,32 @@ public class MouseEvent extends UIEvent {
         if (details != null && !Undefined.isUndefined(details)) {
             final Object screenX = details.get("screenX", details);
             if (NOT_FOUND != screenX) {
-                screenX_ = ScriptRuntime.toInt32(screenX);
+                screenX_ = JavaScriptEngine.toInt32(screenX);
             }
 
             final Object screenY = details.get("screenY", details);
             if (NOT_FOUND != screenX) {
-                screenY_ = ScriptRuntime.toInt32(screenY);
+                screenY_ = JavaScriptEngine.toInt32(screenY);
             }
 
             final Object clientX = details.get("clientX", details);
             if (NOT_FOUND != clientX) {
-                clientX_ = ScriptRuntime.toInt32(clientX);
+                clientX_ = JavaScriptEngine.toInt32(clientX);
             }
 
             final Object clientY = details.get("clientY", details);
             if (NOT_FOUND != clientX) {
-                clientY_ = ScriptRuntime.toInt32(clientY);
+                clientY_ = JavaScriptEngine.toInt32(clientY);
             }
 
             final Object button = details.get("button", details);
             if (NOT_FOUND != button) {
-                button_ = ScriptRuntime.toInt32(button);
+                button_ = JavaScriptEngine.toInt32(button);
             }
 
             final Object buttons = details.get("buttons", details);
             if (NOT_FOUND != buttons) {
-                buttons_ = ScriptRuntime.toInt32(buttons);
+                buttons_ = JavaScriptEngine.toInt32(buttons);
             }
 
             setAltKey(JavaScriptEngine.toBoolean(details.get("altKey")));

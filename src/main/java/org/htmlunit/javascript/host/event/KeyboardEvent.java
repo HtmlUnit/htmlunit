@@ -24,7 +24,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
@@ -1075,7 +1074,7 @@ public class KeyboardEvent extends UIEvent {
 
             final Object location = details.get("location", details);
             if (!isMissingOrUndefined(location)) {
-                setLocation(ScriptRuntime.toInt32(location));
+                setLocation(JavaScriptEngine.toInt32(location));
             }
 
             final Object ctrlKey = details.get("ctrlKey", details);
@@ -1110,18 +1109,18 @@ public class KeyboardEvent extends UIEvent {
 
             final Object charCode = details.get("charCode", details);
             if (!isMissingOrUndefined(charCode)) {
-                setCharCode(ScriptRuntime.toInt32(charCode));
+                setCharCode(JavaScriptEngine.toInt32(charCode));
             }
 
             final Object keyCode = details.get("keyCode", details);
             if (!isMissingOrUndefined(keyCode)) {
-                setKeyCode(ScriptRuntime.toInt32(keyCode));
+                setKeyCode(JavaScriptEngine.toInt32(keyCode));
             }
 
             if (getBrowserVersion().hasFeature(JS_EVENT_KEYBOARD_CTOR_WHICH)) {
                 final Object which = details.get("which", details);
                 if (!isMissingOrUndefined(which)) {
-                    setWhich(ScriptRuntime.toInt32(which));
+                    setWhich(JavaScriptEngine.toInt32(which));
                 }
             }
         }

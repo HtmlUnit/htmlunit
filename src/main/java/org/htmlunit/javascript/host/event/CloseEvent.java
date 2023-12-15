@@ -20,7 +20,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -71,7 +70,7 @@ public class CloseEvent extends Event {
         super.jsConstructor(type, details);
 
         if (details != null && !Undefined.isUndefined(details)) {
-            code_ = ScriptRuntime.toInt32(details.get("code"));
+            code_ = JavaScriptEngine.toInt32(details.get("code"));
             reason_ = JavaScriptEngine.toString(details.get("reason"));
             wasClean_ = JavaScriptEngine.toBoolean(details.get("wasClean"));
         }

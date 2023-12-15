@@ -1303,4 +1303,29 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static Scriptable newArray(final Scriptable scope, final Object[] elements) {
         return Context.getCurrentContext().newArray(scope, elements);
     }
+
+    /**
+     * @param o the object to convert
+     * @return int value
+     */
+    public static int toInt32(final Object o) {
+        return ScriptRuntime.toInt32(o);
+    }
+
+    /**
+     * @param o the object to convert
+     * @return double value
+     */
+    public static double toInteger(final Object o) {
+        return ScriptRuntime.toInteger(o);
+    }
+
+    /**
+     * @param args an array
+     * @param index the index in the array
+     * @return double value
+     */
+    public static double toInteger(final Object[] args, final int index) {
+        return ScriptRuntime.toInteger(args, index);
+    }
 }

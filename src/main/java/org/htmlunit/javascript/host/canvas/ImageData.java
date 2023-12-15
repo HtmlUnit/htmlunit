@@ -21,7 +21,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -79,7 +78,7 @@ public class ImageData extends HtmlUnitScriptable {
                 throw JavaScriptEngine.reportRuntimeError("ImageData ctor - data length mod 4 not zero");
             }
 
-            width = (int) ScriptRuntime.toInteger(args[1]);
+            width = (int) JavaScriptEngine.toInteger(args[1]);
             if (args.length < 3) {
                 height = data.getArrayLength() / 4 / width;
 
@@ -88,7 +87,7 @@ public class ImageData extends HtmlUnitScriptable {
                 }
             }
             else {
-                height = (int) ScriptRuntime.toInteger(args[2]);
+                height = (int) JavaScriptEngine.toInteger(args[2]);
             }
 
             if (data.getArrayLength() != 4 * width * height) {
@@ -96,8 +95,8 @@ public class ImageData extends HtmlUnitScriptable {
             }
         }
         else {
-            width = (int) ScriptRuntime.toInteger(args[0]);
-            height = (int) ScriptRuntime.toInteger(args[1]);
+            width = (int) JavaScriptEngine.toInteger(args[0]);
+            height = (int) JavaScriptEngine.toInteger(args[1]);
         }
 
         if (width < 0) {

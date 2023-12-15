@@ -269,7 +269,7 @@ public class Blob extends HtmlUnitScriptable {
         int usedStart = 0;
         int usedEnd = size;
         if (start != null && !Undefined.isUndefined(start)) {
-            usedStart = ScriptRuntime.toInt32(start);
+            usedStart = JavaScriptEngine.toInt32(start);
             if (usedStart < 0) {
                 usedStart = size + usedStart;
             }
@@ -277,7 +277,7 @@ public class Blob extends HtmlUnitScriptable {
         }
 
         if (end != null && !Undefined.isUndefined(end)) {
-            usedEnd = ScriptRuntime.toInt32(end);
+            usedEnd = JavaScriptEngine.toInt32(end);
             if (usedEnd < 0) {
                 usedEnd = size + usedEnd;
             }

@@ -103,7 +103,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             throw JavaScriptEngine.typeError("Function not provided");
         }
 
-        final int timeout = ScriptRuntime.toInt32((args.length > 1) ? args[1] : Undefined.instance);
+        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : Undefined.instance);
         final Object[] params = (args.length > 2)
                 ? Arrays.copyOfRange(args, 2, args.length)
                 : ScriptRuntime.emptyArgs;
@@ -127,7 +127,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             throw JavaScriptEngine.typeError("Function not provided");
         }
 
-        final int timeout = ScriptRuntime.toInt32((args.length > 1) ? args[1] : Undefined.instance);
+        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : Undefined.instance);
         final Object[] params = (args.length > 2)
                 ? Arrays.copyOfRange(args, 2, args.length)
                 : ScriptRuntime.emptyArgs;

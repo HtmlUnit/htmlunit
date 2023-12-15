@@ -24,7 +24,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
@@ -109,7 +108,7 @@ public class CSSGroupingRule extends CSSRule {
             }
         }
         else {
-            positionInt = ScriptRuntime.toInt32(position);
+            positionInt = JavaScriptEngine.toInt32(position);
         }
 
         try {
