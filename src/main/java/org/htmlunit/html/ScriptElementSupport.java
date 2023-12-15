@@ -29,7 +29,6 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
@@ -361,7 +360,7 @@ public final class ScriptElementSupport {
                 && element.hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW)
                 && "window".equals(forr)) {
             final Window window = element.getPage().getEnclosingWindow().getScriptableObject();
-            final BaseFunction function = new EventHandler(element, event, scriptCode);
+            final EventHandler function = new EventHandler(element, event, scriptCode);
             window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
             return;
         }
