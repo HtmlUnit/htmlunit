@@ -163,7 +163,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     + "msg = msg.replace(/\\r/g, '\\\\r'); "
                     + "msg = msg.replace(/\\t/g, '\\\\t'); "
                     + "msg = msg.replace(/\\u001e/g, '\\\\u001e'); "
-                    + "window.document.title += msg + '§';}\n";
+                    + "window.document.title += msg + '\u00A7';}\n";
 
     /**
      * Function used in many tests.
@@ -176,7 +176,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Function used in many tests.
      */
     public static final String LOG_TEXTAREA_FUNCTION = "  function log(msg) { "
-            + "document.getElementById('myLog').value += msg + '§';}\n";
+            + "document.getElementById('myLog').value += msg + '\u00A7';}\n";
 
     /**
      * HtmlSniped to insert text area used for logging.
@@ -1093,7 +1093,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final StringBuilder expected = new StringBuilder();
         for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i]).append('§');
+            expected.append(expectedAlerts[i]).append('\u00A7');
         }
 
         final String title = driver.getTitle();
@@ -1133,7 +1133,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 && expectedAlerts.length == 1
                 && expectedAlerts[0].startsWith("data:image/png;base64,")) {
             String value = textArea.getAttribute("value");
-            if (value.endsWith("§")) {
+            if (value.endsWith("\u00A7")) {
                 value = value.substring(0, value.length() - 1);
             }
             compareImages(expectedAlerts[0], value);
@@ -1142,7 +1142,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final StringBuilder expected = new StringBuilder();
         for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i]).append('§');
+            expected.append(expectedAlerts[i]).append('\u00A7');
         }
         assertEquals(expected.toString(), textArea.getAttribute("value"));
 
@@ -1185,7 +1185,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final String... expectedAlerts) throws Exception {
         final StringBuilder expected = new StringBuilder();
         for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i]).append('§');
+            expected.append(expectedAlerts[i]).append('\u00A7');
         }
 
         return verifyJsVariable(driver, "window.top.name", expected.toString());

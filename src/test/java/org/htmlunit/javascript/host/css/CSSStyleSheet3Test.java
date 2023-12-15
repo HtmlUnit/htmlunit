@@ -133,7 +133,7 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
+    @Alerts({"\"a\"", "\"\u00E4\"", "\"\u0623\u0647\u0644\u0627\u064B\"", "\"\u043C\u0438\u0440\"", "\"\u623F\u95F4\""})
     @Default
     public void charset() throws Exception {
         charset(charsetHtmlResponseHeader_, charsetResponseHeader_, charsetResponseEncoding_, bom_);
@@ -191,10 +191,10 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
                                     + charsetCssResponseHeader.getCharset().name().toLowerCase();
         }
         final String css = ".c1::before { content: \"a\"}"
-                + ".c2::before { content: \"ä\"}"
-                + ".c3::before { content: \"أهلاً\"}"
-                + ".c4::before { content: \"мир\"}"
-                + ".c5::before { content: \"房间\"}";
+                + ".c2::before { content: \"\u00E4\"}"
+                + ".c3::before { content: \"\u0623\u0647\u0644\u0627\u064B\"}"
+                + ".c4::before { content: \"\u043C\u0438\u0440\"}"
+                + ".c5::before { content: \"\u623F\u95F4\"}";
 
         byte[] style = null;
         if (charsetCssResponseEncoding == null) {
@@ -235,7 +235,7 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
             }
             final WebDriver driver = loadPage2(html, URL_FIRST, htmlContentType, htmlResponseCharset, null);
 
-            assertEquals(String.join("§", getExpectedAlerts()) + '§', driver.getTitle());
+            assertEquals(String.join("\u00A7", getExpectedAlerts()) + '\u00A7', driver.getTitle());
         }
         catch (final WebDriverException e) {
             if (!e.getCause().getMessage().contains("illegal character")
