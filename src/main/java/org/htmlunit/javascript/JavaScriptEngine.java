@@ -69,6 +69,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.StackStyle;
 import org.htmlunit.corejs.javascript.Symbol;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.UniqueTag;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
@@ -1247,7 +1248,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return the corresponding boolean value converted using the ECMA rules
      */
     public static boolean toBoolean(final Object value) {
-        return JavaScriptEngine.toBoolean(value);
+        return ScriptRuntime.toBoolean(value);
     }
 
     /**
@@ -1334,6 +1335,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return whether obj is undefined
      */
     public static boolean isUndefined(final Object obj) {
-        return JavaScriptEngine.isUndefined(obj);
+        return Undefined.isUndefined(obj);
     }
 }
