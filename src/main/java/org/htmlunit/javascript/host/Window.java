@@ -63,7 +63,6 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.WebWindowNotFoundException;
 import org.htmlunit.corejs.javascript.AccessorSlot;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
@@ -331,7 +330,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
             return null;
         }
-        if (Undefined.isUndefined(defaultValue)) {
+        if (JavaScriptEngine.isUndefined(defaultValue)) {
             defaultValue = null;
         }
         else {
@@ -415,15 +414,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public WindowProxy open(final Object url, final Object name, final Object features,
             final Object replace) {
         String urlString = null;
-        if (!Undefined.isUndefined(url)) {
+        if (!JavaScriptEngine.isUndefined(url)) {
             urlString = JavaScriptEngine.toString(url);
         }
         String windowName = "";
-        if (!Undefined.isUndefined(name)) {
+        if (!JavaScriptEngine.isUndefined(name)) {
             windowName = JavaScriptEngine.toString(name);
         }
         String featuresString = null;
-        if (!Undefined.isUndefined(features)) {
+        if (!JavaScriptEngine.isUndefined(features)) {
             featuresString = JavaScriptEngine.toString(features);
         }
         final WebClient webClient = getWebWindow().getWebClient();
@@ -436,7 +435,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         }
 
         boolean replaceCurrentEntryInBrowsingHistory = false;
-        if (!Undefined.isUndefined(replace)) {
+        if (!JavaScriptEngine.isUndefined(replace)) {
             replaceCurrentEntryInBrowsingHistory = JavaScriptEngine.toBoolean(replace);
         }
         if ((featuresString != null || replaceCurrentEntryInBrowsingHistory) && LOG.isDebugEnabled()) {
@@ -917,7 +916,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOpener(final Object newValue) {
         if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
-            && newValue != null && !Undefined.isUndefined(newValue) && !(newValue instanceof Window)) {
+            && newValue != null && !JavaScriptEngine.isUndefined(newValue) && !(newValue instanceof Window)) {
             throw JavaScriptEngine.reportRuntimeError("Can't set opener to something other than a window!");
         }
         opener_ = newValue;
@@ -2059,10 +2058,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         final PostponedAction action = new PostponedAction(page, "Window.postMessage") {
             @Override
             public void execute() {
-                final ContextAction<Object> contextAction = cx -> receiver.dispatchEvent(event);
-
                 final HtmlUnitContextFactory cf = jsEngine.getContextFactory();
-                cf.call(contextAction);
+                cf.call(cx -> receiver.dispatchEvent(event));
             }
         };
         jsEngine.addPostponedAction(action);

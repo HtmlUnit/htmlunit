@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -62,7 +61,7 @@ public class TextEncoder extends HtmlUnitScriptable {
      */
     @JsxFunction
     public NativeUint8Array encode(final Object toEncode) {
-        if (Undefined.isUndefined(toEncode)) {
+        if (JavaScriptEngine.isUndefined(toEncode)) {
             final NativeUint8Array result = new NativeUint8Array(0);
             result.setParentScope(getParentScope());
             result.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), result.getClassName()));

@@ -20,8 +20,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -65,7 +65,7 @@ public class SubmitEvent extends Event {
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
-        if (details != null && !Undefined.isUndefined(details)) {
+        if (details != null && !JavaScriptEngine.isUndefined(details)) {
             final Object submitter = details.get("submitter");
             if (submitter instanceof HTMLElement) {
                 submitter_ = (HTMLElement) submitter;

@@ -21,7 +21,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlCanvas;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -137,7 +136,7 @@ public class HTMLCanvasElement extends HTMLElement {
     public String toDataURL(final Object type) {
         if (context2d_ != null) {
             final String typeInUse;
-            if (Undefined.isUndefined(type)) {
+            if (JavaScriptEngine.isUndefined(type)) {
                 typeInUse = null;
             }
             else {

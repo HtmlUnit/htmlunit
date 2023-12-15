@@ -20,7 +20,6 @@ import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -92,7 +91,7 @@ public class DOMParser extends HtmlUnitScriptable {
      */
     public static Document parseFromString(final HtmlUnitScriptable scriptable, final String str, final Object type)
                 throws IOException {
-        if (type == null || Undefined.isUndefined(type)) {
+        if (type == null || JavaScriptEngine.isUndefined(type)) {
             throw JavaScriptEngine.reportRuntimeError("Missing 'type' parameter");
         }
 

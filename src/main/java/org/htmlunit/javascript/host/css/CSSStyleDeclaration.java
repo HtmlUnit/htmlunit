@@ -2406,7 +2406,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             return;
         }
         // undefined
-        if (Undefined.isUndefined(zIndex)) {
+        if (JavaScriptEngine.isUndefined(zIndex)) {
             return;
         }
 

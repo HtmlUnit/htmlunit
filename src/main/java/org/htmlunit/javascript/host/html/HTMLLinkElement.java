@@ -23,7 +23,6 @@ import java.net.MalformedURLException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.html.HtmlLink;
 import org.htmlunit.html.HtmlPage;
@@ -201,7 +200,7 @@ public class HTMLLinkElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setRelList(final Object rel) {
-        if (Undefined.isUndefined(rel)) {
+        if (JavaScriptEngine.isUndefined(rel)) {
             setRel("undefined");
             return;
         }

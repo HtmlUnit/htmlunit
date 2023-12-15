@@ -25,7 +25,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.RecursiveFunctionObject;
@@ -76,7 +75,7 @@ public class V8BreakIterator extends HtmlUnitScriptable {
             else if (locales instanceof String) {
                 locale = new Locale(locales.toString());
             }
-            else if (!Undefined.isUndefined(locales)) {
+            else if (!JavaScriptEngine.isUndefined(locales)) {
                 throw JavaScriptEngine.throwAsScriptRuntimeEx(
                         new Exception("Unknown type " + locales.getClass().getName()));
             }

@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -139,7 +138,7 @@ public class HTMLSelectElement extends HTMLElement {
     @JsxFunction
     public Object item(final int index) {
         final Object option = getOptions().item(index);
-        if (Undefined.isUndefined(option)) {
+        if (JavaScriptEngine.isUndefined(option)) {
             return null;
         }
         return option;

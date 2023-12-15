@@ -78,7 +78,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.json.JsonParser;
 import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -684,7 +683,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         // async defaults to true if not specified
         boolean async = true;
-        if (!Undefined.isUndefined(asyncParam)) {
+        if (!JavaScriptEngine.isUndefined(asyncParam)) {
             async = JavaScriptEngine.toBoolean(asyncParam);
         }
 
@@ -730,11 +729,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             // password is ignored if no user defined
-            if (user != null && !Undefined.isUndefined(user)) {
+            if (user != null && !JavaScriptEngine.isUndefined(user)) {
                 final String userCred = user.toString();
 
                 String passwordCred = "";
-                if (password != null && !Undefined.isUndefined(password)) {
+                if (password != null && !JavaScriptEngine.isUndefined(password)) {
                     passwordCred = password.toString();
                 }
 
@@ -863,7 +862,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             && (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
                     || HttpMethod.PATCH == webRequest_.getHttpMethod())
-            && !Undefined.isUndefined(content)) {
+            && !JavaScriptEngine.isUndefined(content)) {
 
             final boolean setEncodingType = webRequest_.getAdditionalHeader(HttpHeader.CONTENT_TYPE) == null;
 

@@ -45,7 +45,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomAttr;
@@ -2089,7 +2088,7 @@ public class Element extends Node {
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public boolean toggleAttribute(final String name, final Object force) {
-        if (Undefined.isUndefined(force)) {
+        if (JavaScriptEngine.isUndefined(force)) {
             if (hasAttribute(name)) {
                 removeAttribute(name);
                 return false;

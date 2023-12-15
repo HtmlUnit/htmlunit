@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.SgmlPage;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
@@ -74,7 +73,7 @@ public class HTMLOptionElement extends HTMLElement {
         htmlOption.setSelected(selected);
         setDomNode(htmlOption);
 
-        if (!Undefined.isUndefined(newText)) {
+        if (!JavaScriptEngine.isUndefined(newText)) {
             final String newTextString = JavaScriptEngine.toString(newText);
             htmlOption.appendChild(new DomText(page, newTextString));
             htmlOption.setLabelAttribute(newTextString);

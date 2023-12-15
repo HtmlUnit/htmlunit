@@ -25,7 +25,6 @@ import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -156,7 +155,7 @@ public class History extends HtmlUnitScriptable {
 
     private static URL buildNewStateUrl(final WebWindow webWindow, final Object url) throws MalformedURLException {
         URL newStateUrl = null;
-        if (url != null && !Undefined.isUndefined(url)) {
+        if (url != null && !JavaScriptEngine.isUndefined(url)) {
             final String urlString = JavaScriptEngine.toString(url);
             if (StringUtils.isNotBlank(urlString)) {
                 final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();

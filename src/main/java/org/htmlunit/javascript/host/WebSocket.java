@@ -28,7 +28,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -220,7 +219,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             throw JavaScriptEngine.reportRuntimeError(
                     "WebSocket Error: constructor must have one or two String parameters.");
         }
-        if (Undefined.isUndefined(args[0])) {
+        if (JavaScriptEngine.isUndefined(args[0])) {
             throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {

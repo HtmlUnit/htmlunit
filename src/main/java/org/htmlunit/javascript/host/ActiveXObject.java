@@ -28,7 +28,6 @@ import org.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -84,7 +83,7 @@ public class ActiveXObject extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError(
                     "ActiveXObject Error: constructor must have one or two String parameters.");
         }
-        if (Undefined.isUndefined(args[0])) {
+        if (JavaScriptEngine.isUndefined(args[0])) {
             throw JavaScriptEngine.reportRuntimeError("ActiveXObject Error: constructor parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {

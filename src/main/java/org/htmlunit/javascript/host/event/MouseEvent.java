@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -141,7 +140,7 @@ public class MouseEvent extends UIEvent {
     @Override
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(JavaScriptEngine.toString(type), details);
-        if (details != null && !Undefined.isUndefined(details)) {
+        if (details != null && !JavaScriptEngine.isUndefined(details)) {
             final Object screenX = details.get("screenX", details);
             if (NOT_FOUND != screenX) {
                 screenX_ = JavaScriptEngine.toInt32(screenX);

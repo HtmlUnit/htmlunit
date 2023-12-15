@@ -31,7 +31,6 @@ import org.apache.commons.lang3.time.FastDateFormat;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -113,9 +112,9 @@ public class File extends Blob {
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public File(final NativeArray fileBits, final String fileName, final ScriptableObject properties) {
         if (fileBits == null
-                || Undefined.isUndefined(fileBits)
+                || JavaScriptEngine.isUndefined(fileBits)
                 || fileName == null
-                || Undefined.isUndefined(fileName)) {
+                || JavaScriptEngine.isUndefined(fileName)) {
             throw JavaScriptEngine.typeError("Failed to construct 'File': 2 arguments required.");
         }
 

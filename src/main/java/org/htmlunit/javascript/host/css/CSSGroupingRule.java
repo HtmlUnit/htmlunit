@@ -24,7 +24,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
 import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
@@ -98,7 +97,7 @@ public class CSSGroupingRule extends CSSRule {
         if (position == null) {
             positionInt = 0;
         }
-        else if (Undefined.isUndefined(position)) {
+        else if (JavaScriptEngine.isUndefined(position)) {
             if (getBrowserVersion().hasFeature(JS_GROUPINGRULE_INSERTRULE_INDEX_OPTIONAL)) {
                 positionInt = 0;
             }

@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -77,7 +76,7 @@ public class UIEvent extends Event {
         super.jsConstructor(type, details);
 
         view_ = NO_VIEW;
-        if (details != null && !Undefined.isUndefined(details)) {
+        if (details != null && !JavaScriptEngine.isUndefined(details)) {
             final Object view = details.get("view", details);
             if (view instanceof Window) {
                 view_ = view;

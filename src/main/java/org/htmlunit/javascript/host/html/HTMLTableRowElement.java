@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
@@ -142,7 +141,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     @JsxFunction
     public Object insertCell(final Object index) {
         int position = -1;
-        if (!Undefined.isUndefined(index)) {
+        if (!JavaScriptEngine.isUndefined(index)) {
             position = (int) JavaScriptEngine.toNumber(index);
         }
         final HtmlTableRow htmlRow = (HtmlTableRow) getDomNodeOrDie();
@@ -171,7 +170,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     @JsxFunction
     public void deleteCell(final Object index) {
         int position = -1;
-        if (!Undefined.isUndefined(index)) {
+        if (!JavaScriptEngine.isUndefined(index)) {
             position = (int) JavaScriptEngine.toNumber(index);
         }
         else if (getBrowserVersion().hasFeature(JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX)) {

@@ -45,7 +45,7 @@ public class Enumerator extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor(final Object o) {
-        if (Undefined.isUndefined(o)) {
+        if (JavaScriptEngine.isUndefined(o)) {
             return;
         }
         throw JavaScriptEngine.typeError("object is not enumerable");

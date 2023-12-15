@@ -1328,4 +1328,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static double toInteger(final Object[] args, final int index) {
         return ScriptRuntime.toInteger(args, index);
     }
+
+    /**
+     * @param obj the value to check
+     * @return whether obj is undefined
+     */
+    public static boolean isUndefined(final Object obj) {
+        return JavaScriptEngine.isUndefined(obj);
+    }
 }

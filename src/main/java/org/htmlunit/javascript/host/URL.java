@@ -25,7 +25,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -67,7 +66,7 @@ public class URL extends HtmlUnitScriptable {
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public URL(final String url, final Object base) {
         String baseStr = null;
-        if (!Undefined.isUndefined(base)) {
+        if (!JavaScriptEngine.isUndefined(base)) {
             baseStr = JavaScriptEngine.toString(base);
         }
 

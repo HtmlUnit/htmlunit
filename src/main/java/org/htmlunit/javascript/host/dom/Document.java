@@ -78,7 +78,6 @@ import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomDocumentFragment;
@@ -653,7 +652,7 @@ public class Document extends Node {
                 }
             }
             else if (result == null
-                    || Undefined.isUndefined(result)
+                    || JavaScriptEngine.isUndefined(result)
                     || result instanceof ScriptableObject) {
                 xPathResult = new XPathResult();
                 xPathResult.setParentScope(getParentScope());

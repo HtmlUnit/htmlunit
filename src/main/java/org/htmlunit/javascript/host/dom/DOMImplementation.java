@@ -48,7 +48,6 @@ import java.io.IOException;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -262,7 +261,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
      */
     @JsxFunction
     public HTMLDocument createHTMLDocument(final Object titleObj) {
-        if (Undefined.isUndefined(titleObj)
+        if (JavaScriptEngine.isUndefined(titleObj)
                 && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE)) {
             throw JavaScriptEngine.reportRuntimeError("Title is required");
         }
@@ -272,7 +271,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
         try {
             final WebWindow webWindow = getWindow().getWebWindow();
             final String html;
-            if (Undefined.isUndefined(titleObj)) {
+            if (JavaScriptEngine.isUndefined(titleObj)) {
                 html = "<html><head></head><body></body></html>";
             }
             else {

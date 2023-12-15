@@ -50,7 +50,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -3536,7 +3535,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setEnterKeyHint(final Object enterKeyHint) {
-        if (enterKeyHint == null || Undefined.isUndefined(enterKeyHint)) {
+        if (enterKeyHint == null || JavaScriptEngine.isUndefined(enterKeyHint)) {
             getDomNodeOrDie().removeAttribute("enterkeyhint");
             return;
         }

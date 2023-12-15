@@ -396,7 +396,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
 
         // defaults to true if not specified
         boolean async = true;
-        if (!Undefined.isUndefined(asyncParam)) {
+        if (!JavaScriptEngine.isUndefined(asyncParam)) {
             async = JavaScriptEngine.toBoolean(asyncParam);
         }
 
@@ -412,11 +412,11 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
 
             // password is ignored if no user defined
-            if (user != null && !Undefined.isUndefined(user)) {
+            if (user != null && !JavaScriptEngine.isUndefined(user)) {
                 final String userCred = user.toString();
 
                 String passwordCred = "";
-                if (password != null && !Undefined.isUndefined(password)) {
+                if (password != null && !JavaScriptEngine.isUndefined(password)) {
                     passwordCred = password.toString();
                 }
 
@@ -506,7 +506,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
-        if (content != null && !Undefined.isUndefined(content)) {
+        if (content != null && !JavaScriptEngine.isUndefined(content)) {
             if (!"".equals(content) && HttpMethod.GET == webRequest_.getHttpMethod()) {
                 webRequest_.setHttpMethod(HttpMethod.POST);
             }

@@ -19,7 +19,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.io.Serializable;
 import java.util.function.Predicate;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
@@ -103,7 +102,7 @@ public class RowContainer extends HTMLElement {
     @JsxFunction
     public Object insertRow(final Object index) {
         int rowIndex = -1;
-        if (!Undefined.isUndefined(index)) {
+        if (!JavaScriptEngine.isUndefined(index)) {
             rowIndex = (int) JavaScriptEngine.toNumber(index);
         }
         final HTMLCollection rows = (HTMLCollection) getRows();

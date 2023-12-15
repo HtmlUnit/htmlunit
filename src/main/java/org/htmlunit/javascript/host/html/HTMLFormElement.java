@@ -265,7 +265,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setRelList(final Object rel) {
-        if (Undefined.isUndefined(rel)) {
+        if (JavaScriptEngine.isUndefined(rel)) {
             setRel("undefined");
             return;
         }
@@ -346,7 +346,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public void requestSubmit(final Object submitter) {
-        if (Undefined.isUndefined(submitter)) {
+        if (JavaScriptEngine.isUndefined(submitter)) {
             submit();
             return;
         }

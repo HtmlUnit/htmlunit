@@ -14,7 +14,7 @@
  */
 package org.htmlunit;
 
-import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * This object contains the result of executing a chunk of script code.
@@ -67,6 +67,6 @@ public final class ScriptResult {
      * @return {@code true} if <code>scriptResult</code> is undefined (there was no return value)
      */
     public static boolean isUndefined(final ScriptResult scriptResult) {
-        return scriptResult != null && Undefined.isUndefined(scriptResult.getJavaScriptResult());
+        return scriptResult != null && JavaScriptEngine.isUndefined(scriptResult.getJavaScriptResult());
     }
 }

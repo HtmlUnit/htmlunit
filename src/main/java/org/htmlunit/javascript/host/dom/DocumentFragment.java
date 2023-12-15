@@ -19,7 +19,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
@@ -144,7 +143,7 @@ public class DocumentFragment extends Node {
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public HtmlUnitScriptable getElementById(final Object id) {
-        if (id == null || Undefined.isUndefined(id)) {
+        if (id == null || JavaScriptEngine.isUndefined(id)) {
             return null;
         }
         final String idString = JavaScriptEngine.toString(id);

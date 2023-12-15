@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -1060,7 +1059,7 @@ public class KeyboardEvent extends UIEvent {
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
-        if (details != null && !Undefined.isUndefined(details)) {
+        if (details != null && !JavaScriptEngine.isUndefined(details)) {
 
             final Object key = details.get("key", details);
             if (!isMissingOrUndefined(key)) {

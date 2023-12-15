@@ -91,7 +91,7 @@ public class MessageEvent extends Event {
 
         String origin = "";
         String lastEventId = "";
-        if (details != null && !Undefined.isUndefined(details)) {
+        if (details != null && !JavaScriptEngine.isUndefined(details)) {
             data_ = details.get("data");
 
             final String detailOrigin = (String) details.get(HttpHeader.ORIGIN_LC);
@@ -145,7 +145,7 @@ public class MessageEvent extends Event {
         lastEventId_ = lastEventId;
         source_ = source;
 
-        if (Undefined.isUndefined(ports)
+        if (JavaScriptEngine.isUndefined(ports)
             || ports instanceof NativeArray
             || (ports instanceof Scriptable && ScriptableObject.hasProperty((Scriptable) ports, "length"))) {
             ports_ = ports;

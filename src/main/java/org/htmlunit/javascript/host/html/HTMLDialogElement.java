@@ -19,7 +19,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -85,7 +84,7 @@ public class HTMLDialogElement extends HTMLElement {
      */
     @JsxFunction
     public void close(final Object returnValue) {
-        if (returnValue == null || Undefined.isUndefined(returnValue)) {
+        if (returnValue == null || JavaScriptEngine.isUndefined(returnValue)) {
             ((HtmlDialog) getDomNodeOrDie()).close("");
         }
 
@@ -122,7 +121,7 @@ public class HTMLDialogElement extends HTMLElement {
      */
     @JsxSetter
     public void setReturnValue(final Object newValue) {
-        if (newValue == null || Undefined.isUndefined(newValue)) {
+        if (newValue == null || JavaScriptEngine.isUndefined(newValue)) {
             ((HtmlDialog) getDomNodeOrDie()).setReturnValue("");
         }
 

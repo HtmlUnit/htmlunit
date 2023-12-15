@@ -75,7 +75,7 @@ public class HTMLAllCollection extends HTMLCollection {
         if (index instanceof String) {
             final String name = (String) index;
             final Object result = namedItem(name);
-            if (null != result && !Undefined.isUndefined(result)) {
+            if (null != result && !JavaScriptEngine.isUndefined(result)) {
                 return result;
             }
             numb = Double.NaN;
@@ -179,7 +179,7 @@ public class HTMLAllCollection extends HTMLCollection {
         }
 
         final Object value = super.call(cx, scope, thisObj, args);
-        if (nullIfNotFound && Undefined.isUndefined(value)) {
+        if (nullIfNotFound && JavaScriptEngine.isUndefined(value)) {
             return null;
         }
         return value;

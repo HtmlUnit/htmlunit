@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -196,7 +195,7 @@ public class FileReader extends EventTarget {
         readyState_ = LOADING;
 
         Charset charset = StandardCharsets.UTF_8;
-        if (encoding != null && !Undefined.isUndefined(encoding)) {
+        if (encoding != null && !JavaScriptEngine.isUndefined(encoding)) {
             final String encAsString = JavaScriptEngine.toString(encoding);
             if (StringUtils.isNotBlank(encAsString)) {
                 try {

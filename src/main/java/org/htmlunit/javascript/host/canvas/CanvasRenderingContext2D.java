@@ -27,7 +27,6 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -160,7 +159,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setLineWidth(final Object lineWidth) {
-        if (!Undefined.isUndefined(lineWidth)) {
+        if (!JavaScriptEngine.isUndefined(lineWidth)) {
             final double width = JavaScriptEngine.toNumber(lineWidth);
             if (!Double.isNaN(width)) {
                 getRenderingBackend().setLineWidth((int) width);
@@ -400,13 +399,13 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
                 // 3 arguments
                 //   void ctx.drawImage(image, dx, dy);
-                if (Undefined.isUndefined(sWidth)) {
+                if (JavaScriptEngine.isUndefined(sWidth)) {
                     getRenderingBackend().drawImage(imageData, 0, 0, null, null, sx, sy, null, null);
                 }
 
                 // 5 arguments
                 //   void ctx.drawImage(image, dx, dy, dWidth, dHeight);
-                else if (Undefined.isUndefined(dx)) {
+                else if (JavaScriptEngine.isUndefined(dx)) {
                     final int dWidthI = JavaScriptEngine.toInt32(sWidth);
                     final int dHeightI = JavaScriptEngine.toInt32(sHeight);
 
@@ -561,7 +560,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      */
     @JsxFunction
     public TextMetrics measureText(final Object text) {
-        if (text == null || Undefined.isUndefined(text)) {
+        if (text == null || JavaScriptEngine.isUndefined(text)) {
             throw JavaScriptEngine.throwAsScriptRuntimeEx(
                     new RuntimeException("Missing argument for CanvasRenderingContext2D.measureText()."));
         }
@@ -610,12 +609,12 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         int dirtyWidthArg = imageData.getWidth();
         int dirtyHeightArg = imageData.getHeight();
 
-        if (!Undefined.isUndefined(dirtyX)) {
+        if (!JavaScriptEngine.isUndefined(dirtyX)) {
             dirtyXArg = (int) JavaScriptEngine.toInteger(dirtyX);
 
-            if (Undefined.isUndefined(dirtyY)
-                    || Undefined.isUndefined(dirtyWidth)
-                    || Undefined.isUndefined(dirtyHeight)) {
+            if (JavaScriptEngine.isUndefined(dirtyY)
+                    || JavaScriptEngine.isUndefined(dirtyWidth)
+                    || JavaScriptEngine.isUndefined(dirtyHeight)) {
                 throw JavaScriptEngine.reportRuntimeError(
                         "CanvasRenderingContext2D.putImageData() failed - seven parameters expected");
             }

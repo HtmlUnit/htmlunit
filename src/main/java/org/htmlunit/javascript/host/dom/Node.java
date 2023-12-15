@@ -335,7 +335,7 @@ public class Node extends EventTarget {
 
             // extract refChild
             final DomNode refChildNode;
-            if (Undefined.isUndefined(refChildObject)) {
+            if (JavaScriptEngine.isUndefined(refChildObject)) {
                 if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
                     refChildNode = null;
                 }
@@ -694,7 +694,7 @@ public class Node extends EventTarget {
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public boolean contains(final Object element) {
-        if (element == null || Undefined.isUndefined(element)) {
+        if (element == null || JavaScriptEngine.isUndefined(element)) {
             return false;
         }
 

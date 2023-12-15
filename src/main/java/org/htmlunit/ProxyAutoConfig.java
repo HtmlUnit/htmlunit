@@ -28,7 +28,6 @@ import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
@@ -214,7 +213,7 @@ public final class ProxyAutoConfig {
                 || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
             timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
         }
-        if (Undefined.isUndefined(wd2) || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
+        if (JavaScriptEngine.isUndefined(wd2) || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
             wd2 = wd1;
         }
         final Calendar calendar = Calendar.getInstance(timezone);
@@ -255,7 +254,7 @@ public final class ProxyAutoConfig {
                 timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
-            else if (!Undefined.isUndefined(values[length])) {
+            else if (!JavaScriptEngine.isUndefined(values[length])) {
                 length++;
                 break;
             }
@@ -405,7 +404,7 @@ public final class ProxyAutoConfig {
                 timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
-            else if (!Undefined.isUndefined(values[length])) {
+            else if (!JavaScriptEngine.isUndefined(values[length])) {
                 length++;
                 break;
             }

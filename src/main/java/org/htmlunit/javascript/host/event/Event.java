@@ -26,7 +26,6 @@ import org.htmlunit.ScriptResult;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -687,7 +686,7 @@ public class Event extends HtmlUnitScriptable {
         boolean bubbles = false;
         boolean cancelable = false;
 
-        if (details != null && !Undefined.isUndefined(details)) {
+        if (details != null && !JavaScriptEngine.isUndefined(details)) {
             bubbles = JavaScriptEngine.toBoolean(details.get("bubbles"));
             cancelable  = JavaScriptEngine.toBoolean(details.get("cancelable"));
         }
@@ -1097,6 +1096,6 @@ public class Event extends HtmlUnitScriptable {
      * @return whether the given value indicates a missing or undefined property
      */
     protected static boolean isMissingOrUndefined(final Object value) {
-        return value == Scriptable.NOT_FOUND || Undefined.isUndefined(value);
+        return value == Scriptable.NOT_FOUND || JavaScriptEngine.isUndefined(value);
     }
 }

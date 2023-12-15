@@ -33,7 +33,6 @@ import org.htmlunit.corejs.javascript.LambdaConstructor;
 import org.htmlunit.corejs.javascript.LambdaFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.javascript.host.Window;
@@ -154,7 +153,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     @Override
     public boolean has(final int index, final Scriptable start) {
         final Object found = get(index, start);
-        if (Scriptable.NOT_FOUND != found && !Undefined.isUndefined(found)) {
+        if (Scriptable.NOT_FOUND != found && !JavaScriptEngine.isUndefined(found)) {
             return true;
         }
         return super.has(index, start);

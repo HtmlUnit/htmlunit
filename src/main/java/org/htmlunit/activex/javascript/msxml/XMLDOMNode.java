@@ -461,7 +461,7 @@ public class XMLDOMNode extends MSXMLScriptable {
             }
             final DomNode refChildNode;
             // IE accepts non standard calls with only one arg
-            if (Undefined.isUndefined(refChildObject)) {
+            if (JavaScriptEngine.isUndefined(refChildObject)) {
                 if (args.length > 1) {
                     throw JavaScriptEngine.reportRuntimeError("Invalid argument.");
                 }

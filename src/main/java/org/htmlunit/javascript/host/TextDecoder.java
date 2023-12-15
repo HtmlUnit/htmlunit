@@ -24,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -352,7 +351,7 @@ public class TextDecoder extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public TextDecoder(final Object encoding) {
-        if (Undefined.isUndefined(encoding)) {
+        if (JavaScriptEngine.isUndefined(encoding)) {
             return;
         }
 
@@ -383,7 +382,7 @@ public class TextDecoder extends HtmlUnitScriptable {
      */
     @JsxFunction
     public String decode(final Object buffer) {
-        if (Undefined.isUndefined(buffer)) {
+        if (JavaScriptEngine.isUndefined(buffer)) {
             return "";
         }
 
