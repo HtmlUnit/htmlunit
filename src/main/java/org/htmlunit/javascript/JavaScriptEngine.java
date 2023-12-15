@@ -1220,6 +1220,36 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Convert the value to a JavaScript Number value.
+     *
+     * @param value a JavaScript value
+     * @return the corresponding double value converted using the ECMA rules
+     */
+    public static double toNumber(final Object value) {
+        return ScriptRuntime.toNumber(value);
+    }
+
+    /**
+     * Convert the value to a JavaScript String value.
+     *
+     * @param value a JavaScript value
+     * @return the corresponding String value converted using the ECMA rules
+     */
+    public static String toString(final Object value) {
+        return ScriptRuntime.toString(value);
+    }
+
+    /**
+     * Convert the value to a JavaScript boolean value.
+     *
+     * @param value a JavaScript value
+     * @return the corresponding boolean value converted using the ECMA rules
+     */
+    public static boolean toBoolean(final Object value) {
+        return JavaScriptEngine.toBoolean(value);
+    }
+
+    /**
      * Rethrow the exception wrapping it as the script runtime exception.
      *
      * @param e the exception to rethrow

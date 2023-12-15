@@ -28,6 +28,7 @@ import java.util.Map;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -84,7 +85,7 @@ public class Storage extends HtmlUnitScriptable {
             super.put(name, start, value);
         }
         if (store_ != null && (!isReserved || getBrowserVersion().hasFeature(JS_STORAGE_PRESERVED_INCLUDED))) {
-            setItem(name, Context.toString(value));
+            setItem(name, JavaScriptEngine.toString(value));
         }
     }
 

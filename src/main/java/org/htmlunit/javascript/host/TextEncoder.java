@@ -21,12 +21,12 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.nio.charset.StandardCharsets;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -74,7 +74,7 @@ public class TextEncoder extends HtmlUnitScriptable {
             txt = "null";
         }
         else {
-            txt = Context.toString(toEncode);
+            txt = JavaScriptEngine.toString(toEncode);
         }
 
         final byte[] bytes = txt.getBytes(StandardCharsets.UTF_8);

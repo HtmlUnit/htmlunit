@@ -69,7 +69,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssPixelValueConverter;
 import org.htmlunit.css.CssPixelValueConverter.CssValue;
@@ -107,6 +106,7 @@ import org.htmlunit.html.HtmlTextInput;
 import org.htmlunit.html.HtmlTime;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
@@ -1665,7 +1665,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (property == NOT_FOUND) {
             return super.getPropertyValue(name);
         }
-        return Context.toString(property);
+        return JavaScriptEngine.toString(property);
     }
 
     /**

@@ -48,7 +48,6 @@ import java.io.IOException;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
@@ -278,7 +277,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             }
             else {
                 html = "<html><head><title>"
-                        + Context.toString(titleObj)
+                        + JavaScriptEngine.toString(titleObj)
                         + "</title></head><body></body></html>";
             }
             final WebResponse webResponse = new StringWebResponse(html, UrlUtils.URL_ABOUT_BLANK);

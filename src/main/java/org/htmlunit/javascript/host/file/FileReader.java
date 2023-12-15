@@ -31,11 +31,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -197,7 +197,7 @@ public class FileReader extends EventTarget {
 
         Charset charset = StandardCharsets.UTF_8;
         if (encoding != null && !Undefined.isUndefined(encoding)) {
-            final String encAsString = Context.toString(encoding);
+            final String encAsString = JavaScriptEngine.toString(encoding);
             if (StringUtils.isNotBlank(encAsString)) {
                 try {
                     charset = Charsets.toCharset(encAsString.trim().toLowerCase(Locale.ROOT));

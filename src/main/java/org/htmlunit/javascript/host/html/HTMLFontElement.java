@@ -19,8 +19,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlFont;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -84,7 +84,7 @@ public class HTMLFontElement extends HTMLElement {
      */
     @JsxGetter
     public int getSize() {
-        return (int) Context.toNumber(getDomNodeOrDie().getAttributeDirect("size"));
+        return (int) JavaScriptEngine.toNumber(getDomNodeOrDie().getAttributeDirect("size"));
     }
 
     /**
@@ -93,6 +93,6 @@ public class HTMLFontElement extends HTMLElement {
      */
     @JsxSetter
     public void setSize(final int size) {
-        getDomNodeOrDie().setAttribute("size", Context.toString(size));
+        getDomNodeOrDie().setAttribute("size", JavaScriptEngine.toString(size));
     }
 }

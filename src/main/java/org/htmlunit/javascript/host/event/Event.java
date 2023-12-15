@@ -24,12 +24,12 @@ import java.util.ArrayList;
 
 import org.htmlunit.ScriptResult;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -688,8 +688,8 @@ public class Event extends HtmlUnitScriptable {
         boolean cancelable = false;
 
         if (details != null && !Undefined.isUndefined(details)) {
-            bubbles = ScriptRuntime.toBoolean(details.get("bubbles"));
-            cancelable  = ScriptRuntime.toBoolean(details.get("cancelable"));
+            bubbles = JavaScriptEngine.toBoolean(details.get("bubbles"));
+            cancelable  = JavaScriptEngine.toBoolean(details.get("cancelable"));
         }
         initEvent(type, bubbles, cancelable);
     }
@@ -1076,7 +1076,7 @@ public class Event extends HtmlUnitScriptable {
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setReturnValue(final Object newValue) {
         if (isCancelable()) {
-            final boolean bool = !ScriptRuntime.toBoolean(newValue);
+            final boolean bool = !JavaScriptEngine.toBoolean(newValue);
             if (bool) {
                 preventDefault_ = bool;
             }

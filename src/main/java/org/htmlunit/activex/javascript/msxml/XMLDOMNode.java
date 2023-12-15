@@ -323,7 +323,7 @@ public class XMLDOMNode extends MSXMLScriptable {
     @JsxSetter
     public void setText(final Object text) {
         final DomNode domNode = getDomNodeOrDie();
-        domNode.setTextContent(text == null ? null : Context.toString(text));
+        domNode.setTextContent(text == null ? null : JavaScriptEngine.toString(text));
     }
 
     /**

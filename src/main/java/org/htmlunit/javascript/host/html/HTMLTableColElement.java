@@ -74,7 +74,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setSpan(final Object span) {
-        final double d = Context.toNumber(span);
+        final double d = JavaScriptEngine.toNumber(span);
         int i = (int) d;
         if (i < 1) {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
@@ -110,7 +110,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
             value = "";
         }
         else {
-            value = Context.toString(width);
+            value = JavaScriptEngine.toString(width);
         }
         setWidthOrHeight("width", value, false);
     }

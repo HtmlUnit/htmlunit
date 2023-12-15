@@ -17,8 +17,8 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_END_TAG_FORBIDDEN;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlBaseFont;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -82,7 +82,7 @@ public class HTMLBaseFontElement extends HTMLElement {
     @JsxGetter
     public int getSize() {
         final HtmlBaseFont base = (HtmlBaseFont) getDomNodeOrDie();
-        return (int) Context.toNumber(base.getSizeAttribute());
+        return (int) JavaScriptEngine.toNumber(base.getSizeAttribute());
     }
 
     /**
@@ -91,7 +91,7 @@ public class HTMLBaseFontElement extends HTMLElement {
      */
     @JsxSetter
     public void setSize(final int size) {
-        getDomNodeOrDie().setAttribute("size", Context.toString(Integer.valueOf(size)));
+        getDomNodeOrDie().setAttribute("size", JavaScriptEngine.toString(Integer.valueOf(size)));
     }
 
     /**

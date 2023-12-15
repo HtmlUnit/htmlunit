@@ -24,7 +24,6 @@ import java.util.HashSet;
 
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
@@ -329,7 +328,7 @@ public class Range extends AbstractRange {
             return getSimpleRange().extractContents().getScriptableObject();
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 
@@ -398,7 +397,7 @@ public class Range extends AbstractRange {
             return getSimpleRange().cloneContents().getScriptableObject();
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 
@@ -411,7 +410,7 @@ public class Range extends AbstractRange {
             getSimpleRange().deleteContents();
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 
@@ -426,7 +425,7 @@ public class Range extends AbstractRange {
             getSimpleRange().insertNode(newNode.getDomNodeOrDie());
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 
@@ -440,7 +439,7 @@ public class Range extends AbstractRange {
             getSimpleRange().surroundContents(newNode.getDomNodeOrDie());
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 
@@ -454,7 +453,7 @@ public class Range extends AbstractRange {
             return new Range(getSimpleRange().cloneRange());
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 
@@ -476,7 +475,7 @@ public class Range extends AbstractRange {
             return getSimpleRange().toString();
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 
@@ -507,7 +506,7 @@ public class Range extends AbstractRange {
             return rectList;
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 
@@ -538,7 +537,7 @@ public class Range extends AbstractRange {
             return rect;
         }
         catch (final IllegalStateException e) {
-            throw Context.reportRuntimeError(e.getMessage());
+            throw JavaScriptEngine.reportRuntimeError(e.getMessage());
         }
     }
 }

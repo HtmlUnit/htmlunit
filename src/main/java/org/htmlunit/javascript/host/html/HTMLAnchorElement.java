@@ -858,7 +858,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setRelList(final Object rel) {
-        setRel(ScriptRuntime.toString(rel));
+        setRel(JavaScriptEngine.toString(rel));
     }
 
     /**

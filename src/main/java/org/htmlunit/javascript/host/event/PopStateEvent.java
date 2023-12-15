@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.WebClient;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -85,7 +84,7 @@ public class PopStateEvent extends Event {
 
             final ContextAction<Object> contextAction = cx -> {
                 for (final Object o : ScriptableObject.getPropertyIds(old)) {
-                    final String property = Context.toString(o);
+                    final String property = JavaScriptEngine.toString(o);
                     newState.defineProperty(property, ScriptableObject.getProperty(old, property),
                             ScriptableObject.EMPTY);
                 }

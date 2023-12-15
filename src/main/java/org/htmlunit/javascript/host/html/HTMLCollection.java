@@ -183,7 +183,7 @@ public class HTMLCollection extends AbstractList implements Callable {
 
         if (matchingElements.isEmpty()) {
             if (getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO)) {
-                final double doubleValue = Context.toNumber(name);
+                final double doubleValue = JavaScriptEngine.toNumber(name);
                 if (!Double.isNaN(doubleValue)) {
                     return get((int) doubleValue, this);
                 }
@@ -223,7 +223,7 @@ public class HTMLCollection extends AbstractList implements Callable {
         }
 
         int idx = 0;
-        final double doubleValue = Context.toNumber(index);
+        final double doubleValue = JavaScriptEngine.toNumber(index);
         if (!Double.isNaN(doubleValue)) {
             idx = (int) doubleValue;
         }

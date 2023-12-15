@@ -45,7 +45,6 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
@@ -203,7 +202,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     @JsxGetter
     public String getResponseText() {
         if (state_ == STATE_UNSENT) {
-            throw Context.reportRuntimeError(
+            throw JavaScriptEngine.reportRuntimeError(
                     "The data necessary to complete this operation is not yet available (request not opened).");
         }
         if (state_ != STATE_DONE) {
@@ -398,10 +397,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         // defaults to true if not specified
         boolean async = true;
         if (!Undefined.isUndefined(asyncParam)) {
-            async = ScriptRuntime.toBoolean(asyncParam);
+            async = JavaScriptEngine.toBoolean(asyncParam);
         }
 
-        final String urlAsString = Context.toString(url);
+        final String urlAsString = JavaScriptEngine.toString(url);
 
         // (URL + Method + User + Password) become a WebRequest instance.
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
@@ -518,7 +517,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                     ((FormData) content).fillRequest(webRequest_);
                 }
                 else {
-                    final String body = Context.toString(content);
+                    final String body = JavaScriptEngine.toString(content);
                     if (!body.isEmpty()) {
                         if (LOG.isDebugEnabled()) {
                             LOG.debug("Setting request body to: " + body);

@@ -36,6 +36,7 @@ import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -174,7 +175,7 @@ public class FormData extends HtmlUnitScriptable {
             requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, contentType, (Charset) null));
         }
         else {
-            requestParameters_.add(new NameValuePair(name, Context.toString(value)));
+            requestParameters_.add(new NameValuePair(name, JavaScriptEngine.toString(value)));
         }
     }
 
@@ -290,7 +291,7 @@ public class FormData extends HtmlUnitScriptable {
                     new KeyDataPair(name, file.getFile(), fileName, file.getType(), (Charset) null));
         }
         else {
-            requestParameters_.add(pos, new NameValuePair(name, Context.toString(value)));
+            requestParameters_.add(pos, new NameValuePair(name, JavaScriptEngine.toString(value)));
         }
     }
 
@@ -321,7 +322,7 @@ public class FormData extends HtmlUnitScriptable {
     public void forEach(final Object callback) {
         if (!(callback instanceof Function)) {
             throw ScriptRuntime.typeError(
-                    "Foreach callback '" + ScriptRuntime.toString(callback) + "' is not a function");
+                    "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 
         final Function fun = (Function) callback;

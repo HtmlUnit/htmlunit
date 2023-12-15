@@ -20,11 +20,11 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.Window;
@@ -82,7 +82,7 @@ public final class DOMStringMap extends HtmlUnitScriptable {
         else {
             final HtmlElement e = (HtmlElement) getDomNodeOrNull();
             if (e != null) {
-                e.setAttribute("data-" + StringUtils.cssDeCamelize(name), Context.toString(value));
+                e.setAttribute("data-" + StringUtils.cssDeCamelize(name), JavaScriptEngine.toString(value));
             }
         }
     }

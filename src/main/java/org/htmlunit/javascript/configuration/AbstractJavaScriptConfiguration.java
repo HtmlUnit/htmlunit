@@ -33,9 +33,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * An abstract container for all the JavaScript configuration information.
@@ -322,7 +322,7 @@ public abstract class AbstractJavaScriptConfiguration {
                                 classConfiguration.addConstant(field.getName(), field.get(null));
                             }
                             catch (final IllegalAccessException e) {
-                                throw Context.reportRuntimeError(
+                                throw JavaScriptEngine.reportRuntimeError(
                                         "Cannot get field '" + field.getName()
                                         + "' for type: " + classConfiguration.getHostClass().getName()
                                         + "reason: " + e.getMessage());

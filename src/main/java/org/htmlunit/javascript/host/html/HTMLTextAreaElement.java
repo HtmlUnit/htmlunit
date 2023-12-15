@@ -27,7 +27,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -102,7 +101,7 @@ public class HTMLTextAreaElement extends HTMLElement {
             return;
         }
 
-        getDomNodeOrDie().setText(Context.toString(value));
+        getDomNodeOrDie().setText(JavaScriptEngine.toString(value));
     }
 
     /**

@@ -265,7 +265,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public void alert(final Object message) {
         // use Object as parameter and perform String conversion by ourself
         // this allows to place breakpoint here and "see" the message object and its properties
-        final String stringMessage = Context.toString(message);
+        final String stringMessage = JavaScriptEngine.toString(message);
         final AlertHandler handler = getWebWindow().getWebClient().getAlertHandler();
         if (handler == null) {
             if (LOG.isWarnEnabled()) {
@@ -336,7 +336,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             defaultValue = null;
         }
         else {
-            defaultValue = Context.toString(defaultValue);
+            defaultValue = JavaScriptEngine.toString(defaultValue);
         }
         return handler.handlePrompt(document_.getPage(), message, (String) defaultValue);
     }
@@ -417,15 +417,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             final Object replace) {
         String urlString = null;
         if (!Undefined.isUndefined(url)) {
-            urlString = Context.toString(url);
+            urlString = JavaScriptEngine.toString(url);
         }
         String windowName = "";
         if (!Undefined.isUndefined(name)) {
-            windowName = Context.toString(name);
+            windowName = JavaScriptEngine.toString(name);
         }
         String featuresString = null;
         if (!Undefined.isUndefined(features)) {
-            featuresString = Context.toString(features);
+            featuresString = JavaScriptEngine.toString(features);
         }
         final WebClient webClient = getWebWindow().getWebClient();
 
@@ -438,7 +438,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
         boolean replaceCurrentEntryInBrowsingHistory = false;
         if (!Undefined.isUndefined(replace)) {
-            replaceCurrentEntryInBrowsingHistory = Context.toBoolean(replace);
+            replaceCurrentEntryInBrowsingHistory = JavaScriptEngine.toBoolean(replace);
         }
         if ((featuresString != null || replaceCurrentEntryInBrowsingHistory) && LOG.isDebugEnabled()) {
             LOG.debug(
@@ -732,7 +732,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public void cancelAnimationFrame(final Object requestId) {
-        final int id = (int) Context.toNumber(requestId);
+        final int id = (int) JavaScriptEngine.toNumber(requestId);
 
         animationFrames_.removeIf(animationFrame -> animationFrame.id_ == id);
     }
@@ -1998,7 +1998,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
         String targetOrigin = "*";
         if (args.length > 1) {
-            targetOrigin = ScriptRuntime.toString(args[1]);
+            targetOrigin = JavaScriptEngine.toString(args[1]);
         }
 
         Object transfer = Undefined.instance;

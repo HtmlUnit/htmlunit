@@ -19,7 +19,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -59,7 +58,7 @@ public class HTMLDialogElement extends HTMLElement {
      */
     @JsxSetter
     public void setOpen(final Object newValue) {
-        final boolean bool = ScriptRuntime.toBoolean(newValue);
+        final boolean bool = JavaScriptEngine.toBoolean(newValue);
 
         ((HtmlDialog) getDomNodeOrDie()).setOpen(bool);
     }
@@ -90,7 +89,7 @@ public class HTMLDialogElement extends HTMLElement {
             ((HtmlDialog) getDomNodeOrDie()).close("");
         }
 
-        ((HtmlDialog) getDomNodeOrDie()).close(ScriptRuntime.toString(returnValue));
+        ((HtmlDialog) getDomNodeOrDie()).close(JavaScriptEngine.toString(returnValue));
     }
 
     /**
@@ -127,6 +126,6 @@ public class HTMLDialogElement extends HTMLElement {
             ((HtmlDialog) getDomNodeOrDie()).setReturnValue("");
         }
 
-        ((HtmlDialog) getDomNodeOrDie()).setReturnValue(ScriptRuntime.toString(newValue));
+        ((HtmlDialog) getDomNodeOrDie()).setReturnValue(JavaScriptEngine.toString(newValue));
     }
 }

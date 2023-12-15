@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_TYPE_ACCEPTS_ARBITRARY_VALUES;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -47,7 +46,7 @@ public class HTMLListElement extends HTMLElement {
      */
     @JsxSetter
     public void setCompact(final Object compact) {
-        if (Context.toBoolean(compact)) {
+        if (JavaScriptEngine.toBoolean(compact)) {
             getDomNodeOrDie().setAttribute("compact", "");
         }
         else {

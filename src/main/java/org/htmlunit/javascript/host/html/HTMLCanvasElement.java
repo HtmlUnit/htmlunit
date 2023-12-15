@@ -21,9 +21,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlCanvas;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -141,7 +141,7 @@ public class HTMLCanvasElement extends HTMLElement {
                 typeInUse = null;
             }
             else {
-                typeInUse = Context.toString(type);
+                typeInUse = JavaScriptEngine.toString(type);
             }
             return context2d_.toDataURL(typeInUse);
         }

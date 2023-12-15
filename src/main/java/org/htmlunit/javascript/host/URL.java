@@ -25,10 +25,10 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -69,7 +69,7 @@ public class URL extends HtmlUnitScriptable {
     public URL(final String url, final Object base) {
         String baseStr = null;
         if (!Undefined.isUndefined(base)) {
-            baseStr = Context.toString(base);
+            baseStr = JavaScriptEngine.toString(base);
         }
 
         try {

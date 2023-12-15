@@ -19,9 +19,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -58,7 +58,7 @@ public class CompositionEvent extends UIEvent {
         if (details != null && !Undefined.isUndefined(details)) {
             final Object dataObj = details.get("data", details);
             if (NOT_FOUND != dataObj) {
-                data_ = ScriptRuntime.toString(dataObj);
+                data_ = JavaScriptEngine.toString(dataObj);
             }
         }
     }

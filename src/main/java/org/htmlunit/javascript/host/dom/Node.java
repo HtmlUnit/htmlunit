@@ -659,7 +659,7 @@ public class Node extends EventTarget {
      */
     @JsxSetter
     public void setTextContent(final Object value) {
-        getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
+        getDomNodeOrDie().setTextContent(value == null ? null : JavaScriptEngine.toString(value));
     }
 
     /**
@@ -963,7 +963,7 @@ public class Node extends EventTarget {
             return (Node) obj;
         }
         return (Node)
-                ((HTMLDocument) thisObj.getOwnerDocument()).createTextNode(Context.toString(obj));
+                ((HTMLDocument) thisObj.getOwnerDocument()).createTextNode(JavaScriptEngine.toString(obj));
     }
 
     /**

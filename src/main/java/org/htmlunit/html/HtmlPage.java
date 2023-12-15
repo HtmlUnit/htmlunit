@@ -72,7 +72,6 @@ import org.htmlunit.WebClientOptions;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -1375,7 +1374,7 @@ public class HtmlPage extends SgmlPage {
                     }
                 }
                 else {
-                    final String message = Context.toString(beforeUnloadEvent.getReturnValue());
+                    final String message = JavaScriptEngine.toString(beforeUnloadEvent.getReturnValue());
                     return handler.handleEvent(page, message);
                 }
             }

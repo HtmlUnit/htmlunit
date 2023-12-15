@@ -164,7 +164,7 @@ public class HTMLDocument extends Document {
     private static String concatArgsAsString(final Object[] args) {
         final StringBuilder builder = new StringBuilder();
         for (final Object arg : args) {
-            builder.append(Context.toString(arg));
+            builder.append(JavaScriptEngine.toString(arg));
         }
         return builder.toString();
     }

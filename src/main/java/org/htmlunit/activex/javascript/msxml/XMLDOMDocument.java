@@ -30,7 +30,6 @@ import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomComment;
@@ -443,7 +442,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxFunction
     public Object createNode(final Object type, final String name, final Object namespaceURI) {
-        switch ((short) Context.toNumber(type)) {
+        switch ((short) JavaScriptEngine.toNumber(type)) {
             case Node.ELEMENT_NODE:
                 return createElementNS((String) namespaceURI, name);
             case Node.ATTRIBUTE_NODE:
@@ -451,7 +450,7 @@ public class XMLDOMDocument extends XMLDOMNode {
 
             default:
                 throw JavaScriptEngine.reportRuntimeError("xmlDoc.createNode(): Unsupported type "
-                        + (short) Context.toNumber(type));
+                        + (short) JavaScriptEngine.toNumber(type));
         }
     }
 

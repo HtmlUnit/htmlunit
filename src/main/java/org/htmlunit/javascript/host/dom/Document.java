@@ -1316,7 +1316,7 @@ public class Document extends Node {
                     }
                     response = ScriptableObject.callMethod(filter, "acceptNode", args);
                 }
-                return (short) Context.toNumber(response);
+                return (short) JavaScriptEngine.toNumber(response);
             };
         }
         return filterWrapper;

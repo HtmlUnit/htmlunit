@@ -120,7 +120,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -137,6 +136,7 @@ import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.impl.Color;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -1565,7 +1565,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         if (getDomNodeOrNull() != null) { // check if prototype or not
             final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
             if (style != null) {
-                final String stringValue = Context.toString(value);
+                final String stringValue = JavaScriptEngine.toString(value);
                 setStyleAttribute(style.getAttributeName(), stringValue);
                 return;
             }
@@ -1661,7 +1661,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             doubleValue = ((Number) opacity).doubleValue();
         }
         else {
-            String valueString = Context.toString(opacity);
+            String valueString = JavaScriptEngine.toString(opacity);
 
             if (valueString.isEmpty()) {
                 setStyleAttribute(OPACITY.getAttributeName(), valueString);
@@ -2497,7 +2497,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), value, imp, auto, true, false, null);
         }
         else {
-            setStyleAttribute(name, Context.toString(value), imp);
+            setStyleAttribute(name, JavaScriptEngine.toString(value), imp);
         }
     }
 
@@ -2508,7 +2508,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxFunction
     public String removeProperty(final Object name) {
-        return removeStyleAttribute(Context.toString(name));
+        return removeStyleAttribute(JavaScriptEngine.toString(name));
     }
 
     /**
@@ -2801,7 +2801,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             doubleValue = ((Number) value).doubleValue();
         }
         else {
-            String valueString = Context.toString(value);
+            String valueString = JavaScriptEngine.toString(value);
             if (null == value) {
                 valueString = "";
             }
@@ -2855,7 +2855,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 // we have a unit but surrounding blanks
                 return;
             }
-            doubleValue = Context.toNumber(valueString);
+            doubleValue = JavaScriptEngine.toNumber(valueString);
         }
 
         try {

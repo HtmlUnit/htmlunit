@@ -18,6 +18,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -71,11 +72,11 @@ public class Worker extends EventTarget {
     public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) throws Exception {
         if (args.length < 1 || args.length > 2) {
-            throw Context.reportRuntimeError(
+            throw JavaScriptEngine.reportRuntimeError(
                     "Worker Error: constructor must have one or two String parameters.");
         }
 
-        final String url = Context.toString(args[0]);
+        final String url = JavaScriptEngine.toString(args[0]);
 
         return new Worker(cx, getWindow(ctorObj), url);
     }

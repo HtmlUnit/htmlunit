@@ -19,7 +19,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomDocumentFragment;
@@ -148,7 +147,7 @@ public class DocumentFragment extends Node {
         if (id == null || Undefined.isUndefined(id)) {
             return null;
         }
-        final String idString = ScriptRuntime.toString(id);
+        final String idString = JavaScriptEngine.toString(id);
         if (idString == null || idString.length() == 0) {
             return null;
         }

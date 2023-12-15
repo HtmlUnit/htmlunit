@@ -29,11 +29,11 @@ import java.util.List;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -82,14 +82,14 @@ public class HTMLAllCollection extends HTMLCollection {
 
             browser = getBrowserVersion();
             if (!browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER)) {
-                numb = ScriptRuntime.toNumber(index);
+                numb = JavaScriptEngine.toNumber(index);
             }
             if (Double.isNaN(numb)) {
                 return null;
             }
         }
         else {
-            numb = ScriptRuntime.toNumber(index);
+            numb = JavaScriptEngine.toNumber(index);
             browser = getBrowserVersion();
         }
 
@@ -168,7 +168,7 @@ public class HTMLAllCollection extends HTMLCollection {
                 }
             }
             else {
-                final String val = Context.toString(args[0]);
+                final String val = JavaScriptEngine.toString(args[0]);
                 try {
                     args[0] = Integer.parseInt(val);
                 }

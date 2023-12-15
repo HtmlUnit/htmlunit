@@ -16,7 +16,6 @@ package org.htmlunit.activex.javascript.msxml;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomCharacterData;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -76,7 +75,7 @@ public class XMLDOMCharacterData extends XMLDOMNode {
      */
     @Override
     public void setText(final Object newText) {
-        setData(newText == null ? null : Context.toString(newText));
+        setData(newText == null ? null : JavaScriptEngine.toString(newText));
     }
 
     /**

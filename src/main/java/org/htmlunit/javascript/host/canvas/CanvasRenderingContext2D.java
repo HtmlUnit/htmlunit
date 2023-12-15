@@ -162,7 +162,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxSetter
     public void setLineWidth(final Object lineWidth) {
         if (!Undefined.isUndefined(lineWidth)) {
-            final double width = Context.toNumber(lineWidth);
+            final double width = JavaScriptEngine.toNumber(lineWidth);
             if (!Double.isNaN(width)) {
                 getRenderingBackend().setLineWidth((int) width);
             }
@@ -245,14 +245,14 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     public static void clip(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof CanvasRenderingContext2D)) {
-            throw Context.reportRuntimeError(
+            throw JavaScriptEngine.reportRuntimeError(
                     "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
         }
         final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
 
         RenderingBackend.WindingRule windingRule = WindingRule.NON_ZERO;
         if (args.length == 1) {
-            final String windingRuleParam = ScriptRuntime.toString(args[0]);
+            final String windingRuleParam = JavaScriptEngine.toString(args[0]);
             if ("evenodd".contentEquals(windingRuleParam)) {
                 windingRule = WindingRule.EVEN_ODD;
             }
@@ -261,11 +261,11 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
         if (args.length > 1) {
             if (!(args[0] instanceof Path2D)) {
-                throw Context.reportRuntimeError(
+                throw JavaScriptEngine.reportRuntimeError(
                         "CanvasRenderingContext2D.clip() failed - the first parameter has to be a Path2D");
             }
 
-            final String windingRuleParam = ScriptRuntime.toString(args[1]);
+            final String windingRuleParam = JavaScriptEngine.toString(args[1]);
             if ("evenodd".contentEquals(windingRuleParam)) {
                 windingRule = WindingRule.EVEN_ODD;
             }
@@ -299,7 +299,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     public static ImageData createImageData(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof CanvasRenderingContext2D)) {
-            throw Context.reportRuntimeError(
+            throw JavaScriptEngine.reportRuntimeError(
                     "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
         }
         final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
@@ -322,7 +322,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             return imageData;
         }
 
-        throw Context.reportRuntimeError(
+        throw JavaScriptEngine.reportRuntimeError(
                 "CanvasRenderingContext2D.getImageData() failed - "
                 + "wrong parameters given (" + StringUtils.join(args, ", ") + ")");
     }
@@ -567,7 +567,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                     new RuntimeException("Missing argument for CanvasRenderingContext2D.measureText()."));
         }
 
-        final String textValue = Context.toString(text);
+        final String textValue = JavaScriptEngine.toString(text);
 
         // TODO take font into account
         final int width = textValue.length() * getBrowserVersion().getPixesPerChar();
@@ -617,7 +617,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             if (Undefined.isUndefined(dirtyY)
                     || Undefined.isUndefined(dirtyWidth)
                     || Undefined.isUndefined(dirtyHeight)) {
-                throw Context.reportRuntimeError(
+                throw JavaScriptEngine.reportRuntimeError(
                         "CanvasRenderingContext2D.putImageData() failed - seven parameters expected");
             }
             dirtyYArg = (int) ScriptRuntime.toInteger(dirtyY);

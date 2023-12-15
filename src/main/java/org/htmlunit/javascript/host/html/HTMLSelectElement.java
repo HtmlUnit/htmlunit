@@ -22,12 +22,12 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -255,7 +255,7 @@ public class HTMLSelectElement extends HTMLElement {
     @Override
     @JsxSetter
     public void setValue(final Object newValue) {
-        final String val = Context.toString(newValue);
+        final String val = JavaScriptEngine.toString(newValue);
         getDomNodeOrDie().setSelectedAttribute(val, true, false);
     }
 

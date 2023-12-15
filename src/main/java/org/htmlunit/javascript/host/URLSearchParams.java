@@ -44,6 +44,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -195,7 +196,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
                             throw ScriptRuntime.typeError("Sequence initializer must only contain pair elements.");
                         }
 
-                        nameValuePairs.add(new NameValuePair(Context.toString(name), Context.toString(value)));
+                        nameValuePairs.add(new NameValuePair(
+                                JavaScriptEngine.toString(name),
+                                JavaScriptEngine.toString(value)));
                     }
                 }
             }
@@ -209,14 +212,14 @@ public class URLSearchParams extends HtmlUnitScriptable {
             for (final Map.Entry<Object, Object> keyValuePair : ((NativeObject) params).entrySet()) {
                 nameValuePairs.add(
                         new NameValuePair(
-                                Context.toString(keyValuePair.getKey()),
-                                Context.toString(keyValuePair.getValue())));
+                                JavaScriptEngine.toString(keyValuePair.getKey()),
+                                JavaScriptEngine.toString(keyValuePair.getValue())));
             }
             return nameValuePairs;
         }
 
         // otherwise handle it as string
-        return splitQuery(Context.toString(params));
+        return splitQuery(JavaScriptEngine.toString(params));
     }
 
     private List<NameValuePair> splitQuery() {
@@ -422,7 +425,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
     public void forEach(final Object callback) {
         if (!(callback instanceof Function)) {
             throw ScriptRuntime.typeError(
-                    "Foreach callback '" + ScriptRuntime.toString(callback) + "' is not a function");
+                    "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 
         final Function fun = (Function) callback;

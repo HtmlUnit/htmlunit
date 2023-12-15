@@ -270,7 +270,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
             setRel("undefined");
             return;
         }
-        setRel(ScriptRuntime.toString(rel));
+        setRel(JavaScriptEngine.toString(rel));
     }
 
     /**
@@ -398,7 +398,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return getElements().item(index);
         }
 
-        final String name = Context.toString(index);
+        final String name = JavaScriptEngine.toString(index);
         final Object response = getWithPreemption(name);
         if (subIndex instanceof Number && response instanceof HTMLCollection) {
             return ((HTMLCollection) response).item(subIndex);

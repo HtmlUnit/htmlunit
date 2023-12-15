@@ -23,6 +23,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -71,8 +72,8 @@ public class CloseEvent extends Event {
 
         if (details != null && !Undefined.isUndefined(details)) {
             code_ = ScriptRuntime.toInt32(details.get("code"));
-            reason_ = ScriptRuntime.toString(details.get("reason"));
-            wasClean_ = ScriptRuntime.toBoolean(details.get("wasClean"));
+            reason_ = JavaScriptEngine.toString(details.get("reason"));
+            wasClean_ = JavaScriptEngine.toBoolean(details.get("wasClean"));
         }
     }
 

@@ -191,7 +191,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
 
         final HtmlUnitContextFactory cf = jsEngine.getContextFactory();
 
-        final JavaScriptJob job = new WorkerJob(cf, action, "postMessage: " + Context.toString(message));
+        final JavaScriptJob job = new WorkerJob(cf, action, "postMessage: " + JavaScriptEngine.toString(message));
 
         final HtmlPage page = (HtmlPage) owningWindow_.getDocument().getPage();
         owningWindow_.getWebWindow().getJobManager().addJob(job, page);
@@ -213,7 +213,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
 
         final HtmlUnitContextFactory cf = jsEngine.getContextFactory();
 
-        final JavaScriptJob job = new WorkerJob(cf, action, "messagePosted: " + Context.toString(message));
+        final JavaScriptJob job = new WorkerJob(cf, action, "messagePosted: " + JavaScriptEngine.toString(message));
 
         final HtmlPage page = (HtmlPage) owningWindow_.getDocument().getPage();
         owningWindow_.getWebWindow().getJobManager().addJob(job, page);
@@ -257,7 +257,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
                 .hasFeature(JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL);
 
         for (final Object arg : args) {
-            final String url = Context.toString(arg);
+            final String url = JavaScriptEngine.toString(arg);
             workerScope.loadAndExecute(webClient, url, cx, checkContentType);
         }
     }
@@ -270,7 +270,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         final WebRequest webRequest = new WebRequest(fullUrl);
         final WebResponse response = webClient.loadWebResponse(webRequest);
         if (checkMimeType && !MimeType.isJavascriptMimeType(response.getContentType())) {
-            throw Context.reportRuntimeError(
+            throw JavaScriptEngine.reportRuntimeError(
                     "NetworkError: importScripts response is not a javascript response");
         }
 

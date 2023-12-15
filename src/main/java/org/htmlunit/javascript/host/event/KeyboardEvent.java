@@ -28,6 +28,7 @@ import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -1064,12 +1065,12 @@ public class KeyboardEvent extends UIEvent {
 
             final Object key = details.get("key", details);
             if (!isMissingOrUndefined(key)) {
-                setKey(ScriptRuntime.toString(key));
+                setKey(JavaScriptEngine.toString(key));
             }
 
             final Object code = details.get("code", details);
             if (!isMissingOrUndefined(code)) {
-                setCode(ScriptRuntime.toString(code));
+                setCode(JavaScriptEngine.toString(code));
             }
 
             final Object location = details.get("location", details);
@@ -1079,32 +1080,32 @@ public class KeyboardEvent extends UIEvent {
 
             final Object ctrlKey = details.get("ctrlKey", details);
             if (!isMissingOrUndefined(ctrlKey)) {
-                setCtrlKey(ScriptRuntime.toBoolean(ctrlKey));
+                setCtrlKey(JavaScriptEngine.toBoolean(ctrlKey));
             }
 
             final Object shiftKey = details.get("shiftKey", details);
             if (!isMissingOrUndefined(shiftKey)) {
-                setShiftKey(ScriptRuntime.toBoolean(shiftKey));
+                setShiftKey(JavaScriptEngine.toBoolean(shiftKey));
             }
 
             final Object altKey = details.get("altKey", details);
             if (!isMissingOrUndefined(altKey)) {
-                setAltKey(ScriptRuntime.toBoolean(altKey));
+                setAltKey(JavaScriptEngine.toBoolean(altKey));
             }
 
             final Object metaKey = details.get("metaKey", details);
             if (!isMissingOrUndefined(metaKey)) {
-                setMetaKey(ScriptRuntime.toBoolean(metaKey));
+                setMetaKey(JavaScriptEngine.toBoolean(metaKey));
             }
 
             final Object repeat = details.get("repeat", details);
             if (!isMissingOrUndefined(repeat)) {
-                setRepeat(ScriptRuntime.toBoolean(repeat));
+                setRepeat(JavaScriptEngine.toBoolean(repeat));
             }
 
             final Object isComposing = details.get("isComposing", details);
             if (!isMissingOrUndefined(isComposing)) {
-                setIsComposing(ScriptRuntime.toBoolean(isComposing));
+                setIsComposing(JavaScriptEngine.toBoolean(isComposing));
             }
 
             final Object charCode = details.get("charCode", details);

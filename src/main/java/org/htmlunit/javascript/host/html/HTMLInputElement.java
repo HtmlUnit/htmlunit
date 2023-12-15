@@ -30,7 +30,6 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -111,7 +110,7 @@ public class HTMLInputElement extends HTMLElement {
             return;
         }
 
-        final String val = Context.toString(newValue);
+        final String val = JavaScriptEngine.toString(newValue);
         if ("file".equalsIgnoreCase(getType())) {
             if (StringUtils.isNotEmpty(val) &&  getBrowserVersion().hasFeature(JS_SELECT_FILE_THROWS)) {
                 throw JavaScriptEngine.reportRuntimeError("InvalidStateError: "

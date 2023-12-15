@@ -313,7 +313,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 || RESPONSE_TYPE_TEXT.equals(responseType)) {
 
             if (state_ == OPENED && !async_ && !getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT)) {
-                throw Context.reportRuntimeError(
+                throw JavaScriptEngine.reportRuntimeError(
                         "InvalidAccessError: synchronous XMLHttpRequests do not support responseType");
             }
 
@@ -457,7 +457,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         if (!RESPONSE_TYPE_DEFAULT.equals(responseType_) && !RESPONSE_TYPE_TEXT.equals(responseType_)) {
-            throw Context.reportRuntimeError(
+            throw JavaScriptEngine.reportRuntimeError(
                     "InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': "
                     + "The value is only accessible if the object's 'responseType' is '' or 'text' "
                     + "(was '" + getResponseType() + "').");
@@ -685,10 +685,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         // async defaults to true if not specified
         boolean async = true;
         if (!Undefined.isUndefined(asyncParam)) {
-            async = ScriptRuntime.toBoolean(asyncParam);
+            async = JavaScriptEngine.toBoolean(asyncParam);
         }
 
-        final String url = Context.toString(urlParam);
+        final String url = JavaScriptEngine.toString(urlParam);
 
         // (URL + Method + User + Password) become a WebRequest instance.
         final HtmlPage containingPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
@@ -922,7 +922,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 ((Blob) content).fillRequest(webRequest_);
             }
             else {
-                final String body = Context.toString(content);
+                final String body = JavaScriptEngine.toString(content);
                 if (!body.isEmpty()) {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("Setting request body to: " + body);

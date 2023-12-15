@@ -27,6 +27,7 @@ import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -140,7 +141,7 @@ public class MouseEvent extends UIEvent {
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     @Override
     public void jsConstructor(final String type, final ScriptableObject details) {
-        super.jsConstructor(ScriptRuntime.toString(type), details);
+        super.jsConstructor(JavaScriptEngine.toString(type), details);
         if (details != null && !Undefined.isUndefined(details)) {
             final Object screenX = details.get("screenX", details);
             if (NOT_FOUND != screenX) {
@@ -172,10 +173,10 @@ public class MouseEvent extends UIEvent {
                 buttons_ = ScriptRuntime.toInt32(buttons);
             }
 
-            setAltKey(ScriptRuntime.toBoolean(details.get("altKey")));
-            setCtrlKey(ScriptRuntime.toBoolean(details.get("ctrlKey")));
-            setMetaKey(ScriptRuntime.toBoolean(details.get("metaKey")));
-            setShiftKey(ScriptRuntime.toBoolean(details.get("shiftKey")));
+            setAltKey(JavaScriptEngine.toBoolean(details.get("altKey")));
+            setCtrlKey(JavaScriptEngine.toBoolean(details.get("ctrlKey")));
+            setMetaKey(JavaScriptEngine.toBoolean(details.get("metaKey")));
+            setShiftKey(JavaScriptEngine.toBoolean(details.get("shiftKey")));
         }
     }
 

@@ -21,12 +21,12 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.HttpHeader;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -102,7 +102,7 @@ public class MessageEvent extends Event {
 
             final Object detailLastEventId = details.get("lastEventId");
             if (detailLastEventId != null) {
-                lastEventId = Context.toString(detailLastEventId);
+                lastEventId = JavaScriptEngine.toString(detailLastEventId);
             }
 
             source_ = null;

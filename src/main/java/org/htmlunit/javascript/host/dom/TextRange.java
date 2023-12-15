@@ -18,13 +18,13 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.impl.SelectableTextInput;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -191,7 +191,7 @@ public class TextRange extends HtmlUnitScriptable {
         }
         int c = 1;
         if (!Undefined.isUndefined(count)) {
-            c = (int) Context.toNumber(count);
+            c = (int) JavaScriptEngine.toNumber(count);
         }
         if (range_.getStartContainer() == range_.getEndContainer()
                 && range_.getStartContainer() instanceof SelectableTextInput) {
@@ -230,7 +230,7 @@ public class TextRange extends HtmlUnitScriptable {
         }
         int c = 1;
         if (!Undefined.isUndefined(count)) {
-            c = (int) Context.toNumber(count);
+            c = (int) JavaScriptEngine.toNumber(count);
         }
         if (range_.getStartContainer() == range_.getEndContainer()
                 && range_.getStartContainer() instanceof SelectableTextInput) {

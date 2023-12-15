@@ -755,7 +755,7 @@ public class HTMLElement extends Element {
             valueString = null;
         }
         else {
-            valueString = Context.toString(value);
+            valueString = JavaScriptEngine.toString(value);
         }
 
         final DomNode domNode = getDomNodeOrDie();
@@ -783,7 +783,7 @@ public class HTMLElement extends Element {
         domNode.removeAllChildren();
 
         if (value != null) {
-            final String textValue = Context.toString(value);
+            final String textValue = JavaScriptEngine.toString(value);
             if (StringUtils.isNotEmpty(textValue)) {
                 domNode.appendChild(new DomText(domNode.getPage(), textValue));
             }
@@ -1027,7 +1027,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter({FF, FF_ESR})
     public boolean isSpellcheck() {
-        return Context.toBoolean(getDomNodeOrDie().getAttributeDirect("spellcheck"));
+        return JavaScriptEngine.toBoolean(getDomNodeOrDie().getAttributeDirect("spellcheck"));
     }
 
     /**
@@ -1099,7 +1099,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public int getTabIndex() {
-        return (int) Context.toNumber(getDomNodeOrDie().getAttributeDirect("tabindex"));
+        return (int) JavaScriptEngine.toNumber(getDomNodeOrDie().getAttributeDirect("tabindex"));
     }
 
     /**
@@ -1320,7 +1320,7 @@ public class HTMLElement extends Element {
      * @param valid the valid values; if {@code null}, any value is valid
      */
     protected void setVAlign(final Object vAlign, final String[] valid) {
-        final String valign = Context.toString(vAlign);
+        final String valign = JavaScriptEngine.toString(vAlign);
         final String valignLC = valign.toLowerCase(Locale.ROOT);
         if (valid == null || ArrayUtils.contains(valid, valignLC)) {
             if (getBrowserVersion().hasFeature(JS_VALIGN_CONVERTS_TO_LOWERCASE)) {
@@ -3508,7 +3508,7 @@ public class HTMLElement extends Element {
      * @param newValue the new value
      */
     public void setValue(final Object newValue) {
-        getDomNodeOrDie().setAttribute(DomElement.VALUE_ATTRIBUTE, Context.toString(newValue));
+        getDomNodeOrDie().setAttribute(DomElement.VALUE_ATTRIBUTE, JavaScriptEngine.toString(newValue));
     }
 
     /**
@@ -3541,7 +3541,7 @@ public class HTMLElement extends Element {
             getDomNodeOrDie().removeAttribute("enterkeyhint");
             return;
         }
-        getDomNodeOrDie().setAttribute("enterkeyhint", Context.toString(enterKeyHint));
+        getDomNodeOrDie().setAttribute("enterkeyhint", JavaScriptEngine.toString(enterKeyHint));
     }
 
     /**

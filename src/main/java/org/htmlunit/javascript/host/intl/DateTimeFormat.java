@@ -36,6 +36,7 @@ import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -265,11 +266,11 @@ public class DateTimeFormat extends HtmlUnitScriptable {
                 final NativeArray array = (NativeArray) args[0];
                 locales = new String[(int) array.getLength()];
                 for (int i = 0; i < locales.length; i++) {
-                    locales[i] = Context.toString(array.get(i));
+                    locales[i] = JavaScriptEngine.toString(array.get(i));
                 }
             }
             else {
-                locales = new String[] {Context.toString(args[0])};
+                locales = new String[] {JavaScriptEngine.toString(args[0])};
             }
         }
         else {

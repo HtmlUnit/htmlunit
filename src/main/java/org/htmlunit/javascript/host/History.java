@@ -26,10 +26,10 @@ import java.net.URL;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -158,7 +158,7 @@ public class History extends HtmlUnitScriptable {
     private static URL buildNewStateUrl(final WebWindow webWindow, final Object url) throws MalformedURLException {
         URL newStateUrl = null;
         if (url != null && !Undefined.isUndefined(url)) {
-            final String urlString = ScriptRuntime.toString(url);
+            final String urlString = JavaScriptEngine.toString(url);
             if (StringUtils.isNotBlank(urlString)) {
                 final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
                 newStateUrl = page.getFullyQualifiedUrl(urlString);

@@ -928,7 +928,7 @@ public class Element extends Node {
         String html = null;
         final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
         if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
-            html = Context.toString(value);
+            html = JavaScriptEngine.toString(value);
         }
 
         try {
@@ -994,7 +994,7 @@ public class Element extends Node {
             domNode.remove();
             return;
         }
-        final String valueStr = Context.toString(value);
+        final String valueStr = JavaScriptEngine.toString(value);
         if (valueStr.isEmpty()) {
             domNode.remove();
             return;
@@ -2099,7 +2099,7 @@ public class Element extends Node {
             setAttribute(name, "");
             return true;
         }
-        if (ScriptRuntime.toBoolean(force)) {
+        if (JavaScriptEngine.toBoolean(force)) {
             setAttribute(name, "");
             return true;
         }

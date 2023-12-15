@@ -38,6 +38,7 @@ import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.regexp.NativeRegExp;
 import org.htmlunit.corejs.javascript.regexp.RegExpImpl;
 import org.htmlunit.corejs.javascript.regexp.SubString;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Begins customization of JavaScript RegExp base on JDK regular expression support.
@@ -92,7 +93,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         final Object[] args, final int actionType) {
         // in a first time just improve replacement with a String (not a function)
         if (RA_REPLACE == actionType && args.length == 2 && args[1] instanceof String) {
-            final String thisString = Context.toString(thisObj);
+            final String thisString = JavaScriptEngine.toString(thisObj);
             final String replacement = (String) args[1];
             final Object arg0 = args[0];
             if (arg0 instanceof String) {
@@ -117,13 +118,13 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 return null;
             }
             final Object arg0 = args[0];
-            final String thisString = Context.toString(thisObj);
+            final String thisString = JavaScriptEngine.toString(thisObj);
             final RegExpData reData;
             if (arg0 instanceof NativeRegExp) {
                 reData = new RegExpData((NativeRegExp) arg0);
             }
             else {
-                reData = new RegExpData(Context.toString(arg0));
+                reData = new RegExpData(JavaScriptEngine.toString(arg0));
             }
 
             final Matcher matcher = reData.getPattern().matcher(thisString);

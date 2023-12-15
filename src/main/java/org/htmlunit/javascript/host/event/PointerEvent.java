@@ -26,6 +26,7 @@ import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -72,7 +73,7 @@ public class PointerEvent extends MouseEvent {
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         final PointerEvent event = new PointerEvent();
         if (args.length != 0) {
-            event.setType(Context.toString(args[0]));
+            event.setType(JavaScriptEngine.toString(args[0]));
             event.setBubbles(false);
             event.setCancelable(false);
             event.width_ = 1;
@@ -104,13 +105,13 @@ public class PointerEvent extends MouseEvent {
                 value = String.valueOf(value);
             }
             else if (defaulValue instanceof Double) {
-                value = Context.toNumber(value);
+                value = JavaScriptEngine.toNumber(value);
             }
             else if (defaulValue instanceof Number) {
-                value = (int) Context.toNumber(value);
+                value = (int) JavaScriptEngine.toNumber(value);
             }
             else {
-                value = Context.toBoolean(value);
+                value = JavaScriptEngine.toBoolean(value);
             }
         }
         return value;

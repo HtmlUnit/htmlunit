@@ -76,7 +76,7 @@ public final class ProxyAutoConfig {
 
             final NativeFunction f = (NativeFunction) fObj;
             final Object result = f.call(cx, scope, scope, functionArgs);
-            return Context.toString(result);
+            return JavaScriptEngine.toString(result);
         }
     }
 
@@ -210,11 +210,11 @@ public final class ProxyAutoConfig {
      */
     public static boolean weekdayRange(final String wd1, Object wd2, final Object gmt) {
         TimeZone timezone = TimeZone.getDefault();
-        if (TIMEZONE_GMT.equals(Context.toString(gmt))
-                || TIMEZONE_GMT.equals(Context.toString(wd2))) {
+        if (TIMEZONE_GMT.equals(JavaScriptEngine.toString(gmt))
+                || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
             timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
         }
-        if (Undefined.isUndefined(wd2) || TIMEZONE_GMT.equals(Context.toString(wd2))) {
+        if (Undefined.isUndefined(wd2) || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
             wd2 = wd1;
         }
         final Calendar calendar = Calendar.getInstance(timezone);
@@ -251,7 +251,7 @@ public final class ProxyAutoConfig {
         //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
-            if (TIMEZONE_GMT.equals(Context.toString(values[length]))) {
+            if (TIMEZONE_GMT.equals(JavaScriptEngine.toString(values[length]))) {
                 timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
@@ -345,7 +345,7 @@ public final class ProxyAutoConfig {
     }
 
     private static int getSmallInt(final Object object) {
-        final String s = Context.toString(object);
+        final String s = JavaScriptEngine.toString(object);
         if (Character.isDigit(s.charAt(0))) {
             final int i = Integer.parseInt(s);
             if (i < 70) {
@@ -356,7 +356,7 @@ public final class ProxyAutoConfig {
     }
 
     private static int dateRange_getMonth(final Object object) {
-        final String s = Context.toString(object);
+        final String s = JavaScriptEngine.toString(object);
         if (Character.isLetter(s.charAt(0))) {
             try {
                 final Calendar cal = Calendar.getInstance(Locale.ROOT);
@@ -372,7 +372,7 @@ public final class ProxyAutoConfig {
     }
 
     private static int dateRange_getYear(final Object object) {
-        final String s = Context.toString(object);
+        final String s = JavaScriptEngine.toString(object);
         if (Character.isDigit(s.charAt(0))) {
             final int i = Integer.parseInt(s);
             if (i > 1000) {
@@ -401,7 +401,7 @@ public final class ProxyAutoConfig {
         //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
-            if (TIMEZONE_GMT.equals(Context.toString(values[length]))) {
+            if (TIMEZONE_GMT.equals(JavaScriptEngine.toString(values[length]))) {
                 timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }

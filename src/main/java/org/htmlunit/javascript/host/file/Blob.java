@@ -31,7 +31,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebRequest;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -40,6 +39,7 @@ import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -115,7 +115,7 @@ public class Blob extends HtmlUnitScriptable {
                     out.write(bytes, 0, bytes.length);
                 }
                 else {
-                    final String bits = Context.toString(fileBits.get(i));
+                    final String bits = JavaScriptEngine.toString(fileBits.get(i));
                     // Todo normalize line breaks
                     final byte[] bytes = bits.getBytes(UTF_8);
                     out.write(bytes, 0, bytes.length);
@@ -174,7 +174,7 @@ public class Blob extends HtmlUnitScriptable {
         final Object optionsType = properties.get(OPTIONS_TYPE_NAME, properties);
         if (optionsType != null && properties != Scriptable.NOT_FOUND
                 && !Undefined.isUndefined(optionsType)) {
-            return Context.toString(optionsType);
+            return JavaScriptEngine.toString(optionsType);
         }
 
         return OPTIONS_TYPE_DEFAULT;
@@ -189,7 +189,7 @@ public class Blob extends HtmlUnitScriptable {
         if (optionsType != null && properties != Scriptable.NOT_FOUND
                 && !Undefined.isUndefined(optionsType)) {
             try {
-                return Long.parseLong(Context.toString(optionsType));
+                return Long.parseLong(JavaScriptEngine.toString(optionsType));
             }
             catch (final NumberFormatException e) {
                 // fall back to default
@@ -286,7 +286,7 @@ public class Blob extends HtmlUnitScriptable {
 
         String usedContentType = "";
         if (contentType != null && !Undefined.isUndefined(contentType)) {
-            usedContentType = ScriptRuntime.toString(contentType).toLowerCase(Locale.ROOT);
+            usedContentType = JavaScriptEngine.toString(contentType).toLowerCase(Locale.ROOT);
         }
 
         if (usedEnd <= usedStart || usedStart >= getSize()) {
