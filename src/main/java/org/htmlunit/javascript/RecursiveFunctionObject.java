@@ -17,7 +17,6 @@ package org.htmlunit.javascript;
 import static org.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
 
 import java.lang.reflect.Member;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -76,12 +75,18 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public Object[] getIds() {
-        final Set<Object> objects = new LinkedHashSet<>(Arrays.asList(super.getIds()));
+        final Set<Object> objects = new LinkedHashSet<>();
+        for (final Object obj : super.getIds()) {
+            objects.add(obj);
+        }
+
         for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
                 c != null; c = c.getSuperclass()) {
             final Object scripatble = getParentScope().get(c.getSimpleName(), this);
             if (scripatble instanceof Scriptable) {
-                objects.addAll(Arrays.asList(((Scriptable) scripatble).getIds()));
+                for (final Object obj : ((Scriptable) scripatble).getIds()) {
+                    objects.add(obj);
+                }
             }
         }
         return objects.toArray(new Object[0]);
