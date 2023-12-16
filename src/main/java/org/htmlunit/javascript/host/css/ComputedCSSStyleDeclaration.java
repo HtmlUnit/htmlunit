@@ -152,8 +152,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     @Override
-    // todo reduce visibility
-    public ComputedCssStyleDeclaration getCssStyleDeclaration() {
+    protected ComputedCssStyleDeclaration getCssStyleDeclaration() {
         return (ComputedCssStyleDeclaration) super.getCssStyleDeclaration();
     }
 
