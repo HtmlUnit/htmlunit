@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host.css;
 
+import java.nio.charset.StandardCharsets;
+
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -1880,8 +1882,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll(':target');\n"
-            + "  alert(found.length);\n"
-            + "  if (found.length > 0) { alert(found[0].id); }\n"
+            + "  log(found.length);\n"
+            + "  if (found.length > 0) { log(found[0].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1890,7 +1892,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts2(UrlUtils.getUrlWithNewRef(URL_FIRST, "id2"));
+        final WebDriver driver = loadPage2(UrlUtils.getUrlWithNewRef(URL_FIRST, "id2"), StandardCharsets.UTF_8);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1925,9 +1928,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll(':target');\n"
-            + "  alert(found.length);\n"
+            + "  log(found.length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1936,7 +1940,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts2(UrlUtils.getUrlWithNewRef(URL_FIRST, "id3"));
+        final WebDriver driver = loadPage2(UrlUtils.getUrlWithNewRef(URL_FIRST, "id3"), StandardCharsets.UTF_8);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
