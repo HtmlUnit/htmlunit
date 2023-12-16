@@ -236,7 +236,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
     /**
      * Pre process the specified source code in the context of the given page using the processor specified
-     * in the webclient. This method delegates to the pre processor handler specified in the
+     * in the {@link WebClient}. This method delegates to the pre processor handler specified in the
      * <code>WebClient</code>. If no pre processor handler is defined, the original source code is returned
      * unchanged.
      * @param htmlPage the page

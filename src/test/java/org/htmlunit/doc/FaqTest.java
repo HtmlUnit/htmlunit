@@ -19,19 +19,22 @@ import static org.junit.Assert.assertNotNull;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import javax.imageio.ImageIO;
 
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.ScriptPreProcessor;
 import org.htmlunit.WebClient;
+import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.junit.Test;
 
 /**
  * Tests for the sample code from the documentation to make sure
- * we adapt the docu or do not break the samples.
+ * we adapt the documentation or do not break the samples.
  *
  * @author Ronald Brill
  */
@@ -97,5 +100,34 @@ public class FaqTest {
                 + "</svg>";
         final BufferedImage img = ImageIO.read(new ByteArrayInputStream(svg.getBytes(StandardCharsets.US_ASCII)));
         assertNotNull(img);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void scriptPreProcessor() throws Exception {
+        final URL url = new URL("https://www.htmlunit.org");
+
+        // create a ScriptPreProcessor
+        final ScriptPreProcessor myScriptPreProcessor = new ScriptPreProcessor() {
+
+            @Override
+            public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
+                    final int lineNumber, final HtmlElement htmlElement) {
+
+                // modify the source code here
+
+                return sourceCode;
+            }
+        };
+
+        try (WebClient webClient = new WebClient()) {
+            // activate the ScriptPreProcessor
+            webClient.setScriptPreProcessor(myScriptPreProcessor);
+
+            // use the client as usual
+            final HtmlPage page = webClient.getPage(url);
+        }
     }
 }

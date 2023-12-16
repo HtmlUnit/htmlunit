@@ -169,6 +169,40 @@ e.g.
             </answer>
         </faq>
 
+        <faq id="HowToModifyJavascriptCode">
+            <question>
+                How to modify the JavaScript code before it is processed?
+            </question>
+            <answer>
+                <p>
+                    You can register you own implementation of a ScriptPreProcessor as:
+            <source><![CDATA[
+
+    // create a ScriptPreProcessor
+    final ScriptPreProcessor myScriptPreProcessor = new ScriptPreProcessor() {
+
+        @Override
+        public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
+                final int lineNumber, final HtmlElement htmlElement) {
+
+            // modify the source code here
+
+            return sourceCode;
+        }
+    };
+
+    try (WebClient webClient = new WebClient()) {
+        // activate the ScriptPreProcessor
+        webClient.setScriptPreProcessor(myScriptPreProcessor);
+
+        // use the client as usual
+        final HtmlPage page = webClient.getPage(url);
+    }
+            ]]></source>
+                </p>
+            </answer>
+        </faq>
+
         <faq id="HowToParseHtmlString">
             <question>
                 How to parse html content given as string?
