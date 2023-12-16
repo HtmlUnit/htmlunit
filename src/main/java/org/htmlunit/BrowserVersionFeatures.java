@@ -1748,6 +1748,6 @@ public enum BrowserVersionFeatures {
     XHR_USE_CONTENT_CHARSET,
 
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature(IE)
     XPATH_SELECTION_NAMESPACES,
 }

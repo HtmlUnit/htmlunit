@@ -9,6 +9,9 @@
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
             <action type="update" dev="rbri">
+                Bunch of refactorings to reduce the overall source code dependencies from core-js.
+            </action>
+            <action type="update" dev="rbri">
                 Make closing of windows more robust by making sure the deregistration is done also in case of errors.
                 This should fix some more memory leaks.
             </action>
@@ -24,7 +27,7 @@
                 URL 'protocol' setter validates (FF, Chrome, Edge).
             </action>
             <action type="add" dev="rbri">
-                Details name property support added (Chrome/Edge).
+                Details 'name'' property support added (Chrome/Edge).
             </action>
             <action type="update" dev="rbri">
                 Because the naming of the method and parametes is misleading, the method

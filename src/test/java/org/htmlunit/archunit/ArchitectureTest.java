@@ -334,7 +334,6 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebConsole")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebConsole$1")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.ScriptException")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomNode")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomElement")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog$1")
