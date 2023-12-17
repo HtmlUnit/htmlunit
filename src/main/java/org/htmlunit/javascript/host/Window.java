@@ -1977,7 +1977,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     /**
      * Posts a message.
-     * @param cx the current context
+     * @param context the current context
      * @param scope the scope
      * @param thisObj this object
      * @param args the script(s) to import
@@ -1985,7 +1985,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
-    public static void postMessage(final Context cx, final Scriptable scope,
+    public static void postMessage(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function funObj) {
 
         // support the structured clone algorithm

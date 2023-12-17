@@ -1067,9 +1067,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         int height = CssPixelValueConverter.pixelValue(element,
                 new CssPixelValueConverter.CssValue(defaultHeight, defaultWindowHeight) {
                 @Override public String get(final ComputedCssStyleDeclaration style) {
-                    final Element element = style.getElementOrNull();
-                    if (element instanceof HTMLBodyElement) {
-                        return String.valueOf(element.getWindow().getWebWindow().getInnerHeight());
+                    final Element elem = style.getElementOrNull();
+                    if (elem instanceof HTMLBodyElement) {
+                        return String.valueOf(elem.getWindow().getWebWindow().getInnerHeight());
                     }
                     // height is ignored for inline elements
                     if (isInline) {
