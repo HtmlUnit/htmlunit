@@ -128,15 +128,15 @@ public final class CssPixelValueConverter {
             final DomNode parent = element.getParentNode();
             final int absoluteValue;
             if (parent instanceof DomElement) {
+                final DomElement parentElem = (DomElement) parent;
                 final ComputedCssStyleDeclaration style =
-                        parent.getPage().getEnclosingWindow().getComputedStyle(element, null);
+                        parentElem.getPage().getEnclosingWindow().getComputedStyle(parentElem, null);
                 final String parentStyleValue = value.get(style);
                 absoluteValue = pixelValue((DomElement) parent, parentStyleValue, value, true);
             }
             else {
                 absoluteValue = value.getWindowDefaultValue();
             }
-
             return  Math.round((i / 100f) * absoluteValue);
         }
         if (AUTO.equals(styleValue)) {
@@ -154,11 +154,11 @@ public final class CssPixelValueConverter {
                 if (parent == null || parent instanceof HtmlHtml) {
                     return value.getWindowDefaultValue();
                 }
-
+                final DomElement parentElem = (DomElement) parent;
                 final ComputedCssStyleDeclaration style =
-                        parent.getPage().getEnclosingWindow().getComputedStyle(element, null);
+                        parentElem.getPage().getEnclosingWindow().getComputedStyle(parentElem, null);
                 final String parentStyleValue = value.get(style);
-                return pixelValue((DomElement) parent, parentStyleValue, value, true);
+                return pixelValue(parentElem, parentStyleValue, value, true);
             }
 
             return 0;
