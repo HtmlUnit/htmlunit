@@ -339,7 +339,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     }
                     else {
                         constructor = config.getHostClass().newInstance();
-                        ((HtmlUnitScriptable) constructor).setClassName(config.getClassName());
+                        ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
                     }
                     defineConstructor(window, prototype, constructor);
                     configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);

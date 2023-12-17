@@ -30,7 +30,7 @@
                 URL 'protocol' setter validates (FF, Chrome, Edge).
             </action>
             <action type="add" dev="rbri">
-                Details 'name'' property support added (Chrome/Edge).
+                Details 'name' property support added (Chrome/Edge).
             </action>
             <action type="update" dev="rbri">
                 Because the naming of the method and parametes is misleading, the method
