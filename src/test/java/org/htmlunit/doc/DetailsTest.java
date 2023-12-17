@@ -62,11 +62,11 @@ public class DetailsTest extends WebServerTestCase {
 
                 @Override
                 public WebResponse getResponse(final WebRequest request) throws IOException {
-                    final URL url = request.getUrl();
+                    final URL requestUrl = request.getUrl();
                     // check the request url
                     // if is allowed simple call super.
 
-                    if (!isBlocked(url)) {
+                    if (!isBlocked(requestUrl)) {
                         return super.getResponse(request);
                     }
 
@@ -76,11 +76,11 @@ public class DetailsTest extends WebServerTestCase {
                             200, "blocked", Collections.emptyList());
                     final WebResponse blocked = new WebResponse(data, request, 0L);
                     // if you like to check later on for blocked responses
-                    blocked.markAsBlocked("Blocked URL: '" + url.toExternalForm() + "'");
+                    blocked.markAsBlocked("Blocked URL: '" + requestUrl.toExternalForm() + "'");
                     return blocked;
                 }
 
-                private boolean isBlocked(final URL url) {
+                private boolean isBlocked(final URL requestUrl) {
                     return true;
                 }
             };
@@ -129,8 +129,8 @@ public class DetailsTest extends WebServerTestCase {
                     httpMethod.abort();
 
                     // construct alternative response
-                    final String content = "<html><html>";
-                    final WebResponseData data = new WebResponseData(content.getBytes(Charsets.UTF_8),
+                    final String alternativeContent = "<html><html>";
+                    final WebResponseData data = new WebResponseData(alternativeContent.getBytes(Charsets.UTF_8),
                             200, "blocked", Collections.emptyList());
                     final WebResponse blocked = new WebResponse(data, webRequest, 0L);
                     // if you like to check later on for blocked responses
