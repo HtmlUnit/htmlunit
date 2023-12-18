@@ -16,6 +16,7 @@ package org.htmlunit.javascript.configuration;
 
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,7 +51,7 @@ public final class ClassConfiguration {
     /**
      * The constructor method in the {@link #hostClass_}
      */
-    private Member jsConstructor_;
+    private Map.Entry<String, Member> jsConstructor_;
     private final Class<?>[] domClasses_;
     private final boolean jsObject_;
     private final String className_;
@@ -79,12 +80,12 @@ public final class ClassConfiguration {
         extendedClassName_ = extendedClassName;
     }
 
-    void setJSConstructor(final Member jsConstructor) {
+    void setJSConstructor(final String name, final Member jsConstructor) {
         if (jsConstructor_ != null) {
             throw new IllegalStateException("Can not have two constructors for "
-                    + jsConstructor_.getDeclaringClass().getName());
+                    + jsConstructor_.getValue().getDeclaringClass().getName());
         }
-        jsConstructor_ = jsConstructor;
+        jsConstructor_ = new AbstractMap.SimpleImmutableEntry(name, jsConstructor);
     }
 
     /**
@@ -270,7 +271,7 @@ public final class ClassConfiguration {
      * @return the JavaScript constructor method in {@link #getHostClass()}
      */
     @SuppressFBWarnings("EI_EXPOSE_REP")
-    public Member getJsConstructor() {
+    public Map.Entry<String, Member> getJsConstructor() {
         return jsConstructor_;
     }
 

@@ -202,9 +202,18 @@ public abstract class AbstractJavaScriptConfiguration {
         try {
             for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {
                 for (final Annotation annotation : constructor.getAnnotations()) {
-                    if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
-                            expectedBrowser)) {
-                        classConfiguration.setJSConstructor(constructor);
+                    if (annotation instanceof JsxConstructor) {
+                        final JsxConstructor jsxConstructor = (JsxConstructor) annotation;
+                        if (isSupported(jsxConstructor.value(), expectedBrowser)) {
+                            final String name;
+                            if (jsxConstructor.functionName().isEmpty()) {
+                                name = classConfiguration.getClassName();
+                            }
+                            else {
+                                name = jsxConstructor.functionName();
+                            }
+                            classConfiguration.setJSConstructor(name, constructor);
+                        }
                     }
                 }
             }
@@ -300,9 +309,18 @@ public abstract class AbstractJavaScriptConfiguration {
                             classConfiguration.addStaticFunction(name, method);
                         }
                     }
-                    else if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
-                            expectedBrowser)) {
-                        classConfiguration.setJSConstructor(method);
+                    else if (annotation instanceof JsxConstructor) {
+                        final JsxConstructor jsxConstructor = (JsxConstructor) annotation;
+                        if (isSupported(jsxConstructor.value(), expectedBrowser)) {
+                            final String name;
+                            if (jsxConstructor.functionName().isEmpty()) {
+                                name = classConfiguration.getClassName();
+                            }
+                            else {
+                                name = jsxConstructor.functionName();
+                            }
+                            classConfiguration.setJSConstructor(name, method);
+                        }
                     }
                 }
             }

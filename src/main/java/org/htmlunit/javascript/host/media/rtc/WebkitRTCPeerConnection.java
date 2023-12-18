@@ -33,7 +33,7 @@ public class WebkitRTCPeerConnection extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
+    @JsxConstructor(functionName = "RTCPeerConnection")
     public WebkitRTCPeerConnection() {
     }
 }

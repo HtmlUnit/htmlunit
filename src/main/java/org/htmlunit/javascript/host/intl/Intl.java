@@ -50,7 +50,8 @@ public class Intl extends HtmlUnitScriptable {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
             final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
             final FunctionObject functionObject =
-                    new RecursiveFunctionObject(config.getClassName(), config.getJsConstructor(), this, browserVersion);
+                    new RecursiveFunctionObject(config.getJsConstructor().getKey(),
+                            config.getJsConstructor().getValue(), this, browserVersion);
             functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
         }
         catch (final Exception e) {

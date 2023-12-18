@@ -47,4 +47,10 @@ public @interface JsxConstructor {
         FF_ESR,
         IE
     };
+
+    /**
+     * The JavaScript function property name.
+     * @return the function property name
+     */
+    String functionName() default "";
 }

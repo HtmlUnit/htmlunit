@@ -45,7 +45,7 @@ public class WebkitURL extends URL {
      * @param base a string representing the base URL to use in case url
      * is a relative URL. If not specified, it defaults to ''.
      */
-    @JsxConstructor
+    @JsxConstructor(functionName = "URL")
     public WebkitURL(final String url, final Object base) {
         super(url, base);
     }

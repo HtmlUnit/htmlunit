@@ -25,6 +25,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code WebKitMutationObserver}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE})
 public class WebKitMutationObserver extends MutationObserver {
@@ -39,7 +40,7 @@ public class WebKitMutationObserver extends MutationObserver {
      * Creates an instance.
      * @param function the function to observe
      */
-    @JsxConstructor
+    @JsxConstructor(functionName = "MutationObserver")
     public WebKitMutationObserver(final Function function) {
         super(function);
     }

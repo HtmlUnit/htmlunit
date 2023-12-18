@@ -96,45 +96,6 @@ public class RecursiveFunctionObject extends FunctionObject {
      * {@inheritDoc}
      */
     @Override
-    public String getFunctionName() {
-        final String functionName = super.getFunctionName();
-        switch (functionName) {
-            case "webkitRTCPeerConnection":
-                return "RTCPeerConnection";
-
-            case "webkitSpeechRecognition":
-                return "SpeechRecognition";
-
-            case "WebKitMutationObserver":
-                return "MutationObserver";
-
-            case "webkitMediaStream":
-                return "MediaStream";
-
-            case "webkitSpeechGrammar":
-                return "SpeechGrammar";
-
-            case "webkitSpeechGrammarList":
-                return "SpeechGrammarList";
-
-            case "webkitSpeechRecognitionError":
-                return "SpeechRecognitionErrorEvent";
-
-            case "webkitSpeechRecognitionEvent":
-                return "SpeechRecognitionEvent";
-
-            case "webkitURL":
-                return "URL";
-
-            default:
-        }
-        return functionName;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Object get(final String name, final Scriptable start) {
         Object value = super.get(name, start);
         if (value != NOT_FOUND) {

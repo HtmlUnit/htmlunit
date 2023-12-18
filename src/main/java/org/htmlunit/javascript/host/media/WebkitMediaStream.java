@@ -33,7 +33,7 @@ public class WebkitMediaStream extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
+    @JsxConstructor(functionName = "MediaStream")
     public WebkitMediaStream() {
     }
 }

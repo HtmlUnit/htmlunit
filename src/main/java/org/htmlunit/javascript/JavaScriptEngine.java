@@ -226,8 +226,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         final ClassConfiguration windowConfig = jsConfig_.getClassConfiguration("Window");
         if (windowConfig.getJsConstructor() != null) {
-            final FunctionObject functionObject = new RecursiveFunctionObject("Window",
-                    windowConfig.getJsConstructor(), window, browserVersion);
+            final FunctionObject functionObject =
+                    new RecursiveFunctionObject("Window", windowConfig.getJsConstructor().getValue(), window, browserVersion);
             ScriptableObject.defineProperty(window, "constructor", functionObject,
                     ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
         }
@@ -313,7 +313,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final Member jsConstructor = config.getJsConstructor();
+            final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String hostClassSimpleName = config.getHostClassSimpleName();
@@ -350,7 +350,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         function = (BaseFunction) ScriptableObject.getProperty(window, "constructor");
                     }
                     else {
-                        function = new RecursiveFunctionObject(jsClassName, jsConstructor, window, browserVersion);
+                        function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), window, browserVersion);
                     }
 
                     if ("WebKitMutationObserver".equals(hostClassSimpleName)

@@ -33,8 +33,7 @@ public class WebkitSpeechRecognition extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
+    @JsxConstructor(functionName = "SpeechRecognition")
     public WebkitSpeechRecognition() {
     }
-
 }
