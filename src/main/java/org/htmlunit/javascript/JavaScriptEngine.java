@@ -431,19 +431,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
         }
 
-        // some special redirectors
-//        // WebKitMutationObserver
-//        if (browserVersion.isChrome() || browserVersion.isEdge()) {
-//            prototypeProperty = ScriptableObject.getProperty(window, "MutationObserver");
-//            ScriptableObject.defineProperty(window, "WebKitMutationObserver", prototypeProperty, ScriptableObject.DONTENUM);
-//        }
-//
-//        // webkitURL
-//        if (browserVersion.isChrome() || browserVersion.isEdge() || browserVersion.isFirefox()) {
-//            prototypeProperty = ScriptableObject.getProperty(window, "URL");
-//            ScriptableObject.defineProperty(window, "webkitURL", prototypeProperty, ScriptableObject.DONTENUM);
-//        }
-
         // IE ActiveXObject simulation
         // see http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx
         // DEV Note: this is at the moment the only usage of HiddenFunctionObject

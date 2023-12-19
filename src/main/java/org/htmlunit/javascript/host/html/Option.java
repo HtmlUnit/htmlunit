@@ -21,6 +21,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * The JavaScript object that represents an "Option", this is used to construct {@literal HTMLOptionElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class Option extends HTMLOptionElement {
@@ -35,16 +36,5 @@ public class Option extends HTMLOptionElement {
     public void jsConstructor(final Object newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         super.jsConstructor(newText, newValue, defaultSelected, selected);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if (String.class.equals(hint) || hint == null) {
-            return "[object " + getClassName() + "]";
-        }
-        return super.getDefaultValue(hint);
     }
 }

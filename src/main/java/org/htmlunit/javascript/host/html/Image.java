@@ -24,6 +24,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * The JavaScript object that represents an "Image", this is historically used to construct {@literal HTMLImageElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class Image extends HTMLImageElement {
@@ -40,16 +41,5 @@ public class Image extends HTMLImageElement {
                     .getFactory(HtmlImage.TAG_NAME)
                     .createElement(page, HtmlImage.TAG_NAME, null);
         setDomNode(fake);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if (String.class.equals(hint) || hint == null) {
-            return "[object " + getClassName() + "]";
-        }
-        return super.getDefaultValue(hint);
     }
 }
