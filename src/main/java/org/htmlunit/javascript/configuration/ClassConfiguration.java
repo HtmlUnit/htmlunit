@@ -52,6 +52,7 @@ public final class ClassConfiguration {
      * The constructor method in the {@link #hostClass_}
      */
     private Map.Entry<String, Member> jsConstructor_;
+    private String jsConstructorAlias_;
     private final Class<?>[] domClasses_;
     private final boolean jsObject_;
     private final String className_;
@@ -86,6 +87,15 @@ public final class ClassConfiguration {
                     + jsConstructor_.getValue().getDeclaringClass().getName());
         }
         jsConstructor_ = new AbstractMap.SimpleImmutableEntry(name, jsConstructor);
+    }
+
+    void setJSConstructorAlias(final String alias) {
+        if (jsConstructor_ == null) {
+            throw new IllegalStateException("Can not define an constructor alias for "
+                    + jsConstructor_.getValue().getDeclaringClass().getName()
+                    + " because there is no JsxConstructor defined");
+        }
+        jsConstructorAlias_ = alias;
     }
 
     /**
@@ -273,6 +283,14 @@ public final class ClassConfiguration {
     @SuppressFBWarnings("EI_EXPOSE_REP")
     public Map.Entry<String, Member> getJsConstructor() {
         return jsConstructor_;
+    }
+
+    /**
+     * @return the JavaScript constructor method alias
+     * or null if there is nothing.
+     */
+    public String getJsConstructorAlias() {
+        return jsConstructorAlias_;
     }
 
     /**

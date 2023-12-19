@@ -460,4 +460,33 @@ public class MutationObserverTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object MutationObserver]", "", "false"},
+            CHROME = {"[object MutationObserver]", "[object MutationObserver]", "true"},
+            EDGE = {"[object MutationObserver]", "[object MutationObserver]", "true"})
+    public void webKitMutationObserver() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var observer = new MutationObserver(function() {});\n"
+            + "  var wkObserver = '';\n"
+            + "  if (typeof(WebKitMutationObserver) == 'function') {\n"
+            + "    wkObserver = new WebKitMutationObserver(function() {});\n"
+            + "  }\n"
+            + "  log(observer);\n"
+            + "  log(wkObserver);\n"
+            + "  log(Object.getPrototypeOf(observer) == Object.getPrototypeOf(wkObserver));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

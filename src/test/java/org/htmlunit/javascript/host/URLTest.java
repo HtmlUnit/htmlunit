@@ -1118,4 +1118,31 @@ public class URLTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"https://htmlunit.org/", "https://htmlunit.org/", "true"},
+            IE = {})
+    public void webkitURL() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  if (typeof window.URL === 'function') {\n"
+            + "    var url = new URL('https://htmlunit.org');\n"
+            + "    var wkUrl = new webkitURL('https://htmlunit.org');\n"
+            + "    log(url);\n"
+            + "    log(wkUrl);\n"
+            + "    log(Object.getPrototypeOf(url) == Object.getPrototypeOf(wkUrl));\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

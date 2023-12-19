@@ -70,7 +70,6 @@ import org.htmlunit.javascript.host.TouchList;
 import org.htmlunit.javascript.host.URL;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.WebSocket;
-import org.htmlunit.javascript.host.WebkitURL;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.XPathExpression;
 import org.htmlunit.javascript.host.animations.Animation;
@@ -179,7 +178,6 @@ import org.htmlunit.javascript.host.dom.ShadowRoot;
 import org.htmlunit.javascript.host.dom.Text;
 import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.dom.TreeWalker;
-import org.htmlunit.javascript.host.dom.WebKitMutationObserver;
 import org.htmlunit.javascript.host.dom.XPathEvaluator;
 import org.htmlunit.javascript.host.dom.XPathNSResolver;
 import org.htmlunit.javascript.host.dom.XPathResult;
@@ -419,7 +417,6 @@ import org.htmlunit.javascript.host.media.TimeRanges;
 import org.htmlunit.javascript.host.media.VTTCue;
 import org.htmlunit.javascript.host.media.VideoPlaybackQuality;
 import org.htmlunit.javascript.host.media.WaveShaperNode;
-import org.htmlunit.javascript.host.media.WebkitMediaStream;
 import org.htmlunit.javascript.host.media.midi.MIDIAccess;
 import org.htmlunit.javascript.host.media.midi.MIDIInput;
 import org.htmlunit.javascript.host.media.midi.MIDIInputMap;
@@ -436,7 +433,6 @@ import org.htmlunit.javascript.host.media.rtc.RTCPeerConnection;
 import org.htmlunit.javascript.host.media.rtc.RTCSctpTransport;
 import org.htmlunit.javascript.host.media.rtc.RTCSessionDescription;
 import org.htmlunit.javascript.host.media.rtc.RTCStatsReport;
-import org.htmlunit.javascript.host.media.rtc.WebkitRTCPeerConnection;
 import org.htmlunit.javascript.host.network.NetworkInformation;
 import org.htmlunit.javascript.host.payment.PaymentAddress;
 import org.htmlunit.javascript.host.payment.PaymentRequest;
@@ -661,10 +657,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLSampler.class, WebGLShader.class, WebGLShaderPrecisionFormat.class, WebGLSync.class,
         WebGLTexture.class, WebGLTransformFeedback.class,
         WebGLUniformLocation.class, WebGLVertexArrayObject.class,
-        WebKitCSSMatrix.class, WebkitMediaStream.class, WebKitMutationObserver.class,
-        WebkitRTCPeerConnection.class, WebkitSpeechGrammar.class,
+        WebKitCSSMatrix.class,
+        WebkitSpeechGrammar.class,
         WebkitSpeechGrammarList.class, WebkitSpeechRecognition.class, WebkitSpeechRecognitionError.class,
-        WebkitSpeechRecognitionEvent.class, WebkitURL.class,
+        WebkitSpeechRecognitionEvent.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class, XMLSerializer.class,
         XPathEvaluator.class, XPathExpression.class,

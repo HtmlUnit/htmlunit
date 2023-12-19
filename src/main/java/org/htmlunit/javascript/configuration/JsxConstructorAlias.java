@@ -12,41 +12,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host;
+package org.htmlunit.javascript.configuration;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * A JavaScript object for {@code webkitURL}.
+ * An annotation to mark a Java method as JavaScript constructor.
  *
  * @author Ahmed Ashour
+ * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(value = {CHROME, EDGE, FF, FF_ESR}, className = "webkitURL")
-public class WebkitURL extends URL {
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.METHOD})
+public @interface JsxConstructorAlias {
 
     /**
-     * Creates an instance.
+     * The {@link SupportedBrowser}s supported by this constructor.
+     * @return the {@link SupportedBrowser}s
      */
-    public WebkitURL() {
-    }
+    SupportedBrowser[] value() default {
+        CHROME,
+        EDGE,
+        FF,
+        FF_ESR,
+        IE
+    };
 
     /**
-     * Creates an instance.
-     * @param url a string representing an absolute or relative URL.
-     * If url is a relative URL, base is required, and will be used
-     * as the base URL. If url is an absolute URL, a given base will be ignored.
-     * @param base a string representing the base URL to use in case url
-     * is a relative URL. If not specified, it defaults to ''.
+     * The JavaScript property name.
+     * @return the property name
      */
-    @JsxConstructor(functionName = "URL")
-    public WebkitURL(final String url, final Object base) {
-        super(url, base);
-    }
+    String alias();
 }

@@ -21,6 +21,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -36,6 +37,7 @@ public class MediaStream extends EventTarget {
      * Creates an instance.
      */
     @JsxConstructor
+    @JsxConstructorAlias(value = {CHROME, EDGE}, alias = "webkitMediaStream")
     public MediaStream() {
     }
 }

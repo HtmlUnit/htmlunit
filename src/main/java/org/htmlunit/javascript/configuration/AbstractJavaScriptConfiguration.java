@@ -215,6 +215,12 @@ public abstract class AbstractJavaScriptConfiguration {
                             classConfiguration.setJSConstructor(name, constructor);
                         }
                     }
+                    if (annotation instanceof JsxConstructorAlias) {
+                        final JsxConstructorAlias jsxConstructorAlias = (JsxConstructorAlias) annotation;
+                        if (isSupported(jsxConstructorAlias.value(), expectedBrowser)) {
+                            classConfiguration.setJSConstructorAlias(jsxConstructorAlias.alias());
+                        }
+                    }
                 }
             }
 

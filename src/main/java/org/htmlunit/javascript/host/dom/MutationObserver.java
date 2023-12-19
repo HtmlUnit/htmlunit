@@ -14,6 +14,9 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
@@ -31,6 +34,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.Window;
 
@@ -65,6 +69,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      * @param function the function to observe
      */
     @JsxConstructor
+    @JsxConstructorAlias(value = {CHROME, EDGE}, alias = "WebKitMutationObserver")
     public MutationObserver(final Function function) {
         function_ = function;
     }

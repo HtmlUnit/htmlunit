@@ -29,6 +29,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -64,6 +65,7 @@ public class URL extends HtmlUnitScriptable {
      * is a relative URL. If not specified, it defaults to ''.
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructorAlias(value = {CHROME, EDGE, FF, FF_ESR}, alias = "webkitURL")
     public URL(final String url, final Object base) {
         String baseStr = null;
         if (!JavaScriptEngine.isUndefined(base)) {

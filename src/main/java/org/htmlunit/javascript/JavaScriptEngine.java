@@ -333,20 +333,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 prototype = prototypesPerJSName.get("HTMLOptionElement");
                 sharedPrototype = true;
             }
-            else if ("WebKitMutationObserver".equals(hostClassSimpleName)) {
-                prototypes.remove(config.getHostClass());
-                prototypesPerJSName.remove(config.getClassName());
-
-                prototype = prototypesPerJSName.get("MutationObserver");
-                sharedPrototype = true;
-            }
-            else if ("WebkitURL".equals(hostClassSimpleName)) {
-                prototypes.remove(config.getHostClass());
-                prototypesPerJSName.remove(config.getClassName());
-
-                prototype = prototypesPerJSName.get("URL");
-                sharedPrototype = true;
-            }
 
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor == null) {
@@ -406,6 +392,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         if (function instanceof FunctionObject) {
                             try {
                                 ((FunctionObject) function).addAsConstructor(window, prototype, ScriptableObject.DONTENUM);
+
+                                final String alias = config.getJsConstructorAlias();
+                                if (alias != null) {
+                                    ScriptableObject.defineProperty(window, alias, function, ScriptableObject.DONTENUM);
+                                }
                             }
                             catch (final Exception e) {
                                 // TODO see issue #1897
@@ -439,6 +430,19 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 prototype.setPrototype(objectPrototype);
             }
         }
+
+        // some special redirectors
+//        // WebKitMutationObserver
+//        if (browserVersion.isChrome() || browserVersion.isEdge()) {
+//            prototypeProperty = ScriptableObject.getProperty(window, "MutationObserver");
+//            ScriptableObject.defineProperty(window, "WebKitMutationObserver", prototypeProperty, ScriptableObject.DONTENUM);
+//        }
+//
+//        // webkitURL
+//        if (browserVersion.isChrome() || browserVersion.isEdge() || browserVersion.isFirefox()) {
+//            prototypeProperty = ScriptableObject.getProperty(window, "URL");
+//            ScriptableObject.defineProperty(window, "webkitURL", prototypeProperty, ScriptableObject.DONTENUM);
+//        }
 
         // IE ActiveXObject simulation
         // see http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx
