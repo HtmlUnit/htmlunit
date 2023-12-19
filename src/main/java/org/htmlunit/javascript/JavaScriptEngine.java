@@ -317,18 +317,35 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final String jsClassName = config.getClassName();
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String hostClassSimpleName = config.getHostClassSimpleName();
+            boolean sharedPrototype = false;
 
             if ("Image".equals(hostClassSimpleName)) {
+                prototypes.remove(config.getHostClass());
+                prototypesPerJSName.remove(config.getClassName());
+
                 prototype = prototypesPerJSName.get("HTMLImageElement");
+                sharedPrototype = true;
             }
             else if ("Option".equals(hostClassSimpleName)) {
+                prototypes.remove(config.getHostClass());
+                prototypesPerJSName.remove(config.getClassName());
+
                 prototype = prototypesPerJSName.get("HTMLOptionElement");
+                sharedPrototype = true;
             }
             else if ("WebKitMutationObserver".equals(hostClassSimpleName)) {
+                prototypes.remove(config.getHostClass());
+                prototypesPerJSName.remove(config.getClassName());
+
                 prototype = prototypesPerJSName.get("MutationObserver");
+                sharedPrototype = true;
             }
             else if ("WebkitURL".equals(hostClassSimpleName)) {
+                prototypes.remove(config.getHostClass());
+                prototypesPerJSName.remove(config.getClassName());
+
                 prototype = prototypesPerJSName.get("URL");
+                sharedPrototype = true;
             }
 
             if (prototype != null && config.isJsObject()) {
@@ -353,10 +370,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), window, browserVersion);
                     }
 
-                    if ("WebKitMutationObserver".equals(hostClassSimpleName)
-                            || "WebkitURL".equals(hostClassSimpleName)
-                            || "Image".equals(hostClassSimpleName)
-                            || "Option".equals(hostClassSimpleName)) {
+                    if (sharedPrototype) {
                         final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());
 
                         if (function instanceof FunctionObject) {
@@ -459,7 +473,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             ScriptableObject.defineProperty(window, "Console", console, ScriptableObject.DONTENUM);
         }
 
-        window.setPrototypes(prototypes, prototypesPerJSName);
+        window.setPrototypes(prototypes);
         window.initialize(webWindow, page);
 
         applyPolyfills(webClient, browserVersion, context, window);

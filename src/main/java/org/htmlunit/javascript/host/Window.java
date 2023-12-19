@@ -172,7 +172,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private Event currentEvent_;
     private String status_ = "";
     private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
-    private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
     private Object controllers_;
     private Object opener_;
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
@@ -236,23 +235,11 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the prototype object corresponding to the specified HtmlUnit class inside the window scope.
-     * @param className the class name whose prototype is to be returned
-     * @return the prototype object corresponding to the specified class inside the specified scope
-     */
-    public Scriptable getPrototype(final String className) {
-        return prototypesPerJSName_.get(className);
-    }
-
-    /**
      * Sets the prototypes for HtmlUnit host classes.
      * @param map a Map of ({@link Class}, {@link Scriptable})
-     * @param prototypesPerJSName map of {@link String} and {@link Scriptable}
      */
-    public void setPrototypes(final Map<Class<? extends Scriptable>, Scriptable> map,
-            final Map<String, Scriptable> prototypesPerJSName) {
+    public void setPrototypes(final Map<Class<? extends Scriptable>, Scriptable> map) {
         prototypes_ = map;
-        prototypesPerJSName_ = prototypesPerJSName;
     }
 
     /**
