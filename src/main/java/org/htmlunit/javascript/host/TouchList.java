@@ -32,7 +32,13 @@ public class TouchList extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public TouchList() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

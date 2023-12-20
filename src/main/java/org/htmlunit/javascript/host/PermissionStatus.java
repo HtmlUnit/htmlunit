@@ -35,7 +35,15 @@ public class PermissionStatus extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public PermissionStatus() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

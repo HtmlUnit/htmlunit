@@ -52,9 +52,15 @@ public class StyleSheet extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public StyleSheet() {
         ownerNode_ = null;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 
     public StyleSheet(final HTMLElement ownerNode) {

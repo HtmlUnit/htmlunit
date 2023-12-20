@@ -54,9 +54,15 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     /**
      * We need default constructors to build the prototype instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public NamedNodeMap() {
         attributes_ = null;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 
     /**

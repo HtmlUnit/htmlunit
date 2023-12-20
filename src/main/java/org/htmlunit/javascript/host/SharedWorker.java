@@ -35,7 +35,15 @@ public class SharedWorker extends EventTarget {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public SharedWorker() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

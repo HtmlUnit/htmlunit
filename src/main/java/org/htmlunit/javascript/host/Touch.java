@@ -32,7 +32,13 @@ public class Touch extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public Touch() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

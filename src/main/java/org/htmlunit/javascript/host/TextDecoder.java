@@ -350,7 +350,7 @@ public class TextDecoder extends HtmlUnitScriptable {
      * @param encoding the encoding
      */
     @JsxConstructor
-    public TextDecoder(final Object encoding) {
+    public void jsConstructor(final Object encoding) {
         if (JavaScriptEngine.isUndefined(encoding)) {
             return;
         }

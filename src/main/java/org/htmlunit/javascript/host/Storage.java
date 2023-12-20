@@ -57,9 +57,15 @@ public class Storage extends HtmlUnitScriptable {
     /**
      * Public default constructor only for the prototype.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public Storage() {
         store_ = null;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 
     /**

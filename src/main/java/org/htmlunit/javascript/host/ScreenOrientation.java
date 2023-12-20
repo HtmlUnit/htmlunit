@@ -39,8 +39,16 @@ public class ScreenOrientation extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public ScreenOrientation() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

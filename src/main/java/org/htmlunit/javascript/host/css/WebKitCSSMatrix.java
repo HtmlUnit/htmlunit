@@ -35,7 +35,13 @@ public class WebKitCSSMatrix extends DOMMatrix {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public WebKitCSSMatrix() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }
