@@ -129,10 +129,16 @@ public class DOMException extends HtmlUnitScriptable {
     /**
      * Default constructor used to build the prototype.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public DOMException() {
         code_ = -1;
         message_ = null;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 
     /**

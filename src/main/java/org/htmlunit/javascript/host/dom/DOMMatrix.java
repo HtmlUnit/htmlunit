@@ -34,7 +34,15 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public DOMMatrix() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

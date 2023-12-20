@@ -33,7 +33,15 @@ public class PresentationRequest extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PresentationRequest() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

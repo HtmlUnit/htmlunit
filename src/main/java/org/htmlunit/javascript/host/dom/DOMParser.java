@@ -51,8 +51,14 @@ public class DOMParser extends HtmlUnitScriptable {
     /**
      * The constructor.
      */
-    @JsxConstructor
     public DOMParser() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 
     /**

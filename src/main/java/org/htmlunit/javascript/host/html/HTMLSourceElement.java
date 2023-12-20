@@ -36,10 +36,17 @@ public class HTMLSourceElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public HTMLSourceElement() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        super.jsConstructor();
+    }
     /**
      * Returns whether the end tag is forbidden or not.
      * @see <a href="http://www.w3.org/TR/html4/index/elements.html">HTML 4 specs</a>

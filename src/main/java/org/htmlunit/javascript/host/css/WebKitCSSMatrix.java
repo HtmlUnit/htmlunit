@@ -41,7 +41,9 @@ public class WebKitCSSMatrix extends DOMMatrix {
     /**
      * JavaScript constructor.
      */
+    @Override
     @JsxConstructor
     public void jsConstructor() {
+        super.jsConstructor();
     }
 }

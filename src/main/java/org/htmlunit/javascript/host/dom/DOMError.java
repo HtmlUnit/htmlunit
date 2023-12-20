@@ -34,8 +34,13 @@ public class DOMError extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE})
     public DOMError() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE})
+    public void jsConstructor() {
+    }
 }

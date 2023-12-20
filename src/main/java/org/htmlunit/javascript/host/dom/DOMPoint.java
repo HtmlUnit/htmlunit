@@ -34,7 +34,15 @@ public class DOMPoint extends DOMPointReadOnly {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public DOMPoint() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

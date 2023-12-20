@@ -25,6 +25,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code Presentation}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE})
 public class Presentation extends HtmlUnitScriptable {
@@ -32,7 +33,13 @@ public class Presentation extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public Presentation() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }
