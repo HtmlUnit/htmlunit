@@ -38,4 +38,11 @@ public class IDBIndex extends HtmlUnitScriptable {
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public IDBIndex() {
     }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+    }
 }

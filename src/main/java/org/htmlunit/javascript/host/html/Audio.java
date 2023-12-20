@@ -21,6 +21,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * The JavaScript object {@code Audio}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class Audio extends HTMLAudioElement {
@@ -28,8 +29,16 @@ public class Audio extends HTMLAudioElement {
     /**
      * The constructor.
      */
-    @JsxConstructor
     public Audio() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

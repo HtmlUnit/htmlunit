@@ -31,7 +31,15 @@ public class FileSystemDirectoryEntry extends FileSystemEntry {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public FileSystemDirectoryEntry() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }
