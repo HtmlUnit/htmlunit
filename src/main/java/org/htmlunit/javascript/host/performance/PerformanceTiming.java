@@ -34,35 +34,28 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 @JsxClass
 public class PerformanceTiming extends HtmlUnitScriptable {
 
-    private long domainLookupStart_;
-    private long domainLookupEnd_;
-    private long connectStart_;
-    private long connectEnd_;
-    private long responseStart_;
-    private long responseEnd_;
+    private final long domainLookupStart_;
+    private final long domainLookupEnd_;
+    private final long connectStart_;
+    private final long connectEnd_;
+    private final long responseStart_;
+    private final long responseEnd_;
 
-    private long domContentLoadedEventStart_;
-    private long domContentLoadedEventEnd_;
-    private long domLoading_;
-    private long domInteractive_;
-    private long domComplete_;
+    private final long domContentLoadedEventStart_;
+    private final long domContentLoadedEventEnd_;
+    private final long domLoading_;
+    private final long domInteractive_;
+    private final long domComplete_;
 
-    private long loadEventStart_;
-    private long loadEventEnd_;
-    private long navigationStart_;
-    private long fetchStart_;
+    private final long loadEventStart_;
+    private final long loadEventEnd_;
+    private final long navigationStart_;
+    private final long fetchStart_;
 
     /**
      * Creates an instance.
      */
     public PerformanceTiming() {
-    }
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
         final long now = System.currentTimeMillis();
 
         // simulate the fastest browser on earth
@@ -85,6 +78,13 @@ public class PerformanceTiming extends HtmlUnitScriptable {
 
         navigationStart_ = now;
         fetchStart_ = now;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 
     /**
