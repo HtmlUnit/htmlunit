@@ -48,6 +48,7 @@ public class ClientRectList extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public ClientRectList() {
+        clientRects_ = new ArrayList<>();
     }
 
     /**
@@ -55,7 +56,6 @@ public class ClientRectList extends HtmlUnitScriptable {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        clientRects_ = new ArrayList<>();
     }
 
     /**
