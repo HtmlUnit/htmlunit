@@ -33,7 +33,15 @@ public class PaymentResponse extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PaymentResponse() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

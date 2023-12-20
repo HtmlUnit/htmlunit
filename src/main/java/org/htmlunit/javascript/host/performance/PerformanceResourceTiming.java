@@ -34,8 +34,15 @@ public class PerformanceResourceTiming extends PerformanceEntry {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public PerformanceResourceTiming() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        super.jsConstructor();
+    }
 }

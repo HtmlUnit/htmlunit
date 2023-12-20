@@ -35,8 +35,13 @@ public class GamepadButton extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public GamepadButton() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+    }
 }

@@ -23,6 +23,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * A JavaScript object for {@code MessageChannel}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class MessageChannel extends HtmlUnitScriptable {
@@ -33,8 +34,14 @@ public class MessageChannel extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public MessageChannel() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 
     /**

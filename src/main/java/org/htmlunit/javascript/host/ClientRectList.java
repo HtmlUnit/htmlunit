@@ -42,13 +42,19 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 @JsxClass(IE)
 public class ClientRectList extends HtmlUnitScriptable {
 
-    private final List<ClientRect> clientRects_;
+    private List<ClientRect> clientRects_;
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public ClientRectList() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
         clientRects_ = new ArrayList<>();
     }
 

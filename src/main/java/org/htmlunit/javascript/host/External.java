@@ -39,8 +39,14 @@ public class External extends HtmlUnitScriptable {
     /**
      * The constructor.
      */
-    @JsxConstructor
     public External() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 
     /**

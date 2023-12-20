@@ -33,7 +33,15 @@ public class BatteryManager extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public BatteryManager() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

@@ -33,7 +33,15 @@ public class PaymentRequest extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PaymentRequest() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }
