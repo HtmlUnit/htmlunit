@@ -34,7 +34,13 @@ public class SecurityPolicyViolationEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public SecurityPolicyViolationEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

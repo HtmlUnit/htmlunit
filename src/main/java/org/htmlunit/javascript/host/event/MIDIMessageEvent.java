@@ -34,7 +34,13 @@ public class MIDIMessageEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MIDIMessageEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

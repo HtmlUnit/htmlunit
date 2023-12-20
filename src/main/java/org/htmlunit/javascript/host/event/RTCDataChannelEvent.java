@@ -34,7 +34,13 @@ public class RTCDataChannelEvent extends Event {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public RTCDataChannelEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

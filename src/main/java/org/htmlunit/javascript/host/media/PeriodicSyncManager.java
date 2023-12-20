@@ -32,7 +32,13 @@ public class PeriodicSyncManager extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PeriodicSyncManager() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

@@ -33,7 +33,13 @@ public class MediaKeyError extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MediaKeyError() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

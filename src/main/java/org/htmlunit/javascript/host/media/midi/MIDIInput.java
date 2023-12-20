@@ -34,7 +34,15 @@ public class MIDIInput extends MIDIPort {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public MIDIInput() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

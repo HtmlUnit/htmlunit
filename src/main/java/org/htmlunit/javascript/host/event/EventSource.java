@@ -47,7 +47,15 @@ public class EventSource extends EventTarget {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public EventSource() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

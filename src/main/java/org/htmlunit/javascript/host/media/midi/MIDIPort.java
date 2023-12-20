@@ -35,7 +35,13 @@ public class MIDIPort extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public MIDIPort() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

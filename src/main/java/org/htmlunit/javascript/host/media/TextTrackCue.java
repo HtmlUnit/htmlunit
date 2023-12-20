@@ -22,6 +22,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * A JavaScript object for {@code TextTrackCue}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class TextTrackCue extends EventTarget {
@@ -29,8 +30,13 @@ public class TextTrackCue extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public TextTrackCue() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+    }
 }

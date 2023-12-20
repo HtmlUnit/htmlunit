@@ -35,7 +35,13 @@ public class MIDIOutputMap extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public MIDIOutputMap() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

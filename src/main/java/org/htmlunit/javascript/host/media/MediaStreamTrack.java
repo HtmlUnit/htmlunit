@@ -35,7 +35,13 @@ public class MediaStreamTrack extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MediaStreamTrack() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

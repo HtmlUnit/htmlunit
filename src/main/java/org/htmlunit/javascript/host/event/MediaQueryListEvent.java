@@ -34,7 +34,13 @@ public class MediaQueryListEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MediaQueryListEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

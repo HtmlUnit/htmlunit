@@ -38,7 +38,6 @@ public class SVGPathSegCurvetoQuadraticSmoothAbs extends SVGPathSeg {
     public SVGPathSegCurvetoQuadraticSmoothAbs() {
     }
 
-
     /**
      * JavaScript constructor.
      */

@@ -34,7 +34,13 @@ public class SpeechSynthesisEvent extends Event {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public SpeechSynthesisEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

@@ -56,8 +56,14 @@ public class EventTarget extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public EventTarget() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 
     /**

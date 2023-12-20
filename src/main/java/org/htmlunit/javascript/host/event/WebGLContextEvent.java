@@ -35,7 +35,13 @@ public class WebGLContextEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public WebGLContextEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

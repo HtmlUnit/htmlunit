@@ -80,8 +80,8 @@ public class TextEvent extends UIEvent {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, EDGE})
     @Override
+    @JsxConstructor({CHROME, EDGE})
     public void jsConstructor(final String type, final ScriptableObject details) {
         throw JavaScriptEngine.typeError("TextEvent ctor is not available");
     }

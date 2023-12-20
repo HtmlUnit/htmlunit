@@ -34,7 +34,15 @@ public class VTTCue extends TextTrackCue {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public VTTCue() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

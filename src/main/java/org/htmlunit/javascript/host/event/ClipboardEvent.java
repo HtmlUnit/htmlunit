@@ -34,7 +34,13 @@ public class ClipboardEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public ClipboardEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

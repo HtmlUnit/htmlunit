@@ -24,6 +24,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code PresentationConnectionCloseEvent}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE})
 public class PresentationConnectionCloseEvent extends Event {
@@ -31,7 +32,13 @@ public class PresentationConnectionCloseEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PresentationConnectionCloseEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

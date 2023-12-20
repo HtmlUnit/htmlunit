@@ -35,7 +35,13 @@ public class AudioBuffer extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public AudioBuffer() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

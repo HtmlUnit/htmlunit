@@ -35,7 +35,13 @@ public class MediaKeySession extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public MediaKeySession() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

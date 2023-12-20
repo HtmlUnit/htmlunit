@@ -31,7 +31,13 @@ public class PresentationConnectionAvailableEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PresentationConnectionAvailableEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

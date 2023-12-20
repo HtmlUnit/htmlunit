@@ -35,7 +35,13 @@ public class Headers extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public Headers() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

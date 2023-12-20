@@ -32,8 +32,13 @@ public class WebkitSpeechRecognitionError extends Event {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor(functionName = "SpeechRecognitionErrorEvent")
     public WebkitSpeechRecognitionError() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor(functionName = "SpeechRecognitionErrorEvent")
+    public void jsConstructor() {
+    }
 }

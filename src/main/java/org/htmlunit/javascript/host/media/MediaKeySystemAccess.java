@@ -35,7 +35,13 @@ public class MediaKeySystemAccess extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public MediaKeySystemAccess() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

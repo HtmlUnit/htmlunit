@@ -41,7 +41,13 @@ public class MouseScrollEvent extends MouseEvent {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public MouseScrollEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

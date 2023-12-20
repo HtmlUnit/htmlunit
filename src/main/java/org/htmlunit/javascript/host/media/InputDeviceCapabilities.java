@@ -25,6 +25,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code InputDeviceCapabilities}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE})
 public class InputDeviceCapabilities extends HtmlUnitScriptable {
@@ -32,7 +33,13 @@ public class InputDeviceCapabilities extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public InputDeviceCapabilities() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

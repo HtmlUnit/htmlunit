@@ -35,7 +35,13 @@ public class PeriodicWave extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PeriodicWave() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

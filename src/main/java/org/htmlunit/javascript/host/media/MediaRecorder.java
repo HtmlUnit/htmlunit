@@ -35,7 +35,13 @@ public class MediaRecorder extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MediaRecorder() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

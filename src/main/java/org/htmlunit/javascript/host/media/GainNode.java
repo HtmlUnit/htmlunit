@@ -40,8 +40,8 @@ public class GainNode extends AudioNode {
     public GainNode() {
     }
 
-    @JsxConstructor
     @Override
+    @JsxConstructor
     public void jsConstructor(final Object baCtx) {
         super.jsConstructor(baCtx);
 

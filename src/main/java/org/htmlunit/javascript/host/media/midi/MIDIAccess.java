@@ -35,7 +35,13 @@ public class MIDIAccess extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public MIDIAccess() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

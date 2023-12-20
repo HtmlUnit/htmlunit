@@ -34,7 +34,13 @@ public class PromiseRejectionEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public PromiseRejectionEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

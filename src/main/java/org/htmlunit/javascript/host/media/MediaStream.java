@@ -36,8 +36,14 @@ public class MediaStream extends EventTarget {
     /**
      * Creates an instance.
      */
+    public MediaStream() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
     @JsxConstructor
     @JsxConstructorAlias(value = {CHROME, EDGE}, alias = "webkitMediaStream")
-    public MediaStream() {
+    public void jsConstructor() {
     }
 }

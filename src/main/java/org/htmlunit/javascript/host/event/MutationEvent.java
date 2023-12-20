@@ -60,8 +60,8 @@ public class MutationEvent extends Event {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor(final String type, final ScriptableObject details) {
         throw JavaScriptEngine.typeError("Illegal constructor call for MutationEvent");
     }

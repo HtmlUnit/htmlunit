@@ -46,8 +46,8 @@ public class AudioProcessingEvent extends Event {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor(final String type, final ScriptableObject details) {
         if (getBrowserVersion().hasFeature(JS_AUDIO_PROCESSING_EVENT_CTOR)) {
             if (details == null || JavaScriptEngine.isUndefined(details)) {

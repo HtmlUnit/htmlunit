@@ -34,7 +34,13 @@ public class RTCPeerConnectionIceEvent extends Event {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public RTCPeerConnectionIceEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

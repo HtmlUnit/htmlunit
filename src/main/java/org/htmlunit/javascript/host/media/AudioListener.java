@@ -35,7 +35,13 @@ public class AudioListener extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public AudioListener() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

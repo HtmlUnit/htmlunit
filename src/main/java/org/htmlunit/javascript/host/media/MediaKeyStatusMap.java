@@ -35,7 +35,13 @@ public class MediaKeyStatusMap extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public MediaKeyStatusMap() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

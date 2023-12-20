@@ -34,7 +34,13 @@ public class MIDIConnectionEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MIDIConnectionEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

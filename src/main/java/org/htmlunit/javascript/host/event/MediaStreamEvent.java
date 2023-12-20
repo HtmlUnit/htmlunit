@@ -34,7 +34,13 @@ public class MediaStreamEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MediaStreamEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

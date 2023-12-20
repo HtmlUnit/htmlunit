@@ -34,7 +34,13 @@ public class MediaEncryptedEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MediaEncryptedEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

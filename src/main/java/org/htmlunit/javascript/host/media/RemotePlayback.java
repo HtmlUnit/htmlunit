@@ -32,7 +32,13 @@ public class RemotePlayback extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public RemotePlayback() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

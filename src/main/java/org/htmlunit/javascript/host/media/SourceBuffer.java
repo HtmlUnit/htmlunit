@@ -30,7 +30,13 @@ public class SourceBuffer extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public SourceBuffer() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

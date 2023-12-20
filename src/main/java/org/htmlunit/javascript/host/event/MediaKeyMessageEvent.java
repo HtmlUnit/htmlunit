@@ -34,7 +34,13 @@ public class MediaKeyMessageEvent extends Event {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public MediaKeyMessageEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }
