@@ -34,7 +34,15 @@ public class Animation extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public Animation() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

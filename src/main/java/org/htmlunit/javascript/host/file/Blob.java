@@ -210,7 +210,7 @@ public class Blob extends HtmlUnitScriptable {
      * @param properties the properties
      */
     @JsxConstructor
-    public Blob(final NativeArray fileBits, final ScriptableObject properties) {
+    public void jsConstructor(final NativeArray fileBits, final ScriptableObject properties) {
         NativeArray nativeBits = fileBits;
         if (JavaScriptEngine.isUndefined(fileBits)) {
             nativeBits = null;

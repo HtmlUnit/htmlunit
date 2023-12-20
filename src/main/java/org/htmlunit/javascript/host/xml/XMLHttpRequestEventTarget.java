@@ -46,10 +46,11 @@ public class XMLHttpRequestEventTarget extends EventTarget {
     }
 
     /**
-     * @return the constructed object
+     * JavaScript constructor.
      */
+    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public static XMLHttpRequestEventTarget ctor() {
+    public void jsConstructor() {
         throw JavaScriptEngine.typeError("Illegal constructor.");
     }
 

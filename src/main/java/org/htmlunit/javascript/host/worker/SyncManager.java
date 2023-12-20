@@ -25,6 +25,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code SyncManager}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE})
 public class SyncManager extends HtmlUnitScriptable {
@@ -32,8 +33,13 @@ public class SyncManager extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public SyncManager() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+    }
 }

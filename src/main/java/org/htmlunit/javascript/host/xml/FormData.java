@@ -139,7 +139,7 @@ public class FormData extends HtmlUnitScriptable {
      * @param formObj a form
      */
     @JsxConstructor
-    public FormData(final Object formObj) {
+    public void jsConstructor(final Object formObj) {
         if (formObj instanceof HTMLFormElement) {
             final HTMLFormElement form = (HTMLFormElement) formObj;
             requestParameters_.addAll(form.getHtmlForm().getParameterListForSubmit(null));

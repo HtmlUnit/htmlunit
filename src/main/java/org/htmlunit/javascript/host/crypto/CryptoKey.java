@@ -35,8 +35,13 @@ public class CryptoKey extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public CryptoKey() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+    }
 }

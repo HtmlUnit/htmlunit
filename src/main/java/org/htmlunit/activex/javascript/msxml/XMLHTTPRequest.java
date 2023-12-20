@@ -122,8 +122,14 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public XMLHTTPRequest() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 
     /**

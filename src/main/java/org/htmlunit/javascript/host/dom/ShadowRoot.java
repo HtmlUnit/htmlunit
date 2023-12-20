@@ -34,7 +34,15 @@ public class ShadowRoot extends DocumentFragment {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public ShadowRoot() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

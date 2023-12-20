@@ -70,7 +70,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      */
     @JsxConstructor
     @JsxConstructorAlias(value = {CHROME, EDGE}, alias = "WebKitMutationObserver")
-    public MutationObserver(final Function function) {
+    public void jsConstructor(final Function function) {
         function_ = function;
     }
 

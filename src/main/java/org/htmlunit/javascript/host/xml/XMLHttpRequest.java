@@ -186,9 +186,17 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public XMLHttpRequest() {
         this(true);
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

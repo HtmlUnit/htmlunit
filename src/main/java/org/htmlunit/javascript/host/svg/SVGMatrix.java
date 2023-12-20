@@ -47,7 +47,6 @@ public class SVGMatrix extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public SVGMatrix() {
         shearX_ = 0.0;
         shearY_ = 0.0;
@@ -55,6 +54,13 @@ public class SVGMatrix extends HtmlUnitScriptable {
         scaleY_ = 1.0;
         translateX_ = 0.0;
         translateY_ = 0.0;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 
     /**

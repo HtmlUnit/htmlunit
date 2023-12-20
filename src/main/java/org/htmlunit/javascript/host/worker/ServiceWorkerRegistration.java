@@ -35,8 +35,15 @@ public class ServiceWorkerRegistration extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public ServiceWorkerRegistration() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
+    }
 }

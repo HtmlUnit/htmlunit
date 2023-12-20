@@ -69,7 +69,7 @@ public class Worker extends EventTarget {
      * @throws Exception in case of problem
      */
     @JsxConstructor
-    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
+    public static Worker jsConstructor(final Context cx, final Scriptable scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) throws Exception {
         if (args.length < 1 || args.length > 2) {
             throw JavaScriptEngine.reportRuntimeError(
@@ -77,7 +77,6 @@ public class Worker extends EventTarget {
         }
 
         final String url = JavaScriptEngine.toString(args[0]);
-
         return new Worker(cx, getWindow(ctorObj), url);
     }
 

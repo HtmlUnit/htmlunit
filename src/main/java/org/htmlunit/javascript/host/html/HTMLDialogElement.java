@@ -39,8 +39,16 @@ public class HTMLDialogElement extends HTMLElement {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public HTMLDialogElement() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

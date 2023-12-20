@@ -41,8 +41,14 @@ public class XPathEvaluator extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public XPathEvaluator() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 
     /**

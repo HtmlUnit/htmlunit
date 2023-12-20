@@ -110,7 +110,7 @@ public class File extends Blob {
      * @param properties the properties
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public File(final NativeArray fileBits, final String fileName, final ScriptableObject properties) {
+    public void jsConstructor(final NativeArray fileBits, final String fileName, final ScriptableObject properties) {
         if (fileBits == null
                 || JavaScriptEngine.isUndefined(fileBits)
                 || fileName == null

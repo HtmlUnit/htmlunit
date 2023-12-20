@@ -70,8 +70,14 @@ public class XSLTProcessor extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public XSLTProcessor() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 
     /**
