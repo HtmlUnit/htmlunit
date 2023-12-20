@@ -35,7 +35,6 @@ public class IDBIndex extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public IDBIndex() {
     }
 

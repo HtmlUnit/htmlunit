@@ -34,8 +34,15 @@ public class HTMLFormControlsCollection extends HTMLCollection {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public HTMLFormControlsCollection() {
     }
 
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
+    }
 }
