@@ -35,7 +35,13 @@ public class RTCStatsReport extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public RTCStatsReport() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

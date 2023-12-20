@@ -48,6 +48,7 @@ public class BaseAudioContext extends EventTarget {
     /**
      * Creates an instance.
      */
+    @Override
     @JsxConstructor
     public void jsConstructor() {
         throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");

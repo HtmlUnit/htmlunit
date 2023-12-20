@@ -35,7 +35,15 @@ public class RTCSctpTransport extends EventTarget {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public RTCSctpTransport() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

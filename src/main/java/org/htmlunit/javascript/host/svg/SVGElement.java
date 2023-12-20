@@ -50,6 +50,7 @@ public class SVGElement extends Element {
     /**
      * Creates an instance.
      */
+    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
         throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");

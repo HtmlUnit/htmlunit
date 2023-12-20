@@ -65,7 +65,9 @@ public class TextTrack extends EventTarget {
     /**
      * JavaScript constructor.
      */
+    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
+        super.jsConstructor();
     }
 }

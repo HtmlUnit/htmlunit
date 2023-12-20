@@ -32,7 +32,15 @@ public class FederatedCredential extends Credential {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public FederatedCredential() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

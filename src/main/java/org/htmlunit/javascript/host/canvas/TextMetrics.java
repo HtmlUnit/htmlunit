@@ -38,9 +38,15 @@ public class TextMetrics extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public TextMetrics() {
         width_ = 0;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 
     TextMetrics(final int width) {

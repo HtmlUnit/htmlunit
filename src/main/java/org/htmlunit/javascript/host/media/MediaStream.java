@@ -42,8 +42,10 @@ public class MediaStream extends EventTarget {
     /**
      * JavaScript constructor.
      */
+    @Override
     @JsxConstructor
     @JsxConstructorAlias(value = {CHROME, EDGE}, alias = "webkitMediaStream")
     public void jsConstructor() {
+        super.jsConstructor();
     }
 }

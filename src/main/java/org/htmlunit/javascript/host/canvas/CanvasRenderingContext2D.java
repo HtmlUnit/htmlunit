@@ -56,16 +56,20 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(CanvasRenderingContext2D.class);
 
-    private final HTMLCanvasElement canvas_;
+    private HTMLCanvasElement canvas_;
     private RenderingBackend renderingBackend_;
 
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CanvasRenderingContext2D() {
-        canvas_ = null;
-        renderingBackend_ = null;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 
     /**

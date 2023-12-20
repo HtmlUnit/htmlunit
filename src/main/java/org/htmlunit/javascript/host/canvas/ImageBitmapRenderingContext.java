@@ -35,7 +35,13 @@ public class ImageBitmapRenderingContext extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public ImageBitmapRenderingContext() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }

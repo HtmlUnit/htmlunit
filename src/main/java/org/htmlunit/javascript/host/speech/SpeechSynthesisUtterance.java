@@ -35,7 +35,15 @@ public class SpeechSynthesisUtterance extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public SpeechSynthesisUtterance() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

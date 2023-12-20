@@ -32,7 +32,15 @@ public class PasswordCredential extends Credential {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public PasswordCredential() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

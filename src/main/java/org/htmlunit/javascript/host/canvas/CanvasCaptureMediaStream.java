@@ -33,7 +33,15 @@ public class CanvasCaptureMediaStream extends MediaStream {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public CanvasCaptureMediaStream() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

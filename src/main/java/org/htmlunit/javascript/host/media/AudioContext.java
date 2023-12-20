@@ -43,6 +43,6 @@ public class AudioContext extends BaseAudioContext {
     @Override
     @JsxConstructor
     public void jsConstructor() {
-        super.jsConstructor();
+        // don't call the super constructor here
     }
 }

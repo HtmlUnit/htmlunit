@@ -36,8 +36,16 @@ public class RTCPeerConnection extends EventTarget {
     /**
      * Creates an instance.
      */
+    public RTCPeerConnection() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
     @JsxConstructor
     @JsxConstructorAlias(value = {CHROME, EDGE}, alias = "webkitRTCPeerConnection")
-    public RTCPeerConnection() {
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

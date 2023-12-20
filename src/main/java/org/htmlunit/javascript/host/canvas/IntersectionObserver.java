@@ -37,8 +37,14 @@ public class IntersectionObserver extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public IntersectionObserver() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 
     /**

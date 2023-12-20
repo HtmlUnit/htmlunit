@@ -34,7 +34,15 @@ public class SpeechSynthesisErrorEvent extends SpeechSynthesisEvent {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public SpeechSynthesisErrorEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

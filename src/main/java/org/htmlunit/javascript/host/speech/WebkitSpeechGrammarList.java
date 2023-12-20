@@ -33,7 +33,13 @@ public class WebkitSpeechGrammarList extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor(functionName = "SpeechGrammarList")
     public WebkitSpeechGrammarList() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor(functionName = "SpeechGrammarList")
+    public void jsConstructor() {
     }
 }

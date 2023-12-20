@@ -35,7 +35,13 @@ public class Credential extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public Credential() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
     }
 }
