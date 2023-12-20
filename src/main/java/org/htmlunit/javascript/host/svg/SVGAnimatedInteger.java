@@ -35,7 +35,13 @@ public class SVGAnimatedInteger extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public SVGAnimatedInteger() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 }

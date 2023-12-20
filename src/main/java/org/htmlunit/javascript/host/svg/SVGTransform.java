@@ -58,7 +58,13 @@ public class SVGTransform extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public SVGTransform() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 }

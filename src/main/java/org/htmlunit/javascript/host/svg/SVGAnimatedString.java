@@ -35,7 +35,13 @@ public class SVGAnimatedString extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public SVGAnimatedString() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 }

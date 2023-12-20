@@ -35,7 +35,13 @@ public class SVGLengthList extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public SVGLengthList() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 }

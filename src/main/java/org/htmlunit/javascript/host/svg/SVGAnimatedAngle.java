@@ -35,7 +35,13 @@ public class SVGAnimatedAngle extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public SVGAnimatedAngle() {
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
     }
 }
