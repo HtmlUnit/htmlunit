@@ -196,7 +196,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @Override
     @JsxConstructor
     public void jsConstructor() {
-        super.jsConstructor();
+        // don't call super here
     }
 
     /**
