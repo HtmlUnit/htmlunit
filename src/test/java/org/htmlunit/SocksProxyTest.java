@@ -61,7 +61,7 @@ public class SocksProxyTest extends WebServerTestCase {
         doHttpTest(getWebClientWithWrongSocksProxy());
     }
 
-    private void doHttpTest(final WebClient client) throws Exception, IOException, MalformedURLException {
+    private static void doHttpTest(final WebClient client) throws Exception, IOException, MalformedURLException {
         final URL http = new URL("http://localhost:" + PORT + "/");
         final HtmlPage page = client.getPage(http);
         assertEquals("hello", page.getTitleText());

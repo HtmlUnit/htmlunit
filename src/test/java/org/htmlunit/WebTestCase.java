@@ -93,7 +93,7 @@ public abstract class WebTestCase {
     public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "22222"));
 
     /** The second listener port for the web server, used for cross-origin tests. */
-    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "22228"));
+    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "22223"));
 
     /** The third listener port for the web server, used for cross-origin tests. */
     public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "22224"));
