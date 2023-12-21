@@ -15,9 +15,9 @@
 package org.htmlunit.util;
 
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,8 +49,8 @@ public final class StringUtils {
                                 + "\\s*((0|[1-9]\\d?|100)(.\\d*)?)%\\s*\\)");
     private static final Pattern ILLEGAL_FILE_NAME_CHARS = Pattern.compile("\\\\|/|\\||:|\\?|\\*|\"|<|>|\\p{Cntrl}");
 
-    private static final Map<String, String> CamelizeCache_ = new HashMap<>();
-    private static final Map<String, String> RootLowercaseCache_ = new HashMap<>();
+    private static final Map<String, String> CamelizeCache_ = new ConcurrentHashMap<>();
+    private static final Map<String, String> RootLowercaseCache_ = new ConcurrentHashMap<>();
 
     /**
      * Disallow instantiation of this class.
