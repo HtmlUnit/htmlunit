@@ -52,7 +52,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR, IE})
+@JsxClass
 public class Geolocation extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);

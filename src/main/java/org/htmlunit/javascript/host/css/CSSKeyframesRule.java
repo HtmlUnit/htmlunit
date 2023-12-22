@@ -31,7 +31,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR, IE})
+@JsxClass
 public class CSSKeyframesRule extends CSSRule {
 
     /**
