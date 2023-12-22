@@ -69,7 +69,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
     /** Constant used to register the prototype in the context. */
     public static final String URL_SEARCH_PARMS_TAG = "URLSearchParams";
 
-    private final URL url_;
+    private URL url_;
 
     public static final class NativeParamsIterator extends ES6Iterator {
         enum Type { KEYS, VALUES, BOTH }
@@ -126,7 +126,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * Constructs a new instance.
      */
     public URLSearchParams() {
-        url_ = null;
     }
 
     /**
@@ -142,8 +141,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * @param params the params string
      */
     @JsxConstructor
-    public URLSearchParams(final Object params) {
-        url_ = new URL("http://www.htmlunit.org", "");
+    public void jsConstructor(final Object params) {
+        url_ = new URL();
+        url_.jsConstructor("http://www.htmlunit.org", "");
 
         if (params == null || JavaScriptEngine.isUndefined(params)) {
             return;

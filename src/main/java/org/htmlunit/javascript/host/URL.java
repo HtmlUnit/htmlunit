@@ -66,7 +66,7 @@ public class URL extends HtmlUnitScriptable {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     @JsxConstructorAlias(value = {CHROME, EDGE, FF, FF_ESR}, alias = "webkitURL")
-    public URL(final String url, final Object base) {
+    public void jsConstructor(final String url, final Object base) {
         String baseStr = null;
         if (!JavaScriptEngine.isUndefined(base)) {
             baseStr = JavaScriptEngine.toString(base);

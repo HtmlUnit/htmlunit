@@ -65,7 +65,7 @@ public class CSSStyleSheet extends StyleSheet {
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
 
     /** The parsed stylesheet which this host object wraps. */
-    private final CssStyleSheet styleSheet_;
+    private CssStyleSheet styleSheet_;
 
     /** The collection of rules defined in this style sheet. */
     private CSSRuleList cssRules_;
@@ -74,9 +74,18 @@ public class CSSStyleSheet extends StyleSheet {
     /**
      * Creates a new empty stylesheet.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CSSStyleSheet() {
         super(null);
+        styleSheet_ = new CssStyleSheet(null, (InputSource) null, null);
+    }
+
+    /**
+     * Creates a new empty stylesheet.
+     */
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        super.jsConstructor();
         styleSheet_ = new CssStyleSheet(null, (InputSource) null, null);
     }
 
