@@ -351,8 +351,6 @@ import org.htmlunit.javascript.host.html.HTMLTrackElement;
 import org.htmlunit.javascript.host.html.HTMLUListElement;
 import org.htmlunit.javascript.host.html.HTMLUnknownElement;
 import org.htmlunit.javascript.host.html.HTMLVideoElement;
-import org.htmlunit.javascript.host.html.Image;
-import org.htmlunit.javascript.host.html.Option;
 import org.htmlunit.javascript.host.html.RowContainer;
 import org.htmlunit.javascript.host.html.ValidityState;
 import org.htmlunit.javascript.host.idb.IDBCursor;
@@ -557,7 +555,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
         IDBKeyRange.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class,
         IDBTransaction.class, IDBVersionChangeEvent.class, IdleDeadline.class, IIRFilterNode.class,
-        Image.class, ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class,
+        ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class,
         InputDeviceCapabilities.class, InputEvent.class,
         IntersectionObserver.class, IntersectionObserverEntry.class,
         KeyboardEvent.class, KeyframeEffect.class,
@@ -578,7 +576,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Navigator.class, NetworkInformation.class, Node.class, NodeFilter.class, NodeIterator.class,
         NodeList.class, Notification.class, OES_element_index_uint.class, OES_standard_derivatives.class,
         OES_texture_float.class, OES_texture_float_linear.class, OfflineAudioCompletionEvent.class,
-        OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
+        OfflineAudioContext.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
         PasswordCredential.class,
         Path2D.class,
         PaymentAddress.class, PaymentRequest.class, PaymentResponse.class,

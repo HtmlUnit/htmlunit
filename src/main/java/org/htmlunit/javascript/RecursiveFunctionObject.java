@@ -103,9 +103,8 @@ public class RecursiveFunctionObject extends FunctionObject {
         }
 
         final String superFunctionName = super.getFunctionName();
-        if (!"Image".equals(superFunctionName) && !"Option".equals(superFunctionName)
-                && (!"WebGLContextEvent".equals(superFunctionName)
-                        || browserVersion_.hasFeature(JS_WEBGL_CONTEXT_EVENT_CONSTANTS))) {
+        if (!"WebGLContextEvent".equals(superFunctionName)
+                        || browserVersion_.hasFeature(JS_WEBGL_CONTEXT_EVENT_CONSTANTS)) {
             Class<?> klass = getPrototypeProperty().getClass();
 
             while (value == NOT_FOUND && HtmlUnitScriptable.class.isAssignableFrom(klass)) {

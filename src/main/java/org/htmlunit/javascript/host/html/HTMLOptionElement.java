@@ -84,6 +84,18 @@ public class HTMLOptionElement extends HTMLElement {
     }
 
     /**
+     * JavaScript constructor.
+     * @param newText the text
+     * @param newValue the value
+     * @param defaultSelected Whether the option is initially selected
+     * @param selected the current selection state of the option
+     */
+    public void jsConstructorOption(final Object newText, final String newValue,
+            final boolean defaultSelected, final boolean selected) {
+        jsConstructor(newText, newValue, defaultSelected, selected);
+    }
+
+    /**
      * Returns the value of the {@code value} property.
      * @return the value property
      */

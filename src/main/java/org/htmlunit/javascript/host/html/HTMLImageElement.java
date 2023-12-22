@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
@@ -71,6 +72,18 @@ public class HTMLImageElement extends HTMLElement {
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
         throw JavaScriptEngine.typeError("Invalid constructor.");
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    public void jsConstructorImage() {
+        final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final DomElement fake =
+                page.getWebClient().getPageCreator().getHtmlParser()
+                    .getFactory(HtmlImage.TAG_NAME)
+                    .createElement(page, HtmlImage.TAG_NAME, null);
+        setDomNode(fake);
     }
 
     /**

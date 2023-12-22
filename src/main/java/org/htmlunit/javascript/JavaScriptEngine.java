@@ -71,7 +71,6 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.StackStyle;
 import org.htmlunit.corejs.javascript.Symbol;
 import org.htmlunit.corejs.javascript.Undefined;
-import org.htmlunit.corejs.javascript.UniqueTag;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -86,6 +85,8 @@ import org.htmlunit.javascript.host.DateCustom;
 import org.htmlunit.javascript.host.NumberCustom;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.html.HTMLImageElement;
+import org.htmlunit.javascript.host.html.HTMLOptionElement;
 import org.htmlunit.javascript.host.intl.Intl;
 import org.htmlunit.javascript.host.xml.FormData;
 import org.htmlunit.javascript.polyfill.Polyfill;
@@ -315,24 +316,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
-            Scriptable prototype = prototypesPerJSName.get(jsClassName);
-            final String hostClassSimpleName = config.getHostClassSimpleName();
-            boolean sharedPrototype = false;
-
-            if ("Image".equals(hostClassSimpleName)) {
-                prototypes.remove(config.getHostClass());
-                prototypesPerJSName.remove(config.getClassName());
-
-                prototype = prototypesPerJSName.get("HTMLImageElement");
-                sharedPrototype = true;
-            }
-            else if ("Option".equals(hostClassSimpleName)) {
-                prototypes.remove(config.getHostClass());
-                prototypesPerJSName.remove(config.getClassName());
-
-                prototype = prototypesPerJSName.get("HTMLOptionElement");
-                sharedPrototype = true;
-            }
+            final Scriptable prototype = prototypesPerJSName.get(jsClassName);
 
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor == null) {
@@ -356,56 +340,22 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), window, browserVersion);
                     }
 
-                    if (sharedPrototype) {
-                        final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());
+                    if (function instanceof FunctionObject) {
+                        try {
+                            ((FunctionObject) function).addAsConstructor(window, prototype, ScriptableObject.DONTENUM);
 
-                        if (function instanceof FunctionObject) {
-                            try {
-                                ((FunctionObject) function).addAsConstructor(window, prototype, ScriptableObject.DONTENUM);
-                            }
-                            catch (final Exception e) {
-                                // TODO see issue #1897
-                                if (LOG.isWarnEnabled()) {
-                                    final String newline = System.lineSeparator();
-                                    LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
-                                            + e.getMessage() + newline
-                                            + "prototype: " + prototype.getClassName());
-                                }
+                            final String alias = config.getJsConstructorAlias();
+                            if (alias != null) {
+                                ScriptableObject.defineProperty(window, alias, function, ScriptableObject.DONTENUM);
                             }
                         }
-
-                        ScriptableObject.defineProperty(window, jsClassName, function, ScriptableObject.DONTENUM);
-
-                        // the prototype class name is set as a side effect of functionObject.addAsConstructor
-                        // so we restore its value
-                        if (!hostClassSimpleName.equals(prototype.getClassName())) {
-                            if (prototypeProperty == UniqueTag.NOT_FOUND) {
-                                ScriptableObject.deleteProperty(window, prototype.getClassName());
-                            }
-                            else {
-                                ScriptableObject.defineProperty(window, prototype.getClassName(),
-                                        prototypeProperty, ScriptableObject.DONTENUM);
-                            }
-                        }
-                    }
-                    else {
-                        if (function instanceof FunctionObject) {
-                            try {
-                                ((FunctionObject) function).addAsConstructor(window, prototype, ScriptableObject.DONTENUM);
-
-                                final String alias = config.getJsConstructorAlias();
-                                if (alias != null) {
-                                    ScriptableObject.defineProperty(window, alias, function, ScriptableObject.DONTENUM);
-                                }
-                            }
-                            catch (final Exception e) {
-                                // TODO see issue #1897
-                                if (LOG.isWarnEnabled()) {
-                                    final String newline = System.lineSeparator();
-                                    LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
-                                            + e.getMessage() + newline
-                                            + "prototype: " + prototype.getClassName());
-                                }
+                        catch (final Exception e) {
+                            // TODO see issue #1897
+                            if (LOG.isWarnEnabled()) {
+                                final String newline = System.lineSeparator();
+                                LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                                        + e.getMessage() + newline
+                                        + "prototype: " + prototype.getClassName());
                             }
                         }
                     }
@@ -415,6 +365,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
         }
         window.setPrototype(prototypesPerJSName.get(Window.class.getSimpleName()));
+
+        // special handling for image/option
+        final Method imageCtor = HTMLImageElement.class.getDeclaredMethod("jsConstructorImage");
+        additionalCtor(window, prototypesPerJSName, imageCtor, "Image", "HTMLImageElement");
+        final Method optionCtor = HTMLOptionElement.class.getDeclaredMethod("jsConstructorOption",
+                new Class[] {Object.class, String.class, boolean.class, boolean.class});
+        additionalCtor(window, prototypesPerJSName, optionCtor, "Option", "HTMLOptionElement");
 
         // once all prototypes have been build, it's possible to configure the chains
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
@@ -468,6 +425,27 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         window.initialize(webWindow, page);
 
         applyPolyfills(webClient, browserVersion, context, window);
+    }
+
+    private static void additionalCtor(final Window window, final Map<String, Scriptable> prototypesPerJSName,
+            final Method ctorMethod, final String prop, final String clazzName) throws Exception {
+        final FunctionObject function = new FunctionObject(prop, ctorMethod, window);
+        final Scriptable proto = prototypesPerJSName.get(clazzName);
+        final Object prototypeProperty = ScriptableObject.getProperty(window, clazzName);
+        try {
+            function.addAsConstructor(window, proto, ScriptableObject.DONTENUM);
+        }
+        catch (final Exception e) {
+            // TODO see issue #1897
+            if (LOG.isWarnEnabled()) {
+                final String newline = System.lineSeparator();
+                LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                        + e.getMessage() + newline
+                        + "prototype: " + proto.getClassName());
+            }
+        }
+        ScriptableObject.defineProperty(window, prop, function, ScriptableObject.DONTENUM);
+        ScriptableObject.defineProperty(window, clazzName, prototypeProperty, ScriptableObject.DONTENUM);
     }
 
     /**
