@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
-
 import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -102,27 +100,23 @@ public class RecursiveFunctionObject extends FunctionObject {
             return value;
         }
 
-        final String superFunctionName = super.getFunctionName();
-        if (!"WebGLContextEvent".equals(superFunctionName)
-                        || browserVersion_.hasFeature(JS_WEBGL_CONTEXT_EVENT_CONSTANTS)) {
-            Class<?> klass = getPrototypeProperty().getClass();
+        Class<?> klass = getPrototypeProperty().getClass();
 
-            while (value == NOT_FOUND && HtmlUnitScriptable.class.isAssignableFrom(klass)) {
-                final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                        klass.asSubclass(HtmlUnitScriptable.class), browserVersion_);
-                if (config != null) {
-                    final List<ConstantInfo> constants = config.getConstants();
-                    if (constants != null) {
-                        for (final ConstantInfo constantInfo : constants) {
-                            if (constantInfo.getName().equals(name)) {
-                                value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
-                                break;
-                            }
+        while (value == NOT_FOUND && HtmlUnitScriptable.class.isAssignableFrom(klass)) {
+            final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
+                    klass.asSubclass(HtmlUnitScriptable.class), browserVersion_);
+            if (config != null) {
+                final List<ConstantInfo> constants = config.getConstants();
+                if (constants != null) {
+                    for (final ConstantInfo constantInfo : constants) {
+                        if (constantInfo.getName().equals(name)) {
+                            value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
+                            break;
                         }
                     }
                 }
-                klass = klass.getSuperclass();
             }
+            klass = klass.getSuperclass();
         }
         return value;
     }

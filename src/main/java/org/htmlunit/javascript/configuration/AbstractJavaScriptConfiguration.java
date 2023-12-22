@@ -21,7 +21,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -200,30 +199,6 @@ public abstract class AbstractJavaScriptConfiguration {
         final Map<String, Method> allSetters = new ConcurrentHashMap<>();
 
         try {
-            for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {
-                for (final Annotation annotation : constructor.getAnnotations()) {
-                    if (annotation instanceof JsxConstructor) {
-                        final JsxConstructor jsxConstructor = (JsxConstructor) annotation;
-                        if (isSupported(jsxConstructor.value(), expectedBrowser)) {
-                            final String name;
-                            if (jsxConstructor.functionName().isEmpty()) {
-                                name = classConfiguration.getClassName();
-                            }
-                            else {
-                                name = jsxConstructor.functionName();
-                            }
-                            classConfiguration.setJSConstructor(name, constructor);
-                        }
-                    }
-                    if (annotation instanceof JsxConstructorAlias) {
-                        final JsxConstructorAlias jsxConstructorAlias = (JsxConstructorAlias) annotation;
-                        if (isSupported(jsxConstructorAlias.value(), expectedBrowser)) {
-                            classConfiguration.setJSConstructorAlias(jsxConstructorAlias.alias());
-                        }
-                    }
-                }
-            }
-
             // do this as first step to be able to overwrite the symbol later if needed
             classConfiguration.addSymbolConstant(SymbolKey.TO_STRING_TAG, classConfiguration.getHostClassSimpleName());
 

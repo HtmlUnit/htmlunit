@@ -7179,7 +7179,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "naturalHeight[GCE],naturalWidth[GCE],src[GSCE],width[GSCE]",
             FF = "align[GSCE],alt[GSCE],border[GSCE],complete[GCE],constructor(),height[GSCE],name[GSCE],"
                 + "naturalHeight[GCE],naturalWidth[GCE],src[GSCE],width[GSCE]",
-            IE = "align[GSCE],alt[GSCE],border[GSCE],complete[GCE],constructor[],height[GSCE],name[GSCE],"
+            IE = "align[GSCE],alt[GSCE],border[GSCE],complete[GCE],constructor[WC],height[GSCE],name[GSCE],"
                 + "naturalHeight[GCE],naturalWidth[GCE],src[GSCE],width[GSCE]")
     public void img() throws Exception {
         test("img");
@@ -7295,7 +7295,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            IE = "align[GSCE],alt[GSCE],border[GSCE],complete[GCE],constructor[],height[GSCE],name[GSCE],"
+            IE = "align[GSCE],alt[GSCE],border[GSCE],complete[GCE],constructor[WC],height[GSCE],name[GSCE],"
                 + "naturalHeight[GCE],naturalWidth[GCE],src[GSCE],width[GSCE]")
     public void image() throws Exception {
         test("image");

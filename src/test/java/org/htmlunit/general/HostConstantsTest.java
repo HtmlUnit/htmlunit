@@ -15,6 +15,7 @@
 package org.htmlunit.general;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
+import static org.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -129,6 +130,12 @@ public class HostConstantsTest extends WebDriverTestCase {
         if ("Error".equals(host_) && getBrowserVersion().hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
             return "stackTraceLimit:10";
         }
+
+        if ("WebGLContextEvent".equals(host_) && !getBrowserVersion().hasFeature(JS_WEBGL_CONTEXT_EVENT_CONSTANTS)) {
+            // NYI IE
+            return "AT_TARGET:2 BUBBLING_PHASE:3 CAPTURING_PHASE:1";
+        }
+
         final JavaScriptConfiguration javaScriptConfig = JavaScriptConfiguration.getInstance(getBrowserVersion());
         final List<String> constants = new ArrayList<>();
         ClassConfiguration classConfig = javaScriptConfig.getClassConfiguration(host_);

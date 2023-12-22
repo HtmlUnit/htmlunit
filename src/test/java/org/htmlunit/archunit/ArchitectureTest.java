@@ -17,6 +17,7 @@ package org.htmlunit.archunit;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.constructors;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 import java.lang.reflect.Executable;
@@ -26,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxClasses;
 import org.htmlunit.javascript.configuration.JsxConstant;
+import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -88,7 +90,7 @@ public class ArchitectureTest {
             .should().resideInAPackage("..javascript..");
 
     /**
-     * Every JsxGetter with propertyName defined has to end in '_js'.
+     * Every JsxConstant should be public static final.
      *
      * AbstractJavaScriptConfiguration.process(ClassConfiguration, String, SupportedBrowser)
      * stores the value.
@@ -108,6 +110,8 @@ public class ArchitectureTest {
             .that().areAnnotatedWith(JsxGetter.class)
                     .or().areAnnotatedWith(JsxSetter.class)
                     .or().areAnnotatedWith(JsxFunction.class)
+                    .or().areAnnotatedWith(JsxConstructor.class)
+                    .or().areAnnotatedWith(JsxConstant.class)
             .should().beDeclaredInClassesThat().resideInAPackage("..javascript..");
 
     /**
@@ -118,6 +122,8 @@ public class ArchitectureTest {
             .that().areAnnotatedWith(JsxGetter.class)
                     .or().areAnnotatedWith(JsxSetter.class)
                     .or().areAnnotatedWith(JsxFunction.class)
+                    .or().areAnnotatedWith(JsxConstructor.class)
+                    .or().areAnnotatedWith(JsxConstant.class)
             .should().beDeclaredInClassesThat().areAnnotatedWith(JsxClass.class)
             .orShould().beDeclaredInClassesThat().areAnnotatedWith(JsxClasses.class);
 
@@ -140,6 +146,21 @@ public class ArchitectureTest {
                     .or().areAnnotatedWith(JsxFunction.class)
             .should().notHaveRawReturnType("short")
             .andShould().notHaveRawReturnType("float");
+
+    /**
+     * JsxConstructor should not used for constructors.
+     */
+    @ArchTest
+    public static final ArchRule jsxAnnotationJsxConstructor = constructors()
+            .should().notBeAnnotatedWith(JsxConstructor.class);
+
+    /**
+     * JsxConstructor should have name jsConstructor.
+     */
+    @ArchTest
+    public static final ArchRule jsxAnnotationJsxConstructorNaming = methods()
+            .that().areAnnotatedWith(JsxConstructor.class)
+            .should().haveName("jsConstructor");
 
     /**
      * JsxGetter/Setter/Functions should not use a short as parameter.
