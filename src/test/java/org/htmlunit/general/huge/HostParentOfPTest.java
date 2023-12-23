@@ -632,11 +632,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
-    @HtmlUnitNYI(FF = "false",
-            FF_ESR = "false")
+    @Alerts("false")
     public void _RTCIceCandidate_mozRTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "mozRTCIceCandidate");
     }
@@ -656,11 +652,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
-    @HtmlUnitNYI(FF = "false",
-            FF_ESR = "false")
+    @Alerts("false")
     public void _RTCPeerConnection_mozRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "mozRTCPeerConnection");
     }
@@ -711,11 +703,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
-    @HtmlUnitNYI(FF = "false",
-            FF_ESR = "false")
+    @Alerts("false")
     public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "mozRTCSessionDescription");
     }
