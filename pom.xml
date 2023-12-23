@@ -26,7 +26,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <htmlunitcssparser.version>3.9.0</htmlunitcssparser.version>
-        <htmlunitneko.version>3.9.0</htmlunitneko.version>
+        <htmlunitneko.version>3.10.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>3.10.0-SNAPSHOT</htmlunitxpath.version>
         <htmlunitcsp.version>3.10.0-SNAPSHOT</htmlunitcsp.version>
         <htmlunitcorejs.version>3.9.0</htmlunitcorejs.version>
@@ -40,11 +40,11 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
-        <spotbugs.version>4.8.2</spotbugs.version>
+        <spotbugs.version>4.8.3</spotbugs.version>
         <pmd.version>6.50.0</pmd.version>
         <junit.version>4.13.2</junit.version>
         <archunit.version>1.2.1</archunit.version>
-        <dependencycheck.version>9.0.6</dependencycheck.version>
+        <dependencycheck.version>9.0.7</dependencycheck.version>
     </properties>
 
     <build>
@@ -52,7 +52,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.12.0</version>
                 <configuration>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
@@ -158,7 +158,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.2.3</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
