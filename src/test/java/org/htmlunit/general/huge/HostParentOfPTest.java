@@ -682,8 +682,6 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false")
     public void _RTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "webkitRTCPeerConnection");
     }
