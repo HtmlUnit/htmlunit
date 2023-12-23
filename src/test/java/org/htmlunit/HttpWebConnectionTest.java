@@ -550,18 +550,23 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final HttpEntity responseEntity = new StringEntity(content);
         httpResponse.setEntity(responseEntity);
 
-        final HttpWebConnection connection = new HttpWebConnection(getWebClient());
-        final Method method = connection.getClass().getDeclaredMethod("makeWebResponse",
-                HttpResponse.class, WebRequest.class, DownloadedContent.class, long.class);
-        final WebResponse response = (WebResponse) method.invoke(connection,
-                httpResponse, new WebRequest(url), downloadedContent, new Long(loadTime));
+        try (HttpWebConnection connection = new HttpWebConnection(getWebClient())) {
+            final Method method = connection.getClass().getDeclaredMethod("makeWebResponse",
+                    HttpResponse.class, WebRequest.class, DownloadedContent.class, long.class);
+            final WebResponse response = (WebResponse) method.invoke(connection,
+                    httpResponse, new WebRequest(url), downloadedContent, Long.valueOf(loadTime));
 
-        assertEquals(HttpClientConverter.OK, response.getStatusCode());
-        assertEquals(url, response.getWebRequest().getUrl());
-        assertEquals(loadTime, response.getLoadTime());
-        assertEquals(content, response.getContentAsString());
-        assertEquals(content.getBytes(), IOUtils.toByteArray(response.getContentAsStream()));
-        assertEquals(new ByteArrayInputStream(content.getBytes()), response.getContentAsStream());
+            assertEquals(HttpClientConverter.OK, response.getStatusCode());
+            assertEquals(url, response.getWebRequest().getUrl());
+            assertEquals(loadTime, response.getLoadTime());
+            assertEquals(content, response.getContentAsString());
+            try (InputStream is = response.getContentAsStream()) {
+                assertEquals(content.getBytes(), IOUtils.toByteArray(is));
+            }
+            try (InputStream is = response.getContentAsStream()) {
+                assertEquals(new ByteArrayInputStream(content.getBytes()), is);
+            }
+        }
     }
 
     /**
