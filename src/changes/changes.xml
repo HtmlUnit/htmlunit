@@ -9,7 +9,10 @@
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
             <action type="fix" dev="rbri">
-                neko: support bang comments (--!&gt; as closing sequence)
+                neko: support early closing of cdata sections by &gt;.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: support bang comments (--!&gt; as closing sequence).
             </action>
             <action type="fix" dev="rbri">
                 ScriptPreProcessor documentation added to the FAQ.
