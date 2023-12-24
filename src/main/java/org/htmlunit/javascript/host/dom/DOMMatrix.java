@@ -21,6 +21,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 
 /**
  * A JavaScript object for {@code DOMMatrix}.
@@ -42,6 +43,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
      */
     @Override
     @JsxConstructor
+    @JsxConstructorAlias(alias = "WebKitCSSMatrix")
     public void jsConstructor() {
         super.jsConstructor();
     }

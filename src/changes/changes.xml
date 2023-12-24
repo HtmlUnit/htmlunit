@@ -9,6 +9,12 @@
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
             <action type="fix" dev="rbri">
+                WebKitCSSMatrix aliases to DOMMatrix.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: RTC is an inline element.
+            </action>
+            <action type="fix" dev="rbri">
                 neko: support early closing of cdata sections by &gt;.
             </action>
             <action type="fix" dev="rbri">

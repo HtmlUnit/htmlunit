@@ -10222,10 +10222,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function DOMMatrix() { [native code] }",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "function WebKitCSSMatrix() { [native code] }",
-            EDGE = "function WebKitCSSMatrix() { [native code] }",
-            FF = "function WebKitCSSMatrix() { [native code] }",
-            FF_ESR = "function WebKitCSSMatrix() { [native code] }")
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
     }

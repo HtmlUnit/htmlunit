@@ -138,7 +138,6 @@ import org.htmlunit.javascript.host.css.MediaQueryList;
 import org.htmlunit.javascript.host.css.StyleMedia;
 import org.htmlunit.javascript.host.css.StyleSheet;
 import org.htmlunit.javascript.host.css.StyleSheetList;
-import org.htmlunit.javascript.host.css.WebKitCSSMatrix;
 import org.htmlunit.javascript.host.dom.AbstractList;
 import org.htmlunit.javascript.host.dom.AbstractRange;
 import org.htmlunit.javascript.host.dom.Attr;
@@ -655,7 +654,6 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLSampler.class, WebGLShader.class, WebGLShaderPrecisionFormat.class, WebGLSync.class,
         WebGLTexture.class, WebGLTransformFeedback.class,
         WebGLUniformLocation.class, WebGLVertexArrayObject.class,
-        WebKitCSSMatrix.class,
         WebkitSpeechGrammar.class,
         WebkitSpeechGrammarList.class, WebkitSpeechRecognition.class, WebkitSpeechRecognitionError.class,
         WebkitSpeechRecognitionEvent.class,
