@@ -289,8 +289,6 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false")
     public void _webkitMediaStream_MediaStream() throws Exception {
         test("webkitMediaStream", "MediaStream");
     }
@@ -335,8 +333,6 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false")
     public void _webkitRTCPeerConnection_RTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "RTCPeerConnection");
     }
