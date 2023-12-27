@@ -24,7 +24,10 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import org.htmlunit.SgmlPage;
@@ -49,6 +52,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.Element;
+import org.htmlunit.javascript.host.NamedNodeMap;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.html.HTMLCollection;
@@ -476,6 +480,119 @@ public class Node extends EventTarget {
         final DomNode clonedNode = domNode.cloneNode(deep);
 
         return getJavaScriptNode(clonedNode);
+    }
+
+    /**
+     * Check if 2 nodes are equals.
+     * For detail specifications
+     * @see <a href="https://dom.spec.whatwg.org/#concept-node-equals">concept-node-equals</a>
+     */
+    @JsxFunction
+    public boolean isEqualNode(final Node other) {
+        if (isSameNode(other)) {
+            return true;
+        }
+
+        if (!getClassName().equals(other.getClassName())) {
+            return false;
+        }
+
+        if (this instanceof DocumentType) {
+            final DocumentType docType = (DocumentType)this;
+            final DocumentType otherDocType = (DocumentType)other;
+            if (!Objects.equals(docType.getName(), otherDocType.getName())
+                    || !Objects.equals(docType.getPublicId(), otherDocType.getPublicId())
+                    || !Objects.equals(docType.getSystemId(), otherDocType.getSystemId())) {
+                return false;
+            }
+
+        } else if (this instanceof Element) {
+            final Element element = (Element)this;
+            final Element otherElement = (Element)other;
+            if (!Objects.equals(element.getNodeName(), otherElement.getNodeName())
+                    || !Objects.equals(element.getPrefix(), otherElement.getPrefix())
+                    || !Objects.equals(element.getLocalName(), otherElement.getLocalName())) {
+                return false;
+            }
+
+            final NamedNodeMap attributesMap = element.getAttributes();
+            final NamedNodeMap otherAttributesMap = otherElement.getAttributes();
+            if (attributesMap != null || otherAttributesMap != null) {
+                if (attributesMap == null || otherAttributesMap == null) {
+                    return false;
+                }
+
+                final int length = attributesMap.getLength();
+                if (length != otherAttributesMap.getLength()) {
+                    return false;
+                }
+
+                final Map<String, Attr> name2Attributes = new HashMap<>();
+                for (int i = 0; i < length; i++) {
+                    final Attr attribute = (Attr)attributesMap.item(i);
+                    name2Attributes.put(attribute.getName(), attribute);
+                }
+
+                for (int i = 0; i < length; i++) {
+                    final Attr otherAttribute = (Attr)otherAttributesMap.item(i);
+                    final Attr attribute = name2Attributes.get(otherAttribute.getName());
+                    if (attribute == null) {
+                        return false;
+                    }
+                    if (!attribute.isEqualNode(otherAttribute)) {
+                        return false;
+                    }
+                }
+            }
+
+        } else if (this instanceof Attr) {
+            final Attr attr = (Attr)this;
+            final Attr otherAttr = (Attr)other;
+            if (!Objects.equals(attr.getName(), otherAttr.getName())
+                    || !Objects.equals(attr.getLocalName(), otherAttr.getLocalName())
+                    || !Objects.equals(attr.getValue(), otherAttr.getValue())) {
+                return false;
+            }
+
+        } else if (this instanceof ProcessingInstruction) {
+            final ProcessingInstruction instruction = (ProcessingInstruction)this;
+            final ProcessingInstruction otherInstruction = (ProcessingInstruction)other;
+            if (!Objects.equals(instruction.getTarget(), otherInstruction.getTarget())
+                    || !Objects.equals(instruction.getData(), otherInstruction.getData())) {
+                return false;
+            }
+
+        } else if (this instanceof Text || this instanceof Comment) {
+            final CharacterData data = (CharacterData)this;
+            final CharacterData otherData = (CharacterData)other;
+            if (!Objects.equals(data.getData(), otherData.getData())) {
+                return false;
+            }
+        }
+
+        final NodeList childNodes = getChildNodes();
+        final NodeList otherChildNodes = other.getChildNodes();
+        if (childNodes != null || otherChildNodes != null) {
+            if (childNodes == null || otherChildNodes == null) {
+                return false;
+            }
+
+            final int length = childNodes.getLength();
+            final int otherLength = childNodes.getLength();
+            if (length != otherLength) {
+                return false;
+            }
+
+            for (int i = 0; i < length; i++) {
+                final Node childNode = (Node)childNodes.item(i);
+                final Node otherChildNode = (Node)otherChildNodes.item(i);
+                if (!childNode.isEqualNode(otherChildNode)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
