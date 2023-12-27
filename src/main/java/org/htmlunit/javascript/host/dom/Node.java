@@ -486,6 +486,8 @@ public class Node extends EventTarget {
      * Check if 2 nodes are equals.
      * For detail specifications
      * @see <a href="https://dom.spec.whatwg.org/#concept-node-equals">concept-node-equals</a>
+     * @param other the node to compare with
+     * @return true or false
      */
     @JsxFunction
     public boolean isEqualNode(final Node other) {
@@ -498,17 +500,18 @@ public class Node extends EventTarget {
         }
 
         if (this instanceof DocumentType) {
-            final DocumentType docType = (DocumentType)this;
-            final DocumentType otherDocType = (DocumentType)other;
+            final DocumentType docType = (DocumentType) this;
+            final DocumentType otherDocType = (DocumentType) other;
             if (!Objects.equals(docType.getName(), otherDocType.getName())
                     || !Objects.equals(docType.getPublicId(), otherDocType.getPublicId())
                     || !Objects.equals(docType.getSystemId(), otherDocType.getSystemId())) {
                 return false;
             }
 
-        } else if (this instanceof Element) {
-            final Element element = (Element)this;
-            final Element otherElement = (Element)other;
+        }
+        else if (this instanceof Element) {
+            final Element element = (Element) this;
+            final Element otherElement = (Element) other;
             if (!Objects.equals(element.getNodeName(), otherElement.getNodeName())
                     || !Objects.equals(element.getPrefix(), otherElement.getPrefix())
                     || !Objects.equals(element.getLocalName(), otherElement.getLocalName())) {
@@ -529,12 +532,12 @@ public class Node extends EventTarget {
 
                 final Map<String, Attr> name2Attributes = new HashMap<>();
                 for (int i = 0; i < length; i++) {
-                    final Attr attribute = (Attr)attributesMap.item(i);
+                    final Attr attribute = (Attr) attributesMap.item(i);
                     name2Attributes.put(attribute.getName(), attribute);
                 }
 
                 for (int i = 0; i < length; i++) {
-                    final Attr otherAttribute = (Attr)otherAttributesMap.item(i);
+                    final Attr otherAttribute = (Attr) otherAttributesMap.item(i);
                     final Attr attribute = name2Attributes.get(otherAttribute.getName());
                     if (attribute == null) {
                         return false;
@@ -545,26 +548,29 @@ public class Node extends EventTarget {
                 }
             }
 
-        } else if (this instanceof Attr) {
-            final Attr attr = (Attr)this;
-            final Attr otherAttr = (Attr)other;
+        }
+        else if (this instanceof Attr) {
+            final Attr attr = (Attr) this;
+            final Attr otherAttr = (Attr) other;
             if (!Objects.equals(attr.getName(), otherAttr.getName())
                     || !Objects.equals(attr.getLocalName(), otherAttr.getLocalName())
                     || !Objects.equals(attr.getValue(), otherAttr.getValue())) {
                 return false;
             }
 
-        } else if (this instanceof ProcessingInstruction) {
-            final ProcessingInstruction instruction = (ProcessingInstruction)this;
-            final ProcessingInstruction otherInstruction = (ProcessingInstruction)other;
+        }
+        else if (this instanceof ProcessingInstruction) {
+            final ProcessingInstruction instruction = (ProcessingInstruction) this;
+            final ProcessingInstruction otherInstruction = (ProcessingInstruction) other;
             if (!Objects.equals(instruction.getTarget(), otherInstruction.getTarget())
                     || !Objects.equals(instruction.getData(), otherInstruction.getData())) {
                 return false;
             }
 
-        } else if (this instanceof Text || this instanceof Comment) {
-            final CharacterData data = (CharacterData)this;
-            final CharacterData otherData = (CharacterData)other;
+        }
+        else if (this instanceof Text || this instanceof Comment) {
+            final CharacterData data = (CharacterData) this;
+            final CharacterData otherData = (CharacterData) other;
             if (!Objects.equals(data.getData(), otherData.getData())) {
                 return false;
             }
@@ -584,8 +590,8 @@ public class Node extends EventTarget {
             }
 
             for (int i = 0; i < length; i++) {
-                final Node childNode = (Node)childNodes.item(i);
-                final Node otherChildNode = (Node)otherChildNodes.item(i);
+                final Node childNode = (Node) childNodes.item(i);
+                final Node otherChildNode = (Node) otherChildNodes.item(i);
                 if (!childNode.isEqualNode(otherChildNode)) {
                     return false;
                 }
