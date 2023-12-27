@@ -368,6 +368,66 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"false", "false", "true", "false", "false", "false"})
+    public void isEqualNode() throws Exception {
+        final String html = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var list1 = document.getElementById(\"list1\");\n"
+                + "    var list2 = document.getElementById(\"list2\");\n"
+                + "    log(list1.isEqualNode(list2));\n"
+                + "\n"
+                + "    var nodes = document.getElementsByClassName(\"test\");\n"
+                + "    log(nodes[0].isEqualNode(nodes[1]));\n"
+                + "    log(nodes[0].isEqualNode(nodes[2]));\n"
+                + "    log(nodes[0].isEqualNode(nodes[3]));\n"
+                + "    log(nodes[0].isEqualNode(nodes[4]));\n"
+                + "    log(nodes[0].isEqualNode(nodes[5]));"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "<ul id=\"list1\">\n"
+                + "    <li>foo</li>\n"
+                + "    <li>bar</li>\n"
+                + "</ul>\n"
+                + "<ul id=\"list2\">\n"
+                + "    <li>foo</li>\n"
+                + "    <li>bar</li>\n"
+                + "</ul>\n"
+                + "\n"
+                + "<ul class=\"test\">\n"
+                + "    <li>foo</li>\n"
+                + "    <li>bar</li>\n"
+                + "</ul>\n"
+                + "<ul class=\"test\">\n"
+                + "    <li>foo</li>     \n"
+                + "    <li>bar</li>\n"
+                + "</ul>\n"
+                + "<ul class=\"test\">\n"
+                + "    <li>foo</li>\n"
+                + "    <li>bar</li>\n"
+                + "</ul>\n"
+                + "<ul class=\"test\">\n"
+                + "    <li>foo</li>\n"
+                + "\n"
+                + "    <li>bar</li>\n"
+                + "</ul>\n"
+                + "<ul class=\"test\">\n"
+                + "    <li>foo</li>\n"
+                + "    <li>bar</li>\n"
+                + "    <li></li>\n"
+                + "</ul>\n"
+                + "<ul class=\"test\">\n"
+                + "    <li>foobar</li>\n"
+                + "    <li></li>\n"
+                + "</ul>"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"true", "false"})
     public void isSameNode() throws Exception {
         final String html = "<html><head><script>\n"
