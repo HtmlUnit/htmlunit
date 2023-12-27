@@ -23,6 +23,7 @@ import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -961,5 +962,30 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "</html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts("ti </head> <body> 1234 </body> </html>")
+    @HtmlUnitNYI(CHROME = "ti 1234",
+            EDGE = "ti 1234",
+            FF = "ti 1234",
+            FF_ESR = "ti 1234",
+            IE = "ti 1234")
+    public void badTagInHead() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head><foo/>\n"
+                + "<title>ti\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "1234\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 }

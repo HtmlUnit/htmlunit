@@ -66,19 +66,6 @@ public class HTMLParserTest extends SimpleWebTestCase {
     }
 
     /**
-     * Works since NekoHtml 0.9.5.
-     * @exception Exception If the test fails
-     */
-    @Test
-    public void badTagInHead() throws Exception {
-        final String htmlContent = "<html>\n" + "<head><foo/>\n<title>foo\n</head>\n"
-                + "<body>\nfoo\n</body>\n</html>";
-
-        final HtmlPage page = loadPage(htmlContent);
-        assertEquals("foo", page.getTitleText());
-    }
-
-    /**
      * Regression test for bug #766: parse failure when parsing page with UTF-8 BOM (byte order mark).
      * The HTML file used is from NekoHTML's bug number #54.
      * @throws Exception if an error occurs
