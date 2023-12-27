@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
+            <action type="fix" dev="rbri">
+                neko: unknown elements are always moved to the body.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache log4j-api to 2.22.1.
             </action>
