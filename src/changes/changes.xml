@@ -9,6 +9,12 @@
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
             <action type="fix" dev="rbri">
+                neko: frames tags without a frameset parent are ignored.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: hr tag is allowed inside select's.
+            </action>
+            <action type="fix" dev="rbri">
                 neko: unknown elements are always moved to the body.
             </action>
             <action type="update" dev="rbri">

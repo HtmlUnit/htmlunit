@@ -78,7 +78,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final List<String> strings = DefaultElementFactory.SUPPORTED_TAGS_;
+        final List<String> strings = new ArrayList<>(DefaultElementFactory.SUPPORTED_TAGS_);
+        strings.add("unknown");
 
         for (final String parent : strings) {
             for (final String child : strings) {
@@ -345,6 +346,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _command_frame() throws Exception {
         test("command", "frame");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _command_frameset() throws Exception {
+        test("command", "frameset");
     }
 
     /**
@@ -860,8 +870,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             FF = "0",
             FF_ESR = "0")
-    @HtmlUnitNYI(FF = "1",
-            FF_ESR = "1")
     public void _head_command() throws Exception {
         test("head", "command");
     }
@@ -1075,6 +1083,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = "1")
     public void _isindex_frameset() throws Exception {
         test("isindex", "frameset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _li_caption() throws Exception {
+        test("li", "caption");
     }
 
     /**
@@ -1476,6 +1493,21 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("1")
     public void _ruby_blink() throws Exception {
         test("ruby", "blink");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF = "0",
+            FF_ESR = "0",
+            IE = "0")
+    @HtmlUnitNYI(FF = "1",
+            FF_ESR = "1",
+            IE = "1")
+    public void _select_hr() throws Exception {
+        test("select", "hr");
     }
 
     /**
@@ -1921,7 +1953,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_frame() throws Exception {
         test("template", "frame");
     }
