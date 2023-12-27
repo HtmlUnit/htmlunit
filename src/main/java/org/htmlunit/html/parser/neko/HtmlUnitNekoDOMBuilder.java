@@ -121,7 +121,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         final short mainId = commandId + 1;
 
         // isIndex is special - we have to add it here because all browsers moving this to
-        // the body (even if it is not supported
+        // the body (even if it is not supported)
         final HTMLElements.Element isIndex = new HTMLElements.Element(isindexId, "ISINDEX",
                 HTMLElements.Element.CONTAINER, HTMLElements.BODY, null);
         final HTMLElements.Element isIndexSupported = new HTMLElements.Element(isindexId, "ISINDEX",
