@@ -188,11 +188,7 @@ public class HostParentOfS2Test extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false")
+    @Alerts("false")
     public void _SVGGraphicsElement_SVGClipPathElement() throws Exception {
         test("SVGGraphicsElement", "SVGClipPathElement");
     }

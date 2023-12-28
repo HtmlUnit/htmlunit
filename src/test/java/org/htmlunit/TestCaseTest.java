@@ -97,6 +97,34 @@ public final class TestCaseTest {
                 names.add(config.getClassName());
             }
         }
+        return names;
+    }
+
+    /**
+     * Returns list of all constructors defined.
+     * @return the list
+     * @throws Exception if an error occurs.
+     */
+    public static Set<String> getAllConstructorNames() throws Exception {
+        final Set<String> names = new HashSet<>();
+
+        for (final BrowserVersion browser : BrowserVersion.ALL_SUPPORTED_BROWSERS) {
+            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(browser);
+            for (final ClassConfiguration config : jsConfig.getAll()) {
+                if (config.getJsConstructor() != null) {
+                    names.add(config.getJsConstructor().getKey());
+                }
+                else {
+                    names.add(config.getClassName());
+                }
+                if (config.getJsConstructorAlias() != null) {
+                    names.add(config.getJsConstructorAlias());
+                }
+            }
+        }
+
+        names.add("Image");
+        names.add("Option");
 
         return names;
     }

@@ -465,6 +465,16 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _CSSGroupingRule_CSSStyleRule() throws Exception {
+        test("CSSGroupingRule", "CSSStyleRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _CSSGroupingRule_CSSSupportsRule() throws Exception {
