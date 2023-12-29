@@ -2710,4 +2710,43 @@ public class WebClientTest extends SimpleWebTestCase {
         assertNotNull(webClient.getCurrentWindow());
         assertEquals("js", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
     }
+
+    /**
+     * Test for https://github.com/HtmlUnit/htmlunit/issues/701.
+     * @throws Exception if test fails
+     */
+    @Test
+    public void getPageInSeparateThread() throws Exception {
+        final String html = "<html><head><title>testpage</title></head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, html);
+
+        try (WebClient webClient = getWebClientWithMockWebConnection()) {
+            final TestThread testThread = new TestThread(webClient);
+            testThread.start();
+
+            testThread.join();
+        }
+    }
+
+    private static final class TestThread extends Thread {
+        private final WebClient webClient_;
+
+        private TestThread(final WebClient webClient) {
+            webClient_ = webClient;
+        }
+
+        @Override
+        public void run() {
+            try {
+                final HtmlPage page = webClient_.getPage(URL_FIRST);
+                assertEquals("testpage", page.getTitleText());
+            }
+            catch (FailingHttpStatusCodeException | IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }
