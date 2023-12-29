@@ -467,6 +467,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
+    @HtmlUnitNYI(FF = "false")
     public void _CSSGroupingRule_CSSStyleRule() throws Exception {
         test("CSSGroupingRule", "CSSStyleRule");
     }
