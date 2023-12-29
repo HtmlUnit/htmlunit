@@ -1435,20 +1435,25 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public String guessContentType(final File file) {
         final String fileName = file.getName();
-        if (fileName.endsWith(".xhtml")) {
+        final String fileNameLC = fileName.toLowerCase(Locale.ROOT);
+        if (fileNameLC.endsWith(".xhtml")) {
             // Java's mime type map returns application/xml in JDK8.
             return MimeType.APPLICATION_XHTML;
         }
 
         // Java's mime type map does not know these in JDK8.
-        if (fileName.endsWith(".js")) {
+        if (fileNameLC.endsWith(".js")) {
             return MimeType.APPLICATION_JAVASCRIPT;
         }
-        if (fileName.toLowerCase(Locale.ROOT).endsWith(".css")) {
+
+        if (fileNameLC.endsWith(".css")) {
             return MimeType.TEXT_CSS;
         }
 
-        String contentType = URLConnection.guessContentTypeFromName(fileName);
+        String contentType = null;
+        if (!fileNameLC.endsWith(".php")) {
+            contentType = URLConnection.guessContentTypeFromName(fileName);
+        }
         if (contentType == null) {
             try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(file.toPath()))) {
                 contentType = URLConnection.guessContentTypeFromStream(inputStream);
