@@ -680,6 +680,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Returns the maximum bytes to have in memory, after which the content is saved to a temporary file.
+     * Default is 500 * 1024.
      * @return the maximum bytes in memory
      */
     public int getMaxInMemory() {

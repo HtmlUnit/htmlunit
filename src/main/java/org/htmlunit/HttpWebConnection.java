@@ -804,7 +804,7 @@ public class HttpWebConnection implements WebConnection {
             try {
                 while ((nbRead = is.read(buffer)) != -1) {
                     bos.write(buffer, 0, nbRead);
-                    if (bos.size() > maxInMemory) {
+                    if (maxInMemory > 0 && bos.size() > maxInMemory) {
                         // we have exceeded the max for memory, let's write everything to a temporary file
                         final File file = File.createTempFile("htmlunit", ".tmp", tempFileDirectory);
                         file.deleteOnExit();
