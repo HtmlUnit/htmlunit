@@ -29,7 +29,7 @@
         <htmlunitneko.version>3.10.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>3.10.0-SNAPSHOT</htmlunitxpath.version>
         <htmlunitcsp.version>3.10.0-SNAPSHOT</htmlunitcsp.version>
-        <htmlunitcorejs.version>3.9.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>3.10.0-SNAPSHOT</htmlunitcorejs.version>
 
         <htmlunitdriver.version>4.17.0-SNAPSHOT</htmlunitdriver.version>
         <selenium.version>4.16.1</selenium.version>
