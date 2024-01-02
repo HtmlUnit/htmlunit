@@ -352,14 +352,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             namespaceURI = namespaceURI.trim();
         }
 
-        // add a head if none was there
-        else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
-            final ElementFactory factory = htmlParser_.getElementFactory(page_, null, "head", insideSvg_, false);
-            final DomElement newElement = factory.createElement(page_, "head", null);
-            appendChild(currentNode_, newElement);
-            headParsed_ = HeadParsed.SYNTHESIZED;
-        }
-
         // If we're adding a body element, keep track of any temporary synthetic ones
         // that we may have had to create earlier (for document.write(), for example).
         HtmlBody oldBody = null;
@@ -799,7 +791,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      */
     @Override
     public void ignoredStartElement(final QName elem, final XMLAttributes attrs, final Augmentations augs) {
-        // when multiple body elements are encountered, the attributes of the discarded
+        // when multiple html/body elements are encountered, the attributes of the discarded
         // elements are used when not previously defined
         if (attrs != null && body_ != null) {
             String lp = elem.localpart;
