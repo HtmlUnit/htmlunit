@@ -1080,7 +1080,11 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
+    @HtmlUnitNYI(
+            CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF_ESR = "0")
     public void _isindex_frameset() throws Exception {
         test("isindex", "frameset");
     }
