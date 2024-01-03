@@ -103,6 +103,16 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                 + "    var props = Object.getOwnPropertySymbols(object.constructor.prototype);\n"
                 + "    for (i = 0; i < props.length; i++) {\n"
                 + "      var str = props[i].toString();\n"
+
+                + "      let desc = Object.getOwnPropertyDescriptor(object.constructor.prototype, props[i]);\n"
+                + "      str += ' [';\n"
+                + "      if (desc.get != undefined) str += 'G';\n"
+                + "      if (desc.set != undefined) str += 'S';\n"
+                + "      if (desc.writable) str += 'W';\n"
+                + "      if (desc.configurable) str += 'C';\n"
+                + "      if (desc.enumerable) str += 'E';\n"
+                + "      str += ']'\n"
+
                 + "      var val = object[props[i]];\n"
                 + "      if (typeof val === 'function') {\n"
                 + "        str = str + ' [function]';\n"
@@ -428,10 +438,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Text]",
-            EDGE = "Symbol(Symbol.toStringTag) [Text]",
-            FF = "Symbol(Symbol.toStringTag) [Text]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Text]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Text]",
             IE = "exception")
     public void text() throws Exception {
         testString("", "document.createTextNode('some text')");
@@ -441,10 +448,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Attr]",
-            EDGE = "Symbol(Symbol.toStringTag) [Attr]",
-            FF = "Symbol(Symbol.toStringTag) [Attr]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Attr]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Attr]",
             IE = "exception")
     public void attr() throws Exception {
         testString("", "document.createAttribute('some_attrib')");
@@ -454,10 +458,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Comment]",
-            EDGE = "Symbol(Symbol.toStringTag) [Comment]",
-            FF = "Symbol(Symbol.toStringTag) [Comment]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Comment]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Comment]",
             IE = "exception")
     public void comment() throws Exception {
         testString("", "document.createComment('come_comment')");
@@ -467,10 +468,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void unknown() throws Exception {
         testString("", "unknown");
@@ -480,10 +478,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void htmlElement() throws Exception {
         testString("", "unknown");
@@ -495,27 +490,23 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Element],"
-                + "Symbol(Symbol.unscopables) [{\"after\":true,\"append\":true,\"before\":true,"
-                + "\"prepend\":true,\"remove\":true,\"replaceChildren\":true,"
-                + "\"replaceWith\":true,\"slot\":true}]",
-            EDGE = "Symbol(Symbol.toStringTag) [Element],"
-                + "Symbol(Symbol.unscopables) [{\"after\":true,\"append\":true,\"before\":true,"
-                + "\"prepend\":true,\"remove\":true,\"replaceChildren\":true,"
-                + "\"replaceWith\":true,\"slot\":true}]",
-            FF = "Symbol(Symbol.toStringTag) [Element],"
-                + "Symbol(Symbol.unscopables) [{\"slot\":true,\"before\":true,\"after\":true,"
-                + "\"replaceWith\":true,\"remove\":true,\"prepend\":true,\"append\":true,"
-                + "\"replaceChildren\":true}]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Element],"
-                + "Symbol(Symbol.unscopables) [{\"slot\":true,\"before\":true,\"after\":true,"
-                + "\"replaceWith\":true,\"remove\":true,\"prepend\":true,\"append\":true,"
-                + "\"replaceChildren\":true}]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Element],"
+                + "Symbol(Symbol.unscopables) [C] [{\"after\":true,\"append\":true,\"before\":true,"
+                    + "\"prepend\":true,\"remove\":true,\"replaceChildren\":true,"
+                    + "\"replaceWith\":true,\"slot\":true}]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Element],"
+                + "Symbol(Symbol.unscopables) [C] [{\"slot\":true,\"before\":true,\"after\":true,"
+                    + "\"replaceWith\":true,\"remove\":true,\"prepend\":true,"
+                    + "\"append\":true,\"replaceChildren\":true}]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Element],"
+                + "Symbol(Symbol.unscopables) [C] [{\"slot\":true,\"before\":true,\"after\":true,"
+                    + "\"replaceWith\":true,\"remove\":true,\"prepend\":true,"
+                    + "\"append\":true,\"replaceChildren\":true}]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [Element]",
-            EDGE = "Symbol(Symbol.toStringTag) [Element]",
-            FF = "Symbol(Symbol.toStringTag) [Element]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Element]")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [Element]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Element]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Element]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Element]")
     public void element() throws Exception {
         testString("", "element");
     }
@@ -526,23 +517,22 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Element],Symbol(Symbol.unscopables) [{\"after\":true,\"append\":true,"
-                + "\"before\":true,\"prepend\":true,\"remove\":true,\"replaceChildren\":true,\"replaceWith\":true,"
-                + "\"slot\":true}]",
-            EDGE = "Symbol(Symbol.toStringTag) [Element],Symbol(Symbol.unscopables) [{\"after\":true,\"append\":true,"
-                + "\"before\":true,\"prepend\":true,\"remove\":true,\"replaceChildren\":true,\"replaceWith\":true,"
-                + "\"slot\":true}]",
-            FF = "Symbol(Symbol.toStringTag) [Element],Symbol(Symbol.unscopables) [{\"slot\":true,\"before\":true,"
-                + "\"after\":true,\"replaceWith\":true,\"remove\":true,\"prepend\":true,\"append\":true,"
-                + "\"replaceChildren\":true}]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Element],Symbol(Symbol.unscopables) [{\"slot\":true,\"before\":true,"
-                + "\"after\":true,\"replaceWith\":true,\"remove\":true,\"prepend\":true,\"append\":true,"
-                + "\"replaceChildren\":true}]",
+    @Alerts(DEFAULT =
+                "Symbol(Symbol.toStringTag) [C] [Element],"
+                + "Symbol(Symbol.unscopables) [C] [{\"after\":true,\"append\":true,"
+                    + "\"before\":true,\"prepend\":true,\"remove\":true,\"replaceChildren\":true,\"replaceWith\":true,"
+                    + "\"slot\":true}]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Element],"
+                + "Symbol(Symbol.unscopables) [C] [{\"slot\":true,\"before\":true,\"after\":true,\"replaceWith\":true,"
+                    + "\"remove\":true,\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Element],"
+                + "Symbol(Symbol.unscopables) [C] [{\"slot\":true,\"before\":true,\"after\":true,\"replaceWith\":true,"
+                    + "\"remove\":true,\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [Element]",
-            EDGE = "Symbol(Symbol.toStringTag) [Element]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Element]",
-            FF = "Symbol(Symbol.toStringTag) [Element]")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [Element]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Element]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Element]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Element]")
     public void element2() throws Exception {
         testString("", "element, document.createDocumentFragment()");
     }
@@ -551,11 +541,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+    @Alerts("exception")
     public void currentStyle() throws Exception {
         testString("", "document.body.currentStyle");
     }
@@ -564,10 +550,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Event]",
-            EDGE = "Symbol(Symbol.toStringTag) [Event]",
-            FF = "Symbol(Symbol.toStringTag) [Event]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Event]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Event]",
             IE = "exception")
     public void event() throws Exception {
         testString("", "event");
@@ -577,10 +560,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Window]",
-            EDGE = "Symbol(Symbol.toStringTag) [Window]",
-            FF = "Symbol(Symbol.toStringTag) [Window]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Window]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Window]",
             IE = "exception")
     public void window() throws Exception {
         testString("", "window");
@@ -592,10 +572,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void abbr() throws Exception {
         test("abbr");
@@ -607,10 +584,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void acronym() throws Exception {
         test("acronym");
@@ -622,10 +596,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLAnchorElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLAnchorElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLAnchorElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLAnchorElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLAnchorElement]",
             IE = "exception")
     public void a() throws Exception {
         test("a");
@@ -637,10 +608,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void address() throws Exception {
         test("address");
@@ -652,10 +620,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void applet() throws Exception {
         test("applet");
@@ -667,10 +632,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLAreaElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLAreaElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLAreaElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLAreaElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLAreaElement]",
             IE = "exception")
     public void area() throws Exception {
         test("area");
@@ -682,10 +644,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void article() throws Exception {
         test("article");
@@ -697,10 +656,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void aside() throws Exception {
         test("aside");
@@ -712,10 +668,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLAudioElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLAudioElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLAudioElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLAudioElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLAudioElement]",
             IE = "exception")
     public void audio() throws Exception {
         test("audio");
@@ -727,10 +680,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void bgsound() throws Exception {
         test("bgsound");
@@ -742,10 +692,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLBaseElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLBaseElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLBaseElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLBaseElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLBaseElement]",
             IE = "exception")
     public void base() throws Exception {
         test("base");
@@ -757,10 +704,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void basefont() throws Exception {
         test("basefont");
@@ -772,10 +716,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void bdi() throws Exception {
         test("bdi");
@@ -787,10 +728,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void bdo() throws Exception {
         test("bdo");
@@ -802,10 +740,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void big() throws Exception {
         test("big");
@@ -817,10 +752,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void blink() throws Exception {
         test("blink");
@@ -832,10 +764,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLQuoteElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLQuoteElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLQuoteElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLQuoteElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLQuoteElement]",
             IE = "exception")
     public void blockquote() throws Exception {
         test("blockquote");
@@ -847,10 +776,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLBodyElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLBodyElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLBodyElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLBodyElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLBodyElement]",
             IE = "exception")
     public void body() throws Exception {
         test("body");
@@ -862,10 +788,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void b() throws Exception {
         test("b");
@@ -877,10 +800,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLBRElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLBRElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLBRElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLBRElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLBRElement]",
             IE = "exception")
     public void br() throws Exception {
         test("br");
@@ -892,10 +812,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLButtonElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLButtonElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLButtonElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLButtonElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLButtonElement]",
             IE = "exception")
     public void button() throws Exception {
         test("button");
@@ -907,10 +824,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLCanvasElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLCanvasElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLCanvasElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLCanvasElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLCanvasElement]",
             IE = "exception")
     public void canvas() throws Exception {
         test("canvas");
@@ -922,10 +836,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableCaptionElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableCaptionElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableCaptionElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableCaptionElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableCaptionElement]",
             IE = "exception")
     public void caption() throws Exception {
         test("caption");
@@ -937,10 +848,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void center() throws Exception {
         test("center");
@@ -952,10 +860,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void cite() throws Exception {
         test("cite");
@@ -967,10 +872,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void code() throws Exception {
         test("code");
@@ -982,10 +884,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void command() throws Exception {
         test("command");
@@ -997,10 +896,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLDataListElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLDataListElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLDataListElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLDataListElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLDataListElement]",
             IE = "exception")
     public void datalist() throws Exception {
         test("datalist");
@@ -1012,10 +908,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void dfn() throws Exception {
         test("dfn");
@@ -1027,10 +920,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void dd() throws Exception {
         test("dd");
@@ -1042,10 +932,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLModElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLModElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLModElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLModElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLModElement]",
             IE = "exception")
     public void del() throws Exception {
         test("del");
@@ -1057,10 +944,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLDetailsElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLDetailsElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLDetailsElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLDetailsElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLDetailsElement]",
             IE = "exception")
     public void details() throws Exception {
         test("details");
@@ -1072,10 +956,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLDialogElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLDialogElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLDialogElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLDialogElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLDialogElement]",
             IE = "exception")
     public void dialog() throws Exception {
         test("dialog");
@@ -1087,10 +968,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLDirectoryElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLDirectoryElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLDirectoryElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLDirectoryElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLDirectoryElement]",
             IE = "exception")
     public void dir() throws Exception {
         test("dir");
@@ -1102,10 +980,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLDivElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLDivElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLDivElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLDivElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLDivElement]",
             IE = "exception")
     public void div() throws Exception {
         test("div");
@@ -1117,10 +992,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLDListElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLDListElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLDListElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLDListElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLDListElement]",
             IE = "exception")
     public void dl() throws Exception {
         test("dl");
@@ -1132,10 +1004,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void dt() throws Exception {
         test("dt");
@@ -1147,10 +1016,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLEmbedElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLEmbedElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLEmbedElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLEmbedElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLEmbedElement]",
             IE = "exception")
     public void embed() throws Exception {
         test("embed");
@@ -1162,10 +1028,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void em() throws Exception {
         test("em");
@@ -1177,10 +1040,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLFieldSetElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLFieldSetElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLFieldSetElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLFieldSetElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLFieldSetElement]",
             IE = "exception")
     public void fieldset() throws Exception {
         test("fieldset");
@@ -1192,10 +1052,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void figcaption() throws Exception {
         test("figcaption");
@@ -1207,10 +1064,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void figure() throws Exception {
         test("figure");
@@ -1222,10 +1076,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLFontElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLFontElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLFontElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLFontElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLFontElement]",
             IE = "exception")
     public void font() throws Exception {
         test("font");
@@ -1237,10 +1088,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLFormElement]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLFormElement]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLFormElement]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLFormElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLFormElement]",
             IE = "exception")
     public void form() throws Exception {
         test("form");
@@ -1252,10 +1100,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FormData]",
             IE = "exception")
     public void formData() throws Exception {
         testString("", "new FormData()");
@@ -1267,10 +1112,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void footer() throws Exception {
         test("footer");
@@ -1282,10 +1124,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLFrameElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLFrameElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLFrameElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLFrameElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLFrameElement]",
             IE = "exception")
     public void frame() throws Exception {
         test("frame");
@@ -1297,10 +1136,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLFrameSetElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLFrameSetElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLFrameSetElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLFrameSetElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLFrameSetElement]",
             IE = "exception")
     public void frameset() throws Exception {
         test("frameset");
@@ -1312,10 +1148,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHeadElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHeadElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHeadElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHeadElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHeadElement]",
             IE = "exception")
     public void head() throws Exception {
         test("head");
@@ -1327,10 +1160,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void header() throws Exception {
         test("header");
@@ -1342,10 +1172,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHeadingElement]",
             IE = "exception")
     public void h1() throws Exception {
         test("h1");
@@ -1357,10 +1184,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHeadingElement]",
             IE = "exception")
     public void h2() throws Exception {
         test("h2");
@@ -1372,10 +1196,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHeadingElement]",
             IE = "exception")
     public void h3() throws Exception {
         test("h3");
@@ -1387,10 +1208,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHeadingElement]",
             IE = "exception")
     public void h4() throws Exception {
         test("h4");
@@ -1402,10 +1220,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHeadingElement]",
             IE = "exception")
     public void h5() throws Exception {
         test("h5");
@@ -1417,10 +1232,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHeadingElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHeadingElement]",
             IE = "exception")
     public void h6() throws Exception {
         test("h6");
@@ -1432,10 +1244,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHRElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHRElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHRElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHRElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHRElement]",
             IE = "exception")
     public void hr() throws Exception {
         test("hr");
@@ -1447,10 +1256,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLHtmlElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLHtmlElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLHtmlElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLHtmlElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLHtmlElement]",
             IE = "exception")
     public void html() throws Exception {
         test("html");
@@ -1462,10 +1268,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLIFrameElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLIFrameElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLIFrameElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLIFrameElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLIFrameElement]",
             IE = "exception")
     public void iframe() throws Exception {
         test("iframe");
@@ -1477,10 +1280,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLQuoteElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLQuoteElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLQuoteElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLQuoteElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLQuoteElement]",
             IE = "exception")
     public void q() throws Exception {
         test("q");
@@ -1492,10 +1292,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLImageElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLImageElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLImageElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLImageElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLImageElement]",
             IE = "exception")
     public void img() throws Exception {
         test("img");
@@ -1507,10 +1304,9 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
+            FF = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void image() throws Exception {
         test("image");
@@ -1522,10 +1318,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLModElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLModElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLModElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLModElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLModElement]",
             IE = "exception")
     public void ins() throws Exception {
         test("ins");
@@ -1537,10 +1330,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void isindex() throws Exception {
         test("isindex");
@@ -1552,10 +1342,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void i() throws Exception {
         test("i");
@@ -1567,10 +1354,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void kbd() throws Exception {
         test("kbd");
@@ -1580,10 +1364,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void keygen() throws Exception {
         test("keygen");
@@ -1595,10 +1376,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLLabelElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLLabelElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLLabelElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLLabelElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLLabelElement]",
             IE = "exception")
     public void label() throws Exception {
         test("label");
@@ -1610,10 +1388,9 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
+            FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void layer() throws Exception {
         test("layer");
@@ -1625,10 +1402,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLLegendElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLLegendElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLLegendElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLLegendElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLLegendElement]",
             IE = "exception")
     public void legend() throws Exception {
         test("legend");
@@ -1640,10 +1414,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLPreElement]",
             IE = "exception")
     public void listing() throws Exception {
         test("listing");
@@ -1655,10 +1426,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLLIElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLLIElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLLIElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLLIElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLLIElement]",
             IE = "exception")
     public void li() throws Exception {
         test("li");
@@ -1670,10 +1438,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLLinkElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLLinkElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLLinkElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLLinkElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLLinkElement]",
             IE = "exception")
     public void link() throws Exception {
         test("link");
@@ -1685,10 +1450,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void main() throws Exception {
         test("main");
@@ -1700,10 +1462,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLMapElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLMapElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLMapElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLMapElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLMapElement]",
             IE = "exception")
     public void map() throws Exception {
         test("map");
@@ -1715,10 +1474,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void mark() throws Exception {
         test("mark");
@@ -1730,10 +1486,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLMarqueeElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLMarqueeElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLMarqueeElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLMarqueeElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLMarqueeElement]",
             IE = "exception")
     public void marquee() throws Exception {
         test("marquee");
@@ -1745,10 +1498,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLMenuElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLMenuElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLMenuElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLMenuElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLMenuElement]",
             IE = "exception")
     public void menu() throws Exception {
         test("menu");
@@ -1760,10 +1510,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void menuitem() throws Exception {
         test("menuitem");
@@ -1775,10 +1522,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLMetaElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLMetaElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLMetaElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLMetaElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLMetaElement]",
             IE = "exception")
     public void meta() throws Exception {
         test("meta");
@@ -1790,10 +1534,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLMeterElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLMeterElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLMeterElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLMeterElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLMeterElement]",
             IE = "exception")
     public void meter() throws Exception {
         test("meter");
@@ -1805,10 +1546,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void multicol() throws Exception {
         test("multicol");
@@ -1820,10 +1558,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void nav() throws Exception {
         test("nav");
@@ -1835,10 +1570,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void nextid() throws Exception {
         test("nextid");
@@ -1850,10 +1582,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void nobr() throws Exception {
         test("nobr");
@@ -1865,10 +1594,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void noembed() throws Exception {
         test("noembed");
@@ -1880,10 +1606,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void noframes() throws Exception {
         test("noframes");
@@ -1895,10 +1618,9 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
+            FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void nolayer() throws Exception {
         test("nolayer");
@@ -1910,10 +1632,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void noscript() throws Exception {
         test("noscript");
@@ -1925,10 +1644,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLObjectElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLObjectElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLObjectElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLObjectElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLObjectElement]",
             IE = "exception")
     public void object() throws Exception {
         test("object");
@@ -1940,10 +1656,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLOListElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLOListElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLOListElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLOListElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLOListElement]",
             IE = "exception")
     public void ol() throws Exception {
         test("ol");
@@ -1955,10 +1668,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLOptGroupElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLOptGroupElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLOptGroupElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLOptGroupElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLOptGroupElement]",
             IE = "exception")
     public void optgroup() throws Exception {
         test("optgroup");
@@ -1970,10 +1680,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLOptionElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLOptionElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLOptionElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLOptionElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLOptionElement]",
             IE = "exception")
     public void option() throws Exception {
         test("option");
@@ -1985,10 +1692,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLOutputElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLOutputElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLOutputElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLOutputElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLOutputElement]",
             IE = "exception")
     public void output() throws Exception {
         test("output");
@@ -2000,10 +1704,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLParagraphElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLParagraphElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLParagraphElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLParagraphElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLParagraphElement]",
             IE = "exception")
     public void p() throws Exception {
         test("p");
@@ -2015,10 +1716,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLParamElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLParamElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLParamElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLParamElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLParamElement]",
             IE = "exception")
     public void param() throws Exception {
         test("param");
@@ -2030,10 +1728,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Performance]",
-            EDGE = "Symbol(Symbol.toStringTag) [Performance]",
-            FF = "Symbol(Symbol.toStringTag) [Performance]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Performance]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Performance]",
             IE = "exception")
     public void performance() throws Exception {
         testString("", "performance");
@@ -2045,10 +1740,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void plaintext() throws Exception {
         test("plaintext");
@@ -2060,10 +1752,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLPreElement]",
             IE = "exception")
     public void pre() throws Exception {
         test("pre");
@@ -2075,10 +1764,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLProgressElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLProgressElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLProgressElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLProgressElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLProgressElement]",
             IE = "exception")
     public void progress() throws Exception {
         test("progress");
@@ -2090,13 +1776,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void rb() throws Exception {
         test("rb");
     }
@@ -2107,10 +1790,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void rbc() throws Exception {
         test("rbc");
@@ -2122,13 +1802,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void rp() throws Exception {
         test("rp");
     }
@@ -2139,13 +1816,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void rt() throws Exception {
         test("rt");
     }
@@ -2156,13 +1830,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void rtc() throws Exception {
         test("rtc");
     }
@@ -2173,13 +1844,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void ruby() throws Exception {
         test("ruby");
     }
@@ -2190,10 +1858,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void s() throws Exception {
         test("s");
@@ -2205,10 +1870,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void samp() throws Exception {
         test("samp");
@@ -2220,10 +1882,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLScriptElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLScriptElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLScriptElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLScriptElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLScriptElement]",
             IE = "exception")
     public void script() throws Exception {
         test("script");
@@ -2235,10 +1894,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void section() throws Exception {
         test("section");
@@ -2250,10 +1906,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLSelectElement]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLSelectElement]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLSelectElement]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLSelectElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLSelectElement]",
             IE = "exception")
     public void select() throws Exception {
         test("select");
@@ -2265,10 +1918,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLOptionsCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLOptionsCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLOptionsCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLOptionsCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLOptionsCollection]",
             IE = "exception")
     public void optionsCollection() throws Exception {
         testString("var sel = document.createElement('select')", "sel.options");
@@ -2280,10 +1930,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void small() throws Exception {
         test("small");
@@ -2295,10 +1942,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLSourceElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLSourceElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLSourceElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLSourceElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLSourceElement]",
             IE = "exception")
     public void source() throws Exception {
         test("source");
@@ -2310,10 +1954,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLSpanElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLSpanElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLSpanElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLSpanElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLSpanElement]",
             IE = "exception")
     public void span() throws Exception {
         test("span");
@@ -2325,10 +1966,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void strike() throws Exception {
         test("strike");
@@ -2340,10 +1978,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void strong() throws Exception {
         test("strong");
@@ -2355,10 +1990,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLStyleElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLStyleElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLStyleElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLStyleElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLStyleElement]",
             IE = "exception")
     public void style() throws Exception {
         test("style");
@@ -2370,10 +2002,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void sub() throws Exception {
         test("sub");
@@ -2385,10 +2014,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void summary() throws Exception {
         test("summary");
@@ -2400,10 +2026,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void sup() throws Exception {
         test("sup");
@@ -2415,10 +2038,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void svg() throws Exception {
         test("svg");
@@ -2430,10 +2050,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableElement]",
             IE = "exception")
     public void table() throws Exception {
         test("table");
@@ -2445,10 +2062,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableColElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableColElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableColElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableColElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableColElement]",
             IE = "exception")
     public void col() throws Exception {
         test("col");
@@ -2460,10 +2074,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableColElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableColElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableColElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableColElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableColElement]",
             IE = "exception")
     public void colgroup() throws Exception {
         test("colgroup");
@@ -2475,10 +2086,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableSectionElement]",
             IE = "exception")
     public void tbody() throws Exception {
         test("tbody");
@@ -2490,10 +2098,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableCellElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableCellElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableCellElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableCellElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableCellElement]",
             IE = "exception")
     public void td() throws Exception {
         test("td");
@@ -2505,10 +2110,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableCellElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableCellElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableCellElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableCellElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableCellElement]",
             IE = "exception")
     public void th() throws Exception {
         test("th");
@@ -2520,10 +2122,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableRowElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableRowElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableRowElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableRowElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableRowElement]",
             IE = "exception")
     public void tr() throws Exception {
         test("tr");
@@ -2535,10 +2134,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTextAreaElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTextAreaElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTextAreaElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTextAreaElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTextAreaElement]",
             IE = "exception")
     public void textarea() throws Exception {
         test("textarea");
@@ -2550,10 +2146,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableSectionElement]",
             IE = "exception")
     public void tfoot() throws Exception {
         test("tfoot");
@@ -2565,10 +2158,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTableSectionElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTableSectionElement]",
             IE = "exception")
     public void thead() throws Exception {
         test("thead");
@@ -2580,10 +2170,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void tt() throws Exception {
         test("tt");
@@ -2595,10 +2182,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTimeElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTimeElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTimeElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTimeElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTimeElement]",
             IE = "exception")
     public void time() throws Exception {
         test("time");
@@ -2610,10 +2194,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTitleElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTitleElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTitleElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTitleElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTitleElement]",
             IE = "exception")
     public void title() throws Exception {
         test("title");
@@ -2625,10 +2206,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTrackElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTrackElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTrackElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTrackElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTrackElement]",
             IE = "exception")
     public void track() throws Exception {
         test("track");
@@ -2640,10 +2218,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void u() throws Exception {
         test("u");
@@ -2655,10 +2230,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUListElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUListElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUListElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUListElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUListElement]",
             IE = "exception")
     public void ul() throws Exception {
         test("ul");
@@ -2670,10 +2242,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void var() throws Exception {
         test("var");
@@ -2685,10 +2254,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLVideoElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLVideoElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLVideoElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLVideoElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLVideoElement]",
             IE = "exception")
     public void video() throws Exception {
         test("video");
@@ -2700,10 +2266,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             IE = "exception")
     public void wbr() throws Exception {
         test("wbr");
@@ -2715,10 +2278,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLPreElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLPreElement]",
             IE = "exception")
     public void xmp() throws Exception {
         test("xmp");
@@ -2730,10 +2290,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLInputElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLInputElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLInputElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLInputElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLInputElement]",
             IE = "exception")
     public void input() throws Exception {
         test("input");
@@ -2745,10 +2302,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLDataElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLDataElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLDataElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLDataElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLDataElement]",
             IE = "exception")
     public void data() throws Exception {
         test("data");
@@ -2760,10 +2314,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             IE = "exception")
     public void content() throws Exception {
         test("content");
@@ -2775,10 +2326,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLPictureElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLPictureElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLPictureElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLPictureElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLPictureElement]",
             IE = "exception")
     public void picutre() throws Exception {
         test("picture");
@@ -2790,10 +2338,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLTemplateElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLTemplateElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLTemplateElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLTemplateElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLTemplateElement]",
             IE = "exception")
     public void template() throws Exception {
         test("template");
@@ -2805,10 +2350,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [KeyboardEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [KeyboardEvent]",
-            FF = "Symbol(Symbol.toStringTag) [KeyboardEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [KeyboardEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [KeyboardEvent]",
             IE = "exception")
     public void keyboardEvent() throws Exception {
         testString("", "document.createEvent('KeyboardEvent')");
@@ -2820,10 +2362,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Event]",
-            EDGE = "Symbol(Symbol.toStringTag) [Event]",
-            FF = "Symbol(Symbol.toStringTag) [Event]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Event]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Event]",
             IE = "exception")
     public void event2() throws Exception {
         testString("", "document.createEvent('Event')");
@@ -2835,10 +2374,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [UIEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [UIEvent]",
-            FF = "Symbol(Symbol.toStringTag) [UIEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [UIEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [UIEvent]",
             IE = "exception")
     public void uiEvent() throws Exception {
         testString("", "document.createEvent('UIEvent')");
@@ -2850,10 +2386,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [URL]",
-            EDGE = "Symbol(Symbol.toStringTag) [URL]",
-            FF = "Symbol(Symbol.toStringTag) [URL]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [URL]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [URL]",
             IE = "exception")
     public void url() throws Exception {
         testString("", "new URL('http://developer.mozilla.org')");
@@ -2865,10 +2398,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [URL]",
-            EDGE = "Symbol(Symbol.toStringTag) [URL]",
-            FF = "Symbol(Symbol.toStringTag) [URL]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [URL]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [URL]",
             IE = "exception")
     public void webkitURL() throws Exception {
         testString("", "new webkitURL('http://developer.mozilla.org')");
@@ -2880,10 +2410,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [DragEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [DragEvent]",
-            FF = "Symbol(Symbol.toStringTag) [DragEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [DragEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [DragEvent]",
             IE = "exception")
     public void dragEvent() throws Exception {
         testString("", "document.createEvent('DragEvent')");
@@ -2895,10 +2422,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [PointerEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [PointerEvent]",
-            FF = "Symbol(Symbol.toStringTag) [PointerEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [PointerEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [PointerEvent]",
             IE = "exception")
     public void pointerEvent() throws Exception {
         testString("", "new PointerEvent('click')");
@@ -2910,11 +2434,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+    @Alerts(DEFAULT = "exception")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
     }
@@ -2925,8 +2445,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [WheelEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [WheelEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [WheelEvent]",
             FF = "exception",
             FF_ESR = "exception",
             IE = "exception")
@@ -2940,10 +2459,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [MouseEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [MouseEvent]",
-            FF = "Symbol(Symbol.toStringTag) [MouseEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [MouseEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [MouseEvent]",
             IE = "exception")
     public void mouseEvent() throws Exception {
         testString("", "document.createEvent('MouseEvent')");
@@ -2957,10 +2473,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [CompositionEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [CompositionEvent]",
-            FF = "Symbol(Symbol.toStringTag) [CompositionEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [CompositionEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
             IE = "exception")
     public void compositionEvent() throws Exception {
         testString("", "document.createEvent('CompositionEvent')");
@@ -2972,10 +2485,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [FocusEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [FocusEvent]",
-            FF = "Symbol(Symbol.toStringTag) [FocusEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [FocusEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [FocusEvent]",
             IE = "exception")
     public void focusEvent() throws Exception {
         testString("", "document.createEvent('FocusEvent')");
@@ -2987,10 +2497,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [InputEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [InputEvent]",
-            FF = "Symbol(Symbol.toStringTag) [InputEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [InputEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [InputEvent]",
             IE = "exception")
     public void inputEvent() throws Exception {
         testString("", "new InputEvent('input')");
@@ -3002,11 +2509,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+    @Alerts(DEFAULT = "exception")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -3028,10 +2531,9 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [TextEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [TextEvent]",
-            FF = "Symbol(Symbol.toStringTag) [CompositionEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [CompositionEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
             IE = "exception")
     public void textEvent() throws Exception {
         testString("", "document.createEvent('TextEvent')");
@@ -3043,8 +2545,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [TouchEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [TouchEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
             FF = "exception",
             FF_ESR = "exception",
             IE = "exception")
@@ -3058,10 +2559,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLSlotElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLSlotElement]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLSlotElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLSlotElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLSlotElement]",
             IE = "exception")
     public void slot() throws Exception {
         test("slot");
@@ -3073,18 +2571,15 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Document],"
-                + "Symbol(Symbol.unscopables) [{\"append\":true,\"fullscreen\":true,"
-                + "\"prepend\":true,\"replaceChildren\":true}]",
-            EDGE = "Symbol(Symbol.toStringTag) [Document],"
-                + "Symbol(Symbol.unscopables) [{\"append\":true,\"fullscreen\":true,"
-                + "\"prepend\":true,\"replaceChildren\":true}]",
-            FF = "Symbol(Symbol.toStringTag) [Document],"
-                + "Symbol(Symbol.unscopables) [{\"fullscreen\":true,\"prepend\":true,"
-                + "\"append\":true,\"replaceChildren\":true}]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Document],"
-                + "Symbol(Symbol.unscopables) [{\"fullscreen\":true,\"prepend\":true,"
-                + "\"append\":true,\"replaceChildren\":true}]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Document],"
+                + "Symbol(Symbol.unscopables) [C] [{\"append\":true,\"fullscreen\":true,"
+                    + "\"prepend\":true,\"replaceChildren\":true}]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Document],"
+                    + "Symbol(Symbol.unscopables) [C] [{\"fullscreen\":true,\"prepend\":true,"
+                    + "\"append\":true,\"replaceChildren\":true}]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Document],"
+                    + "Symbol(Symbol.unscopables) [C] [{\"fullscreen\":true,\"prepend\":true,"
+                    + "\"append\":true,\"replaceChildren\":true}]",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
@@ -3100,10 +2595,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLDocument]",
-            EDGE = "Symbol(Symbol.toStringTag) [HTMLDocument]",
-            FF = "Symbol(Symbol.toStringTag) [HTMLDocument]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLDocument]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLDocument]",
             IE = "exception")
     public void htmlDocument() throws Exception {
         testString("", "document");
@@ -3115,10 +2607,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [XMLDocument]",
-            EDGE = "Symbol(Symbol.toStringTag) [XMLDocument]",
-            FF = "Symbol(Symbol.toStringTag) [XMLDocument]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [XMLDocument]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [XMLDocument]",
             IE = "exception")
     public void xmlDocument() throws Exception {
         testString("", "xmlDocument");
@@ -3128,10 +2617,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [SVGElement]",
-            EDGE = "Symbol(Symbol.toStringTag) [SVGElement]",
-            FF = "Symbol(Symbol.toStringTag) [SVGElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [SVGElement]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [SVGElement]",
             IE = "exception")
     public void svgElement() throws Exception {
         testString("", "svg");
@@ -3141,10 +2627,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Attr]",
-            EDGE = "Symbol(Symbol.toStringTag) [Attr]",
-            FF = "Symbol(Symbol.toStringTag) [Attr]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Attr]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Attr]",
             IE = "exception")
     public void nodeAndAttr() throws Exception {
         testString("", "document.createAttribute('some_attrib')");
@@ -3154,10 +2637,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Range]",
-            EDGE = "Symbol(Symbol.toStringTag) [Range]",
-            FF = "Symbol(Symbol.toStringTag) [Range]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Range]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Range]",
             IE = "exception")
     public void range() throws Exception {
         testString("", "document.createRange()");
@@ -3167,19 +2647,17 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [DocumentFragment],"
-                + "Symbol(Symbol.unscopables) [{\"append\":true,\"prepend\":true,\"replaceChildren\":true}]",
-            EDGE = "Symbol(Symbol.toStringTag) [DocumentFragment],"
-                + "Symbol(Symbol.unscopables) [{\"append\":true,\"prepend\":true,\"replaceChildren\":true}]",
-            FF = "Symbol(Symbol.toStringTag) [DocumentFragment],"
-                + "Symbol(Symbol.unscopables) [{\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [DocumentFragment],"
-                + "Symbol(Symbol.unscopables) [{\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [DocumentFragment],"
+                + "Symbol(Symbol.unscopables) [C] [{\"append\":true,\"prepend\":true,\"replaceChildren\":true}]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DocumentFragment],"
+                + "Symbol(Symbol.unscopables) [C] [{\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DocumentFragment],"
+                + "Symbol(Symbol.unscopables) [C] [{\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [DocumentFragment]",
-            EDGE = "Symbol(Symbol.toStringTag) [DocumentFragment]",
-            FF = "Symbol(Symbol.toStringTag) [DocumentFragment]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [DocumentFragment]")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [DocumentFragment]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DocumentFragment]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DocumentFragment]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DocumentFragment]")
     public void documentFragment() throws Exception {
         testString("", "document.createDocumentFragment()");
     }
@@ -3188,10 +2666,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [AudioContext]",
-            EDGE = "Symbol(Symbol.toStringTag) [AudioContext]",
-            FF = "Symbol(Symbol.toStringTag) [AudioContext]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [AudioContext]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [AudioContext]",
             IE = "exception")
     public void audioContext() throws Exception {
         testString("", "new AudioContext()");
@@ -3201,10 +2676,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [OfflineAudioContext]",
-            EDGE = "Symbol(Symbol.toStringTag) [OfflineAudioContext]",
-            FF = "Symbol(Symbol.toStringTag) [OfflineAudioContext]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [OfflineAudioContext]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [OfflineAudioContext]",
             IE = "exception")
     public void offlineAudioContext() throws Exception {
         testString("", "new OfflineAudioContext({length: 44100 * 1, sampleRate: 44100})");
@@ -3214,10 +2686,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [AudioParam]",
-            EDGE = "Symbol(Symbol.toStringTag) [AudioParam]",
-            FF = "Symbol(Symbol.toStringTag) [AudioParam]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [AudioParam]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [AudioParam]",
             IE = "exception")
     public void audioParam() throws Exception {
         testString("var audioCtx = new AudioContext(); var gainNode = new GainNode(audioCtx);", "gainNode.gain");
@@ -3227,10 +2696,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [GainNode]",
-            EDGE = "Symbol(Symbol.toStringTag) [GainNode]",
-            FF = "Symbol(Symbol.toStringTag) [GainNode]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [GainNode]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [GainNode]",
             IE = "exception")
     public void gainNode() throws Exception {
         testString("var audioCtx = new AudioContext();", "new GainNode(audioCtx)");
@@ -3240,10 +2706,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [BeforeUnloadEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [BeforeUnloadEvent]",
-            FF = "Symbol(Symbol.toStringTag) [BeforeUnloadEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [BeforeUnloadEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [BeforeUnloadEvent]",
             IE = "exception")
     public void beforeUnloadEvent() throws Exception {
         testString("", "document.createEvent('BeforeUnloadEvent')");
@@ -3253,10 +2716,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [CloseEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [CloseEvent]",
-            FF = "Symbol(Symbol.toStringTag) [CloseEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [CloseEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CloseEvent]",
             IE = "exception")
     public void closeEvent() throws Exception {
         testString("", "new CloseEvent('type-close')");
@@ -3266,10 +2726,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [BlobEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [BlobEvent]",
-            FF = "Symbol(Symbol.toStringTag) [BlobEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [BlobEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [BlobEvent]",
             IE = "exception")
     public void blobEvent() throws Exception {
         testString("var debug = {hello: 'world'};"
@@ -3283,8 +2740,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [TouchEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [TouchEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
             FF = "exception",
             FF_ESR = "exception",
             IE = "exception")
@@ -3298,10 +2754,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [DeviceMotionEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [DeviceMotionEvent]",
-            FF = "Symbol(Symbol.toStringTag) [DeviceMotionEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [DeviceMotionEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [DeviceMotionEvent]",
             IE = "exception")
     public void deviceMotionEvent() throws Exception {
         testString("", "new DeviceMotionEvent('motion')");
@@ -3313,10 +2766,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [ErrorEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [ErrorEvent]",
-            FF = "Symbol(Symbol.toStringTag) [ErrorEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [ErrorEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [ErrorEvent]",
             IE = "exception")
     public void errorEvent() throws Exception {
         testString("", "new ErrorEvent('error')");
@@ -3328,10 +2778,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [GamepadEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [GamepadEvent]",
-            FF = "Symbol(Symbol.toStringTag) [GamepadEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [GamepadEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [GamepadEvent]",
             IE = "exception")
     public void gamepadEvent() throws Exception {
         testString("", "new GamepadEvent('gamepad')");
@@ -3343,10 +2790,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [MutationEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [MutationEvent]",
-            FF = "Symbol(Symbol.toStringTag) [MutationEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [MutationEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [MutationEvent]",
             IE = "exception")
     public void mutationEvent() throws Exception {
         testString("", "document.createEvent('MutationEvent')");
@@ -3367,10 +2811,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [PageTransitionEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [PageTransitionEvent]",
-            FF = "Symbol(Symbol.toStringTag) [PageTransitionEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [PageTransitionEvent]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [PageTransitionEvent]",
             IE = "exception")
     public void pageTransitionEvent() throws Exception {
         testString("", "new PageTransitionEvent('transition')");
@@ -3382,10 +2823,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [SourceBufferList]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [SourceBufferList]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [SourceBufferList]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [SourceBufferList]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [SourceBufferList]",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
@@ -3401,10 +2839,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLCollection]",
             IE = "exception")
     public void htmlCollection() throws Exception {
         testString("", "document.getElementsByTagName('div')");
@@ -3416,10 +2851,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLCollection]",
             IE = "exception")
     public void htmlCollectionDocumentAnchors() throws Exception {
         testString("", "document.anchors");
@@ -3431,10 +2863,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLCollection]",
             IE = "exception")
     public void htmlCollectionDocumentApplets() throws Exception {
         testString("", "document.applets");
@@ -3446,10 +2875,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLCollection]",
             IE = "exception")
     public void htmlCollectionDocumentEmbeds() throws Exception {
         testString("", "document.embeds");
@@ -3461,10 +2887,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLCollection]",
             IE = "exception")
     public void htmlCollectionDocumentForms() throws Exception {
         testString("", "document.forms");
@@ -3476,10 +2899,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLCollection]",
             IE = "exception")
     public void htmlCollectionDocumentImages() throws Exception {
         testString("", "document.images");
@@ -3491,10 +2911,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLCollection]",
             IE = "exception")
     public void htmlCollectionDocumentLinks() throws Exception {
         testString("", "document.links");
@@ -3506,10 +2923,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLCollection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [HTMLCollection]",
             IE = "exception")
     public void htmlCollectionDocumentScripts() throws Exception {
         testString("", "document.scripts");
@@ -3521,10 +2935,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [NodeList]",
             IE = "exception")
     public void nodeListElementById() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
@@ -3536,10 +2947,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [NodeList]",
             IE = "exception")
     public void nodeListElementsByName() throws Exception {
         testString("", "document.getElementsByName('myLog')");
@@ -3551,10 +2959,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NodeList]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [NodeList]",
             IE = "exception")
     public void nodeListButtonLabels() throws Exception {
         testString("var button = document.createElement('button');", "button.labels");
@@ -3566,15 +2971,14 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [CSS2Properties]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [CSS2Properties]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            EDGE = "Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            FF = "Symbol(Symbol.toStringTag) [CSS2Properties]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [CSS2Properties]")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
+            FF = "Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CSS2Properties]")
     public void computedStyle() throws Exception {
         testString("", "window.getComputedStyle(document.body)");
     }
@@ -3585,15 +2989,14 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [CSS2Properties]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [CSS2Properties]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            EDGE = "Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            FF = "Symbol(Symbol.toStringTag) [CSSStyleDeclaration]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [CSSStyleDeclaration]")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
+            FF = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]")
     public void cssStyleDeclaration() throws Exception {
         testString("", "document.body.style");
     }
@@ -3604,10 +3007,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Location]",
-            EDGE = "Symbol(Symbol.toStringTag) [Location]",
-            FF = "Symbol(Symbol.toStringTag) [Location]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Location]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Location]",
             IE = "exception")
     public void location() throws Exception {
         testString("", "window.location");
@@ -3620,10 +3020,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Screen]",
-            EDGE = "Symbol(Symbol.toStringTag) [Screen]",
-            FF = "Symbol(Symbol.toStringTag) [Screen]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Screen]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Screen]",
             IE = "exception")
     public void screen() throws Exception {
         testString("", "window.screen");
@@ -3635,10 +3032,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [ScreenOrientation]",
-            EDGE = "Symbol(Symbol.toStringTag) [ScreenOrientation]",
-            FF = "Symbol(Symbol.toStringTag) [ScreenOrientation]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [ScreenOrientation]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [ScreenOrientation]",
             IE = "exception")
     public void screenOrientation() throws Exception {
         testString("", "window.screen.orientation");
@@ -3650,10 +3044,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Crypto]",
-            EDGE = "Symbol(Symbol.toStringTag) [Crypto]",
-            FF = "Symbol(Symbol.toStringTag) [Crypto]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Crypto]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Crypto]",
             IE = "exception")
     public void crypto() throws Exception {
         testString("", "window.crypto");
@@ -3665,10 +3056,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [SubtleCrypto]",
-            EDGE = "Symbol(Symbol.toStringTag) [SubtleCrypto]",
-            FF = "Symbol(Symbol.toStringTag) [SubtleCrypto]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [SubtleCrypto]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [SubtleCrypto]",
             IE = "exception")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");
@@ -3680,10 +3068,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [XPathResult]",
-            EDGE = "Symbol(Symbol.toStringTag) [XPathResult]",
-            FF = "Symbol(Symbol.toStringTag) [XPathResult]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [XPathResult]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [XPathResult]",
             IE = "exception")
     public void xPathResult() throws Exception {
         testString("var res = document.evaluate('/html/body', document, null, XPathResult.ANY_TYPE, null);", "res");
@@ -3695,10 +3080,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [CDATASection]",
-            EDGE = "Symbol(Symbol.toStringTag) [CDATASection]",
-            FF = "Symbol(Symbol.toStringTag) [CDATASection]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [CDATASection]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CDATASection]",
             IE = "exception")
     public void cDATASection() throws Exception {
         final String setup = " var doc = document.implementation.createDocument('', '', null);\n"
@@ -3714,19 +3096,20 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [DocumentType],"
-                + "Symbol(Symbol.unscopables) [{\"after\":true,\"before\":true,\"remove\":true,\"replaceWith\":true}]",
-            EDGE = "Symbol(Symbol.toStringTag) [DocumentType],"
-                + "Symbol(Symbol.unscopables) [{\"after\":true,\"before\":true,\"remove\":true,\"replaceWith\":true}]",
-            FF = "Symbol(Symbol.toStringTag) [DocumentType],"
-                + "Symbol(Symbol.unscopables) [{\"before\":true,\"after\":true,\"replaceWith\":true,\"remove\":true}]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [DocumentType],"
-                + "Symbol(Symbol.unscopables) [{\"before\":true,\"after\":true,\"replaceWith\":true,\"remove\":true}]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [DocumentType],"
+                + "Symbol(Symbol.unscopables) [C] "
+                    + "[{\"after\":true,\"before\":true,\"remove\":true,\"replaceWith\":true}]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DocumentType],"
+                + "Symbol(Symbol.unscopables) [C] "
+                    + "[{\"before\":true,\"after\":true,\"replaceWith\":true,\"remove\":true}]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DocumentType],"
+                + "Symbol(Symbol.unscopables) [C] "
+                    + "[{\"before\":true,\"after\":true,\"replaceWith\":true,\"remove\":true}]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [DocumentType]",
-            EDGE = "Symbol(Symbol.toStringTag) [DocumentType]",
-            FF = "Symbol(Symbol.toStringTag) [DocumentType]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [DocumentType]")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [DocumentType]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DocumentType]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DocumentType]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DocumentType]")
     public void documentType() throws Exception {
         testString("", "document.firstChild");
     }
@@ -3737,10 +3120,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Blob]",
-            EDGE = "Symbol(Symbol.toStringTag) [Blob]",
-            FF = "Symbol(Symbol.toStringTag) [Blob]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [Blob]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [Blob]",
             IE = "exception")
     public void blob() throws Exception {
         testString("", "new Blob([1, 2], { type: \"text/html\" })");
@@ -3752,10 +3132,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [URLSearchParams]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [URLSearchParams]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [URLSearchParams]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [URLSearchParams]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [URLSearchParams]",
             IE = "exception")
     public void urlSearchParams() throws Exception {
         testString("", "new URLSearchParams('q=URLUtils.searchParams&topic=api')");
@@ -3767,10 +3144,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NamedNodeMap]",
-            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NamedNodeMap]",
-            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NamedNodeMap]",
-            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [NamedNodeMap]",
+    @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [NamedNodeMap]",
             IE = "exception")
     public void namedNodeMap() throws Exception {
         testString("", "element.attributes");
@@ -3782,10 +3156,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [MutationObserver]",
-            EDGE = "Symbol(Symbol.toStringTag) [MutationObserver]",
-            FF = "Symbol(Symbol.toStringTag) [MutationObserver]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [MutationObserver]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [MutationObserver]",
             IE = "exception")
     public void mutationObserver() throws Exception {
         testString("", "new MutationObserver(function(m) {})");
@@ -3797,8 +3168,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [MutationObserver]",
-            EDGE = "Symbol(Symbol.toStringTag) [MutationObserver]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [MutationObserver]",
             FF = "exception",
             FF_ESR = "exception",
             IE = "exception")
@@ -3812,7 +3182,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSStyleSheet]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CSSStyleSheet]",
             IE = "exception")
     public void cssStyleSheet() throws Exception {
         testString("", "document.styleSheets[0]");
@@ -3824,7 +3194,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSPageRule]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CSSPageRule]",
             IE = "exception")
     public void cssPageRule() throws Exception {
         testString("", "document.styleSheets[0].cssRules[0]");
@@ -3836,7 +3206,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSMediaRule]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CSSMediaRule]",
             IE = "exception")
     public void cssMediaRule() throws Exception {
         testString("", "document.styleSheets[1].cssRules[0]");
@@ -3848,7 +3218,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSFontFaceRule]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CSSFontFaceRule]",
             IE = "exception")
     public void cssFontFaceRule() throws Exception {
         testString("", "document.styleSheets[2].cssRules[0]");
@@ -3860,7 +3230,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSImportRule]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CSSImportRule]",
             IE = "exception")
     public void cssImportRule() throws Exception {
         testString("", "document.styleSheets[3].cssRules[0]");
@@ -3872,7 +3242,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSStyleRule]",
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [CSSStyleRule]",
             IE = "exception")
     public void cssStyleRule() throws Exception {
         testString("", "document.styleSheets[4].cssRules[0]");

@@ -715,7 +715,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Map<Symbol, String> symbolConstantMap = config.getSymbolConstantMap();
         if (symbolConstantMap != null) {
             for (final Entry<Symbol, String> symbolInfo : symbolConstantMap.entrySet()) {
-                scriptable.defineProperty(symbolInfo.getKey(), symbolInfo.getValue(), ScriptableObject.DONTENUM);
+                scriptable.defineProperty(symbolInfo.getKey(), symbolInfo.getValue(), ScriptableObject.DONTENUM | ScriptableObject.READONLY);
             }
         }
     }
