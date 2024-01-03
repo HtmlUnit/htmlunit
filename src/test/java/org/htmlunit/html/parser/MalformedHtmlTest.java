@@ -1289,10 +1289,10 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts({"frame loaded", "1", "0"})
     @HtmlUnitNYI(CHROME = {"", "0", "1"},
-        EDGE = {"", "0", "1"},
-        FF = {"", "0", "1"},
-        FF_ESR = {"", "0", "1"},
-        IE = {"", "0", "1"})
+            EDGE = {"", "0", "1"},
+            FF = {"", "0", "1"},
+            FF_ESR = {"", "0", "1"},
+            IE = {"", "0", "1"})
     public void framesetInsideDiv() throws Exception {
         final String html = "<html>\n"
                 + "<div id='tester'>\n"
@@ -1322,10 +1322,10 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts({"frame loaded", "1", "0"})
     @HtmlUnitNYI(CHROME = {"", "0", "1"},
-        EDGE = {"", "0", "1"},
-        FF = {"", "0", "1"},
-        FF_ESR = {"", "0", "1"},
-        IE = {"", "0", "1"})
+            EDGE = {"", "0", "1"},
+            FF = {"", "0", "1"},
+            FF_ESR = {"", "0", "1"},
+            IE = {"", "0", "1"})
     public void framesetInsideForm() throws Exception {
         final String html = "<html>\n"
                 + "<form id='tester'>\n"
