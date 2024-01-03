@@ -367,7 +367,16 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         if (node != null) {
             return node.getPage().getWebClient().getBrowserVersion();
         }
-        return getWindow().getWebWindow().getWebClient().getBrowserVersion();
+
+        final Window window = getWindow();
+        if (window != null) {
+            final WebWindow webWindow = window.getWebWindow();
+            if (webWindow != null) {
+                return webWindow.getWebClient().getBrowserVersion();
+            }
+        }
+
+        return null;
     }
 
     /**

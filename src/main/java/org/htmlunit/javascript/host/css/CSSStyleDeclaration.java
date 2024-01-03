@@ -120,6 +120,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.corejs.javascript.ES6Iterator;
+import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -142,6 +144,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.Element;
 
 /**
@@ -1287,6 +1290,15 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns an Iterator allowing to go through all keys contained in this object.
+     * @return an {@link NativeArrayIterator}
+     */
+    @JsxSymbol(value = {CHROME, EDGE, FF, FF_ESR}, symbolName = "iterator")
+    public ES6Iterator values() {
+        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
+    }
+
+    /**
      * Gets the {@code letterSpacing} style attribute.
      * @return the style attribute
      */
@@ -1580,9 +1592,12 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             return super.has(name, start);
         }
 
-        final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
-        if (style != null) {
-            return true;
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion != null) {
+            final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
+            if (style != null) {
+                return true;
+            }
         }
 
         return super.has(name, start);

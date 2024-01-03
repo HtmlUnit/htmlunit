@@ -69,6 +69,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssPixelValueConverter;
 import org.htmlunit.css.CssPixelValueConverter.CssValue;
@@ -109,6 +110,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.dom.Text;
@@ -160,6 +162,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     protected ComputedCssStyleDeclaration getCssStyleDeclaration() {
         return (ComputedCssStyleDeclaration) super.getCssStyleDeclaration();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * This method does nothing as the object is read-only.
+     */
+    @Override
+    @JsxSymbol(value = {FF, FF_ESR}, symbolName = "iterator")
+    public ES6Iterator values() {
+        return super.values();
     }
 
     /**

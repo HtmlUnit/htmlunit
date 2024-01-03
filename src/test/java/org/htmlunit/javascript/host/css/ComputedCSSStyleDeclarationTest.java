@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -2911,6 +2912,46 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script>\n"
 
             + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"function values() { [native code] }", "no for..of", "true"},
+            IE = "no for..of")
+    public void iterator() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+                + "</head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var style = window.getComputedStyle(document.body, null);\n"
+
+                + "    if (typeof Symbol != 'undefined') {\n"
+                + "      log(style[Symbol.iterator]);\n"
+                + "    }\n"
+
+                + "    if (!style.forEach) {\n"
+                + "      log('no for..of');\n"
+                + "    }\n"
+
+                + "    if (typeof Symbol === 'undefined') {\n"
+                + "      return;\n"
+                + "    }\n"
+
+                + "    var count = 0;\n"
+                + "    for (var i of style) {\n"
+                + "      count++;\n"
+                + "    }\n"
+                + "    log(count > 0);"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()' style='display: inline'>\n"
+                + "  <div></div>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

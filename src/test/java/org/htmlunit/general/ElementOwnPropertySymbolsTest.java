@@ -2975,10 +2975,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
             FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
-            FF = "Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CSS2Properties]")
     public void computedStyle() throws Exception {
         testString("", "window.getComputedStyle(document.body)");
     }
@@ -2993,10 +2989,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
             FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
-            FF = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]")
     public void cssStyleDeclaration() throws Exception {
         testString("", "document.body.style");
     }

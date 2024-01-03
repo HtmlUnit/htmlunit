@@ -731,7 +731,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                 final Callable symbolFunction = scriptable.has(methodName, scriptable)
                         ? (Callable) scriptable.get(methodName, scriptable)
-                        : new FunctionObject(symbol.toString(), method, scriptable);
+                        : new FunctionObject(methodName, method, scriptable);
                 scriptable.defineProperty(symbol, symbolFunction, ScriptableObject.DONTENUM);
             }
         }
