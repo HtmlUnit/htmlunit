@@ -134,10 +134,10 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             ancestors.add(0, new QName(null, node.getNodeName(), null, null));
             node = node.getParentNode();
         }
-        if (ancestors.isEmpty() || !"html".equals(ancestors.get(0).localpart)) {
+        if (ancestors.isEmpty() || !"html".equals(ancestors.get(0).getLocalpart())) {
             ancestors.add(0, new QName(null, "html", null, null));
         }
-        if (ancestors.size() == 1 || !"body".equals(ancestors.get(1).localpart)) {
+        if (ancestors.size() == 1 || !"body".equals(ancestors.get(1).getLocalpart())) {
             ancestors.add(1, new QName(null, "body", null, null));
         }
 

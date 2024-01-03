@@ -19,7 +19,6 @@ import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -363,7 +362,27 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 "outerA", "BODY:null", "1", "#text:V", "true", "false",
                 "outerA", "DIV:null", "1", "#text:W", "false", "false",
                 "innerA", "DIV:null", "1", "#text:X", "false", "true"})
-    @NotYetImplemented
+    @HtmlUnitNYI(
+            CHROME = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
+                      "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                      "outerA", "BODY:null", "2", "#text:V", "true", "false",
+                      "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"},
+            EDGE = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
+                    "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                    "outerA", "BODY:null", "2", "#text:V", "true", "false",
+                    "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"},
+            FF = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
+                  "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                  "outerA", "BODY:null", "2", "#text:V", "true", "false",
+                  "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"},
+            FF_ESR = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
+                      "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                      "outerA", "BODY:null", "2", "#text:V", "true", "false",
+                      "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"},
+            IE = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
+                  "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                  "outerA", "BODY:null", "2", "#text:V", "true", "false",
+                  "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"})
     // Input:
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>
     // CHROME and IE generate:
@@ -1093,10 +1112,15 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("frame loaded")
+    @Alerts({"frame loaded", "1", "0"})
+    @HtmlUnitNYI(CHROME = {"", "0", "1"},
+            EDGE = {"", "0", "1"},
+            FF = {"", "0", "1"},
+            FF_ESR = {"", "0", "1"},
+            IE = {"", "0", "1"})
     public void siblingWithoutContentBeforeFrameset() throws Exception {
         final String html = "<html>\n"
-                + "<div><span></span></div>\n"
+                + "<div id='div1'><span></span></div>\n"
                 + "<frameset>\n"
                 + "  <frame name='main' src='" + URL_SECOND + "' />\n"
                 + "</frameset>\n"
@@ -1109,18 +1133,26 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals(1, webDriver.findElements(By.name("main")).size());
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("div1")).size());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("frame loaded")
+    @Alerts({"frame loaded", "1", "0"})
+    @HtmlUnitNYI(CHROME = {"", "0", "1"},
+            EDGE = {"", "0", "1"},
+            FF = {"", "0", "1"},
+            FF_ESR = {"", "0", "1"},
+            IE = {"", "0", "1"})
     public void siblingWithWhitespaceContentBeforeFrameset() throws Exception {
         final String html = "<html>\n"
-                + "<div>     \t \r \r\n</div>\n"
+                + "<div id='div1'>     \t \r \r\n</div>\n"
                 + "<frameset>\n"
                 + "  <frame name='main' src='" + URL_SECOND + "' />\n"
                 + "</frameset>\n"
@@ -1133,17 +1165,21 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals(1, webDriver.findElements(By.name("main")).size());
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("div1")).size());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"", "0", "1"})
     public void siblingWithNbspContentBeforeFrameset() throws Exception {
         final String html = "<html>\n"
-                + "<div>&nbsp;</div>\n"
+                + "<div id='div1'>&nbsp;</div>\n"
                 + "<frameset>\n"
                 + "  <frame name='main' src='" + URL_SECOND + "' />\n"
                 + "</div>\n"
@@ -1156,17 +1192,21 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals(0, webDriver.findElements(By.name("main")).size());
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("div1")).size());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"", "0", "1"})
     public void siblingWithContentBeforeFrameset() throws Exception {
         final String html = "<html>\n"
-                + "<div><span>CONTENT</span></div>\n"
+                + "<div id='div1'><span>CONTENT</span></div>\n"
                 + "<frameset>\n"
                 + "  <frame name='main' src='" + URL_SECOND + "' />\n"
                 + "</frameset>\n"
@@ -1179,16 +1219,80 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals(0, webDriver.findElements(By.name("main")).size());
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("div1")).size());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("frame loaded")
-    @NotYetImplemented
+    @Alerts({"", "0", "1"})
+    public void siblingWithoutContentAndBodyBeforeFrameset() throws Exception {
+        final String html = "<html>\n"
+                + "<div id='div1'><span></span></div>\n"
+                + "<body>\n"
+                + "<frameset>\n"
+                + "  <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("div1")).size());
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "0", "1"})
+    public void siblingWithContentAndBodyBeforeFrameset() throws Exception {
+        final String html = "<html>\n"
+                + "<div id='div1'>x<span></span></div>\n"
+                + "<body>\n"
+                + "<frameset>\n"
+                + "  <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("div1")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"frame loaded", "1", "0"})
+    @HtmlUnitNYI(CHROME = {"", "0", "1"},
+        EDGE = {"", "0", "1"},
+        FF = {"", "0", "1"},
+        FF_ESR = {"", "0", "1"},
+        IE = {"", "0", "1"})
     public void framesetInsideDiv() throws Exception {
         final String html = "<html>\n"
                 + "<div id='tester'>\n"
@@ -1205,17 +1309,23 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals(1, webDriver.findElements(By.name("main")).size());
-        assertEquals(0, webDriver.findElements(By.id("tester")).size());
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("tester")).size());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("frame loaded")
-    @NotYetImplemented
+    @Alerts({"frame loaded", "1", "0"})
+    @HtmlUnitNYI(CHROME = {"", "0", "1"},
+        EDGE = {"", "0", "1"},
+        FF = {"", "0", "1"},
+        FF_ESR = {"", "0", "1"},
+        IE = {"", "0", "1"})
     public void framesetInsideForm() throws Exception {
         final String html = "<html>\n"
                 + "<form id='tester'>\n"
@@ -1232,16 +1342,46 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals(1, webDriver.findElements(By.name("main")).size());
-        assertEquals(0, webDriver.findElements(By.id("tester")).size());
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("tester")).size());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
+    @Alerts({"", "0", "1"})
+    public void framesetInsideFormContent() throws Exception {
+        final String html = "<html>\n"
+                + "<form id='tester'>Content\n"
+                + "  <frameset>\n"
+                + "    <frame name='main' src='" + URL_SECOND + "' />\n"
+                + "  </frameset>\n"
+                + "</form>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>\n"
+                + "<script>\n"
+                + "  alert('frame loaded');\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("tester")).size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "0", "1"})
     public void framesetInsideTable() throws Exception {
         final String html = "<html>\n"
                 + "<table id='tester'>\n"
@@ -1258,9 +1398,11 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals(0, webDriver.findElements(By.name("main")).size());
-        assertEquals(1, webDriver.findElements(By.id("tester")).size());
+
+        final WebDriver webDriver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], String.join("§", getCollectedAlerts(webDriver)));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), webDriver.findElements(By.name("main")).size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), webDriver.findElements(By.id("tester")).size());
     }
 
     /**

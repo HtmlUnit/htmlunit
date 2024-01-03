@@ -15,6 +15,12 @@
                 SymbolConstants are readonly.
             </action>
             <action type="fix" dev="rbri">
+                neko: frameset tags ignored in some more cases, handling of text before the frameset also fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: frameset tags closing the head.
+            </action>
+            <action type="fix" dev="rbri">
                 WebClientOptions.setMaxInMemory(int) should not create temp files if the limit is set to something &lt;= 0.
             </action>
             <action type="fix" dev="Lai Quang Duong">

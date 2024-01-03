@@ -747,7 +747,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     public void ignoredEndElement(final QName element, final Augmentations augs) {
         // HTMLTagBalancer brings us here if </form> was found in the source on a different
         // DOM tree depth (either above or below) to the <form> that started it
-        if ("form".equals(element.localpart) && consumingForm_ != null) {
+        if ("form".equals(element.getLocalpart()) && consumingForm_ != null) {
             consumingForm_ = null;
 
             if (findElementOnStack("table", "form") instanceof HtmlTable) {
@@ -794,7 +794,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         // when multiple html/body elements are encountered, the attributes of the discarded
         // elements are used when not previously defined
         if (attrs != null && body_ != null) {
-            String lp = elem.localpart;
+            String lp = elem.getLocalpart();
             if (lp != null && lp.length() == 4) {
                 lp = lp.toLowerCase(Locale.ROOT);
                 if ("body".equals(lp)) {
