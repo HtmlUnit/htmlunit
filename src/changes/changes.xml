@@ -8,6 +8,19 @@
 
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
+            <action type="add" dev="Lai Quang Duong">
+                String.includes/startsWith/endsWith no longer throws a TypeError when the first argument is a regex
+                and Symbol.match of that regex has been set to false.
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                String.prototype.replaceAll implemented.
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                RegExp.dotAll flag implemented.
+            </action>
+            <action type="fix" dev="Lai Quang Duong">
+                No longer throw an TypeError when RegExp.prototype.toString is called on a NativeObject.
+            </action>
             <action type="add" dev="rbri">
                 Symbol.iterator property is now available on CSSStyleDeclaration/ComputedCSSStyleDeclaration.
             </action>

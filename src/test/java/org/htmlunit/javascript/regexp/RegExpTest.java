@@ -20,6 +20,7 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Tests for the RegEx support.
@@ -390,8 +391,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "a\na"},
-            IE = {})
+    @Alerts(DEFAULT = {"1", "a\na"})
     public void dotAll() throws Exception {
         final String script =
                 "var result = 'a\\naba'.match(/a.a/s);\n"
@@ -404,8 +404,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "a\na"},
-            IE = {})
+    @Alerts(DEFAULT = {"1", "a\na"})
     public void dotAllAndGlobal() throws Exception {
         final String script =
                 "var result = 'a\\naba'.match(/a.a/sg);\n"
@@ -514,6 +513,98 @@ public class RegExpTest extends WebDriverTestCase {
                 + "log(get.writable);\n";
 
         testEvaluate(script);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void stringReplace() throws Exception {
+        testEvaluate("xyz", "''.replace('', 'xyz')");
+        testEvaluate("1", "'121'.replace('21', '')");
+        testEvaluate("xyz121", "'121'.replace('', 'xyz')");
+        testEvaluate("a$c21", "'121'.replace('1', 'a$c')");
+        testEvaluate("a121", "'121'.replace('1', 'a$&')");
+        testEvaluate("a$c21", "'121'.replace('1', 'a$$c')");
+        testEvaluate("abaabe", "'abcde'.replace('cd', 'a$`')");
+        testEvaluate("a21", "'121'.replace('1', 'a$`')");
+        testEvaluate("abaee", "'abcde'.replace('cd', \"a$'\")");
+        testEvaluate("aba", "'abcd'.replace('cd', \"a$'\")");
+        testEvaluate("aba$0", "'abcd'.replace('cd', 'a$0')");
+        testEvaluate("aba$1", "'abcd'.replace('cd', 'a$1')");
+        testEvaluate("abCD", "'abcd'.replace('cd', function (matched) { return matched.toUpperCase() })");
+        testEvaluate("", "'123456'.replace(/\\d+/, '')");
+        testEvaluate("123ABCD321abcd",
+                "'123abcd321abcd'.replace(/[a-z]+/, function (matched) { return matched.toUpperCase() })");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void stringReplaceAll() throws Exception {
+        testEvaluate("xyz", "''.replaceAll('', 'xyz')");
+        testEvaluate("1", "'12121'.replaceAll('21', '')");
+        testEvaluate("xyz1xyz2xyz1xyz", "'121'.replaceAll('', 'xyz')");
+        testEvaluate("a$c2a$c", "'121'.replaceAll('1', 'a$c')");
+        testEvaluate("a12a1", "'121'.replaceAll('1', 'a$&')");
+        testEvaluate("a$c2a$c", "'121'.replaceAll('1', 'a$$c')");
+        testEvaluate("aaadaaabcda", "'abcdabc'.replaceAll('bc', 'a$`')");
+        testEvaluate("a2a12", "'121'.replaceAll('1', 'a$`')");
+        testEvaluate("aadabcdaa", "'abcdabc'.replaceAll('bc', \"a$'\")");
+        testEvaluate("aadabcdaa", "'abcdabc'.replaceAll('bc', \"a$'\")");
+        testEvaluate("aa$0daa$0", "'abcdabc'.replaceAll('bc', 'a$0')");
+        testEvaluate("aa$1daa$1", "'abcdabc'.replaceAll('bc', 'a$1')");
+        testEvaluate("", "'123456'.replaceAll(/\\d+/g, '')");
+        testEvaluate("123456", "'123456'.replaceAll(undefined, '')");
+        testEvaluate("afoobarb", "'afoob'.replaceAll(/(foo)/g, '$1bar')");
+        testEvaluate("foobarb", "'foob'.replaceAll(/(foo)/gy, '$1bar')");
+        testEvaluate("hllo", "'hello'.replaceAll(/(h)e/gy, '$1')");
+        testEvaluate("$1llo", "'hello'.replaceAll(/he/g, '$1')");
+        testEvaluate("I$want$these$periods$to$be$$s", "'I.want.these.periods.to.be.$s'.replaceAll(/\\./g, '$')");
+        testEvaluate("food bar", "'foo bar'.replaceAll(/foo/g, '$&d')");
+        testEvaluate("foo foo ", "'foo bar'.replaceAll(/bar/g, '$`')");
+        testEvaluate(" bar bar", "'foo bar'.replaceAll(/foo/g, '$\\'')");
+        testEvaluate("$' bar", "'foo bar'.replaceAll(/foo/g, '$$\\'')");
+        testEvaluate("123FOOBAR321BARFOO123",
+                "'123foobar321barfoo123'.replace(/[a-z]+/g, function (matched) { return matched.toUpperCase() })");
+
+        testEvaluate(
+                "TypeError: replaceAll must be called with a global RegExp",
+                "'hello'.replaceAll(/he/i, 'x')");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"ad$0db", "ad$0db", "ad$0dbd$0dc"},
+            IE = {"adfoodb", "adfkxxxkodb", "adfoodbdfuodc"})
+    public void stringReplaceAllBrowserSpecific() throws Exception {
+        testEvaluate(getExpectedAlerts()[0], "'afoob'.replaceAll(/(foo)/g, 'd$0d')");
+        testEvaluate(getExpectedAlerts()[1], "'afkxxxkob'.replace(/(f)k(.*)k(o)/g, 'd$0d')");
+        testEvaluate(getExpectedAlerts()[2], "'afoobfuoc'.replaceAll(/(f.o)/g, 'd$0d')");
+    }
+
+    private void testEvaluate(final String expected, final String script) throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TEXTAREA_FUNCTION
+                + "function test() {\n"
+                + "  try {\n"
+                + "    log(" + script + ");\n"
+                + "  } catch (e) { log(e); }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + LOG_TEXTAREA
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTextArea2(driver, expected);
     }
 
     private void testEvaluate(final String script) throws Exception {
