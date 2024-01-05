@@ -18,7 +18,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -391,9 +390,41 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"1", "a\na"},
+            IE = {})
+    public void dotAll() throws Exception {
+        final String script =
+                "var result = 'a\\naba'.match(/a.a/s);\n"
+                + "log(result.length);\n"
+                + "log(result[0]);\n";
+        testEvaluate(script);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "a\na"},
+            IE = {})
+    public void dotAllAndGlobal() throws Exception {
+        final String script =
+                "var result = 'a\\naba'.match(/a.a/sg);\n"
+                + "log(result.length);\n"
+                + "log(result[0]);\n";
+        testEvaluate(script);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
             IE = {})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"get undefined", "", "false", "false", "false"},
+            EDGE = {"get undefined", "", "false", "false", "false"},
+            FF = {"get undefined", "", "false", "false", "false"},
+            FF_ESR = {"get undefined", "", "false", "false", "false"},
+            IE = {"get undefined", "", "false", "false", "false"})
     public void flagsProperty() throws Exception {
         testProperty("flags");
     }
@@ -404,7 +435,11 @@ public class RegExpTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
             IE = {})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
+            EDGE = {"get undefined", "false", "false", "false", "false"},
+            FF = {"get undefined", "false", "false", "false", "false"},
+            FF_ESR = {"get undefined", "false", "false", "false", "false"},
+            IE = {"get undefined", "false", "false", "false", "false"})
     public void globalProperty() throws Exception {
         testProperty("global");
     }
@@ -415,7 +450,11 @@ public class RegExpTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
             IE = {})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
+            EDGE = {"get undefined", "false", "false", "false", "false"},
+            FF = {"get undefined", "false", "false", "false", "false"},
+            FF_ESR = {"get undefined", "false", "false", "false", "false"},
+            IE = {"get undefined", "false", "false", "false", "false"})
     public void ignoreCaseProperty() throws Exception {
         testProperty("ignoreCase");
     }
@@ -426,11 +465,14 @@ public class RegExpTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
             IE = {})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
+            EDGE = {"get undefined", "false", "false", "false", "false"},
+            FF = {"get undefined", "false", "false", "false", "false"},
+            FF_ESR = {"get undefined", "false", "false", "false", "false"},
+            IE = {"get undefined", "false", "false", "false", "false"})
     public void multilineProperty() throws Exception {
         testProperty("multiline");
     }
-
 
     /**
      * @throws Exception if an error occurs
@@ -438,15 +480,34 @@ public class RegExpTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
             IE = {})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
+            EDGE = {"get undefined", "false", "false", "false", "false"},
+            FF = {"get undefined", "false", "false", "false", "false"},
+            FF_ESR = {"get undefined", "false", "false", "false", "false"},
+            IE = {"get undefined", "false", "false", "false", "false"})
     public void stickyProperty() throws Exception {
         testProperty("sticky");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
+            IE = {})
+    @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
+            EDGE = {"get undefined", "false", "false", "false", "false"},
+            FF = {"get undefined", "false", "false", "false", "false"},
+            FF_ESR = {"get undefined", "false", "false", "false", "false"},
+            IE = {"get undefined", "false", "false", "false", "false"})
+    public void dotAllProperty() throws Exception {
+        testProperty("dotAll");
     }
 
     private void testProperty(final String property) throws Exception {
         final String script =
                 "var get = Object.getOwnPropertyDescriptor(RegExp.prototype, '" + property + "');\n"
-                + "log(get.get.length);\n"
+                + "log(get.get == undefined ? 'get undefined' : get.get.length);\n"
                 + "log(get.value);\n"
                 + "log(get.configurable);\n"
                 + "log(get.enumerable);\n"

@@ -458,6 +458,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             if (jsFlags.contains("m")) {
                 flags |= Pattern.MULTILINE;
             }
+            if (jsFlags.contains("s")) {
+                flags |= Pattern.DOTALL;
+            }
             return flags;
         }
 
