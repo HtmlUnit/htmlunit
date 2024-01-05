@@ -391,7 +391,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "a\na"})
+    @Alerts({"1", "a\na"})
     public void dotAll() throws Exception {
         final String script =
                 "var result = 'a\\naba'.match(/a.a/s);\n"
@@ -404,7 +404,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "a\na"})
+    @Alerts({"1", "a\na"})
     public void dotAllAndGlobal() throws Exception {
         final String script =
                 "var result = 'a\\naba'.match(/a.a/sg);\n"
