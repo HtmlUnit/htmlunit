@@ -1222,6 +1222,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
+    /** Indicates that Object.assign() is supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_OBJECT_ASSIGN,
+
     /** Indicates that Object.getOwnPropertySymbols() is supported. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS,
@@ -1343,6 +1347,22 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR, IE})
     JS_STORAGE_PRESERVED_INCLUDED,
 
+    /** Indicates that string.includes() is supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_STRING_INCLUDES,
+
+    /** Indicates that string.startsWith() and .endWith() are supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_STRING_REPEAT,
+
+    /** Indicates that string.startsWith() and .endWith() are supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_STRING_STARTS_ENDS_WITH,
+
+    /** Indicates that string.trimLeft() and .trimRight() are supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_STRING_TRIM_LEFT_RIGHT,
+
     /** Stylesheet list contains only active style sheets. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_STYLESHEETLIST_ACTIVE_ONLY,
@@ -1456,6 +1476,10 @@ public enum BrowserVersionFeatures {
     /** Setting the property valign converts to lowercase. */
     @BrowserFeature(IE)
     JS_VALIGN_CONVERTS_TO_LOWERCASE,
+
+    /** Indicates that WeakSet is supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_WEAK_SET,
 
     /** Allow inheriting parent constants
      * in {@link org.htmlunit.javascript.host.event.WebGLContextEvent}. */
@@ -1612,22 +1636,6 @@ public enum BrowserVersionFeatures {
     /** The default display style of slot is 'content'. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     SLOT_CONTENTS,
-
-    /** Indicates that string.includes() is supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    STRING_INCLUDES,
-
-    /** Indicates that string.startsWith() and .endWith() are supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    STRING_REPEAT,
-
-    /** Indicates that string.startsWith() and .endWith() are supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    STRING_STARTS_ENDS_WITH,
-
-    /** Indicates that string.trimLeft() and .trimRight() are supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    STRING_TRIM_LEFT_RIGHT,
 
     /**
      * Method addRule returns the rule position instead of -1.

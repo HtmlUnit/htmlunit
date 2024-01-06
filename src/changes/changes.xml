@@ -8,6 +8,16 @@
 
     <body>
         <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
+            <action type="add" dev="rbri">
+                BrowserVersionFeatures JS_OBJECT_ASSIGN and JS_WEAK_SET added.
+            </action>
+            <action type="update" dev="rbri">
+                Some BrowserVersionFeatures renamed:
+                  STRING_INCLUDES -&gt; JS_STRING_INCLUDES,
+                    STRING_REPEAT -&gt; JS_STRING_REPEAT,
+                    STRING_STARTS_ENDS_WITH -&gt; JS_STRING_STARTS_ENDS_WITH, and
+                    STRING_TRIM_LEFT_RIGHT -&gt; JS_STRING_TRIM_LEFT_RIGHT.
+            </action>
             <action type="add" dev="Lai Quang Duong">
                 String.includes/startsWith/endsWith no longer throws a TypeError when the first argument is a regex
                 and Symbol.match of that regex has been set to false.

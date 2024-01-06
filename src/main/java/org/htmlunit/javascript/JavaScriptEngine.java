@@ -21,16 +21,18 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static org.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THIS;
 import static org.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
+import static org.htmlunit.BrowserVersionFeatures.JS_OBJECT_ASSIGN;
 import static org.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROMISE;
 import static org.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static org.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
+import static org.htmlunit.BrowserVersionFeatures.JS_WEAK_SET;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
-import static org.htmlunit.BrowserVersionFeatures.STRING_INCLUDES;
-import static org.htmlunit.BrowserVersionFeatures.STRING_REPEAT;
-import static org.htmlunit.BrowserVersionFeatures.STRING_STARTS_ENDS_WITH;
-import static org.htmlunit.BrowserVersionFeatures.STRING_TRIM_LEFT_RIGHT;
+import static org.htmlunit.BrowserVersionFeatures.JS_STRING_INCLUDES;
+import static org.htmlunit.BrowserVersionFeatures.JS_STRING_REPEAT;
+import static org.htmlunit.BrowserVersionFeatures.JS_STRING_STARTS_ENDS_WITH;
+import static org.htmlunit.BrowserVersionFeatures.JS_STRING_TRIM_LEFT_RIGHT;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -473,16 +475,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "Date");
         deleteProperties(datePrototype, "toSource");
 
-        if (!browserVersion.hasFeature(STRING_INCLUDES)) {
+        if (!browserVersion.hasFeature(JS_STRING_INCLUDES)) {
             deleteProperties(stringPrototype, "includes");
         }
-        if (!browserVersion.hasFeature(STRING_REPEAT)) {
+        if (!browserVersion.hasFeature(JS_STRING_REPEAT)) {
             deleteProperties(stringPrototype, "repeat");
         }
-        if (!browserVersion.hasFeature(STRING_STARTS_ENDS_WITH)) {
+        if (!browserVersion.hasFeature(JS_STRING_STARTS_ENDS_WITH)) {
             deleteProperties(stringPrototype, "startsWith", "endsWith");
         }
-        if (!browserVersion.hasFeature(STRING_TRIM_LEFT_RIGHT)) {
+        if (!browserVersion.hasFeature(JS_STRING_TRIM_LEFT_RIGHT)) {
             deleteProperties(stringPrototype, "trimLeft", "trimRight");
         }
 
@@ -491,10 +493,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         removePrototypeProperties(scriptable, "Array", "toSource");
         removePrototypeProperties(scriptable, "Function", "toSource");
 
-        if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
+        if (!browserVersion.hasFeature(JS_OBJECT_ASSIGN)) {
             ((IdFunctionObject) ScriptableObject.getProperty(scriptable, "Object")).delete("assign");
+        }
 
-            // TODO
+        if (!browserVersion.hasFeature(JS_WEAK_SET)) {
             deleteProperties(scriptable, "WeakSet");
         }
         deleteProperties(scriptable, "isXMLName");
