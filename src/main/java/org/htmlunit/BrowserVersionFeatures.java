@@ -1481,11 +1481,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_WEAK_SET,
 
-    /** Allow inheriting parent constants
-     * in {@link org.htmlunit.javascript.host.event.WebGLContextEvent}. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_WEBGL_CONTEXT_EVENT_CONSTANTS,
-
     /** Setting the property width/height to arbitrary values is allowed. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,

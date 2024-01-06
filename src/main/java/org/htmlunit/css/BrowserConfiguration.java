@@ -132,7 +132,7 @@ abstract class BrowserConfiguration {
 
         @Override
         public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isChrome() || browserVersion == BrowserVersion.EDGE;
+            return browserVersion.isChrome() || browserVersion.isEdge();
         }
 
         @Override
@@ -170,7 +170,7 @@ abstract class BrowserConfiguration {
 
         @Override
         public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isChrome() || browserVersion == BrowserVersion.EDGE;
+            return browserVersion.isChrome() || browserVersion.isEdge();
         }
     }
 
@@ -182,7 +182,7 @@ abstract class BrowserConfiguration {
         @Override
         public boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isChrome()
-                    || browserVersion == BrowserVersion.EDGE
+                    || browserVersion.isEdge()
                     || browserVersion.isFirefox();
         }
     }
