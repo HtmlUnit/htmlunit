@@ -13,10 +13,8 @@
             </action>
             <action type="update" dev="rbri">
                 Some BrowserVersionFeatures renamed:
-                  STRING_INCLUDES -&gt; JS_STRING_INCLUDES,
-                    STRING_REPEAT -&gt; JS_STRING_REPEAT,
-                    STRING_STARTS_ENDS_WITH -&gt; JS_STRING_STARTS_ENDS_WITH, and
-                    STRING_TRIM_LEFT_RIGHT -&gt; JS_STRING_TRIM_LEFT_RIGHT.
+                STRING_INCLUDES -&gt; JS_STRING_INCLUDES, STRING_REPEAT -&gt; JS_STRING_REPEAT,
+                STRING_STARTS_ENDS_WITH -&gt; JS_STRING_STARTS_ENDS_WITH, and STRING_TRIM_LEFT_RIGHT -&gt; JS_STRING_TRIM_LEFT_RIGHT.
             </action>
             <action type="add" dev="Lai Quang Duong">
                 String.includes/startsWith/endsWith no longer throws a TypeError when the first argument is a regex
