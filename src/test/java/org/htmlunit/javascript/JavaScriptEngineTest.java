@@ -984,7 +984,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "2")
+    @Alerts(DEFAULT = {"", "ex thrown"},
+            IE = {"2", "no ex"})
     public void commentNoDoubleSlash() throws Exception {
         final String html =
             "<html><head>\n"
@@ -995,18 +996,18 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        boolean exceptionThrown = false;
+        final String expectedExThrown = getExpectedAlerts()[1];
+        String exceptionThrown = "no ex";
         try {
+            setExpectedAlerts(getExpectedAlerts()[0]);
             loadPageWithAlerts(html);
         }
         catch (final ScriptException e) {
-            exceptionThrown = true;
+            exceptionThrown = "ex thrown";
             assertEquals(4, e.getFailingLineNumber());
         }
 
-        assertEquals(getBrowserVersion().isFirefox()
-                || getBrowserVersion().isChrome()
-                || getBrowserVersion().isEdge(), exceptionThrown);
+        assertEquals(expectedExThrown, exceptionThrown);
     }
 
     /**

@@ -47,6 +47,10 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"button.x#100", "button.y#200", "button#foo"},
+            FF = {"button.x#100", "button.y#200"},
+            FF_ESR = {"button.x#100", "button.y#200"},
+            IE = {"button.x#100", "button.y#200"})
     public void click_WithPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -55,7 +59,7 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
             + "<input type='image' name='button' value='foo'/>\n"
             + "<input type='image' name='anotherButton' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -64,15 +68,11 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
         final HtmlPage secondPage = imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List<NameValuePair> expectedPairs = new ArrayList<>();
-        expectedPairs.add(new NameValuePair("button.x", "100"));
-        expectedPairs.add(new NameValuePair("button.y", "200"));
-
-        if (getBrowserVersion().isChrome() || getBrowserVersion().isEdge()) {
-            expectedPairs.add(new NameValuePair("button", "foo"));
+        final List<String> params = new ArrayList<>();
+        for (final NameValuePair nameValuePair : webConnection.getLastParameters()) {
+            params.add(nameValuePair.getName() + "#" + nameValuePair.getValue());
         }
-
-        assertEquals(expectedPairs, webConnection.getLastParameters());
+        assertEquals(getExpectedAlerts(), params);
     }
 
     /**

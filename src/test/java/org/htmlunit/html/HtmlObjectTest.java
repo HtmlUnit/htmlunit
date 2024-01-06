@@ -92,10 +92,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     public void simpleInstantiation() throws Exception {
         Assume.assumeFalse(SKIP_);
 
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
-
         final URL url = getClass().getResource("/objects/emptyApplet.html");
 
         final HtmlPage page = getWebClient().getPage(url);
@@ -110,10 +106,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     public void cacheArchive() throws Exception {
         Assume.assumeFalse(SKIP_);
-
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
 
         final URL url = getClass().getResource("/objects/cacheArchiveApplet.html");
 
@@ -130,10 +122,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     public void checkAppletBaseWithoutCodebase() throws Exception {
         Assume.assumeFalse(SKIP_);
-
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
 
         final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
 
@@ -172,10 +160,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     public void checkAppletBase() throws Exception {
         Assume.assumeFalse(SKIP_);
 
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
-
         final URL url = getClass().getResource("/objects/codebaseApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -212,10 +196,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     public void checkSubdirAppletBase() throws Exception {
         Assume.assumeFalse(SKIP_);
-
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
 
         final URL url = getClass().getResource("/objects/subdir/codebaseApplet.html");
 
@@ -254,10 +234,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     public void checkSubdirRelativeAppletBase() throws Exception {
         Assume.assumeFalse(SKIP_);
 
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
-
         final URL url = getClass().getResource("/objects/subdir/archiveRelativeApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -294,10 +270,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     public void checkAppletParams() throws Exception {
         Assume.assumeFalse(SKIP_);
-
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
 
         final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
 
@@ -337,10 +309,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     public void checkAppletExecJs() throws Exception {
         Assume.assumeFalse(SKIP_);
 
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
-
         final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
@@ -370,10 +338,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     public void setMember() throws Exception {
         Assume.assumeFalse(SKIP_);
-
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
 
         final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
 
@@ -407,10 +371,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     public void checkAppletOverwriteArchive() throws Exception {
         Assume.assumeFalse(SKIP_);
-
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
 
         final URL url = getClass().getResource("/objects/subdir/codebaseParamApplet.html");
 
@@ -449,10 +409,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletUnknownArchive() throws Exception {
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
-
         final URL url = getClass().getResource("/objects/unknownArchiveApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -488,10 +444,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     public void checkAppletIgnoreUnknownArchive() throws Exception {
         Assume.assumeFalse(SKIP_);
 
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
-
         final URL url = getClass().getResource("/objects/ignoreUnknownArchiveApplet.html");
 
         final WebClient webClient = getWebClient();
@@ -519,10 +471,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     public void appletConfirmHandler() throws Exception {
         Assume.assumeFalse(SKIP_);
-
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
 
         final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
 
@@ -563,10 +511,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
      */
     @Test
     public void appletConfirmHandlerPermit() throws Exception {
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
-
         final URL url = getClass().getResource("/objects/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();

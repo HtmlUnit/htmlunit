@@ -112,10 +112,6 @@ public class HtmlAppletTest extends SimpleWebTestCase {
     public void cacheArchive() throws Exception {
         Assume.assumeFalse(SKIP_);
 
-        if (getBrowserVersion().isChrome()) {
-            return;
-        }
-
         final URL url = getClass().getResource("/objects/cacheArchiveApplet.html");
 
         final HtmlPage page = getWebClient().getPage(url);
