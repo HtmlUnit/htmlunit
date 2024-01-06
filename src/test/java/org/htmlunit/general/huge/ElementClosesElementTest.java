@@ -1093,6 +1093,16 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
+    @HtmlUnitNYI(IE = "0")
+    public void _isindex_isindex() throws Exception {
+        test("isindex", "isindex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("0")
     public void _li_caption() throws Exception {
         test("li", "caption");
