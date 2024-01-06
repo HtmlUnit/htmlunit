@@ -58,7 +58,7 @@ public class ExternalTest {
     static String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static String EDGE_DRIVER_ = "120.0.2210.91";
+    static String EDGE_DRIVER_ = "120.0.2210.121";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -235,9 +235,9 @@ public class ExternalTest {
         }
     }
 
-    private static void assertVersion(final String groupId, final String artifactId, final String version)
+    private static void assertVersion(final String groupId, final String artifactId, final String pomVersion)
             throws Exception {
-        String latestVersion = null;
+        String latestMavenCentralVersion = null;
         String url = MAVEN_REPO_URL_
                         + groupId.replace('.', '/') + '/'
                         + artifactId.replace('.', '/');
@@ -250,11 +250,11 @@ public class ExternalTest {
             try {
                 final HtmlPage page = webClient.getPage(url);
                 for (final HtmlAnchor anchor : page.getAnchors()) {
-                    String itemVersion = anchor.getTextContent();
-                    itemVersion = itemVersion.substring(0, itemVersion.length() - 1);
-                    if (!isIgnored(groupId, artifactId, itemVersion)) {
-                        if (isVersionAfter(itemVersion, latestVersion)) {
-                            latestVersion = itemVersion;
+                    String mavenCentralVersion = anchor.getTextContent();
+                    mavenCentralVersion = mavenCentralVersion.substring(0, mavenCentralVersion.length() - 1);
+                    if (!isIgnored(groupId, artifactId, mavenCentralVersion)) {
+                        if (isVersionAfter(mavenCentralVersion, latestMavenCentralVersion)) {
+                            latestMavenCentralVersion = mavenCentralVersion;
                         }
                     }
                 }
@@ -263,50 +263,56 @@ public class ExternalTest {
                 // ignore because our ci machine sometimes fails
             }
         }
-        if (!version.endsWith("-SNAPSHOT")
-                || !isVersionAfter(version.substring(0, version.length() - "-SNAPSHOT".length()), latestVersion)) {
-            assertEquals(groupId + ":" + artifactId, latestVersion, version);
+        if (!pomVersion.endsWith("-SNAPSHOT")
+                || !isVersionAfter(
+                        pomVersion.substring(0, pomVersion.length() - "-SNAPSHOT".length()),
+                        latestMavenCentralVersion)) {
+
+            // it is ok if the pom uses a more recent version
+            if (!isVersionAfter(pomVersion, latestMavenCentralVersion)) {
+                assertEquals(groupId + ":" + artifactId, latestMavenCentralVersion, pomVersion);
+            }
         }
     }
 
-    private static boolean isVersionAfter(final String version1, final String version2) {
-        if (version2 == null) {
+    private static boolean isVersionAfter(final String pomVersion, final String centralVersion) {
+        if (centralVersion == null) {
             return true;
         }
-        final String[] values1 = version1.split("\\.");
-        final String[] values2 = version2.split("\\.");
-        for (int i = 0; i < values1.length; i++) {
-            if (values1[i].startsWith("v")) {
-                values1[i] = values1[i].substring(1);
+        final String[] pomValues = pomVersion.split("\\.");
+        final String[] centralValues = centralVersion.split("\\.");
+        for (int i = 0; i < pomValues.length; i++) {
+            if (pomValues[i].startsWith("v")) {
+                pomValues[i] = pomValues[i].substring(1);
             }
             try {
-                Integer.parseInt(values1[i]);
+                Integer.parseInt(pomValues[i]);
             }
             catch (final NumberFormatException e) {
                 return false;
             }
         }
-        for (int i = 0; i < values2.length; i++) {
-            if (values2[i].startsWith("v")) {
-                values2[i] = values2[i].substring(1);
+        for (int i = 0; i < centralValues.length; i++) {
+            if (centralValues[i].startsWith("v")) {
+                centralValues[i] = centralValues[i].substring(1);
             }
             try {
-                Integer.parseInt(values2[i]);
+                Integer.parseInt(centralValues[i]);
             }
             catch (final NumberFormatException e) {
                 return true;
             }
         }
-        for (int i = 0; i < values1.length; i++) {
-            if (i == values2.length) {
+        for (int i = 0; i < pomValues.length; i++) {
+            if (i == centralValues.length) {
                 return true;
             }
-            final int i1 = Integer.parseInt(values1[i]);
-            final int i2 = Integer.parseInt(values2[i]);
-            if (i1 < i2) {
+            final int pomValuePart = Integer.parseInt(pomValues[i]);
+            final int centralValuePart = Integer.parseInt(centralValues[i]);
+            if (pomValuePart < centralValuePart) {
                 return false;
             }
-            if (i1 > i2) {
+            if (pomValuePart > centralValuePart) {
                 return true;
             }
         }
