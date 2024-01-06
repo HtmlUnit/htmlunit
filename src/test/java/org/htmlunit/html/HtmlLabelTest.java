@@ -196,6 +196,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "meter1",
+            IE = "null")
     public void getLabeledElementForMeter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -207,12 +209,15 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            if (getBrowserVersion().isIE()) {
-                assertNull(label.getLabeledElement());
+
+            final String txt;
+            if (null == label.getLabeledElement()) {
+                txt = "null";
             }
             else {
-                assertEquals("meter1", label.getLabeledElement().getId());
+                txt = label.getLabeledElement().getId();
             }
+            assertEquals(getExpectedAlerts()[0], txt);
         }
     }
 
@@ -220,6 +225,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "output1",
+            IE = "null")
     public void getLabeledElementForOutput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -231,12 +238,15 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            if (getBrowserVersion().isIE()) {
-                assertNull(label.getLabeledElement());
+
+            final String txt;
+            if (null == label.getLabeledElement()) {
+                txt = "null";
             }
             else {
-                assertEquals("output1", label.getLabeledElement().getId());
+                txt = label.getLabeledElement().getId();
             }
+            assertEquals(getExpectedAlerts()[0], txt);
         }
     }
 
@@ -384,6 +394,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "meter1",
+            IE = "null")
     public void getLabeledElementNestedMeter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -397,12 +409,15 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            if (getBrowserVersion().isIE()) {
-                assertNull(label.getLabeledElement());
+
+            final String txt;
+            if (null == label.getLabeledElement()) {
+                txt = "null";
             }
             else {
-                assertEquals("meter1", label.getLabeledElement().getId());
+                txt = label.getLabeledElement().getId();
             }
+            assertEquals(getExpectedAlerts()[0], txt);
         }
     }
 
@@ -410,6 +425,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "output1",
+            IE = "null")
     public void getLabeledElementNestedOutput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -423,12 +440,15 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            if (getBrowserVersion().isIE()) {
-                assertNull(label.getLabeledElement());
+
+            final String txt;
+            if (null == label.getLabeledElement()) {
+                txt = "null";
             }
             else {
-                assertEquals("output1", label.getLabeledElement().getId());
+                txt = label.getLabeledElement().getId();
             }
+            assertEquals(getExpectedAlerts()[0], txt);
         }
     }
 

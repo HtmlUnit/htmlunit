@@ -189,7 +189,6 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.general.HostConstantsTest")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.DefaultCredentialsProvider2Test")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.FocusableElementTest")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlLabelTest")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlObjectTest")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlOptionTest")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage3Test")
