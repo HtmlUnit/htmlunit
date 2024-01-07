@@ -1071,9 +1071,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             setState(HEADERS_RECEIVED);
             if (async_) {
                 fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-            }
 
-            if (async_) {
                 setState(LOADING);
                 fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                 fireJavascriptEvent(Event.TYPE_PROGRESS);
