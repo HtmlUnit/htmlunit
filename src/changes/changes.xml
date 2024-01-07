@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="3.10.0" date="December xx, 2023" description="Chrome/Edge 120, Firefox 120, Bugfixes">
+        <release version="3.10.0" date="January xx, 2024" description="Chrome/Edge 120, Firefox 120, Bugfixes">
+            <action type="fix" dev="rbri">
+                Make the output file handling of XmlSerializer.save(SgmlPage, File) more robust.
+            </action>
+            <action type="update" dev="rbri">
+                Suspicious code in WebResponseDate fixed.
+            </action>
             <action type="add" dev="rbri">
                 BrowserVersionFeatures JS_OBJECT_ASSIGN and JS_WEAK_SET added.
             </action>

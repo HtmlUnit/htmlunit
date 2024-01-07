@@ -55,12 +55,20 @@ public class XmlSerializer {
     private File outputDir_;
 
     public void save(final SgmlPage page, final File file) throws IOException {
+        save(page, file, false);
+    }
+
+    private void save(final SgmlPage page, final File file, final boolean append) throws IOException {
         String fileName = file.getName();
-        if (!fileName.endsWith(".htm") && !fileName.endsWith(".html")) {
-            fileName += ".html";
+
+        if (!append) {
+            if (!fileName.endsWith(".htm") && !fileName.endsWith(".html")) {
+                fileName += ".html";
+            }
         }
         final File outputFile = new File(file.getParentFile(), fileName);
-        if (outputFile.exists()) {
+
+        if (!append && outputFile.exists()) {
             throw new IOException("File already exists: " + outputFile);
         }
         fileName = fileName.substring(0, fileName.lastIndexOf('.'));
@@ -81,7 +89,7 @@ public class XmlSerializer {
         printXml(node);
         final String response = builder_.toString();
         builder_.setLength(0);
-        FileUtils.writeStringToFile(outputFile, response, charsetName);
+        FileUtils.writeStringToFile(outputFile, response, charsetName, append);
     }
 
     /**
@@ -221,9 +229,7 @@ public class XmlSerializer {
 
         if (enclosedPage != null) {
             if (enclosedPage.isHtmlPage()) {
-                file.delete(); // TODO: refactor as it is stupid to create empty file at one place
-                // and then to complain that it already exists
-                ((HtmlPage) enclosedPage).save(file);
+                new XmlSerializer().save((HtmlPage) enclosedPage, file, true);
             }
             else {
                 try (InputStream is = enclosedPage.getWebResponse().getContentAsStream()) {
