@@ -8,6 +8,12 @@
 
     <body>
         <release version="3.10.0" date="January xx, 2024" description="Chrome/Edge 120, Firefox 120, Bugfixes">
+            <action type="add" dev="rbri">
+                neko: many test cases added to the parser.
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                neko: rewritten script tag content parsing to be in sync with the spec.
+            </action>
             <action type="fix" dev="rbri">
                 Make the output file handling of XmlSerializer.save(SgmlPage, File) more robust.
             </action>
