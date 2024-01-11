@@ -1444,7 +1444,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "<head>\n"
-            + "    <script>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  </script>\n"
             + "  <script id='testScript'>\n"
