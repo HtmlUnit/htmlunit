@@ -1138,7 +1138,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\n    <script id=\"testScript\">function foo() { return a > b}</script>\n  ")
+    @Alerts("\\n\\s\\s\\s\\s<script\\sid=\"testScript\">function\\sfoo()\\s{\\sreturn\\sa\\s>\\sb}</script>\\n\\s\\s")
     public void innerHTMLGetSet() throws Exception {
         final String html
             = "<html>\n"
@@ -1150,18 +1150,18 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  </div>\n"
 
             + "  <script type='text/javascript'>\n"
-            + LOG_TITLE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "    var div = document.getElementById('tester');\n"
             + "    try {\n"
             + "      div.innerHTML = div.innerHTML;\n"
-            + "    } catch (e) { alert('exception'); }\n"
-            + "    alert(div.innerHTML);\n"
+            + "    } catch (e) { log('exception'); }\n"
+            + "    log(div.innerHTML);\n"
             + "  </script>\n"
 
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1439,27 +1439,30 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"out", "\n    <!-- yy --!>\n    alert('out');\n  "})
+    @Alerts({"out", "\\n\\s\\s\\s\\s<!--\\syy\\s--!>\\n\\s\\s\\s\\slog('out');\\n\\s\\s"})
     public void incorrectlyClosedComment() throws Exception {
         final String html =
             "<html>\n"
             + "<head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  </script>\n"
             + "  <script id='testScript'>\n"
             + "    <!-- yy --!>\n"
-            + "    alert('out');\n"
+            + "    log('out');\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <!-- xx -->\n"
 
             + "  <script >\n"
-            + "    alert(document.getElementById('testScript').innerHTML);\n"
+            + "    log(document.getElementById('testScript').innerHTML);\n"
             + "  </script>\n"
 
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
