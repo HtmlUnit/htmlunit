@@ -8,6 +8,12 @@
 
     <body>
         <release version="3.10.0" date="January xx, 2024" description="Chrome/Edge 120, Firefox 120, Bugfixes">
+            <action type="add" dev="Lai Quang Duong">
+                core-js: arguments[Symbol.iterator] points to Array Array.prototype[Symbol.iterator].
+            </action>
+            <action type="add" dev="rbri">
+                core-js: Array.prototype[Symbol.iterator] points to the 'values' functions.
+            </action>
             <action type="add" dev="rbri">
                 neko: many test cases added to the parser.
             </action>
@@ -57,16 +63,16 @@
                 WebClientOptions.setMaxInMemory(int) should not create temp files if the limit is set to something &lt;= 0.
             </action>
             <action type="fix" dev="Lai Quang Duong">
-                core-js Fix Math.clz23() rounding errors.
+                core-js: Fix Math.clz23() rounding errors.
             </action>
             <action type="fix" dev="Lai Quang Duong">
-                core-js Reflect.construct() uses the wrong set of arguments if newTarget is set.
+                core-js: Reflect.construct() uses the wrong set of arguments if newTarget is set.
             </action>
             <action type="add" dev="Lai Quang Duong">
-                core-js Receiver argument support added for Reflect.set().
+                core-js: Receiver argument support added for Reflect.set().
             </action>
             <action type="fix" dev="Lai Quang Duong">
-                core-js Reflect.construct() uses the wrong set of arguments if newTarget is set.
+                core-js: Reflect.construct() uses the wrong set of arguments if newTarget is set.
             </action>
             <action type="fix" dev="rbri">
                 Improve content type detection for '.php' content.
