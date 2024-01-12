@@ -52,6 +52,7 @@ import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
+import org.htmlunit.cyberneko.util.FastHashMap;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -104,7 +105,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     private NamedAttrNodeMapImpl attributes_;
 
     /** The map holding the namespaces, keyed by URI. */
-    private final Map<String, String> namespaces_ = new HashMap<>();
+    private FastHashMap<String, String> namespaces_;
 
     /** Cache for the styles. */
     private String styleString_;
@@ -135,6 +136,9 @@ public class DomElement extends DomNamespaceNode implements Element {
                 final String attrNamespaceURI = entry.getNamespaceURI();
                 final String prefix = entry.getPrefix();
                 if (attrNamespaceURI != null && prefix != null) {
+                    if (namespaces_ == null) {
+                    	namespaces_ = new FastHashMap<>(1, 0.5f);
+                    }
                     namespaces_.put(attrNamespaceURI, prefix);
                 }
             }
@@ -384,7 +388,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             qualifiedName = localName;
         }
         else {
-            final String prefix = namespaces_.get(namespaceURI);
+            final String prefix = namespaces_ == null ? null : namespaces_.get(namespaceURI);
             if (prefix == null) {
                 qualifiedName = null;
             }
@@ -532,6 +536,9 @@ public class DomElement extends DomNamespaceNode implements Element {
         attributes_.put(qualifiedName, newAttr);
 
         if (namespaceURI != null) {
+        	if (namespaces_ == null) {
+        		namespaces_ = new FastHashMap<>(1, 0.5f);
+        	}
             namespaces_.put(namespaceURI, newAttr.getPrefix());
         }
     }
