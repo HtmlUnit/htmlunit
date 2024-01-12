@@ -200,6 +200,7 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.libraries.HtmxTest1x9x6")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.libraries.HtmxTest1x9x7")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.libraries.HtmxTest1x9x9")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.libraries.HtmxTest1x9x10")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.regexp.mozilla.js1_2.DigitTest")
         .should().callMethod(BrowserVersion.class, "isIE", new Class[] {});
 }
