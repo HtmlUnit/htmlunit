@@ -42,20 +42,22 @@ public class HtmxOneNineTenScriptPreprozessor implements ScriptPreProcessor {
 
         String patchedSourceCode = sourceCode;
 
-        if (sourceName.contains("/htmx.js")) {
+        if (sourceName.contains("/htmx.js") && !sourceName.contains("/htmx.js#")) {
             patchedSourceCode = StringUtils.replace(
                     sourceCode,
                     "function makeTagRegEx(tag, global = false) {",
                     "function makeTagRegEx(tag) {\n"
-                        + "            "
-                        + "var global = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;\n");
+                            + "            "
+                            + "var global = arguments.length > 1 && arguments[1] !== undefined "
+                                + "? arguments[1] : false;\n");
         }
-        else if (sourceName.contains("/htmx.min.js")) {
+        else if (sourceName.contains("/htmx.min.js") && !sourceName.contains("/htmx.min.js#")) {
             patchedSourceCode = StringUtils.replace(
                     sourceCode,
                     "function e(e,t=false){",
                     "function e(e){"
-                            + "var t = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false; ");
+                            + "var t = arguments.length > 1 && arguments[1] !== undefined "
+                                + "? arguments[1] : false; ");
         }
 
         if (nextScriptPreProcessor_ != null) {
