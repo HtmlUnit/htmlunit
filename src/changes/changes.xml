@@ -104,6 +104,12 @@
             <action type="fix" dev="rbri">
                 neko: support bang comments (--!&gt; as closing sequence).
             </action>
+            <action type="csp" dev="kingthorin">
+                csp: Address deprecation of 'referrer'.
+            </action>
+            <action type="csp" dev="kingthorin">
+                csp: Address deprecation of 'plugin-types' and 'prefetch-src'.
+            </action>
             <action type="fix" dev="rbri">
                 ScriptPreProcessor documentation added to the FAQ.
             </action>
