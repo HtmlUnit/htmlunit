@@ -2000,7 +2000,8 @@ public class HtmlPage extends SgmlPage {
             result.attributeListeners_ = null;
 
             result.selectionRanges_ = new ArrayList<>(3);
-            result.afterLoadActions_ = new ArrayList<>();
+            // the original one is synchronized so we should do that here too, shouldn't we?
+            result.afterLoadActions_ = Collections.synchronizedList(new ArrayList<>());
             result.frameElements_ = new TreeSet<>(documentPositionComparator);
             for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
                 result.appendChild(child.cloneNode(true));
