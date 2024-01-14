@@ -433,7 +433,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             }
             catch (final IOException ioe) {
                 LOG.info("There is no ImageReader available for you imgage with src '" + imageElem.getSrc() + "'"
-                        + "Please have a look at https://htmlunit.sourceforge.io/images-howto.html "
+                        + "Please have a look at https://www.htmlunit.org/images-howto.html "
                         + "for a possible solution.");
             }
         }

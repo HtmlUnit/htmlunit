@@ -40,8 +40,8 @@ public enum BrowserVersionFeatures {
 
     /**
      * If the "href" attribute of HtmlAnchor is defined but empty then IE interprets this as an empty filename.
-     * Example: The page http://htmlunit.sourceforge.net/test/myFile.html contains an anchor with an empty
-     * href attribute. Clicking the link in IE force the load of page http://htmlunit.sourceforge.net/test/.
+     * Example: The page https://www.htmlunit.org/test/myFile.html contains an anchor with an empty
+     * href attribute. Clicking the link in IE force the load of page https://www.htmlunit.org/test/.
      * In Firefox the URL is unchanged.
      */
     @BrowserFeature(IE)
