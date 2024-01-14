@@ -29,9 +29,9 @@
         <htmlunitcsp.version>3.10.0</htmlunitcsp.version>
         <htmlunitneko.version>3.10.0</htmlunitneko.version>
         <htmlunitxpath.version>3.10.0</htmlunitxpath.version>
-        <htmlunitcorejs.version>3.10.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitcorejs.version>3.10.0</htmlunitcorejs.version>
 
-        <htmlunitdriver.version>4.16.0</htmlunitdriver.version>
+        <htmlunitdriver.version>4.17.0-SNAPSHOT</htmlunitdriver.version>
         <selenium.version>4.16.1</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
