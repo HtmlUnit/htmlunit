@@ -51,6 +51,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -162,10 +163,8 @@ public class HtmlPage extends SgmlPage {
     private transient Charset originalCharset_;
     private final Object lock_ = new SerializableLock(); // used for synchronization
 
-    private Map<String, SortedSet<DomElement>> idMap_
-            = Collections.synchronizedMap(new HashMap<>());
-    private Map<String, SortedSet<DomElement>> nameMap_
-            = Collections.synchronizedMap(new HashMap<>());
+    private Map<String, SortedSet<DomElement>> idMap_ = new ConcurrentHashMap<>();
+    private Map<String, SortedSet<DomElement>> nameMap_ = new ConcurrentHashMap<>();
 
     private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(documentPositionComparator);
     private int parserCount_;
@@ -1975,8 +1974,8 @@ public class HtmlPage extends SgmlPage {
         final HtmlPage result = (HtmlPage) super.clone();
         result.elementWithFocus_ = null;
 
-        result.idMap_ = Collections.synchronizedMap(new HashMap<>());
-        result.nameMap_ = Collections.synchronizedMap(new HashMap<>());
+        result.idMap_ = new ConcurrentHashMap<>();
+        result.nameMap_ = new ConcurrentHashMap<>();
 
         return result;
     }
