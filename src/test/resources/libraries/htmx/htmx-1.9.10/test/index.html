@@ -47,7 +47,7 @@
 </script>
 
 <script class="mocha-init">
-    mocha.setup('bdd');
+    mocha.setup({ui: 'bdd', timeout: 4000 });
     mocha.checkLeaks();
     should = chai.should();
 </script>
