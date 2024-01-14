@@ -1994,9 +1994,11 @@ public class HtmlPage extends SgmlPage {
 
         // if deep, clone the kids too, and re initialize parts of the clone
         if (deep) {
-            synchronized (lock_) {
-                result.attributeListeners_ = null;
-            }
+            // this was previously synchronized but that makes not sense, why
+            // lock the source against a copy only one has a reference too,
+            // because result is a local reference
+            result.attributeListeners_ = null;
+
             result.selectionRanges_ = new ArrayList<>(3);
             result.afterLoadActions_ = new ArrayList<>();
             result.frameElements_ = new TreeSet<>(documentPositionComparator);
