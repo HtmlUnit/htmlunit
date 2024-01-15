@@ -24,15 +24,15 @@ import org.htmlunit.html.HtmlPage;
  *
  * @author Ronald Brill
  */
-public class HtmxOneNineTenScriptPreProzessor implements ScriptPreProcessor {
+public class HtmxOneNineTenScriptPreProcessor implements ScriptPreProcessor {
 
     private final ScriptPreProcessor nextScriptPreProcessor_;
 
-    public HtmxOneNineTenScriptPreProzessor() {
+    public HtmxOneNineTenScriptPreProcessor() {
         nextScriptPreProcessor_ = null;
     }
 
-    public HtmxOneNineTenScriptPreProzessor(final ScriptPreProcessor nextScriptPreProcessor) {
+    public HtmxOneNineTenScriptPreProcessor(final ScriptPreProcessor nextScriptPreProcessor) {
         nextScriptPreProcessor_ = nextScriptPreProcessor;
     }
 
