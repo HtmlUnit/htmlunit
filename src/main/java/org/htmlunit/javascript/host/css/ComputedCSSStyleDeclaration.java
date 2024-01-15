@@ -71,6 +71,7 @@ import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
+import org.htmlunit.css.CssColors;
 import org.htmlunit.css.CssPixelValueConverter;
 import org.htmlunit.css.CssPixelValueConverter.CssValue;
 import org.htmlunit.css.StyleAttributes;
@@ -245,7 +246,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (StringUtils.isEmpty(value)) {
             return BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
         }
-        return toRGBColor(value);
+        return CssColors.toRGBColor(value);
     }
 
     /**
@@ -383,7 +384,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getColor() {
         final String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)", null);
-        return toRGBColor(value);
+        return CssColors.toRGBColor(value);
     }
 
     /**

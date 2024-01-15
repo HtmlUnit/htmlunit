@@ -107,7 +107,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -128,6 +127,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.AbstractCssStyleDeclaration;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
+import org.htmlunit.css.CssColors;
 import org.htmlunit.css.CssPixelValueConverter;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
@@ -213,29 +213,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
          "inherit", "initial", "revert", "unset"};
 
     // private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
-    private static final Map<String, String> CSSColors_ = new HashMap<>();
 
     /** The wrapped CSSStyleDeclaration */
     private AbstractCssStyleDeclaration styleDeclaration_;
-
-    static {
-        CSSColors_.put("aqua", "rgb(0, 255, 255)");
-        CSSColors_.put("black", "rgb(0, 0, 0)");
-        CSSColors_.put("blue", "rgb(0, 0, 255)");
-        CSSColors_.put("fuchsia", "rgb(255, 0, 255)");
-        CSSColors_.put("gray", "rgb(128, 128, 128)");
-        CSSColors_.put("green", "rgb(0, 128, 0)");
-        CSSColors_.put("lime", "rgb(0, 255, 0)");
-        CSSColors_.put("maroon", "rgb(128, 0, 0)");
-        CSSColors_.put("navy", "rgb(0, 0, 128)");
-        CSSColors_.put("olive", "rgb(128, 128, 0)");
-        CSSColors_.put("purple", "rgb(128, 0, 128)");
-        CSSColors_.put("red", "rgb(255, 0, 0)");
-        CSSColors_.put("silver", "rgb(192, 192, 192)");
-        CSSColors_.put("teal", "rgb(0, 128, 128)");
-        CSSColors_.put("white", "rgb(255, 255, 255)");
-        CSSColors_.put("yellow", "rgb(255, 255, 0)");
-    }
 
     /**
      * Creates an instance.
@@ -2594,7 +2574,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
         final String[] tokens = org.htmlunit.util.StringUtils.splitAtBlank(text);
         for (final String token : tokens) {
-            if (isColorKeyword(token)) {
+            if (CssColors.isColorKeyword(token)) {
                 return token;
             }
 
@@ -2702,29 +2682,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             }
         }
         return null;
-    }
-
-    /**
-     * Returns if the specified token is a reserved color keyword.
-     * @param token the token to check
-     * @return whether the token is a reserved color keyword or not
-     */
-    private static boolean isColorKeyword(final String token) {
-        return CSSColors_.containsKey(token.toLowerCase(Locale.ROOT));
-    }
-
-    /**
-     * Gets the RGB equivalent of a CSS color if the provided color is recognized.
-     * @param color the color
-     * @return the provided color if this is not a recognized color keyword, the RGB value
-     * in the form "rgb(x, y, z)" otherwise
-     */
-    public static String toRGBColor(final String color) {
-        final String rgbValue = CSSColors_.get(color.toLowerCase(Locale.ROOT));
-        if (rgbValue != null) {
-            return rgbValue;
-        }
-        return color;
     }
 
     /**
