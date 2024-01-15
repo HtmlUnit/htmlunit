@@ -20,19 +20,19 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 
 /**
- * Preprozessor to fix one default parameter method.
+ * PreProzessor to fix one default parameter method.
  *
  * @author Ronald Brill
  */
-public class HtmxOneNineTenScriptPreprozessor implements ScriptPreProcessor {
+public class HtmxOneNineTenScriptPreProzessor implements ScriptPreProcessor {
 
     private final ScriptPreProcessor nextScriptPreProcessor_;
 
-    public HtmxOneNineTenScriptPreprozessor() {
+    public HtmxOneNineTenScriptPreProzessor() {
         nextScriptPreProcessor_ = null;
     }
 
-    public HtmxOneNineTenScriptPreprozessor(final ScriptPreProcessor nextScriptPreProcessor) {
+    public HtmxOneNineTenScriptPreProzessor(final ScriptPreProcessor nextScriptPreProcessor) {
         nextScriptPreProcessor_ = nextScriptPreProcessor;
     }
 

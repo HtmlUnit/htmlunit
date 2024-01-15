@@ -15,7 +15,7 @@
 package org.htmlunit.libraries;
 
 import org.htmlunit.WebClient;
-import org.htmlunit.javascript.preprocessor.HtmxOneNineTenScriptPreprozessor;
+import org.htmlunit.javascript.preprocessor.HtmxOneNineTenScriptPreProzessor;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -53,7 +53,7 @@ public class HtmxTest1x9x10 extends HtmxTest {
     protected void setupWebClient(final WebClient webClient) {
         super.setupWebClient(webClient);
 
-        webClient.setScriptPreProcessor(new HtmxOneNineTenScriptPreprozessor());
+        webClient.setScriptPreProcessor(new HtmxOneNineTenScriptPreProzessor());
         webClient.getOptions().setThrowExceptionOnScriptError(false);
     }
 }
