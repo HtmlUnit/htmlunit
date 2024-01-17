@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="3.11.0" date="February xx, 2024" description="Chrome/Edge 120, Firefox 120, neko script parsing, Bugfixes">
+        <release version="3.11.0" date="February xx, 2024" description="Bugfixes">
+            <action type="add" dev="rbri">
+                neko: tag name scanner updated to match the real browsers.
+            </action>
             <action type="add" dev="rbri">
                 HtmxOneNineTenScriptPreprozessor renamed to HtmxOneNineTenScriptPreProcessor.
             </action>
