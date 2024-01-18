@@ -54,11 +54,11 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "120.0.6099.109";
+    static String CHROME_DRIVER_ = "120.0.6099";
     static String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static String EDGE_DRIVER_ = "120.0.2210.133";
+    static String EDGE_DRIVER_ = "120.0.2210";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -145,7 +145,7 @@ public class ExternalTest {
 
             String version = "0.0.0.0";
             final Pattern regex =
-                    Pattern.compile("\"channels\":\\{\"Stable\":\\{.*?\"version\":\"(\\d*\\.\\d*\\.\\d*\\.\\d*)\"");
+                    Pattern.compile("\"channels\":\\{\"Stable\":\\{.*?\"version\":\"(\\d*\\.\\d*\\.\\d*)\\.\\d*\"");
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
@@ -173,7 +173,7 @@ public class ExternalTest {
             final Pattern regex =
                     Pattern.compile("Version ("
                                 + BrowserVersion.EDGE.getBrowserVersionNumeric()
-                                + "\\.\\d*\\.\\d*\\.\\d*)\\s");
+                                + "\\.\\d*\\.\\d*)\\.\\d*\\s");
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
