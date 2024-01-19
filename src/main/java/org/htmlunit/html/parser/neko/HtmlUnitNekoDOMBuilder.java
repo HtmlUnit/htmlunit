@@ -227,7 +227,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             final Charset charset = webResponse.getContentCharset();
             final String url = webResponse.getWebRequest().getUrl().toString();
             final XMLInputSource in = new XMLInputSource(null, url, null, new StringReader(html), charset.name());
-            ((HTMLConfiguration) fConfiguration).evaluateInputSource(in);
+            ((HTMLConfiguration) parserConfiguration_).evaluateInputSource(in);
         }
         finally {
             page_.registerParsingEnd();
@@ -258,7 +258,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         final HTMLParserListener listener = webClient.getHTMLParserListener();
         final boolean reportErrors = listener != null;
         if (reportErrors) {
-            fConfiguration.setErrorHandler(new HtmlUnitNekoHTMLErrorHandler(listener, url, htmlContent));
+            parserConfiguration_.setErrorHandler(new HtmlUnitNekoHTMLErrorHandler(listener, url, htmlContent));
         }
 
         try {
