@@ -60,7 +60,8 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
         webClient.getPage(URL_FIRST);
 
         final String[] expectedIncorrectness = {
-            "Obsolete content type encountered: 'application/x-javascript'."
+            "Obsolete content type encountered: 'application/x-javascript' for "
+                    + "remotely loaded JavaScript element at 'http://localhost:22222/script.js'."
         };
         assertEquals(expectedIncorrectness, collectedIncorrectness);
     }
