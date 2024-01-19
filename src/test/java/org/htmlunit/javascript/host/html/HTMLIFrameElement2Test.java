@@ -1163,7 +1163,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                                 + URL_SECOND + "ext.js'></script></body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
         final String js = "parent.log('iframe external script');";
-        getMockWebConnection().setResponse(new URL(URL_SECOND, "ext.js"), js, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setResponse(new URL(URL_SECOND, "ext.js"), js, MimeType.TEXT_JAVASCRIPT);
 
         final WebDriver driver = loadPage2(html);
         Thread.sleep(DEFAULT_WAIT_TIME);

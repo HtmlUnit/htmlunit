@@ -91,7 +91,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         final ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(resourceBase);
         final MimeTypes mimeTypes = new MimeTypes();
-        mimeTypes.addMimeMapping("js", MimeType.APPLICATION_JAVASCRIPT);
+        mimeTypes.addMimeMapping("js", MimeType.TEXT_JAVASCRIPT);
         resourceHandler.setMimeTypes(mimeTypes);
 
         final HandlerList handlers = new HandlerList();

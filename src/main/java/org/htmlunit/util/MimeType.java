@@ -24,8 +24,8 @@ import java.util.Map;
  */
 public final class MimeType {
 
-    /** "application/javascript". */
-    public static final String APPLICATION_JAVASCRIPT = "application/javascript";
+    /** "text/javascript". */
+    public static final String TEXT_JAVASCRIPT = "text/javascript";
     /** "application/octet-stream". */
     public static final String APPLICATION_OCTET_STREAM = "application/octet-stream";
     /** "application/json". */
@@ -54,11 +54,11 @@ public final class MimeType {
     private static final Map<String, String> type2extension = buildMap();
 
     /**
-     * See <a href="https://mimesniff.spec.whatwg.org/#javascript-mime-type">
-     * https://mimesniff.spec.whatwg.org/#javascript-mime-type</a>.
+     * See <a href="https://www.rfc-editor.org/rfc/rfc9239.html#name-iana-considerations">
+     * https://www.rfc-editor.org/rfc/rfc9239.html#name-iana-considerations</a>.
      *
      * @param mimeType the type to check
-     * @return true if the mime type is for js
+     * @return true if the mime type is obsolete
      */
     public static boolean isJavascriptMimeType(final String mimeType) {
         if (mimeType == null) {
@@ -66,12 +66,42 @@ public final class MimeType {
         }
         final String mimeTypeLC = StringUtils.toRootLowerCaseWithCache(mimeType);
 
-        return "application/ecmascript".equals(mimeTypeLC)
-                || APPLICATION_JAVASCRIPT.equals(mimeTypeLC)
+        return TEXT_JAVASCRIPT.equals(mimeTypeLC)
+                || "application/javascript".equals(mimeTypeLC)
                 || "application/x-ecmascript".equals(mimeTypeLC)
                 || "application/x-javascript".equals(mimeTypeLC)
                 || "text/ecmascript".equals(mimeTypeLC)
-                || "text/javascript".equals(mimeTypeLC)
+                || "application/ecmascript".equals(mimeTypeLC)
+                || "text/javascript1.0".equals(mimeTypeLC)
+                || "text/javascript1.1".equals(mimeTypeLC)
+                || "text/javascript1.2".equals(mimeTypeLC)
+                || "text/javascript1.3".equals(mimeTypeLC)
+                || "text/javascript1.4".equals(mimeTypeLC)
+                || "text/javascript1.5".equals(mimeTypeLC)
+                || "text/jscript".equals(mimeTypeLC)
+                || "text/livescript".equals(mimeTypeLC)
+                || "text/x-ecmascript".equals(mimeTypeLC)
+                || "text/x-javascript".equals(mimeTypeLC);
+    }
+
+    /**
+     * See <a href="https://mimesniff.spec.whatwg.org/#javascript-mime-type">
+     * https://mimesniff.spec.whatwg.org/#javascript-mime-type</a>.
+     *
+     * @param mimeType the type to check
+     * @return true if the mime type is for js
+     */
+    public static boolean isObsoleteJavascriptMimeType(final String mimeType) {
+        if (mimeType == null) {
+            return false;
+        }
+        final String mimeTypeLC = StringUtils.toRootLowerCaseWithCache(mimeType);
+
+        return "application/javascript".equals(mimeTypeLC)
+                || "application/ecmascript".equals(mimeTypeLC)
+                || "application/x-ecmascript".equals(mimeTypeLC)
+                || "application/x-javascript".equals(mimeTypeLC)
+                || "text/ecmascript".equals(mimeTypeLC)
                 || "text/javascript1.0".equals(mimeTypeLC)
                 || "text/javascript1.1".equals(mimeTypeLC)
                 || "text/javascript1.2".equals(mimeTypeLC)

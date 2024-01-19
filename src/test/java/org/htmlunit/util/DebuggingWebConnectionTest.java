@@ -103,7 +103,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
         final MockWebConnection mockConnection = new MockWebConnection();
         final List<NameValuePair> responseHeaders = Arrays.asList(
             new NameValuePair("Content-Encoding", "gzip"));
-        mockConnection.setResponse(URL_FIRST, baos.toByteArray(), 200, "OK", MimeType.APPLICATION_JAVASCRIPT,
+        mockConnection.setResponse(URL_FIRST, baos.toByteArray(), 200, "OK", MimeType.TEXT_JAVASCRIPT,
             responseHeaders);
 
         final String dirName = "test-" + getClass().getSimpleName();

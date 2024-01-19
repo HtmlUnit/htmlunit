@@ -68,7 +68,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
             @Override
             public WebResponse getResponse(final WebRequest request) throws IOException {
                 if ("www.google-analytics.com".equals(request.getUrl().getHost())) {
-                    return createWebResponse(request, "", MimeType.APPLICATION_JAVASCRIPT); // -> empty script
+                    return createWebResponse(request, "", MimeType.TEXT_JAVASCRIPT); // -> empty script
                 }
                 return super.getResponse(request);
             }

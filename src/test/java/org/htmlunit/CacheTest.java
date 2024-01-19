@@ -214,9 +214,9 @@ public class CacheTest extends SimpleWebTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok",
-                MimeType.APPLICATION_JAVASCRIPT, headers);
+                MimeType.TEXT_JAVASCRIPT, headers);
         connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok",
-                MimeType.APPLICATION_JAVASCRIPT, headers);
+                MimeType.TEXT_JAVASCRIPT, headers);
 
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -270,8 +270,8 @@ public class CacheTest extends SimpleWebTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo1.js"), script1,
-                200, "ok", MimeType.APPLICATION_JAVASCRIPT, headers);
-        getMockWebConnection().setDefaultResponse(script2, 200, "ok", MimeType.APPLICATION_JAVASCRIPT, headers);
+                200, "ok", MimeType.TEXT_JAVASCRIPT, headers);
+        getMockWebConnection().setDefaultResponse(script2, 200, "ok", MimeType.TEXT_JAVASCRIPT, headers);
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -381,8 +381,8 @@ public class CacheTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", MimeType.APPLICATION_JAVASCRIPT, headers);
-        connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", MimeType.APPLICATION_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", MimeType.TEXT_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", MimeType.TEXT_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(1, client.getCache().getSize());
@@ -587,7 +587,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.TEXT_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(0, client.getCache().getSize());
@@ -687,7 +687,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.TEXT_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());
@@ -731,7 +731,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.TEXT_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());
@@ -777,7 +777,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.TEXT_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());
@@ -816,7 +816,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.TEXT_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());

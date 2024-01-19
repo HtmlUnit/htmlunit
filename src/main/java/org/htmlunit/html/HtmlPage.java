@@ -1108,22 +1108,18 @@ public class HtmlPage extends SgmlPage {
             throw new IOException("Unable to download JavaScript from '" + url + "' (status " + statusCode + ").");
         }
 
-        //http://www.ietf.org/rfc/rfc4329.txt
         final String contentType = response.getContentType();
-        if (!MimeType.APPLICATION_JAVASCRIPT.equalsIgnoreCase(contentType)
-            && !"application/ecmascript".equalsIgnoreCase(contentType)) {
-            // warn about obsolete or not supported content types
-            if ("text/javascript".equals(contentType)
-                    || "text/ecmascript".equals(contentType)
-                    || "application/x-javascript".equalsIgnoreCase(contentType)) {
+        if (contentType != null) {
+            if (MimeType.isObsoleteJavascriptMimeType(contentType)) {
                 getWebClient().getIncorrectnessListener().notify(
-                    "Obsolete content type encountered: '" + contentType + "'.", this);
+                        "Obsolete content type encountered: '" + contentType + "' "
+                                + "for remotely loaded JavaScript element at '" + url + "'.", this);
             }
-            else {
+            else if (!MimeType.isJavascriptMimeType(contentType)) {
                 getWebClient().getIncorrectnessListener().notify(
-                        "Expected content type of 'application/javascript' or 'application/ecmascript' for "
-                        + "remotely loaded JavaScript element at '" + url + "', "
-                        + "but got '" + contentType + "'.", this);
+                        "Expect content type of '" + MimeType.TEXT_JAVASCRIPT + "' "
+                                + "for remotely loaded JavaScript element at '" + url + "', "
+                                + "but got '" + contentType + "'.", this);
             }
         }
 

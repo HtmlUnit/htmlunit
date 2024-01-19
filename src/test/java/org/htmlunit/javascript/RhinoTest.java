@@ -184,7 +184,7 @@ public class RhinoTest extends WebDriverTestCase {
                 + "  </body></html>";
 
         final String js = "log('from script');";
-        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
 
         loadPageVerifyTitle2(html);
     }

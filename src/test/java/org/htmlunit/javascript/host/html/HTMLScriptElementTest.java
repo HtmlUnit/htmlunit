@@ -74,7 +74,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  <body onload='test()'>\n"
             + "  </body></html>";
 
-        getMockWebConnection().setDefaultResponse("log('4');", MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse("log('4');", MimeType.TEXT_JAVASCRIPT);
 
         loadPageVerifyTitle2(html);
     }
@@ -1395,7 +1395,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         final String js = "log('inside script.js');";
 
-        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
 
         loadPageVerifyTitle2(html);
     }
@@ -1430,7 +1430,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         final String js = "log('inside script.js');";
 
-        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
 
         loadPageVerifyTitle2(html);
     }

@@ -1443,7 +1443,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // Java's mime type map does not know these in JDK8.
         if (fileNameLC.endsWith(".js")) {
-            return MimeType.APPLICATION_JAVASCRIPT;
+            return MimeType.TEXT_JAVASCRIPT;
         }
 
         if (fileNameLC.endsWith(".css")) {

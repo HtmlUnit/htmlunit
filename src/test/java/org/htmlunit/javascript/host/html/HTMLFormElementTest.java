@@ -2065,7 +2065,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
                 + "<script>alert('page" + i + "');</script>\n"
                 + "</head></html>";
             connection.setResponse(new URL(URL_FIRST, "foo" + i), htmlX);
-            connection.setResponse(new URL(URL_FIRST, "script" + i + ".js"), "", MimeType.APPLICATION_JAVASCRIPT);
+            connection.setResponse(new URL(URL_FIRST, "script" + i + ".js"), "", MimeType.TEXT_JAVASCRIPT);
         }
         final String[] expectedRequests = getExpectedAlerts();
 

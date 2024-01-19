@@ -225,7 +225,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("window.foo = 'Hello'", MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse("window.foo = 'Hello'", MimeType.TEXT_JAVASCRIPT);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.linkText("a link")).click();
         driver.findElement(By.id("clickMe")).click();
@@ -395,7 +395,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</form></body></html>";
 
         final String script = "document.write(\"<div id='div1'>hello</div>\");\n";
-        getMockWebConnection().setDefaultResponse(script, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse(script, MimeType.TEXT_JAVASCRIPT);
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, "First");
@@ -441,7 +441,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final String js = "document.write('from external script');\n"
                     + "document.title = 'done';";
 
-        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
         final WebDriver driver = loadPage2(html);
 
         assertTitle(driver, "done");

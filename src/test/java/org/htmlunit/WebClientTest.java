@@ -1464,7 +1464,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals("empty.png", MimeType.IMAGE_PNG, c.guessContentType(getTestFile("empty.png")));
         assertEquals("empty.jpg", MimeType.IMAGE_JPEG, c.guessContentType(getTestFile("empty.jpg")));
         assertEquals("empty.gif", MimeType.IMAGE_GIF, c.guessContentType(getTestFile("empty.gif")));
-        assertEquals("empty.js", MimeType.APPLICATION_JAVASCRIPT, c.guessContentType(getTestFile("empty.js")));
+        assertEquals("empty.js", MimeType.TEXT_JAVASCRIPT, c.guessContentType(getTestFile("empty.js")));
         assertEquals("empty.css", "text/css", c.guessContentType(getTestFile("empty.css")));
 
         // test real files with bad file suffix

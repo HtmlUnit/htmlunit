@@ -1076,7 +1076,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 + "} catch (e) { pi = pi + ' - ' + 'exception'; }\n"
                 + "postMessage(pi);\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
 
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());

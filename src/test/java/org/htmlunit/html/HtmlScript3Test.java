@@ -186,7 +186,7 @@ public class HtmlScript3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        String scriptContentType = MimeType.APPLICATION_JAVASCRIPT;
+        String scriptContentType = MimeType.TEXT_JAVASCRIPT;
         if (charsetResponseHeader != null) {
             scriptContentType = scriptContentType + "; charset="
                                     + charsetResponseHeader.getCharset().name().toLowerCase();

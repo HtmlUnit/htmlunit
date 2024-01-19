@@ -74,7 +74,7 @@ public class LibraryDependencyTest extends WebDriverTestCase {
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_SECOND, secondHtml);
-        webConnection.setResponse(URL_THIRD, prototype, MimeType.APPLICATION_JAVASCRIPT);
+        webConnection.setResponse(URL_THIRD, prototype, MimeType.TEXT_JAVASCRIPT);
 
         loadPageWithAlerts2(firstHtml, 10_000);
     }

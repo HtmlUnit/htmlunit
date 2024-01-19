@@ -121,15 +121,15 @@ public class DefaultPageCreator implements PageCreator, Serializable {
 
         final String contentTypeLC = org.htmlunit.util.StringUtils
                                             .toRootLowerCaseWithCache(contentType);
+
+        if (MimeType.isJavascriptMimeType(contentTypeLC)) {
+            return PageType.JAVASCRIPT;
+        }
+
         switch (contentTypeLC) {
             case MimeType.TEXT_HTML:
             case "image/svg+xml":
                 return PageType.HTML;
-
-            case "text/javascript":
-            case "application/x-javascript":
-            case MimeType.APPLICATION_JAVASCRIPT:
-                return PageType.JAVASCRIPT;
 
             case MimeType.TEXT_XML:
             case "application/xml":

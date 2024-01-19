@@ -91,7 +91,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_SECOND, secondHtml);
 
         final String script = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
-        webConnection.setResponse(new URL("http://script/"), script, MimeType.APPLICATION_JAVASCRIPT);
+        webConnection.setResponse(new URL("http://script/"), script, MimeType.TEXT_JAVASCRIPT);
 
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -223,12 +223,12 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        conn.setResponse(new URL(URL_FIRST, "a.js"), "log(1)", MimeType.APPLICATION_JAVASCRIPT);
-        conn.setResponse(new URL(URL_FIRST, "b.js"), "log(4)", MimeType.APPLICATION_JAVASCRIPT);
-        conn.setResponse(new URL(URL_FIRST, "c.js"), "log(5)", MimeType.APPLICATION_JAVASCRIPT);
-        conn.setResponse(new URL(URL_FIRST, "d.js"), "log(10)", MimeType.APPLICATION_JAVASCRIPT);
-        conn.setResponse(new URL(URL_FIRST, "e.js"), "log(11)", MimeType.APPLICATION_JAVASCRIPT);
-        conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", MimeType.APPLICATION_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "a.js"), "log(1)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "b.js"), "log(4)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "c.js"), "log(5)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "d.js"), "log(10)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "e.js"), "log(11)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", MimeType.TEXT_JAVASCRIPT);
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("1 2 3 4 5 6 7 8 9 10 11 12", page.getBody().asNormalizedText().trim());
@@ -323,7 +323,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
-        webConnection.setResponse(scriptUrl, "alert('foo');\n", MimeType.APPLICATION_JAVASCRIPT);
+        webConnection.setResponse(scriptUrl, "alert('foo');\n", MimeType.TEXT_JAVASCRIPT);
 
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

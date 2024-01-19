@@ -547,7 +547,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("", MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse("", MimeType.TEXT_JAVASCRIPT);
 
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
@@ -580,7 +580,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setResponse(scriptUrl, (String) null, HttpClientConverter.NO_CONTENT, "No Content",
-                                                MimeType.APPLICATION_JAVASCRIPT, null);
+                                                MimeType.TEXT_JAVASCRIPT, null);
         loadPageVerifyTitle2(html);
     }
 
@@ -649,7 +649,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String script = new String(ByteOrderMark.UTF_8.getBytes())
                 + "log('" + "\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627"
                             + "\u064b\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627\u064b" + "');";
-        getMockWebConnection().setResponse(URL_SECOND, script, MimeType.APPLICATION_JAVASCRIPT, UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, script, MimeType.TEXT_JAVASCRIPT, UTF_8);
         expandExpectedAlertsVariables(URL_SECOND);
 
         loadPageVerifyTitle2(html);
@@ -950,7 +950,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
         final ArrayList<NameValuePair> headers = new ArrayList<>();
         getMockWebConnection().setResponse(URL_SECOND, (String) null, HttpClientConverter.NO_CONTENT, "No Content",
-                MimeType.APPLICATION_JAVASCRIPT,
+                MimeType.TEXT_JAVASCRIPT,
                 headers);
 
         loadPageWithAlerts2(html);

@@ -973,7 +973,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    }\n"
                 + "  }\n";
 
-        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
         final String xml = "<xml><content>blah</content></xml>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "/data"), xml, MimeType.TEXT_XML);
