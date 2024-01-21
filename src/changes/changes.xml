@@ -8,6 +8,11 @@
 
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Bugfixes">
+            <action type="update" dev="rbri" issue="#710">"
+                Detection and reporting of obsolete mime types for javascript files has changed to be in
+                sync with the spec and the current practice. 
+                "text/javascript" is the correct; "application/javascript" is reported as obsolete.
+            </action>
             <action type="fix" dev="rbri">
                 neko: AbstractDOMParser fix an old bug in the (optimized) handling of text nodes
                 during dom construction - in some cases parts of the text got lost.
