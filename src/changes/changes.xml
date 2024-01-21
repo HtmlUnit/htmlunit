@@ -8,6 +8,20 @@
 
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                neko: AbstractDOMParser fix an old bug in the (optimized) handling of text nodes
+                during dom construction - in some cases parts of the text got lost.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: HTMLScanner make sure endDocument() is called even if the &lt;plaintext&gt; node
+                is at the end of the document - otherwise the endElement calls for the parents are missing.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: DOMMessageFormatter possible NPE fixed.
+            </action>
+            <action type="fix" dev="René Schwietzke">
+                neko: more performance updates.
+            </action>
             <action type="add" dev="rbri">
                 neko: tag name scanner updated to match the real browsers.
             </action>
