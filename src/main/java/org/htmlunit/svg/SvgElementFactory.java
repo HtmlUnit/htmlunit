@@ -61,7 +61,7 @@ public class SvgElementFactory implements ElementFactory {
         try {
             for (final Class<?> klass : CLASSES_) {
                 final String key = klass.getField("TAG_NAME").get(null).toString();
-                ELEMENTS_.put(StringUtils.toRootLowerCaseWithCache(key), klass);
+                ELEMENTS_.put(StringUtils.toRootLowerCase(key), klass);
             }
         }
         catch (final Exception e) {
@@ -94,7 +94,7 @@ public class SvgElementFactory implements ElementFactory {
             final Attributes attributes, final boolean checkBrowserCompatibility) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
-        qualifiedNameLC = StringUtils.toRootLowerCaseWithCache(qualifiedNameLC);
+        qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedNameLC);
         String tagNameLC = qualifiedNameLC;
         if (tagNameLC.indexOf(':') != -1) {
             tagNameLC = tagNameLC.substring(tagNameLC.indexOf(':') + 1);

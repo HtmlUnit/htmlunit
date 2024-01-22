@@ -284,7 +284,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             String tagName = qualifiedName;
             final int index = tagName.indexOf(':');
             if (index == -1) {
-                tagName = StringUtils.toRootLowerCaseWithCache(tagName);
+                tagName = StringUtils.toRootLowerCase(tagName);
             }
             else {
                 tagName = tagName.substring(index + 1);

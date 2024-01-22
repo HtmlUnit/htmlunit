@@ -87,7 +87,7 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (element != null && element.getValue() != null) {
             final String value = element.getValue();
             if (!value.contains("url")) {
-                return StringUtils.toRootLowerCaseWithCache(value);
+                return StringUtils.toRootLowerCase(value);
             }
             return value;
         }

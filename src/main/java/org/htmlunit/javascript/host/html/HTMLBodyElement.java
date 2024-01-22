@@ -67,7 +67,7 @@ public class HTMLBodyElement extends HTMLElement {
     public void createEventHandlerFromAttribute(final String attributeName, final String value) {
         // when many body tags are found while parsing, attributes of
         // different tags are added and should create an event handler when needed
-        if (StringUtils.toRootLowerCaseWithCache(attributeName).startsWith("on")) {
+        if (StringUtils.toRootLowerCase(attributeName).startsWith("on")) {
             createEventHandler(attributeName.substring(2), value);
         }
     }

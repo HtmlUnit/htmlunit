@@ -224,7 +224,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
             }
         }
         if (!startTagClosed) {
-            final String tagName = StringUtils.toRootLowerCaseWithCache(nodeName);
+            final String tagName = StringUtils.toRootLowerCase(nodeName);
             if (NON_EMPTY_TAGS.contains(tagName)) {
                 builder.append("></").append(nodeName).append('>');
             }

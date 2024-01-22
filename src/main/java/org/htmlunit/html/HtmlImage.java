@@ -137,7 +137,7 @@ public class HtmlImage extends HtmlElement {
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(qualifiedName);
+        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
         if (SRC_ATTRIBUTE.equals(qualifiedNameLC) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedNameLC);
             if (!oldValue.equals(value)) {

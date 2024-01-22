@@ -270,7 +270,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             final String value = element.getValue();
             if (!"content".equals(name)
                     && !value.contains("url")) {
-                return org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(value);
+                return org.htmlunit.util.StringUtils.toRootLowerCase(value);
             }
             return value;
         }
