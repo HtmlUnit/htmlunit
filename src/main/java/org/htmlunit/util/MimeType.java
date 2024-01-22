@@ -14,8 +14,7 @@
  */
 package org.htmlunit.util;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.htmlunit.cyberneko.util.FastHashMap;
 
 /**
  * Utility holding information about association between MIME type and file extensions.
@@ -51,7 +50,38 @@ public final class MimeType {
     /** "image/png". */
     public static final String IMAGE_PNG = "image/png";
 
-    private static final Map<String, String> type2extension = buildMap();
+    private static final FastHashMap<String, String> type2extension = buildMap();
+
+    /**
+     * A map to avoid lowercase conversion and a check check if this is one of
+     * our mimetype we know. The value is not used.
+     */
+    private static final FastHashMap<String, Boolean> lookupMap = new FastHashMap<>(2 * 16 + 1, 0.7f);
+
+    static {
+        lookupMap.put("application/ecmascript", true);
+        lookupMap.put(APPLICATION_JAVASCRIPT, true);
+        lookupMap.put("application/x-ecmascript", true);
+        lookupMap.put("application/x-javascript", true);
+        lookupMap.put("text/ecmascript", true);
+        lookupMap.put("text/javascript", true);
+        lookupMap.put("text/javascript1.0", true);
+        lookupMap.put("text/javascript1.1", true);
+        lookupMap.put("text/javascript1.2", true);
+        lookupMap.put("text/javascript1.3", true);
+        lookupMap.put("text/javascript1.4", true);
+        lookupMap.put("text/javascript1.5", true);
+        lookupMap.put("text/jscript", true);
+        lookupMap.put("text/livescript", true);
+        lookupMap.put("text/x-ecmascript", true);
+        lookupMap.put("text/x-javascript", true);
+
+        // have uppercase ready too, keys() is safe for
+        // concurrent modification
+        for (final String k : lookupMap.keys()) {
+            lookupMap.put(k.toUpperCase(), true);
+        }
+    }
 
     /**
      * See <a href="https://www.rfc-editor.org/rfc/rfc9239.html#name-iana-considerations">
@@ -95,7 +125,16 @@ public final class MimeType {
         if (mimeType == null) {
             return false;
         }
-        final String mimeTypeLC = StringUtils.toRootLowerCaseWithCache(mimeType);
+
+        // go a cheap route first
+        if (lookupMap.get(mimeType) != null) {
+            return true;
+        }
+
+        // this is our fallback in case we have not found the usual casing
+        // our target is ASCII, we can lowercase the normal way because
+        // matching some languages with strange rules does not matter, cheaper!
+        final String mimeTypeLC = mimeType.toLowerCase();
 
         return "application/javascript".equals(mimeTypeLC)
                 || "application/ecmascript".equals(mimeTypeLC)
@@ -114,8 +153,8 @@ public final class MimeType {
                 || "text/x-javascript".equals(mimeTypeLC);
     }
 
-    private static Map<String, String> buildMap() {
-        final Map<String, String> map = new HashMap<>();
+    private static FastHashMap<String, String> buildMap() {
+        final FastHashMap<String, String> map = new FastHashMap<>(2 * 11 + 1, 0.7f);
         map.put("application/pdf", "pdf");
         map.put("application/x-javascript", "js");
         map.put("image/gif", "gif");
@@ -127,6 +166,12 @@ public final class MimeType {
         map.put(MimeType.TEXT_HTML, "html");
         map.put(TEXT_PLAIN, "txt");
         map.put("image/x-icon", "ico");
+
+        // have uppercase ready too, keys() is safe for
+        // concurrent modification
+        for (final String k : map.keys()) {
+            map.put(k.toUpperCase(), map.get(k));
+        }
         return map;
     }
 
@@ -143,11 +188,17 @@ public final class MimeType {
      * @return {@code null} if none is known
      */
     public static String getFileExtension(final String contentType) {
-        final String value = type2extension.get(StringUtils.toRootLowerCaseWithCache(contentType));
-        if (value == null) {
+        if (contentType == null) {
             return "unknown";
         }
 
-        return value;
+        String value = type2extension.get(contentType);
+        if (value == null) {
+            // fallback
+            final String uppercased = contentType.toLowerCase();
+            value = type2extension.get(uppercased);
+        }
+
+        return value == null ? "unknown" : value;
     }
 }
