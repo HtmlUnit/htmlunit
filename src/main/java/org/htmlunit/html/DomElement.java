@@ -1710,7 +1710,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
         if (caseSensitive_) {
             return name;
         }
-        return StringUtils.toRootLowerCaseWithCache(name);
+        return StringUtils.toRootLowerCase(name);
     }
 
     /**

@@ -63,7 +63,7 @@ public class HTMLSpanElement extends HTMLElement {
         super.setDomNode(domNode);
         final BrowserVersion browser = getBrowserVersion();
         if (browser.hasFeature(HTMLBASEFONT_END_TAG_FORBIDDEN)) {
-            switch (StringUtils.toRootLowerCaseWithCache(domNode.getLocalName())) {
+            switch (StringUtils.toRootLowerCase(domNode.getLocalName())) {
                 case "basefont":
                 case "keygen":
                     endTagForbidden_ = true;

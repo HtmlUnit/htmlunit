@@ -818,7 +818,7 @@ public class HTMLDocument extends Document {
         String name = attributeName;
         if (StringUtils.isNotEmpty(name)
                 && getBrowserVersion().hasFeature(JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE)) {
-            name = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(name);
+            name = org.htmlunit.util.StringUtils.toRootLowerCase(name);
         }
 
         return super.createAttribute(name);

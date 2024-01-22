@@ -26,12 +26,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ObjectInstantiationException;
@@ -76,6 +73,7 @@ import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLDocument;
+import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
@@ -329,7 +327,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         }
         handleCharacters();
 
-        final String tagLower = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(localName);
+        final String tagLower = org.htmlunit.util.StringUtils.toRootLowerCase(localName);
         if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
             // we have to push the current node on the stack to make sure
             // the endElement call is able to remove a node from the stack
@@ -547,7 +545,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     public void endElement(final String namespaceURI, final String localName, final String qName)
         throws SAXException {
 
-        final String tagLower = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(localName);
+        final String tagLower = org.htmlunit.util.StringUtils.toRootLowerCase(localName);
 
         handleCharacters();
 
@@ -809,9 +807,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
     private static void copyAttributes(final DomElement to, final XMLAttributes attrs) {
         final int length = attrs.getLength();
+
         for (int i = 0; i < length; i++) {
-            final String attrName = org.htmlunit.util.StringUtils
-                                        .toRootLowerCaseWithCache(attrs.getLocalName(i));
+            final String attrName = StringUtils.toRootLowerCase(attrs.getLocalName(i));
             if (to.getAttributes().getNamedItem(attrName) == null) {
                 to.setAttribute(attrName, attrs.getValue(i));
                 if (attrName.startsWith("on") && to.getPage().getWebClient().isJavaScriptEngineEnabled()

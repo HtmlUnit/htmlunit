@@ -625,8 +625,8 @@ public class CssStyleSheet implements Serializable {
                 final String a = element.getAttribute(beginHyphenAttributeCondition.getLocalName());
                 if (beginHyphenAttributeCondition.isCaseInSensitive()) {
                     return selectsHyphenSeparated(
-                            org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(v),
-                            org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(a));
+                            org.htmlunit.util.StringUtils.toRootLowerCase(v),
+                            org.htmlunit.util.StringUtils.toRootLowerCase(a));
                 }
                 return selectsHyphenSeparated(v, a);
 
@@ -636,8 +636,8 @@ public class CssStyleSheet implements Serializable {
                 final String a2 = element.getAttribute(oneOfAttributeCondition.getLocalName());
                 if (oneOfAttributeCondition.isCaseInSensitive()) {
                     return selectsOneOf(
-                            org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(v2),
-                            org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(a2));
+                            org.htmlunit.util.StringUtils.toRootLowerCase(v2),
+                            org.htmlunit.util.StringUtils.toRootLowerCase(a2));
                 }
                 return selectsOneOf(v2, a2);
 

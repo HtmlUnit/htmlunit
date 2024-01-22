@@ -515,13 +515,13 @@ public class HTMLElement extends Element {
             if (prefix != null) {
                 // create string builder only if needed (performance)
                 final StringBuilder localName = new StringBuilder(
-                                org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(prefix))
+                                org.htmlunit.util.StringUtils.toRootLowerCase(prefix))
                     .append(':')
                     .append(org.htmlunit.util.StringUtils
-                                .toRootLowerCaseWithCache(domNode.getLocalName()));
+                                .toRootLowerCase(domNode.getLocalName()));
                 return localName.toString();
             }
-            return org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(domNode.getLocalName());
+            return org.htmlunit.util.StringUtils.toRootLowerCase(domNode.getLocalName());
         }
         return domNode.getLocalName();
     }

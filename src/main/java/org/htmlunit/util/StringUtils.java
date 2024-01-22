@@ -348,20 +348,15 @@ public final class StringUtils {
         return result;
     }
 
-    public static String toRootLowerCaseWithCache(final String string) {
-        if (string == null) {
-            return null;
-        }
-
-        String result = RootLowercaseCache_.get(string);
-        if (null != result) {
-            return result;
-        }
-
-        result = string.toLowerCase(Locale.ROOT);
-        RootLowercaseCache_.put(string, result);
-
-        return result;
+    /**
+     * Lowercases a string by checking and check for null first. There
+     * is no cache involved and the ROOT locale is used to convert it.
+     *
+     * @param s the string to lowercase
+     * @return the lowercased string
+     */
+    public static String toRootLowerCase(final String s) {
+        return s == null ? null : s.toLowerCase(Locale.ROOT);
     }
 
     /**

@@ -141,7 +141,7 @@ public class Element extends Node {
         //Should be called only on construction.
         final DomElement htmlElt = (DomElement) domNode;
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
-            final String eventName = StringUtils.toRootLowerCaseWithCache(attr.getName());
+            final String eventName = StringUtils.toRootLowerCase(attr.getName());
             if (eventName.startsWith("on")) {
                 createEventHandler(eventName.substring(2), attr.getValue());
             }
@@ -236,7 +236,7 @@ public class Element extends Node {
         final boolean caseSensitive;
         final DomNode dom = getDomNodeOrNull();
         if (dom == null) {
-            searchTagName = StringUtils.toRootLowerCaseWithCache(tagName);
+            searchTagName = StringUtils.toRootLowerCase(tagName);
             caseSensitive = false;
         }
         else {
@@ -246,7 +246,7 @@ public class Element extends Node {
                 caseSensitive = true;
             }
             else {
-                searchTagName = StringUtils.toRootLowerCaseWithCache(tagName);
+                searchTagName = StringUtils.toRootLowerCase(tagName);
                 caseSensitive = false;
             }
         }

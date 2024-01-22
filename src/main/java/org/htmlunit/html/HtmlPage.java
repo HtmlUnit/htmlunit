@@ -596,7 +596,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public DomElement createElement(String tagName) {
         if (tagName.indexOf(':') == -1) {
-            tagName = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(tagName);
+            tagName = org.htmlunit.util.StringUtils.toRootLowerCase(tagName);
         }
         return getWebClient().getPageCreator().getHtmlParser().getFactory(tagName)
                     .createElementNS(this, null, tagName, null, true);

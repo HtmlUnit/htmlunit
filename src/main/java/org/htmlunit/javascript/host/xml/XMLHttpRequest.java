@@ -976,7 +976,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 for (final Entry<String, String> header
                         : new TreeMap<>(webRequest_.getAdditionalHeaders()).entrySet()) {
                     final String name = org.htmlunit.util.StringUtils
-                                            .toRootLowerCaseWithCache(header.getKey());
+                                            .toRootLowerCase(header.getKey());
                     if (isPreflightHeader(name, header.getValue())) {
                         if (builder.length() != 0) {
                             builder.append(',');
@@ -1177,7 +1177,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS.equalsIgnoreCase(pair.getName())) {
                 String value = pair.getValue();
                 if (value != null) {
-                    value = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(value);
+                    value = org.htmlunit.util.StringUtils.toRootLowerCase(value);
                     final String[] values = org.htmlunit.util.StringUtils.splitAtComma(value);
                     for (String part : values) {
                         part = part.trim();
@@ -1190,7 +1190,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            final String key = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(header.getKey());
+            final String key = org.htmlunit.util.StringUtils.toRootLowerCase(header.getKey());
             if (isPreflightHeader(key, header.getValue())
                     && !accessControlValues.contains(key)) {
                 return false;
@@ -1252,7 +1252,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return {@code true} if the header can be set from JavaScript
      */
     static boolean isAuthorizedHeader(final String name) {
-        final String nameLowerCase = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(name);
+        final String nameLowerCase = org.htmlunit.util.StringUtils.toRootLowerCase(name);
         if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
             return false;
         }

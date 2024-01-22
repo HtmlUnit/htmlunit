@@ -625,7 +625,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(qualifiedName);
+        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
         if (NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
@@ -1143,7 +1143,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public final String getType() {
         final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
         String type = getTypeAttribute();
-        type = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(type);
+        type = org.htmlunit.util.StringUtils.toRootLowerCase(type);
         return isSupported(type, browserVersion) ? type : "text";
     }
 
@@ -1167,11 +1167,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         final BrowserVersion browser = webClient.getBrowserVersion();
         if (!currentType.equalsIgnoreCase(newType)) {
             if (newType != null && browser.hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
-                newType = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(newType);
+                newType = org.htmlunit.util.StringUtils.toRootLowerCase(newType);
             }
 
             if (!isSupported(org.htmlunit.util.StringUtils
-                                    .toRootLowerCaseWithCache(newType), browser)) {
+                                    .toRootLowerCase(newType), browser)) {
                 if (setThroughAttribute) {
                     newType = "text";
                 }
