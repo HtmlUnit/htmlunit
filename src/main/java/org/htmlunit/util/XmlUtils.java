@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -274,7 +273,7 @@ public final class XmlUtils {
                             namedNodeMapToSaxAttributes(nodeAttributes, attributesOrderMap, source));
         }
 
-        final Map<String, DomAttr> attributes = new LinkedHashMap<>();
+        final OrderedFastHashMap<String, DomAttr> attributes = new OrderedFastHashMap<>();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
             final int orderedIndex = Platform.getIndex(nodeAttributes, attributesOrderMap, source, i);
             final Attr attribute = (Attr) nodeAttributes.item(orderedIndex);
