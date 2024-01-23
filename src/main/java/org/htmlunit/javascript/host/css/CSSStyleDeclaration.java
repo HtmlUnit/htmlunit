@@ -106,7 +106,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -245,6 +244,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
         setDomNode(element.getDomNodeOrNull(), false);
 
+        if (styleDeclaration == null) {
+            throw new IllegalStateException("styleDeclaration can't be null");
+        }
         styleDeclaration_ = styleDeclaration;
     }
 
@@ -257,6 +259,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         setParentScope(parentStyleSheet);
         setPrototype(getPrototype(getClass()));
 
+        if (styleDeclaration == null) {
+            throw new IllegalStateException("styleDeclaration can't be null");
+        }
         styleDeclaration_ = styleDeclaration;
     }
 
@@ -288,9 +293,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the element to which this style belongs
      */
     protected Element getElement() {
-        if (styleDeclaration_ == null) {
-            return null;
-        }
         return styleDeclaration_.getElementOrNull();
     }
 
@@ -298,9 +300,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the dom element to which this style belongs
      */
     protected DomElement getDomElement() {
-        if (styleDeclaration_ == null) {
-            return null;
-        }
         return styleDeclaration_.getDomElementOrNull();
     }
 
@@ -311,9 +310,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the named style attribute value, or an empty string if it is not found
      */
     protected String getStylePriority(final String name) {
-        if (styleDeclaration_ == null) {
-            return null;
-        }
         return styleDeclaration_.getStylePriority(name);
     }
 
@@ -325,9 +321,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the StyleElement or null if not found
      */
     private StyleElement getStyleElementCaseInSensitive(final String name) {
-        if (styleDeclaration_ == null) {
-            return null;
-        }
         return styleDeclaration_.getStyleElementCaseInSensitive(name);
     }
 
@@ -359,9 +352,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param name the attribute name (delimiter-separated, not camel-cased)
      */
     private String removeStyleAttribute(final String name) {
-        if (styleDeclaration_ == null) {
-            return null;
-        }
         return styleDeclaration_.removeStyleAttribute(name);
     }
 
@@ -372,9 +362,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return a sorted map containing style elements, keyed on style element name
      */
     private Map<String, StyleElement> getStyleMap() {
-        if (styleDeclaration_ == null) {
-            return Collections.emptyMap();
-        }
         return styleDeclaration_.getStyleMap();
     }
 
@@ -1059,9 +1046,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getCssText() {
-        if (styleDeclaration_ == null) {
-            return null;
-        }
         return styleDeclaration_.getCssText();
     }
 
@@ -1250,9 +1234,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        if (styleDeclaration_ == null) {
-            return 0;
-        }
         return styleDeclaration_.getLength();
     }
 
@@ -1263,9 +1244,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        if (styleDeclaration_ == null) {
-            return null;
-        }
         return styleDeclaration_.item(index);
     }
 
@@ -1528,10 +1506,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the value
      */
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
-        if (styleDeclaration_ != null) {
-            return styleDeclaration_.getStyleAttribute(definition, getDefaultValueIfEmpty);
-        }
-        return "";
+        return styleDeclaration_.getStyleAttribute(definition, getDefaultValueIfEmpty);
     }
 
     @Override
@@ -1815,11 +1790,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public CSSRule getParentRule() {
-        if (null != styleDeclaration_) {
-            final AbstractCSSRuleImpl parentRule = styleDeclaration_.getParentRule();
-            if (parentRule != null) {
-                return CSSRule.create((CSSStyleSheet) getParentScope(), parentRule);
-            }
+        final AbstractCSSRuleImpl parentRule = styleDeclaration_.getParentRule();
+        if (parentRule != null) {
+            return CSSRule.create((CSSStyleSheet) getParentScope(), parentRule);
         }
         return null;
     }
@@ -2436,10 +2409,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             }
         }
 
-        if (styleDeclaration_ != null) {
-            return styleDeclaration_.getStyleAttribute(name);
-        }
-        return "";
+        return styleDeclaration_.getStyleAttribute(name);
     }
 
     /**
@@ -2739,7 +2709,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @Override
     public String toString() {
-        if (styleDeclaration_ != null || getDomElement() == null) {
+        if (getDomElement() == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
 
