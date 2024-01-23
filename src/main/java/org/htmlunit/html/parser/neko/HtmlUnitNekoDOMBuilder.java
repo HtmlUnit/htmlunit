@@ -39,10 +39,12 @@ import org.htmlunit.cyberneko.HTMLElements;
 import org.htmlunit.cyberneko.HTMLEventInfo;
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancingListener;
+import org.htmlunit.cyberneko.util.FastHashMap;
 import org.htmlunit.cyberneko.xerces.parsers.AbstractSAXParser;
 import org.htmlunit.cyberneko.xerces.xni.Augmentations;
 import org.htmlunit.cyberneko.xerces.xni.QName;
 import org.htmlunit.cyberneko.xerces.xni.XMLAttributes;
+import org.htmlunit.cyberneko.xerces.xni.XMLString;
 import org.htmlunit.cyberneko.xerces.xni.XNIException;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLInputSource;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLParserConfiguration;
@@ -104,64 +106,64 @@ import org.xml.sax.ext.LexicalHandler;
 final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         implements ContentHandler, LexicalHandler, HTMLTagBalancingListener, HTMLParserDOMBuilder {
 
-    // cache Neko Elements for performance and memory
-    private static final Map<Triple<Boolean, Boolean, Boolean>, HTMLElements> ELEMENTS;
+    // cache Neko Elements for performance and memory efficiency
+    private static final FastHashMap<Triple<Boolean, Boolean, Boolean>, HTMLElements>
+                HTMLELEMENTS_CACHE = new FastHashMap<>();
+
     static {
-        ELEMENTS = new HashMap<>();
+        // continue short code enumeration
+        final short isIndexShortCode = HTMLElements.UNKNOWN + 1;
 
-        Triple<Boolean, Boolean, Boolean> key;
-        HTMLElements value;
-
-        final short unknownId = HTMLElements.UNKNOWN;
-        final short isindexId = unknownId + 1;
-
-        final short commandId = isindexId + 1;
-        final short mainId = commandId + 1;
+        final short commandShortCode = isIndexShortCode + 1;
+        final short mainShortCode = commandShortCode + 1;
 
         // isIndex is special - we have to add it here because all browsers moving this to
         // the body (even if it is not supported)
-        final HTMLElements.Element isIndex = new HTMLElements.Element(isindexId, "ISINDEX",
+        final HTMLElements.Element isIndex = new HTMLElements.Element(isIndexShortCode, "ISINDEX",
                 HTMLElements.Element.CONTAINER, HTMLElements.BODY, null);
-        final HTMLElements.Element isIndexSupported = new HTMLElements.Element(isindexId, "ISINDEX",
-                HTMLElements.Element.BLOCK, HTMLElements.BODY, new short[] {isindexId});
+        final HTMLElements.Element isIndexSupported = new HTMLElements.Element(isIndexShortCode, "ISINDEX",
+                HTMLElements.Element.BLOCK, HTMLElements.BODY, new short[] {isIndexShortCode});
 
-        final HTMLElements.Element command = new HTMLElements.Element(commandId, "COMMAND",
+        final HTMLElements.Element command = new HTMLElements.Element(commandShortCode, "COMMAND",
                 HTMLElements.Element.EMPTY, new short[] {HTMLElements.BODY, HTMLElements.HEAD}, null);
-        final HTMLElements.Element main = new HTMLElements.Element(mainId, "MAIN",
+        final HTMLElements.Element main = new HTMLElements.Element(mainShortCode, "MAIN",
                 HTMLElements.Element.INLINE, HTMLElements.BODY, null);
+
+        Triple<Boolean, Boolean, Boolean> key;
+        HTMLElements value;
 
         // !COMMAND_TAG !ISINDEX_TAG !MAIN_TAG
         key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
         value = new HTMLElements();
         value.setElement(isIndex);
-        ELEMENTS.put(key, value);
+        HTMLELEMENTS_CACHE.put(key, value);
 
         // !COMMAND_TAG !ISINDEX_TAG MAIN_TAG
         key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.TRUE);
         value = new HTMLElements();
         value.setElement(main);
         value.setElement(isIndex);
-        ELEMENTS.put(key, value);
+        HTMLELEMENTS_CACHE.put(key, value);
 
         // !COMMAND_TAG ISINDEX_TAG !MAIN_TAG
         key = Triple.of(Boolean.FALSE, Boolean.TRUE, Boolean.FALSE);
         value = new HTMLElements();
         value.setElement(isIndexSupported);
-        ELEMENTS.put(key, value);
+        HTMLELEMENTS_CACHE.put(key, value);
 
         // !COMMAND_TAG ISINDEX_TAG MAIN_TAG
         key = Triple.of(Boolean.FALSE, Boolean.TRUE, Boolean.TRUE);
         value = new HTMLElements();
         value.setElement(isIndexSupported);
         value.setElement(main);
-        ELEMENTS.put(key, value);
+        HTMLELEMENTS_CACHE.put(key, value);
 
         // COMMAND_TAG !ISINDEX_TAG !MAIN_TAG
         key = Triple.of(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE);
         value = new HTMLElements();
         value.setElement(command);
         value.setElement(isIndex);
-        ELEMENTS.put(key, value);
+        HTMLELEMENTS_CACHE.put(key, value);
 
         // COMMAND_TAG !ISINDEX_TAG MAIN_TAG
         key = Triple.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE);
@@ -169,14 +171,14 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         value.setElement(command);
         value.setElement(isIndex);
         value.setElement(main);
-        ELEMENTS.put(key, value);
+        HTMLELEMENTS_CACHE.put(key, value);
 
         // COMMAND_TAG ISINDEX_TAG !MAIN_TAG
         key = Triple.of(Boolean.TRUE, Boolean.TRUE, Boolean.FALSE);
         value = new HTMLElements();
         value.setElement(command);
         value.setElement(isIndexSupported);
-        ELEMENTS.put(key, value);
+        HTMLELEMENTS_CACHE.put(key, value);
 
         // COMMAND_TAG ISINDEX_TAG MAIN_TAG
         key = Triple.of(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
@@ -184,7 +186,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         value.setElement(command);
         value.setElement(isIndexSupported);
         value.setElement(main);
-        ELEMENTS.put(key, value);
+        HTMLELEMENTS_CACHE.put(key, value);
     }
 
     private enum HeadParsed { YES, SYNTHESIZED, NO }
@@ -200,7 +202,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private final int initialSize_;
     private DomNode currentNode_;
     private final boolean createdByJavascript_;
-    private final StringBuilder characters_ = new StringBuilder();
+    private final XMLString characters_ = new XMLString();
     private HtmlUnitNekoDOMBuilder.HeadParsed headParsed_ = HeadParsed.NO;
     private HtmlElement body_;
     private boolean lastTagWasSynthesized_;
@@ -282,7 +284,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * @return the configuration
      */
     private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {
-        final HTMLElements elements = ELEMENTS.get(
+        final HTMLElements elements = HTMLELEMENTS_CACHE.get(
                 Triple.of(browserVersion.hasFeature(HTML_COMMAND_TAG),
                         browserVersion.hasFeature(HTML_ISINDEX_TAG),
                         browserVersion.hasFeature(HTML_MAIN_TAG)));
@@ -608,54 +610,57 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * Picks up the character data accumulated so far and add it to the current element as a text node.
      */
     private void handleCharacters() {
-        if (characters_.length() != 0) {
-            if (currentNode_ instanceof HtmlHtml) {
-                // In HTML, the <html> node only has two possible children:
-                // the <head> and the <body>; any text is ignored.
-                characters_.setLength(0);
-            }
-            else {
-                // Use the normal behavior: append a text node for the accumulated text.
-                final String textValue = characters_.toString();
-                final DomText text = new DomText(page_, textValue);
-                characters_.setLength(0);
+        // make the code easier to read because we remove a nesting level
+        if (characters_.length() == 0) {
+            return;
+        }
 
-                if (StringUtils.isNotBlank(textValue)) {
-                    // malformed HTML: </td>some text</tr> => text comes before the table
-                    if (currentNode_ instanceof HtmlTableRow) {
-                        final HtmlTableRow row = (HtmlTableRow) currentNode_;
-                        final HtmlTable enclosingTable = row.getEnclosingTable();
-                        if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
-                            if (enclosingTable.getPreviousSibling() instanceof DomText) {
-                                final DomText domText = (DomText) enclosingTable.getPreviousSibling();
-                                domText.setTextContent(domText.getWholeText() + textValue);
-                            }
-                            else {
-                                enclosingTable.insertBefore(text);
-                            }
-                        }
-                    }
-                    else if (currentNode_ instanceof HtmlTable) {
-                        final HtmlTable enclosingTable = (HtmlTable) currentNode_;
-                        if (enclosingTable.getPreviousSibling() instanceof DomText) {
-                            final DomText domText = (DomText) enclosingTable.getPreviousSibling();
-                            domText.setTextContent(domText.getWholeText() + textValue);
-                        }
-                        else {
-                            enclosingTable.insertBefore(text);
-                        }
-                    }
-                    else if (currentNode_ instanceof HtmlImage) {
-                        currentNode_.getParentNode().appendChild(text);
+        if (currentNode_ instanceof HtmlHtml) {
+            // In HTML, the <html> node only has two possible children:
+            // the <head> and the <body>; any text is ignored.
+            characters_.clear();
+            return;
+        }
+
+        // Use the normal behavior: append a text node for the accumulated text.
+        final String textValue = characters_.toString();
+        final DomText textNode = new DomText(page_, textValue);
+        characters_.clear();
+
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(textValue)) {
+            // malformed HTML: </td>some text</tr> => text comes before the table
+            if (currentNode_ instanceof HtmlTableRow) {
+                final HtmlTableRow row = (HtmlTableRow) currentNode_;
+                final HtmlTable enclosingTable = row.getEnclosingTable();
+                if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
+                    if (enclosingTable.getPreviousSibling() instanceof DomText) {
+                        final DomText domText = (DomText) enclosingTable.getPreviousSibling();
+                        domText.setTextContent(domText.getWholeText() + textValue);
                     }
                     else {
-                        appendChild(currentNode_, text);
+                        enclosingTable.insertBefore(textNode);
                     }
                 }
+            }
+            else if (currentNode_ instanceof HtmlTable) {
+                final HtmlTable enclosingTable = (HtmlTable) currentNode_;
+                if (enclosingTable.getPreviousSibling() instanceof DomText) {
+                    final DomText domText = (DomText) enclosingTable.getPreviousSibling();
+                    domText.setTextContent(domText.getWholeText() + textValue);
+                }
                 else {
-                    appendChild(currentNode_, text);
+                    enclosingTable.insertBefore(textNode);
                 }
             }
+            else if (currentNode_ instanceof HtmlImage) {
+                currentNode_.getParentNode().appendChild(textNode);
+            }
+            else {
+                appendChild(currentNode_, textNode);
+            }
+        }
+        else {
+            appendChild(currentNode_, textNode);
         }
     }
 
