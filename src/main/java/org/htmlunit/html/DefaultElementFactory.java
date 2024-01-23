@@ -18,7 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.KEYGEN_AS_BLOCK;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -28,6 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import org.htmlunit.util.OrderedFastHashMap;
 import org.xml.sax.Attributes;
 
 /**
@@ -779,23 +779,25 @@ public class DefaultElementFactory implements ElementFactory {
      * @return the map of attribute values for {@link HtmlElement}s
      */
     static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
-        if (attributes == null) {
-            return null;
-        }
+        final int length = attributes == null ? 0 : attributes.getLength();
+        final Map<String, DomAttr> attributeMap = new OrderedFastHashMap<>(length);
 
-        final Map<String, DomAttr> attributeMap = new LinkedHashMap<>(attributes.getLength());
-        for (int i = 0; i < attributes.getLength(); i++) {
+        for (int i = 0; i < length; i++) {
             final String qName = attributes.getQName(i);
+
             // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
             if (!attributeMap.containsKey(qName)) {
                 String namespaceURI = attributes.getURI(i);
+
                 if (namespaceURI != null && namespaceURI.isEmpty()) {
                     namespaceURI = null;
                 }
+
                 final DomAttr newAttr = new DomAttr(page, namespaceURI, qName, attributes.getValue(i), true);
                 attributeMap.put(qName, newAttr);
             }
         }
+
         return attributeMap;
     }
 

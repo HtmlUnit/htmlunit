@@ -25,7 +25,6 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -60,6 +59,7 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.event.PointerEvent;
+import org.htmlunit.util.OrderedFastHashMap;
 import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -129,15 +129,17 @@ public class DomElement extends DomNamespaceNode implements Element {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
 
-        if (attributes != null && !attributes.isEmpty()) {
+        if (attributes != null) {
             attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive(), attributes);
-            for (final DomAttr entry : attributes_.values()) {
+
+            for (final DomAttr entry : attributes.values()) {
                 entry.setParentNode(this);
                 final String attrNamespaceURI = entry.getNamespaceURI();
                 final String prefix = entry.getPrefix();
+
                 if (attrNamespaceURI != null && prefix != null) {
                     if (namespaces_ == null) {
-                    	namespaces_ = new FastHashMap<>(1, 0.5f);
+                        namespaces_ = new FastHashMap<>(1, 0.5f);
                     }
                     namespaces_.put(attrNamespaceURI, prefix);
                 }
@@ -536,9 +538,9 @@ public class DomElement extends DomNamespaceNode implements Element {
         attributes_.put(qualifiedName, newAttr);
 
         if (namespaceURI != null) {
-        	if (namespaces_ == null) {
-        		namespaces_ = new FastHashMap<>(1, 0.5f);
-        	}
+            if (namespaces_ == null) {
+                namespaces_ = new FastHashMap<>(1, 0.5f);
+            }
             namespaces_.put(namespaceURI, newAttr.getPrefix());
         }
     }
@@ -1663,9 +1665,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     private static final DomAttr[] EMPTY_ARRAY = new DomAttr[0];
     protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
 
-    private final Map<String, DomAttr> map_ = new LinkedHashMap<>();
-    private boolean dirty_;
-    private DomAttr[] attrPositions_ = EMPTY_ARRAY;
+    private final OrderedFastHashMap<String, DomAttr> map_;
     private final DomElement domNode_;
     private final boolean caseSensitive_;
 
@@ -1673,6 +1673,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
         super();
         domNode_ = null;
         caseSensitive_ = true;
+        map_ = new OrderedFastHashMap<>(0);
     }
 
     NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive) {
@@ -1682,12 +1683,30 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
         }
         domNode_ = domNode;
         caseSensitive_ = caseSensitive;
+        map_ = new OrderedFastHashMap<>(0);
     }
 
     NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive,
             final Map<String, DomAttr> attributes) {
-        this(domNode, caseSensitive);
-        putAll(attributes);
+        super();
+        if (domNode == null) {
+            throw new IllegalArgumentException("Provided domNode can't be null.");
+        }
+        domNode_ = domNode;
+        caseSensitive_ = caseSensitive;
+
+        // we expect a special map here, if we don't get it... we have to create us one
+        if (caseSensitive && attributes instanceof OrderedFastHashMap) {
+            // no need to rework the map at all, we are case sensitive, so
+            // we keep all attributes and we got the right map from outside too
+            map_ = (OrderedFastHashMap) attributes;
+        }
+        else {
+            // this is more expensive but atypical, so we don't have to care that much
+            map_ = new OrderedFastHashMap<>(attributes.size());
+            // this will create a new map with all case lowercased and
+            putAll(attributes);
+        }
     }
 
     /**
@@ -1732,11 +1751,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
         if (index < 0 || index >= map_.size()) {
             return null;
         }
-        if (dirty_) {
-            attrPositions_ = map_.values().toArray(attrPositions_);
-            dirty_ = false;
-        }
-        return attrPositions_[index];
+        return map_.getValue(index);
     }
 
     /**
@@ -1780,7 +1795,6 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     @Override
     public DomAttr put(final String key, final DomAttr value) {
         final String name = fixName(key);
-        dirty_ = true;
         return map_.put(name, value);
     }
 
@@ -1791,7 +1805,6 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     public DomAttr remove(final Object key) {
         if (key instanceof String) {
             final String name = fixName((String) key);
-            dirty_ = true;
             return map_.remove(name);
         }
         return null;
@@ -1802,7 +1815,6 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public void clear() {
-        dirty_ = true;
         map_.clear();
     }
 
