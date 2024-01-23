@@ -526,6 +526,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     }
 
     private static boolean isTableCell(final String nodeName) {
+        if (nodeName == null || nodeName.length() != 2) {
+            return false;
+        }
         return "td".equals(nodeName) || "th".equals(nodeName);
     }
 
