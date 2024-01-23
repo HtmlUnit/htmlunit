@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
-import static org.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_18;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_10;
@@ -31,7 +30,6 @@ import static org.htmlunit.css.CssStyleSheet.INLINE;
 import static org.htmlunit.css.CssStyleSheet.NONE;
 import static org.htmlunit.css.CssStyleSheet.RELATIVE;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
-import static org.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
@@ -44,7 +42,6 @@ import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
 import static org.htmlunit.css.StyleAttributes.Definition.BOX_SIZING;
 import static org.htmlunit.css.StyleAttributes.Definition.CSS_FLOAT;
-import static org.htmlunit.css.StyleAttributes.Definition.FONT_FAMILY;
 import static org.htmlunit.css.StyleAttributes.Definition.HEIGHT;
 import static org.htmlunit.css.StyleAttributes.Definition.LEFT;
 import static org.htmlunit.css.StyleAttributes.Definition.LINE_HEIGHT;
@@ -226,7 +223,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute(ACCELERATOR, false), ACCELERATOR);
+        return getCssStyleDeclaration().getAccelerator();
     }
 
     /**
@@ -375,7 +372,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBottom() {
-        return defaultIfEmpty(super.getBottom(), AUTO, null);
+        return getCssStyleDeclaration().getBottom();
     }
 
     /**
@@ -383,8 +380,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getColor() {
-        final String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)", null);
-        return CssColors.toRGBColor(value);
+        return getCssStyleDeclaration().getColor();
     }
 
     /**
@@ -408,11 +404,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFont() {
-        if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)
-                && getDomElement().isAttachedToPage()) {
-            return super.getFont();
-        }
-        return "";
+        return getCssStyleDeclaration().getFont();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getFontFamily() {
+        return getCssStyleDeclaration().getFontFamily();
     }
 
     /**
@@ -420,11 +420,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFontSize() {
-        String value = super.getFontSize();
-        if (!value.isEmpty()) {
-            value = CssPixelValueConverter.pixelValue(value) + "px";
-        }
-        return value;
+        return getCssStyleDeclaration().getFontSize();
     }
 
     /**
@@ -433,14 +429,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getLineHeight() {
         return defaultIfEmpty(super.getLineHeight(), LINE_HEIGHT);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFontFamily() {
-        return defaultIfEmpty(super.getFontFamily(), FONT_FAMILY);
     }
 
     /**

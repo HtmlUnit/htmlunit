@@ -1527,8 +1527,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "inline", "rgb(0, 0, 0)"},
-            IE = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"})
+    @Alerts(DEFAULT = {"", "inline"},
+            IE = {"inline", "inline"})
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1538,9 +1538,32 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "      var e = document.createElement('tt');\n"
             + "      var style = window.getComputedStyle(e, null);\n"
             + "      log(style['display']);\n"
-            + "      log(style['color']);\n"
             + "      document.body.appendChild(e);\n"
             + "      log(style['display']);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "rgb(0, 0, 0)"},
+            IE = {"rgb(0, 0, 0)", "rgb(0, 0, 0)"})
+    public void colorDefault() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var e = document.createElement('tt');\n"
+            + "      var style = window.getComputedStyle(e, null);\n"
+            + "      log(style['color']);\n"
+            + "      document.body.appendChild(e);\n"
             + "      log(style['color']);\n"
             + "    }\n"
             + "  </script>\n"

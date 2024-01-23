@@ -15,13 +15,16 @@
 package org.htmlunit.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
+import static org.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.AUTO;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
 import static org.htmlunit.css.CssStyleSheet.NONE;
+import static org.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
 import static org.htmlunit.css.StyleAttributes.Definition.AZIMUTH;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_COLLAPSE;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_SPACING;
+import static org.htmlunit.css.StyleAttributes.Definition.BOTTOM;
 import static org.htmlunit.css.StyleAttributes.Definition.CAPTION_SIDE;
 import static org.htmlunit.css.StyleAttributes.Definition.COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.CURSOR;
@@ -272,6 +275,39 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defaultValue}
+     * @param defaultValue the default value of the string
+     * @return the string, or {@code toReturnIfEmptyOrDefault}
+     */
+    private String getStyleAttribute(final Definition definition, final String toReturnIfEmptyOrDefault,
+            final String defaultValue) {
+        final DomElement domElement = getDomElementOrNull();
+        final BrowserVersion browserVersion = domElement.getPage().getWebClient().getBrowserVersion();
+
+        if (!domElement.isAttachedToPage()
+                && browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+            return ComputedCssStyleDeclaration.EMPTY_FINAL;
+        }
+
+        final boolean feature = browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
+        final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
+
+        // to make the fuzzer happy the recursion was removed
+        final ComputedCssStyleDeclaration[] queue = new ComputedCssStyleDeclaration[] {this};
+        String value = null;
+        while (queue[0] != null) {
+            value = getStyleAttributeWorker(definition, false,
+                    browserVersion, feature, isDefInheritable, queue);
+        }
+
+        if (value == null || value.isEmpty() || value.equals(defaultValue)) {
+            return toReturnIfEmptyOrDefault;
+        }
+
+        return value;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -388,6 +424,28 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * @return the accelerator setting
+     */
+    public String getAccelerator() {
+        return getStyleAttribute(ACCELERATOR, true);
+    }
+
+    /**
+     * @return the bottom setting
+     */
+    public String getBottom() {
+        return getStyleAttribute(BOTTOM, AUTO, null);
+    }
+
+    /**
+     * @return the color setting
+     */
+    public String getColor() {
+        final String value = getStyleAttribute(COLOR, "rgb(0, 0, 0)", null);
+        return CssColors.toRGBColor(value);
+    }
+
+    /**
      * @return the display setting
      */
     public String getDisplay() {
@@ -407,6 +465,38 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 return ((HtmlElement) domElem).getDefaultStyleDisplay().value();
             }
             return "";
+        }
+        return value;
+    }
+
+    /**
+     * @return the font setting
+     */
+    public String getFont() {
+        final DomElement domElem = getDomElementOrNull();
+        if (domElem.isAttachedToPage()) {
+            final BrowserVersion browserVersion = domElem.getPage().getWebClient().getBrowserVersion();
+            if (browserVersion.hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)) {
+                return getStyleAttribute(FONT, true);
+            }
+        }
+        return "";
+    }
+
+    /**
+     * @return the font family setting
+     */
+    public String getFontFamily() {
+        return getStyleAttribute(FONT_FAMILY, true);
+    }
+
+    /**
+     * @return the font size setting
+     */
+    public String getFontSize() {
+        String value = getStyleAttribute(FONT_SIZE, true);
+        if (!value.isEmpty()) {
+            value = CssPixelValueConverter.pixelValue(value) + "px";
         }
         return value;
     }
