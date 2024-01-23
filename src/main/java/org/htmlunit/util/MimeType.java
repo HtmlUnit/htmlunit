@@ -59,12 +59,11 @@ public final class MimeType {
     private static final FastHashMap<String, Boolean> lookupMap = new FastHashMap<>(2 * 16 + 1, 0.7f);
 
     static {
-        lookupMap.put("application/ecmascript", true);
-        lookupMap.put(APPLICATION_JAVASCRIPT, true);
+        lookupMap.put("application/javascript", true);
         lookupMap.put("application/x-ecmascript", true);
         lookupMap.put("application/x-javascript", true);
         lookupMap.put("text/ecmascript", true);
-        lookupMap.put("text/javascript", true);
+        lookupMap.put("application/ecmascript", true);
         lookupMap.put("text/javascript1.0", true);
         lookupMap.put("text/javascript1.1", true);
         lookupMap.put("text/javascript1.2", true);
@@ -94,7 +93,7 @@ public final class MimeType {
         if (mimeType == null) {
             return false;
         }
-        final String mimeTypeLC = StringUtils.toRootLowerCaseWithCache(mimeType);
+        final String mimeTypeLC = StringUtils.toRootLowerCase(mimeType);
 
         return TEXT_JAVASCRIPT.equals(mimeTypeLC)
                 || "application/javascript".equals(mimeTypeLC)
