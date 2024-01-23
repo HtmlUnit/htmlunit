@@ -21,8 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRES
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -148,7 +146,7 @@ public abstract class HtmlElement extends DomElement {
     protected static final String ATTRIBUTE_CHECKED = "checked";
 
     /** The listeners which are to be notified of attribute changes. */
-    private final Collection<HtmlAttributeChangeListener> attributeListeners_;
+    private final List<HtmlAttributeChangeListener> attributeListeners_ = new ArrayList<>();
 
     /** The owning form for lost form children. */
     private HtmlForm owningForm_;
@@ -182,7 +180,6 @@ public abstract class HtmlElement extends DomElement {
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        attributeListeners_ = new LinkedHashSet<>();
     }
 
     /**
@@ -236,7 +233,7 @@ public abstract class HtmlElement extends DomElement {
      */
     protected static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
             final HtmlElement element, final String oldAttributeValue, final boolean notifyMutationObservers) {
-        final Collection<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
+        final List<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
         if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
             synchronized (listeners) {
                 for (final HtmlAttributeChangeListener listener : listeners) {
