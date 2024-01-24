@@ -21,7 +21,6 @@ import java.util.Map;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
-import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.util.StringUtils;
 
@@ -296,6 +295,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     public String getLineHeight() {
         return getStyleAttribute(Definition.LINE_HEIGHT, true);
     }
+
     /**
      * @return the style attribute {@code margin}
      */
@@ -348,7 +348,6 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     /**
      * @return the style attribute {@code outline}
      */
-    @JsxGetter
     public String getOutline() {
         return getStyleAttribute(Definition.OUTLINE, true);
     }
@@ -450,7 +449,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     public String getWidows() {
         return getStyleAttribute(Definition.WIDOWS, true);
     }
-//
+
 //    /**
 //     * @return the style attribute {@code width}
 //     */
