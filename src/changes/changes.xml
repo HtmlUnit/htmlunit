@@ -8,6 +8,20 @@
 
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: Correct implementation of Math.atanh.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: BigIntLiteral.toSource includes suffix.
+            </action>
+            <action type="add" dev="rbri">
+                core-js: Limit the length of the string to be used for source code indentation to avoid
+                protect memory from overflow.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: When an Array object's prototype is changed, disable the "dense only" optimization
+                to ensure that prototype properties are considered by standard operations.
+            </action>
             <action type="update" dev="rbri" issue="#710">"
                 Detection and reporting of obsolete mime types for javascript files has changed to be in
                 sync with the spec and the current practice.
