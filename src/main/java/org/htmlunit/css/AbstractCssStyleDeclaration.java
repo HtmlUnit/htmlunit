@@ -21,6 +21,7 @@ import java.util.Map;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
+import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.util.StringUtils;
 
@@ -273,5 +274,194 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         else {
             throw new IllegalStateException("Unsupported definition: " + name);
         }
+    }
+
+    /**
+     * @return the style attribute {@code left}
+     */
+    public String getLeft() {
+        return getStyleAttribute(Definition.LEFT, true);
+    }
+
+    /**
+     * @return the style attribute {@code letterSpacing}
+     */
+    public String getLetterSpacing() {
+        return getStyleAttribute(Definition.LETTER_SPACING, true);
+    }
+
+    /**
+     * @return the style attribute {@code lineHeight}
+     */
+    public String getLineHeight() {
+        return getStyleAttribute(Definition.LINE_HEIGHT, true);
+    }
+    /**
+     * @return the style attribute {@code margin}
+     */
+    public String getMargin() {
+        return getStyleAttribute(Definition.MARGIN, true);
+    }
+
+    /**
+     * @return the style attribute {@code maxHeight}
+     */
+    public String getMaxHeight() {
+        return getStyleAttribute(Definition.MAX_HEIGHT, true);
+    }
+
+    /**
+     * @return the style attribute {@code maxWidth}
+     */
+    public String getMaxWidth() {
+        return getStyleAttribute(Definition.MAX_WIDTH, true);
+    }
+
+    /**
+     * @return the style attribute {@code minHeight}
+     */
+    public String getMinHeight() {
+        return getStyleAttribute(Definition.MIN_HEIGHT, true);
+    }
+
+    /**
+     * @return the style attribute {@code minWidth}
+     */
+    public String getMinWidth() {
+        return getStyleAttribute(Definition.MIN_WIDTH, true);
+    }
+
+    /**
+     * @return the style attribute {@code msImeAlign}
+     */
+    public String getMsImeAlign() {
+        return getStyleAttribute(Definition.MS_IME_ALIGN, true);
+    }
+
+    /**
+     * @return the style attribute {@code orphans}
+     */
+    public String getOrphans() {
+        return getStyleAttribute(Definition.ORPHANS, true);
+    }
+
+    /**
+     * @return the style attribute {@code outline}
+     */
+    @JsxGetter
+    public String getOutline() {
+        return getStyleAttribute(Definition.OUTLINE, true);
+    }
+
+    /**
+     * @return the style attribute {@code outlineWidth}
+     */
+    public String getOutlineWidth() {
+        return getStyleAttribute(Definition.OUTLINE_WIDTH, true);
+    }
+
+    /**
+     * @return the style attribute {@code padding}
+     */
+    public String getPadding() {
+        return getStyleAttribute(Definition.PADDING, true);
+    }
+
+    /**
+     * @return the style attribute {@code paddingBottom}
+     */
+    public String getPaddingBottom() {
+        return getStyleAttribute(Definition.PADDING_BOTTOM, Definition.PADDING);
+    }
+
+    /**
+     * @return the style attribute {@code paddingLeft}
+     */
+    public String getPaddingLeft() {
+        return getStyleAttribute(Definition.PADDING_LEFT, Definition.PADDING);
+    }
+
+    /**
+     * @return the style attribute {@code paddingRight}
+     */
+    public String getPaddingRight() {
+        return getStyleAttribute(Definition.PADDING_RIGHT, Definition.PADDING);
+    }
+
+    /**
+     * @return the style attribute {@code paddingTop}
+     */
+    public String getPaddingTop() {
+        return getStyleAttribute(Definition.PADDING_TOP, Definition.PADDING);
+    }
+
+    /**
+     * @return the style attribute {@code position}
+     */
+    public String getPosition() {
+        return getStyleAttribute(Definition.POSITION, true);
+    }
+
+    /**
+     * @return the style attribute {@code right}
+     */
+    public String getRight() {
+        return getStyleAttribute(Definition.RIGHT, true);
+    }
+
+    /**
+     * @return the style attribute {@code rubyAlign}
+     */
+    public String getRubyAlign() {
+        return getStyleAttribute(Definition.RUBY_ALIGN, true);
+    }
+
+    /**
+     * @return the style attribute {@code size}
+     */
+    public String getSize() {
+        return getStyleAttribute(Definition.SIZE, true);
+    }
+
+    /**
+     * @return the style attribute {@code textIndent}
+     */
+    public String getTextIndent() {
+        return getStyleAttribute(Definition.TEXT_INDENT, true);
+    }
+
+    /**
+     * @return the style attribute {@code top}
+     */
+    public String getTop() {
+        return getStyleAttribute(Definition.TOP, true);
+    }
+
+    /**
+     * @return the style attribute {@code verticalAlign}
+     */
+    public String getVerticalAlign() {
+        return getStyleAttribute(Definition.VERTICAL_ALIGN, true);
+    }
+
+    /**
+     * @return the style attribute {@code widows}
+     */
+    public String getWidows() {
+        return getStyleAttribute(Definition.WIDOWS, true);
+    }
+//
+//    /**
+//     * @return the style attribute {@code width}
+//     */
+//    public String getWidth() {
+//        return getStyleAttribute(Definition.WIDTH, true);
+//    }
+
+    /**
+     * @return the style attribute {@code wordSpacing}
+     */
+    public String getWordSpacing() {
+        return getStyleAttribute(Definition.WORD_SPACING, true);
     }
 }

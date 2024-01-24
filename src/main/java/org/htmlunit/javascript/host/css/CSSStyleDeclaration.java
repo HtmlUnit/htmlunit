@@ -1116,7 +1116,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getLineHeight() {
-        return getStyleAttribute(LINE_HEIGHT);
+        return styleDeclaration_.getLineHeight();
     }
 
     /**
@@ -1226,7 +1226,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getLeft() {
-        return getStyleAttribute(LEFT);
+        return styleDeclaration_.getLeft();
     }
 
     /**
@@ -1272,7 +1272,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getLetterSpacing() {
-        return getStyleAttribute(LETTER_SPACING);
+        return styleDeclaration_.getLetterSpacing();
     }
 
     /**
@@ -1291,7 +1291,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMargin() {
-        return getStyleAttribute(MARGIN);
+        return styleDeclaration_.getMargin();
     }
 
     /**
@@ -1381,7 +1381,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMaxHeight() {
-        return getStyleAttribute(MAX_HEIGHT);
+        return styleDeclaration_.getMaxHeight();
     }
 
     /**
@@ -1399,7 +1399,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMaxWidth() {
-        return getStyleAttribute(MAX_WIDTH);
+        return styleDeclaration_.getMaxWidth();
     }
 
     /**
@@ -1417,7 +1417,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMinHeight() {
-        return getStyleAttribute(MIN_HEIGHT);
+        return styleDeclaration_.getMinHeight();
     }
 
     /**
@@ -1592,7 +1592,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public String getMsImeAlign() {
-        return getStyleAttribute(Definition.MS_IME_ALIGN);
+        return styleDeclaration_.getMsImeAlign();
     }
 
     /**
@@ -1673,7 +1673,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getOutline() {
-        return getStyleAttribute(OUTLINE);
+        return styleDeclaration_.getOutline();
     }
 
     /**
@@ -1691,7 +1691,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getOutlineWidth() {
-        return getStyleAttribute(OUTLINE_WIDTH);
+        return styleDeclaration_.getOutlineWidth();
     }
 
     /**
@@ -1711,7 +1711,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPadding() {
-        return getStyleAttribute(PADDING);
+        return styleDeclaration_.getPadding();
     }
 
     /**
@@ -1729,7 +1729,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingBottom() {
-        return getCssStyleDeclaration().getStyleAttribute(PADDING_BOTTOM, PADDING);
+        return styleDeclaration_.getPaddingBottom();
     }
 
     /**
@@ -1747,7 +1747,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingLeft() {
-        return getCssStyleDeclaration().getStyleAttribute(PADDING_LEFT, PADDING);
+        return styleDeclaration_.getPaddingLeft();
     }
 
     /**
@@ -1765,7 +1765,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingRight() {
-        return getCssStyleDeclaration().getStyleAttribute(PADDING_RIGHT, PADDING);
+        return styleDeclaration_.getPaddingRight();
     }
 
     /**
@@ -1783,7 +1783,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingTop() {
-        return getCssStyleDeclaration().getStyleAttribute(PADDING_TOP, PADDING);
+        return styleDeclaration_.getPaddingTop();
     }
 
     /**
@@ -2040,7 +2040,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getRight() {
-        return getStyleAttribute(RIGHT);
+        return styleDeclaration_.getRight();
     }
 
     /**
@@ -2058,7 +2058,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter({IE, FF, FF_ESR})
     public String getRubyAlign() {
-        return getStyleAttribute(RUBY_ALIGN);
+        return styleDeclaration_.getRubyAlign();
     }
 
     /**
@@ -2076,7 +2076,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter({CHROME, EDGE})
     public String getSize() {
-        return getStyleAttribute(SIZE);
+        return styleDeclaration_.getSize();
     }
 
     /**
@@ -2184,7 +2184,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getTextIndent() {
-        return getStyleAttribute(TEXT_INDENT);
+        return styleDeclaration_.getTextIndent();
     }
 
     /**
@@ -2202,7 +2202,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getTop() {
-        return getStyleAttribute(TOP);
+        return styleDeclaration_.getTop();
     }
 
     /**
@@ -2220,7 +2220,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getVerticalAlign() {
-        return getStyleAttribute(VERTICAL_ALIGN);
+        return styleDeclaration_.getVerticalAlign();
     }
 
     /**
@@ -2240,7 +2240,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getWidth() {
-        return getStyleAttribute(WIDTH);
+        return styleDeclaration_.getStyleAttribute(Definition.WIDTH, true);
     }
 
     /**
@@ -2258,7 +2258,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public String getWidows() {
-        return getStyleAttribute(WIDOWS);
+        return styleDeclaration_.getWidows();
     }
 
     /**
@@ -2286,7 +2286,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public String getOrphans() {
-        return getStyleAttribute(ORPHANS);
+        return styleDeclaration_.getOrphans();
     }
 
     /**
@@ -2314,7 +2314,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPosition() {
-        return getStyleAttribute(POSITION);
+        return styleDeclaration_.getPosition();
     }
 
     /**
@@ -2336,7 +2336,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getWordSpacing() {
-        return getStyleAttribute(WORD_SPACING);
+        return styleDeclaration_.getWordSpacing();
     }
 
     /**
