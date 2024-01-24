@@ -106,6 +106,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -293,6 +294,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the element to which this style belongs
      */
     protected Element getElement() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getElementOrNull();
     }
 
@@ -300,6 +304,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the dom element to which this style belongs
      */
     protected DomElement getDomElement() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getDomElementOrNull();
     }
 
@@ -362,6 +369,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return a sorted map containing style elements, keyed on style element name
      */
     private Map<String, StyleElement> getStyleMap() {
+        if (styleDeclaration_ == null) {
+            return Collections.emptyMap();
+        }
         return styleDeclaration_.getStyleMap();
     }
 
@@ -1506,6 +1516,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the value
      */
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
+        if (styleDeclaration_ == null) {
+            return ""; // prototype
+        }
         return styleDeclaration_.getStyleAttribute(definition, getDefaultValueIfEmpty);
     }
 
@@ -2709,12 +2722,12 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @Override
     public String toString() {
-        if (getDomElement() == null) {
+        final DomElement domElement = getDomElement();
+        if (domElement == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
 
-        final String style = getDomElement().getAttributeDirect("style");
-        return "CSSStyleDeclaration for '" + style + "'";
+        return "CSSStyleDeclaration for '" + domElement + "'";
     }
 
     /**

@@ -2022,4 +2022,27 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         assertFalse(webDriver.findElement(By.id("di")).isDisplayed());
     }
+
+    /**
+     * Test for #1300.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "[object CSSStyleDeclaration]")
+    public void brokenExternalCSS() throws Exception {
+        final String html = "<html><head>\n"
+            + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.body.currentStyle);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "body { font-weight: 900\\9; }");
+        loadPageVerifyTitle2(html);
+    }
 }

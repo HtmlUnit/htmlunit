@@ -34,6 +34,7 @@ import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
 import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
@@ -257,6 +258,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("CSSStyleDeclaration for 'HtmlBody[<body>]'")
     public void brokenExternalCSS() throws Exception {
         final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";
@@ -267,7 +269,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final NodeList list = htmlPage.getElementsByTagName("body");
         final HtmlElement element = (HtmlElement) list.item(0);
         final ComputedCSSStyleDeclaration style = ((HTMLElement) element.getScriptableObject()).getCurrentStyle();
-        assertEquals("CSSStyleDeclaration for 'null'", style.toString());
+        assertEquals(getExpectedAlerts()[0], style.toString());
     }
 
 }
