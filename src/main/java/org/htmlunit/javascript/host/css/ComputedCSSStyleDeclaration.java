@@ -29,6 +29,7 @@ import static org.htmlunit.css.CssStyleSheet.INHERIT;
 import static org.htmlunit.css.CssStyleSheet.INLINE;
 import static org.htmlunit.css.CssStyleSheet.NONE;
 import static org.htmlunit.css.CssStyleSheet.RELATIVE;
+import static org.htmlunit.css.CssStyleSheet.SCROLL;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_COLOR;
@@ -1173,12 +1174,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final String overflow = getStyleAttribute(OVERFLOW, true);
         if (horizontal) {
             // TODO: inherit, overflow-x
-            scrollable = (element instanceof HtmlBody || "scroll".equals(overflow) || AUTO.equals(overflow))
+            scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
                 && (ignoreSize || getContentWidth() > getCalculatedWidth());
         }
         else {
             // TODO: inherit, overflow-y
-            scrollable = (element instanceof HtmlBody || "scroll".equals(overflow) || AUTO.equals(overflow))
+            scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
                 && (ignoreSize || getContentHeight() > getEmptyHeight());
         }
         return scrollable;

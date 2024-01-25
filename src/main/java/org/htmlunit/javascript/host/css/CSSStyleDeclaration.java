@@ -32,6 +32,7 @@ import static org.htmlunit.css.CssStyleSheet.INITIAL;
 import static org.htmlunit.css.CssStyleSheet.NONE;
 import static org.htmlunit.css.CssStyleSheet.RELATIVE;
 import static org.htmlunit.css.CssStyleSheet.REPEAT;
+import static org.htmlunit.css.CssStyleSheet.SCROLL;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
 import static org.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND;
@@ -409,7 +410,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                             && getClass() == CSSStyleDeclaration.class) {
                         return INITIAL;
                     }
-                    return "scroll"; // default if shorthand is used
+                    return SCROLL; // default if shorthand is used
                 }
                 return value;
             }
@@ -2630,8 +2631,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the string of the attachment if found, null otherwise
      */
     private static String findAttachment(final String text) {
-        if (text.contains("scroll")) {
-            return "scroll";
+        if (text.contains(SCROLL)) {
+            return SCROLL;
         }
         if (text.contains(FIXED)) {
             return FIXED;

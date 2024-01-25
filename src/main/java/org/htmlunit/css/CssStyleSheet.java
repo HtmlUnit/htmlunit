@@ -150,6 +150,8 @@ public class CssStyleSheet implements Serializable {
     public static final String BLOCK = "block";
     /** "inline". */
     public static final String INLINE = "inline";
+    /** "scroll". */
+    public static final String SCROLL = "scroll";
 
     private static final Log LOG = LogFactory.getLog(CssStyleSheet.class);
 
