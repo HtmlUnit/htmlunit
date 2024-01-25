@@ -278,6 +278,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param name the attribute name (delimiter-separated, not camel-cased)
      */
     private String removeStyleAttribute(final String name) {
+        if (styleDeclaration_ == null) {
+            return null;
+        }
         return styleDeclaration_.removeStyleAttribute(name);
     }
 

@@ -233,7 +233,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
         final BrowserVersion browserVersion = getDomElementOrNull().getPage().getWebClient().getBrowserVersion();
-        final boolean feature = browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
+        final boolean feature = hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
         final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
 
         // to make the fuzzer happy the recursion was removed
@@ -283,17 +283,17 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     private String getStyleAttribute(final Definition definition, final String toReturnIfEmptyOrDefault,
             final String defaultValue) {
         final DomElement domElement = getDomElementOrNull();
-        final BrowserVersion browserVersion = domElement.getPage().getWebClient().getBrowserVersion();
 
         if (!domElement.isAttachedToPage()
-                && browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+                && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
             return ComputedCssStyleDeclaration.EMPTY_FINAL;
         }
 
-        final boolean feature = browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
+        final boolean feature = hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
         final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
 
         // to make the fuzzer happy the recursion was removed
+        final BrowserVersion browserVersion = domElement.getPage().getWebClient().getBrowserVersion();
         final ComputedCssStyleDeclaration[] queue = new ComputedCssStyleDeclaration[] {this};
         String value = null;
         while (queue[0] != null) {
@@ -455,8 +455,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public String getDisplay() {
         final DomElement domElem = getDomElementOrNull();
         if (!domElem.isAttachedToPage()) {
-            final BrowserVersion browserVersion = domElem.getPage().getWebClient().getBrowserVersion();
-            if (browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+            if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
                 return "";
             }
         }
@@ -480,8 +479,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public String getFont() {
         final DomElement domElem = getDomElementOrNull();
         if (domElem.isAttachedToPage()) {
-            final BrowserVersion browserVersion = domElem.getPage().getWebClient().getBrowserVersion();
-            if (browserVersion.hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)) {
+            if (hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)) {
                 return getStyleAttribute(FONT, true);
             }
         }
@@ -511,6 +509,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * @return the width
      */
+    @Override
     public String getWidth() {
         if (NONE.equals(getDisplay())) {
             return AUTO;
@@ -518,8 +517,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         final DomElement domElem = getDomElementOrNull();
         if (!domElem.isAttachedToPage()) {
-            final BrowserVersion browserVersion = domElem.getPage().getWebClient().getBrowserVersion();
-            if (browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+            if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
                 return "";
             }
             if (getStyleAttribute(WIDTH, true).isEmpty()) {

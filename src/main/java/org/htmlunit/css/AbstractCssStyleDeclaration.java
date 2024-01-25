@@ -1023,12 +1023,12 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         return getStyleAttribute(Definition.WIDOWS, true);
     }
 
-//    /**
-//     * @return the style attribute {@code width}
-//     */
-//    public String getWidth() {
-//        return getStyleAttribute(Definition.WIDTH, true);
-//    }
+    /**
+     * @return the style attribute {@code width}
+     */
+    public String getWidth() {
+        return getStyleAttribute(Definition.WIDTH, true);
+    }
 
     /**
      * @return the style attribute {@code wordSpacing}
