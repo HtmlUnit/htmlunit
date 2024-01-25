@@ -1242,6 +1242,37 @@ public class OrderedFastHashMapTest {
     }
 
     /**
+     * Try to test early growth and potential problems when growing. Based on
+     * infinite loop observations.
+     */
+    @Test
+    public void growFromSmall_InfiniteLoopIsssue() {
+        for (int initSize = 0; initSize < 100; initSize++) {
+//            System.out.println("Initial Size: " + initSize);
+            final OrderedFastHashMap<Integer, Integer> m = new OrderedFastHashMap<>(initSize);
+
+            for (int i = 0; i < 300; i++) {
+//                System.out.println(" Iteration: " + i);
+
+                // add one
+                m.put(i, i);
+
+                // ask for all
+                for (int j = 0; j <= i; j++) {
+//                    System.out.println("  Get: " + j);
+                    assertEquals(Integer.valueOf(j), m.get(j));
+                }
+
+                // ask for something else
+                for (int j = -1; j >= -100; j--) {
+//                    System.out.println("  Get Null: " + j);
+                    assertNull(m.get(j));
+                }
+            }
+        }
+    }
+
+    /**
      * Try to hit all slots with bad hashcodes
      */
     @Test

@@ -139,8 +139,15 @@ public class OrderedFastHashMap<K, V> implements Map<K, V> {
         }
 
         // we have not found it, search longer
+        final int originalPtr = ptr;
         while (true) {
             ptr = (ptr + 2) & (length - 1); // that's next index
+
+            // if we searched the entire array, we can stop
+            if (originalPtr == ptr) {
+                return null;
+            }
+
             k = this.mapData_[ptr];
 
             if (k == FREE_KEY_) {
@@ -166,7 +173,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V> {
      */
     private V put(final K key, final V value, final Position listPosition) {
         if (mapSize_ >= mapThreshold_) {
-            rehash(this.mapData_.length == 0 ? 2 : this.mapData_.length << 1);
+            rehash(this.mapData_.length == 0 ? 4 : this.mapData_.length << 1);
         }
 
         int ptr = getStartIndex(key) << 1;
@@ -915,7 +922,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V> {
                 mapData_ != null ? Arrays.asList(mapData_).subList(0, Math.min(mapData_.length, maxLen)) : null,
                         FILLFACTOR_, mapThreshold_, mapSize_,
                         orderedList_ != null
-                                ? Arrays.toString(Arrays.copyOf(orderedList_, Math.min(orderedList_.length, maxLen)))
+                        ? Arrays.toString(Arrays.copyOf(orderedList_, Math.min(orderedList_.length, maxLen)))
                                 : null,
                                 orderedListSize_);
     }
