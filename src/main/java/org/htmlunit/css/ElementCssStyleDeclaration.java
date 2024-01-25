@@ -17,6 +17,7 @@ package org.htmlunit.css;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
@@ -197,5 +198,13 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public DomElement getDomElementOrNull() {
         return domElement_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasFeature(final BrowserVersionFeatures property) {
+        return getDomElementOrNull().hasFeature(property);
     }
 }

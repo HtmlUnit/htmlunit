@@ -75,6 +75,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
@@ -741,5 +742,21 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public void setDefaultLocalStyleAttribute(final String name, final String newValue) {
         final StyleElement element = new StyleElement(name, newValue, "", SelectorSpecificity.DEFAULT_STYLE_ATTRIBUTE);
         localModifications_.put(name, element);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasFeature(final BrowserVersionFeatures property) {
+        return getDomElementOrNull().hasFeature(property);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isComputed() {
+        return true;
     }
 }

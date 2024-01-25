@@ -14,13 +14,50 @@
  */
 package org.htmlunit.css;
 
+import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
+import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
+import static org.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
+import static org.htmlunit.css.CssStyleSheet.FIXED;
+import static org.htmlunit.css.CssStyleSheet.INITIAL;
+import static org.htmlunit.css.CssStyleSheet.NONE;
+import static org.htmlunit.css.CssStyleSheet.REPEAT;
+import static org.htmlunit.css.CssStyleSheet.SCROLL;
+import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND;
+import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
+import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_COLOR;
+import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
+import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_POSITION;
+import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_WIDTH;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_COLOR;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_STYLE;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_WIDTH;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_COLOR;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_STYLE;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_WIDTH;
+import static org.htmlunit.css.StyleAttributes.Definition.BORDER_WIDTH;
+
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
+import org.htmlunit.html.impl.Color;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.util.StringUtils;
 
@@ -40,6 +77,17 @@ import org.htmlunit.util.StringUtils;
  * @author cd alexndr
  */
 public abstract class AbstractCssStyleDeclaration implements Serializable {
+
+    private static final Pattern URL_PATTERN =
+            Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
+
+    private static final Pattern POSITION_PATTERN =
+            Pattern.compile("(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex))\\s*"
+                    + "(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
+    private static final Pattern POSITION_PATTERN2 =
+            Pattern.compile("(left|right|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
+    private static final Pattern POSITION_PATTERN3 =
+            Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
 
     /**
      * Returns the priority of the named style attribute, or an empty string if it is not found.
@@ -71,6 +119,13 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the value
      */
     public abstract String getStyleAttribute(Definition definition, boolean getDefaultValueIfEmpty);
+
+    /**
+     * Indicates if the browser this is associated with has the feature.
+     * @param property the property name
+     * @return {@code false} if this browser doesn't have this feature
+     */
+    public abstract boolean hasFeature(BrowserVersionFeatures property);
 
     /**
      * <p>Returns the value of one of the two named style attributes. If both attributes exist,
@@ -230,6 +285,13 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public abstract DomElement getDomElementOrNull();
 
+    /**
+     * @return true if this is a computed style declaration
+     */
+    public boolean isComputed() {
+        return false;
+    }
+
     protected String getStyleAttribute(final Definition name, final String value) {
         final String[] values = StringUtils.splitAtJavaWhitespace(value);
         if (name.name().contains("TOP")) {
@@ -273,6 +335,421 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         else {
             throw new IllegalStateException("Unsupported definition: " + name);
         }
+    }
+
+    /**
+     * Gets the {@code backgroundAttachment} style attribute.
+     * @return the style attribute
+     */
+    public String getBackgroundAttachment() {
+        String value = getStyleAttribute(BACKGROUND_ATTACHMENT, false);
+        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+            final String bg = getStyleAttribute(BACKGROUND, true);
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
+                value = findAttachment(bg);
+                if (value == null) {
+                    if (hasFeature(CSS_BACKGROUND_INITIAL) && !isComputed()) {
+                        return INITIAL;
+                    }
+                    return SCROLL; // default if shorthand is used
+                }
+                return value;
+            }
+            return "";
+        }
+
+        return value;
+    }
+
+    /**
+     * Gets the {@code backgroundColor} style attribute.
+     * @return the style attribute
+     */
+    public String getBackgroundColor() {
+        String value = getStyleAttribute(BACKGROUND_COLOR, false);
+        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+            final String bg = getStyleAttribute(BACKGROUND, false);
+            if (org.apache.commons.lang3.StringUtils.isBlank(bg)) {
+                return "";
+            }
+            value = findColor(bg);
+            if (value == null) {
+                if (hasFeature(CSS_BACKGROUND_INITIAL)) {
+                    if (!isComputed()) {
+                        return INITIAL;
+                    }
+                    return "rgba(0, 0, 0, 0)";
+                }
+                if (hasFeature(CSS_BACKGROUND_RGBA)) {
+                    return "rgba(0, 0, 0, 0)";
+                }
+                return "transparent"; // default if shorthand is used
+            }
+            return value;
+        }
+        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+            return "";
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code backgroundImage} style attribute.
+     * @return the style attribute
+     */
+    public String getBackgroundImage() {
+        String value = getStyleAttribute(BACKGROUND_IMAGE, false);
+        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+            final String bg = getStyleAttribute(BACKGROUND, false);
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
+                value = findImageUrl(bg);
+                final boolean backgroundInitial = hasFeature(CSS_BACKGROUND_INITIAL);
+                if (value == null) {
+                    return backgroundInitial && !isComputed() ? INITIAL : NONE;
+                }
+                if (isComputed()) {
+                    try {
+                        value = value.substring(5, value.length() - 2);
+                        return "url(\"" + getDomElementOrNull().getHtmlPageOrNull()
+                            .getFullyQualifiedUrl(value) + "\")";
+                    }
+                    catch (final Exception e) {
+                        // ignore
+                    }
+                }
+                return value;
+            }
+            return "";
+        }
+
+        return value;
+    }
+
+    /**
+     * Gets the {@code backgroundPosition} style attribute.
+     * @return the style attribute
+     */
+    public String getBackgroundPosition() {
+        String value = getStyleAttribute(BACKGROUND_POSITION, false);
+        if (value == null) {
+            return null;
+        }
+        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+            final String bg = getStyleAttribute(BACKGROUND, false);
+            if (bg == null) {
+                return null;
+            }
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
+                value = findPosition(bg);
+                final boolean isInitial = hasFeature(CSS_BACKGROUND_INITIAL);
+                if (value == null) {
+                    if (isInitial) {
+                        return isComputed() ? "" : INITIAL;
+                    }
+                    return "0% 0%";
+                }
+                if (hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
+                    final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
+                    if ("center".equals(values[0])) {
+                        values[0] = "";
+                    }
+                    if ("center".equals(values[1])) {
+                        values[1] = "";
+                    }
+                    if (!isComputed() || value.contains("top")) {
+                        return (values[0] + ' ' + values[1]).trim();
+                    }
+                }
+                if (isComputed()) {
+                    final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
+                    switch (values[0]) {
+                        case "left":
+                            values[0] = "0%";
+                            break;
+
+                        case "center":
+                            values[0] = "50%";
+                            break;
+
+                        case "right":
+                            values[0] = "100%";
+                            break;
+
+                        default:
+                    }
+                    switch (values[1]) {
+                        case "top":
+                            values[1] = "0%";
+                            break;
+
+                        case "center":
+                            values[1] = "50%";
+                            break;
+
+                        case "bottom":
+                            values[1] = "100%";
+                            break;
+
+                        default:
+                    }
+                    value = values[0] + ' ' + values[1];
+                }
+                return value;
+            }
+            return "";
+        }
+
+        return value;
+    }
+
+    /**
+     * Gets the {@code backgroundRepeat} style attribute.
+     * @return the style attribute
+     */
+    public String getBackgroundRepeat() {
+        String value = getStyleAttribute(BACKGROUND_REPEAT, false);
+        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+            final String bg = getStyleAttribute(BACKGROUND, false);
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
+                value = findRepeat(bg);
+                if (value == null) {
+                    if (hasFeature(CSS_BACKGROUND_INITIAL) && !isComputed()) {
+                        return INITIAL;
+                    }
+                    return REPEAT; // default if shorthand is used
+                }
+                return value;
+            }
+            return "";
+        }
+
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderBottomColor} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderBottomColor() {
+        String value = getStyleAttribute(BORDER_BOTTOM_COLOR, false);
+        if (value.isEmpty()) {
+            value = findColor(getStyleAttribute(BORDER_BOTTOM, false));
+            if (value == null) {
+                value = findColor(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderBottomStyle} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderBottomStyle() {
+        String value = getStyleAttribute(BORDER_BOTTOM_STYLE, false);
+        if (value.isEmpty()) {
+            value = findBorderStyle(getStyleAttribute(BORDER_BOTTOM, false));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderBottomWidth} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderBottomWidth() {
+        return getBorderWidth(BORDER_BOTTOM_WIDTH, BORDER_BOTTOM);
+    }
+
+    /**
+     * Gets the {@code borderLeftColor} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderLeftColor() {
+        String value = getStyleAttribute(BORDER_LEFT_COLOR, false);
+        if (value.isEmpty()) {
+            value = findColor(getStyleAttribute(BORDER_LEFT, false));
+            if (value == null) {
+                value = findColor(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderLeftStyle} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderLeftStyle() {
+        String value = getStyleAttribute(BORDER_LEFT_STYLE, false);
+        if (value.isEmpty()) {
+            value = findBorderStyle(getStyleAttribute(BORDER_LEFT, false));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderLeftWidth} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderLeftWidth() {
+        return getBorderWidth(BORDER_LEFT_WIDTH, BORDER_LEFT);
+    }
+
+    /**
+     * Gets the border width for the specified side
+     * @param borderSideWidth the border side width Definition
+     * @param borderSide the border side Definition
+     * @return the width, "" if not defined
+     */
+    private String getBorderWidth(final Definition borderSideWidth, final Definition borderSide) {
+        String value = getStyleAttribute(borderSideWidth, false);
+        if (value.isEmpty()) {
+            value = findBorderWidth(getStyleAttribute(borderSide, false));
+            if (value == null) {
+                final String borderWidth = getStyleAttribute(BORDER_WIDTH, false);
+                if (!org.apache.commons.lang3.StringUtils.isEmpty(borderWidth)) {
+                    final String[] values = org.htmlunit.util.StringUtils.splitAtJavaWhitespace(borderWidth);
+                    int index = values.length;
+                    if (borderSideWidth.name().contains("TOP")) {
+                        index = 0;
+                    }
+                    else if (borderSideWidth.name().contains("RIGHT")) {
+                        index = 1;
+                    }
+                    else if (borderSideWidth.name().contains("BOTTOM")) {
+                        index = 2;
+                    }
+                    else if (borderSideWidth.name().contains("LEFT")) {
+                        index = 3;
+                    }
+                    if (index < values.length) {
+                        value = values[index];
+                    }
+                }
+            }
+            if (value == null) {
+                value = findBorderWidth(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderRightColor} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderRightColor() {
+        String value = getStyleAttribute(BORDER_RIGHT_COLOR, false);
+        if (value.isEmpty()) {
+            value = findColor(getStyleAttribute(BORDER_RIGHT, false));
+            if (value == null) {
+                value = findColor(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderRightStyle} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderRightStyle() {
+        String value = getStyleAttribute(BORDER_RIGHT_STYLE, false);
+        if (value.isEmpty()) {
+            value = findBorderStyle(getStyleAttribute(BORDER_RIGHT, false));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderRightWidth} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderRightWidth() {
+        return getBorderWidth(BORDER_RIGHT_WIDTH, BORDER_RIGHT);
+    }
+
+    /**
+     * Gets the {@code borderTop} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderTop() {
+        return getStyleAttribute(BORDER_TOP, true);
+    }
+
+    /**
+     * Gets the {@code borderTopColor} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderTopColor() {
+        String value = getStyleAttribute(BORDER_TOP_COLOR, false);
+        if (value.isEmpty()) {
+            value = findColor(getStyleAttribute(BORDER_TOP, false));
+            if (value == null) {
+                value = findColor(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderTopStyle} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderTopStyle() {
+        String value = getStyleAttribute(BORDER_TOP_STYLE, false);
+        if (value.isEmpty()) {
+            value = findBorderStyle(getStyleAttribute(BORDER_TOP, false));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute(BORDER, false));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Gets the {@code borderTopWidth} style attribute.
+     * @return the style attribute
+     */
+    public String getBorderTopWidth() {
+        return getBorderWidth(BORDER_TOP_WIDTH, BORDER_TOP);
     }
 
     /**
@@ -462,5 +939,178 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getWordSpacing() {
         return getStyleAttribute(Definition.WORD_SPACING, true);
+    }
+
+    /**
+     * Searches for any attachment notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the attachment if found, null otherwise
+     */
+    private static String findAttachment(final String text) {
+        if (text.contains(SCROLL)) {
+            return SCROLL;
+        }
+        if (text.contains(FIXED)) {
+            return FIXED;
+        }
+        return null;
+    }
+
+    /**
+     * Searches for any color notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the color if found, null otherwise
+     */
+    private static String findColor(final String text) {
+        Color tmpColor = org.htmlunit.util.StringUtils.findColorRGB(text);
+        if (tmpColor != null) {
+            return org.htmlunit.util.StringUtils.formatColor(tmpColor);
+        }
+
+        final String[] tokens = org.htmlunit.util.StringUtils.splitAtBlank(text);
+        for (final String token : tokens) {
+            if (CssColors.isColorKeyword(token)) {
+                return token;
+            }
+
+            tmpColor = org.htmlunit.util.StringUtils.asColorHexadecimal(token);
+            if (tmpColor != null) {
+                return org.htmlunit.util.StringUtils.formatColor(tmpColor);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for any URL notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the URL if found, null otherwise
+     */
+    private static String findImageUrl(final String text) {
+        final Matcher m = URL_PATTERN.matcher(text);
+        if (m.find()) {
+            return "url(\"" + m.group(1) + "\")";
+        }
+        return null;
+    }
+
+    /**
+     * Searches for any position notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the position if found, null otherwise
+     */
+    private static String findPosition(final String text) {
+        Matcher m = POSITION_PATTERN.matcher(text);
+        if (m.find()) {
+            return m.group(1) + " " + m.group(3);
+        }
+        m = POSITION_PATTERN2.matcher(text);
+        if (m.find()) {
+            return m.group(1) + " " + m.group(2);
+        }
+        m = POSITION_PATTERN3.matcher(text);
+        if (m.find()) {
+            return m.group(2) + " " + m.group(1);
+        }
+        return null;
+    }
+
+    /**
+     * Searches for any repeat notation in the specified text.
+     * @param text the string to search in
+     * @return the string of the repeat if found, null otherwise
+     */
+    private static String findRepeat(final String text) {
+        if (text.contains("repeat-x")) {
+            return "repeat-x";
+        }
+        if (text.contains("repeat-y")) {
+            return "repeat-y";
+        }
+        if (text.contains("no-repeat")) {
+            return "no-repeat";
+        }
+        if (text.contains(REPEAT)) {
+            return REPEAT;
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a border style in the specified text.
+     * @param text the string to search in
+     * @return the border style if found, null otherwise
+     */
+    private static String findBorderStyle(final String text) {
+        for (final String token : org.htmlunit.util.StringUtils.splitAtBlank(text)) {
+            if (isBorderStyle(token)) {
+                return token;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns if the specified token is a border style.
+     * @param token the token to check
+     * @return whether the token is a border style or not
+     */
+    private static boolean isBorderStyle(final String token) {
+        return NONE.equalsIgnoreCase(token) || "hidden".equalsIgnoreCase(token)
+            || "dotted".equalsIgnoreCase(token) || "dashed".equalsIgnoreCase(token)
+            || "solid".equalsIgnoreCase(token) || "double".equalsIgnoreCase(token)
+            || "groove".equalsIgnoreCase(token) || "ridge".equalsIgnoreCase(token)
+            || "inset".equalsIgnoreCase(token) || "outset".equalsIgnoreCase(token);
+    }
+
+    /**
+     * Searches for a border width in the specified text.
+     * @param text the string to search in
+     * @return the border width if found, null otherwise
+     */
+    private static String findBorderWidth(final String text) {
+        for (final String token : org.htmlunit.util.StringUtils.splitAtBlank(text)) {
+            if (isBorderWidth(token)) {
+                return token;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns if the specified token is a border width.
+     * @param token the token to check
+     * @return whether the token is a border width or not
+     */
+    private static boolean isBorderWidth(final String token) {
+        return "thin".equalsIgnoreCase(token) || "medium".equalsIgnoreCase(token)
+            || "thick".equalsIgnoreCase(token) || isLength(token);
+    }
+
+    /**
+     * Returns if the specified token is a length.
+     * @param token the token to check
+     * @return whether the token is a length or not
+     */
+    static boolean isLength(String token) {
+        if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")
+            || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")
+            || token.endsWith("%")) {
+
+            if (token.endsWith("%")) {
+                token = token.substring(0, token.length() - 1);
+            }
+            else {
+                token = token.substring(0, token.length() - 2);
+            }
+            try {
+                Double.parseDouble(token);
+                return true;
+            }
+            catch (final NumberFormatException e) {
+                // Ignore.
+            }
+        }
+        return false;
     }
 }

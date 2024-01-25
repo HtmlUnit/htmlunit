@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.css;
 
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
-import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
 import static org.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED;
 import static org.htmlunit.BrowserVersionFeatures.CSS_VERTICAL_ALIGN_SUPPORTS_AUTO;
@@ -29,28 +28,20 @@ import static org.htmlunit.css.CssStyleSheet.AUTO;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
 import static org.htmlunit.css.CssStyleSheet.INHERIT;
 import static org.htmlunit.css.CssStyleSheet.INITIAL;
-import static org.htmlunit.css.CssStyleSheet.NONE;
 import static org.htmlunit.css.CssStyleSheet.RELATIVE;
-import static org.htmlunit.css.CssStyleSheet.REPEAT;
-import static org.htmlunit.css.CssStyleSheet.SCROLL;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
 import static org.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_POSITION;
 import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_STYLE;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_WIDTH;
@@ -58,7 +49,6 @@ import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_STYLE;
 import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_WIDTH;
 import static org.htmlunit.css.StyleAttributes.Definition.BOTTOM;
 import static org.htmlunit.css.StyleAttributes.Definition.COLOR;
 import static org.htmlunit.css.StyleAttributes.Definition.DISPLAY;
@@ -114,8 +104,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -128,7 +116,6 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.AbstractCssStyleDeclaration;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
-import org.htmlunit.css.CssColors;
 import org.htmlunit.css.CssPixelValueConverter;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
@@ -137,7 +124,6 @@ import org.htmlunit.css.StyleElement;
 import org.htmlunit.css.WrappedCssStyleDeclaration;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
-import org.htmlunit.html.impl.Color;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -165,15 +151,6 @@ import org.htmlunit.javascript.host.Element;
  */
 @JsxClass
 public class CSSStyleDeclaration extends HtmlUnitScriptable {
-    private static final Pattern URL_PATTERN =
-        Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
-    private static final Pattern POSITION_PATTERN =
-        Pattern.compile("(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex))\\s*"
-                + "(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
-    private static final Pattern POSITION_PATTERN2 =
-        Pattern.compile("(left|right|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|top|bottom|center)");
-    private static final Pattern POSITION_PATTERN3 =
-        Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
 
     private static final Set<String> LENGTH_PROPERTIES_FFFF = new HashSet<>(Arrays.asList(
             BORDER_TOP_WIDTH.getAttributeName(),
@@ -400,24 +377,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBackgroundAttachment() {
-        String value = getStyleAttribute(BACKGROUND_ATTACHMENT, false);
-        if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND);
-            if (StringUtils.isNotBlank(bg)) {
-                value = findAttachment(bg);
-                if (value == null) {
-                    if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)
-                            && getClass() == CSSStyleDeclaration.class) {
-                        return INITIAL;
-                    }
-                    return SCROLL; // default if shorthand is used
-                }
-                return value;
-            }
-            return "";
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-
-        return value;
+        return styleDeclaration_.getBackgroundAttachment();
     }
 
     /**
@@ -435,31 +398,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBackgroundColor() {
-        String value = getStyleAttribute(BACKGROUND_COLOR, false);
-        if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, false);
-            if (StringUtils.isBlank(bg)) {
-                return "";
-            }
-            value = findColor(bg);
-            if (value == null) {
-                if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
-                    if (getClass() == CSSStyleDeclaration.class) {
-                        return INITIAL;
-                    }
-                    return "rgba(0, 0, 0, 0)";
-                }
-                if (getBrowserVersion().hasFeature(CSS_BACKGROUND_RGBA)) {
-                    return "rgba(0, 0, 0, 0)";
-                }
-                return "transparent"; // default if shorthand is used
-            }
-            return value;
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        if (StringUtils.isBlank(value)) {
-            return "";
-        }
-        return value;
+        return styleDeclaration_.getBackgroundColor();
     }
 
     /**
@@ -477,32 +419,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBackgroundImage() {
-        String value = getStyleAttribute(BACKGROUND_IMAGE, false);
-        if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, false);
-            if (StringUtils.isNotBlank(bg)) {
-                value = findImageUrl(bg);
-                final boolean isComputed = getClass() != CSSStyleDeclaration.class;
-                final boolean backgroundInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL);
-                if (value == null) {
-                    return backgroundInitial && !isComputed ? INITIAL : NONE;
-                }
-                if (isComputed) {
-                    try {
-                        value = value.substring(5, value.length() - 2);
-                        return "url(\"" + getDomElement().getHtmlPageOrNull()
-                            .getFullyQualifiedUrl(value) + "\")";
-                    }
-                    catch (final Exception e) {
-                        // ignore
-                    }
-                }
-                return value;
-            }
-            return "";
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-
-        return value;
+        return styleDeclaration_.getBackgroundImage();
     }
 
     /**
@@ -520,77 +440,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBackgroundPosition() {
-        String value = getStyleAttribute(BACKGROUND_POSITION, false);
-        if (value == null) {
-            return null;
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, false);
-            if (bg == null) {
-                return null;
-            }
-            if (StringUtils.isNotBlank(bg)) {
-                value = findPosition(bg);
-                final boolean isInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL);
-                final boolean isComputed = getClass() != CSSStyleDeclaration.class;
-                if (value == null) {
-                    if (isInitial) {
-                        return isComputed ? "" : INITIAL;
-                    }
-                    return "0% 0%";
-                }
-                if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
-                    final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
-                    if ("center".equals(values[0])) {
-                        values[0] = "";
-                    }
-                    if ("center".equals(values[1])) {
-                        values[1] = "";
-                    }
-                    if (!isComputed || value.contains("top")) {
-                        return (values[0] + ' ' + values[1]).trim();
-                    }
-                }
-                if (isComputed) {
-                    final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
-                    switch (values[0]) {
-                        case "left":
-                            values[0] = "0%";
-                            break;
-
-                        case "center":
-                            values[0] = "50%";
-                            break;
-
-                        case "right":
-                            values[0] = "100%";
-                            break;
-
-                        default:
-                    }
-                    switch (values[1]) {
-                        case "top":
-                            values[1] = "0%";
-                            break;
-
-                        case "center":
-                            values[1] = "50%";
-                            break;
-
-                        case "bottom":
-                            values[1] = "100%";
-                            break;
-
-                        default:
-                    }
-                    value = values[0] + ' ' + values[1];
-                }
-                return value;
-            }
-            return "";
-        }
-
-        return value;
+        return styleDeclaration_.getBackgroundPosition();
     }
 
     /**
@@ -608,24 +461,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBackgroundRepeat() {
-        String value = getStyleAttribute(BACKGROUND_REPEAT, false);
-        if (StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, false);
-            if (StringUtils.isNotBlank(bg)) {
-                value = findRepeat(bg);
-                if (value == null) {
-                    if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)
-                            && getClass() == CSSStyleDeclaration.class) {
-                        return INITIAL;
-                    }
-                    return REPEAT; // default if shorthand is used
-                }
-                return value;
-            }
-            return "";
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-
-        return value;
+        return styleDeclaration_.getBackgroundRepeat();
     }
 
     /**
@@ -643,17 +482,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderBottomColor() {
-        String value = getStyleAttribute(BORDER_BOTTOM_COLOR, false);
-        if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_BOTTOM, false));
-            if (value == null) {
-                value = findColor(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderBottomColor();
     }
 
     /**
@@ -671,17 +503,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderBottomStyle() {
-        String value = getStyleAttribute(BORDER_BOTTOM_STYLE, false);
-        if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_BOTTOM, false));
-            if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderBottomStyle();
     }
 
     /**
@@ -699,7 +524,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderBottomWidth() {
-        return getBorderWidth(BORDER_BOTTOM_WIDTH, BORDER_BOTTOM);
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
+        return styleDeclaration_.getBorderBottomWidth();
     }
 
     /**
@@ -718,17 +546,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderLeftColor() {
-        String value = getStyleAttribute(BORDER_LEFT_COLOR, false);
-        if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_LEFT, false));
-            if (value == null) {
-                value = findColor(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderLeftColor();
     }
 
     /**
@@ -746,17 +567,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderLeftStyle() {
-        String value = getStyleAttribute(BORDER_LEFT_STYLE, false);
-        if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_LEFT, false));
-            if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderLeftStyle();
     }
 
     /**
@@ -774,49 +588,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderLeftWidth() {
-        return getBorderWidth(BORDER_LEFT_WIDTH, BORDER_LEFT);
-    }
-
-    /**
-     * Gets the border width for the specified side
-     * @param borderSideWidth the border side width Definition
-     * @param borderSide the border side Definition
-     * @return the width, "" if not defined
-     */
-    private String getBorderWidth(final Definition borderSideWidth, final Definition borderSide) {
-        String value = getStyleAttribute(borderSideWidth, false);
-        if (value.isEmpty()) {
-            value = findBorderWidth(getStyleAttribute(borderSide, false));
-            if (value == null) {
-                final String borderWidth = getStyleAttribute(BORDER_WIDTH, false);
-                if (!StringUtils.isEmpty(borderWidth)) {
-                    final String[] values = org.htmlunit.util.StringUtils.splitAtJavaWhitespace(borderWidth);
-                    int index = values.length;
-                    if (borderSideWidth.name().contains("TOP")) {
-                        index = 0;
-                    }
-                    else if (borderSideWidth.name().contains("RIGHT")) {
-                        index = 1;
-                    }
-                    else if (borderSideWidth.name().contains("BOTTOM")) {
-                        index = 2;
-                    }
-                    else if (borderSideWidth.name().contains("LEFT")) {
-                        index = 3;
-                    }
-                    if (index < values.length) {
-                        value = values[index];
-                    }
-                }
-            }
-            if (value == null) {
-                value = findBorderWidth(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderLeftWidth();
     }
 
     /**
@@ -835,17 +610,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderRightColor() {
-        String value = getStyleAttribute(BORDER_RIGHT_COLOR, false);
-        if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_RIGHT, false));
-            if (value == null) {
-                value = findColor(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderRightColor();
     }
 
     /**
@@ -863,17 +631,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderRightStyle() {
-        String value = getStyleAttribute(BORDER_RIGHT_STYLE, false);
-        if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_RIGHT, false));
-            if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderRightStyle();
     }
 
     /**
@@ -891,7 +652,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderRightWidth() {
-        return getBorderWidth(BORDER_RIGHT_WIDTH, BORDER_RIGHT);
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
+        return styleDeclaration_.getBorderRightWidth();
     }
 
     /**
@@ -910,7 +674,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderTop() {
-        return getStyleAttribute(BORDER_TOP);
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
+        return styleDeclaration_.getBorderTop();
     }
 
     /**
@@ -928,17 +695,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderTopColor() {
-        String value = getStyleAttribute(BORDER_TOP_COLOR, false);
-        if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_TOP, false));
-            if (value == null) {
-                value = findColor(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderTopColor();
     }
 
     /**
@@ -956,17 +716,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderTopStyle() {
-        String value = getStyleAttribute(BORDER_TOP_STYLE, false);
-        if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_TOP, false));
-            if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER, false));
-            }
-            if (value == null) {
-                value = "";
-            }
+        if (styleDeclaration_ == null) {
+            return null; // prototype
         }
-        return value;
+        return styleDeclaration_.getBorderTopStyle();
     }
 
     /**
@@ -984,7 +737,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getBorderTopWidth() {
-        return getBorderWidth(BORDER_TOP_WIDTH, BORDER_TOP);
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
+        return styleDeclaration_.getBorderTopWidth();
     }
 
     /**
@@ -1057,6 +813,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getCssText() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getCssText();
     }
 
@@ -1117,6 +876,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getLineHeight() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getLineHeight();
     }
 
@@ -1227,6 +989,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getLeft() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getLeft();
     }
 
@@ -1245,6 +1010,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
+        if (styleDeclaration_ == null) {
+            return 0; // prototype
+        }
         return styleDeclaration_.getLength();
     }
 
@@ -1255,6 +1023,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.item(index);
     }
 
@@ -1273,6 +1044,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getLetterSpacing() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getLetterSpacing();
     }
 
@@ -1292,6 +1066,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMargin() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getMargin();
     }
 
@@ -1382,6 +1159,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMaxHeight() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getMaxHeight();
     }
 
@@ -1400,6 +1180,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMaxWidth() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getMaxWidth();
     }
 
@@ -1418,6 +1201,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMinHeight() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getMinHeight();
     }
 
@@ -1593,6 +1379,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public String getMsImeAlign() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getMsImeAlign();
     }
 
@@ -1674,6 +1463,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getOutline() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getOutline();
     }
 
@@ -1692,6 +1484,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getOutlineWidth() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getOutlineWidth();
     }
 
@@ -1712,6 +1507,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPadding() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getPadding();
     }
 
@@ -1730,6 +1528,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingBottom() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getPaddingBottom();
     }
 
@@ -1748,6 +1549,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingLeft() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getPaddingLeft();
     }
 
@@ -1766,6 +1570,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingRight() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getPaddingRight();
     }
 
@@ -1784,6 +1591,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingTop() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getPaddingTop();
     }
 
@@ -2041,6 +1851,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getRight() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getRight();
     }
 
@@ -2059,6 +1872,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter({IE, FF, FF_ESR})
     public String getRubyAlign() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getRubyAlign();
     }
 
@@ -2077,6 +1893,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter({CHROME, EDGE})
     public String getSize() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getSize();
     }
 
@@ -2185,6 +2004,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getTextIndent() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getTextIndent();
     }
 
@@ -2203,6 +2025,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getTop() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getTop();
     }
 
@@ -2221,6 +2046,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getVerticalAlign() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getVerticalAlign();
     }
 
@@ -2241,6 +2069,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getWidth() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getStyleAttribute(Definition.WIDTH, true);
     }
 
@@ -2259,6 +2090,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public String getWidows() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getWidows();
     }
 
@@ -2287,6 +2121,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public String getOrphans() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getOrphans();
     }
 
@@ -2315,6 +2152,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPosition() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getPosition();
     }
 
@@ -2337,6 +2177,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getWordSpacing() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
         return styleDeclaration_.getWordSpacing();
     }
 
@@ -2543,152 +2386,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Searches for any color notation in the specified text.
-     * @param text the string to search in
-     * @return the string of the color if found, null otherwise
-     */
-    private static String findColor(final String text) {
-        Color tmpColor = org.htmlunit.util.StringUtils.findColorRGB(text);
-        if (tmpColor != null) {
-            return org.htmlunit.util.StringUtils.formatColor(tmpColor);
-        }
-
-        final String[] tokens = org.htmlunit.util.StringUtils.splitAtBlank(text);
-        for (final String token : tokens) {
-            if (CssColors.isColorKeyword(token)) {
-                return token;
-            }
-
-            tmpColor = org.htmlunit.util.StringUtils.asColorHexadecimal(token);
-            if (tmpColor != null) {
-                return org.htmlunit.util.StringUtils.formatColor(tmpColor);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Searches for any URL notation in the specified text.
-     * @param text the string to search in
-     * @return the string of the URL if found, null otherwise
-     */
-    private static String findImageUrl(final String text) {
-        final Matcher m = URL_PATTERN.matcher(text);
-        if (m.find()) {
-            return "url(\"" + m.group(1) + "\")";
-        }
-        return null;
-    }
-
-    /**
-     * Searches for any position notation in the specified text.
-     * @param text the string to search in
-     * @return the string of the position if found, null otherwise
-     */
-    private static String findPosition(final String text) {
-        Matcher m = POSITION_PATTERN.matcher(text);
-        if (m.find()) {
-            return m.group(1) + " " + m.group(3);
-        }
-        m = POSITION_PATTERN2.matcher(text);
-        if (m.find()) {
-            return m.group(1) + " " + m.group(2);
-        }
-        m = POSITION_PATTERN3.matcher(text);
-        if (m.find()) {
-            return m.group(2) + " " + m.group(1);
-        }
-        return null;
-    }
-
-    /**
-     * Searches for any repeat notation in the specified text.
-     * @param text the string to search in
-     * @return the string of the repeat if found, null otherwise
-     */
-    private static String findRepeat(final String text) {
-        if (text.contains("repeat-x")) {
-            return "repeat-x";
-        }
-        if (text.contains("repeat-y")) {
-            return "repeat-y";
-        }
-        if (text.contains("no-repeat")) {
-            return "no-repeat";
-        }
-        if (text.contains(REPEAT)) {
-            return REPEAT;
-        }
-        return null;
-    }
-
-    /**
-     * Searches for any attachment notation in the specified text.
-     * @param text the string to search in
-     * @return the string of the attachment if found, null otherwise
-     */
-    private static String findAttachment(final String text) {
-        if (text.contains(SCROLL)) {
-            return SCROLL;
-        }
-        if (text.contains(FIXED)) {
-            return FIXED;
-        }
-        return null;
-    }
-
-    /**
-     * Searches for a border style in the specified text.
-     * @param text the string to search in
-     * @return the border style if found, null otherwise
-     */
-    private static String findBorderStyle(final String text) {
-        for (final String token : org.htmlunit.util.StringUtils.splitAtBlank(text)) {
-            if (isBorderStyle(token)) {
-                return token;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Searches for a border width in the specified text.
-     * @param text the string to search in
-     * @return the border width if found, null otherwise
-     */
-    private static String findBorderWidth(final String text) {
-        for (final String token : org.htmlunit.util.StringUtils.splitAtBlank(text)) {
-            if (isBorderWidth(token)) {
-                return token;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Returns if the specified token is a border style.
-     * @param token the token to check
-     * @return whether the token is a border style or not
-     */
-    private static boolean isBorderStyle(final String token) {
-        return NONE.equalsIgnoreCase(token) || "hidden".equalsIgnoreCase(token)
-            || "dotted".equalsIgnoreCase(token) || "dashed".equalsIgnoreCase(token)
-            || "solid".equalsIgnoreCase(token) || "double".equalsIgnoreCase(token)
-            || "groove".equalsIgnoreCase(token) || "ridge".equalsIgnoreCase(token)
-            || "inset".equalsIgnoreCase(token) || "outset".equalsIgnoreCase(token);
-    }
-
-    /**
-     * Returns if the specified token is a border width.
-     * @param token the token to check
-     * @return whether the token is a border width or not
-     */
-    private static boolean isBorderWidth(final String token) {
-        return "thin".equalsIgnoreCase(token) || "medium".equalsIgnoreCase(token)
-            || "thick".equalsIgnoreCase(token) || isLength(token);
     }
 
     /**

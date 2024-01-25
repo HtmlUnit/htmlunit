@@ -106,7 +106,8 @@ public class CSSPageRule extends CSSRule {
      */
     @JsxGetter
     public CSSStyleDeclaration getStyle() {
-        final WrappedCssStyleDeclaration styleDeclaration = new WrappedCssStyleDeclaration(getPageRule().getStyle());
+        final WrappedCssStyleDeclaration styleDeclaration
+                = new WrappedCssStyleDeclaration(getPageRule().getStyle(), getBrowserVersion());
         return new CSSStyleDeclaration(getParentStyleSheet(), styleDeclaration);
     }
 

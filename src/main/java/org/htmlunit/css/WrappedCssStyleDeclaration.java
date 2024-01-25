@@ -17,6 +17,8 @@ package org.htmlunit.css;
 import java.util.Collections;
 import java.util.Map;
 
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
@@ -45,13 +47,17 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     /** The wrapped CSSStyleDeclaration. */
     private final CSSStyleDeclarationImpl cssStyleDeclarationImpl_;
+    private final BrowserVersion browserVersion_;
 
     /**
      * Creates an instance which wraps the specified style declaration implementation.
      * @param cssStyleDeclarationImpl the style declaration to wrap
+     * @param browserVersion the {@link BrowserVersion}
      */
-    public WrappedCssStyleDeclaration(final CSSStyleDeclarationImpl cssStyleDeclarationImpl) {
+    public WrappedCssStyleDeclaration(final CSSStyleDeclarationImpl cssStyleDeclarationImpl,
+                final BrowserVersion browserVersion) {
         cssStyleDeclarationImpl_ = cssStyleDeclarationImpl;
+        browserVersion_ = browserVersion;
     }
 
     /**
@@ -183,4 +189,11 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasFeature(final BrowserVersionFeatures property) {
+        return browserVersion_.hasFeature(property);
+    }
 }

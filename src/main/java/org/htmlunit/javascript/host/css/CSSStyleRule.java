@@ -111,7 +111,7 @@ public class CSSStyleRule extends CSSRule {
     @JsxGetter
     public CSSStyleDeclaration getStyle() {
         final WrappedCssStyleDeclaration styleDeclaration
-                = new WrappedCssStyleDeclaration(((CSSStyleRuleImpl) getRule()).getStyle());
+                = new WrappedCssStyleDeclaration(((CSSStyleRuleImpl) getRule()).getStyle(), getBrowserVersion());
         return new CSSStyleDeclaration(getParentStyleSheet(), styleDeclaration);
     }
 
