@@ -434,6 +434,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * @return the bottom setting
      */
+    @Override
     public String getBottom() {
         return getStyleAttribute(BOTTOM, AUTO, null);
     }
@@ -441,6 +442,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * @return the color setting
      */
+    @Override
     public String getColor() {
         final String value = getStyleAttribute(COLOR, "rgb(0, 0, 0)", null);
         return CssColors.toRGBColor(value);
@@ -449,6 +451,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * @return the display setting
      */
+    @Override
     public String getDisplay() {
         final DomElement domElem = getDomElementOrNull();
         if (!domElem.isAttachedToPage()) {
@@ -473,6 +476,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * @return the font setting
      */
+    @Override
     public String getFont() {
         final DomElement domElem = getDomElementOrNull();
         if (domElem.isAttachedToPage()) {
@@ -487,6 +491,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * @return the font family setting
      */
+    @Override
     public String getFontFamily() {
         return getStyleAttribute(FONT_FAMILY, true);
     }
@@ -494,6 +499,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * @return the font size setting
      */
+    @Override
     public String getFontSize() {
         String value = getStyleAttribute(FONT_SIZE, true);
         if (!value.isEmpty()) {

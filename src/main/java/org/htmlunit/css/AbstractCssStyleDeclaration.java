@@ -22,30 +22,6 @@ import static org.htmlunit.css.CssStyleSheet.INITIAL;
 import static org.htmlunit.css.CssStyleSheet.NONE;
 import static org.htmlunit.css.CssStyleSheet.REPEAT;
 import static org.htmlunit.css.CssStyleSheet.SCROLL;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_POSITION;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_STYLE;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_RIGHT_WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_STYLE;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_TOP_WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_WIDTH;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -342,9 +318,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBackgroundAttachment() {
-        String value = getStyleAttribute(BACKGROUND_ATTACHMENT, false);
+        String value = getStyleAttribute(Definition.BACKGROUND_ATTACHMENT, false);
         if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, true);
+            final String bg = getStyleAttribute(Definition.BACKGROUND, true);
             if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
                 value = findAttachment(bg);
                 if (value == null) {
@@ -366,9 +342,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBackgroundColor() {
-        String value = getStyleAttribute(BACKGROUND_COLOR, false);
+        String value = getStyleAttribute(Definition.BACKGROUND_COLOR, false);
         if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, false);
+            final String bg = getStyleAttribute(Definition.BACKGROUND, false);
             if (org.apache.commons.lang3.StringUtils.isBlank(bg)) {
                 return "";
             }
@@ -398,9 +374,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBackgroundImage() {
-        String value = getStyleAttribute(BACKGROUND_IMAGE, false);
+        String value = getStyleAttribute(Definition.BACKGROUND_IMAGE, false);
         if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, false);
+            final String bg = getStyleAttribute(Definition.BACKGROUND, false);
             if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
                 value = findImageUrl(bg);
                 final boolean backgroundInitial = hasFeature(CSS_BACKGROUND_INITIAL);
@@ -430,12 +406,12 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBackgroundPosition() {
-        String value = getStyleAttribute(BACKGROUND_POSITION, false);
+        String value = getStyleAttribute(Definition.BACKGROUND_POSITION, false);
         if (value == null) {
             return null;
         }
         if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, false);
+            final String bg = getStyleAttribute(Definition.BACKGROUND, false);
             if (bg == null) {
                 return null;
             }
@@ -507,9 +483,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBackgroundRepeat() {
-        String value = getStyleAttribute(BACKGROUND_REPEAT, false);
+        String value = getStyleAttribute(Definition.BACKGROUND_REPEAT, false);
         if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
-            final String bg = getStyleAttribute(BACKGROUND, false);
+            final String bg = getStyleAttribute(Definition.BACKGROUND, false);
             if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
                 value = findRepeat(bg);
                 if (value == null) {
@@ -531,11 +507,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderBottomColor() {
-        String value = getStyleAttribute(BORDER_BOTTOM_COLOR, false);
+        String value = getStyleAttribute(Definition.BORDER_BOTTOM_COLOR, false);
         if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_BOTTOM, false));
+            value = findColor(getStyleAttribute(Definition.BORDER_BOTTOM, false));
             if (value == null) {
-                value = findColor(getStyleAttribute(BORDER, false));
+                value = findColor(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -549,11 +525,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderBottomStyle() {
-        String value = getStyleAttribute(BORDER_BOTTOM_STYLE, false);
+        String value = getStyleAttribute(Definition.BORDER_BOTTOM_STYLE, false);
         if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_BOTTOM, false));
+            value = findBorderStyle(getStyleAttribute(Definition.BORDER_BOTTOM, false));
             if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER, false));
+                value = findBorderStyle(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -567,7 +543,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderBottomWidth() {
-        return getBorderWidth(BORDER_BOTTOM_WIDTH, BORDER_BOTTOM);
+        return getBorderWidth(Definition.BORDER_BOTTOM_WIDTH, Definition.BORDER_BOTTOM);
     }
 
     /**
@@ -575,11 +551,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderLeftColor() {
-        String value = getStyleAttribute(BORDER_LEFT_COLOR, false);
+        String value = getStyleAttribute(Definition.BORDER_LEFT_COLOR, false);
         if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_LEFT, false));
+            value = findColor(getStyleAttribute(Definition.BORDER_LEFT, false));
             if (value == null) {
-                value = findColor(getStyleAttribute(BORDER, false));
+                value = findColor(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -593,11 +569,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderLeftStyle() {
-        String value = getStyleAttribute(BORDER_LEFT_STYLE, false);
+        String value = getStyleAttribute(Definition.BORDER_LEFT_STYLE, false);
         if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_LEFT, false));
+            value = findBorderStyle(getStyleAttribute(Definition.BORDER_LEFT, false));
             if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER, false));
+                value = findBorderStyle(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -611,7 +587,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderLeftWidth() {
-        return getBorderWidth(BORDER_LEFT_WIDTH, BORDER_LEFT);
+        return getBorderWidth(Definition.BORDER_LEFT_WIDTH, Definition.BORDER_LEFT);
     }
 
     /**
@@ -625,7 +601,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         if (value.isEmpty()) {
             value = findBorderWidth(getStyleAttribute(borderSide, false));
             if (value == null) {
-                final String borderWidth = getStyleAttribute(BORDER_WIDTH, false);
+                final String borderWidth = getStyleAttribute(Definition.BORDER_WIDTH, false);
                 if (!org.apache.commons.lang3.StringUtils.isEmpty(borderWidth)) {
                     final String[] values = org.htmlunit.util.StringUtils.splitAtJavaWhitespace(borderWidth);
                     int index = values.length;
@@ -647,7 +623,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                 }
             }
             if (value == null) {
-                value = findBorderWidth(getStyleAttribute(BORDER, false));
+                value = findBorderWidth(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -661,11 +637,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderRightColor() {
-        String value = getStyleAttribute(BORDER_RIGHT_COLOR, false);
+        String value = getStyleAttribute(Definition.BORDER_RIGHT_COLOR, false);
         if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_RIGHT, false));
+            value = findColor(getStyleAttribute(Definition.BORDER_RIGHT, false));
             if (value == null) {
-                value = findColor(getStyleAttribute(BORDER, false));
+                value = findColor(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -679,11 +655,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderRightStyle() {
-        String value = getStyleAttribute(BORDER_RIGHT_STYLE, false);
+        String value = getStyleAttribute(Definition.BORDER_RIGHT_STYLE, false);
         if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_RIGHT, false));
+            value = findBorderStyle(getStyleAttribute(Definition.BORDER_RIGHT, false));
             if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER, false));
+                value = findBorderStyle(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -697,7 +673,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderRightWidth() {
-        return getBorderWidth(BORDER_RIGHT_WIDTH, BORDER_RIGHT);
+        return getBorderWidth(Definition.BORDER_RIGHT_WIDTH, Definition.BORDER_RIGHT);
     }
 
     /**
@@ -705,7 +681,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderTop() {
-        return getStyleAttribute(BORDER_TOP, true);
+        return getStyleAttribute(Definition.BORDER_TOP, true);
     }
 
     /**
@@ -713,11 +689,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderTopColor() {
-        String value = getStyleAttribute(BORDER_TOP_COLOR, false);
+        String value = getStyleAttribute(Definition.BORDER_TOP_COLOR, false);
         if (value.isEmpty()) {
-            value = findColor(getStyleAttribute(BORDER_TOP, false));
+            value = findColor(getStyleAttribute(Definition.BORDER_TOP, false));
             if (value == null) {
-                value = findColor(getStyleAttribute(BORDER, false));
+                value = findColor(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -731,11 +707,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderTopStyle() {
-        String value = getStyleAttribute(BORDER_TOP_STYLE, false);
+        String value = getStyleAttribute(Definition.BORDER_TOP_STYLE, false);
         if (value.isEmpty()) {
-            value = findBorderStyle(getStyleAttribute(BORDER_TOP, false));
+            value = findBorderStyle(getStyleAttribute(Definition.BORDER_TOP, false));
             if (value == null) {
-                value = findBorderStyle(getStyleAttribute(BORDER, false));
+                value = findBorderStyle(getStyleAttribute(Definition.BORDER, false));
             }
             if (value == null) {
                 value = "";
@@ -749,7 +725,71 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the style attribute
      */
     public String getBorderTopWidth() {
-        return getBorderWidth(BORDER_TOP_WIDTH, BORDER_TOP);
+        return getBorderWidth(Definition.BORDER_TOP_WIDTH, Definition.BORDER_TOP);
+    }
+
+    /**
+     * Gets the {@code bottom} style attribute.
+     * @return the style attribute
+     */
+    public String getBottom() {
+        return getStyleAttribute(Definition.BOTTOM, true);
+    }
+
+    /**
+     * Gets the {@code color} style attribute.
+     * @return the style attribute
+     */
+    public String getColor() {
+        return getStyleAttribute(Definition.COLOR, true);
+    }
+
+    /**
+     * Gets the {@code cssFloat} style attribute.
+     * @return the style attribute
+     */
+    public String getCssFloat() {
+        return getStyleAttribute(Definition.FLOAT, true);
+    }
+
+    /**
+     * Gets the {@code display} style attribute.
+     * @return the style attribute
+     */
+    public String getDisplay() {
+        return getStyleAttribute(Definition.DISPLAY, true);
+    }
+
+    /**
+     * Gets the {@code font} style attribute.
+     * @return the style attribute
+     */
+    public String getFont() {
+        return getStyleAttribute(Definition.FONT, true);
+    }
+
+    /**
+     * Gets the {@code fontFamily} style attribute.
+     * @return the style attribute
+     */
+    public String getFontFamily() {
+        return getStyleAttribute(Definition.FONT_FAMILY, true);
+    }
+
+    /**
+     * Gets the {@code fontSize} style attribute.
+     * @return the style attribute
+     */
+    public String getFontSize() {
+        return getStyleAttribute(Definition.FONT_SIZE, true);
+    }
+
+    /**
+     * Gets the {@code height} style attribute.
+     * @return the style attribute
+     */
+    public String getHeight() {
+        return getStyleAttribute(Definition.HEIGHT, true);
     }
 
     /**
@@ -778,6 +818,38 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getMargin() {
         return getStyleAttribute(Definition.MARGIN, true);
+    }
+
+    /**
+     * Gets the {@code marginBottom} style attribute.
+     * @return the style attribute
+     */
+    public String getMarginBottom() {
+        return getStyleAttribute(Definition.MARGIN_BOTTOM, Definition.MARGIN);
+    }
+
+    /**
+     * Gets the {@code marginLeft} style attribute.
+     * @return the style attribute
+     */
+    public String getMarginLeft() {
+        return getStyleAttribute(Definition.MARGIN_LEFT, Definition.MARGIN);
+    }
+
+    /**
+     * Gets the {@code marginRight} style attribute.
+     * @return the style attribute
+     */
+    public String getMarginRight() {
+        return getStyleAttribute(Definition.MARGIN_RIGHT, Definition.MARGIN);
+    }
+
+    /**
+     * Gets the {@code marginTop} style attribute.
+     * @return the style attribute
+     */
+    public String getMarginTop() {
+        return getStyleAttribute(Definition.MARGIN_TOP, Definition.MARGIN);
     }
 
     /**
@@ -813,6 +885,30 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getMsImeAlign() {
         return getStyleAttribute(Definition.MS_IME_ALIGN, true);
+    }
+
+    /**
+     * Gets the {@code opacity} style attribute.
+     * @return the style attribute
+     */
+    public String getOpacity() {
+        final String opacity = getStyleAttribute(Definition.OPACITY, false);
+        if (opacity == null || opacity.isEmpty()) {
+            return "";
+        }
+
+        final String trimedOpacity = opacity.trim();
+        try {
+            final double value = Double.parseDouble(trimedOpacity);
+            if (value % 1 == 0) {
+                return Integer.toString((int) value);
+            }
+            return Double.toString(value);
+        }
+        catch (final NumberFormatException e) {
+            // ignore wrong value
+        }
+        return "";
     }
 
     /**
@@ -939,6 +1035,31 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getWordSpacing() {
         return getStyleAttribute(Definition.WORD_SPACING, true);
+    }
+
+    /**
+     * Gets the {@code zIndex} style attribute.
+     * @return the style attribute
+     */
+    public Object getZIndex() {
+        final String value = getStyleAttribute(Definition.Z_INDEX_, true);
+        if (hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
+            try {
+                return Integer.valueOf(value);
+            }
+            catch (final NumberFormatException e) {
+                return "";
+            }
+        }
+
+        // zIndex is string
+        try {
+            Integer.parseInt(value);
+            return value;
+        }
+        catch (final NumberFormatException e) {
+            return "";
+        }
     }
 
     /**
