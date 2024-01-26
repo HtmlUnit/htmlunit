@@ -341,6 +341,60 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * @return the width
+     */
+    @Override
+    public String getWidth() {
+        if (NONE.equals(getDisplay())) {
+            return AUTO;
+        }
+
+        final DomElement domElem = getDomElement();
+        if (!domElem.isAttachedToPage()) {
+            if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+                return "";
+            }
+            if (getStyleAttribute(WIDTH, true).isEmpty()) {
+                return AUTO;
+            }
+        }
+
+        final int windowWidth = domElem.getPage().getEnclosingWindow().getInnerWidth();
+        return CssPixelValueConverter.pixelString(domElem, new CssPixelValueConverter.CssValue(0, windowWidth) {
+            @Override
+            public String get(final ComputedCssStyleDeclaration style) {
+                final String value = style.getStyleAttribute(WIDTH, true);
+                if (StringUtils.isEmpty(value)) {
+                    final String position = getStyleAttribute(POSITION, true);
+                    if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+                        final String content = domElem.getVisibleText();
+                        // do this only for small content
+                        // at least for empty div's this is more correct
+                        if (null != content && content.length() < 13) {
+                            return (content.length() * 7) + "px";
+                        }
+                    }
+
+                    int windowDefaultValue = getWindowDefaultValue();
+                    if (domElem instanceof HtmlBody) {
+                        windowDefaultValue -= 16;
+                    }
+                    return windowDefaultValue + "px";
+                }
+                else if (AUTO.equals(value)) {
+                    int windowDefaultValue = getWindowDefaultValue();
+                    if (domElem instanceof HtmlBody) {
+                        windowDefaultValue -= 16;
+                    }
+                    return windowDefaultValue + "px";
+                }
+
+                return value;
+            }
+        });
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -492,60 +546,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             value = CssPixelValueConverter.pixelValue(value) + "px";
         }
         return value;
-    }
-
-    /**
-     * @return the width
-     */
-    @Override
-    public String getWidth() {
-        if (NONE.equals(getDisplay())) {
-            return AUTO;
-        }
-
-        final DomElement domElem = getDomElement();
-        if (!domElem.isAttachedToPage()) {
-            if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-                return "";
-            }
-            if (getStyleAttribute(WIDTH, true).isEmpty()) {
-                return AUTO;
-            }
-        }
-
-        final int windowWidth = domElem.getPage().getEnclosingWindow().getInnerWidth();
-        return CssPixelValueConverter.pixelString(domElem, new CssPixelValueConverter.CssValue(0, windowWidth) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                final String value = style.getStyleAttribute(WIDTH, true);
-                if (StringUtils.isEmpty(value)) {
-                    final String position = getStyleAttribute(POSITION, true);
-                    if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
-                        final String content = domElem.getVisibleText();
-                        // do this only for small content
-                        // at least for empty div's this is more correct
-                        if (null != content && content.length() < 13) {
-                            return (content.length() * 7) + "px";
-                        }
-                    }
-
-                    int windowDefaultValue = getWindowDefaultValue();
-                    if (domElem instanceof HtmlBody) {
-                        windowDefaultValue -= 16;
-                    }
-                    return windowDefaultValue + "px";
-                }
-                else if (AUTO.equals(value)) {
-                    int windowDefaultValue = getWindowDefaultValue();
-                    if (domElem instanceof HtmlBody) {
-                        windowDefaultValue -= 16;
-                    }
-                    return windowDefaultValue + "px";
-                }
-
-                return value;
-            }
-        });
     }
 
     /**

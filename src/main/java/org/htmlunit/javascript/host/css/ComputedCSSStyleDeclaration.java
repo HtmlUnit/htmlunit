@@ -698,14 +698,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getWidth() {
-        return getCssStyleDeclaration().getWidth();
-    }
-
-    /**
      * Returns the element's width in pixels, possibly including its padding and border.
      * @param includeBorder whether or not to include the border width in the returned value
      * @param includePadding whether or not to include the padding width in the returned value
@@ -750,7 +742,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int width;
-        final String styleWidth = super.getWidth();
+        final String styleWidth = getCssStyleDeclaration().getStyleAttribute(Definition.WIDTH, true);
         final DomNode parent = element.getParentNode();
 
         // width is ignored for inline elements

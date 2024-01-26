@@ -2024,7 +2024,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         if (styleDeclaration_ == null) {
             return null; // prototype
         }
-        return styleDeclaration_.getStyleAttribute(Definition.WIDTH, true);
+        return styleDeclaration_.getWidth();
     }
 
     /**
