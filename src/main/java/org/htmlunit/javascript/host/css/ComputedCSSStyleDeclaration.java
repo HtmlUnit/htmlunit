@@ -31,32 +31,6 @@ import static org.htmlunit.css.CssStyleSheet.NONE;
 import static org.htmlunit.css.CssStyleSheet.RELATIVE;
 import static org.htmlunit.css.CssStyleSheet.SCROLL;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_POSITION;
-import static org.htmlunit.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
-import static org.htmlunit.css.StyleAttributes.Definition.BOX_SIZING;
-import static org.htmlunit.css.StyleAttributes.Definition.CSS_FLOAT;
-import static org.htmlunit.css.StyleAttributes.Definition.HEIGHT;
-import static org.htmlunit.css.StyleAttributes.Definition.LEFT;
-import static org.htmlunit.css.StyleAttributes.Definition.LINE_HEIGHT;
-import static org.htmlunit.css.StyleAttributes.Definition.MARGIN;
-import static org.htmlunit.css.StyleAttributes.Definition.MARGIN_LEFT;
-import static org.htmlunit.css.StyleAttributes.Definition.MARGIN_RIGHT;
-import static org.htmlunit.css.StyleAttributes.Definition.ORPHANS;
-import static org.htmlunit.css.StyleAttributes.Definition.OVERFLOW;
-import static org.htmlunit.css.StyleAttributes.Definition.PADDING;
-import static org.htmlunit.css.StyleAttributes.Definition.POSITION;
-import static org.htmlunit.css.StyleAttributes.Definition.TOP;
-import static org.htmlunit.css.StyleAttributes.Definition.WIDOWS;
-import static org.htmlunit.css.StyleAttributes.Definition.WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
@@ -239,7 +213,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundAttachment() {
-        return defaultIfEmpty(super.getBackgroundAttachment(), BACKGROUND_ATTACHMENT);
+        return defaultIfEmpty(super.getBackgroundAttachment(), Definition.BACKGROUND_ATTACHMENT);
     }
 
     /**
@@ -249,7 +223,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getBackgroundColor() {
         final String value = super.getBackgroundColor();
         if (StringUtils.isEmpty(value)) {
-            return BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
+            return Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
         }
         return CssColors.toRGBColor(value);
     }
@@ -259,7 +233,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundImage() {
-        return defaultIfEmpty(super.getBackgroundImage(), BACKGROUND_IMAGE);
+        return defaultIfEmpty(super.getBackgroundImage(), Definition.BACKGROUND_IMAGE);
     }
 
     /**
@@ -268,7 +242,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundPosition() {
-        return defaultIfEmpty(super.getBackgroundPosition(), BACKGROUND_POSITION);
+        return defaultIfEmpty(super.getBackgroundPosition(), Definition.BACKGROUND_POSITION);
     }
 
     /**
@@ -276,7 +250,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundRepeat() {
-        return defaultIfEmpty(super.getBackgroundRepeat(), BACKGROUND_REPEAT);
+        return defaultIfEmpty(super.getBackgroundRepeat(), Definition.BACKGROUND_REPEAT);
     }
 
     /**
@@ -284,7 +258,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomColor() {
-        return defaultIfEmpty(super.getBorderBottomColor(), BORDER_BOTTOM_COLOR);
+        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER_BOTTOM_COLOR);
     }
 
     /**
@@ -292,7 +266,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomStyle() {
-        return defaultIfEmpty(super.getBorderBottomStyle(), BORDER_BOTTOM_STYLE);
+        return defaultIfEmpty(super.getBorderBottomStyle(), Definition.BORDER_BOTTOM_STYLE);
     }
 
     /**
@@ -300,7 +274,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), BORDER_BOTTOM_WIDTH));
+        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), Definition.BORDER_BOTTOM_WIDTH));
     }
 
     /**
@@ -308,7 +282,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftColor() {
-        return defaultIfEmpty(super.getBorderLeftColor(), BORDER_LEFT_COLOR);
+        return defaultIfEmpty(super.getBorderLeftColor(), Definition.BORDER_LEFT_COLOR);
     }
 
     /**
@@ -316,7 +290,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftStyle() {
-        return defaultIfEmpty(super.getBorderLeftStyle(), BORDER_LEFT_STYLE);
+        return defaultIfEmpty(super.getBorderLeftStyle(), Definition.BORDER_LEFT_STYLE);
     }
 
     /**
@@ -396,7 +370,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getCssFloat() {
-        return defaultIfEmpty(super.getCssFloat(), CSS_FLOAT);
+        return defaultIfEmpty(super.getCssFloat(), Definition.CSS_FLOAT);
     }
 
     /**
@@ -436,7 +410,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getLineHeight() {
-        return defaultIfEmpty(super.getLineHeight(), LINE_HEIGHT);
+        return defaultIfEmpty(super.getLineHeight(), Definition.LINE_HEIGHT);
     }
 
     /**
@@ -453,7 +427,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
                 return "";
             }
-            if (getStyleAttribute(HEIGHT, true).isEmpty()) {
+            if (getStyleAttribute(Definition.HEIGHT, true).isEmpty()) {
                 return AUTO;
             }
         }
@@ -463,7 +437,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     @Override
                     public String get(final ComputedCssStyleDeclaration style) {
                         final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
-                        return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), offsetHeight, AUTO);
+                        return defaultIfEmpty(style.getStyleAttribute(Definition.HEIGHT, true), offsetHeight, AUTO);
                     }
                 });
     }
@@ -483,9 +457,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 if (style.getDomElement() == element) {
-                    return style.getStyleAttribute(LEFT, true);
+                    return style.getStyleAttribute(Definition.LEFT, true);
                 }
-                return style.getStyleAttribute(WIDTH, true);
+                return style.getStyleAttribute(Definition.WIDTH, true);
             }
         });
     }
@@ -503,7 +477,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMargin() {
-        return defaultIfEmpty(super.getMargin(), MARGIN, true);
+        return defaultIfEmpty(super.getMargin(), Definition.MARGIN, true);
     }
 
     /**
@@ -519,7 +493,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginLeft() {
-        return getMarginX(super.getMarginLeft(), MARGIN_LEFT);
+        return getMarginX(super.getMarginLeft(), Definition.MARGIN_LEFT);
     }
 
     /**
@@ -527,7 +501,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginRight() {
-        return getMarginX(super.getMarginRight(), MARGIN_RIGHT);
+        return getMarginX(super.getMarginRight(), Definition.MARGIN_RIGHT);
     }
 
     private String getMarginX(final String superMarginX, final Definition definition) {
@@ -548,7 +522,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         if (style.getDomElement() == element) {
                             return style.getStyleAttribute(definition, true);
                         }
-                        return style.getStyleAttribute(WIDTH, true);
+                        return style.getStyleAttribute(Definition.WIDTH, true);
                     }
                 });
     }
@@ -614,7 +588,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPadding() {
-        return defaultIfEmpty(super.getPadding(), PADDING, true);
+        return defaultIfEmpty(super.getPadding(), Definition.PADDING, true);
     }
 
     /**
@@ -677,16 +651,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         final String superTop = super.getTop();
         if (!superTop.endsWith("%")) {
-            return defaultIfEmpty(superTop, TOP);
+            return defaultIfEmpty(superTop, Definition.TOP);
         }
 
         return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 if (style.getDomElement() == element) {
-                    return style.getStyleAttribute(TOP, true);
+                    return style.getStyleAttribute(Definition.TOP, true);
                 }
-                return style.getStyleAttribute(HEIGHT, true);
+                return style.getStyleAttribute(Definition.HEIGHT, true);
             }
         });
     }
@@ -704,7 +678,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWidows() {
-        return defaultIfEmpty(super.getWidows(), WIDOWS);
+        return defaultIfEmpty(super.getWidows(), Definition.WIDOWS);
     }
 
     /**
@@ -712,7 +686,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getOrphans() {
-        return defaultIfEmpty(super.getOrphans(), ORPHANS);
+        return defaultIfEmpty(super.getOrphans(), Definition.ORPHANS);
     }
 
     /**
@@ -720,7 +694,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPosition() {
-        return defaultIfEmpty(super.getPosition(), POSITION);
+        return defaultIfEmpty(super.getPosition(), Definition.POSITION);
     }
 
     /**
@@ -744,7 +718,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
         int width = getCalculatedWidth();
-        if (!"border-box".equals(getStyleAttribute(BOX_SIZING))) {
+        if (!"border-box".equals(getStyleAttribute(Definition.BOX_SIZING))) {
             if (includeBorder) {
                 width += getBorderHorizontal();
             }
@@ -788,7 +762,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
             // Width not explicitly set.
             final String cssFloat = getCssFloat();
-            final String position = getStyleAttribute(POSITION, true);
+            final String position = getStyleAttribute(Definition.POSITION, true);
             if ("right".equals(cssFloat) || "left".equals(cssFloat)
                     || ABSOLUTE.equals(position) || FIXED.equals(position)) {
                 // We're floating; simplistic approximation: text content * pixels per character.
@@ -859,7 +833,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             width = CssPixelValueConverter.pixelValue(element,
                     new CssPixelValueConverter.CssValue(0, element.getPage().getEnclosingWindow().getInnerWidth()) {
                     @Override public String get(final ComputedCssStyleDeclaration style) {
-                        return style.getStyleAttribute(WIDTH, true);
+                        return style.getStyleAttribute(Definition.WIDTH, true);
                     }
                 });
         }
@@ -917,7 +891,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
         int height = getCalculatedHeight();
-        if (!"border-box".equals(getStyleAttribute(BOX_SIZING))) {
+        if (!"border-box".equals(getStyleAttribute(Definition.BOX_SIZING))) {
             if (includeBorder) {
                 height += getBorderVertical();
             }
@@ -1050,12 +1024,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
             if (element instanceof HtmlDivision
                     || element instanceof HtmlSpan) {
-                String width = getStyleAttribute(WIDTH, false);
+                String width = getStyleAttribute(Definition.WIDTH, false);
 
                 // maybe we are enclosed something that forces a width
                 Element parent = getParentElement();
                 while (width.isEmpty() && parent != null) {
-                    width = getWindow().getComputedStyle(parent, null).getStyleAttribute(WIDTH, false);
+                    width = getWindow().getComputedStyle(parent, null).getStyleAttribute(Definition.WIDTH, false);
                     parent = parent.getParentElement();
                 }
                 final int pixelWidth = CssPixelValueConverter.pixelValue(width);
@@ -1091,7 +1065,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     if (isInline) {
                         return "";
                     }
-                    return style.getStyleAttribute(HEIGHT, true);
+                    return style.getStyleAttribute(Definition.HEIGHT, true);
                 }
             });
 
@@ -1178,7 +1152,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private boolean isScrollable(final boolean horizontal, final boolean ignoreSize) {
         final boolean scrollable;
         final DomElement element = getDomElement();
-        final String overflow = getStyleAttribute(OVERFLOW, true);
+        final String overflow = getStyleAttribute(Definition.OVERFLOW, true);
         if (horizontal) {
             // TODO: inherit, overflow-x
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
@@ -1424,7 +1398,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS {@code position} attribute, replacing inherited values with the actual parent values
      */
     public String getPositionWithInheritance() {
-        String p = getStyleAttribute(POSITION, true);
+        String p = getStyleAttribute(Definition.POSITION, true);
         if (INHERIT.equals(p)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent == null) {
@@ -1655,7 +1629,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWordSpacing() {
-        return defaultIfEmpty(super.getWordSpacing(), WORD_SPACING);
+        return defaultIfEmpty(super.getWordSpacing(), Definition.WORD_SPACING);
     }
 
     /**
