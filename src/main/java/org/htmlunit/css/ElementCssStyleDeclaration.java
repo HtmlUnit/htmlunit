@@ -205,6 +205,6 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public boolean hasFeature(final BrowserVersionFeatures property) {
-        return getDomElementOrNull().hasFeature(property);
+        return domElement_.hasFeature(property);
     }
 }

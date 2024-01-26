@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED;
@@ -303,7 +302,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute(Definition.ACCELERATOR), "false");
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
+        return styleDeclaration_.getAccelerator();
     }
 
     /**

@@ -14,6 +14,7 @@
  */
 package org.htmlunit.css;
 
+import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
 import static org.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
@@ -311,6 +312,14 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         else {
             throw new IllegalStateException("Unsupported definition: " + name);
         }
+    }
+
+    /**
+     * Gets the {@code accelerator} style attribute.
+     * @return the style attribute
+     */
+    public String getAccelerator() {
+        return defaultIfEmpty(getStyleAttribute(Definition.ACCELERATOR, true), "false");
     }
 
     /**

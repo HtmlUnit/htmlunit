@@ -427,6 +427,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * @return the accelerator setting
      */
+    @Override
     public String getAccelerator() {
         return getStyleAttribute(ACCELERATOR, true);
     }
