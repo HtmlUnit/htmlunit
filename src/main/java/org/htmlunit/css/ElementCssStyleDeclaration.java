@@ -21,7 +21,6 @@ import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
-import org.htmlunit.javascript.host.Element;
 import org.htmlunit.util.StringUtils;
 
 /**
@@ -52,6 +51,9 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param domElement the dom element this is based on
      */
     public ElementCssStyleDeclaration(final DomElement domElement) {
+        if (domElement == null) {
+            throw new IllegalStateException("domElement can't be null");
+        }
         domElement_ = domElement;
     }
 
@@ -184,19 +186,7 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return domElement_.getStyleMap();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Element getElementOrNull() {
-        return domElement_.getScriptableObject();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomElement getDomElementOrNull() {
+    public DomElement getDomElement() {
         return domElement_;
     }
 
@@ -206,5 +196,13 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public boolean hasFeature(final BrowserVersionFeatures property) {
         return domElement_.hasFeature(property);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "ElementCssStyleDeclaration for '" + getDomElement() + "'";
     }
 }

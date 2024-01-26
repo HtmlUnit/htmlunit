@@ -258,7 +258,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("CSSStyleDeclaration for 'HtmlBody[<body>]'")
+    @Alerts("CSSStyleDeclaration for 'ComputedCssStyleDeclaration for 'HtmlBody[<body>]''")
     public void brokenExternalCSS() throws Exception {
         final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";

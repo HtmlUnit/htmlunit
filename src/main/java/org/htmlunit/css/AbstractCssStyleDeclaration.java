@@ -35,7 +35,6 @@ import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.impl.Color;
-import org.htmlunit.javascript.host.Element;
 import org.htmlunit.util.StringUtils;
 
 /**
@@ -253,16 +252,6 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     public abstract Map<String, StyleElement> getStyleMap();
 
     /**
-     * @return the element to which this style belongs
-     */
-    public abstract Element getElementOrNull();
-
-    /**
-     * @return the dom element to which this style belongs
-     */
-    public abstract DomElement getDomElementOrNull();
-
-    /**
      * @return true if this is a computed style declaration
      */
     public boolean isComputed() {
@@ -395,7 +384,8 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                 if (isComputed()) {
                     try {
                         value = value.substring(5, value.length() - 2);
-                        return "url(\"" + getDomElementOrNull().getHtmlPageOrNull()
+                        final DomElement domElement = ((ComputedCssStyleDeclaration) this).getDomElement();
+                        return "url(\"" + domElement.getHtmlPageOrNull()
                             .getFullyQualifiedUrl(value) + "\")";
                     }
                     catch (final Exception e) {

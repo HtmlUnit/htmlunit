@@ -23,8 +23,6 @@ import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
 import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
-import org.htmlunit.html.DomElement;
-import org.htmlunit.javascript.host.Element;
 
 /**
  * A css StyleDeclaration backed by a {@link CSSStyleDeclarationImpl}.
@@ -171,22 +169,6 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public Map<String, StyleElement> getStyleMap() {
         return Collections.emptyMap();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Element getElementOrNull() {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomElement getDomElementOrNull() {
-        return null;
     }
 
     /**

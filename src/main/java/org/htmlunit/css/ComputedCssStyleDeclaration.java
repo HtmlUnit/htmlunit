@@ -87,7 +87,6 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlElement;
-import org.htmlunit.javascript.host.Element;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -191,7 +190,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     public ComputedCssStyleDeclaration(final ElementCssStyleDeclaration styleDeclaration) {
         elementStyleDeclaration_ = styleDeclaration;
-        getDomElementOrNull().setDefaults(this);
+        getDomElement().setDefaults(this);
     }
 
     /**
@@ -232,7 +231,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
-        final BrowserVersion browserVersion = getDomElementOrNull().getPage().getWebClient().getBrowserVersion();
+        final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
         final boolean feature = hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
         final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
 
@@ -254,7 +253,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final ComputedCssStyleDeclaration decl = queue[0];
         queue[0] = null;
 
-        final DomElement domElem = decl.getDomElementOrNull();
+        final DomElement domElem = decl.getDomElement();
         if (!domElem.isAttachedToPage() && feature) {
             return EMPTY_FINAL;
         }
@@ -282,7 +281,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     private String getStyleAttribute(final Definition definition, final String toReturnIfEmptyOrDefault,
             final String defaultValue) {
-        final DomElement domElement = getDomElementOrNull();
+        final DomElement domElement = getDomElement();
 
         if (!domElement.isAttachedToPage()
                 && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
@@ -408,20 +407,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return elementStyleDeclaration_.getStyleMap();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Element getElementOrNull() {
-        return elementStyleDeclaration_.getElementOrNull();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomElement getDomElementOrNull() {
-        return elementStyleDeclaration_.getDomElementOrNull();
+    public DomElement getDomElement() {
+        return elementStyleDeclaration_.getDomElement();
     }
 
     /**
@@ -454,7 +441,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getDisplay() {
-        final DomElement domElem = getDomElementOrNull();
+        final DomElement domElem = getDomElement();
         if (!domElem.isAttachedToPage()) {
             if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
                 return "";
@@ -478,7 +465,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getFont() {
-        final DomElement domElem = getDomElementOrNull();
+        final DomElement domElem = getDomElement();
         if (domElem.isAttachedToPage()) {
             if (hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)) {
                 return getStyleAttribute(FONT, true);
@@ -516,7 +503,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return AUTO;
         }
 
-        final DomElement domElem = getDomElementOrNull();
+        final DomElement domElem = getDomElement();
         if (!domElem.isAttachedToPage()) {
             if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
                 return "";
@@ -754,7 +741,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public boolean hasFeature(final BrowserVersionFeatures property) {
-        return getDomElementOrNull().hasFeature(property);
+        return getDomElement().hasFeature(property);
     }
 
     /**
@@ -763,5 +750,13 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public boolean isComputed() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "ComputedCssStyleDeclaration for '" + getDomElement() + "'";
     }
 }

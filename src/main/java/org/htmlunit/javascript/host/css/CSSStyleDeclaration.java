@@ -63,7 +63,6 @@ import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.css.StyleElement;
 import org.htmlunit.css.WrappedCssStyleDeclaration;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
-import org.htmlunit.html.DomElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -205,27 +204,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         }
 
         return NOT_FOUND;
-    }
-
-    /**
-     * Returns the element to which this style belongs.
-     * @return the element to which this style belongs
-     */
-    protected Element getElement() {
-        if (styleDeclaration_ == null) {
-            return null; // prototype
-        }
-        return styleDeclaration_.getElementOrNull();
-    }
-
-    /**
-     * @return the dom element to which this style belongs
-     */
-    protected DomElement getDomElement() {
-        if (styleDeclaration_ == null) {
-            return null; // prototype
-        }
-        return styleDeclaration_.getDomElementOrNull();
     }
 
     /**
@@ -2380,12 +2358,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @Override
     public String toString() {
-        final DomElement domElement = getDomElement();
-        if (domElement == null) {
+        if (styleDeclaration_ == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
 
-        return "CSSStyleDeclaration for '" + domElement + "'";
+        return "CSSStyleDeclaration for '" + styleDeclaration_ + "'";
     }
 
     /**

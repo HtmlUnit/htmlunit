@@ -184,6 +184,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         // Empty.
     }
 
+    /**
+     * @return the dom element to which this style belongs
+     */
+    private DomElement getDomElement() {
+        return getCssStyleDeclaration().getDomElement();
+    }
+
     private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition) {
         return defaultIfEmpty(str, definition, false);
     }
@@ -475,7 +482,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getDomElementOrNull() == element) {
+                if (style.getDomElement() == element) {
                     return style.getStyleAttribute(LEFT, true);
                 }
                 return style.getStyleAttribute(WIDTH, true);
@@ -538,7 +545,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 .pixelString(element, new CssPixelValueConverter.CssValue(0, windowWidth) {
                     @Override
                     public String get(final ComputedCssStyleDeclaration style) {
-                        if (style.getDomElementOrNull() == element) {
+                        if (style.getDomElement() == element) {
                             return style.getStyleAttribute(definition, true);
                         }
                         return style.getStyleAttribute(WIDTH, true);
@@ -676,7 +683,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getDomElementOrNull() == element) {
+                if (style.getDomElement() == element) {
                     return style.getStyleAttribute(TOP, true);
                 }
                 return style.getStyleAttribute(HEIGHT, true);
@@ -1046,7 +1053,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 String width = getStyleAttribute(WIDTH, false);
 
                 // maybe we are enclosed something that forces a width
-                Element parent = getElement().getParentElement();
+                Element parent = getParentElement();
                 while (width.isEmpty() && parent != null) {
                     width = getWindow().getComputedStyle(parent, null).getStyleAttribute(WIDTH, false);
                     parent = parent.getParentElement();
@@ -1076,7 +1083,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         int height = CssPixelValueConverter.pixelValue(element,
                 new CssPixelValueConverter.CssValue(defaultHeight, defaultWindowHeight) {
                 @Override public String get(final ComputedCssStyleDeclaration style) {
-                    final Element elem = style.getElementOrNull();
+                    final Element elem = style.getDomElement().getScriptableObject();
                     if (elem instanceof HTMLBodyElement) {
                         return String.valueOf(elem.getWindow().getWebWindow().getInnerHeight());
                     }
@@ -1326,7 +1333,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else if ((ABSOLUTE.equals(p) || FIXED.equals(p)) && !AUTO.equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
-            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            final Element parent = getParentElement();
             final int parentWidth;
             if (parent == null) {
                 parentWidth = getWindow().getInnerWidth();
@@ -1340,7 +1347,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else if (FIXED.equals(p) && !AUTO.equals(r)) {
             final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(getElement(), null);
 
-            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            final Element parent = getParentElement();
             final int parentWidth;
             if (parent == null) {
                 parentWidth = getWindow().getInnerWidth();
@@ -1495,7 +1502,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getBottomWithInheritance() {
         String bottom = getBottom();
         if (INHERIT.equals(bottom)) {
-            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            final Element parent = getParentElement();
             if (parent == null) {
                 bottom = AUTO;
             }
@@ -1689,5 +1696,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return value;
         }
         return CssPixelValueConverter.pixelValue(value) + "px";
+    }
+
+    private Element getElement() {
+        return getCssStyleDeclaration().getDomElement().getScriptableObject();
+    }
+
+    private Element getParentElement() {
+        return getElement().getParentElement();
     }
 }
