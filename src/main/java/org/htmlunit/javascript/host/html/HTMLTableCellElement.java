@@ -27,6 +27,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.List;
 
+import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
@@ -37,7 +38,6 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
-import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.event.MouseEvent;
 
 /**
@@ -81,7 +81,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         if (isDisplayNone()) {
             return 0;
         }
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        final ComputedCssStyleDeclaration style = getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
         final boolean includeBorder = getBrowserVersion().hasFeature(JS_TABLE_CELL_OFFSET_INCLUDES_BORDER);
         return style.getCalculatedHeight(includeBorder, true);
     }
@@ -101,8 +101,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             return 0;
         }
 
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        if ("collapse".equals(style.getStyleAttribute(StyleAttributes.Definition.BORDER_COLLAPSE))) {
+        final ComputedCssStyleDeclaration style = getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
+        if ("collapse".equals(style.getStyleAttribute(StyleAttributes.Definition.BORDER_COLLAPSE, true))) {
             final HtmlTableRow row = getRow();
             if (row != null) {
                 final HtmlElement thiz = getDomNodeOrDie();

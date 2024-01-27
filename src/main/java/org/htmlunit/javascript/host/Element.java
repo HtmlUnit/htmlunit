@@ -44,6 +44,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomAttr;
@@ -63,7 +64,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.css.CSSStyleDeclaration;
-import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
 import org.htmlunit.javascript.host.dom.Document;
@@ -605,7 +605,7 @@ public class Element extends Node {
      */
     @JsxGetter
     public int getClientHeight() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        final ComputedCssStyleDeclaration style = getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
         return style.getCalculatedHeight(false, true);
     }
 
@@ -615,7 +615,7 @@ public class Element extends Node {
      */
     @JsxGetter
     public int getClientWidth() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        final ComputedCssStyleDeclaration style = getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
         return style.getCalculatedWidth(false, true);
     }
 
@@ -625,7 +625,7 @@ public class Element extends Node {
      */
     @JsxGetter
     public int getClientLeft() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        final ComputedCssStyleDeclaration style = getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
         return style.getBorderLeftValue();
     }
 
@@ -635,7 +635,7 @@ public class Element extends Node {
      */
     @JsxGetter
     public int getClientTop() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        final ComputedCssStyleDeclaration style = getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
         return style.getBorderTopValue();
     }
 
@@ -1167,7 +1167,8 @@ public class Element extends Node {
             scrollTop_ = 0;
         }
         else if (scrollTop_ > 0) {
-            final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+            final ComputedCssStyleDeclaration style =
+                    getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
             if (!style.isScrollable(false)) {
                 scrollTop_ = 0;
             }
@@ -1197,7 +1198,8 @@ public class Element extends Node {
             scrollLeft_ = 0;
         }
         else if (scrollLeft_ > 0) {
-            final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+            final ComputedCssStyleDeclaration style =
+                    getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
             if (!style.isScrollable(true)) {
                 scrollLeft_ = 0;
             }

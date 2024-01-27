@@ -92,10 +92,8 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptErrorListener;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
-import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.Location;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLIFrameElement;
@@ -2272,12 +2270,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (webClient_.isJavaScriptEnabled() && frameElement.isDisplayed()) {
-                    // todo move getCalculatedWidth() and getCalculatedHeight() to ComputedCssStyleDeclaration
-                    final ComputedCssStyleDeclaration computedCssStyleDeclaration =
-                            fw.getComputedStyle(frameElement, null);
-                    final Element elem = frameElement.getScriptableObject();
-                    final ComputedCSSStyleDeclaration style =
-                            new ComputedCSSStyleDeclaration(elem, computedCssStyleDeclaration);
+                    final ComputedCssStyleDeclaration style = fw.getComputedStyle(frameElement, null);
                     use = style.getCalculatedWidth(false, false) != 0
                             && style.getCalculatedHeight(false, false) != 0;
                 }
