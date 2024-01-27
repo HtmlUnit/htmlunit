@@ -181,7 +181,6 @@ import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
 import org.htmlunit.platform.Platform;
-import org.w3c.dom.Text;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -1289,7 +1288,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 || element instanceof HtmlDefinition
                 || element instanceof HtmlDefinitionDescription
                 || element instanceof HtmlDefinitionTerm
-                || element instanceof HtmlElement
                 || element instanceof HtmlEmphasis
                 || element instanceof HtmlFigure
                 || element instanceof HtmlFigureCaption
@@ -1322,6 +1320,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 || element instanceof HtmlSuperscript
                 || element instanceof HtmlTeletype
                 || element instanceof HtmlUnderlined
+                || element instanceof HtmlUnknownElement
                 || element instanceof HtmlWordBreak
                 || element instanceof HtmlMain
                 || element instanceof HtmlVariable
