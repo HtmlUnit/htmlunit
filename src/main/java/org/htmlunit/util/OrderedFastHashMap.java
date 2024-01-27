@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2023 Gargoyle Software Inc.
+ * Copyright (c) 2002-2024 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package org.htmlunit.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,7 +55,7 @@ import java.util.Set;
  *
  * @author Ren&eacute; Schwietzke
  */
-public class OrderedFastHashMap<K, V> implements Map<K, V> {
+public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     // our placeholders in the map
     private static Object FREE_KEY_ = null;
     private static Object REMOVED_KEY_ = new Object();
