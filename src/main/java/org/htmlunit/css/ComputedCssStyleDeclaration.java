@@ -110,6 +110,7 @@ import org.htmlunit.html.HtmlBaseFont;
 import org.htmlunit.html.HtmlBidirectionalIsolation;
 import org.htmlunit.html.HtmlBidirectionalOverride;
 import org.htmlunit.html.HtmlBig;
+import org.htmlunit.html.HtmlBlink;
 import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlBold;
 import org.htmlunit.html.HtmlButton;
@@ -1281,6 +1282,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 || element instanceof HtmlBidirectionalIsolation
                 || element instanceof HtmlBidirectionalOverride
                 || element instanceof HtmlBig
+                || element instanceof HtmlBlink
                 || element instanceof HtmlBold
                 || element instanceof HtmlCenter
                 || element instanceof HtmlCitation
