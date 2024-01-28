@@ -178,4 +178,12 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public boolean hasFeature(final BrowserVersionFeatures property) {
         return browserVersion_.hasFeature(property);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BrowserVersion getBrowserVersion() {
+        return browserVersion_;
+    }
 }

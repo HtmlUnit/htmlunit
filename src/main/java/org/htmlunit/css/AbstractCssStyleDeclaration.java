@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
@@ -102,6 +103,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return {@code false} if this browser doesn't have this feature
      */
     public abstract boolean hasFeature(BrowserVersionFeatures property);
+
+    /**
+     * @return the {@link BrowserVersion}
+     */
+    public abstract BrowserVersion getBrowserVersion();
 
     /**
      * <p>Returns the value of one of the two named style attributes. If both attributes exist,

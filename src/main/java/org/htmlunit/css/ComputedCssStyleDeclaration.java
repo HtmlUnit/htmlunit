@@ -32,52 +32,6 @@ import static org.htmlunit.css.CssStyleSheet.NONE;
 import static org.htmlunit.css.CssStyleSheet.RELATIVE;
 import static org.htmlunit.css.CssStyleSheet.SCROLL;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
-import static org.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
-import static org.htmlunit.css.StyleAttributes.Definition.AZIMUTH;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_COLLAPSE;
-import static org.htmlunit.css.StyleAttributes.Definition.BORDER_SPACING;
-import static org.htmlunit.css.StyleAttributes.Definition.BOTTOM;
-import static org.htmlunit.css.StyleAttributes.Definition.CAPTION_SIDE;
-import static org.htmlunit.css.StyleAttributes.Definition.COLOR;
-import static org.htmlunit.css.StyleAttributes.Definition.CURSOR;
-import static org.htmlunit.css.StyleAttributes.Definition.DIRECTION;
-import static org.htmlunit.css.StyleAttributes.Definition.DISPLAY;
-import static org.htmlunit.css.StyleAttributes.Definition.ELEVATION;
-import static org.htmlunit.css.StyleAttributes.Definition.EMPTY_CELLS;
-import static org.htmlunit.css.StyleAttributes.Definition.FONT;
-import static org.htmlunit.css.StyleAttributes.Definition.FONT_FAMILY;
-import static org.htmlunit.css.StyleAttributes.Definition.FONT_SIZE;
-import static org.htmlunit.css.StyleAttributes.Definition.FONT_STYLE;
-import static org.htmlunit.css.StyleAttributes.Definition.FONT_VARIANT;
-import static org.htmlunit.css.StyleAttributes.Definition.FONT_WEIGHT;
-import static org.htmlunit.css.StyleAttributes.Definition.LETTER_SPACING;
-import static org.htmlunit.css.StyleAttributes.Definition.LINE_HEIGHT;
-import static org.htmlunit.css.StyleAttributes.Definition.LIST_STYLE;
-import static org.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_IMAGE;
-import static org.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_POSITION;
-import static org.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_TYPE;
-import static org.htmlunit.css.StyleAttributes.Definition.ORPHANS;
-import static org.htmlunit.css.StyleAttributes.Definition.PITCH;
-import static org.htmlunit.css.StyleAttributes.Definition.PITCH_RANGE;
-import static org.htmlunit.css.StyleAttributes.Definition.POSITION;
-import static org.htmlunit.css.StyleAttributes.Definition.QUOTES;
-import static org.htmlunit.css.StyleAttributes.Definition.RICHNESS;
-import static org.htmlunit.css.StyleAttributes.Definition.SPEAK;
-import static org.htmlunit.css.StyleAttributes.Definition.SPEAK_HEADER;
-import static org.htmlunit.css.StyleAttributes.Definition.SPEAK_NUMERAL;
-import static org.htmlunit.css.StyleAttributes.Definition.SPEAK_PUNCTUATION;
-import static org.htmlunit.css.StyleAttributes.Definition.SPEECH_RATE;
-import static org.htmlunit.css.StyleAttributes.Definition.STRESS;
-import static org.htmlunit.css.StyleAttributes.Definition.TEXT_ALIGN;
-import static org.htmlunit.css.StyleAttributes.Definition.TEXT_INDENT;
-import static org.htmlunit.css.StyleAttributes.Definition.TEXT_TRANSFORM;
-import static org.htmlunit.css.StyleAttributes.Definition.VISIBILITY;
-import static org.htmlunit.css.StyleAttributes.Definition.VOICE_FAMILY;
-import static org.htmlunit.css.StyleAttributes.Definition.VOLUME;
-import static org.htmlunit.css.StyleAttributes.Definition.WHITE_SPACE;
-import static org.htmlunit.css.StyleAttributes.Definition.WIDOWS;
-import static org.htmlunit.css.StyleAttributes.Definition.WIDTH;
-import static org.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
 
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -181,6 +135,8 @@ import org.htmlunit.html.HtmlUnderlined;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
+import org.htmlunit.javascript.host.Element;
+import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.platform.Platform;
 
 /**
@@ -199,47 +155,47 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     /** The set of 'inheritable' definitions. */
     private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
-        AZIMUTH,
-        BORDER_COLLAPSE,
-        BORDER_SPACING,
-        CAPTION_SIDE,
-        COLOR,
-        CURSOR,
-        DIRECTION,
-        ELEVATION,
-        EMPTY_CELLS,
-        FONT_FAMILY,
-        FONT_SIZE,
-        FONT_STYLE,
-        FONT_VARIANT,
-        FONT_WEIGHT,
-        FONT,
-        LETTER_SPACING,
-        LINE_HEIGHT,
-        LIST_STYLE_IMAGE,
-        LIST_STYLE_POSITION,
-        LIST_STYLE_TYPE,
-        LIST_STYLE,
-        ORPHANS,
-        PITCH_RANGE,
-        PITCH,
-        QUOTES,
-        RICHNESS,
-        SPEAK_HEADER,
-        SPEAK_NUMERAL,
-        SPEAK_PUNCTUATION,
-        SPEAK,
-        SPEECH_RATE,
-        STRESS,
-        TEXT_ALIGN,
-        TEXT_INDENT,
-        TEXT_TRANSFORM,
-        VISIBILITY,
-        VOICE_FAMILY,
-        VOLUME,
-        WHITE_SPACE,
-        WIDOWS,
-        WORD_SPACING);
+        Definition.AZIMUTH,
+        Definition.BORDER_COLLAPSE,
+        Definition.BORDER_SPACING,
+        Definition.CAPTION_SIDE,
+        Definition.COLOR,
+        Definition.CURSOR,
+        Definition.DIRECTION,
+        Definition.ELEVATION,
+        Definition.EMPTY_CELLS,
+        Definition.FONT_FAMILY,
+        Definition.FONT_SIZE,
+        Definition.FONT_STYLE,
+        Definition.FONT_VARIANT,
+        Definition.FONT_WEIGHT,
+        Definition.FONT,
+        Definition.LETTER_SPACING,
+        Definition.LINE_HEIGHT,
+        Definition.LIST_STYLE_IMAGE,
+        Definition.LIST_STYLE_POSITION,
+        Definition.LIST_STYLE_TYPE,
+        Definition.LIST_STYLE,
+        Definition.ORPHANS,
+        Definition.PITCH_RANGE,
+        Definition.PITCH,
+        Definition.QUOTES,
+        Definition.RICHNESS,
+        Definition.SPEAK_HEADER,
+        Definition.SPEAK_NUMERAL,
+        Definition.SPEAK_PUNCTUATION,
+        Definition.SPEAK,
+        Definition.SPEECH_RATE,
+        Definition.STRESS,
+        Definition.TEXT_ALIGN,
+        Definition.TEXT_INDENT,
+        Definition.TEXT_TRANSFORM,
+        Definition.VISIBILITY,
+        Definition.VOICE_FAMILY,
+        Definition.VOLUME,
+        Definition.WHITE_SPACE,
+        Definition.WIDOWS,
+        Definition.WORD_SPACING);
 
     /** Denotes a value which should be returned as is. */
     public static final String EMPTY_FINAL = new String("");
@@ -449,7 +405,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
                 return "";
             }
-            if (getStyleAttribute(WIDTH, true).isEmpty()) {
+            if (getStyleAttribute(Definition.WIDTH, true).isEmpty()) {
                 return AUTO;
             }
         }
@@ -458,9 +414,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return CssPixelValueConverter.pixelString(domElem, new CssPixelValueConverter.CssValue(0, windowWidth) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
-                final String value = style.getStyleAttribute(WIDTH, true);
+                final String value = style.getStyleAttribute(Definition.WIDTH, true);
                 if (StringUtils.isEmpty(value)) {
-                    final String position = getStyleAttribute(POSITION, true);
+                    final String position = getStyleAttribute(Definition.POSITION, true);
                     if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
                         final String content = domElem.getVisibleText();
                         // do this only for small content
@@ -565,7 +521,148 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getAccelerator() {
-        return getStyleAttribute(ACCELERATOR, true);
+        return getStyleAttribute(Definition.ACCELERATOR, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBackgroundAttachment() {
+        return defaultIfEmpty(super.getBackgroundAttachment(), Definition.BACKGROUND_ATTACHMENT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBackgroundColor() {
+        final String value = super.getBackgroundColor();
+        if (StringUtils.isEmpty(value)) {
+            return Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
+        }
+        return CssColors.toRGBColor(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBackgroundImage() {
+        return defaultIfEmpty(super.getBackgroundImage(), Definition.BACKGROUND_IMAGE);
+    }
+
+    /**
+     * Gets the {@code backgroundPosition} style attribute.
+     * @return the style attribute
+     */
+    @Override
+    public String getBackgroundPosition() {
+        return defaultIfEmpty(super.getBackgroundPosition(), Definition.BACKGROUND_POSITION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBackgroundRepeat() {
+        return defaultIfEmpty(super.getBackgroundRepeat(), Definition.BACKGROUND_REPEAT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderBottomColor() {
+        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER_BOTTOM_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderBottomStyle() {
+        return defaultIfEmpty(super.getBorderBottomStyle(), Definition.BORDER_BOTTOM_STYLE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderBottomWidth() {
+        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), Definition.BORDER_BOTTOM_WIDTH));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderLeftColor() {
+        return defaultIfEmpty(super.getBorderLeftColor(), Definition.BORDER_LEFT_COLOR);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderLeftStyle() {
+        return defaultIfEmpty(super.getBorderLeftStyle(), Definition.BORDER_LEFT_STYLE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderLeftWidth() {
+        return pixelString(defaultIfEmpty(super.getBorderLeftWidth(), "0px", null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderRightColor() {
+        return defaultIfEmpty(super.getBorderRightColor(), "rgb(0, 0, 0)", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderRightStyle() {
+        return defaultIfEmpty(super.getBorderRightStyle(), NONE, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderRightWidth() {
+        return pixelString(defaultIfEmpty(super.getBorderRightWidth(), "0px", null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderTopColor() {
+        return defaultIfEmpty(super.getBorderTopColor(), "rgb(0, 0, 0)", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderTopStyle() {
+        return defaultIfEmpty(super.getBorderTopStyle(), NONE, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBorderTopWidth() {
+        return pixelString(defaultIfEmpty(super.getBorderTopWidth(), "0px", null));
     }
 
     /**
@@ -573,7 +670,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getBottom() {
-        return getStyleAttribute(BOTTOM, AUTO, null);
+        return getStyleAttribute(Definition.BOTTOM, AUTO, null);
     }
 
     /**
@@ -581,8 +678,16 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getColor() {
-        final String value = getStyleAttribute(COLOR, "rgb(0, 0, 0)", null);
+        final String value = getStyleAttribute(Definition.COLOR, "rgb(0, 0, 0)", null);
         return CssColors.toRGBColor(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCssFloat() {
+        return defaultIfEmpty(super.getCssFloat(), Definition.CSS_FLOAT);
     }
 
     /**
@@ -599,7 +704,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
-        final String value = getStyleAttribute(DISPLAY.getAttributeName());
+        final String value = getStyleAttribute(Definition.DISPLAY.getAttributeName());
         if (StringUtils.isEmpty(value)) {
             if (domElem instanceof HtmlElement) {
                 return ((HtmlElement) domElem).getDefaultStyleDisplay().value();
@@ -617,7 +722,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final DomElement domElem = getDomElement();
         if (domElem.isAttachedToPage()) {
             if (hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)) {
-                return getStyleAttribute(FONT, true);
+                return getStyleAttribute(Definition.FONT, true);
             }
         }
         return "";
@@ -628,7 +733,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getFontFamily() {
-        return getStyleAttribute(FONT_FAMILY, true);
+        return getStyleAttribute(Definition.FONT_FAMILY, true);
     }
 
     /**
@@ -636,11 +741,49 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getFontSize() {
-        String value = getStyleAttribute(FONT_SIZE, true);
+        String value = getStyleAttribute(Definition.FONT_SIZE, true);
         if (!value.isEmpty()) {
             value = CssPixelValueConverter.pixelValue(value) + "px";
         }
         return value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLineHeight() {
+        return defaultIfEmpty(super.getLineHeight(), Definition.LINE_HEIGHT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getHeight() {
+        if (NONE.equals(getDisplay())) {
+            return AUTO;
+        }
+
+        final DomElement elem = getDomElement();
+        if (!elem.isAttachedToPage()) {
+            if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+                return "";
+            }
+            if (getStyleAttribute(Definition.HEIGHT, true).isEmpty()) {
+                return AUTO;
+            }
+        }
+        final int windowHeight = elem.getPage().getEnclosingWindow().getInnerHeight();
+        return CssPixelValueConverter
+                .pixelString(elem, new CssPixelValueConverter.CssValue(0, windowHeight) {
+                    @Override
+                    public String get(final ComputedCssStyleDeclaration style) {
+                        // TODO don't reach out to the js peer
+                        final String offsetHeight = ((HTMLElement) elem.getScriptableObject()).getOffsetHeight() + "px";
+                        return defaultIfEmpty(style.getStyleAttribute(Definition.HEIGHT, true), offsetHeight, AUTO);
+                    }
+                });
     }
 
     /**
@@ -661,6 +804,212 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     return style.getStyleAttribute(Definition.LEFT, true);
                 }
                 return style.getStyleAttribute(Definition.WIDTH, true);
+            }
+        });
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLetterSpacing() {
+        return defaultIfEmpty(super.getLetterSpacing(), "normal", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMargin() {
+        return defaultIfEmpty(super.getMargin(), Definition.MARGIN, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMarginBottom() {
+        return pixelString(defaultIfEmpty(super.getMarginBottom(), "0px", null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMarginLeft() {
+        return getMarginX(super.getMarginLeft(), Definition.MARGIN_LEFT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMarginRight() {
+        return getMarginX(super.getMarginRight(), Definition.MARGIN_RIGHT);
+    }
+
+    private String getMarginX(final String superMarginX, final Definition definition) {
+        if (!superMarginX.endsWith("%")) {
+            return pixelString(defaultIfEmpty(superMarginX, "0px", null));
+        }
+        final DomElement element = getDomElement();
+        if (!element.isAttachedToPage() && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+            return "";
+        }
+
+        final int windowWidth = element.getPage().getEnclosingWindow().getInnerWidth();
+        return CssPixelValueConverter
+                .pixelString(element, new CssPixelValueConverter.CssValue(0, windowWidth) {
+                    @Override
+                    public String get(final ComputedCssStyleDeclaration style) {
+                        if (style.getDomElement() == element) {
+                            return style.getStyleAttribute(definition, true);
+                        }
+                        return style.getStyleAttribute(Definition.WIDTH, true);
+                    }
+                });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMarginTop() {
+        return pixelString(defaultIfEmpty(super.getMarginTop(), "0px", null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMaxHeight() {
+        return defaultIfEmpty(super.getMaxHeight(), NONE, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMaxWidth() {
+        return defaultIfEmpty(super.getMaxWidth(), NONE, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMinHeight() {
+        return defaultIfEmpty(super.getMinHeight(), "0px", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMinWidth() {
+        return defaultIfEmpty(super.getMinWidth(), "0px", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getOpacity() {
+        return defaultIfEmpty(super.getOpacity(), "1", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getOrphans() {
+        return defaultIfEmpty(super.getOrphans(), Definition.ORPHANS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getOutlineWidth() {
+        return defaultIfEmpty(super.getOutlineWidth(), "0px", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPadding() {
+        return defaultIfEmpty(super.getPadding(), Definition.PADDING, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPaddingBottom() {
+        return pixelString(defaultIfEmpty(super.getPaddingBottom(), "0px", null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPaddingLeft() {
+        return pixelString(defaultIfEmpty(super.getPaddingLeft(), "0px", null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPaddingRight() {
+        return pixelString(defaultIfEmpty(super.getPaddingRight(), "0px", null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPaddingTop() {
+        return pixelString(defaultIfEmpty(super.getPaddingTop(), "0px", null));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getRight() {
+        return defaultIfEmpty(super.getRight(), AUTO, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTextIndent() {
+        return defaultIfEmpty(super.getTextIndent(), "0px", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTop() {
+        final DomElement element = getDomElement();
+        if (!element.isAttachedToPage() && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+            return "";
+        }
+        final String superTop = super.getTop();
+        if (!superTop.endsWith("%")) {
+            return defaultIfEmpty(superTop, Definition.TOP);
+        }
+
+        return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
+            @Override
+            public String get(final ComputedCssStyleDeclaration style) {
+                if (style.getDomElement() == element) {
+                    return style.getStyleAttribute(Definition.TOP, true);
+                }
+                return style.getStyleAttribute(Definition.HEIGHT, true);
             }
         });
     }
@@ -797,6 +1146,42 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
         }
         return bottom;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getVerticalAlign() {
+        return defaultIfEmpty(super.getVerticalAlign(), "baseline", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getWidows() {
+        return defaultIfEmpty(super.getWidows(), Definition.WIDOWS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getWordSpacing() {
+        return defaultIfEmpty(super.getWordSpacing(), Definition.WORD_SPACING);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getZIndex() {
+        final Object response = super.getZIndex();
+        if (response.toString().isEmpty()) {
+            return AUTO;
+        }
+        return response;
     }
 
     /**
@@ -941,6 +1326,14 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         return left;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPosition() {
+        return defaultIfEmpty(super.getPosition(), Definition.POSITION);
     }
 
     /**
@@ -1858,6 +2251,14 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public BrowserVersion getBrowserVersion() {
+        return getDomElement().getPage().getWebClient().getBrowserVersion();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isComputed() {
         return true;
     }
@@ -1868,6 +2269,25 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public String toString() {
         return "ComputedCssStyleDeclaration for '" + getDomElement() + "'";
+    }
+
+    private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition) {
+        return defaultIfEmpty(str, definition, false);
+    }
+
+    private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
+            final boolean isPixel) {
+        if (!getDomElement().isAttachedToPage()
+                && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+            return ComputedCssStyleDeclaration.EMPTY_FINAL;
+        }
+        if (str == null || str.isEmpty()) {
+            return definition.getDefaultComputedValue(getBrowserVersion());
+        }
+        if (isPixel) {
+            return pixelString(str);
+        }
+        return str;
     }
 
     /**
@@ -1884,5 +2304,20 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return toReturnIfEmptyOrDefault;
         }
         return str;
+    }
+
+    /**
+     * Returns the specified length value as a pixel length value, as long as we're not emulating IE.
+     * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)}
+     * if you need percentage support).
+     * @param value the length value to convert to a pixel length value
+     * @return the specified length value as a pixel length value
+     * @see #pixelString(Element, CSSStyleDeclaration.CssValue)
+     */
+    private static String pixelString(final String value) {
+        if (EMPTY_FINAL == value || value.endsWith("px")) {
+            return value;
+        }
+        return CssPixelValueConverter.pixelValue(value) + "px";
     }
 }

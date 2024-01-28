@@ -14,28 +14,17 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
-import static org.htmlunit.css.CssStyleSheet.AUTO;
-import static org.htmlunit.css.CssStyleSheet.NONE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
-import org.htmlunit.css.CssColors;
-import org.htmlunit.css.CssPixelValueConverter;
-import org.htmlunit.css.CssPixelValueConverter.CssValue;
-import org.htmlunit.css.StyleAttributes;
-import org.htmlunit.css.StyleAttributes.Definition;
-import org.htmlunit.html.DomElement;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 import org.htmlunit.javascript.host.Element;
-import org.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -105,48 +94,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * @return the dom element to which this style belongs
-     */
-    private DomElement getDomElement() {
-        return getCssStyleDeclaration().getDomElement();
-    }
-
-    private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition) {
-        return defaultIfEmpty(str, definition, false);
-    }
-
-    private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
-            final boolean isPixel) {
-        if (!getDomElement().isAttachedToPage()
-                && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-            return ComputedCssStyleDeclaration.EMPTY_FINAL;
-        }
-        if (str == null || str.isEmpty()) {
-            return definition.getDefaultComputedValue(getBrowserVersion());
-        }
-        if (isPixel) {
-            return pixelString(str);
-        }
-        return str;
-    }
-
-    /**
-     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defaultValue}
-     * @param defaultValue the default value of the string
-     * @return the string, or {@code toReturnIfEmptyOrDefault}
-     */
-    private String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
-        if (!getDomElement().isAttachedToPage()
-                && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-            return ComputedCssStyleDeclaration.EMPTY_FINAL;
-        }
-        if (str == null || str.isEmpty() || str.equals(defaultValue)) {
-            return toReturnIfEmptyOrDefault;
-        }
-        return str;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -159,7 +106,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundAttachment() {
-        return defaultIfEmpty(super.getBackgroundAttachment(), Definition.BACKGROUND_ATTACHMENT);
+        return getCssStyleDeclaration().getBackgroundAttachment();
     }
 
     /**
@@ -167,11 +114,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundColor() {
-        final String value = super.getBackgroundColor();
-        if (StringUtils.isEmpty(value)) {
-            return Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
-        }
-        return CssColors.toRGBColor(value);
+        return getCssStyleDeclaration().getBackgroundColor();
     }
 
     /**
@@ -179,7 +122,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundImage() {
-        return defaultIfEmpty(super.getBackgroundImage(), Definition.BACKGROUND_IMAGE);
+        return getCssStyleDeclaration().getBackgroundImage();
     }
 
     /**
@@ -188,7 +131,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundPosition() {
-        return defaultIfEmpty(super.getBackgroundPosition(), Definition.BACKGROUND_POSITION);
+        return getCssStyleDeclaration().getBackgroundPosition();
     }
 
     /**
@@ -196,7 +139,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBackgroundRepeat() {
-        return defaultIfEmpty(super.getBackgroundRepeat(), Definition.BACKGROUND_REPEAT);
+        return getCssStyleDeclaration().getBackgroundRepeat();
     }
 
     /**
@@ -204,7 +147,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomColor() {
-        return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER_BOTTOM_COLOR);
+        return getCssStyleDeclaration().getBorderBottomColor();
     }
 
     /**
@@ -212,7 +155,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomStyle() {
-        return defaultIfEmpty(super.getBorderBottomStyle(), Definition.BORDER_BOTTOM_STYLE);
+        return getCssStyleDeclaration().getBorderBottomStyle();
     }
 
     /**
@@ -220,7 +163,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderBottomWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), Definition.BORDER_BOTTOM_WIDTH));
+        return getCssStyleDeclaration().getBorderBottomWidth();
     }
 
     /**
@@ -228,7 +171,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftColor() {
-        return defaultIfEmpty(super.getBorderLeftColor(), Definition.BORDER_LEFT_COLOR);
+        return getCssStyleDeclaration().getBorderLeftColor();
     }
 
     /**
@@ -236,7 +179,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftStyle() {
-        return defaultIfEmpty(super.getBorderLeftStyle(), Definition.BORDER_LEFT_STYLE);
+        return getCssStyleDeclaration().getBorderLeftStyle();
     }
 
     /**
@@ -244,7 +187,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderLeftWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderLeftWidth(), "0px", null));
+        return getCssStyleDeclaration().getBorderLeftWidth();
     }
 
     /**
@@ -252,7 +195,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightColor() {
-        return defaultIfEmpty(super.getBorderRightColor(), "rgb(0, 0, 0)", null);
+        return getCssStyleDeclaration().getBorderRightColor();
     }
 
     /**
@@ -260,7 +203,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightStyle() {
-        return defaultIfEmpty(super.getBorderRightStyle(), NONE, null);
+        return getCssStyleDeclaration().getBorderRightStyle();
     }
 
     /**
@@ -268,7 +211,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderRightWidth(), "0px", null));
+        return getCssStyleDeclaration().getBorderRightWidth();
     }
 
     /**
@@ -276,7 +219,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopColor() {
-        return defaultIfEmpty(super.getBorderTopColor(), "rgb(0, 0, 0)", null);
+        return getCssStyleDeclaration().getBorderTopColor();
     }
 
     /**
@@ -284,7 +227,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopStyle() {
-        return defaultIfEmpty(super.getBorderTopStyle(), NONE, null);
+        return getCssStyleDeclaration().getBorderTopStyle();
     }
 
     /**
@@ -292,7 +235,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopWidth() {
-        return pixelString(defaultIfEmpty(super.getBorderTopWidth(), "0px", null));
+        return getCssStyleDeclaration().getBorderTopWidth();
     }
 
     /**
@@ -316,7 +259,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getCssFloat() {
-        return defaultIfEmpty(super.getCssFloat(), Definition.CSS_FLOAT);
+        return getCssStyleDeclaration().getCssFloat();
     }
 
     /**
@@ -356,7 +299,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getLineHeight() {
-        return defaultIfEmpty(super.getLineHeight(), Definition.LINE_HEIGHT);
+        return getCssStyleDeclaration().getLineHeight();
     }
 
     /**
@@ -364,28 +307,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getHeight() {
-        if (NONE.equals(getDisplay())) {
-            return AUTO;
-        }
-
-        final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
-            if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-                return "";
-            }
-            if (getStyleAttribute(Definition.HEIGHT, true).isEmpty()) {
-                return AUTO;
-            }
-        }
-        final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
-        return CssPixelValueConverter
-                .pixelString(elem.getDomNodeOrDie(), new CssPixelValueConverter.CssValue(0, windowHeight) {
-                    @Override
-                    public String get(final ComputedCssStyleDeclaration style) {
-                        final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
-                        return defaultIfEmpty(style.getStyleAttribute(Definition.HEIGHT, true), offsetHeight, AUTO);
-                    }
-                });
+        return getCssStyleDeclaration().getHeight();
     }
 
     /**
@@ -401,7 +323,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getLetterSpacing() {
-        return defaultIfEmpty(super.getLetterSpacing(), "normal", null);
+        return getCssStyleDeclaration().getLetterSpacing();
     }
 
     /**
@@ -409,7 +331,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMargin() {
-        return defaultIfEmpty(super.getMargin(), Definition.MARGIN, true);
+        return getCssStyleDeclaration().getMargin();
     }
 
     /**
@@ -417,7 +339,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginBottom() {
-        return pixelString(defaultIfEmpty(super.getMarginBottom(), "0px", null));
+        return getCssStyleDeclaration().getMarginBottom();
     }
 
     /**
@@ -425,7 +347,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginLeft() {
-        return getMarginX(super.getMarginLeft(), Definition.MARGIN_LEFT);
+        return getCssStyleDeclaration().getMarginLeft();
     }
 
     /**
@@ -433,30 +355,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginRight() {
-        return getMarginX(super.getMarginRight(), Definition.MARGIN_RIGHT);
-    }
-
-    private String getMarginX(final String superMarginX, final Definition definition) {
-        if (!superMarginX.endsWith("%")) {
-            return pixelString(defaultIfEmpty(superMarginX, "0px", null));
-        }
-        final DomElement element = getDomElement();
-        if (!element.isAttachedToPage()
-                && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-            return "";
-        }
-
-        final int windowWidth = element.getPage().getEnclosingWindow().getInnerWidth();
-        return CssPixelValueConverter
-                .pixelString(element, new CssPixelValueConverter.CssValue(0, windowWidth) {
-                    @Override
-                    public String get(final ComputedCssStyleDeclaration style) {
-                        if (style.getDomElement() == element) {
-                            return style.getStyleAttribute(definition, true);
-                        }
-                        return style.getStyleAttribute(Definition.WIDTH, true);
-                    }
-                });
+        return getCssStyleDeclaration().getMarginRight();
     }
 
     /**
@@ -464,7 +363,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMarginTop() {
-        return pixelString(defaultIfEmpty(super.getMarginTop(), "0px", null));
+        return getCssStyleDeclaration().getMarginTop();
     }
 
     /**
@@ -472,7 +371,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMaxHeight() {
-        return defaultIfEmpty(super.getMaxHeight(), NONE, null);
+        return getCssStyleDeclaration().getMaxHeight();
     }
 
     /**
@@ -480,7 +379,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMaxWidth() {
-        return defaultIfEmpty(super.getMaxWidth(), NONE, null);
+        return getCssStyleDeclaration().getMaxWidth();
     }
 
     /**
@@ -488,7 +387,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMinHeight() {
-        return defaultIfEmpty(super.getMinHeight(), "0px", null);
+        return getCssStyleDeclaration().getMinHeight();
     }
 
     /**
@@ -496,7 +395,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMinWidth() {
-        return defaultIfEmpty(super.getMinWidth(), "0px", null);
+        return getCssStyleDeclaration().getMinWidth();
     }
 
     /**
@@ -504,7 +403,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getOpacity() {
-        return defaultIfEmpty(super.getOpacity(), "1", null);
+        return getCssStyleDeclaration().getOpacity();
     }
 
     /**
@@ -512,7 +411,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getOutlineWidth() {
-        return defaultIfEmpty(super.getOutlineWidth(), "0px", null);
+        return getCssStyleDeclaration().getOutlineWidth();
     }
 
     /**
@@ -520,7 +419,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPadding() {
-        return defaultIfEmpty(super.getPadding(), Definition.PADDING, true);
+        return getCssStyleDeclaration().getPadding();
     }
 
     /**
@@ -528,7 +427,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingBottom() {
-        return pixelString(defaultIfEmpty(super.getPaddingBottom(), "0px", null));
+        return getCssStyleDeclaration().getPaddingBottom();
     }
 
     /**
@@ -536,7 +435,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingLeft() {
-        return pixelString(defaultIfEmpty(super.getPaddingLeft(), "0px", null));
+        return getCssStyleDeclaration().getPaddingLeft();
     }
 
     /**
@@ -544,7 +443,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingRight() {
-        return pixelString(defaultIfEmpty(super.getPaddingRight(), "0px", null));
+        return getCssStyleDeclaration().getPaddingRight();
     }
 
     /**
@@ -552,7 +451,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPaddingTop() {
-        return pixelString(defaultIfEmpty(super.getPaddingTop(), "0px", null));
+        return getCssStyleDeclaration().getPaddingTop();
     }
 
     /**
@@ -560,7 +459,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getRight() {
-        return defaultIfEmpty(super.getRight(), AUTO, null);
+        return getCssStyleDeclaration().getRight();
     }
 
     /**
@@ -568,7 +467,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getTextIndent() {
-        return defaultIfEmpty(super.getTextIndent(), "0px", null);
+        return getCssStyleDeclaration().getTextIndent();
     }
 
     /**
@@ -576,25 +475,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getTop() {
-        final DomElement element = getDomElement();
-        if (!element.isAttachedToPage()
-                && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-            return "";
-        }
-        final String superTop = super.getTop();
-        if (!superTop.endsWith("%")) {
-            return defaultIfEmpty(superTop, Definition.TOP);
-        }
-
-        return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getDomElement() == element) {
-                    return style.getStyleAttribute(Definition.TOP, true);
-                }
-                return style.getStyleAttribute(Definition.HEIGHT, true);
-            }
-        });
+        return getCssStyleDeclaration().getTop();
     }
 
     /**
@@ -602,7 +483,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getVerticalAlign() {
-        return defaultIfEmpty(super.getVerticalAlign(), "baseline", null);
+        return getCssStyleDeclaration().getVerticalAlign();
     }
 
     /**
@@ -610,7 +491,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWidows() {
-        return defaultIfEmpty(super.getWidows(), Definition.WIDOWS);
+        return getCssStyleDeclaration().getWidows();
     }
 
     /**
@@ -618,7 +499,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getOrphans() {
-        return defaultIfEmpty(super.getOrphans(), Definition.ORPHANS);
+        return getCssStyleDeclaration().getOrphans();
     }
 
     /**
@@ -626,7 +507,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getPosition() {
-        return defaultIfEmpty(super.getPosition(), Definition.POSITION);
+        return getCssStyleDeclaration().getPosition();
     }
 
     /**
@@ -634,7 +515,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWordSpacing() {
-        return defaultIfEmpty(super.getWordSpacing(), Definition.WORD_SPACING);
+        return getCssStyleDeclaration().getWordSpacing();
     }
 
     /**
@@ -642,11 +523,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public Object getZIndex() {
-        final Object response = super.getZIndex();
-        if (response.toString().isEmpty()) {
-            return AUTO;
-        }
-        return response;
+        return getCssStyleDeclaration().getZIndex();
     }
 
     /**
@@ -660,28 +537,5 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return super.getPropertyValue(name);
         }
         return JavaScriptEngine.toString(property);
-    }
-
-    /**
-     * Returns the specified length value as a pixel length value, as long as we're not emulating IE.
-     * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)}
-     * if you need percentage support).
-     * @param value the length value to convert to a pixel length value
-     * @return the specified length value as a pixel length value
-     * @see #pixelString(Element, CSSStyleDeclaration.CssValue)
-     */
-    private static String pixelString(final String value) {
-        if (ComputedCssStyleDeclaration.EMPTY_FINAL == value || value.endsWith("px")) {
-            return value;
-        }
-        return CssPixelValueConverter.pixelValue(value) + "px";
-    }
-
-    private Element getElement() {
-        return getCssStyleDeclaration().getDomElement().getScriptableObject();
-    }
-
-    private Element getParentElement() {
-        return getElement().getParentElement();
     }
 }
