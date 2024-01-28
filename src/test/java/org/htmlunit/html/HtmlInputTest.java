@@ -25,6 +25,7 @@ import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +37,7 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Anton Demydenko
+ * @author Ronny Shapiro
  */
 @RunWith(BrowserRunner.class)
 public final class HtmlInputTest extends SimpleWebTestCase {
@@ -240,9 +242,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         assertFalse(input.isValid());
     }
 
-
     @Test
-    public void changeType_javascriptDisabled() throws Exception {
+    public void changeType_javascriptEngineDisabled() throws Exception {
         final String htmlContent
                 = "<html><head><title>foo</title></head><body>\n"
                 + "<form id='form1'>\n"
@@ -255,6 +256,29 @@ public final class HtmlInputTest extends SimpleWebTestCase {
             final HtmlTextInput input = form.getInputByName("text1");
 
             input.setAttribute("type", "hidden");
+        }
+    }
+
+    @Test
+    public void changeType_javascriptDisabled() throws Exception {
+        final String htmlContent
+                = "<html><head><title>foo</title></head><body>\n"
+                + "<form id='form1'>\n"
+                + "<input type='text' name='text1' onchange='alert(\"changed\")')>\n"
+                + "</form></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion())) {
+            webClient.getOptions().setJavaScriptEnabled(false);
+            final HtmlPage page = loadPage(webClient, htmlContent, null, URL_FIRST);
+            final HtmlForm form = page.getHtmlElementById("form1");
+            final HtmlTextInput input = form.getInputByName("text1");
+
+            final ScriptableObject jsPeer = input.getScriptableObject();
+            assertNotNull(jsPeer);
+
+            input.setAttribute("type", "hidden");
+            assertNotNull(input.getScriptableObject());
+            assertNotEquals(jsPeer, input.getScriptableObject());
         }
     }
 }

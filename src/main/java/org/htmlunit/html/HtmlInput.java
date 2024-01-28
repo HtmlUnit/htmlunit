@@ -67,6 +67,7 @@ import org.xml.sax.helpers.AttributesImpl;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Ronny Shapiro
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
     FormFieldWithNameHistory, ValidatableElement  {
@@ -1228,7 +1229,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 }
 
                 final WebClient client = page.getWebClient();
-                if (client.isJavaScriptEnabled()) {
+                if (client.isJavaScriptEngineEnabled()) {
                     final HTMLInputElement scriptable = getScriptableObject();
                     setScriptableObject(null);
                     scriptable.setDomNode(newInput, true);
