@@ -393,21 +393,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getLeft() {
-        final String superLeft = super.getLeft();
-        if (!superLeft.endsWith("%")) {
-            return defaultIfEmpty(superLeft, AUTO, null);
-        }
-
-        final DomElement element = getDomElement();
-        return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getDomElement() == element) {
-                    return style.getStyleAttribute(Definition.LEFT, true);
-                }
-                return style.getStyleAttribute(Definition.WIDTH, true);
-            }
-        });
+        return getCssStyleDeclaration().getLeft();
     }
 
     /**

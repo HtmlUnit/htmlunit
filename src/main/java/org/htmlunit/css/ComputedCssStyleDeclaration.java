@@ -644,6 +644,28 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLeft() {
+        final String superLeft = super.getLeft();
+        if (!superLeft.endsWith("%")) {
+            return defaultIfEmpty(superLeft, AUTO, null);
+        }
+
+        final DomElement element = getDomElement();
+        return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
+            @Override
+            public String get(final ComputedCssStyleDeclaration style) {
+                if (style.getDomElement() == element) {
+                    return style.getStyleAttribute(Definition.LEFT, true);
+                }
+                return style.getStyleAttribute(Definition.WIDTH, true);
+            }
+        });
+    }
+
+    /**
      * Returns the computed top (Y coordinate), relative to the node's parent's top edge.
      * @param includeMargin whether or not to take the margin into account in the calculation
      * @param includeBorder whether or not to take the border into account in the calculation
@@ -833,6 +855,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             if (parent == null) {
                 parentWidth = getDomElement().getPage().getEnclosingWindow().getInnerWidth();
             }
+            else if (parent instanceof Page) {
+                parentWidth = (((Page) parent).getEnclosingWindow()).getInnerWidth();
+            }
             else {
                 final ComputedCssStyleDeclaration parentStyle =
                         parent.getPage().getEnclosingWindow().getComputedStyle((DomElement) parent, null);
@@ -860,7 +885,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         else if (FIXED.equals(p) && AUTO.equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
             final DomNode parent = getDomElement().getParentNode();
-            if (parent == null) {
+            if (parent == null || parent instanceof Page) {
                 left = 0;
             }
             else {
@@ -1391,6 +1416,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                         width = computedCss.getStyleAttribute(Definition.WIDTH, false);
                     }
                     parent = parent.getParentNode();
+                    if (parent instanceof Page) {
+                        break;
+                    }
                 }
                 final int pixelWidth = CssPixelValueConverter.pixelValue(width);
                 final String content = element.getVisibleText();
@@ -1840,5 +1868,21 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public String toString() {
         return "ComputedCssStyleDeclaration for '" + getDomElement() + "'";
+    }
+
+    /**
+     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defaultValue}
+     * @param defaultValue the default value of the string
+     * @return the string, or {@code toReturnIfEmptyOrDefault}
+     */
+    private String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
+        if (!getDomElement().isAttachedToPage()
+                && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+            return ComputedCssStyleDeclaration.EMPTY_FINAL;
+        }
+        if (str == null || str.isEmpty() || str.equals(defaultValue)) {
+            return toReturnIfEmptyOrDefault;
+        }
+        return str;
     }
 }
