@@ -16,6 +16,11 @@ package org.htmlunit.util;
 
 import java.util.Random;
 
+/**
+ * Unit tests helper.
+ *
+* @author Ren&eacute; Schwietzke
+ */
 public final class RandomUtils {
     private static final String LOWERCHARS = "abcdefghijklmnopqrstuvwxyz";
     private static final String UPPERCHARS = LOWERCHARS.toUpperCase();
@@ -25,7 +30,6 @@ public final class RandomUtils {
      * Private ctor to keep Checkstyle happy
      */
     private RandomUtils() {
-
     }
 
     /**

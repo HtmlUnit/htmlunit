@@ -1662,7 +1662,6 @@ public class DomElement extends DomNamespaceNode implements Element {
  * The {@link NamedNodeMap} to store the node attributes.
  */
 class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serializable {
-    private static final DomAttr[] EMPTY_ARRAY = new DomAttr[0];
     protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
 
     private final OrderedFastHashMap<String, DomAttr> map_;

@@ -40,6 +40,11 @@ import java.util.stream.IntStream;
 
 import org.junit.Test;
 
+/**
+ * Unit tests for {@link OrderedFastHashMap}.
+ *
+* @author Ren&eacute; Schwietzke
+ */
 public class OrderedFastHashMapTest {
 
     @Test
@@ -453,7 +458,7 @@ public class OrderedFastHashMapTest {
 
     @Test
     public void removeByIndex_first() {
-        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<String, Integer>();
+        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<>();
         m.put("a", 1);
         m.put("b", 2);
         m.put("c", 3);
@@ -466,7 +471,7 @@ public class OrderedFastHashMapTest {
 
     @Test
     public void removeByIndex_second() {
-        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<String, Integer>();
+        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<>();
         m.put("a", 1);
         m.put("b", 2);
         m.put("c", 3);
@@ -479,7 +484,7 @@ public class OrderedFastHashMapTest {
 
     @Test
     public void removeByIndex_last() {
-        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<String, Integer>();
+        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<>();
         m.put("a", 1);
         m.put("b", 2);
         m.put("c", 3);
@@ -492,7 +497,7 @@ public class OrderedFastHashMapTest {
 
     @Test
     public void removeByIndex_middle_to_empty() {
-        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<String, Integer>();
+        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<>();
         m.put("a", 1);
         m.put("b", 2);
         m.put("c", 3);
@@ -505,7 +510,7 @@ public class OrderedFastHashMapTest {
 
     @Test
     public void clear() {
-        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<String, Integer>();
+        final OrderedFastHashMap<String, Integer> m = new OrderedFastHashMap<>();
         m.put("a", 1);
         assertEquals(1, m.size());
 
@@ -743,9 +748,9 @@ public class OrderedFastHashMapTest {
         final OrderedFastHashMap<MockKey<String>, String> m = new OrderedFastHashMap<>();
         final MockKey<String> mockKey1 = new MockKey<>(10, "akey1");
         m.put(mockKey1, "any1");
-        m.put(new MockKey<String>(10, "akey2"), "any2");
-        m.put(new MockKey<String>(10, "akey3"), "any3");
-        m.put(new MockKey<String>(10, "akey4"), "any4");
+        m.put(new MockKey<>(10, "akey2"), "any2");
+        m.put(new MockKey<>(10, "akey3"), "any3");
+        m.put(new MockKey<>(10, "akey4"), "any4");
         assertTrue(m.containsKey(mockKey1));
         assertTrue(m.containsKey(new MockKey<>(10, "akey1")));
     }
@@ -770,9 +775,9 @@ public class OrderedFastHashMapTest {
     public void containsKey_False_content_based() {
         // same hash but different content
         final OrderedFastHashMap<MockKey<String>, String> m = new OrderedFastHashMap<>();
-        m.put(new MockKey<String>(10, "akey2"), "any2");
-        m.put(new MockKey<String>(10, "akey3"), "any3");
-        m.put(new MockKey<String>(10, "akey4"), "any4");
+        m.put(new MockKey<>(10, "akey2"), "any2");
+        m.put(new MockKey<>(10, "akey3"), "any3");
+        m.put(new MockKey<>(10, "akey4"), "any4");
         assertFalse(m.containsKey(new MockKey<>(10, "akey")));
 
         // different hash, same content
@@ -1273,34 +1278,34 @@ public class OrderedFastHashMapTest {
 
     @Test
     public void collision() {
-        final OrderedFastHashMap<MockKey<String>, String> f = new OrderedFastHashMap<MockKey<String>, String>(13);
+        final OrderedFastHashMap<MockKey<String>, String> f = new OrderedFastHashMap<>(13);
         IntStream.range(0, 15).forEach(i -> {
-            f.put(new MockKey<String>(12, "k" + i), "v" + i);
+            f.put(new MockKey<>(12, "k" + i), "v" + i);
         });
 
         assertEquals(15, f.size());
 
         IntStream.range(0, 15).forEach(i -> {
-            assertEquals("v" + i, f.get(new MockKey<String>(12, "k" + i)));
+            assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i)));
         });
 
         // round 2
         IntStream.range(0, 20).forEach(i -> {
-            f.put(new MockKey<String>(12, "k" + i), "v" + i);
+            f.put(new MockKey<>(12, "k" + i), "v" + i);
         });
 
         assertEquals(20, f.size());
 
         IntStream.range(0, 20).forEach(i -> {
-            assertEquals("v" + i, f.get(new MockKey<String>(12, "k" + i)));
+            assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i)));
         });
 
         // round 3
         IntStream.range(0, 10).forEach(i -> {
-            assertEquals("v" + i, f.remove(new MockKey<String>(12, "k" + i)));
+            assertEquals("v" + i, f.remove(new MockKey<>(12, "k" + i)));
         });
         IntStream.range(10, 20).forEach(i -> {
-            assertEquals("v" + i, f.get(new MockKey<String>(12, "k" + i)));
+            assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i)));
         });
     }
 
@@ -1311,7 +1316,7 @@ public class OrderedFastHashMapTest {
     public void overflow() {
         final OrderedFastHashMap<MockKey<String>, Integer> m = new OrderedFastHashMap<>(5);
         final Map<MockKey<String>, Integer> data = IntStream.range(0, 152).mapToObj(Integer::valueOf)
-                .collect(Collectors.toMap(i -> new MockKey<String>(1, "k" + i), i -> i));
+                .collect(Collectors.toMap(i -> new MockKey<>(1, "k" + i), i -> i));
 
         // add all
         data.forEach((k, v) -> m.put(k, v));
@@ -1357,11 +1362,11 @@ public class OrderedFastHashMapTest {
         final OrderedFastHashMap<MockKey<String>, Integer> m = new OrderedFastHashMap<>(15);
 
         final Map<MockKey<String>, Integer> data = IntStream.range(0, 150).mapToObj(Integer::valueOf)
-                .collect(Collectors.toMap(i -> new MockKey<String>(i, "k1" + i), i -> i));
+                .collect(Collectors.toMap(i -> new MockKey<>(i, "k1" + i), i -> i));
 
         // add the same hash codes again but other keys
         data.putAll(IntStream.range(0, 150).mapToObj(Integer::valueOf)
-                .collect(Collectors.toMap(i -> new MockKey<String>(i, "k2" + i), i -> i)));
+                .collect(Collectors.toMap(i -> new MockKey<>(i, "k2" + i), i -> i)));
         // add all
         data.forEach((k, v) -> m.put(k, v));
         // verify
@@ -1511,6 +1516,5 @@ public class OrderedFastHashMapTest {
         public int compareTo(final MockKey<T> o) {
             return o.key_.compareTo(this.key_);
         }
-
     }
 }

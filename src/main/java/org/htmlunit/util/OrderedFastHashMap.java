@@ -314,6 +314,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
      *
      * @return the size of the map
      */
+    @Override
     public int size() {
         return mapSize_;
     }
@@ -384,6 +385,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
      *
      * @return a list of values
      */
+    @Override
     public List<V> values() {
         final List<V> result = new ArrayList<>(this.orderedListSize_);
 
@@ -400,6 +402,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
      * Clears the map, reuses the data structure by clearing it out. It won't shrink
      * the underlying arrays!
      */
+    @Override
     public void clear() {
         this.mapSize_ = 0;
         this.orderedListSize_ = 0;
@@ -564,9 +567,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
             final K key = (K) this.mapData_[pos];
             return remove(key);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     public V removeLast() {
@@ -575,9 +576,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
             final K key = (K) this.mapData_[pos];
             return remove(key);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -698,7 +697,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
                 array[i] = (T) this.backingMap_.getEntry(i);
             }
 
-            return (T[]) array;
+            return array;
         }
 
         @Override
@@ -804,7 +803,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
                 array[i] = (T) this.backingMap_.getKey(i);
             }
 
-            return (T[]) array;
+            return array;
         }
 
         @Override
@@ -991,6 +990,5 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
 
             return false;
         }
-
     }
 }

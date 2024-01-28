@@ -1536,7 +1536,6 @@ public class HTMLElement extends Element {
         }
 
         if (offsetParent != null) {
-            final HTMLElement thiz = getDomNodeOrDie().getScriptableObject();
             style = webWindow.getComputedStyle(getDomNodeOrDie(), null);
             final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
 
