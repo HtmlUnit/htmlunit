@@ -1227,9 +1227,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                     getParentNode().replaceChild(newInput, this);
                 }
 
-                final HTMLInputElement scriptable = getScriptableObject();
-                setScriptableObject(null);
-                scriptable.setDomNode(newInput, true);
+                final WebClient client = page.getWebClient();
+                if (client.isJavaScriptEnabled()) {
+                    final HTMLInputElement scriptable = getScriptableObject();
+                    setScriptableObject(null);
+                    scriptable.setDomNode(newInput, true);
+                }
 
                 return newInput;
             }

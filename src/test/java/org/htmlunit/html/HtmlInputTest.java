@@ -24,6 +24,7 @@ import java.util.List;
 import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebClient;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -237,5 +238,23 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
         final HtmlInput input = (HtmlInput) page.getElementById("foo");
         assertFalse(input.isValid());
+    }
+
+
+    @Test
+    public void changeType_javascriptDisabled() throws Exception {
+        final String htmlContent
+                = "<html><head><title>foo</title></head><body>\n"
+                + "<form id='form1'>\n"
+                + "<input type='text' name='text1' onchange='alert(\"changed\")')>\n"
+                + "</form></body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, htmlContent, null, URL_FIRST);
+            final HtmlForm form = page.getHtmlElementById("form1");
+            final HtmlTextInput input = form.getInputByName("text1");
+
+            input.setAttribute("type", "hidden");
+        }
     }
 }
