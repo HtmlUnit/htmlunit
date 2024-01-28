@@ -807,6 +807,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
         });
     }
+
     /**
      * {@inheritDoc}
      */
