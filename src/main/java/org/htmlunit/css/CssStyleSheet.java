@@ -553,8 +553,7 @@ public class CssStyleSheet implements Serializable {
      * @param throwOnSyntax throw exception if the selector syntax is incorrect
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
-    // TODO make (package) private again
-    public static boolean selects(final BrowserVersion browserVersion,
+    static boolean selects(final BrowserVersion browserVersion,
             final Condition condition, final DomElement element,
             final boolean fromQuerySelectorAll, final boolean throwOnSyntax) {
 
