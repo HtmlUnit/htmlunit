@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Bugfixes">
+            <action type="fix" dev="René Schwietzke">
+                Bunch of dom performance updates.
+            </action>
             <action type="fix" dev="Ronny Shapiro">
                 Changing the input type when Javascript engine is disabled should not throw.
             </action>
