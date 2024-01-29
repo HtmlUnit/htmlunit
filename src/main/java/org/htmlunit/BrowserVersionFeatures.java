@@ -1000,7 +1000,7 @@ public enum BrowserVersionFeatures {
     JS_GLOBAL_THIS,
 
     /** The index parameter of {@link CSSGroupingRule#insertRule(String, Object)} is optional. */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_GROUPINGRULE_INSERTRULE_INDEX_OPTIONAL,
 
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
