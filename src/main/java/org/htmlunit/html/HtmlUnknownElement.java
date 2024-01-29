@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import static org.htmlunit.BrowserVersionFeatures.CSS_DIALOG_NONE;
 import static org.htmlunit.BrowserVersionFeatures.CSS_RP_DISPLAY_NONE;
 import static org.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
-import static org.htmlunit.BrowserVersionFeatures.CSS_RUBY_DISPLAY_INLINE;
 import static org.htmlunit.BrowserVersionFeatures.MULTICOL_BLOCK;
 import static org.htmlunit.BrowserVersionFeatures.SLOT_CONTENTS;
 
@@ -79,9 +78,6 @@ public class HtmlUnknownElement extends HtmlElement {
     public DisplayStyle getDefaultStyleDisplay() {
         switch (getTagName()) {
             case HtmlRuby.TAG_NAME:
-                if (hasFeature(CSS_RUBY_DISPLAY_INLINE)) {
-                    return DisplayStyle.INLINE;
-                }
                 return DisplayStyle.RUBY;
             case HtmlRb.TAG_NAME:
                 if (!hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)

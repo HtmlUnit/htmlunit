@@ -119,10 +119,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({IE, FF_ESR})
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
-    /** The default value of the display property for the 'ruby' tag is 'inline'. */
-    @BrowserFeature({CHROME, EDGE})
-    CSS_RUBY_DISPLAY_INLINE,
-
     /** Throws exception on setting a CSS style value to null. */
     @BrowserFeature(IE)
     CSS_SET_NULL_THROWS,
