@@ -7517,9 +7517,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function SpeechSynthesis() { [native code] }",
-            FF_ESR = "function SpeechSynthesis() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechSynthesis() { [native code] }",
+            IE = "exception")
     public void speechSynthesis() throws Exception {
         test("SpeechSynthesis");
     }
@@ -7558,9 +7557,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function SpeechSynthesisVoice() { [native code] }",
-            FF_ESR = "function SpeechSynthesisVoice() { [native code] }")
+    @Alerts(DEFAULT = "function SpeechSynthesisVoice() { [native code] }",
+            IE = "exception")
     public void speechSynthesisVoice() throws Exception {
         test("SpeechSynthesisVoice");
     }

@@ -7484,9 +7484,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function",
-            FF_ESR = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void speechSynthesis() throws Exception {
         test("SpeechSynthesis");
     }
@@ -7525,9 +7524,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function",
-            FF_ESR = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void speechSynthesisVoice() throws Exception {
         test("SpeechSynthesisVoice");
     }

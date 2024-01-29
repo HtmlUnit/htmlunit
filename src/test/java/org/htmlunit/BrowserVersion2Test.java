@@ -42,10 +42,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,"
+    @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,"
                     + "image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-            EDGE = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,"
-                    + "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
             FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
             FF_ESR = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
             IE = "Accept: text/html, application/xhtml+xml, image/jxr, */*")
@@ -61,11 +59,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = {"2", "Accept: text/html,application/xhtml+xml,"
+    @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7"},
-            EDGE = {"2", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"},
             FF = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"},
             FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"},
@@ -95,11 +91,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = {"2", "Accept: text/html,application/xhtml+xml,"
+    @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7"},
-            EDGE = {"2", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"},
             FF = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"},
             FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"},
@@ -125,11 +119,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "Accept: text/html,application/xhtml+xml,application/xml;"
+    @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;"
                     + "q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7",
-            EDGE = "Accept: text/html,application/xhtml+xml,application/xml;"
-                    + "q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
             FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
             FF_ESR = "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -158,8 +150,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-            EDGE = "Accept: image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    @Alerts(DEFAULT = "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
             FF = "Accept: image/avif,image/webp,*/*",
             FF_ESR = "Accept: image/avif,image/webp,*/*",
             IE = "Accept: image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5")
@@ -348,7 +339,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
                     + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7"},
             EDGE = {"1", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"},
+                    + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
+                    + "q=0.8,application/signed-exchange;v=b3;q=0.7"},
             IE = {"2", "Accept: text/css, */*"})
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
@@ -383,7 +375,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
                     + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7"},
             EDGE = {"1", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"},
+                    + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
+                    + "q=0.8,application/signed-exchange;v=b3;q=0.7"},
             IE = {"2", "Accept: text/css, */*"})
     public void acceptHeaderCssWrongType() throws Exception {
         final String html

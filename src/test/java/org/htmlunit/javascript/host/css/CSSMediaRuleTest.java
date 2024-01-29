@@ -532,11 +532,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "exception"},
-            FF = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
-                  "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            FF_ESR = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
-                      "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
+             "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void insertRule() throws Exception {
         final String html
             = "<html><body>\n"
