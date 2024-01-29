@@ -29,8 +29,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(isJSObject = false, value = {CHROME, EDGE})
-@JsxClass({FF, FF_ESR})
+@JsxClass({CHROME, EDGE, FF, FF_ESR})
 public class SpeechSynthesis extends EventTarget {
 
     /**

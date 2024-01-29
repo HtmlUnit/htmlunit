@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host.speech;
 
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
@@ -26,7 +28,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ronald Brill
  */
-@JsxClass({FF, FF_ESR})
+@JsxClass({CHROME, EDGE, FF, FF_ESR})
 public class SpeechSynthesisVoice extends HtmlUnitScriptable {
 
     /**
