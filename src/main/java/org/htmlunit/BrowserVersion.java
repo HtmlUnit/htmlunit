@@ -294,7 +294,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.COOKIE};
         EDGE.acceptLanguageHeader_ = "en-US,en;q=0.9";
         EDGE.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
-                                            + "q=0.9,image/webp,image/apng,*/*;"
+                                            + "q=0.9,image/avif,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.7";
         EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";

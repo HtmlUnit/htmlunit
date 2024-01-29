@@ -9,6 +9,9 @@
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Chrome/Edge 121, Bugfixes">
             <action type="update" dev="rbri">
+                Edge 121: html accept-header mentions image/avif.
+            </action>
+            <action type="update" dev="rbri">
                 Chrome/Edge 121: SpeechSynthesis/SpeechSynthesisVoice are available as globals.
             </action>
             <action type="update" dev="rbri">

@@ -1257,9 +1257,6 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"null", "text/html,application/xhtml+xml,application/xml;"
                         + "q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
                        "null", "null", "no\\sActiveX"},
-            EDGE = {"null", "text/html,application/xhtml+xml,application/xml;"
-                        + "q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-                    "null", "null", "no\\sActiveX"},
             FF = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
                   "null", "null", "no\\sActiveX"},
             FF_ESR = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
