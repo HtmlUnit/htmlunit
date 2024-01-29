@@ -3172,7 +3172,7 @@ public final class StyleAttributes implements Serializable {
         SCROLLBAR_BASE_COLOR("scrollbarBaseColor", "scrollbar-base-color", ie("undefined")),
 
         /** The style property {@code scrollbarColor}. */
-        SCROLLBAR_COLOR("scrollbarColor", "scrollbar-color", ff("auto")),
+        SCROLLBAR_COLOR("scrollbarColor", "scrollbar-color", chromeAndEdgeAndFirefox("auto")),
 
         /** The style property {@code scrollbar-color}. */
         SCROLLBAR_COLOR_("scrollbar-color", "scrollbar-color", ff("auto")),
@@ -3199,7 +3199,7 @@ public final class StyleAttributes implements Serializable {
         SCROLLBAR_TRACK_COLOR("scrollbarTrackColor", "scrollbar-track-color", ie("undefined")),
 
         /** The style property {@code scrollbarWidth}. */
-        SCROLLBAR_WIDTH("scrollbarWidth", "scrollbar-width", ff("auto")),
+        SCROLLBAR_WIDTH("scrollbarWidth", "scrollbar-width", chromeAndEdgeAndFirefox("auto")),
 
         /** The style property {@code scrollbar-width}. */
         SCROLLBAR_WIDTH_("scrollbar-width", "scrollbar-width", ff("auto")),
