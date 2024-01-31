@@ -644,9 +644,11 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public DomElement getElementById(final String elementId) {
-        final SortedSet<DomElement> elements = idMap_.get(elementId);
-        if (elements != null) {
-            return elements.first();
+        if (elementId != null) {
+            final SortedSet<DomElement> elements = idMap_.get(elementId);
+            if (elements != null) {
+                return elements.first();
+            }
         }
         return null;
     }
@@ -1689,9 +1691,11 @@ public class HtmlPage extends SgmlPage {
      * @return the elements with the specified name attribute
      */
     public List<DomElement> getElementsById(final String elementId) {
-        final SortedSet<DomElement> elements = idMap_.get(elementId);
-        if (elements != null) {
-            return new ArrayList<>(elements);
+        if (elementId != null) {
+            final SortedSet<DomElement> elements = idMap_.get(elementId);
+            if (elements != null) {
+                return new ArrayList<>(elements);
+            }
         }
         return Collections.emptyList();
     }
@@ -1707,9 +1711,11 @@ public class HtmlPage extends SgmlPage {
      */
     @SuppressWarnings("unchecked")
     public <E extends DomElement> E getElementByName(final String name) throws ElementNotFoundException {
-        final SortedSet<DomElement> elements = nameMap_.get(name);
-        if (elements != null) {
-            return (E) elements.first();
+        if (name != null) {
+            final SortedSet<DomElement> elements = nameMap_.get(name);
+            if (elements != null) {
+                return (E) elements.first();
+            }
         }
         throw new ElementNotFoundException("*", DomElement.NAME_ATTRIBUTE, name);
     }
@@ -1723,9 +1729,11 @@ public class HtmlPage extends SgmlPage {
      * @return the elements with the specified name attribute
      */
     public List<DomElement> getElementsByName(final String name) {
-        final SortedSet<DomElement> elements = nameMap_.get(name);
-        if (elements != null) {
-            return new ArrayList<>(elements);
+        if (name != null) {
+            final SortedSet<DomElement> elements = nameMap_.get(name);
+            if (elements != null) {
+                return new ArrayList<>(elements);
+            }
         }
         return Collections.emptyList();
     }
@@ -1738,6 +1746,9 @@ public class HtmlPage extends SgmlPage {
      * @return the elements with the specified string for their name or ID
      */
     public List<DomElement> getElementsByIdAndOrName(final String idAndOrName) {
+        if (idAndOrName == null) {
+            return Collections.emptyList();
+        }
         final Collection<DomElement> list1 = idMap_.get(idAndOrName);
         final Collection<DomElement> list2 = nameMap_.get(idAndOrName);
         final List<DomElement> list = new ArrayList<>();
