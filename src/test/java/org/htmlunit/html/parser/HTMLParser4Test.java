@@ -386,40 +386,39 @@ public class HTMLParser4Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-// this tests fails and breaks the driver for follow up tests - have to investigate what is going wrong here
-//    /**
-//     * See issue #1830.
-//     * @throws Exception failure
-//     */
-//    @Test
-//    @Alerts({"[object HTMLHeadElement]",
-//                "HEAD,HEAD,http://www.w3.org/1999/xhtml,null,head",
-//                "[object HTMLBodyElement]", "BODY,BODY,http://www.w3.org/1999/xhtml,null,body"})
-//    @NotYetImplemented
-//    public void namespace_svg() throws Exception {
-//        final String html =
-//            "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
-//                            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
-//            + "<html xmlns=\"http://www.w3.org/2000/svg\">\n"
-//            + "<head>\n"
-//            + "<script>\n"
-//            + "  function test() {\n"
-//            + "    elem = document.getElementsByTagName('head')[0];\n"
-//            + "    debug(elem);\n"
-//            + "    elem = document.getElementsByTagName('body')[0];\n"
-//            + "    debug(elem);\n"
-//            + "  }\n"
-//            + "  function debug(e) {\n"
-//            + "    log(e);\n"
-//            + "    log(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
-//            + "  }\n"
-//            + "</script>\n"
-//            + "</head>\n"
-//            + "<body onload='test()'>\n"
-//            + "</body></html>";
-//
-//        loadPageVerifyTitle2(html);
-//    }
+    /**
+     * See issue #1830.
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"[object HTMLHeadElement]",
+                "HEAD,HEAD,http://www.w3.org/1999/xhtml,null,head",
+                "[object HTMLBodyElement]", "BODY,BODY,http://www.w3.org/1999/xhtml,null,body"})
+    public void namespace_svg() throws Exception {
+        final String html =
+            "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+                            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
+            + "<html xmlns=\"http://www.w3.org/2000/svg\">\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    elem = document.getElementsByTagName('head')[0];\n"
+            + "    debug(elem);\n"
+            + "    elem = document.getElementsByTagName('body')[0];\n"
+            + "    debug(elem);\n"
+            + "  }\n"
+            + "  function debug(e) {\n"
+            + "    log(e);\n"
+            + "    log(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * See issue #1830.
@@ -457,6 +456,34 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "    <g id='rectangles'>\n"
             + "      <rect x='1' y='11' width='8' height='8'/>\n"
             + "    </g>\n"
+            + "  </svg>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * See issue #719.
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts("5")
+    public void svg_selfClosingTags() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    elem = document.getElementById('tester');\n"
+            + "    log(elem.childNodes.length);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <svg id='tester' xmlns=\"http://www.w3.org/2000/svg\">\n"
+            + "    <path fill=\"#4285F4\" />\n"
+            + "    <path fill=\"#34A853\" />\n"
             + "  </svg>\n"
             + "</body></html>";
 

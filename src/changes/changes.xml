@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Chrome/Edge 121, Bugfixes">
+            <action type="fix" dev="rbri" due-to="Ronny Shapiro">
+                neko: fix a regression in neko 3.11.0 regarding the handling of self closing unknown tags.
+            </action>
             <action type="fix" dev="Ronny Shapiro">
                 Fix potential NPE in HtmlPage.getElementById(String), HtmlPage.getElementsById(String), 
                 HtmlPage.getElementByName(String), HtmlPage.getElementsByName(String), and HtmlPage.getElementsByIdAndOrName(String).
