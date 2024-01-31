@@ -16,10 +16,13 @@
                 HtmlPage.getElementByName(String), HtmlPage.getElementsByName(String), and HtmlPage.getElementsByIdAndOrName(String).
             </action>
             <action type="update" dev="rbri">
-                Chrome/Edge 121: Default display style for the ruby tag is 'ruby'.
+                Chrome/Edge 121: Default display style for the 'rt' tag is 'ruby-text'.
             </action>
             <action type="update" dev="rbri">
-                Edge 121: html/image accept-header mentions image/avif.
+                Chrome/Edge 121: Default display style for the 'ruby' tag is 'ruby'.
+            </action>
+            <action type="update" dev="rbri">
+                Edge 121: html/image accept-header mentions 'image/avif'.
             </action>
             <action type="update" dev="rbri">
                 Chrome/Edge 121: SpeechSynthesis/SpeechSynthesisVoice are available as globals.

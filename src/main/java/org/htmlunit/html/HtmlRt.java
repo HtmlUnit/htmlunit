@@ -80,7 +80,7 @@ public class HtmlRt extends HtmlElement {
             }
         }
         else {
-            return DisplayStyle.BLOCK;
+            return DisplayStyle.RUBY_TEXT;
         }
         return DisplayStyle.INLINE;
     }
