@@ -121,6 +121,92 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementByIdNull() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        assertNull(page.getElementById(null));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByIdNull() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final List<DomElement> elements = page.getElementsById(null);
+        assertNotNull(elements);
+        assertEquals(0, elements.size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByIdOrNameNull() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final List<DomElement> elements = page.getElementsByIdAndOrName(null);
+        assertNotNull(elements);
+        assertEquals(0, elements.size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test(expected = ElementNotFoundException.class)
+    public void getElementByNameNull() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        assertNull(page.getElementByName(null));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByNameNull() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final List<DomElement> elements = page.getElementsByName(null);
+        assertNotNull(elements);
+        assertEquals(0, elements.size());
+    }
+
+    /**
      * Tests getHtmlElement() for all elements that can be loaded.
      * @throws Exception if the test fails
      */
@@ -1078,15 +1164,19 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         page.getElementByName("b").remove();
         assertEquals(page.getElementById("b2"), page.getElementByName("b"));
+    }
 
-        boolean thrown = false;
-        try {
-            page.getElementByName("c");
-        }
-        catch (final ElementNotFoundException e) {
-            thrown = true;
-        }
-        assertTrue(thrown);
+    /**
+     * @exception Exception if the test fails
+     */
+    @Test(expected = ElementNotFoundException.class)
+    public void getElementByNameNotfound() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='a' name='a'>foo</div>\n"
+            + "<div id='b1' name='b'>bar</div>\n"
+            + "<div id='b2' name='b'>baz</div></body></html>";
+        final HtmlPage page = loadPage(html);
+        page.getElementByName("c");
     }
 
     /**
