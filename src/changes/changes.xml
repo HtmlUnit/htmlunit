@@ -12,7 +12,7 @@
                 neko: fix a regression in neko 3.11.0 regarding the handling of self closing unknown tags.
             </action>
             <action type="fix" dev="Ronny Shapiro">
-                Fix potential NPE in HtmlPage.getElementById(String), HtmlPage.getElementsById(String), 
+                Fix potential NPE in HtmlPage.getElementById(String), HtmlPage.getElementsById(String),
                 HtmlPage.getElementByName(String), HtmlPage.getElementsByName(String), and HtmlPage.getElementsByIdAndOrName(String).
             </action>
             <action type="update" dev="rbri">
