@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.11.0" date="February xx, 2024" description="Chrome/Edge 121, Bugfixes">
+        <release version="3.11.0" date="February xx, 2024" description="Chrome/Edge 121, Firefox 122, Bugfixes">
             <action type="fix" dev="rbri" due-to="Ronny Shapiro">
                 neko: fix a regression in neko 3.11.0 regarding the handling of self closing unknown tags.
             </action>
