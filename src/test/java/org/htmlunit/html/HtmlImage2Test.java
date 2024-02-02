@@ -428,7 +428,9 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"58", "29", "58", "29"})
+    @Alerts(DEFAULT = {"58", "29", "58", "29"},
+            FF = {"58", "29", "68", "118"},
+            FF_ESR = {"58", "29", "68", "118"})
     @NotYetImplemented
     public void clickWithCoordinates() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
