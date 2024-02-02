@@ -130,8 +130,7 @@ public class PointerEvent extends MouseEvent {
      */
     public PointerEvent(final DomNode domNode, final String type, final boolean shiftKey,
             final boolean ctrlKey, final boolean altKey, final int button, final int detail) {
-        super(domNode, type, shiftKey, ctrlKey, altKey, button);
-        setDetail(detail);
+        super(domNode, type, shiftKey, ctrlKey, altKey, button, detail);
 
         pointerId_ = 1;
         width_ = 1;

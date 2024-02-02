@@ -151,6 +151,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE,
 
+    /** The context menu MouseEvent has a detail of 1. */
+    @BrowserFeature(FF)
+    EVENT_CONTEXT_MENU_HAS_DETAIL_1,
+
     /** Triggers the onfocus onfocusin blur onfocusout events in this order. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_FOCUS_FOCUS_IN_BLUR_OUT,

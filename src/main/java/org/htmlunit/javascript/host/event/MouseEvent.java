@@ -186,9 +186,10 @@ public class MouseEvent extends UIEvent {
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      * @param button the button code, must be {@link #BUTTON_LEFT}, {@link #BUTTON_MIDDLE} or {@link #BUTTON_RIGHT}
+     * @param detail the detail value
      */
     public MouseEvent(final DomNode domNode, final String type, final boolean shiftKey,
-        final boolean ctrlKey, final boolean altKey, final int button) {
+        final boolean ctrlKey, final boolean altKey, final int button, final int detail) {
 
         super(domNode, type);
         setShiftKey(shiftKey);
@@ -200,12 +201,7 @@ public class MouseEvent extends UIEvent {
         }
         button_ = button;
 
-        if (TYPE_DBL_CLICK.equals(type) || TYPE_CONTEXT_MENU.equals(type)) {
-            setDetail(2);
-        }
-        else {
-            setDetail(1);
-        }
+        setDetail(detail);
     }
 
     /**

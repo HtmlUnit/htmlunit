@@ -9,6 +9,9 @@
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Chrome/Edge 121, Firefox 122, Bugfixes">
             <action type="update" dev="rbri">
+                Firefox 122: The MouseEvent provided to the oncontextmenu handler has an detail of 1.
+            </action>
+            <action type="update" dev="rbri">
                 Firefox 122: HtmlButton no longer ignores disabled state set at the beginning of the action.
             </action>
             <action type="update" dev="rbri">

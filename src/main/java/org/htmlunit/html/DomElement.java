@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.EVENT_CONTEXT_MENU_HAS_DETAIL_1;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_POINTEREVENT_DETAIL_0;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONDOUBLECLICK_USES_POINTEREVENT;
@@ -1045,7 +1046,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 }
                 else {
                     event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
                 }
 
                 if (disableProcessLabelAfterBubbling) {
@@ -1245,7 +1246,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
         else {
             event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
-                    MouseEvent.BUTTON_LEFT);
+                    MouseEvent.BUTTON_LEFT, 2);
         }
         final ScriptResult scriptResult = fireEvent(event);
         if (scriptResult == null) {
@@ -1418,6 +1419,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
             return mouseDownPage;
         }
+
         final Page mouseUpPage = mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
         if (mouseUpPage != getPage()) {
             if (LOG.isDebugEnabled()) {
@@ -1425,6 +1427,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
             return mouseUpPage;
         }
+
         return doMouseEvent(MouseEvent.TYPE_CONTEXT_MENU, shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
     }
 
@@ -1443,18 +1446,30 @@ public class DomElement extends DomNamespaceNode implements Element {
     private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
         final boolean altKey, final int button) {
         final SgmlPage page = getPage();
-        if (!page.getWebClient().isJavaScriptEnabled()) {
+        final WebClient webClient = getPage().getWebClient();
+        if (!webClient.isJavaScriptEnabled()) {
             return page;
         }
 
         final ScriptResult scriptResult;
         final Event event;
-        if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
-                && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-            event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
+        if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)) {
+            final BrowserVersion browserVersion = webClient.getBrowserVersion();
+            if (browserVersion.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+                event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
+            }
+            else if (browserVersion.hasFeature(EVENT_CONTEXT_MENU_HAS_DETAIL_1)) {
+                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
+            }
+            else {
+                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 2);
+            }
+        }
+        else if (MouseEvent.TYPE_DBL_CLICK.equals(eventType)) {
+            event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 2);
         }
         else {
-            event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+            event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
         }
         scriptResult = fireEvent(event);
 
@@ -1463,7 +1478,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             currentPage = page;
         }
         else {
-            currentPage = page.getWebClient().getCurrentWindow().getEnclosedPage();
+            currentPage = webClient.getCurrentWindow().getEnclosedPage();
         }
 
         final boolean mouseOver = !MouseEvent.TYPE_MOUSE_OUT.equals(eventType);
