@@ -804,7 +804,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            FF = "2",
             FF_ESR = "2",
             IE = "2")
     public void onclickDisablesSubmit() throws Exception {
@@ -836,7 +835,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"foo", "foonewValue", "foonewValue"},
-            FF = {"foo", "foonewValue", "foo"},
             FF_ESR = {"foo", "foonewValue", "foo"},
             IE = {"foo", "foonewValue", "foo"})
     public void onclickDisablesReset() throws Exception {
