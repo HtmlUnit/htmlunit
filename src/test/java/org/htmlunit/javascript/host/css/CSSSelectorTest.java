@@ -1971,11 +1971,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "[object HTMLHeadingElement]"},
-            FF = "exception",
             FF_ESR = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception")
+            EDGE = "exception",
+            FF = "exception")
     public void has() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
