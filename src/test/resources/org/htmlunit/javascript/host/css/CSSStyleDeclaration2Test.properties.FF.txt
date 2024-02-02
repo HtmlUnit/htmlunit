@@ -400,6 +400,7 @@ offset
 offsetAnchor
 offsetDistance
 offsetPath
+offsetPosition
 offsetRotate
 opacity
 order
@@ -524,6 +525,7 @@ textShadow
 textTransform
 textUnderlineOffset
 textUnderlinePosition
+textWrap
 top
 touchAction
 transform

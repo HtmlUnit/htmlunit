@@ -2588,7 +2588,8 @@ public final class StyleAttributes implements Serializable {
         OBJECT_VIEWBOX("objectViewBox", "object-view-box", chromeAndEdgeNone()),
 
         /** The style property {@code offset}. */
-        OFFSET("offset", "offset", chromeAndEdge("none 0px auto 0deg"), ff("none")),
+        OFFSET("offset", "offset", chromeAndEdge("none 0px auto 0deg"),
+                ffEsr("none"), ffLatest("normal")),
 
         /** The style property {@code offsetAnchor}. */
         OFFSET_ANCHOR("offsetAnchor", "offset-anchor", chromeAndEdgeAuto(), ff("auto")),
@@ -2609,7 +2610,10 @@ public final class StyleAttributes implements Serializable {
         OFFSET_PATH_("offset-path", "offset-path", ffNone()),
 
         /** The style property {@code offsetPosition}. */
-        OFFSET_POSITION("offsetPosition", "offset-position", chromeAndEdgeNormal()),
+        OFFSET_POSITION("offsetPosition", "offset-position", chromeAndEdgeNormal(), ffLatest("normal")),
+
+        /** The style property {@code offset-position}. */
+        OFFSET_POSITION_("offset-position", "offset-position", ffLatest("normal")),
 
         /** The style property {@code offsetRotate}. */
         OFFSET_ROTATE("offsetRotate", "offset-rotate", chromeAndEdge("auto 0deg"), ff("auto")),
@@ -3523,7 +3527,10 @@ public final class StyleAttributes implements Serializable {
         TEXT_UNDERLINE_POSITION_("text-underline-position", "text-underline-position", ff("auto")),
 
         /** The style property {@code textWrap}. */
-        TEXT_WRAP("textWrap", "text-wrap", chromeAndEdge("wrap")),
+        TEXT_WRAP("textWrap", "text-wrap", chromeAndEdge("wrap"), ffLatest("auto")),
+
+        /** The style property {@code text-wrap}. */
+        TEXT_WRAP_("text-wrap", "text-wrap", ffLatest("auto")),
 
         /** The style property {@code timelineScope}. */
         TIMELINE_SCOPE("timelineScope", "timeline-scope", chromeAndEdgeNone()),
