@@ -867,6 +867,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return the result of executing the specified code
      */
     public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
+        if (shutdownPending_ || webClient_ == null) {
+            // shutdown was already called
+            if (LOG.isInfoEnabled()) {
+                LOG.info("execute() called after the shutdown of the Javascript engine and therefore not processed");
+            }
+
+            return null;
+        }
+
         final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
@@ -914,6 +923,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public Object callFunction(final HtmlPage page, final Function function,
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
+        if (shutdownPending_ || webClient_ == null) {
+            // shutdown was already called
+            if (LOG.isInfoEnabled()) {
+                LOG.info("callFunction() called after the shutdown of the Javascript engine and therefore not processed");
+            }
+
+            return null;
+        }
+
         final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
