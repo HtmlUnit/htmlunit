@@ -132,7 +132,7 @@ public final class ScriptElementSupport {
             }
             else if (engine != null
                     && (element.hasAttribute("async")
-                            || postponed && hasSrcAttrib)) {
+                            || postponed && StringUtils.isBlank(element.getTextContent()))) {
                 engine.addPostponedAction(action);
             }
             else {
@@ -392,4 +392,5 @@ public final class ScriptElementSupport {
         }
         return scriptCode.toString();
     }
+
 }
