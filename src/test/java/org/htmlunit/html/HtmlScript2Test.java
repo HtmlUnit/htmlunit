@@ -955,4 +955,88 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("script")
+    public void srcAndContent() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script src='foo.js'>window.document.title += 'content' + '\\u00a7';</script>\n";
+
+        final String js = "window.document.title += 'script' + '\\u00a7';";
+
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void emptySrcAndContent() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script src=''>window.document.title += 'content' + '\\u00a7';</script>\n";
+
+        final String js = "window.document.title += 'script' + '\\u00a7';";
+
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void blankSrcAndContent() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script src=' '>window.document.title += 'content' + '\\u00a7';</script>\n";
+
+        final String js = "window.document.title += 'script' + '\\u00a7';";
+
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void attribSrcAndContent() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script src>window.document.title += 'content' + '\\u00a7';</script>\n";
+
+        final String js = "window.document.title += 'script' + '\\u00a7';";
+
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"first script", "second script"})
+    public void content() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script src='foo.js'>window.document.title += 'content' + '\\u00a7';</script>\n"
+            + "    <script>window.document.title += 'second script' + '\\u00a7';</script>\n";
+
+        final String js = "window.document.title += 'first script' + '\\u00a7';";
+
+        getMockWebConnection().setDefaultResponse(js, MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(html);
+    }
 }

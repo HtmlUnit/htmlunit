@@ -88,8 +88,8 @@ public final class ScriptElementSupport {
 
         final ScriptElement script = (ScriptElement) element;
         final String srcAttrib = script.getSrcAttribute();
-        if (ATTRIBUTE_NOT_DEFINED != srcAttrib
-                && script.isDeferred()) {
+        final boolean hasSrcAttrib = ATTRIBUTE_NOT_DEFINED == srcAttrib;
+        if (!hasSrcAttrib && script.isDeferred()) {
             return;
         }
 
@@ -97,9 +97,9 @@ public final class ScriptElementSupport {
         if (webWindow != null) {
             final StringBuilder description = new StringBuilder()
                     .append("Execution of ")
-                    .append(srcAttrib == ATTRIBUTE_NOT_DEFINED ? "inline " : "external ")
+                    .append(hasSrcAttrib ? "inline " : "external ")
                     .append(element.getClass().getSimpleName());
-            if (srcAttrib != ATTRIBUTE_NOT_DEFINED) {
+            if (!hasSrcAttrib) {
                 description.append(" (").append(srcAttrib).append(')');
             }
             final PostponedAction action = new PostponedAction(element.getPage(), description.toString()) {
@@ -132,7 +132,7 @@ public final class ScriptElementSupport {
             }
             else if (engine != null
                     && (element.hasAttribute("async")
-                            || postponed && StringUtils.isBlank(element.getTextContent()))) {
+                            || postponed && hasSrcAttrib)) {
                 engine.addPostponedAction(action);
             }
             else {
@@ -392,5 +392,4 @@ public final class ScriptElementSupport {
         }
         return scriptCode.toString();
     }
-
 }
