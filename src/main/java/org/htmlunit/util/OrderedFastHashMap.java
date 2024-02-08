@@ -14,6 +14,9 @@
  */
 package org.htmlunit.util;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,8 +60,8 @@ import java.util.Set;
  */
 public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     // our placeholders in the map
-    private static Object FREE_KEY_ = null;
-    private static Object REMOVED_KEY_ = new Object();
+    private static final Object FREE_KEY_ = null;
+    private static final Object REMOVED_KEY_ = new Object();
 
     // Fill factor, must be between (0 and 1)
     private static final double FILLFACTOR_ = 0.7d;
@@ -636,6 +639,57 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
             this.orderedList_[i] = this.orderedList_[this.orderedListSize_ - i - 1];
             this.orderedList_[this.orderedListSize_ - i - 1] = j;
         }
+    }
+
+    /**
+     * We have to overwrite the export due to the use of static object as marker
+     *
+     * @param aInputStream the inputstream to read from
+     * @throws IOException when the reading from the source fails
+     * @throws ClassNotFoundException in case we cannot restore a class
+     */
+    private void readObject(final ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
+        // perform the default de-serialization first
+        aInputStream.defaultReadObject();
+
+        // we have to restore order, keep relevant data
+        final Object[] srcData = Arrays.copyOf(this.mapData_, this.mapData_.length);
+        final int[] srcIndex = Arrays.copyOf(this.orderedList_, this.orderedList_.length);
+        final int orderedListSize = this.orderedListSize_;
+
+        // now, empty the original map
+        clear();
+
+        // sort things in, so we get a nice clean new map, this will
+        // also cleanup what was previously a removed entry, we have not
+        // kept that information anyway
+        for (int i = 0; i < orderedListSize; i++) {
+            final int pos = srcIndex[i];
+
+            final K key = (K) srcData[pos];
+            final V value = (V) srcData[pos + 1];
+            put((K) key, value);
+        }
+    }
+
+    /**
+     * We have to overwrite the export due to the use of static object as marker
+     *
+     * @param aOutputStream the stream to write to
+     * @throws IOException in case we have issue writing our data to the stream
+     */
+    private void writeObject(final ObjectOutputStream aOutputStream) throws IOException {
+        // we will remove all placeholder object references,
+        // when putting it back together, we rebuild the map from scratch
+        for (int i = 0; i < this.mapData_.length; i++) {
+            final Object entry = this.mapData_[i];
+            if (entry == FREE_KEY_ || entry == REMOVED_KEY_) {
+                this.mapData_[i] = null;
+            }
+        }
+
+        // perform the default serialization for all non-transient, non-static fields
+        aOutputStream.defaultWriteObject();
     }
 
     /**

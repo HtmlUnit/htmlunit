@@ -22,6 +22,11 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -1485,6 +1490,73 @@ public class OrderedFastHashMapTest {
             assertEquals(i, e.getKey());
             assertEquals(i, e.getValue());
         });
+    }
+
+    /**
+     * Test serialization, should work out of the box, just to
+     * ensure nobody removes that.
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    @Test
+    public void serializable() throws IOException, ClassNotFoundException {
+        final OrderedFastHashMap<String, Integer> src = new OrderedFastHashMap<>();
+
+        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        final ObjectOutputStream objectOutputStream = new ObjectOutputStream(buffer);
+        objectOutputStream.writeObject(src);
+        objectOutputStream.close();
+
+        final ObjectInputStream objectInputStream =
+                new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
+        final OrderedFastHashMap<String, Integer> copy =
+                (OrderedFastHashMap<String, Integer>) objectInputStream.readObject();
+        objectInputStream.close();
+
+        assertEquals(src.size(), copy.size());
+
+        // clone still works
+        copy.put("test", 1);
+        assertEquals(Integer.valueOf(1), copy.get("test"));
+    }
+
+    /**
+     * Test serialization, should work out of the box, just to
+     * ensure nobody removes that.
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    @Test
+    public void serializable_notEmpty() throws IOException, ClassNotFoundException {
+        final OrderedFastHashMap<String, Integer> src = new OrderedFastHashMap<>();
+        src.put("zuha", 1);
+        src.put("bs", 2);
+        src.put("ozuasdc", 3);
+        src.put("asdf", 4);
+        src.remove("bs");
+
+        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        final ObjectOutputStream objectOutputStream = new ObjectOutputStream(buffer);
+        objectOutputStream.writeObject(src);
+        objectOutputStream.close();
+
+        final ObjectInputStream objectInputStream =
+                new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
+        final OrderedFastHashMap<String, Integer> copy =
+                (OrderedFastHashMap<String, Integer>) objectInputStream.readObject();
+        objectInputStream.close();
+
+        assertEquals(src.size(), copy.size());
+        assertEquals(Integer.valueOf(4), copy.get("asdf"));
+        assertEquals(Integer.valueOf(3), copy.get("ozuasdc"));
+        assertEquals(Integer.valueOf(1), copy.get("zuha"));
+
+        // check order
+        assertEquals("zuha", copy.getKey(0));
+        assertEquals("ozuasdc", copy.getKey(1));
+        assertEquals("asdf", copy.getKey(2));
     }
 
     static class MockKey<T extends Comparable<T>> implements Comparable<MockKey<T>> {
