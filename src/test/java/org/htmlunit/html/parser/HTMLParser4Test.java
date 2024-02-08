@@ -996,11 +996,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("ti </head> <body> 1234 </body> </html>")
-    @HtmlUnitNYI(CHROME = "ti 1234",
-            EDGE = "ti 1234",
-            FF = "ti 1234",
-            FF_ESR = "ti 1234",
-            IE = "ti 1234")
     public void badTagInHead() throws Exception {
         final String html =
                 "<html>\n"

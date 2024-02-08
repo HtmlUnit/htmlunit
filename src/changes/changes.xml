@@ -9,6 +9,17 @@
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Chrome/Edge 121, Firefox 122, Bugfixes">
             <action type="fix" dev="rbri">
+                neko: Fix the parsing of special tags (eg. title) - they consume all content until the matching
+                end tag is reached.
+            </action>
+            <action type="update" dev="rbri">
+                neko: Optimize the attribute handling a bit for faster processing.
+            </action>
+            <action type="update" dev="rbri">
+                neko: Deprecated feature "http://cyberneko.org/html/features/document-fragment" removed.
+                Please use "http://cyberneko.org/html/features/balance-tags/document-fragment" instead.
+            </action>
+            <action type="fix" dev="rbri">
                 Avoid a NPE if an XmlHttpRequest response arrives while the client already shouts down.
             </action>
             <action type="update" dev="rbri">
