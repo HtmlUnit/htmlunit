@@ -365,7 +365,7 @@ public class CSSStyleSheet extends StyleSheet {
     @Deprecated
     public static void validateSelectors(final SelectorList selectorList, final int documentMode,
                 final DomNode domNode) throws CSSException {
-        CssStyleSheet.validateSelectors(null, documentMode, domNode);
+        CssStyleSheet.validateSelectors(selectorList, documentMode, domNode);
     }
 
     private void initCssRules() {

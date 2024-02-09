@@ -8,6 +8,10 @@
 
     <body>
         <release version="3.11.0" date="February xx, 2024" description="Chrome/Edge 121, Firefox 122, many Neko improvements, Bugfixes">
+            <action type="fix" dev="rbri">
+                Method org.htmlunit.javascript.host.css.CSSStyleSheet.validateSelectors(SelectorList, int, DomNode) does not
+                forward the SelectorList to the implementation (regression from version 3.7.0)
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.16.1.
             </action>
