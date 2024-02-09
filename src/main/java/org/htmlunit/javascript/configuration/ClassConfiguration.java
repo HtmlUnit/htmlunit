@@ -91,9 +91,10 @@ public final class ClassConfiguration {
 
     void setJSConstructorAlias(final String alias) {
         if (jsConstructor_ == null) {
-            throw new IllegalStateException("Can not define an constructor alias for "
-                    + jsConstructor_.getValue().getDeclaringClass().getName()
-                    + " because there is no JsxConstructor defined");
+            throw new IllegalStateException("Can not define the constructor alias '"
+                    + alias + "' for scriptable class -'"
+                    + hostClass_.getName()
+                    + "' because there is no JsxConstructor defined");
         }
         jsConstructorAlias_ = alias;
     }

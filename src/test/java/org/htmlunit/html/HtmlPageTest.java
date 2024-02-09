@@ -19,6 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,6 +35,7 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.CollectingAlertHandler;
@@ -1037,6 +1039,20 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertTrue(xml.startsWith(prefix));
         xml = xml.substring(prefix.length());
         assertEquals(htmlContent, xml.replaceAll("\\s", ""));
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void asXml1() throws Exception {
+        final String htmlContent = FileUtils.readFileToString(new File("D:\\test.resp"), StandardCharsets.UTF_8);
+
+        getWebClient().getOptions().setJavaScriptEnabled(false);
+
+        final HtmlPage page = loadPage(htmlContent);
+        String xml = page.asXml();
+        System.out.println(xml);
     }
 
     /**
