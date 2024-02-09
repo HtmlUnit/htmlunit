@@ -29,7 +29,7 @@
         <htmlunitcsp.version>3.11.0</htmlunitcsp.version>
         <htmlunitneko.version>3.11.2-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>3.11.0</htmlunitxpath.version>
-        <htmlunitcorejs.version>3.11.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitcorejs.version>3.11.0</htmlunitcorejs.version>
 
         <htmlunitdriver.version>4.17.0</htmlunitdriver.version>
         <selenium.version>4.17.0</selenium.version>
