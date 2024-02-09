@@ -668,7 +668,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
 
             final K key = (K) srcData[pos];
             final V value = (V) srcData[pos + 1];
-            put((K) key, value);
+            put(key, value);
         }
     }
 
