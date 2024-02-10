@@ -19,10 +19,10 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.concurrent.Future;
 
-import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketPolicy;
-import org.eclipse.jetty.websocket.client.WebSocketClient;
+import org.htmlunit.jetty.util.ssl.SslContextFactory;
+import org.htmlunit.jetty.websocket.api.Session;
+import org.htmlunit.jetty.websocket.api.WebSocketPolicy;
+import org.htmlunit.jetty.websocket.client.WebSocketClient;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebClientOptions;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -142,7 +142,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
         }
     }
 
-    private class JettyWebSocketAdapterImpl extends org.eclipse.jetty.websocket.api.WebSocketAdapter {
+    private class JettyWebSocketAdapterImpl extends org.htmlunit.jetty.websocket.api.WebSocketAdapter {
 
         JettyWebSocketAdapterImpl() {
         }

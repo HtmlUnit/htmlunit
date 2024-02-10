@@ -68,6 +68,8 @@ public class ArchitectureTest {
 
         .and().doNotHaveFullyQualifiedName("org.htmlunit.csp.Utils")
 
+        .and().resideOutsideOfPackage("org.htmlunit.jetty..")
+
         .should().resideInAPackage("org.htmlunit.util");
 
     /**
@@ -79,6 +81,7 @@ public class ArchitectureTest {
             .doNotHaveFullyQualifiedName("org.htmlunit.html.applets.AppletContextImpl")
             .and().resideOutsideOfPackage("org.htmlunit.platform..")
             .and().resideOutsideOfPackage("org.htmlunit.corejs.javascript.tools..")
+            .and().resideOutsideOfPackage("org.htmlunit.jetty..")
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
@@ -308,6 +311,8 @@ public class ArchitectureTest {
          .that()
             .doNotHaveFullyQualifiedName("org.htmlunit.platform.image.ImageIOImageData")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
+            .and().resideOutsideOfPackage("org.htmlunit.jetty..")
         .should().dependOnClassesThat().resideInAnyPackage("javax.imageio..");
 
     /**
@@ -367,4 +372,11 @@ public class ArchitectureTest {
 
             .and().resideOutsideOfPackage("org.htmlunit.corejs..")
         .should().dependOnClassesThat().resideInAnyPackage("org.htmlunit.corejs..");
+
+    /**
+     * Do not use jetty.
+     */
+    @ArchTest
+    public static final ArchRule jettyPackageRule = noClasses()
+        .should().dependOnClassesThat().resideInAnyPackage("org.eclipse.jetty..");
 }

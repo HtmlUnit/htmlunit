@@ -30,11 +30,13 @@
         <htmlunitneko.version>3.11.2</htmlunitneko.version>
         <htmlunitxpath.version>3.11.0</htmlunitxpath.version>
         <htmlunitcorejs.version>3.11.0</htmlunitcorejs.version>
+        <htmlunitwebsocketclient.version>3.12.0-SNAPSHOT</htmlunitwebsocketclient.version>
+
+        <httpcomponents.version>4.5.14</httpcomponents.version>
 
         <htmlunitdriver.version>4.17.0</htmlunitdriver.version>
         <selenium.version>4.17.0</selenium.version>
 
-        <httpcomponents.version>4.5.14</httpcomponents.version>
         <jetty.version>9.4.53.v20231009</jetty.version>
         <log4j.version>2.22.1</log4j.version>
 
@@ -1165,6 +1167,12 @@
             <version>${htmlunitcsp.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.htmlunit</groupId>
+            <artifactId>htmlunit-websocket-client</artifactId>
+            <version>${htmlunitwebsocketclient.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
@@ -1204,13 +1212,6 @@
             <groupId>org.brotli</groupId>
             <artifactId>dec</artifactId>
             <version>0.1.2</version>
-        </dependency>
-
-        <!-- Jetty -->
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-client</artifactId>
-            <version>${jetty.version}</version>
         </dependency>
 
         <!-- Test dependencies. -->
