@@ -2,4 +2,7 @@
 <FindBugsFilter>
     <!-- Ignored bug categories -->
     <Bug pattern="SE_NO_SERIALVERSIONID"/>
+
+    <Bug pattern="EI_EXPOSE_REP"/>
+    <Bug pattern="EI_EXPOSE_REP2"/>
 </FindBugsFilter>
