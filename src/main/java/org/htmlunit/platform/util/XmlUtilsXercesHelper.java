@@ -27,8 +27,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  *
@@ -43,7 +41,6 @@ public final class XmlUtilsXercesHelper implements XmlUtilsHelperAPI {
     /**
      * Ctor.
      */
-    @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
     public XmlUtilsXercesHelper() {
         // Force eager loading of classes in order to flush out any linkage errors early
         Objects.hash(DeferredDocumentImpl.class, DeferredNode.class);

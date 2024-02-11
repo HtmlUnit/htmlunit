@@ -25,8 +25,6 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 /**
  * A JavaScript object for {@code MutationRecord}.
  *
@@ -138,7 +136,6 @@ public class MutationRecord extends HtmlUnitScriptable {
      * @return the {@code addedNodes} property
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public NodeList getAddedNodes() {
         return addedNodes_;
     }
@@ -155,7 +152,6 @@ public class MutationRecord extends HtmlUnitScriptable {
      * @return the {@code removedNodes} property
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public NodeList getRemovedNodes() {
         return removedNodes_;
     }
@@ -172,7 +168,6 @@ public class MutationRecord extends HtmlUnitScriptable {
      * @return the {@code previousSibling} property
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Node getPreviousSibling() {
         return previousSibling_;
     }
@@ -189,7 +184,6 @@ public class MutationRecord extends HtmlUnitScriptable {
      * @return the {@code nextSibling} property
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Node getNextSibling() {
         return nextSibling_;
     }

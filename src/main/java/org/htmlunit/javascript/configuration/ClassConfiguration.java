@@ -26,8 +26,6 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Symbol;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 /**
  * A container for all the JavaScript configuration information for one class.
  *
@@ -148,7 +146,6 @@ public final class ClassConfiguration {
      * Returns the Map of entries for the defined properties.
      * @return the map
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Map<String, PropertyInfo> getPropertyMap() {
         return propertyMap_;
     }
@@ -157,7 +154,6 @@ public final class ClassConfiguration {
      * Returns the Map of entries for the defined symbols.
      * @return the map
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Map<Symbol, Method> getSymbolMap() {
         return symbolMap_;
     }
@@ -166,7 +162,6 @@ public final class ClassConfiguration {
      * Returns the Map of entries for the defined symbols.
      * @return the map
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Map<Symbol, String> getSymbolConstantMap() {
         return symbolConstantMap_;
     }
@@ -175,7 +170,6 @@ public final class ClassConfiguration {
      * Returns the set of entries for the defined static properties.
      * @return a set
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Map<String, PropertyInfo> getStaticPropertyMap() {
         return staticPropertyMap_;
     }
@@ -184,7 +178,6 @@ public final class ClassConfiguration {
      * Returns the set of entries for the defined functions.
      * @return a set
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Map<String, Method> getFunctionMap() {
         return functionMap_;
     }
@@ -193,7 +186,6 @@ public final class ClassConfiguration {
      * Returns the set of entries for the defined static functions.
      * @return a set
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Map<String, Method> getStaticFunctionMap() {
         return staticFunctionMap_;
     }
@@ -202,7 +194,6 @@ public final class ClassConfiguration {
      * Returns the constant list.
      * @return a list
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public List<ConstantInfo> getConstants() {
         return constants_;
     }
@@ -281,7 +272,6 @@ public final class ClassConfiguration {
      * Gets the JavaScript constructor method in {@link #getHostClass()}.
      * @return the JavaScript constructor method in {@link #getHostClass()}
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Map.Entry<String, Member> getJsConstructor() {
         return jsConstructor_;
     }
@@ -299,7 +289,6 @@ public final class ClassConfiguration {
      *
      * @return the DOM classes
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Class<?>[] getDomClasses() {
         return domClasses_;
     }
@@ -333,7 +322,6 @@ public final class ClassConfiguration {
          * @param readMethod the readMethod
          * @param writeMethod the writeMethod
          */
-        @SuppressFBWarnings("EI_EXPOSE_REP")
         public PropertyInfo(final Method readMethod, final Method writeMethod) {
             readMethod_ = readMethod;
             writeMethod_ = writeMethod;
@@ -342,7 +330,6 @@ public final class ClassConfiguration {
         /**
          * @return the readMethod
          */
-        @SuppressFBWarnings("EI_EXPOSE_REP")
         public Method getReadMethod() {
             return readMethod_;
         }
@@ -350,7 +337,6 @@ public final class ClassConfiguration {
         /**
          * @return the writeMethod
          */
-        @SuppressFBWarnings("EI_EXPOSE_REP")
         public Method getWriteMethod() {
             return writeMethod_;
         }

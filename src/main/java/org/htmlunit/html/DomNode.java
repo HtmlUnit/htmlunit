@@ -66,8 +66,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.UserDataHandler;
 import org.xml.sax.SAXException;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the
  * W3C DOM specification, but does not implement it.
@@ -235,7 +233,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the page that contains this node.
      * @return the page that contains this node
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public SgmlPage getPage() {
         return page_;
     }
@@ -244,7 +241,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the page that contains this node.
      * @return the page that contains this node
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public HtmlPage getHtmlPageOrNull() {
         if (page_ == null || !page_.isHtmlPage()) {
             return null;
@@ -276,7 +272,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getLastChild() {
         if (firstChild_ != null) {
             // last child is stored as the previous sibling of first child
@@ -289,7 +284,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getParentNode() {
         return parent_;
     }
@@ -318,7 +312,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getPreviousSibling() {
         if (parent_ == null || this == parent_.firstChild_) {
             // previous sibling of first child points to last child
@@ -331,7 +324,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getNextSibling() {
         return nextSibling_;
     }
@@ -340,7 +332,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getFirstChild() {
         return firstChild_;
     }

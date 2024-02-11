@@ -122,8 +122,6 @@ import org.htmlunit.javascript.host.xml.XMLDocument;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xml.XmlPage;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 /**
  * A JavaScript object for {@code Window}.
  *
@@ -331,7 +329,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the document
      */
     @JsxGetter(propertyName = "document")
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DocumentProxy getDocument_js() {
         return documentProxy_;
     }
@@ -340,7 +337,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the window's current document.
      * @return the window's current document
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Document getDocument() {
         return document_;
     }
@@ -350,7 +346,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the application cache
      */
     @JsxGetter(IE)
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public ApplicationCache getApplicationCache() {
         return applicationCache_;
     }
@@ -360,7 +355,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the current event, or {@code null} if no event is currently available
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Object getEvent() {
         if (currentEvent_ == null) {
             return Undefined.instance;
@@ -372,7 +366,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the current event (used internally regardless of the emulation mode).
      * @return the current event, or {@code null} if no event is currently available
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Event getCurrentEvent() {
         return currentEvent_;
     }
@@ -545,7 +538,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the navigator
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Navigator getNavigator() {
         return navigator_;
     }
@@ -555,7 +547,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the client information
      */
     @JsxGetter({CHROME, EDGE, FF, FF_ESR, IE})
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Object getClientInformation() {
         if (clientInformation_ != null) {
             return clientInformation_;
@@ -640,7 +631,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code location} property
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Location getLocation() {
         return location_;
     }
@@ -727,7 +717,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code screen} property
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Screen getScreen() {
         return screen_;
     }
@@ -737,7 +726,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code history} property
      */
     @JsxGetter
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public History getHistory() {
         return history_;
     }
@@ -960,7 +948,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the WebWindow associated with this Window.
      * @return the WebWindow
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public WebWindow getWebWindow() {
         return webWindow_;
     }
@@ -1685,7 +1672,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the current selection.
      * @return the current selection
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Selection getSelectionImpl() {
         if (selection_ == null) {
             selection_ = new Selection();
@@ -2164,7 +2150,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code crypto} property
      */
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
-    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Crypto getCrypto() {
         if (crypto_ == null) {
             crypto_ = new Crypto(this);

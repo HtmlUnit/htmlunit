@@ -28,8 +28,6 @@ import org.w3c.dom.Node;
 import com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl;
 import com.sun.org.apache.xerces.internal.dom.DeferredNode;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  *
@@ -44,7 +42,6 @@ public final class XmlUtilsSunXercesHelper implements XmlUtilsHelperAPI {
     /**
      * Ctor.
      */
-    @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
     public XmlUtilsSunXercesHelper() {
         // Force eager loading of classes in order to flush out any linkage errors early
         Objects.hash(DeferredDocumentImpl.class, DeferredNode.class);
