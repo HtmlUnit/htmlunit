@@ -59,7 +59,6 @@ import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlHiddenInput;
-import org.htmlunit.html.HtmlHtml;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlMeta;
 import org.htmlunit.html.HtmlPage;
@@ -612,13 +611,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private void handleCharacters() {
         // make the code easier to read because we remove a nesting level
         if (characters_.length() == 0) {
-            return;
-        }
-
-        if (currentNode_ instanceof HtmlHtml) {
-            // In HTML, the <html> node only has two possible children:
-            // the <head> and the <body>; any text is ignored.
-            characters_.clear();
             return;
         }
 
