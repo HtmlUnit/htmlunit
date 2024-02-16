@@ -27,7 +27,7 @@
 
         <htmlunitcssparser.version>3.11.0</htmlunitcssparser.version>
         <htmlunitcsp.version>3.11.0</htmlunitcsp.version>
-        <htmlunitneko.version>3.11.2</htmlunitneko.version>
+        <htmlunitneko.version>3.12.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>3.11.0</htmlunitxpath.version>
         <htmlunitcorejs.version>3.11.0</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>3.12.0-SNAPSHOT</htmlunitwebsocketclient.version>
