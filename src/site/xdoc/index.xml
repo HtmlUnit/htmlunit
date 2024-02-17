@@ -175,7 +175,8 @@
             <p>
                 Place <a href="dependencies.html">all the required jars</a> in your classpath.
                 All of these can be found in the lib directory of the HtmlUnit installation
-                (htmlunit-x.xx.x-bin.zip contains everything you need including all required dependencies).
+                (<a href="https://github.com/HtmlUnit/htmlunit/releases" target="blank">htmlunit-3.xx.x-bin.zip</a>
+                contains everything you need including all required dependencies).
             </p>
             <p>
                 For maven, you would add:
@@ -183,7 +184,7 @@
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>3.6.0</version>
+    <version>3.11.0</version>
 </dependency>]]></source>
             </p>
 
