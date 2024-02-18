@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.css;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -107,6 +108,31 @@ public class CSSTest extends WebDriverTestCase {
             + "  try {\n"
             + "    log(CSS.supports('display: flex'));"
             + "    log(CSS.supports('color: red'));"
+            + "  } catch (e) { log('Exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false"},
+            IE = "Exception")
+    @HtmlUnitNYI(CHROME = {"true", "true"},
+            EDGE = {"true", "true"},
+            FF = {"true", "true"},
+            FF_ESR = {"true", "true"})
+    public void supportsSelector() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    log(CSS.supports('selector(div)'));"
+            + "    log(CSS.supports('selector(div, span)'));"
             + "  } catch (e) { log('Exception'); }\n"
             + "</script>\n"
             + "</body></html>";
