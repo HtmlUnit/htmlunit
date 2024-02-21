@@ -834,6 +834,27 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Forwards this to the {@link HtmlUnitContextFactory} but with checking shutdown handling.
+     *
+     * @param <T> return type of the action
+     * @param action the contextAction
+     * @param page the page
+     * @return the result of the call
+     */
+    public final <T> T callSecured(final ContextAction<T> action, final HtmlPage page) {
+        if (shutdownPending_ || webClient_ == null) {
+            // shutdown was already called
+            if (LOG.isInfoEnabled()) {
+                LOG.info("execute() called after the shutdown of the Javascript engine and therefore not processed");
+            }
+
+            return null;
+        }
+
+        return getContextFactory().callSecured(action, page);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

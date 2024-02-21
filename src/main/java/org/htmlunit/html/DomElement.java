@@ -54,7 +54,6 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 import org.htmlunit.cyberneko.util.FastHashMap;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
-import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
@@ -1527,8 +1526,8 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final EventTarget jsElt = getScriptableObject();
-        final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
-        final ScriptResult result = cf.callSecured(cx -> jsElt.fireEvent(event), getHtmlPageOrNull());
+        final ScriptResult result = ((JavaScriptEngine) client.getJavaScriptEngine())
+                                        .callSecured(cx -> jsElt.fireEvent(event), getHtmlPageOrNull());
         if (event.isAborted(result)) {
             preventDefault();
         }
