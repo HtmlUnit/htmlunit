@@ -35,7 +35,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
@@ -279,14 +278,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
 
         final DedicatedWorkerGlobalScope thisScope = this;
         final ContextAction<Object> action = cx -> {
-            final Script script = javaScriptEngine.compile(page, thisScope, scriptCode,
-                    fullUrl.toExternalForm(), 1);
-
-            // script might be null here e.g. if there is a syntax error
-            if (script != null) {
-                return javaScriptEngine.execute(page, thisScope, script);
-            }
-            return null;
+            return javaScriptEngine.execute(page, thisScope, scriptCode, fullUrl.toExternalForm(), 1);
         };
 
         final HtmlUnitContextFactory cf = javaScriptEngine.getContextFactory();

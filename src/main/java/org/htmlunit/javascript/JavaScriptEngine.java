@@ -793,22 +793,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * {@inheritDoc}
      */
     @Override
-    public Script compile(final HtmlPage page, final String sourceCode,
-                           final String sourceName, final int startLine) {
-        final Scriptable scope = getScope(page, null);
-        return compile(page, scope, sourceCode, sourceName, startLine);
-    }
-
-    /**
-     * Compiles the specified JavaScript code in the context of a given scope.
-     *
-     * @param owningPage the page from which the code started
-     * @param scope the scope in which to execute the javascript code
-     * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name that will be displayed on error conditions
-     * @param startLine the line at which the script source starts
-     * @return the result of executing the specified code
-     */
     public Script compile(final HtmlPage owningPage, final Scriptable scope, final String sourceCode,
             final String sourceName, final int startLine) {
         WebAssert.notNull("sourceCode", sourceCode);
@@ -831,6 +815,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         };
 
         return (Script) getContextFactory().callSecured(action, owningPage);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Deprecated
+    public Script compile(final HtmlPage owningPage, final String sourceCode,
+            final String sourceName, final int startLine) {
+        return compile(owningPage, owningPage.getEnclosingWindow().getScriptableObject(), sourceCode, sourceName, startLine);
     }
 
     /**
@@ -859,34 +853,34 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public Object execute(final HtmlPage page,
+                           final Scriptable scope,
                            final String sourceCode,
                            final String sourceName,
                            final int startLine) {
-
-        final Script script = compile(page, sourceCode, sourceName, startLine);
-        if (script == null) { // happens with syntax error + throwExceptionOnScriptError = false
+        final Script script = compile(page, scope, sourceCode, sourceName, startLine);
+        if (script == null) {
+            // happens with syntax error + throwExceptionOnScriptError = false
             return null;
         }
-        return execute(page, script);
+        return execute(page, scope, script);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Object execute(final HtmlPage page, final Script script) {
-        final Scriptable scope = getScope(page, null);
-        return execute(page, scope, script);
+    @Deprecated
+    public Object execute(final HtmlPage page,
+                           final String sourceCode,
+                           final String sourceName,
+                           final int startLine) {
+        return execute(page, page.getEnclosingWindow().getScriptableObject(), sourceCode, sourceName, startLine);
     }
 
     /**
-     * Executes the specified JavaScript code in the given scope.
-     *
-     * @param page the page that started the execution
-     * @param scope the scope in which to execute
-     * @param script the script to execute
-     * @return the result of executing the specified code
+     * {@inheritDoc}
      */
+    @Override
     public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
@@ -910,6 +904,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         };
 
         return getContextFactory().callSecured(action, page);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Deprecated
+    public Object execute(final HtmlPage page, final Script script) {
+        return execute(page, page.getEnclosingWindow().getScriptableObject(), script);
     }
 
     /**

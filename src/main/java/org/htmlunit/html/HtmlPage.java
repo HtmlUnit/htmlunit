@@ -966,7 +966,8 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);
+        final Object result = getWebClient().getJavaScriptEngine()
+                .execute(this, getEnclosingWindow().getScriptableObject(), sourceCode, sourceName, startLine);
         return new ScriptResult(result);
     }
 
@@ -1046,7 +1047,7 @@ public class HtmlPage extends SgmlPage {
 
         @SuppressWarnings("unchecked")
         final AbstractJavaScriptEngine<Object> engine = (AbstractJavaScriptEngine<Object>) client.getJavaScriptEngine();
-        engine.execute(this, script);
+        engine.execute(this, getEnclosingWindow().getScriptableObject(), script);
         return JavaScriptLoadResult.SUCCESS;
     }
 
@@ -1150,7 +1151,8 @@ public class HtmlPage extends SgmlPage {
                                 && getWebClient().getBrowserVersion().hasFeature(JS_IGNORES_UTF8_BOM_SOMETIMES));
         if (null != scriptCode) {
             final AbstractJavaScriptEngine<?> javaScriptEngine = client.getJavaScriptEngine();
-            final Object script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
+            final Scriptable scope = getEnclosingWindow().getScriptableObject();
+            final Object script = javaScriptEngine.compile(this, scope, scriptCode, url.toExternalForm(), 1);
             if (script != null && cache.cacheIfPossible(request, response, script)) {
                 // no cleanup if the response is stored inside the cache
                 return script;
