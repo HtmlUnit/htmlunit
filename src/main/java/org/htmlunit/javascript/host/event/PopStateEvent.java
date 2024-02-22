@@ -79,7 +79,7 @@ public class PopStateEvent extends Event {
             final NativeObject newState = new NativeObject();
 
             final WebClient client = getWindow().getWebWindow().getWebClient();
-            final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+            final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
             final ContextAction<Object> contextAction = cx -> {
                 for (final Object o : ScriptableObject.getPropertyIds(old)) {

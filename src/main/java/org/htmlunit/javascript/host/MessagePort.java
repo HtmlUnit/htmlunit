@@ -23,8 +23,8 @@ import java.net.URL;
 
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
+import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -114,7 +114,7 @@ public class MessagePort extends EventTarget {
             event.setParentScope(port1_);
             event.setPrototype(getPrototype(event.getClass()));
 
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine<?> jsEngine = webWindow.getWebClient().getJavaScriptEngine();
             final PostponedAction action = new PostponedAction(page, "MessagePort.postMessage") {
                 @Override
                 public void execute() {

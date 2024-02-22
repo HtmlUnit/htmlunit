@@ -190,4 +190,10 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
                            String sourceCode,
                            String sourceName,
                            int startLine);
+
+    /**
+     * @return this JavaScript engine's {@link HtmlUnitContextFactory}
+     */
+    HtmlUnitContextFactory getContextFactory();
+
 }

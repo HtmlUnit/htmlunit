@@ -20,8 +20,8 @@ import java.util.Map;
 
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
+import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLDialogElement;
@@ -128,7 +128,7 @@ public class HtmlDialog extends HtmlElement {
                 final HTMLDialogElement dialogElement = getScriptableObject();
                 final Event event = new Event(dialogElement, Event.TYPE_CLOSE);
 
-                final JavaScriptEngine jsEngine = (JavaScriptEngine) client.getJavaScriptEngine();
+                final AbstractJavaScriptEngine<?> jsEngine = client.getJavaScriptEngine();
                 final PostponedAction action = new PostponedAction(page, "Dialog.CloseEvent") {
                     @Override
                     public void execute() {

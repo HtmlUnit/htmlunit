@@ -156,7 +156,7 @@ public class NodeList extends AbstractList implements Callable {
         final List<DomNode> nodes = getElements();
 
         final WebClient client = getWindow().getWebWindow().getWebClient();
-        final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+        final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
         final ContextAction<Object> contextAction = cx -> {
             final Function function = (Function) callback;

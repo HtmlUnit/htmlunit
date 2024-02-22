@@ -19,13 +19,13 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.concurrent.Future;
 
+import org.htmlunit.WebClient;
+import org.htmlunit.WebClientOptions;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.jetty.util.ssl.SslContextFactory;
 import org.htmlunit.jetty.websocket.api.Session;
 import org.htmlunit.jetty.websocket.api.WebSocketPolicy;
 import org.htmlunit.jetty.websocket.client.WebSocketClient;
-import org.htmlunit.WebClient;
-import org.htmlunit.WebClientOptions;
-import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 
 /**
  * Jetty based impl of the WebSocketAdapter.

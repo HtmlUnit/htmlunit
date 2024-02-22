@@ -25,14 +25,14 @@ import static org.htmlunit.BrowserVersionFeatures.JS_OBJECT_ASSIGN;
 import static org.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROMISE;
 import static org.htmlunit.BrowserVersionFeatures.JS_REFLECT;
-import static org.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
-import static org.htmlunit.BrowserVersionFeatures.JS_WEAK_SET;
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_STRING_INCLUDES;
 import static org.htmlunit.BrowserVersionFeatures.JS_STRING_REPEAT;
 import static org.htmlunit.BrowserVersionFeatures.JS_STRING_STARTS_ENDS_WITH;
 import static org.htmlunit.BrowserVersionFeatures.JS_STRING_TRIM_LEFT_RIGHT;
+import static org.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
+import static org.htmlunit.BrowserVersionFeatures.JS_WEAK_SET;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -173,9 +173,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
-     * Returns this JavaScript engine's Rhino {@link org.htmlunit.corejs.javascript.ContextFactory}.
-     * @return this JavaScript engine's Rhino {@link org.htmlunit.corejs.javascript.ContextFactory}
+     * {@inheritDoc}
      */
+    @Override
     public HtmlUnitContextFactory getContextFactory() {
         return contextFactory_;
     }

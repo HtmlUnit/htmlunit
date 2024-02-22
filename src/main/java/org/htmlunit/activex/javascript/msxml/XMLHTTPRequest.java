@@ -478,7 +478,6 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         }
         else {
             // Create and start a thread in which to execute the request.
-            final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction<Object> action = cx -> {
                 // KEY_STARTING_SCOPE maintains a stack of scopes
                 @SuppressWarnings("unchecked")
@@ -498,6 +497,8 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                 }
                 return null;
             };
+
+            final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                     createJavascriptXMLHttpRequestJob(cf, action);
             if (LOG.isDebugEnabled()) {
