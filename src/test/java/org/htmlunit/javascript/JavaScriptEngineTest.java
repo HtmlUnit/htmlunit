@@ -928,25 +928,25 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         /** {@inheritDoc} */
         @Override
         public Object execute(
-                final HtmlPage page, final String sourceCode,
-                final String sourceName, final int startLine) {
+                final HtmlPage page, final Scriptable scope,
+                final String sourceCode, final String sourceName, final int startLine) {
             scriptExecutionCount_++;
-            return super.execute(page, sourceCode, sourceName, startLine);
+            return super.execute(page, scope, sourceCode, sourceName, startLine);
         }
 
         /** {@inheritDoc} */
         @Override
-        public Object execute(final HtmlPage page, final Script script) {
+        public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
             scriptExecuteScriptCount_++;
-            return super.execute(page, script);
+            return super.execute(page, scope, script);
         }
 
         /** {@inheritDoc} */
         @Override
-        public Script compile(final HtmlPage page, final String sourceCode,
-                final String sourceName, final int startLine) {
+        public Script compile(final HtmlPage page, final Scriptable scope,
+                final String sourceCode, final String sourceName, final int startLine) {
             scriptCompileCount_++;
-            return super.compile(page, sourceCode, sourceName, startLine);
+            return super.compile(page, scope, sourceCode, sourceName, startLine);
         }
 
         /** {@inheritDoc} */
@@ -1091,8 +1091,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setJavaScriptEngine(new JavaScriptEngine(client) {
             @Override
-            public Object execute(final HtmlPage htmlPage, final String sourceCode,
-                    final String sourceName, final int startLine) {
+            public Object execute(final HtmlPage htmlPage, final Scriptable scope,
+                    final String sourceCode, final String sourceName, final int startLine) {
                 collectedScripts.add(sourceCode);
                 return null;
             }
@@ -1127,8 +1127,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client1 = getWebClient();
         final WebClient client2 = createNewWebClient();
 
-        final HtmlUnitContextFactory cf1 = ((JavaScriptEngine) client1.getJavaScriptEngine()).getContextFactory();
-        final HtmlUnitContextFactory cf2 = ((JavaScriptEngine) client2.getJavaScriptEngine()).getContextFactory();
+        final HtmlUnitContextFactory cf1 = client1.getJavaScriptEngine().getContextFactory();
+        final HtmlUnitContextFactory cf2 = client2.getJavaScriptEngine().getContextFactory();
 
         assertFalse(cf1 == cf2);
         assertFalse(cf1 == ContextFactory.getGlobal());

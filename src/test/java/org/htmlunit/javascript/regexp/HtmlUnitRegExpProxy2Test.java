@@ -101,7 +101,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     @Test
     public void needCustomFix() {
         final WebClient client = getWebClient();
-        final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+        final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final Context ctx = cf.enterContext();
         try {
             final ScriptableObject topScope = ctx.initStandardObjects();
@@ -130,7 +130,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     @Test
     public void matchFixNeeded() throws Exception {
         final WebClient client = getWebClient();
-        final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+        final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final Context cx = cf.enterContext();
         try {
             final ScriptableObject topScope = cx.initStandardObjects();
