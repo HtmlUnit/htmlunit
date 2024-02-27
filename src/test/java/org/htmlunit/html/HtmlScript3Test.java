@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.io.ByteArrayOutputStream;
@@ -34,7 +33,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -2555,7 +2553,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    @NotYetImplemented(IE)
     public void _GB2312____BOMUTF8_false() throws Exception {
         charset(TestCharset.GB2312, null, null, null, BOM_UTF_8, false);
     }
@@ -2565,7 +2562,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    @NotYetImplemented(IE)
     public void _GB2312____BOMUTF8_true() throws Exception {
         charset(TestCharset.GB2312, null, null, null, BOM_UTF_8, true);
     }
@@ -2575,7 +2571,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    @NotYetImplemented(IE)
     public void _GB2312___UTF8_BOMUTF8_false() throws Exception {
         charset(TestCharset.GB2312, null, null, TestCharset.UTF8, BOM_UTF_8, false);
     }
@@ -2585,7 +2580,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    @NotYetImplemented(IE)
     public void _GB2312___UTF8_BOMUTF8_true() throws Exception {
         charset(TestCharset.GB2312, null, null, TestCharset.UTF8, BOM_UTF_8, true);
     }
@@ -2595,7 +2589,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    @NotYetImplemented(IE)
     public void _GB2312___ISO88591_BOMUTF8_false() throws Exception {
         charset(TestCharset.GB2312, null, null, TestCharset.ISO88591, BOM_UTF_8, false);
     }
@@ -2605,7 +2598,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    @NotYetImplemented(IE)
     public void _GB2312___ISO88591_BOMUTF8_true() throws Exception {
         charset(TestCharset.GB2312, null, null, TestCharset.ISO88591, BOM_UTF_8, true);
     }

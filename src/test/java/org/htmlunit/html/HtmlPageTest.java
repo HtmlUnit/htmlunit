@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -52,7 +51,6 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.Cookie;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -1290,7 +1288,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE) // in fact IE seems to perform other requests
     public void noSlashURL() throws Exception {
         testNoSlashURL("http:/second");
         testNoSlashURL("http:second");

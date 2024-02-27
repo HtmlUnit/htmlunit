@@ -14,8 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -49,7 +47,6 @@ public class TinyMceTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"348", "0"},
             IE = {"348", "13"})
-    @NotYetImplemented(IE)
     // TODO [IE]XML tinymce 3.2.7 is not compatible with IE
     public void api() throws Exception {
         test("api", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));

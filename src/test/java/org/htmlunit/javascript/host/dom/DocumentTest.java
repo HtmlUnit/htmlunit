@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.dom;
 
 import static org.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION;
 import static org.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromFile;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 
@@ -2287,7 +2286,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onload",
             IE = "undefined")
-    @NotYetImplemented(IE)
     public void caller_event() throws Exception {
         final String html =
               "<html>\n"
@@ -2651,7 +2649,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"null", "text1", "not available"},
             IE = {"null", "text1", "onfocus text2", "text2", "onfocus text2"})
-    @NotYetImplemented(IE)
     // the execution order is not yet correct: the onfocus is called during onload not after it
     public void setActive() throws Exception {
         final String html = "<html><head>\n"

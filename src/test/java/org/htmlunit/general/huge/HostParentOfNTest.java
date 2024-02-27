@@ -1830,8 +1830,7 @@ public class HostParentOfNTest extends HostParentOf {
     @HtmlUnitNYI(CHROME = "true",
             EDGE = "true",
             FF = "true",
-            FF_ESR = "true",
-            IE = "true")
+            FF_ESR = "true")
     public void _NodeFilter_NodeFilter() throws Exception {
         test("NodeFilter", "NodeFilter");
     }

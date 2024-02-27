@@ -20,12 +20,10 @@ import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.LOAD_XMLDOMD
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callCreateXMLDOMDocument;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLDOMDocumentFromURL;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -284,7 +282,6 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"true", "true", "true"})
-    @NotYetImplemented(IE)
     // Xerxes is the problem here as they do treat whitespaces as text nodes.
     public void nodeValue_empty() throws Exception {
         final String test =

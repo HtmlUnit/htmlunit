@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 import java.util.Map;
@@ -212,7 +211,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
             CHROME = "about://unsupported",
             EDGE = "about://unsupported",
             IE = "exception")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @NotYetImplemented({CHROME, EDGE})
     public void aboutSrc() throws Exception {
         final String html
             = "<html><head>\n"

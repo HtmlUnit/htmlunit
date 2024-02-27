@@ -1199,8 +1199,7 @@ public class HostParentOfS2Test extends HostParentOf {
             CHROME = "true",
             EDGE = "true")
     @HtmlUnitNYI(FF = "true",
-            FF_ESR = "true",
-            IE = "true")
+            FF_ESR = "true")
     public void _SVGUnitTypes_SVGUnitTypes() throws Exception {
         test("SVGUnitTypes", "SVGUnitTypes");
     }

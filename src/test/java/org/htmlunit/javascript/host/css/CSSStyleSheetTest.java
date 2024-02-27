@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -155,7 +152,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                        "§§URL§§style5.css 1", "§§URL§§style6.css 0",
                        "§§URL§§style7.css 0", "§§URL§§style8.css 1"},
             IE = {"2", "§§URL§§style1.css 1", "§§URL§§style5.css 1"})
-    @NotYetImplemented(IE)
     public void hrefWrongContentType() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1063,7 +1059,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"block", "1"},
             IE = {"none", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_max_width() throws Exception {
         mediaRule("screen and (max-width: 123px)");
     }
@@ -1120,7 +1115,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "1"},
             IE = {"block", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_min_width_match() throws Exception {
         mediaRule("screen and (min-width: 123px)");
     }
@@ -1251,7 +1245,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"block", "1"},
             IE = {"none", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_max_height() throws Exception {
         mediaRule("screen and (max-height: 123px)");
     }
@@ -1308,7 +1301,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "1"},
             IE = {"block", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_min_height_match() throws Exception {
         mediaRule("screen and (min-height: 123px)");
     }
@@ -1448,7 +1440,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "1"},
             IE = {"block", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_resolution_match() throws Exception {
         mediaRule("screen and (resolution: 96dpi)");
     }
@@ -1477,7 +1468,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "1"},
             IE = {"block", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_resolution_without_value() throws Exception {
         mediaRule("screen and (resolution)");
     }
@@ -1497,7 +1487,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"block", "1"},
             IE = {"none", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_max_resolution() throws Exception {
         mediaRule("screen and (max-resolution: 90dpi)");
     }
@@ -1554,7 +1543,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "1"},
             IE = {"block", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_min_resolution_match() throws Exception {
         mediaRule("screen and (min-resolution: 10dpi)");
     }
@@ -1593,7 +1581,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"block", "1"},
             IE = {"none", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_portrait() throws Exception {
         mediaRule("screen and (orientation: portrait)");
     }
@@ -1604,7 +1591,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "1"},
             IE = {"block", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_portrait_not() throws Exception {
         mediaRule("not screen and (orientation: portrait)");
     }
@@ -1615,7 +1601,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "1"},
             IE = {"block", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_landscape() throws Exception {
         mediaRule("screen and (orientation: landscape)");
     }
@@ -1626,7 +1611,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"block", "1"},
             IE = {"none", "1"})
-    @NotYetImplemented(IE)
     public void mediaRule_landscape_not() throws Exception {
         mediaRule("not screen and (orientation: landscape)");
     }

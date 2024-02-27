@@ -18,7 +18,6 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -1126,8 +1125,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "10px",
             EDGE =  "10px",
             FF = "10px",
-            FF_ESR = "10px",
-            IE = "10px")
+            FF_ESR = "10px")
     public void fontSize2() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6em;'>\n"
@@ -1158,8 +1156,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
             FF = "1px",
-            FF_ESR = "1px",
-            IE = "1px")
+            FF_ESR = "1px")
     public void fontSizeVH() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6vh;'>\n"
@@ -1190,8 +1187,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
             FF = "1px",
-            FF_ESR = "1px",
-            IE = "1px")
+            FF_ESR = "1px")
     public void fontSizeVW() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6vw;'>\n"
@@ -1517,8 +1513,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"30", "18", "0", "0"},
             EDGE = {"30", "18", "0", "0"},
             FF = {"30", "18", "0", "0"},
-            FF_ESR = {"30", "18", "0", "0"},
-            IE = {"30", "18", "0", "0"})
+            FF_ESR = {"30", "18", "0", "0"})
     public void widthAndHeightChildDisplayNone() throws Exception {
         final String content = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1973,7 +1968,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "left", "left", "right", "right"},
             IE = {"undefined", "left", "undefined", "left", "undefined", "right"})
-    @NotYetImplemented(IE)
     public void cssFloat2() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -2366,8 +2360,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"0px", "0", "16"},
             EDGE = {"0px", "0", "16"},
             FF = {"0px", "0", "16"},
-            FF_ESR = {"0px", "0", "16"},
-            IE = {"8px", "0", "16"})
+            FF_ESR = {"0px", "0", "16"})
     public void bodyOffsetWidth() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2451,7 +2444,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"18", "18px", "36", "36px", "54", "54px"},
             IE = {"18", "18.4px", "37", "36.8px", "55", "55.2px"})
-    @NotYetImplemented(IE)
     public void heightManyLines() throws Exception {
         final String html = "<html>\n"
             + "<head><script>\n"
@@ -2485,8 +2477,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0 0",
             EDGE = "0 0",
             FF = "0 0",
-            FF_ESR = "0 0",
-            IE = "0 0")
+            FF_ESR = "0 0")
     public void iFrameInnerWidth() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2783,8 +2774,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1256",
             EDGE = "1256",
             FF = "1256",
-            FF_ESR = "1256",
-            IE = "1256")
+            FF_ESR = "1256")
     public void widthBlockElements() throws Exception {
         final String content = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

@@ -181,8 +181,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"552", "294"},
             EDGE = {"552", "294"},
             FF = {"552", "294"},
-            FF_ESR = {"552", "294"},
-            IE = {"552", "294"})
+            FF_ESR = {"552", "294"})
     public void issue124() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

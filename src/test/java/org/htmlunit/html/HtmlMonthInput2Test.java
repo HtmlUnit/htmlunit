@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.junit.BrowserRunner;
@@ -36,7 +35,7 @@ public class HtmlMonthInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({FF, FF_ESR, IE})
+    @NotYetImplemented({FF, FF_ESR})
     public void minValidation() throws Exception {
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
@@ -76,7 +75,7 @@ public class HtmlMonthInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({FF, FF_ESR, IE})
+    @NotYetImplemented({FF, FF_ESR})
     public void maxValidation() throws Exception {
         final String htmlContent = "<html>\n" + "<head></head>\n"
                 + "<body>\n"

@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.css;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -303,7 +302,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591__BOMUTF8() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
@@ -324,7 +322,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591_UTF8_BOMUTF8() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
     }
@@ -344,7 +341,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -355,7 +351,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591_ISO88591_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -366,7 +361,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591_UTF8_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -377,7 +371,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591_UTF8_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -388,7 +381,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591__BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
@@ -399,7 +391,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591__BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
@@ -410,7 +401,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_UTF8_UTF8_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -421,7 +411,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_UTF8_UTF8_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16LE);
     }
@@ -432,7 +421,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_UTF8__BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
@@ -443,7 +431,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_UTF8__BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
@@ -454,7 +441,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_UTF8_ISO88591_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -465,7 +451,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _ISO88591_UTF8_ISO88591_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16LE);
     }
@@ -523,7 +508,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_UTF8_ISO88591_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -534,7 +518,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_UTF8_ISO88591_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16LE);
     }
@@ -545,7 +528,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_UTF8_UTF8_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -556,7 +538,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_UTF8_UTF8_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16LE);
     }
@@ -567,7 +548,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_UTF8__BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
@@ -578,7 +558,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_UTF8__BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
@@ -589,7 +568,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591_UTF8_BOMUTF8() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
     }
@@ -600,7 +578,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591__BOMUTF8() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8);
     }
@@ -649,7 +626,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __UTF8_ISO88591_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -660,7 +636,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __UTF8_ISO88591_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16LE);
     }
@@ -671,7 +646,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __UTF8_UTF8_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -682,7 +656,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __UTF8_UTF8_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16LE);
     }
@@ -693,7 +666,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __UTF8__BOMUTF16BE() throws Exception {
         charset(null, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
@@ -704,7 +676,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __UTF8__BOMUTF16LE() throws Exception {
         charset(null, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
@@ -744,7 +715,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void __ISO88591_UTF8_BOMUTF8() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
     }
@@ -755,7 +725,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void __ISO88591__BOMUTF8() throws Exception {
         charset(null, TestCharset.ISO88591, null, BOM_UTF_8);
     }
@@ -831,7 +800,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591_UTF8_BOMUTF8() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
     }
@@ -842,7 +810,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591__BOMUTF8() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, BOM_UTF_8);
     }
@@ -853,7 +820,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591_ISO88591_BOMUTF8() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
     }
@@ -864,7 +830,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -875,7 +840,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591_ISO88591_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16LE);
     }
@@ -886,7 +850,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591_UTF8_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -897,7 +860,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591_UTF8_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16LE);
     }
@@ -908,7 +870,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591__BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
@@ -919,7 +880,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_ISO88591__BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
@@ -930,7 +890,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591_ISO88591_BOMUTF8() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
     }
@@ -941,7 +900,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591_ISO88591_BOMUTF8() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
     }
@@ -952,7 +910,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -963,7 +920,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591_ISO88591_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16LE);
     }
@@ -974,7 +930,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591_UTF8_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -985,7 +940,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591_UTF8_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16LE);
     }
@@ -996,7 +950,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591__BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
@@ -1007,7 +960,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _UTF8_ISO88591__BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
@@ -1018,7 +970,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented(IE)
     public void __ISO88591_ISO88591_BOMUTF8() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
     }
@@ -1029,7 +980,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __ISO88591_ISO88591_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -1040,7 +990,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __ISO88591_ISO88591_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16LE);
     }
@@ -1051,7 +1000,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __ISO88591_UTF8_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -1062,7 +1010,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __ISO88591_UTF8_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16LE);
     }
@@ -1073,7 +1020,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __ISO88591__BOMUTF16BE() throws Exception {
         charset(null, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
@@ -1084,7 +1030,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void __ISO88591__BOMUTF16LE() throws Exception {
         charset(null, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
@@ -1095,7 +1040,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_UTF8_ISO88591_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
     }
@@ -1106,7 +1050,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_UTF8_ISO88591_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16LE);
     }
@@ -1117,7 +1060,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_UTF8_UTF8_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
     }
@@ -1128,7 +1070,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_UTF8_UTF8_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16LE);
     }
@@ -1139,7 +1080,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_UTF8__BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
@@ -1150,7 +1090,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"none", "none", "none", "none", "none"})
-    @NotYetImplemented(IE)
     public void _GB2312_UTF8__BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, null, BOM_UTF_16LE);
     }

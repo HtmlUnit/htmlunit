@@ -189,7 +189,6 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @HtmlUnitNYI(IE = "true")
     public void _CharacterData_ProcessingInstruction() throws Exception {
         test("CharacterData", "ProcessingInstruction");
     }
@@ -266,7 +265,6 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
-    @HtmlUnitNYI(IE = "false")
     public void _Console_Console() throws Exception {
         test("Console", "Console");
     }

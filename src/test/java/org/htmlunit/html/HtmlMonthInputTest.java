@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
@@ -168,7 +167,7 @@ public class HtmlMonthInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "8",
             CHROME = "",
             EDGE = "")
-    @NotYetImplemented({FF, FF_ESR, IE})
+    @NotYetImplemented({FF, FF_ESR})
     public void typing() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"

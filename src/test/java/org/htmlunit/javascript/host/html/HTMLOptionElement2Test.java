@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -823,7 +822,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLOptionsCollection]", "0", "exception", "0"},
             IE = {"[object HTMLSelectElement]", "0", "1"})
-    @NotYetImplemented(IE)
     public void without_new() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1424,7 +1422,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                        "false-null", "true-true", "false-null"},
             IE = {"false-null", "true-true", "true-",
                   "false-null", "true-true", "false-null"})
-    @NotYetImplemented(IE)
     public void createOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

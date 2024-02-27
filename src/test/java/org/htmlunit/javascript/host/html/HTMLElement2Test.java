@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
@@ -272,7 +271,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"15", "15"},
             FF = {"12", "12"},
             FF_ESR = {"12", "12"})
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @NotYetImplemented({CHROME, EDGE})
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"
@@ -469,7 +468,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
                   "4.111111111111111", "5.111111111111111", "6.111111111111111",
                   "7.166666666666667", "8.166666666666666", "9.222222222222221",
                   "101.22222222222223", "203.44444444444446", "6132.333333333333"})
-    @NotYetImplemented(IE)
     public void offsetTopWithPreviousSiblings() throws Exception {
         String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1639,7 +1637,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
             IE = {"First: body1", "Second:",
                   "Second: body1 text1 [object HTMLButtonElement] text2 [object Window] onfocus text2"})
     // alert conflicts with focus/blur
-    @NotYetImplemented(IE)
     public void setActiveAndFocus() throws Exception {
         final String firstHtml =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

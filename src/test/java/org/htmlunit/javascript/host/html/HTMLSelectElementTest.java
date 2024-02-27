@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.util.List;
 
 import org.htmlunit.HttpMethod;
@@ -25,7 +23,6 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -2772,7 +2769,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLOptionElement]", "[object HTMLOptionElement]", "[object HTMLOptionElement]"},
             IE = "exception")
-    @NotYetImplemented(IE)
     public void optionsForOf() throws Exception {
         final String html =
               "<html>\n"

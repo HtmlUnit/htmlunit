@@ -232,11 +232,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=abc@email.com", "2"})
-    @HtmlUnitNYI(IE = {"abc@email.com",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=abc%40email.com", "2"})
     public void patternValidationValid() throws Exception {
         validation("<input type='email' pattern='.+@email.com' "
                 + "id='e1' name='k' value='abc@email.com'>\n", "", null);
@@ -274,11 +269,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-true-false-false-false-false-undefined-true-false-false",
                   "true",
                   "§§URL§§", "1"})
-    @HtmlUnitNYI(IE = {" ",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=+", "2"})
     public void patternValidationBlank() throws Exception {
         validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value=' '>\n", "", null);
     }
@@ -297,11 +287,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-true-false-false-false-false-undefined-true-false-false",
                   "true",
                   "§§URL§§", "1"})
-    @HtmlUnitNYI(IE = {"  \t",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=++%09", "2"})
     public void patternValidationWhitespace() throws Exception {
         validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value='  \t'>\n", "", null);
     }
@@ -320,11 +305,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-true-false-false-false-false-undefined-true-false-false",
                   "true",
                   "§§URL§§", "1"})
-    @HtmlUnitNYI(IE = {" abc@email.com ",
-                       "false",
-                       "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                       "true",
-                       "§§URL§§", "1"})
     public void patternValidationTrimInitial() throws Exception {
         validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value=' abc@email.com '>\n", "", null);
     }
@@ -362,12 +342,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                            "true",
                            "false-false-false-false-false-false-false-false-false-true-false",
                            "true",
-                           "§§URL§§?k=abc%40email.com", "2"},
-                 IE = {" abc@email.com",
-                       "false",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§", "1"})
+                           "§§URL§§?k=abc%40email.com", "2"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='email' pattern='.+@email.com' id='e1' name='k'>\n", "", " abc@email.com");
     }
@@ -386,11 +361,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@b.com", "2"})
-    @HtmlUnitNYI(IE = {"a@b.com",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=a%40b.com", "2"})
     public void minLengthValidationInvalid() throws Exception {
         validation("<input type='email' minlength='10' id='e1' name='k'>\n", "", "a@b.com");
     }
@@ -409,11 +379,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@b.com", "2"})
-    @HtmlUnitNYI(IE = {"a@b.com",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=a%40b.com", "2"})
     public void minLengthValidationInvalidInitial() throws Exception {
         validation("<input type='email' minlength='10' id='e1' name='k' value='a@b.com'>\n", "", null);
     }
@@ -450,11 +415,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@b.com", "2"})
-    @HtmlUnitNYI(IE = {"a@b.com",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=a%40b.com", "2"})
     public void minLengthValidationValid() throws Exception {
         validation("<input type='email' minlength='5' id='e1' name='k'>\n", "", "a@b.com");
     }
@@ -473,11 +433,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@b.c", "2"})
-    @HtmlUnitNYI(IE = {"a@b.c",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=a%40b.c", "2"})
     public void maxLengthValidationValid() throws Exception {
         validation("<input type='email' maxlength='5' id='e1' name='k'>\n", "", "a@b.com");
     }
@@ -496,11 +451,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@ema", "2"})
-    @HtmlUnitNYI(IE = {"a@ema",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=a%40ema", "2"})
     public void maxLengthValidationInvalid() throws Exception {
         validation("<input type='email' maxlength='5' id='e1' name='k'>\n", "", "a@email.com");
     }
@@ -519,11 +469,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@email.com", "2"})
-    @HtmlUnitNYI(IE = {"a@email.com",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=a%40email.com", "2"})
     public void maxLengthValidationInvalidInitial() throws Exception {
         validation("<input type='email' maxlength='5' id='e1' name='k' value='a@email.com'>\n", "", null);
     }
@@ -665,11 +610,6 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=test@abc.edu", "2"})
-    @HtmlUnitNYI(IE = {"",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=test%40abc.edu", "2"})
     public void validationRequiredValueSet() throws Exception {
         validation("<input type='email' id='e1' name='k' required>\n", "elem.value='test@abc.edu';", null);
     }

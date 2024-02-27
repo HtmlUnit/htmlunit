@@ -14,13 +14,10 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -106,7 +103,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string 0", "string item", "string length", "string namedItem"},
             IE = {"string item", "string length", "string myForm", "string namedItem"})
-    @NotYetImplemented(IE)
     public void for_in() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -138,7 +134,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             IE = {"string 1", "string action", "string first_submit", "string item",
                   "string length", "string namedItem", "string second_submit", "string val1",
                   "string val2"})
-    @NotYetImplemented(IE)
     public void for_in2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

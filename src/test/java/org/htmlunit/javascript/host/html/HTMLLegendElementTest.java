@@ -14,12 +14,9 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -83,7 +80,6 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"left", "right", "bottom", "top", "wrong", ""},
             IE = {"left", "right", "bottom", "top", "", ""})
-    @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"

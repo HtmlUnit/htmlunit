@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
@@ -125,7 +124,6 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"10px", "20em", "80%", "40", "wrong", ""},
             IE = {"10", "20", "80%", "40", "", ""})
-    @NotYetImplemented(IE)
     public void getHeight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -153,7 +151,6 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"20px", "8", "foo"},
             IE = {"20", "8", "error", "8"})
-    @NotYetImplemented(IE)
     public void setHeight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -186,7 +183,6 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"10px", "20em", "80%", "40", "wrong", ""},
             IE = {"10", "20", "80%", "40", "", ""})
-    @NotYetImplemented(IE)
     public void getWidth() throws Exception {
         final String html
             = "<html><body>\n"
@@ -214,7 +210,6 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"20px", "8", "foo"},
             IE = {"20", "8", "error", "8"})
-    @NotYetImplemented(IE)
     public void setWidth() throws Exception {
         final String html
             = "<html><body>\n"

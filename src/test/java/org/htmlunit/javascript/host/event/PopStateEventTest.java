@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.event;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
@@ -189,7 +188,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "exception ctor",
             FF_ESR = "exception ctor")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @NotYetImplemented({CHROME, EDGE})
     public void dispatchEventWithoutInit() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

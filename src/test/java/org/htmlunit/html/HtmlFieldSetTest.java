@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -117,7 +116,6 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "false", "false", "false", "false"})
-    @HtmlUnitNYI(IE = {"false", "false", "false", "false", "false"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"

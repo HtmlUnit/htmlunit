@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -40,8 +39,6 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
@@ -537,7 +534,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "third"},
             IE = {"1", "third"})
-    @HtmlUnitNYI(IE = {"2", "third"})
     public void buttonWithFormAction() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head><title>first</title></head>\n"
@@ -941,7 +937,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
-    @NotYetImplemented(IE)
     public void inputTypeImageWithFormTarget() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"

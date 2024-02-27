@@ -395,8 +395,7 @@ public class HostParentOfDTest extends HostParentOf {
     @HtmlUnitNYI(CHROME = "false",
             EDGE = "false",
             FF = "false",
-            FF_ESR = "false",
-            IE = "false")
+            FF_ESR = "false")
     public void _DOMStringMap_DOMStringMap() throws Exception {
         test("DOMStringMap", "DOMStringMap");
     }

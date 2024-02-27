@@ -67,10 +67,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                   "[object CSS2Properties]", "[object CSS2Properties]"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]",
                       "[object CSS2Properties]", "[object CSS2Properties]"})
-    @HtmlUnitNYI(IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+    @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                        "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
-            FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
-                  "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                       "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
     // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
@@ -108,7 +106,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"background-color: rgb(255, 255, 255);", "background-color: rgb(255, 255, 255);"})
     @HtmlUnitNYI(CHROME = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
             EDGE = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
-            IE = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
             FF = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
             FF_ESR = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"})
     // FIXME hex colors are not transformed to rgb for direct styles
@@ -183,8 +180,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                            "background-color: #FFFFFF;color: red;"},
             EDGE = {"background-color: rgb(255, 255, 255); color: red;",
                     "background-color: #FFFFFF;color: red;"},
-            IE = {"background-color: rgb(255, 255, 255); color: red;",
-                  "background-color: #FFFFFF;color: red;"},
             FF = {"background-color: rgb(255, 255, 255); color: red;",
                   "background-color: #FFFFFF;color: red;"},
             FF_ESR = {"background-color: rgb(255, 255, 255); color: red;",
@@ -226,7 +221,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"color: rgb(0, 0, 0);", "color: rgb(0, 0, 0);"})
     @HtmlUnitNYI(CHROME = {"color: rgb(0, 0, 0);", "color:#000000;"},
             EDGE = {"color: rgb(0, 0, 0);", "color:#000000;"},
-            IE = {"color: rgb(0, 0, 0);", "color:#000000;"},
             FF = {"color: rgb(0, 0, 0);", "color:#000000;"},
             FF_ESR = {"color: rgb(0, 0, 0);", "color:#000000;"})
     // FIXME hex colors are not transformed to rgb for direct styles
@@ -358,7 +352,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"", ""})
     @HtmlUnitNYI(CHROME = {"", "abc"},
             EDGE = {"", "abc"},
-            IE = {"", "abc"},
             FF = {"", "abc"},
             FF_ESR = {"", "abc"})
     @NotYetImplemented
@@ -646,8 +639,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"black", "pink", "color: pink; background: blue; foo: bar;"},
             EDGE = {"black", "pink", "color: pink; background: blue; foo: bar;"},
             FF = {"black", "pink", "color: pink; background: blue; foo: bar;"},
-            FF_ESR = {"black", "pink", "color: pink; background: blue; foo: bar;"},
-            IE = {"black", "pink", "color: pink; background: blue; foo: bar;"})
+            FF_ESR = {"black", "pink", "color: pink; background: blue; foo: bar;"})
     public void style_MultipleCssAttributes() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -929,8 +921,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"", "alpha(opacity=50)"},
             EDGE = {"", "alpha(opacity=50)"},
             FF = {"", "alpha(opacity=50)"},
-            FF_ESR = {"", "alpha(opacity=50)"},
-            IE = {"", "alpha(opacity=50)"})
+            FF_ESR = {"", "alpha(opacity=50)"})
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1498,7 +1489,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "none", "rgb(0, 128, 0)"},
             IE = {"inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)"})
-    @HtmlUnitNYI(IE = {"none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)"})
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2887,8 +2877,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
-    @HtmlUnitNYI(IE = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setVerticalAlign() throws Exception {
         setLength("vertical-align", "verticalAlign");
     }
@@ -3615,8 +3603,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
             IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]", "", ""})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
-            FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
-            IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "", ""})
+            FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"})
     public void setStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

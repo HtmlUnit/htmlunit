@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -829,7 +828,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
             IE = {"true", "1256"})
-    @NotYetImplemented(IE)
     public void setInnerWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -850,7 +848,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
             IE = {"true", "682"})
-    @NotYetImplemented(IE)
     public void setInnerHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -871,7 +868,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
             IE = {"true", "1272"})
-    @NotYetImplemented(IE)
     public void setOuterWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -892,7 +888,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
             IE = {"true", "768"})
-    @NotYetImplemented(IE)
     public void setOuterHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1344,7 +1339,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string string 8 number object", "string string 1 number object"},
             IE = {"string string 8 number object", "string string 9 number object"})
-    @NotYetImplemented(IE)
     public void onErrorExceptionInstance2() throws Exception {
         final String html
                 = "<html>\n"

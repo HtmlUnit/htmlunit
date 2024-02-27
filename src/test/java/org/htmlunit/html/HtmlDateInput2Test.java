@@ -16,8 +16,6 @@ package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.htmlunit.junit.BrowserRunner.TestedBrowser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,7 +31,6 @@ public class HtmlDateInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(TestedBrowser.IE)
     public void minValidation() throws Exception {
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
@@ -73,7 +70,6 @@ public class HtmlDateInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(TestedBrowser.IE)
     public void maxValidation() throws Exception {
         final String htmlContent = "<html>\n" + "<head></head>\n"
                 + "<body>\n"

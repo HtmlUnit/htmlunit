@@ -14,12 +14,9 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -106,7 +103,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"A", "A", "4294967295", "undefined"},
             IE = {"A", "A", "-1", "true"})
-    @NotYetImplemented(IE)
     // The spec states it is an unsigned long.
     public void getters2() throws Exception {
         final String script = "var theA = document.getElementById('theA');\n"

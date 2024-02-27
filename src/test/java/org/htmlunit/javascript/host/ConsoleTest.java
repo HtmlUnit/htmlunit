@@ -20,7 +20,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -136,7 +135,6 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @HtmlUnitNYI(IE = "true")
     public void windowProperty() throws Exception {
         final String html
             = "<html>\n"
@@ -159,7 +157,6 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "success",
             IE = "exception")
-    @HtmlUnitNYI(IE = "success")
     public void fromWindow() throws Exception {
         final String html
             = "<html>\n"

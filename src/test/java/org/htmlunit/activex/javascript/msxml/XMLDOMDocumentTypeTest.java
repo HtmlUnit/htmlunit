@@ -18,12 +18,10 @@ import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.ACTIVEX_CHEC
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLDOMDocumentFromURL;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -272,7 +270,6 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = "<!DOCTYPE a [ <!ELEMENT a (b+)> <!ELEMENT b (#PCDATA)> ]>")
-    @NotYetImplemented(IE)
     // It seems we currently do not have access to the DTD.
     public void xml() throws Exception {
         property("xml");

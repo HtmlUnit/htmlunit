@@ -85,7 +85,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function AbstractRange() { [native code] }",
             IE = "exception")
-    @HtmlUnitNYI(IE = "function AbstractRange() { [native code] }")
     public void abstractRange() throws Exception {
         test("AbstractRange");
     }
@@ -1638,7 +1637,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object DeviceAcceleration]")
-    @HtmlUnitNYI(IE = "exception")
     public void deviceAcceleration() throws Exception {
         test("DeviceAcceleration");
     }
@@ -1687,7 +1685,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object DeviceRotationRate]")
-    @HtmlUnitNYI(IE = "exception")
     public void deviceRotationRate() throws Exception {
         test("DeviceRotationRate");
     }
@@ -4487,8 +4484,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function InternalError() { [native code] }",
             FF_ESR = "function InternalError() { [native code] }")
     @HtmlUnitNYI(CHROME = "function InternalError() { [native code] }",
-            EDGE = "function InternalError() { [native code] }",
-            IE = "function InternalError() { [native code] }")
+            EDGE = "function InternalError() { [native code] }")
     public void internalError() throws Exception {
         test("InternalError");
     }
@@ -5656,7 +5652,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object MSCurrentStyleCSSProperties]")
-    @HtmlUnitNYI(IE = "exception")
     public void msCurrentStyleCSSProperties() throws Exception {
         test("MSCurrentStyleCSSProperties");
     }
@@ -5677,7 +5672,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object MSStyleCSSProperties]")
-    @HtmlUnitNYI(IE = "exception")
     public void msStyleCSSProperties() throws Exception {
         test("MSStyleCSSProperties");
     }
@@ -7416,7 +7410,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SourceBuffer() { [native code] }",
             IE = "[object SourceBuffer]")
-    @HtmlUnitNYI(IE = "function SourceBuffer() { [native code] }")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");
     }
@@ -7427,7 +7420,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SourceBufferList() { [native code] }",
             IE = "[object SourceBufferList]")
-    @HtmlUnitNYI(IE = "function SourceBufferList() { [native code] }")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
     }

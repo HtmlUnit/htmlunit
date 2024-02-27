@@ -22,12 +22,10 @@ import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callCreateXM
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLDOMDocumentFromString;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callSerializeXMLDOMDocumentToString;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -106,7 +104,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {})
-    @NotYetImplemented(IE)
     // so far we are not able to add the XML header
     public void nameSpaces() throws Exception {
         final String expectedString = getExpectedAlerts().length != 0 ? ""
@@ -158,7 +155,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {})
-    @NotYetImplemented(IE)
     // so far we are not able to add the XML header
     public void htmlAttributes() throws Exception {
         final String expectedString = getExpectedAlerts().length != 0 ? ""

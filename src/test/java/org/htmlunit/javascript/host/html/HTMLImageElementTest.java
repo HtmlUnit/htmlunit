@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -860,7 +859,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "myImageWithMap clicked",
             IE = "a0 clicked")
-    @NotYetImplemented(IE)
     public void clickWithMap() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

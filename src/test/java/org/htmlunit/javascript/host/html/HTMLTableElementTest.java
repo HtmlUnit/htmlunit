@@ -14,12 +14,9 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -807,7 +804,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"},
             IE = {"", "#667788", "#000000", "red", "#123456", "#000000"})
-    @NotYetImplemented(IE)
     public void borderColor() throws Exception {
         final String html
             = "<html><body>\n"
@@ -844,7 +840,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"", "", "", "red", "#123456", "#000000"})
-    @NotYetImplemented(IE)
     public void borderColorDark() throws Exception {
         final String html
             = "<html><body>\n"
@@ -881,7 +876,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"", "", "", "red", "#123456", "#000000"})
-    @NotYetImplemented(IE)
     public void borderColorLight() throws Exception {
         final String html
             = "<html><body>\n"

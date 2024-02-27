@@ -14,7 +14,6 @@
  */
 package org.htmlunit;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
 import java.io.StringWriter;
@@ -30,7 +29,6 @@ import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -408,7 +406,6 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts(DEFAULT = "HTTP ERROR 401",
             IE = "HTTP ERROR 500")
-    @NotYetImplemented(IE)
     public void basicAuthenticationXHRWithUsername() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"

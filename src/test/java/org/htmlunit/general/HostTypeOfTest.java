@@ -64,7 +64,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    @HtmlUnitNYI(IE = "function")
     public void abstractRange() throws Exception {
         test("AbstractRange");
     }
@@ -1608,7 +1607,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "object")
-    @HtmlUnitNYI(IE = "undefined")
     public void deviceAcceleration() throws Exception {
         test("DeviceAcceleration");
     }
@@ -1657,7 +1655,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "object")
-    @HtmlUnitNYI(IE = "undefined")
     public void deviceRotationRate() throws Exception {
         test("DeviceRotationRate");
     }
@@ -4453,8 +4450,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             FF_ESR = "function")
     @HtmlUnitNYI(CHROME = "function",
-            EDGE = "function",
-            IE = "function")
+            EDGE = "function")
     public void internalError() throws Exception {
         test("InternalError");
     }
@@ -5621,7 +5617,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "object")
-    @HtmlUnitNYI(IE = "undefined")
     public void msCurrentStyleCSSProperties() throws Exception {
         test("MSCurrentStyleCSSProperties");
     }
@@ -5644,7 +5639,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = "object")
-    @HtmlUnitNYI(IE = "undefined")
     public void msStyleCSSProperties() throws Exception {
         test("MSStyleCSSProperties");
     }

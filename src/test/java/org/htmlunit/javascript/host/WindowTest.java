@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -50,7 +49,6 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -1259,7 +1257,6 @@ public class WindowTest extends SimpleWebTestCase {
             EDGE = {"undefined", "not available"},
             FF = {"undefined", "not available"},
             FF_ESR = {"undefined", "not available"})
-    @NotYetImplemented(IE)
     public void showModalDialogWithButton() throws Exception {
         final String html1
             = "<html><head>\n"

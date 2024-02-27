@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -293,7 +292,6 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1234-abcd-abcd", "1234-1234-1234"},
             IE = {"1234-abcd-abcd", "1234-abcd-abcd"})
-    @HtmlUnitNYI(IE = {"1234-abcd-abcd", "abcd-abcd-abcd"})
     public void none_reset() throws Exception {
         changeType("value='abcd'", "1234", "reset");
     }
@@ -332,7 +330,6 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1234-abcd-abcd", "1234-1234-1234"},
             IE = {"1234-abcd-abcd", "1234-abcd-abcd"})
-    @HtmlUnitNYI(IE = {"1234-abcd-abcd", "abcd-abcd-abcd"})
     public void none_submit() throws Exception {
         changeType("value='abcd'", "1234", "submit");
     }

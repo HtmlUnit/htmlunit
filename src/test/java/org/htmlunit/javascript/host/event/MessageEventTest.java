@@ -14,13 +14,10 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -132,7 +129,6 @@ public class MessageEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
                   "-http://localhost:", "-undefined", "-[object Window]"})
-    @NotYetImplemented(IE)
     public void initMessageEventPortsNull() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {

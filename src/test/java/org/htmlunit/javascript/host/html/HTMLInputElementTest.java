@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -27,7 +25,6 @@ import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -344,7 +341,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                   "undefined", "false", "false", "false", "false", "false", "false",
                   "false", "false", "false", "false", "false", "false", "false"})
     @Test
-    @NotYetImplemented(IE)
     public void checkedWithAttribute() throws Exception {
         testAttribute("checked", "checked", null);
     }
@@ -2036,7 +2032,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "§§URL§§?myName=abcdefg",
             IE = "§§URL§§")
-    @NotYetImplemented(IE)
     public void maxLengthJavaScript() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2195,7 +2190,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             FF = {"154", "18", "154", "18", "10", "10", "10", "10"},
             FF_ESR = {"154", "18", "154", "18", "10", "10", "10", "10"},
             IE = {"143", "19", "145", "20", "13", "13", "13", "13"})
-    @NotYetImplemented(IE)
     public void defaultClientWidthHeight() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

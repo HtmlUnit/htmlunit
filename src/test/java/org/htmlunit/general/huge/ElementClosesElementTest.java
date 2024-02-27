@@ -298,7 +298,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _colgroup_template() throws Exception {
         test("colgroup", "template");
     }
@@ -480,7 +479,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _form_isindex() throws Exception {
         test("form", "isindex");
     }
@@ -934,7 +932,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _head_template() throws Exception {
         test("head", "template");
     }
@@ -1094,7 +1091,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @HtmlUnitNYI(IE = "0")
     public void _isindex_isindex() throws Exception {
         test("isindex", "isindex");
     }
@@ -1213,7 +1209,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "1")
-    @HtmlUnitNYI(IE = "0")
     public void _p_dialog() throws Exception {
         test("p", "dialog");
     }
@@ -1377,7 +1372,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _p_isindex() throws Exception {
         test("p", "isindex");
     }
@@ -1518,8 +1512,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             FF_ESR = "0",
             IE = "0")
     @HtmlUnitNYI(FF = "1",
-            FF_ESR = "1",
-            IE = "1")
+            FF_ESR = "1")
     public void _select_hr() throws Exception {
         test("select", "hr");
     }
@@ -1557,7 +1550,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _select_template() throws Exception {
         test("select", "template");
     }
@@ -1640,7 +1632,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _table_template() throws Exception {
         test("table", "template");
     }
@@ -1723,7 +1714,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _tbody_template() throws Exception {
         test("tbody", "template");
     }
@@ -1788,7 +1778,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _tfoot_template() throws Exception {
         test("tfoot", "template");
     }
@@ -1853,7 +1842,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _thead_template() throws Exception {
         test("thead", "template");
     }
@@ -1918,7 +1906,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @HtmlUnitNYI(IE = "1")
     public void _tr_template() throws Exception {
         test("tr", "template");
     }
@@ -1937,7 +1924,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_caption() throws Exception {
         test("template", "tr");
     }
@@ -1947,7 +1933,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_col() throws Exception {
         test("template", "col");
     }
@@ -1957,7 +1942,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_colgroup() throws Exception {
         test("template", "colgroup");
     }
@@ -1976,7 +1960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_tbody() throws Exception {
         test("template", "tbody");
     }
@@ -1986,7 +1969,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_td() throws Exception {
         test("template", "td");
     }
@@ -1996,7 +1978,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_tfoot() throws Exception {
         test("template", "tfoot");
     }
@@ -2006,7 +1987,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_th() throws Exception {
         test("template", "th");
     }
@@ -2016,7 +1996,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_thead() throws Exception {
         test("template", "thead");
     }
@@ -2026,7 +2005,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(IE  = "1")
     public void _template_tr() throws Exception {
         test("template", "tr");
     }

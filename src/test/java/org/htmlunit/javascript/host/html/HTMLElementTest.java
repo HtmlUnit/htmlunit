@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 
@@ -230,7 +229,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE = {"text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined"},
             CHROME = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             EDGE = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
-    @NotYetImplemented({FF, FF_ESR, IE})
+    @NotYetImplemented({FF, FF_ESR})
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"
@@ -412,7 +411,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"null", "inform('newHandler')", "null"},
             IE = {"null", "inform('newHandler')", ""})
-    @NotYetImplemented(IE)
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -2428,7 +2426,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object MSCurrentStyleCSSProperties]", "#000000"})
-    @NotYetImplemented(IE)
     public void currentStyle() throws Exception {
         style("currentStyle");
     }
@@ -2439,7 +2436,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object MSStyleCSSProperties]", ""})
-    @NotYetImplemented(IE)
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
     }
@@ -3964,7 +3960,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<svg id=\"svgElem2\"></svg>",
             IE = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svgElem2\" />")
-    @NotYetImplemented(IE)
     public void innerHTML_svg() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

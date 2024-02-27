@@ -23,12 +23,10 @@ import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callCreateXM
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLDOMDocumentFromString;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLDOMDocumentFromURL;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -457,7 +455,6 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = "xml(7)=version=\"1.0\"")
-    @NotYetImplemented(IE)
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration() throws Exception {
         final String xml = ""
@@ -584,7 +581,6 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = "xml(7)=version=\"1.0\"")
-    @NotYetImplemented(IE)
     // Xerces does not offer any way to access the XML declaration
     public void lastChild_xmlDeclaration() throws Exception {
         final String xml = ""

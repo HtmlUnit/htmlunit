@@ -15,7 +15,6 @@
 package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
@@ -417,7 +416,6 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "modified",
             IE = "Hello world")
-    @NotYetImplemented(IE)
     // IE does not support deflate compression anymore but I couldn't find a way to disable it in HttpClient
     public void deflateCompressionNonGZipCompatible() throws Exception {
         doTestDeflateCompression(false);
@@ -466,7 +464,6 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "executed",
              IE = "")
-    @NotYetImplemented(IE)
     public void javascriptContentDetectorWithoutContentType500() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<script>alert('executed')</script>", 500, "OK", null);

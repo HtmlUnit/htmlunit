@@ -219,10 +219,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                 if (BrowserVersionClassRunner.isDefined(alerts.value())) {
                     expectedAlerts = alerts.value();
                 }
-                if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.IE(), alerts.DEFAULT());
-                }
                 else if (browserVersion == BrowserVersion.EDGE) {
                     expectedAlerts = BrowserVersionClassRunner
                             .firstDefinedOrGiven(expectedAlerts, alerts.EDGE(), alerts.DEFAULT());
@@ -246,10 +242,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                 final HtmlUnitNYI htmlUnitNYI = method.getAnnotation(HtmlUnitNYI.class);
                 String[] nyiAlerts = {};
                 if (htmlUnitNYI != null) {
-                    if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
-                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.IE());
-                    }
-                    else if (browserVersion == BrowserVersion.EDGE) {
+                    if (browserVersion == BrowserVersion.EDGE) {
                         nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.EDGE());
                     }
                     else if (browserVersion == BrowserVersion.FIREFOX_ESR) {

@@ -14,15 +14,12 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.util.Set;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -41,7 +38,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "true"},
             IE = {"1", "false"})
-    @NotYetImplemented(IE)
     public void has() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -142,7 +138,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "0")
-    @NotYetImplemented(IE)
     public void constructorArray() throws Exception {
         final String html
             = "<html><head>\n"
@@ -164,7 +159,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "0")
-    @NotYetImplemented(IE)
     public void constructorInt32Array() throws Exception {
         final String html
             = "<html><head>\n"
@@ -187,7 +181,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "true", "false"},
             IE = {"0", "false", "false"})
-    @NotYetImplemented(IE)
     public void constructorStringParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -237,7 +230,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "true", "false"},
             IE = {"0", "false", "false"})
-    @NotYetImplemented(IE)
     public void constructorSetParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -261,7 +253,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "false", "false"},
             IE = {"0", "false", "false"})
-    @NotYetImplemented(IE)
     public void constructorMapParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -330,7 +321,6 @@ public class SetTest extends WebDriverTestCase {
                        "undefined", "undefined", "[object Set]", "[object Window]",
                        "null", "null", "[object Set]", "[object Window]"},
             IE = {})
-    @NotYetImplemented(IE)
     public void forEach() throws Exception {
         final String html
             = "<html><head>\n"
@@ -362,7 +352,6 @@ public class SetTest extends WebDriverTestCase {
                        "undefined", "undefined", "[object Set]", "undefined",
                        "null", "null", "[object Set]", "undefined"},
             IE = {})
-    @NotYetImplemented(IE)
     public void forEachStrict() throws Exception {
         final String html
             = "<html><head>\n"
@@ -394,7 +383,6 @@ public class SetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
                        "null", "null", "[object Set]", "hello"},
             IE = {})
-    @NotYetImplemented(IE)
     public void forEachThis() throws Exception {
         final String html
             = "<html><head>\n"
@@ -454,7 +442,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "0"},
             IE = {})
-    @NotYetImplemented(IE)
     public void forEach_withElision() throws Exception {
         final String html
                 = "<html><head>\n"

@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -145,7 +144,6 @@ public class WebSocketTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"blob", "blob", "arraybuffer", "blob", "blob"},
             IE = {"blob", "exception", "arraybuffer", "blob", "exception"})
-    @NotYetImplemented(IE)
     public void binaryType() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

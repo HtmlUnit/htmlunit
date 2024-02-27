@@ -169,9 +169,6 @@ public class BrowserRunner extends Suite {
         /** Latest version of Chrome. */
         CHROME,
 
-        /** Internet Explorer 11. */
-        IE,
-
         /** Edge. */
         EDGE,
 

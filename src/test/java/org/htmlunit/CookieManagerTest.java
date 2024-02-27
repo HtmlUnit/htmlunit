@@ -14,8 +14,6 @@
  */
 package org.htmlunit;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -29,8 +27,6 @@ import org.apache.http.client.utils.DateUtils;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Assert;
@@ -425,7 +421,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "cookie1=1",
             IE = "cookie1=1; cookie2=2")
-    @NotYetImplemented(IE)
     public void cookieExpires_GMT() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie",
@@ -666,7 +661,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"cookies: first=1", "cookies: "},
             IE = {})
-    @HtmlUnitNYI(IE = {"cookies: first=1", "cookies: "})
     public void setCookieDuring302() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
@@ -740,7 +734,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"first=1; second=2; third=3", "26"},
             IE = {"second=2; third=3", "17"})
-    @HtmlUnitNYI(IE = {"first=1; second=2; third=3", "26"})
     public void sameSite() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "first=1; path=/; SameSite=None; Secure"));

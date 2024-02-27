@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +29,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebResponse;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -195,7 +192,6 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"onError", "body onLoad"},
             IE = {"onLoad", "body onLoad"})
-    @NotYetImplemented(IE)
     public void onError() throws Exception {
         onLoadOnError("rel='stylesheet' href='unknown.css'");
     }
@@ -233,7 +229,6 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"},
             IE = {"onLoadJs1", "body onLoad", "onLoad1", "onLoad2;"})
-    @NotYetImplemented(IE)
     public void onLoadOrder() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.css"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");
@@ -302,7 +297,6 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onError [object Event]",
             IE = "onLoad [object Event]")
-    @NotYetImplemented(IE)
     public void onLoadDynamicUnknown() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
         final String html

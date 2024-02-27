@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.dom;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 
@@ -345,7 +344,6 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLBodyElement]", "§§URL§§#", "§§URL§§#"},
             IE = {"null", "§§URL§§#", "§§URL§§#"})
-    @NotYetImplemented(IE)
     public void activeElement_iframe() throws Exception {
         final String html =
                 "<html>\n"

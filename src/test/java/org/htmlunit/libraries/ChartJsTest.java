@@ -14,15 +14,12 @@
  */
 package org.htmlunit.libraries;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -72,7 +69,6 @@ public class ChartJsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
     public void simpleBarChart() throws Exception {
         doTest("simple_bar_chart");
     }

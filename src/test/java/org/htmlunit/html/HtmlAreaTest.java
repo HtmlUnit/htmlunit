@@ -27,7 +27,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -283,7 +282,6 @@ public class HtmlAreaTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false", "true"},
             IE = {"false", "false", "false"})
-    @HtmlUnitNYI(IE = {"false", "false", "true"})
     public void isDisplayedEmptyCircle() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"

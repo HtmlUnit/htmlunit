@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -633,7 +631,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<html><head><title>test</title></head><body><img src=\"x\" onerror=\"log(1)\"></body></html>",
             IE = "<html><head><title>test</title></head><body><img onerror=\"log(1)\" src=\"x\"></body></html>")
-    @NotYetImplemented(IE)
     public void createHTMLDocumentInnerAddImg() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"

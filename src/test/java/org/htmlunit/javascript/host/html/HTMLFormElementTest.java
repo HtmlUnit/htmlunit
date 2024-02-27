@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -1156,7 +1155,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"page1.html", "page2.html", "page1.html", "page1.html"},
             IE = {"page1.html", "page1.html", "page1.html", "page1.html"})
-    @NotYetImplemented(IE)
     public void changeFormActionAfterSubmit() throws Exception {
         final String[] expectedFiles = getExpectedAlerts();
         setExpectedAlerts();
@@ -1313,7 +1311,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"page4.html?f1=v1&f2=v2", "page4.html?f1=v1&f2=v2", "page3.html?f1=v1", "page3.html?f1=v1"},
             IE = {"page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1"})
-    @NotYetImplemented(IE)
     public void changesAfterCallToSubmit() throws Exception {
         final String[] expectedUrlSuffixes = getExpectedAlerts();
         setExpectedAlerts();
@@ -3076,7 +3073,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElement]"},
             IE = "exception")
-    @NotYetImplemented(IE)
     public void elementsForOf() throws Exception {
         final String html =
               "<html>\n"

@@ -14,12 +14,9 @@
  */
 package org.htmlunit.javascript.host.arrays;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -177,7 +174,6 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "exception")
-    @NotYetImplemented(IE)
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -205,7 +201,6 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
             IE = {"[object Uint8ClampedArray]", "[object Uint8ClampedArray]",
                   "[object Uint8ClampedArray]", "[object Uint8ClampedArray]",
                   "[object Uint8ClampedArray]"})
-    @NotYetImplemented(IE)
     public void asString() throws Exception {
         final String html
             = "<html><head>\n"
@@ -239,7 +234,6 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Uint8ClampedArray",
             IE = "undefined")
-    @NotYetImplemented(IE)
     public void name() throws Exception {
         final String html
             = "<html><head>\n"

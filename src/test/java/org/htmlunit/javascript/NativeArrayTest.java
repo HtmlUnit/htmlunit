@@ -16,7 +16,6 @@ package org.htmlunit.javascript;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
@@ -46,7 +45,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             CHROME = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"},
             EDGE = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"},
             IE = {"5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5"})
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @NotYetImplemented({CHROME, EDGE})
     public void sortSteps() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -547,7 +546,6 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "20"},
             IE = "undefined")
-    @NotYetImplemented(IE)
     public void find() throws Exception {
         final String html
             = "<html>\n"
@@ -575,7 +573,6 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "20"},
             IE = "undefined")
-    @NotYetImplemented(IE)
     public void findPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -630,7 +627,6 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "1"},
             IE = "undefined")
-    @NotYetImplemented(IE)
     public void findIndex() throws Exception {
         final String html
             = "<html>\n"
@@ -658,7 +654,6 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "1"},
             IE = "undefined")
-    @NotYetImplemented(IE)
     public void findIndexPrototype() throws Exception {
         final String html
             = "<html>\n"

@@ -14,15 +14,12 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.javascript.host.xml.XMLDocumentTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1192,7 +1189,6 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
                        "function Element() { [native code] }"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
-    @NotYetImplemented(IE)
     public void prototypConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1225,7 +1221,6 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
                        "function Element() { [native code] }"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
-    @NotYetImplemented(IE)
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

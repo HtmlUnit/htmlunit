@@ -17,7 +17,6 @@ package org.htmlunit.general;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -417,7 +416,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "0", "1", "1", "0", "1"},
             IE = {"3", "2", "2", "3", "2", "2"})
-    @HtmlUnitNYI(IE = {"1", "0", "1", "1", "0", "1"})
     public void dialog() throws Exception {
         loadPageVerifyTitle2(test("dialog"));
     }
@@ -738,7 +736,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
             IE = {"1", "0", "1", "1", "0", "1"})
-    @HtmlUnitNYI(IE = {"3", "2", "2", "3", "2", "2"})
     public void isindex() throws Exception {
         loadPageVerifyTitle2(test("isindex"));
     }

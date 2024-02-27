@@ -127,8 +127,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             EDGE = {"", "16px \"Times New Roman\"", "", "normal", "",
                     "16px \"Times New Roman\"", "oblique", "oblique"},
             FF = {"", "16px serif", "", "normal", "", "16px serif", "oblique", "oblique"},
-            FF_ESR = {"", "16px serif", "", "normal", "", "16px serif", "oblique", "oblique"},
-            IE = {"", "", "", "normal", "", "", "oblique", "oblique"})
+            FF_ESR = {"", "16px serif", "", "normal", "", "16px serif", "oblique", "oblique"})
     public void fontStyle() throws Exception {
         font("15px arial, sans-serif", "fontStyle", "oblique");
     }
@@ -182,7 +181,6 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1px xyz", "1px xyz",
                        "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"},
             IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
-    @HtmlUnitNYI(IE = {"1px / normal xyz", "", "xyz", "xyz", "1px / normal xyz", "", "abc", "abc"})
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
     }
@@ -213,7 +211,6 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1px / 2px xyz", "1px / 2px xyz",
                        "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
-    @HtmlUnitNYI(IE = {"1px / 2px xyz", "", "2px", "2px", "1px / 2px xyz", "", "normal", "normal"})
     public void minimalLineHeight() throws Exception {
         font("1px/2px xyz", "lineHeight", "normal");
     }
@@ -262,8 +259,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             EDGE = {"", "16px \"Times New Roman\"", "", "normal",
                     "", "16px \"Times New Roman\"", "normal", "normal"},
             FF = {"", "16px serif", "", "normal", "", "16px serif", "normal", "normal"},
-            FF_ESR = {"", "16px serif", "", "normal", "", "16px serif", "normal", "normal"},
-            IE = {"", "", "", "normal", "", "", "normal", "normal"})
+            FF_ESR = {"", "16px serif", "", "normal", "", "16px serif", "normal", "normal"})
     public void minimalLineHeightSpace3() throws Exception {
         font("1px /2px xyz", "lineHeight", "normal");
     }
@@ -280,8 +276,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             EDGE = {"", "16px \"Times New Roman\"", "", "normal",
                     "", "16px \"Times New Roman\"", "normal", "normal"},
             FF = {"", "16px serif", "", "normal", "", "16px serif", "normal", "normal"},
-            FF_ESR = {"", "16px serif", "", "normal", "", "16px serif", "normal", "normal"},
-            IE = {"", "", "", "normal", "", "", "normal", "normal"})
+            FF_ESR = {"", "16px serif", "", "normal", "", "16px serif", "normal", "normal"})
     public void minimalLineHeightSpace4() throws Exception {
         font("1px  /2px xyz", "lineHeight", "normal");
     }

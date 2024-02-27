@@ -20,12 +20,10 @@ import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.LOAD_XMLDOMD
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callCreateXMLDOMDocument;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLDOMDocumentFromURL;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,7 +63,6 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"1", "version=1.0"})
-    @NotYetImplemented(IE)
     // DOM processing instructions do not support attributes
     public void attributes_xmlDecl() throws Exception {
         final String test = ""
@@ -81,7 +78,6 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"3", "version=1.0", "encoding=utf-8", "standalone=yes"})
-    @NotYetImplemented(IE)
     // DOM processing instructions do not support attributes
     public void attributes_complete_xmlDecl() throws Exception {
         final String html = ""

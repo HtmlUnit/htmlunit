@@ -41,7 +41,6 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -772,7 +771,6 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "First"},
             IE = {"0", "First"})
-    @HtmlUnitNYI(IE = {"1", "First"})
     public void clickWithDownloadAttribute() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -801,7 +799,6 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "First"},
             IE = {"0", "First"})
-    @HtmlUnitNYI(IE = {"1", "First"})
     public void clickWithDownloadAttributeFromJs() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -842,12 +839,6 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
                         + "97CER3N0vr4MkhoXe0rZigAAAABJRU5ErkJggg=="},
             IE = {"0", "First",
                   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAAL"
-                        + "GPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YGARc5KB0XV+IAAAAddEVYdENvbW1l"
-                        + "bnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAF1JREFUGNO9zL0NglAAxPEfdLTs4BZM4DIO4C"
-                        + "7OwQg2JoQ9LE1exdlYvBBeZ7jqch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI"
-                        + "97CER3N0vr4MkhoXe0rZigAAAABJRU5ErkJggg=="})
-    @HtmlUnitNYI(IE = {"1", "First",
-                       "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAAL"
                         + "GPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YGARc5KB0XV+IAAAAddEVYdENvbW1l"
                         + "bnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAF1JREFUGNO9zL0NglAAxPEfdLTs4BZM4DIO4C"
                         + "7OwQg2JoQ9LE1exdlYvBBeZ7jqch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI"

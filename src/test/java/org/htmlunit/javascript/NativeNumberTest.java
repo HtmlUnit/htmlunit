@@ -14,12 +14,9 @@
  */
 package org.htmlunit.javascript;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,7 +36,6 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false", "false", "true", "true", "false", "false"},
             IE = "no Number.isFinite")
-    @NotYetImplemented(IE)
     public void isFinite() throws Exception {
         final String html =
             "<html>\n"
@@ -72,7 +68,6 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
                        "false", "false", "false", "false", "false"},
             IE = "no Number.isInteger")
-    @NotYetImplemented(IE)
     public void isInteger() throws Exception {
         final String html =
             "<html>\n"
@@ -112,7 +107,6 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
                        "false", "false", "false", "false", "false", "false", "false"},
             IE = "no Number.isNaN")
-    @NotYetImplemented(IE)
     public void isNaN() throws Exception {
         final String html =
             "<html>\n"
@@ -153,7 +147,6 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "false", "false", "false", "false", "true"},
             IE = "no Number.isSafeInteger")
-    @NotYetImplemented(IE)
     public void isSafeInteger() throws Exception {
         final String html =
             "<html>\n"
@@ -186,7 +179,6 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "3.14",
             IE = "no Number.parseFloat")
-    @NotYetImplemented(IE)
     public void parseFloat() throws Exception {
         final String html =
             "<html>\n"
@@ -212,7 +204,6 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4",
             IE = "no Number.parseInt")
-    @NotYetImplemented(IE)
     public void parseInt() throws Exception {
         final String html =
             "<html>\n"

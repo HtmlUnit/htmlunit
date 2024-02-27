@@ -14,13 +14,10 @@
  */
 package org.htmlunit.javascript;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -192,7 +189,6 @@ public class NativeObjectTest extends WebDriverTestCase {
             FF = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
             FF_ESR = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
             IE = "\\nfunction()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}\\n")
-    @NotYetImplemented(IE)
     public void proto() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -241,7 +237,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "exception")
-    @NotYetImplemented(IE)
     public void getPrototypeOfString() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -266,7 +261,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "exception")
-    @NotYetImplemented(IE)
     public void getPrototypeOfNumber() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -291,7 +285,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "exception")
-    @NotYetImplemented(IE)
     public void getPrototypeOfBoolean() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -316,7 +309,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             IE = "exception")
-    @NotYetImplemented(IE)
     public void getTypeOfPrototypeOfNumber() throws Exception {
         final String html = ""
             + "<html><head>\n"

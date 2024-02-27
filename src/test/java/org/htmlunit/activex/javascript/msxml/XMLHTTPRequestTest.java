@@ -20,7 +20,6 @@ import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.CREATE_XMLHT
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.CREATE_XMLHTTPREQUEST_FUNCTION_NAME;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callCreateXMLHTTPRequest;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -41,7 +40,6 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationServlet;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.junit.Retry;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -794,7 +792,6 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"4:200 DELETE localhost/bounce?null,0 ",
                   "4:200 OPTIONS localhost/bounce?null,0 "})
-    @NotYetImplemented(IE)
     // HtmlUnit does not send a body for DELETE and OPTIONS requests
     public void open_method2() throws Exception {
         final String test = ""
@@ -1077,7 +1074,6 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
                   "4:200 DELETE localhost/bounce?null,0 ",
                   "4:200 DELETE localhost/bounce?null,0 ",
                   "4:200 DELETE localhost/bounce?null,4 "})
-    @NotYetImplemented(IE)
     // HtmlUnit does not send a body for DELETE and OPTIONS requests
     public void send_delete() throws Exception {
         final String test = ""
@@ -1118,7 +1114,6 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
                   "4:200 OPTIONS localhost/bounce?null,0 ",
                   "4:200 OPTIONS localhost/bounce?null,0 ",
                   "4:200 OPTIONS localhost/bounce?null,4 "})
-    @NotYetImplemented(IE)
     // HtmlUnit does not send a body for DELETE and OPTIONS requests
     public void send_options() throws Exception {
         final String test = ""

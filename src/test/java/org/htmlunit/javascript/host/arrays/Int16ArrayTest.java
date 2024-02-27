@@ -14,12 +14,9 @@
  */
 package org.htmlunit.javascript.host.arrays;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -277,7 +274,6 @@ public class Int16ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "exception")
-    @NotYetImplemented(IE)
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -305,7 +301,6 @@ public class Int16ArrayTest extends WebDriverTestCase {
             IE = {"[object Int16Array]", "[object Int16Array]",
                   "[object Int16Array]", "[object Int16Array]",
                   "[object Int16Array]"})
-    @NotYetImplemented(IE)
     public void asString() throws Exception {
         final String html
             = "<html><head>\n"
@@ -339,7 +334,6 @@ public class Int16ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Int16Array",
             IE = "undefined")
-    @NotYetImplemented(IE)
     public void name() throws Exception {
         final String html
             = "<html><head>\n"

@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -282,7 +281,6 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             IE = {"false",
                   "undefined-false-false-false-false-false-false-undefined-false-false-true",
                   "true"})
-    @HtmlUnitNYI(IE = {"true", "undefined-false-false-false-false-false-false-undefined-false-true-false", "true"})
     public void validationRequired() throws Exception {
         validation("<input type='color' id='e1' required>\n", "");
     }

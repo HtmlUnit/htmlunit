@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.event;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
@@ -753,7 +752,6 @@ public class Event2Test extends WebDriverTestCase {
                        "true"},
             IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
                   "div capturing", "false", "false", "span capturing", "false", "true"})
-    @NotYetImplemented(IE)
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
     }

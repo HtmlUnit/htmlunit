@@ -14,14 +14,11 @@
  */
 package org.htmlunit.javascript.host.worker;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import java.net.URL;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -274,7 +271,6 @@ public class WorkerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             IE = "exception Error")
-    @NotYetImplemented(IE)
     public void onmessageNumber() throws Exception {
         final String html = "<html><body><script>\n"
                 + LOG_TITLE_FUNCTION
@@ -295,7 +291,6 @@ public class WorkerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             IE = "HtmlUnit")
-    @NotYetImplemented(IE)
     public void onmessageString() throws Exception {
         final String html = "<html><body><script>\n"
                 + LOG_TITLE_FUNCTION
