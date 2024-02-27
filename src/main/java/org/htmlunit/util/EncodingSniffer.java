@@ -90,7 +90,7 @@ public final class EncodingSniffer {
     private static final byte[] WHITESPACE = {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E};
     private static final byte[] COMMENT_END = {'-', '-', '>'};
 
-    /** <a href="http://encoding.spec.whatwg.org/#encodings">Reference</a> */
+    /** <a href="https://encoding.spec.whatwg.org/#names-and-labels">Encoding names and labels</a> */
     private static final Map<String, String> ENCODING_FROM_LABEL;
     static {
         ENCODING_FROM_LABEL = new HashMap<>();
@@ -98,8 +98,11 @@ public final class EncodingSniffer {
         // The Encoding
         // ------------
         ENCODING_FROM_LABEL.put("unicode-1-1-utf-8", "utf-8");
+        ENCODING_FROM_LABEL.put("unicode11utf8", "utf-8");
+        ENCODING_FROM_LABEL.put("unicode20utf8", "utf-8");
         ENCODING_FROM_LABEL.put("utf-8", "utf-8");
         ENCODING_FROM_LABEL.put("utf8", "utf-8");
+        ENCODING_FROM_LABEL.put("x-unicode20utf8", "utf-8");
 
         // Legacy single-byte encodings
         // ----------------------------
@@ -367,8 +370,9 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("csiso2022jp", "iso-2022-jp");
         ENCODING_FROM_LABEL.put("iso-2022-jp", "iso-2022-jp");
 
-        // iso-2022-jp
+        // shift_jis
         ENCODING_FROM_LABEL.put("csshiftjis", "shift_jis");
+        ENCODING_FROM_LABEL.put("ms932", "shift_jis");
         ENCODING_FROM_LABEL.put("ms_kanji", "shift_jis");
         ENCODING_FROM_LABEL.put("shift-jis", "shift_jis");
         ENCODING_FROM_LABEL.put("shift_jis", "shift_jis");
@@ -396,14 +400,22 @@ public final class EncodingSniffer {
 
         // replacement
         ENCODING_FROM_LABEL.put("csiso2022kr", "replacement");
+        ENCODING_FROM_LABEL.put("hz-gb-2312", "replacement");
         ENCODING_FROM_LABEL.put("iso-2022-cn", "replacement");
         ENCODING_FROM_LABEL.put("iso-2022-cn-ext", "replacement");
         ENCODING_FROM_LABEL.put("iso-2022-kr", "replacement");
+        ENCODING_FROM_LABEL.put("replacement", "replacement");
 
         // utf-16be
+        ENCODING_FROM_LABEL.put("unicodefffe", "utf-16be");
         ENCODING_FROM_LABEL.put("utf-16be", "utf-16be");
 
         // utf-16le
+        ENCODING_FROM_LABEL.put("csunicode", "utf-16le");
+        ENCODING_FROM_LABEL.put("iso-10646-ucs-2", "utf-16le");
+        ENCODING_FROM_LABEL.put("ucs-2", "utf-16le");
+        ENCODING_FROM_LABEL.put("unicode", "utf-16le");
+        ENCODING_FROM_LABEL.put("unicodefeff", "utf-16le");
         ENCODING_FROM_LABEL.put("utf-16", "utf-16le");
         ENCODING_FROM_LABEL.put("utf-16le", "utf-16le");
 
