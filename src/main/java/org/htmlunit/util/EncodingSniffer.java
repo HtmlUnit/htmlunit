@@ -548,14 +548,14 @@ public final class EncodingSniffer {
     public static Charset sniffHtmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
-        if (encoding != null) {
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
             return encoding;
         }
 
@@ -580,14 +580,14 @@ public final class EncodingSniffer {
     public static Charset sniffXmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
-        if (encoding != null) {
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
             return encoding;
         }
 
@@ -613,13 +613,16 @@ public final class EncodingSniffer {
     public static Charset sniffUnknownContentTypeEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        final byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        final byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
+            return encoding;
+        }
         return encoding;
     }
 
