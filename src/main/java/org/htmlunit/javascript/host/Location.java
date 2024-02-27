@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_HASH_IS_ENCODED;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
@@ -331,12 +330,6 @@ public class Location extends HtmlUnitScriptable {
             URL url = page.getFullyQualifiedUrl(newLocation);
             // fix for empty url
             if (StringUtils.isEmpty(newLocation)) {
-                final boolean dropFilename = browserVersion.hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
-                if (dropFilename) {
-                    String path = url.getPath();
-                    path = path.substring(0, path.lastIndexOf('/') + 1);
-                    url = UrlUtils.getUrlWithNewPath(url, path);
-                }
                 url = UrlUtils.getUrlWithNewRef(url, null);
             }
 

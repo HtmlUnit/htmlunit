@@ -14,14 +14,11 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_IE_STYLE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -67,21 +64,5 @@ public class CSSFontFaceRule extends CSSRule {
     @Override
     public int getType() {
         return FONT_FACE_RULE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCssText() {
-        String cssText = super.getCssText();
-        final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(CSS_CSSTEXT_IE_STYLE)) {
-            cssText = StringUtils.replace(cssText, "{ ", "{\n\t");
-            cssText = StringUtils.replace(cssText, "; }", ";\n}\n");
-            cssText = StringUtils.replace(cssText, "; ", ";\n\t");
-            cssText = REPLACEMENT_IE.matcher(cssText).replaceFirst("url($1)");
-        }
-        return cssText;
     }
 }

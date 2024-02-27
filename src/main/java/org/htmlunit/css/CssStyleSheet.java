@@ -17,7 +17,6 @@ package org.htmlunit.css;
 import static java.nio.charset.StandardCharsets.UTF_16BE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER;
 import static org.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN;
 import static org.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
@@ -903,13 +902,6 @@ public class CssStyleSheet implements Serializable {
                             && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
                 }
 
-            case "-ms-input-placeholder":
-                if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER)) {
-                    return element instanceof HtmlInput
-                            && StringUtils.isEmpty(((HtmlInput) element).getValue())
-                            && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
-                }
-
             default:
                 if (value.startsWith("nth-child(")) {
                     final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
@@ -1233,10 +1225,6 @@ public class CssStyleSheet implements Serializable {
 
                 if ("placeholder-shown".equals(value)) {
                     return domNode.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN);
-                }
-
-                if ("-ms-input-placeholder".equals(value)) {
-                    return domNode.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER);
                 }
 
                 return CSS4_PSEUDO_CLASSES.contains(value);

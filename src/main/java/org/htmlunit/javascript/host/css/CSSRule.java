@@ -20,8 +20,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.util.regex.Pattern;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
@@ -52,9 +50,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class CSSRule extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(CSSRule.class);
-
-    /** RegEx to fix css text for IE. */
-    protected static final Pattern REPLACEMENT_IE = Pattern.compile("url\\(\"([^;]*)\"\\)");
 
     /**
      * The rule is a {@code CSSUnknownRule}.

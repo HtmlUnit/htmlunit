@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
 import static org.htmlunit.BrowserVersionFeatures.JS_SCRIPT_HANDLE_204_AS_ERROR;
 import static org.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
@@ -228,10 +227,6 @@ public final class ScriptElementSupport {
             }
             finally {
                 doc.setCurrentScript(null);
-            }
-
-            if (element.hasFeature(EVENT_ONLOAD_INTERNAL_JAVASCRIPT)) {
-                executeEvent(element, Event.TYPE_LOAD);
             }
         }
     }

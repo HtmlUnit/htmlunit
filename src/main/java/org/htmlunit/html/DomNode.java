@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
 import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static org.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
 
@@ -423,7 +422,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public void normalize() {
         for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child instanceof DomText) {
-                final boolean removeChildTextNodes = hasFeature(DOM_NORMALIZE_REMOVE_CHILDREN);
                 final StringBuilder dataBuilder = new StringBuilder();
                 DomNode toRemove = child;
                 DomText firstText = null;
@@ -431,7 +429,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 while (toRemove instanceof DomText && !(toRemove instanceof DomCDataSection)) {
                     final DomNode nextChild = toRemove.getNextSibling();
                     dataBuilder.append(toRemove.getTextContent());
-                    if (removeChildTextNodes || firstText != null) {
+                    if (firstText != null) {
                         toRemove.remove();
                     }
                     if (firstText == null) {
@@ -440,13 +438,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     toRemove = nextChild;
                 }
                 if (firstText != null) {
-                    if (removeChildTextNodes) {
-                        final DomText newText = new DomText(getPage(), dataBuilder.toString());
-                        insertBefore(newText, toRemove);
-                    }
-                    else {
-                        firstText.setData(dataBuilder.toString());
-                    }
+                    firstText.setData(dataBuilder.toString());
                 }
             }
         }

@@ -14,10 +14,8 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static org.htmlunit.javascript.host.css.CSSStyleDeclaration.isLength;
 
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.util.StringUtils;
 
 /**
@@ -36,14 +34,10 @@ final class ComputedFont {
     static final int LINE_HEIGHT_INDEX = 4;
     static final int FONT_FAMILY_INDEX = 5;
 
-    static String[] getDetails(final String font, final BrowserVersion browserVersion) {
+    static String[] getDetails(final String font) {
         String fontName = font;
         while (fontName.contains("  ")) {
             fontName = fontName.replace("  ", " ");
-        }
-        if (browserVersion.hasFeature(CSS_SET_NULL_THROWS)
-                && fontName.contains("/ ")) {
-            return null;
         }
         final String[] tokens = StringUtils.splitAtBlank(fontName);
         if (tokens.length > 1) {

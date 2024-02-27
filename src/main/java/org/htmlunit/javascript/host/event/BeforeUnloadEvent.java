@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.event;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_HANDLER_NULL_RETURN_IS_MEANINGFUL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -121,7 +120,7 @@ public class BeforeUnloadEvent extends Event {
         final BrowserVersion browserVersion = getBrowserVersion();
 
         // Most browsers ignore null return values of property handlers
-        if (returnValue != null || browserVersion.hasFeature(EVENT_HANDLER_NULL_RETURN_IS_MEANINGFUL)) {
+        if (returnValue != null) {
             // Chrome/Firefox only accept the return value if returnValue is equal to default
             if (!browserVersion.hasFeature(EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE)
                     || getReturnValueDefault(browserVersion).equals(getReturnValue())) {

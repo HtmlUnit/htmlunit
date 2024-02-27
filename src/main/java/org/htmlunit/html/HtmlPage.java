@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static org.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
@@ -2473,16 +2472,6 @@ public class HtmlPage extends SgmlPage {
         elementWithFocus_ = null;
 
         if (!windowActivated) {
-            if (hasFeature(EVENT_FOCUS_IN_FOCUS_OUT_BLUR)) {
-                if (oldFocusedElement != null) {
-                    oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
-                }
-
-                if (newElement != null) {
-                    newElement.fireEvent(Event.TYPE_FOCUS_IN);
-                }
-            }
-
             if (oldFocusedElement != null) {
                 oldFocusedElement.removeFocus();
                 oldFocusedElement.fireEvent(Event.TYPE_BLUR);

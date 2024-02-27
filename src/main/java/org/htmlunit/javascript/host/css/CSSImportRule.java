@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_IE_STYLE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -111,17 +110,5 @@ public class CSSImportRule extends CSSRule {
      */
     private CSSImportRuleImpl getImportRule() {
         return (CSSImportRuleImpl) getRule();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCssText() {
-        String cssText = super.getCssText();
-        if (getBrowserVersion().hasFeature(CSS_CSSTEXT_IE_STYLE)) {
-            cssText = REPLACEMENT_IE.matcher(cssText).replaceFirst("url( $1 )");
-        }
-        return cssText;
     }
 }

@@ -17,7 +17,6 @@ package org.htmlunit.css;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
-import static org.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
 import static org.htmlunit.css.CssStyleSheet.INITIAL;
 import static org.htmlunit.css.CssStyleSheet.NONE;
@@ -428,18 +427,6 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                         return isComputed() ? "" : INITIAL;
                     }
                     return "0% 0%";
-                }
-                if (hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
-                    final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
-                    if ("center".equals(values[0])) {
-                        values[0] = "";
-                    }
-                    if ("center".equals(values[1])) {
-                        values[1] = "";
-                    }
-                    if (!isComputed() || value.contains("top")) {
-                        return (values[0] + ' ' + values[1]).trim();
-                    }
                 }
                 if (isComputed()) {
                     final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
@@ -1048,16 +1035,6 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public Object getZIndex() {
         final String value = getStyleAttribute(Definition.Z_INDEX_, true);
-        if (hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
-            try {
-                return Integer.valueOf(value);
-            }
-            catch (final NumberFormatException e) {
-                return "";
-            }
-        }
-
-        // zIndex is string
         try {
             Integer.parseInt(value);
             return value;

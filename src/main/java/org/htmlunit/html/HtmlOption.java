@@ -16,12 +16,7 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_ONLY;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
 import static org.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
 
@@ -256,55 +251,11 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    public Page mouseDown(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
-        Page page = null;
-        if (hasFeature(EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT)) {
-            page = getEnclosingSelect().mouseDown(shiftKey, ctrlKey, altKey, button);
-        }
-        if (hasFeature(EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION)) {
-            return page;
-        }
-        return super.mouseDown(shiftKey, ctrlKey, altKey, button);
-    }
-
-    /**
-     * Selects the option if it's not already selected.
-     * {@inheritDoc}
-     */
-    @Override
     public Page mouseUp(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
-        Page page = null;
-        if (hasFeature(EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT)) {
-            page = getEnclosingSelect().mouseUp(shiftKey, ctrlKey, altKey, button);
-        }
         if (hasFeature(EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION)) {
-            return page;
+            return null;
         }
         return super.mouseUp(shiftKey, ctrlKey, altKey, button);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P click(final Event event,
-            final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
-            final boolean ignoreVisibility) throws IOException {
-        if (hasFeature(EVENT_ONCLICK_FOR_SELECT_ONLY)) {
-            final SgmlPage page = getPage();
-
-            if (isDisabled()) {
-                return (P) page;
-            }
-
-            if (isStateUpdateFirst()) {
-                doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
-            }
-
-            return getEnclosingSelect().click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
-        }
-        return super.click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
     }
 
     /**
@@ -329,20 +280,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         }
         super.doClickStateUpdate(shiftKey, ctrlKey);
         return changed;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected DomNode getEventTargetElement() {
-        if (hasFeature(EVENT_ONCLICK_FOR_SELECT_ONLY)) {
-            final HtmlSelect select = getEnclosingSelect();
-            if (select != null) {
-                return select;
-            }
-        }
-        return super.getEventTargetElement();
     }
 
     /**
@@ -407,11 +344,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
-        final SgmlPage page = getPage();
-        if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION)) {
-            return page;
-        }
-
         if (hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION) && isDisabled()) {
             getEnclosingSelect().mouseOver(shiftKey, ctrlKey, altKey, button);
         }

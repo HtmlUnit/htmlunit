@@ -16,9 +16,6 @@ package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
-import static org.htmlunit.BrowserVersionFeatures.CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED;
-import static org.htmlunit.BrowserVersionFeatures.CSS_VERTICAL_ALIGN_SUPPORTS_AUTO;
-import static org.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
@@ -855,7 +852,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     private void updateFont(final String font, final boolean force) {
         final BrowserVersion browserVersion = getBrowserVersion();
-        final String[] details = ComputedFont.getDetails(font, browserVersion);
+        final String[] details = ComputedFont.getDetails(font);
         if (details != null || force) {
             final StringBuilder newFont = new StringBuilder();
             newFont.append(getFontSize());
@@ -865,7 +862,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 lineHeight = defaultLineHeight;
             }
 
-            if (browserVersion.hasFeature(CSS_ZINDEX_TYPE_INTEGER) || !lineHeight.equals(defaultLineHeight)) {
+            if (!lineHeight.equals(defaultLineHeight)) {
                 newFont.append('/');
                 if (lineHeight.equals(defaultLineHeight)) {
                     newFont.append(Definition.LINE_HEIGHT.getDefaultComputedValue(browserVersion));
@@ -898,7 +895,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setFont(final String font) {
-        final String[] details = ComputedFont.getDetails(font, getBrowserVersion());
+        final String[] details = ComputedFont.getDetails(font);
         if (details != null) {
             setStyleAttribute(Definition.FONT_FAMILY.getAttributeName(), details[ComputedFont.FONT_FAMILY_INDEX]);
             final String fontSize = details[ComputedFont.FONT_SIZE_INDEX];
@@ -1446,9 +1443,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setOutlineWidth(final Object outlineWidth) {
-        final boolean requiresUnit = !getBrowserVersion().hasFeature(CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED);
         setStyleLengthAttribute(Definition.OUTLINE_WIDTH.getAttributeName(), outlineWidth, "",
-                false, false, requiresUnit, THIN_MED_THICK);
+                false, false, true, THIN_MED_THICK);
     }
 
     /**
@@ -2010,9 +2006,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setVerticalAlign(final Object verticalAlign) {
-        final boolean auto = getBrowserVersion().hasFeature(CSS_VERTICAL_ALIGN_SUPPORTS_AUTO);
         setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(),
-                verticalAlign, "", auto, true, false, ALIGN_KEYWORDS);
+                verticalAlign, "", false, true, false, ALIGN_KEYWORDS);
     }
 
     /**
@@ -2244,17 +2239,15 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             setStyleLengthAttribute(name, value, imp, false, true, false, null);
         }
         else if (Definition.OUTLINE_WIDTH.getAttributeName().equals(name)) {
-            final boolean requiresUnit = !getBrowserVersion().hasFeature(CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED);
             setStyleLengthAttribute(Definition.OUTLINE_WIDTH.getAttributeName(),
-                    value, imp, false, false, requiresUnit, THIN_MED_THICK);
+                    value, imp, false, false, true, THIN_MED_THICK);
         }
         else if (Definition.WORD_SPACING.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.WORD_SPACING.getAttributeName(), value, imp,
                     false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, null);
         }
         else if (Definition.VERTICAL_ALIGN.getAttributeName().equals(name)) {
-            final boolean auto = getBrowserVersion().hasFeature(CSS_VERTICAL_ALIGN_SUPPORTS_AUTO);
-            setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(), value, imp, auto, true, false, null);
+            setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(), value, imp, false, true, false, null);
         }
         else {
             setStyleAttribute(name, JavaScriptEngine.toString(value), imp);

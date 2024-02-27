@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_FF_STYLE;
-import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_IE_STYLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_PAGERULE_SELECTORTEXT_EMPTY;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -126,12 +125,7 @@ public class CSSPageRule extends CSSRule {
     public String getCssText() {
         String cssText = super.getCssText();
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(CSS_CSSTEXT_IE_STYLE)) {
-            cssText = StringUtils.replace(cssText, " { }", "  {\n\t\n}");
-            cssText = StringUtils.replace(cssText, " { ", "  {\n\t");
-            cssText = StringUtils.replace(cssText, "; }", ";\n}");
-        }
-        else if (browserVersion.hasFeature(CSS_CSSTEXT_FF_STYLE)) {
+        if (browserVersion.hasFeature(CSS_CSSTEXT_FF_STYLE)) {
             cssText = StringUtils.replace(cssText, "@page {", "@page  {");
         }
 

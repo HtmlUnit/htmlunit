@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
 import static org.htmlunit.BrowserVersionFeatures.ANCHOR_SEND_PING_REQUEST;
 
 import java.io.IOException;
@@ -218,13 +217,6 @@ public class HtmlAnchor extends HtmlElement {
         URL url = page.getFullyQualifiedUrl(href);
         // fix for empty url
         if (StringUtils.isEmpty(href)) {
-            final boolean dropFilename = page.getWebClient().getBrowserVersion()
-                    .hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
-            if (dropFilename) {
-                String path = url.getPath();
-                path = path.substring(0, path.lastIndexOf('/') + 1);
-                url = UrlUtils.getUrlWithNewPath(url, path);
-            }
             url = UrlUtils.getUrlWithNewRef(url, null);
         }
         return url;

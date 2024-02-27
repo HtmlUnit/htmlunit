@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_PROGRESS_DISPLAY_INLINE;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -49,9 +47,6 @@ public class HtmlProgress extends HtmlElement implements LabelableElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_PROGRESS_DISPLAY_INLINE)) {
-            return DisplayStyle.INLINE;
-        }
         return DisplayStyle.INLINE_BLOCK;
     }
 }

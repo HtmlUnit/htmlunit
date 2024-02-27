@@ -14,7 +14,6 @@
  */
 package org.htmlunit;
 
-import static org.htmlunit.BrowserVersionFeatures.CONNECTION_KEEP_ALIVE_IE;
 import static org.htmlunit.BrowserVersionFeatures.URL_AUTH_CREDENTIALS;
 
 import java.io.ByteArrayInputStream;
@@ -943,8 +942,7 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (HttpHeader.CONNECTION.equals(header)) {
-                list.add(new RequestClientConnControl(
-                                webClient_.getBrowserVersion().hasFeature(CONNECTION_KEEP_ALIVE_IE)));
+                list.add(new RequestClientConnControl());
             }
             else if (HttpHeader.COOKIE.equals(header)) {
                 if (!webRequest.hasHint(HttpHint.BlockCookies)) {
@@ -1187,12 +1185,8 @@ public class HttpWebConnection implements WebConnection {
         private static final String PROXY_CONN_DIRECTIVE = "Proxy-Connection";
         private static final String CONN_DIRECTIVE = "Connection";
         private static final String CONN_KEEP_ALIVE = "keep-alive";
-        private static final String CONN_KEEP_ALIVE_IE = "Keep-Alive";
 
-        private final boolean ie_;
-
-        RequestClientConnControl(final boolean ie) {
-            ie_ = ie;
+        RequestClientConnControl() {
         }
 
         @Override
@@ -1200,7 +1194,7 @@ public class HttpWebConnection implements WebConnection {
             throws HttpException, IOException {
             final String method = request.getRequestLine().getMethod();
             if ("CONNECT".equalsIgnoreCase(method)) {
-                request.setHeader(PROXY_CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
+                request.setHeader(PROXY_CONN_DIRECTIVE, CONN_KEEP_ALIVE);
                 return;
             }
 
@@ -1214,11 +1208,11 @@ public class HttpWebConnection implements WebConnection {
 
             if ((route.getHopCount() == 1 || route.isTunnelled())
                     && !request.containsHeader(CONN_DIRECTIVE)) {
-                request.addHeader(CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
+                request.addHeader(CONN_DIRECTIVE, CONN_KEEP_ALIVE);
             }
             if ((route.getHopCount() == 2 && !route.isTunnelled())
                     && !request.containsHeader(PROXY_CONN_DIRECTIVE)) {
-                request.addHeader(PROXY_CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
+                request.addHeader(PROXY_CONN_DIRECTIVE, CONN_KEEP_ALIVE);
             }
         }
     }
