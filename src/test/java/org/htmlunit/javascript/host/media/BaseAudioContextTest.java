@@ -32,8 +32,7 @@ public class BaseAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"
@@ -56,8 +55,7 @@ public class BaseAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "error"},
-            IE = "BaseAudioContext not available")
+    @Alerts({"function", "error"})
     public void ctor() throws Exception {
         final String html
             = "<html>\n"

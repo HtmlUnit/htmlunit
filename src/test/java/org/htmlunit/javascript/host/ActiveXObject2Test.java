@@ -35,9 +35,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "NaN", "false", "No", "No", "No", "No"},
-            IE = {"undefined", "\\nfunction\\sActiveXObject()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}\\n",
-                  "NaN", "false", "No", "No", "Yes", "Yes"})
+    @Alerts({"undefined", "undefined", "NaN", "false", "No", "No", "No", "No"})
     public void browserDetection() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -64,8 +62,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "object")
+    @Alerts("exception")
     public void xmlDocument() throws Exception {
         final String html = "<html>\n"
             + " <head>\n"
@@ -88,8 +85,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ActiveXObject undefined",
-            IE = "exception")
+    @Alerts("ActiveXObject undefined")
     public void activex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

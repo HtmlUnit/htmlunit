@@ -87,7 +87,6 @@ class BrowserStatement extends Statement {
                         && BrowserVersionClassRunner.isDefined(alerts.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts.FF())
                         && BrowserVersionClassRunner.isDefined(alerts.FF_ESR())
-                        && BrowserVersionClassRunner.isDefined(alerts.IE())
                         && BrowserVersionClassRunner.isDefined(alerts.EDGE()));
 
                 assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
@@ -95,10 +94,8 @@ class BrowserStatement extends Statement {
                         && BrowserVersionClassRunner.isDefined(alerts.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts.FF())
                         && BrowserVersionClassRunner.isDefined(alerts.FF_ESR())
-                        && BrowserVersionClassRunner.isDefined(alerts.IE())
                         && BrowserVersionClassRunner.isDefined(alerts.EDGE()));
 
-                assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts.IE(), alerts.DEFAULT());
                 assertNotEquals(BrowserVersion.EDGE, alerts.EDGE(), alerts.DEFAULT());
                 assertNotEquals(BrowserVersion.CHROME, alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals(BrowserVersion.FIREFOX, alerts.FF(), alerts.DEFAULT());
@@ -134,15 +131,6 @@ class BrowserStatement extends Statement {
                     assertNotEquals(BrowserVersion.FIREFOX, alerts.DEFAULT(), nyiAlerts.FF());
                 }
 
-                if (BrowserVersionClassRunner.isDefined(alerts.IE())
-                        && BrowserVersionClassRunner.isDefined(nyiAlerts.IE())) {
-                    assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts.IE(), nyiAlerts.IE());
-                }
-                else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
-                        && BrowserVersionClassRunner.isDefined(nyiAlerts.IE())) {
-                    assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts.DEFAULT(), nyiAlerts.IE());
-                }
-
                 if (BrowserVersionClassRunner.isDefined(alerts.EDGE())
                         && BrowserVersionClassRunner.isDefined(nyiAlerts.EDGE())) {
                     assertNotEquals(BrowserVersion.EDGE, alerts.EDGE(), nyiAlerts.EDGE());
@@ -162,10 +150,8 @@ class BrowserStatement extends Statement {
                         && BrowserVersionClassRunner.isDefined(alerts2.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts2.FF())
                         && BrowserVersionClassRunner.isDefined(alerts2.FF_ESR())
-                        && BrowserVersionClassRunner.isDefined(alerts2.IE())
                         && BrowserVersionClassRunner.isDefined(alerts2.EDGE()));
 
-                assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts2.IE(), alerts2.DEFAULT());
                 assertNotEquals(BrowserVersion.EDGE, alerts2.EDGE(), alerts2.DEFAULT());
                 assertNotEquals(BrowserVersion.CHROME, alerts2.CHROME(), alerts2.DEFAULT());
                 assertNotEquals(BrowserVersion.FIREFOX, alerts2.FF(), alerts2.DEFAULT());

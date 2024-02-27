@@ -174,8 +174,7 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object BlobEvent]", "blob", "false", "false", "false", "[object Blob]"},
-            IE = "exception")
+    @Alerts({"[object BlobEvent]", "blob", "false", "false", "false", "[object Blob]"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -248,8 +247,7 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"

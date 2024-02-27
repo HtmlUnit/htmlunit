@@ -67,8 +67,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "", "false", "false", "false", ""},
-            IE = "exception")
+    @Alerts({"[object BeforeUnloadEvent]", "", "false", "false", "false", ""})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -90,8 +89,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""},
-            IE = "exception")
+    @Alerts({"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""})
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -114,8 +112,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""},
-            IE = "exception")
+    @Alerts({"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""})
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -139,8 +136,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "beforeunload", "true", "false", "false", "true"},
-            IE = {"[object Event]", "beforeunload", "true", "false", "undefined", "undefined"})
+    @Alerts({"[object Event]", "beforeunload", "true", "false", "false", "true"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

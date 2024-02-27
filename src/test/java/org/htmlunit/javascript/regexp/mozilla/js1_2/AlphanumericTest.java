@@ -142,8 +142,7 @@ public class AlphanumericTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\n",
-            IE = "\r")
+    @Alerts("\n")
     public void test11() throws Exception {
         final String[] exp = getExpectedAlerts();
         for (int i = 0; i < non_alphanumeric.length() - 1; i++) {

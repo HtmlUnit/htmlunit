@@ -66,8 +66,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object AudioProcessingEvent]", "audioprocessing", "false", "false", "false"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     // audioCtx.createBuffer is missing
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception")
@@ -143,8 +142,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"

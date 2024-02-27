@@ -44,8 +44,7 @@ public class AnimationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object AnimationEvent]", "animationstart", "false", "false", "false"},
-            IE = "exception")
+    @Alerts({"[object AnimationEvent]", "animationstart", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -69,8 +68,7 @@ public class AnimationEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object AnimationEvent]", "", "false", "false", "false"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = {"[object AnimationEvent]", "", "false", "false", "undefined"})
+            FF_ESR = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

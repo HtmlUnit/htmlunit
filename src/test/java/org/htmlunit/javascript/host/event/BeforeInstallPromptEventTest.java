@@ -44,8 +44,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "before", "false", "false", "false"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -93,8 +92,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "42", "false", "false", "false"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -118,8 +116,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "null", "false", "false", "false"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -165,8 +162,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "HtmlUnitEvent", "false", "false", "false"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -190,8 +186,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "click", "false", "false", "false"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -216,8 +211,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
-            FF_ESR = "false",
-            IE = "false")
+            FF_ESR = "false")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"

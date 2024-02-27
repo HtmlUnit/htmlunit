@@ -140,8 +140,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined"},
-            IE = {"false", "true", "false", "true", "true"})
+    @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined"})
     public void expando() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -167,8 +166,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "false")
+    @Alerts("undefined")
     public void expandoEvent() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -286,8 +284,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Attr]", "§§URL§§"},
-            IE = {"[object Attr]", "undefined"})
+    @Alerts({"[object Attr]", "§§URL§§"})
     public void html_baseURI() throws Exception {
         html("baseURI");
     }
@@ -305,8 +302,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Attr]", "testattr"},
-            IE = {"[object Attr]", "testAttr"})
+    @Alerts({"[object Attr]", "testattr"})
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -355,8 +351,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Attr]", "§§URL§§foo.xml"},
-            IE = {"[object Attr]", "undefined"})
+    @Alerts({"[object Attr]", "§§URL§§foo.xml"})
     public void xml_baseURI() throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
         xml("baseURI");

@@ -80,10 +80,7 @@ public class BirdTest extends WebDriverTestCase {
                   "Safari false", "KHTML false", "Opera false"},
             FF_ESR = {"IE false", "IE6 undefined", "IE7 undefined", "IE8 undefined", "Mozilla true",
                       "Firefox true", "Firefox2 undefined", "Firefox3 undefined", "Gecko true",
-                      "Safari false", "KHTML false", "Opera false"},
-            IE = {"IE false", "IE6 undefined", "IE7 undefined", "IE8 undefined", "Mozilla true",
-                  "Firefox false", "Firefox2 undefined", "Firefox3 undefined", "Gecko true",
-                  "Safari false", "KHTML false", "Opera false"})
+                      "Safari false", "KHTML false", "Opera false"})
     public void browserUtility() throws Exception {
         doTest("BrowserUtilityTest.html");
     }

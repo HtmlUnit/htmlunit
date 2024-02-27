@@ -18,7 +18,6 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -325,7 +324,7 @@ public class BrowserRunner extends Suite {
          * @return the browsers
          */
         TestedBrowser[] value() default {
-            IE, EDGE, FF_ESR, FF, CHROME
+            EDGE, FF_ESR, FF, CHROME
         };
 
         /**

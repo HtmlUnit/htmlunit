@@ -32,8 +32,7 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"
@@ -56,8 +55,7 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "[object AudioContext]"},
-            IE = "AudioContext not available")
+    @Alerts({"function", "[object AudioContext]"})
     public void ctor() throws Exception {
         final String html
             = "<html>\n"
@@ -90,8 +88,7 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object AudioBufferSourceNode]",
-            IE = "AudioContext not available")
+    @Alerts("[object AudioBufferSourceNode]")
     public void createBufferSource() throws Exception {
         final String html
             = "<html>\n"
@@ -121,8 +118,7 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"AudioContext prep done", "Error with decoding audio data"},
-            IE = "AudioContext not available")
+    @Alerts({"AudioContext prep done", "Error with decoding audio data"})
     public void decodeAudioData() throws Exception {
         final String html
             = "<html>\n"
@@ -158,8 +154,7 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"AudioContext prep done", "Error with decoding audio data"},
-            IE = "AudioContext not available")
+    @Alerts({"AudioContext prep done", "Error with decoding audio data"})
     public void decodeAudioData2() throws Exception {
         final String html
             = "<html>\n"
@@ -195,8 +190,7 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "-3.4028234663852886e+38", "3.4028234663852886e+38", "1", "0.5"},
-            IE = "AudioContext not available")
+    @Alerts({"1", "-3.4028234663852886e+38", "3.4028234663852886e+38", "1", "0.5"})
     public void createGain() throws Exception {
         final String html
             = "<html>\n"

@@ -72,8 +72,7 @@ public class BeforeUnloadEvent2Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Second",
-            IE = "First")
+    @Alerts("Second")
     public void returnNull() throws Exception {
         onbeforeunload("return null");
     }
