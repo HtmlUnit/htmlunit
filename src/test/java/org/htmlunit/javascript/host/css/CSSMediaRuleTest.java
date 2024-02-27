@@ -153,9 +153,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             FF = "@media print {\n  *#navigation { display: none; }"
                     + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}",
             FF_ESR = "@media print {\n  *#navigation { display: none; }"
-                    + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}",
-            IE = "@media print {\n\t*#navigation { display: none; }"
-                    + "\n\t@media (max-width: 12cm) {\n\t*.note { float: none; }\n}\n}")
+                    + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}")
     public void cssTextNested() throws Exception {
         final String html
             = "<html><body>\n"
@@ -185,7 +183,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
             IE = "exception")
-    @HtmlUnitNYI(IE = "@media screen {\n\tp { background-color: rgb(255, 255, 255); }\n}")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -244,7 +241,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSMediaRule]", "[object CSSMediaRule]"},
             IE = "undefined")
-    @HtmlUnitNYI(IE = {"[object CSSMediaRule]", "[object CSSMediaRule]"})
     // [CSSPARSER] IE does not support nested media rules at all -> inner one is ignored
     public void parentRuleNested() throws Exception {
         final String html
@@ -431,8 +427,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                        "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)"},
             IE = {"2", "only screen and (color)", "print and (max-width:12cm) and (min-width:30em)",
                   "only screen and (color), print and (max-width:12cm) and (min-width:30em)", "undefined"})
-    @HtmlUnitNYI(IE = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
-                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)", "undefined"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
@@ -729,7 +723,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "exception"},
             IE = {"1", "-1", "1", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    @HtmlUnitNYI(IE = {"1", "exception"})
     public void insertRuleEmptyWithIndex() throws Exception {
         final String html
             = "<html><body>\n"

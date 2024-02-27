@@ -19,7 +19,6 @@ import java.net.URL;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -376,7 +375,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "", "0", "", "@import url(\"imp.css\");"},
             IE = {"[object MediaList]", "all", "0", "all", "@import url( imp.css ) all;"})
-    @HtmlUnitNYI(IE = {"[object MediaList]", "all", "0", "", "@import url( imp.css );"})
     public void mediaNone() throws Exception {
         final String html
             = "<html><body>\n"
@@ -493,10 +491,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             IE = {"2", "only screen and (color)", "print and (max-width:12cm) and (min-width:30em)",
                   "only screen and (color), print and (max-width:12cm) and (min-width:30em)",
                   "@import url( imp.css ) only screen and (color), print and (max-width:12cm) and (min-width:30em);"})
-    @HtmlUnitNYI(IE = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
-                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
-                       "@import url( imp.css ) only screen and (color), "
-                               + "print and (max-width: 12cm) and (min-width: 30em);"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"

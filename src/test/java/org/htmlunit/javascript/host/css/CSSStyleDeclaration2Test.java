@@ -19,7 +19,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -256,11 +255,6 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                        "inherit", "initial", "revert", "unset",
                        "unset", "unset", "unset"},
             IE = {})
-    @HtmlUnitNYI(IE = {"", "baseline", "sub", "super", "text-top",
-                       "text-bottom", "middle", "top", "bottom",
-                       "1.7em", "4px", "32%",
-                       "inherit", "initial", "revert", "unset",
-                       "unset", "unset", "unset"})
     public void verticalAlign() throws Exception {
         checkPropertyValues("vertical-align",
                 "baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom",

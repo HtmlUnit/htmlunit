@@ -141,10 +141,6 @@ public class BrowserParameterizedRunner extends Suite {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.FIREFOX, true, tests));
                 }
-                if (browsers.contains(BrowserRunner.REAL_IE)) {
-                    runners_.add(new BrowserVersionClassRunnerWithParameters(
-                            klass, BrowserVersion.INTERNET_EXPLORER, true, tests));
-                }
                 if (browsers.contains(BrowserRunner.REAL_EDGE)) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.EDGE, true, tests));
@@ -162,10 +158,6 @@ public class BrowserParameterizedRunner extends Suite {
             if (browsers.contains(BrowserRunner.HTMLUNIT_FIREFOX)) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.FIREFOX, false, tests));
-            }
-            if (browsers.contains(BrowserRunner.HTMLUNIT_IE)) {
-                runners_.add(new BrowserVersionClassRunnerWithParameters(
-                        klass, BrowserVersion.INTERNET_EXPLORER, false, tests));
             }
             if (browsers.contains(BrowserRunner.HTMLUNIT_EDGE)) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
