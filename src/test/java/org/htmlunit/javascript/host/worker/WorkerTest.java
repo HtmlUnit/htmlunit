@@ -23,7 +23,6 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -36,15 +35,6 @@ import org.openqa.selenium.WebDriver;
  */
 @RunWith(BrowserRunner.class)
 public class WorkerTest extends WebDriverTestCase {
-
-    /**
-     * Closes the real ie because clearing all cookies seem to be not working
-     * at the moment.
-     */
-    @After
-    public void shutDownRealBrowsersAfter() {
-        shutDownRealIE();
-    }
 
     /**
      * @throws Exception if the test fails

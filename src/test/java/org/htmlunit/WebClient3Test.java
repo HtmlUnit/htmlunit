@@ -185,9 +185,6 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts({"open", "first", "second"})
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         final String firstContent = "<html>\n"
             + "<head>\n"
             + "<script type='text/javascript'>\n"
@@ -231,9 +228,6 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts({"open", "first", "second"})
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         final String firstContent = "<html>\n"
             + "<head>\n"
             + "<script type='text/javascript'>\n"
@@ -413,9 +407,6 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts("modified")
     public void deflateCompressionGZipCompatible() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         doTestDeflateCompression(true);
     }
 

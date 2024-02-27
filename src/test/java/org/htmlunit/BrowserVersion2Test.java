@@ -83,8 +83,6 @@ public class BrowserVersion2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts()[0], Integer.toString(getMockWebConnection().getRequestCount()));
         assertEquals(getExpectedAlerts()[1], acceptHeaderString());
-
-        shutDownRealIE();
     }
 
     /**

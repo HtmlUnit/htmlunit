@@ -20,7 +20,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,15 +31,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
-
-    /**
-     * Closes the real ie because clearing all cookies seem to be not working
-     * at the moment.
-     */
-    @After
-    public void shutDownRealBrowsersAfter() {
-        shutDownRealIE();
-    }
 
     /**
      * @throws Exception if the test fails

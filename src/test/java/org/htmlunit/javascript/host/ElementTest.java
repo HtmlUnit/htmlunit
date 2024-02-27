@@ -118,9 +118,6 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "1"})
     public void removeChild() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -196,9 +193,6 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"book", "exception"})
     public void selectNode_root() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -372,9 +366,6 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void attributes2() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -633,9 +624,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"})
     public void xml_nodeName() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         xml("nodeName");
     }
 
@@ -648,9 +636,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"})
     public void xml_tagName() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         xml("tagName");
     }
 
@@ -663,9 +648,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "null",
                 "[object HTMLUnknownElement]", "null"})
     public void xml_prefix() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         xml("prefix");
     }
 
@@ -678,9 +660,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"})
     public void xml_localName() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         xml("localName");
     }
 
@@ -693,9 +672,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "undefined",
                 "[object HTMLUnknownElement]", "undefined"})
     public void xml_baseName() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         xml("baseName");
     }
 
@@ -708,9 +684,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"})
     public void xml_namespaceURI() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         xml("namespaceURI");
     }
 
@@ -1085,9 +1058,6 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"ab", "ab"})
     public void removeAttribute_case_sensitive() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"

@@ -16,7 +16,6 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -99,9 +98,6 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerDriverService;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
@@ -195,8 +191,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             Arrays.asList(BrowserVersion.CHROME,
                     BrowserVersion.EDGE,
                     BrowserVersion.FIREFOX,
-                    BrowserVersion.FIREFOX_ESR,
-                    BrowserVersion.INTERNET_EXPLORER));
+                    BrowserVersion.FIREFOX_ESR));
 
     /**
      * Browsers which run by default.
@@ -205,14 +200,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
         {BrowserVersion.CHROME,
             BrowserVersion.EDGE,
             BrowserVersion.FIREFOX,
-            BrowserVersion.FIREFOX_ESR,
-            BrowserVersion.INTERNET_EXPLORER};
+            BrowserVersion.FIREFOX_ESR};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
     private static Set<String> BROWSERS_PROPERTIES_;
     private static String CHROME_BIN_;
-    private static String IE_BIN_;
     private static String EDGE_BIN_;
     private static String GECKO_BIN_;
     private static String FF_BIN_;
@@ -270,7 +263,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     BROWSERS_PROPERTIES_ = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
                             .toLowerCase(Locale.ROOT).split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
-                    IE_BIN_ = properties.getProperty("ie.bin");
                     EDGE_BIN_ = properties.getProperty("edge.bin");
 
                     GECKO_BIN_ = properties.getProperty("geckodriver.bin");
@@ -426,13 +418,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Closes the real IE browser drivers.
-     */
-    protected static void shutDownRealIE() {
-        shutDownReal(INTERNET_EXPLORER);
-    }
-
-    /**
      * Asserts all static servers are null.
      * @throws Exception if it fails
      */
@@ -497,20 +482,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected WebDriver buildWebDriver() throws IOException {
         if (useRealBrowser()) {
-            if (BrowserVersion.INTERNET_EXPLORER == getBrowserVersion()) {
-                if (IE_BIN_ != null) {
-                    System.setProperty(InternetExplorerDriverService.IE_DRIVER_EXE_PROPERTY, IE_BIN_);
-                }
-
-                final InternetExplorerOptions options = new InternetExplorerOptions();
-                options.ignoreZoomSettings();
-
-                // clear the cookies - seems to be not done by the driver
-                final InternetExplorerDriver ieDriver = new InternetExplorerDriver(options);
-                ieDriver.manage().deleteAllCookies();
-                return ieDriver;
-            }
-
             if (BrowserVersion.EDGE == getBrowserVersion()) {
                 final EdgeDriverService service = new EdgeDriverService.Builder()
                         .withLogOutput(System.out)

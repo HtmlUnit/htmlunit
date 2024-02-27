@@ -303,8 +303,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1"})
     public void responseXML() throws Exception {
-        shutDownRealIE();
-
         testResponseXML(MimeType.TEXT_XML);
         testResponseXML(null);
     }
@@ -316,8 +314,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void responseXML_badContentType() throws Exception {
-        shutDownRealIE();
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1105,8 +1101,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                 + "Transfer-Encoding: chunked\\n"
                                 + "Server: Jetty(XXX)\\n"})
     public void getAllResponseHeaders() throws Exception {
-        shutDownRealIE();
-
         final String html =
                 "<html>\n"
                         + "  <head>\n"

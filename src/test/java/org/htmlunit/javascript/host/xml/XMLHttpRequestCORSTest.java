@@ -37,7 +37,6 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -52,14 +51,6 @@ import org.openqa.selenium.WebDriver;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequestCORSTest extends WebDriverTestCase {
-
-    /**
-     * Closes the real IE; otherwise tests are failing because of cached responses.
-     */
-    @After
-    public void shutDownRealBrowsersAfter() {
-        shutDownRealIE();
-    }
 
     /**
      * @throws Exception if the test fails.

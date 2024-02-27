@@ -2768,8 +2768,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"books", "books", "3", "#text", "0"})
     public void createAttribute() throws Exception {
-        shutDownRealIE();
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2806,8 +2804,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1"})
     public void getElementsByTagNameNS() throws Exception {
-        shutDownRealIE();
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

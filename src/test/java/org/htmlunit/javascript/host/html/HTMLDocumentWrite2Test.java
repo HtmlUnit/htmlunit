@@ -83,13 +83,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        try {
-            loadPage2(html);
-            verifyWindowName2(getWebDriver(), getExpectedAlerts());
-        }
-        finally {
-            shutDownRealIE();
-        }
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -253,13 +248,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        try {
-            final WebDriver driver = loadPageWithAlerts2(html);
-            assertTitle(driver, "#1");
-        }
-        finally {
-            shutDownRealIE();
-        }
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "#1");
     }
 
     /**
@@ -286,18 +276,13 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
 
         getMockWebConnection().setDefaultResponse("");
-        try {
-            final WebDriver driver = loadPage2(html);
-            driver.switchTo().window("myPopup");
-            driver.findElement(By.id("it")).click();
+        final WebDriver driver = loadPage2(html);
+        driver.switchTo().window("myPopup");
+        driver.findElement(By.id("it")).click();
 
-            assertEquals(Integer.parseInt(getExpectedAlerts()[0]),
-                    getMockWebConnection().getRequestCount() - startCount);
-            assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
-        }
-        finally {
-            shutDownRealIE();
-        }
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]),
+                getMockWebConnection().getRequestCount() - startCount);
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
     }
 
     /**
@@ -322,13 +307,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        try {
-            final WebDriver driver = loadPage2(html);
-            assertTitle(driver, getExpectedAlerts()[0]);
-        }
-        finally {
-            shutDownRealIE();
-        }
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

@@ -33,7 +33,6 @@ import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,15 +51,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 @RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
-
-    /**
-     * Closes the real IE because clearing all cookies seem to be not working
-     * at the moment.
-     */
-    @After
-    public void shutDownRealBrowsersAfter() {
-        shutDownRealIE();
-    }
 
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
     public static final String HTML_ALERT_COOKIE

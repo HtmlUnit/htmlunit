@@ -29,7 +29,6 @@ import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,15 +42,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class CanvasRenderingContext2DTest extends WebDriverTestCase {
-
-    /**
-     * Closes the real IE; the drawImage test are producing strange
-     * results without this.
-     */
-    @After
-    public void shutDownRealBrowsersAfter() {
-        shutDownRealIE();
-    }
 
     /**
      * @throws Exception if an error occurs

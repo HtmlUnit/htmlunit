@@ -45,7 +45,6 @@ import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.junit.Retry;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -57,14 +56,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHTTPRequestTest extends WebDriverTestCase {
-
-    /**
-     * Closes the real IE; otherwise tests are failing because of cached responses.
-     */
-    @After
-    public void shutDownRealBrowsersAfter() {
-        shutDownRealIE();
-    }
 
     /**
      * @throws Exception if the test fails

@@ -615,8 +615,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
-
-        shutDownRealIE();
     }
 
     /**

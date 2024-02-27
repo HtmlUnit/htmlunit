@@ -412,9 +412,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"book", "exception /title", "exception title"})
     public void selectNodes_fromRoot() throws Exception {
-        // IE works only if running alone
-        shutDownRealIE();
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -761,8 +758,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "0"})
     public void getElementsByTagName() throws Exception {
-        shutDownRealIE();
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

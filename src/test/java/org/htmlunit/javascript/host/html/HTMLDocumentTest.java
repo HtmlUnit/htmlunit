@@ -1677,9 +1677,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "", "foo=bar", "foo=hello world"})
     public void cookie_write_cookiesEnabled() throws Exception {
-        // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
-        shutDownRealIE();
-
         final String html =
                 "<html><head><script>\n"
               + LOG_TITLE_FUNCTION

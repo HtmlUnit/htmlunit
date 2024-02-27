@@ -383,8 +383,6 @@ public class WebClient6Test extends WebDriverTestCase {
     }
 
     private void redirectGet(final int code, final HttpMethod httpMethod, final String redirectUrl) throws Exception {
-        shutDownRealIE();
-
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><body><a href='redirect.html'>redirect</a></body></html>";
@@ -411,8 +409,6 @@ public class WebClient6Test extends WebDriverTestCase {
 
     private void redirectPost(final int code, final HttpMethod httpMethod,
             final String redirectUrl, final boolean resendParams) throws Exception {
-        shutDownRealIE();
-
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><body><form action='redirect.html' method='POST'>\n"

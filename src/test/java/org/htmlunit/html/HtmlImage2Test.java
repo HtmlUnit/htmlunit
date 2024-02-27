@@ -420,8 +420,6 @@ public class HtmlImage2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_SECOND);
         loadPageVerifyTitle2(html);
-
-        shutDownRealIE();
     }
 
     /**

@@ -144,12 +144,6 @@ public abstract class WebTestCase {
      */
     public static final URL URL_CROSS_ORIGIN_BASE;
 
-    /** To be documented. */
-    protected static final BrowserVersion FLAG_ALL_BROWSERS
-        = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.BEST_SUPPORTED)
-                    .setApplicationName("FLAG_ALL_BROWSERS")
-                    .build();
-
     private BrowserVersion browserVersion_;
     private String[] expectedAlerts_;
     private MockWebConnection mockWebConnection_;
