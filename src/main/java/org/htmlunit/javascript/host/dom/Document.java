@@ -29,7 +29,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -122,7 +121,6 @@ import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLFrameSetElement;
-import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.CDATASection;
@@ -753,8 +751,7 @@ public class Document extends Node {
             // TODO: implement XmlPage.getCharset
             return "";
         }
-        final Charset charset = getPage().getCharset();
-        return EncodingSniffer.translateEncodingLabel(charset);
+        return getPage().getCharset().name();
     }
 
     /**
@@ -767,8 +764,7 @@ public class Document extends Node {
             // TODO: implement XmlPage.getCharset
             return "";
         }
-        final Charset charset = getPage().getCharset();
-        return EncodingSniffer.translateEncodingLabel(charset);
+        return getPage().getCharset().name();
     }
 
     /**
@@ -1841,8 +1837,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public String getInputEncoding() {
-        final Charset encoding = getPage().getCharset();
-        return EncodingSniffer.translateEncodingLabel(encoding);
+        return getPage().getCharset().name();
     }
 
     /**
