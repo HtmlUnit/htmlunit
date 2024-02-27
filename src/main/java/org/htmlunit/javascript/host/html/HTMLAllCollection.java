@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_INTEGER_INDEX;
 import static org.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
-import static org.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -96,8 +95,7 @@ public class HTMLAllCollection extends HTMLCollection {
             return null;
         }
 
-        if (!getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO)
-                && (Double.isInfinite(numb) || numb != Math.floor(numb))) {
+        if (Double.isInfinite(numb) || numb != Math.floor(numb)) {
             return null;
         }
 
@@ -180,13 +178,5 @@ public class HTMLAllCollection extends HTMLCollection {
             return null;
         }
         return value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean supportsParentheses() {
-        return true;
     }
 }

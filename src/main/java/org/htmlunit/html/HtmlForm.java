@@ -21,7 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.FORM_PARAMETRS_NOT_SUPPORTED_F
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
-import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 
@@ -327,14 +326,7 @@ public class HtmlForm extends HtmlElement {
                 url = UrlUtils.getUrlWithNewQuery(url, queryFormFields);
             }
 
-            if (HttpMethod.POST == method
-                    && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)
-                    && UrlUtils.URL_ABOUT_BLANK != url
-                    && StringUtils.isEmpty(actionUrl)) {
-                url = UrlUtils.getUrlWithNewRef(url, null);
-            }
-            else if (anchor != null
-                    && UrlUtils.URL_ABOUT_BLANK != url) {
+            if (anchor != null && UrlUtils.URL_ABOUT_BLANK != url) {
                 url = UrlUtils.getUrlWithNewRef(url, anchor);
             }
         }

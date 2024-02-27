@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
 import static org.htmlunit.BrowserVersionFeatures.JS_IGNORES_UTF8_BOM_SOMETIMES;
@@ -316,15 +315,6 @@ public class HtmlPage extends SgmlPage {
 
         if (!isFrameWindow) {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
-
-            if (!isAboutBlank && enclosingWindow.getWebClient().isJavaScriptEnabled()
-                    && hasFeature(EVENT_FOCUS_ON_LOAD)) {
-                final HtmlElement body = getBody();
-                if (body != null) {
-                    final Event event = new Event((Window) enclosingWindow.getScriptableObject(), Event.TYPE_FOCUS);
-                    body.fireEvent(event);
-                }
-            }
         }
 
         try {

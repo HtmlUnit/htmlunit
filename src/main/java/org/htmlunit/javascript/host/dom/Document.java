@@ -21,8 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
-import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
-import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static org.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_REQUIRES_NAME_OR_ID;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
@@ -34,7 +32,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_RE
 import static org.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static org.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -827,9 +824,6 @@ public class Document extends Node {
             return "";
         }
         final Charset charset = getPage().getCharset();
-        if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return charset.name().toLowerCase(Locale.ROOT);
-        }
         return EncodingSniffer.translateEncodingLabel(charset);
     }
 
@@ -844,9 +838,6 @@ public class Document extends Node {
             return "";
         }
         final Charset charset = getPage().getCharset();
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return charset.name().toLowerCase(Locale.ROOT);
-        }
         return EncodingSniffer.translateEncodingLabel(charset);
     }
 
@@ -2054,9 +2045,6 @@ public class Document extends Node {
     @JsxGetter
     public String getInputEncoding() {
         final Charset encoding = getPage().getCharset();
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return encoding.name();
-        }
         return EncodingSniffer.translateEncodingLabel(encoding);
     }
 
@@ -2146,17 +2134,10 @@ public class Document extends Node {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
             String color = ((HTMLBodyElement) body).getALink();
-            if (ATTRIBUTE_NOT_DEFINED == color && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-                color = "#0000ff";
-            }
-            else if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
                 color = "#000000";
             }
             return color;
-        }
-
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            return "#0000ff";
         }
         return null;
     }
@@ -2183,17 +2164,10 @@ public class Document extends Node {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
             String color = ((HTMLBodyElement) body).getBgColor();
-            if (ATTRIBUTE_NOT_DEFINED == color && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-                color = "#ffffff";
-            }
-            else if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
                 color = "#000000";
             }
             return color;
-        }
-
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            return "#ffffff";
         }
         return null;
     }
@@ -2220,17 +2194,10 @@ public class Document extends Node {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
             String color = ((HTMLBodyElement) body).getText();
-            if (ATTRIBUTE_NOT_DEFINED == color && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-                color = "#000000";
-            }
             if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
                 color = "#000000";
             }
             return color;
-        }
-
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            return "#000000";
         }
         return null;
     }
@@ -2256,17 +2223,10 @@ public class Document extends Node {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
             String color = ((HTMLBodyElement) body).getLink();
-            if (ATTRIBUTE_NOT_DEFINED == color && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-                color = "#0000ff";
-            }
             if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
                 color = "#000000";
             }
             return color;
-        }
-
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            return "#0000ff";
         }
         return null;
     }
@@ -2292,17 +2252,10 @@ public class Document extends Node {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
             String color = ((HTMLBodyElement) body).getVLink();
-            if (ATTRIBUTE_NOT_DEFINED == color && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-                color = "#800080";
-            }
             if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
                 color = "#000000";
             }
             return color;
-        }
-
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            return "#800080";
         }
         return null;
     }
@@ -2356,11 +2309,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public String getXmlEncoding() {
-        String encoding = getPage().getXmlEncoding();
-        if (encoding == null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            encoding = "";
-        }
-        return encoding;
+        return getPage().getXmlEncoding();
     }
 
     /**
@@ -2378,11 +2327,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public String getXmlVersion() {
-        String version = getPage().getXmlVersion();
-        if (version == null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            version = "";
-        }
-        return version;
+        return getPage().getXmlVersion();
     }
 
     /**

@@ -14,11 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
-import static org.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static org.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NAMED_ITEM_ID_FIRST;
-import static org.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
-import static org.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_SUPPORTS_PARANTHESES;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -37,7 +33,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlForm;
@@ -143,30 +138,7 @@ public class HTMLCollection extends AbstractList implements Callable {
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (supportsParentheses()) {
-            if (args.length == 0) {
-                throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
-            }
-            final Object object = getIt(args[0]);
-            if (object == NOT_FOUND) {
-                if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
-                    return null;
-                }
-                return Undefined.instance;
-            }
-            return object;
-        }
-
         throw JavaScriptEngine.typeError("HTMLCollection does nont support function like access");
-    }
-
-    /**
-     * Is parentheses supported.
-     *
-     * @return true or false
-     */
-    protected boolean supportsParentheses() {
-        return getBrowserVersion().hasFeature(HTMLCOLLECTION_SUPPORTS_PARANTHESES);
     }
 
     /**
@@ -187,15 +159,10 @@ public class HTMLCollection extends AbstractList implements Callable {
         }
 
         if (matchingElements.isEmpty()) {
-            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO)) {
-                final double doubleValue = JavaScriptEngine.toNumber(name);
-                if (!Double.isNaN(doubleValue)) {
-                    return get((int) doubleValue, this);
-                }
-            }
             return NOT_FOUND;
         }
-        else if (matchingElements.size() == 1) {
+
+        if (matchingElements.size() == 1) {
             return getScriptableForElement(matchingElements.get(0));
         }
 
@@ -222,11 +189,6 @@ public class HTMLCollection extends AbstractList implements Callable {
      */
     @JsxFunction
     public Object item(final Object index) {
-        if (index instanceof String && getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO)) {
-            final String name = (String) index;
-            return namedItem(name);
-        }
-
         int idx = 0;
         final double doubleValue = JavaScriptEngine.toNumber(index);
         if (!Double.isNaN(doubleValue)) {

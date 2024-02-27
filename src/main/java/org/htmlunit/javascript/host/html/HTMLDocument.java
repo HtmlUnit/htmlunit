@@ -16,9 +16,7 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COOKIES_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
-import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
-import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -65,7 +63,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.Element;
-import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.Document;
@@ -210,10 +207,6 @@ public class HTMLDocument extends Document {
             return (HTMLDocument) ((DocumentProxy) thisObj).getDelegee();
         }
 
-        final Window window = getWindow(thisObj);
-        if (window.getBrowserVersion().hasFeature(HTMLDOCUMENT_FUNCTION_DETACHED)) {
-            return (HTMLDocument) window.getDocument();
-        }
         throw JavaScriptEngine.reportRuntimeError("Function can't be used detached from document");
     }
 
@@ -667,13 +660,12 @@ public class HTMLDocument extends Document {
             return NOT_FOUND;
         }
 
-        final boolean forIDAndOrName = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME);
         final boolean alsoFrames = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
 
         // for performance
         // we will calculate the elements to decide if we really have
         // to really create a HTMLCollection or not
-        final List<DomNode> matchingElements = getItComputeElements(page, name, forIDAndOrName, alsoFrames);
+        final List<DomNode> matchingElements = getItComputeElements(page, name, alsoFrames);
         final int size = matchingElements.size();
         if (size == 0) {
             return NOT_FOUND;
@@ -698,14 +690,13 @@ public class HTMLDocument extends Document {
 
         coll.setElementsSupplier(
                 (Supplier<List<DomNode>> & Serializable)
-                () -> getItComputeElements(page, name, forIDAndOrName, alsoFrames));
+                () -> getItComputeElements(page, name, alsoFrames));
 
         coll.setEffectOnCacheFunction(
                 (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
                 event -> {
                     final String attributeName = event.getName();
-                    if (DomElement.NAME_ATTRIBUTE.equals(attributeName)
-                            || (forIDAndOrName && DomElement.ID_ATTRIBUTE.equals(attributeName))) {
+                    if (DomElement.NAME_ATTRIBUTE.equals(attributeName)) {
                         return EffectOnCache.RESET;
                     }
 
@@ -716,14 +707,8 @@ public class HTMLDocument extends Document {
     }
 
     static List<DomNode> getItComputeElements(final HtmlPage page, final String name,
-            final boolean forIDAndOrName, final boolean alsoFrames) {
-        final List<DomElement> elements;
-        if (forIDAndOrName) {
-            elements = page.getElementsByIdAndOrName(name);
-        }
-        else {
-            elements = page.getElementsByName(name);
-        }
+            final boolean alsoFrames) {
+        final List<DomElement> elements = page.getElementsByName(name);
         final List<DomNode> matchingElements = new ArrayList<>();
         for (final DomElement elt : elements) {
             if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet

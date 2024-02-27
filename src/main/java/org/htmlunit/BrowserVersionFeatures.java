@@ -203,24 +203,12 @@ public enum BrowserVersionFeatures {
     HTMLBASEFONT_END_TAG_FORBIDDEN,
 
     /** If type submit/reset the form update is triggered even if disabled. */
-    @BrowserFeature({FF_ESR, IE})
+    @BrowserFeature(FF_ESR)
     HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE,
 
     /** willValidate does not check the readonly property. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY,
-
-    /** HtmlCollection.item() supports also doubles as index. */
-    @BrowserFeature(IE)
-    HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
-
-    /** HtmlCollection.item[] supports also doubles as index. */
-    @BrowserFeature(IE)
-    HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO,
-
-    /** HtmlCollection.item searches by id also. */
-    @BrowserFeature(IE)
-    HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO,
 
     /** HtmlCollection.namedItem searches by id first. */
     @BrowserFeature({CHROME, EDGE})
@@ -229,18 +217,6 @@ public enum BrowserVersionFeatures {
     /** HtmlCollection returns null instead of undefined if an element was not found. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
-
-    /** HtmlAllCollection(int) is not supported. */
-    @BrowserFeature(IE)
-    HTMLCOLLECTION_SUPPORTS_PARANTHESES,
-
-    /** Is {@code document.charset} lower-case. */
-    @BrowserFeature(IE)
-    HTMLDOCUMENT_CHARSET_LOWERCASE,
-
-    /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
-    @BrowserFeature(IE)
-    HTMLDOCUMENT_COLOR,
 
     /** Calling cookies setter with blank string does not reset the cookies. */
     @BrowserFeature({CHROME, EDGE})
@@ -252,12 +228,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY,
 
-    /** We can use functions in detached documents. */
-    @BrowserFeature(IE)
-    HTMLDOCUMENT_FUNCTION_DETACHED,
-
     /** Calls to <code>document.XYZ</code> also looks at frames. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     HTMLDOCUMENT_GET_ALSO_FRAMES,
 
     /** Calls to <code>document.XYZ</code> looks at children with the specified ID and/or name. */
