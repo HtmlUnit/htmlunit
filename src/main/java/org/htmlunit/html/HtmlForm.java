@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.FORM_IGNORE_REL_NOREFERRER;
 import static org.htmlunit.BrowserVersionFeatures.FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
-import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
@@ -328,11 +327,7 @@ public class HtmlForm extends HtmlElement {
                 url = UrlUtils.getUrlWithNewQuery(url, queryFormFields);
             }
 
-            if (HttpMethod.GET == method && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)
-                    && UrlUtils.URL_ABOUT_BLANK != url) {
-                url = UrlUtils.getUrlWithNewRef(url, null);
-            }
-            else if (HttpMethod.POST == method
+            if (HttpMethod.POST == method
                     && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)
                     && UrlUtils.URL_ABOUT_BLANK != url
                     && StringUtils.isEmpty(actionUrl)) {
@@ -377,10 +372,6 @@ public class HtmlForm extends HtmlElement {
         if (HttpMethod.POST == method) {
             if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
                 request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "max-age=0");
-            }
-
-            if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE)) {
-                request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "no-cache");
             }
         }
 

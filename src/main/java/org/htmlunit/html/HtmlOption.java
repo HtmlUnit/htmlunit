@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
 import static org.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
 
 import java.io.IOException;
@@ -244,18 +243,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     public final void setValueAttribute(final String newValue) {
         setAttribute(VALUE_ATTRIBUTE, newValue);
-    }
-
-    /**
-     * Selects the option if it's not already selected.
-     * {@inheritDoc}
-     */
-    @Override
-    public Page mouseUp(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
-        if (hasFeature(EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION)) {
-            return null;
-        }
-        return super.mouseUp(shiftKey, ctrlKey, altKey, button);
     }
 
     /**

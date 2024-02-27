@@ -14,9 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
 import static org.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_INTEGER_INDEX;
-import static org.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
 import static org.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
 import static org.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -77,35 +75,28 @@ public class HTMLAllCollection extends HTMLCollection {
      */
     @Override
     public Object item(final Object index) {
-        double numb;
+        final double numb;
 
-        final BrowserVersion browser;
         if (index instanceof String) {
             final String name = (String) index;
             final Object result = namedItem(name);
             if (null != result && !JavaScriptEngine.isUndefined(result)) {
                 return result;
             }
-            numb = Double.NaN;
-
-            browser = getBrowserVersion();
-            if (!browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER)) {
-                numb = JavaScriptEngine.toNumber(index);
-            }
+            numb = JavaScriptEngine.toNumber(index);
             if (Double.isNaN(numb)) {
                 return null;
             }
         }
         else {
             numb = JavaScriptEngine.toNumber(index);
-            browser = getBrowserVersion();
         }
 
         if (numb < 0) {
             return null;
         }
 
-        if (!browser.hasFeature(HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO)
+        if (!getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO)
                 && (Double.isInfinite(numb) || numb != Math.floor(numb))) {
             return null;
         }
@@ -138,9 +129,7 @@ public class HTMLAllCollection extends HTMLCollection {
             }
         }
 
-        if (matching.size() == 1
-                || (matching.size() > 1
-                        && browser.hasFeature(HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
+        if (matching.size() == 1) {
             return getScriptableForElement(matching.get(0));
         }
         if (matching.isEmpty()) {

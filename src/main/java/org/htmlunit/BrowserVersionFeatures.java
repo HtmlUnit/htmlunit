@@ -38,26 +38,9 @@ import org.htmlunit.javascript.host.intl.DateTimeFormat;
  */
 public enum BrowserVersionFeatures {
 
-    /**
-     * If the "href" attribute of HtmlAnchor is defined but empty then IE interprets this as an empty filename.
-     * Example: The page https://www.htmlunit.org/test/myFile.html contains an anchor with an empty
-     * href attribute. Clicking the link in IE force the load of page https://www.htmlunit.org/test/.
-     * In Firefox the URL is unchanged.
-     */
-    @BrowserFeature(IE)
-    ANCHOR_EMPTY_HREF_NO_FILENAME,
-
     /** Ignore target when {@code href} is a javascript snippet. */
     @BrowserFeature({CHROME, EDGE})
     ANCHOR_SEND_PING_REQUEST,
-
-    /** Use Keep-Alive instead of keep-alive. */
-    @BrowserFeature(IE)
-    CONNECTION_KEEP_ALIVE_IE,
-
-    /** Browser does not check the CSP. */
-    @BrowserFeature(IE)
-    CONTENT_SECURITY_POLICY_IGNORED,
 
     /** Background image is 'initial'. */
     @BrowserFeature({CHROME, EDGE})
@@ -70,10 +53,6 @@ public enum BrowserVersionFeatures {
     /** {@code CSSFontFaceRule.cssText} uses one more blank. */
     @BrowserFeature(FF)
     CSS_CSSTEXT_FF_STYLE,
-
-    /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
-    @BrowserFeature(IE)
-    CSS_CSSTEXT_IE_STYLE,
 
     /** Is display style of HtmlDialog is 'none'. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -95,18 +74,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     CSS_NOSCRIPT_DISPLAY_INLINE,
 
-    /** Unit is not required when setting outline-width style. */
-    @BrowserFeature(IE)
-    CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED,
-
-    /** The default value of the display property for the 'progress' tag is 'inline' instead of the default one. */
-    @BrowserFeature(IE)
-    CSS_PROGRESS_DISPLAY_INLINE,
-
-    /** Is the css pseudo selector -ms-input-placeholder supported. */
-    @BrowserFeature(IE)
-    CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER,
-
     /** Is the css pseudo selector placeholder-shown supported. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN,
@@ -116,12 +83,8 @@ public enum BrowserVersionFeatures {
     CSS_RP_DISPLAY_NONE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature({IE, FF_ESR})
+    @BrowserFeature(FF_ESR)
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
-
-    /** Throws exception on setting a CSS style value to null. */
-    @BrowserFeature(IE)
-    CSS_SET_NULL_THROWS,
 
     /** For disconnected items style properties are blank. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -131,21 +94,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
 
-    /** 'auto' is supported when setting vertical-align style. */
-    @BrowserFeature(IE)
-    CSS_VERTICAL_ALIGN_SUPPORTS_AUTO,
-
-    /** zIndex is of type Integer. Other values are ignored (''). */
-    @BrowserFeature(IE)
-    CSS_ZINDEX_TYPE_INTEGER,
-
     /** Add the 'Referer' header to a request triggered by window.showModalDialog. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     DIALOGWINDOW_REFERER,
-
-    /** IE removes all child text nodes, but FF preserves the first. */
-    @BrowserFeature(IE)
-    DOM_NORMALIZE_REMOVE_CHILDREN,
 
     /** Indicates whether returnValue behaves HTML5-like with an empty string default. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -159,18 +110,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_FOCUS_FOCUS_IN_BLUR_OUT,
 
-    /** Triggers the onfocusin onfocus onfocusout blur events in this order. */
-    @BrowserFeature(IE)
-    EVENT_FOCUS_IN_FOCUS_OUT_BLUR,
-
-    /** Triggers the onfocus event when focusing the body on load. */
-    @BrowserFeature({IE, FF, FF_ESR})
-    EVENT_FOCUS_ON_LOAD,
-
-    /** Indicates whether returning 'null' from a property handler is meaningful. */
-    @BrowserFeature(IE)
-    EVENT_HANDLER_NULL_RETURN_IS_MEANINGFUL,
-
     /** Mouse events are triggered on disabled elements also. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_MOUSE_ON_DISABLED,
@@ -183,57 +122,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_ONCHANGE_AFTER_ONCLICK,
 
-    /** Triggers "onclick" event handler for the select only, not for the clicked option. */
-    @BrowserFeature(IE)
-    EVENT_ONCLICK_FOR_SELECT_ONLY,
-
-    /** <code>PointerEvent</code>has detail of 0. */
-    @BrowserFeature(IE)
-    EVENT_ONCLICK_POINTEREVENT_DETAIL_0,
-
-    /** Triggers 'onclick' event handler using <code>PointerEvent</code>. */
-    @BrowserFeature({CHROME, EDGE, IE})
-    EVENT_ONCLICK_USES_POINTEREVENT,
-
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
-
-    /** Triggers 'ondblclick' event handler using <code>PointerEvent</code>. */
-    @BrowserFeature(IE)
-    EVENT_ONDOUBLECLICK_USES_POINTEREVENT,
-
-    /** Triggers "onload" event if internal javascript loaded. */
-    @BrowserFeature(IE)
-    EVENT_ONLOAD_INTERNAL_JAVASCRIPT,
 
     /** MessageEvent default data value is null. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_ONMESSAGE_DEFAULT_DATA_NULL,
 
-    /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature(IE)
-    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
-
-    /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature(IE)
-    EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION,
-
     /** FF triggers a mouseover event even if the option is disabled. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION,
-
-    /** IE never triggers a mouseover event for select options. */
-    @BrowserFeature(IE)
-    EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION,
-
-    /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature(IE)
-    EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT,
-
-    /** Does not trigger "onmouseup" event handler for the select options. */
-    @BrowserFeature(IE)
-    EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION,
 
     /** <code>PopStateEvent</code> can not be created by calling document.createEvent('PopStateEvent'). */
     @BrowserFeature({FF, FF_ESR})
@@ -247,29 +146,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_TYPE_HASHCHANGEEVENT,
 
-    /** Supports vendor specific event type 'MouseWheelEvent'. */
-    @BrowserFeature(IE)
-    EVENT_TYPE_MOUSEWHEELEVENT,
-
-    /** Supports event type 'PointerEvent'. */
-    @BrowserFeature(IE)
-    EVENT_TYPE_POINTEREVENT,
-
-    /** Supports event type 'ProgressEvent'. */
-    @BrowserFeature(IE)
-    EVENT_TYPE_PROGRESSEVENT,
-
     /** Supports event type 'TextEvent'. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     EVENT_TYPE_TEXTEVENT,
 
     /** Supports event type 'WheelEvent'. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     EVENT_TYPE_WHEELEVENT,
-
-    /** For new pages the focus points to the body node. */
-    @BrowserFeature(IE)
-    FOCUS_BODY_ELEMENT_AT_START,
 
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -284,7 +167,7 @@ public enum BrowserVersionFeatures {
     FORM_FORM_ATTRIBUTE_SUPPORTED,
 
     /** Form elements are able to refer to the for by using the from attribute. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     FORM_IGNORE_REL_NOREFERRER,
 
     /** Form formxxx parameters not supported for input type image. */
@@ -299,37 +182,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE,
 
-    /** Form submit includes the Cache-Control: no-cache header. */
-    @BrowserFeature(IE)
-    FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE,
-
     /** Forms are ignoring the rel='noreferrer' attribute. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     FORM_SUBMISSION_HEADER_ORIGIN,
 
-    /** Form submit is done without the hash part of the action url. */
-    @BrowserFeature(IE)
-    FORM_SUBMISSION_URL_WITHOUT_HASH,
-
     /** If the frame src has 'about:' scheme always use 'about:blank' as source. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME,
-
-    /** */
-    @BrowserFeature(IE)
-    HTMLABBREVIATED,
-
-    /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature(IE)
-    HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
 
     /** HtmlAllCollection.item(int) requires int parameter. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLALLCOLLECTION_INTEGER_INDEX,
-
-    /** HtmlCollection returns the first hit instead of a collection if many elements found. */
-    @BrowserFeature(IE)
-    HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -338,10 +201,6 @@ public enum BrowserVersionFeatures {
     /** Should org.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR})
     HTMLBASEFONT_END_TAG_FORBIDDEN,
-
-    /** Base tag href attribute is empty if not defined. */
-    @BrowserFeature(IE)
-    HTMLBASE_HREF_DEFAULT_EMPTY,
 
     /** If type submit/reset the form update is triggered even if disabled. */
     @BrowserFeature({FF_ESR, IE})

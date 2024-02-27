@@ -19,9 +19,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MOUSEWHEELEVENT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
@@ -1241,13 +1238,7 @@ public class Document extends Node {
                         && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
                 || "BeforeUnloadEvent".equals(eventType)
                         && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
-                || "MouseWheelEvent".equals(eventType)
-                        && getBrowserVersion().hasFeature(EVENT_TYPE_MOUSEWHEELEVENT)
-                || "PointerEvent".equals(eventType)
-                        && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
                 || "PopStateEvent".equals(eventType)
-                || "ProgressEvent".equals(eventType)
-                        && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)
                 || "FocusEvent".equals(eventType)
                 || "WheelEvent".equals(eventType)
                         && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT)

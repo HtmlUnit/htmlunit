@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
 import static org.htmlunit.BrowserVersionFeatures.JS_PHRASE_COMMON_CLASS_NAME;
 import static org.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -97,8 +96,7 @@ public class HTMLPhraseElement extends HTMLElement {
         super.setDomNode(domNode);
 
         if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
-            if ((domNode instanceof HtmlAbbreviated && getBrowserVersion().hasFeature(HTMLABBREVIATED))
-                || domNode instanceof HtmlAcronym
+            if (domNode instanceof HtmlAcronym
                 || domNode instanceof HtmlBidirectionalOverride
                 || domNode instanceof HtmlBig
                 || domNode instanceof HtmlBlink

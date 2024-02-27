@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLBASE_HREF_DEFAULT_EMPTY;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -59,9 +58,6 @@ public class HTMLBaseElement extends HTMLElement {
     public String getHref() {
         final String href = getDomNodeOrDie().getAttributeDirect("href");
         if (ATTRIBUTE_NOT_DEFINED == href) {
-            if (getBrowserVersion().hasFeature(HTMLBASE_HREF_DEFAULT_EMPTY)) {
-                return href;
-            }
             return getWindow().getLocation().getHref();
         }
         return href;
