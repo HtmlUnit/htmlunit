@@ -143,7 +143,6 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "2")
-    @HtmlUnitNYI(IE = "1")
     public void onclickDisables() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -443,7 +442,6 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
             IE = {"true", "false", "true", "true", "true"})
-    @HtmlUnitNYI(IE = {"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"

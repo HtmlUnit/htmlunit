@@ -968,8 +968,7 @@ public class EventTest extends WebDriverTestCase {
             IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @HtmlUnitNYI(FF = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"},
-            FF_ESR = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"},
-            IE = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"})
+            FF_ESR = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"})
     public void document_focus() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

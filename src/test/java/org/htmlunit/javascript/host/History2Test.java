@@ -627,7 +627,6 @@ public class History2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"href=§§URL§§", "href=§§URL§§"},
             IE = {"href=§§URL§§", "href=§§URL§§undefined"})
-    @HtmlUnitNYI(IE = {"href=§§URL§§", "href=§§URL§§"})
     public void replaceStateUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -673,8 +672,7 @@ public class History2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
                  EDGE = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
                  FF = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
-                 FF_ESR = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
-                 IE = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"})
+                 FF_ESR = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"})
     public void replaceStateObj() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -719,7 +717,6 @@ public class History2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"href=§§URL§§", "href=§§URL§§"},
             IE = {"href=§§URL§§", "href=§§URL§§undefined"})
-    @HtmlUnitNYI(IE = {"href=§§URL§§", "href=§§URL§§"})
     public void pushStateUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -765,8 +762,7 @@ public class History2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
             EDGE = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
             FF = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
-            FF_ESR = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
-            IE = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"})
+            FF_ESR = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"})
     public void pushStateObj() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
