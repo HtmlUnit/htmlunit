@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
@@ -569,7 +568,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     protected boolean propagateClickStateUpdateToParent() {
-        return !hasFeature(HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR);
+        return true;
     }
 
     /**

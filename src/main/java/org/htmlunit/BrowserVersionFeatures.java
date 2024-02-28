@@ -110,6 +110,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_FOCUS_FOCUS_IN_BLUR_OUT,
 
+    /** Triggers the onfocus event when focusing the body on load. */
+    @BrowserFeature({FF, FF_ESR})
+    EVENT_FOCUS_ON_LOAD,
+
     /** Mouse events are triggered on disabled elements also. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_MOUSE_ON_DISABLED,
@@ -121,6 +125,10 @@ public enum BrowserVersionFeatures {
     /** Triggers "onchange" event handler after "onclick" event handler. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_ONCHANGE_AFTER_ONCLICK,
+
+    /** Triggers 'onclick' event handler using <code>PointerEvent</code>. */
+    @BrowserFeature({CHROME, EDGE})
+    EVENT_ONCLICK_USES_POINTEREVENT,
 
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
     @BrowserFeature({FF, FF_ESR})
@@ -169,10 +177,6 @@ public enum BrowserVersionFeatures {
     /** Form elements are able to refer to the for by using the from attribute. */
     @BrowserFeature({CHROME, EDGE})
     FORM_IGNORE_REL_NOREFERRER,
-
-    /** Form formxxx parameters not supported for input type image. */
-    @BrowserFeature(IE)
-    FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE,
 
     /** Form submit forces a real request also if only the hash was changed. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -232,24 +236,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLDOCUMENT_GET_ALSO_FRAMES,
 
-    /** Calls to <code>document.XYZ</code> looks at children with the specified ID and/or name. */
-    @BrowserFeature(IE)
-    HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME,
-
-    /**
-     * Calls to <code>document.XYZ</code> should first look at standard functions before looking at elements
-     * named <code>XYZ</code>.
-     */
-    @BrowserFeature(IE)
-    HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS,
-
     /** Allows invalid 'align' values. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLELEMENT_ALIGN_INVALID,
-
-    /** Detaching the active element from the dom tree triggers no keyup event. */
-    @BrowserFeature(IE)
-    HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT,
 
     /** Removing the active element from the dom tree triggers the onblur event. */
     @BrowserFeature({CHROME, EDGE})
@@ -260,7 +249,7 @@ public enum BrowserVersionFeatures {
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
 
     /** Empty src attribute sets display to false. */
-    @BrowserFeature({IE, FF, FF_ESR})
+    @BrowserFeature({FF, FF_ESR})
     HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE,
 
     /** Is document.cretaeElement('image') an HTMLElement. */
@@ -286,14 +275,6 @@ public enum BrowserVersionFeatures {
     /** When clicking a {@code checkbox} or {@code radio} input the surrounding anchor is not clicked. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
-
-    /** When clicking an input the surrounding anchor is not clicked. */
-    @BrowserFeature(IE)
-    HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
-
-    /** HTMLInputElement: {@code files} to be {@code undefined}. */
-    @BrowserFeature(IE)
-    HTMLINPUT_FILES_UNDEFINED,
 
     /** HTMLInputElement: type {@code file} selectionSart/End are null. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -330,10 +311,6 @@ public enum BrowserVersionFeatures {
     /** If the type is present for a link only use if type is text/css. */
     @BrowserFeature({CHROME, EDGE})
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
-
-    /** */
-    @BrowserFeature(IE)
-    HTMLOPTION_PREVENT_DISABLED,
 
     /** Removing the selected attribute, de selects the option. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})

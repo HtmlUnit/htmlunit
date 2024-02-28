@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COOKIES_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
-import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -645,7 +644,7 @@ public class HTMLDocument extends Document {
     @Override
     protected Object getWithPreemption(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
-        if (page == null || getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS)) {
+        if (page == null) {
             final Object response = getPrototype().get(name, this);
             if (response != NOT_FOUND) {
                 return response;

@@ -1190,11 +1190,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "Jane", "Smith", "sdg", "finished"},
-            CHROME = "not available",
-            EDGE = "not available",
-            FF = "not available",
-            FF_ESR = "not available")
+    @Alerts("not available")
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -1252,11 +1248,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "result", "finished"},
-            CHROME = {"undefined", "not available"},
-            EDGE = {"undefined", "not available"},
-            FF = {"undefined", "not available"},
-            FF_ESR = {"undefined", "not available"})
+    @Alerts({"undefined", "not available"})
     public void showModalDialogWithButton() throws Exception {
         final String html1
             = "<html><head>\n"

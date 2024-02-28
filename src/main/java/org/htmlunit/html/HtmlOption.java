@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION;
-import static org.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -182,9 +181,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public final boolean isDisabled() {
-        if (hasFeature(HTMLOPTION_PREVENT_DISABLED)) {
-            return false;
-        }
         return hasAttribute(ATTRIBUTE_DISABLED);
     }
 

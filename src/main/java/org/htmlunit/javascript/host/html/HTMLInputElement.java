@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
@@ -30,7 +29,6 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlCheckBoxInput;
@@ -680,9 +678,6 @@ public class HTMLInputElement extends HTMLElement {
             list.setParentScope(getParentScope());
             list.setPrototype(getPrototype(list.getClass()));
             return list;
-        }
-        if (getBrowserVersion().hasFeature(HTMLINPUT_FILES_UNDEFINED)) {
-            return Undefined.instance;
         }
         return null;
     }

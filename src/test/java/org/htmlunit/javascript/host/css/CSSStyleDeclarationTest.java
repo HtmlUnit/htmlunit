@@ -61,8 +61,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                        "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
-            IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]",
-                  "[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]",
                   "[object CSS2Properties]", "[object CSS2Properties]"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]",
@@ -172,10 +170,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"background-color: rgb(255, 255, 255); color: red;",
-                       "background-color: rgb(255, 255, 255); color: red;"},
-            IE = {"color: red; background-color: rgb(255, 255, 255);",
-                  "color: red; background-color: rgb(255, 255, 255);"})
+    @Alerts({"background-color: rgb(255, 255, 255); color: red;",
+             "background-color: rgb(255, 255, 255); color: red;"})
     @HtmlUnitNYI(CHROME = {"background-color: rgb(255, 255, 255); color: red;",
                            "background-color: #FFFFFF;color: red;"},
             EDGE = {"background-color: rgb(255, 255, 255); color: red;",
@@ -634,8 +630,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"black", "pink", "color: pink; background: blue;"},
-            IE = {"black", "pink", "background: blue; color: pink; foo: bar;"})
+    @Alerts({"black", "pink", "color: pink; background: blue;"})
     @HtmlUnitNYI(CHROME = {"black", "pink", "color: pink; background: blue; foo: bar;"},
             EDGE = {"black", "pink", "color: pink; background: blue; foo: bar;"},
             FF = {"black", "pink", "color: pink; background: blue; foo: bar;"},
@@ -1143,8 +1138,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "foo")
+    @Alerts("undefined")
     public void initUnsupportdProperty() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='my' style='htmlunit: foo'>d</div>\n"
@@ -1222,8 +1216,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"string", "", "string", "", "string", "4", "string", "", "string", "", "string", ""},
-            IE = {"string", "", "string", "", "number", "4", "string", "", "string", "", "string", ""})
+    @Alerts({"string", "", "string", "", "string", "4", "string", "", "string", "", "string", ""})
     public void zIndexDefault() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -1487,8 +1480,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "none", "rgb(0, 128, 0)"},
-            IE = {"inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)"})
+    @Alerts({"", "", "none", "rgb(0, 128, 0)"})
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1517,8 +1509,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
-            IE = {"inline", "inline"})
+    @Alerts({"", "inline"})
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1542,8 +1533,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "rgb(0, 0, 0)"},
-            IE = {"rgb(0, 0, 0)", "rgb(0, 0, 0)"})
+    @Alerts({"", "rgb(0, 0, 0)"})
     public void colorDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1841,8 +1831,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "")
+    @Alerts({})
     public void getAttribute() throws Exception {
         getAttribute("\"font\"");
     }
@@ -1851,8 +1840,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "")
+    @Alerts({})
     public void getAttributeFont() throws Exception {
         getAttribute("'font'");
     }
@@ -1861,8 +1849,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "green")
+    @Alerts({})
     public void getAttributeColor() throws Exception {
         getAttribute("'color'");
     }
@@ -1871,8 +1858,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "green")
+    @Alerts({})
     public void getAttributeColorCase() throws Exception {
         getAttribute("'ColoR'");
     }
@@ -1881,8 +1867,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "")
+    @Alerts({})
     public void getAttributeFont0() throws Exception {
         getAttribute("'font', 0");
     }
@@ -1891,8 +1876,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "green")
+    @Alerts({})
     public void getAttributeColor0() throws Exception {
         getAttribute("'color', 0");
     }
@@ -1901,8 +1885,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "green")
+    @Alerts({})
     public void getAttributeColorCase0() throws Exception {
         getAttribute("'coLOr', 0");
     }
@@ -1911,8 +1894,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "")
+    @Alerts({})
     public void getAttributeFont1() throws Exception {
         getAttribute("'font', 1");
     }
@@ -1921,8 +1903,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "green")
+    @Alerts({})
     public void getAttributeColor1() throws Exception {
         getAttribute("'color', 1");
     }
@@ -1931,8 +1912,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "green")
+    @Alerts({})
     public void getAttributeColorCase1() throws Exception {
         getAttribute("'ColOR', 1");
     }
@@ -1957,8 +1937,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'font', 'blah'", "green", "green"})
+    @Alerts("not supported")
     public void setAttributeFont() throws Exception {
         setAttribute("'font', 'blah'");
     }
@@ -1967,8 +1946,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'color', 'red'", "green", "red"})
+    @Alerts("not supported")
     public void setAttributeColor() throws Exception {
         setAttribute("'color', 'red'");
     }
@@ -1977,8 +1955,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'ColoR', 'red'", "green", "red"})
+    @Alerts("not supported")
     public void setAttributeColorCase() throws Exception {
         setAttribute("'ColoR', 'red'");
     }
@@ -1987,8 +1964,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'font', 'blah', 0", "green", "green"})
+    @Alerts("not supported")
     public void setAttributeFont0() throws Exception {
         setAttribute("'font', 'blah', 0");
     }
@@ -1997,8 +1973,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'color', 'red', 0", "green", "red"})
+    @Alerts("not supported")
     public void setAttributeColor0() throws Exception {
         setAttribute("'color', 'red', 0");
     }
@@ -2007,8 +1982,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'ColoR', 'red', 0", "green", "red"})
+    @Alerts("not supported")
     public void setAttributeColorCase0() throws Exception {
         setAttribute("'ColoR', 'red', 0");
     }
@@ -2017,8 +1991,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'font', 'blah', 1", "green", "green"})
+    @Alerts("not supported")
     public void setAttributeFont1() throws Exception {
         setAttribute("'font', 'blah', 1");
     }
@@ -2027,8 +2000,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'color', 'red', 1", "green", "red"})
+    @Alerts("not supported")
     public void setAttributeColor1() throws Exception {
         setAttribute("'color', 'red', 1");
     }
@@ -2037,8 +2009,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'ColoR', 'red', 1", "green", "red"})
+    @Alerts("not supported")
     public void setAttributeColorCase1() throws Exception {
         setAttribute("'ColoR', 'red', 1");
     }
@@ -2070,8 +2041,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'font'", "green", "false", "green"})
+    @Alerts("not supported")
     public void removeAttributeFont() throws Exception {
         removeAttribute("'font'");
     }
@@ -2080,8 +2050,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'color'", "green", "true", ""})
+    @Alerts("not supported")
     public void removeAttributeColor() throws Exception {
         removeAttribute("'color'");
     }
@@ -2090,8 +2059,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'ColoR'", "green", "true", ""})
+    @Alerts("not supported")
     public void removeAttributeColorCase() throws Exception {
         removeAttribute("'ColoR'");
     }
@@ -2100,8 +2068,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'font', 0", "green", "false", "green"})
+    @Alerts("not supported")
     public void removeAttributeFont0() throws Exception {
         removeAttribute("'font', 0");
     }
@@ -2110,8 +2077,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'color', 0", "green", "true", ""})
+    @Alerts("not supported")
     public void removeAttributeColor0() throws Exception {
         removeAttribute("'color', 0");
     }
@@ -2120,8 +2086,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'ColoR', 0", "green", "true", ""})
+    @Alerts("not supported")
     public void removeAttributeColorCase0() throws Exception {
         removeAttribute("'ColoR', 0");
     }
@@ -2130,8 +2095,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'font', 1", "green", "false", "green"})
+    @Alerts("not supported")
     public void removeAttributeFont1() throws Exception {
         removeAttribute("'font', 1");
     }
@@ -2140,8 +2104,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'color', 1", "green", "true", ""})
+    @Alerts("not supported")
     public void removeAttributeColor1() throws Exception {
         removeAttribute("'color', 1");
     }
@@ -2150,8 +2113,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "not supported",
-            IE = {"'ColoR', 1", "green", "true", ""})
+    @Alerts("not supported")
     public void removeAttributeColorCase1() throws Exception {
         removeAttribute("'ColoR', 1");
     }
@@ -2229,10 +2191,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setWidthProperty() throws Exception {
         setLengthProperty("width", "width");
     }
@@ -2241,10 +2201,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setWidth() throws Exception {
         setLength("width", "width");
     }
@@ -2253,10 +2211,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setHeightProperty() throws Exception {
         setLengthProperty("height", "height");
     }
@@ -2265,10 +2221,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setHeight() throws Exception {
         setLength("height", "height");
     }
@@ -2277,10 +2231,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setTopProperty() throws Exception {
         setLengthProperty("top", "top");
     }
@@ -2289,10 +2241,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setTop() throws Exception {
         setLength("top", "top");
     }
@@ -2301,10 +2251,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLeftProperty() throws Exception {
         setLengthProperty("left", "left");
     }
@@ -2313,10 +2261,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLeft() throws Exception {
         setLength("left", "left");
     }
@@ -2325,10 +2271,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBottomProperty() throws Exception {
         setLengthProperty("bottom", "bottom");
     }
@@ -2337,10 +2281,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBottom() throws Exception {
         setLength("bottom", "bottom");
     }
@@ -2349,10 +2291,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setRightProperty() throws Exception {
         setLengthProperty("right", "right");
     }
@@ -2361,10 +2301,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setRight() throws Exception {
         setLength("right", "right");
     }
@@ -2373,10 +2311,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginTopProperty() throws Exception {
         setLengthProperty("margin-top", "marginTop");
     }
@@ -2385,10 +2321,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginTop() throws Exception {
         setLength("margin-top", "marginTop");
     }
@@ -2397,10 +2331,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginLeftProperty() throws Exception {
         setLengthProperty("margin-left", "marginLeft");
     }
@@ -2409,10 +2341,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginLeft() throws Exception {
         setLength("margin-left", "marginLeft");
     }
@@ -2421,10 +2351,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginBottomProperty() throws Exception {
         setLengthProperty("margin-bottom", "marginBottom");
     }
@@ -2433,10 +2361,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginBottom() throws Exception {
         setLength("margin-bottom", "marginBottom");
     }
@@ -2445,10 +2371,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginRightProperty() throws Exception {
         setLengthProperty("margin-right", "marginRight");
     }
@@ -2457,10 +2381,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginRight() throws Exception {
         setLength("margin-right", "marginRight");
     }
@@ -2469,10 +2391,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingTopProperty() throws Exception {
         setLengthProperty("padding-top", "paddingTop");
     }
@@ -2481,10 +2401,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingTop() throws Exception {
         setLength("padding-top", "paddingTop");
     }
@@ -2493,10 +2411,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingLeftProperty() throws Exception {
         setLengthProperty("padding-left", "paddingLeft");
     }
@@ -2505,10 +2421,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingLeft() throws Exception {
         setLength("padding-left", "paddingLeft");
     }
@@ -2517,10 +2431,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingBottomProperty() throws Exception {
         setLengthProperty("padding-bottom", "paddingBottom");
     }
@@ -2529,10 +2441,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingBottom() throws Exception {
         setLength("padding-bottom", "paddingBottom");
     }
@@ -2541,10 +2451,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingRightProperty() throws Exception {
         setLengthProperty("padding-right", "paddingRight");
     }
@@ -2553,10 +2461,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingRight() throws Exception {
         setLength("padding-right", "paddingRight");
     }
@@ -2565,10 +2471,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderTopWidthProperty() throws Exception {
         setLengthProperty("border-top-width", "borderTopWidth");
     }
@@ -2577,10 +2481,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderTopWidth() throws Exception {
         setLength("border-top-width", "borderTopWidth");
     }
@@ -2589,10 +2491,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderLeftWidthProperty() throws Exception {
         setLengthProperty("border-left-width", "borderLeftWidth");
     }
@@ -2601,10 +2501,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderLeftWidth() throws Exception {
         setLength("border-left-width", "borderLeftWidth");
     }
@@ -2613,10 +2511,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderBottomWidthProperty() throws Exception {
         setLengthProperty("border-bottom-width", "borderBottomWidth");
     }
@@ -2625,10 +2521,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderBottomWidth() throws Exception {
         setLength("border-bottom-width", "borderBottomWidth");
     }
@@ -2637,10 +2531,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderRightWidthProperty() throws Exception {
         setLengthProperty("border-right-width", "borderRightWidth");
     }
@@ -2649,10 +2541,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderRightWidth() throws Exception {
         setLength("border-right-width", "borderRightWidth");
     }
@@ -2661,10 +2551,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMaxWidthProperty() throws Exception {
         setLengthProperty("max-width", "maxWidth");
     }
@@ -2673,10 +2561,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMaxWidth() throws Exception {
         setLength("max-width", "maxWidth");
     }
@@ -2685,10 +2571,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMinWidthProperty() throws Exception {
         setLengthProperty("min-width", "minWidth");
     }
@@ -2697,10 +2581,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMinWidth() throws Exception {
         setLength("min-width", "minWidth");
     }
@@ -2709,10 +2591,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMaxHeightProperty() throws Exception {
         setLengthProperty("max-height", "maxHeight");
     }
@@ -2721,10 +2601,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMaxHeight() throws Exception {
         setLength("max-height", "maxHeight");
     }
@@ -2733,10 +2611,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMinHeightProperty() throws Exception {
         setLengthProperty("min-height", "minHeight");
     }
@@ -2745,10 +2621,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMinHeight() throws Exception {
         setLength("min-height", "minHeight");
     }
@@ -2757,10 +2631,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setTextIndentProperty() throws Exception {
         setLengthProperty("text-indent", "textIndent");
     }
@@ -2769,10 +2641,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setTextIndent() throws Exception {
         setLength("text-indent", "textIndent");
     }
@@ -2781,10 +2651,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setFontSizeProperty() throws Exception {
         setLengthProperty("font-size", "fontSize");
     }
@@ -2793,10 +2661,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setFontSize() throws Exception {
         setLength("font-size", "fontSize");
     }
@@ -2810,9 +2676,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             FF_ESR = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                      "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+                      "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setWordSpacingProperty() throws Exception {
         setLengthProperty("word-spacing", "wordSpacing");
     }
@@ -2826,9 +2690,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
             FF_ESR = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                      "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"})
+                      "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"})
     public void setWordSpacing() throws Exception {
         setLength("word-spacing", "wordSpacing");
     }
@@ -2837,10 +2699,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLetterSpacingProperty() throws Exception {
         setLengthProperty("letter-spacing", "letterSpacing");
     }
@@ -2849,10 +2709,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLetterSpacing() throws Exception {
         setLength("letter-spacing", "letterSpacing");
     }
@@ -2861,10 +2719,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "7%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setVerticalAlignProperty() throws Exception {
         setLengthProperty("vertical-align", "verticalAlign");
     }
@@ -2873,10 +2729,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setVerticalAlign() throws Exception {
         setLength("vertical-align", "verticalAlign");
     }
@@ -2885,10 +2739,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"17px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"17px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setOutlineWidthProperty() throws Exception {
         setLengthProperty("outline-width", "outlineWidth");
     }
@@ -2909,10 +2761,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"17px", "5px", "6em", "17px", "17px", "initial", "inherit",
-                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
-                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts({"17px", "5px", "6em", "17px", "17px", "initial", "inherit",
+             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setOutlineWidth() throws Exception {
         setLength("outline-width", "outlineWidth");
     }
@@ -3097,8 +2947,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined"},
-            IE = {"5px", "5", "1em", "16", "30px", "30"})
+    @Alerts({"5px", "undefined", "1em", "undefined"})
     public void pixelLeft() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='left: 5px; border: 1px solid black;'>a</div>\n"
@@ -3125,8 +2974,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined"},
-            IE = {"5px", "5", "1em", "16", "30px", "30"})
+    @Alerts({"5px", "undefined", "1em", "undefined"})
     public void pixelRight() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='right: 5px; border: 1px solid black;'>a</div>\n"
@@ -3153,8 +3001,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined"},
-            IE = {"5px", "5", "1em", "16", "30px", "30"})
+    @Alerts({"5px", "undefined", "1em", "undefined"})
     public void pixelTop() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='top: 5px; border: 1px solid black;'>a</div>\n"
@@ -3181,8 +3028,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5px", "undefined", "1em", "undefined"},
-            IE = {"5px", "5", "1em", "16", "30px", "30"})
+    @Alerts({"5px", "undefined", "1em", "undefined"})
     public void pixelBottom() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='bottom: 5px; border: 1px solid black;'>a</div>\n"
@@ -3213,8 +3059,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "none"},
             CHROME = {"undefined", "before", "none", "exception"},
-            EDGE = {"undefined", "before", "none", "exception"},
-            IE = {"function", "before", "none", "after", "none"})
+            EDGE = {"undefined", "before", "none", "exception"})
     @HtmlUnitNYI(CHROME = {"function", "before", "none", "after", "none"},
             EDGE = {"function", "before", "none", "after", "none"},
             FF = {"function", "before", "none", "after", "none"},
@@ -3284,8 +3129,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "width", "undefined", "undefined"},
-            IE = {"1", "width", "", "undefined"})
+    @Alerts({"1", "width", "undefined", "undefined"})
     public void length2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -3336,8 +3180,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"auto", ""},
-            IE = {"auto", "auto"})
+    @Alerts({"auto", ""})
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -3498,7 +3341,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
-            IE = {"", "2", "0", "0", "5", "5", "0", "0"},
             FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"},
             FF_ESR = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     public void widows() throws Exception {
@@ -3532,7 +3374,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
-            IE = {"", "2", "0", "0", "5", "5", "0", "0"},
             FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"},
             FF_ESR = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     public void orphans() throws Exception {
@@ -3600,8 +3441,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
-            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
-            IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]", "", ""})
+            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"})
     public void setStyle() throws Exception {
@@ -3628,8 +3468,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "false", "true", "false", "false"},
-            IE = {"1", "false", "true", "true", "true"})
+    @Alerts({"1", "false", "true", "false", "false"})
     public void in() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

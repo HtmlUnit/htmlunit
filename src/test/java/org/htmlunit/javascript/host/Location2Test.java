@@ -1007,8 +1007,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "null", "§§URL§§/"},
-            CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
+    @Alerts(CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
             EDGE = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
             FF = {"3", "§§URL§§", "§§URL§§/"},
             FF_ESR = {"3", "§§URL§§", "§§URL§§/"})

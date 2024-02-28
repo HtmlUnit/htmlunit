@@ -15,7 +15,6 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static org.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 
@@ -584,13 +583,7 @@ public abstract class HtmlElement extends DomElement {
 
         HtmlElement eventSource = this;
         if (!isAttachedToPage()) {
-            final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-            if (browserVersion.hasFeature(HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT)) {
-                eventSource = null;
-            }
-            else {
-                eventSource = page.getBody();
-            }
+            eventSource = page.getBody();
         }
 
         if (eventSource != null) {

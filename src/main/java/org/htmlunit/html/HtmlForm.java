@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.FORM_IGNORE_REL_NOREFERRER;
-import static org.htmlunit.BrowserVersionFeatures.FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
@@ -216,12 +215,6 @@ public class HtmlForm extends HtmlElement {
             final boolean isInput = HtmlInput.TAG_NAME.equals(element.getTagName());
             if (isInput) {
                 typeImage = "image".equalsIgnoreCase(type);
-            }
-
-            // IE does not support formxxx attributes for input with 'image' types
-            final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
-            if (browser.hasFeature(FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE) && typeImage) {
-                return;
             }
 
             // could be excessive validation but support of html5 fromxxx
