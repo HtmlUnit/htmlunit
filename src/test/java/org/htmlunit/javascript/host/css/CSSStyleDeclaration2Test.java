@@ -166,10 +166,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                       "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
                       "success",
                       "success",
-                      "success"},
-            IE = {"success", "letterSpacing 42% - 42em",
-                  "outlineWidth 42% - 42em", "success", "success",
-                  "wordSpacing 42% - 42em"})
+                      "success"})
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");
@@ -249,12 +246,11 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "baseline", "sub", "super", "text-top",
-                       "text-bottom", "middle", "top", "bottom",
-                       "1.7em", "4px", "32%",
-                       "inherit", "initial", "revert", "unset",
-                       "unset", "unset", "unset"},
-            IE = {})
+    @Alerts({"", "baseline", "sub", "super", "text-top",
+             "text-bottom", "middle", "top", "bottom",
+             "1.7em", "4px", "32%",
+             "inherit", "initial", "revert", "unset",
+             "unset", "unset", "unset"})
     public void verticalAlign() throws Exception {
         checkPropertyValues("vertical-align",
                 "baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom",
@@ -445,8 +441,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"function values() { [native code] }", "no for..of", "display"},
-            IE = "no for..of")
+    @Alerts({"function values() { [native code] }", "no for..of", "display"})
     public void iterator() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
                 + "</head>\n"

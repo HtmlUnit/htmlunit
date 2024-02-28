@@ -61,8 +61,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@page { margin: 1cm; }",
-            FF = "@page  { margin: 1cm; }",
-            IE = "@page  {\n\tmargin: 1cm;\n}")
+            FF = "@page  { margin: 1cm; }")
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -90,8 +89,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@page { }",
-            FF = "@page  { }",
-            IE = "@page  {\n\t\n}")
+            FF = "@page  { }")
     public void cssTextEmpty() throws Exception {
         final String html
             = "<html><body>\n"
@@ -119,8 +117,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@page { margin-left: 4cm; margin-right: 3cm; }",
-            FF = "@page  { margin-left: 4cm; margin-right: 3cm; }",
-            IE = "@page  {\n\tmargin-right: 3cm; margin-left: 4cm;\n}")
+            FF = "@page  { margin-left: 4cm; margin-right: 3cm; }")
     public void cssTextMultipleRules() throws Exception {
         final String html
             = "<html><body>\n"
@@ -148,8 +145,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@page { margin: 1cm; }",
-            FF = "@page  { margin: 1cm; }",
-            IE = "@page  {\n\tmargin: 1cm;\n}")
+            FF = "@page  { margin: 1cm; }")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -321,7 +317,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ":first",
-            IE = "",
             FF_ESR = "exception")
     @HtmlUnitNYI(FF_ESR = ":first")
     public void selectorText() throws Exception {
@@ -353,7 +348,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ":first",
-            IE = "",
             FF_ESR = "exception")
     @HtmlUnitNYI(FF_ESR = ":first")
     public void selectorTextCaseInsensitive() throws Exception {
@@ -385,7 +379,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {":first", ":left"},
-            IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(FF_ESR = {":first", ":left"})
     public void selectorTextSet() throws Exception {
@@ -419,7 +412,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {":first", "null"},
-            IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(FF_ESR = {":first", "null"})
     public void selectorTextSetNull() throws Exception {
@@ -453,7 +445,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {":first", ""},
-            IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(FF_ESR = {":first", ""})
     public void selectorTextSetEmpty() throws Exception {
@@ -487,7 +478,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {":first", ":first"},
-            IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(FF_ESR = {":first", ":first"})
     public void selectorTextSetInvalid() throws Exception {
@@ -521,7 +511,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {":first", ":left"},
-            IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(FF_ESR = {":first", ":left"})
     public void selectorTextSetCaseInsensitive() throws Exception {

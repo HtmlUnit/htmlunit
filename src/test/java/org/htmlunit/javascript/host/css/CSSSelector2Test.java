@@ -61,8 +61,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
             + "</head>\n";
 
     @Test
-    @Alerts(DEFAULT = "[object HTMLInputElement]",
-            IE = "SyntaxError")
+    @Alerts("[object HTMLInputElement]")
     public void placeholderShown() throws Exception {
         final String html = PLACEHOLDER_SHOWN_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -74,8 +73,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "[object HTMLInputElement]",
-            IE = "SyntaxError")
+    @Alerts("[object HTMLInputElement]")
     public void placeholderShown_number() throws Exception {
         final String html = PLACEHOLDER_SHOWN_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -87,8 +85,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "[object HTMLInputElement]",
-            IE = "SyntaxError")
+    @Alerts("[object HTMLInputElement]")
     public void placeholderShown_displayNone() throws Exception {
         final String html = PLACEHOLDER_SHOWN_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -99,8 +96,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "SyntaxError")
+    @Alerts("null")
     public void placeholderShown_hasValue() throws Exception {
         final String html = PLACEHOLDER_SHOWN_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -111,8 +107,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "SyntaxError")
+    @Alerts("null")
     public void placeholderShown_noInput() throws Exception {
         final String html = PLACEHOLDER_SHOWN_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -123,8 +118,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "SyntaxError",
-            IE = "[object HTMLInputElement]")
+    @Alerts("SyntaxError")
     public void msPlaceholder() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -136,8 +130,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "SyntaxError",
-            IE = "[object HTMLInputElement]")
+    @Alerts("SyntaxError")
     public void msPlaceholder_number() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -149,8 +142,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "SyntaxError",
-            IE = "[object HTMLInputElement]")
+    @Alerts("SyntaxError")
     public void msPlaceholder_displayNone() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -161,8 +153,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "SyntaxError",
-            IE = "null")
+    @Alerts("SyntaxError")
     public void msPlaceholder_hasValue() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -173,8 +164,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "SyntaxError",
-            IE = "null")
+    @Alerts("SyntaxError")
     public void msPlaceholder_noInput() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"

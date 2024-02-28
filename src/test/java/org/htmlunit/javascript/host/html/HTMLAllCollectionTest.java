@@ -452,8 +452,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void functionIndex_Unknown() throws Exception {
         functionIndex("'foo'");
     }

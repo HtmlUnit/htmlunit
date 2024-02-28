@@ -179,4 +179,12 @@ public class HTMLAllCollection extends HTMLCollection {
         }
         return value;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean supportsParentheses() {
+        return true;
+    }
 }

@@ -33,10 +33,8 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object CSSFontFaceRule]", "5",
-                       "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"},
-            IE = {"[object CSSFontFaceRule]", "5",
-                  "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(Delicious-Bold.otf);\n}\n"})
+    @Alerts({"[object CSSFontFaceRule]", "5",
+             "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"})
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"
@@ -64,8 +62,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@font-face { font-family: Delicious; src: url(\"//:\"); }",
-            IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(//:);\n}\n")
+    @Alerts("@font-face { font-family: Delicious; src: url(\"//:\"); }")
     public void urlSlashSlashColon() throws Exception {
         final String html
             = "<html><body>\n"
@@ -91,8 +88,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@font-face { font-family: Delicious; src: url(\"/:\"); }",
-            IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(/:);\n}\n")
+    @Alerts("@font-face { font-family: Delicious; src: url(\"/:\"); }")
     public void urlSlashColon() throws Exception {
         final String html
             = "<html><body>\n"
@@ -118,8 +114,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@font-face { font-family: Delicious; src: url(\"//\"); }",
-            IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(//);\n}\n")
+    @Alerts("@font-face { font-family: Delicious; src: url(\"//\"); }")
     public void urlSlashSlash() throws Exception {
         final String html
             = "<html><body>\n"

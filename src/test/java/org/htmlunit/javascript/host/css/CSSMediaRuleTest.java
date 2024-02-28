@@ -60,8 +60,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
-            IE = "@media screen {\n\tp { background-color: rgb(255, 255, 255); }\n}")
+    @Alerts("@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}")
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -115,8 +114,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@media screen {\n  p { }\n  div { }\n}",
-            IE = "@media screen {\n\tp {  }\n\tdiv {  }\n}")
+    @Alerts("@media screen {\n  p { }\n  div { }\n}")
     public void cssTextMultipleRules() throws Exception {
         final String html
             = "<html><body>\n"
@@ -143,9 +141,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@media print {\n  #navigation { display: none; }"
-                        + "\n  @media (max-width: 12cm) {\n  .note { float: none; }\n}\n}",
-            IE = "@media print {\n\t#navigation { display: none; }\n}")
+    @Alerts("@media print {\n  #navigation { display: none; }"
+            + "\n  @media (max-width: 12cm) {\n  .note { float: none; }\n}\n}")
     @HtmlUnitNYI(CHROME = "@media print {\n  *#navigation { display: none; }"
                     + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}",
             EDGE = "@media print {\n  *#navigation { display: none; }"
@@ -181,8 +178,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
-            IE = "exception")
+    @Alerts("@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -239,9 +235,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object CSSMediaRule]", "[object CSSMediaRule]"},
-            IE = "undefined")
-    // [CSSPARSER] IE does not support nested media rules at all -> inner one is ignored
+    @Alerts({"[object CSSMediaRule]", "[object CSSMediaRule]"})
     public void parentRuleNested() throws Exception {
         final String html
             = "<html><body>\n"
@@ -354,8 +348,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object MediaList]", "all", "1", "all", "all", "all"},
-            IE = {"[object MediaList]", "all", "1", "all", "all", "undefined"})
+    @Alerts({"[object MediaList]", "all", "1", "all", "all", "all"})
     public void mediaAll() throws Exception {
         final String html
             = "<html><body>\n"
@@ -388,8 +381,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object MediaList]", "screen", "1", "screen", "screen", "screen"},
-            IE = {"[object MediaList]", "screen", "1", "screen", "screen", "undefined"})
+    @Alerts({"[object MediaList]", "screen", "1", "screen", "screen", "screen"})
     public void media() throws Exception {
         final String html
             = "<html><body>\n"
@@ -422,11 +414,9 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
-                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
-                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)"},
-            IE = {"2", "only screen and (color)", "print and (max-width:12cm) and (min-width:30em)",
-                  "only screen and (color), print and (max-width:12cm) and (min-width:30em)", "undefined"})
+    @Alerts({"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
+             "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
+             "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
@@ -526,9 +516,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
-                       "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            IE = {"1", "exception"})
+    @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
+             "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void insertRule() throws Exception {
         final String html
             = "<html><body>\n"
@@ -721,8 +710,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "exception"},
-            IE = {"1", "-1", "1", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @Alerts({"1", "exception"})
     public void insertRuleEmptyWithIndex() throws Exception {
         final String html
             = "<html><body>\n"

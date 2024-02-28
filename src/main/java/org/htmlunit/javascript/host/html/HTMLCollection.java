@@ -138,7 +138,27 @@ public class HTMLCollection extends AbstractList implements Callable {
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        if (supportsParentheses()) {
+            if (args.length == 0) {
+                throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
+            }
+            final Object object = getIt(args[0]);
+            if (object == NOT_FOUND) {
+                return null;
+            }
+            return object;
+        }
+
         throw JavaScriptEngine.typeError("HTMLCollection does nont support function like access");
+    }
+
+    /**
+     * Is parentheses supported.
+     *
+     * @return true or false
+     */
+    protected boolean supportsParentheses() {
+        return false;
     }
 
     /**

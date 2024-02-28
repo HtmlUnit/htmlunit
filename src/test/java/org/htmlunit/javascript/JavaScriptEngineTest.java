@@ -1300,8 +1300,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void nonStandardBrowserVersion() throws Exception {
-        final BrowserVersion browser = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.INTERNET_EXPLORER)
-                .setApplicationName("Mozilla")
+        final BrowserVersion browser = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.CHROME)
+                .setApplicationName("Explorer")
                 .setApplicationVersion("5.0")
                 .build();
 
