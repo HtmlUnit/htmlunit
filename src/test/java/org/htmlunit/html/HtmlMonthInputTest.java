@@ -20,7 +20,6 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -271,7 +270,6 @@ public class HtmlMonthInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
             IE = {"true", "false", "true", "true", "true"})
-    @HtmlUnitNYI(IE = {"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"

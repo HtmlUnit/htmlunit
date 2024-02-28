@@ -142,7 +142,6 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"},
             IE = {"1", "2", "4", "5", "6", "8", "9", "A", "D", "E", "G"})
-    @HtmlUnitNYI(IE = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"})
     public void typeValues() throws Exception {
         final String html = "<html>"
             + "<head>\n"
@@ -310,9 +309,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             FF = {"dcl listener added", "head-end", "end",
                   "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             FF_ESR = {"dcl listener added", "head-end", "end",
-                      "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
-            IE = {"dcl listener added", "head-end", "end",
-                  "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})
+                      "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})
     public void deferDynamicExternal() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -352,7 +349,6 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"end", "s0 6", "5", "deferred-1", "deferred-2", "deferred-3", "onload"},
             IE = {"end", "s0 6", "5", "deferred-1", "deferred-2", "onload"})
-    @HtmlUnitNYI(IE = {"end", "s0 6", "5", "deferred-1", "deferred-2", "deferred-3", "onload"})
     public void deferRemovesScript() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

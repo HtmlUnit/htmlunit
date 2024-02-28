@@ -21,7 +21,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -945,7 +944,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "1", " ", "0", "1", "undefined", "1", "[object Object]"},
             IE = {"0", "1", "\u00A0", "1", "1", "undefined", "1", "[object Object]"})
-    @HtmlUnitNYI(IE = {"0", "1", " ", "1", "1", "undefined", "1", "[object Object]"})
     public void innerText_Empty() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

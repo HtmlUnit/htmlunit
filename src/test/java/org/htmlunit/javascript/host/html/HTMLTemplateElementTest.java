@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -248,10 +247,6 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
                   "<template><div></div></template>", "<template id=\"tEmpty\"></template>",
                   "<template id=\"tText\">HtmlUnit</template>",
                   "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
-    @HtmlUnitNYI(IE = {"<template></template>", "<template><div></div></template>",
-                       "<template id=\"tEmpty\"></template>",
-                       "<template id=\"tText\">HtmlUnit</template>",
-                       "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
     public void outerHTML() throws Exception {
         final String html =
             "<html>\n"

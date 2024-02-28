@@ -671,8 +671,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"error2;error3;load4;load5;", "3"},
             EDGE = {"error2;error3;load4;load5;", "3"},
             FF = {"error2;load3;load4;load5;", "4"},
-            FF_ESR = {"error2;load3;load4;load5;", "4"},
-            IE = {"error2;error3;load4;load5;", "3"})
+            FF_ESR = {"error2;load3;load4;load5;", "4"})
     public void onload() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

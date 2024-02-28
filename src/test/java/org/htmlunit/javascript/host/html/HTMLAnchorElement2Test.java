@@ -785,7 +785,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "0,0"},
             IE = {"", "0,0", "0,0"})
-    @HtmlUnitNYI(IE = {"", "0,0"})
     public void coords() throws Exception {
         attribute("coords", "0,0");
     }
@@ -1595,9 +1594,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
                            "%20%20%20%20", "http:// :§§URL§§/foo.html#O"},
                 EDGE = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
-                        "%20%20%20%20", "http:// :§§URL§§/foo.html#O"},
-                IE = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
-                      "%20%20%20%20", "http:// :§§URL§§/foo.html#O"})
+                        "%20%20%20%20", "http:// :§§URL§§/foo.html#O"})
     public void readWriteAnchorHostnameEmpty() throws Exception {
         final String html =
               "<html>\n"

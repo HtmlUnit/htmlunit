@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,7 +38,6 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
                        "undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"left", "right", "bottom", "middle",
                   "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
-    @HtmlUnitNYI(IE = {"left", "right", "", "", "", "", "", "", "", "", ""})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"

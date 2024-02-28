@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -38,7 +37,6 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"50----", "50----", "50----"})
-    @HtmlUnitNYI(IE = {"50----", "----", "50----"})
     public void defaultValues() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -77,7 +75,6 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"50----", "50----", "50----"})
-    @HtmlUnitNYI(IE = {"50----", "----", "50----"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -449,7 +446,6 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
             IE = {"true", "false", "true", "true", "true"})
-    @HtmlUnitNYI(IE = {"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"

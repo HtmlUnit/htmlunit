@@ -664,7 +664,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
-    @HtmlUnitNYI(IE = {"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
     public void lastModified() throws Exception {
         final List<NameValuePair> responseHeaders = new ArrayList<>();
         responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
@@ -682,7 +681,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
-    @HtmlUnitNYI(IE = {"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
     public void lastModifiedAndDate() throws Exception {
         final List<NameValuePair> responseHeaders = new ArrayList<>();
         responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
@@ -804,7 +802,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = {"1", "[object HTMLBodyElement]"},
             FF_ESR = {"1", "[object HTMLBodyElement]"},
             IE = {"0", "[object HTMLBodyElement]"})
-    @HtmlUnitNYI(IE = {"0", "exception"})
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
     }
@@ -819,7 +816,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = {"1", "[object Text]"},
             FF_ESR = {"1", "[object Text]"},
             IE = {"1", "[object Text]"})
-    @HtmlUnitNYI(IE = {"0", "exception"})
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
     }
@@ -2335,7 +2331,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "BackCompat", "function", "function"},
             IE = {"8", "CSS1Compat", "object", "object"})
-    @HtmlUnitNYI(IE = {"8", "CSS1Compat", "function", "function"})
     public void documentMode_metaIE8() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }
@@ -2346,7 +2341,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "CSS1Compat", "function", "function"},
             IE = {"8", "CSS1Compat", "object", "object"})
-    @HtmlUnitNYI(IE = {"8", "CSS1Compat", "function", "function"})
     public void documentMode_metaIE8_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_, "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }

@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -1111,7 +1110,6 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "false", "true", "false", "false"},
             IE = {"1", "true", "true", "true", "true"})
-    @HtmlUnitNYI(IE = {"1", "false", "true", "true", "true"})
     public void in() throws Exception {
         final String html
             = "<html><head><script>\n"

@@ -497,7 +497,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""},
             IE = {"[object Window]", "[object HTMLIFrameElement]", "undefined", ""})
-    @HtmlUnitNYI(IE = {"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""})
     public void idByName() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -896,7 +895,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"loaded", "[object HTMLDocument]", "2"},
             IE = {"loaded", "[object HTMLDocument]", "1"})
-    @HtmlUnitNYI(IE = {"loaded", "[object HTMLDocument]", "2"})
     public void recursive() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -981,8 +979,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"loaded", "21"},
             EDGE = {"loaded", "21"},
             FF = {"loaded", "21"},
-            FF_ESR = {"loaded", "21"},
-            IE = {"loaded", "21"})
+            FF_ESR = {"loaded", "21"})
     public void recursiveContentRedirectHeader() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

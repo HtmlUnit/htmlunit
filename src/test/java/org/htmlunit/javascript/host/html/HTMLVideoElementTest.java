@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -182,7 +181,6 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string", ""},
             IE = {"string", "§§URL§§flower.mp4"})
-    @HtmlUnitNYI(IE = {"string", ""})
     public void currentSrc() throws Exception {
         final String html
             = "<html><body>\n"

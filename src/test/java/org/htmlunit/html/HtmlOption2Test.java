@@ -54,9 +54,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"option1", "", "Number Three", "Number 4",
                            "option1\nNumber Three\nNumber 4"},
             EDGE = {"option1", "", "Number Three", "Number 4",
-                    "option1\nNumber Three\nNumber 4"},
-            IE = {"option1", "", "Number Three", "Number 4",
-                  "option1\nNumber Three\nNumber 4"})
+                    "option1\nNumber Three\nNumber 4"})
     public void getVisibleText() throws Exception {
         final String htmlContent
             = "<html>\n"

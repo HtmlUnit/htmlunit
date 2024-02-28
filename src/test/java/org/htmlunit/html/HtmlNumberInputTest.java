@@ -262,8 +262,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
             EDGE = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
             FF = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
-            FF_ESR = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
-            IE = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"})
+            FF_ESR = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"})
     public void typeIntegerNegativeValid() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -313,8 +312,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"-", "--null-false", "-12", "-12--null-false"},
             EDGE = {"-", "--null-false", "-12", "-12--null-false"},
             FF = {"-", "--null-false", "-12", "-12--null-false"},
-            FF_ESR = {"-", "--null-false", "-12", "-12--null-false"},
-            IE = {"-", "--null-false", "-12", "-12--null-false"})
+            FF_ESR = {"-", "--null-false", "-12", "-12--null-false"})
     public void typeIntegerNegativeInvalid() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -635,9 +633,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                                + "-99999999999999999999999999999-true"},
             IE = {"8-8-8-true", "---true", "---true",
                   "99999999999999999999999999999-99999999999999999999999999999-99999999999999999999999999999-true"})
-    @HtmlUnitNYI(IE = {"8-8-8-true", "-abc-abc-true", "---true",
-                       "99999999999999999999999999999-99999999999999999999999999999"
-                               + "-99999999999999999999999999999-true"})
     public void defaultValuesInvalidValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -686,9 +681,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                        "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
                        "-\\s3\\s9\\s-\\s3\\s9\\s-true"},
             IE = {"8-8-8-true", "---true", "---true", "\\s3\\s9\\s-\\s3\\s9\\s-\\s3\\s9\\s-true"})
-    @HtmlUnitNYI(IE = {"8-8-8-true", "-\\s\\s-\\s\\s-true",
-                       "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
-                       "-\\s3\\s9\\s-\\s3\\s9\\s-true"})
     public void defaultValuesBlankValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -983,7 +975,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"123-123-123-true", "2-2-2-false", "20000-2-2-false", "20000-9-9-false"},
             IE = {"123-123-123-true", "2-2-2-true", "20000-2-2-false", "20000-9-9-false"})
-    @HtmlUnitNYI(IE = {"123-123-123-true", "2-2-2-false", "20000-2-2-false", "20000-9-9-false"})
     public void valueOutside() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1137,8 +1128,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF_ESR = {"--null-true", "4", "4--null-true", "", "--null-false"},
             IE = {"--null-true", "4", "4--null-true", "4a", "4a--null-true"})
     @HtmlUnitNYI(FF = {"--null-true", "4", "4--null-true", "4a", "--null-false"},
-            FF_ESR = {"--null-true", "4", "4--null-true", "4a", "--null-false"},
-            IE = {"--null-true", "4", "4--null-true", "4a", "--null-false"})
+            FF_ESR = {"--null-true", "4", "4--null-true", "4a", "--null-false"})
     public void typeInvalidChars() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1183,8 +1173,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
             IE = {"012", "012-0-0-true", "", "-0-0-true", "", "-0-0-true"})
     @HtmlUnitNYI(FF = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
-            FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
-            IE = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"})
+            FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"})
     public void typeCharsAndClear() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1233,7 +1222,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-0-0-true",
             FF = "-0-0-false",
             FF_ESR = "-0-0-false")
-    @HtmlUnitNYI(IE = "-0-0-false")
     public void issue321() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1270,7 +1258,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"13-13-13-true", "15-15-15-false", "17-15-15-false", "17-19-19-false"},
             IE = {"13-13-13-true", "15-15-15-true", "17-15-15-false", "17-19-19-false"})
-    @HtmlUnitNYI(IE = {"13-13-13-true", "15-15-15-false", "17-15-15-false", "17-19-19-false"})
     public void valueNotReachableByStep() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1316,7 +1303,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1.3-1.3-1.3-true", "1.5-1.5-1.5-false", "1.7-1.5-1.5-false", "1.7-1.9-1.9-false"},
             IE = {"1.3-1.3-1.3-true", "1.5-1.5-1.5-true", "1.7-1.5-1.5-false", "1.7-1.9-1.9-false"})
-    @HtmlUnitNYI(IE = {"1.3-1.3-1.3-true", "1.5-1.5-1.5-false", "1.7-1.5-1.5-false", "1.7-1.9-1.9-false"})
     public void valueNotReachableByStepDouble() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1787,12 +1773,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=+210+", "1"})
-    @HtmlUnitNYI(IE = {"",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"})
-    // real ie clicks the wrong button
     public void patternValidationTrimInitial() throws Exception {
         validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k' value=' 210 '>\n", "", null);
     }
@@ -1830,13 +1810,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                            "false",
                            "false-false-false-false-false-false-false-false-false-true-false",
                            "true",
-                           "§§URL§§", "1"},
-                 IE = {" 210 ",
-                       "false",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§", "1"})
-    // real ie clicks the wrong button
+                           "§§URL§§", "1"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k'>\n", "", " 210 ");
     }
@@ -1950,12 +1924,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=12345", "2"})
-    @HtmlUnitNYI(IE = {"123456789",
-                       "true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true",
-                       "§§URL§§?k=123456789", "2"})
-    // real ie clicks the wrong button
     public void maxLengthValidationInvalid() throws Exception {
         validation("<input type='number' maxlength='5' id='e1' name='k'>\n", "", "123456789");
     }

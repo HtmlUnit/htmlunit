@@ -1881,8 +1881,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"Old = Old\ninnerText", "New = New cell value"},
             EDGE =  {"Old = Old\ninnerText", "New = New cell value"},
             FF = {"Old = Old\ninnerText", "New = New cell value"},
-            FF_ESR = {"Old = Old\ninnerText", "New = New cell value"},
-            IE  = {"Old = Old\ninnerText", "New = New cell value"})
+            FF_ESR = {"Old = Old\ninnerText", "New = New cell value"})
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

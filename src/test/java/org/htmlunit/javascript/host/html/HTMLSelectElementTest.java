@@ -22,7 +22,6 @@ import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -2563,7 +2562,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "false", "true", "false", "false"},
             IE = {"1", "true", "true", "true", "true"})
-    @HtmlUnitNYI(IE = {"1", "false", "true", "true", "true"})
     public void in() throws Exception {
         final String html =
             "<html>\n"

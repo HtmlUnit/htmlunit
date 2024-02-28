@@ -372,8 +372,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"0", "0"},
             EDGE = {"0", "0"},
             FF = {"0", "0"},
-            FF_ESR = {"0", "0"},
-            IE = {"0", "0"})
+            FF_ESR = {"0", "0"})
     public void top() throws Exception {
         final String html =
             "<html>\n"

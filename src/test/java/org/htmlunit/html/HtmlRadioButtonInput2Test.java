@@ -19,7 +19,6 @@ import java.util.Arrays;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1217,7 +1216,6 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
             IE = {"true", "false", "true", "true", "true"})
-    @HtmlUnitNYI(IE = {"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"
@@ -1312,9 +1310,6 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             IE = {"false",
                   "undefined-false-false-false-false-false-false-undefined-false-false-true",
                   "true"})
-    @HtmlUnitNYI(IE = {"true",
-                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                       "true"})
     public void validationRequired() throws Exception {
         validation("<input type='radio' id='e1' required>\n", "");
     }
