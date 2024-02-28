@@ -113,8 +113,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "false")
+    @Alerts("undefined")
     public void readOnly() throws Exception {
         final String html = "<html><head>\n"
                 + "<style>\n"

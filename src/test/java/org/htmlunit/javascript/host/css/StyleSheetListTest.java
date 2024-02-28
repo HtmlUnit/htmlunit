@@ -248,8 +248,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1"},
-            IE = {"1", "2"})
+    @Alerts({"1", "1"})
     @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
     public void dynamicAddedStyleSheet() throws Exception {
         final String html =

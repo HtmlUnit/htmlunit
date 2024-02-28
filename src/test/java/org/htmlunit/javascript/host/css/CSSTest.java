@@ -33,8 +33,7 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object CSS]", "undefined"},
-            IE = "Exception")
+    @Alerts({"[object CSS]", "undefined"})
     public void global() throws Exception {
         final String html
             = "<html><body>\n"
@@ -76,8 +75,7 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true"},
-            IE = "Exception")
+    @Alerts({"true", "true", "true"})
     public void supports() throws Exception {
         final String html
             = "<html><body>\n"
@@ -98,8 +96,7 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true"},
-            IE = "Exception")
+    @Alerts({"true", "true"})
     public void supportsCondition() throws Exception {
         final String html
             = "<html><body>\n"
@@ -119,8 +116,7 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false"},
-            IE = "Exception")
+    @Alerts({"true", "false"})
     @HtmlUnitNYI(CHROME = {"true", "true"},
             EDGE = {"true", "true"},
             FF = {"true", "true"},

@@ -15,7 +15,6 @@
 package org.htmlunit;
 
 import static java.util.Arrays.asList;
-import static org.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
@@ -1789,9 +1788,9 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void urlEncoding2() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(INTERNET_EXPLORER, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.BEST_SUPPORTED, "<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
-        assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20\u00E9%20d", wrs.getUrl());
+        assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%C3%A9%20d", wrs.getUrl());
     }
 
     /**
