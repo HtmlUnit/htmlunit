@@ -50,7 +50,7 @@ public class HtmlUnitUsernamePasswordCredentials implements Credentials, Seriali
      * @param password the password
      */
     public HtmlUnitUsernamePasswordCredentials(final String userName, final char[] password) {
-        httpClientUsernamePasswordCredentials_ = new UsernamePasswordCredentials(userName, String.valueOf(password));
+        httpClientUsernamePasswordCredentials_ = new UsernamePasswordCredentials(userName, password != null ? String.valueOf(password) : null);
     }
 
     @Override
