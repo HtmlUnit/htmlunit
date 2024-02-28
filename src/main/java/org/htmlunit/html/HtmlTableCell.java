@@ -16,6 +16,7 @@ package org.htmlunit.html;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 
 /**
@@ -48,7 +49,7 @@ public abstract class HtmlTableCell extends HtmlElement {
      * @return the value of the colspan attribute, or <code>1</code> if the attribute wasn't specified
      */
     public int getColumnSpan() {
-        final String spanString = getAttributeDirect("colspan");
+        final String spanString = StringUtils.replaceChars(getAttributeDirect("colspan"), "\r\n", null);
         if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
@@ -65,7 +66,7 @@ public abstract class HtmlTableCell extends HtmlElement {
      * @return the value of the rowspan attribute, or <code>1</code> if the attribute wasn't specified
      */
     public int getRowSpan() {
-        final String spanString = getAttributeDirect("rowspan");
+        final String spanString = StringUtils.replaceChars(getAttributeDirect("rowspan"), "\r\n", null);
         if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
