@@ -106,7 +106,6 @@ public class NoHttpResponseTest {
         @Test
         @Alerts(DEFAULT = "right submit",
                 IE = "Can’t reach this page")
-        @HtmlUnitNYI(IE = "right submit")
         public void callSubmitInButtonAndReturnTrue() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(URL_FIRST, html);

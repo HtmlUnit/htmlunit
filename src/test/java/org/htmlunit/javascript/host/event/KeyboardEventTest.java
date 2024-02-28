@@ -464,10 +464,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                            "keyup, false, false, , 7, false, false, false, false, 0, 0"},
                  EDGE = {"exception",
                          "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
-                         "keyup, false, false, , 7, false, false, false, false, 0, 0"},
-                 IE = {"exception",
-                       "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
-                       "keyup, false, false, , 7, false, false, false, false, 0, 0"})
+                         "keyup, false, false, , 7, false, false, false, false, 0, 0"})
     public void initKeyboardEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

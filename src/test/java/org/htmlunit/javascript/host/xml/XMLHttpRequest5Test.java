@@ -42,7 +42,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"multipart/form-data; boundary=----formdata123456", "Html\r\nUnit\r\n"},
             IE = {"null", "Html\r\nUnit\r\n"})
-    @HtmlUnitNYI(IE = {"application/x-www-form-urlencoded", "null"})
     public void sendBlob() throws Exception {
         sendBlobWithMimeTypeAndAssertContentType(getExpectedAlerts()[0],
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
@@ -50,7 +49,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
 
     @Test
     @Alerts({"null", "Html\r\nUnit\r\n"})
-    @HtmlUnitNYI(IE = {"application/x-www-form-urlencoded", "null"})
     public void sendBlob_emptyMimeType() throws Exception {
         sendBlobWithMimeTypeAndAssertContentType(getExpectedAlerts()[0],
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
@@ -59,7 +57,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"doesnt/exist", "Html\r\nUnit\r\n"},
             IE = {"null", "Html\r\nUnit\r\n"})
-    @HtmlUnitNYI(IE = {"application/x-www-form-urlencoded", "null"})
     public void sendBlob_badMimeType() throws Exception {
         sendBlobWithMimeTypeAndAssertContentType(getExpectedAlerts()[0],
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
@@ -111,7 +108,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
 
     @Test
     @Alerts({"text/plain", "HtmlUnit"})
-    @HtmlUnitNYI(IE = {"application/x-www-form-urlencoded", "null"})
     public void sendBlob307() throws Exception {
         final URL redirectUrl = new URL(URL_FIRST, "/redirect.html");
         final URL responseUrl = new URL(URL_FIRST, "/response.html");
@@ -160,7 +156,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"application/xml;charset=UTF-8", "null"},
             IE = {"application/xml; charset=utf-8", "\u00EF\u00BB\u00BF"})
-    @HtmlUnitNYI(IE = {"application/xml;charset=UTF-8", "null"})
     public void sendXMLDocumentEmpty() throws Exception {
         final String createXmlDoc =
                 "    var doc = document.implementation.createDocument('', '', null);\n";
@@ -170,7 +165,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"application/xml;charset=UTF-8", "<root/>"},
             IE = {"application/xml; charset=utf-8", "\u00EF\u00BB\u00BF<root />"})
-    @HtmlUnitNYI(IE = {"application/xml;charset=UTF-8", "<root/>"})
     public void sendXMLDocumentRoot() throws Exception {
         final String createXmlDoc =
                 "    var doc = document.implementation.createDocument('', '', null);\n"
@@ -191,9 +185,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
             FF = {"application/xml;charset=UTF-8",
                   "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
             FF_ESR = {"application/xml;charset=UTF-8",
-                      "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
-            IE = {"application/xml;charset=UTF-8",
-                  "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"})
+                      "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"})
     public void sendXMLDocumentRootNamespace() throws Exception {
         final String createXmlDoc =
                 "    var doc = document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);\n"
@@ -317,21 +309,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "</body></html>"},
                  FF_ESR = {"text/html;charset=UTF-8",
                            "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
-                           + "  function test() {\n"
-                           + "    try {\n"
-                           + "    var doc = document;\n"
-                           + "      var xhr = new XMLHttpRequest();\n"
-                           + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
-                           + "      xhr.send(doc);\n"
-                           + "  } catch (exception) { \n"
-                           + "    alert(exception);\n"
-                           + "  }\n"
-                           + "}\n"
-                           + "</script></head>"
-                           + "<body onload=\"test()\">\n"
-                           + "</body></html>"},
-                 IE = {"text/html;charset=UTF-8",
-                       "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"
                            + "    var doc = document;\n"

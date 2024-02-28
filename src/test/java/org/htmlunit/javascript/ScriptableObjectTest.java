@@ -257,8 +257,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void ctorChangeableHasNoEffectForSealedStrict() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"

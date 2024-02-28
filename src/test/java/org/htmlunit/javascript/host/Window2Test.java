@@ -1452,7 +1452,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
-    @HtmlUnitNYI(IE = "false")
     public void getComputedStyleCached() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'></div>\n"
@@ -2415,8 +2414,7 @@ public class Window2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object Window]", "[object EventTarget]", "[object Object]"},
             EDGE = {"[object Window]", "[object EventTarget]", "[object Object]"},
             FF = {"[object Window]", "[object EventTarget]", "[object Object]"},
-            FF_ESR = {"[object Window]", "[object EventTarget]", "[object Object]"},
-            IE = {"[object Window]", "[object EventTarget]", "[object Object]"})
+            FF_ESR = {"[object Window]", "[object EventTarget]", "[object Object]"})
     public void test__proto__() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2621,9 +2619,7 @@ public class Window2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
                            "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
             EDGE = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
-                    "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
-            IE = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
-                  "[object Event]", "{\"enumerable\":true,\"configurable\":true}"})
+                    "[object Event]", "{\"enumerable\":true,\"configurable\":true}"})
     public void eventProperty() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -2649,7 +2645,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "{\"value\":7,\"writable\":true,\"enumerable\":true,\"configurable\":true}",
             IE = "undefined")
-    @HtmlUnitNYI(IE = "{\"value\":7,\"writable\":true,\"enumerable\":true,\"configurable\":true}")
     public void eventPropertyReplaced() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

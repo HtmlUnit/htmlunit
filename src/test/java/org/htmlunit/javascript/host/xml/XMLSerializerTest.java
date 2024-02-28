@@ -121,9 +121,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "1032323232<body>1032323232</body>103232</html>103232</xsl:template>10</xsl:stylesheet>",
             FF = "<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232<xsl:template32match=\"/\">103232<html>"
-                    + "1032323232<body>1032323232</body>103232</html>103232</xsl:template>10</xsl:stylesheet>",
-            IE = "<xsl:stylesheet32version=\"1.0\"32"
-                    + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232<xsl:template32match=\"/\">103232<html>"
                     + "1032323232<body>1032323232</body>103232</html>103232</xsl:template>10</xsl:stylesheet>")
     public void nameSpaces() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
@@ -218,13 +215,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<body32id=\"bodyId\">"
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
-                    + "</html>",
-
-            IE = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
-                    + "<head><title>html</title></head>"
-                    + "<body32id=\"bodyId\">"
-                    + "<span32class=\"spanClass\">foo</span>"
-                    + "</body>"
                     + "</html>")
     public void htmlAttributes() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
@@ -291,9 +281,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             FF = {"<html><body id=\"bodyId\"></body></html>",
                   "<html><body id=\"bodyId\"></body></html>"},
             FF_ESR = {"<html><body id=\"bodyId\"></body></html>",
-                      "<html><body id=\"bodyId\"></body></html>"},
-            IE = {"<html><body id=\"bodyId\"></body></html>",
-                  "<html><body id=\"bodyId\"></body></html>"})
+                      "<html><body id=\"bodyId\"></body></html>"})
     public void xhtmlDocument() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -327,9 +315,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             FF = {"<html><body id=\"bodyId\"></body></html>",
                   "<html><body id=\"bodyId\"></body></html>"},
             FF_ESR = {"<html><body id=\"bodyId\"></body></html>",
-                      "<html><body id=\"bodyId\"></body></html>"},
-            IE = {"<html><body id=\"bodyId\"></body></html>",
-                  "<html><body id=\"bodyId\"></body></html>"})
+                      "<html><body id=\"bodyId\"></body></html>"})
     public void xhtmlDocumentBodyEmptyNamespace() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -364,9 +350,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             FF = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
                   "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"},
             FF_ESR = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
-                      "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"},
-            IE = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
-                  "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"})
+                      "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"})
     public void soapTest() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -520,7 +504,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
             IE = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
-    @HtmlUnitNYI(IE = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -613,11 +596,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
                   "<p xmlns=\"http://www.w3.org/1999/xhtml\" />",
                   "<li xmlns=\"http://www.w3.org/1999/xhtml\" />",
                   "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />"})
-    @HtmlUnitNYI(IE = {"<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
-                       "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
-                       "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
-                       "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
-                       "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"})
     public void otherTags() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

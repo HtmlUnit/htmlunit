@@ -156,8 +156,6 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
                   "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
             FF_ESR = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
                       "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
-            IE = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                  "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
             EDGE = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
                     "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"})
     public void regExResultProperties() throws Exception {

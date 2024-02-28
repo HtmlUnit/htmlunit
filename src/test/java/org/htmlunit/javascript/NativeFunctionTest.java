@@ -17,7 +17,6 @@ package org.htmlunit.javascript;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -529,7 +528,6 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"configurable: true", "enumerable: false", "writable: false"},
             IE = "no values")
-    @HtmlUnitNYI(IE = {"configurable: true", "enumerable: false", "writable: false"})
     public void functionLength() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -476,8 +476,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF_ESR = "1",
-            IE = "1")
+            FF_ESR = "1")
     public void onloadJavascriptFunction() throws Exception {
         final String html
             = "<html><head>\n"
@@ -917,9 +916,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                     "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
             FF = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
             FF_ESR = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8",
-                      "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
-            IE = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8",
-                  "f10", "f11", "f12", "f10", "f11", "f12", "f13"})
+                      "f10", "f11", "f12", "f10", "f11", "f12", "f13"})
     public void functioNamesExceptionsStrict() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -1113,7 +1110,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "2"},
             IE = {})
-    @HtmlUnitNYI(IE = {"1", "2"})
     public void constInOfLoop() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

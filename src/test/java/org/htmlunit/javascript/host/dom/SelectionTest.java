@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.dom;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -196,9 +195,6 @@ public class SelectionTest extends WebDriverTestCase {
             IE = {"1:null/0/null/0/true/undefined/0/",
                   "2:[object Text]/0/[object Text]/0/true/undefined/1/[",
                   "3:s2/1/s3/1/false/undefined/1/foo[foo"})
-    @HtmlUnitNYI(IE = {"1:null/0/null/0/true/undefined/0/",
-                       "2:null/0/null/0/true/undefined/0/",
-                       "3:s2/1/s3/1/false/undefined/1/foo[foo"})
     public void addRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -436,7 +432,6 @@ public class SelectionTest extends WebDriverTestCase {
             FF = {"", "null-0", "", "null-0", "null", "null"},
             FF_ESR = {"", "null-0", "", "null-0", "null", "null"},
             IE = {"", "[object Text]-1", "", "null-0", "", "null-0", "", "null-0"})
-    @HtmlUnitNYI(IE = {"", "null-0", "", "null-0", "", "null-0", "", "null-0"})
     public void getSelection_display() throws Exception {
         final String html = "<html>\n"
             + "<body onload='test()'>\n"

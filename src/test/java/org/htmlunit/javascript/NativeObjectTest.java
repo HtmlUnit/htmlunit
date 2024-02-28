@@ -395,7 +395,6 @@ public class NativeObjectTest extends WebDriverTestCase {
             EDGE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             FF = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             FF_ESR = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
-    @HtmlUnitNYI(IE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
     public void getOwnPropertyDescriptor() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -443,10 +442,7 @@ public class NativeObjectTest extends WebDriverTestCase {
                            "x.get.call = function call() { [native code] }"},
             EDGE = {"[object HTMLInputElement]", "x = [object Object]",
                     "x.get = function value() { [native code] }",
-                    "x.get.call = function call() { [native code] }"},
-            IE = {"[object HTMLInputElement]", "x = [object Object]",
-                  "x.get = \nfunction value() {\n    [native code]\n}\n",
-                  "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
+                    "x.get.call = function call() { [native code] }"})
     public void getOwnPropertyDescriptorGetCall() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TEXTAREA_FUNCTION

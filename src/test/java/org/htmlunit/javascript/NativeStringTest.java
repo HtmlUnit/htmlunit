@@ -17,7 +17,6 @@ package org.htmlunit.javascript;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -316,7 +315,6 @@ public class NativeStringTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\u0069\u0307", "\u0069"},
             IE = {"\u0130", "\u0130"})
-    @HtmlUnitNYI(IE = {"\u0069\u0307", "\u0069"})
     public void toLocaleLowerCase() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

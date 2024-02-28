@@ -17,7 +17,6 @@ package org.htmlunit.libraries;
 import org.htmlunit.WebClient;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,8 +34,6 @@ public class HtmxTest1x9x2 extends HtmxTest {
     @Test
     @Alerts(DEFAULT = "passes:529failures:0",
             IE = "not testable")
-    @HtmlUnitNYI(
-            IE = "passes:412failures:109")
     public void htmx() throws Exception {
         htmx("htmx-1.9.2");
     }

@@ -1562,7 +1562,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"39", "27035", "65533", "39"},
             IE = {"39", "27035", "63"})
-    @HtmlUnitNYI(IE = {"39", "27035", "65533", "39"})
     public void overrideMimeType_charset_all() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1728,8 +1727,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "undefined",
             EDGE = "undefined",
             FF = "undefined",
-            FF_ESR = "undefined",
-            IE = "undefined")
+            FF_ESR = "undefined")
     public void addEventListenerCaller() throws Exception {
         final String html =
               "<html>\n"
@@ -1898,7 +1896,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object XMLHttpRequest]",
             IE = "[object XMLHttpRequestPrototype]")
-    @HtmlUnitNYI(IE = "[object XMLHttpRequest]")
     public void defineProperty2() throws Exception {
         final String html =
               "<html>\n"
@@ -1926,7 +1923,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "application/json",
             IE = "null")
-    @HtmlUnitNYI(IE = "application/x-www-form-urlencoded")
     public void enctypeBlob() throws Exception {
         final String html
             = "<html>\n"
@@ -1973,8 +1969,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "text/plain",
             EDGE = "text/plain",
             FF = "text/plain",
-            FF_ESR = "text/plain",
-            IE = "text/plain")
+            FF_ESR = "text/plain")
     public void enctypeBufferSource() throws Exception {
         final String html
             = "<html>\n"
@@ -2926,7 +2921,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "blob", "[object Blob]", "36", "text/xml"},
             IE = {"", "blob", "[object Blob]", "36", "text/xml;charset=iso-8859-1"})
-    @HtmlUnitNYI(IE = {"", "blob", "[object Blob]", "36", "text/xml"})
     public void responseResponseTypeBlob() throws Exception {
         final String html =
               "<html>\n"

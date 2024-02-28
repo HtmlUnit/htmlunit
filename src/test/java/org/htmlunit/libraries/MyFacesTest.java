@@ -62,8 +62,7 @@ public class MyFacesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: missing formal parameter",
             EDGE = "org.htmlunit.ScriptException: missing formal parameter",
             FF = "org.htmlunit.ScriptException: missing formal parameter",
-            FF_ESR = "org.htmlunit.ScriptException: missing formal parameter",
-            IE = "org.htmlunit.ScriptException: missing formal parameter")
+            FF_ESR = "org.htmlunit.ScriptException: missing formal parameter")
     public void checkForJsCompileErrors_4_0_2() throws Exception {
         try {
             getWebDriver().get(URL_FIRST + "index.html");

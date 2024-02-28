@@ -39,7 +39,6 @@ import org.htmlunit.WebTestCase;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.Retry;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -392,8 +391,6 @@ public final class XMLHttpRequestLifeCycleTest {
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                       "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
                       "abort-done: 0_0", "send-done: 0_0"})
-        @HtmlUnitNYI(IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
-                           "abort-done: 0_0", "send-done: 0_0"})
         public void addEventListener_sync_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.DONE_ABORT), URL_FIRST,
                     servlets_);
@@ -674,10 +671,6 @@ public final class XMLHttpRequestLifeCycleTest {
                       "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
                       "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
                       "abort-done: 0_0"})
-        @HtmlUnitNYI(IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
-                           "send-done: 1_0", "loadstart_1_0_false", "readystatechange_2_200_true",
-                           "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
-                           "abort-done: 0_0"})
         public void addEventListener_async_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.DONE_ABORT), URL_FIRST,
                     servlets_);
@@ -896,8 +889,6 @@ public final class XMLHttpRequestLifeCycleTest {
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                       "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
                       "abort-done: 0_0", "send-done: 0_0"})
-        @HtmlUnitNYI(IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
-                           "abort-done: 0_0", "send-done: 0_0"})
         public void onKeyWord_sync_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.DONE_ABORT),
                     URL_FIRST, servlets_);
@@ -1102,10 +1093,6 @@ public final class XMLHttpRequestLifeCycleTest {
                       "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
                       "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
                       "abort-done: 0_0"})
-        @HtmlUnitNYI(IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
-                           "send-done: 1_0", "loadstart_1_0_false", "readystatechange_2_200_true",
-                           "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
-                           "abort-done: 0_0"})
         public void onKeyWord_async_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.DONE_ABORT),
                     URL_FIRST, servlets_);

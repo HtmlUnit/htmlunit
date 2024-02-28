@@ -44,9 +44,7 @@ public class NumberFormatTest extends WebDriverTestCase {
             FF = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                   "undefined", "undefined"},
             FF_ESR = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                      "undefined", "undefined"},
-            IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                  "undefined", "undefined"})
+                      "undefined", "undefined"})
     public void resolvedOptionsValues() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"

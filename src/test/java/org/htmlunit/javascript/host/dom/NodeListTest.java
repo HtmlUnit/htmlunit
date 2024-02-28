@@ -18,7 +18,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -351,7 +350,6 @@ public class NodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0,[object HTMLHtmlElement]", "1,[object HTMLHeadElement]",
                        "2,[object HTMLScriptElement]", "3,[object HTMLBodyElement]"},
             IE = {})
-    @HtmlUnitNYI(IE = "not defined")
     public void entriesForOf() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -442,7 +440,6 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "1", "2", "3"},
             IE = {})
-    @HtmlUnitNYI(IE = "not defined")
     public void keysForOf() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -557,7 +554,6 @@ public class NodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object HTMLHtmlElement]", "[object HTMLHeadElement]",
                        "[object HTMLScriptElement]", "[object HTMLBodyElement]"},
             IE = {})
-    @HtmlUnitNYI(IE = "not defined")
     public void valuesForOf() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

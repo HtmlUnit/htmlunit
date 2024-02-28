@@ -617,20 +617,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Content-Length: 48",
                       "Content-Type: application/x-www-form-urlencoded",
                       "",
-                      "text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21"},
-            IE = {"POST /foo HTTP/1.1",
-                  "Accept: §§ACCEPT§§",
-                  "Referer: http://localhost:§§PORT§§/",
-                  "Accept-Language: en-US,en;q=0.9",
-                  "User-Agent: §§USER_AGENT§§",
-                  "Accept-Encoding: gzip, deflate",
-                  "Host: localhost:§§PORT§§",
-                  "Connection: Keep-Alive",
-                  "Cache-Control: no-cache",
-                  "Content-Length: 48",
-                  "Content-Type: application/x-www-form-urlencoded",
-                  "",
-                  "text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21"})
+                      "text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21"})
     public void formPost() throws Exception {
         String html = "<html><body><form action='foo' method='post' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"

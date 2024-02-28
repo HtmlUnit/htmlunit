@@ -95,7 +95,6 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string", "true"},
             IE = "undefined")
-    @HtmlUnitNYI(IE = {"string", "true"})
     public void stackNewErrorWithoutThrow() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -122,7 +121,6 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @HtmlUnitNYI(IE = "true")
     public void stackInNewError() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -147,8 +145,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "method()@url",
             EDGE = "method()@url",
             FF = "method()@url",
-            FF_ESR = "method()@url",
-            IE = "method()@url")
+            FF_ESR = "method()@url")
     public void stackContent() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -189,8 +186,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "method()@url",
             EDGE = "method()@url",
             FF = "method()@url",
-            FF_ESR = "method()@url",
-            IE = "method()@url")
+            FF_ESR = "method()@url")
     public void stackContentNewError() throws Exception {
         final String html
             = "<html><head><script>\n"

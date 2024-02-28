@@ -170,8 +170,7 @@ public class Location2Test extends WebDriverTestCase {
             FF_ESR = "exception",
             IE = "exception")
     @HtmlUnitNYI(FF = {"", "about:blank", "blank", "", "about:", ""},
-            FF_ESR = {"", "about:blank", "blank", "", "about:", ""},
-            IE = {"", "about:blank", "/blank", "", "about:", ""})
+            FF_ESR = {"", "about:blank", "blank", "", "about:", ""})
     public void about_blank_query_hash_attributes() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -205,7 +204,6 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "about:blank", "#foo", "about:blank#foo"},
             IE = {"", "about:blank", "", "about:blank"})
-    @HtmlUnitNYI(IE = {"", "about:blank", "#foo", "about:blank#foo"})
     public void about_blank_set_hash() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1206,19 +1204,6 @@ public class Location2Test extends WebDriverTestCase {
                        "search - {\"enumerable\":true,\"configurable\":false}",
                        "toString - {\"writable\":false,\"enumerable\":true,\"configurable\":false}"},
             IE = {})
-    @HtmlUnitNYI(IE = {"assign - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
-                       "hash - {\"enumerable\":true,\"configurable\":false}",
-                       "host - {\"enumerable\":true,\"configurable\":false}",
-                       "hostname - {\"enumerable\":true,\"configurable\":false}",
-                       "href - {\"enumerable\":true,\"configurable\":false}",
-                       "origin - {\"enumerable\":true,\"configurable\":false}",
-                       "pathname - {\"enumerable\":true,\"configurable\":false}",
-                       "port - {\"enumerable\":true,\"configurable\":false}",
-                       "protocol - {\"enumerable\":true,\"configurable\":false}",
-                       "reload - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
-                       "replace - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
-                       "search - {\"enumerable\":true,\"configurable\":false}",
-                       "toString - {\"writable\":false,\"enumerable\":true,\"configurable\":false}"})
     public void ownPropertyDescriptor() throws Exception {
         final String html
             = "<html><head></head>\n"

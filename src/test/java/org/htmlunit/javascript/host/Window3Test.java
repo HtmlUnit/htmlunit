@@ -31,7 +31,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -421,7 +420,6 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"document", "body"},
             IE = "document")
-    @HtmlUnitNYI(IE = {"document", "body"})
     public void scrollEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -471,7 +469,6 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"document", "body"},
             IE = "document")
-    @HtmlUnitNYI(IE = {"document", "body"})
     public void scrollByEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -563,7 +560,6 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"document", "body"},
             IE = "document")
-    @HtmlUnitNYI(IE = {"document", "body"})
     public void scrollToEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1757,7 +1753,6 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "no exception")
-    @HtmlUnitNYI(IE = "exception")
     public void getComputedStyle() throws Exception {
         final String html
             = "<html><head><script>\n"

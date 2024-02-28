@@ -21,7 +21,6 @@ import java.net.URL;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
@@ -1043,8 +1042,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object XMLDocument]", "OK"},
             IE = {"[object Document]", "OK"})
-    @HtmlUnitNYI(IE = {"[object XMLDocument]", "OK"})
-    // Real IE seems to generate always an (HTML)Document within an iframe.
     public void test() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1078,7 +1075,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLDocument]",
             IE = "[object Document]")
-    @HtmlUnitNYI(IE = "[object HTMLDocument]")
     public void html() throws Exception {
         final String svg
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
@@ -1139,7 +1135,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "about:blank",
             IE = "§§URL§§")
-    @HtmlUnitNYI(IE = "about:blank")
     public void url() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

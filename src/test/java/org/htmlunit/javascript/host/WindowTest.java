@@ -1691,14 +1691,6 @@ public class WindowTest extends SimpleWebTestCase {
                     + "§event afterprint"
                     + "§[object Event]afterprint-false-false-false-[object Window]"
                         + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
-                    + "§printed§",
-            IE = "before print"
-                    + "§event beforeprint"
-                    + "§[object Event]beforeprint-false-false-undefined-[object Window]"
-                        + "-false-2-undefined-undefined-[object Window]-[object Window]-beforeprint"
-                    + "§event afterprint"
-                    + "§[object Event]afterprint-false-false-undefined-[object Window]"
-                        + "-false-2-undefined-undefined-[object Window]-[object Window]-afterprint"
                     + "§printed§")
     public void printEvent() throws Exception {
         // we have to test this manually

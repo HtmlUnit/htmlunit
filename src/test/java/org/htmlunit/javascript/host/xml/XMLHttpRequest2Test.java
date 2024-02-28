@@ -267,8 +267,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"5", "pass", "pass", "pass", "pass"},
             IE = {"1", "exception", "exception", "pass", "pass"})
-    @HtmlUnitNYI(IE = {"3", "exception", "exception", "pass", "pass"})
-    // real IE invokes just one request and returns the other two responses from it's cache
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -481,8 +479,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"hello", "in timeout"},
             EDGE = {"hello", "in timeout"},
             FF = {"hello", "in timeout"},
-            FF_ESR = {"hello", "in timeout"},
-            IE = {"hello", "in timeout"})
+            FF_ESR = {"hello", "in timeout"})
     // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xhrDownloadInBackground() throws Exception {
         final String html = "<html><head>\n"
@@ -1044,7 +1041,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "gzip", "45"},
             IE = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "null", "null"})
-    @HtmlUnitNYI(IE = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "gzip", "45"})
     public void encodedXml() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", EncodedXmlServlet.class);
@@ -1210,8 +1206,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "read onerror",
             EDGE = "read onerror",
             FF = "read onerror",
-            FF_ESR = "read onerror",
-            IE = "read onerror")
+            FF_ESR = "read onerror")
     public void readPropertyFromPrototypeShouldThrow() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
