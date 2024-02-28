@@ -22,7 +22,6 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.xml.XmlPage;
 import org.junit.Test;
@@ -1775,7 +1774,6 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Sum\ndetail")
-    @BuggyWebDriver(IE = "Sum")
     public void getVisibleTextDetailsOpen() throws Exception {
         getVisibleTextFormated("<details id='tester' open=true>"
                 + "<summary>Sum</summary>"

@@ -77,8 +77,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§")
     @BuggyWebDriver(FF = "WebDriverException",
-                    FF_ESR = "WebDriverException",
-                    IE = "WebDriverException")
+                    FF_ESR = "WebDriverException")
     public void referer() throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
 

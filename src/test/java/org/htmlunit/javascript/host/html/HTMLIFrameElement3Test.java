@@ -27,7 +27,6 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -974,8 +973,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             FF_ESR = {"loaded", "19"},
             FF = {"loaded", "19"},
             IE = {"loaded", "2"})
-    @BuggyWebDriver(IE = "")
-    // this kill the real ie
     @HtmlUnitNYI(CHROME = {"loaded", "21"},
             EDGE = {"loaded", "21"},
             FF = {"loaded", "21"},

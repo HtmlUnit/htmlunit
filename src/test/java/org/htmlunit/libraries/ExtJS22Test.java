@@ -21,7 +21,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -162,7 +161,6 @@ public class ExtJS22Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello from the Ext console.")
-    @BuggyWebDriver(IE = "Todo")
     public void debug_console() throws Exception {
         final WebDriver driver = getPage("debug", "debug-console");
 

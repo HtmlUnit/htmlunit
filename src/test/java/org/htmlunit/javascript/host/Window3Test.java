@@ -31,7 +31,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.NameValuePair;
@@ -84,7 +83,6 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "one", "two", "three"})
-    @BuggyWebDriver(IE = {"undefined", "one", "two", "three"})
     public void opener() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
@@ -319,7 +317,6 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "false", "true"})
-    @BuggyWebDriver(IE = {"false", "false", "true"})
     public void closed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

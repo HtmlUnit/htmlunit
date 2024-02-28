@@ -19,7 +19,6 @@ import java.util.List;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -43,7 +42,6 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "false", "false", "true"})
-    @BuggyWebDriver(IE = {"false", "false", "true", "false"})
     public void select() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
@@ -78,7 +76,6 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "true", "true", "true"})
-    @BuggyWebDriver(IE = {"false", "false", "true", "false"})
     public void shiftClick() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
@@ -114,7 +111,6 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "true", "false", "true"})
-    @BuggyWebDriver(IE = {"false", "false", "true", "false"})
     public void controlClick() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"

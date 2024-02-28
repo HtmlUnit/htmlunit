@@ -18,7 +18,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -402,7 +401,6 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Click on DIV(id=div1): true, true, false, false")
-    @BuggyWebDriver(IE = "Click on SPAN(id=span1): true, true, true, false")
     public void eventCoordinates_div() throws Exception {
         eventCoordinates("div1");
     }

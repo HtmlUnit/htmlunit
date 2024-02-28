@@ -19,7 +19,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -113,7 +112,6 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("31,415.927")
-    @BuggyWebDriver(IE = "31.415,927")
     public void format_default() throws Exception {
         test("new Intl.NumberFormat().format(number)");
     }

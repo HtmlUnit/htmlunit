@@ -191,8 +191,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @BuggyWebDriver(CHROME = {"onfocus; onchange; mouseup; onclick;", ""},
                     EDGE = {"onfocus; onchange; mouseup; onclick;", ""},
                     FF = {"mousedown; onfocus; onchange; mouseup; onclick;", ""},
-                    FF_ESR = {"mousedown; onfocus; onchange; mouseup; onclick;", ""},
-                    IE = {"mousedown; onchange; mouseup; onclick; onfocus;", ""})
+                    FF_ESR = {"mousedown; onfocus; onchange; mouseup; onclick;", ""})
     public void clickOptionEventSequence() throws Exception {
         testClickEventSequence("<select size='2'><option id='" + TEST_ID + "'>1</option></select>", false);
     }

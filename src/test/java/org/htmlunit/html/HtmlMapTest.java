@@ -73,8 +73,7 @@ public class HtmlMapTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§a.html")
     @BuggyWebDriver(FF = "Element <area id=\"tester\" href=\"a.html\"> could not be scrolled into view",
-                    FF_ESR = "Element <area id=\"tester\" href=\"a.html\"> could not be scrolled into view",
-                    IE = "§§URL§§")
+                    FF_ESR = "Element <area id=\"tester\" href=\"a.html\"> could not be scrolled into view")
     public void mapClick() throws Exception {
         final URL urlImage = new URL(URL_FIRST, "img.jpg");
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/4x7.jpg")) {

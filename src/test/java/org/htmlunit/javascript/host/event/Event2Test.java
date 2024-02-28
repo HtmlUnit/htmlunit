@@ -54,9 +54,7 @@ public class Event2Test extends WebDriverTestCase {
     @BuggyWebDriver(FF = "[object Event] change b:true c:true [select] [-]"
                 + " [object Event] click b:true c:true [select] [-]",
             FF_ESR = "[object Event] change b:true c:true [select] [-]"
-                + " [object Event] click b:true c:true [select] [-]",
-            IE = "[object Event] change b:true c:false [select] [-]"
-                + " [object MouseEvent] click b:true c:true [select] [1]")
+                + " [object Event] click b:true c:true [select] [-]")
     @NotYetImplemented({CHROME, EDGE})
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";

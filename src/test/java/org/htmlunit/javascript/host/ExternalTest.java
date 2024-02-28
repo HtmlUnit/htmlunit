@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -103,10 +102,6 @@ public class ExternalTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: 0"},
             FF = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"},
             FF_ESR = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
-    // fail with missing permission
-    @BuggyWebDriver(IE = {"IsSearchProviderInstalled defined", "exception"},
-                    CHROME = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"},
-                    EDGE = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
     public void isSearchProviderInstalled() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

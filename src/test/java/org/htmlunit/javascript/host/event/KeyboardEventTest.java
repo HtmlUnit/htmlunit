@@ -782,21 +782,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                           "keyup:190,0,190,.,undefined,Period,false",
                           "keydown:13,0,13,Enter,undefined,Enter,false",
                           "keypress:13,13,13,Enter,undefined,Enter,false",
-                          "keyup:13,0,13,Enter,undefined,Enter,false"},
-                    IE = {"keydown:16,0,16,Shift,,undefined,false",
-                          "keydown:65,0,65,A,A,undefined,false",
-                          "keypress:65,65,65,A,A,undefined,false",
-                          "keyup:65,0,65,a,a,undefined,false",
-                          "keyup:16,0,16,Shift,,undefined,false",
-                          "keydown:65,0,65,a,a,undefined,false",
-                          "keypress:97,97,97,a,a,undefined,false",
-                          "keyup:65,0,65,a,a,undefined,false",
-                          "keydown:190,0,190,.,.,undefined,false",
-                          "keypress:46,46,46,.,.,undefined,false",
-                          "keyup:190,0,190,.,.,undefined,false",
-                          "keydown:13,0,13,Enter,\\n,undefined,false",
-                          "keypress:13,13,13,\\r,\\r,undefined,false",
-                          "keyup:13,0,13,Enter,\\n,undefined,false"})
+                          "keyup:13,0,13,Enter,undefined,Enter,false"})
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"

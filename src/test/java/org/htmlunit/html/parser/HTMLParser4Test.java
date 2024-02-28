@@ -18,7 +18,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
@@ -501,10 +500,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts({"titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
-    @BuggyWebDriver(IE = {"titles", "HEAD", "Outer Html", "DIV", "",
-                          "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
-    // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
-    // Currently I do not know why it behaves this way so I take the default behavior.
     public void completeHtmlInsideDiv() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -558,10 +553,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts({"titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
-    @BuggyWebDriver(IE = {"titles", "HEAD", "Outer Html", "DIV", "",
-                          "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
-    // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
-    // Currently I do not know why it behaves this way so I take the default behavior.
     public void writeCompleteHtmlInsideDIV() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
