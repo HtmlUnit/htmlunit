@@ -52,7 +52,12 @@ public abstract class HtmlTableCell extends HtmlElement {
         if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
-        return Integer.parseInt(spanString);
+        try {
+            return Integer.parseInt(spanString);
+        }
+        catch (final NumberFormatException e) {
+            return 1;
+        }
     }
 
     /**
@@ -64,7 +69,12 @@ public abstract class HtmlTableCell extends HtmlElement {
         if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
-        return Integer.parseInt(spanString);
+        try {
+            return Integer.parseInt(spanString);
+        }
+        catch (final NumberFormatException e) {
+            return 1;
+        }
     }
 
     /**
