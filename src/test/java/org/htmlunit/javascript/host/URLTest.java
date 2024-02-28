@@ -43,8 +43,7 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function URL() { [native code] }",
-            IE = "[object URL]")
+    @Alerts("function URL() { [native code] }")
     public void windowURL() throws Exception {
         final String html =
             "<html>\n"

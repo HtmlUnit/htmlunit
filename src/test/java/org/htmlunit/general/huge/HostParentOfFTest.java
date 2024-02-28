@@ -192,8 +192,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _FontFace_FontFace() throws Exception {
         test("FontFace", "FontFace");
     }
@@ -222,8 +221,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _GainNode_GainNode() throws Exception {
         test("GainNode", "GainNode");
     }
@@ -232,8 +230,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Gamepad_Gamepad() throws Exception {
         test("Gamepad", "Gamepad");
     }
@@ -242,8 +239,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _GamepadButton_GamepadButton() throws Exception {
         test("GamepadButton", "GamepadButton");
     }
@@ -252,8 +248,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _GamepadEvent_GamepadEvent() throws Exception {
         test("GamepadEvent", "GamepadEvent");
     }

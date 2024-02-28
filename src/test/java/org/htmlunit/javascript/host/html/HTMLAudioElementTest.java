@@ -258,8 +258,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "maybe",
-            IE = "")
+    @Alerts("maybe")
     public void canPlayType_AudioOgg() throws Exception {
         canPlayType("audio/ogg");
     }
@@ -268,8 +267,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "maybe",
-            IE = "")
+    @Alerts("maybe")
     public void canPlayType_VideoOgg() throws Exception {
         canPlayType("video/ogg");
     }
@@ -278,8 +276,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "maybe",
-            IE = "")
+    @Alerts("maybe")
     public void canPlayType_ApplicationOgg() throws Exception {
         canPlayType("application/ogg");
     }
@@ -310,8 +307,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "maybe",
-            IE = "")
+    @Alerts("maybe")
     public void canPlayType_AudioWav() throws Exception {
         canPlayType("audio/wav");
     }
@@ -320,8 +316,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "maybe",
-            IE = "")
+    @Alerts("maybe")
     public void canPlayType_AudioXWav() throws Exception {
         canPlayType("audio/x-wav");
     }
@@ -343,8 +338,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "maybe",
-            IE = "")
+    @Alerts("maybe")
     public void canPlayType_AudioWebm() throws Exception {
         canPlayType("audio/webm");
     }
@@ -353,8 +347,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "maybe",
-            IE = "")
+    @Alerts("maybe")
     public void canPlayType_VideoWebm() throws Exception {
         canPlayType("video/webm");
     }

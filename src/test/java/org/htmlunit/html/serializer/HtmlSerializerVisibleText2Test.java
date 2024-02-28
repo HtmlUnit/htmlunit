@@ -815,8 +815,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            IE = "A B C D EF G H I Second")
+    @Alerts("A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
         getVisibleTextWhiteSpaceSelect("normal");
     }
@@ -826,8 +825,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            IE = "A B C D EF G H I Second")
+    @Alerts("A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("nowrap");
     }
@@ -871,8 +869,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            IE = "A B C D \nEF\nG \n H I \n Second")
+    @Alerts("A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "A B C D \nEF\nG \n H I\n Second",
             EDGE = "A B C D \nEF\nG \n H I\n Second",
             FF = "A B C D \nEF\nG \n H I\n Second",
@@ -1750,8 +1747,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Sum\nSum2",
-            IE = "SumSum2")
+    @Alerts("Sum\nSum2")
     public void getVisibleTextDetailsTwoSums() throws Exception {
         getVisibleTextFormated("<details id='tester'>"
                 + "<summary>Sum</summary>"

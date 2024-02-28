@@ -282,8 +282,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void uniqueID() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2256,8 +2255,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "?%C3%A8=%C3%A8",
-            IE = "?\u00E8=\u00E8")
+    @Alerts("?%C3%A8=%C3%A8")
     public void encoding7() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2534,8 +2532,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            IE = "undefined")
+    @Alerts("§§URL§§")
     public void baseURI_noBaseTag() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -2557,8 +2554,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§details/abc",
-            IE = "undefined")
+    @Alerts("§§URL§§details/abc")
     public void baseURI_noBaseTag_urlPath() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -2582,8 +2578,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§?x=y&z=zz",
-            IE = "undefined")
+    @Alerts("§§URL§§?x=y&z=zz")
     public void baseURI_noBaseTag_urlParams() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -2607,8 +2602,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§details/abc;jsessionid=42?x=y&z=zz",
-            IE = "undefined")
+    @Alerts("§§URL§§details/abc;jsessionid=42?x=y&z=zz")
     public void baseURI_noBaseTag_urlPathAndParams() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -2632,8 +2626,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://myotherwebsite.com/foo",
-            IE = "undefined")
+    @Alerts("http://myotherwebsite.com/foo")
     public void baseURI_withBaseTag() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2652,8 +2645,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://myotherwebsite.com/foo",
-            IE = "undefined")
+    @Alerts("http://myotherwebsite.com/foo")
     public void baseURI_withBaseTagInBody() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -2671,8 +2663,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§img/",
-            IE = "undefined")
+    @Alerts("§§URL§§img/")
     public void baseURI_withBaseTag_absolutePath() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2694,8 +2685,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§path/to/img",
-            IE = "undefined")
+    @Alerts("§§URL§§path/to/img")
     public void baseURI_withBaseTag_relativePath() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2717,8 +2707,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§path/to/img/",
-            IE = "undefined")
+    @Alerts("§§URL§§path/to/img/")
     public void baseURI_withBaseTag_relativePath_slash() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2740,8 +2729,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§path/img",
-            IE = "undefined")
+    @Alerts("§§URL§§path/img")
     public void baseURI_withBaseTag_relativePath_parent() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2763,8 +2751,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§img",
-            IE = "undefined")
+    @Alerts("§§URL§§img")
     public void baseURI_withBaseTag_relativePath_strange() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2858,8 +2845,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "undefined")
+    @Alerts("1")
     public void childElementCount() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2881,8 +2867,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLEmbedElement]")
+    @Alerts("exception")
     public void embeds() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2932,8 +2917,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLImageElement]")
+    @Alerts("exception")
     public void images() throws Exception {
         final String html = ""
             + "<html><head>\n"

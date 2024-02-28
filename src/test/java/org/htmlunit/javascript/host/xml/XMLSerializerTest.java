@@ -412,8 +412,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\">HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\">is great</h2>",
-            IE = "")
+    @Alerts("<h1 xmlns=\"http://www.w3.org/1999/xhtml\">HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\">is great</h2>")
     @HtmlUnitNYI(CHROME = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>",
             EDGE = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>",
             FF = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>",
@@ -472,8 +471,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>",
-            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child /><another_child /></my:parent></root>")
+    @Alerts("<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>")
     public void namespace() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -502,8 +500,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
-            IE = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
+    @Alerts("<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -711,8 +708,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
-            IE = "exception")
+    @Alerts("<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
     public void outputOmitXmlDeclaration() throws Exception {
         transform("<xsl:output omit-xml-declaration='yes' />");
     }

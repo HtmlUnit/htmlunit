@@ -1307,8 +1307,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "<div><span></span>nullundefinedhello<p></p></div>",
-            IE = "<div><p></p></div>")
+    @Alerts("<div><span></span>nullundefinedhello<p></p></div>")
     public void before() throws Exception {
         final String html =
               "<html><head>\n"
@@ -1336,8 +1335,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "<div><p></p><span></span>nullundefinedhello</div>",
-            IE = "<div><p></p></div>")
+    @Alerts("<div><p></p><span></span>nullundefinedhello</div>")
     public void after() throws Exception {
         final String html =
               "<html><head>\n"
@@ -1365,8 +1363,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "<div><span></span>nullundefinedhello</div>",
-            IE = "<div><p></p></div>")
+    @Alerts("<div><span></span>nullundefinedhello</div>")
     public void replaceWith() throws Exception {
         final String html =
               "<html><head>\n"

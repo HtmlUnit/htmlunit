@@ -171,8 +171,7 @@ public class Uint16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "exception")
+    @Alerts("0")
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -231,8 +230,7 @@ public class Uint16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Uint16Array",
-            IE = "undefined")
+    @Alerts("Uint16Array")
     public void name() throws Exception {
         final String html
             = "<html><head>\n"

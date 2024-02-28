@@ -52,8 +52,7 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "default",
-            IE = "exception")
+    @Alerts("default")
     public void permission() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
@@ -86,8 +85,7 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "exception")
+    @Alerts("function")
     public void requestPermission() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION

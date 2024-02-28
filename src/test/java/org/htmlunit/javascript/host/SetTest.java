@@ -136,8 +136,7 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
+    @Alerts("2")
     public void constructorArray() throws Exception {
         final String html
             = "<html><head>\n"
@@ -157,8 +156,7 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
+    @Alerts("2")
     public void constructorInt32Array() throws Exception {
         final String html
             = "<html><head>\n"

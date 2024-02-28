@@ -1338,8 +1338,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Philippine eagle",
-            IE = "not found")
+    @Alerts("Philippine eagle")
     public void matches() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

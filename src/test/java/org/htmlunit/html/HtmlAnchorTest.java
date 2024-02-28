@@ -227,8 +227,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "page2.html",
-            IE = "")
+    @Alerts("page2.html")
     public void clickNestedInputTextElement() throws Exception {
         final String html =
               "<html>\n"
@@ -250,8 +249,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "page2.html",
-            IE = "")
+    @Alerts("page2.html")
     public void clickNestedInputPasswordElement() throws Exception {
         final String html =
               "<html>\n"
@@ -606,8 +604,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "click href click doubleClick href ",
-            IE = "click href click doubleClick ")
+    @Alerts("click href click doubleClick href ")
     @BuggyWebDriver(
             FF = "click doubleClick click href href ",
             FF_ESR = "click doubleClick click href href ")

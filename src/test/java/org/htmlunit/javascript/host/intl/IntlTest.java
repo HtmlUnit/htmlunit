@@ -34,8 +34,7 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Intl]",
-            IE = "[object Object]")
+    @Alerts("[object Intl]")
     public void intl() throws Exception {
         test("Intl");
     }
@@ -61,8 +60,7 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function Collator() { [native code] }",
-            IE = "function Collator() { [native code] } ")
+    @Alerts("function Collator() { [native code] }")
     public void collator() throws Exception {
         test("Intl.Collator");
     }
@@ -71,8 +69,7 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function DateTimeFormat() { [native code] }",
-            IE = "function DateTimeFormat() { [native code] } ")
+    @Alerts("function DateTimeFormat() { [native code] }")
     public void dateTimeFormat() throws Exception {
         test("Intl.DateTimeFormat");
     }
@@ -81,8 +78,7 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function NumberFormat() { [native code] }",
-            IE = "function NumberFormat() { [native code] } ")
+    @Alerts("function NumberFormat() { [native code] }")
     public void numberFormat() throws Exception {
         test("Intl.NumberFormat");
     }

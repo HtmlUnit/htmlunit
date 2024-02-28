@@ -399,8 +399,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ok",
-            IE = "exception")
+    @Alerts("ok")
     public void sameOriginPolicy_aboutBlank() throws Exception {
         sameOriginPolicy("about:blank");
     }

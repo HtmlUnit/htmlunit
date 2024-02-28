@@ -152,8 +152,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "onchange-select; onclick-option; onclick-select;",
-            IE = "onchange-select; onclick-select;")
+    @Alerts("onchange-select; onclick-option; onclick-select;")
     @BuggyWebDriver(CHROME = "onchange-select; onclick-select;",
             EDGE = "onchange-select; onclick-select;",
             FF = "onchange-select; onclick-select;",
@@ -196,8 +195,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "change-SELECT; click-OPTION; click-OPTION;",
-            IE = "change-SELECT; click-SELECT;")
+    @Alerts("change-SELECT; click-OPTION; click-OPTION;")
     @BuggyWebDriver(CHROME = "change-SELECT; click-SELECT;",
             EDGE = "change-SELECT; click-SELECT;",
             FF = "change-SELECT; click-SELECT;",
@@ -255,8 +253,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;",
-            IE = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
+    @Alerts("onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;")
     @BuggyWebDriver(CHROME = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
             EDGE = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
             FF = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
@@ -1469,8 +1466,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "o-mouse over [option1]s-mouse over [option1]",
-            IE = "")
+    @Alerts("o-mouse over [option1]s-mouse over [option1]")
     public void mouseOver() throws Exception {
         shutDownAll();
 
@@ -1522,8 +1518,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "o-mouse over [option1] s-mouse over [option1]",
-            IE = "")
+    @Alerts("o-mouse over [option1] s-mouse over [option1]")
     public void mouseOverDisabledSelect() throws Exception {
         shutDownAll();
 

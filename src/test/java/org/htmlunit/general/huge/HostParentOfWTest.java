@@ -50,8 +50,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WaveShaperNode_WaveShaperNode() throws Exception {
         test("WaveShaperNode", "WaveShaperNode");
     }
@@ -69,8 +68,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WeakSet_WeakSet() throws Exception {
         test("WeakSet", "WeakSet");
     }
@@ -79,8 +77,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _WEBGL_compressed_texture_s3tc_WEBGL_compressed_texture_s3tc() throws Exception {
         test("WEBGL_compressed_texture_s3tc", "WEBGL_compressed_texture_s3tc");
     }
@@ -89,8 +86,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _WEBGL_debug_renderer_info_WEBGL_debug_renderer_info() throws Exception {
         test("WEBGL_debug_renderer_info", "WEBGL_debug_renderer_info");
     }
@@ -99,8 +95,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WebGL2RenderingContext_WebGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext", "WebGL2RenderingContext");
     }
@@ -154,8 +149,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WebGLQuery_WebGLQuery() throws Exception {
         test("WebGLQuery", "WebGLQuery");
     }
@@ -182,8 +176,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WebGLSampler_WebGLSampler() throws Exception {
         test("WebGLSampler", "WebGLSampler");
     }
@@ -210,8 +203,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WebGLSync_WebGLSync() throws Exception {
         test("WebGLSync", "WebGLSync");
     }
@@ -229,8 +221,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WebGLTransformFeedback_WebGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback", "WebGLTransformFeedback");
     }
@@ -248,8 +239,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WebGLVertexArrayObject_WebGLVertexArrayObject() throws Exception {
         test("WebGLVertexArrayObject", "WebGLVertexArrayObject");
     }
@@ -271,8 +261,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _WebKitCSSMatrix_WebKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix", "WebKitCSSMatrix");
     }
@@ -482,8 +471,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _XMLHttpRequestEventTarget_XMLHttpRequest() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequest");
     }
@@ -501,8 +489,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestUpload() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestUpload");
     }
@@ -511,8 +498,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _XMLHttpRequestUpload_XMLHttpRequestUpload() throws Exception {
         test("XMLHttpRequestUpload", "XMLHttpRequestUpload");
     }
@@ -530,8 +516,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _XPathEvaluator_XPathEvaluator() throws Exception {
         test("XPathEvaluator", "XPathEvaluator");
     }
@@ -540,8 +525,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _XPathExpression_XPathExpression() throws Exception {
         test("XPathExpression", "XPathExpression");
     }
@@ -550,8 +534,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _XPathResult_XPathResult() throws Exception {
         test("XPathResult", "XPathResult");
     }
@@ -560,8 +543,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _XSLTProcessor_XSLTProcessor() throws Exception {
         test("XSLTProcessor", "XSLTProcessor");
     }

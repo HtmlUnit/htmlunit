@@ -177,8 +177,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "3.14",
-            IE = "no Number.parseFloat")
+    @Alerts("3.14")
     public void parseFloat() throws Exception {
         final String html =
             "<html>\n"
@@ -202,8 +201,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "4",
-            IE = "no Number.parseInt")
+    @Alerts("4")
     public void parseInt() throws Exception {
         final String html =
             "<html>\n"

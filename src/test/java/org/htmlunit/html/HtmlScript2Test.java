@@ -553,8 +553,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "load",
-            IE = "error")
+    @Alerts("load")
     public void addEventListener_NoContent() throws Exception {
         // use always a different url to avoid caching effects
         final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
@@ -740,8 +739,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLScriptElement]",
-            IE = "undefined")
+    @Alerts("[object HTMLScriptElement]")
     public void currentScriptInline() throws Exception {
         final String html
                 = "<html>\n"
@@ -762,8 +760,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void currentScriptFunction() throws Exception {
         final String html
                 = "<html>\n"
@@ -786,8 +783,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLScriptElement]",
-            IE = "undefined")
+    @Alerts("[object HTMLScriptElement]")
     public void currentScriptExternal() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "log(document.currentScript);");
         final String html

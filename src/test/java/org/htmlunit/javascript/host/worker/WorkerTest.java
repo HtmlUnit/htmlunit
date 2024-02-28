@@ -147,8 +147,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "start worker import exception end worker",
-            IE = "start worker in imported script1 end worker")
+    @Alerts("start worker import exception end worker")
     public void importScriptsWrongContentType() throws Exception {
         importScripts(MimeType.TEXT_HTML);
     }
@@ -207,8 +206,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DedicatedWorkerGlobalScope] [object DedicatedWorkerGlobalScope] true",
-            IE = "[object WorkerGlobalScope] [object WorkerGlobalScope] true")
+    @Alerts("[object DedicatedWorkerGlobalScope] [object DedicatedWorkerGlobalScope] true")
     public void thisAndSelf() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -269,8 +267,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "exception Error")
+    @Alerts("null")
     public void onmessageNumber() throws Exception {
         final String html = "<html><body><script>\n"
                 + LOG_TITLE_FUNCTION
@@ -289,8 +286,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "HtmlUnit")
+    @Alerts("null")
     public void onmessageString() throws Exception {
         final String html = "<html><body><script>\n"
                 + LOG_TITLE_FUNCTION

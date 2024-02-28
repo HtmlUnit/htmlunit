@@ -37,8 +37,7 @@ public class SvgForeignObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGForeignObjectElement]",
-            IE = "[object SVGElement]")
+    @Alerts("[object SVGForeignObjectElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

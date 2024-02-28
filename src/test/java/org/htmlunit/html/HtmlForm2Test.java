@@ -445,8 +445,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "gzip, deflate, br",
-            IE = "gzip, deflate")
+    @Alerts("gzip, deflate, br")
     public void acceptEncodingHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -656,8 +655,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "third content",
-            IE = "second content")
+    @Alerts("third content")
     public void inputTypeImageWithFormAction() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"
@@ -737,8 +735,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "GET",
-            IE = "POST")
+    @Alerts("GET")
     public void inputTypeImageWithFormMethod() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"
@@ -824,8 +821,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "application/x-www-form-urlencoded",
-            IE = "multipart/form-data")
+    @Alerts("application/x-www-form-urlencoded")
     public void inputTypeImageWithFormEnctype() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"
@@ -935,8 +931,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
+    @Alerts("2")
     public void inputTypeImageWithFormTarget() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"
@@ -1258,8 +1253,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "hiddenParam#form1",
-            IE = "hiddenParam#form2")
+    @Alerts("hiddenParam#form1")
     public void submitFromInsideAnother() throws Exception {
         final String html =
             "<!DOCTYPE html>\n"
@@ -1593,8 +1587,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "NoReferrer",
-            IE = "undefined")
+    @Alerts("NoReferrer")
     public void relAttribute() throws Exception {
         final String html
             = "<html><head></head>\n"

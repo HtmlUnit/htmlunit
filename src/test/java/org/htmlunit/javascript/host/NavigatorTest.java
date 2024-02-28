@@ -51,8 +51,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "0")
+    @Alerts("undefined")
     public void appMinorVersion() throws Exception {
         attribute("appMinorVersion", getExpectedAlerts()[0]);
     }
@@ -82,8 +81,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "en-US")
+    @Alerts("undefined")
     public void browserLanguage() throws Exception {
         attribute("browserLanguage", getExpectedAlerts()[0]);
     }
@@ -115,8 +113,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "x86")
+    @Alerts("undefined")
     public void cpuClass() throws Exception {
         attribute("cpuClass", getExpectedAlerts()[0]);
     }
@@ -144,8 +141,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "en-US")
+    @Alerts("undefined")
     public void systemLanguage() throws Exception {
         attribute("systemLanguage", getExpectedAlerts()[0]);
     }
@@ -166,8 +162,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "en-US")
+    @Alerts("undefined")
     public void userLanguage() throws Exception {
         attribute("userLanguage", getExpectedAlerts()[0]);
     }
@@ -322,8 +317,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "en-US,en",
-            IE = "undefined")
+    @Alerts("en-US,en")
     public void languages() throws Exception {
         final String html
             = "<html><head>\n"

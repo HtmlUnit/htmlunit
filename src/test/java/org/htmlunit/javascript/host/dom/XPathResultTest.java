@@ -242,8 +242,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "7",
-            IE = "evaluate not supported")
+    @Alerts("7")
     public void notOr() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -265,8 +265,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\\r\\n")
+    @Alerts("no ActiveX")
     public void namespace() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -295,8 +294,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<teXtaREa/>")
+    @Alerts("no ActiveX")
     public void mixedCase() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -316,8 +314,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<img href=\"mypage.htm\"/>")
+    @Alerts("no ActiveX")
     public void noClosingTagWithAttribute() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"

@@ -121,8 +121,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Animation]",
-            IE = "exception")
+    @Alerts("[object Animation]")
     public void _Animation() throws Exception {
         test("Animation");
     }
@@ -140,8 +139,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object AudioContext]",
-            IE = "exception")
+    @Alerts("[object AudioContext]")
     public void _AudioContext() throws Exception {
         test("AudioContext");
     }
@@ -150,8 +148,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSStyleSheet]",
-            IE = "exception")
+    @Alerts("[object CSSStyleSheet]")
     public void _CSSStyleSheet() throws Exception {
         test("CSSStyleSheet");
     }
@@ -160,8 +157,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Comment]",
-            IE = "exception")
+    @Alerts("[object Comment]")
     public void _Comment() throws Exception {
         test("Comment");
     }
@@ -170,8 +166,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "matrix(1, 0, 0, 1, 0, 0)",
-            IE = "exception")
+    @Alerts("matrix(1, 0, 0, 1, 0, 0)")
     public void _DOMMatrix() throws Exception {
         test("DOMMatrix");
     }
@@ -180,8 +175,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "matrix(1, 0, 0, 1, 0, 0)",
-            IE = "exception")
+    @Alerts("matrix(1, 0, 0, 1, 0, 0)")
     public void _DOMMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly");
     }
@@ -190,8 +184,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Error",
-            IE = "exception")
+    @Alerts("Error")
     public void _DOMException() throws Exception {
         test("DOMException");
     }
@@ -200,8 +193,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMPoint]",
-            IE = "exception")
+    @Alerts("[object DOMPoint]")
     public void _DOMPoint() throws Exception {
         test("DOMPoint");
     }
@@ -210,8 +202,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMPointReadOnly]",
-            IE = "exception")
+    @Alerts("[object DOMPointReadOnly]")
     public void _DOMPointReadOnly() throws Exception {
         test("DOMPointReadOnly");
     }
@@ -220,8 +211,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMRect]",
-            IE = "exception")
+    @Alerts("[object DOMRect]")
     public void _DOMRect() throws Exception {
         test("DOMRect");
     }
@@ -230,8 +220,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMRectReadOnly]",
-            IE = "exception")
+    @Alerts("[object DOMRectReadOnly]")
     public void _DOMRectReadOnly() throws Exception {
         test("DOMRectReadOnly");
     }
@@ -240,8 +229,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DataTransfer]",
-            IE = "exception")
+    @Alerts("[object DataTransfer]")
     public void _DataTransfer() throws Exception {
         test("DataTransfer");
     }
@@ -250,8 +238,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Document]",
-            IE = "exception")
+    @Alerts("[object Document]")
     public void _Document() throws Exception {
         test("Document");
     }
@@ -260,8 +247,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DocumentFragment]",
-            IE = "exception")
+    @Alerts("[object DocumentFragment]")
     public void _DocumentFragment() throws Exception {
         test("DocumentFragment");
     }
@@ -270,8 +256,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object Object]")
+    @Alerts("exception")
     public void _Enumerator() throws Exception {
         test("Enumerator");
     }
@@ -280,8 +265,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object EventTarget]",
-            IE = "exception")
+    @Alerts("[object EventTarget]")
     public void _EventTarget() throws Exception {
         test("EventTarget");
     }
@@ -290,8 +274,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Headers]",
-            IE = "exception")
+    @Alerts("[object Headers]")
     public void _Headers() throws Exception {
         test("Headers");
     }
@@ -321,8 +304,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object MediaStream]",
-            IE = "exception")
+    @Alerts("[object MediaStream]")
     public void _MediaStream() throws Exception {
         test("MediaStream");
     }
@@ -351,8 +333,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Path2D]",
-            IE = "exception")
+    @Alerts("[object Path2D]")
     public void _Path2D() throws Exception {
         test("Path2D");
     }
@@ -361,8 +342,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "exception")
+    @Alerts("")
     public void _Range() throws Exception {
         test("Range");
     }
@@ -371,8 +351,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object ReadableStream]",
-            IE = "exception")
+    @Alerts("[object ReadableStream]")
     public void _ReadableStream() throws Exception {
         test("ReadableStream");
     }
@@ -381,8 +360,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Response]",
-            IE = "exception")
+    @Alerts("[object Response]")
     public void _Response() throws Exception {
         test("Response");
     }
@@ -391,8 +369,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object RTCPeerConnection]",
-            IE = "exception")
+    @Alerts("[object RTCPeerConnection]")
     public void _RTCPeerConnection() throws Exception {
         test("RTCPeerConnection");
     }
@@ -413,8 +390,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SpeechSynthesisUtterance]",
-            IE = "exception")
+    @Alerts("[object SpeechSynthesisUtterance]")
     public void _SpeechSynthesisUtterance() throws Exception {
         test("SpeechSynthesisUtterance");
     }
@@ -423,8 +399,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Text]",
-            IE = "exception")
+    @Alerts("[object Text]")
     public void _Text() throws Exception {
         test("Text");
     }
@@ -433,8 +408,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object TextDecoder]",
-            IE = "exception")
+    @Alerts("[object TextDecoder]")
     public void _TextDecoder() throws Exception {
         test("TextDecoder");
     }
@@ -443,8 +417,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object TextEncoder]",
-            IE = "exception")
+    @Alerts("[object TextEncoder]")
     public void _TextEncoder() throws Exception {
         test("TextEncoder");
     }
@@ -453,8 +426,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "exception")
+    @Alerts("")
     public void _URLSearchParams() throws Exception {
         test("URLSearchParams");
     }
@@ -463,8 +435,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object WebGLContextEvent]")
+    @Alerts("exception")
     public void _WebGLContextEvent() throws Exception {
         test("WebGLContextEvent");
     }
@@ -473,8 +444,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "matrix(1, 0, 0, 1, 0, 0)",
-            IE = "exception")
+    @Alerts("matrix(1, 0, 0, 1, 0, 0)")
     public void _WebKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
     }
@@ -543,8 +513,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XPathEvaluator]",
-            IE = "exception")
+    @Alerts("[object XPathEvaluator]")
     public void _XPathEvaluator() throws Exception {
         test("XPathEvaluator");
     }
@@ -553,8 +522,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XSLTProcessor]",
-            IE = "exception")
+    @Alerts("[object XSLTProcessor]")
     public void _XSLTProcessor() throws Exception {
         test("XSLTProcessor");
     }

@@ -133,8 +133,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void windowProperty() throws Exception {
         final String html
             = "<html>\n"
@@ -155,8 +154,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "success",
-            IE = "exception")
+    @Alerts("success")
     public void fromWindow() throws Exception {
         final String html
             = "<html>\n"

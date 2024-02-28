@@ -33,8 +33,7 @@ public class HTMLQuoteElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void prototypeComparison() throws Exception {
         final String html = ""
             + "<html><head>\n"

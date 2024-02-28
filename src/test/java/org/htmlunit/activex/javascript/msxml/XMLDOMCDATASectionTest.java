@@ -43,8 +43,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "[object\\sObject]")
+    @Alerts("no\\sActiveX")
     public void scriptableToString() throws Exception {
         tester("log(Object.prototype.toString.call(cdata));\n");
     }
@@ -53,8 +52,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "null")
+    @Alerts("no\\sActiveX")
     public void attributes() throws Exception {
         property("attributes");
     }
@@ -63,8 +61,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "")
+    @Alerts("no\\sActiveX")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -73,8 +70,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "0")
+    @Alerts("no\\sActiveX")
     public void childNodes() throws Exception {
         tester("log(cdata.childNodes.length);\n");
     }
@@ -133,8 +129,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "null")
+    @Alerts("no\\sActiveX")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -143,8 +138,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "null")
+    @Alerts("no\\sActiveX")
     public void definition() throws Exception {
         property("definition");
     }
@@ -153,8 +147,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "null")
+    @Alerts("no\\sActiveX")
     public void firstChild() throws Exception {
         property("firstChild");
     }
@@ -163,8 +156,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "null")
+    @Alerts("no\\sActiveX")
     public void lastChild() throws Exception {
         property("lastChild");
     }
@@ -203,8 +195,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "")
+    @Alerts("no\\sActiveX")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -213,8 +204,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "#cdata-section")
+    @Alerts("no\\sActiveX")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -223,8 +213,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "4")
+    @Alerts("no\\sActiveX")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -283,8 +272,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "")
+    @Alerts("no\\sActiveX")
     // Xerxes is the problem here as they drop empty CDATA sections. So <root> has no children and our test fails.
     // see: https://issues.apache.org/jira/browse/XERCESJ-1033
     public void nodeValue_empty() throws Exception {
@@ -300,8 +288,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "true")
+    @Alerts("no\\sActiveX")
     public void ownerDocument() throws Exception {
         tester("log(cdata.ownerDocument === doc);\n");
     }
@@ -310,8 +297,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "true")
+    @Alerts("no\\sActiveX")
     public void ownerDocument_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -332,8 +318,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "true")
+    @Alerts("no\\sActiveX")
     public void parentNode() throws Exception {
         final String xml = ""
             + "<root>"
@@ -347,8 +332,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "true")
+    @Alerts("no\\sActiveX")
     public void parentNode_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -369,8 +353,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = "")
+    @Alerts("no\\sActiveX")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -459,8 +442,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<![CDATA[]]>")
+    @Alerts("no ActiveX")
     public void xml_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

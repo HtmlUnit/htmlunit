@@ -191,8 +191,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _IdleDeadline_IdleDeadline() throws Exception {
         test("IdleDeadline", "IdleDeadline");
     }
@@ -201,8 +200,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _IIRFilterNode_IIRFilterNode() throws Exception {
         test("IIRFilterNode", "IIRFilterNode");
     }
@@ -233,8 +231,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _ImageBitmap_ImageBitmap() throws Exception {
         test("ImageBitmap", "ImageBitmap");
     }
@@ -243,8 +240,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext", "ImageBitmapRenderingContext");
     }
@@ -275,8 +271,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _InputEvent_InputEvent() throws Exception {
         test("InputEvent", "InputEvent");
     }
@@ -324,8 +319,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _IntersectionObserver_IntersectionObserver() throws Exception {
         test("IntersectionObserver", "IntersectionObserver");
     }
@@ -334,8 +328,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _IntersectionObserverEntry_IntersectionObserverEntry() throws Exception {
         test("IntersectionObserverEntry", "IntersectionObserverEntry");
     }
@@ -355,8 +348,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _KeyframeEffect_KeyframeEffect() throws Exception {
         test("KeyframeEffect", "KeyframeEffect");
     }
@@ -385,8 +377,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _RTCStatsReport_RTCStatsReport() throws Exception {
         test("RTCStatsReport", "RTCStatsReport");
     }

@@ -856,8 +856,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myImageWithMap clicked",
-            IE = "a0 clicked")
+    @Alerts("myImageWithMap clicked")
     public void clickWithMap() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

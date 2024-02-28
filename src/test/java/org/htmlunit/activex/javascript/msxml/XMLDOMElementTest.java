@@ -43,8 +43,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts("no ActiveX")
     public void scriptableToString() throws Exception {
         tester("log(Object.prototype.toString.call(root));\n", "<root/>");
     }
@@ -158,8 +157,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "0")
+    @Alerts("no ActiveX")
     public void childNodes_none() throws Exception {
         tester("log(root.childNodes.length);\n", "<root/>");
     }
@@ -228,8 +226,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "#cdata-section=child-cdata")
+    @Alerts("no ActiveX")
     public void firstChild() throws Exception {
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -246,8 +243,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void firstChild_none() throws Exception {
         tester("debug(root.firstChild);\n", "<root/>");
     }
@@ -256,8 +252,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "#text=child-text")
+    @Alerts("no ActiveX")
     public void lastChild() throws Exception {
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -274,8 +269,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void lastChild_none() throws Exception {
         tester("debug(root.lastChild);\n", "<root/>");
     }
@@ -407,8 +401,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void ownerDocument() throws Exception {
         tester("log(root.ownerDocument === doc);\n", "<root/>");
     }
@@ -417,8 +410,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void ownerDocument_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -458,8 +450,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void parentNode_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -540,8 +531,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "child-cdatagrand-child-textchild-text")
+    @Alerts("no ActiveX")
     public void text() throws Exception {
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -613,8 +603,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void text_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -686,8 +675,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<something/>")
+    @Alerts("no ActiveX")
     public void xml_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

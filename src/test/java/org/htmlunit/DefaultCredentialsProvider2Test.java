@@ -404,8 +404,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "HTTP ERROR 401",
-            IE = "HTTP ERROR 500")
+    @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUsername() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"

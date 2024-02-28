@@ -76,8 +76,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "createNode not available")
+    @Alerts("no ActiveX")
     public void createNode() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -99,8 +98,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "createNode not available")
+    @Alerts("no ActiveX")
     public void createNode_element() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -148,8 +146,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "a:b")
+    @Alerts("no ActiveX")
     public void createElement_namespace() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

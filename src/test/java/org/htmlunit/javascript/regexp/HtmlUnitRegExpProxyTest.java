@@ -619,8 +619,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "afood$0$7b",
-            IE = "afoodfoo$7b")
+    @Alerts("afood$0$7b")
     public void replace_backReferences() throws Exception {
         testEvaluate("'afoob'.replace(/(foo)/g, '$1d$0$7')");
     }
@@ -699,8 +698,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ad$0db",
-            IE = "adfoodb")
+    @Alerts("ad$0db")
     public void replace_backReference_$0() throws Exception {
         testEvaluate("'afoob'.replace(/(foo)/g, 'd$0d')");
         testEvaluate("'afoob'.replace(/(foo)/, 'd$0d')");
@@ -710,8 +708,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ad$0db",
-            IE = "adfkxxxkodb")
+    @Alerts("ad$0db")
     public void replace_backReference_$0WithMultipleGroups() throws Exception {
         testEvaluate("'afkxxxkob'.replace(/(f)k(.*)k(o)/g, 'd$0d')");
         testEvaluate("'afkxxxkob'.replace(/(f)k(.*)k(o)/, 'd$0d')");
@@ -721,8 +718,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ad$0db",
-            IE = "adfoodb")
+    @Alerts("ad$0db")
     public void replace_backReference_$0WithNoGroups() throws Exception {
         testEvaluate("'afoob'.replace(/foo/g, 'd$0d')");
         testEvaluate("'afoob'.replace(/foo/, 'd$0d')");
@@ -732,8 +728,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ad$0dbfuoc",
-            IE = "adfoodbfuoc")
+    @Alerts("ad$0dbfuoc")
     public void replace_backReference_$0WithMultipleHits() throws Exception {
         testEvaluate("'afoobfuoc'.replace(/(f.o)/, 'd$0d')");
     }
@@ -742,8 +737,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ad$0dbd$0dc",
-            IE = "adfoodbdfuodc")
+    @Alerts("ad$0dbd$0dc")
     public void replace_backReference_$0WithMultipleHitsGlobal() throws Exception {
         testEvaluate("'afoobfuoc'.replace(/(f.o)/g, 'd$0d')");
     }

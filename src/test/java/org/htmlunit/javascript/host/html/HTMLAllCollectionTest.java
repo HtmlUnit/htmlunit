@@ -33,8 +33,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void namedItem_Unknown() throws Exception {
         namedItem("'foo'");
     }
@@ -100,8 +99,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void namedItem_ZeroIndex() throws Exception {
         namedItem("0");
     }
@@ -110,8 +108,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void namedItem_ValidIndex() throws Exception {
         namedItem("1");
     }
@@ -120,8 +117,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void namedItem_DoubleIndex() throws Exception {
         namedItem("1.1");
     }
@@ -130,8 +126,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void namedItem_InvalidIndex() throws Exception {
         namedItem("200");
     }
@@ -140,8 +135,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void namedItem_IndexAsString() throws Exception {
         namedItem("'1'");
     }
@@ -150,8 +144,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void namedItem_IndexDoubleAsString() throws Exception {
         namedItem("'1.1'");
     }
@@ -258,8 +251,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "myHead-undefined")
+    @Alerts("null")
     public void item_DoubleIndex() throws Exception {
         item("1.1");
     }
@@ -277,8 +269,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            IE = "null")
+    @Alerts("myHead-undefined")
     public void item_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -387,8 +378,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "myHead-undefined")
+    @Alerts("undefined")
     public void arrayIndex_DoubleIndex() throws Exception {
         arrayIndex("1.1");
     }
@@ -479,8 +469,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void functionIndex_NegativIndex() throws Exception {
         functionIndex("-1");
     }
@@ -507,8 +496,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "myHead-undefined")
+    @Alerts("null")
     public void functionIndex_DoubleIndex() throws Exception {
         functionIndex("1.1");
     }
@@ -517,8 +505,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void functionIndex_InvalidIndex() throws Exception {
         functionIndex("200");
     }
@@ -598,8 +585,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
-            IE = "[object Object]")
+    @Alerts("function () { [native code] }")
     public void proto() throws Exception {
         final String html = ""
             + "<html><head>\n"

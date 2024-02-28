@@ -90,8 +90,7 @@ public class XSLProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "97")
+    @Alerts("no ActiveX")
     public void transform() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 

@@ -60,8 +60,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DataTransferItem_DataTransferItem() throws Exception {
         test("DataTransferItem", "DataTransferItem");
     }
@@ -70,8 +69,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DataTransferItemList_DataTransferItemList() throws Exception {
         test("DataTransferItemList", "DataTransferItemList");
     }
@@ -89,8 +87,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DelayNode_DelayNode() throws Exception {
         test("DelayNode", "DelayNode");
     }
@@ -171,8 +168,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DocumentFragment_ShadowRoot() throws Exception {
         test("DocumentFragment", "ShadowRoot");
     }
@@ -228,8 +224,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMMatrix_DOMMatrix() throws Exception {
         test("DOMMatrix", "DOMMatrix");
     }
@@ -238,8 +233,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMMatrix_WebKitCSSMatrix() throws Exception {
         test("DOMMatrix", "WebKitCSSMatrix");
     }
@@ -248,8 +242,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMMatrixReadOnly_DOMMatrix() throws Exception {
         test("DOMMatrixReadOnly", "DOMMatrix");
     }
@@ -258,8 +251,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMMatrixReadOnly_DOMMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly", "DOMMatrixReadOnly");
     }
@@ -268,8 +260,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMMatrixReadOnly_WebKitCSSMatrix() throws Exception {
         test("DOMMatrixReadOnly", "WebKitCSSMatrix");
     }
@@ -287,8 +278,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMPoint_DOMPoint() throws Exception {
         test("DOMPoint", "DOMPoint");
     }
@@ -297,8 +287,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMPointReadOnly_DOMPoint() throws Exception {
         test("DOMPointReadOnly", "DOMPoint");
     }
@@ -307,8 +296,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMPointReadOnly_DOMPointReadOnly() throws Exception {
         test("DOMPointReadOnly", "DOMPointReadOnly");
     }
@@ -317,8 +305,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMRect_DOMRect() throws Exception {
         test("DOMRect", "DOMRect");
     }
@@ -327,8 +314,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMRectList_DOMRectList() throws Exception {
         test("DOMRectList", "DOMRectList");
     }
@@ -337,8 +323,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     @HtmlUnitNYI(CHROME = "false",
             EDGE = "false",
             FF = "false",
@@ -351,8 +336,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DOMRectReadOnly_DOMRectReadOnly() throws Exception {
         test("DOMRectReadOnly", "DOMRectReadOnly");
     }
@@ -372,8 +356,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _DOMSettableTokenList_DOMSettableTokenList() throws Exception {
         test("DOMSettableTokenList", "DOMSettableTokenList");
     }
@@ -404,8 +387,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _DOMTokenList_DOMSettableTokenList() throws Exception {
         test("DOMTokenList", "DOMSettableTokenList");
     }
@@ -432,8 +414,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DynamicsCompressorNode_DynamicsCompressorNode() throws Exception {
         test("DynamicsCompressorNode", "DynamicsCompressorNode");
     }
@@ -469,8 +450,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLAppletElement() throws Exception {
         test("Element", "HTMLAppletElement");
     }
@@ -506,8 +486,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLBaseFontElement() throws Exception {
         test("Element", "HTMLBaseFontElement");
     }
@@ -516,8 +495,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLBGSoundElement() throws Exception {
         test("Element", "HTMLBGSoundElement");
     }
@@ -526,8 +504,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLBlockElement() throws Exception {
         test("Element", "HTMLBlockElement");
     }
@@ -572,8 +549,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLDataElement() throws Exception {
         test("Element", "HTMLDataElement");
     }
@@ -591,8 +567,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLDDElement() throws Exception {
         test("Element", "HTMLDDElement");
     }
@@ -601,8 +576,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLDetailsElement() throws Exception {
         test("Element", "HTMLDetailsElement");
     }
@@ -611,8 +585,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLDialogElement() throws Exception {
         test("Element", "HTMLDialogElement");
     }
@@ -648,8 +621,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLDTElement() throws Exception {
         test("Element", "HTMLDTElement");
     }
@@ -784,8 +756,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLIsIndexElement() throws Exception {
         test("Element", "HTMLIsIndexElement");
     }
@@ -884,8 +855,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLMeterElement() throws Exception {
         test("Element", "HTMLMeterElement");
     }
@@ -903,8 +873,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLNextIdElement() throws Exception {
         test("Element", "HTMLNextIdElement");
     }
@@ -949,8 +918,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLOutputElement() throws Exception {
         test("Element", "HTMLOutputElement");
     }
@@ -977,8 +945,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLPhraseElement() throws Exception {
         test("Element", "HTMLPhraseElement");
     }
@@ -987,8 +954,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLPictureElement() throws Exception {
         test("Element", "HTMLPictureElement");
     }
@@ -1042,8 +1008,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLSlotElement() throws Exception {
         test("Element", "HTMLSlotElement");
     }
@@ -1106,8 +1071,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLTableDataCellElement() throws Exception {
         test("Element", "HTMLTableDataCellElement");
     }
@@ -1125,8 +1089,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Element_HTMLTableHeaderCellElement() throws Exception {
         test("Element", "HTMLTableHeaderCellElement");
     }
@@ -1153,8 +1116,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLTemplateElement() throws Exception {
         test("Element", "HTMLTemplateElement");
     }
@@ -1172,8 +1134,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_HTMLTimeElement() throws Exception {
         test("Element", "HTMLTimeElement");
     }
@@ -1254,8 +1215,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGAnimateElement() throws Exception {
         test("Element", "SVGAnimateElement");
     }
@@ -1264,8 +1224,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGAnimateMotionElement() throws Exception {
         test("Element", "SVGAnimateMotionElement");
     }
@@ -1274,8 +1233,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGAnimateTransformElement() throws Exception {
         test("Element", "SVGAnimateTransformElement");
     }
@@ -1284,8 +1242,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGAnimationElement() throws Exception {
         test("Element", "SVGAnimationElement");
     }
@@ -1429,8 +1386,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGFEDropShadowElement() throws Exception {
         test("Element", "SVGFEDropShadowElement");
     }
@@ -1592,8 +1548,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGForeignObjectElement() throws Exception {
         test("Element", "SVGForeignObjectElement");
     }
@@ -1611,8 +1566,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGGeometryElement() throws Exception {
         test("Element", "SVGGeometryElement");
     }
@@ -1630,8 +1584,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGGraphicsElement() throws Exception {
         test("Element", "SVGGraphicsElement");
     }
@@ -1694,8 +1647,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGMPathElement() throws Exception {
         test("Element", "SVGMPathElement");
     }
@@ -1767,8 +1719,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Element_SVGSetElement() throws Exception {
         test("Element", "SVGSetElement");
     }
@@ -1894,8 +1845,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Enumerator_Enumerator() throws Exception {
         test("Enumerator", "Enumerator");
     }
@@ -1904,8 +1854,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     @HtmlUnitNYI(CHROME = "false",
             EDGE = "false",
             FF = "false",
@@ -1954,8 +1903,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_AudioProcessingEvent() throws Exception {
         test("Event", "AudioProcessingEvent");
     }
@@ -1984,8 +1932,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_BlobEvent() throws Exception {
         test("Event", "BlobEvent");
     }
@@ -1994,8 +1941,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_ClipboardEvent() throws Exception {
         test("Event", "ClipboardEvent");
     }
@@ -2103,8 +2049,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_GamepadEvent() throws Exception {
         test("Event", "GamepadEvent");
     }
@@ -2113,8 +2058,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_HashChangeEvent() throws Exception {
         test("Event", "HashChangeEvent");
     }
@@ -2132,8 +2076,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_InputEvent() throws Exception {
         test("Event", "InputEvent");
     }
@@ -2151,8 +2094,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_MediaEncryptedEvent() throws Exception {
         test("Event", "MediaEncryptedEvent");
     }
@@ -2172,8 +2114,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_MediaKeyMessageEvent() throws Exception {
         test("Event", "MediaKeyMessageEvent");
     }
@@ -2182,8 +2123,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_MediaQueryListEvent() throws Exception {
         test("Event", "MediaQueryListEvent");
     }
@@ -2192,8 +2132,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_MediaStreamEvent() throws Exception {
         test("Event", "MediaStreamEvent");
     }
@@ -2202,8 +2141,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_MediaStreamTrackEvent() throws Exception {
         test("Event", "MediaStreamTrackEvent");
     }
@@ -2221,8 +2159,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_MIDIConnectionEvent() throws Exception {
         test("Event", "MIDIConnectionEvent");
     }
@@ -2231,8 +2168,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_MIDIMessageEvent() throws Exception {
         test("Event", "MIDIMessageEvent");
     }
@@ -2261,8 +2197,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Event_MouseWheelEvent() throws Exception {
         test("Event", "MouseWheelEvent");
     }
@@ -2271,8 +2206,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Event_MSGestureEvent() throws Exception {
         test("Event", "MSGestureEvent");
     }
@@ -2290,8 +2224,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_OfflineAudioCompletionEvent() throws Exception {
         test("Event", "OfflineAudioCompletionEvent");
     }
@@ -2371,8 +2304,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_RTCDataChannelEvent() throws Exception {
         test("Event", "RTCDataChannelEvent");
     }
@@ -2381,8 +2313,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_RTCPeerConnectionIceEvent() throws Exception {
         test("Event", "RTCPeerConnectionIceEvent");
     }
@@ -2391,8 +2322,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_SecurityPolicyViolationEvent() throws Exception {
         test("Event", "SecurityPolicyViolationEvent");
     }
@@ -2401,8 +2331,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_SpeechSynthesisEvent() throws Exception {
         test("Event", "SpeechSynthesisEvent");
     }
@@ -2420,8 +2349,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_SubmitEvent() throws Exception {
         test("Event", "SubmitEvent");
     }
@@ -2430,8 +2358,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _Event_SVGZoomEvent() throws Exception {
         test("Event", "SVGZoomEvent");
     }
@@ -2549,8 +2476,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventSource_EventSource() throws Exception {
         test("EventSource", "EventSource");
     }
@@ -2559,8 +2485,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_AnalyserNode() throws Exception {
         test("EventTarget", "AnalyserNode");
     }
@@ -2569,8 +2494,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Animation() throws Exception {
         test("EventTarget", "Animation");
     }
@@ -2588,8 +2512,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Attr() throws Exception {
         test("EventTarget", "Attr");
     }
@@ -2598,8 +2521,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Audio() throws Exception {
         test("EventTarget", "Audio");
     }
@@ -2608,8 +2530,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_AudioBufferSourceNode() throws Exception {
         test("EventTarget", "AudioBufferSourceNode");
     }
@@ -2618,8 +2539,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_AudioContext() throws Exception {
         test("EventTarget", "AudioContext");
     }
@@ -2628,8 +2548,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_AudioDestinationNode() throws Exception {
         test("EventTarget", "AudioDestinationNode");
     }
@@ -2638,8 +2557,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_AudioNode() throws Exception {
         test("EventTarget", "AudioNode");
     }
@@ -2648,8 +2566,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_AudioScheduledSourceNode() throws Exception {
         test("EventTarget", "AudioScheduledSourceNode");
     }
@@ -2658,8 +2575,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_BaseAudioContext() throws Exception {
         test("EventTarget", "BaseAudioContext");
     }
@@ -2680,8 +2596,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_BiquadFilterNode() throws Exception {
         test("EventTarget", "BiquadFilterNode");
     }
@@ -2690,8 +2605,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_BroadcastChannel() throws Exception {
         test("EventTarget", "BroadcastChannel");
     }
@@ -2722,8 +2636,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_CDATASection() throws Exception {
         test("EventTarget", "CDATASection");
     }
@@ -2732,8 +2645,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_ChannelMergerNode() throws Exception {
         test("EventTarget", "ChannelMergerNode");
     }
@@ -2742,8 +2654,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_ChannelSplitterNode() throws Exception {
         test("EventTarget", "ChannelSplitterNode");
     }
@@ -2752,8 +2663,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_CharacterData() throws Exception {
         test("EventTarget", "CharacterData");
     }
@@ -2762,8 +2672,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Comment() throws Exception {
         test("EventTarget", "Comment");
     }
@@ -2772,8 +2681,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_ConstantSourceNode() throws Exception {
         test("EventTarget", "ConstantSourceNode");
     }
@@ -2782,8 +2690,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_ConvolverNode() throws Exception {
         test("EventTarget", "ConvolverNode");
     }
@@ -2792,8 +2699,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_DelayNode() throws Exception {
         test("EventTarget", "DelayNode");
     }
@@ -2802,8 +2708,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Document() throws Exception {
         test("EventTarget", "Document");
     }
@@ -2812,8 +2717,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_DocumentFragment() throws Exception {
         test("EventTarget", "DocumentFragment");
     }
@@ -2822,8 +2726,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_DocumentType() throws Exception {
         test("EventTarget", "DocumentType");
     }
@@ -2852,8 +2755,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_DynamicsCompressorNode() throws Exception {
         test("EventTarget", "DynamicsCompressorNode");
     }
@@ -2862,8 +2764,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Element() throws Exception {
         test("EventTarget", "Element");
     }
@@ -2872,8 +2773,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_EventSource() throws Exception {
         test("EventTarget", "EventSource");
     }
@@ -2882,8 +2782,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_EventTarget() throws Exception {
         test("EventTarget", "EventTarget");
     }
@@ -2892,8 +2791,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_FileReader() throws Exception {
         test("EventTarget", "FileReader");
     }
@@ -2913,8 +2811,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_GainNode() throws Exception {
         test("EventTarget", "GainNode");
     }
@@ -2923,8 +2820,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLAnchorElement() throws Exception {
         test("EventTarget", "HTMLAnchorElement");
     }
@@ -2933,8 +2829,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLAreaElement() throws Exception {
         test("EventTarget", "HTMLAreaElement");
     }
@@ -2943,8 +2838,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLAudioElement() throws Exception {
         test("EventTarget", "HTMLAudioElement");
     }
@@ -2953,8 +2847,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLBaseElement() throws Exception {
         test("EventTarget", "HTMLBaseElement");
     }
@@ -2963,8 +2856,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLBodyElement() throws Exception {
         test("EventTarget", "HTMLBodyElement");
     }
@@ -2973,8 +2865,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLBRElement() throws Exception {
         test("EventTarget", "HTMLBRElement");
     }
@@ -2983,8 +2874,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLButtonElement() throws Exception {
         test("EventTarget", "HTMLButtonElement");
     }
@@ -2993,8 +2883,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLCanvasElement() throws Exception {
         test("EventTarget", "HTMLCanvasElement");
     }
@@ -3003,8 +2892,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLDataElement() throws Exception {
         test("EventTarget", "HTMLDataElement");
     }
@@ -3013,8 +2901,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLDataListElement() throws Exception {
         test("EventTarget", "HTMLDataListElement");
     }
@@ -3023,8 +2910,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLDetailsElement() throws Exception {
         test("EventTarget", "HTMLDetailsElement");
     }
@@ -3033,8 +2919,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLDialogElement() throws Exception {
         test("EventTarget", "HTMLDialogElement");
     }
@@ -3043,8 +2928,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLDirectoryElement() throws Exception {
         test("EventTarget", "HTMLDirectoryElement");
     }
@@ -3053,8 +2937,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLDivElement() throws Exception {
         test("EventTarget", "HTMLDivElement");
     }
@@ -3063,8 +2946,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLDListElement() throws Exception {
         test("EventTarget", "HTMLDListElement");
     }
@@ -3073,8 +2955,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLDocument() throws Exception {
         test("EventTarget", "HTMLDocument");
     }
@@ -3083,8 +2964,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLElement() throws Exception {
         test("EventTarget", "HTMLElement");
     }
@@ -3093,8 +2973,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLEmbedElement() throws Exception {
         test("EventTarget", "HTMLEmbedElement");
     }
@@ -3103,8 +2982,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLFieldSetElement() throws Exception {
         test("EventTarget", "HTMLFieldSetElement");
     }
@@ -3113,8 +2991,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLFontElement() throws Exception {
         test("EventTarget", "HTMLFontElement");
     }
@@ -3123,8 +3000,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLFormElement() throws Exception {
         test("EventTarget", "HTMLFormElement");
     }
@@ -3133,8 +3009,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLFrameElement() throws Exception {
         test("EventTarget", "HTMLFrameElement");
     }
@@ -3143,8 +3018,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLFrameSetElement() throws Exception {
         test("EventTarget", "HTMLFrameSetElement");
     }
@@ -3153,8 +3027,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLHeadElement() throws Exception {
         test("EventTarget", "HTMLHeadElement");
     }
@@ -3163,8 +3036,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLHeadingElement() throws Exception {
         test("EventTarget", "HTMLHeadingElement");
     }
@@ -3173,8 +3045,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLHRElement() throws Exception {
         test("EventTarget", "HTMLHRElement");
     }
@@ -3183,8 +3054,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLHtmlElement() throws Exception {
         test("EventTarget", "HTMLHtmlElement");
     }
@@ -3193,8 +3063,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLIFrameElement() throws Exception {
         test("EventTarget", "HTMLIFrameElement");
     }
@@ -3203,8 +3072,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLImageElement() throws Exception {
         test("EventTarget", "HTMLImageElement");
     }
@@ -3213,8 +3081,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLInputElement() throws Exception {
         test("EventTarget", "HTMLInputElement");
     }
@@ -3223,8 +3090,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLLabelElement() throws Exception {
         test("EventTarget", "HTMLLabelElement");
     }
@@ -3233,8 +3099,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLLegendElement() throws Exception {
         test("EventTarget", "HTMLLegendElement");
     }
@@ -3243,8 +3108,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLLIElement() throws Exception {
         test("EventTarget", "HTMLLIElement");
     }
@@ -3253,8 +3117,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLLinkElement() throws Exception {
         test("EventTarget", "HTMLLinkElement");
     }
@@ -3263,8 +3126,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLMapElement() throws Exception {
         test("EventTarget", "HTMLMapElement");
     }
@@ -3273,8 +3135,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLMarqueeElement() throws Exception {
         test("EventTarget", "HTMLMarqueeElement");
     }
@@ -3283,8 +3144,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLMediaElement() throws Exception {
         test("EventTarget", "HTMLMediaElement");
     }
@@ -3293,8 +3153,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLMenuElement() throws Exception {
         test("EventTarget", "HTMLMenuElement");
     }
@@ -3312,8 +3171,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLMetaElement() throws Exception {
         test("EventTarget", "HTMLMetaElement");
     }
@@ -3322,8 +3180,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLMeterElement() throws Exception {
         test("EventTarget", "HTMLMeterElement");
     }
@@ -3332,8 +3189,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLModElement() throws Exception {
         test("EventTarget", "HTMLModElement");
     }
@@ -3342,8 +3198,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLObjectElement() throws Exception {
         test("EventTarget", "HTMLObjectElement");
     }
@@ -3352,8 +3207,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLOListElement() throws Exception {
         test("EventTarget", "HTMLOListElement");
     }
@@ -3362,8 +3216,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLOptGroupElement() throws Exception {
         test("EventTarget", "HTMLOptGroupElement");
     }
@@ -3372,8 +3225,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLOptionElement() throws Exception {
         test("EventTarget", "HTMLOptionElement");
     }
@@ -3382,8 +3234,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLOutputElement() throws Exception {
         test("EventTarget", "HTMLOutputElement");
     }
@@ -3392,8 +3243,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLParagraphElement() throws Exception {
         test("EventTarget", "HTMLParagraphElement");
     }
@@ -3402,8 +3252,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLParamElement() throws Exception {
         test("EventTarget", "HTMLParamElement");
     }
@@ -3412,8 +3261,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLPictureElement() throws Exception {
         test("EventTarget", "HTMLPictureElement");
     }
@@ -3422,8 +3270,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLPreElement() throws Exception {
         test("EventTarget", "HTMLPreElement");
     }
@@ -3432,8 +3279,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLProgressElement() throws Exception {
         test("EventTarget", "HTMLProgressElement");
     }
@@ -3442,8 +3288,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLQuoteElement() throws Exception {
         test("EventTarget", "HTMLQuoteElement");
     }
@@ -3452,8 +3297,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLScriptElement() throws Exception {
         test("EventTarget", "HTMLScriptElement");
     }
@@ -3462,8 +3306,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLSelectElement() throws Exception {
         test("EventTarget", "HTMLSelectElement");
     }
@@ -3472,8 +3315,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLSlotElement() throws Exception {
         test("EventTarget", "HTMLSlotElement");
     }
@@ -3482,8 +3324,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLSourceElement() throws Exception {
         test("EventTarget", "HTMLSourceElement");
     }
@@ -3492,8 +3333,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLSpanElement() throws Exception {
         test("EventTarget", "HTMLSpanElement");
     }
@@ -3502,8 +3342,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLStyleElement() throws Exception {
         test("EventTarget", "HTMLStyleElement");
     }
@@ -3512,8 +3351,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTableCaptionElement() throws Exception {
         test("EventTarget", "HTMLTableCaptionElement");
     }
@@ -3522,8 +3360,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTableCellElement() throws Exception {
         test("EventTarget", "HTMLTableCellElement");
     }
@@ -3532,8 +3369,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTableColElement() throws Exception {
         test("EventTarget", "HTMLTableColElement");
     }
@@ -3542,8 +3378,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTableElement() throws Exception {
         test("EventTarget", "HTMLTableElement");
     }
@@ -3552,8 +3387,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTableRowElement() throws Exception {
         test("EventTarget", "HTMLTableRowElement");
     }
@@ -3562,8 +3396,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTableSectionElement() throws Exception {
         test("EventTarget", "HTMLTableSectionElement");
     }
@@ -3572,8 +3405,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTemplateElement() throws Exception {
         test("EventTarget", "HTMLTemplateElement");
     }
@@ -3582,8 +3414,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTextAreaElement() throws Exception {
         test("EventTarget", "HTMLTextAreaElement");
     }
@@ -3592,8 +3423,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTimeElement() throws Exception {
         test("EventTarget", "HTMLTimeElement");
     }
@@ -3602,8 +3432,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTitleElement() throws Exception {
         test("EventTarget", "HTMLTitleElement");
     }
@@ -3612,8 +3441,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLTrackElement() throws Exception {
         test("EventTarget", "HTMLTrackElement");
     }
@@ -3622,8 +3450,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLUListElement() throws Exception {
         test("EventTarget", "HTMLUListElement");
     }
@@ -3632,8 +3459,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLUnknownElement() throws Exception {
         test("EventTarget", "HTMLUnknownElement");
     }
@@ -3642,8 +3468,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_HTMLVideoElement() throws Exception {
         test("EventTarget", "HTMLVideoElement");
     }
@@ -3652,8 +3477,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_IDBDatabase() throws Exception {
         test("EventTarget", "IDBDatabase");
     }
@@ -3671,8 +3495,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_IDBOpenDBRequest() throws Exception {
         test("EventTarget", "IDBOpenDBRequest");
     }
@@ -3681,8 +3504,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_IDBRequest() throws Exception {
         test("EventTarget", "IDBRequest");
     }
@@ -3691,8 +3513,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_IDBTransaction() throws Exception {
         test("EventTarget", "IDBTransaction");
     }
@@ -3701,8 +3522,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_IIRFilterNode() throws Exception {
         test("EventTarget", "IIRFilterNode");
     }
@@ -3711,8 +3531,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Image() throws Exception {
         test("EventTarget", "Image");
     }
@@ -3730,8 +3549,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaDevices() throws Exception {
         test("EventTarget", "MediaDevices");
     }
@@ -3740,8 +3558,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaElementAudioSourceNode() throws Exception {
         test("EventTarget", "MediaElementAudioSourceNode");
     }
@@ -3750,8 +3567,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaKeySession() throws Exception {
         test("EventTarget", "MediaKeySession");
     }
@@ -3760,8 +3576,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaQueryList() throws Exception {
         test("EventTarget", "MediaQueryList");
     }
@@ -3770,8 +3585,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaRecorder() throws Exception {
         test("EventTarget", "MediaRecorder");
     }
@@ -3780,8 +3594,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaSource() throws Exception {
         test("EventTarget", "MediaSource");
     }
@@ -3790,8 +3603,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaStream() throws Exception {
         test("EventTarget", "MediaStream");
     }
@@ -3800,8 +3612,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaStreamAudioDestinationNode() throws Exception {
         test("EventTarget", "MediaStreamAudioDestinationNode");
     }
@@ -3810,8 +3621,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaStreamAudioSourceNode() throws Exception {
         test("EventTarget", "MediaStreamAudioSourceNode");
     }
@@ -3820,8 +3630,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MediaStreamTrack() throws Exception {
         test("EventTarget", "MediaStreamTrack");
     }
@@ -3830,8 +3639,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MessagePort() throws Exception {
         test("EventTarget", "MessagePort");
     }
@@ -3840,8 +3648,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MIDIAccess() throws Exception {
         test("EventTarget", "MIDIAccess");
     }
@@ -3850,8 +3657,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MIDIInput() throws Exception {
         test("EventTarget", "MIDIInput");
     }
@@ -3860,8 +3666,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MIDIOutput() throws Exception {
         test("EventTarget", "MIDIOutput");
     }
@@ -3870,8 +3675,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_MIDIPort() throws Exception {
         test("EventTarget", "MIDIPort");
     }
@@ -3900,8 +3704,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Node() throws Exception {
         test("EventTarget", "Node");
     }
@@ -3910,8 +3713,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Notification() throws Exception {
         test("EventTarget", "Notification");
     }
@@ -3920,8 +3722,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_OfflineAudioContext() throws Exception {
         test("EventTarget", "OfflineAudioContext");
     }
@@ -3939,8 +3740,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Option() throws Exception {
         test("EventTarget", "Option");
     }
@@ -3949,8 +3749,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_OscillatorNode() throws Exception {
         test("EventTarget", "OscillatorNode");
     }
@@ -3959,8 +3758,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_PannerNode() throws Exception {
         test("EventTarget", "PannerNode");
     }
@@ -3991,8 +3789,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Performance() throws Exception {
         test("EventTarget", "Performance");
     }
@@ -4001,8 +3798,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_PermissionStatus() throws Exception {
         test("EventTarget", "PermissionStatus");
     }
@@ -4044,8 +3840,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_ProcessingInstruction() throws Exception {
         test("EventTarget", "ProcessingInstruction");
     }
@@ -4065,8 +3860,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_RTCPeerConnection() throws Exception {
         test("EventTarget", "RTCPeerConnection");
     }
@@ -4075,8 +3869,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_RTCSctpTransport() throws Exception {
         test("EventTarget", "RTCSctpTransport");
     }
@@ -4085,8 +3878,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Screen() throws Exception {
         test("EventTarget", "Screen");
     }
@@ -4095,8 +3887,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_ScreenOrientation() throws Exception {
         test("EventTarget", "ScreenOrientation");
     }
@@ -4105,8 +3896,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_ScriptProcessorNode() throws Exception {
         test("EventTarget", "ScriptProcessorNode");
     }
@@ -4154,8 +3944,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_ShadowRoot() throws Exception {
         test("EventTarget", "ShadowRoot");
     }
@@ -4164,8 +3953,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SharedWorker() throws Exception {
         test("EventTarget", "SharedWorker");
     }
@@ -4174,8 +3962,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SourceBuffer() throws Exception {
         test("EventTarget", "SourceBuffer");
     }
@@ -4184,8 +3971,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SourceBufferList() throws Exception {
         test("EventTarget", "SourceBufferList");
     }
@@ -4194,8 +3980,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SpeechSynthesis() throws Exception {
         test("EventTarget", "SpeechSynthesis");
     }
@@ -4204,8 +3989,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SpeechSynthesisUtterance() throws Exception {
         test("EventTarget", "SpeechSynthesisUtterance");
     }
@@ -4214,8 +3998,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_StereoPannerNode() throws Exception {
         test("EventTarget", "StereoPannerNode");
     }
@@ -4237,8 +4020,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGAElement() throws Exception {
         test("EventTarget", "SVGAElement");
     }
@@ -4247,8 +4029,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGAnimateElement() throws Exception {
         test("EventTarget", "SVGAnimateElement");
     }
@@ -4257,8 +4038,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGAnimateMotionElement() throws Exception {
         test("EventTarget", "SVGAnimateMotionElement");
     }
@@ -4267,8 +4047,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGAnimateTransformElement() throws Exception {
         test("EventTarget", "SVGAnimateTransformElement");
     }
@@ -4277,8 +4056,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGAnimationElement() throws Exception {
         test("EventTarget", "SVGAnimationElement");
     }
@@ -4287,8 +4065,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGCircleElement() throws Exception {
         test("EventTarget", "SVGCircleElement");
     }
@@ -4297,8 +4074,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGClipPathElement() throws Exception {
         test("EventTarget", "SVGClipPathElement");
     }
@@ -4307,8 +4083,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGComponentTransferFunctionElement() throws Exception {
         test("EventTarget", "SVGComponentTransferFunctionElement");
     }
@@ -4317,8 +4092,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGDefsElement() throws Exception {
         test("EventTarget", "SVGDefsElement");
     }
@@ -4327,8 +4101,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGDescElement() throws Exception {
         test("EventTarget", "SVGDescElement");
     }
@@ -4337,8 +4110,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGElement() throws Exception {
         test("EventTarget", "SVGElement");
     }
@@ -4347,8 +4119,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGEllipseElement() throws Exception {
         test("EventTarget", "SVGEllipseElement");
     }
@@ -4357,8 +4128,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEBlendElement() throws Exception {
         test("EventTarget", "SVGFEBlendElement");
     }
@@ -4367,8 +4137,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEColorMatrixElement() throws Exception {
         test("EventTarget", "SVGFEColorMatrixElement");
     }
@@ -4377,8 +4146,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEComponentTransferElement() throws Exception {
         test("EventTarget", "SVGFEComponentTransferElement");
     }
@@ -4387,8 +4155,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFECompositeElement() throws Exception {
         test("EventTarget", "SVGFECompositeElement");
     }
@@ -4397,8 +4164,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEConvolveMatrixElement() throws Exception {
         test("EventTarget", "SVGFEConvolveMatrixElement");
     }
@@ -4407,8 +4173,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEDiffuseLightingElement() throws Exception {
         test("EventTarget", "SVGFEDiffuseLightingElement");
     }
@@ -4417,8 +4182,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEDisplacementMapElement() throws Exception {
         test("EventTarget", "SVGFEDisplacementMapElement");
     }
@@ -4427,8 +4191,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEDistantLightElement() throws Exception {
         test("EventTarget", "SVGFEDistantLightElement");
     }
@@ -4437,8 +4200,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEDropShadowElement() throws Exception {
         test("EventTarget", "SVGFEDropShadowElement");
     }
@@ -4447,8 +4209,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEFloodElement() throws Exception {
         test("EventTarget", "SVGFEFloodElement");
     }
@@ -4457,8 +4218,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEFuncAElement() throws Exception {
         test("EventTarget", "SVGFEFuncAElement");
     }
@@ -4467,8 +4227,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEFuncBElement() throws Exception {
         test("EventTarget", "SVGFEFuncBElement");
     }
@@ -4477,8 +4236,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEFuncGElement() throws Exception {
         test("EventTarget", "SVGFEFuncGElement");
     }
@@ -4487,8 +4245,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEFuncRElement() throws Exception {
         test("EventTarget", "SVGFEFuncRElement");
     }
@@ -4497,8 +4254,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEGaussianBlurElement() throws Exception {
         test("EventTarget", "SVGFEGaussianBlurElement");
     }
@@ -4507,8 +4263,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEImageElement() throws Exception {
         test("EventTarget", "SVGFEImageElement");
     }
@@ -4517,8 +4272,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEMergeElement() throws Exception {
         test("EventTarget", "SVGFEMergeElement");
     }
@@ -4527,8 +4281,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEMergeNodeElement() throws Exception {
         test("EventTarget", "SVGFEMergeNodeElement");
     }
@@ -4537,8 +4290,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEMorphologyElement() throws Exception {
         test("EventTarget", "SVGFEMorphologyElement");
     }
@@ -4547,8 +4299,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEOffsetElement() throws Exception {
         test("EventTarget", "SVGFEOffsetElement");
     }
@@ -4557,8 +4308,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFEPointLightElement() throws Exception {
         test("EventTarget", "SVGFEPointLightElement");
     }
@@ -4567,8 +4317,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFESpecularLightingElement() throws Exception {
         test("EventTarget", "SVGFESpecularLightingElement");
     }
@@ -4577,8 +4326,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFESpotLightElement() throws Exception {
         test("EventTarget", "SVGFESpotLightElement");
     }
@@ -4587,8 +4335,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFETileElement() throws Exception {
         test("EventTarget", "SVGFETileElement");
     }
@@ -4597,8 +4344,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFETurbulenceElement() throws Exception {
         test("EventTarget", "SVGFETurbulenceElement");
     }
@@ -4607,8 +4353,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGFilterElement() throws Exception {
         test("EventTarget", "SVGFilterElement");
     }
@@ -4617,8 +4362,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGForeignObjectElement() throws Exception {
         test("EventTarget", "SVGForeignObjectElement");
     }
@@ -4627,8 +4371,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGGElement() throws Exception {
         test("EventTarget", "SVGGElement");
     }
@@ -4637,8 +4380,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGGeometryElement() throws Exception {
         test("EventTarget", "SVGGeometryElement");
     }
@@ -4647,8 +4389,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGGradientElement() throws Exception {
         test("EventTarget", "SVGGradientElement");
     }
@@ -4657,8 +4398,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGGraphicsElement() throws Exception {
         test("EventTarget", "SVGGraphicsElement");
     }
@@ -4667,8 +4407,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGImageElement() throws Exception {
         test("EventTarget", "SVGImageElement");
     }
@@ -4677,8 +4416,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGLinearGradientElement() throws Exception {
         test("EventTarget", "SVGLinearGradientElement");
     }
@@ -4687,8 +4425,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGLineElement() throws Exception {
         test("EventTarget", "SVGLineElement");
     }
@@ -4697,8 +4434,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGMarkerElement() throws Exception {
         test("EventTarget", "SVGMarkerElement");
     }
@@ -4707,8 +4443,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGMaskElement() throws Exception {
         test("EventTarget", "SVGMaskElement");
     }
@@ -4717,8 +4452,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGMetadataElement() throws Exception {
         test("EventTarget", "SVGMetadataElement");
     }
@@ -4727,8 +4461,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGMPathElement() throws Exception {
         test("EventTarget", "SVGMPathElement");
     }
@@ -4737,8 +4470,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGPathElement() throws Exception {
         test("EventTarget", "SVGPathElement");
     }
@@ -4747,8 +4479,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGPatternElement() throws Exception {
         test("EventTarget", "SVGPatternElement");
     }
@@ -4757,8 +4488,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGPolygonElement() throws Exception {
         test("EventTarget", "SVGPolygonElement");
     }
@@ -4767,8 +4497,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGPolylineElement() throws Exception {
         test("EventTarget", "SVGPolylineElement");
     }
@@ -4777,8 +4506,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGRadialGradientElement() throws Exception {
         test("EventTarget", "SVGRadialGradientElement");
     }
@@ -4787,8 +4515,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGRectElement() throws Exception {
         test("EventTarget", "SVGRectElement");
     }
@@ -4797,8 +4524,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGScriptElement() throws Exception {
         test("EventTarget", "SVGScriptElement");
     }
@@ -4807,8 +4533,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGSetElement() throws Exception {
         test("EventTarget", "SVGSetElement");
     }
@@ -4817,8 +4542,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGStopElement() throws Exception {
         test("EventTarget", "SVGStopElement");
     }
@@ -4827,8 +4551,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGStyleElement() throws Exception {
         test("EventTarget", "SVGStyleElement");
     }
@@ -4837,8 +4560,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGSVGElement() throws Exception {
         test("EventTarget", "SVGSVGElement");
     }
@@ -4847,8 +4569,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGSwitchElement() throws Exception {
         test("EventTarget", "SVGSwitchElement");
     }
@@ -4857,8 +4578,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGSymbolElement() throws Exception {
         test("EventTarget", "SVGSymbolElement");
     }
@@ -4867,8 +4587,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGTextContentElement() throws Exception {
         test("EventTarget", "SVGTextContentElement");
     }
@@ -4877,8 +4596,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGTextElement() throws Exception {
         test("EventTarget", "SVGTextElement");
     }
@@ -4887,8 +4605,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGTextPathElement() throws Exception {
         test("EventTarget", "SVGTextPathElement");
     }
@@ -4897,8 +4614,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGTextPositioningElement() throws Exception {
         test("EventTarget", "SVGTextPositioningElement");
     }
@@ -4907,8 +4623,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGTitleElement() throws Exception {
         test("EventTarget", "SVGTitleElement");
     }
@@ -4917,8 +4632,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGTSpanElement() throws Exception {
         test("EventTarget", "SVGTSpanElement");
     }
@@ -4927,8 +4641,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGUseElement() throws Exception {
         test("EventTarget", "SVGUseElement");
     }
@@ -4937,8 +4650,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_SVGViewElement() throws Exception {
         test("EventTarget", "SVGViewElement");
     }
@@ -4947,8 +4659,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Text() throws Exception {
         test("EventTarget", "Text");
     }
@@ -4957,8 +4668,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_TextTrack() throws Exception {
         test("EventTarget", "TextTrack");
     }
@@ -4967,8 +4677,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_TextTrackCue() throws Exception {
         test("EventTarget", "TextTrackCue");
     }
@@ -4977,8 +4686,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_TextTrackList() throws Exception {
         test("EventTarget", "TextTrackList");
     }
@@ -4987,8 +4695,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_VTTCue() throws Exception {
         test("EventTarget", "VTTCue");
     }
@@ -4997,8 +4704,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_WaveShaperNode() throws Exception {
         test("EventTarget", "WaveShaperNode");
     }
@@ -5040,8 +4746,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_WebSocket() throws Exception {
         test("EventTarget", "WebSocket");
     }
@@ -5050,8 +4755,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Window() throws Exception {
         test("EventTarget", "Window");
     }
@@ -5060,8 +4764,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_Worker() throws Exception {
         test("EventTarget", "Worker");
     }
@@ -5070,8 +4773,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_XMLDocument() throws Exception {
         test("EventTarget", "XMLDocument");
     }
@@ -5080,8 +4782,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_XMLHttpRequest() throws Exception {
         test("EventTarget", "XMLHttpRequest");
     }
@@ -5090,8 +4791,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_XMLHttpRequestEventTarget() throws Exception {
         test("EventTarget", "XMLHttpRequestEventTarget");
     }
@@ -5100,8 +4800,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _EventTarget_XMLHttpRequestUpload() throws Exception {
         test("EventTarget", "XMLHttpRequestUpload");
     }
@@ -5110,8 +4809,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_SpeechSynthesisErrorEvent() throws Exception {
         test("Event", "SpeechSynthesisErrorEvent");
     }
@@ -5120,8 +4818,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _EXT_texture_filter_anisotropic_EXT_texture_filter_anisotropic() throws Exception {
         test("EXT_texture_filter_anisotropic", "EXT_texture_filter_anisotropic");
     }

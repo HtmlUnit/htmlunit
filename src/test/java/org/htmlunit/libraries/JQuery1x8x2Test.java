@@ -3494,8 +3494,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 5, 5",
-            IE = "1, 4, 5")
+    @Alerts("0, 5, 5")
     public void manipulation__clone_form_element___Bug__3879___6655_() throws Exception {
         runTest("manipulation: clone(form element) (Bug #3879, #6655)");
     }
@@ -6117,8 +6116,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2",
-            IE = "0, 1, 1")
+    @Alerts("0, 2, 2")
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }

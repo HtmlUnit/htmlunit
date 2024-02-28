@@ -202,7 +202,7 @@ public class BrowserRunner extends Suite {
          * Alerts for Internet Explorer 11.
          * @return the alerts
          */
-        String[] IE() default { EMPTY_DEFAULT };
+        // String[] IE() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Edge.

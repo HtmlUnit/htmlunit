@@ -74,8 +74,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Intl]",
-            IE = "[object Object]")
+    @Alerts("[object Intl]")
     public void intl() throws Exception {
         test("Intl");
     }
@@ -131,8 +130,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31,415.927",
-            IE = "31.415,927")
+    @Alerts("31,415.927")
     public void format_ban() throws Exception {
         test("new Intl.NumberFormat('ban').format(number)");
     }
@@ -173,8 +171,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31,415.927",
-            IE = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667")
+    @Alerts("31,415.927")
     public void format_ar_ae() throws Exception {
         test("new Intl.NumberFormat('ar-AE').format(number)");
     }
@@ -192,8 +189,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31.415,927",
-            IE = "31,415.927")
+    @Alerts("31.415,927")
     public void format_ar_dz() throws Exception {
         test("new Intl.NumberFormat('ar-DZ').format(number)");
     }
@@ -247,8 +243,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31.415,927",
-            IE = "31,415.927")
+    @Alerts("31.415,927")
     public void format_ar_ly() throws Exception {
         test("new Intl.NumberFormat('ar-LY').format(number)");
     }
@@ -257,8 +252,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31.415,927",
-            IE = "31,415.927")
+    @Alerts("31.415,927")
     public void format_ar_ma() throws Exception {
         test("new Intl.NumberFormat('ar-MA').format(number)");
     }
@@ -312,8 +306,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31.415,927",
-            IE = "31,415.927")
+    @Alerts("31.415,927")
     public void format_ar_tn() throws Exception {
         test("new Intl.NumberFormat('ar-TN').format(number)");
     }
@@ -832,8 +825,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31\u202f415,927",
-            IE = "31\u00a0415,927")
+    @Alerts("31\u202f415,927")
     public void format_fr() throws Exception {
         test("new Intl.NumberFormat('fr').format(number)");
     }
@@ -842,8 +834,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31\u202f415,927",
-            IE = "31.415,927")
+    @Alerts("31\u202f415,927")
     public void format_fr_be() throws Exception {
         test("new Intl.NumberFormat('fr-BE').format(number)");
     }
@@ -861,8 +852,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31\u202f415,927",
-            IE = "31\u00a0415,927")
+    @Alerts("31\u202f415,927")
     public void format_fr_ch() throws Exception {
         test("new Intl.NumberFormat('fr-CH').format(number)");
     }
@@ -871,8 +861,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31\u202f415,927",
-            IE = "31\u00a0415,927")
+    @Alerts("31\u202f415,927")
     public void format_fr_fr() throws Exception {
         test("new Intl.NumberFormat('fr-FR').format(number)");
     }

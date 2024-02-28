@@ -304,8 +304,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "#%3Ca%3Efoobar%3C/a%3E",
-            IE = "#<a>foobar</a>")
+    @Alerts("#%3Ca%3Efoobar%3C/a%3E")
     public void hash() throws Exception {
         checkHash(URL_FIRST + "?#<a>foobar</a>");
     }
@@ -314,8 +313,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void emptyHash() throws Exception {
         checkHash(URL_FIRST + "#");
     }

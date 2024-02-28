@@ -1691,8 +1691,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Sum",
-            IE = "Sum\ndetail")
+    @Alerts("Sum")
     public void getNormalizedTextDetails() throws Exception {
         getNormalizedTextFormated("<details id='tester'>"
                 + "<summary>Sum</summary>"
@@ -1704,8 +1703,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Sum\nSum2",
-            IE = "SumSum2\ndetail")
+    @Alerts("Sum\nSum2")
     public void getNormalizedTextDetailsTwoSums() throws Exception {
         getNormalizedTextFormated("<details id='tester'>"
                 + "<summary>Sum</summary>"

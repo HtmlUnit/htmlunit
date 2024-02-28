@@ -41,8 +41,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts("no ActiveX")
     public void scriptableToString() throws Exception {
         tester("log(Object.prototype.toString.call(instr));\n");
     }
@@ -51,8 +50,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void attributes() throws Exception {
         property("attributes");
     }
@@ -107,8 +105,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "apache")
+    @Alerts("no ActiveX")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -117,8 +114,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "xml")
+    @Alerts("no ActiveX")
     public void baseName_xmlDecl() throws Exception {
         property_xmlDecl("baseName");
     }
@@ -127,8 +123,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "0")
+    @Alerts("no ActiveX")
     public void childNodes() throws Exception {
         tester("log(instr.childNodes.length);\n");
     }
@@ -137,8 +132,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "0")
+    @Alerts("no ActiveX")
     public void childNodes_xmlDecl() throws Exception {
         tester_xmlDecl("log(instr.childNodes.length);\n");
     }
@@ -221,8 +215,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -231,8 +224,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void dataType_xmlDecl() throws Exception {
         property_xmlDecl("dataType");
     }
@@ -241,8 +233,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void definition() throws Exception {
         property("definition");
     }
@@ -251,8 +242,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void definition_xmlDecl() throws Exception {
         property_xmlDecl("definition");
     }
@@ -261,8 +251,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void firstChild() throws Exception {
         property("firstChild");
     }
@@ -271,8 +260,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void firstChild_xmlDecl() throws Exception {
         property_xmlDecl("firstChild");
     }
@@ -281,8 +269,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void lastChild() throws Exception {
         property("lastChild");
     }
@@ -291,8 +278,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void lastChild_xmlDecl() throws Exception {
         property_xmlDecl("lastChild");
     }
@@ -301,8 +287,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -311,8 +296,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void namespaceURI_xmlDecl() throws Exception {
         property_xmlDecl("namespaceURI");
     }
@@ -321,8 +305,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "apache")
+    @Alerts("no ActiveX")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -331,8 +314,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "xml")
+    @Alerts("no ActiveX")
     public void nodeName_xmlDecl() throws Exception {
         property_xmlDecl("nodeName");
     }
@@ -341,8 +323,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "7")
+    @Alerts("no ActiveX")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -351,8 +332,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "7")
+    @Alerts("no ActiveX")
     public void nodeType_xmlDecl() throws Exception {
         property_xmlDecl("nodeType");
     }
@@ -435,8 +415,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void ownerDocument() throws Exception {
         tester("log(instr.ownerDocument === doc);\n");
     }
@@ -445,8 +424,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void ownerDocument_xmlDecl() throws Exception {
         tester_xmlDecl("log(instr.ownerDocument === doc);\n");
     }
@@ -455,8 +433,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void ownerDocument_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -477,8 +454,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void ownerDocument_created_xmlDecl() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -499,8 +475,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void parentNode() throws Exception {
         tester("log(doc === instr.parentNode);\n");
     }
@@ -509,8 +484,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void parentNode_xmlDecl() throws Exception {
         tester_xmlDecl("log(doc === instr.parentNode);\n");
     }
@@ -519,8 +493,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void parentNode_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -541,8 +514,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void parentNode_created_xmlDecl() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -563,8 +535,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -573,8 +544,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void prefix_xmlDecl() throws Exception {
         property_xmlDecl("prefix");
     }
@@ -583,8 +553,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "apache")
+    @Alerts("no ActiveX")
     public void target() throws Exception {
         property("target");
     }
@@ -593,8 +562,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "xml")
+    @Alerts("no ActiveX")
     public void target_xmlDecl() throws Exception {
         property_xmlDecl("target");
     }
@@ -677,8 +645,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<?apache include file=\"header.html\" ?>")
+    @Alerts("no ActiveX")
     public void xml() throws Exception {
         property("xml");
     }
@@ -687,8 +654,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<?xml version=\"1.0\"?>")
+    @Alerts("no ActiveX")
     public void xml_xmlDecl() throws Exception {
         property_xmlDecl("xml");
     }
@@ -697,8 +663,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<?x ?>")
+    @Alerts("no ActiveX")
     public void xml_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

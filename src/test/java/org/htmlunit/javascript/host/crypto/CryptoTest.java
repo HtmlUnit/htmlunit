@@ -91,8 +91,7 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[0-9a-f]{8}\\-[0-9a-f]{4}\\-[0-9a-f]{4}\\-[0-9a-f]{4}\\-[0-9a-f]{12}§",
-            IE = "exception§")
+    @Alerts("[0-9a-f]{8}\\-[0-9a-f]{4}\\-[0-9a-f]{4}\\-[0-9a-f]{4}\\-[0-9a-f]{12}§")
     public void randomUUID() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -131,8 +130,7 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SubtleCrypto]",
-            IE = "exception")
+    @Alerts("[object SubtleCrypto]")
     public void subtle() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

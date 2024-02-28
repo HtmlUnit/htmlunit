@@ -364,8 +364,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "6")
+    @Alerts("2")
     @HtmlUnitNYI(CHROME = "20",
             EDGE = "20",
             FF = "20",
@@ -573,8 +572,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "16")
+    @Alerts("0")
     public void embed() throws Exception {
         loadPageVerifyTitle2(test("embed"));
     }
@@ -596,8 +594,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "35",
-            IE = "16")
+    @Alerts("35")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -857,8 +854,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "30")
+    @Alerts("0")
     public void image() throws Exception {
         loadPageVerifyTitle2(test("image"));
     }
@@ -869,8 +865,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "30")
+    @Alerts("0")
     public void img() throws Exception {
         loadPageVerifyTitle2(test("img"));
     }
@@ -896,8 +891,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "19")
+    @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1112,8 +1106,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "16",
-            IE = "0")
+    @Alerts("16")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1267,8 +1260,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20",
-            IE = "0")
+    @Alerts("20")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
@@ -1346,8 +1338,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "16",
-            IE = "10")
+    @Alerts("16")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1590,8 +1581,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "150",
-            IE = "666")
+    @Alerts("150")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1842,8 +1832,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "15",
-            IE = "0")
+    @Alerts("15")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",

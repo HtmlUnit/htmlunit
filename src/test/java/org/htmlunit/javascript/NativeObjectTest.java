@@ -235,8 +235,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "exception")
+    @Alerts("true")
     public void getPrototypeOfString() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -259,8 +258,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "exception")
+    @Alerts("true")
     public void getPrototypeOfNumber() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -283,8 +281,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "exception")
+    @Alerts("true")
     public void getPrototypeOfBoolean() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -307,8 +304,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            IE = "exception")
+    @Alerts("object")
     public void getTypeOfPrototypeOfNumber() throws Exception {
         final String html = ""
             + "<html><head>\n"

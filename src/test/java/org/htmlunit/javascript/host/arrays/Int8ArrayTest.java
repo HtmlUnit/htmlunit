@@ -244,8 +244,7 @@ public class Int8ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "exception")
+    @Alerts("0")
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -304,8 +303,7 @@ public class Int8ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Int8Array",
-            IE = "undefined")
+    @Alerts("Int8Array")
     public void name() throws Exception {
         final String html
             = "<html><head>\n"

@@ -465,8 +465,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-16",
-            IE = "0")
+    @Alerts("-16")
     public void details() throws Exception {
         test("details");
     }
@@ -569,8 +568,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "16")
+    @Alerts("0")
     public void embed() throws Exception {
         test("embed");
     }
@@ -828,8 +826,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "28")
+    @Alerts("0")
     public void image() throws Exception {
         test("image");
     }
@@ -840,8 +837,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "28")
+    @Alerts("0")
     public void img() throws Exception {
         test("img");
     }
@@ -863,8 +859,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "145")
+    @Alerts("0")
     public void isindex() throws Exception {
         test("isindex");
     }
@@ -928,8 +923,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-16",
-            IE = "8")
+    @Alerts("-16")
     public void legend() throws Exception {
         test("legend");
     }
@@ -940,8 +934,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-16",
-            IE = "0")
+    @Alerts("-16")
     public void listing() throws Exception {
         test("listing");
     }
@@ -978,8 +971,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-16",
-            IE = "0")
+    @Alerts("-16")
     public void main() throws Exception {
         test("main");
     }
@@ -1060,8 +1052,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "80",
-            IE = "0")
+    @Alerts("80")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
@@ -1194,8 +1185,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-16",
-            IE = "0")
+    @Alerts("-16")
     public void optgroup() throws Exception {
         test("optgroup");
     }
@@ -1206,8 +1196,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-16",
-            IE = "0")
+    @Alerts("-16")
     public void option() throws Exception {
         test("option");
     }
@@ -1273,8 +1262,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "160",
-            IE = "280")
+    @Alerts("160")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
@@ -1493,8 +1481,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-16",
-            IE = "0")
+    @Alerts("-16")
     public void summary() throws Exception {
         test("summary");
     }
@@ -1527,8 +1514,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "2")
+    @Alerts("0")
     public void table() throws Exception {
         test("table");
     }
@@ -1762,8 +1748,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-16",
-            IE = "40")
+    @Alerts("-16")
     public void xmp() throws Exception {
         test("xmp");
     }

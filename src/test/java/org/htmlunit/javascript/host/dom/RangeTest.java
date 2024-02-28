@@ -379,8 +379,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void getClientRectsMany() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"

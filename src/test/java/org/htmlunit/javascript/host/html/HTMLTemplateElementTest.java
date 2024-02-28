@@ -32,8 +32,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "exception")
+    @Alerts("false")
     public void prototype() throws Exception {
         final String html
             = "<html><body>\n"
@@ -52,8 +51,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void contentCheck() throws Exception {
         final String html =
             "<html>\n"

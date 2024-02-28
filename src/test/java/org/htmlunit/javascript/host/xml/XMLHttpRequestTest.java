@@ -964,8 +964,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            IE = "null")
+    @Alerts("§§URL§§")
     public void originHeaderPost() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -992,8 +991,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            IE = "null")
+    @Alerts("§§URL§§")
     public void originHeaderPut() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1020,8 +1018,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            IE = "null")
+    @Alerts("§§URL§§")
     public void originHeaderDelete() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1130,8 +1127,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            IE = "null")
+    @Alerts("§§URL§§")
     public void originHeaderOptions() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1722,8 +1718,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "null")
+    @Alerts("function")
     @HtmlUnitNYI(CHROME = "undefined",
             EDGE = "undefined",
             FF = "undefined",
@@ -1762,8 +1757,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLHttpRequestUpload]",
-            IE = "[object XMLHttpRequestEventTarget]")
+    @Alerts("[object XMLHttpRequestUpload]")
     public void upload() throws Exception {
         final String html =
               "<html>\n"
@@ -1894,8 +1888,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLHttpRequest]",
-            IE = "[object XMLHttpRequestPrototype]")
+    @Alerts("[object XMLHttpRequest]")
     public void defineProperty2() throws Exception {
         final String html =
               "<html>\n"
@@ -1921,8 +1914,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "application/json",
-            IE = "null")
+    @Alerts("application/json")
     public void enctypeBlob() throws Exception {
         final String html
             = "<html>\n"

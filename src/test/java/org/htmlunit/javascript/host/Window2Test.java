@@ -382,8 +382,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "function")
+    @Alerts("undefined")
     public void collectGarbage() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1450,8 +1449,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void getComputedStyleCached() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'></div>\n"
@@ -2137,8 +2135,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "function")
+    @Alerts("undefined")
     public void showModalDialog() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -2153,8 +2150,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "function")
+    @Alerts("undefined")
     public void showModelessDialog() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -2170,8 +2166,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
+    @Alerts("function")
     public void find() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -2348,8 +2343,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "exception")
+    @Alerts("0")
     public void constructorError() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2643,8 +2637,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "{\"value\":7,\"writable\":true,\"enumerable\":true,\"configurable\":true}",
-            IE = "undefined")
+    @Alerts("{\"value\":7,\"writable\":true,\"enumerable\":true,\"configurable\":true}")
     public void eventPropertyReplaced() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -2666,8 +2659,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "not available")
+    @Alerts("true")
     public void isSecureContextLocalhost() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -2682,8 +2674,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "not available")
+    @Alerts("false")
     public void isSecureContextHttp() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -2699,8 +2690,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "null")
+    @Alerts("true")
     public void isSecureContextHttpS() throws Exception {
         final WebDriver driver = loadPage2(new URL("https://www.wetator.org/HtmlUnit"), StandardCharsets.UTF_8);
 
@@ -2713,8 +2703,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "null")
+    @Alerts("true")
     public void isSecureContextFile() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -2742,8 +2731,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "null")
+    @Alerts("false")
     public void isSecureContextAboutBlank() throws Exception {
         final WebDriver driver = getWebDriver();
         driver.get("about:blank");

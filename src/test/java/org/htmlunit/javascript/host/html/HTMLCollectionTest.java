@@ -463,8 +463,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b1-button1",
-            IE = "null")
+    @Alerts("b1-button1")
     public void item_Unknown() throws Exception {
         item("'foo'");
     }
@@ -473,8 +472,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b1-button1",
-            IE = "b2-button2")
+    @Alerts("b1-button1")
     public void item_ById() throws Exception {
         item("'b2'");
     }
@@ -483,8 +481,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b1-button1",
-            IE = "b2-button2")
+    @Alerts("b1-button1")
     public void item_ByName() throws Exception {
         item("'button2'");
     }
@@ -538,8 +535,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            IE = "null")
+    @Alerts("b2-button2")
     public void item_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -548,8 +544,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            IE = "null")
+    @Alerts("b2-button2")
     public void item_IndexDoubleAsString() throws Exception {
         item("'1.1'");
     }
@@ -648,8 +643,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "b2-button2")
+    @Alerts("undefined")
     public void arrayIndex_DoubleIndex() throws Exception {
         arrayIndex("1.1");
     }
@@ -712,8 +706,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "undefined")
+    @Alerts("exception")
     public void functionIndex_Unknown() throws Exception {
         functionIndex("'foo'");
     }
@@ -722,8 +715,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "b2-button2")
+    @Alerts("exception")
     public void functionIndex_ById() throws Exception {
         functionIndex("'b2'");
     }
@@ -732,8 +724,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "b2-button2")
+    @Alerts("exception")
     public void functionIndex_ByName() throws Exception {
         functionIndex("'button2'");
     }
@@ -742,8 +733,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "undefined")
+    @Alerts("exception")
     public void functionIndex_NegativIndex() throws Exception {
         functionIndex("-1");
     }
@@ -752,8 +742,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "b1-button1")
+    @Alerts("exception")
     public void functionIndex_ZeroIndex() throws Exception {
         functionIndex("0");
     }
@@ -762,8 +751,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "b2-button2")
+    @Alerts("exception")
     public void functionIndex_ValidIndex() throws Exception {
         functionIndex("1");
     }
@@ -772,8 +760,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "b2-button2")
+    @Alerts("exception")
     public void functionIndex_DoubleIndex() throws Exception {
         functionIndex("1.1");
     }
@@ -782,8 +769,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "undefined")
+    @Alerts("exception")
     public void functionIndex_InvalidIndex() throws Exception {
         functionIndex("2");
     }
@@ -792,8 +778,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "undefined")
+    @Alerts("exception")
     public void functionIndex_IndexAsString() throws Exception {
         functionIndex("'2'");
     }
@@ -939,8 +924,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            IE = "null")
+    @Alerts("b2-button2")
     public void namedItem_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -949,8 +933,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2",
-            IE = "null")
+    @Alerts("b2-button2")
     public void namedItem_IndexDoubleAsString() throws Exception {
         item("'1.1'");
     }

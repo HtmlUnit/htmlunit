@@ -287,8 +287,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "true-false-true-true-true-true",
-            IE = "true-true-true-true-true-true")
+    @Alerts("true-false-true-true-true-true")
     public void minValidation() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -318,8 +317,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "true-true-true-false-true-true",
-            IE = "true-true-true-true-true-true")
+    @Alerts("true-true-true-false-true-true")
     public void maxValidation() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

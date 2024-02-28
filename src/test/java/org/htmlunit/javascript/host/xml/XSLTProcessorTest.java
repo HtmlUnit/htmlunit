@@ -124,8 +124,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "*bar*",
-            IE = "exception")
+    @Alerts("*bar*")
     public void transformToFragment() throws Exception {
         final String xsl
             = "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"

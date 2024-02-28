@@ -7614,8 +7614,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2",
-            IE = "0, 1, 1")
+    @Alerts("0, 2, 2")
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }

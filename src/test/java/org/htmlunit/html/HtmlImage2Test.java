@@ -83,8 +83,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
+    @Alerts("2")
     public void loadImage() throws Exception {
         loadImage("src='img.jpg'");
         loadImageInnerHtml("src='img.jpg'");
@@ -150,8 +149,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
+    @Alerts("2")
     public void loadImageWrongType() throws Exception {
         loadImage("src='" + URL_FIRST + "'");
         loadImageInnerHtml("src='" + URL_FIRST + "'");
@@ -285,8 +283,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void isDisplayedNoSource() throws Exception {
         isDisplayed("");
     }
@@ -295,8 +292,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void isDisplayedEmptySource() throws Exception {
         isDisplayed("src=''");
     }

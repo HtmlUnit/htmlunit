@@ -30,15 +30,13 @@ import org.junit.runner.RunWith;
 public class ReflectTest extends WebDriverTestCase {
 
     @Test
-    @Alerts(DEFAULT = "[object Reflect]",
-            IE = "no Reflect")
+    @Alerts("[object Reflect]")
     public void testToString() throws Exception {
         test("log(Reflect.toString())");
     }
 
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "no Reflect")
+    @Alerts("1")
     public void apply() throws Exception {
         test("log(Reflect.apply(Math.floor, undefined, [1.75]))");
     }
@@ -73,8 +71,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "no Reflect")
+    @Alerts("exception")
     public void applyMissingArgs() throws Exception {
         final String js =
                 "try {\n"
@@ -86,8 +83,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "no Reflect")
+    @Alerts("exception")
     public void applyTargetNotFunction() throws Exception {
         final String js =
                 "try {\n"
@@ -99,8 +95,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "no Reflect")
+    @Alerts("exception")
     public void applyArgumentsListNotFunction() throws Exception {
         final String js =
                 "var s1 = Symbol('1');"
@@ -250,8 +245,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "no Reflect")
+    @Alerts("0")
     public void ownKeysEmptyObj() throws Exception {
         final String js =
                 "log(Reflect.ownKeys({}).length)";
@@ -259,8 +253,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "no Reflect")
+    @Alerts("0")
     public void ownKeysDeleteObj() throws Exception {
         final String js =
                 "var o = { d: 42 };\n"
@@ -270,8 +263,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "length",
-            IE = "no Reflect")
+    @Alerts("length")
     public void ownKeysEmptyArray() throws Exception {
         final String js =
                 "log(Reflect.ownKeys([]));";
@@ -279,8 +271,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "2,length",
-            IE = "no Reflect")
+    @Alerts("2,length")
     public void ownKeysArray() throws Exception {
         final String js =
                 "log(Reflect.ownKeys([, , 2]));";
@@ -288,8 +279,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "p1,p2",
-            IE = "no Reflect")
+    @Alerts("p1,p2")
     public void ownKeysNotEnumerable() throws Exception {
         final String js =
                 "var o = {};\n"
@@ -347,8 +337,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "no Reflect")
+    @Alerts("function")
     public void hasProto() throws Exception {
         final String js =
                 "var o1 = { p: 42 }\n"
@@ -375,8 +364,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "no Reflect")
+    @Alerts("true")
     public void getOwnPropertyDescriptorUndefinedProperty() throws Exception {
         final String js =
                 "var o = Object.create({p: 1});\n"
@@ -385,8 +373,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "one",
-            IE = "no Reflect")
+    @Alerts("one")
     public void getPropertyByInt() throws Exception {
         final String js =
                 "var a = ['zero', 'one']\n"
@@ -436,8 +423,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "no Reflect")
+    @Alerts("false")
     public void setPrototypeOfCycle() throws Exception {
         final String js =
                 "var o1 = {};\n"

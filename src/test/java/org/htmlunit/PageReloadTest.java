@@ -54,8 +54,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void link_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "linkEmptyHash", 0, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -104,8 +103,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void link_url_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "linkDifferentUrlEmptyHash", 1, PATHNAME2, getExpectedAlerts()[0]);
     }
@@ -180,8 +178,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void link_urlHash_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "linkDifferentUrlEmptyHash", 1, PATHNAME2, getExpectedAlerts()[0]);
     }
@@ -216,8 +213,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void javascript_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "javascriptEmptyHash", 0, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -266,8 +262,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void javascript_url_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "javascriptDifferentUrlEmptyHash", 1, PATHNAME2, getExpectedAlerts()[0]);
     }
@@ -342,8 +337,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void javascript_urlHash_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "javascriptDifferentUrlEmptyHash", 1, PATHNAME2, getExpectedAlerts()[0]);
     }
@@ -740,8 +734,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void submitPost_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitPostEmptyHash", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -750,8 +743,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void submitPostV_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitPostEmptyHashV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -840,8 +832,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void submitPost_url_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitPostDifferentUrlEmptyHash",
                 1, PATHNAME2, getExpectedAlerts()[0]);
@@ -859,8 +850,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void submitPostV_url_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitPostDifferentUrlEmptyHashV",
                 1, PATHNAME2, getExpectedAlerts()[0]);
@@ -996,8 +986,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void submitPost_urlHash_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitPostDifferentUrlEmptyHash",
                 1, PATHNAME2, getExpectedAlerts()[0]);
@@ -1015,8 +1004,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void submitPostV_urlHash_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitPostDifferentUrlEmptyHashV",
                 1, PATHNAME2, getExpectedAlerts()[0]);
@@ -1426,8 +1414,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void jsSubmitPost_url_EmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitPostEmptyHash", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -1436,8 +1423,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void jsSubmitPostV_url_EmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitPostEmptyHashV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -1526,8 +1512,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void jsSubmitPost_url_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitPostDifferentUrlEmptyHash",
                 1, PATHNAME2, getExpectedAlerts()[0]);
@@ -1545,8 +1530,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void jsSubmitPostV_url_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitPostDifferentUrlEmptyHashV",
                 1, PATHNAME2, getExpectedAlerts()[0]);
@@ -1682,8 +1666,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void jsSubmitPost_urlHash_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitPostDifferentUrlEmptyHash",
                 1, PATHNAME2, getExpectedAlerts()[0]);
@@ -1701,8 +1684,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "#")
+    @Alerts("")
     public void jsSubmitPostV_urlHash_differentUrlEmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitPostDifferentUrlEmptyHashV",
                 1, PATHNAME2, getExpectedAlerts()[0]);

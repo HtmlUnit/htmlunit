@@ -42,8 +42,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts("no ActiveX")
     public void scriptableToString() throws Exception {
         tester("log(Object.prototype.toString.call(attrs));\n");
     }
@@ -52,8 +51,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "1")
+    @Alerts("no ActiveX")
     public void length() throws Exception {
         tester("log(attrs.length);\n");
     }
@@ -62,8 +60,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "undefined")
+    @Alerts("no ActiveX")
     public void byName_attribute() throws Exception {
         tester("log(attrs.name);\n");
     }
@@ -72,8 +69,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "undefined")
+    @Alerts("no ActiveX")
     public void byName_map() throws Exception {
         tester("log(attrs['name']);\n");
     }
@@ -82,8 +78,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "name")
+    @Alerts("no ActiveX")
     public void byNumber() throws Exception {
         tester("log(attrs[0].nodeName);\n");
     }
@@ -92,8 +87,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void byNumber_unknown() throws Exception {
         tester("debug(attrs[1]);\n");
     }
@@ -102,8 +96,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "name=y")
+    @Alerts("no ActiveX")
     public void getNamedItem() throws Exception {
         tester("debug(attrs.getNamedItem('name'));\n");
     }
@@ -112,8 +105,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void getNamedItem_unknown() throws Exception {
         tester("debug(attrs.getNamedItem('unknown'));\n");
     }
@@ -122,8 +114,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void getNamedItem_caseSensitive() throws Exception {
         tester("debug(attrs.getNamedItem('NaMe'));\n");
     }
@@ -132,8 +123,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "exception-getNull")
+    @Alerts("no ActiveX")
     public void getNamedItem_null() throws Exception {
         final String test = ""
             + "try {\n"
@@ -147,8 +137,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "name=y")
+    @Alerts("no ActiveX")
     public void item() throws Exception {
         tester("debug(attrs.item(0));\n");
     }
@@ -157,8 +146,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void item_unknown() throws Exception {
         tester("debug(attrs.item(1));\n");
     }

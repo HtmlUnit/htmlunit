@@ -39,8 +39,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts("no ActiveX")
     public void scriptableToString() throws Exception {
         tester("log(Object.prototype.toString.call(doctype));\n");
     }
@@ -49,8 +48,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "0")
+    @Alerts("no ActiveX")
     public void attributes() throws Exception {
         tester("log(doctype.attributes.length);\n");
     }
@@ -59,8 +57,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "a")
+    @Alerts("no ActiveX")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -69,8 +66,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "0")
+    @Alerts("no ActiveX")
     public void childNodes() throws Exception {
         tester("log(doctype.childNodes.length);\n");
     }
@@ -79,8 +75,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -89,8 +84,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void definition() throws Exception {
         property("definition");
     }
@@ -99,8 +93,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "0")
+    @Alerts("no ActiveX")
     public void entities() throws Exception {
         tester("log(doctype.entities.length);\n");
     }
@@ -109,8 +102,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void firstChild() throws Exception {
         property("firstChild");
     }
@@ -119,8 +111,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void lastChild() throws Exception {
         property("lastChild");
     }
@@ -129,8 +120,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "a")
+    @Alerts("no ActiveX")
     public void name() throws Exception {
         property("name");
     }
@@ -139,8 +129,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -149,8 +138,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "a")
+    @Alerts("no ActiveX")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -159,8 +147,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "10")
+    @Alerts("no ActiveX")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -194,8 +181,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "0")
+    @Alerts("no ActiveX")
     public void notations() throws Exception {
         tester("log(doctype.notations.length);\n");
     }
@@ -204,8 +190,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void ownerDocument() throws Exception {
         tester("log(doctype.ownerDocument === doc);\n");
     }
@@ -214,8 +199,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void parentNode() throws Exception {
         tester("log(doctype.parentNode === doc);\n");
     }
@@ -224,8 +208,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -234,8 +217,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void text() throws Exception {
         property("text");
     }
@@ -268,8 +250,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "<!DOCTYPE a [ <!ELEMENT a (b+)> <!ELEMENT b (#PCDATA)> ]>")
+    @Alerts("no ActiveX")
     // It seems we currently do not have access to the DTD.
     public void xml() throws Exception {
         property("xml");

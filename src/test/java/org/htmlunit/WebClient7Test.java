@@ -41,8 +41,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?a=b%20c&d=%C3%A9%C3%A8",
-            IE = "/test.html?a=b%20c&d=\u00E9\u00E8")
+    @Alerts("/test.html?a=b%20c&d=%C3%A9%C3%A8")
     public void loadPage_EncodeRequest() throws Exception {
         // with query string not encoded
         testRequestUrlEncoding("test.html?a=b c&d=\u00E9\u00E8");
@@ -108,8 +107,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?param=%C2%A9%C2%A3",
-            IE = "/test.html?param=\u00A9\u00A3")
+    @Alerts("/test.html?param=%C2%A9%C2%A3")
     public void loadPage_EncodeRequest7() throws Exception {
         // unicode
         testRequestUrlEncoding("test.html?param=\u00A9\u00A3");
@@ -190,8 +188,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%C3%B6nig",
-            IE = "/test.html?k\u00c3\u00b6nig")
+    @Alerts("/test.html?k%C3%B6nig")
     public void anchorUrlEncodingUTF8Header() throws Exception {
         anchorUrlEncoding(true, "UTF-8");
     }
@@ -200,8 +197,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%C3%B6nig",
-            IE = "/test.html?k\u00c3\u00b6nig")
+    @Alerts("/test.html?k%C3%B6nig")
     public void anchorUrlEncodingUTF8Meta() throws Exception {
         anchorUrlEncoding(false, "UTF-8");
     }
@@ -210,8 +206,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%F6nig",
-            IE = "/test.html?k\u00f6nig")
+    @Alerts("/test.html?k%F6nig")
     public void anchorUrlEncodingISO8859_1Header() throws Exception {
         anchorUrlEncoding(true, "ISO-8859-1");
     }
@@ -220,8 +215,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%F6nig",
-            IE = "/test.html?k\u00f6nig")
+    @Alerts("/test.html?k%F6nig")
     public void anchorUrlEncodingISO8859_1Meta() throws Exception {
         anchorUrlEncoding(false, "ISO-8859-1");
     }
@@ -248,8 +242,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/area.html?k%C3%B6nig",
-            IE = "/area.html?k\u00c3\u00b6nig")
+    @Alerts("/area.html?k%C3%B6nig")
     @BuggyWebDriver(FF = "WebDriverException",
             FF_ESR = "WebDriverException")
     public void areaUrlEncodingUTF8Header() throws Exception {
@@ -260,8 +253,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/area.html?k%C3%B6nig",
-            IE = "/area.html?k\u00c3\u00b6nig")
+    @Alerts("/area.html?k%C3%B6nig")
     @BuggyWebDriver(FF = "WebDriverException",
             FF_ESR = "WebDriverException")
     public void areaUrlEncodingUTF8Meta() throws Exception {
@@ -272,8 +264,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/area.html?k%F6nig",
-            IE = "/area.html?k\u00f6nig")
+    @Alerts("/area.html?k%F6nig")
     @BuggyWebDriver(FF = "WebDriverException",
             FF_ESR = "WebDriverException")
     public void areaUrlEncodingISO8859_1Header() throws Exception {
@@ -284,8 +275,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/area.html?k%F6nig",
-            IE = "/area.html?k\u00f6nig")
+    @Alerts("/area.html?k%F6nig")
     @BuggyWebDriver(FF = "WebDriverException",
             FF_ESR = "WebDriverException")
     public void areaUrlEncodingISO8859_1Meta() throws Exception {
@@ -296,8 +286,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.gif?k%C3%B6nig",
-            IE = "/test.gif?k\u00c3\u00b6nig")
+    @Alerts("/test.gif?k%C3%B6nig")
     public void imageUrlEncodingUTF8Header() throws Exception {
         imageUrlEncoding(true, "UTF-8");
     }
@@ -306,8 +295,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.gif?k%C3%B6nig",
-            IE = "/test.gif?k\u00c3\u00b6nig")
+    @Alerts("/test.gif?k%C3%B6nig")
     public void imageUrlEncodingUTF8Meta() throws Exception {
         imageUrlEncoding(false, "UTF-8");
     }
@@ -344,8 +332,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.css?k%C3%B6nig",
-            IE = "/test.css?k\u00c3\u00b6nig")
+    @Alerts("/test.css?k%C3%B6nig")
     public void linkUrlEncodingUTF8Header() throws Exception {
         linkUrlEncoding(true, "UTF-8");
     }
@@ -354,8 +341,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.css?k%C3%B6nig",
-            IE = "/test.css?k\u00c3\u00b6nig")
+    @Alerts("/test.css?k%C3%B6nig")
     public void linkUrlEncodingUTF8Meta() throws Exception {
         linkUrlEncoding(false, "UTF-8");
     }
@@ -392,8 +378,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%C3%B6nig",
-            IE = "/test.html?k\u00c3\u00b6nig")
+    @Alerts("/test.html?k%C3%B6nig")
     public void iframeUrlEncodingUTF8Header() throws Exception {
         iframeUrlEncoding(true, "UTF-8");
     }
@@ -402,8 +387,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%C3%B6nig",
-            IE = "/test.html?k\u00c3\u00b6nig")
+    @Alerts("/test.html?k%C3%B6nig")
     public void iframeUrlEncodingUTF8Meta() throws Exception {
         iframeUrlEncoding(false, "UTF-8");
     }
@@ -412,8 +396,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%F6nig",
-            IE = "/test.html?k\u00f6nig")
+    @Alerts("/test.html?k%F6nig")
     public void iframeUrlEncodingISO8859_1Header() throws Exception {
         framesetUrlEncoding("ISO_8859_1");
     }
@@ -537,8 +520,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%C3%B6nig",
-            IE = "/test.html?k\u00c3\u00b6nig")
+    @Alerts("/test.html?k%C3%B6nig")
     public void framesetUrlEncodingUTF8() throws Exception {
         framesetUrlEncoding("UTF-8");
     }
@@ -547,8 +529,7 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/test.html?k%F6nig",
-            IE = "/test.html?k\u00f6nig")
+    @Alerts("/test.html?k%F6nig")
     public void framesetUrlEncodingISO8859_1() throws Exception {
         framesetUrlEncoding("ISO_8859_1");
     }

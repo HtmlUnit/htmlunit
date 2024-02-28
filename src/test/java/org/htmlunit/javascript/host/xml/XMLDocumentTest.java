@@ -921,8 +921,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "exception")
+    @Alerts("0")
     public void xpathWithNamespaces() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1073,8 +1072,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDocument]",
-            IE = "[object Document]")
+    @Alerts("[object HTMLDocument]")
     public void html() throws Exception {
         final String svg
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
@@ -1091,8 +1089,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            IE = "[object Document]")
+    @Alerts("[object XMLDocument]")
     @NotYetImplemented
     public void svg() throws Exception {
         final String svg
@@ -1133,8 +1130,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "about:blank",
-            IE = "§§URL§§")
+    @Alerts("about:blank")
     public void url() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -296,8 +296,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _colgroup_template() throws Exception {
         test("colgroup", "template");
     }
@@ -477,8 +476,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _form_isindex() throws Exception {
         test("form", "isindex");
     }
@@ -930,8 +928,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _head_template() throws Exception {
         test("head", "template");
     }
@@ -1075,8 +1072,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "0")
+    @Alerts("null")
     @HtmlUnitNYI(
             CHROME = "0",
             EDGE = "0",
@@ -1207,8 +1203,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "1")
+    @Alerts("0")
     public void _p_dialog() throws Exception {
         test("p", "dialog");
     }
@@ -1370,8 +1365,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _p_isindex() throws Exception {
         test("p", "isindex");
     }
@@ -1398,8 +1392,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "1")
+    @Alerts("0")
     public void _p_main() throws Exception {
         test("p", "main");
     }
@@ -1548,8 +1541,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _select_template() throws Exception {
         test("select", "template");
     }
@@ -1630,8 +1622,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _table_template() throws Exception {
         test("table", "template");
     }
@@ -1712,8 +1703,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _tbody_template() throws Exception {
         test("tbody", "template");
     }
@@ -1776,8 +1766,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _tfoot_template() throws Exception {
         test("tfoot", "template");
     }
@@ -1840,8 +1829,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _thead_template() throws Exception {
         test("thead", "template");
     }
@@ -1904,8 +1892,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void _tr_template() throws Exception {
         test("tr", "template");
     }

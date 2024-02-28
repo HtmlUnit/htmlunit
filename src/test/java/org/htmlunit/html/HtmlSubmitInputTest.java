@@ -140,8 +140,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "2")
+    @Alerts("1")
     public void onclickDisables() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

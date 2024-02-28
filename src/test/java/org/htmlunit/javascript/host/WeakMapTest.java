@@ -57,8 +57,7 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "false")
+    @Alerts("exception")
     public void constructorSetParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -82,8 +81,7 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void constructorMapParam() throws Exception {
         final String html
             = "<html><head>\n"

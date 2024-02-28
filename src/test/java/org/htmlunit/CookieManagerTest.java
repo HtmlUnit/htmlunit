@@ -356,8 +356,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
-            IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
+    @Alerts("cookie1=1; cookie2=2; cookie3=3")
     public void setCookieExpires_twoDigits() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun 01-Dec-68 16:00:00 GMT"));
@@ -379,8 +378,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
-            IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
+    @Alerts("cookie1=1; cookie2=2; cookie3=3")
     public void setCookieExpires_twoDigits2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun,01 Dec 68 16:00:00 GMT"));
@@ -402,8 +400,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1",
-            IE = "cookie1=1; cookie6=6")
+    @Alerts("cookie1=1")
     public void cookieExpires_TwoDigits3() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun-01 Dec 68 16:00:00 GMT"));
@@ -419,8 +416,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1",
-            IE = "cookie1=1; cookie2=2")
+    @Alerts("cookie1=1")
     public void cookieExpires_GMT() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie",
@@ -594,8 +590,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1; second=2",
-            IE = "first=1")
+    @Alerts("first=1; second=2")
     public void setCookieSubPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;path=/foo/blah"));
@@ -614,8 +609,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1; second=2",
-            IE = "first=1")
+    @Alerts("first=1; second=2")
     public void setCookieDifferentPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));

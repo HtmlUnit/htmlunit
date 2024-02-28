@@ -132,8 +132,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function Array() { [native code] }",
-            IE = "function Array() { [native code] } ")
+    @Alerts("function Array() { [native code] }")
     public void constructorToString() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -419,8 +418,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            IE = "not supported")
+    @Alerts("TypeError")
     public void fromObject() throws Exception {
         final String html
             = "<html>\n"
@@ -451,8 +449,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "not supported")
+    @Alerts("0")
     public void fromNativeObject() throws Exception {
         final String html
             = "<html>\n"
@@ -2074,8 +2071,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "3",
-            IE = "not supported")
+    @Alerts("3")
     public void of() throws Exception {
         final String html
             = "<html>\n"

@@ -34,8 +34,7 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMeterElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLMeterElement]")
     public void tag() throws Exception {
         final String html = "<html><body>\n"
             + "<meter id='it' min='200' max='500' value='350'>\n"

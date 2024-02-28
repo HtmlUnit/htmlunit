@@ -264,8 +264,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "parsererror",
-            IE = "exception")
+    @Alerts("parsererror")
     public void parseFromString_invalidXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -292,8 +291,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "parsererror",
-            IE = "0")
+    @Alerts("parsererror")
     public void parseFromString_emptyString() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

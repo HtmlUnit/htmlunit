@@ -49,8 +49,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void async() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -133,8 +132,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "false")
+    @Alerts("no ActiveX")
     public void preserveWhiteSpace() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -360,8 +358,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "someprefix:test")
+    @Alerts("no ActiveX")
     public void loadXML_Namespace() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -386,8 +383,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "7")
+    @Alerts("no ActiveX")
     public void loadXML_XMLSpaceAttribute() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -521,8 +517,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "1")
+    @Alerts("no ActiveX")
     public void xpathWithNamespaces() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -555,8 +550,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "1")
+    @Alerts("no ActiveX")
     public void selectionNamespaces() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
@@ -594,8 +588,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void nodeFromID() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"

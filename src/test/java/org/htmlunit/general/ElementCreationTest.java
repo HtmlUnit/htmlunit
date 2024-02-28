@@ -50,8 +50,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void abbr() throws Exception {
         test("abbr");
     }
@@ -62,8 +61,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void acronym() throws Exception {
         test("acronym");
     }
@@ -74,8 +72,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLBlockElement]")
+    @Alerts("[object HTMLElement]")
     public void address() throws Exception {
         test("address");
     }
@@ -97,8 +94,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE = "[object HTMLAppletElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void applet() throws Exception {
         test("applet");
     }
@@ -153,8 +149,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE = "[object HTMLBGSoundElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void bgsound() throws Exception {
         test("bgsound");
     }
@@ -176,8 +171,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLBaseFontElement]")
+    @Alerts("[object HTMLElement]")
     public void basefont() throws Exception {
         test("basefont");
     }
@@ -188,8 +182,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLElement]")
     public void bdi() throws Exception {
         test("bdi");
     }
@@ -200,8 +193,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void bdo() throws Exception {
         test("bdo");
     }
@@ -212,8 +204,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void big() throws Exception {
         test("big");
     }
@@ -224,8 +215,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void blink() throws Exception {
         test("blink");
     }
@@ -236,8 +226,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLQuoteElement]",
-            IE = "[object HTMLBlockElement]")
+    @Alerts("[object HTMLQuoteElement]")
     public void blockquote() throws Exception {
         test("blockquote");
     }
@@ -259,8 +248,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void b() throws Exception {
         test("b");
     }
@@ -315,8 +303,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLBlockElement]")
+    @Alerts("[object HTMLElement]")
     public void center() throws Exception {
         test("center");
     }
@@ -327,8 +314,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void cite() throws Exception {
         test("cite");
     }
@@ -339,8 +325,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void code() throws Exception {
         test("code");
     }
@@ -362,8 +347,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void dfn() throws Exception {
         test("dfn");
     }
@@ -374,8 +358,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLDDElement]")
+    @Alerts("[object HTMLElement]")
     public void dd() throws Exception {
         test("dd");
     }
@@ -397,8 +380,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLDTElement]")
+    @Alerts("[object HTMLElement]")
     public void dt() throws Exception {
         test("dt");
     }
@@ -453,8 +435,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void em() throws Exception {
         test("em");
     }
@@ -465,8 +446,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLPreElement]",
-            IE = "[object HTMLBlockElement]")
+    @Alerts("[object HTMLPreElement]")
     public void xmp() throws Exception {
         test("xmp");
     }
@@ -744,8 +724,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE = "[object HTMLIsIndexElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void isindex() throws Exception {
         test("isindex");
     }
@@ -756,8 +735,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void i() throws Exception {
         test("i");
     }
@@ -768,8 +746,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void kbd() throws Exception {
         test("kbd");
     }
@@ -778,8 +755,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE = "[object HTMLBlockElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void keygen() throws Exception {
         test("keygen");
     }
@@ -823,8 +799,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLPreElement]",
-            IE = "[object HTMLBlockElement]")
+    @Alerts("[object HTMLPreElement]")
     public void listing() throws Exception {
         test("listing");
     }
@@ -846,8 +821,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLElement]")
     public void main() throws Exception {
         test("main");
     }
@@ -924,8 +898,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMeterElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLMeterElement]")
     public void meter() throws Exception {
         test("meter");
     }
@@ -958,8 +931,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE = "[object HTMLNextIdElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void nextid() throws Exception {
         test("nextid");
     }
@@ -970,8 +942,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void nobr() throws Exception {
         test("nobr");
     }
@@ -1059,8 +1030,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOutputElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLOutputElement]")
     public void output() throws Exception {
         test("output");
     }
@@ -1093,8 +1063,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLBlockElement]")
+    @Alerts("[object HTMLElement]")
     public void plaintext() throws Exception {
         test("plaintext");
     }
@@ -1127,8 +1096,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void rp() throws Exception {
         test("rp");
     }
@@ -1139,8 +1107,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void rt() throws Exception {
         test("rt");
     }
@@ -1151,8 +1118,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void ruby() throws Exception {
         test("ruby");
     }
@@ -1163,8 +1129,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void s() throws Exception {
         test("s");
     }
@@ -1175,8 +1140,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void samp() throws Exception {
         test("samp");
     }
@@ -1220,8 +1184,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void small() throws Exception {
         test("small");
     }
@@ -1254,8 +1217,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void strike() throws Exception {
         test("strike");
     }
@@ -1266,8 +1228,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void strong() throws Exception {
         test("strong");
     }
@@ -1289,8 +1250,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void sub() throws Exception {
         test("sub");
     }
@@ -1301,8 +1261,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLElement]")
     public void summary() throws Exception {
         test("summary");
     }
@@ -1313,8 +1272,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void sup() throws Exception {
         test("sup");
     }
@@ -1380,8 +1338,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableCellElement]",
-            IE = "[object HTMLTableDataCellElement]")
+    @Alerts("[object HTMLTableCellElement]")
     public void td() throws Exception {
         test("td");
     }
@@ -1414,8 +1371,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableCellElement]",
-            IE = "[object HTMLTableHeaderCellElement]")
+    @Alerts("[object HTMLTableCellElement]")
     public void th() throws Exception {
         test("th");
     }
@@ -1448,8 +1404,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void tt() throws Exception {
         test("tt");
     }
@@ -1471,8 +1426,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTimeElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLTimeElement]")
     public void time() throws Exception {
         test("time");
     }
@@ -1494,8 +1448,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void u() throws Exception {
         test("u");
     }
@@ -1517,8 +1470,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void var() throws Exception {
         test("var");
     }
@@ -1560,8 +1512,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDetailsElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLDetailsElement]")
     public void details() throws Exception {
         test("details");
     }
@@ -1572,8 +1523,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDialogElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLDialogElement]")
     public void dialog() throws Exception {
         test("dialog");
     }
@@ -1604,8 +1554,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void rb() throws Exception {
         test("rb");
     }
@@ -1623,8 +1572,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLPhraseElement]")
+    @Alerts("[object HTMLElement]")
     public void rtc() throws Exception {
         test("rtc");
     }
@@ -1644,8 +1592,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDataElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLDataElement]")
     public void data() throws Exception {
         test("data");
     }
@@ -1667,8 +1614,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLPictureElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLPictureElement]")
     public void picture() throws Exception {
         test("picture");
     }
@@ -1679,8 +1625,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTemplateElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLTemplateElement]")
     public void template() throws Exception {
         test("template");
     }
@@ -1691,8 +1636,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSlotElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLSlotElement]")
     public void slot() throws Exception {
         test("slot");
     }

@@ -32,8 +32,7 @@ public class HtmxTest1x7x0 extends HtmxTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "passes:446failures:0",
-            IE = "passes:16failures:431")
+    @Alerts("passes:446failures:0")
     public void htmx() throws Exception {
         htmx("htmx-1.7.0");
     }

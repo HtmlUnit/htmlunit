@@ -119,8 +119,7 @@ public class FileReaderTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "data:application/octet-stream;base64,SHRtbFVuaXRpcyBncmVhdA==",
-            IE = "data:;base64,SHRtbFVuaXRpcyBncmVhdA==")
+    @Alerts("data:application/octet-stream;base64,SHRtbFVuaXRpcyBncmVhdA==")
     public void readAsDataURL_blob() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -180,8 +179,7 @@ public class FileReaderTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "data:unknown;base64,SHRtbFVuaXRpcyBncmVhdA==",
-            IE = "data:unKNown;base64,SHRtbFVuaXRpcyBncmVhdA==")
+    @Alerts("data:unknown;base64,SHRtbFVuaXRpcyBncmVhdA==")
     public void readAsDataURL_blobMimeTypeUnknown() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -258,8 +256,7 @@ public class FileReaderTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "#data:image/png;base64,",
-            IE = "#null")
+    @Alerts("#data:image/png;base64,")
     public void readAsDataURLEmptyImage() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

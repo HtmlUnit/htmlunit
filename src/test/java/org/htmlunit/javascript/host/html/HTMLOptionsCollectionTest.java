@@ -457,8 +457,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "null")
+    @Alerts("undefined")
     public void getThree() throws Exception {
         get("3", false);
     }
@@ -467,8 +466,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "null")
+    @Alerts("undefined")
     public void getTenEmpty() throws Exception {
         get("10", true);
     }
@@ -477,8 +475,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "null")
+    @Alerts("undefined")
     public void getTen() throws Exception {
         get("10", false);
     }
@@ -737,8 +734,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "exception")
+    @Alerts("0")
     public void removeMinusOneEmpty() throws Exception {
         remove("-1", true, false);
     }
@@ -747,8 +743,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "exception")
+    @Alerts("0")
     public void removeMinusOneEmptyMulti() throws Exception {
         remove("-1", true, true);
     }

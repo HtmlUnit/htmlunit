@@ -386,8 +386,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
+    @Alerts("2")
     public void core__isPlainObject_Symbol_() throws Exception {
         runTest("core: isPlainObject(Symbol)");
     }
@@ -407,8 +406,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void core__isPlainObject_Object_assign______() throws Exception {
         runTest("core: isPlainObject(Object.assign(...))");
     }
@@ -1500,8 +1498,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void deferred__jQuery_Deferred_then___IsCallable_determination__gh_3596_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - IsCallable determination (gh-3596)");
     }
@@ -1723,8 +1720,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
+    @Alerts("2")
     public void deprecated__type_for__Symbol_() throws Exception {
         runTest("deprecated: type for `Symbol`");
     }
@@ -1754,8 +1750,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void deprecated__isFunction_GeneratorFunction_() throws Exception {
         runTest("deprecated: isFunction(GeneratorFunction)");
     }
@@ -1765,8 +1760,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     @NotYetImplemented({ CHROME, FF, FF_ESR })
     public void deprecated__isFunction_AsyncFunction_() throws Exception {
         runTest("deprecated: isFunction(AsyncFunction)");
@@ -1777,8 +1771,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
+    @Alerts("2")
     public void deprecated__isFunction_custom___toStringTag_() throws Exception {
         runTest("deprecated: isFunction(custom @@toStringTag)");
     }
@@ -1838,8 +1831,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
+    @Alerts("2")
     public void deprecated__isNumeric_Symbol_() throws Exception {
         runTest("deprecated: isNumeric(Symbol)");
     }
@@ -4607,8 +4599,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
+    @Alerts("2")
     public void traversing__contents___for__template____remains_inert() throws Exception {
         runTest("traversing: contents() for <template /> remains inert");
     }
@@ -5670,8 +5661,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "4",
-            IE = "0")
+    @Alerts("4")
     @NotYetImplemented
     public void manipulation__html_script_type_module_() throws Exception {
         runTest("manipulation: html(script type module)");
@@ -6740,8 +6730,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "3",
-            IE = "2")
+    @Alerts("3")
     public void css__Don_t_default_to_a_cached_previously_used_wrong_prefixed_name__gh_2015_() throws Exception {
         runTest("css: Don't default to a cached previously used wrong prefixed name (gh-2015)");
     }
@@ -9275,8 +9264,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
+    @Alerts("2")
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }

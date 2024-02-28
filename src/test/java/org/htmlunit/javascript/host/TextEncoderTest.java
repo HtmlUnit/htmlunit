@@ -33,8 +33,7 @@ public class TextEncoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "utf-8",
-            IE = "no TextEncoder")
+    @Alerts("utf-8")
     public void encoding() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -807,8 +807,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            IE = "")
+    @Alerts("§§URL§§")
     public void action() throws Exception {
         final String html =
             "<html>\n"
@@ -1192,8 +1191,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "radio")
+    @Alerts("exception")
     public void item() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1220,8 +1218,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "2")
+    @Alerts("exception")
     public void item_many() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1249,8 +1246,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "radio2")
+    @Alerts("exception")
     public void item_many_subindex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1278,8 +1274,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "radio2")
+    @Alerts("exception")
     public void item_integer() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1364,8 +1359,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "3")
+    @Alerts("2")
     public void submit_twice() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

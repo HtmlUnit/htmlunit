@@ -295,8 +295,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "onError [object Event]",
-            IE = "onLoad [object Event]")
+    @Alerts("onError [object Event]")
     public void onLoadDynamicUnknown() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
         final String html

@@ -32,8 +32,7 @@ public class HTMLIsIndexElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE = "[object HTMLIsIndexElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void createElement() throws Exception {
         final String html =
             "<html>\n"

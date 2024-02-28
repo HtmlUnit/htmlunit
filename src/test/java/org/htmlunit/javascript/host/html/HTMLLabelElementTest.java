@@ -265,8 +265,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlNone() throws Exception {
         final String html =
               "  <label id='label1'>Item</label>\n"
@@ -280,8 +279,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlForEmpty() throws Exception {
         final String html =
               "  <label id='label1' for=''>Item</label>\n"
@@ -295,8 +293,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlForUnknown() throws Exception {
         final String html =
               "  <label id='label1' for='unknown'>Item</label>\n"
@@ -310,8 +307,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlForNotLabelable() throws Exception {
         final String html =
               "  <label id='label1' for='div1'>Item</label>\n"
@@ -325,8 +321,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLButtonElement]:button1",
-            IE = "undefined")
+    @Alerts("[object HTMLButtonElement]:button1")
     public void controlForButton() throws Exception {
         final String html =
               "  <label id='label1' for='button1'>Item</label>\n"
@@ -340,8 +335,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLInputElement]:text1",
-            IE = "undefined")
+    @Alerts("[object HTMLInputElement]:text1")
     public void controlForInput() throws Exception {
         final String html =
               "  <label id='label1' for='text1'>Item</label>\n"
@@ -355,8 +349,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlForInputHidden() throws Exception {
         final String html =
               "  <label id='label1' for='hidden1'>Item</label>\n"
@@ -370,8 +363,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMeterElement]:meter1",
-            IE = "undefined")
+    @Alerts("[object HTMLMeterElement]:meter1")
     public void controlForMeter() throws Exception {
         final String html =
               "  <label id='label1' for='meter1'>Item</label>\n"
@@ -385,8 +377,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOutputElement]:output1",
-            IE = "undefined")
+    @Alerts("[object HTMLOutputElement]:output1")
     public void controlForOutput() throws Exception {
         final String html =
               "  <label id='label1' for='output1'>Item</label>\n"
@@ -400,8 +391,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLProgressElement]:progress1",
-            IE = "undefined")
+    @Alerts("[object HTMLProgressElement]:progress1")
     public void controlForProgress() throws Exception {
         final String html =
               "  <label id='label1' for='progress1'>Item</label>\n"
@@ -415,8 +405,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSelectElement]:select1",
-            IE = "undefined")
+    @Alerts("[object HTMLSelectElement]:select1")
     public void controlForSelect() throws Exception {
         final String html =
               "  <label id='label1' for='select1'>Item</label>\n"
@@ -430,8 +419,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTextAreaElement]:text1",
-            IE = "undefined")
+    @Alerts("[object HTMLTextAreaElement]:text1")
     public void controlForTextArea() throws Exception {
         final String html =
               "  <label id='label1' for='text1'>Item</label>\n"
@@ -445,8 +433,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlNestedNotLabelable() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -461,8 +448,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLButtonElement]:button1",
-            IE = "undefined")
+    @Alerts("[object HTMLButtonElement]:button1")
     public void controlNestedButton() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -478,8 +464,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLInputElement]:text1",
-            IE = "undefined")
+    @Alerts("[object HTMLInputElement]:text1")
     public void controlNestedInput() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -495,8 +480,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlNestedInputHidden() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -512,8 +496,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMeterElement]:meter1",
-            IE = "undefined")
+    @Alerts("[object HTMLMeterElement]:meter1")
     public void controlNestedMeter() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -529,8 +512,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOutputElement]:output1",
-            IE = "undefined")
+    @Alerts("[object HTMLOutputElement]:output1")
     public void controlNestedOutput() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -546,8 +528,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLProgressElement]:progress1",
-            IE = "undefined")
+    @Alerts("[object HTMLProgressElement]:progress1")
     public void controlNestedProgress() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -563,8 +544,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSelectElement]:select1",
-            IE = "undefined")
+    @Alerts("[object HTMLSelectElement]:select1")
     public void controlNestedSelect() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -580,8 +560,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTextAreaElement]:text1",
-            IE = "undefined")
+    @Alerts("[object HTMLTextAreaElement]:text1")
     public void controlNestedTextArea() throws Exception {
         final String html =
               "  <label id='label1'>Item\n"
@@ -597,8 +576,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLInputElement]:text2",
-            IE = "undefined")
+    @Alerts("[object HTMLInputElement]:text2")
     public void controlForVersusNested() throws Exception {
         final String html =
               "  <label id='label1' for='text2'>Item\n"
@@ -614,8 +592,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlForUnknownVersusNested() throws Exception {
         final String html =
               "  <label id='label1' for='unknown'>Item\n"
@@ -631,8 +608,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "undefined")
+    @Alerts("null")
     public void controlForNotLabelableVersusNested() throws Exception {
         final String html =
               "  <label id='label1' for='div1'>Item\n"
@@ -663,8 +639,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "[object HTMLInputElement]")
+    @Alerts("null")
     public void controlSet() throws Exception {
         final String html
             = "<html>\n"
@@ -727,8 +702,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "[object HTMLFormElement]:form1")
+    @Alerts("null")
     public void formInsideForm() throws Exception {
         final String html
             = "  <form id='form1'>\n"
@@ -777,8 +751,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFormElement]:form1",
-            IE = "null")
+    @Alerts("[object HTMLFormElement]:form1")
     public void formForLabelableInsideForm() throws Exception {
         final String html
             = "  <label id='label1' for='text1'>Item</label>\n"
@@ -812,8 +785,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "[object HTMLFormElement]:form1")
+    @Alerts("null")
     public void formNestedNotLabelableInsideForm() throws Exception {
         final String html
             = "  <form id='form1'>\n"

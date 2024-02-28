@@ -1126,8 +1126,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Null ChildrenLength: 0",
-            IE = "Null ChildrenLength: 1")
+    @Alerts("Null ChildrenLength: 0")
     public void setInnerHTMLNull() throws Exception {
         final String html = "<html><head></head><body>\n"
                 + "<div id='testDiv'>foo</div>\n"
@@ -2515,8 +2514,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMRect]",
-            IE = "[object ClientRect]")
+    @Alerts("[object DOMRect]")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='div1'>hello</div><script>\n"
@@ -3957,8 +3955,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<svg id=\"svgElem2\"></svg>",
-            IE = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svgElem2\" />")
+    @Alerts("<svg id=\"svgElem2\"></svg>")
     public void innerHTML_svg() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

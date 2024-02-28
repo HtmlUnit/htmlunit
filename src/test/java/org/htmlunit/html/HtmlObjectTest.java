@@ -55,8 +55,7 @@ public class HtmlObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "false")
+    @Alerts("undefined")
     public void classid() throws Exception {
         if (getBrowserVersion().isIE() && !ActiveXObjectTest.isJacobInstalled()) {
             return;

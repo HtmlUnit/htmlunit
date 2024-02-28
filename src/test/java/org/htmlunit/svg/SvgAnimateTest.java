@@ -37,8 +37,7 @@ public class SvgAnimateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGAnimateElement]",
-            IE = "[object SVGElement]")
+    @Alerts("[object SVGAnimateElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

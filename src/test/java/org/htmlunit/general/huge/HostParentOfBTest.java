@@ -50,8 +50,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _BarProp_BarProp() throws Exception {
         test("BarProp", "BarProp");
     }
@@ -60,8 +59,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _BaseAudioContext_AudioContext() throws Exception {
         test("BaseAudioContext", "AudioContext");
     }
@@ -70,8 +68,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _BaseAudioContext_BaseAudioContext() throws Exception {
         test("BaseAudioContext", "BaseAudioContext");
     }
@@ -80,8 +77,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _BaseAudioContext_OfflineAudioContext() throws Exception {
         test("BaseAudioContext", "OfflineAudioContext");
     }
@@ -122,8 +118,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _BiquadFilterNode_BiquadFilterNode() throws Exception {
         test("BiquadFilterNode", "BiquadFilterNode");
     }
@@ -150,8 +145,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _BlobEvent_BlobEvent() throws Exception {
         test("BlobEvent", "BlobEvent");
     }
@@ -160,8 +154,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _BroadcastChannel_BroadcastChannel() throws Exception {
         test("BroadcastChannel", "BroadcastChannel");
     }

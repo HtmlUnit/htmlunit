@@ -170,8 +170,7 @@ public class Float64ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "exception")
+    @Alerts("0")
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -230,8 +229,7 @@ public class Float64ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Float64Array",
-            IE = "undefined")
+    @Alerts("Float64Array")
     public void name() throws Exception {
         final String html
             = "<html><head>\n"

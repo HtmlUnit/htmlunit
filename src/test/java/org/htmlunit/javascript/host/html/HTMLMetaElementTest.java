@@ -66,8 +66,7 @@ public class HTMLMetaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "only screen and (max-width: 600px)",
-            IE = "undefined")
+    @Alerts("only screen and (max-width: 600px)")
     public void media() throws Exception {
         final String html =
             "<html>\n"

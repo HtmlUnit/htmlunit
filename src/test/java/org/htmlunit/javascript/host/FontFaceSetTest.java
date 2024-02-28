@@ -52,8 +52,7 @@ public class FontFaceSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object FontFaceSet]",
-            IE = "undefined")
+    @Alerts("[object FontFaceSet]")
     public void documentFonts() throws Exception {
         final String html
             = "<html>\n"
@@ -71,8 +70,7 @@ public class FontFaceSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "then: ",
-            IE = "document.fonts is undefined")
+    @Alerts("then: ")
     public void load() throws Exception {
         final String html
             = "<html>\n"

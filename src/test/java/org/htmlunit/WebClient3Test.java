@@ -414,8 +414,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "modified",
-            IE = "Hello world")
+    @Alerts("modified")
     // IE does not support deflate compression anymore but I couldn't find a way to disable it in HttpClient
     public void deflateCompressionNonGZipCompatible() throws Exception {
         doTestDeflateCompression(false);

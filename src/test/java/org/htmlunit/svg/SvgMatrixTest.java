@@ -37,8 +37,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function SVGMatrix() { [native code] }",
-            IE = "[object SVGMatrix]")
+    @Alerts("function SVGMatrix() { [native code] }")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"

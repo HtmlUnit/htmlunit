@@ -119,8 +119,7 @@ public class NativeErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void stackInNewError() throws Exception {
         final String html
             = "<html><head><script>\n"

@@ -31,8 +31,7 @@ public class HTMLDataElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDataElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLDataElement]")
     public void tag() throws Exception {
         final String html = "<html><body>\n"
             + "  <data id='it' value='1234'>onetwothreefour</data>\n"

@@ -150,8 +150,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "gzip, deflate, br",
-            IE = "gzip, deflate")
+    @Alerts("gzip, deflate, br")
     public void acceptEncoding() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"

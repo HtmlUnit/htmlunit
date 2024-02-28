@@ -17853,8 +17853,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),selectorText[GSCE],style[GSCE]",
-            IE = "constructor[],selectorText[GCE],style[GCE]")
+    @Alerts("constructor(),selectorText[GSCE],style[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),selectorText[GSCE],style[GCE]",
             EDGE = "constructor(),selectorText[GSCE],style[GCE]",
             FF = "constructor(),selectorText[GSCE],style[GCE]",
@@ -17869,8 +17868,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),media[GSCE]",
-            IE = "constructor[],media[GCE]")
+    @Alerts("constructor(),media[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),media[GCE]",
             EDGE = "constructor(),media[GCE]",
             FF = "constructor(),media[GCE]",
@@ -17885,8 +17883,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),style[GCE]",
-            IE = "constructor[]")
+    @Alerts("constructor(),style[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
@@ -17901,8 +17898,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),href[GCE],layerName[GCE],media[GSCE],styleSheet[GCE],supportsText[GCE]",
-            IE = "constructor[],href[GCE],media[GCE],styleSheet[GCE]")
+    @Alerts("constructor(),href[GCE],layerName[GCE],media[GSCE],styleSheet[GCE],supportsText[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),href[GCE],media[GCE],styleSheet[GCE]",
             EDGE = "constructor(),href[GCE],media[GCE],styleSheet[GCE]",
             FF = "constructor(),href[GCE],media[GCE],styleSheet[GCE]",

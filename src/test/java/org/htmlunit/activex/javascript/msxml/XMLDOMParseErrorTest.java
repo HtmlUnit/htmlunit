@@ -43,8 +43,7 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts("no ActiveX")
     public void scriptableToString() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

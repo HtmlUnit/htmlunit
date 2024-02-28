@@ -195,8 +195,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "meter1",
-            IE = "null")
+    @Alerts("meter1")
     public void getLabeledElementForMeter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -224,8 +223,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "output1",
-            IE = "null")
+    @Alerts("output1")
     public void getLabeledElementForOutput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -393,8 +391,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "meter1",
-            IE = "null")
+    @Alerts("meter1")
     public void getLabeledElementNestedMeter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -424,8 +421,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "output1",
-            IE = "null")
+    @Alerts("output1")
     public void getLabeledElementNestedOutput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -649,8 +645,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "labelclick",
-            IE = "labelclick;divclick")
+    @Alerts("labelclick")
     public void clickForNotLabelable() throws Exception {
         final String html =
               "  <label id='label1' for='div1' onclick='log(\"labelclick\")' "
@@ -1069,8 +1064,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "labelclick",
-            IE = "labelclick;div1click")
+    @Alerts("labelclick")
     public void clickForNotLabelableVersusNested() throws Exception {
         final String html =
               "  <label id='label1' for='div1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"

@@ -1640,8 +1640,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "error")
+    @Alerts("true")
     public void stop() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -1686,8 +1685,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "First",
-            IE = "Second")
+    @Alerts("First")
     public void navigate() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1751,8 +1749,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "no exception")
+    @Alerts("exception")
     public void getComputedStyle() throws Exception {
         final String html
             = "<html><head><script>\n"

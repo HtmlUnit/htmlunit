@@ -818,8 +818,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
+    @Alerts("1")
     public void isindex() throws Exception {
         test("isindex");
     }
@@ -1442,8 +1441,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "exception")
+    @Alerts("1")
     public void svg() throws Exception {
         test("svg");
     }
@@ -1718,8 +1716,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE = "1")
+    @Alerts("0")
     public void template() throws Exception {
         test("template");
     }

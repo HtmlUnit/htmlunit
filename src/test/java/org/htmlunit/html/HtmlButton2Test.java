@@ -529,8 +529,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
+    @Alerts("2")
     public void typeUnknownExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -560,8 +559,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
+    @Alerts("2")
     public void typeSubmitExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -621,8 +619,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "1")
+    @Alerts("2")
     public void submitWithoutTypeExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"

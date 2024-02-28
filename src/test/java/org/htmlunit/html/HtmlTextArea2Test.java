@@ -171,8 +171,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "7",
-            IE = "textLength not available")
+    @Alerts("7")
     public void textLength() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -333,8 +332,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Hello World",
-            IE = "Hello WorldHtmlUnit")
+    @Alerts("Hello World")
     public void getVisibleTextValueChangedWithTyping() throws Exception {
         final String html
             = "<html>"
@@ -361,8 +359,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Hello World",
-            IE = "HtmlUnit")
+    @Alerts("Hello World")
     public void getVisibleTextValueChangedFromJs() throws Exception {
         final String html
             = "<html>"

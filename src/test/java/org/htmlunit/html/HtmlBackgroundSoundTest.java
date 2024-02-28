@@ -36,8 +36,7 @@ public class HtmlBackgroundSoundTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE = "[object HTMLBGSoundElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ +  "<html><head>\n"
             + "<script>\n"

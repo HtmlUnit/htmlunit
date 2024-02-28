@@ -610,8 +610,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "TypeError: Throwing 1",
-            IE = "")
+    @Alerts("TypeError: Throwing 1")
     public void resolveThenableThrows() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -655,8 +654,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Resolving",
-            IE = "")
+    @Alerts("Resolving")
     public void resolveThenableThrowsAfterCallback() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1477,8 +1475,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "failure1",
-            IE = "")
+    @Alerts("failure1")
     public void thenThenableThrows() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1573,8 +1570,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "")
+    @Alerts("1")
     public void thenThenableThrowsAfterCallback() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2044,8 +2040,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "test")
+    @Alerts("")
     public void changeLocationFromPromise() throws Exception {
         final String html =
                 "<html>\n"

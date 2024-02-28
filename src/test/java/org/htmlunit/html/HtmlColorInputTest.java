@@ -136,8 +136,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "#000000",
-            IE = "")
+    @Alerts("#000000")
     public void clearInput() throws Exception {
         final String htmlContent
                 = "<html>\n"

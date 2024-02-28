@@ -128,8 +128,7 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown label,mouseup label,click label,focus text,click text,",
-            IE = "mousedown label,mouseup label,click label,click text,focus text,")
+    @Alerts("mousedown label,mouseup label,click label,focus text,click text,")
     public void clickEventsLabel() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -156,8 +156,7 @@ public class NodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "0,1,2,3,4,entries,forEach,item,keys,length,values",
-            IE = "0,1,2,3,4,item,length")
+    @Alerts("0,1,2,3,4,entries,forEach,item,keys,length,values")
     public void forIn() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
                 + "<script>\n"
@@ -185,8 +184,7 @@ public class NodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "entries,forEach,item,keys,length,values",
-            IE = "item,length")
+    @Alerts("entries,forEach,item,keys,length,values")
     public void forInEmptyList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
                 + "<script>\n"

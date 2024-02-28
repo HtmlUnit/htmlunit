@@ -68,8 +68,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _TextDecoder_TextDecoder() throws Exception {
         test("TextDecoder", "TextDecoder");
     }
@@ -78,8 +77,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _TextEncoder_TextEncoder() throws Exception {
         test("TextEncoder", "TextEncoder");
     }
@@ -108,8 +106,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _TextRange_TextRange() throws Exception {
         test("TextRange", "TextRange");
     }
@@ -136,8 +133,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _TextTrackCue_VTTCue() throws Exception {
         test("TextTrackCue", "VTTCue");
     }
@@ -271,8 +267,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _UIEvent_InputEvent() throws Exception {
         test("UIEvent", "InputEvent");
     }
@@ -310,8 +305,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _UIEvent_MouseWheelEvent() throws Exception {
         test("UIEvent", "MouseWheelEvent");
     }
@@ -320,8 +314,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _UIEvent_MSGestureEvent() throws Exception {
         test("UIEvent", "MSGestureEvent");
     }
@@ -339,8 +332,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("false")
     public void _UIEvent_SVGZoomEvent() throws Exception {
         test("UIEvent", "SVGZoomEvent");
     }
@@ -434,8 +426,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _URL_URL() throws Exception {
         test("URL", "URL");
     }
@@ -457,8 +448,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _URLSearchParams_URLSearchParams() throws Exception {
         test("URLSearchParams", "URLSearchParams");
     }
@@ -494,8 +484,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _VTTCue_VTTCue() throws Exception {
         test("VTTCue", "VTTCue");
     }

@@ -32,8 +32,7 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"
@@ -91,8 +90,7 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object AudioBufferSourceNode]",
-            IE = "OfflineAudioContext not available")
+    @Alerts("[object AudioBufferSourceNode]")
     public void createBufferSource() throws Exception {
         final String html
             = "<html>\n"
@@ -235,8 +233,7 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function startRendering() { [native code] }",
-            IE = "OfflineAudioContext not available")
+    @Alerts("function startRendering() { [native code] }")
     public void startRendering() throws Exception {
         final String html
             = "<html>\n"

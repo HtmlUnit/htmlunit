@@ -171,8 +171,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "Received: func=function addEventListener() { [native code] }",
-            IE = "Received: func= function addEventListener() { [native code] } ")
+    @Alerts("Received: func=function addEventListener() { [native code] }")
     public void functionDefaultValue() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION

@@ -41,8 +41,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts("no ActiveX")
     public void scriptableToString() throws Exception {
         tester("log(Object.prototype.toString.call(fragment));\n");
     }
@@ -51,8 +50,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void attributes() throws Exception {
         property("attributes");
     }
@@ -61,8 +59,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -108,8 +105,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "0")
+    @Alerts("no ActiveX")
     public void childNodes_none() throws Exception {
         tester("log(fragment.childNodes.length);\n");
     }
@@ -118,8 +114,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -128,8 +123,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void definition() throws Exception {
         property("definition");
     }
@@ -154,8 +148,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void firstChild_none() throws Exception {
         property("firstChild");
     }
@@ -180,8 +173,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void lastChild_none() throws Exception {
         property("lastChild");
     }
@@ -190,8 +182,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -200,8 +191,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "#document-fragment")
+    @Alerts("no ActiveX")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -210,8 +200,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "11")
+    @Alerts("no ActiveX")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -245,8 +234,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "true")
+    @Alerts("no ActiveX")
     public void ownerDocument() throws Exception {
         tester("log(fragment.ownerDocument === doc);\n");
     }
@@ -255,8 +243,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "null")
+    @Alerts("no ActiveX")
     public void parentNode() throws Exception {
         property("parentNode");
     }
@@ -265,8 +252,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -275,8 +261,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "child-cdatagrand-child-textchild-text")
+    @Alerts("no ActiveX")
     public void text() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('child-cdata');\n"
@@ -326,8 +311,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "c ct t")
+    @Alerts("no ActiveX")
     public void text_lineBreak() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('c\\nc');\n"
@@ -343,8 +327,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void text_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -393,8 +376,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "child-text\\r\\n")
+    @Alerts("no ActiveX")
     public void xml_lineBreak() throws Exception {
         final String test =
                 "var text = doc.createTextNode('child-text\\n');\n"
@@ -411,8 +393,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "")
+    @Alerts("no ActiveX")
     public void xml_created() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

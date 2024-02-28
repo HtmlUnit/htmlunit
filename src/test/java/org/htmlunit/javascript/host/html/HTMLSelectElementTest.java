@@ -2486,8 +2486,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "mouse over",
-            IE = "")
+    @Alerts("mouse over")
     @BuggyWebDriver(FF = "mouse overmouse overmouse over",
             FF_ESR = "mouse overmouse overmouse over")
     public void mouseOverDisabledSelect() throws Exception {
