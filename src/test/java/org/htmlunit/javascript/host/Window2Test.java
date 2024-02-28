@@ -424,8 +424,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function Node() { [native code] }", "function Element() { [native code] }"},
-            IE = {"[object Node]", "[object Element]"})
+    @Alerts({"function Node() { [native code] }", "function Element() { [native code] }"})
     public void windowProperties() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -779,8 +778,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception", "exception", "exception"},
-            IE = {"JScript", "11", "0", "number"})
+    @Alerts({"exception", "exception", "exception", "exception"})
     public void IEScriptEngineXxx() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -825,8 +823,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "1234"},
-            IE = {"true", "1256"})
+    @Alerts({"true", "1234"})
     public void setInnerWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -845,8 +842,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "1234"},
-            IE = {"true", "682"})
+    @Alerts({"true", "1234"})
     public void setInnerHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -865,8 +861,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "1234"},
-            IE = {"true", "1272"})
+    @Alerts({"true", "1234"})
     public void setOuterWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -885,8 +880,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "1234"},
-            IE = {"true", "768"})
+    @Alerts({"true", "1234"})
     public void setOuterHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1001,8 +995,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "0", "0"},
-            IE = {"0", "0", "undefined", "undefined"})
+    @Alerts({"0", "0", "0", "0"})
     public void pageXOffset() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1336,8 +1329,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"string string 8 number object", "string string 1 number object"},
-            IE = {"string string 8 number object", "string string 9 number object"})
+    @Alerts({"string string 8 number object", "string string 1 number object"})
     public void onErrorExceptionInstance2() throws Exception {
         final String html
                 = "<html>\n"
@@ -2403,8 +2395,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"})
     @HtmlUnitNYI(CHROME = {"[object Window]", "[object EventTarget]", "[object Object]"},
             EDGE = {"[object Window]", "[object EventTarget]", "[object Object]"},
             FF = {"[object Window]", "[object EventTarget]", "[object Object]"},
@@ -2480,8 +2471,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Window]", "true", "true"},
-            IE = "globalThis is undefined")
+    @Alerts(DEFAULT = {"[object Window]", "true", "true"})
     public void globalThis() throws Exception {
         final String html
             = "<html><head></head><body>\n"

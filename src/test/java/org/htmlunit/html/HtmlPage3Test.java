@@ -110,8 +110,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"windows-1252", "windows-1252", "windows-1252", "undefined"},
-            IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
+    @Alerts({"windows-1252", "windows-1252", "windows-1252", "undefined"})
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
             + "  <meta http-equiv='Content-Type' content='text/html; charset=Shift_JIS'>\n"

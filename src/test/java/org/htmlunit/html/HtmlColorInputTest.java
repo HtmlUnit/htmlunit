@@ -36,8 +36,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"#000000--null", "#000000--null", "#000000--null"},
-            IE = {"--null", "exception", "--null"})
+    @Alerts({"#000000--null", "#000000--null", "#000000--null"})
     public void defaultValues() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -71,8 +70,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"#000000--null", "#000000--null", "#000000--null"},
-            IE = {"--null", "exception", "--null"})
+    @Alerts({"#000000--null", "#000000--null", "#000000--null"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

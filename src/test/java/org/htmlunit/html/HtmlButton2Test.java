@@ -679,8 +679,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "second"},
-            IE = {"2", "third"})
+    @Alerts({"2", "second"})
     public void externalPreferenceFrom() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -715,8 +714,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "second"},
-            IE = {"2", "third"})
+    @Alerts({"2", "second"})
     public void internalDifferentFrom() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -799,8 +797,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            FF_ESR = "2",
-            IE = "2")
+            FF_ESR = "2")
     public void onclickDisablesSubmit() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -158,8 +158,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "undefined", "", ""},
-            IE = {"", "", "", ""})
+    @Alerts({"", "undefined", "", ""})
     public void src() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -430,8 +429,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},
-            IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
+    @Alerts({"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"})
     public void widthHeightWithoutSource() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -502,8 +500,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
       * @throws Exception if the test fails
       */
     @Test
-    @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},
-            IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
+    @Alerts({"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"})
     public void widthHeightEmptySource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -620,8 +617,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "true"},
-            IE = {"false", "false", "false", "true"})
+    @Alerts({"true", "true", "true", "true"})
     public void complete() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

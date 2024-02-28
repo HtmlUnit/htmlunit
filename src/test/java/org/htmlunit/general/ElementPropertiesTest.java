@@ -428,10 +428,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "appendData(),data,deleteData(),insertData(),length,replaceData(),splitText(),substringData(),"
-                + "wholeText",
-            IE = "appendData(),data,deleteData(),insertData(),length,replaceData(),replaceWholeText(),splitText(),"
-                + "substringData(),"
+    @Alerts("appendData(),data,deleteData(),insertData(),length,replaceData(),splitText(),substringData(),"
                 + "wholeText")
     public void text() throws Exception {
         testString("", "document.createTextNode('some text'), unknown");
@@ -543,26 +540,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
                 + "spellcheck,style,tabIndex,title,"
-                + "translate",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),contains(),contentEditable,createControlRange(),"
-                + "currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),getAdjacentText(),"
-                + "getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,insertAdjacentElement(),"
-                + "insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,isMultiLine,isTextEdit,"
-                + "lang,language,mergeAttributes(),msGetInputContext(),namedRecordset(),offsetHeight,offsetLeft,"
-                + "offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,onbeforecut,"
-                + "onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,recordset,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate")
     @HtmlUnitNYI(CHROME = "accessKey,autofocus,"
                 + "blur(),click(),contentEditable,dataset,dir,enterKeyHint,focus(),hidden,innerText,"
                 + "isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
@@ -723,20 +701,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollLeft,scrollLeftMax,scrollTo(),scrollTop,scrollTopMax,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setCapture(),setPointerCapture(),"
                 + "shadowRoot,slot,tagName,toggleAttribute(),"
-                + "webkitMatchesSelector()",
-            IE = "childElementCount,clientHeight,clientLeft,clientTop,clientWidth,firstElementChild,getAttribute(),"
-                + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),lastElementChild,"
-                + "msContentZoomFactor,msGetRegionContent(),msGetUntransformedBounds(),msMatchesSelector(),"
-                + "msRegionOverflow,msReleasePointerCapture(),msRequestFullscreen(),msSetPointerCapture(),msZoomTo(),"
-                + "nextElementSibling,ongotpointercapture,onlostpointercapture,onmsgesturechange,onmsgesturedoubletap,"
-                + "onmsgestureend,onmsgesturehold,onmsgesturestart,onmsgesturetap,onmsgotpointercapture,"
-                + "onmsinertiastart,onmslostpointercapture,onmspointercancel,onmspointerdown,onmspointerenter,"
-                + "onmspointerleave,onmspointermove,onmspointerout,onmspointerover,onmspointerup,onpointercancel,"
-                + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
-                + "previousElementSibling,querySelector(),querySelectorAll(),releasePointerCapture(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),scrollHeight,scrollLeft,scrollTop,scrollWidth,"
-                + "setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),tagName")
+                + "webkitMatchesSelector()")
     @HtmlUnitNYI(CHROME = "append(),attributes,"
                 + "childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
@@ -880,20 +845,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollIntoView(),scrollLeft,scrollLeftMax,scrollTo(),scrollTop,scrollTopMax,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setCapture(),"
                 + "setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),"
-                + "webkitMatchesSelector()",
-            IE = "childElementCount,clientHeight,clientLeft,clientTop,clientWidth,firstElementChild,getAttribute(),"
-                + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),lastElementChild,"
-                + "msContentZoomFactor,msGetRegionContent(),msGetUntransformedBounds(),msMatchesSelector(),"
-                + "msRegionOverflow,msReleasePointerCapture(),msRequestFullscreen(),msSetPointerCapture(),msZoomTo(),"
-                + "nextElementSibling,ongotpointercapture,onlostpointercapture,onmsgesturechange,onmsgesturedoubletap,"
-                + "onmsgestureend,onmsgesturehold,onmsgesturestart,onmsgesturetap,onmsgotpointercapture,"
-                + "onmsinertiastart,onmslostpointercapture,onmspointercancel,onmspointerdown,onmspointerenter,"
-                + "onmspointerleave,onmspointermove,onmspointerout,onmspointerover,onmspointerup,onpointercancel,"
-                + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
-                + "previousElementSibling,releasePointerCapture(),removeAttribute(),removeAttributeNode(),"
-                + "removeAttributeNS(),scrollHeight,scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
-                + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),tagName")
+                + "webkitMatchesSelector()")
     @HtmlUnitNYI(CHROME = "after(),append(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
@@ -985,10 +937,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "META_MASK,NONE,originalTarget,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
                 + "stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,"
-                + "type",
-            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
-                + "defaultPrevented,eventPhase,initEvent(),isTrusted,preventDefault(),srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
                 + "type")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,"
@@ -1155,37 +1103,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollY,self,sessionStorage,setInterval(),setResizable(),setTimeout(),sizeToContent(),"
                 + "sortFunction(),speechSynthesis,status,statusbar,stop(),structuredClone(),test(),toolbar,top,"
                 + "updateCommands(),visualViewport,"
-                + "window",
-            IE = "addEventListener(),alert(),animationStartTime,applicationCache,atob(),blur(),btoa(),"
-                + "cancelAnimationFrame(),captureEvents(),clearImmediate(),clearInterval(),clearTimeout(),"
-                + "clientInformation,clipboardData,close(),closed,confirm(),console,"
-                + "defaultStatus,devicePixelRatio,dispatchEvent(),document,doNotTrack,event,external,focus(),"
-                + "frameElement,frames,getComputedStyle(),getSelection(),history,indexedDB,innerHeight,"
-                + "innerWidth,item(),length,localStorage,location,log(),"
-                + "matchMedia(),maxConnectionsPerServer,moveBy(),"
-                + "moveTo(),msAnimationStartTime,msCancelRequestAnimationFrame(),msClearImmediate(),msCrypto,"
-                + "msIndexedDB,msIsStaticHTML(),msMatchMedia(),msRequestAnimationFrame(),msSetImmediate(),"
-                + "msWriteProfilerMark(),name,navigate(),navigator,offscreenBuffering,onabort,onafterprint,"
-                + "onbeforeprint,onbeforeunload,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncompassneedscalibration,oncontextmenu,ondblclick,ondevicemotion,ondeviceorientation,"
-                + "ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
-                + "ondurationchange,onemptied,onended,onerror,onfocus,onfocusin,onfocusout,onhashchange,onhelp,"
-                + "oninput,onkeydown,onkeypress,onkeyup,onload(),onloadeddata,onloadedmetadata,onloadstart,"
-                + "onmessage,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
-                + "onmousewheel,onmsgesturechange,onmsgesturedoubletap,onmsgestureend,onmsgesturehold,"
-                + "onmsgesturestart,onmsgesturetap,onmsinertiastart,onmspointercancel,onmspointerdown,"
-                + "onmspointerenter,onmspointerleave,onmspointermove,onmspointerout,onmspointerover,onmspointerup,"
-                + "onoffline,ononline,onpagehide,onpageshow,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
-                + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onpopstate,"
-                + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,onvolumechange,"
-                + "onwaiting,open(),"
-                + "opener,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,performance,"
-                + "postMessage(),print(),"
-                + "process(),prompt(),releaseEvents(),removeEventListener(),requestAnimationFrame(),resizeBy(),"
-                + "resizeTo(),screen,screenLeft,screenTop,screenX,screenY,scroll(),scrollBy(),scrollTo(),self,"
-                + "sessionStorage,setImmediate(),setInterval(),setTimeout(),showHelp(),showModalDialog(),"
-                + "showModelessDialog(),sortFunction(),status,styleMedia,test(),top,toStaticHTML(),toString(),"
                 + "window")
     @HtmlUnitNYI(CHROME = "addEventListener(),alert(),atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),"
@@ -1321,10 +1238,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,type,"
-                + "username",
-            IE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
-                + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
-                + "urn")
+                + "username")
     public void a() throws Exception {
         test("a");
     }
@@ -1346,9 +1260,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-",
-            IE = "align,alt,altHtml,archive,BaseHref,border,classid,code,codeBase,codeType,contentDocument,data,"
-                + "declare,form,height,hspace,name,object,standby,type,useMap,vspace,width")
+    @Alerts("-")
     public void applet() throws Exception {
         test("applet");
     }
@@ -1360,8 +1272,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
-                + "protocol,referrerPolicy,rel,relList,search,shape,target,username",
-            IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target")
+                + "protocol,referrerPolicy,rel,relList,search,shape,target,username")
     @HtmlUnitNYI(CHROME = "alt,coords,rel,relList",
             EDGE = "alt,coords,rel,relList",
             FF_ESR = "alt,coords,rel,relList",
@@ -1433,16 +1344,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "onwaitingforkey,pause(),paused,play(),playbackRate,played,preload,preservesPitch,readyState,"
                 + "seekable,seeking,seekToNextFrame(),setMediaKeys(),src,srcObject,textTracks,"
-                + "volume",
-            IE = "addTextTrack(),audioTracks,autobuffer,autoplay,buffered,canPlayType(),controls,currentSrc,"
-                + "currentTime,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
-                + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,initialTime,load(),loop,"
-                + "msGraphicsTrustStatus,msKeys,msPlayToDisabled,"
-                + "msPlayToPreferredSourceUri,msPlayToPrimary,msSetMediaKeys(),muted,"
-                + "NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,"
-                + "NETWORK_NO_SOURCE,networkState,onmsneedkey,"
-                + "pause(),paused,play(),playbackRate,played,preload,readyState,"
-                + "seekable,seeking,src,textTracks,volume")
+                + "volume")
     @HtmlUnitNYI(CHROME = "canPlayType(),currentSrc,"
                 + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
                 + "load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play(),src",
@@ -1572,11 +1474,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ongamepadconnected,ongamepaddisconnected,onhashchange,"
                 + "onlanguagechange,onmessage,onmessageerror,"
                 + "onoffline,ononline,onpagehide,onpageshow,onpopstate,onrejectionhandled,"
-                + "onstorage,onunhandledrejection,onunload,text,vLink",
-            IE = "aLink,background,bgColor,bgProperties,bottomMargin,createTextRange(),leftMargin,link,noWrap,"
-                + "onafterprint,onbeforeprint,onbeforeunload,onhashchange,onmessage,onoffline,ononline,onpagehide,"
-                + "onpageshow,onpopstate,onresize,onstorage,onunload,rightMargin,scroll,text,topMargin,"
-                + "vLink")
+                + "onstorage,onunhandledrejection,onunload,text,vLink")
     public void body() throws Exception {
         test("body");
     }
@@ -1622,9 +1520,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             FF_ESR = "checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,labels,"
                 + "name,reportValidity(),setCustomValidity(),type,validationMessage,validity,value,"
-                + "willValidate",
-            IE = "autofocus,checkValidity(),createTextRange(),form,formAction,formEnctype,formMethod,"
-                + "formNoValidate,formTarget,name,setCustomValidity(),status,type,validationMessage,validity,value,"
                 + "willValidate")
     @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,formNoValidate,labels,name,setCustomValidity()"
                 + ",type,validity,value,willValidate",
@@ -1653,8 +1548,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "width",
             FF_ESR = "captureStream(),getContext(),height,mozOpaque,mozPrintCallback,toBlob(),toDataURL(),"
                 + "transferControlToOffscreen(),"
-                + "width",
-            IE = "getContext(),height,msToBlob(),toDataURL(),width")
+                + "width")
     @HtmlUnitNYI(CHROME = "getContext(),height,toDataURL(),width",
             EDGE = "getContext(),height,toDataURL(),width",
             FF_ESR = "getContext(),height,toDataURL(),width",
@@ -1770,8 +1664,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "open",
             CHROME = "name,open",
-            EDGE = "name,open",
-            IE = "-")
+            EDGE = "name,open")
     public void details() throws Exception {
         test("details");
     }
@@ -1837,10 +1730,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,getSVGDocument(),height,name,src,type,width",
-            IE = "getSVGDocument(),height,msPlayToDisabled,msPlayToPreferredSourceUri,msPlayToPrimary,name,palette,"
-                + "pluginspage,readyState,src,units,"
-                + "width")
+    @Alerts("align,getSVGDocument(),height,name,src,type,width")
     @HtmlUnitNYI(CHROME = "align,height,name,width",
             EDGE = "align,height,name,width",
             FF_ESR = "align,height,name,width",
@@ -1867,8 +1757,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
-                + "validationMessage,validity,willValidate",
-            IE = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate")
+                + "validationMessage,validity,willValidate")
     @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
             EDGE = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
             FF_ESR = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
@@ -1927,9 +1816,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "target",
             FF_ESR = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,rel,relList,reportValidity(),requestSubmit(),reset(),submit(),"
-                + "target",
-            IE = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
-                + "name,namedItem(),noValidate,reset(),submit(),"
                 + "target")
     @HtmlUnitNYI(CHROME = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,rel,relList,requestSubmit(),reset(),submit(),target",
@@ -1952,8 +1838,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "append(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
             EDGE = "append(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
             FF = "append(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
-            FF_ESR = "append(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
-            IE = "append()")
+            FF_ESR = "append(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()")
     public void formData() throws Exception {
         testString("", "new FormData()");
     }
@@ -1975,12 +1860,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,"
+    @Alerts("contentDocument,contentWindow,frameBorder,longDesc,marginHeight,marginWidth,"
                 + "name,noResize,scrolling,"
-                + "src",
-            IE = "border,borderColor,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),"
-                + "height,longDesc,marginHeight,marginWidth,name,noResize,scrolling,security,src,"
-                + "width")
+                + "src")
     @HtmlUnitNYI(CHROME = "contentDocument,contentWindow,name,src",
             EDGE = "contentDocument,contentWindow,name,src",
             FF_ESR = "contentDocument,contentWindow,name,src",
@@ -2010,10 +1892,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "cols,onafterprint,onbeforeprint,onbeforeunload,ongamepadconnected,ongamepaddisconnected,"
                 + "onhashchange,onlanguagechange,onmessage,onmessageerror,onoffline,ononline,"
                 + "onpagehide,onpageshow,onpopstate,onrejectionhandled,onstorage,onunhandledrejection,"
-                + "onunload,rows",
-            IE = "border,borderColor,cols,frameBorder,frameSpacing,name,onafterprint,onbeforeprint,onbeforeunload,"
-                + "onhashchange,onmessage,onoffline,ononline,onpagehide,onpageshow,onresize,onstorage,onunload,"
-                + "rows")
+                + "onunload,rows")
     public void frameset() throws Exception {
         test("frameset");
     }
@@ -2151,10 +2030,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "width",
             FF_ESR = "align,allow,allowFullscreen,contentDocument,contentWindow,frameBorder,"
                 + "getSVGDocument(),height,longDesc,marginHeight,marginWidth,name,referrerPolicy,"
-                + "sandbox,scrolling,src,srcdoc,width",
-            IE = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"
-                + "hspace,longDesc,marginHeight,marginWidth,name,noResize,sandbox,scrolling,security,src,vspace,"
-                + "width")
+                + "sandbox,scrolling,src,srcdoc,width")
     @HtmlUnitNYI(CHROME = "align,contentDocument,contentWindow,height,name,src,width",
             EDGE = "align,contentDocument,contentWindow,height,name,src,width",
             FF_ESR = "align,contentDocument,contentWindow,height,name,src,width",
@@ -2193,12 +2069,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "useMap,vspace,width,x,y",
             FF_ESR = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,height,hspace,isMap,loading,"
                 + "longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,"
-                + "useMap,vspace,width,x,y",
-            IE = "align,alt,border,complete,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,fileUpdatedDate,"
-                + "height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
-                + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,protocol,src,"
-                + "start,useMap,vrml,vspace,"
-                + "width")
+                + "useMap,vspace,width,x,y")
     @HtmlUnitNYI(CHROME = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width",
             EDGE = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width",
             FF_ESR = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width",
@@ -2213,12 +2084,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-",
-            IE = "align,alt,border,complete,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,fileUpdatedDate,"
-                + "height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
-                + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,protocol,src,"
-                + "start,useMap,vrml,vspace,"
-                + "width")
+    @Alerts("-")
     public void image() throws Exception {
         test("image");
     }
@@ -2350,8 +2216,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "as,charset,crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
             FF_ESR = "as,charset,crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,integrity,"
-                + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
-            IE = "charset,href,hreflang,media,rel,rev,sheet,target,type")
+                + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type")
     @HtmlUnitNYI(CHROME = "disabled,href,rel,relList,rev,type",
             EDGE = "disabled,href,rel,relList,rev,type",
             FF_ESR = "disabled,href,rel,relList,rev,type",
@@ -2406,9 +2271,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,"
                 + "scrollDelay,start(),stop(),trueSpeed,vspace,width",
             FF_ESR = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,"
-                + "scrollDelay,start(),stop(),trueSpeed,vspace,width",
-            IE = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
-                + "start(),stop(),trueSpeed,vspace,width")
+                + "scrollDelay,start(),stop(),trueSpeed,vspace,width")
     @HtmlUnitNYI(CHROME = "bgColor,height,width",
             EDGE = "bgColor,height,width",
             FF_ESR = "bgColor,height,width",
@@ -2568,10 +2431,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate",
             FF_ESR = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
                 + "declare,form,getSVGDocument(),height,hspace,name,reportValidity(),setCustomValidity(),standby,"
-                + "type,useMap,validationMessage,validity,vspace,width,willValidate",
-            IE = "align,alt,altHtml,archive,BaseHref,border,checkValidity(),classid,code,codeBase,codeType,"
-                + "contentDocument,data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,"
-                + "msPlayToPreferredSourceUri,msPlayToPrimary,name,object,readyState,setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate")
     @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
                     + "validity,width,willValidate",
@@ -2629,8 +2488,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
-                + "validationMessage,validity,value,willValidate",
-            IE = "-")
+                + "validationMessage,validity,value,willValidate")
     @HtmlUnitNYI(CHROME = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
             EDGE = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
             FF_ESR = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
@@ -2682,10 +2540,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "addEventListener(),clearMarks(),clearMeasures(),clearResourceTimings(),dispatchEvent(),"
                 + "eventCounts,getEntries(),getEntriesByName(),getEntriesByType(),mark(),measure(),navigation,"
                 + "now(),onresourcetimingbufferfull,removeEventListener(),setResourceTimingBufferSize(),"
-                + "timeOrigin,timing,toJSON()",
-            IE = "clearMarks(),clearMeasures(),clearResourceTimings(),getEntries(),getEntriesByName(),"
-                + "getEntriesByType(),getMarks(),getMeasures(),mark(),measure(),navigation,now(),"
-                + "setResourceTimingBufferSize(),timing,toJSON()")
+                + "timeOrigin,timing,toJSON()")
     @HtmlUnitNYI(CHROME = "addEventListener(),dispatchEvent(),getEntries(),getEntriesByName(),getEntriesByType(),"
                 + "navigation,now(),removeEventListener(),timing",
             EDGE = "addEventListener(),dispatchEvent(),getEntries(),getEntriesByName(),getEntriesByType(),"
@@ -2838,8 +2693,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "async,charset,crossOrigin,defer,event,htmlFor,"
                 + "integrity,noModule,referrerPolicy,src,text,type",
             FF_ESR = "async,charset,crossOrigin,defer,event,htmlFor,"
-                + "integrity,noModule,referrerPolicy,src,text,type",
-            IE = "async,charset,crossOrigin,defer,event,htmlFor,src,text,type")
+                + "integrity,noModule,referrerPolicy,src,text,type")
     @HtmlUnitNYI(CHROME = "async,src,text,type",
             EDGE = "async,src,text,type",
             FF_ESR = "async,src,text,type",
@@ -2880,9 +2734,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "add(),autocomplete,checkValidity(),disabled,form,item(),labels,length,multiple,name,namedItem(),"
                 + "options,reportValidity(),required,selectedIndex,selectedOptions,setCustomValidity(),size,type,"
                 + "validationMessage,validity,value,"
-                + "willValidate",
-            IE = "add(),autofocus,checkValidity(),form,item(),length,multiple,name,namedItem(),options,remove(),"
-                + "required,selectedIndex,setCustomValidity(),size,type,validationMessage,validity,value,"
                 + "willValidate")
     @HtmlUnitNYI(CHROME = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
                 + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
@@ -2905,8 +2756,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "add(),item(),length,namedItem(),remove(),selectedIndex",
             EDGE = "add(),item(),length,namedItem(),remove(),selectedIndex",
             FF = "add(),item(),length,namedItem(),remove(),selectedIndex",
-            FF_ESR = "add(),item(),length,namedItem(),remove(),selectedIndex",
-            IE = "add(),childNodes,item(),length,remove(),selectedIndex")
+            FF_ESR = "add(),item(),length,namedItem(),remove(),selectedIndex")
     @HtmlUnitNYI(CHROME = "add(),item(),length,remove(),selectedIndex",
             EDGE = "add(),item(),length,remove(),selectedIndex",
             FF_ESR = "add(),item(),length,remove(),selectedIndex",
@@ -2982,8 +2832,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "disabled,media,sheet,type",
             CHROME = "blocking,disabled,media,sheet,type",
-            EDGE = "blocking,disabled,media,sheet,type",
-            IE = "media,sheet,type")
+            EDGE = "blocking,disabled,media,sheet,type")
     @HtmlUnitNYI(
             CHROME = "disabled,media,sheet,type",
             EDGE = "disabled,media,sheet,type")
@@ -3044,11 +2893,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
                 + "createTFoot(),createTHead(),deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),frame,"
                 + "insertRow(),rows,rules,summary,tBodies,tFoot,tHead,"
-                + "width",
-            IE = "align,background,bgColor,border,borderColor,borderColorDark,borderColorLight,caption,cellPadding,"
-                + "cells,cellSpacing,cols,createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
-                + "deleteRow(),deleteTFoot(),deleteTHead(),frame,height,insertRow(),moveRow(),rows,rules,summary,"
-                + "tBodies,tFoot,tHead,"
                 + "width")
     @HtmlUnitNYI(CHROME = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
                 + "createTFoot(),createTHead(),deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),insertRow(),"
@@ -3105,10 +2949,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "abbr,align,axis,bgColor,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,"
-                + "width",
-            IE = "abbr,align,axis,background,bgColor,borderColor,borderColorDark,borderColorLight,cellIndex,ch,"
-                + "chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,"
+    @Alerts("abbr,align,axis,bgColor,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,"
                 + "width")
     public void td() throws Exception {
         test("td");
@@ -3120,10 +2961,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "abbr,align,axis,bgColor,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,"
-                + "width",
-            IE = "abbr,align,axis,background,bgColor,borderColor,borderColorDark,borderColorLight,cellIndex,ch,"
-                + "chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,"
+    @Alerts("abbr,align,axis,bgColor,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,"
                 + "width")
     public void th() throws Exception {
         test("th");
@@ -3135,10 +2973,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,bgColor,cells,ch,chOff,deleteCell(),insertCell(),rowIndex,sectionRowIndex,vAlign",
-            IE = "align,bgColor,borderColor,borderColorDark,borderColorLight,cells,ch,chOff,deleteCell(),height,"
-                + "insertCell(),rowIndex,sectionRowIndex,"
-                + "vAlign")
+    @Alerts("align,bgColor,cells,ch,chOff,deleteCell(),insertCell(),rowIndex,sectionRowIndex,vAlign")
     public void tr() throws Exception {
         test("tr");
     }
@@ -3168,10 +3003,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "placeholder,readOnly,reportValidity(),required,rows,select(),selectionDirection,selectionEnd,"
                 + "selectionStart,setCustomValidity(),setRangeText(),setSelectionRange(),textLength,type,"
                 + "validationMessage,validity,value,willValidate,"
-                + "wrap",
-            IE = "autofocus,checkValidity(),cols,createTextRange(),defaultValue,form,maxLength,name,placeholder,"
-                + "readOnly,required,rows,select(),selectionEnd,selectionStart,setCustomValidity(),"
-                + "setSelectionRange(),status,type,validationMessage,validity,value,willValidate,"
                 + "wrap")
     @HtmlUnitNYI(CHROME = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,"
                 + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart"
@@ -3348,17 +3179,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "networkState,onencrypted,onwaitingforkey,pause(),paused,play(),playbackRate,played,poster,"
                 + "preload,preservesPitch,readyState,seekable,seeking,seekToNextFrame(),setMediaKeys(),src,"
                 + "srcObject,textTracks,videoHeight,videoWidth,volume,"
-                + "width",
-            IE = "addTextTrack(),audioTracks,autobuffer,autoplay,buffered,canPlayType(),controls,currentSrc,"
-                + "currentTime,defaultPlaybackRate,duration,ended,error,getVideoPlaybackQuality(),"
-                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
-                + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,initialTime,load(),loop,"
-                + "msGraphicsTrustStatus,msKeys,msPlayToDisabled,"
-                + "msPlayToPreferredSourceUri,msPlayToPrimary,msSetMediaKeys(),msZoom,"
-                + "muted,NETWORK_EMPTY,NETWORK_IDLE,"
-                + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,"
-                + "onmsneedkey,pause(),paused,play(),playbackRate,played,poster,"
-                + "preload,readyState,seekable,seeking,src,textTracks,videoHeight,videoWidth,volume,"
                 + "width")
     @HtmlUnitNYI(CHROME = "canPlayType(),currentSrc,"
                 + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
@@ -3439,13 +3259,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setCustomValidity(),setRangeText(),setSelectionRange(),showPicker(),size,src,step,stepDown(),"
                 + "stepUp(),textLength,type,useMap,validationMessage,validity,value,valueAsDate,valueAsNumber,"
                 + "webkitdirectory,webkitEntries,width,"
-                + "willValidate",
-            IE = "accept,align,alt,autocomplete,autofocus,border,checked,checkValidity(),complete,"
-                + "createTextRange(),defaultChecked,defaultValue,dynsrc,files,form,formAction,formEnctype,"
-                + "formMethod,formNoValidate,formTarget,height,hspace,indeterminate,list,loop,lowsrc,max,maxLength,"
-                + "min,multiple,name,pattern,placeholder,readOnly,required,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),size,src,start,status,step,stepDown(),stepUp(),type,"
-                + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,willValidate")
+                + "willValidate")
     @HtmlUnitNYI(CHROME = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formNoValidate,"
                 + "height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,"
@@ -3513,8 +3327,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "content,shadowRootMode",
             FF = "content",
-            FF_ESR = "content",
-            IE = "-")
+            FF_ESR = "content")
     @HtmlUnitNYI(CHROME = "content",
             EDGE = "content")
     public void template() throws Exception {
@@ -3619,14 +3432,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "originalTarget,preventDefault(),rangeOffset,rangeParent,repeat,returnValue,SCROLL_PAGE_DOWN,"
                 + "SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
                 + "target,timeStamp,type,view,"
-                + "which",
-            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,char,charCode,"
-                + "ctrlKey,currentTarget,defaultPrevented,detail,deviceSessionId,DOM_KEY_LOCATION_JOYSTICK,"
-                + "DOM_KEY_LOCATION_LEFT,"
-                + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
-                + "eventPhase,getModifierState(),initEvent(),initKeyboardEvent(),initUIEvent(),isTrusted,key,keyCode,"
-                + "locale,location,metaKey,preventDefault(),repeat,shiftKey,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view,which")
+                + "which")
     @HtmlUnitNYI(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "charCode,"
                 + "code,composed,ctrlKey,currentTarget,"
@@ -3748,10 +3554,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
                 + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type",
-            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
-                + "defaultPrevented,eventPhase,initEvent(),isTrusted,preventDefault(),srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+                + "target,timeStamp,type")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
@@ -3801,10 +3604,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
                 + "originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,SCROLL_PAGE_DOWN,"
                 + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view,which",
-            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
-                + "defaultPrevented,detail,deviceSessionId,eventPhase,initEvent(),initUIEvent(),isTrusted,"
-                + "preventDefault(),srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
+                + "target,timeStamp,type,view,which")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
@@ -3842,8 +3642,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "hash,host,hostname,href,origin,password,pathname,"
                  + "port,protocol,search,searchParams,toJSON(),toString(),username",
             FF_ESR = "hash,host,hostname,href,origin,password,pathname,"
-                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
-            IE = "exception")
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username")
     public void url() throws Exception {
         testString("", "new URL('http://developer.mozilla.org')");
     }
@@ -3861,8 +3660,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "hash,host,hostname,href,origin,password,pathname,"
                  + "port,protocol,search,searchParams,toJSON(),toString(),username",
             FF_ESR = "hash,host,hostname,href,origin,password,pathname,"
-                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
-            IE = "exception")
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username")
     public void webkitURL() throws Exception {
         testString("", "new webkitURL('http://developer.mozilla.org')");
     }
@@ -3909,13 +3707,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "rangeOffset,rangeParent,relatedTarget,returnValue,screenX,screenY,SCROLL_PAGE_DOWN,"
                 + "SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
                 + "target,timeStamp,type,view,which,x,"
-                + "y",
-            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
-                + "clientX,clientY,ctrlKey,currentTarget,dataTransfer,defaultPrevented,detail,deviceSessionId,"
-                + "eventPhase,fromElement,getModifierState(),initDragEvent(),initEvent(),initMouseEvent(),"
-                + "initUIEvent(),isTrusted,layerX,layerY,metaKey,msConvertURL(),offsetX,offsetY,pageX,pageY,"
-                + "preventDefault(),relatedTarget,screenX,screenY,shiftKey,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,toElement,type,view,which,x,y")
+                + "y")
     @HtmlUnitNYI(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,clientX,clientY,composed,ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,"
                 + "initEvent(),initMouseEvent(),initUIEvent(),metaKey,NONE,pageX,pageY,preventDefault(),"
@@ -3959,8 +3751,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "getCoalescedEvents(),getPredictedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             FF_ESR = "getCoalescedEvents(),getPredictedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
-                + "tangentialPressure,tiltX,tiltY,twist,width",
-            IE = "exception")
+                + "tangentialPressure,tiltX,tiltY,twist,width")
     @HtmlUnitNYI(CHROME = "altitudeAngle,azimuthAngle,height,"
                     + "isPrimary,pointerId,pointerType,pressure,tiltX,tiltY,width",
             EDGE = "altitudeAngle,azimuthAngle,height,isPrimary,pointerId,pointerType,pressure,tiltX,tiltY,width",
@@ -3979,9 +3770,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "height,hwTimestamp,initPointerEvent(),isPrimary,pointerId,"
-                + "pointerType,pressure,rotation,tiltX,tiltY,width")
+            FF_ESR = "exception")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent'), document.createEvent('MouseEvent')");
     }
@@ -3997,8 +3786,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,"
                 + "DOM_DELTA_PIXEL,wheelDelta,wheelDeltaX,wheelDeltaY",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,initWheelEvent()")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL",
             EDGE = "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL")
     public void wheelEvent() throws Exception {
@@ -4043,13 +3831,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "offsetY,originalTarget,pageX,pageY,preventDefault(),rangeOffset,rangeParent,relatedTarget,"
                 + "returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which,x,"
-                + "y",
-            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
-                + "clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,deviceSessionId,eventPhase,"
-                + "fromElement,getModifierState(),initEvent(),initMouseEvent(),initUIEvent(),isTrusted,layerX,"
-                + "layerY,metaKey,offsetX,offsetY,pageX,pageY,preventDefault(),relatedTarget,screenX,screenY,"
-                + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,toElement,"
-                + "type,view,which,x,y")
+                + "y")
     @HtmlUnitNYI(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,clientX,clientY,composed,ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,"
                 + "initEvent(),initMouseEvent(),initUIEvent(),metaKey,NONE,pageX,pageY,preventDefault(),"
@@ -4105,11 +3887,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "explicitOriginalTarget,initCompositionEvent(),initEvent(),initUIEvent(),isTrusted,"
                 + "layerX,layerY,locale,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,"
                 + "returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view,which",
-            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,data,"
-                + "defaultPrevented,detail,deviceSessionId,eventPhase,initCompositionEvent(),initEvent(),"
-                + "initUIEvent(),isTrusted,locale,preventDefault(),srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view")
+                + "stopPropagation(),target,timeStamp,type,view,which")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,currentTarget,"
                 + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
@@ -4161,11 +3939,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
                 + "originalTarget,preventDefault(),rangeOffset,rangeParent,relatedTarget,returnValue,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view,which",
-            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
-                + "currentTarget,defaultPrevented,detail,deviceSessionId,eventPhase,initEvent(),"
-                + "initFocusEvent(),initUIEvent(),isTrusted,preventDefault(),relatedTarget,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
+                + "stopPropagation(),target,timeStamp,type,view,which")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
                 + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
@@ -4219,8 +3993,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "initEvent(),initUIEvent(),inputType,isComposing,"
                 + "isTrusted,layerX,layerY,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,"
                 + "rangeParent,returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
-            IE = "exception")
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),"
@@ -4260,14 +4033,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,"
-                + "deviceSessionId,eventPhase,fromElement,getModifierState(),initEvent(),initMouseEvent(),"
-                + "initMouseWheelEvent(),initUIEvent(),isTrusted,layerX,layerY,metaKey,offsetX,offsetY,"
-                + "pageX,pageY,preventDefault(),relatedTarget,screenX,screenY,shiftKey,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,toElement,type,"
-                + "view,wheelDelta,which,x,y")
+            FF_ESR = "exception")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -4310,13 +4076,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "explicitOriginalTarget,initCompositionEvent(),initEvent(),initUIEvent(),isTrusted,layerX,layerY,"
                 + "locale,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view,which",
-            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,data,"
-                + "defaultPrevented,detail,deviceSessionId,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,"
-                + "DOM_INPUT_METHOD_IME,DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
-                + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE,"
-                + "eventPhase,initEvent(),initTextEvent(),initUIEvent(),inputMethod,isTrusted,locale,preventDefault(),"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
+                + "target,timeStamp,type,view,which")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,data,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
@@ -4358,8 +4118,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "type,view,"
                 + "which",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
@@ -4393,8 +4152,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "type,view,"
                 + "which",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
                 + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
                 + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
@@ -4416,8 +4174,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "assign(),assignedElements(),assignedNodes(),name",
             EDGE = "assign(),assignedElements(),assignedNodes(),name",
             FF = "assign(),assignedElements(),assignedNodes(),name",
-            FF_ESR = "assign(),assignedElements(),assignedNodes(),name",
-            IE = "-")
+            FF_ESR = "assign(),assignedElements(),assignedNodes(),name")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
             FF_ESR = "-",
@@ -4617,8 +4374,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "releaseEvents(),removeChild(),removeEventListener(),replaceChild(),replaceChildren(),"
                 + "requestStorageAccess(),rootElement,scripts,scrollingElement,selectedStyleSheetSet,styleSheets,"
                 + "styleSheetSets,TEXT_NODE,textContent,timeline,title,URL,visibilityState,vlinkColor,write(),"
-                + "writeln()",
-            IE = "exception")
+                + "writeln()")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF_ESR = "exception",
@@ -5138,37 +4894,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "releaseEvents(),removeChild(),removeEventListener(),replaceChild(),replaceChildren(),"
                 + "requestStorageAccess(),rootElement,scripts,scrollingElement,selectedStyleSheetSet,styleSheets,"
                 + "styleSheetSets,TEXT_NODE,textContent,timeline,title,URL,visibilityState,vlinkColor,write(),"
-                + "writeln()",
-            IE = "activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,captureEvents(),characterSet,"
-                + "charset,clear(),close(),compatible,compatMode,cookie,createAttribute(),createAttributeNS(),"
-                + "createCDATASection(),createComment(),createDocumentFragment(),createElement(),createElementNS(),"
-                + "createEvent(),createNodeIterator(),createProcessingInstruction(),createRange(),createTextNode(),"
-                + "createTreeWalker(),defaultCharset,defaultView,designMode,dir,doctype,documentElement,documentMode,"
-                + "domain,elementFromPoint(),embeds,execCommand(),execCommandShowHelp(),fgColor,fileCreatedDate,"
-                + "fileModifiedDate,fileUpdatedDate,focus(),forms,frames,getElementById(),getElementsByClassName(),"
-                + "getElementsByName(),getElementsByTagName(),getElementsByTagNameNS(),getSelection(),hasFocus(),head,"
-                + "hidden,images,implementation,importNode(),inputEncoding,lastModified,linkColor,links,location,media,"
-                + "mimeType,msCapsLockWarningOff,msCSSOMElementFloatMetrics,msElementsFromPoint(),msElementsFromRect(),"
-                + "msExitFullscreen(),msFullscreenElement,msFullscreenEnabled,msHidden,msVisibilityState,nameProp,"
-                + "onabort,onactivate,onbeforeactivate,onbeforedeactivate,onblur,oncanplay,oncanplaythrough,onchange,"
-                + "onclick,oncontextmenu,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
-                + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onfocusin,onfocusout,onhelp,"
-                + "oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
-                + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsfullscreenchange,"
-                + "onmsfullscreenerror,onmsgesturechange,onmsgesturedoubletap,onmsgestureend,onmsgesturehold,"
-                + "onmsgesturestart,onmsgesturetap,onmsinertiastart,onmsmanipulationstatechanged,onmspointercancel,"
-                + "onmspointerdown,onmspointerenter,onmspointerleave,onmspointermove,onmspointerout,onmspointerover,"
-                + "onmspointerup,onmssitemodejumplistitemremoved,onmsthumbnailclick,onpause,onplay,onplaying,"
-                + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
-                + "onpointerout,"
-                + "onpointerover,onpointerup,onprogress,onratechange,onreadystatechange,onreset,onscroll,onseeked,"
-                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onstop,onstoragecommit,onsubmit,"
-                + "onsuspend,ontimeupdate,onvolumechange,onwaiting,open(),parentWindow,plugins,protocol,"
-                + "queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
-                + "queryCommandText(),queryCommandValue(),querySelector(),querySelectorAll(),readyState,referrer,"
-                + "releaseCapture(),releaseEvents(),rootElement,scripts,security,styleSheets,title,uniqueID,"
-                + "updateSettings(),URL,URLUnencoded,visibilityState,vlinkColor,write(),writeln(),xmlEncoding,"
-                + "xmlStandalone,xmlVersion")
+                + "writeln()")
     @HtmlUnitNYI(CHROME = "activeElement,addEventListener(),adoptNode(),alinkColor,all,anchors,appendChild(),"
                 + "applets,ATTRIBUTE_NODE,baseURI,bgColor,body,captureEvents(),CDATA_SECTION_NODE,characterSet,"
                 + "charset,childElementCount,childNodes,children,clear(),cloneNode(),close(),COMMENT_NODE,"
@@ -5367,8 +5093,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,"
                 + "onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,ownerSVGElement,style,tabIndex,"
-                + "viewportElement",
-            IE = "-")
+                + "viewportElement")
     @HtmlUnitNYI(CHROME = "onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,"
                 + "ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
@@ -5462,17 +5187,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "lastChild,localName,lookupNamespaceURI(),lookupPrefix(),name,namespaceURI,nextSibling,nodeName,"
                 + "nodeType,nodeValue,normalize(),NOTATION_NODE,ownerDocument,ownerElement,parentElement,"
                 + "parentNode,prefix,previousSibling,PROCESSING_INSTRUCTION_NODE,removeChild(),removeEventListener(),"
-                + "replaceChild(),specified,TEXT_NODE,textContent,value",
-            IE = "addEventListener(),appendChild(),ATTRIBUTE_NODE,attributes,CDATA_SECTION_NODE,childNodes,cloneNode(),"
-                + "COMMENT_NODE,compareDocumentPosition(),dispatchEvent(),DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,"
-                + "DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,DOCUMENT_POSITION_DISCONNECTED,"
-                + "DOCUMENT_POSITION_FOLLOWING,DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,DOCUMENT_POSITION_PRECEDING,"
-                + "DOCUMENT_TYPE_NODE,ELEMENT_NODE,ENTITY_NODE,ENTITY_REFERENCE_NODE,expando,firstChild,"
-                + "hasAttributes(),hasChildNodes(),insertBefore(),isDefaultNamespace(),isEqualNode(),isSameNode(),"
-                + "isSupported(),lastChild,localName,lookupNamespaceURI(),lookupPrefix(),name,namespaceURI,nextSibling,"
-                + "nodeName,nodeType,nodeValue,normalize(),NOTATION_NODE,ownerDocument,ownerElement,parentNode,prefix,"
-                + "previousSibling,PROCESSING_INSTRUCTION_NODE,removeChild(),removeEventListener(),replaceChild(),"
-                + "specified,TEXT_NODE,textContent,value")
+                + "replaceChild(),specified,TEXT_NODE,textContent,value")
     @HtmlUnitNYI(CHROME = "addEventListener(),appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,"
                 + "childNodes,cloneNode(),COMMENT_NODE,"
                 + "compareDocumentPosition(),contains(),dispatchEvent(),DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,"
@@ -5537,12 +5252,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "getClientRects(),insertNode(),intersectsNode(),isPointInRange(),selectNode(),selectNodeContents(),"
                 + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END,"
                 + "START_TO_START,startContainer,startOffset,surroundContents(),toString()",
-            IE = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,compareBoundaryPoints(),"
-                + "createContextualFragment(),deleteContents(),detach(),END_TO_END,END_TO_START,endContainer,endOffset,"
-                + "extractContents(),getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),"
-                + "selectNodeContents(),setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),"
-                + "setStartBefore(),START_TO_END,START_TO_START,startContainer,startOffset,surroundContents(),"
-                + "toString()",
             FF_ESR = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
                 + "compareBoundaryPoints(),comparePoint(),createContextualFragment(),deleteContents(),detach(),"
                 + "END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),getBoundingClientRect(),"
@@ -5639,17 +5348,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "isSameNode(),lastChild,lastElementChild,lookupNamespaceURI(),lookupPrefix(),nextSibling,nodeName,"
                 + "nodeType,nodeValue,normalize(),NOTATION_NODE,ownerDocument,parentElement,parentNode,prepend(),"
                 + "previousSibling,PROCESSING_INSTRUCTION_NODE,querySelector(),querySelectorAll(),removeChild(),"
-                + "removeEventListener(),replaceChild(),replaceChildren(),TEXT_NODE,textContent",
-            IE = "addEventListener(),appendChild(),ATTRIBUTE_NODE,attributes,CDATA_SECTION_NODE,childNodes,cloneNode(),"
-                + "COMMENT_NODE,compareDocumentPosition(),dispatchEvent(),DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,"
-                + "DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,DOCUMENT_POSITION_DISCONNECTED,"
-                + "DOCUMENT_POSITION_FOLLOWING,DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,DOCUMENT_POSITION_PRECEDING,"
-                + "DOCUMENT_TYPE_NODE,ELEMENT_NODE,ENTITY_NODE,ENTITY_REFERENCE_NODE,firstChild,hasAttributes(),"
-                + "hasChildNodes(),insertBefore(),isDefaultNamespace(),isEqualNode(),isSameNode(),isSupported(),"
-                + "lastChild,localName,lookupNamespaceURI(),lookupPrefix(),namespaceURI,nextSibling,nodeName,nodeType,"
-                + "nodeValue,normalize(),NOTATION_NODE,ownerDocument,parentNode,prefix,previousSibling,"
-                + "PROCESSING_INSTRUCTION_NODE,querySelector(),querySelectorAll(),removeChild(),removeEventListener(),"
-                + "removeNode(),replaceChild(),replaceNode(),swapNode(),TEXT_NODE,textContent")
+                + "removeEventListener(),replaceChild(),replaceChildren(),TEXT_NODE,textContent")
     @HtmlUnitNYI(CHROME = "addEventListener(),appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,"
                 + "childElementCount,childNodes,"
                 + "children,cloneNode(),COMMENT_NODE,compareDocumentPosition(),contains(),"
@@ -5743,8 +5442,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createMediaStreamSource(),createMediaStreamTrackSource(),createOscillator(),createPanner(),"
                 + "createPeriodicWave(),createScriptProcessor(),createStereoPanner(),createWaveShaper(),"
                 + "currentTime,decodeAudioData(),destination,dispatchEvent(),getOutputTimestamp(),listener,"
-                + "onstatechange,outputLatency,removeEventListener(),resume(),sampleRate,state,suspend()",
-            IE = "exception")
+                + "onstatechange,outputLatency,removeEventListener(),resume(),sampleRate,state,suspend()")
     @HtmlUnitNYI(CHROME = "addEventListener(),createBuffer(),createBufferSource(),createGain(),decodeAudioData(),"
                 + "dispatchEvent(),removeEventListener()",
             EDGE = "addEventListener(),createBuffer(),createBufferSource(),createGain(),decodeAudioData(),"
@@ -5788,8 +5486,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createOscillator(),createPanner(),createPeriodicWave(),createScriptProcessor(),"
                 + "createStereoPanner(),createWaveShaper(),currentTime,decodeAudioData(),destination,"
                 + "dispatchEvent(),length,listener,oncomplete,onstatechange,removeEventListener(),"
-                + "resume(),sampleRate,startRendering(),state",
-            IE = "exception")
+                + "resume(),sampleRate,startRendering(),state")
     @HtmlUnitNYI(CHROME = "addEventListener(),createBuffer(),createBufferSource(),createGain(),decodeAudioData(),"
                 + "dispatchEvent(),removeEventListener(),startRendering()",
             EDGE = "addEventListener(),createBuffer(),createBufferSource(),createGain(),decodeAudioData(),"
@@ -5817,8 +5514,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setValueCurveAtTime(),value",
             FF_ESR = "cancelScheduledValues(),defaultValue,exponentialRampToValueAtTime(),"
                 + "linearRampToValueAtTime(),maxValue,minValue,setTargetAtTime(),setValueAtTime(),"
-                + "setValueCurveAtTime(),value",
-            IE = "exception")
+                + "setValueCurveAtTime(),value")
     @HtmlUnitNYI(CHROME = "defaultValue,maxValue,minValue,value",
             EDGE = "defaultValue,maxValue,minValue,value",
             FF_ESR = "defaultValue,maxValue,minValue,value",
@@ -5838,8 +5534,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "addEventListener(),channelCount,channelCountMode,channelInterpretation,connect(),"
                 + "context,disconnect(),dispatchEvent(),gain,numberOfInputs,numberOfOutputs,removeEventListener()",
             FF_ESR = "addEventListener(),channelCount,channelCountMode,channelInterpretation,connect(),"
-                + "context,disconnect(),dispatchEvent(),gain,numberOfInputs,numberOfOutputs,removeEventListener()",
-            IE = "exception")
+                + "context,disconnect(),dispatchEvent(),gain,numberOfInputs,numberOfOutputs,removeEventListener()")
     @HtmlUnitNYI(CHROME = "addEventListener(),connect(),dispatchEvent(),gain,removeEventListener()",
             EDGE = "addEventListener(),connect(),dispatchEvent(),gain,removeEventListener()",
             FF_ESR = "addEventListener(),connect(),dispatchEvent(),gain,removeEventListener()",
@@ -5869,8 +5564,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,"
                 + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type",
-            IE = "exception")
+                + "stopPropagation(),target,timeStamp,type")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,currentTarget,defaultPrevented,eventPhase,initEvent(),"
                 + "NONE,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
@@ -5916,8 +5610,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
                 + "reason,returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,wasClean",
-            IE = "exception")
+                + "stopPropagation(),target,timeStamp,type,wasClean")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
                 + "composed,currentTarget,defaultPrevented,eventPhase,initEvent(),"
                 + "NONE,preventDefault(),reason,returnValue,srcElement,"
@@ -5961,8 +5654,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "composed,composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
                 + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type",
-            IE = "exception")
+                + "target,timeStamp,type")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
                 + "currentTarget,data,defaultPrevented,eventPhase,initEvent(),"
                 + "NONE,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
@@ -6010,8 +5702,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),CONTROL_MASK,currentTarget,"
                 + "defaultPrevented,eventPhase,explicitOriginalTarget,initDeviceMotionEvent(),initEvent(),"
                 + "interval,isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,rotationRate,"
-                + "SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            IE = "exception")
+                + "SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
@@ -6057,8 +5748,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,error,eventPhase,"
                 + "explicitOriginalTarget,filename,initEvent(),isTrusted,lineno,message,META_MASK,NONE,"
                 + "originalTarget,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            IE = "exception")
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
@@ -6102,8 +5792,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,gamepad,initEvent(),isTrusted,META_MASK,NONE,originalTarget,"
                 + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type",
-            IE = "exception")
+                + "stopPropagation(),target,timeStamp,type")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
@@ -6149,11 +5838,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "CAPTURING_PHASE,composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,initEvent(),initMutationEvent(),isTrusted,META_MASK,MODIFICATION,newValue,"
                 + "NONE,originalTarget,preventDefault(),prevValue,relatedNode,REMOVAL,returnValue,SHIFT_MASK,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            IE = "ADDITION,AT_TARGET,attrChange,attrName,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,currentTarget,defaultPrevented,eventPhase,initEvent(),initMutationEvent(),isTrusted,"
-                + "MODIFICATION,newValue,preventDefault(),prevValue,relatedNode,REMOVAL,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
     @HtmlUnitNYI(CHROME = "ADDITION,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,currentTarget,defaultPrevented,eventPhase,initEvent(),"
                 + "MODIFICATION,NONE,preventDefault(),REMOVAL,"
@@ -6206,8 +5891,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,persisted,"
                 + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type",
-            IE = "exception")
+                + "stopPropagation(),target,timeStamp,type")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
@@ -6243,8 +5927,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "addEventListener(),dispatchEvent(),length,onaddsourcebuffer,"
                 + "onremovesourcebuffer,removeEventListener()",
             FF_ESR = "addEventListener(),dispatchEvent(),length,onaddsourcebuffer,"
-                + "onremovesourcebuffer,removeEventListener()",
-            IE = "addEventListener(),dispatchEvent(),item(),length,removeEventListener()")
+                + "onremovesourcebuffer,removeEventListener()")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
             FF = "-",
@@ -6262,8 +5945,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "item(),length,namedItem()",
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
-            FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem()")
+            FF_ESR = "item(),length,namedItem()")
     public void htmlCollection() throws Exception {
         testString("", "document.getElementsByTagName('div')");
     }
@@ -6277,8 +5959,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "item(),length,namedItem()",
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
-            FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem()")
+            FF_ESR = "item(),length,namedItem()")
     public void htmlCollectionDocumentAnchors() throws Exception {
         testString("", "document.anchors");
     }
@@ -6292,8 +5973,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "item(),length,namedItem()",
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
-            FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem()")
+            FF_ESR = "item(),length,namedItem()")
     public void htmlCollectionDocumentApplets() throws Exception {
         testString("", "document.applets");
     }
@@ -6307,8 +5987,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "item(),length,namedItem()",
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
-            FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem()")
+            FF_ESR = "item(),length,namedItem()")
     public void htmlCollectionDocumentEmbeds() throws Exception {
         testString("", "document.embeds");
     }
@@ -6322,8 +6001,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "item(),length,namedItem()",
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
-            FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem()")
+            FF_ESR = "item(),length,namedItem()")
     public void htmlCollectionDocumentForms() throws Exception {
         testString("", "document.forms");
     }
@@ -6337,8 +6015,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "item(),length,namedItem()",
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
-            FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem()")
+            FF_ESR = "item(),length,namedItem()")
     public void htmlCollectionDocumentImages() throws Exception {
         testString("", "document.images");
     }
@@ -6352,8 +6029,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "item(),length,namedItem()",
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
-            FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem()")
+            FF_ESR = "item(),length,namedItem()")
     public void htmlCollectionDocumentLinks() throws Exception {
         testString("", "document.links");
     }
@@ -6367,8 +6043,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "0,item(),length,namedItem()",
             EDGE = "0,item(),length,namedItem()",
             FF = "0,item(),length,namedItem()",
-            FF_ESR = "0,item(),length,namedItem()",
-            IE = "0,item(),length,namedItem()")
+            FF_ESR = "0,item(),length,namedItem()")
     public void htmlCollectionDocumentScripts() throws Exception {
         testString("", "document.scripts");
     }
@@ -6382,8 +6057,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "entries(),forEach(),item(),keys(),length,values()",
             EDGE = "entries(),forEach(),item(),keys(),length,values()",
             FF = "entries(),forEach(),item(),keys(),length,values()",
-            FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
-            IE = "item(),length")
+            FF_ESR = "entries(),forEach(),item(),keys(),length,values()")
     public void nodeListElementById() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
     }
@@ -6397,8 +6071,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "entries(),forEach(),item(),keys(),length,values()",
             EDGE = "entries(),forEach(),item(),keys(),length,values()",
             FF = "entries(),forEach(),item(),keys(),length,values()",
-            FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
-            IE = "item(),length")
+            FF_ESR = "entries(),forEach(),item(),keys(),length,values()")
     public void nodeListElementsByName() throws Exception {
         testString("", "document.getElementsByName('myLog')");
     }
@@ -6412,8 +6085,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "entries(),forEach(),item(),keys(),length,values()",
             EDGE = "entries(),forEach(),item(),keys(),length,values()",
             FF = "entries(),forEach(),item(),keys(),length,values()",
-            FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
-            IE = "-")
+            FF_ESR = "entries(),forEach(),item(),keys(),length,values()")
     public void nodeListButtonLabels() throws Exception {
         testString("var button = document.createElement('button');", "button.labels");
     }
@@ -7123,53 +6795,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitTransitionProperty,WebkitTransitionTimingFunction,webkitTransitionTimingFunction,"
                 + "WebkitUserSelect,webkitUserSelect,white-space,whiteSpace,width,will-change,willChange,word-break,"
                 + "word-spacing,word-wrap,wordBreak,wordSpacing,wordWrap,writing-mode,writingMode,x,y,z-index,"
-                + "zIndex",
-            IE = "alignContent,alignItems,alignmentBaseline,alignSelf,animation,animationDelay,animationDirection,"
-                + "animationDuration,animationFillMode,animationIterationCount,animationName,animationPlayState,"
-                + "animationTimingFunction,backfaceVisibility,background,backgroundAttachment,backgroundClip,"
-                + "backgroundColor,backgroundImage,backgroundOrigin,backgroundPosition,backgroundRepeat,"
-                + "backgroundSize,baselineShift,border,borderBottom,borderBottomColor,borderBottomLeftRadius,"
-                + "borderBottomRightRadius,borderBottomStyle,borderBottomWidth,borderCollapse,borderColor,"
-                + "borderImage,borderImageOutset,borderImageRepeat,borderImageSlice,borderImageSource,"
-                + "borderImageWidth,borderLeft,borderLeftColor,borderLeftStyle,borderLeftWidth,borderRadius,"
-                + "borderRight,borderRightColor,borderRightStyle,borderRightWidth,borderSpacing,borderStyle,"
-                + "borderTop,borderTopColor,borderTopLeftRadius,borderTopRightRadius,borderTopStyle,borderTopWidth,"
-                + "borderWidth,bottom,boxShadow,boxSizing,breakAfter,breakBefore,breakInside,captionSide,clear,clip,"
-                + "clipPath,clipRule,color,colorInterpolationFilters,columnCount,columnFill,columnGap,columnRule,"
-                + "columnRuleColor,columnRuleStyle,columnRuleWidth,columns,columnSpan,columnWidth,content,"
-                + "counterIncrement,counterReset,cssFloat,cssText,cursor,direction,display,dominantBaseline,"
-                + "emptyCells,enableBackground,fill,fillOpacity,fillRule,filter,flex,flexBasis,flexDirection,"
-                + "flexFlow,flexGrow,flexShrink,flexWrap,floodColor,floodOpacity,font,fontFamily,"
-                + "fontFeatureSettings,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontVariant,fontWeight,"
-                + "getPropertyPriority(),getPropertyValue(),glyphOrientationHorizontal,glyphOrientationVertical,"
-                + "height,item(),justifyContent,kerning,left,length,letterSpacing,lightingColor,lineHeight,"
-                + "listStyle,listStyleImage,listStylePosition,listStyleType,margin,marginBottom,marginLeft,"
-                + "marginRight,marginTop,marker,markerEnd,markerMid,markerStart,mask,maxHeight,maxWidth,minHeight,"
-                + "minWidth,msAnimation,msAnimationDelay,msAnimationDirection,msAnimationDuration,"
-                + "msAnimationFillMode,msAnimationIterationCount,msAnimationName,msAnimationPlayState,"
-                + "msAnimationTimingFunction,msBackfaceVisibility,msContentZoomChaining,msContentZooming,"
-                + "msContentZoomLimit,msContentZoomLimitMax,msContentZoomLimitMin,msContentZoomSnap,"
-                + "msContentZoomSnapPoints,msContentZoomSnapType,msFlex,msFlexAlign,msFlexDirection,msFlexFlow,"
-                + "msFlexItemAlign,msFlexLinePack,msFlexNegative,msFlexOrder,msFlexPack,msFlexPositive,"
-                + "msFlexPreferredSize,msFlexWrap,msFlowFrom,msFlowInto,msFontFeatureSettings,msGridColumn,"
-                + "msGridColumnAlign,msGridColumns,msGridColumnSpan,msGridRow,msGridRowAlign,msGridRows,"
-                + "msGridRowSpan,msHighContrastAdjust,msHyphenateLimitChars,msHyphenateLimitLines,"
-                + "msHyphenateLimitZone,msHyphens,msImeAlign,msOverflowStyle,msPerspective,msPerspectiveOrigin,"
-                + "msScrollChaining,msScrollLimit,msScrollLimitXMax,msScrollLimitXMin,msScrollLimitYMax,"
-                + "msScrollLimitYMin,msScrollRails,msScrollSnapPointsX,msScrollSnapPointsY,msScrollSnapType,"
-                + "msScrollSnapX,msScrollSnapY,msScrollTranslation,msTextCombineHorizontal,msTextSizeAdjust,"
-                + "msTouchAction,msTouchSelect,msTransform,msTransformOrigin,msTransformStyle,msTransition,"
-                + "msTransitionDelay,msTransitionDuration,msTransitionProperty,msTransitionTimingFunction,"
-                + "msUserSelect,msWrapFlow,msWrapMargin,msWrapThrough,opacity,order,orphans,outline,outlineColor,"
-                + "outlineStyle,outlineWidth,overflow,overflowX,overflowY,padding,paddingBottom,paddingLeft,"
-                + "paddingRight,paddingTop,pageBreakAfter,pageBreakBefore,pageBreakInside,parentRule,perspective,"
-                + "perspectiveOrigin,pointerEvents,position,quotes,removeProperty(),right,rubyAlign,rubyOverhang,"
-                + "rubyPosition,setProperty(),stopColor,stopOpacity,stroke,strokeDasharray,strokeDashoffset,"
-                + "strokeLinecap,strokeLinejoin,strokeMiterlimit,strokeOpacity,strokeWidth,tableLayout,textAlign,"
-                + "textAlignLast,textAnchor,textDecoration,textIndent,textJustify,textOverflow,textShadow,"
-                + "textTransform,textUnderlinePosition,top,touchAction,transform,transformOrigin,transformStyle,"
-                + "transition,transitionDelay,transitionDuration,transitionProperty,transitionTimingFunction,"
-                + "unicodeBidi,verticalAlign,visibility,whiteSpace,widows,width,wordBreak,wordSpacing,wordWrap,"
                 + "zIndex")
     @HtmlUnitNYI(CHROME = "accentColor,additiveSymbols,alignContent,alignItems,alignmentBaseline,"
                 + "alignSelf,all,animation,animationComposition,"
@@ -8528,62 +8153,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitTransitionProperty,WebkitTransitionTimingFunction,webkitTransitionTimingFunction,"
                 + "WebkitUserSelect,webkitUserSelect,white-space,whiteSpace,width,will-change,willChange,word-break,"
                 + "word-spacing,word-wrap,wordBreak,wordSpacing,wordWrap,writing-mode,writingMode,x,y,z-index,"
-                + "zIndex",
-            IE = "accelerator,alignContent,alignItems,alignmentBaseline,alignSelf,animation,animationDelay,"
-                + "animationDirection,animationDuration,animationFillMode,animationIterationCount,animationName,"
-                + "animationPlayState,animationTimingFunction,backfaceVisibility,background,backgroundAttachment,"
-                + "backgroundClip,backgroundColor,backgroundImage,backgroundOrigin,backgroundPosition,"
-                + "backgroundPositionX,backgroundPositionY,backgroundRepeat,backgroundSize,baselineShift,border,"
-                + "borderBottom,borderBottomColor,borderBottomLeftRadius,borderBottomRightRadius,borderBottomStyle,"
-                + "borderBottomWidth,borderCollapse,borderColor,borderImage,borderImageOutset,borderImageRepeat,"
-                + "borderImageSlice,borderImageSource,borderImageWidth,borderLeft,borderLeftColor,borderLeftStyle,"
-                + "borderLeftWidth,borderRadius,borderRight,borderRightColor,borderRightStyle,borderRightWidth,"
-                + "borderSpacing,borderStyle,borderTop,borderTopColor,borderTopLeftRadius,borderTopRightRadius,"
-                + "borderTopStyle,borderTopWidth,borderWidth,bottom,boxShadow,boxSizing,breakAfter,breakBefore,"
-                + "breakInside,captionSide,clear,clip,clipPath,clipRule,color,colorInterpolationFilters,columnCount,"
-                + "columnFill,columnGap,columnRule,columnRuleColor,columnRuleStyle,columnRuleWidth,columns,"
-                + "columnSpan,columnWidth,content,counterIncrement,counterReset,cssFloat,cssText,cursor,direction,"
-                + "display,dominantBaseline,emptyCells,enableBackground,fill,fillOpacity,fillRule,filter,flex,"
-                + "flexBasis,flexDirection,flexFlow,flexGrow,flexShrink,flexWrap,floodColor,floodOpacity,font,"
-                + "fontFamily,fontFeatureSettings,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontVariant,"
-                + "fontWeight,getAttribute(),getPropertyPriority(),getPropertyValue(),glyphOrientationHorizontal,"
-                + "glyphOrientationVertical,height,imeMode,item(),justifyContent,kerning,layoutFlow,layoutGrid,"
-                + "layoutGridChar,layoutGridLine,layoutGridMode,layoutGridType,left,length,letterSpacing,"
-                + "lightingColor,lineBreak,lineHeight,listStyle,listStyleImage,listStylePosition,listStyleType,"
-                + "margin,marginBottom,marginLeft,marginRight,marginTop,marker,markerEnd,markerMid,markerStart,mask,"
-                + "maxHeight,maxWidth,minHeight,minWidth,msAnimation,msAnimationDelay,msAnimationDirection,"
-                + "msAnimationDuration,msAnimationFillMode,msAnimationIterationCount,msAnimationName,"
-                + "msAnimationPlayState,msAnimationTimingFunction,msBackfaceVisibility,msBlockProgression,"
-                + "msContentZoomChaining,msContentZooming,msContentZoomLimit,msContentZoomLimitMax,"
-                + "msContentZoomLimitMin,msContentZoomSnap,msContentZoomSnapPoints,msContentZoomSnapType,msFlex,"
-                + "msFlexAlign,msFlexDirection,msFlexFlow,msFlexItemAlign,msFlexLinePack,msFlexNegative,msFlexOrder,"
-                + "msFlexPack,msFlexPositive,msFlexPreferredSize,msFlexWrap,msFlowFrom,msFlowInto,"
-                + "msFontFeatureSettings,msGridColumn,msGridColumnAlign,msGridColumns,msGridColumnSpan,msGridRow,"
-                + "msGridRowAlign,msGridRows,msGridRowSpan,msHighContrastAdjust,msHyphenateLimitChars,"
-                + "msHyphenateLimitLines,msHyphenateLimitZone,msHyphens,msImeAlign,msInterpolationMode,"
-                + "msOverflowStyle,msPerspective,msPerspectiveOrigin,msScrollChaining,msScrollLimit,"
-                + "msScrollLimitXMax,msScrollLimitXMin,msScrollLimitYMax,msScrollLimitYMin,msScrollRails,"
-                + "msScrollSnapPointsX,msScrollSnapPointsY,msScrollSnapType,msScrollSnapX,msScrollSnapY,"
-                + "msScrollTranslation,msTextCombineHorizontal,msTextSizeAdjust,msTouchAction,msTouchSelect,"
-                + "msTransform,msTransformOrigin,msTransformStyle,msTransition,msTransitionDelay,"
-                + "msTransitionDuration,msTransitionProperty,msTransitionTimingFunction,msUserSelect,msWrapFlow,"
-                + "msWrapMargin,msWrapThrough,opacity,order,orphans,outline,outlineColor,outlineStyle,outlineWidth,"
-                + "overflow,overflowX,overflowY,padding,paddingBottom,paddingLeft,paddingRight,paddingTop,"
-                + "pageBreakAfter,pageBreakBefore,pageBreakInside,parentRule,perspective,perspectiveOrigin,"
-                + "pixelBottom,pixelHeight,pixelLeft,pixelRight,pixelTop,pixelWidth,pointerEvents,posBottom,"
-                + "posHeight,position,posLeft,posRight,posTop,posWidth,quotes,removeAttribute(),removeProperty(),"
-                + "right,rubyAlign,rubyOverhang,rubyPosition,scrollbar3dLightColor,scrollbarArrowColor,"
-                + "scrollbarBaseColor,scrollbarDarkShadowColor,scrollbarFaceColor,scrollbarHighlightColor,"
-                + "scrollbarShadowColor,scrollbarTrackColor,setAttribute(),setProperty(),stopColor,stopOpacity,"
-                + "stroke,strokeDasharray,strokeDashoffset,strokeLinecap,strokeLinejoin,strokeMiterlimit,"
-                + "strokeOpacity,strokeWidth,styleFloat,tableLayout,textAlign,textAlignLast,textAnchor,"
-                + "textAutospace,textDecoration,textDecorationBlink,textDecorationLineThrough,textDecorationNone,"
-                + "textDecorationOverline,textDecorationUnderline,textIndent,textJustify,textJustifyTrim,"
-                + "textKashida,textKashidaSpace,textOverflow,textShadow,textTransform,textUnderlinePosition,top,"
-                + "touchAction,transform,transformOrigin,transformStyle,transition,transitionDelay,"
-                + "transitionDuration,transitionProperty,transitionTimingFunction,unicodeBidi,verticalAlign,"
-                + "visibility,whiteSpace,widows,width,wordBreak,wordSpacing,wordWrap,writingMode,zIndex,"
-                + "zoom")
+                + "zIndex")
     public void cssStyleDeclaration() throws Exception {
         testString("", "document.body.style");
     }
@@ -8599,8 +8169,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "assign(),hash,host,hostname,href,origin,"
                + "pathname,port,protocol,reload(),replace(),search,toString()",
             FF_ESR = "assign(),hash,host,hostname,href,origin,"
-                   + "pathname,port,protocol,reload(),replace(),search,toString()",
-            IE = "assign(),hash,host,hostname,href,origin,"
                    + "pathname,port,protocol,reload(),replace(),search,toString()")
     @HtmlUnitNYI(CHROME = "assign(),hash,host,hostname,href,origin,"
                         + "pathname,port,protocol,reload(),replace(),search,toString()",
@@ -8626,11 +8194,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "orientation,pixelDepth,removeEventListener(),top,width",
             FF_ESR = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),height,"
                 + "left,mozLockOrientation(),mozOrientation,mozUnlockOrientation(),onmozorientationchange,"
-                + "orientation,pixelDepth,removeEventListener(),top,width",
-            IE = "addEventListener(),availHeight,availWidth,bufferDepth,colorDepth,deviceXDPI,deviceYDPI,"
-                + "dispatchEvent(),fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,msLockOrientation(),"
-                + "msOrientation,msUnlockOrientation(),onmsorientationchange,pixelDepth,removeEventListener(),"
-                + "systemXDPI,systemYDPI,width")
+                + "orientation,pixelDepth,removeEventListener(),top,width")
     @HtmlUnitNYI(FF = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),"
                 + "height,left,mozOrientation,orientation,pixelDepth,removeEventListener(),top,width",
             FF_ESR = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),"
@@ -8648,8 +8212,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
             EDGE = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
             FF = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
-            FF_ESR = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
-            IE = "-")
+            FF_ESR = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()")
     @HtmlUnitNYI(CHROME = "addEventListener(),angle,dispatchEvent(),onchange,removeEventListener(),type",
             EDGE = "addEventListener(),angle,dispatchEvent(),onchange,removeEventListener(),type",
             FF = "addEventListener(),angle,dispatchEvent(),onchange,removeEventListener(),type",
@@ -8676,8 +8239,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),"
-                    + "generateKey(),importKey(),sign(),unwrapKey(),verify(),wrapKey()",
-            IE = "exception")
+                    + "generateKey(),importKey(),sign(),unwrapKey(),verify(),wrapKey()")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");
     }
@@ -8707,8 +8269,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "invalidIteratorState,iterateNext(),NUMBER_TYPE,numberValue,ORDERED_NODE_ITERATOR_TYPE,"
                 + "ORDERED_NODE_SNAPSHOT_TYPE,resultType,singleNodeValue,snapshotItem(),snapshotLength,STRING_TYPE,"
                 + "stringValue,UNORDERED_NODE_ITERATOR_TYPE,"
-                + "UNORDERED_NODE_SNAPSHOT_TYPE",
-            IE = "exception")
+                + "UNORDERED_NODE_SNAPSHOT_TYPE")
     public void xPathResult() throws Exception {
         testString("var res = document.evaluate('/html/body', document, null, XPathResult.ANY_TYPE, null);", "res");
     }
@@ -8770,19 +8331,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NOTATION_NODE,ownerDocument,parentElement,parentNode,previousElementSibling,previousSibling,"
                 + "PROCESSING_INSTRUCTION_NODE,remove(),removeChild(),removeEventListener(),replaceChild(),"
                 + "replaceData(),replaceWith(),splitText(),substringData(),TEXT_NODE,textContent,"
-                + "wholeText",
-            IE = "addEventListener(),appendChild(),appendData(),ATTRIBUTE_NODE,attributes,CDATA_SECTION_NODE,"
-                + "childNodes,cloneNode(),COMMENT_NODE,compareDocumentPosition(),data,deleteData(),dispatchEvent(),"
-                + "DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
-                + "DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
-                + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,DOCUMENT_POSITION_PRECEDING,DOCUMENT_TYPE_NODE,"
-                + "ELEMENT_NODE,ENTITY_NODE,ENTITY_REFERENCE_NODE,firstChild,hasAttributes(),hasChildNodes(),"
-                + "insertBefore(),insertData(),isDefaultNamespace(),isEqualNode(),isSameNode(),isSupported(),"
-                + "lastChild,length,localName,lookupNamespaceURI(),lookupPrefix(),namespaceURI,nextSibling,nodeName,"
-                + "nodeType,nodeValue,normalize(),NOTATION_NODE,ownerDocument,parentNode,prefix,previousSibling,"
-                + "PROCESSING_INSTRUCTION_NODE,removeChild(),removeEventListener(),removeNode(),replaceChild(),"
-                + "replaceData(),replaceNode(),replaceWholeText(),splitText(),substringData(),swapNode(),TEXT_NODE,"
-                + "textContent,"
                 + "wholeText")
     @HtmlUnitNYI(CHROME = "addEventListener(),after(),appendChild(),appendData(),ATTRIBUTE_NODE,baseURI,before(),"
                 + "CDATA_SECTION_NODE,childNodes,cloneNode(),COMMENT_NODE,compareDocumentPosition(),contains(),"
@@ -8885,18 +8433,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "lookupNamespaceURI(),lookupPrefix(),name,nextSibling,nodeName,nodeType,nodeValue,normalize(),"
                 + "NOTATION_NODE,ownerDocument,parentElement,parentNode,previousSibling,PROCESSING_INSTRUCTION_NODE,"
                 + "publicId,remove(),removeChild(),removeEventListener(),replaceChild(),replaceWith(),systemId,"
-                + "TEXT_NODE,textContent",
-            IE = "addEventListener(),appendChild(),ATTRIBUTE_NODE,attributes,CDATA_SECTION_NODE,childNodes,"
-                + "cloneNode(),COMMENT_NODE,compareDocumentPosition(),dispatchEvent(),DOCUMENT_FRAGMENT_NODE,"
-                + "DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
-                + "DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
-                + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,DOCUMENT_POSITION_PRECEDING,DOCUMENT_TYPE_NODE,"
-                + "ELEMENT_NODE,entities,ENTITY_NODE,ENTITY_REFERENCE_NODE,firstChild,hasAttributes(),"
-                + "hasChildNodes(),insertBefore(),internalSubset,isDefaultNamespace(),isEqualNode(),isSameNode(),"
-                + "isSupported(),lastChild,localName,lookupNamespaceURI(),lookupPrefix(),name,namespaceURI,"
-                + "nextSibling,nodeName,nodeType,nodeValue,normalize(),NOTATION_NODE,notations,ownerDocument,"
-                + "parentNode,prefix,previousSibling,PROCESSING_INSTRUCTION_NODE,publicId,removeChild(),"
-                + "removeEventListener(),replaceChild(),systemId,TEXT_NODE,textContent")
+                + "TEXT_NODE,textContent")
     @HtmlUnitNYI(CHROME = "addEventListener(),after(),appendChild(),ATTRIBUTE_NODE,baseURI,before(),CDATA_SECTION_NODE,"
                 + "childNodes,cloneNode(),COMMENT_NODE,compareDocumentPosition(),contains(),dispatchEvent(),"
                 + "DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
@@ -8954,8 +8491,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "arrayBuffer(),size,slice(),stream(),text(),type",
             EDGE = "arrayBuffer(),size,slice(),stream(),text(),type",
             FF = "arrayBuffer(),size,slice(),stream(),text(),type",
-            FF_ESR = "arrayBuffer(),size,slice(),stream(),text(),type",
-            IE = "size,slice(),stream(),type")
+            FF_ESR = "arrayBuffer(),size,slice(),stream(),text(),type")
     public void blob() throws Exception {
         testString("", "new Blob([1, 2], { type: \"text/html\" })");
     }
@@ -8973,8 +8509,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "append(),delete(),entries(),forEach(),get(),getAll(),"
                 + "has(),keys(),set(),size,sort(),toString(),values()",
             FF_ESR = "append(),delete(),entries(),forEach(),get(),getAll(),"
-                + "has(),keys(),set(),size,sort(),toString(),values()",
-            IE = "exception")
+                + "has(),keys(),set(),size,sort(),toString(),values()")
     @HtmlUnitNYI(CHROME = "append(),delete(),entries(),forEach(),get(),getAll(),"
                 + "has(),keys(),set(),size,toString(),values()",
             EDGE = "append(),delete(),entries(),forEach(),get(),getAll(),"
@@ -9000,8 +8535,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "getNamedItem(),getNamedItemNS(),item(),length,removeNamedItem(),"
                 + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
             FF_ESR = "getNamedItem(),getNamedItemNS(),item(),length,removeNamedItem(),"
-                + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
-            IE = "getNamedItem(),getNamedItemNS(),item(),length,removeNamedItem(),"
                 + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()")
     public void namedNodeMap() throws Exception {
         testString("", "element.attributes");
@@ -9016,8 +8549,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "disconnect(),observe(),takeRecords()",
             EDGE = "disconnect(),observe(),takeRecords()",
             FF = "disconnect(),observe(),takeRecords()",
-            FF_ESR = "disconnect(),observe(),takeRecords()",
-            IE = "disconnect(),observe(),takeRecords()")
+            FF_ESR = "disconnect(),observe(),takeRecords()")
     public void mutationObserver() throws Exception {
         testString("", "new MutationObserver(function(m) {})");
     }
@@ -9031,8 +8563,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "disconnect(),observe(),takeRecords()",
             EDGE = "disconnect(),observe(),takeRecords()",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void webKitMutationObserver() throws Exception {
         testString("", "new WebKitMutationObserver(function(m) {})");
     }
@@ -9043,10 +8574,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "addRule(),cssRules,deleteRule(),disabled,href,insertRule(),media,ownerNode,"
-                + "ownerRule,parentStyleSheet,removeRule(),replace(),replaceSync(),rules,title,type",
-            IE = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,"
-                + "owningElement,removeRule(),rules")
+    @Alerts("addRule(),cssRules,deleteRule(),disabled,href,insertRule(),media,ownerNode,"
+                + "ownerRule,parentStyleSheet,removeRule(),replace(),replaceSync(),rules,title,type")
     @HtmlUnitNYI(CHROME = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,removeRule(),rules",
             EDGE = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,removeRule(),rules",
             FF = "addRule(),cssRules,deleteRule(),href,insertRule(),ownerNode,removeRule(),rules",
@@ -9061,12 +8590,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
+    @Alerts("CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
-                + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type",
-            IE = "CHARSET_RULE,cssText,FONT_FACE_RULE,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
-                + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,"
-                + "type,UNKNOWN_RULE,VIEWPORT_RULE")
+                + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type")
     public void cssPageRule() throws Exception {
         testString("", "document.styleSheets[0].cssRules[0]");
     }
@@ -9077,13 +8603,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "CHARSET_RULE,conditionText,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),"
+    @Alerts("CHARSET_RULE,conditionText,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),"
                 + "FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,"
                 + "KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,"
-                + "STYLE_RULE,SUPPORTS_RULE,type",
-            IE = "CHARSET_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,IMPORT_RULE,insertRule(),"
-                + "KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
-                + "parentStyleSheet,STYLE_RULE,type,UNKNOWN_RULE,VIEWPORT_RULE")
+                + "STYLE_RULE,SUPPORTS_RULE,type")
     public void cssMediaRule() throws Exception {
         testString("", "document.styleSheets[1].cssRules[0]");
     }
@@ -9094,11 +8617,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
+    @Alerts("CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
-                + "parentRule,parentStyleSheet,style,STYLE_RULE,SUPPORTS_RULE,type",
-            IE = "CHARSET_RULE,cssText,FONT_FACE_RULE,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
-                + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,type,UNKNOWN_RULE,VIEWPORT_RULE")
+                + "parentRule,parentStyleSheet,style,STYLE_RULE,SUPPORTS_RULE,type")
     @HtmlUnitNYI(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,STYLE_RULE,SUPPORTS_RULE,type",
@@ -9121,12 +8642,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+    @Alerts("CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,layerName,media,MEDIA_RULE,NAMESPACE_RULE,"
-                + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,supportsText,type",
-            IE = "CHARSET_RULE,cssText,FONT_FACE_RULE,href,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,"
-                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,type,"
-                + "UNKNOWN_RULE,VIEWPORT_RULE")
+                + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,supportsText,type")
     @HtmlUnitNYI(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
                 + "parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,type",
@@ -9159,10 +8677,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "style,STYLE_RULE,SUPPORTS_RULE,type",
             FF_ESR = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
-                + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type",
-            IE = "CHARSET_RULE,cssText,FONT_FACE_RULE,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
-                + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,readOnly,selectorText,style,"
-                + "STYLE_RULE,type,UNKNOWN_RULE,VIEWPORT_RULE")
+                + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type")
     @HtmlUnitNYI(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type",

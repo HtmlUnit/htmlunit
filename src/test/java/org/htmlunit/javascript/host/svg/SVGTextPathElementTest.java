@@ -86,8 +86,7 @@ public class SVGTextPathElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object SVGTextPathElement]", "43.3"},
-            IE = {"[object SVGTextPathElement]", "49.3"})
+    @Alerts({"[object SVGTextPathElement]", "43.3"})
     @NotYetImplemented
     public void getComputedTextLength() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -791,8 +791,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "0", "1"},
-            IE = {"1", "0"})
+    @Alerts({"0", "1", "0", "1"})
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -830,8 +829,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "true", "false"},
-            IE = {"false", "false", "false", "false"})
+    @Alerts({"false", "false", "true", "false"})
     // XML ID handling not yet correctly implemented
     public void getElementById_xml() throws Exception {
         final String html = "<html><head>\n"
@@ -867,8 +865,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true"},
-            IE = {"false", "false"})
+    @Alerts({"true", "true"})
     // XML ID handling not yet correctly implemented
     public void getElementById_html() throws Exception {
         final String html = "<html><head>\n"
@@ -962,8 +959,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "1")
+    @Alerts(DEFAULT = {})
     public void selectionNamespaces() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1039,8 +1035,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object XMLDocument]", "OK"},
-            IE = {"[object Document]", "OK"})
+    @Alerts({"[object XMLDocument]", "OK"})
     public void test() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

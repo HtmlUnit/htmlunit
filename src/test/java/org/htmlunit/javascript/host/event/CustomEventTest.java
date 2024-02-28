@@ -44,8 +44,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CustomEvent]", "my", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object CustomEvent]", "my", "false", "false", "false", "null"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -93,8 +92,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CustomEvent]", "42", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object CustomEvent]", "42", "false", "false", "false", "null"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -116,8 +114,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CustomEvent]", "null", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object CustomEvent]", "null", "false", "false", "false", "null"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -161,8 +158,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CustomEvent]", "HtmlUnitEvent", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object CustomEvent]", "HtmlUnitEvent", "false", "false", "false", "null"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -184,8 +180,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CustomEvent]", "click", "false", "false", "false", "abcd"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object CustomEvent]", "click", "false", "false", "false", "abcd"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

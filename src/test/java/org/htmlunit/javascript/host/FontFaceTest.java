@@ -34,8 +34,7 @@ public class FontFaceTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function\\sFontFace()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
             CHROME = "function\\sFontFace()\\s{\\s[native\\scode]\\s}",
-            EDGE = "function\\sFontFace()\\s{\\s[native\\scode]\\s}",
-            IE = "undefined")
+            EDGE = "function\\sFontFace()\\s{\\s[native\\scode]\\s}")
     public void window() throws Exception {
         final String html
             = "<html>\n"

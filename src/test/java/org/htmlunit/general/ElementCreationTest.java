@@ -668,8 +668,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             FF = "[object HTMLElement]",
-            FF_ESR = "[object HTMLElement]",
-            IE = "[object HTMLImageElement]")
+            FF_ESR = "[object HTMLElement]")
     public void image() throws Exception {
         test("image");
     }

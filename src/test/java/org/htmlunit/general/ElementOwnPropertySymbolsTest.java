@@ -489,8 +489,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Element],"
                 + "Symbol(Symbol.unscopables) [C] [{\"slot\":true,\"before\":true,\"after\":true,"
                     + "\"replaceWith\":true,\"remove\":true,\"prepend\":true,"
-                    + "\"append\":true,\"replaceChildren\":true}]",
-            IE = "exception")
+                    + "\"append\":true,\"replaceChildren\":true}]")
     @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [Element]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [Element]",
             FF = "Symbol(Symbol.toStringTag) [C] [Element]",
@@ -515,8 +514,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                     + "\"remove\":true,\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Element],"
                 + "Symbol(Symbol.unscopables) [C] [{\"slot\":true,\"before\":true,\"after\":true,\"replaceWith\":true,"
-                    + "\"remove\":true,\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
-            IE = "exception")
+                    + "\"remove\":true,\"prepend\":true,\"append\":true,\"replaceChildren\":true}]")
     @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [Element]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [Element]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Element]",
@@ -1231,8 +1229,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
             FF = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
-            IE = "exception")
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLElement]")
     public void image() throws Exception {
         test("image");
     }
@@ -1309,8 +1306,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            IE = "exception")
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void layer() throws Exception {
         test("layer");
     }
@@ -1521,8 +1517,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [HTMLElement]",
             FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            IE = "exception")
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void nolayer() throws Exception {
         test("nolayer");
     }
@@ -2282,8 +2277,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [WheelEvent]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void wheelEvent() throws Exception {
         testString("", "document.createEvent('WheelEvent')");
     }
@@ -2364,8 +2358,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
             FF = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
-            IE = "exception")
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]")
     public void textEvent() throws Exception {
         testString("", "document.createEvent('TextEvent')");
     }
@@ -2378,8 +2371,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void touchEvent2() throws Exception {
         testString("", "new TouchEvent('touch')");
     }
@@ -2409,8 +2401,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                     + "\"append\":true,\"replaceChildren\":true}]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Document],"
                     + "Symbol(Symbol.unscopables) [C] [{\"fullscreen\":true,\"prepend\":true,"
-                    + "\"append\":true,\"replaceChildren\":true}]",
-            IE = "exception")
+                    + "\"append\":true,\"replaceChildren\":true}]")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
@@ -2477,8 +2468,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF = "Symbol(Symbol.toStringTag) [C] [DocumentFragment],"
                 + "Symbol(Symbol.unscopables) [C] [{\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [DocumentFragment],"
-                + "Symbol(Symbol.unscopables) [C] [{\"prepend\":true,\"append\":true,\"replaceChildren\":true}]",
-            IE = "exception")
+                + "Symbol(Symbol.unscopables) [C] [{\"prepend\":true,\"append\":true,\"replaceChildren\":true}]")
     @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [DocumentFragment]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [DocumentFragment]",
             FF = "Symbol(Symbol.toStringTag) [C] [DocumentFragment]",
@@ -2560,8 +2550,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void touchEvent() throws Exception {
         testString("", "new TouchEvent('touch')");
     }
@@ -2774,8 +2763,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
             FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
-            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
-            IE = "exception")
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]")
     public void computedStyle() throws Exception {
         testString("", "window.getComputedStyle(document.body)");
     }
@@ -2788,8 +2776,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
             FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
-            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]",
-            IE = "exception")
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSS2Properties]")
     @HtmlUnitNYI(FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]",
             FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [CSSStyleDeclaration]")
     public void cssStyleDeclaration() throws Exception {
@@ -2892,8 +2879,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                     + "[{\"before\":true,\"after\":true,\"replaceWith\":true,\"remove\":true}]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [DocumentType],"
                 + "Symbol(Symbol.unscopables) [C] "
-                    + "[{\"before\":true,\"after\":true,\"replaceWith\":true,\"remove\":true}]",
-            IE = "exception")
+                    + "[{\"before\":true,\"after\":true,\"replaceWith\":true,\"remove\":true}]")
     @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [DocumentType]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [DocumentType]",
             FF = "Symbol(Symbol.toStringTag) [C] [DocumentType]",
@@ -2954,8 +2940,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [MutationObserver]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void webKitMutationObserver() throws Exception {
         testString("", "new WebKitMutationObserver(function(m) {})");
     }

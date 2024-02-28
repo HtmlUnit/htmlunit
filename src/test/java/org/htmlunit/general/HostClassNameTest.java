@@ -1780,8 +1780,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function DOMError() { [native code] }",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "[object DOMError]")
+            FF_ESR = "exception")
     public void domError() throws Exception {
         test("DOMError");
     }
@@ -7248,8 +7247,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Storage() { [native code] }",
-            IE  = "[object Storage]")
+    @Alerts("function Storage() { [native code] }")
     public void storage() throws Exception {
         test("Storage");
     }
@@ -8883,7 +8881,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function TextEvent() { [native code] }",
             FF = "exception",
-            IE = "[object TextEvent]",
             FF_ESR = "exception")
     public void textEvent() throws Exception {
         test("TextEvent");

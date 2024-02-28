@@ -68,8 +68,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 288, 340, 407",
             FF = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
-            FF_ESR = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
-            IE = "14, 28, 46, 55, 81, 110, 124, 161, 202, 221, 269, 290, 345, 405")
+            FF_ESR = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418")
     @NotYetImplemented // we will see other results on unix
     public void offsetHeightLineBreaks() throws Exception {
         final String html
@@ -176,8 +175,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"549", "273"},
-            IE = {"552", "276"})
+    @Alerts({"549", "273"})
     @HtmlUnitNYI(CHROME = {"552", "294"},
             EDGE = {"552", "294"},
             FF = {"552", "294"},

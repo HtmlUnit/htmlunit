@@ -63,8 +63,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myForm", "TypeError"},
-            IE = {"myForm", "myForm"})
+    @Alerts({"myForm", "TypeError"})
     public void formsAccessor_FormsAsFunction() throws Exception {
         final String html
             = "<html><head>\n"
@@ -92,8 +91,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myForm", "TypeError"},
-            IE = {"myForm", "myForm"})
+    @Alerts({"myForm", "TypeError"})
     public void formsAccessor_FormsAsFunction2() throws Exception {
         final String html
             = "<html><head>\n"
@@ -121,8 +119,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"error", "error", "error"},
-            IE = {"textfieldid", "textfieldname", "textfieldid"})
+    @Alerts({"error", "error", "error"})
     public void asFunction() throws Exception {
         final String html
             = "<html><head>\n"
@@ -361,8 +358,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"§§URL§§", "§§URL§§/path?query"},
-            IE = {"null", "§§URL§§/path?query"})
+    @Alerts({"§§URL§§", "§§URL§§/path?query"})
     public void originRefererHeaderPost() throws Exception {
         final String firstHtml
             = "<html>\n"
@@ -398,8 +394,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,"
                     + "image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-            FF_ESR = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-            IE = "text/html, application/xhtml+xml, image/jxr, */*")
+            FF_ESR = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8")
     public void acceptHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -531,8 +526,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "third"},
-            IE = {"1", "third"})
+    @Alerts({"2", "third"})
     public void buttonWithFormAction() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head><title>first</title></head>\n"
@@ -1291,8 +1285,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "hiddenParam#form2")
+    @Alerts(DEFAULT = {})
     public void submitFromInsideAnotherInvalidFormRef() throws Exception {
         final String html =
             "<!DOCTYPE html>\n"

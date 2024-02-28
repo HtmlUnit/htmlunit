@@ -52,8 +52,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLVideoElement]", "function HTMLVideoElement() { [native code] }"},
-            IE = {"[object HTMLVideoElement]", "[object HTMLVideoElement]"})
+    @Alerts({"[object HTMLVideoElement]", "function HTMLVideoElement() { [native code] }"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -179,8 +178,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"string", ""},
-            IE = {"string", "§§URL§§flower.mp4"})
+    @Alerts({"string", ""})
     public void currentSrc() throws Exception {
         final String html
             = "<html><body>\n"

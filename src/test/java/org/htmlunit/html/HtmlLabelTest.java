@@ -662,8 +662,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick", "textfocus", "textclick"},
-            IE = {"labelclick", "textclick", "textfocus"})
+    @Alerts({"labelclick", "textfocus", "textclick"})
     public void clickForInput() throws Exception {
         final String html =
               "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
@@ -680,8 +679,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick", "selectfocus", "selectclick"},
-            IE = {"labelclick", "selectclick", "selectfocus"})
+    @Alerts({"labelclick", "selectfocus", "selectclick"})
     public void clickForSelect() throws Exception {
         final String html =
               "  <label id='label1' for='select1' onclick='log(\"labelclick\")' "
@@ -698,8 +696,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick", "textfocus", "textclick"},
-            IE = {"labelclick", "textclick", "textfocus"})
+    @Alerts({"labelclick", "textfocus", "textclick"})
     public void clickForTextArea() throws Exception {
         final String html =
               "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
@@ -825,8 +822,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick", "text1focus", "text1click", "labelclick"},
-            IE = {"labelclick", "text1click", "labelclick", "text1focus"})
+    @Alerts({"labelclick", "text1focus", "text1click", "labelclick"})
     public void clickNestedInput() throws Exception {
         final String html =
               "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
@@ -845,8 +841,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick", "select1focus", "select1click", "labelclick"},
-            IE = {"labelclick", "select1click", "labelclick", "select1focus"})
+    @Alerts({"labelclick", "select1focus", "select1click", "labelclick"})
     public void clickNestedSelect() throws Exception {
         final String html =
               "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
@@ -867,8 +862,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick", "text1focus", "text1click", "labelclick"},
-            IE = {"labelclick", "text1click", "labelclick", "text1focus"})
+    @Alerts({"labelclick", "text1focus", "text1click", "labelclick"})
     public void clickNestedTextArea() throws Exception {
         final String html =
               "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
@@ -1025,8 +1019,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick", "text2focus", "text2click"},
-            IE = {"labelclick", "text2click", "text2focus"})
+    @Alerts({"labelclick", "text2focus", "text2click"})
     public void clickForVersusNested() throws Exception {
         final String html =
               "  <label id='label1' for='text2' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"

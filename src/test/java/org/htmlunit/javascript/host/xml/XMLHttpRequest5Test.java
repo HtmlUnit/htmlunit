@@ -40,8 +40,7 @@ import org.junit.runner.RunWith;
 public class XMLHttpRequest5Test extends WebDriverTestCase {
 
     @Test
-    @Alerts(DEFAULT = {"multipart/form-data; boundary=----formdata123456", "Html\r\nUnit\r\n"},
-            IE = {"null", "Html\r\nUnit\r\n"})
+    @Alerts({"multipart/form-data; boundary=----formdata123456", "Html\r\nUnit\r\n"})
     public void sendBlob() throws Exception {
         sendBlobWithMimeTypeAndAssertContentType(getExpectedAlerts()[0],
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
@@ -55,8 +54,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"doesnt/exist", "Html\r\nUnit\r\n"},
-            IE = {"null", "Html\r\nUnit\r\n"})
+    @Alerts({"doesnt/exist", "Html\r\nUnit\r\n"})
     public void sendBlob_badMimeType() throws Exception {
         sendBlobWithMimeTypeAndAssertContentType(getExpectedAlerts()[0],
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
@@ -154,8 +152,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"application/xml;charset=UTF-8", "null"},
-            IE = {"application/xml; charset=utf-8", "\u00EF\u00BB\u00BF"})
+    @Alerts({"application/xml;charset=UTF-8", "null"})
     public void sendXMLDocumentEmpty() throws Exception {
         final String createXmlDoc =
                 "    var doc = document.implementation.createDocument('', '', null);\n";
@@ -163,8 +160,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"application/xml;charset=UTF-8", "<root/>"},
-            IE = {"application/xml; charset=utf-8", "\u00EF\u00BB\u00BF<root />"})
+    @Alerts({"application/xml;charset=UTF-8", "<root/>"})
     public void sendXMLDocumentRoot() throws Exception {
         final String createXmlDoc =
                 "    var doc = document.implementation.createDocument('', '', null);\n"

@@ -183,8 +183,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"§§URL§§subdir/frame.html", "§§URL§§frame.html"},
-            IE = "§§URL§§subdir/frame.html")
+    @Alerts(DEFAULT = {"§§URL§§subdir/frame.html", "§§URL§§frame.html"})
     public void location() throws Exception {
         location("Frame1.location = \"frame.html\"");
         location("Frame1.location.replace(\"frame.html\")");
@@ -727,8 +726,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"loaded", "null"},
-            IE = {"loaded", "error"})
+    @Alerts({"loaded", "null"})
     public void deny() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

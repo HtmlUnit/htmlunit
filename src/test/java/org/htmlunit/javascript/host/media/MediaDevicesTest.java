@@ -56,8 +56,7 @@ public class MediaDevicesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object MediaDevices]", "err"},
-            IE = "undefined")
+    @Alerts(DEFAULT = {"[object MediaDevices]", "err"})
     public void getUserMedia() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

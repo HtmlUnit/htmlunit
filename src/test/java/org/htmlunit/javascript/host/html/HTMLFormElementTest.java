@@ -131,8 +131,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "textInput1", "button1", "textInput3"},
-            IE = {"1", "button1"})
+    @Alerts({"3", "textInput1", "button1", "textInput3"})
     public void elementsAccessorFormAttribute() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -548,8 +547,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text/plain", "application/x-www-form-urlencoded", "newEncoding"},
-            IE = {"text/plain", "exception"})
+    @Alerts({"text/plain", "application/x-www-form-urlencoded", "newEncoding"})
     public void encodingProperty_textPlain() throws Exception {
         doTestProperty("encoding", "enctype", MimeType.TEXT_PLAIN, "newEncoding");
     }
@@ -558,8 +556,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding"},
-            IE = {"application/x-www-form-urlencoded", "exception"})
+    @Alerts({"application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding"})
     public void encodingProperty_dummyValues() throws Exception {
         doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
     }
@@ -972,8 +969,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElement]"},
-            IE = {"undefined", "undefined"})
+    @Alerts({"[object HTMLInputElement]", "[object HTMLInputElement]"})
     public void fieldFoundWithIdByReference() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1152,8 +1148,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"page1.html", "page2.html", "page1.html", "page1.html"},
-            IE = {"page1.html", "page1.html", "page1.html", "page1.html"})
+    @Alerts({"page1.html", "page2.html", "page1.html", "page1.html"})
     public void changeFormActionAfterSubmit() throws Exception {
         final String[] expectedFiles = getExpectedAlerts();
         setExpectedAlerts();
@@ -1304,8 +1299,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"page4.html?f1=v1&f2=v2", "page4.html?f1=v1&f2=v2", "page3.html?f1=v1", "page3.html?f1=v1"},
-            IE = {"page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1"})
+    @Alerts({"page4.html?f1=v1&f2=v2", "page4.html?f1=v1&f2=v2", "page3.html?f1=v1", "page3.html?f1=v1"})
     public void changesAfterCallToSubmit() throws Exception {
         final String[] expectedUrlSuffixes = getExpectedAlerts();
         setExpectedAlerts();
@@ -2029,8 +2023,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "foo4?foo=", "script4.js"},
-            IE = {"", "foo0?foo=", "foo4?foo=", "script4.js"})
+    @Alerts({"", "foo4?foo=", "script4.js"})
     @NotYetImplemented
     public void submitTriggersRequestNotParsed() throws Exception {
         final String html = "<html><head><script>\n"
@@ -2316,8 +2309,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Response", "param1=value1"},
-            IE = "requestSubmit() not available")
+    @Alerts(DEFAULT = {"Response", "param1=value1"})
     public void requestSubmit() throws Exception {
         final String html
             = "<html>\n"
@@ -2357,8 +2349,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Response", "param1=value1"},
-            IE = "requestSubmit() not available")
+    @Alerts(DEFAULT = {"Response", "param1=value1"})
     public void requestSubmitWithSubmit() throws Exception {
         final String html
             = "<html>\n"
@@ -2400,8 +2391,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Response", "param1=value1&submit1="},
-            IE = "requestSubmit() not available")
+    @Alerts(DEFAULT = {"Response", "param1=value1&submit1="})
     public void requestSubmitWithButton() throws Exception {
         final String html
             = "<html>\n"
@@ -2445,8 +2435,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"first", "requestSubmit failed"},
-            IE = "requestSubmit() not available")
+    @Alerts(DEFAULT = {"first", "requestSubmit failed"})
     public void requestSubmitNotMember() throws Exception {
         final String html
             = "<html>\n"
@@ -2492,8 +2481,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"first", "requestSubmit failed"},
-            IE = "requestSubmit() not available")
+    @Alerts(DEFAULT = {"first", "requestSubmit failed"})
     public void requestSubmitNotSubmit() throws Exception {
         final String html
             = "<html>\n"
@@ -2867,8 +2855,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"},
-            IE = {"undefined", "undefined", "prefetch", "prefetch", "not supported", "notsupported"})
+    @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
     public void readWriteRel() throws Exception {
         final String html
             = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
@@ -2896,8 +2883,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "alternate", "help"})
     public void relList() throws Exception {
         final String html
             = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
@@ -2921,8 +2907,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"})
     public void setRelListString() throws Exception {
         final String html
             = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
@@ -2959,8 +2944,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"})
     public void setRelListStringBlank() throws Exception {
         final String html
             = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
@@ -2989,8 +2973,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"})
     public void setRelListNull() throws Exception {
         final String html
             = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
@@ -3027,8 +3010,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
     public void setRelListUndefined() throws Exception {
         final String html
             = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
@@ -3065,8 +3047,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElement]"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElement]"})
     public void elementsForOf() throws Exception {
         final String html =
               "<html>\n"

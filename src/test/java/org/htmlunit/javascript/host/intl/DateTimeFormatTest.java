@@ -105,8 +105,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "12/20/2013"},
-            IE = {"true", "\u200E12\u200E/\u200E20\u200E/\u200E2013"})
+    @Alerts({"true", "12/20/2013"})
     public void dateTimeFormat() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"

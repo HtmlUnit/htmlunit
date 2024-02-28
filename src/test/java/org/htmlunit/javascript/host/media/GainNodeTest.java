@@ -55,8 +55,7 @@ public class GainNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "-3.4028234663852886e+38", "3.4028234663852886e+38", "1", "0.5"},
-            IE = "AudioContext not available")
+    @Alerts(DEFAULT = {"1", "-3.4028234663852886e+38", "3.4028234663852886e+38", "1", "0.5"})
     public void ctor() throws Exception {
         final String html
             = "<html>\n"
@@ -95,8 +94,7 @@ public class GainNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Error 1", "Error 2", "Error 3", "Error 4"},
-            IE = "AudioContext not available")
+    @Alerts(DEFAULT = {"Error 1", "Error 2", "Error 3", "Error 4"})
     public void ctorAudiocontextMissing() throws Exception {
         final String html
             = "<html>\n"

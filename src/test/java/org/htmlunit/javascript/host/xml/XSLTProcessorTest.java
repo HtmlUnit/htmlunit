@@ -46,8 +46,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>",
             FF_ESR = "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
                 + "<body><h2>My CD Collection</h2>"
-                + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>",
-            IE = "exception")
+                + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>")
     @HtmlUnitNYI(CHROME = "<html><body><h2>My CD Collection</h2>"
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>",
             EDGE = "<html><body><h2>My CD Collection</h2>"
@@ -158,8 +157,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function", "function", "function", "function",
-                       "undefined", "undefined", "undefined", "undefined"},
-            IE = "exception")
+                       "undefined", "undefined", "undefined", "undefined"})
     public void methods() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -216,8 +214,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"},
-            IE = {"exception str", "exception numb", "exception bool", "exception ?", "exception if"})
+    @Alerts({"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"})
     public void browserDetection() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -253,8 +250,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"preparation done", "null"},
             FF = {"preparation done", "exception"},
-            FF_ESR = {"preparation done", "exception"},
-            IE = "exception")
+            FF_ESR = {"preparation done", "exception"})
     @HtmlUnitNYI(CHROME = {"preparation done", "exception"},
             EDGE = {"preparation done", "exception"})
     public void testSecurity() throws Exception {

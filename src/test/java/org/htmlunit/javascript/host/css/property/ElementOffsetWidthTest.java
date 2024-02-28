@@ -1379,8 +1379,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(CHROME = "24",
             EDGE = "22",
             FF = "30",
-            FF_ESR = "30",
-            IE = "25")
+            FF_ESR = "30")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
@@ -1605,8 +1604,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(CHROME = "170",
             EDGE = "168",
             FF = "165",
-            FF_ESR = "165",
-            IE = "183")
+            FF_ESR = "165")
     @HtmlUnitNYI(CHROME = "100",
             EDGE = "100",
             FF = "100",
@@ -1761,8 +1759,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "158",
-            FF_ESR = "158",
-            IE = "145")
+            FF_ESR = "158")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "154",
@@ -1812,8 +1809,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "253",
             FF = "230",
-            FF_ESR = "230",
-            IE = "228")
+            FF_ESR = "230")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
@@ -1841,8 +1837,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "158",
-            FF_ESR = "158",
-            IE = "147")
+            FF_ESR = "158")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "154",
@@ -1874,8 +1869,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "51",
             FF = "44",
-            FF_ESR = "44",
-            IE = "57")
+            FF_ESR = "44")
     @HtmlUnitNYI(CHROME = "55",
             EDGE = "55",
             FF = "55",
@@ -1892,8 +1886,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "158",
-            FF_ESR = "158",
-            IE = "145")
+            FF_ESR = "158")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "154",
@@ -1910,8 +1903,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "58",
             FF = "90",
-            FF_ESR = "90",
-            IE = "103")
+            FF_ESR = "90")
     @HtmlUnitNYI(CHROME = "118",
             EDGE = "118",
             FF = "118",
@@ -1928,8 +1920,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "158",
-            FF_ESR = "158",
-            IE = "145")
+            FF_ESR = "158")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "154",

@@ -294,8 +294,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object InputDeviceCapabilities]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void _InputDeviceCapabilities() throws Exception {
         test("InputDeviceCapabilities");
     }
@@ -380,8 +379,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object RTCSessionDescription]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void _RTCSessionDescription() throws Exception {
         test("RTCSessionDescription");
     }
@@ -455,8 +453,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MediaStream]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void _webkitMediaStream() throws Exception {
         test("webkitMediaStream");
     }
@@ -467,8 +464,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object RTCPeerConnection]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void _webkitRTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection");
     }
@@ -479,8 +475,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object SpeechGrammar]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void _webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar");
     }
@@ -491,8 +486,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object SpeechGrammarList]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void _webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList");
     }
@@ -503,8 +497,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object SpeechRecognition]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void _webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition");
     }

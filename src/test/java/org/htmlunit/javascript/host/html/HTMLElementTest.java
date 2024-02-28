@@ -196,8 +196,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"null", "bla", "true"},
-            IE = {"", "bla", "true"})
+    @Alerts({"null", "bla", "true"})
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -409,8 +408,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null", "inform('newHandler')", "null"},
-            IE = {"null", "inform('newHandler')", ""})
+    @Alerts({"null", "inform('newHandler')", "null"})
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -860,8 +858,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<b>inner HTML</b>",
             FF = "getInnerHTML() not available",
-            FF_ESR = "getInnerHTML() not available",
-            IE = "getInnerHTML() not available")
+            FF_ESR = "getInnerHTML() not available")
     public void getGetInnerHTML() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1233,8 +1230,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Children: 1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLNull() throws Exception {
         final String html = createPageForSetOuterHTML("div", null);
         loadPageVerifyTextArea2(html);
@@ -1855,8 +1851,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "exception"},
-            IE = {"2", "BR"})
+    @Alerts({"2", "exception"})
     public void childrenFunctionAccess() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'><br/><div>\n"
@@ -1875,8 +1870,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old = Old\n\ninnerText", "New = New cell value"},
-            IE = {"Old = Old \ninnerText", "New = New cell value"})
+    @Alerts({"Old = Old\n\ninnerText", "New = New cell value"})
     @HtmlUnitNYI(CHROME = {"Old = Old\ninnerText", "New = New cell value"},
             EDGE =  {"Old = Old\ninnerText", "New = New cell value"},
             FF = {"Old = Old\ninnerText", "New = New cell value"},
@@ -2586,8 +2580,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DOMRect]", "0", "0"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object DOMRect]", "0", "0"})
     public void getBoundingClientRectDisconnected() throws Exception {
         final String html = "<html>\n"
             + "<head><script>\n"
@@ -2612,8 +2605,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DOMRectList]", "1"},
-            IE = {"[object ClientRectList]", "1"})
+    @Alerts({"[object DOMRectList]", "1"})
     public void getClientRects() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2634,8 +2626,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DOMRectList]", "0"},
-            IE = {"[object ClientRectList]", "0"})
+    @Alerts({"[object DOMRectList]", "0"})
     public void getClientRectsDisconnected() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -2655,8 +2646,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DOMRectList]", "0", "[object DOMRectList]", "0"},
-            IE = {"[object ClientRectList]", "0", "[object ClientRectList]", "0"})
+    @Alerts({"[object DOMRectList]", "0", "[object DOMRectList]", "0"})
     public void getClientRectsDisplayNone() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -2729,8 +2719,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true"},
-            IE = {"false", "true", "false"})
+    @Alerts({"true", "true", "true"})
     public void uniqueID() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -3269,8 +3258,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception[]", "false", "false"},
-            IE = {"false", "false", "false"})
+    @Alerts({"exception[]", "false", "false"})
     public void contains_invalid_argument() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
@@ -3496,8 +3484,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false,false,false,false,false,true,false", "clearAttributes not available"},
-            IE = {"false,false,false,false,false,true,false", "false,false,false,false,false,true,false"})
+    @Alerts({"false,false,false,false,false,true,false", "clearAttributes not available"})
     public void clearAttributes() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3633,8 +3620,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex"},
-            IE = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0"})
+    @Alerts({"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex"})
     public void setColorAttribute() throws Exception {
         final String html =
             "<html>\n"
@@ -3687,8 +3673,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"button", "null", "false", "true"},
-            IE = {"button", "", "false", "true"})
+    @Alerts({"button", "null", "false", "true"})
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"
@@ -4217,8 +4202,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "<!--some comment-->", "true", "false"},
-            IE = {"-", "<!--some comment-->", "-", "-"})
+    @Alerts({"false", "<!--some comment-->", "true", "false"})
     public void replaceChildAddNewChildToDocument() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -5177,8 +5161,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "go", "", "enter", "done",  "go", "next", "previous", "search", "send"},
-            IE = {"undefined", "GO", "run", "enter", "done",  "go", "next", "previous", "search", "send"})
+    @Alerts({"", "go", "", "enter", "done",  "go", "next", "previous", "search", "send"})
     public void enterKeyHint() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -5228,8 +5211,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "go", "", "", ""},
-            IE = {"undefined", "GO", "run", "undefined", "null"})
+    @Alerts({"", "go", "", "", ""})
     public void enterKeyHint2() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -5263,8 +5245,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"go", "go", "", "", ""},
-            IE = {"undefined", "undefined", "undefined", "undefined", "undefined"})
+    @Alerts({"go", "go", "", "", ""})
     public void enterKeyHintDefaults() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -5301,8 +5282,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"true", "", "true", "7", "true", "seven", "false", "null"},
-            IE = {"undefined", "", "undefined", "7", "undefined", "seven", "undefined", "null"})
+    @Alerts({"true", "", "true", "7", "true", "seven", "false", "null"})
     public void autofocus() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

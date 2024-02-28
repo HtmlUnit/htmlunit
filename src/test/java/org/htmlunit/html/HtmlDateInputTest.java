@@ -38,8 +38,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"--null", "--null", "--null"},
-            IE = {"--null", "exception", "--null"})
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -73,8 +72,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"--null", "--null", "--null"},
-            IE = {"--null", "exception", "--null"})
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -111,8 +109,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"text-datetime", "date-Date"},
-            IE = {"text-datetime", "text-Date"})
+    @Alerts({"text-datetime", "date-Date"})
     public void type() throws Exception {
         final String html =
               "<html>\n"

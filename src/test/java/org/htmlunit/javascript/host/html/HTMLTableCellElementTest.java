@@ -37,8 +37,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"left", "right", "3", "center", "8", "foo"},
-            IE = {"left", "right", "", "error", "error", "center", "right", ""})
+    @Alerts({"left", "right", "3", "center", "8", "foo"})
     public void align() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -147,8 +146,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
-            IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
+    @Alerts({"top", "baseline", "3", "middle", "8", "BOTtom"})
     public void vAlign() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -189,8 +187,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "#0000aa", "x"},
-            IE = {"", "#0000aa", "#0"})
+    @Alerts({"", "#0000aa", "x"})
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -288,8 +285,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "3", "1", "2", "1", "5", "1", "2", "1"},
-            IE = {"1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5"})
+    @Alerts({"1", "3", "1", "2", "1", "5", "1", "2", "1"})
     public void colSpan() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -525,8 +521,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"100px", "200px", "400", "abc", "-5", "100.2", "10%"},
-            IE = {"100", "200", "400", "error", "400", "error", "400", "100", "10%"})
+    @Alerts({"100px", "200px", "400", "abc", "-5", "100.2", "10%"})
     public void width() throws Exception {
         final String html =
             "<html>\n"
@@ -593,8 +588,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"},
-            IE = {"", "#667788", "#000000", "red", "#123456", "#000000"})
+    @Alerts({"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"})
     public void borderColor() throws Exception {
         final String html
             = "<html><body>\n"
@@ -629,8 +623,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            IE = {"", "", "", "", "", ""})
+    @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void borderColorDark() throws Exception {
         final String html
             = "<html><body>\n"
@@ -665,8 +658,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            IE = {"", "", "", "", "", ""})
+    @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void borderColorLight() throws Exception {
         final String html
             = "<html><body>\n"

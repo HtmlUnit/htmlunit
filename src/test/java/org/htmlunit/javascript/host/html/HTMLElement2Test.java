@@ -942,8 +942,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", " ", "0", "1", "undefined", "1", "[object Object]"},
-            IE = {"0", "1", "\u00A0", "1", "1", "undefined", "1", "[object Object]"})
+    @Alerts({"0", "1", " ", "0", "1", "undefined", "1", "[object Object]"})
     public void innerText_Empty() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -984,8 +983,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"something", "0"},
-            IE = {"something", "null"})
+    @Alerts({"something", "0"})
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

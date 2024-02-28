@@ -513,8 +513,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object MediaDevices]", "true"},
-            IE = {"undefined", "true"})
+    @Alerts({"[object MediaDevices]", "true"})
     public void mediaDevices() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

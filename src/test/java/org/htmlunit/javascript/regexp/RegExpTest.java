@@ -34,8 +34,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"g", "true", "false", "false", "false"},
-            IE = {"undefined", "true", "false", "false", "undefined"})
+    @Alerts({"g", "true", "false", "false", "false"})
     public void globalCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'g');");
     }
@@ -44,8 +43,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"g", "true", "false", "false", "false"},
-            IE = {"undefined", "true", "false", "false", "undefined"})
+    @Alerts({"g", "true", "false", "false", "false"})
     public void global() throws Exception {
         testEvaluateProperties("/foo/g;");
     }
@@ -54,8 +52,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"i", "false", "true", "false", "false"},
-            IE = {"undefined", "false", "true", "false", "undefined"})
+    @Alerts({"i", "false", "true", "false", "false"})
     public void ignoreCaseCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'i');");
     }
@@ -64,8 +61,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"i", "false", "true", "false", "false"},
-            IE = {"undefined", "false", "true", "false", "undefined"})
+    @Alerts({"i", "false", "true", "false", "false"})
     public void ignoreCase() throws Exception {
         testEvaluateProperties("/foo/i;");
     }
@@ -74,8 +70,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"m", "false", "false", "true", "false"},
-            IE = {"undefined", "false", "false", "true", "undefined"})
+    @Alerts({"m", "false", "false", "true", "false"})
     public void multilineCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'm');");
     }
@@ -84,8 +79,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"m", "false", "false", "true", "false"},
-            IE = {"undefined", "false", "false", "true", "undefined"})
+    @Alerts({"m", "false", "false", "true", "false"})
     public void multiline() throws Exception {
         testEvaluateProperties("/foo/m;");
     }
@@ -114,8 +108,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gm", "true", "false", "true", "false"},
-            IE = {"undefined", "true", "false", "true", "undefined"})
+    @Alerts({"gm", "true", "false", "true", "false"})
     public void globalMultilineCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'gm');");
     }
@@ -124,8 +117,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gm", "true", "false", "true", "false"},
-            IE = {"undefined", "true", "false", "true", "undefined"})
+    @Alerts({"gm", "true", "false", "true", "false"})
     public void globalMultiline() throws Exception {
         testEvaluateProperties("/foo/gm;");
     }
@@ -134,8 +126,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gi", "true", "true", "false", "false"},
-            IE = {"undefined", "true", "true", "false", "undefined"})
+    @Alerts({"gi", "true", "true", "false", "false"})
     public void globalIgnoreCaseCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'ig');");
     }
@@ -144,8 +135,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gi", "true", "true", "false", "false"},
-            IE = {"undefined", "true", "true", "false", "undefined"})
+    @Alerts({"gi", "true", "true", "false", "false"})
     public void globalIgnoreCase() throws Exception {
         testEvaluateProperties("/foo/ig;");
     }
@@ -174,8 +164,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gim", "true", "true", "true", "false"},
-            IE = {"undefined", "true", "true", "true", "undefined"})
+    @Alerts({"gim", "true", "true", "true", "false"})
     public void globalMultilineIgnoreCaseCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'mig');");
     }
@@ -184,8 +173,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gim", "true", "true", "true", "false"},
-            IE = {"undefined", "true", "true", "true", "undefined"})
+    @Alerts({"gim", "true", "true", "true", "false"})
     public void globalMultilineIgnoreCase() throws Exception {
         testEvaluateProperties("/foo/gmi;");
     }
@@ -234,8 +222,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"im", "false", "true", "true", "false"},
-            IE = {"undefined", "false", "true", "true", "undefined"})
+    @Alerts({"im", "false", "true", "true", "false"})
     public void ignoreCaseMultilineCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'im');");
     }
@@ -244,8 +231,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"im", "false", "true", "true", "false"},
-            IE = {"undefined", "false", "true", "true", "undefined"})
+    @Alerts({"im", "false", "true", "true", "false"})
     public void ignoreCaseMultiline() throws Exception {
         testEvaluateProperties("/foo/mi;");
     }
@@ -543,8 +529,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"ad$0db", "ad$0db", "ad$0dbd$0dc"},
-            IE = {"adfoodb", "adfkxxxkodb", "adfoodbdfuodc"})
+    @Alerts({"ad$0db", "ad$0db", "ad$0dbd$0dc"})
     public void stringReplaceAllBrowserSpecific() throws Exception {
         testEvaluate(getExpectedAlerts()[0], "'afoob'.replaceAll(/(foo)/g, 'd$0d')");
         testEvaluate(getExpectedAlerts()[1], "'afkxxxkob'.replace(/(f)k(.*)k(o)/g, 'd$0d')");

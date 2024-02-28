@@ -32,8 +32,7 @@ public class HtmlTemplateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "null", "null"},
-            IE = {"4", "[object HTMLInputElement]", "[object HTMLInputElement]"})
+    @Alerts({"2", "null", "null"})
     public void noChilds() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

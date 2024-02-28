@@ -198,8 +198,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false"},
-            IE = "startsWith not supported")
+    @Alerts(DEFAULT = {"true", "true", "true", "false"})
     public void startsWith() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -227,8 +226,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false"},
-            IE = "endsWith not supported")
+    @Alerts(DEFAULT = {"true", "true", "true", "false"})
     public void endsWith() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -256,8 +254,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "true", "false"},
-            IE = "includes not supported")
+    @Alerts(DEFAULT = {"true", "true", "true", "true", "false"})
     public void includes() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -286,8 +283,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "abc", "abcabc"},
-            IE = "repeat not supported")
+    @Alerts(DEFAULT = {"", "abc", "abcabc"})
     public void repeat() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -313,8 +309,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(DEFAULT = {"\u0069\u0307", "\u0069"},
-            IE = {"\u0130", "\u0130"})
+    @Alerts({"\u0069\u0307", "\u0069"})
     public void toLocaleLowerCase() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

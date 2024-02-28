@@ -36,8 +36,7 @@ public class MapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "value1"},
-            IE = {"1", "undefined"})
+    @Alerts({"3", "value1"})
     public void get() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -324,8 +323,7 @@ public class MapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "77", "one"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"1", "77", "one"})
     public void constructorIteratorParam() throws Exception {
         final String html
             = "<html><head>\n"

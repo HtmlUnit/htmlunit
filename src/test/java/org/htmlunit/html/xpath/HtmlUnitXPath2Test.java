@@ -34,8 +34,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"},
-            IE = "error")
+    @Alerts(DEFAULT = {"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"})
     public void optionText() throws Exception {
         final String content = "<html><head>\n"
             + "<script>\n"
@@ -525,8 +524,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "mySpan - - myDiv",
             FF = "mySpan - myDiv - ",
-            FF_ESR = "mySpan - myDiv - ",
-            IE = "error")
+            FF_ESR = "mySpan - myDiv - ")
     public void reuseResult() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"

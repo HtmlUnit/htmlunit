@@ -56,8 +56,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLAudioElement]", "function HTMLAudioElement() { [native code] }"},
-            IE = {"[object HTMLAudioElement]", "[object HTMLAudioElement]"})
+    @Alerts({"[object HTMLAudioElement]", "function HTMLAudioElement() { [native code] }"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -105,8 +104,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLAudioElement]", "[object Promise]", "done"},
-            IE = {"[object HTMLAudioElement]", "undefined", "done"})
+    @Alerts({"[object HTMLAudioElement]", "[object Promise]", "done"})
     public void audio() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -208,8 +206,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLAudioElement]", "maybe", "done"},
-            IE = {"[object HTMLAudioElement]", "", "done"})
+    @Alerts({"[object HTMLAudioElement]", "maybe", "done"})
     public void nullConstructor() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -371,8 +368,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "probably",
             FF = "maybe",
-            FF_ESR = "maybe",
-            IE = "")
+            FF_ESR = "maybe")
     @HtmlUnitNYI(CHROME = "maybe",
             EDGE = "maybe")
     public void canPlayType_AudioFlac() throws Exception {
@@ -541,8 +537,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"string", ""},
-            IE = {"string", "§§URL§§horse.mp3"})
+    @Alerts({"string", ""})
     public void currentSrc() throws Exception {
         final String html
             = "<html><body>\n"

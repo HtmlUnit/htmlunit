@@ -122,8 +122,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"10px", "20em", "80%", "40", "wrong", ""},
-            IE = {"10", "20", "80%", "40", "", ""})
+    @Alerts({"10px", "20em", "80%", "40", "wrong", ""})
     public void getHeight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -149,8 +148,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"20px", "8", "foo"},
-            IE = {"20", "8", "error", "8"})
+    @Alerts({"20px", "8", "foo"})
     public void setHeight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -181,8 +179,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"10px", "20em", "80%", "40", "wrong", ""},
-            IE = {"10", "20", "80%", "40", "", ""})
+    @Alerts({"10px", "20em", "80%", "40", "wrong", ""})
     public void getWidth() throws Exception {
         final String html
             = "<html><body>\n"
@@ -208,8 +205,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"20px", "8", "foo"},
-            IE = {"20", "8", "error", "8"})
+    @Alerts({"20px", "8", "foo"})
     public void setWidth() throws Exception {
         final String html
             = "<html><body>\n"

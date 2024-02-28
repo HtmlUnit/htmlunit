@@ -33,8 +33,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLElement]", "undefined", "undefined", "undefined"},
-            IE = {"[object HTMLBaseFontElement]", "", "3", ""})
+    @Alerts({"[object HTMLElement]", "undefined", "undefined", "undefined"})
     public void defaults() throws Exception {
         final String html =
             "<html>\n"
@@ -61,8 +60,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "42"},
-            IE = {"4", "42"})
+    @Alerts({"undefined", "42"})
     public void size() throws Exception {
         final String html =
             "<html>\n"
@@ -92,8 +90,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "helvetica"},
-            IE = {"swiss", "helvetica"})
+    @Alerts({"undefined", "helvetica"})
     public void face() throws Exception {
         final String html =
             "<html>\n"
@@ -123,8 +120,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "blue"},
-            IE = {"red", "blue"})
+    @Alerts({"undefined", "blue"})
     public void color() throws Exception {
         final String html =
             "<html>\n"
@@ -154,8 +150,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLElement]", "exception"},
-            IE = {"[object HTMLBaseFontElement]", "[object HTMLBaseFontElement]"})
+    @Alerts({"[object HTMLElement]", "exception"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"

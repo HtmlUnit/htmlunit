@@ -130,8 +130,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"mousedown; onfocus; mouseup; onclick; onchange;", ""},
-            IE = {"mousedown; onfocus; mouseup; onchange; onclick;", ""})
+    @Alerts({"mousedown; onfocus; mouseup; onclick; onchange;", ""})
     public void clickCheckboxEventSequence() throws Exception {
         testClickEventSequence("<input type='checkbox' id='" + TEST_ID + "'>Check", false);
     }
@@ -153,8 +152,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"mousedown; onfocus; mouseup; onclick; onchange;", ""},
-            IE = {"mousedown; onfocus; mouseup; onchange; onclick;", ""})
+    @Alerts({"mousedown; onfocus; mouseup; onclick; onchange;", ""})
     public void clickRadioEventSequence() throws Exception {
         testClickEventSequence("<input type='radio' name='test' id='" + TEST_ID + "'>Check", false);
     }

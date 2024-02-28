@@ -32,8 +32,7 @@ public class HTMLDTElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "null", "nowrap", "null", "x", "null", "x", "blah", "", "blah"},
-            IE = {"false", "null", "true", "", "true", "", "true", "blah", "false", "null"})
+    @Alerts({"undefined", "null", "nowrap", "null", "x", "null", "x", "blah", "", "blah"})
     public void noWrap() throws Exception {
         final String html =
             "<html>\n"

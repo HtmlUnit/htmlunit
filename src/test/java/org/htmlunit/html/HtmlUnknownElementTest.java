@@ -35,8 +35,7 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLElement]"},
-            IE = {"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLUnknownElement]"})
+    @Alerts({"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLElement]"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -66,8 +65,7 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLElement]"},
-            IE = {"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLUnknownElement]"})
+    @Alerts({"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLElement]"})
     public void simpleScriptable_strict() throws Exception {
         final String header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
                 + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";

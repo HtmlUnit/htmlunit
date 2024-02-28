@@ -444,8 +444,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
-            IE = {"true", "false", "true", "true", "true"})
+    @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"

@@ -190,8 +190,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"onError", "body onLoad"},
-            IE = {"onLoad", "body onLoad"})
+    @Alerts({"onError", "body onLoad"})
     public void onError() throws Exception {
         onLoadOnError("rel='stylesheet' href='unknown.css'");
     }
@@ -227,8 +226,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"},
-            IE = {"onLoadJs1", "body onLoad", "onLoad1", "onLoad2;"})
+    @Alerts({"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"})
     public void onLoadOrder() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.css"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");

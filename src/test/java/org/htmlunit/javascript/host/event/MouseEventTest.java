@@ -62,8 +62,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "click", "false", "false", "false", "false",
-                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"},
-            IE = "exception")
+                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -116,8 +115,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "42", "false", "false", "false", "false",
-                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"},
-            IE = "exception")
+                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -140,8 +138,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "null", "false", "false", "false", "false",
-                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"},
-            IE = "exception")
+                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -186,8 +183,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "HtmlUnitEvent", "false", "false", "false", "false",
-                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"},
-            IE = "exception")
+                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -210,8 +206,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "click", "false", "false", "false", "false",
-                       "7", "0", "13", "-15", "true", "true", "true", "true", "2", "4", "3"},
-            IE = "exception")
+                       "7", "0", "13", "-15", "true", "true", "true", "true", "2", "4", "3"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

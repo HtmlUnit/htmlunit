@@ -45,8 +45,7 @@ public class TinyMceTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"348", "0"},
-            IE = {"348", "13"})
+    @Alerts({"348", "0"})
     // TODO [IE]XML tinymce 3.2.7 is not compatible with IE
     public void api() throws Exception {
         test("api", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));

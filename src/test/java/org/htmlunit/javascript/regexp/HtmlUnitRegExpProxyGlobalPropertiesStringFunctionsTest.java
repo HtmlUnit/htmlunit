@@ -245,8 +245,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "y", "1234", "z"},
-            IE = {"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "", "1234", "z"})
+    @Alerts({"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "y", "1234", "z"})
     public void regExpSearchTooManyGroups() throws Exception {
         testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)')");
     }
@@ -282,8 +281,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "y", "1234", "z"},
-            IE = {"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "", "1234", "z"})
+    @Alerts({"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "y", "1234", "z"})
     public void regExpSearchTooManyGroupsIgnoreCase() throws Exception {
         testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
     }
@@ -328,8 +326,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "y", "1234", "z"},
-            IE = {"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "", "1234", "z"})
+    @Alerts({"4", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-", "HtmlUnitxy", "y", "1234", "z"})
     public void regExpSearchTooManyGroupsGlobal() throws Exception {
         testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g')");
     }

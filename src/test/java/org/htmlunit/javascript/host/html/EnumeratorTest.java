@@ -125,8 +125,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"f t1 t2", "Enumerator not supported"},
-            IE = {"f t1 t2", "exception"})
+    @Alerts({"f t1 t2", "Enumerator not supported"})
     public void formEnumerator() throws Exception {
         final String html
             = "<html>\n"
@@ -160,8 +159,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "Enumerator not supported"},
-            IE = {"undefined", "exception"})
+    @Alerts({"undefined", "Enumerator not supported"})
     public void item() throws Exception {
         final String html
             = "<html><head>\n"

@@ -79,8 +79,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object DocumentFragment]", "0-0",
                        "[object DocumentFragment]", "0-0",
                        "[object DocumentFragment]", "0-1",
-                       "[object DocumentFragment]", "0-2"},
-            IE = "not available")
+                       "[object DocumentFragment]", "0-2"})
     public void content() throws Exception {
         final String html =
             "<html>\n"
@@ -121,8 +120,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DocumentFragment]", "0-0", "1-0"},
-            IE = "not available")
+    @Alerts(DEFAULT = {"[object DocumentFragment]", "0-0", "1-0"})
     public void appendChild() throws Exception {
         final String html =
             "<html>\n"
@@ -155,8 +153,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "<p></p>", "", "HtmlUnit", "<div>HtmlUnit</div><div>is great</div>"},
-            IE = {"", "<div></div>", "", "HtmlUnit", "<div>HtmlUnit</div><div>is great</div>"})
+    @Alerts({"", "", "<p></p>", "", "HtmlUnit", "<div>HtmlUnit</div><div>is great</div>"})
     public void innerHTML() throws Exception {
         final String html =
             "<html>\n"
@@ -290,8 +287,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myTemplate", "null"},
-            IE = {"myTemplate", "[object HTMLDivElement]"})
+    @Alerts({"myTemplate", "null"})
     public void getElementById() throws Exception {
         final String html =
             "<html>\n"
@@ -321,8 +317,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myTemplate", "0"},
-            IE = {"myTemplate", "2"})
+    @Alerts({"myTemplate", "0"})
     public void getElementsByTagName() throws Exception {
         final String html =
             "<html>\n"
@@ -352,8 +347,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myTemplate", "0"},
-            IE = {"myTemplate", "3"})
+    @Alerts({"myTemplate", "0"})
     public void childNodes() throws Exception {
         final String html =
             "<html>\n"

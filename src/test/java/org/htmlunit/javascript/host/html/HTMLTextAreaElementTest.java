@@ -124,8 +124,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"11", "0"},
-            IE = {"undefined", "undefined"})
+    @Alerts({"11", "0"})
     public void textLength() throws Exception {
         final String html
             = "<html>\n"
@@ -150,8 +149,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10", "7,7"},
-            IE = {"0,0", "0,0", "3,3", "3,10", "0,0"})
+    @Alerts({"0,0", "11,11", "3,11", "3,10", "7,7"})
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -160,8 +158,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "11,11", "11,11", "11,11", "7,7"},
-            IE = {"0,0", "0,0", "0,0", "0,11", "0,0"})
+    @Alerts({"0,0", "11,11", "11,11", "11,11", "7,7"})
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -170,8 +167,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5", "7,7"},
-            IE = {"0,0", "0,0", "10,10", "5,5", "7,7"})
+    @Alerts({"0,0", "11,11", "10,11", "5,5", "7,7"})
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
     }
@@ -371,8 +367,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"20", "5", "8", "4", "20", "20", "20", "3"},
-            IE = {"20", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3"})
+    @Alerts({"20", "5", "8", "4", "20", "20", "20", "3"})
     public void cols() throws Exception {
         final String html
             = "<html><head>\n"
@@ -423,8 +418,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "5", "8", "4", "2", "2", "2", "3"},
-            IE = {"2", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3"})
+    @Alerts({"2", "5", "8", "4", "2", "2", "2", "3"})
     public void rows() throws Exception {
         final String html
             = "<html><head>\n"
@@ -543,8 +537,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"null", "4", "", "0"},
-            IE = {"null", "4", "null", "4"})
+    @Alerts({"null", "4", "", "0"})
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"
@@ -610,8 +603,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-1", "null", "32", "32", "-1", "ms"},
-            IE = {"2147483647", "null", "32", "32", "2147483647", "ms"})
+    @Alerts({"-1", "null", "32", "32", "-1", "ms"})
     public void maxLength() throws Exception {
         final String html
             = "<html>\n"
@@ -643,8 +635,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-1", "null", "32", "32", "-1", "ms"},
-            IE = {"undefined", "null", "undefined", "32", "undefined", "ms"})
+    @Alerts({"-1", "null", "32", "32", "-1", "ms"})
     public void minLength() throws Exception {
         final String html
             = "<html>\n"
@@ -676,8 +667,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"10", "10", "error", "10", "10", "0", "0"},
-            IE = {"10", "10", "-1", "-1", "0", "0"})
+    @Alerts({"10", "10", "error", "10", "10", "0", "0"})
     public void setMaxLength() throws Exception {
         final String html
             = "<html>\n"

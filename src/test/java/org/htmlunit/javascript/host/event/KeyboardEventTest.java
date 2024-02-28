@@ -59,8 +59,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object KeyboardEvent]", "type", "false", "false", "false",
-                       ",,0,false,false,false,false,false,false,0,0"},
-            IE = "exception")
+                       ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head><script>\n"
@@ -113,8 +112,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object KeyboardEvent]", "42", "false", "false", "false",
-                       ",,0,false,false,false,false,false,false,0,0"},
-            IE = "exception")
+                       ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -137,8 +135,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT =  {"[object KeyboardEvent]", "null", "false", "false", "false",
-                        ",,0,false,false,false,false,false,false,0,0"},
-            IE = "exception")
+                        ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -183,8 +180,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object KeyboardEvent]", "HtmlUnitEvent", "false", "false", "false",
-                       ",,0,false,false,false,false,false,false,0,0"},
-            IE = "exception")
+                       ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -211,8 +207,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             CHROME = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
                       "key,code,123,true,true,true,true,true,true,456,0"},
             EDGE = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-                    "key,code,123,true,true,true,true,true,true,456,0"},
-            IE = "exception")
+                    "key,code,123,true,true,true,true,true,true,456,0"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -238,8 +233,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-                       "null,,0,true,false,false,false,false,false,456,0"},
-            IE = "exception")
+                       "null,,0,true,false,false,false,false,false,456,0"})
     public void create_ctorSomeDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -263,8 +257,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-                       ",,0,false,false,false,false,false,false,0,0"},
-            IE = "exception")
+                       ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -288,8 +281,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-                       ",,0,false,false,false,false,false,false,0,0"},
-            IE = "exception")
+                       ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorNullData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -312,8 +304,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-                       ",,0,false,false,false,false,false,false,0,0"},
-            IE = "exception")
+                       ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorUndefinedData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -336,8 +327,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-                       ",,0,false,false,false,false,false,false,0,0"},
-            IE = "exception")
+                       ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

@@ -36,8 +36,7 @@ public class HtmlQuoteTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLQuoteElement]", "[object HTMLQuoteElement]"},
-            IE = {"[object HTMLQuoteElement]", "[object HTMLBlockElement]"})
+    @Alerts({"[object HTMLQuoteElement]", "[object HTMLQuoteElement]"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

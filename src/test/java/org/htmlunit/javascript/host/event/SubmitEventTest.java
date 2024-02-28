@@ -43,8 +43,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -92,8 +91,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object SubmitEvent]", "42", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object SubmitEvent]", "42", "false", "false", "false", "null"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -115,8 +113,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object SubmitEvent]", "null", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object SubmitEvent]", "null", "false", "false", "false", "null"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -160,8 +157,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object SubmitEvent]", "HtmlUnitEvent", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object SubmitEvent]", "HtmlUnitEvent", "false", "false", "false", "null"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -183,8 +179,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -213,8 +208,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

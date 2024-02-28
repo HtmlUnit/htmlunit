@@ -64,8 +64,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "function HTMLAreaElement() { [native code] }"},
-            IE = {"", "[object HTMLAreaElement]"})
+    @Alerts({"", "function HTMLAreaElement() { [native code] }"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -198,8 +197,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "alternate", "help"})
     public void relList() throws Exception {
         final String html
             = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"

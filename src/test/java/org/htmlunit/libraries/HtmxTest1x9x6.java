@@ -34,8 +34,7 @@ public class HtmxTest1x9x6 extends HtmxTest {
     @Test
     @Alerts(DEFAULT = "passes:634failures:1",
             FF = "passes:634failures:0",
-            FF_ESR = "passes:634failures:0",
-            IE = "not testable")
+            FF_ESR = "passes:634failures:0")
     @HtmlUnitNYI(
             CHROME = "passes:634failures:0",
             EDGE = "passes:634failures:0")

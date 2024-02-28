@@ -161,8 +161,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "31,415.927",
             FF = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667",
-            FF_ESR = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667",
-            IE = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667")
+            FF_ESR = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667")
     public void format_ar() throws Exception {
         test("new Intl.NumberFormat('ar').format(number)");
     }
@@ -326,8 +325,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "31,415.927",
             FF = "31\u00a0415,927",
-            FF_ESR = "31\u00a0415,927",
-            IE = "31\u00a0415,927")
+            FF_ESR = "31\u00a0415,927")
     public void format_be() throws Exception {
         test("new Intl.NumberFormat('be').format(number)");
     }
@@ -338,8 +336,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "31,415.927",
             FF = "31\u00a0415,927",
-            FF_ESR = "31\u00a0415,927",
-            IE = "31\u00a0415,927")
+            FF_ESR = "31\u00a0415,927")
     public void format_be_by() throws Exception {
         test("new Intl.NumberFormat('be-BY').format(number)");
     }
@@ -962,8 +959,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "31,415.927",
             FF = "31.415,927",
-            FF_ESR = "31.415,927",
-            IE = "31.415,927")
+            FF_ESR = "31.415,927")
     public void format_is() throws Exception {
         test("new Intl.NumberFormat('is').format(number)");
     }
@@ -974,8 +970,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "31,415.927",
             FF = "31.415,927",
-            FF_ESR = "31.415,927",
-            IE = "31.415,927")
+            FF_ESR = "31.415,927")
     public void format_is_is() throws Exception {
         test("new Intl.NumberFormat('is-IS').format(number)");
     }
@@ -1103,8 +1098,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "31,415.927",
             FF = "31.415,927",
-            FF_ESR = "31.415,927",
-            IE = "31.415,927")
+            FF_ESR = "31.415,927")
     public void format_mk() throws Exception {
         test("new Intl.NumberFormat('mk').format(number)");
     }
@@ -1115,8 +1109,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "31,415.927",
             FF = "31.415,927",
-            FF_ESR = "31.415,927",
-            IE = "31.415,927")
+            FF_ESR = "31.415,927")
     public void format_mk_mk() throws Exception {
         test("new Intl.NumberFormat('mk-MK').format(number)");
     }
@@ -1335,8 +1328,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "31,415.927",
             EDGE = "31\u00a0415,927",
             FF = "31\u00a0415,927",
-            FF_ESR = "31\u00a0415,927",
-            IE = "31\u00a0415,927")
+            FF_ESR = "31\u00a0415,927")
     public void format_sq() throws Exception {
         test("new Intl.NumberFormat('sq').format(number)");
     }
@@ -1348,8 +1340,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "31,415.927",
             EDGE = "31\u00a0415,927",
             FF = "31\u00a0415,927",
-            FF_ESR = "31\u00a0415,927",
-            IE = "31\u00a0415,927")
+            FF_ESR = "31\u00a0415,927")
     public void format_sq_al() throws Exception {
         test("new Intl.NumberFormat('sq-AL').format(number)");
     }

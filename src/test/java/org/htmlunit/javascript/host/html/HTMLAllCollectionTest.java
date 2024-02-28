@@ -69,8 +69,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"coll 2", "b4-button4_1", "b4-button4_2"},
-            IE = "b4-button4_1")
+    @Alerts(DEFAULT = {"coll 2", "b4-button4_1", "b4-button4_2"})
     public void namedItem_DuplicateId() throws Exception {
         namedItem("'b4'");
     }
@@ -79,8 +78,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"coll 2", "b5_1-button5", "b5_2-button5"},
-            IE = "b5_1-button5")
+    @Alerts(DEFAULT = {"coll 2", "b5_1-button5", "b5_2-button5"})
     public void namedItem_DuplicateName() throws Exception {
         namedItem("'button5'");
     }
@@ -89,8 +87,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"coll 2", "b6-button6", "button6-button6_2"},
-            IE = "b6-button6")
+    @Alerts(DEFAULT = {"coll 2", "b6-button6", "button6-button6_2"})
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("'button6'");
     }
@@ -560,8 +557,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"},
-            IE = {"[object HTMLAllCollection]", "[object HTMLAllCollection]"})
+    @Alerts({"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"

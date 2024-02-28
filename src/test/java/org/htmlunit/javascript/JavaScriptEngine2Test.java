@@ -148,8 +148,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "function foo() {}", "function foo() {}", "function foo() {}"},
-            IE = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"})
+    @Alerts({"undefined", "function foo() {}", "function foo() {}", "function foo() {}"})
     @HtmlUnitNYI(CHROME = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"},
             EDGE = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"},
             FF = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"},
@@ -449,8 +448,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "false", "0"},
-            IE = {"1", "true", "1"})
+    @Alerts({"0", "false", "0"})
     public void nativeFunction_toStringValue() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

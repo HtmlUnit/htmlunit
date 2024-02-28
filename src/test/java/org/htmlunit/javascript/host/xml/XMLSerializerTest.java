@@ -374,8 +374,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<foo/>", "<foo/>"},
-            IE = {"<foo />", "<foo />"})
+    @Alerts({"<foo/>", "<foo/>"})
     public void document() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -443,8 +442,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>"},
-            IE = {"<img />", "", "<?myTarget myData?>"})
+    @Alerts({"<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>"})
     public void xml() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

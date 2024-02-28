@@ -195,8 +195,7 @@ public class Uint8ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "1"})
     public void defineProperty() throws Exception {
         final String html
             = "<html><head>\n"

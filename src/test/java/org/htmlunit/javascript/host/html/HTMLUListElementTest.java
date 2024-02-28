@@ -112,8 +112,7 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"},
-            IE = {"", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I"})
+    @Alerts({"", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
     public void type() throws Exception {
         final String html =
                 "<html>\n"

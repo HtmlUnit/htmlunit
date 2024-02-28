@@ -542,8 +542,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined"},
-            IE = {"null", "undefined"})
+    @Alerts({"undefined", "undefined"})
     public void optionIndexOutOfBound() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -787,8 +786,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLOptionsCollection]", "0", "1"},
-            IE = {"[object HTMLSelectElement]", "0", "1"})
+    @Alerts({"[object HTMLOptionsCollection]", "0", "1"})
     public void with_new() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -817,8 +815,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLOptionsCollection]", "0", "exception", "0"},
-            IE = {"[object HTMLSelectElement]", "0", "1"})
+    @Alerts({"[object HTMLOptionsCollection]", "0", "exception", "0"})
     public void without_new() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1573,8 +1570,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "o-mouse over [option1] s-mouse over [option1]",
             FF = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
-            FF_ESR = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
-            IE = "")
+            FF_ESR = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
     public void mouseOverDisabledOption() throws Exception {
         shutDownAll();
 

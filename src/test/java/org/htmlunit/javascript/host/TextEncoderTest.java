@@ -59,8 +59,7 @@ public class TextEncoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"0", "8", "72", "116"},
-            IE = "no TextEncoder")
+    @Alerts(DEFAULT = {"0", "8", "72", "116"})
     public void encode() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -92,8 +91,7 @@ public class TextEncoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "4"},
-            IE = "no TextEncoder")
+    @Alerts(DEFAULT = {"0", "0", "4"})
     public void encode2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

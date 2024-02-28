@@ -468,8 +468,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D\nEF\nG\nH\nI",
             FF = "A B C D\nEFGH\nI",
-            FF_ESR = "A B C D\nEFGH\nI",
-            IE = "A B C D EF G H \n I ")
+            FF_ESR = "A B C D\nEFGH\nI")
     @HtmlUnitNYI(CHROME = "A B C D\nEF\nG\nH\n I",
             EDGE = "A B C D\nEF\nG\nH\n I",
             FF = "A B C D\nEF\nG\nH\n I",
@@ -554,8 +553,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D\nEF\nG\nH\nI",
             FF = "A B C D\nEFGH\nI",
-            FF_ESR = "A B C D\nEFGH\nI",
-            IE = "A B C D EF G H \n I ")
+            FF_ESR = "A B C D\nEFGH\nI")
     @HtmlUnitNYI(CHROME = "A B C D\nEF\nG\nH\n I",
             EDGE = "A B C D\nEF\nG\nH\n I",
             FF = "A B C D\nEF\nG\nH\n I",
@@ -737,8 +735,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
-            FF_ESR = "",
-            IE = " A B C D EF G H I  Second ")
+            FF_ESR = "")
     @HtmlUnitNYI(CHROME = "A B C D EF G H I Second",
             EDGE = "A B C D EF G H I Second",
             FF = "A B C D EF G H I Second",
@@ -754,8 +751,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
-            FF_ESR = "",
-            IE = " A B C D EF G H I  Second ")
+            FF_ESR = "")
     @HtmlUnitNYI(CHROME = "A B C D EF G H I Second",
             EDGE = "A B C D EF G H I Second",
             FF = "A B C D EF G H I Second",
@@ -771,8 +767,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
-            FF_ESR = "",
-            IE = " A B C D EF G H I  Second ")
+            FF_ESR = "")
     @HtmlUnitNYI(CHROME = "A B C D EF G H I Second",
             EDGE = "A B C D EF G H I Second",
             FF = "A B C D EF G H I Second",
@@ -788,8 +783,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
-            FF_ESR = "",
-            IE = "   A B  C\t \t  D \nEF\nG \n H   I  Second")
+            FF_ESR = "")
     @HtmlUnitNYI(CHROME = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
             EDGE = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
             FF = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
@@ -805,8 +799,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
-            FF_ESR = "",
-            IE = "   A B  C\t \t  D \nEF\nG \n H   I  Second")
+            FF_ESR = "")
     @HtmlUnitNYI(CHROME = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
             EDGE = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
             FF = "        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
@@ -822,8 +815,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
-            FF_ESR = "",
-            IE = " A B C D EF G H I  Second ")
+            FF_ESR = "")
     @HtmlUnitNYI(CHROME = "A B C D\nEF\nG\nH I\nSecond\n",
             EDGE = "A B C D\nEF\nG\nH I\nSecond\n",
             FF = "A B C D\nEF\nG\nH I\nSecond\n",
@@ -1331,8 +1323,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "\n\nfirst item\n\n\nA B C D\nEF\nG\nH\nI"
                 + "\n\n\nthird item\n4. item\n\nsome text\n\nlast item\n\n",
             FF = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item",
-            FF_ESR = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item",
-            IE = " first item\n  A B C D EF G H \n I \n third item\n4. item\n some text last item\n ")
+            FF_ESR = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item")
     @HtmlUnitNYI(CHROME = "first item\n\n\n A B C D\nEF\nG\nH\n I"
                 + "\n\n\nthird item\n4. item\n\nsome text\n\nlast item\n\n",
             EDGE = "first item\n\n\n A B C D\nEF\nG\nH\n I"
@@ -1445,8 +1436,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "\n\nfirst item\n\n\nA B C D\nEF\nG\nH\nI\n"
                 + "\n\nthird item\n4. item\n\nsome text\n\nlast item\n\n",
             FF = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item",
-            FF_ESR = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item",
-            IE = " first item\n  A B C D EF G H \n I \n third item\n4. item\n some text last item\n ")
+            FF_ESR = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item")
     @HtmlUnitNYI(CHROME = "first item\n\n\n A B C D\nEF\nG\nH\n I"
                 + "\n\n\nthird item\n4. item\n\nsome text\n\nlast item\n\n",
             EDGE = "first item\n\n\n A B C D\nEF\nG\nH\n I"

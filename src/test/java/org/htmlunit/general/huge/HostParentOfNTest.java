@@ -815,8 +815,7 @@ public class HostParentOfNTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-           IE = "false")
+    @Alerts("true")
     public void _Node_HTMLSlotElement() throws Exception {
         test("Node", "HTMLSlotElement");
     }

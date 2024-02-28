@@ -34,8 +34,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "false", "true", "true", "false", "false"},
-            IE = "no Number.isFinite")
+    @Alerts(DEFAULT = {"false", "false", "false", "true", "true", "false", "false"})
     public void isFinite() throws Exception {
         final String html =
             "<html>\n"
@@ -66,8 +65,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
-                       "false", "false", "false", "false", "false"},
-            IE = "no Number.isInteger")
+                       "false", "false", "false", "false", "false"})
     public void isInteger() throws Exception {
         final String html =
             "<html>\n"
@@ -105,8 +103,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
-                       "false", "false", "false", "false", "false", "false", "false"},
-            IE = "no Number.isNaN")
+                       "false", "false", "false", "false", "false", "false", "false"})
     public void isNaN() throws Exception {
         final String html =
             "<html>\n"
@@ -145,8 +142,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "false", "false", "false", "false", "true"},
-            IE = "no Number.isSafeInteger")
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "false", "false", "false", "true"})
     public void isSafeInteger() throws Exception {
         final String html =
             "<html>\n"

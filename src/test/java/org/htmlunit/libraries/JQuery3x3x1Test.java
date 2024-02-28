@@ -6753,8 +6753,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Alerts(CHROME = "8",
             EDGE = "8",
             FF = "10",
-            FF_ESR = "10",
-            IE = "0")
+            FF_ESR = "10")
     @NotYetImplemented
     public void css__css___customProperty_() throws Exception {
         runTest("css: css(--customProperty)");

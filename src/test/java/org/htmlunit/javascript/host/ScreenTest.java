@@ -45,8 +45,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0"},
-            IE = {"undefined", "1234"})
+    @Alerts({"0", "0"})
     public void availLeft() throws Exception {
         testNumericProperty("availLeft");
     }
@@ -55,8 +54,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0"},
-            IE = {"undefined", "1234"})
+    @Alerts({"0", "0"})
     public void availTop() throws Exception {
         testNumericProperty("availTop");
     }
@@ -74,8 +72,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "1234"},
-            IE = {"0", "0"})
+    @Alerts({"undefined", "1234"})
     public void bufferDepth() throws Exception {
         testNumericProperty("bufferDepth");
     }
@@ -93,8 +90,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "1234"},
-            IE = {"96", "96"})
+    @Alerts({"undefined", "1234"})
     public void deviceXDPI() throws Exception {
         testNumericProperty("deviceXDPI");
     }
@@ -103,8 +99,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "1234"},
-            IE = {"96", "96"})
+    @Alerts({"undefined", "1234"})
     public void deviceYDPI() throws Exception {
         testNumericProperty("deviceYDPI");
     }
@@ -113,8 +108,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "false"},
-            IE = {"true", "true"})
+    @Alerts({"undefined", "false"})
     public void fontSmoothingEnabled() throws Exception {
         testBooleanProperty("fontSmoothingEnabled");
     }
@@ -154,8 +148,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "1234"},
-            IE = {"96", "96"})
+    @Alerts({"undefined", "1234"})
     public void logicalXDPI() throws Exception {
         testNumericProperty("logicalXDPI");
     }
@@ -164,8 +157,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "1234"},
-            IE = {"96", "96"})
+    @Alerts({"undefined", "1234"})
     public void logicalYDPI() throws Exception {
         testNumericProperty("logicalYDPI");
     }
@@ -183,8 +175,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "1234"},
-            IE = {"96", "96"})
+    @Alerts({"undefined", "1234"})
     public void systemXDPI() throws Exception {
         testNumericProperty("systemXDPI");
     }
@@ -193,8 +184,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "1234"},
-            IE = {"96", "96"})
+    @Alerts({"undefined", "1234"})
     public void systemYDPI() throws Exception {
         testNumericProperty("systemYDPI");
     }
@@ -265,8 +255,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"[object ScreenOrientation]", "landscape-primary", "0"},
-            IE = {"undefined", "exception"})
+    @Alerts({"[object ScreenOrientation]", "landscape-primary", "0"})
     public void orientation() throws Exception {
         final String html = "<html><head>\n"
             + "  <script>\n"
@@ -318,8 +307,7 @@ public class ScreenTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "undefined",
-            FF_ESR = "undefined",
-            IE = "undefined")
+            FF_ESR = "undefined")
     public void isExtended() throws Exception {
         final String html = "<html><head>\n"
             + "  <script>\n"

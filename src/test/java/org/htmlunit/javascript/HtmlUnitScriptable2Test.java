@@ -48,8 +48,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text/html", "text/html"},
-            IE = {"undefined", "123456"})
+    @Alerts({"text/html", "text/html"})
     public void setNonWritablePropertyContentType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

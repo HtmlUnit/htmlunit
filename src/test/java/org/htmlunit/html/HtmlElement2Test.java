@@ -225,8 +225,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLInputElement] [object HTMLBodyElement]",
             CHROME = "[object HTMLInputElement] onblur onfocusout [object HTMLBodyElement]",
-            EDGE = "[object HTMLInputElement] onblur onfocusout [object HTMLBodyElement]",
-            IE = "[object HTMLInputElement] null")
+            EDGE = "[object HTMLInputElement] onblur onfocusout [object HTMLBodyElement]")
     public void removeActiveElement() throws Exception {
         final String html =
                HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -259,8 +258,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLInputElement] [object HTMLBodyElement]",
             CHROME = "[object HTMLInputElement] onblur1 onfocusout1 [object HTMLBodyElement]",
-            EDGE = "[object HTMLInputElement] onblur1 onfocusout1 [object HTMLBodyElement]",
-            IE = "[object HTMLInputElement] null")
+            EDGE = "[object HTMLInputElement] onblur1 onfocusout1 [object HTMLBodyElement]")
     public void removeParentOfActiveElement() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_

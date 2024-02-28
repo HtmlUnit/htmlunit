@@ -39,8 +39,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"name=f", "id=f", "foo=bar", "baz=blah"},
-            IE = {"name=f", "id=f", "baz=blah", "foo=bar"})
+    @Alerts({"name=f", "id=f", "foo=bar", "baz=blah"})
     public void attributes() throws Exception {
         final String html =
               "<html>\n"
@@ -71,8 +70,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"name=f", "id=f", "foo=bar", "baz=blah"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"name=f", "id=f", "foo=bar", "baz=blah"})
     public void attributesForOf() throws Exception {
         final String html =
               "<html>\n"

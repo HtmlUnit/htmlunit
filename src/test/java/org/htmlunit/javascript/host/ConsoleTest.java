@@ -64,8 +64,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "undefined", "false"},
-            IE = {"false", "object", "true"})
+    @Alerts({"true", "undefined", "false"})
     public void prototypeUppercase() throws Exception {
         final String html
             = "<html>\n"
@@ -87,8 +86,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "window.console.timeStamp not available")
+    @Alerts(DEFAULT = {})
     public void timeStamp() throws Exception {
         final String html
             = "<html>\n"
@@ -109,8 +107,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "function", "function", "function", "function", "function"},
-            IE = {"function", "function", "function", "function", "function", "undefined"})
+    @Alerts({"function", "function", "function", "function", "function", "function"})
     public void methods() throws Exception {
         final String html
             = "<html>\n"

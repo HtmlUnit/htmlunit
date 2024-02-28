@@ -34,8 +34,7 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "error"},
-            IE = {"object", "error"})
+    @Alerts({"function", "error"})
     public void ctor() throws Exception {
         final String html
             = "<html>\n"
@@ -63,8 +62,7 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "10", "true"},
-            IE = {"true", "true", "true", "exception"})
+    @Alerts({"true", "true", "true", "false", "false", "false", "10", "true"})
     public void getRandomValues() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

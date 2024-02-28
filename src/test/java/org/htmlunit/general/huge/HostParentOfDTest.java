@@ -2586,8 +2586,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
-            FF_ESR = "false",
-            IE = "false")
+            FF_ESR = "false")
     public void _EventTarget_BatteryManager() throws Exception {
         test("EventTarget", "BatteryManager");
     }

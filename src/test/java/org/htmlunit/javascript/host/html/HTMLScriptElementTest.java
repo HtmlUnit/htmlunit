@@ -812,8 +812,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"script-for", "exception", "script-body"},
-            IE = {"script-body", "script-for", "hello"})
+    @Alerts({"script-for", "exception", "script-body"})
     public void scriptForEvent() throws Exception {
         // IE accepts it with () or without
         scriptForEvent("onload");
@@ -971,8 +970,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "3"},
-            IE = "1")
+    @Alerts(DEFAULT = {"1", "2", "3"})
     public void scriptType() throws Exception {
         final String html
             = "<html>\n"

@@ -265,8 +265,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"5", "pass", "pass", "pass", "pass"},
-            IE = {"1", "exception", "exception", "pass", "pass"})
+    @Alerts({"5", "pass", "pass", "pass", "pass"})
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1038,8 +1037,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "gzip", "45"},
-            IE = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "null", "null"})
+    @Alerts({"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "gzip", "45"})
     public void encodedXml() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", EncodedXmlServlet.class);

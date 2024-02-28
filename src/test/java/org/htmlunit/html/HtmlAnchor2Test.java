@@ -769,8 +769,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "First"},
-            IE = {"0", "First"})
+    @Alerts({"1", "First"})
     public void clickWithDownloadAttribute() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -797,8 +796,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "First"},
-            IE = {"0", "First"})
+    @Alerts({"1", "First"})
     public void clickWithDownloadAttributeFromJs() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

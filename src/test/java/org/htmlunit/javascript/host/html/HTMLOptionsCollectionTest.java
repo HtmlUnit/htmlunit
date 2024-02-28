@@ -752,8 +752,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "One", "Two*", "Three"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"3", "One", "Two*", "Three"})
     public void removeMinusOne() throws Exception {
         remove("-1", false, false);
     }
@@ -762,8 +761,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"})
     public void removeMinusOneMulti() throws Exception {
         remove("-1", false, true);
     }
@@ -953,8 +951,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "One", "3", "One", "Two", "Three"},
-            IE = {"exception", "exception", "exception"})
+    @Alerts({"0", "1", "One", "3", "One", "Two", "Three"})
     public void setLengthMinusOne() throws Exception {
         setLength("-1");
     }
@@ -1103,8 +1100,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "false", "true", "false", "false"},
-            IE = {"1", "true", "true", "true", "true"})
+    @Alerts({"1", "false", "true", "false", "false"})
     public void in() throws Exception {
         final String html
             = "<html><head><script>\n"

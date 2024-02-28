@@ -209,8 +209,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "about:blank",
             CHROME = "about://unsupported",
-            EDGE = "about://unsupported",
-            IE = "exception")
+            EDGE = "about://unsupported")
     @NotYetImplemented({CHROME, EDGE})
     public void aboutSrc() throws Exception {
         final String html
@@ -244,8 +243,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1:true", "2:false", "3:false", "4:false"},
-            IE = {"1:false", "2:false", "3:false", "4:false"})
+    @Alerts({"1:true", "2:false", "3:false", "4:false"})
     @HtmlUnitNYI(CHROME = {"1:false", "2:false", "3:false", "4:false"},
             EDGE = {"1:false", "2:false", "3:false", "4:false"},
             FF = {"1:false", "2:false", "3:false", "4:false"},

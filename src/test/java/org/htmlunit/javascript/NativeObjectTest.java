@@ -187,8 +187,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function\\s()\\s{\\s[native\\scode]\\s}",
             FF = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
-            FF_ESR = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
-            IE = "\\nfunction()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}\\n")
+            FF_ESR = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}")
     public void proto() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -327,8 +326,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "true", "true"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"2", "true", "true"})
     public void getOwnPropertySymbols() throws Exception {
         final String html = ""
             + "<html><head>\n"

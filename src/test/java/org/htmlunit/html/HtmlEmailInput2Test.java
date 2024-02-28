@@ -306,8 +306,7 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "", "a@b.com"},
-            IE = {"true", "true", "true", "", "a@b.com"})
+    @Alerts({"true", "false", "true", "", "a@b.com"})
     public void minLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"

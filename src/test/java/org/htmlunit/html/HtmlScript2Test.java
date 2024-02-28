@@ -140,8 +140,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"},
-            IE = {"1", "2", "4", "5", "6", "8", "9", "A", "D", "E", "G"})
+    @Alerts({"1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"})
     public void typeValues() throws Exception {
         final String html = "<html>"
             + "<head>\n"
@@ -347,8 +346,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"end", "s0 6", "5", "deferred-1", "deferred-2", "deferred-3", "onload"},
-            IE = {"end", "s0 6", "5", "deferred-1", "deferred-2", "onload"})
+    @Alerts({"end", "s0 6", "5", "deferred-1", "deferred-2", "deferred-3", "onload"})
     public void deferRemovesScript() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -515,8 +513,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"s-x", "z"},
-            IE = {"s-x", "x", "z"})
+    @Alerts({"s-x", "z"})
     public void addEventListener_load() throws Exception {
         final String html
             = "<html><head>\n"
@@ -664,8 +661,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"onLoad", "body onLoad"},
-            IE = "body onLoad")
+    @Alerts(DEFAULT = {"onLoad", "body onLoad"})
     public void onLoadTypeWhitespace() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "");
         onLoadOnError("src='simple.js' type='\t  text/javascript     '");

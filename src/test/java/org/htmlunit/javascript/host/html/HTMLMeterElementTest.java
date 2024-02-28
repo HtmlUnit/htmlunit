@@ -75,8 +75,7 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "2", "1", "1"},
-            IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
+    @Alerts({"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
         final String html =
             "<html><head>\n"

@@ -414,8 +414,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "1", "1", "0", "1"},
-            IE = {"3", "2", "2", "3", "2", "2"})
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dialog() throws Exception {
         loadPageVerifyTitle2(test("dialog"));
     }
@@ -734,8 +733,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
-            IE = {"1", "0", "1", "1", "0", "1"})
+    @Alerts({"3", "2", "2", "3", "2", "2"})
     public void isindex() throws Exception {
         loadPageVerifyTitle2(test("isindex"));
     }
@@ -843,8 +841,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "1", "1", "0", "1"},
-            IE = {"3", "2", "2", "3", "2", "2"})
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void main() throws Exception {
         loadPageVerifyTitle2(test("main"));
     }

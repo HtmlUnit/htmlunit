@@ -142,8 +142,7 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"blob", "blob", "arraybuffer", "blob", "blob"},
-            IE = {"blob", "exception", "arraybuffer", "blob", "exception"})
+    @Alerts({"blob", "blob", "arraybuffer", "blob", "blob"})
     public void binaryType() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

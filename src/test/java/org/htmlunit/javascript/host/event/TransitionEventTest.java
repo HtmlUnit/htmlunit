@@ -42,8 +42,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object TransitionEvent]", "transition", "false", "false", "false"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object TransitionEvent]", "transition", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -91,8 +90,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object TransitionEvent]", "42", "false", "false", "false"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object TransitionEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -114,8 +112,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object TransitionEvent]", "null", "false", "false", "false"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object TransitionEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -159,8 +156,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object TransitionEvent]", "HtmlUnitEvent", "false", "false", "false"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object TransitionEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -182,8 +178,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object TransitionEvent]", "transition", "false", "false", "false"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object TransitionEvent]", "transition", "false", "false", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -210,8 +205,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object TransitionEvent]", "transition", "false", "false", "false"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object TransitionEvent]", "transition", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

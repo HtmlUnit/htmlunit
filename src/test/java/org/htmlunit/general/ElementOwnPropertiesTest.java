@@ -431,8 +431,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "assignedSlot[GCE],constructor(),splitText(),wholeText[GCE]",
             EDGE = "assignedSlot[GCE],constructor(),splitText(),wholeText[GCE]",
             FF = "assignedSlot[GCE],constructor(),splitText(),wholeText[GCE]",
-            FF_ESR = "assignedSlot[GCE],constructor(),splitText(),wholeText[GCE]",
-            IE = "constructor,removeNode(),replaceNode(),replaceWholeText(),splitText(),swapNode(),wholeText")
+            FF_ESR = "assignedSlot[GCE],constructor(),splitText(),wholeText[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),splitText(),wholeText[GCE]",
             EDGE = "constructor(),splitText(),wholeText[GCE]",
             FF_ESR = "constructor(),splitText(),wholeText[GCE]",
@@ -456,8 +455,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "value[GSCE]",
             FF_ESR = "constructor(),localName[GCE],name[GCE],namespaceURI[GCE],ownerElement[GCE],prefix[GCE],"
                 + "specified[GCE],"
-                + "value[GSCE]",
-            IE = "constructor,expando,name,ownerElement,specified,value")
+                + "value[GSCE]")
     public void attr() throws Exception {
         testString("", "document.createAttribute('some_attrib')");
     }
@@ -469,8 +467,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,text")
+            FF_ESR = "constructor()")
     public void comment() throws Exception {
         testString("", "document.createComment('come_comment')");
     }
@@ -482,8 +479,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     public void unknown() throws Exception {
         testString("", "unknown");
     }
@@ -495,8 +491,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     public void htmlElement() throws Exception {
         testString("", "unknown");
     }
@@ -881,8 +876,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "blockDirection,clipBottom,clipLeft,clipRight,clipTop,constructor,hasLayout")
+            FF_ESR = "exception")
     public void currentStyle() throws Exception {
         testString("", "document.body.currentStyle");
     }
@@ -1214,8 +1208,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1438,8 +1431,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1711,8 +1703,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,clear,constructor,width")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2365,8 +2356,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor[]")
+            FF_ESR = "constructor()")
     public void audio() throws Exception {
         test("audio");
     }
@@ -2380,8 +2370,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "balance,constructor,loop,src,volume")
+            FF_ESR = "constructor()")
     @HtmlUnitNYI(FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -2438,8 +2427,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),href[GSCE],target[GSCE]",
             EDGE = "constructor(),href[GSCE],target[GSCE]",
             FF = "constructor(),href[GSCE],target[GSCE]",
-            FF_ESR = "constructor(),href[GSCE],target[GSCE]",
-            IE = "constructor[],href[GSCE],target[GSCE]")
+            FF_ESR = "constructor(),href[GSCE],target[GSCE]")
     public void base() throws Exception {
         test("base");
     }
@@ -2561,8 +2549,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "color[GSCE],constructor[],face[GSCE],size[GSCE]")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2785,8 +2772,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "constructor,namedRecordset(),recordset")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3008,8 +2994,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3231,8 +3216,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3346,8 +3330,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "cite,constructor,dateTime")
+            FF_ESR = "constructor()")
     public void blink() throws Exception {
         test("blink");
     }
@@ -3361,8 +3344,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "cite[GSCE],constructor()",
             EDGE = "cite[GSCE],constructor()",
             FF = "cite[GSCE],constructor()",
-            FF_ESR = "cite[GSCE],constructor()",
-            IE = "cite,clear,constructor,width")
+            FF_ESR = "cite[GSCE],constructor()")
     public void blockquote() throws Exception {
         test("blockquote");
     }
@@ -3525,8 +3507,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3641,8 +3622,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "clear[GSCE],constructor()",
             EDGE = "clear[GSCE],constructor()",
             FF = "clear[GSCE],constructor()",
-            FF_ESR = "clear[GSCE],constructor()",
-            IE = "clear[GSCE],constructor[]")
+            FF_ESR = "clear[GSCE],constructor()")
     public void br() throws Exception {
         test("br");
     }
@@ -3703,8 +3683,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "width[GSCE]",
             FF_ESR = "captureStream(),constructor(),getContext(),height[GSCE],mozOpaque[GSCE],mozPrintCallback[GSCE],"
                 + "toBlob(),toDataURL(),transferControlToOffscreen(),"
-                + "width[GSCE]",
-            IE = "constructor,getContext(),height,msToBlob(),toDataURL(),width")
+                + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),getContext(),height[GSCE],toDataURL(),width[GSCE]",
             EDGE = "constructor(),getContext(),height[GSCE],toDataURL(),width[GSCE]",
             FF_ESR = "constructor(),getContext(),height[GSCE],toDataURL(),width[GSCE]",
@@ -3722,8 +3701,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],constructor[],vAlign[GSCE]")
+            FF_ESR = "align[GSCE],constructor()")
     public void caption() throws Exception {
         test("caption");
     }
@@ -3845,8 +3823,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,clear,constructor,width")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4069,8 +4046,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4292,8 +4268,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4407,8 +4382,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     public void command() throws Exception {
         test("command");
     }
@@ -4422,8 +4396,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),options[GCE]",
             EDGE = "constructor(),options[GCE]",
             FF = "constructor(),options[GCE]",
-            FF_ESR = "constructor(),options[GCE]",
-            IE = "constructor[],options[GCE]")
+            FF_ESR = "constructor(),options[GCE]")
     public void datalist() throws Exception {
         test("datalist");
     }
@@ -4545,8 +4518,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4768,8 +4740,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "constructor[],noWrap[GSCE]")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4884,8 +4855,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "cite[GSCE],constructor(),dateTime[GSCE]",
             EDGE = "cite[GSCE],constructor(),dateTime[GSCE]",
             FF = "cite[GSCE],constructor(),dateTime[GSCE]",
-            FF_ESR = "cite[GSCE],constructor(),dateTime[GSCE]",
-            IE = "cite[GSCE],constructor[],dateTime[GSCE]")
+            FF_ESR = "cite[GSCE],constructor(),dateTime[GSCE]")
     public void del() throws Exception {
         test("del");
     }
@@ -4899,8 +4869,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),name[GSCE],open[GSCE]",
             EDGE = "constructor(),name[GSCE],open[GSCE]",
             FF = "constructor(),open[GSCE]",
-            FF_ESR = "constructor(),open[GSCE]",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor(),open[GSCE]")
     public void details() throws Exception {
         test("details");
     }
@@ -4914,8 +4883,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
             EDGE = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
             FF = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
-            FF_ESR = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()")
     public void dialog() throws Exception {
         test("dialog");
     }
@@ -4929,8 +4897,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "compact[GSCE],constructor()",
             EDGE = "compact[GSCE],constructor()",
             FF = "compact[GSCE],constructor()",
-            FF_ESR = "compact[GSCE],constructor()",
-            IE = "compact,constructor,type")
+            FF_ESR = "compact[GSCE],constructor()")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -4948,8 +4915,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],constructor[],noWrap[GSCE]")
+            FF_ESR = "align[GSCE],constructor()")
     public void div() throws Exception {
         test("div");
     }
@@ -4963,8 +4929,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "compact[GSCE],constructor()",
             EDGE = "compact[GSCE],constructor()",
             FF = "compact[GSCE],constructor()",
-            FF_ESR = "compact[GSCE],constructor()",
-            IE = "compact,constructor")
+            FF_ESR = "compact[GSCE],constructor()")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -5090,8 +5055,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "constructor[],noWrap[GSCE]")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5339,8 +5303,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5969,8 +5932,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "color[GSCE],constructor(),face[GSCE],size[GSCE]",
             EDGE = "color[GSCE],constructor(),face[GSCE],size[GSCE]",
             FF = "color[GSCE],constructor(),face[GSCE],size[GSCE]",
-            FF_ESR = "color[GSCE],constructor(),face[GSCE],size[GSCE]",
-            IE = "color[GSCE],constructor[],face[GSCE],size[GSCE]")
+            FF_ESR = "color[GSCE],constructor(),face[GSCE],size[GSCE]")
     public void font() throws Exception {
         test("font");
     }
@@ -6025,8 +5987,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
             EDGE = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
             FF = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
-            FF_ESR = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
-            IE = "append(),constructor()")
+            FF_ESR = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()")
     public void formData() throws Exception {
         testString("", "new FormData()");
     }
@@ -6359,8 +6320,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,profile")
+            FF_ESR = "constructor()")
     public void head() throws Exception {
         test("head");
     }
@@ -6616,8 +6576,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],clear[GSCE],constructor[]")
+            FF_ESR = "align[GSCE],constructor()")
     public void h1() throws Exception {
         test("h1");
     }
@@ -6631,8 +6590,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],clear[GSCE],constructor[]")
+            FF_ESR = "align[GSCE],constructor()")
     public void h2() throws Exception {
         test("h2");
     }
@@ -6646,8 +6604,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],clear[GSCE],constructor[]")
+            FF_ESR = "align[GSCE],constructor()")
     public void h3() throws Exception {
         test("h3");
     }
@@ -6661,8 +6618,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],clear[GSCE],constructor[]")
+            FF_ESR = "align[GSCE],constructor()")
     public void h4() throws Exception {
         test("h4");
     }
@@ -6676,8 +6632,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],clear[GSCE],constructor[]")
+            FF_ESR = "align[GSCE],constructor()")
     public void h5() throws Exception {
         test("h5");
     }
@@ -6691,8 +6646,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],clear[GSCE],constructor[]")
+            FF_ESR = "align[GSCE],constructor()")
     public void h6() throws Exception {
         test("h6");
     }
@@ -6706,8 +6660,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],color[GSCE],constructor(),noShade[GSCE],size[GSCE],width[GSCE]",
             EDGE = "align[GSCE],color[GSCE],constructor(),noShade[GSCE],size[GSCE],width[GSCE]",
             FF = "align[GSCE],color[GSCE],constructor(),noShade[GSCE],size[GSCE],width[GSCE]",
-            FF_ESR = "align[GSCE],color[GSCE],constructor(),noShade[GSCE],size[GSCE],width[GSCE]",
-            IE = "align,color,constructor,noShade,size,width")
+            FF_ESR = "align[GSCE],color[GSCE],constructor(),noShade[GSCE],size[GSCE],width[GSCE]")
     @HtmlUnitNYI(CHROME = "align[GSCE],color[GSCE],constructor(),width[GSCE]",
             EDGE = "align[GSCE],color[GSCE],constructor(),width[GSCE]",
             FF_ESR = "align[GSCE],color[GSCE],constructor(),width[GSCE]",
@@ -6725,8 +6678,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),version[GSCE]",
             EDGE = "constructor(),version[GSCE]",
             FF = "constructor(),version[GSCE]",
-            FF_ESR = "constructor(),version[GSCE]",
-            IE = "constructor[],version[GSCE]")
+            FF_ESR = "constructor(),version[GSCE]")
     public void html() throws Exception {
         test("html");
     }
@@ -6784,8 +6736,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "cite[GSCE],constructor()",
             EDGE = "cite[GSCE],constructor()",
             FF = "cite[GSCE],constructor()",
-            FF_ESR = "cite[GSCE],constructor()",
-            IE = "cite[GSCE],constructor[],dateTime[GSCE]")
+            FF_ESR = "cite[GSCE],constructor()")
     public void q() throws Exception {
         test("q");
     }
@@ -6955,8 +6906,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "cite[GSCE],constructor(),dateTime[GSCE]",
             EDGE = "cite[GSCE],constructor(),dateTime[GSCE]",
             FF = "cite[GSCE],constructor(),dateTime[GSCE]",
-            FF_ESR = "cite[GSCE],constructor(),dateTime[GSCE]",
-            IE = "cite[GSCE],constructor[],dateTime[GSCE]")
+            FF_ESR = "cite[GSCE],constructor(),dateTime[GSCE]")
     public void ins() throws Exception {
         test("ins");
     }
@@ -6970,8 +6920,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "action,constructor,form,prompt")
+            FF_ESR = "constructor()")
     public void isindex() throws Exception {
         test("isindex");
     }
@@ -7093,8 +7042,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7317,8 +7265,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7430,8 +7377,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "cite,clear,constructor,width")
+            FF_ESR = "constructor()")
     public void keygen() throws Exception {
         test("keygen");
     }
@@ -7445,8 +7391,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),control[GCE],form[GCE],htmlFor[GSCE]",
             EDGE = "constructor(),control[GCE],form[GCE],htmlFor[GSCE]",
             FF = "constructor(),control[GCE],form[GCE],htmlFor[GSCE]",
-            FF_ESR = "constructor(),control[GCE],form[GCE],htmlFor[GSCE]",
-            IE = "constructor[],form[GCE],htmlFor[GSCE]")
+            FF_ESR = "constructor(),control[GCE],form[GCE],htmlFor[GSCE]")
     public void label() throws Exception {
         test("label");
     }
@@ -7516,8 +7461,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "title[GSCE],togglePopover(),translate[GSCE],"
                 + "virtualKeyboardPolicy[GSCE]",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7585,8 +7529,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor(),form[GCE]",
             EDGE = "align[GSCE],constructor(),form[GCE]",
             FF = "align[GSCE],constructor(),form[GCE]",
-            FF_ESR = "align[GSCE],constructor(),form[GCE]",
-            IE = "align[GSCE],constructor[],form[GCE]")
+            FF_ESR = "align[GSCE],constructor(),form[GCE]")
     public void legend() throws Exception {
         test("legend");
     }
@@ -7600,8 +7543,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),width[GSCE]",
             EDGE = "constructor(),width[GSCE]",
             FF = "constructor(),width[GSCE]",
-            FF_ESR = "constructor(),width[GSCE]",
-            IE = "cite,clear,constructor,width")
+            FF_ESR = "constructor(),width[GSCE]")
     public void listing() throws Exception {
         test("listing");
     }
@@ -7615,8 +7557,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),type[GSCE],value[GSCE]",
             EDGE = "constructor(),type[GSCE],value[GSCE]",
             FF = "constructor(),type[GSCE],value[GSCE]",
-            FF_ESR = "constructor(),type[GSCE],value[GSCE]",
-            IE = "constructor,type,value")
+            FF_ESR = "constructor(),type[GSCE],value[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -7648,8 +7589,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "as[GSCE],charset[GSCE],constructor(),crossOrigin[GSCE],disabled[GSCE],href[GSCE],hreflang[GSCE],"
                 + "imageSizes[GSCE],imageSrcset[GSCE],integrity[GSCE],media[GSCE],referrerPolicy[GSCE],rel[GSCE],"
                 + "relList[GSCE],rev[GSCE],sheet[GCE],sizes[GSCE],target[GSCE],"
-                + "type[GSCE]",
-            IE = "charset,constructor,href,hreflang,media,rel,rev,sheet,target,type")
+                + "type[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),disabled[GSCE],href[GSCE],rel[GSCE],relList[GSCE],rev[GSCE],type[GSCE]",
             EDGE = "constructor(),disabled[GSCE],href[GSCE],rel[GSCE],relList[GSCE],rev[GSCE],type[GSCE]",
             FF_ESR = "constructor(),disabled[GSCE],href[GSCE],rel[GSCE],relList[GSCE],rev[GSCE],type[GSCE]",
@@ -7775,8 +7715,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "constructor,namedRecordset(),recordset")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7890,8 +7829,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "areas[GCE],constructor(),name[GSCE]",
             EDGE = "areas[GCE],constructor(),name[GSCE]",
             FF = "areas[GCE],constructor(),name[GSCE]",
-            FF_ESR = "areas[GCE],constructor(),name[GSCE]",
-            IE = "areas[GCE],constructor[],name[GSCE]")
+            FF_ESR = "areas[GCE],constructor(),name[GSCE]")
     public void map() throws Exception {
         test("map");
     }
@@ -8177,8 +8115,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "compact[GSCE],constructor()",
             EDGE = "compact[GSCE],constructor()",
             FF = "compact[GSCE],constructor()",
-            FF_ESR = "compact[GSCE],constructor()",
-            IE = "compact,constructor,type")
+            FF_ESR = "compact[GSCE],constructor()")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -8196,8 +8133,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     public void menuitem() throws Exception {
         test("menuitem");
     }
@@ -8211,8 +8147,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),content[GSCE],httpEquiv[GSCE],media[GSCE],name[GSCE],scheme[GSCE]",
             EDGE = "constructor(),content[GSCE],httpEquiv[GSCE],media[GSCE],name[GSCE],scheme[GSCE]",
             FF = "constructor(),content[GSCE],httpEquiv[GSCE],media[GSCE],name[GSCE],scheme[GSCE]",
-            FF_ESR = "constructor(),content[GSCE],httpEquiv[GSCE],media[GSCE],name[GSCE],scheme[GSCE]",
-            IE = "charset[GSCE],constructor[],content[GSCE],httpEquiv[GSCE],name[GSCE],scheme[GSCE],url[GSCE]")
+            FF_ESR = "constructor(),content[GSCE],httpEquiv[GSCE],media[GSCE],name[GSCE],scheme[GSCE]")
     public void meta() throws Exception {
         test("meta");
     }
@@ -8226,8 +8161,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),high[GSCE],labels[GCE],low[GSCE],max[GSCE],min[GSCE],optimum[GSCE],value[GSCE]",
             EDGE = "constructor(),high[GSCE],labels[GCE],low[GSCE],max[GSCE],min[GSCE],optimum[GSCE],value[GSCE]",
             FF = "constructor(),high[GSCE],labels[GCE],low[GSCE],max[GSCE],min[GSCE],optimum[GSCE],value[GSCE]",
-            FF_ESR = "constructor(),high[GSCE],labels[GCE],low[GSCE],max[GSCE],min[GSCE],optimum[GSCE],value[GSCE]",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor(),high[GSCE],labels[GCE],low[GSCE],max[GSCE],min[GSCE],optimum[GSCE],value[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),high[GCE],labels[GCE],low[GCE],max[GCE],min[GCE],optimum[GCE],value[GCE]",
             EDGE = "constructor(),high[GCE],labels[GCE],low[GCE],max[GCE],min[GCE],optimum[GCE],value[GCE]",
             FF = "constructor(),high[GCE],labels[GCE],low[GCE],max[GCE],min[GCE],optimum[GCE],value[GCE]",
@@ -8245,8 +8179,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     public void multicol() throws Exception {
         test("multicol");
     }
@@ -8501,8 +8434,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,n")
+            FF_ESR = "constructor()")
     public void nextid() throws Exception {
         test("nextid");
     }
@@ -8624,8 +8556,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9277,8 +9208,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "title[GSCE],togglePopover(),translate[GSCE],"
                 + "virtualKeyboardPolicy[GSCE]",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9454,8 +9384,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,clear,constructor,width")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9616,8 +9545,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]",
             EDGE = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]",
             FF = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]",
-            FF_ESR = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]",
-            IE = "compact,constructor,start,type")
+            FF_ESR = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),type[GSCE]",
             EDGE = "constructor(),type[GSCE]",
             FF_ESR = "constructor(),type[GSCE]",
@@ -9635,8 +9563,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),disabled[GSCE],label[GSCE]",
             EDGE = "constructor(),disabled[GSCE],label[GSCE]",
             FF = "constructor(),disabled[GSCE],label[GSCE]",
-            FF_ESR = "constructor(),disabled[GSCE],label[GSCE]",
-            IE = "constructor,defaultSelected,form,index,label,selected,text,value")
+            FF_ESR = "constructor(),disabled[GSCE],label[GSCE]")
     public void optgroup() throws Exception {
         test("optgroup");
     }
@@ -9686,8 +9613,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "willValidate[GCE]",
             FF_ESR = "checkValidity(),constructor(),defaultValue[GSCE],form[GCE],htmlFor[GSCE],labels[GCE],name[GSCE],"
                 + "reportValidity(),setCustomValidity(),type[GCE],validationMessage[GCE],validity[GCE],value[GSCE],"
-                + "willValidate[GCE]",
-            IE = "constructor,namedRecordset(),recordset")
+                + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],setCustomValidity(),"
                 + "validity[GCE],willValidate[GCE]",
             EDGE = "checkValidity(),constructor(),form[GCE],labels[GCE],name[GSCE],setCustomValidity(),"
@@ -9709,8 +9635,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],constructor()",
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
-            FF_ESR = "align[GSCE],constructor()",
-            IE = "align[GSCE],clear[GSCE],constructor[]")
+            FF_ESR = "align[GSCE],constructor()")
     public void p() throws Exception {
         test("p");
     }
@@ -9724,8 +9649,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),name[GSCE],type[GSCE],value[GSCE],valueType[GSCE]",
             EDGE = "constructor(),name[GSCE],type[GSCE],value[GSCE],valueType[GSCE]",
             FF = "constructor(),name[GSCE],type[GSCE],value[GSCE],valueType[GSCE]",
-            FF_ESR = "constructor(),name[GSCE],type[GSCE],value[GSCE],valueType[GSCE]",
-            IE = "constructor[],name[GCE],type[GCE],value[GCE],valueType[GCE]")
+            FF_ESR = "constructor(),name[GSCE],type[GSCE],value[GSCE],valueType[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),name[GCE],type[GCE],value[GCE],valueType[GCE]",
             EDGE = "constructor(),name[GCE],type[GCE],value[GCE],valueType[GCE]",
             FF = "constructor(),name[GCE],type[GCE],value[GCE],valueType[GCE]",
@@ -9888,8 +9812,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,clear,constructor,width")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10003,8 +9926,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),width[GSCE]",
             EDGE = "constructor(),width[GSCE]",
             FF = "constructor(),width[GSCE]",
-            FF_ESR = "constructor(),width[GSCE]",
-            IE = "cite[GSCE],clear[GSCE],constructor[],width[GSCE]")
+            FF_ESR = "constructor(),width[GSCE]")
     public void pre() throws Exception {
         test("pre");
     }
@@ -10018,8 +9940,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),labels[GCE],max[GSCE],position[GCE],value[GSCE]",
             EDGE = "constructor(),labels[GCE],max[GSCE],position[GCE],value[GSCE]",
             FF = "constructor(),labels[GCE],max[GSCE],position[GCE],value[GSCE]",
-            FF_ESR = "constructor(),labels[GCE],max[GSCE],position[GCE],value[GSCE]",
-            IE = "constructor,form,max,position,value")
+            FF_ESR = "constructor(),labels[GCE],max[GSCE],position[GCE],value[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),labels[GCE],max[GCE],value[GCE]",
             EDGE = "constructor(),labels[GCE],max[GCE],value[GCE]",
             FF_ESR = "constructor(),labels[GCE],max[GCE],value[GCE]",
@@ -10145,8 +10066,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10216,8 +10136,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor[]")
+            FF_ESR = "constructor()")
     public void rbc() throws Exception {
         test("rbc");
     }
@@ -10339,8 +10258,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10518,8 +10436,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10698,8 +10615,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10877,8 +10793,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11056,8 +10971,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],"
@@ -11269,8 +11183,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],"
@@ -11383,8 +11296,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "type[GSCE]",
             FF_ESR = "async[GSCE],charset[GSCE],constructor(),crossOrigin[GSCE],defer[GSCE],event[GSCE],htmlFor[GSCE],"
                 + "integrity[GSCE],noModule[GSCE],referrerPolicy[GSCE],src[GSCE],text[GSCE],"
-                + "type[GSCE]",
-            IE = "async,charset,constructor,crossOrigin,defer,event,htmlFor,src,text,type")
+                + "type[GSCE]")
     @HtmlUnitNYI(CHROME = "async[GSCE],constructor(),src[GSCE],text[GSCE],type[GSCE]",
             EDGE = "async[GSCE],constructor(),src[GSCE],text[GSCE],type[GSCE]",
             FF_ESR = "async[GSCE],constructor(),src[GSCE],text[GSCE],type[GSCE]",
@@ -11821,8 +11733,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11936,8 +11847,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),height[GSCE],media[GSCE],sizes[GSCE],src[GSCE],srcset[GSCE],type[GSCE],width[GSCE]",
             EDGE = "constructor(),height[GSCE],media[GSCE],sizes[GSCE],src[GSCE],srcset[GSCE],type[GSCE],width[GSCE]",
             FF = "constructor(),height[GSCE],media[GSCE],sizes[GSCE],src[GSCE],srcset[GSCE],type[GSCE],width[GSCE]",
-            FF_ESR = "constructor(),height[GSCE],media[GSCE],sizes[GSCE],src[GSCE],srcset[GSCE],type[GSCE],width[GSCE]",
-            IE = "constructor,media,msKeySystem,src,type")
+            FF_ESR = "constructor(),height[GSCE],media[GSCE],sizes[GSCE],src[GSCE],srcset[GSCE],type[GSCE],width[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -11955,8 +11865,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor[]")
+            FF_ESR = "constructor()")
     public void span() throws Exception {
         test("span");
     }
@@ -12078,8 +11987,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12302,8 +12210,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12418,8 +12325,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "blocking[GSCE],constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]",
             EDGE = "blocking[GSCE],constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]",
             FF = "constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]",
-            FF_ESR = "constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]",
-            IE = "constructor,media,sheet,type")
+            FF_ESR = "constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]")
     @HtmlUnitNYI(
             CHROME = "constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]",
             EDGE = "constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]")
@@ -12544,8 +12450,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12767,8 +12672,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "constructor,namedRecordset(),recordset")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12991,8 +12895,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13106,8 +13009,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     public void svg() throws Exception {
         test("svg");
     }
@@ -13172,8 +13074,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
-            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
-            IE = "align,ch,chOff,constructor,span,vAlign,width")
+            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),span[GSCE],width[GSCE]",
             EDGE = "constructor(),span[GSCE],width[GSCE]",
             FF_ESR = "constructor(),span[GSCE],width[GSCE]",
@@ -13191,8 +13092,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
-            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
-            IE = "align,ch,chOff,constructor,span,vAlign,width")
+            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),span[GSCE],width[GSCE]",
             EDGE = "constructor(),span[GSCE],width[GSCE]",
             FF_ESR = "constructor(),span[GSCE],width[GSCE]",
@@ -13210,8 +13110,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
-            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
-            IE = "align,bgColor,ch,chOff,constructor,deleteRow(),insertRow(),moveRow(),rows,vAlign")
+            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]")
     @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
@@ -13241,8 +13140,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
                 + "vAlign[GSCE],"
-                + "width[GSCE]",
-            IE = "constructor[]")
+                + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],constructor(),"
                 + "headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
             EDGE = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],constructor(),"
@@ -13276,8 +13174,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
                 + "vAlign[GSCE],"
-                + "width[GSCE]",
-            IE = "constructor,scope")
+                + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
                 + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
             EDGE = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
@@ -13395,8 +13292,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
-            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
-            IE = "align,bgColor,ch,chOff,constructor,deleteRow(),insertRow(),moveRow(),rows,vAlign")
+            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]")
     @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
@@ -13414,8 +13310,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
-            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
-            IE = "align,bgColor,ch,chOff,constructor,deleteRow(),insertRow(),moveRow(),rows,vAlign")
+            FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]")
     @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
@@ -13541,8 +13436,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13656,8 +13550,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),dateTime[GSCE]",
             EDGE = "constructor(),dateTime[GSCE]",
             FF = "constructor(),dateTime[GSCE]",
-            FF_ESR = "constructor(),dateTime[GSCE]",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor(),dateTime[GSCE]")
     public void time() throws Exception {
         test("time");
     }
@@ -13671,8 +13564,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),text[GSCE]",
             EDGE = "constructor(),text[GSCE]",
             FF = "constructor(),text[GSCE]",
-            FF_ESR = "constructor(),text[GSCE]",
-            IE = "constructor[],text[GSCE]")
+            FF_ESR = "constructor(),text[GSCE]")
     public void title() throws Exception {
         test("title");
     }
@@ -13694,8 +13586,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "track[GCE]",
             FF_ESR = "constructor(),default[GSCE],ERROR[E],kind[GSCE],label[GSCE],LOADED[E],LOADING[E],NONE[E],"
                 + "readyState[GCE],src[GSCE],srclang[GSCE],"
-                + "track[GCE]",
-            IE = "constructor,default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track")
+                + "track[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),ERROR[E],LOADED[E],LOADING[E],NONE[E]",
             EDGE = "constructor(),ERROR[E],LOADED[E],LOADING[E],NONE[E]",
             FF_ESR = "constructor(),ERROR[E],LOADED[E],LOADING[E],NONE[E]",
@@ -13821,8 +13712,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13937,8 +13827,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "compact[GSCE],constructor(),type[GSCE]",
             EDGE = "compact[GSCE],constructor(),type[GSCE]",
             FF = "compact[GSCE],constructor(),type[GSCE]",
-            FF_ESR = "compact[GSCE],constructor(),type[GSCE]",
-            IE = "compact,constructor,type")
+            FF_ESR = "compact[GSCE],constructor(),type[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),type[GSCE]",
             EDGE = "constructor(),type[GSCE]",
             FF_ESR = "constructor(),type[GSCE]",
@@ -14064,8 +13953,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "cite,constructor,dateTime")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -14198,8 +14086,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor(),getVideoPlaybackQuality(),height[GSCE],mozDecodedFrames[GCE],mozFrameDelay[GCE],"
                 + "mozHasAudio[GCE],mozPaintedFrames[GCE],mozParsedFrames[GCE],mozPresentedFrames[GCE],poster[GSCE],"
                 + "videoHeight[GCE],videoWidth[GCE],"
-                + "width[GSCE]",
-            IE = "constructor,getVideoPlaybackQuality(),height,msZoom,poster,videoHeight,videoWidth,width")
+                + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),height[GSCE],width[GSCE]",
             EDGE = "constructor(),height[GSCE],width[GSCE]",
             FF_ESR = "constructor(),height[GSCE],width[GSCE]",
@@ -14458,8 +14345,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),width[GSCE]",
             EDGE = "constructor(),width[GSCE]",
             FF = "constructor(),width[GSCE]",
-            FF_ESR = "constructor(),width[GSCE]",
-            IE = "cite,clear,constructor,width")
+            FF_ESR = "constructor(),width[GSCE]")
     public void xmp() throws Exception {
         test("xmp");
     }
@@ -14565,8 +14451,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),value[GSCE]",
             EDGE = "constructor(),value[GSCE]",
             FF = "constructor(),value[GSCE]",
-            FF_ESR = "constructor(),value[GSCE]",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor(),value[GSCE]")
     public void data() throws Exception {
         test("data");
     }
@@ -14580,8 +14465,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     public void content() throws Exception {
         test("content");
     }
@@ -14595,8 +14479,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor()")
     public void picutre() throws Exception {
         test("picture");
     }
@@ -14610,8 +14493,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),content[GCE],shadowRoot[GCE],shadowRootMode[GSCE]",
             EDGE = "constructor(),content[GCE],shadowRoot[GCE],shadowRootMode[GSCE]",
             FF = "constructor(),content[GCE]",
-            FF_ESR = "constructor(),content[GCE]",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "constructor(),content[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),content[GCE]",
             EDGE = "constructor(),content[GCE]")
     public void template() throws Exception {
@@ -14882,8 +14764,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "which[GCE]",
             FF_ESR = "constructor(),detail[GCE],initUIEvent(),layerX[GCE],layerY[GCE],rangeOffset[GCE],"
                 + "rangeParent[GCE],SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE],"
-                + "which[GCE]",
-            IE = "constructor,detail,deviceSessionId,initUIEvent(),view")
+                + "which[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),detail[GCE],initUIEvent(),view[GCE],which[GCE]",
             EDGE = "constructor(),detail[GCE],initUIEvent(),view[GCE],which[GCE]",
             FF_ESR = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],"
@@ -14911,8 +14792,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "username[GSCE]",
             FF_ESR = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
                 + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]",
-            IE = "exception")
+                + "username[GSCE]")
     public void url() throws Exception {
         testString("", "new URL('http://developer.mozilla.org')");
     }
@@ -14934,8 +14814,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "username[GSCE]",
             FF_ESR = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
                 + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]",
-            IE = "exception")
+                + "username[GSCE]")
     public void webkitURL() throws Exception {
         testString("", "new webkitURL('http://developer.mozilla.org')");
     }
@@ -14949,8 +14828,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),dataTransfer[GCE]",
             EDGE = "constructor(),dataTransfer[GCE]",
             FF = "constructor(),dataTransfer[GCE],initDragEvent()",
-            FF_ESR = "constructor(),dataTransfer[GCE],initDragEvent()",
-            IE = "constructor,dataTransfer,initDragEvent(),msConvertURL()")
+            FF_ESR = "constructor(),dataTransfer[GCE],initDragEvent()")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -14980,8 +14858,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor(),getCoalescedEvents(),getPredictedEvents(),height[GCE],isPrimary[GCE],"
                 + "pointerId[GCE],pointerType[GCE],pressure[GCE],tangentialPressure[GCE],tiltX[GCE],tiltY[GCE],"
                 + "twist[GCE],"
-                + "width[GCE]",
-            IE = "exception")
+                + "width[GCE]")
     @HtmlUnitNYI(CHROME = "altitudeAngle[GCE],azimuthAngle[GCE],constructor(),height[GCE],isPrimary[GCE],"
                 + "pointerId[GCE],pointerType[GCE],pressure[GCE],tiltX[GCE],tiltY[GCE],width[GCE]",
             EDGE = "altitudeAngle[GCE],azimuthAngle[GCE],constructor(),height[GCE],isPrimary[GCE],"
@@ -15095,8 +14972,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),data[GCE],initCompositionEvent()",
             EDGE = "constructor(),data[GCE],initCompositionEvent()",
             FF = "constructor(),data[GCE],initCompositionEvent(),locale[GCE]",
-            FF_ESR = "constructor(),data[GCE],initCompositionEvent(),locale[GCE]",
-            IE = "constructor,data[GCE],initCompositionEvent(),locale")
+            FF_ESR = "constructor(),data[GCE],initCompositionEvent(),locale[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
             EDGE = "constructor(),data[GCE]",
             FF_ESR = "constructor(),data[GCE]",
@@ -15114,8 +14990,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),relatedTarget[GCE]",
             EDGE = "constructor(),relatedTarget[GCE]",
             FF = "constructor(),relatedTarget[GCE]",
-            FF_ESR = "constructor(),relatedTarget[GCE]",
-            IE = "constructor,initFocusEvent(),relatedTarget")
+            FF_ESR = "constructor(),relatedTarget[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -15133,8 +15008,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
             EDGE = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
             FF = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
-            FF_ESR = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
-            IE = "exception")
+            FF_ESR = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
             EDGE = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
             FF_ESR = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
@@ -15152,8 +15026,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "constructor,initMouseWheelEvent(),wheelDelta")
+            FF_ESR = "exception")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -15205,8 +15078,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "targetTouches[GCE],"
                 + "touches[GCE]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()")
     public void touchEvent2() throws Exception {
@@ -15222,8 +15094,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "assign(),assignedElements(),assignedNodes(),constructor(),name[GSCE]",
             EDGE = "assign(),assignedElements(),assignedNodes(),constructor(),name[GSCE]",
             FF = "assign(),assignedElements(),assignedNodes(),constructor(),name[GSCE]",
-            FF_ESR = "assign(),assignedElements(),assignedNodes(),constructor(),name[GSCE]",
-            IE = "constructor,namedRecordset(),recordset")
+            FF_ESR = "assign(),assignedElements(),assignedNodes(),constructor(),name[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -15433,8 +15304,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "releaseEvents(),replaceChildren(),requestStorageAccess(),rootElement[GCE],scripts[GCE],"
                 + "scrollingElement[GCE],selectedStyleSheetSet[GSCE],styleSheets[GCE],styleSheetSets[GCE],"
                 + "timeline[GCE],title[GSCE],URL[GCE],visibilityState[GCE],vlinkColor[GSCE],write(),"
-                + "writeln()",
-            IE = "exception")
+                + "writeln()")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF_ESR = "exception",
@@ -15452,8 +15322,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor[]")
+            FF_ESR = "constructor()")
     @HtmlUnitNYI(CHROME = "constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
                 + "open(),write(),writeln()",
             EDGE = "constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
@@ -15475,8 +15344,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor[]")
+            FF_ESR = "constructor()")
     @HtmlUnitNYI(CHROME = "constructor(),getElementsByTagName()",
             EDGE = "constructor(),getElementsByTagName()",
             FF_ESR = "constructor(),getElementsByTagName()",
@@ -15675,8 +15543,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "value[GSCE]",
             FF_ESR = "constructor(),localName[GCE],name[GCE],namespaceURI[GCE],ownerElement[GCE],prefix[GCE],"
                 + "specified[GCE],"
-                + "value[GSCE]",
-            IE = "constructor,expando,name,ownerElement,specified,value")
+                + "value[GSCE]")
     public void nodeAndAttr() throws Exception {
         testString("", "document.createAttribute('some_attrib')");
     }
@@ -15763,8 +15630,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceChildren()",
             FF_ESR = "append(),childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
                 + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
-                + "replaceChildren()",
-            IE = "constructor,querySelector(),querySelectorAll(),removeNode(),replaceNode(),swapNode()")
+                + "replaceChildren()")
     @HtmlUnitNYI(CHROME = "childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
                 + "getElementById(),lastElementChild[GCE],querySelector(),querySelectorAll()",
             EDGE = "childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
@@ -15794,8 +15660,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "suspend()",
             FF_ESR = "baseLatency[GCE],close(),constructor(),createMediaElementSource(),createMediaStreamDestination(),"
                 + "createMediaStreamSource(),createMediaStreamTrackSource(),getOutputTimestamp(),outputLatency[GCE],"
-                + "suspend()",
-            IE = "exception")
+                + "suspend()")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -15811,8 +15676,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),length[GCE],oncomplete[GSCE],resume(),startRendering(),suspend()",
             EDGE = "constructor(),length[GCE],oncomplete[GSCE],resume(),startRendering(),suspend()",
             FF = "constructor(),length[GCE],oncomplete[GSCE],startRendering()",
-            FF_ESR = "constructor(),length[GCE],oncomplete[GSCE],startRendering()",
-            IE = "exception")
+            FF_ESR = "constructor(),length[GCE],oncomplete[GSCE],startRendering()")
     @HtmlUnitNYI(CHROME = "constructor(),startRendering()",
             EDGE = "constructor(),startRendering()",
             FF_ESR = "constructor(),startRendering()",
@@ -15840,8 +15704,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "cancelScheduledValues(),constructor(),defaultValue[GCE],exponentialRampToValueAtTime(),"
                 + "linearRampToValueAtTime(),maxValue[GCE],minValue[GCE],setTargetAtTime(),setValueAtTime(),"
                 + "setValueCurveAtTime(),"
-                + "value[GSCE]",
-            IE = "exception")
+                + "value[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),defaultValue[GCE],maxValue[GCE],minValue[GCE],value[GSCE]",
             EDGE = "constructor(),defaultValue[GCE],maxValue[GCE],minValue[GCE],value[GSCE]",
             FF_ESR = "constructor(),defaultValue[GCE],maxValue[GCE],minValue[GCE],value[GSCE]",
@@ -15857,8 +15720,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),gain[GCE]",
             EDGE = "constructor(),gain[GCE]",
             FF = "constructor(),gain[GCE]",
-            FF_ESR = "constructor(),gain[GCE]",
-            IE = "exception")
+            FF_ESR = "constructor(),gain[GCE]")
     public void gainNode() throws Exception {
         testString("var audioCtx = new AudioContext();", "new GainNode(audioCtx)");
     }
@@ -15870,8 +15732,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),returnValue[GSCE]",
             EDGE = "constructor(),returnValue[GSCE]",
             FF = "constructor(),returnValue[GSCE]",
-            FF_ESR = "constructor(),returnValue[GSCE]",
-            IE = "exception")
+            FF_ESR = "constructor(),returnValue[GSCE]")
     public void beforeUnloadEvent() throws Exception {
         testString("", "document.createEvent('BeforeUnloadEvent')");
     }
@@ -15883,8 +15744,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
             EDGE = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
             FF = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
-            FF_ESR = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
-            IE = "exception")
+            FF_ESR = "code[GCE],constructor(),reason[GCE],wasClean[GCE]")
     public void closeEvent() throws Exception {
         testString("", "new CloseEvent('type-close')");
     }
@@ -15896,8 +15756,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),data[GCE],timecode[GCE]",
             EDGE = "constructor(),data[GCE],timecode[GCE]",
             FF = "constructor(),data[GCE]",
-            FF_ESR = "constructor(),data[GCE]",
-            IE = "exception")
+            FF_ESR = "constructor(),data[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
             EDGE = "constructor(),data[GCE]")
     public void blobEvent() throws Exception {
@@ -15919,8 +15778,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "targetTouches[GCE],"
                 + "touches[GCE]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()")
     public void touchEvent() throws Exception {
@@ -15942,8 +15800,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "rotationRate[GCE]",
             FF_ESR = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),initDeviceMotionEvent(),"
                 + "interval[GCE],"
-                + "rotationRate[GCE]",
-            IE = "exception")
+                + "rotationRate[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
@@ -15961,8 +15818,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
             EDGE = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
             FF = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
-            FF_ESR = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
-            IE = "exception")
+            FF_ESR = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -15980,8 +15836,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),gamepad[GCE]",
             EDGE = "constructor(),gamepad[GCE]",
             FF = "constructor(),gamepad[GCE]",
-            FF_ESR = "constructor(),gamepad[GCE]",
-            IE = "exception")
+            FF_ESR = "constructor(),gamepad[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF_ESR = "constructor()",
@@ -16036,8 +15891,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),persisted[GCE]",
             EDGE = "constructor(),persisted[GCE]",
             FF = "constructor(),persisted[GCE]",
-            FF_ESR = "constructor(),persisted[GCE]",
-            IE = "exception")
+            FF_ESR = "constructor(),persisted[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
@@ -16055,8 +15909,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),length[GCE],onaddsourcebuffer[GSCE],onremovesourcebuffer[GSCE]",
             EDGE = "constructor(),length[GCE],onaddsourcebuffer[GSCE],onremovesourcebuffer[GSCE]",
             FF = "constructor(),length[GCE],onaddsourcebuffer[GSCE],onremovesourcebuffer[GSCE]",
-            FF_ESR = "constructor(),length[GCE],onaddsourcebuffer[GSCE],onremovesourcebuffer[GSCE]",
-            IE = "addEventListener(),constructor,dispatchEvent(),item(),length,removeEventListener()")
+            FF_ESR = "constructor(),length[GCE],onaddsourcebuffer[GSCE],onremovesourcebuffer[GSCE]")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
@@ -16074,8 +15927,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
             EDGE = "constructor(),item(),length[GCE],namedItem()",
             FF = "constructor(),item(),length[GCE],namedItem()",
-            FF_ESR = "constructor(),item(),length[GCE],namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
     public void htmlCollection() throws Exception {
         testString("", "document.getElementsByTagName('div')");
     }
@@ -16089,8 +15941,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
             EDGE = "constructor(),item(),length[GCE],namedItem()",
             FF = "constructor(),item(),length[GCE],namedItem()",
-            FF_ESR = "constructor(),item(),length[GCE],namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
     public void htmlCollectionDocumentAnchors() throws Exception {
         testString("", "document.anchors");
     }
@@ -16104,8 +15955,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
             EDGE = "constructor(),item(),length[GCE],namedItem()",
             FF = "constructor(),item(),length[GCE],namedItem()",
-            FF_ESR = "constructor(),item(),length[GCE],namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
     public void htmlCollectionDocumentApplets() throws Exception {
         testString("", "document.applets");
     }
@@ -16119,8 +15969,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
             EDGE = "constructor(),item(),length[GCE],namedItem()",
             FF = "constructor(),item(),length[GCE],namedItem()",
-            FF_ESR = "constructor(),item(),length[GCE],namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
     public void htmlCollectionDocumentEmbeds() throws Exception {
         testString("", "document.embeds");
     }
@@ -16134,8 +15983,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
             EDGE = "constructor(),item(),length[GCE],namedItem()",
             FF = "constructor(),item(),length[GCE],namedItem()",
-            FF_ESR = "constructor(),item(),length[GCE],namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
     public void htmlCollectionDocumentForms() throws Exception {
         testString("", "document.forms");
     }
@@ -16149,8 +15997,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
             EDGE = "constructor(),item(),length[GCE],namedItem()",
             FF = "constructor(),item(),length[GCE],namedItem()",
-            FF_ESR = "constructor(),item(),length[GCE],namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
     public void htmlCollectionDocumentImages() throws Exception {
         testString("", "document.images");
     }
@@ -16164,8 +16011,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
             EDGE = "constructor(),item(),length[GCE],namedItem()",
             FF = "constructor(),item(),length[GCE],namedItem()",
-            FF_ESR = "constructor(),item(),length[GCE],namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
     public void htmlCollectionDocumentLinks() throws Exception {
         testString("", "document.links");
     }
@@ -16179,8 +16025,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
             EDGE = "constructor(),item(),length[GCE],namedItem()",
             FF = "constructor(),item(),length[GCE],namedItem()",
-            FF_ESR = "constructor(),item(),length[GCE],namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
     public void htmlCollectionDocumentScripts() throws Exception {
         testString("", "document.scripts");
     }
@@ -16194,8 +16039,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
             EDGE = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
             FF = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
-            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
-            IE = "constructor[],item(),length[GCE]")
+            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()")
     public void nodeListElementById() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
     }
@@ -16209,8 +16053,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
             EDGE = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
             FF = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
-            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
-            IE = "constructor[],item(),length[GCE]")
+            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()")
     public void nodeListElementsByName() throws Exception {
         testString("", "document.getElementsByName('myLog')");
     }
@@ -16224,8 +16067,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
             EDGE = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
             FF = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
-            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
-            IE = "exception")
+            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()")
     public void nodeListButtonLabels() throws Exception {
         testString("var button = document.createElement('button');", "button.labels");
     }
@@ -17632,8 +17474,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "angle[GCE],constructor(),lock(),onchange[GSCE],type[GCE],unlock()",
             EDGE = "angle[GCE],constructor(),lock(),onchange[GSCE],type[GCE],unlock()",
             FF = "angle[GCE],constructor(),lock(),onchange[GSCE],type[GCE],unlock()",
-            FF_ESR = "angle[GCE],constructor(),lock(),onchange[GSCE],type[GCE],unlock()",
-            IE = "exception")
+            FF_ESR = "angle[GCE],constructor(),lock(),onchange[GSCE],type[GCE],unlock()")
     @HtmlUnitNYI(CHROME = "angle[GCE],constructor(),onchange[GSCE],type[GCE]",
             EDGE = "angle[GCE],constructor(),onchange[GSCE],type[GCE]",
             FF = "angle[GCE],constructor(),onchange[GSCE],type[GCE]",
@@ -17651,8 +17492,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),getRandomValues(),randomUUID(),subtle[GCE]",
             EDGE = "constructor(),getRandomValues(),randomUUID(),subtle[GCE]",
             FF = "constructor(),getRandomValues(),randomUUID(),subtle[GCE]",
-            FF_ESR = "constructor(),getRandomValues(),randomUUID(),subtle[GCE]",
-            IE = "exception")
+            FF_ESR = "constructor(),getRandomValues(),randomUUID(),subtle[GCE]")
     public void crypto() throws Exception {
         testString("", "window.crypto");
     }
@@ -17674,8 +17514,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "wrapKey()",
             FF_ESR = "constructor(),decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),generateKey(),"
                 + "importKey(),sign(),unwrapKey(),verify(),"
-                + "wrapKey()",
-            IE = "exception")
+                + "wrapKey()")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");
     }
@@ -17689,8 +17528,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void xPathResult() throws Exception {
         testString("var res = document.evaluate('/html/body', document, null, XPathResult.ANY_TYPE, null);", "res");
     }
@@ -17704,8 +17542,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "constructor[]")
+            FF_ESR = "constructor()")
     public void cDATASection() throws Exception {
         final String setup = " var doc = document.implementation.createDocument('', '', null);\n"
                 + "var root = doc.appendChild(doc.createElement('root'));\n"
@@ -17723,8 +17560,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "after(),before(),constructor(),name[GCE],publicId[GCE],remove(),replaceWith(),systemId[GCE]",
             EDGE = "after(),before(),constructor(),name[GCE],publicId[GCE],remove(),replaceWith(),systemId[GCE]",
             FF = "after(),before(),constructor(),name[GCE],publicId[GCE],remove(),replaceWith(),systemId[GCE]",
-            FF_ESR = "after(),before(),constructor(),name[GCE],publicId[GCE],remove(),replaceWith(),systemId[GCE]",
-            IE = "constructor[],entities[GCE],internalSubset[GCE],name[GCE],notations[GCE],publicId[GCE],systemId[GCE]")
+            FF_ESR = "after(),before(),constructor(),name[GCE],publicId[GCE],remove(),replaceWith(),systemId[GCE]")
     public void documentType() throws Exception {
         testString("", "document.firstChild");
     }
@@ -17738,8 +17574,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
             EDGE = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
             FF = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
-            FF_ESR = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
-            IE = "constructor(),size[GCE],slice(),stream(),type[GCE]")
+            FF_ESR = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]")
     public void blob() throws Exception {
         testString("", "new Blob([1, 2], { type: \"text/html\" })");
     }
@@ -17761,8 +17596,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "values()",
             FF_ESR = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),size[GCE],"
                 + "sort(),toString(),"
-                + "values()",
-            IE = "exception")
+                + "values()")
     @HtmlUnitNYI(CHROME = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
                 + "has(),keys(),set(),size[GCE],toString(),values()",
             EDGE = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
@@ -17804,8 +17638,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),disconnect(),observe(),takeRecords()",
             EDGE = "constructor(),disconnect(),observe(),takeRecords()",
             FF = "constructor(),disconnect(),observe(),takeRecords()",
-            FF_ESR = "constructor(),disconnect(),observe(),takeRecords()",
-            IE = "constructor(),disconnect(),observe(),takeRecords()")
+            FF_ESR = "constructor(),disconnect(),observe(),takeRecords()")
     public void mutationObserver() throws Exception {
         testString("", "new MutationObserver(function(m) {})");
     }
@@ -17819,8 +17652,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),disconnect(),observe(),takeRecords()",
             EDGE = "constructor(),disconnect(),observe(),takeRecords()",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     public void webKitMutationObserver() throws Exception {
         testString("", "new WebKitMutationObserver(function(m) {})");
     }
@@ -17916,8 +17748,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "constructor(),cssRules[GCE],deleteRule(),insertRule(),"
                 + "selectorText[GSCE],style[GSCE],styleMap[GCE]",
             FF = "constructor(),selectorText[GSCE],style[GSCE]",
-            FF_ESR = "constructor(),selectorText[GSCE],style[GSCE]",
-            IE = "constructor[],readOnly[GCE],selectorText[GSCE],style[GCE]")
+            FF_ESR = "constructor(),selectorText[GSCE],style[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),selectorText[GSCE],style[GCE]",
             EDGE = "constructor(),selectorText[GSCE],style[GCE]",
             FF = "constructor(),selectorText[GSCE],style[GCE]",

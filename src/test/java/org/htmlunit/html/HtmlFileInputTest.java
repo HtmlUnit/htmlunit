@@ -179,8 +179,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "-Hello world-Hello world-0", "-Hello world-Hello world-0"},
-            IE = {"-Hello world-Hello world-0", "-Hello world-Hello world-0"})
+    @Alerts({"exception", "-Hello world-Hello world-0", "-Hello world-Hello world-0"})
     public void setValueOnChange() throws Exception {
         final String html =
               "<html>\n"
@@ -496,8 +495,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"null", "null", "0"},
-            IE = {"ex start", "ex end", "exception"})
+    @Alerts({"null", "null", "0"})
     public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -611,8 +609,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "exception"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"null,null", "exception"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

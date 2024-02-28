@@ -418,8 +418,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"document", "body"},
-            IE = "document")
+    @Alerts(DEFAULT = {"document", "body"})
     public void scrollEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -467,8 +466,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"document", "body"},
-            IE = "document")
+    @Alerts(DEFAULT = {"document", "body"})
     public void scrollByEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -558,8 +556,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"document", "body"},
-            IE = "document")
+    @Alerts(DEFAULT = {"document", "body"})
     public void scrollToEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -616,8 +613,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"frame1", "frame1", "0", "0"},
-            IE = {"frame1", "frame1", "2", "2"})
+    @Alerts({"frame1", "frame1", "0", "0"})
     public void frameByName() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
             + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"
@@ -1729,8 +1725,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "true",
-            EDGE = "true",
-            IE = "auto")
+            EDGE = "true")
     public void offscreenBuffering() throws Exception {
         final String html
             = "<html><head>\n"

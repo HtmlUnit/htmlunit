@@ -65,8 +65,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts(DEFAULT = {"2", "symbol", "symbol", "1", "c"},
-            IE = "not defined")
+    @Alerts(DEFAULT = {"2", "symbol", "symbol", "1", "c"})
     public void getOwnPropertySymbols() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -169,8 +168,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "ctor", "true"},
-            IE = {"true", "false", "true", "exception"})
+    @Alerts({"true", "false", "true", "ctor", "true"})
     public void ctorChangeableHasNoEffectForTypeOf() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -200,8 +198,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "ctor", "true"},
-            IE = {"true", "false", "true", "exception"})
+    @Alerts({"true", "false", "true", "ctor", "true"})
     public void ctorChangeableHasNoEffectForTypeOfStrict() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"

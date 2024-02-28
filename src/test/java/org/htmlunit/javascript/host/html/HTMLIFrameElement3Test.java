@@ -304,8 +304,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"},
-            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12"})
+    @Alerts({"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"})
     public void width() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -359,8 +358,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"},
-            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12"})
+    @Alerts({"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"})
     public void height() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -493,8 +491,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""},
-            IE = {"[object Window]", "[object HTMLIFrameElement]", "undefined", ""})
+    @Alerts({"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""})
     public void idByName() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -763,8 +760,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"loaded", "null"},
-            IE = {"loaded", "error"})
+    @Alerts({"loaded", "null"})
     public void deny() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "DENY"),
@@ -891,8 +887,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"loaded", "[object HTMLDocument]", "2"},
-            IE = {"loaded", "[object HTMLDocument]", "1"})
+    @Alerts({"loaded", "[object HTMLDocument]", "2"})
     public void recursive() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -928,8 +923,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"loaded", "3"},
-            IE = {"loaded", "2"})
+    @Alerts({"loaded", "3"})
     @HtmlUnitNYI(
             CHROME = {"loaded", "2"},
             EDGE = {"loaded", "2"},

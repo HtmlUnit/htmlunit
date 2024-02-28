@@ -247,8 +247,7 @@ public class TimeEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            EDGE = "false",
-            IE = "false")
+            EDGE = "false")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"

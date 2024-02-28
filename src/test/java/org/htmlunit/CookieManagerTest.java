@@ -336,8 +336,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "fourth=4; third=3",
             FF = "first=1; second=2; third=3",
-            FF_ESR = "first=1; second=2; third=3",
-            IE = "first=1; fourth=4; second=2; third=3")
+            FF_ESR = "first=1; second=2; third=3")
     public void setCookieExpired_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Dec-1-94 16:00:00"));
@@ -726,8 +725,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"first=1; second=2; third=3", "26"},
-            IE = {"second=2; third=3", "17"})
+    @Alerts({"first=1; second=2; third=3", "26"})
     public void sameSite() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "first=1; path=/; SameSite=None; Secure"));

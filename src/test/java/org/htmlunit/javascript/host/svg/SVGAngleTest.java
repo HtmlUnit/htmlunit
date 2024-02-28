@@ -33,8 +33,7 @@ public class SVGAngleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function SVGAngle() { [native code] }", "0", "1", "2", "3", "4"},
-            IE = {"[object SVGAngle]", "0", "1", "2", "3", "4"})
+    @Alerts({"function SVGAngle() { [native code] }", "0", "1", "2", "3", "4"})
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

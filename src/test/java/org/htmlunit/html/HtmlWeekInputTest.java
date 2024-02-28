@@ -41,8 +41,7 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"--null", "--null", "--null"},
-            IE = {"--null", "exception", "--null"})
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -76,8 +75,7 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"--null", "--null", "--null"},
-            IE = {"--null", "exception", "--null"})
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

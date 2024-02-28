@@ -161,8 +161,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             CHROME = "1",
-            EDGE = "1",
-            IE = "1")
+            EDGE = "1")
     @NotYetImplemented({CHROME, EDGE})
     public void loadImageWrongType2() throws Exception {
         loadImageImportNodeHtml("src='" + URL_FIRST + "'");

@@ -193,8 +193,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"www.gargoylesoftware.com", "www.gargoylesoftware.com"},
-            IE = {"www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception"})
+    @Alerts({"www.gargoylesoftware.com", "www.gargoylesoftware.com"})
     public void domain_set_for_about_blank() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"

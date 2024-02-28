@@ -516,8 +516,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "fulfilled!"},
-            IE = "")
+    @Alerts(DEFAULT = {"true", "fulfilled!"})
     public void resolveThenable() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -560,8 +559,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "aaa"},
-            IE = "")
+    @Alerts(DEFAULT = {"true", "aaa"})
     public void resolveThenablePrototype() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -697,8 +695,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "[object Object]"},
-            IE = "")
+    @Alerts(DEFAULT = {"true", "[object Object]"})
     public void resolveThenablesWithoutThen() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1390,8 +1387,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Success"},
-            IE = "")
+    @Alerts(DEFAULT = {"done", "Success"})
     public void thenInsideEventHandler() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1432,8 +1428,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"create thenable 4", "fulfilled"},
-            IE = "")
+    @Alerts(DEFAULT = {"create thenable 4", "fulfilled"})
     public void thenThenable() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1521,8 +1516,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "failure1"},
-            IE = "")
+    @Alerts(DEFAULT = {"done", "failure1"})
     public void thenNotThenable() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

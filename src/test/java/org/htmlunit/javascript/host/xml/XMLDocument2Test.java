@@ -63,8 +63,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"#cdata-section,abcdefghij,4", "abcdefghij", "<![CDATA[abcdefghij]]>"},
-            IE = {"#cdata-section,abcdefghij,4", "abcdefghij", "abcdefghij"})
+    @Alerts({"#cdata-section,abcdefghij,4", "abcdefghij", "<![CDATA[abcdefghij]]>"})
     public void createCDATASection() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -90,8 +89,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>"},
-            IE = {"#cdata-section,<>&?,4", "<>&?", "&lt;&gt;&amp;?"})
+    @Alerts({"#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>"})
     public void createCDATASection_specialChars() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -578,8 +576,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"foo", "fooc1", "null"},
-            IE = "not available")
+    @Alerts(DEFAULT = {"foo", "fooc1", "null"})
     public void firstElementChild() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -611,8 +608,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"foo", "fooc2", "null"},
-            IE = "not available")
+    @Alerts(DEFAULT = {"foo", "fooc2", "null"})
     public void lastElementChild() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -646,8 +642,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3"},
-            IE = {"id: 1", "name: item1", "id: 2", "name: item2", "id: 3", "name: item3"})
+    @Alerts({"name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3"})
     public void attributeOrder() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -66,8 +66,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"left", "right", "justify", "center", "wrong", ""},
-            IE = {"left", "right", "justify", "center", "", ""})
+    @Alerts({"left", "right", "justify", "center", "wrong", ""})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -95,8 +94,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "justify", "center"},
-            IE = {"center", "error", "center", "error", "center", "left", "right", "justify", "center"})
+    @Alerts({"CenTer", "8", "foo", "left", "right", "justify", "center"})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -291,8 +289,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "null", "nowrap", "null", "x", "null", "x", "blah", "", "blah"},
-            IE = {"false", "null", "true", "", "true", "", "true", "blah", "false", "null"})
+    @Alerts({"undefined", "null", "nowrap", "null", "x", "null", "x", "blah", "", "blah"})
     public void noWrap() throws Exception {
         final String html =
             "<html>\n"

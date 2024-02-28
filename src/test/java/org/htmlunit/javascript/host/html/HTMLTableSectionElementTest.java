@@ -34,8 +34,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right"},
-            IE = {"", "error", "", "left", "error", "left", "right"})
+    @Alerts({"", "hello", "left", "hi", "right"})
     public void align_thead() throws Exception {
         align("th");
     }
@@ -44,8 +43,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right"},
-            IE = {"", "error", "", "left", "error", "left", "right"})
+    @Alerts({"", "hello", "left", "hi", "right"})
     public void align_tbody() throws Exception {
         align("tb");
     }
@@ -54,8 +52,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right"},
-            IE = {"", "error", "", "left", "error", "left", "right"})
+    @Alerts({"", "hello", "left", "hi", "right"})
     public void align_tfoot() throws Exception {
         align("tf");
     }
@@ -103,8 +100,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
-            IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
+    @Alerts({"top", "baseline", "3", "middle", "8", "BOTtom"})
     public void vAlign_thead() throws Exception {
         vAlign("th");
     }
@@ -113,8 +109,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
-            IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
+    @Alerts({"top", "baseline", "3", "middle", "8", "BOTtom"})
     public void vAlign_tbody() throws Exception {
         vAlign("tb");
     }
@@ -123,8 +118,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
-            IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
+    @Alerts({"top", "baseline", "3", "middle", "8", "BOTtom"})
     public void vAlign_tfoot() throws Exception {
         vAlign("tf");
     }
@@ -534,8 +528,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "#0000aa", "x"},
-            IE = {"", "#0000aa", "#0"})
+    @Alerts({"undefined", "#0000aa", "x"})
     public void bgColorFooter() throws Exception {
         final String html =
             "<html>\n"
@@ -564,8 +557,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "#0000aa", "x"},
-            IE = {"", "#0000aa", "#0"})
+    @Alerts({"undefined", "#0000aa", "x"})
     public void bgColorHeader() throws Exception {
         final String html =
             "<html>\n"

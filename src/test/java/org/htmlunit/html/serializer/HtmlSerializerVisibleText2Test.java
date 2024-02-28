@@ -49,8 +49,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Alerts(CHROME = "",
             EDGE = "",
             FF = "\n    baz\n  ",
-            FF_ESR = "\n    baz\n  ",
-            IE = "<foo>\n<bar>baz</bar>\n</foo>")
+            FF_ESR = "\n    baz\n  ")
     @HtmlUnitNYI(CHROME = "baz",
             EDGE = "baz",
             FF = "baz",
@@ -802,8 +801,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             CHROME = "       A B C D EF G H I\n      Second\n    ",
-            EDGE = "       A B C D EF G H I\n      Second\n    ",
-            IE = "A B C D EF G H I Second")
+            EDGE = "       A B C D EF G H I\n      Second\n    ")
     @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
             EDGE = "A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelect() throws Exception {
@@ -837,8 +835,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
-            FF_ESR = "A B C D EF G H I\nSecond",
-            IE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
+            FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
             EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
             FF = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
@@ -854,8 +851,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
-            FF_ESR = "A B C D EF G H I\nSecond",
-            IE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
+            FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
             EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
             FF = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",

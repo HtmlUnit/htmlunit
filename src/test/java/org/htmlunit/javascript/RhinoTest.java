@@ -114,8 +114,7 @@ public class RhinoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true"},
-            IE = {"true.constructor", "1.constructor", "test.constructor"})
+    @Alerts({"true", "true", "true"})
     public void isStrict_constructor() throws Exception {
         final String html
             = "<html>\n"

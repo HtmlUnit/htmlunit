@@ -51,8 +51,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HashChangeEvent]", "hashchange", "false", "false", "false", "", ""},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object HashChangeEvent]", "hashchange", "false", "false", "false", "", ""})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -74,8 +73,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HashChangeEvent]", "hashchange", "true", "false", "false", "null", "§§URL§§#1"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object HashChangeEvent]", "hashchange", "true", "false", "false", "null", "§§URL§§#1"})
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -102,8 +100,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HashChangeEvent]", "", "false", "false", "false", "", ""},
-            IE = "exception")
+    @Alerts(DEFAULT = {"[object HashChangeEvent]", "", "false", "false", "false", "", ""})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -128,8 +125,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object HashChangeEvent]", "[object HashChangeEvent]",
                        "hashchange", "true", "false", "false", "§§URL§§", "§§URL§§#1"},
             CHROME = {"[object HashChangeEvent]", "missing initHashChangeEvent"},
-            EDGE = {"[object HashChangeEvent]", "missing initHashChangeEvent"},
-            IE = "exception createEvent")
+            EDGE = {"[object HashChangeEvent]", "missing initHashChangeEvent"})
     public void initHashChangeEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -188,8 +184,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "hashchange", "true", "false", "false", "undefined", "undefined"},
-            IE = {"[object Event]", "hashchange", "true", "false", "undefined", "undefined", "undefined"})
+    @Alerts({"[object Event]", "hashchange", "true", "false", "false", "undefined", "undefined"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -231,8 +226,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HashChangeEvent]", "hashchange", "false", "false", "false", "§§URL§§", "§§URL§§#1"},
-            IE = {"[object Event]", "hashchange", "false", "false", "undefined", "undefined", "undefined"})
+    @Alerts({"[object HashChangeEvent]", "hashchange", "false", "false", "false", "§§URL§§", "§§URL§§#1"})
     public void onHashChange() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

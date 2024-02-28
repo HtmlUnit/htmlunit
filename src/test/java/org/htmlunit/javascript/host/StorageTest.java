@@ -300,8 +300,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "null", "function", "value", "1"},
-            IE = {"function", "null", "string", "value", "1"})
+    @Alerts({"function", "null", "function", "value", "1"})
     public void prototypePropertiesAreVisible() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"

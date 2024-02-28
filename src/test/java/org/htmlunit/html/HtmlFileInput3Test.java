@@ -139,8 +139,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:image/webp", "charset"},
-            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    @Alerts({"CONTENT_TYPE:image/webp", "charset"})
     public void contentTypeWebp() throws Exception {
         contentType("webp");
     }
@@ -243,8 +242,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:application/pdf", "charset"},
-            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    @Alerts({"CONTENT_TYPE:application/pdf", "charset"})
     public void contentTypePdf() throws Exception {
         contentType("pdf");
     }
@@ -303,8 +301,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:text/plain", "charset"},
-            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    @Alerts({"CONTENT_TYPE:text/plain", "charset"})
     public void contentTypeText() throws Exception {
         contentType("text");
     }

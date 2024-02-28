@@ -138,8 +138,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "about:blank", "blank", "", "about:", ""},
-            IE = {"", "about:blank", "/blank", "", "about:", ""})
+    @Alerts({"", "about:blank", "blank", "", "about:", ""})
     public void about_blank_attributes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -167,8 +166,7 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"#hash", "about:blank?query#hash", "blank", "", "about:", "?query"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(FF = {"", "about:blank", "blank", "", "about:", ""},
             FF_ESR = {"", "about:blank", "blank", "", "about:", ""})
     public void about_blank_query_hash_attributes() throws Exception {
@@ -202,8 +200,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "about:blank", "#foo", "about:blank#foo"},
-            IE = {"", "about:blank", "", "about:blank"})
+    @Alerts({"", "about:blank", "#foo", "about:blank#foo"})
     public void about_blank_set_hash() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -285,8 +282,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"#%C3%BC%C3%B6%C3%A4", "§§URL§§#%C3%BC%C3%B6%C3%A4"},
-            IE = {"#üöä", "§§URL§§#üöä"})
+    @Alerts({"#%C3%BC%C3%B6%C3%A4", "§§URL§§#%C3%BC%C3%B6%C3%A4"})
     public void hashEncoding3() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -708,8 +704,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"supported", "onhashchange §§URL§§#1 §§URL§§"},
-            IE = {"supported", "onhashchange undefined undefined"})
+    @Alerts({"supported", "onhashchange §§URL§§#1 §§URL§§"})
     public void onHashChange() throws Exception {
         final String html =
             "<html><head>\n"
@@ -763,8 +758,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"supported", "onhashchange §§URL§§#1  §§URL§§"},
-            IE = {"supported", "onhashchange undefined  undefined"})
+    @Alerts({"supported", "onhashchange §§URL§§#1  §§URL§§"})
     public void onHashChangeJS() throws Exception {
         final String html =
             "<html><head>\n"

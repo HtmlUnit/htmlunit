@@ -33,8 +33,7 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://www.foo.com/images/", "§§URL§§", "", "_blank"},
-            IE = {"http://www.foo.com/images/", "", "", "_blank"})
+    @Alerts({"http://www.foo.com/images/", "§§URL§§", "", "_blank"})
     public void hrefAndTarget() throws Exception {
         final String html =
             "<html>\n"
@@ -62,8 +61,7 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLBaseElement]", "function HTMLBaseElement() { [native code] }"},
-            IE = {"[object HTMLBaseElement]", "[object HTMLBaseElement]"})
+    @Alerts({"[object HTMLBaseElement]", "function HTMLBaseElement() { [native code] }"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"

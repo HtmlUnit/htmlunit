@@ -1352,8 +1352,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "[object Window]", "[object Window]"},
-            IE = {"true", "123", "123"})
+    @Alerts({"true", "[object Window]", "[object Window]"})
     public void overwriteProperty_top() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -1371,8 +1370,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "[object Window]", "[object Window]"},
-            IE = {"true", "123", "123"})
+    @Alerts({"true", "[object Window]", "[object Window]"})
     public void overwriteProperty_top2() throws Exception {
         final String html
             = "<html><body><script>\n"

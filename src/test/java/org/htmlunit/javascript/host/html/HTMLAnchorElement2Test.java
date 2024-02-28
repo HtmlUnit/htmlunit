@@ -609,8 +609,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"},
-            IE = {"§§URL§§second/", "object", "[object HTMLAnchorElement]"})
+    @Alerts({"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"})
     public void typeof() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -783,8 +782,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "0,0"},
-            IE = {"", "0,0", "0,0"})
+    @Alerts({"", "0,0"})
     public void coords() throws Exception {
         attribute("coords", "0,0");
     }
@@ -802,8 +800,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", ""},
-            IE = {"undefined", "something"})
+    @Alerts({"", ""})
     public void origin() throws Exception {
         attribute(HttpHeader.ORIGIN_LC, "something");
     }
@@ -1081,8 +1078,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "alternate", "help"})
     public void relList() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1106,8 +1102,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"})
     public void setRelListString() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1144,8 +1139,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"})
     public void setRelListStringBlank() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1174,8 +1168,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"})
     public void setRelListNull() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1212,8 +1205,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
     public void setRelListUndefined() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"

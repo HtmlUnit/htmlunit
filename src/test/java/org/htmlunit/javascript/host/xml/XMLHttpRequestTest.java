@@ -180,8 +180,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK"},
-            IE = {"1: 0-", "2: 0-", "#1: 0-", "3: 0-", "#1: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK"})
+    @Alerts({"1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK"})
     public void statusAsync() throws Exception {
         final String html =
             "<html>\n"
@@ -1214,8 +1213,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]", "[object XMLDocument]"},
-            IE = {"null", "myID", "blah", "span", "[object XMLDocument]", "-"})
+    @Alerts({"[object Element]", "myID", "blah", "span", "[object XMLDocument]", "[object XMLDocument]"})
     public void responseXML_getElementById2() throws Exception {
         final String html =
               "<html>\n"
@@ -1556,8 +1554,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"39", "27035", "65533", "39"},
-            IE = {"39", "27035", "63"})
+    @Alerts({"39", "27035", "65533", "39"})
     public void overrideMimeType_charset_all() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1640,8 +1637,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"},
-            IE = {"someLoad [object ProgressEvent]", "load", "true", "11", "11"})
+    @Alerts({"someLoad [object ProgressEvent]", "load", "false", "11", "0"})
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"
@@ -1679,8 +1675,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"},
-            IE = {"someLoad [object ProgressEvent]", "load", "true", "11", "11"})
+    @Alerts({"someLoad [object ProgressEvent]", "load", "false", "11", "0"})
     public void addEventListenerDetails() throws Exception {
         final String html =
               "<html>\n"
@@ -1784,8 +1779,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "2", "3", "4"},
-            IE = {"0", "1", "1", "2", "3", "4"})
+    @Alerts({"0", "1", "2", "3", "4"})
     public void asyncUse() throws Exception {
         final String html =
               "<html>\n"
@@ -2363,8 +2357,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "arraybuffer", "blob", "json", "text", "text", "text", "text", "text", ""},
-            IE = {"", "exception", "exception", "exception", "exception", "exception"})
+    @Alerts({"", "arraybuffer", "blob", "json", "text", "text", "text", "text", "text", ""})
     public void responseTypeSetBeforeOpen() throws Exception {
         final String html =
               "<html>\n"
@@ -2911,8 +2904,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"", "blob", "[object Blob]", "36", "text/xml"},
-            IE = {"", "blob", "[object Blob]", "36", "text/xml;charset=iso-8859-1"})
+    @Alerts({"", "blob", "[object Blob]", "36", "text/xml"})
     public void responseResponseTypeBlob() throws Exception {
         final String html =
               "<html>\n"
@@ -3000,8 +2992,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"", "json", "[object Object]", "Unit", "{\"Html\":\"Unit\"}"},
-            IE = {"", "", "{ \"Html\": \"Unit\" }", "undefined", "\"{ \\\"Html\\\": \\\"Unit\\\" }\""})
+    @Alerts({"", "json", "[object Object]", "Unit", "{\"Html\":\"Unit\"}"})
     public void responseResponseTypeJson() throws Exception {
         final String html =
               "<html>\n"
@@ -3044,8 +3035,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"", "json", "null"},
-            IE = {"", "", ""})
+    @Alerts({"", "json", "null"})
     public void responseResponseTypeJsonEmpty() throws Exception {
         final String html =
               "<html>\n"

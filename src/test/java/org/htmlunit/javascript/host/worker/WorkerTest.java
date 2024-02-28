@@ -386,8 +386,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"object", "true"},
-            IE = {"undefined", "globalThis\\sis\\sundefined"})
+    @Alerts({"object", "true"})
     public void globalThis() throws Exception {
         final String workerJs
             = "  try {\n"

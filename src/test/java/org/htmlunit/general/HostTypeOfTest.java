@@ -462,8 +462,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             FF = "undefined",
-            FF_ESR = "undefined",
-            IE = "undefined")
+            FF_ESR = "undefined")
     public void batteryManager() throws Exception {
         test("BatteryManager");
     }
@@ -1752,8 +1751,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             FF = "undefined",
-            FF_ESR = "undefined",
-            IE = "object")
+            FF_ESR = "undefined")
     public void domError() throws Exception {
         test("DOMError");
     }
@@ -8857,8 +8855,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function",
-            IE = "object")
+            EDGE = "function")
     public void textEvent() throws Exception {
         test("TextEvent");
     }

@@ -34,8 +34,7 @@ public class ExternalTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"external defined", "no AutoCompleteSaveForm"},
-            IE = {"external defined", "AutoCompleteSaveForm defined"})
+    @Alerts({"external defined", "no AutoCompleteSaveForm"})
     public void autoCompleteSaveForm() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -37,8 +37,7 @@ public class HtmlApplet2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLUnknownElement]", "[object HTMLCollection]", "0", "undefined"},
-            IE = {"[object HTMLAppletElement]", "[object HTMLCollection]", "1", "[object HTMLAppletElement]"})
+    @Alerts({"[object HTMLUnknownElement]", "[object HTMLCollection]", "0", "undefined"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

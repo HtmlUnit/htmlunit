@@ -813,8 +813,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"left", "right", "bottom", "middle", "top", "wrong", ""},
-            IE = {"left", "right", "bottom", "middle", "top", "", ""})
+    @Alerts({"left", "right", "bottom", "middle", "top", "wrong", ""})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -841,8 +840,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top"},
-            IE = {"center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top"})
+    @Alerts({"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top"})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

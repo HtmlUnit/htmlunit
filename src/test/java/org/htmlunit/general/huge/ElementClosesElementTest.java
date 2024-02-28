@@ -1502,8 +1502,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF = "0",
-            FF_ESR = "0",
-            IE = "0")
+            FF_ESR = "0")
     @HtmlUnitNYI(FF = "1",
             FF_ESR = "1")
     public void _select_hr() throws Exception {

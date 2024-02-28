@@ -74,8 +74,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE = "")
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     @BuggyWebDriver(CHROME = "",
                     EDGE = "",
                     FF = "",
@@ -139,8 +138,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void inputTextClick() throws Exception {
         final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -155,8 +153,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void inputPasswordClick() throws Exception {
         final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -171,8 +168,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void textareaClick() throws Exception {
         final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = "></textarea>\n";
@@ -200,8 +196,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void resetClick() throws Exception {
         final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">\n";
@@ -216,8 +211,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void buttonClick() throws Exception {
         final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">\n";
@@ -232,8 +226,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void anchorClick() throws Exception {
         final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">anchor</a>\n";

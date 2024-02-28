@@ -33,8 +33,7 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "one"},
-            IE = {"false", "undefined"})
+    @Alerts({"true", "one"})
     public void constructorArray() throws Exception {
         final String html
             = "<html><head>\n"
@@ -151,8 +150,7 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "value2"},
-            IE = {"undefined", "undefined"})
+    @Alerts({"undefined", "value2"})
     public void get() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

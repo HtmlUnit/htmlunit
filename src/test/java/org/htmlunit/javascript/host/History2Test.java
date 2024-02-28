@@ -625,8 +625,7 @@ public class History2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"href=§§URL§§", "href=§§URL§§"},
-            IE = {"href=§§URL§§", "href=§§URL§§undefined"})
+    @Alerts({"href=§§URL§§", "href=§§URL§§"})
     public void replaceStateUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -715,8 +714,7 @@ public class History2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"href=§§URL§§", "href=§§URL§§"},
-            IE = {"href=§§URL§§", "href=§§URL§§undefined"})
+    @Alerts({"href=§§URL§§", "href=§§URL§§"})
     public void pushStateUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1191,8 +1189,7 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"auto", "manual", "auto", "auto", "auto", "auto"},
-            IE = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"})
+    @Alerts({"auto", "manual", "auto", "auto", "auto", "auto"})
     public void scrollRestoration() throws Exception {
         final String html = "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION

@@ -98,8 +98,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "alternate", "help"})
     public void relList() throws Exception {
         final String html
             = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
@@ -124,8 +123,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"})
     public void setRelListString() throws Exception {
         final String html
             = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
@@ -162,8 +160,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"})
     public void setRelListStringBlank() throws Exception {
         final String html
             = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
@@ -192,8 +189,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"})
     public void setRelListNull() throws Exception {
         final String html
             = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
@@ -230,8 +226,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"},
-            IE = "exception")
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
     public void setRelListUndefined() throws Exception {
         final String html
             = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"

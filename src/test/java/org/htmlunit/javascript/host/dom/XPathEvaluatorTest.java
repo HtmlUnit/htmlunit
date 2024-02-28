@@ -34,8 +34,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
-            IE = {"undefined", "exception", ""})
+    @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void simple() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='first'>hello</span>\n"

@@ -68,8 +68,7 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "center", "8", "foo"},
-            IE = {"left", "right", "", "error", "error", "center", "right", ""})
+    @Alerts({"undefined", "undefined", "undefined", "center", "8", "foo"})
     public void align() throws Exception {
         final String html
             = "<html><body>\n"

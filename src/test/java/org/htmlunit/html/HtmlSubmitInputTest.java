@@ -233,8 +233,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-", "-", "-"},
-            IE = {"Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query"})
+    @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -266,8 +265,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-", "-", "-"},
-            IE = {"Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query"})
+    @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -438,8 +436,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
-            IE = {"true", "false", "true", "true", "true"})
+    @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"

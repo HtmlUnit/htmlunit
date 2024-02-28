@@ -52,8 +52,7 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MessageEvent]", "type-message", "false", "false", "false",
-                       "null", "", "", "null"},
-            IE = "exception")
+                       "null", "", "", "null"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -76,8 +75,7 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MessageEvent]", "type-message", "false", "false", "false",
-                       "test-data", "test-origin", "42", "[object Window]"},
-            IE = "exception")
+                       "test-data", "test-origin", "42", "[object Window]"})
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

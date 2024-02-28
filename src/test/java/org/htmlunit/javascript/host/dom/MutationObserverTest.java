@@ -396,8 +396,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"before", "after div", "after text", "div observed", "text observed"},
-            IE = {"before", "after div", "after text", "text observed"})
+    @Alerts({"before", "after div", "after text", "div observed", "text observed"})
     public void callbackOrder() throws Exception {
         final String html
             = "<html><head><script>\n"

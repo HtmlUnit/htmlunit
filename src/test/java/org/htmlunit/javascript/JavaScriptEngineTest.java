@@ -984,8 +984,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "ex thrown"},
-            IE = {"2", "no ex"})
+    @Alerts({"", "ex thrown"})
     public void commentNoDoubleSlash() throws Exception {
         final String html =
             "<html><head>\n"

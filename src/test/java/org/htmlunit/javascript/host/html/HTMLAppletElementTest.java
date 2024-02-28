@@ -61,8 +61,7 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top"},
-            IE = {"center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top"})
+    @Alerts({"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top"})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -97,8 +96,7 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLUnknownElement]", "exception"},
-            IE = {"[object HTMLAppletElement]", "[object HTMLAppletElement]"})
+    @Alerts({"[object HTMLUnknownElement]", "exception"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"

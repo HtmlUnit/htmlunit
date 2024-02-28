@@ -213,8 +213,7 @@ public class FileReaderTest extends WebDriverTestCase {
      */
     // @Test
     @Alerts(DEFAULT = "data:application/octet-stream;base64,"
-                + "Niii65mOV9yO6adjkXdWd+zTIXFcOWwumIGlIFRqQ05seTG+J2dx0KcD",
-            IE = "data:;base64,Niii65mOV9yO6adjkXdWd+zTIXFcOWwumIGlIFRqQ05seTG+J2dx0KcD")
+                + "Niii65mOV9yO6adjkXdWd+zTIXFcOWwumIGlIFRqQ05seTG+J2dx0KcD")
     private void readAsDataURLUnknown() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -62,8 +62,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }"},
-            IE = {"[object HTMLHtmlElement]", "[object HTMLHtmlElement]"})
+    @Alerts({"[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }"})
     public void HTMLHtmlElement_toString() throws Exception {
         final String html = "<html id='myId'><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -219,8 +218,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"8", "16", "0", "0"},
-            IE = {"687", "16", "0", "0"})
+    @Alerts({"8", "16", "0", "0"})
     @HtmlUnitNYI(CHROME = {"613", "1256", "0", "0"},
             EDGE = {"613", "1256", "0", "0"},
             FF = {"613", "1256", "0", "0"},

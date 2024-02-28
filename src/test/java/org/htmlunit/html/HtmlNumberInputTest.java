@@ -207,8 +207,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1--null-true", "1", "1--null-true", "1.2", "1.2--null-false"},
-            IE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"})
+    @Alerts({"1", "1--null-true", "1", "1--null-true", "1.2", "1.2--null-false"})
     @HtmlUnitNYI(CHROME = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
             EDGE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
             FF = {"1", "1--null-true", "1.", "--null-false", "1.2", "1.2--null-false"},
@@ -257,8 +256,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
-            IE = {"", "--null-true", "12", "12--null-true", "123", "123--null-true"})
+    @Alerts({"", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"})
     @HtmlUnitNYI(CHROME = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
             EDGE = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
             FF = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
@@ -307,8 +305,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "--null-false", "-12", "-12--null-false"},
-            IE = {"", "--null-true", "12", "12--null-true"})
+    @Alerts({"", "--null-false", "-12", "-12--null-false"})
     @HtmlUnitNYI(CHROME = {"-", "--null-false", "-12", "-12--null-false"},
             EDGE = {"-", "--null-false", "-12", "-12--null-false"},
             FF = {"-", "--null-false", "-12", "-12--null-false"},
@@ -973,8 +970,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"123-123-123-true", "2-2-2-false", "20000-2-2-false", "20000-9-9-false"},
-            IE = {"123-123-123-true", "2-2-2-true", "20000-2-2-false", "20000-9-9-false"})
+    @Alerts({"123-123-123-true", "2-2-2-false", "20000-2-2-false", "20000-9-9-false"})
     public void valueOutside() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1256,8 +1252,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"13-13-13-true", "15-15-15-false", "17-15-15-false", "17-19-19-false"},
-            IE = {"13-13-13-true", "15-15-15-true", "17-15-15-false", "17-19-19-false"})
+    @Alerts({"13-13-13-true", "15-15-15-false", "17-15-15-false", "17-19-19-false"})
     public void valueNotReachableByStep() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1301,8 +1296,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1.3-1.3-1.3-true", "1.5-1.5-1.5-false", "1.7-1.5-1.5-false", "1.7-1.9-1.9-false"},
-            IE = {"1.3-1.3-1.3-true", "1.5-1.5-1.5-true", "1.7-1.5-1.5-false", "1.7-1.9-1.9-false"})
+    @Alerts({"1.3-1.3-1.3-true", "1.5-1.5-1.5-false", "1.7-1.5-1.5-false", "1.7-1.9-1.9-false"})
     public void valueNotReachableByStepDouble() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1474,8 +1468,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "exception"},
-            IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
+    @Alerts({"null,null", "exception"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
