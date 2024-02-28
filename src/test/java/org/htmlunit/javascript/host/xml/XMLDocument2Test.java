@@ -217,8 +217,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"content", "content"})
+    @Alerts(DEFAULT = "exception")
     public void text() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -278,8 +277,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"foo", "foo"})
+    @Alerts(DEFAULT = "exception")
     public void firstChild_element_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -344,8 +342,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"xml", "foo"})
+    @Alerts(DEFAULT = "exception")
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration_activeX() throws Exception {
         final String html = "<html><head>\n"
@@ -412,8 +409,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"apache", "foo"})
+    @Alerts(DEFAULT = "exception")
     public void firstChild_processingInstruction_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -476,8 +472,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"dtd", "a"})
+    @Alerts(DEFAULT = "exception")
     public void firstChild_documentType_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -539,8 +534,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"#comment", "foo"})
+    @Alerts(DEFAULT = "exception")
     public void firstChild_comment_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -324,8 +324,7 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "null", "string", "null", "0"},
             FF = {"function", "null", "function", "value", "1"},
-            FF_ESR = {"function", "null", "function", "value", "1"},
-            IE = {"function", "null", "string", "value", "1"})
+            FF_ESR = {"function", "null", "function", "value", "1"})
     @HtmlUnitNYI(FF = {"function", "null", "string", "value", "1"},
             FF_ESR = {"function", "null", "string", "value", "1"})
     public void writeToPrototypeProperty() throws Exception {

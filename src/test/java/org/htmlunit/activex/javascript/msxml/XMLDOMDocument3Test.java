@@ -121,8 +121,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"a", "null", "b"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void documentElementCaching() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -166,8 +165,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"content", "content"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void text() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

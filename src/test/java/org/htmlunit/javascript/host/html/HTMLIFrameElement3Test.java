@@ -415,8 +415,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"uninitialized", "complete"},
             CHROME = {"complete", "complete"},
-            EDGE = {"complete", "complete"},
-            IE = {"loading", "complete"})
+            EDGE = {"complete", "complete"})
     @HtmlUnitNYI(CHROME = {"loading", "complete"},
             EDGE = {"loading", "complete"},
             FF = {"loading", "complete"},
@@ -773,8 +772,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = {"loaded", "null"},
-            EDGE = {"loaded", "null"},
-            IE = {"loaded", "[object HTMLDocument]"})
+            EDGE = {"loaded", "null"})
     public void csp_None() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'none';"),
@@ -820,8 +818,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = {"loaded", "null"},
-            EDGE = {"loaded", "null"},
-            IE = {"loaded", "[object HTMLDocument]"})
+            EDGE = {"loaded", "null"})
     public void csp_UrlDifferentPort() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
@@ -834,8 +831,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = {"loaded", "null"},
-            EDGE = {"loaded", "null"},
-            IE = {"loaded", "[object HTMLDocument]"})
+            EDGE = {"loaded", "null"})
     public void csp_many() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY,
@@ -964,8 +960,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"loaded", "6"},
             FF_ESR = {"loaded", "19"},
-            FF = {"loaded", "19"},
-            IE = {"loaded", "2"})
+            FF = {"loaded", "19"})
     @HtmlUnitNYI(CHROME = {"loaded", "21"},
             EDGE = {"loaded", "21"},
             FF = {"loaded", "21"},

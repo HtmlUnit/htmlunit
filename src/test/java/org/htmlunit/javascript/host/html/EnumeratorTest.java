@@ -34,8 +34,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Enumerator not supported",
-            IE = {"true", "undefined", "undefined", "undefined", "true"})
+    @Alerts(DEFAULT = "Enumerator not supported")
     public void basicEmptyEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"

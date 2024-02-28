@@ -1246,8 +1246,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                        "", "",
                        "Tester", "https://Tester:password@developer.mozilla.org/",
                        "Tester", "https://Tester@developer.mozilla.org/",
-                       "Tester", "https://Tester@developer.mozilla.org/"},
-            IE = {"undefined", "undefined", "undefined", "undefined"})
+                       "Tester", "https://Tester@developer.mozilla.org/"})
     @HtmlUnitNYI(CHROME = {"", "user", "user", "",
                            "", "",
                            "Tester", "https://Tester:password@developer.mozilla.org",
@@ -1316,8 +1315,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                        "", "",
                        "Tester", "https://user:Tester@developer.mozilla.org/",
                        "Tester", "https://:Tester@developer.mozilla.org/",
-                       "Tester", "https://:Tester@developer.mozilla.org/"},
-            IE = {"undefined", "undefined", "undefined", "undefined"})
+                       "Tester", "https://:Tester@developer.mozilla.org/"})
     @HtmlUnitNYI(CHROME = {"", "password", "password", "",
                            "", "",
                            "Tester", "https://user:Tester@developer.mozilla.org",

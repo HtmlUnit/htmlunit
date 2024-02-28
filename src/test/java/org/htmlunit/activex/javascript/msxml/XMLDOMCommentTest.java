@@ -164,8 +164,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"0", "0", "4", "9", "6"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void length() throws Exception {
         final String test = ""
             + "log(comment.length);\n"
@@ -388,8 +387,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"<!---->", "<!--##-->", "<!--text-->", "<!--text\\r\\ntext-->", "<!--##text##text##-->"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void xml() throws Exception {
         final String test =
             // empty
@@ -454,8 +452,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"myComment", "myComment-appended", "exception-appendNull", "myComment-appended", "myComment-appended\\n"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void appendData() throws Exception {
         final String test = ""
             + "log(comment.data);\n"

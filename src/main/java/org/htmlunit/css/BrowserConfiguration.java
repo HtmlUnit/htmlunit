@@ -117,14 +117,6 @@ abstract class BrowserConfiguration {
         return new FFESR(defaultValue);
     }
 
-    static BrowserConfiguration ie(final String defaultValue) {
-        return new IE(defaultValue);
-    }
-
-    static BrowserConfiguration ieNotIterable(final String defaultValue) {
-        return new IENotIterable(defaultValue);
-    }
-
     static class ChromeAndEdgeNotIterable extends BrowserConfiguration {
         ChromeAndEdgeNotIterable(final String defaultValue) {
             super(defaultValue);
@@ -237,33 +229,6 @@ abstract class BrowserConfiguration {
             return browserVersion.isFirefox()
                     && browserVersion.getBrowserVersionNumeric()
                         > BrowserVersion.FIREFOX_ESR.getBrowserVersionNumeric();
-        }
-    }
-
-    private static class IE extends BrowserConfiguration {
-        IE(final String defaultValue) {
-            super(defaultValue);
-        }
-
-        @Override
-        public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isIE();
-        }
-    }
-
-    private static class IENotIterable extends BrowserConfiguration {
-        IENotIterable(final String defaultValue) {
-            super(defaultValue);
-        }
-
-        @Override
-        public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isIE();
-        }
-
-        @Override
-        public boolean isIteratable() {
-            return false;
         }
     }
 }

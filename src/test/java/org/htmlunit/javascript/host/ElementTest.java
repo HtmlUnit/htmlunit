@@ -278,10 +278,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "<nested>Three</nested>", "Four",
-                       "1", "Two", "0", "0"},
-            IE = {"2", "undefined", "undefined",
-                  "1", "undefined", "0", "0"})
+    @Alerts({"2", "<nested>Three</nested>", "Four", "1", "Two", "0", "0"})
     public void getElementsByTagNameXml() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -733,8 +730,7 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
                     + "DOCUMENT_POSITION_PRECEDING, "
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
-                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "},
-            IE = {"prototype found", ""})
+                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "})
     public void enumeratedProperties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1183,8 +1179,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
-                       "function Element() { [native code] }"},
-            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
+                       "function Element() { [native code] }"})
     public void prototypConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1215,8 +1210,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
-                       "function Element() { [native code] }"},
-            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
+                       "function Element() { [native code] }"})
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

@@ -63,8 +63,7 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"false", "true", "true", "true", "true", "true", "true", "true", "exception-Other"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void parseError_createXMLDocument() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -97,8 +96,7 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"false", "false", "false", "false", "false", "false", "false", "true", "exception-Other"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void parseError_loadXML() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION
@@ -132,8 +130,7 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"false", "false", "false", "false", "false", "false", "false", "false", "exception-Other"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void parseError_load() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

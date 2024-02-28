@@ -521,8 +521,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"124", "124124"},
             FF = {"1234", "12341234"},
-            FF_ESR = {"1234", "12341234"},
-            IE = {"1234", "12341234"})
+            FF_ESR = {"1234", "12341234"})
     @HtmlUnitNYI(CHROME = {"1234", "12341234"},
             EDGE = {"1234", "12341234"})
     public void typing_input_number() throws Exception {
@@ -954,8 +953,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "activeElement BODY",
             FF = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
-            FF_ESR = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
-            IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
+            FF_ESR = {"activeElement BODY", "focus #document", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @HtmlUnitNYI(FF = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"},
             FF_ESR = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"})
@@ -1004,8 +1002,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "blur INPUT",
-            IE = {"blur BODY", "blur INPUT"})
+    @Alerts(DEFAULT = "blur INPUT")
     public void document_input_blur() throws Exception {
         document_input("blur");
     }

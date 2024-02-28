@@ -378,8 +378,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "block"})
-    @AlertsStandards(DEFAULT = {"", "block"},
-            IE = {"block", "block"})
+    @AlertsStandards(DEFAULT = {"", "block"})
     public void dd() throws Exception {
         test("dd");
     }

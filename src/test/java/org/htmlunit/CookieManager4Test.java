@@ -168,12 +168,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                       "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
                       "c2=2; path=/; domain=.htmlunit.org; sameSite=None",
                       "c3=3; path=/; domain=.host1.htmlunit.org; sameSite=None",
-                      "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=None"},
-            IE = {"c1=1; c2=2; c3=3; c4=4",
-                  "c1=1; path=/; domain=.htmlunit.org",
-                  "c2=2; path=/; domain=.htmlunit.org",
-                  "c3=3; path=/; domain=.host1.htmlunit.org",
-                  "c4=4; path=/; domain=.host1.htmlunit.org"})
+                      "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"c1=1; c2=2; c3=3; c4=4",
                            "c1=1; path=/; domain=.htmlunit.org",
                            "c2=2; path=/; domain=.htmlunit.org",
@@ -234,8 +229,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                   "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
             FF_ESR = {"c1=1; c2=2",
                       "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
-            IE = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
+                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             EDGE = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             FF = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
@@ -278,8 +272,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                   "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
             FF_ESR = {"c1=1; c2=2",
                       "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
-            IE = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
+                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             EDGE = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             FF = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
@@ -322,8 +315,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                   "c11=11; path=/; domain=htmlunit; sameSite=None"},
             FF_ESR = {"c11=11; c12=12",
                       "c12=12; path=/; domain=htmlunit; sameSite=None",
-                      "c11=11; path=/; domain=htmlunit; sameSite=None"},
-            IE = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"})
+                      "c11=11; path=/; domain=htmlunit; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"c12=12", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
             EDGE = {"c12=12", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
             FF = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
@@ -371,9 +363,7 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
                       "c2=2; path=/; domain=.htmlunit.org; sameSite=None",
                       "c3=3; path=/; domain=.host1.htmlunit.org; sameSite=None",
-                      "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=None"},
-            IE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org",
-                  "c3=3; path=/; domain=.host1.htmlunit.org", "c4=4; path=/; domain=.host1.htmlunit.org"})
+                      "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org",
                            "c3=3; path=/; domain=.host1.htmlunit.org", "c4=4; path=/; domain=.host1.htmlunit.org"},
             EDGE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org",
@@ -424,8 +414,7 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
                   "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
             FF_ESR = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
-            IE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
+                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             EDGE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             FF = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
@@ -470,8 +459,7 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
                   "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
             FF_ESR = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
-            IE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
+                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             EDGE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             FF = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
@@ -519,8 +507,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                   "c11=11; path=/; domain=htmlunit; sameSite=None"},
             FF_ESR = {"2",
                       "c12=12; path=/; domain=htmlunit; sameSite=None",
-                      "c11=11; path=/; domain=htmlunit; sameSite=None"},
-            IE = {"2", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"})
+                      "c11=11; path=/; domain=htmlunit; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"1", "c12=12; path=/; domain=htmlunit"},
             EDGE = {"1", "c12=12; path=/; domain=htmlunit"},
             FF = {"2", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},

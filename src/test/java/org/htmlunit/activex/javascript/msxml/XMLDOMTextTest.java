@@ -163,8 +163,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"1", "0", "4", "9", "6"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void length() throws Exception {
         final String test = ""
             + "log(text.length);\n"
@@ -269,8 +268,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"true", "true", "true"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     // Xerxes is the problem here as they do treat whitespaces as text nodes.
     public void nodeValue_empty() throws Exception {
         final String test =
@@ -415,8 +413,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"text", "text\\r\\ntext", "##text##text##"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void xml() throws Exception {
         final String test =
             // text
@@ -473,8 +470,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"myText", "myText-appended", "exception-appendNull", "myText-appended", "myText-appended\\n"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void appendData() throws Exception {
         final String test = ""
             + "log(text.data);\n"

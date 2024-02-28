@@ -97,14 +97,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String getAccelerator() {
-        return getCssStyleDeclaration().getAccelerator();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getBackgroundAttachment() {
         return getCssStyleDeclaration().getBackgroundAttachment();
     }

@@ -1521,8 +1521,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
     public void setOuterHTMLDetachedElementNull() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1555,8 +1554,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
     public void setOuterHTMLDetachedElementUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1589,8 +1587,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
     public void setOuterHTMLDetachedElementEmpty() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1623,8 +1620,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
     public void setOuterHTMLDetachedElementBlank() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1657,8 +1653,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
     public void setOuterHTMLDetachedElement() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -2416,8 +2411,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object MSCurrentStyleCSSProperties]", "#000000"})
+    @Alerts(DEFAULT = "undefined")
     public void currentStyle() throws Exception {
         style("currentStyle");
     }
@@ -2426,8 +2420,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object MSStyleCSSProperties]", ""})
+    @Alerts(DEFAULT = "undefined")
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
     }
@@ -2744,8 +2737,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"true", "true"})
+    @Alerts(DEFAULT = "undefined")
     public void uniqueIDFormatIE() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -3423,8 +3415,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "removeNode not available",
-            IE = {"div2", "null", "div3", "div4", "div6", "div7", "null"})
+    @Alerts(DEFAULT = "removeNode not available")
     public void removeNode() throws Exception {
         final String html
             = "<html><head>\n"

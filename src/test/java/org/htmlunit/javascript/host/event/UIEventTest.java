@@ -318,8 +318,7 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "[object Window]"},
             CHROME = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"},
-            EDGE = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"},
-            IE = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"})
+            EDGE = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"})
     public void view() throws Exception {
         final String html =
               "<html><body onload='alertView(event)'><script>\n"

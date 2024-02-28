@@ -113,8 +113,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "20:04"},
             FF = {"08:04", "20:04"},
-            FF_ESR = {"08:04", "20:04"},
-            IE = {"0804", "0804PM"})
+            FF_ESR = {"08:04", "20:04"})
     @BuggyWebDriver(FF = {"08:04", ""},
             FF_ESR = {"08:04", ""})
     @HtmlUnitNYI(CHROME = {"08:04", "20:04"},

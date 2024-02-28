@@ -146,8 +146,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"orsc:1", "opened\\s1", "orsc:1", "orsc:2", "orsc:3", "orsc:4", "sent\\s1", "opened\\s2", "sent\\s2"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void onreadystatechange_sync() throws Exception {
         final String test = ""
             + "xhr.onreadystatechange = onStateChange;\n"
@@ -171,8 +170,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"orsc:1", "opened\\s1", "orsc:1", "sent\\s1", "orsc:2", "orsc:3", "orsc:4"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void onreadystatechange_async() throws Exception {
         final String test = ""
             + "xhr.onreadystatechange = onStateChange;\n"
@@ -191,8 +189,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"0", "1", "4", "1", "4"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void readyState_sync() throws Exception {
         property_lifecycleSync("readyState");
     }
@@ -201,8 +198,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"1:1", "1:1", "2:2", "3:3", "4:4"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void readyState_async() throws Exception {
         property_lifecycleAsync("readyState");
     }
@@ -362,8 +358,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"1:", "1:", "2:", "3:", "4:<root/>\\r\\n"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void responseXML_async() throws Exception {
         property_lifecycleAsync("responseXML.xml");
     }

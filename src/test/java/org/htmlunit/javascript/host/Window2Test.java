@@ -800,8 +800,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = {"true", "true", "138", "true", "true", "16"},
             EDGE = {"true", "true", "138", "true", "true", "64"},
             FF = {"true", "true", "91", "true", "true", "12"},
-            FF_ESR = {"true", "true", "91", "true", "true", "12"},
-            IE = {"true", "true", "86", "true", "true", "16"})
+            FF_ESR = {"true", "true", "91", "true", "true", "12"})
     public void heightsAndWidths() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -903,8 +902,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = {"630", "1256", "613", "1239"},
             EDGE = {"630", "1208", "615", "1193"},
             FF = {"677", "1260", "660", "1243"},
-            FF_ESR = {"677", "1260", "660", "1243"},
-            IE = {"682", "1256", "665", "1239"})
+            FF_ESR = {"677", "1260", "660", "1243"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
@@ -2062,8 +2060,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object Window]", "function Window() { [native code] }",
                        "TEMPORARY, PERSISTENT, "},
             FF = {"[object Window]", "function Window() { [native code] }", ""},
-            FF_ESR = {"[object Window]", "function Window() { [native code] }", ""},
-            IE = {"[object Window]", "[object Window]", ""})
+            FF_ESR = {"[object Window]", "function Window() { [native code] }", ""})
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2598,8 +2595,7 @@ public class Window2Test extends WebDriverTestCase {
             FF = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
                   "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
             FF_ESR = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
-                      "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
-            IE = {"undefined", "undefined", "[object Event]", "undefined"})
+                      "[object Event]", "{\"enumerable\":true,\"configurable\":true}"})
     @HtmlUnitNYI(CHROME = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
                            "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
             EDGE = {"undefined", "{\"enumerable\":true,\"configurable\":true}",

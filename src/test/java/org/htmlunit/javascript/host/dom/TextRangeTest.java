@@ -218,8 +218,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"true", "true", "false", "true"})
+    @Alerts(DEFAULT = "exception")
     public void inRange() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -296,8 +295,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"hello", "world", "hello world"})
+    @Alerts(DEFAULT = "exception")
     public void setEndRange() throws Exception {
         final String html = "<html><body>\n"
             + "<form name='f'><input name='q' value='hello world'></form>\n"

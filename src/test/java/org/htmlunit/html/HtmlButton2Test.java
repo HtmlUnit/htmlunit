@@ -827,8 +827,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"foo", "foonewValue", "foonewValue"},
-            FF_ESR = {"foo", "foonewValue", "foo"},
-            IE = {"foo", "foonewValue", "foo"})
+            FF_ESR = {"foo", "foonewValue", "foo"})
     public void onclickDisablesReset() throws Exception {
         final String html = "<html><head>\n"
             + "  <script type='text/javascript'>\n"
@@ -863,8 +862,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "false", "true", "true", "false", "false", "true", "true"},
             FF = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"},
-            FF_ESR = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"},
-            IE = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"})
+            FF_ESR = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"

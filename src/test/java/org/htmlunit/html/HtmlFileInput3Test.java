@@ -262,8 +262,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"CONTENT_TYPE:audio/flac", "charset"},
             FF = {"CONTENT_TYPE:audio/x-flac", "charset"},
-            FF_ESR = {"CONTENT_TYPE:audio/x-flac", "charset"},
-            IE = {"CONTENT_TYPE:audio/x-flac", "charset"})
+            FF_ESR = {"CONTENT_TYPE:audio/x-flac", "charset"})
     public void contentTypeFlac() throws Exception {
         contentType("flac");
     }

@@ -383,8 +383,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void submitGet_url_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -404,8 +403,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR2 },
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR2 })
     public void submitGet_url_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -440,8 +438,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void submitGet_url_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -530,8 +527,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void submitGet_urlHash_emptyUrl() throws Exception {
         openUrlAndClickById(URL_FIRST + "reload.html#anchor", "submitGetEmpty",
                 Integer.parseInt(getExpectedAlerts()[0]),
@@ -552,8 +548,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void submitGet_urlHash_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -572,8 +567,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR2 },
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR2 })
     public void submitGet_urlHash_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -609,8 +603,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void submitGet_urlHash_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1051,8 +1044,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void jsSubmitGet_url_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
                     PATHNAME, getExpectedAlerts()[1]);
@@ -1071,8 +1063,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR2 },
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR2 })
     public void jsSubmitGet_url_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1107,8 +1098,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void jsSubmitGet_url_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1195,8 +1185,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void jsSubmitGet_urlHash_emptyUrl() throws Exception {
         openUrlAndClickById(URL_FIRST + "reload.html#anchor",
                "jsSubmitGetEmpty", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, getExpectedAlerts()[1]);
@@ -1216,8 +1205,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void jsSubmitGet_urlHash_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);
@@ -1236,8 +1224,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR2 },
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR2 })
     public void jsSubmitGet_urlHash_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetDifferentHash",
                 Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, getExpectedAlerts()[1]);
@@ -1273,8 +1260,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", ANCHOR},
-            IE = {"1", ""})
+    @Alerts(DEFAULT = {"1", ANCHOR})
     public void jsSubmitGet_urlHash_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
                 PATHNAME, getExpectedAlerts()[1]);

@@ -65,8 +65,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"true", "books", "books", "1", "book", "0"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void load() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -98,8 +97,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"true", "books", "books", "1", "book", "0"})
+    @Alerts(DEFAULT = "no ActiveX")
     // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
         final String html = LOG_TITLE_FUNCTION
@@ -170,8 +168,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"1", "books"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void selectNodes() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -201,8 +198,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"0", "1"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void selectNodes_caseSensitive() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -231,8 +227,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"2", "1"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void selectNodes_namespace() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -268,8 +263,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"book", "null", "book", "null"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void selectNodes_nextNodeAndReset() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -303,8 +297,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"book", "0", "1"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void selectNodes_fromRoot() throws Exception {
         final String html = LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -335,8 +328,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"book", "#document", "book", "#document"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void selectSingleNode() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -451,8 +443,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"1", "0", "1", "0"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void getElementsByTagName() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -484,8 +475,7 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"0", "1", "0", "1"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"

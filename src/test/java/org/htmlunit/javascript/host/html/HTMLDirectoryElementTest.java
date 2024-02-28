@@ -112,8 +112,7 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined",
-                       "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"},
-            IE = {"", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I"})
+                       "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
     public void type() throws Exception {
         final String html =
                 "<html>\n"

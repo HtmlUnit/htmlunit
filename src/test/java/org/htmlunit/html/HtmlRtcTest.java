@@ -34,8 +34,7 @@ public class HtmlRtcTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline", "inline"},
             FF = {"", "ruby-text-container", "ruby-text-container"},
-            FF_ESR = {"", "ruby-text-container", "ruby-text-container"},
-            IE = {"ruby-text-container", "ruby-text-container", "ruby-text-container"})
+            FF_ESR = {"", "ruby-text-container", "ruby-text-container"})
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

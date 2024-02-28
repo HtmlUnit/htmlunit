@@ -652,8 +652,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"cookies: first=1", "cookies: "},
-            IE = {})
+    @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieDuring302() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"

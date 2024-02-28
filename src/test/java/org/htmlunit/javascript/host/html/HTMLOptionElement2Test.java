@@ -1039,8 +1039,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                             + "The document has been mutated since the result was returned",
                       "1", "0", "o2",
                       "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned"},
-            IE = {"evaluate not supported", "1", "0", "evaluate not supported"})
+                            + "The document has been mutated since the result was returned"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "0", "o2"},
             EDGE = {"o2", "1", "0", "o2"},
             FF = {"o2", "1", "0", "o2"},
@@ -1072,8 +1071,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                         + "The document has been mutated since the result was returned",
                       "1", "1", "o2",
                       "InvalidStateError: XPathResult.iterateNext: "
-                        + "The document has been mutated since the result was returned"},
-            IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
+                        + "The document has been mutated since the result was returned"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "1", "o2"},
             EDGE = {"o2", "1", "1", "o2"},
             FF = {"o2", "1", "1", "o2"},
@@ -1105,8 +1103,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                             + "The document has been mutated since the result was returned",
                       "1", "-1", "o2",
                       "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned"},
-            IE = {"evaluate not supported", "1", "-1", "evaluate not supported"})
+                            + "The document has been mutated since the result was returned"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "-1", "o2"},
             EDGE = {"o2", "1", "-1", "o2"},
             FF = {"o2", "1", "-1", "o2"},
@@ -1138,8 +1135,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                             + "The document has been mutated since the result was returned",
                       "1", "1", "o2",
                       "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned"},
-            IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
+                            + "The document has been mutated since the result was returned"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "1", "o2"},
             EDGE = {"o2", "1", "1", "o2"},
             FF = {"o2", "1", "1", "o2"},

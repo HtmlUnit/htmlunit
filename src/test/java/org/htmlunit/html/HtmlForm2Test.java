@@ -146,8 +146,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            IE = {"textfieldid", "textfieldname", "textfieldid"})
+    @Alerts(DEFAULT = "TypeError")
     public void asFunctionFormsFunction() throws Exception {
         final String html
             = "<html><head>\n"

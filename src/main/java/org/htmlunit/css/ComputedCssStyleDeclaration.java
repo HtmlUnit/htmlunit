@@ -156,14 +156,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     /** The set of 'inheritable' definitions. */
     private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
-        Definition.AZIMUTH,
         Definition.BORDER_COLLAPSE,
         Definition.BORDER_SPACING,
         Definition.CAPTION_SIDE,
         Definition.COLOR,
         Definition.CURSOR,
         Definition.DIRECTION,
-        Definition.ELEVATION,
         Definition.EMPTY_CELLS,
         Definition.FONT_FAMILY,
         Definition.FONT_SIZE,
@@ -178,22 +176,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         Definition.LIST_STYLE_TYPE,
         Definition.LIST_STYLE,
         Definition.ORPHANS,
-        Definition.PITCH_RANGE,
-        Definition.PITCH,
         Definition.QUOTES,
-        Definition.RICHNESS,
-        Definition.SPEAK_HEADER,
-        Definition.SPEAK_NUMERAL,
-        Definition.SPEAK_PUNCTUATION,
         Definition.SPEAK,
-        Definition.SPEECH_RATE,
-        Definition.STRESS,
         Definition.TEXT_ALIGN,
         Definition.TEXT_INDENT,
         Definition.TEXT_TRANSFORM,
         Definition.VISIBILITY,
-        Definition.VOICE_FAMILY,
-        Definition.VOLUME,
         Definition.WHITE_SPACE,
         Definition.WIDOWS,
         Definition.WORD_SPACING);
@@ -515,14 +503,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     public DomElement getDomElement() {
         return elementStyleDeclaration_.getDomElement();
-    }
-
-    /**
-     * @return the accelerator setting
-     */
-    @Override
-    public String getAccelerator() {
-        return getStyleAttribute(Definition.ACCELERATOR, true);
     }
 
     /**

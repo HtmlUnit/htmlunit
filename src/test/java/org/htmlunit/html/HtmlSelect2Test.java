@@ -147,8 +147,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
             FF = {"true", "false", "true", "true", "true"},
-            FF_ESR = {"true", "false", "true", "true", "true"},
-            IE = {"true", "true", "true", "true", "true"})
+            FF_ESR = {"true", "false", "true", "true", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"

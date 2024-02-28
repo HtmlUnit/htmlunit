@@ -38,8 +38,7 @@ public class StyleAttributesIterable2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE = {"in style", "done"})
+    @Alerts(DEFAULT = "done")
     public void notInComputed() throws Exception {
         styleVsComputed("pixelBottom");
     }

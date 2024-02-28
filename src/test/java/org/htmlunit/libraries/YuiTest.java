@@ -152,8 +152,7 @@ public class YuiTest extends WebDriverTestCase {
                     "test_close_window", "test_regex",
                     "test_createlink", "test_selected_element", "test_dom_path"},
             FF = "test_createlink",
-            FF_ESR = "test_createlink",
-            IE = {"test_bold", "test_createlink"})
+            FF_ESR = "test_createlink")
     @NotYetImplemented
     public void editor() throws Exception {
         doTest("editor.html", Arrays.asList(getExpectedAlerts()));

@@ -14,7 +14,6 @@
  */
 package org.htmlunit.css;
 
-import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
@@ -306,14 +305,6 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         else {
             throw new IllegalStateException("Unsupported definition: " + name);
         }
-    }
-
-    /**
-     * Gets the {@code accelerator} style attribute.
-     * @return the style attribute
-     */
-    public String getAccelerator() {
-        return defaultIfEmpty(getStyleAttribute(Definition.ACCELERATOR, true), "false");
     }
 
     /**
@@ -870,13 +861,6 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getMinWidth() {
         return getStyleAttribute(Definition.MIN_WIDTH, true);
-    }
-
-    /**
-     * @return the style attribute {@code msImeAlign}
-     */
-    public String getMsImeAlign() {
-        return getStyleAttribute(Definition.MS_IME_ALIGN, true);
     }
 
     /**

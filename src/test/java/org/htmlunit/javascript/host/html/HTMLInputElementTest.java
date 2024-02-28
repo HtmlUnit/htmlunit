@@ -2178,8 +2178,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"173", "17", "173", "17", "13", "13", "13", "13"},
             FF = {"154", "18", "154", "18", "10", "10", "10", "10"},
-            FF_ESR = {"154", "18", "154", "18", "10", "10", "10", "10"},
-            IE = {"143", "19", "145", "20", "13", "13", "13", "13"})
+            FF_ESR = {"154", "18", "154", "18", "10", "10", "10", "10"})
     public void defaultClientWidthHeight() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

@@ -547,8 +547,7 @@ public class History2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"href=§§URL§§", "href=§§URL§§?p=%C3%84"},
             FF = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
-            FF_ESR = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
-            IE = {"href=§§URL§§", "href=§§URL§§?p=\u00c4"})
+            FF_ESR = {"href=§§URL§§", "href=§§URL§§?p=%C4"})
     @HtmlUnitNYI(CHROME = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
             EDGE = {"href=§§URL§§", "href=§§URL§§?p=%C4"})
     public void pushStateEncoding() throws Exception {
@@ -826,8 +825,7 @@ public class History2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"href=§§URL§§", "href=§§URL§§?p=%C3%84"},
             FF = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
-            FF_ESR = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
-            IE = {"href=§§URL§§", "href=§§URL§§?p=\u00c4"})
+            FF_ESR = {"href=§§URL§§", "href=§§URL§§?p=%C4"})
     @HtmlUnitNYI(CHROME = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
             EDGE = {"href=§§URL§§", "href=§§URL§§?p=%C4"})
     public void replaceStateEncoding() throws Exception {
@@ -1131,8 +1129,7 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"back", "forward", "go", "length", "pushState", "replaceState",
-                       "scrollRestoration", "state"},
-            IE = {"back", "forward", "go", "length", "pushState", "replaceState", "state"})
+                       "scrollRestoration", "state"})
     public void properties() throws Exception {
         final String html = "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION

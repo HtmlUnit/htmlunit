@@ -41,8 +41,7 @@ public class Sarissa0993Test extends WebDriverTestCase {
     @Alerts(CHROME = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
             EDGE = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
             FF = {"+++++++++++F++++++", "+", "+", "+", "F++", "++", "++++F+++"},
-            FF_ESR = {"+++++++++++F++++++", "+", "+", "+", "F++", "++", "++++F+++"},
-            IE = {"+++++++++++F++++++", "+", "+", "+", "FFF", "FF", "FFFFFFFF"})
+            FF_ESR = {"+++++++++++F++++++", "+", "+", "+", "F++", "++", "++++F+++"})
     // TODO [IE]XML sarissa 0.9.9.3 is not compatible with IE's new XML stuff
     public void sarissa() throws Exception {
         startWebServer("src/test/resources/libraries/sarissa/0.9.9.3", null, null);

@@ -230,8 +230,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"false", "3", "4", "-1", "-2", "5", "6"})
+    @Alerts(DEFAULT = "exception")
     public void rotateFromVectorZeroX() throws Exception {
         transformTest("rotateFromVector(0, 74)");
     }
@@ -240,8 +239,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"false", "1", "2", "3", "4", "5", "6"})
+    @Alerts(DEFAULT = "exception")
     public void rotateFromVectorZeroY() throws Exception {
         transformTest("rotateFromVector(17, 0)");
     }
@@ -279,8 +277,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "1", "2", "3.0699267387390137", "4.139853477478027", "5", "6"},
             CHROME = {"false", "1", "2", "3.0699268119435104", "4.139853623887021", "5", "6"},
-            EDGE = {"false", "1", "2", "3.0699268119435104", "4.139853623887021", "5", "6"},
-            IE = {"false", "1", "2", "3.0699267387390136", "4.139853477478027", "5", "6"})
+            EDGE = {"false", "1", "2", "3.0699268119435104", "4.139853623887021", "5", "6"})
     public void skewX() throws Exception {
         transformTest("skewX(4)");
     }
@@ -291,8 +288,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "1.6926045417785645", "2.9234728813171387", "3", "4", "5", "6"},
             CHROME = {"false", "1.6926045733766895", "2.9234727645022525", "3", "4", "5", "6"},
-            EDGE = {"false", "1.6926045733766895", "2.9234727645022525", "3", "4", "5", "6"},
-            IE = {"false", "1.6926045417785644", "2.9234728813171386", "3", "4", "5", "6"})
+            EDGE = {"false", "1.6926045733766895", "2.9234727645022525", "3", "4", "5", "6"})
     public void skewY() throws Exception {
         transformTest("skewY(13)");
     }

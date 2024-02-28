@@ -545,8 +545,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"before", "active: body",
                        "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
-                       "between", "active: textId", "after", "active: textId"},
-            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+                       "between", "active: textId", "after", "active: textId"})
     public void labelFor() throws Exception {
         testWithCallFocusAndBlur("<label for='textId' id='focusId'>label</label><input type='text' id='textId' "
                 + logEvents("T") + ">");
@@ -568,8 +567,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"before", "active: body",
                        "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
-                       "between", "active: textId", "after", "active: textId"},
-            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+                       "between", "active: textId", "after", "active: textId"})
     public void labelForReadonly() throws Exception {
         testWithCallFocusAndBlur("<label for='textId' id='focusId'>label</label>"
                 + "<input type='text' readonly id='textId' " + logEvents("T") + ">");
@@ -611,8 +609,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"before", "active: body",
                        "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
-                       "between", "active: textId", "after", "active: textId"},
-            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+                       "between", "active: textId", "after", "active: textId"})
     public void labelNotDisplayedFor() throws Exception {
         testWithCallFocusAndBlur("<label for='textId' style='display: none;' id='focusId'>label</label>"
                 + "<input type='text' id='textId' " + logEvents("T") + ">");
@@ -624,8 +621,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"before", "active: body",
                        "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
-                       "between", "active: textId", "after", "active: textId"},
-            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+                       "between", "active: textId", "after", "active: textId"})
     public void labelNotVisibleFor() throws Exception {
         testWithCallFocusAndBlur("<label for='textId' style='visibility: hidden;' id='focusId'>label</label>"
                 + "<input type='text' id='textId' " + logEvents("T") + ">");
@@ -637,8 +633,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"before", "active: body",
                        "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
-                       "between", "active: textId", "after", "active: textId"},
-            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+                       "between", "active: textId", "after", "active: textId"})
     public void labelHiddenFor() throws Exception {
         testWithCallFocusAndBlur("<label for='textId' hidden id='focusId'>label</label>"
                 + "<input type='text' id='textId' " + logEvents("T") + ">");
@@ -651,8 +646,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"before", "active: body",
                        "onfocusT:textId", "active: textId", "onfocusinT:textId",
                        "active: textId", "onfocusin:textId", "active: textId",
-                       "between", "active: textId", "after", "active: textId"},
-            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+                       "between", "active: textId", "after", "active: textId"})
     public void labelNested() throws Exception {
         testWithCallFocusAndBlur("<label for='textId' id='focusId'>label <input type='text' id='textId' "
                 + logEvents("T") + "></label>");
@@ -675,8 +669,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"before", "active: body",
                        "onfocusT:textId", "active: textId", "onfocusinT:textId",
                        "active: textId", "onfocusin:textId", "active: textId",
-                       "between", "active: textId", "after", "active: textId"},
-            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+                       "between", "active: textId", "after", "active: textId"})
     public void labelNestedReadonly() throws Exception {
         testWithCallFocusAndBlur("<label for='textId' id='focusId'>label <input type='text' readonly id='textId' "
                 + logEvents("T") + "></label>");

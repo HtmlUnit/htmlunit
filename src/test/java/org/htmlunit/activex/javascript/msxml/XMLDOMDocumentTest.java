@@ -112,8 +112,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"true", "false"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void async() throws Exception {
         final String test = ""
             + "try {\n"
@@ -215,8 +214,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"true", "exception-write"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void doctype_created() throws Exception {
         final String test = ""
             + "try {\n"
@@ -234,8 +232,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"false", "exception-write"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void doctype_load() throws Exception {
         final String test = ""
             + "try {\n"
@@ -255,8 +252,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"true", "true", "exception-setNull"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void documentElement() throws Exception {
         final String test = ""
             + "log(doc.documentElement == null);\n"
@@ -276,8 +272,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"true", "<new/>\\r\\n"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void documentElement_replaceExisting() throws Exception {
         final String test = ""
             + "doc.documentElement = doc.createElement('foo');\n"
@@ -395,8 +390,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"true", "exception-setNull", "exception-setEmpty", "exception-set"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void firstChild() throws Exception {
         final String test = ""
             + "log(doc.firstChild == null);\n"
@@ -498,8 +492,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"false", "exception-write"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void implementation() throws Exception {
         final String test = ""
             + "try {\n"
@@ -516,8 +509,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"true", "exception-setNull", "exception-setEmpty", "exception-set"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void lastChild() throws Exception {
         final String test = ""
             + "log(doc.lastChild == null);\n"
@@ -664,8 +656,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"null", "exception-setNull", "exception-setEmpty", "exception-set"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void nodeValue() throws Exception {
         final String test = ""
             + "log(doc.nodeValue);\n"
@@ -726,8 +717,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"false", "exception-write"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void parseError() throws Exception {
         final String test = ""
             + "try {\n"
@@ -886,8 +876,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"0", "", "exception-set", "exception-setEmpty", "exception-setNull"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void text_set() throws Exception {
         final String test = ""
             + "log(doc.childNodes.length);\n"
@@ -977,8 +966,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"", "<foo/>\\r\\n"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void xml() throws Exception {
         final String test = ""
             + "var txt = doc.xml;\n"
@@ -1023,8 +1011,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"0", "true", "exception-appendCDATA1"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void appendChild_cdata() throws Exception {
         final String test = ""
             + "log(doc.childNodes.length);\n"
@@ -1218,8 +1205,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"0", "true", "exception-appendText1"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void appendChild_text() throws Exception {
         final String test = ""
             + "log(doc.childNodes.length);\n"
@@ -1335,8 +1321,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"FOO", "fOo", "Foo"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void createAttribute_caseSensitive() throws Exception {
         final String test = ""
             + "var attr = doc.createAttribute('FOO');\n"
@@ -1388,8 +1373,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"FOO", "fOo", "Foo"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void createElement_caseSensitive() throws Exception {
         final String test = ""
             + "var element = doc.createElement('FOO');\n"
@@ -1430,8 +1414,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"0", "true", "exception-insertCDATA1"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void insertBefore_cdata() throws Exception {
         final String test = ""
             + "log(doc.childNodes.length);\n"
@@ -1679,8 +1662,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"0", "true", "exception-insertText1"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void insertBefore_text() throws Exception {
         final String test = ""
             + "log(doc.childNodes.length);\n"
@@ -1792,8 +1774,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"", "<foo><bar/></foo>\\r\\n", "foo"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void loadXML() throws Exception {
         final String test = ""
             + "var text='<foo><bar/></foo>';\n"
@@ -1813,8 +1794,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<myns:foo xmlns:myns=\"http://myNS\"/>\\r\\n", "myns:foo"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void loadXML_namespace() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"

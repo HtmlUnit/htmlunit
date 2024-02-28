@@ -35,10 +35,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"zh-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
-                       "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"},
-            IE = {"zh-Hans-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
-                  "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
+    @Alerts({"zh-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
+             "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
     @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             EDGE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",

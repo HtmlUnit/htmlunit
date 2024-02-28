@@ -48,9 +48,7 @@ public class Event2Test extends WebDriverTestCase {
             CHROME = "[object Event] change b:true c:false [select] [-]"
                 + " [object MouseEvent] click b:true c:true [select] [1]",
             EDGE = "[object Event] change b:true c:false [select] [-]"
-                + " [object MouseEvent] click b:true c:true [select] [1]",
-            IE = "[object Event] change b:true c:false [select] [-]"
-                + " [object PointerEvent] click b:true c:true [select] [1]")
+                + " [object MouseEvent] click b:true c:true [select] [1]")
     @BuggyWebDriver(FF = "[object Event] change b:true c:true [select] [-]"
                 + " [object Event] click b:true c:true [select] [-]",
             FF_ESR = "[object Event] change b:true c:true [select] [-]"
@@ -101,9 +99,7 @@ public class Event2Test extends WebDriverTestCase {
             CHROME = "[object PointerEvent] click b:true c:true [radio] [1]"
                 + " [object Event] change b:true c:false [radio] [-]",
             EDGE = "[object PointerEvent] click b:true c:true [radio] [1]"
-                + " [object Event] change b:true c:false [radio] [-]",
-            IE = "[object Event] change b:true c:false [radio] [-]"
-                + " [object PointerEvent] click b:true c:true [radio] [1]")
+                + " [object Event] change b:true c:false [radio] [-]")
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
@@ -121,9 +117,7 @@ public class Event2Test extends WebDriverTestCase {
             CHROME = "[object PointerEvent] click b:true c:true [checkbox] [1]"
                 + " [object Event] change b:true c:false [checkbox] [-]",
             EDGE = "[object PointerEvent] click b:true c:true [checkbox] [1]"
-                + " [object Event] change b:true c:false [checkbox] [-]",
-            IE = "[object Event] change b:true c:false [checkbox] [-]"
-                + " [object PointerEvent] click b:true c:true [checkbox] [1]")
+                + " [object Event] change b:true c:false [checkbox] [-]")
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
@@ -739,10 +733,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
-                       "true"},
-            IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
-                  "div capturing", "false", "false", "span capturing", "false", "true"})
+    @Alerts({"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "true"})
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
     }
@@ -945,12 +936,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"nullwindow at beforeunload rv=",
-                       "window onbeforeunload rv=1",
-                       "window at beforeunload rv=1"},
-            IE = {"nullwindow at beforeunload rv=undefined",
-                  "window onbeforeunload rv=1",
-                  "window at beforeunload rv=2"})
+    @Alerts({"nullwindow at beforeunload rv=",
+             "window onbeforeunload rv=1",
+             "window at beforeunload rv=1"})
     public void returnPriority2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"

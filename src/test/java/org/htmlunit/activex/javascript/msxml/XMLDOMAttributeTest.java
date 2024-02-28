@@ -71,8 +71,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"1", "#text", "test", "true", "true"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void childNodes() throws Exception {
         final String test = ""
             + "log(att.childNodes.length);\n"
@@ -120,8 +119,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"true", "#text", "test", "true", "true"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void firstChild() throws Exception {
         final String test = ""
             + "log(att.firstChild != null);\n"
@@ -151,8 +149,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"true", "#text", "test", "true", "true"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void lastChild() throws Exception {
         final String test = ""
             + "log(att.lastChild != null);\n"
@@ -182,8 +179,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"testAttr", "exception-write"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void name() throws Exception {
         final String test = ""
             + "try {\n"
@@ -227,8 +223,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"test", "other", "other", "other", "1"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void nodeValue() throws Exception {
         final String test = ""
             + "try {\n"
@@ -322,8 +317,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"test", "other", "other", "other", "1"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void text() throws Exception {
         final String test = ""
             + "try {\n"
@@ -344,8 +338,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"test", "other", "other", "other", "1"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void value() throws Exception {
         final String test = ""
             + "try {\n"

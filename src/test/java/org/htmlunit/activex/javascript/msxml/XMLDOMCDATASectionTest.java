@@ -165,8 +165,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"1", "0", "4", "9", "6"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void length() throws Exception {
         final String test = ""
             + "log(cdata.length);\n"
@@ -412,8 +411,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"<![CDATA[\\s]]>", "<![CDATA[text]]>", "<![CDATA[text\\r\\ntext]]>", "<![CDATA[<tag/>]]>"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void xml() throws Exception {
         final String test = ""
             + "log(cdata.xml);\n"
@@ -463,8 +461,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"myCDATA", "myCDATA-appended", "exception-appendNull", "myCDATA-appended", "myCDATA-appended\\n"})
+    @Alerts(DEFAULT = "no\\sActiveX")
     public void appendData() throws Exception {
         final String test = ""
             + "log(cdata.data);\n"

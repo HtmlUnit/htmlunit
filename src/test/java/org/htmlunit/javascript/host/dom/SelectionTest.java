@@ -173,8 +173,7 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                       "2:null/0/null/0/true/None/0/"},
-            IE = {"1:s2/0/s2/1/false/undefined/1/xyz[xyz", "exception"})
+                       "2:null/0/null/0/true/None/0/"})
     public void empty() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -430,8 +429,7 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "null-0", "", "null-0", "", "null-0", "", "null-0"},
             FF = {"", "null-0", "", "null-0", "null", "null"},
-            FF_ESR = {"", "null-0", "", "null-0", "null", "null"},
-            IE = {"", "[object Text]-1", "", "null-0", "", "null-0", "", "null-0"})
+            FF_ESR = {"", "null-0", "", "null-0", "null", "null"})
     public void getSelection_display() throws Exception {
         final String html = "<html>\n"
             + "<body onload='test()'>\n"

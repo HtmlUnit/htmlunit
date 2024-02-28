@@ -881,8 +881,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "labelclick",
-            IE = {"labelclick", "labelclick"})
+    @Alerts(DEFAULT = "labelclick")
     public void clickNestedDisabled() throws Exception {
         final String html =
               "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"

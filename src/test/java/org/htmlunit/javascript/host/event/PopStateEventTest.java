@@ -102,8 +102,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "false", "null"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = {"[object PopStateEvent]", "null", "", "false", "false", "undefined", "null"})
+            FF_ESR = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -127,8 +126,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "false", "null"},
             FF = "exception",
-            FF_ESR = "exception",
-            IE = {"[object PopStateEvent]", "null", "", "false", "false", "undefined", "null"})
+            FF_ESR = "exception")
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -217,8 +215,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no initPopStateEvent",
             FF = "exception ctor",
-            FF_ESR = "exception ctor",
-            IE = {"[object PopStateEvent]", "null", "PopState", "true", "false", "undefined", "html"})
+            FF_ESR = "exception ctor")
     public void initPopStateEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

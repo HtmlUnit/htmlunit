@@ -34,8 +34,7 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined",
-                       "undefined", "undefined", "undefined"},
-            IE = {"left", "right", "bottom", "middle", "top", "", ""})
+                       "undefined", "undefined", "undefined"})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"

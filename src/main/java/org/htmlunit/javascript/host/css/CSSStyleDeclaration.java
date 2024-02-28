@@ -272,27 +272,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     /**
-     * Gets the {@code accelerator} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(IE)
-    public String getAccelerator() {
-        if (styleDeclaration_ == null) {
-            return null; // prototype
-        }
-        return styleDeclaration_.getAccelerator();
-    }
-
-    /**
-     * Sets the {@code accelerator} style attribute.
-     * @param accelerator the new attribute
-     */
-    @JsxSetter(IE)
-    public void setAccelerator(final String accelerator) {
-        setStyleAttribute(Definition.ACCELERATOR.getAttributeName(), accelerator);
-    }
-
-    /**
      * Gets the {@code backgroundAttachment} style attribute.
      * @return the style attribute
      */
@@ -1331,27 +1310,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             }
         }
         return ids.toArray();
-    }
-
-    /**
-     * Gets the {@code borderTop} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(IE)
-    public String getMsImeAlign() {
-        if (styleDeclaration_ == null) {
-            return null; // prototype
-        }
-        return styleDeclaration_.getMsImeAlign();
-    }
-
-    /**
-     * Sets the {@code msImeAlign} style attribute.
-     * @param msImeAlign the new attribute
-     */
-    @JsxSetter(IE)
-    public void setMsImeAlign(final String msImeAlign) {
-        setStyleAttribute(Definition.MS_IME_ALIGN.getAttributeName(), msImeAlign);
     }
 
     /**

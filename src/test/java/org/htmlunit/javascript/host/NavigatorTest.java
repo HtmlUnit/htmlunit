@@ -93,8 +93,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string", "20100101"},
             CHROME = {"string", "20030107"},
-            EDGE = {"string", "20030107"},
-            IE = {"undefined", "undefined"})
+            EDGE = {"string", "20030107"})
     public void productSub() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -420,8 +419,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Google Inc.", ""},
             FF = {"", ""},
-            FF_ESR = {"", ""},
-            IE = {"", "undefined"})
+            FF_ESR = {"", ""})
     public void vendor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -490,8 +488,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"unspecified", "undefined", "undefined"},
             CHROME = {"null", "undefined", "undefined"},
-            EDGE = {"null", "undefined", "undefined"},
-            IE = {"undefined", "undefined", "null"})
+            EDGE = {"null", "undefined", "undefined"})
     public void doNotTrack() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

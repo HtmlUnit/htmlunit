@@ -105,8 +105,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30",
-                       "-2018-06-12T19:30-2018-06-12T19:30"},
-            IE = {"2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30", "error"})
+                       "-2018-06-12T19:30-2018-06-12T19:30"})
     public void none_datetimelocal() throws Exception {
         changeType("value='2018-06-12T19:30'", "2019-07-11T4:16", "datetime-local");
     }
@@ -116,8 +115,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2019-07-11T4:16--null",
-                       "--null"},
-            IE = {"2019-07-11T4:16--null", "error"})
+                       "--null"})
     public void noneNoValueAttr_datetimelocal() throws Exception {
         changeType("", "2019-07-11T4:16", "datetime-local");
     }
@@ -182,8 +180,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"12-7-7", "12-7-7"},
             CHROME = {"12-7-7", "-7-7"},
-            EDGE = {"12-7-7", "-7-7"},
-            IE = {"12-7-7", "error"})
+            EDGE = {"12-7-7", "-7-7"})
     public void none_month() throws Exception {
         changeType("value='7'", "12", "month");
     }
@@ -194,8 +191,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"12--null", "12--null"},
             CHROME = {"12--null", "--null"},
-            EDGE = {"12--null", "--null"},
-            IE = {"12--null", "error"})
+            EDGE = {"12--null", "--null"})
     public void noneNoValueAttr_month() throws Exception {
         changeType("", "12", "month");
     }
@@ -406,8 +402,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"24-42-42", "24-42-42"},
             CHROME = {"24-42-42", "-42-42"},
-            EDGE = {"24-42-42", "-42-42"},
-            IE = {"24-42-42", "error"})
+            EDGE = {"24-42-42", "-42-42"})
     public void none_week() throws Exception {
         changeType("value='42'", "24", "week");
     }
@@ -418,8 +413,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"24--null", "24--null"},
             CHROME = {"24--null", "--null"},
-            EDGE = {"24--null", "--null"},
-            IE = {"24--null", "error"})
+            EDGE = {"24--null", "--null"})
     public void noneNoValueAttr_week() throws Exception {
         changeType("", "24", "week");
     }
@@ -429,8 +423,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2020-04-7T1:13-2018-06-12T19:30-2018-06-12T19:30",
-                       "2020-04-7T1:13-2018-06-12T19:30-2018-06-12T19:30"},
-            IE = {"2020-04-7T1:13-2018-06-12T19:30-2018-06-12T19:30", "error"})
+                       "2020-04-7T1:13-2018-06-12T19:30-2018-06-12T19:30"})
     public void none_datetime() throws Exception {
         changeType("value='2018-06-12T19:30'", "2020-04-7T1:13", "datetime");
     }
@@ -440,8 +433,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2020-04-7T1:13--null",
-                       "2020-04-7T1:13--null"},
-            IE = {"2020-04-7T1:13--null", "error"})
+                       "2020-04-7T1:13--null"})
     public void noneNoValueAttr_datetime() throws Exception {
         changeType("", "2020-04-7T1:13", "datetime");
     }
@@ -512,8 +504,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2019-07-11T4:16--null",
-                       "--null"},
-            IE = {"2019-07-11T4:16--null", "error"})
+                       "--null"})
     public void detached_datetimelocal() throws Exception {
         changeTypeDetached("2019-07-11T4:16", "datetime-local");
     }
@@ -551,8 +542,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"12--null", "12--null"},
             CHROME = {"12--null", "--null"},
-            EDGE = {"12--null", "--null"},
-            IE = {"12--null", "error"})
+            EDGE = {"12--null", "--null"})
     public void detached_month() throws Exception {
         changeTypeDetached("12", "month");
     }
@@ -663,8 +653,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"24--null", "24--null"},
             CHROME = {"24--null", "--null"},
-            EDGE = {"24--null", "--null"},
-            IE = {"24--null", "error"})
+            EDGE = {"24--null", "--null"})
     public void detached_week() throws Exception {
         changeTypeDetached("24", "week");
     }
@@ -674,8 +663,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2020-04-7T1:13--null",
-                       "2020-04-7T1:13--null"},
-            IE = {"2020-04-7T1:13--null", "error"})
+                       "2020-04-7T1:13--null"})
     public void detached_datetime() throws Exception {
         changeTypeDetached("2020-04-7T1:13", "datetime");
     }

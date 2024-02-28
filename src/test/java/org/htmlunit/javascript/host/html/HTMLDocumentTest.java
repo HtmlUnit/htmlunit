@@ -798,8 +798,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object HTMLBodyElement]"},
-            FF_ESR = {"1", "[object HTMLBodyElement]"},
-            IE = {"0", "[object HTMLBodyElement]"})
+            FF_ESR = {"1", "[object HTMLBodyElement]"})
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
     }
@@ -812,8 +811,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object Text]"},
-            FF_ESR = {"1", "[object Text]"},
-            IE = {"1", "[object Text]"})
+            FF_ESR = {"1", "[object Text]"})
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
     }
@@ -879,8 +877,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "not defined",
-            IE = {"true", "1"})
+    @Alerts(DEFAULT = "not defined")
     public void frames() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

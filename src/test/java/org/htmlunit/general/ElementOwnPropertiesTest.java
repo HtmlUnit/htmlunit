@@ -604,22 +604,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scrollTo(),scrollTop[GSCE],scrollTopMax[GCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setCapture(),setPointerCapture(),shadowRoot[GCE],"
                 + "slot[GSCE],tagName[GCE],toggleAttribute(),"
-                + "webkitMatchesSelector()",
-            IE = "childElementCount,clientHeight,clientLeft,clientTop,clientWidth,constructor,firstElementChild,"
-                + "getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
-                + "getClientRects(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
-                + "lastElementChild,msContentZoomFactor,msGetRegionContent(),msGetUntransformedBounds(),"
-                + "msMatchesSelector(),msRegionOverflow,msReleasePointerCapture(),msRequestFullscreen(),"
-                + "msSetPointerCapture(),msZoomTo(),nextElementSibling,ongotpointercapture,onlostpointercapture,"
-                + "onmsgesturechange,onmsgesturedoubletap,onmsgestureend,onmsgesturehold,onmsgesturestart,"
-                + "onmsgesturetap,onmsgotpointercapture,onmsinertiastart,onmslostpointercapture,onmspointercancel,"
-                + "onmspointerdown,onmspointerenter,onmspointerleave,onmspointermove,onmspointerout,onmspointerover,"
-                + "onmspointerup,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
-                + "onpointerout,onpointerover,onpointerup,previousElementSibling,querySelector(),querySelectorAll(),"
-                + "releasePointerCapture(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),scrollHeight,"
-                + "scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
-                + "setAttributeNS(),setPointerCapture(),"
-                + "tagName")
+                + "webkitMatchesSelector()")
     @HtmlUnitNYI(CHROME = "after(),append(),attributes[GCE],before(),childElementCount[GCE],children[GCE],"
                 + "classList[GCE],className[GSCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],"
                 + "clientWidth[GCE],closest(),constructor(),firstElementChild[GCE],getAttribute(),getAttributeNode(),"
@@ -786,23 +771,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scrollTo(),scrollTop[GSCE],scrollTopMax[GCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setCapture(),setPointerCapture(),shadowRoot[GCE],"
                 + "slot[GSCE],tagName[GCE],toggleAttribute(),"
-                + "webkitMatchesSelector()",
-            IE = "attributes[GCE],childElementCount[GCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],"
-                + "clientWidth[GCE],constructor[],firstElementChild[GCE],getAttribute(),getAttributeNode(),"
-                + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
-                + "lastElementChild[GCE],msMatchesSelector(),nextElementSibling[GCE],ongotpointercapture[GSCE],"
-                + "onlostpointercapture[GSCE],onmsgesturechange[GSCE],onmsgesturedoubletap[GSCE],"
-                + "onmsgestureend[GSCE],onmsgesturehold[GSCE],onmsgesturestart[GSCE],onmsgesturetap[GSCE],"
-                + "onmsgotpointercapture[GSCE],onmsinertiastart[GSCE],onmslostpointercapture[GSCE],"
-                + "onmspointercancel[GSCE],onmspointerdown[GSCE],onmspointerenter[GSCE],"
-                + "onmspointerleave[GSCE],onmspointermove[GSCE],onmspointerout[GSCE],onmspointerover[GSCE],"
-                + "onmspointerup[GSCE],onpointercancel[GSCE],onpointerdown[GSCE],onpointerenter[GSCE],"
-                + "onpointerleave[GSCE],onpointermove[GSCE],onpointerout[GSCE],onpointerover[GSCE],"
-                + "onpointerup[GSCE],previousElementSibling[GCE],querySelector(),querySelectorAll(),"
-                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),scrollHeight[GCE],"
-                + "scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),"
-                + "setAttributeNS(),tagName[GCE]")
+                + "webkitMatchesSelector()")
     @HtmlUnitNYI(CHROME = "after(),append(),attributes[GCE],before(),childElementCount[GCE],"
                 + "children[GCE],classList[GCE],"
                 + "className[GSCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),"
@@ -906,11 +875,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
                 + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
                 + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
-                + "type[GCE]",
-            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,constructor,"
-                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,preventDefault(),srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
-                + "type")
+                + "type[GCE]")
     @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],"
                 + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),"
@@ -942,35 +907,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),PERSISTENT[E],TEMPORARY[E]",
             EDGE = "constructor(),PERSISTENT[E],TEMPORARY[E]",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "addEventListener(),alert(),animationStartTime,applicationCache,atob(),blur(),btoa(),"
-                + "cancelAnimationFrame(),captureEvents(),clearImmediate(),clearInterval(),clearTimeout(),"
-                + "clientInformation,clipboardData,close(),closed,confirm(),console,constructor,defaultStatus,"
-                + "devicePixelRatio,dispatchEvent(),document,doNotTrack,event,external,focus(),frameElement,frames,"
-                + "getComputedStyle(),getSelection(),history,indexedDB,innerHeight,innerWidth,item(),length,"
-                + "localStorage,location,matchMedia(),maxConnectionsPerServer,moveBy(),moveTo(),"
-                + "msAnimationStartTime,msCancelRequestAnimationFrame(),msClearImmediate(),msCrypto,msIndexedDB,"
-                + "msIsStaticHTML(),msMatchMedia(),msRequestAnimationFrame(),msSetImmediate(),msWriteProfilerMark(),"
-                + "name,navigate(),navigator,offscreenBuffering,onabort,onafterprint,onbeforeprint,onbeforeunload,"
-                + "onblur,oncanplay,oncanplaythrough,onchange,onclick,oncompassneedscalibration,oncontextmenu,"
-                + "ondblclick,ondevicemotion,ondeviceorientation,ondrag,ondragend,ondragenter,ondragleave,"
-                + "ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onfocusin,"
-                + "onfocusout,onhashchange,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload(),onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmessage,onmousedown,onmouseenter,onmouseleave,onmousemove,"
-                + "onmouseout,onmouseover,onmouseup,onmousewheel,onmsgesturechange,onmsgesturedoubletap,"
-                + "onmsgestureend,onmsgesturehold,onmsgesturestart,onmsgesturetap,onmsinertiastart,"
-                + "onmspointercancel,onmspointerdown,onmspointerenter,onmspointerleave,onmspointermove,"
-                + "onmspointerout,onmspointerover,onmspointerup,onoffline,ononline,onpagehide,onpageshow,onpause,"
-                + "onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
-                + "onpointerout,onpointerover,onpointerup,onpopstate,onprogress,onratechange,onreadystatechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onstorage,onsubmit,onsuspend,"
-                + "ontimeupdate,onunload,onvolumechange,onwaiting,open(),opener,outerHeight,outerWidth,pageXOffset,"
-                + "pageYOffset,parent,performance,postMessage(),print(),prompt(),releaseEvents(),"
-                + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),screen,screenLeft,screenTop,"
-                + "screenX,screenY,scroll(),scrollBy(),scrollTo(),self,sessionStorage,setImmediate(),setInterval(),"
-                + "setTimeout(),showHelp(),showModalDialog(),showModelessDialog(),status,styleMedia,top,"
-                + "toStaticHTML(),toString(),"
-                + "window")
+            FF_ESR = "constructor()")
     @HtmlUnitNYI(CHROME = "alert(),atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),clearInterval(),"
                 + "clearTimeout(),clientInformation[GSCE],close(),closed[GCE],confirm(),constructor(),crypto[GCE],"
                 + "devicePixelRatio[GCE],document[GCE],event[GCE],external[GCE],find(),focus(),frameElement[GCE],"
@@ -1562,10 +1499,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],pathname[GSCE],ping[GSCE],"
                 + "port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],rev[GSCE],search[GSCE],"
                 + "shape[GSCE],target[GSCE],text[GSCE],toString(),type[GSCE],"
-                + "username[GSCE]",
-            IE = "charset,constructor,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,"
-                + "pathname,port,protocol,protocolLong,rel,rev,search,shape,target,text,toString(),type,"
-                + "urn")
+                + "username[GSCE]")
     @HtmlUnitNYI(CHROME = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],"
                 + "hostname[GSCE],href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
                 + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],"
@@ -1818,11 +1752,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "align,alt,altHtml,archive,BaseHref,border,classid,code,codeBase,codeType,constructor,"
-                + "contentDocument,data,declare,form,height,hspace,name,namedRecordset(),object,recordset,standby,"
-                + "type,useMap,vspace,"
-                + "width")
+            FF_ESR = "constructor()")
     public void applet() throws Exception {
         test("applet");
     }
@@ -1852,10 +1782,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "href[GSCE],noHref[GSCE],origin[GCE],password[GSCE],pathname[GSCE],ping[GSCE],port[GSCE],"
                 + "protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],search[GSCE],shape[GSCE],"
                 + "target[GSCE],toString(),"
-                + "username[GSCE]",
-            IE = "alt,constructor,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,"
-                + "target,"
-                + "toString()")
+                + "username[GSCE]")
     @HtmlUnitNYI(CHROME = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
             EDGE = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
             FF_ESR = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
@@ -1981,26 +1908,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2223,26 +2131,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3380,12 +3269,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onhashchange[GSCE],onlanguagechange[GSCE],onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],"
                 + "ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],"
                 + "onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],text[GSCE],"
-                + "vLink[GSCE]",
-            IE = "aLink,background,bgColor,bgProperties,bottomMargin,constructor,createTextRange(),leftMargin,link,"
-                + "noWrap,onafterprint,onbeforeprint,onbeforeunload,onblur,onerror,onfocus,onhashchange,onload,"
-                + "onmessage,onoffline,ononline,onpagehide,onpageshow,onpopstate,onresize,onstorage,onunload,"
-                + "rightMargin,scroll,text,topMargin,"
-                + "vLink")
+                + "vLink[GSCE]")
     public void body() throws Exception {
         test("body");
     }
@@ -3650,10 +3534,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "checkValidity(),constructor(),disabled[GSCE],form[GCE],formAction[GSCE],formEnctype[GSCE],"
                 + "formMethod[GSCE],formNoValidate[GSCE],formTarget[GSCE],labels[GCE],name[GSCE],reportValidity(),"
                 + "setCustomValidity(),type[GSCE],validationMessage[GCE],validity[GCE],value[GSCE],"
-                + "willValidate[GCE]",
-            IE = "autofocus,checkValidity(),constructor,createTextRange(),form,formAction,formEnctype,formMethod,"
-                + "formNoValidate,formTarget,name,setCustomValidity(),status,type,validationMessage,validity,value,"
-                + "willValidate")
+                + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled[GSCE],form[GCE],formNoValidate[GSCE],"
                 + "labels[GCE],name[GSCE],setCustomValidity(),type[GSCE],validity[GCE],value[GSCE],willValidate[GCE]",
             EDGE = "checkValidity(),constructor(),disabled[GSCE],form[GCE],formNoValidate[GSCE],"
@@ -5174,9 +5055,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "align[GSCE],constructor(),getSVGDocument(),height[GSCE],name[GSCE],src[GSCE],type[GSCE],"
                 + "width[GSCE]",
             FF_ESR = "align[GSCE],constructor(),getSVGDocument(),height[GSCE],name[GSCE],src[GSCE],type[GSCE],"
-                + "width[GSCE]",
-            IE = "constructor[],getSVGDocument(),height[GSCE],hidden,msPlayToDisabled,msPlayToPreferredSourceUri,"
-                + "msPlayToPrimary,name[GSCE],palette,pluginspage,readyState,src[GSCE],units,"
                 + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "align[GSCE],constructor(),height[GSCE],name[GSCE],width[GSCE]",
             EDGE = "align[GSCE],constructor(),height[GSCE],name[GSCE],width[GSCE]",
@@ -5425,9 +5303,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "willValidate[GCE]",
             FF_ESR = "checkValidity(),constructor(),disabled[GSCE],elements[GCE],form[GCE],name[GSCE],reportValidity(),"
                 + "setCustomValidity(),type[GCE],validationMessage[GCE],validity[GCE],"
-                + "willValidate[GCE]",
-            IE = "align,checkValidity(),constructor,form,setCustomValidity(),validationMessage,validity,"
-                + "willValidate")
+                + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
                 + "setCustomValidity(),validity[GCE],willValidate[GCE]",
             EDGE = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
@@ -5557,26 +5433,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5798,26 +5655,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5958,10 +5796,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "acceptCharset[GSCE],action[GSCE],autocomplete[GSCE],checkValidity(),constructor(),elements[GCE],"
                 + "encoding[GSCE],enctype[GSCE],length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],"
                 + "relList[GSCE],reportValidity(),requestSubmit(),reset(),submit(),"
-                + "target[GSCE]",
-            IE = "acceptCharset,action,autocomplete,checkValidity(),constructor,elements,encoding,enctype,item(),"
-                + "length,method,name,namedItem(),noValidate,reset(),submit(),tags(),target,"
-                + "urns()")
+                + "target[GSCE]")
     @HtmlUnitNYI(CHROME = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
                 + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
                 + "requestSubmit(),reset(),submit(),target[GSCE]",
@@ -6109,27 +5944,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,"
-                + "isDisabled,isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),"
-                + "offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,"
-                + "onbeforeactivate,onbeforecopy,onbeforecut,onbeforedeactivate,onbeforepaste,onblur,"
-                + "oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncuechange,oncut,"
-                + "ondblclick,ondeactivate,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,"
-                + "ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onfocusin,onfocusout,onhelp,"
-                + "oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,"
-                + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
-                + "onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,onplay,"
-                + "onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
-                + "outerHTML,outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),"
-                + "removeNode(),replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),"
-                + "setActive(),setCapture(),sourceIndex,spellcheck,style,swapNode(),tabIndex,title,"
-                + "uniqueID,uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6252,11 +6067,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "src[GSCE]",
             FF_ESR = "constructor(),contentDocument[GCE],contentWindow[GCE],frameBorder[GSCE],longDesc[GSCE],"
                 + "marginHeight[GSCE],marginWidth[GSCE],name[GSCE],noResize[GSCE],scrolling[GSCE],"
-                + "src[GSCE]",
-            IE = "border,borderColor,constructor,contentDocument,contentWindow,frameBorder,frameSpacing,"
-                + "getSVGDocument(),height,longDesc,marginHeight,marginWidth,name,noResize,onload,scrolling,"
-                + "security,src,"
-                + "width")
+                + "src[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),contentDocument[GCE],contentWindow[GCE],name[GSCE],src[GSCE]",
             EDGE = "constructor(),contentDocument[GCE],contentWindow[GCE],name[GSCE],src[GSCE]",
             FF_ESR = "constructor(),contentDocument[GCE],contentWindow[GCE],name[GSCE],src[GSCE]",
@@ -6294,11 +6105,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],"
                 + "onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],onstorage[GSCE],"
                 + "onunhandledrejection[GSCE],onunload[GSCE],"
-                + "rows[GSCE]",
-            IE = "border,borderColor,cols,constructor,frameBorder,frameSpacing,name,onafterprint,onbeforeprint,"
-                + "onbeforeunload,onblur,onerror,onfocus,onhashchange,onload,onmessage,onoffline,ononline,"
-                + "onpagehide,onpageshow,onresize,onstorage,onunload,"
-                + "rows")
+                + "rows[GSCE]")
     @HtmlUnitNYI(CHROME = "cols[GSCE],constructor(),onafterprint[GSCE],onbeforeprint[GSCE],onbeforeunload[GSCE],"
                 + "onhashchange[GSCE],onlanguagechange[GSCE],onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],"
                 + "ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],"
@@ -6442,26 +6249,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6710,11 +6498,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "contentWindow[GCE],frameBorder[GSCE],getSVGDocument(),height[GSCE],longDesc[GSCE],"
                 + "marginHeight[GSCE],marginWidth[GSCE],name[GSCE],referrerPolicy[GSCE],sandbox[GSCE],"
                 + "scrolling[GSCE],src[GSCE],srcdoc[GSCE],"
-                + "width[GSCE]",
-            IE = "align,border,constructor,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),"
-                + "height,hspace,longDesc,marginHeight,marginWidth,name,noResize,onload,sandbox,scrolling,security,"
-                + "src,vspace,"
-                + "width")
+                + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "align[GSCE],constructor(),contentDocument[GCE],contentWindow[GCE],"
                 + "height[GSCE],name[GSCE],src[GSCE],width[GSCE]",
             EDGE = "align[GSCE],constructor(),contentDocument[GCE],contentWindow[GCE],"
@@ -6766,11 +6550,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "decode(),decoding[GSCE],height[GSCE],hspace[GSCE],isMap[GSCE],loading[GSCE],longDesc[GSCE],"
                 + "lowsrc[GSCE],name[GSCE],naturalHeight[GCE],naturalWidth[GCE],referrerPolicy[GSCE],sizes[GSCE],"
                 + "src[GSCE],srcset[GSCE],useMap[GSCE],vspace[GSCE],width[GSCE],x[GCE],"
-                + "y[GCE]",
-            IE = "align,alt,border,complete,constructor,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,"
-                + "fileUpdatedDate,height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
-                + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,"
-                + "protocol,src,start,useMap,vrml,vspace,width")
+                + "y[GCE]")
     @HtmlUnitNYI(CHROME = "align[GSCE],alt[GSCE],border[GSCE],complete[GCE],constructor(),height[GSCE],name[GSCE],"
                 + "naturalHeight[GCE],naturalWidth[GCE],src[GSCE],width[GSCE]",
             EDGE = "align[GSCE],alt[GSCE],border[GSCE],complete[GCE],constructor(),height[GSCE],name[GSCE],"
@@ -6844,12 +6624,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "align,alt,border,complete,constructor,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,"
-                + "fileUpdatedDate,height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
-                + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,protocol,src,"
-                + "start,useMap,vrml,vspace,"
-                + "width")
+                + "translate[GSCE]")
     @HtmlUnitNYI(FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -7951,26 +7726,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8094,10 +7850,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "behavior[GSCE],bgColor[GSCE],constructor(),direction[GSCE],height[GSCE],hspace[GSCE],loop[GSCE],"
                 + "onbounce[GSCE],onfinish[GSCE],onstart[GSCE],scrollAmount[GSCE],scrollDelay[GSCE],start(),stop(),"
                 + "trueSpeed[GSCE],vspace[GSCE],"
-                + "width[GSCE]",
-            IE = "behavior,bgColor,constructor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,"
-                + "scrollDelay,start(),stop(),trueSpeed,vspace,"
-                + "width")
+                + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "bgColor[GSCE],constructor(),height[GSCE],width[GSCE]",
             EDGE = "bgColor[GSCE],constructor(),height[GSCE],width[GSCE]",
             FF = "bgColor[GSCE],constructor(),height[GSCE],width[GSCE]",
@@ -8301,26 +8054,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8778,26 +8512,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9019,26 +8734,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9518,12 +9214,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getSVGDocument(),height[GSCE],hspace[GSCE],name[GSCE],reportValidity(),setCustomValidity(),"
                 + "standby[GSCE],type[GSCE],useMap[GSCE],validationMessage[GCE],validity[GCE],vspace[GSCE],"
                 + "width[GSCE],"
-                + "willValidate[GCE]",
-            IE = "align,alt,altHtml,archive,BaseHref,border,checkValidity(),classid,code,codeBase,codeType,"
-                + "constructor,contentDocument,data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,"
-                + "msPlayToPreferredSourceUri,msPlayToPrimary,name,namedRecordset(),object,readyState,recordset,"
-                + "setCustomValidity(),standby,type,useMap,validationMessage,validity,vspace,width,"
-                + "willValidate")
+                + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
                 + "name[GSCE],setCustomValidity(),validity[GCE],width[GSCE],willValidate[GCE]",
             EDGE = "align[GSCE],border[GSCE],checkValidity(),constructor(),form[GCE],height[GSCE],"
@@ -9581,9 +9272,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),defaultSelected[GSCE],disabled[GSCE],form[GCE],index[GCE],label[GSCE],"
                 + "selected[GSCE],text[GSCE],value[GSCE]",
             FF_ESR = "constructor(),defaultSelected[GSCE],disabled[GSCE],form[GCE],index[GCE],label[GSCE],"
-                + "selected[GSCE],text[GSCE],value[GSCE]",
-            IE = "constructor,defaultSelected[GSCE],form[GCE],index[GCE],label[GSCE],selected[GSCE],"
-                + "text[GSCE],value[GSCE]")
+                + "selected[GSCE],text[GSCE],value[GSCE]")
     @HtmlUnitNYI(CHROME = "constructor(),defaultSelected[GCE],disabled[GSCE],form[GCE],index[GCE],label[GSCE],"
                 + "selected[GSCE],text[GSCE],value[GSCE]",
             EDGE = "constructor(),defaultSelected[GCE],disabled[GSCE],form[GCE],index[GCE],label[GSCE],"
@@ -9679,10 +9368,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts[GCE],getEntries(),"
                 + "getEntriesByName(),getEntriesByType(),mark(),measure(),navigation[GCE],now(),"
                 + "onresourcetimingbufferfull[GSCE],setResourceTimingBufferSize(),timeOrigin[GCE],timing[GCE],"
-                + "toJSON()",
-            IE = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor,getEntries(),"
-                + "getEntriesByName(),getEntriesByType(),getMarks(),getMeasures(),mark(),measure(),"
-                + "navigation,now(),setResourceTimingBufferSize(),timing,toJSON()")
+                + "toJSON()")
     @HtmlUnitNYI(CHROME = "constructor(),getEntries(),getEntriesByName(),getEntriesByType(),"
                 + "navigation[GCE],now(),timing[GCE]",
             EDGE = "constructor(),getEntries(),getEntriesByName(),getEntriesByType(),"
@@ -11422,26 +11108,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11571,10 +11238,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],namedItem(),options[GCE],remove(),"
                 + "reportValidity(),required[GSCE],selectedIndex[GSCE],selectedOptions[GCE],setCustomValidity(),"
                 + "size[GSCE],type[GCE],validationMessage[GCE],validity[GCE],value[GSCE],"
-                + "willValidate[GCE]",
-            IE = "add(),autofocus,checkValidity(),constructor,form,item(),length,multiple,name,namedItem(),options,"
-                + "remove(),required,selectedIndex,setCustomValidity(),size,tags(),type,urns(),validationMessage,"
-                + "validity,value,willValidate")
+                + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "add(),checkValidity(),constructor(),disabled[GSCE],form[GCE],item(),"
                 + "labels[GCE],length[GSCE],multiple[GSCE],name[GSCE],options[GCE],remove(),required[GSCE],"
                 + "selectedIndex[GSCE],setCustomValidity(),size[GSCE],type[GCE],validity[GCE],value[GSCE],"
@@ -11604,10 +11268,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]",
             EDGE = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]",
             FF = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]",
-            FF_ESR = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]",
-            IE = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
-                    + "constructor(),hasOwnProperty(),isPrototypeOf(),propertyIsEnumerable(),"
-                    + "toLocaleString(),toString(),valueOf()")
+            FF_ESR = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]")
     @HtmlUnitNYI(CHROME = "add(),constructor(),item(),length[GSCE],remove(),selectedIndex[GSCE]",
             EDGE = "add(),constructor(),item(),length[GSCE],remove(),selectedIndex[GSCE]",
             FF_ESR = "add(),constructor(),item(),length[GSCE],remove(),selectedIndex[GSCE]",
@@ -13039,12 +12700,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "constructor(),createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
                 + "deleteRow(),deleteTFoot(),deleteTHead(),frame[GSCE],insertRow(),rows[GCE],rules[GSCE],"
                 + "summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],"
-                + "width[GSCE]",
-            IE = "align,background,bgColor,border,borderColor,borderColorDark,borderColorLight,caption,cellPadding,"
-                + "cells,cellSpacing,cols,constructor,createCaption(),createTBody(),createTFoot(),createTHead(),"
-                + "deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),frame,height,insertRow(),moveRow(),rows,"
-                + "rules,summary,tBodies,tFoot,tHead,"
-                + "width")
+                + "width[GSCE]")
     @HtmlUnitNYI(CHROME = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
                 + "constructor(),createCaption(),createTBody(),"
                 + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
@@ -13204,10 +12860,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "vAlign[GSCE]",
             FF_ESR = "align[GSCE],bgColor[GSCE],cells[GCE],ch[GSCE],chOff[GSCE],constructor(),deleteCell(),"
                 + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],"
-                + "vAlign[GSCE]",
-            IE = "align,bgColor,borderColor,borderColorDark,borderColorLight,cells,ch,chOff,constructor,"
-                + "deleteCell(),height,insertCell(),rowIndex,sectionRowIndex,"
-                + "vAlign")
+                + "vAlign[GSCE]")
     @HtmlUnitNYI(CHROME = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
                 + "rowIndex[GCE],sectionRowIndex[GCE]",
             EDGE = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
@@ -13252,11 +12905,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "readOnly[GSCE],reportValidity(),required[GSCE],rows[GSCE],select(),selectionDirection[GSCE],"
                 + "selectionEnd[GSCE],selectionStart[GSCE],setCustomValidity(),setRangeText(),setSelectionRange(),"
                 + "textLength[GCE],type[GCE],validationMessage[GCE],validity[GCE],value[GSCE],willValidate[GCE],"
-                + "wrap[GSCE]",
-            IE = "autofocus,checkValidity(),cols,constructor,createTextRange(),defaultValue,form,maxLength,name,"
-                + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,setCustomValidity(),"
-                + "setSelectionRange(),status,type,validationMessage,validity,value,willValidate,"
-                + "wrap")
+                + "wrap[GSCE]")
     @HtmlUnitNYI(CHROME = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
                 + "form[GCE],labels[GCE],"
                 + "maxLength[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
@@ -14212,26 +13861,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],onwebkitanimationstart[GSCE],"
                 + "onwebkittransitionend[GSCE],onwheel[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],"
                 + "tabIndex[GSCE],title[GSCE],"
-                + "translate[GSCE]",
-            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
-                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
-                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
-                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
-                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,isDisabled,"
-                + "isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),offsetHeight,"
-                + "offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,onbeforeactivate,onbeforecopy,"
-                + "onbeforecut,onbeforedeactivate,onbeforepaste,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,"
-                + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
-                + "onfocusin,onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,"
-                + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,"
-                + "onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
-                + "outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),removeNode(),"
-                + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
-                + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
-                + "uniqueNumber")
+                + "translate[GSCE]")
     @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -14402,14 +14032,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "showPicker(),size[GSCE],src[GSCE],step[GSCE],stepDown(),stepUp(),textLength[GCE],type[GSCE],"
                 + "useMap[GSCE],validationMessage[GCE],validity[GCE],value[GSCE],valueAsDate[GSCE],"
                 + "valueAsNumber[GSCE],webkitdirectory[GSCE],webkitEntries[GCE],width[GSCE],"
-                + "willValidate[GCE]",
-            IE = "accept,align,alt,autocomplete,autofocus,border,checked,checkValidity(),complete,constructor,"
-                + "createTextRange(),defaultChecked,defaultValue,dynsrc,files,form,formAction,formEnctype,"
-                + "formMethod,formNoValidate,formTarget,height,hspace,indeterminate,list,loop,lowsrc,max,maxLength,"
-                + "min,multiple,name,pattern,placeholder,readOnly,required,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),size,src,start,status,step,stepDown(),stepUp(),type,"
-                + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,"
-                + "willValidate")
+                + "willValidate[GCE]")
     @HtmlUnitNYI(CHROME = "accept[GSCE],align[GSCE],alt[GSCE],autocomplete[GSCE],checked[GSCE],checkValidity(),"
                 + "constructor(),defaultChecked[GSCE],defaultValue[GSCE],disabled[GSCE],files[GCE],form[GCE],"
                 + "formNoValidate[GSCE],height[GSCE],labels[GCE],max[GSCE],maxLength[GSCE],"
@@ -14597,10 +14220,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "DOM_VK_WIN_OEM_WSCTRL[E],DOM_VK_X[E],DOM_VK_Y[E],DOM_VK_Z[E],DOM_VK_ZOOM[E],getModifierState(),"
                 + "initKeyboardEvent(),isComposing[GCE],key[GCE],keyCode[GCE],location[GCE],metaKey[GCE],"
                 + "repeat[GCE],"
-                + "shiftKey[GCE]",
-            IE = "altKey,char,charCode,constructor,ctrlKey,DOM_KEY_LOCATION_JOYSTICK,DOM_KEY_LOCATION_LEFT,"
-                + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
-                + "getModifierState(),initKeyboardEvent(),key,keyCode,locale,location,metaKey,repeat,shiftKey,which")
+                + "shiftKey[GCE]")
     @HtmlUnitNYI(CHROME = "altKey[GCE],charCode[GCE],code[GCE],constructor(),ctrlKey[GCE],"
                 + "DOM_KEY_LOCATION_LEFT[E],DOM_KEY_LOCATION_NUMPAD[E],DOM_KEY_LOCATION_RIGHT[E],"
                 + "DOM_KEY_LOCATION_STANDARD[E],"
@@ -14722,11 +14342,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
                 + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
                 + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
-                + "type[GCE]",
-            IE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
-                + "constructor[],currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],initEvent(),"
-                + "preventDefault(),srcElement[GSCE],stopImmediatePropagation(),stopPropagation(),"
-                + "target[GCE],timeStamp[GCE],type[GCE]")
+                + "type[GCE]")
     @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
                 + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
                 + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
@@ -14880,10 +14496,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "constructor,height,hwTimestamp,initPointerEvent(),isPrimary,pointerId,pointerType,pressure,"
-                + "rotation,tiltX,tiltY,"
-                + "width")
+            FF_ESR = "exception")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
     }
@@ -14901,9 +14514,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E],wheelDelta[GCE],wheelDeltaX[GCE],"
                 + "wheelDeltaY[GCE]",
             FF = "exception",
-            FF_ESR = "exception",
-            IE = "constructor,deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,"
-                + "initWheelEvent()")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = "constructor(),DOM_DELTA_LINE[E],DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E]",
             EDGE = "constructor(),DOM_DELTA_LINE[E],DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E]")
     public void wheelEvent() throws Exception {
@@ -14939,10 +14550,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
                 + "mozInputSource[GCE],mozPressure[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],"
                 + "relatedTarget[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE],x[GCE],"
-                + "y[GCE]",
-            IE = "altKey,button,buttons,clientX,clientY,constructor,ctrlKey,fromElement,getModifierState(),"
-                + "initMouseEvent(),layerX,layerY,metaKey,offsetX,offsetY,pageX,pageY,relatedTarget,screenX,screenY,"
-                + "shiftKey,toElement,which,x,y")
+                + "y[GCE]")
     @HtmlUnitNYI(CHROME = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
                 + "initMouseEvent(),metaKey[GCE],pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
             EDGE = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
@@ -15051,12 +14659,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor(),data[GCE],initTextEvent()",
             EDGE = "constructor(),data[GCE],initTextEvent()",
             FF = "constructor(),data[GCE],initCompositionEvent(),locale[GCE]",
-            FF_ESR = "constructor(),data[GCE],initCompositionEvent(),locale[GCE]",
-            IE = "constructor,data,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
-                + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
-                + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE,"
-                + "initTextEvent(),inputMethod,"
-                + "locale")
+            FF_ESR = "constructor(),data[GCE],initCompositionEvent(),locale[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
             EDGE = "constructor(),data[GCE]",
             FF_ESR = "constructor(),data[GCE]",
@@ -15450,22 +15053,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwaiting[GSCE],onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],"
                 + "onwebkitanimationstart[GSCE],onwebkittransitionend[GSCE],onwheel[GSCE],ownerSVGElement[GCE],"
                 + "style[GSCE],tabIndex[GSCE],"
-                + "viewportElement[GCE]",
-            IE = "childElementCount,clientHeight,clientLeft,clientTop,clientWidth,constructor,firstElementChild,"
-                + "getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
-                + "getClientRects(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
-                + "lastElementChild,msContentZoomFactor,msGetRegionContent(),msGetUntransformedBounds(),"
-                + "msMatchesSelector(),msRegionOverflow,msReleasePointerCapture(),msRequestFullscreen(),"
-                + "msSetPointerCapture(),msZoomTo(),nextElementSibling,ongotpointercapture,onlostpointercapture,"
-                + "onmsgesturechange,onmsgesturedoubletap,onmsgestureend,onmsgesturehold,onmsgesturestart,"
-                + "onmsgesturetap,onmsgotpointercapture,onmsinertiastart,onmslostpointercapture,onmspointercancel,"
-                + "onmspointerdown,onmspointerenter,onmspointerleave,onmspointermove,onmspointerout,onmspointerover,"
-                + "onmspointerup,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
-                + "onpointerout,onpointerover,onpointerup,previousElementSibling,querySelector(),querySelectorAll(),"
-                + "releasePointerCapture(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),scrollHeight,"
-                + "scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
-                + "setAttributeNS(),setPointerCapture(),"
-                + "tagName")
+                + "viewportElement[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),onabort[GSCE],onauxclick[GSCE],onblur[GSCE],oncancel[GSCE],oncanplay[GSCE],"
                 + "oncanplaythrough[GSCE],onchange[GSCE],onclick[GSCE],onclose[GSCE],oncontextmenu[GSCE],"
                 + "oncopy[GSCE],oncuechange[GSCE],oncut[GSCE],ondblclick[GSCE],ondrag[GSCE],ondragend[GSCE],"
@@ -15579,13 +15167,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "intersectsNode(),isPointInRange(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),"
                 + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END[E],START_TO_START[E],"
                 + "surroundContents(),"
-                + "toString()",
-            IE = "cloneContents(),cloneRange(),collapse(),collapsed[GCE],commonAncestorContainer[GCE],"
-                + "compareBoundaryPoints(),constructor[],createContextualFragment(),deleteContents(),detach(),"
-                + "END_TO_END[E],END_TO_START[E],endContainer[GCE],endOffset[GCE],extractContents(),"
-                + "getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),selectNodeContents(),"
-                + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),"
-                + "START_TO_END[E],START_TO_START[E],startContainer[GCE],startOffset[GCE],surroundContents(),"
                 + "toString()")
     @HtmlUnitNYI(CHROME = "cloneContents(),cloneRange(),collapse(),commonAncestorContainer[GCE],"
                 + "compareBoundaryPoints(),constructor(),createContextualFragment(),deleteContents(),detach(),"
@@ -15862,9 +15443,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "REMOVAL[E]",
             FF_ESR = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor(),initMutationEvent(),MODIFICATION[E],"
                 + "newValue[GCE],prevValue[GCE],relatedNode[GCE],"
-                + "REMOVAL[E]",
-            IE = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor,initMutationEvent(),MODIFICATION[E],"
-                + "newValue[GCE],prevValue[GCE],relatedNode[GCE],REMOVAL[E]")
+                + "REMOVAL[E]")
     @HtmlUnitNYI(CHROME = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]",
             EDGE = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]",
             FF_ESR = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]",
@@ -16671,54 +16250,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "willChange[GSCE],word-break[GSCE],word-spacing[GSCE],word-wrap[GSCE],wordBreak[GSCE],"
                 + "wordSpacing[GSCE],wordWrap[GSCE],writing-mode[GSCE],writingMode[GSCE],x[GSCE],y[GSCE],"
                 + "z-index[GSCE],"
-                + "zIndex[GSCE]",
-            IE = "alignContent,alignItems,alignmentBaseline,alignSelf,animation,animationDelay,animationDirection,"
-                + "animationDuration,animationFillMode,animationIterationCount,animationName,animationPlayState,"
-                + "animationTimingFunction,backfaceVisibility,background,backgroundAttachment,backgroundClip,"
-                + "backgroundColor,backgroundImage,backgroundOrigin,backgroundPosition,backgroundRepeat,"
-                + "backgroundSize,baselineShift,border,borderBottom,borderBottomColor,borderBottomLeftRadius,"
-                + "borderBottomRightRadius,borderBottomStyle,borderBottomWidth,borderCollapse,borderColor,"
-                + "borderImage,borderImageOutset,borderImageRepeat,borderImageSlice,borderImageSource,"
-                + "borderImageWidth,borderLeft,borderLeftColor,borderLeftStyle,borderLeftWidth,borderRadius,"
-                + "borderRight,borderRightColor,borderRightStyle,borderRightWidth,borderSpacing,borderStyle,"
-                + "borderTop,borderTopColor,borderTopLeftRadius,borderTopRightRadius,borderTopStyle,borderTopWidth,"
-                + "borderWidth,bottom,boxShadow,boxSizing,breakAfter,breakBefore,breakInside,captionSide,clear,clip,"
-                + "clipPath,clipRule,color,colorInterpolationFilters,columnCount,columnFill,columnGap,columnRule,"
-                + "columnRuleColor,columnRuleStyle,columnRuleWidth,columns,columnSpan,columnWidth,constructor,"
-                + "content,counterIncrement,counterReset,cssFloat,cssText,cursor,direction,display,dominantBaseline,"
-                + "emptyCells,enableBackground,fill,fillOpacity,fillRule,filter,flex,flexBasis,flexDirection,"
-                + "flexFlow,flexGrow,flexShrink,flexWrap,floodColor,floodOpacity,font,fontFamily,"
-                + "fontFeatureSettings,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontVariant,fontWeight,"
-                + "getPropertyPriority(),getPropertyValue(),glyphOrientationHorizontal,glyphOrientationVertical,"
-                + "height,item(),justifyContent,kerning,left,length,letterSpacing,lightingColor,lineHeight,"
-                + "listStyle,listStyleImage,listStylePosition,listStyleType,margin,marginBottom,marginLeft,"
-                + "marginRight,marginTop,marker,markerEnd,markerMid,markerStart,mask,maxHeight,maxWidth,minHeight,"
-                + "minWidth,msAnimation,msAnimationDelay,msAnimationDirection,msAnimationDuration,"
-                + "msAnimationFillMode,msAnimationIterationCount,msAnimationName,msAnimationPlayState,"
-                + "msAnimationTimingFunction,msBackfaceVisibility,msContentZoomChaining,msContentZooming,"
-                + "msContentZoomLimit,msContentZoomLimitMax,msContentZoomLimitMin,msContentZoomSnap,"
-                + "msContentZoomSnapPoints,msContentZoomSnapType,msFlex,msFlexAlign,msFlexDirection,msFlexFlow,"
-                + "msFlexItemAlign,msFlexLinePack,msFlexNegative,msFlexOrder,msFlexPack,msFlexPositive,"
-                + "msFlexPreferredSize,msFlexWrap,msFlowFrom,msFlowInto,msFontFeatureSettings,msGridColumn,"
-                + "msGridColumnAlign,msGridColumns,msGridColumnSpan,msGridRow,msGridRowAlign,msGridRows,"
-                + "msGridRowSpan,msHighContrastAdjust,msHyphenateLimitChars,msHyphenateLimitLines,"
-                + "msHyphenateLimitZone,msHyphens,msImeAlign,msOverflowStyle,msPerspective,msPerspectiveOrigin,"
-                + "msScrollChaining,msScrollLimit,msScrollLimitXMax,msScrollLimitXMin,msScrollLimitYMax,"
-                + "msScrollLimitYMin,msScrollRails,msScrollSnapPointsX,msScrollSnapPointsY,msScrollSnapType,"
-                + "msScrollSnapX,msScrollSnapY,msScrollTranslation,msTextCombineHorizontal,msTextSizeAdjust,"
-                + "msTouchAction,msTouchSelect,msTransform,msTransformOrigin,msTransformStyle,msTransition,"
-                + "msTransitionDelay,msTransitionDuration,msTransitionProperty,msTransitionTimingFunction,"
-                + "msUserSelect,msWrapFlow,msWrapMargin,msWrapThrough,opacity,order,orphans,outline,outlineColor,"
-                + "outlineStyle,outlineWidth,overflow,overflowX,overflowY,padding,paddingBottom,paddingLeft,"
-                + "paddingRight,paddingTop,pageBreakAfter,pageBreakBefore,pageBreakInside,parentRule,perspective,"
-                + "perspectiveOrigin,pointerEvents,position,quotes,removeProperty(),right,rubyAlign,rubyOverhang,"
-                + "rubyPosition,setProperty(),stopColor,stopOpacity,stroke,strokeDasharray,strokeDashoffset,"
-                + "strokeLinecap,strokeLinejoin,strokeMiterlimit,strokeOpacity,strokeWidth,tableLayout,textAlign,"
-                + "textAlignLast,textAnchor,textDecoration,textIndent,textJustify,textOverflow,textShadow,"
-                + "textTransform,textUnderlinePosition,top,touchAction,transform,transformOrigin,transformStyle,"
-                + "transition,transitionDelay,transitionDuration,transitionProperty,transitionTimingFunction,"
-                + "unicodeBidi,verticalAlign,visibility,whiteSpace,widows,width,wordBreak,wordSpacing,wordWrap,"
-                + "zIndex")
+                + "zIndex[GSCE]")
     @HtmlUnitNYI(CHROME = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],"
                 + "backgroundPosition[GSCE],backgroundRepeat[GSCE],borderBottomColor[GSCE],borderBottomStyle[GSCE],"
                 + "borderBottomWidth[GSCE],borderLeftColor[GSCE],borderLeftStyle[GSCE],borderLeftWidth[GSCE],"
@@ -17352,11 +16884,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "willChange[GSCE],word-break[GSCE],word-spacing[GSCE],word-wrap[GSCE],wordBreak[GSCE],"
                 + "wordSpacing[GSCE],wordWrap[GSCE],writing-mode[GSCE],writingMode[GSCE],x[GSCE],y[GSCE],"
                 + "z-index[GSCE],"
-                + "zIndex[GSCE]",
-            IE = "constructor,pixelBottom,pixelHeight,pixelLeft,pixelRight,pixelTop,pixelWidth,posBottom,posHeight,"
-                + "posLeft,posRight,posTop,posWidth,textDecorationBlink,textDecorationLineThrough,"
-                + "textDecorationNone,textDecorationOverline,"
-                + "textDecorationUnderline")
+                + "zIndex[GSCE]")
     @HtmlUnitNYI(CHROME = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],"
                 + "backgroundPosition[GSCE],backgroundRepeat[GSCE],borderBottomColor[GSCE],borderBottomStyle[GSCE],"
                 + "borderBottomWidth[GSCE],borderLeftColor[GSCE],borderLeftStyle[GSCE],borderLeftWidth[GSCE],"
@@ -17424,9 +16952,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "assign(),constructor[],hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],"
-                + "origin[GCE],pathname[GSCE],port[GSCE],protocol[GSCE],reload(),replace(),search[GSCE],toString()")
+            FF_ESR = "constructor()")
     public void location() throws Exception {
         testString("", "window.location");
         testString("", "document.location");
@@ -17451,12 +16977,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "availHeight[GCE],availLeft[GCE],availTop[GCE],availWidth[GCE],colorDepth[GCE],constructor(),"
                 + "height[GCE],left[GCE],mozLockOrientation(),mozOrientation[GCE],mozUnlockOrientation(),"
                 + "onmozorientationchange[GSCE],orientation[GCE],pixelDepth[GCE],top[GCE],"
-                + "width[GCE]",
-            IE = "addEventListener(),availHeight[GCE],availWidth[GCE],bufferDepth[GSCE],colorDepth[GCE],"
-                + "constructor[],deviceXDPI[GCE],deviceYDPI[GCE],dispatchEvent(),fontSmoothingEnabled[GCE],"
-                + "height[GCE],logicalXDPI[GCE],logicalYDPI[GCE],msLockOrientation(),msOrientation[GCE],"
-                + "msUnlockOrientation(),onmsorientationchange[GSCE],pixelDepth[GCE],removeEventListener(),"
-                + "systemXDPI[GCE],systemYDPI[GCE],width[GCE]")
+                + "width[GCE]")
     @HtmlUnitNYI(FF = "availHeight[GCE],availLeft[GCE],availTop[GCE],availWidth[GCE],colorDepth[GCE],constructor(),"
                 + "height[GCE],left[GCE],mozOrientation[GCE],orientation[GCE],pixelDepth[GCE],top[GCE],width[GCE]",
             FF_ESR = "availHeight[GCE],availLeft[GCE],availTop[GCE],availWidth[GCE],colorDepth[GCE],constructor(),"
@@ -17622,8 +17143,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),getNamedItem(),getNamedItemNS(),item(),length[GCE],removeNamedItem(),"
                 + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
             FF_ESR = "constructor(),getNamedItem(),getNamedItemNS(),item(),length[GCE],removeNamedItem(),"
-                + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
-            IE = "constructor[],getNamedItem(),getNamedItemNS(),item(),length[GCE],removeNamedItem(),"
                 + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()")
     public void namedNodeMap() throws Exception {
         testString("", "element.attributes");
@@ -17663,10 +17182,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "addRule(),constructor(),cssRules[GCE],deleteRule(),insertRule(),"
-                + "ownerRule[GCE],removeRule(),replace(),replaceSync(),rules[GCE]",
-            IE = "addRule(),constructor[],cssRules[GCE],deleteRule(),href[GCE],insertRule(),"
-                + "ownerNode[GCE],owningElement[GCE],removeRule(),rules[GCE]")
+    @Alerts("addRule(),constructor(),cssRules[GCE],deleteRule(),insertRule(),"
+                + "ownerRule[GCE],removeRule(),replace(),replaceSync(),rules[GCE]")
     @HtmlUnitNYI(CHROME = "addRule(),constructor(),cssRules[GCE],deleteRule(),"
                 + "insertRule(),removeRule(),rules[GCE]",
             EDGE = "addRule(),constructor(),cssRules[GCE],deleteRule(),"

@@ -49,8 +49,7 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"button.x#100", "button.y#200", "button#foo"},
             FF = {"button.x#100", "button.y#200"},
-            FF_ESR = {"button.x#100", "button.y#200"},
-            IE = {"button.x#100", "button.y#200"})
+            FF_ESR = {"button.x#100", "button.y#200"})
     public void click_WithPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"

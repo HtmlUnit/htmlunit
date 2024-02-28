@@ -215,8 +215,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<foo/>\\r\\n", "<foo/>"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void document() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -237,8 +236,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<img/>", "<?myTarget myData?>"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void xml() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"

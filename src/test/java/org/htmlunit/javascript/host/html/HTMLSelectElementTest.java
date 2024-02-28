@@ -1666,8 +1666,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"2-2", "1-1", "2-2", "0-0", "2-2", "1-1"})
+    @Alerts(DEFAULT = "exception")
     public void optionsDelegateToSelect() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

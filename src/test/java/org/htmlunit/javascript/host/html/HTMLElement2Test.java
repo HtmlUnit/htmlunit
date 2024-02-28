@@ -1014,8 +1014,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"before\\nsvg-text\\nafter", "before\\nsvg-text\\nafter"},
             FF = {"beforesvg-textafter", "beforesvg-textafter"},
-            FF_ESR = {"beforesvg-textafter", "beforesvg-textafter"},
-            IE = {"beforesvg-titlesvg-textafter", "beforesvg-titlesvg-textafter"})
+            FF_ESR = {"beforesvg-textafter", "beforesvg-textafter"})
     public void innerText_SVG() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

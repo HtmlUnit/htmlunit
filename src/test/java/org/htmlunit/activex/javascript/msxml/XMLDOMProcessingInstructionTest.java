@@ -59,8 +59,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"1", "version=1.0"})
+    @Alerts(DEFAULT = "no ActiveX")
     // DOM processing instructions do not support attributes
     public void attributes_xmlDecl() throws Exception {
         final String test = ""
@@ -74,8 +73,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"3", "version=1.0", "encoding=utf-8", "standalone=yes"})
+    @Alerts(DEFAULT = "no ActiveX")
     // DOM processing instructions do not support attributes
     public void attributes_complete_xmlDecl() throws Exception {
         final String html = ""

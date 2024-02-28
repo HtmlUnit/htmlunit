@@ -156,8 +156,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"null", "exception-setNull", "exception-setEmpty", "exception-set"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void nodeValue() throws Exception {
         final String test = ""
             + "log(doctype.nodeValue);\n"
@@ -226,8 +225,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"exception-set", "exception-setEmpty", "exception-setNull"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void text_set() throws Exception {
         final String test =
             // normal

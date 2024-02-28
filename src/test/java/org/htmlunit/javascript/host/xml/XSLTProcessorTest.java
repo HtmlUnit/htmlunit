@@ -191,8 +191,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function XSLTProcessor() { [native code] }",
-                       "[object XSLTProcessor]"},
-            IE = {"undefined", "exception"})
+                       "[object XSLTProcessor]"})
     public void type() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

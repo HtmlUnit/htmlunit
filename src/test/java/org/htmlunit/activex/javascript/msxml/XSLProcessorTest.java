@@ -157,8 +157,7 @@ public class XSLProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"preparation done", "exception"})
+    @Alerts(DEFAULT = "no ActiveX")
     public void testSecurity() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

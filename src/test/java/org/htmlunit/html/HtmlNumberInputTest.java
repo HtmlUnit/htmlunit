@@ -676,8 +676,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"8-8-8-true", "-\\s\\s-\\s\\s-true",
                        "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
-                       "-\\s3\\s9\\s-\\s3\\s9\\s-true"},
-            IE = {"8-8-8-true", "---true", "---true", "\\s3\\s9\\s-\\s3\\s9\\s-\\s3\\s9\\s-true"})
+                       "-\\s3\\s9\\s-\\s3\\s9\\s-true"})
     public void defaultValuesBlankValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1121,8 +1120,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"--null-true", "4", "4--null-true", "4", "4--null-true"},
             FF = {"--null-true", "4", "4--null-true", "", "--null-false"},
-            FF_ESR = {"--null-true", "4", "4--null-true", "", "--null-false"},
-            IE = {"--null-true", "4", "4--null-true", "4a", "4a--null-true"})
+            FF_ESR = {"--null-true", "4", "4--null-true", "", "--null-false"})
     @HtmlUnitNYI(FF = {"--null-true", "4", "4--null-true", "4a", "--null-false"},
             FF_ESR = {"--null-true", "4", "4--null-true", "4a", "--null-false"})
     public void typeInvalidChars() throws Exception {
@@ -1166,8 +1164,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-true"},
             FF = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
-            FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
-            IE = {"012", "012-0-0-true", "", "-0-0-true", "", "-0-0-true"})
+            FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"})
     @HtmlUnitNYI(FF = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
             FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"})
     public void typeCharsAndClear() throws Exception {
@@ -1399,8 +1396,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                       "null,null", "exception", "null,null"},
-            IE = {"0,0", "0,0", "3,3", "3,10"})
+                       "null,null", "exception", "null,null"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -1410,8 +1406,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                       "null,null", "exception", "null,null"},
-            IE = {"0,0", "0,0", "0,0", "0,11"})
+                       "null,null", "exception", "null,null"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -1421,8 +1416,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                       "null,null", "exception", "null,null"},
-            IE = {"0,0", "0,0", "10,10", "5,5"})
+                       "null,null", "exception", "null,null"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }

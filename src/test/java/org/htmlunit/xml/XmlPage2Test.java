@@ -58,8 +58,7 @@ public class XmlPage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  { "true", "14"},
-            IE = {"true", "15"})
+    @Alerts(DEFAULT =  { "true", "14"})
     public void createElement() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
