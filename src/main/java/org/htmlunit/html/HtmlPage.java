@@ -14,7 +14,7 @@
  */
 package org.htmlunit.html;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
@@ -85,7 +85,6 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
-import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.SerializableLock;
 import org.htmlunit.util.UrlUtils;
@@ -1067,6 +1066,8 @@ public class HtmlPage extends SgmlPage {
 
         request.setRefererlHeader(referringRequest.getUrl());
         request.setCharset(scriptCharset);
+        // https://www.rfc-editor.org/rfc/rfc9239#section-4.2
+        request.setDefaultResponseContentCharset(UTF_8);
 
         // our cache is a bit strange;
         // loadWebResponse check the cache for the web response
@@ -1108,19 +1109,8 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        Charset scriptEncoding = Charset.forName("windows-1252");
-        final Charset contentCharset = EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
-        if (contentCharset == null) {
-            // use info from script tag or fall back to utf-8
-            if (scriptCharset != null && ISO_8859_1 != scriptCharset) {
-                scriptEncoding = scriptCharset;
-            }
-        }
-        else if (ISO_8859_1 != contentCharset) {
-            scriptEncoding = contentCharset;
-        }
-
-        final String scriptCode = response.getContentAsString(scriptEncoding, false);
+        final Charset scriptEncoding = response.getContentCharset();
+        final String scriptCode = response.getContentAsString(scriptEncoding);
         if (null != scriptCode) {
             final AbstractJavaScriptEngine<?> javaScriptEngine = client.getJavaScriptEngine();
             final Scriptable scope = getEnclosingWindow().getScriptableObject();
