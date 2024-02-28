@@ -33,8 +33,7 @@ public class IntersectionObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"
@@ -57,8 +56,7 @@ public class IntersectionObserverTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function", "function", "function", "function"},
-            IE = "no IntersectionObserver")
+    @Alerts({"function", "function", "function", "function"})
     public void functions() throws Exception {
         final String html =
             "<html><head><script>\n"

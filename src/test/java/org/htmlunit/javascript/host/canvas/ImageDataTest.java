@@ -33,11 +33,10 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"8", "1", "2",
-                       "0", "190", "3", "255", "0", "190", "3", "255",
-                       "8", "2", "1",
-                       "0", "190", "3", "255", "0", "190", "3", "255"},
-            IE = "no ctor")
+    @Alerts({"8", "1", "2",
+             "0", "190", "3", "255", "0", "190", "3", "255",
+             "8", "2", "1",
+             "0", "190", "3", "255", "0", "190", "3", "255"})
     public void ctorArray() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -85,9 +84,8 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"8", "1", "2",
-                       "0", "190", "3", "255", "0", "190", "3", "255"},
-            IE = "no ctor")
+    @Alerts({"8", "1", "2",
+             "0", "190", "3", "255", "0", "190", "3", "255"})
     public void ctorArrayWidthHeight() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -174,8 +172,7 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"8", "2", "1", "0", "0", "0", "0", "0", "0", "0", "0"},
-            IE = "no ctor")
+    @Alerts({"8", "2", "1", "0", "0", "0", "0", "0", "0", "0", "0"})
     public void ctorWidthHeight() throws Exception {
         final String html =
             "<html><head><script>\n"

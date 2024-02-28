@@ -173,8 +173,7 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1px xyz", "1px xyz",
-                       "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"})
+    @Alerts({"1px xyz", "1px xyz", "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"})
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
     }

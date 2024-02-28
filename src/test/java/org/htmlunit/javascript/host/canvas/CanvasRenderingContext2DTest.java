@@ -88,10 +88,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
-                       "scrollPathIntoView", "36 methods"},
-            IE = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
-                  "removeHitRegion", "scrollPathIntoView", "35 methods"})
+    @Alerts({"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
+             "scrollPathIntoView", "36 methods"})
     public void methods() throws Exception {
         final String[] methods = {"addHitRegion", "arc", "arcTo", "beginPath", "bezierCurveTo", "clearRect", "clip",
             "closePath", "createImageData", "createLinearGradient", "createPattern", "createRadialGradient",
@@ -193,19 +191,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                     + "oTUpRjRfTAUdQcPWw+xNoTA3ixHINTqdTrycdODF1DpWN3iIYgAGSoXqFBNupB3B4UNmUFoKr3v6dlLo6LQVXiouZCTZiCR"
                     + "njuOw6mbxY8UL4o/EgzTMJqILmoZWoyHRqPD0la3iWk11sIgP2x4XXa+9OiA1QUjKstZJ/gqif6XUXJL9V6nUEw9a2yrvNN"
                     + "R3yQCr1ZpUV9/QfsBkDN/uNPlPsCf3d6bb7d5obrp1c2FhYVI+1tLSona5XJqgcyxiY3c37N71/Py8vJGcnMzX1dVt/QNcN"
-                    + "Toga4nOWgAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                    + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKeSURBVDhP"
-                    + "jVJNTxNRFD3zTSm1UyKlCsEIRCC6EVFijC5MFE1kqTv1B+jChXsSE6Nx48qYsDPRxI0rjR8JGDFGhRBRdiAhliKlLVRmhmk7"
-                    + "nS/vey0IO8/Me2/m3nfuue++K4Dwen5ek5dXb6maFhdFEfSCO3YiAIqmNTc8dPZJ3cLB9716N37mxLGjE57nQxAEGszBVv5R"
-                    + "W8OQAgv4PDX9aPjCuZucTSAtYLNcloIggE+DrUEQIiBCEAbEC/lgUWVZwqnBgRsvXr59wNkEHkCmZ1uZrwKymx5m1zz8KHhI"
-                    + "Gy63bRgmcrk8jvR03X4zNta/HYCBbRAFER6ddSJTwawdgSU3w5R1FH0Vk8s2JC2KVGofWpNJYcN09jPevwBsUJDplRLWiSCI"
-                    + "KtQGGQfiIlJRCU2ahPeLJiRJhKZpNRJhOwCxYVV9fM1WsLLpwvE8eK6PtqiIUKwdEUEVSxsO37uFXRnkrCrKrktEBzmjBMu2"
-                    + "IQQeuvYIiIgBvq2WsLBWqgWrY0cN2E2F6Iy4uNotohFlTC0VcedDBpPpIpaLFmZ+G/w6d/B3H6FD1/ApbaCw/gdTiznMrazh"
-                    + "Z3Yd39MFjM/l4Fcd9LZEeLZbkLdmZlTEEKdTEh5+WcVMoQpFZu4QjzM+787LfQm0NEpcjFqCo5YBFYwZVUXFUG8rBtsasZcK"
-                    + "7VcrcCsVqHT+K306rg+0QWvQSIzkfM6sZVCpeNwok2IymcS1k024dNjCQsGmbgS6kzGkmmOIxWIkopCWAMeh2yDwDIrFPC+s"
-                    + "QL2uKDJ0PY7Ojnac7z+Ei8d70HOwHYlEgmcoULOxvfl8lpeCZ/Ds+dNMQo9/bNYTUfbPwd18qs91kKRhGuX7d+/9Yr/cNzIy"
-                    + "IpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC")
+                    + "Toga4nOWgAAAABJRU5ErkJggg==")
     public void drawImage() throws Exception {
         drawImage("html.png",
                 "canvas.width = img.width; canvas.height = img.height;\n",
@@ -279,10 +265,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
-                + "/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==")
     // The output depends on the deflation algorithm
     // check the output of: $pngcheck -v file.png
     // chrome gives: zlib: deflated, 256-byte window, fast compression
@@ -304,10 +287,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
-                + "/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==")
     public void drawImage_1x1_24bits() throws Exception {
         drawImage("1x1red_24_bit_depth.png",
                 "canvas.width = img.width; canvas.height = img.height;\n",
@@ -326,10 +306,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQIW2P8z8Dwn5GBAYggAM4gXgAAg+YCBUgKw5EAAAAA"
-                + "SUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
-                + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
+                + "SUVORK5CYII=")
     public void drawImage3Arguments() throws Exception {
         drawImage("1x1red_32_bit_depth.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -348,10 +325,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "AABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQIW2NkQAOMWAX+MzD8B8qAJTFUAAA35gIFxQ+VugAA"
-                + "AABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
-                + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
+                + "AABJRU5ErkJggg==")
     public void drawImage3ArgumentsPlacement() throws Exception {
         drawImage("1x1red_32_bit_depth.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -371,10 +345,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "GTbljoocd5Q/XmoDijQRBTzmAeYAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAL0lEQVQIWzXI0REAEBAD0Y1OVCqd6kQ4w/vaWQXS0lmaCCTb"
-                + "GTbljoocd5Q/XmoDijQRBTzmAeYAAAAASUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqSURBVBhXY/jP"
-                + "AET/Ff+DaRBoaGgAc+ACIPAfCkBsJrAIEDAyMgJJBgYAY/AUlK91orEAAAAASUVORK5CYII=")
+                + "GTbljoocd5Q/XmoDijQRBTzmAeYAAAAASUVORK5CYII=")
     public void drawImage3ArgumentsPlacementNegative() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -393,10 +364,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "Lcf9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAK0lEQVQIWy3IsRUAEBQEwd1SJOr8uvQkOnECJhzpSZYYCBM0"
-                + "Lcf9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2B"
-                + "Q+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
+                + "Lcf9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==")
     public void drawImage3ArgumentsImageTooLarge() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 2; canvas.height = 5;\n",
@@ -415,10 +383,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQIW2P8z8Dwn5GBAYggAM4gXgAAg+YCBUgKw5EAAAAA"
-                + "SUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
-                + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
+                + "SUVORK5CYII=")
     public void drawImage5Arguments() throws Exception {
         drawImage("1x1red_32_bit_depth.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -437,10 +402,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "AABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQIW2NkQAOMWAX+MzD8B8qAJTFUAAA35gIFxQ+VugAA"
-                + "AABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
-                + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
+                + "AABJRU5ErkJggg==")
     public void drawImage5ArgumentsPlacement() throws Exception {
         drawImage("1x1red_32_bit_depth.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -459,10 +421,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "CwUd8tccAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJElEQVQIW2P8f4PhP6MGAyMDFDD+ZwAKMOAV+P//PyMQwLQAAJ81"
-                + "CwUd8tccAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAfSURBVBhXY/h"
-                + "/g+E/AzIA8lAEmKA0HDAx/EdWwMAAADhoBtfglrXyAAAAAElFTkSuQmCC")
+                + "CwUd8tccAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsPlacementNegative() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -481,10 +440,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "RU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFklEQVQIW2P8z8AARAjAiMwBsQkLAACDawID+0h1rgAAAABJ"
-                + "RU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhXY/z"
-                + "PwABEFAAGBgCDBQIA1ym4lAAAAABJRU5ErkJggg==")
+                + "RU5ErkJggg==")
     public void drawImageStretch() throws Exception {
         drawImage("1x1red_32_bit_depth.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -503,10 +459,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAK0lEQVQIWy3IsRUAEBQEwd1SJOr8uvQkOnECJhzpSZYYCBM0Lcf"
-                + "9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2B"
-                + "Q+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
+                + "9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==")
     public void drawImage5ArgumentsImageTooLarge() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 2; canvas.height = 5;\n",
@@ -528,11 +481,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAkUlEQVQYV62PwQ0CMQwE7RIQDYQPooL7nguih8g9UJDpJA2c"
                 + "+AE/s3ai04GExAMrkbPWeLVh+rE4uaO73I3qoil1X7OHlocRIE7Q40x4nIf9ZfTQmPNpgOwHn+1JVW/dse66I7Rg/ubYSqGr"
-                + "SAKzGZXW1vQruP2PI26Y4fYtFEdtocw7QDMTVSX0zn6C3/T/wRfzizALwpK/7gAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACCSURBVChTvY7"
-                + "BDcIwDEV/OLUjIHFIL6gTcMXZh3HYx2GTTBL327SoUrlw4SmO/3esr+A3rmZyUdNRolxv3gAeIPkV5kbxcEeea3fPeZrfe1ybTP"
-                + "RsKkOU680fElvOeIm4xb1W5NZCO1xaE3cYv9t7V/YPPj/F6xcqU0spSOkY9leABXrPQu6AWg+SAAAAAElFTkSuQmCC")
+                + "SAKzGZXW1vQruP2PI26Y4fYtFEdtocw7QDMTVSX0zn6C3/T/wRfzizALwpK/7gAAAABJRU5ErkJggg==")
     public void drawImage5ArgumentsStretchX() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -552,10 +501,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "YYPAf/sDBgwHHS4w1Dd8AKnCrhCm8z8QNDY2AjU24FeIz7kYOnEpHgoKAc8UFQug8KnwAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQYV2NkIBIwgtQ1CDf8r49sYGhc3sAAohmnMIDFkQFE"
-                + "YYPAf/sDBgwHHS4w1Dd8AKnCrhCm8z8QNDY2AjU24FeIz7kYOnEpHgoKAc8UFQug8KnwAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA1SURBVChTYyA"
-                + "JNAg3/P+fw/AfRkOFUQATmMydwHDgigOYZpgCFsEP/gNBQ0MDVhNHImBgAADHvxPYgDOEzgAAAABJRU5ErkJggg==")
+                + "YYPAf/sDBgwHHS4w1Dd8AKnCrhCm8z8QNDY2AjU24FeIz7kYOnEpHgoKAc8UFQug8KnwAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsShrinkY() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -574,10 +520,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "cOD4LyDxDyi1X/K/wb1fDACPgxG6JQ+97QAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAANElEQVQIW2NkUPv/3+HbAQZGB5n9/w3YLzAw7ud0+C+g/gHI"
-                + "cOD4LyDxDyi1X/K/wb1fDACPgxG6JQ+97QAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA0SURBVBhXY2R"
-                + "Q+//f4dsBBiYQYcB+gYFxP6fDfwH1DwwsDOYnGBgk/jEwOuyX/G9w7xcDAHxREIP4we06AAAAAElFTkSuQmCC")
+                + "cOD4LyDxDyi1X/K/wb1fDACPgxG6JQ+97QAAAABJRU5ErkJggg==")
     public void drawImage5ArgumentsStretchImageTooLarge() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 2; canvas.height = 5;\n",
@@ -599,11 +542,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAX0lEQVQYV7WQQQqAMBADE3/SS+kvrb8UL/7EmIp62kovBkJg"
                 + "GXbDEoPiIIc/wCxpI5iFKxFfoQBhddNiO1k6IJV0cMekhJafG5daMdtNXfB5j5u6hUEretk7bODNhOAJzrgfCzJhsNQAAAAA"
-                + "SUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABHSURBVChTYxgS"
-                + "QO3///8MDP/hNC4Akvx/A4ihNFQYC/ivCDEJRuMCIMmGhgaIifgUwgDQhWAA5WIAJigNBoyMjFAWOmBgAAAEXSqdGQ47LgAAAABJ"
-                + "RU5ErkJggg==")
+                + "SUVORK5CYII=")
     public void drawImage5ArgumentsNegativeWidth() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -626,11 +565,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAX0lEQVQYV8WOQQqAMBADE3/SS+kvrb8UL/7EmJYKRap4M+w2"
                 + "sAxNiLuipI1gFKqjTHt6VoCw+pK8dqYHkAo6uGNSQPHXH5ecMXtb5Dj6quGmbuFoa9ixB3um0l/0I3gCu8YfCw1yrNcAAAAA"
-                + "SUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABGSURBVChTY8AA"
-                + "av///2dg+A+ncQGQ5P8bQAylocJYwH9FiEkwGhcASTY0NEBMxKcQBoAuBAMol4EJSmMFjIyMUNZQAAwMAKgVKp2FLYz1AAAAAElF"
-                + "TkSuQmCC")
+                + "SUVORK5CYII=")
     public void drawImage5ArgumentsNegativeHeight() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -652,10 +587,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAY0lEQVQYV6WQXQqAMAyDE2+yl+EtnbcUX7yJMf7BYJsMLJQ89KNJ"
                 + "S3QWOzmUYJS0EozCpbiZAhQgLJ6MbivHBkgF7dwwKODUz41zSpjcj2Xd+j3OSZ3C1q5qxhzMmR/vaTz2AM0wHwuiBt/PAAAAAElF"
-                + "TkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABGSURBVChTY6AD"
-                + "UPv//z8Dw384jQuAJP/fAGIoDRXGAv4rQkyC0bgASLKhoQFiIj6FMAB0IRhAuQxMUBorYGRkhLKoDxgYAAFaKp1TOe14AAAAAElF"
                 + "TkSuQmCC")
     public void drawImage9Arguments() throws Exception {
         drawImage("4x6.png",
@@ -678,11 +609,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAiUlEQVQYV2M8FcD+nwEIpkXwgSiGBRGvGcEMNMC4IcAErPCB"
                 + "wgsGgQ8fGBIWfMGucEFCwhVWDg5u+2vXRKXfvuVmvHoVh8L4eG3TiAhTFQmJLDZWVlNGHR3sCkHW/v//3wFI1T948MBBUVGR"
-                + "sMIDBw44ODo64laIzZcYviZGEUgNVmuwhiOxJgIAFNAnC2GN/IoAAAAASUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABzSURBVChTYzwV"
-                + "wP6fAQimRfCBKIYFEa8ZwQw0wPSUQZcBhPVPsDPY7/gOFcYETB8EdK5+lTB5EHJW8WvCaXmoMBawIC5O+8r27Qk/zp8/9f/KFbAz"
-                + "cIL///87/Pv3b//9+/dxKmSC0mDw4MEDKGsoAgYGAFZxKhyfkxO8AAAAAElFTkSuQmCC")
+                + "sMIDBw44ODo64laIzZcYviZGEUgNVmuwhiOxJgIAFNAnC2GN/IoAAAAASUVORK5CYII=")
     public void drawImage9ArgumentsCrop() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -704,8 +631,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAX0lEQVQYV2NkIBIwEqmOYegqVP+fn/hhoVbduwYGxd8P0kEe"
                 + "xuqZbPGpq8wlT4R6KW1jEFn3FqwGq8IDjpyrxFX+hCoY/mHgzPqPW6H4K7lVQWt+hhZM+MagfuszWCEAHxEcC87YTb4AAAAA"
-                + "SUVORK5CYII=",
-            IE = {})
+                + "SUVORK5CYII=")
     public void drawImage9ArgumentsCropNegativStart() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -724,8 +650,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQYV2NkIBIwEqmOYVQh3pAiOngACmkAC8i6MuwAAAAA"
-                + "SUVORK5CYII=",
-            IE = {})
+                + "SUVORK5CYII=")
     public void drawImage9ArgumentsCropNegativWidth() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -744,10 +669,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "cNhvz8DgwHjgAH6FINPmz5//PzExkbBCfG6DyeE1BdmAoaAQAGtwEAvm0nZdAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQYV2Ocr5nwnwEIEq8vYATRuADjgmoesMKE1i/4FR5w"
-                + "cNhvz8DgwHjgAH6FINPmz5//PzExkbBCfG6DyeE1BdmAoaAQAGtwEAvm0nZdAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAvSURBVChTY5iv"
-                + "mfAfhBkIACaGoDUMYEwIHHBw2P/fwYGgiWAwf/584hSOMMDAAAB1Kw2mrjRWYgAAAABJRU5ErkJggg==")
+                + "cNhvz8DgwHjgAH6FINPmz5//PzExkbBCfG6DyeE1BdmAoaAQAGtwEAvm0nZdAAAAAElFTkSuQmCC")
     public void drawImage9ArgumentsStretch() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -769,11 +691,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAaklEQVQYV2NkIBIwEqmOAUPhfwYGVahmTqDkJZhBKAqBiryA"
                 + "EnlALArEi4CSE3EpfAuU4Abiv0B8GajQAkMh0DQboOBKqGm/gfRFIPYBKn4HUoxudTVQLBSIzwFxCUwRhkJ8IUB+8OAyFQDU"
-                + "0xILsSkm0QAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABdSURBVChT"
-                + "Y6A6YITScPCPgUEVyuRkYmC4BGWjAqAiLyDeAcRngTgfKowJgJJvgfgHEH8F4hNQYTAAmg4B/xkYbIDUDyCGif0DKhaCslEB"
-                + "UKIaiC8A8TyciugNGBgAAdYaCnzestwAAAAASUVORK5CYII=")
+                + "0xILsSkm0QAAAABJRU5ErkJggg==")
     public void drawImageDataUrlPng() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -823,8 +741,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "klixcgcWJLdgx05ZYTLlO2OmmGiOWDqb03e+9zy930+A55OXMOs8beReevK+YcBRxGLQu0KlBMcQhCcQT8HsAA3RnHxJjsAG"
                 + "CmyUhuoago8fc2Bt79DyJ8B8GBYXD8wFRARqQkG3fOWwVYPOEJKvXDTBHIBw9Y4usC24rg5SAX9esj2UDBgrjwU1lD3Md1DU"
                 + "cac07tpEBdq3ZNKGQFRiDKEETGXCdQnPnwJd/c8WW9eAr84t2VeoK/gDdTv1Xvfv4fc9vAGT7zEVBadocQAAAABJRU5ErkJg"
-                + "gg==",
-            IE = {})
+                + "gg==")
     public void drawImageDataUrlSvg() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -938,13 +855,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "5/mvRrP2sI3ROTofUG+oj6C1CLUR1kPsp1h3qN8aPePdGWoS/WusnF7uL+qMln+YT8TmTJQiG9QgBMs9R/wc425rlHHro96T"
                 + "7ld02hCtGs35K83lLGajNMB8V7NPmrxKLe6LexqlgQuK0TmFORriyHtqo3sIHlE5o/wC5HE3EaU3PsuxqstiE9F+dfRx2P+3"
                 + "2Kh6JiZqomoCaj1n1ETVBNR6zqiJqgmo9ZxRE1UTUOs5oyaqJqDWc0ZNVE1AreeMmqiagFrPGTVRNQG13hX4a00ZAyWoGQAA"
-                + "AABJRU5ErkJggg==",
-            IE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0I"
-                + "Ars4c6QAAAARnQU1BAACxjwv8YQUAAADvSURBVFhH7ZJBDsFAFIbLURrHwBJHwMqWA3AGDmBtxxGwsHE"
-                + "NbUTcg/+v92QibdKRWPm/5PNPTeZ15nWSD9pw/xq+mZtkbVmHhyXrsW6Iz1Xh80NYrG3yJ4Kp5a9pWE4"
-                + "sozbq3bxAnpTPPDnlqX3MubqwBjse1iFepw/PMC3bKCd9IV1CMrNsWfYgTz6CGxt3YBfGcIJeZ8w/jB0"
-                + "8QNbMyzbKSS50F7CMo+Ud+piklk5uGZJZkpsl61QSe0e/4QrDTvGT8vpEEbtRdiL2JSvILvtV2sIBrA"
-                + "O/RnFHiychhBBCCCGEEEIIIYQQ4l9Ikiccki+D/HzKtwAAAABJRU5ErkJggg==")
+                + "AABJRU5ErkJggg==")
     public void fillText() throws Exception {
         draw("<canvas id='myCanvas' width='42' height='42'>\n",
                 "context.fillText('HtmlUnit', 3, 7);\n");
@@ -1086,11 +997,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "TG8DsoEgs0AGkwNg+ka6gVSNFKonG3JiFqseAAklEgtbZz3HAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAP0lEQVQoU2NkoDJghJrnAKRBmBJwAKj5AMzABiDHHogPkmki"
-                + "TG8DsoEgs0AGkwNg+ka6gVSNFKonG3JiFqseAAklEgtbZz3HAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABTSURBVDhP"
-                + "Y6A2YITSDlBMCTgAwkwQNtgwewiTLADSi+KgBigmF8D1w1xINTD4DYTFMsj/oIA9COaRDmB6G5jBXAiAGU4OeAjEoGTzAMyj"
-                + "HmBgAADuaAqOh9GTVgAAAABJRU5ErkJggg==")
+                + "TG8DsoEgs0AGkwNg+ka6gVSNFKonG3JiFqseAAklEgtbZz3HAAAAAElFTkSuQmCC")
     public void strokeRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.strokeRect(2, 2, 16, 6);\n");
@@ -1108,10 +1015,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "TPV0CAA8pwYL+jNAvAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAKElEQVQoU2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TPV0CAA8pwYL+jNAvAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAhSURBVDhP"
-                + "Yxj0gBFKg8B/KE0uAJvFBGZSEYwaOPwBAwMAkWIBDOc7sxkAAAAASUVORK5CYII=")
+                + "TPV0CAA8pwYL+jNAvAAAAABJRU5ErkJggg==")
     public void fillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(2, 2, 16, 6);\n");
@@ -1129,10 +1033,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "w5CMEKB+sgEAGQQUFQfPo6sAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAALElEQVQ4T2NkgID/UJpSipFx1MDRMCQ5BEaTDclBhqFhNAxH"
-                + "w5CMEKB+sgEAGQQUFQfPo6sAAAAASUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAArSURBVDhP"
-                + "Y2SAgP9QmlLAyARlUA2MGkg5GDWQcjBqIOVg1EDKwWA3kIEBAND2AShZ31fQAAAAAElFTkSuQmCC")
+                + "w5CMEKB+sgEAGQQUFQfPo6sAAAAASUVORK5CYII=")
     public void fillRectWidthHeight() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(1, 0, 18, 20);\n");
@@ -1150,10 +1051,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAnSURBVDhP"
-                + "Yxj0gBFKg8B/KE0uAJvFBGZSEYwaOApGwSgYBSDAwAAA4YcBDBgCJpwAAAAASUVORK5CYII=")
+                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==")
     public void fillRectRotate() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(2, 2, 16, 6); context.rotate(.5);\n");
@@ -1177,12 +1075,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA0ElEQVQ4T2NkoDJgpLJ5DEPTQFVgMNwmNyjQvWwKNOgUEG8E"
                 + "4lYgPk2qwegGrgcaEIBkyBwguw2I7xNrMLKBXkBNW3FobIca/IWQwcgGHgEqtsaj4S3U0D58hsIMBHkT5F1iwE1o+C7GphjZ"
                 + "hdVABSDMSYypQDULgDgRXS16pIgBFVQBcT4RhroA1ewlZCBMXgvq2igcBq8EikcQ8jI2eXuowa5okvpA/iVyDITpCYEGhSGQ"
-                + "ngrEObiChNTCIQ1o0HIg/kwtAwnGFakuHAYGAgBd6xwVKif+GwAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACWSURBVDhP"
-                + "7cytDoJQGIfxcwFY6QSLwUY20EwGK5ULoNrNBJqBxEaTbDabuQgyFZ4zDxtj78Z349l+O+9O+Ku9TTqad5Vc1MjNvbg39GDr"
-                + "BQezuqI71vWEhUl9IY21SoQY1Q3SiKSAj8EeqCCNSBIMZiOCNNDnYXQnpJCGtAyzuuCD/uAZi7rjBz0W64+1CnD4n3vbpFQD"
-                + "eftHtWY6PUwAAAAASUVORK5CYII=")
+                + "ngrEObiChNTCIQ1o0HIg/kwtAwnGFakuHAYGAgBd6xwVKif+GwAAAABJRU5ErkJggg==")
     public void rotateFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.rotate(.5); context.fillRect(6, 2, 12, 6);\n");
@@ -1200,10 +1093,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAnSURBVDhP"
-                + "Yxj0gBFKg8B/KE0uAJvFBGZSEYwaOApGwSgYBSDAwAAA4YcBDBgCJpwAAAAASUVORK5CYII=")
+                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==")
     public void fillRectTranslate() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(2, 2, 16, 6); context.translate(3, 4);\n");
@@ -1221,10 +1111,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "RvJo1iM75BAaR2DxBQB5vAYPhQt4egAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAMUlEQVQ4T2NkoDJgpLJ5DKMGUh6iuMLwP7lGjxoID7nBH4bk"
-                + "RvJo1iM75BAaR2DxBQB5vAYPhQt4egAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkSURBVDhP"
-                + "YxgFIwAwQml08B9KkwyYoDTVwKiBo2AUDAfAwAAAf3YBCwCfFioAAAAASUVORK5CYII=")
+                + "RvJo1iM75BAaR2DxBQB5vAYPhQt4egAAAABJRU5ErkJggg==")
     public void translateFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.translate(3, 4); context.fillRect(2, 2, 16, 6);\n");
@@ -1248,12 +1135,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAxElEQVQ4T2NkoDJgpLJ5DKMGUh6iQysMtYAe/gHE9yjxOLKX"
                 + "rwINAhn6GojPAfFZJPyQWEtgBvIBNXzEo+kF1HBki55gUw8z0BEouY9YV0DVgQxEtuAAkP8VZmAJkNNNooHIyu8COSogAZiB"
                 + "y4DsSAoMXA3UG4ZsYDOQ4wrExkDMQobBFUA9ncgGwswAuRhkqBGUBrFBmBBwAyrYjc1AbBpZ0SwAWWaAplAYyH9HrIHYLOFA"
-                + "8okCkF2M7EVC3iFJnuqFAwBzIx8VNVMmtgAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC3SURBVDhP"
-                + "7dIxCsIwFIDhqAgudvECzk6iXsChV/ECehkvI66CurnpIHQQBMXBTdD/vSYQNEKsi0J/+EiyvLSlpqzsB6rZVeqgibOeClax"
-                + "q7SBDD1ijZVnj6jcwASXfBvsABnsX5ThJTdwiFm+jU4G+hfMcYU2wf0LW2hVu/bsWjR5Us0N3GGBm54+T145mHzTAUaYYonQ"
-                + "Kz5Lofm/zbvqkE/St2TfhV8LJ9nEDAzVgBvexhh/kTEPbs42HzJH+t4AAAAASUVORK5CYII=")
+                + "8okCkF2M7EVC3iFJnuqFAwBzIx8VNVMmtgAAAABJRU5ErkJggg==")
     public void rotateTranslateFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.rotate(0.2); context.translate(0, 4); context.fillRect(4, 4, 16, 6);\n");
@@ -1277,12 +1159,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoUlEQVQ4T2NkoDJgpLJ5DKMGUh6iNAtDAaDbPlDuPgZ4LCcA"
                 + "DZsPxBuA+AEQXwTiC1BMkj0wL4Nc+B6HTpIsQQ7D+0ADFYh0Dk5LkA1sABpWT6SB6MoWAAUSQYLIBuLzNiF7QBEqiG4giL8f"
                 + "iB0I6cYhrwiKUFzpMAAoaQDE+lCamLAtBKqdQErCJmTJAaCBjqQYiM2n6JYYUmoghiWD30AAk4cbJe1EwXcAAAAASUVORK5C"
-                + "YII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACgSURBVDhP"
-                + "YxgFo4B8IAClKQbMUDoCiM8DsQEQWwCxJBCDwAsoTTRghNIgF76HMDHABiB+AMQXgfgCFOMEMANB4D4QK0CYBAFRljQA8X8y"
-                + "8XwgxgAgb2NTTAzGFVwM+4EYmwZiMDi4YLEMAwuBuBGIQWFzE4g/ADEHEBOTrB4C8QnkSCEEAoAYlKz0oTR6BB4AYkdSDMQG"
-                + "0C0xBOKRBRgYAItyQgsDc+IZAAAAAElFTkSuQmCC")
+                + "YII=")
     public void transformTranslateFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.setTransform(1, .2, .3, 1, 0, 0); context.translate(-5, 4); context.fillRect(4, 4, 16, 6);\n");
@@ -1300,10 +1177,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
-                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
-                + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC")
     public void fillStyleNullFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = '#cc0000'; context.fillStyle = null; context.fillRect(2, 2, 16, 6);\n");
@@ -1321,10 +1195,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
-                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
-                + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC")
     public void fillStyleUndefinedFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = '#cc0000'; context.fillStyle = undefined; context.fillRect(2, 2, 16, 6);\n");
@@ -1342,10 +1213,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
-                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
-                + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC")
     public void fillStyleUnknownFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = '#cc0000'; context.fillStyle = 'pipi'; context.fillRect(2, 2, 16, 6);\n");
@@ -1363,10 +1231,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "AymMZIh2qqdDAD9SCgsSO8biAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DMgG/qfQcLBZdDEQVzAQ8gFOF44g"
-                + "AymMZIh2qqdDAD9SCgsSO8biAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtSURBVDhP"
-                + "Yxj0gBFKg8B/KE0uAJvFBGZSEWBzIbIYMiDkA9q4cPAbONgBAwMAI5ADC8QrQ2IAAAAASUVORK5CYII=")
+                + "AymMZIh2qqdDAD9SCgsSO8biAAAAAElFTkSuQmCC")
     public void clearRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(2, 2, 16, 6); context.clearRect(4, 4, 6, 6);\n");
@@ -1389,13 +1254,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAxUlEQVQ4T2P878Lwn4GKgHHUQIpDc+iE4QegXwUo9i/QAIiX"
                 + "/zMsYNzLkPjfmSGAgZFBAcjXB9IGQHkQJgnAwvAD4x4GQWw6SbUEESksDIqMOxgeEOMcfJYgx3ID0JWNxBiIrua/K0MCMJjm"
                 + "g8SRDcTpbUKW/HcARigLw3t0A0F8R6ArDxAyAEdY3wdFKK6EvQGo6QLQGxcZWBkuEBO2wNTSD9RTQEpOwWsJ0EAHoIH7STEQ"
-                + "m09RLGH4w3CeUgMxLBn8BgIAZv1hLbrWWZAAAAAASUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADcSURBVDhP"
-                + "7ZTRDYJADIb/kviuG+gEMoIRfdcN3EDdwA1cwREYgMQ4gbiBI/CskVrOItEQ4XLHm19y4b9e0vZKr8QzMDwS6Ncbf4fudONQ"
-                + "+iYzOw+UGcaUgJBjKc63sg7MSPXMCtPYRYZBgoHaPuApFhxgKHIsVwmJEL5O6qleyh0jOuFqdAM/g5gMixVhpyZreI5V6ef9"
-                + "l5mwVmnPDbGqqm0I6EuWE91aIaXKpG6mXLXTRgwxMS4iUjyQtqltHmEvtdy0Hl9NQcztCEenefgdhHs4Ozmso5u37A/gCR//"
-                + "XBF+op2TAAAAAElFTkSuQmCC")
+                + "m09RLGH4w3CeUgMxLBn8BgIAZv1hLbrWWZAAAAAASUVORK5CYII=")
     public void transformTranslateClearRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = '#ff4400'; context.fillRect(0, 0, 20, 20); "
@@ -1418,11 +1277,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAe0lEQVQoU2NkoDJgRDLPCsh+CMRPKbED2cAVQINcgfgeEO8E"
                 + "4l1AfIhUw5ENhOm1hxrsBqSVoQaDDN8NxE8IWYDNQGQ9MkiGgyy4C7UAZPhBbIYTMhBdjx1QAGSwOxArQV0dgayIVAOR9UoD"
-                + "OXJAfJxaBmINTkpcSB8DAS8zEQuBFGGjAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABZSURBVDhP"
-                + "Y6A2YIbSIOALxF+B+DOYRyEQAeLlQPwGiE8BcQsQ2wExVQDIIJCBIIPfAjHIokQglgZiigHIEJBhIENBhtPU9aDgAVkECi6q"
-                + "AJDrQRE5sgEDAwCWpRA/yw9O8gAAAABJRU5ErkJggg==")
+                + "OXJAfJxaBmINTkpcSB8DAS8zEQuBFGGjAAAAAElFTkSuQmCC")
     public void moveToLineToStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2); context.lineTo(16, 6); context.stroke();\n");
@@ -1447,12 +1302,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA3ElEQVQ4T2NkoDJgpLJ5DDADG4AG/wfiRkotgBkIMujfoDfw"
                 + "L9CFTdT0MlUNrAa6jBOIa6jlwkygQXpADKIpArBYVgeacgqIs4D4HBA/BOJv5JiMnLBTgQZ4A7EGEMsD8XUgPgDFm4g1HF9O"
                 + "sQIaYg/EDkBsDMSLgHgmEN/EZzixWU8VaEgcEBcA8XIg7of6AMNsYg2EaeQHMgqBuBKIu4G4DohBOQwOSDUQplEOyABlV1CQ"
-                + "VADxKpgEuQbC9LtBvX8U6vKvlBoIMpgJiCcAMSiFKFPDQJSIGfwGAgAmkSMVCV26awAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC1SURBVDhP"
-                + "5dOhCgJBEMbx1QOLwWC/JuIrWGxGo2/gQ1wTNBuMFl/BavQFbMIVLVaxCHecCvqfu12wzwiCH/yY3Q3D3jLnfj6Rr1MMsCt3"
-                + "itR9rfmqTmhols+GL19V+doN72hUS11Cwyva1VKXMDY3LHHGExkeUGWCDVLk2GOBEUzSR4ItLpDmXZikgxnkaVbowSQtyG9a"
-                + "YA6zsYuxxgljObDKEAfIMzTlwCLy2TJyx3L3b3HuDVsZGxJRyvPSAAAAAElFTkSuQmCC")
+                + "VADxKpgEuQbC9LtBvX8U6vKvlBoIMpgJiCcAMSiFKFPDQJSIGfwGAgAmkSMVCV26awAAAABJRU5ErkJggg==")
     public void moveToBezierCurveToStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2); context.bezierCurveTo(2, 17, 1, 4, 19, 17); context.stroke();\n");
@@ -1477,12 +1327,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA4klEQVQ4T2NkoDJghJrHBKSzgPgaFL8g1x5kA6cCDdGC4r9A"
                 + "+gQQ74DiB8RaADMQXb00UMAeiD2A2B2InwDxFCCeT8hgXAai6/MCCmQDsQbU4H5cBhNrIEy/FZBRA8T/gTgHiO+jG0yqgTD9"
                 + "VUBGGRCHA/FOZEPJNRBkhj8QLwZiFyA+BTOUEgNBZiQCcQMQGwPxG5AApQaCzJgAdV0BtQwUgUaOJZC+Qg0XghxWB8R8QFxC"
-                + "LQPNgYbNAWJdahkIciUoNzlR08DtQAMnUdPAhUAD91HTQFDiXk1NA8HJcfAbCABA6CBYte9o5AAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC8SURBVDhP"
-                + "5dOxCkFRHMfxg2xG3cVCSpGZMliVxW4zm6zewwt4B5InsChlVpSFSYhJ+f7OPV7g3v/mW5/uOWf4d+re66zLhWcWYxTwxhOJ"
-                + "yoSnBs7QCD7YYBUckaoShpjjgi1GMKuPBQ6Y6MCqDpbQ8IoOrJrihp7fGTXAHS2/M0ov6oSi39HvO0zaDmV0oc/LJN3ugaY2"
-                + "aW+oXsijjbUOLNKwfby064ya/mGrdMOq5cArIsuBdUTx8o9y7gudKxyCiC+bbQAAAABJRU5ErkJggg==")
+                + "LQPNgYbNAWJdahkIciUoNzlR08DtQAMnUdPAhUAD91HTQFDiXk1NA8HJcfAbCABA6CBYte9o5AAAAABJRU5ErkJggg==")
     public void moveToQuadraticCurveToStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2); context.quadraticCurveTo(19, 4, 19, 17); context.stroke();\n");
@@ -1500,10 +1345,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "MAgh2odWshn1MnkhQPVYBgBiiQQV+ctw0AAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAANElEQVQ4T2NkoDJgpLJ5DKMGUh6iQysM/1PoYbBvkb08Ag2k"
-                + "MAgh2odWshn1MnkhQPVYBgBiiQQV+ctw0AAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAoSURBVDhP"
-                + "YxgFo2AQAEYoDQL/oTS5AGwWE5hJRTD4DRwFo2DgAQMDAN0JAQjYZYmBAAAAAElFTkSuQmCC")
+                + "MAgh2odWshn1MnkhQPVYBgBiiQQV+ctw0AAAAABJRU5ErkJggg==")
     public void lineWidthMoveToLineToStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.lineWidth = 4; context.moveTo(2, 10); context.lineTo(18, 10); context.stroke();\n");
@@ -1527,12 +1369,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAApUlEQVQ4T2NkoDJgpLJ5DHQx0AHo6gPkuhybC+8DDVMA4gdA"
                 + "fAGIL0ItIMoSbAb2Aw0owOFCZEsasKnBZqABUOF5IrysCPUFilJckQLzNj5zC4GSE9AV4DIQn7dhZoDC15BYAwOACteT421c"
                 + "LhSAGghKQiR5m5iEDUpCoIgCYXsgRrZkA5AfiGwjMQZicyHMEhCNEjHkGogzGEYNJCLlEVAy+MMQAEwqFxVGqYQqAAAAAElF"
-                + "TkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACKSURBVDhP"
-                + "7dHBDUAwFMbxikWM4OhoBKMYwQZGMQJHN0yAmy34XrwmTRVP49h/8kudXltVISrn1auIV7MZElhghAk65lUN+w3arIEKxKXg"
-                + "GmajW4ijk7iGmEoQ93RtbQBxBbiG2C7Xjnm12yCDt/+0Qn9+yqOhdGJ62RbME9KL/5Le5NPDhELOlDoAyg88S5w3VsoAAAAA"
-                + "SUVORK5CYII=")
+                + "TkSuQmCC")
     public void setTransformFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.setTransform(1, .2, .3, 1, 0, 0); context.fillRect(3, 3, 10, 7);\n");
@@ -1556,12 +1393,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAApUlEQVQ4T2NkoDJgpLJ5DHQx0AHo6gPkuhybC+8DDVMA4gdA"
                 + "fAGIL0ItIMoSbAb2Aw0owOFCZEsasKnBZqABUOF5IrysCPUFilJckQLzNj5zC4GSE9AV4DIQn7dhZoDC15BYAwOACteT421c"
                 + "LhSAGghKQiR5m5iEDUpCoIgCYXsgRrZkA5AfiGwjMQZicyHMEhCNEjHkGogzGEYNJCLlEVAy+MMQAEwqFxVGqYQqAAAAAElF"
-                + "TkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACKSURBVDhP"
-                + "7dHBDUAwFMbxikWM4OhoBKMYwQZGMQJHN0yAmy34XrwmTRVP49h/8kudXltVISrn1auIV7MZElhghAk65lUN+w3arIEKxKXg"
-                + "GmajW4ijk7iGmEoQ93RtbQBxBbiG2C7Xjnm12yCDt/+0Qn9+yqOhdGJ62RbME9KL/5Le5NPDhELOlDoAyg88S5w3VsoAAAAA"
-                + "SUVORK5CYII=")
+                + "TkSuQmCC")
     public void transformFillRect() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.transform(1, .2, .3, 1, 0, 0); context.fillRect(3, 3, 10, 7);\n");
@@ -1579,10 +1411,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "SEMbgeo+YFM7wiOFyODDr2w0DCkPRqqHIQCa5QMVIJiVTAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAPUlEQVQ4T2NkoDJgpLJ5DKMGUh6iIzwMG0gIQZxqkcMQpIif"
-                + "SEMbgeo+YFM7wiOFyODDr2w0DCkPRqqHIQCa5QMVIJiVTAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqSURBVDhP"
-                + "YxgFo2A4AkYoDQINUJoYgFMtE5SGAX4isQAQj4JRMFIAAwMAXz4BqtdD7oMAAAAASUVORK5CYII=")
+                + "SEMbgeo+YFM7wiOFyODDr2w0DCkPRqqHIQCa5QMVIJiVTAAAAABJRU5ErkJggg==")
     public void moveToLineToTransformStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 10); context.lineTo(13, 10);"
@@ -1604,11 +1433,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZ0lEQVQ4T2NkoDJgpLJ5DKMGUh6io2EIDkMBIP5AbmjiCsP3"
                 + "QAMPAPEDID4IxBegbIL24IsUB6BuBSDWB2IDIAbxNxCyhNRYRrcEZJEgsrNJNRCbl1HCnBoGolgyaiDBZEZQAdXDEABMtg0V"
-                + "HTQi5gAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABWSURBVDhP"
-                + "YxgFo2CkAAEoTRZghtLI4AcQvwdiCyjmhIp9AGKCgBFKYwMOQKwAxPpAbADlbwDiB0B8EIgvQNkoAJ+B2AC6JSAsCMRUBRSF"
-                + "+SgYeoCBAQD2+wpun2ZPIwAAAABJRU5ErkJggg==")
+                + "HTQi5gAAAABJRU5ErkJggg==")
     public void transformMoveToLineToStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.transform(1, .2, .3, 1, 0, 0); context.moveTo(2, 10);"
@@ -1627,10 +1452,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "OhCifYTH8mgYkhcCVE82AJYgAhXAytwXAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAM0lEQVQ4T2NkoDJgpLJ5DKMGUh6iIzwMGygMQbB+5DCkuoEU"
-                + "OhCifYTH8mgYkhcCVE82AJYgAhXAytwXAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkSURBVDhP"
-                + "YxgFo2A4AkYoDQINUJpcANbPBGaOglEwCvABBgYAX1ABBKc2Rr8AAAAASUVORK5CYII=")
+                + "OhCifYTH8mgYkhcCVE82AJYgAhXAytwXAAAAAElFTkSuQmCC")
     public void moveToLineToRotateStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 10); context.lineTo(18, 10); context.rotate(90); context.stroke();\n");
@@ -1654,12 +1476,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAo0lEQVQ4T2NkoDJgBJo3FYiZgbgNiB9Raj7IQB4grgLiCqih"
                 + "rUD6O7kGgwyEAUWowX5QgyeSYyiygTD9ZlCDVaAGLyPFYGwGwvR7QQ3+AzV4FzEG4zMQpj8eavAlqMHn8RlMjIEw/cVARjUQ"
                 + "rwRiUMQ9wWYwKQaC9PNBXVsCdW0duqGkGgjTrwR17WIgfQDZUHINxBmMowYSk3TxqxkNw0EYhgB8LRYV8M9b/wAAAABJRU5E"
-                + "rkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACESURBVDhP"
-                + "7cixCYNQFIXhV9hIIK2NhJANUjiChbiBRVZIkQ0UQiYQCeICFq5gkRFSZAULNxDJf91AOOX74btwj6PIjrIODU7bJ+iAJ1ZU"
-                + "CCHpjDcm3G1QlWDAF4UNqjJ8MCK1QdUNP/S42qDqgRk1YhsUHfHCghIBJF3QIt8+n8+3K+f+D8wRAv4wDRcAAAAASUVORK5C"
-                + "YII=")
+                + "rkJggg==")
     public void rotateMoveToLineToStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.rotate(.5); context.moveTo(1, 1); context.lineTo(18, 1); context.stroke();\n");
@@ -1677,10 +1494,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAnSURBVDhP"
-                + "Yxj0gBFKg8B/KE0uAJvFBGZSEYwaOApGwSgYBSDAwAAA4YcBDBgCJpwAAAAASUVORK5CYII=")
+                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==")
     public void rectFill() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.rect(2, 2, 16, 6); context.fill();\n");
@@ -1707,8 +1521,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "KYMyIbKJzeRH2GxmVvKcQrlxP0pOPcP7vvc8nXPvPa/X8+Pw/tjn+YswQ9VlCMABdjC37UStUGSSXIMjxKAIfujCzCRWhQsS"
                 + "tjBUEnM8N2EDdZ1UFUpCD9YfkoK8G4MPst+kqnDw2Le+pooQ3062wjwLK5Aw7ZWtUNbtoQ2yn87x6R4WsDQgCWdX47eLLRVG"
                 + "QU7XKXSTssIUhriLUSeUSZnADUq27dvMcgtZGpqwNFVrIxSHHFQVrjAFmfEIdEA6eYWt8Jkg9zQFMuMXGMHbVLkKTR3/539o"
-                + "rEK34A43YyQVd6W5xwAAAABJRU5ErkJggg==",
-            IE = "context.ellipse not supported")
+                + "rEK34A43YyQVd6W5xwAAAABJRU5ErkJggg==")
     public void ellipseStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (!context.ellipse) { log('context.ellipse not supported'); return; }\n"
@@ -1736,8 +1549,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "QDfQDXQDvEtKUuH3/5IQmhBMgMddafVu4eEX9tw6YN+7gOTBe3ef22CSENgZyAHHJmJEL8C7EvwPjMkeCZYaHdDaQsfgDg8Q"
                 + "zI0nLjSAeRbHGGTNj5HiC3BbBPIm1GZCJtVGnZtT6aNYtfmiK8BGeqO4DpHyhpv3SsRs7RzIuSSqVRdrZ3dKXEIvJaVYW916"
                 + "QJmwxREEWKxt7mWgrE9UmtNJbRMckgGu8JvbMk17wtc+pumLwQQmyKl4SztmNmgs+JX+D60U2vUf7SQ5FX401SMAAAAASUVO"
-                + "RK5CYII=",
-            IE = "context.ellipse not supported")
+                + "RK5CYII=")
     public void ellipseFill() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (!context.ellipse) { log('context.ellipse not supported'); return; }\n"
@@ -1763,12 +1575,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAtElEQVQ4T2NkoDJgpLJ5DKMGUh6ihMKwB2jFMyDuI9YqfAau"
                 + "AhrCBsTRQPyVUgMlgAbcAmI+Yg2CqcPlwkSgAg8gDqeWgZlAg4yBOAWHgbOB4ueAeDq6PC4XmgMV7gdiLhwGfgOKOwLxSWIN"
                 + "BKlbAMRaQGyGpukUkH8NiBOwWYYvljmhXgoD0kuBGKQ2CohBsQ8Kku+kGghTD/K+EZQDCjcMbyIbTChh4whC3MKjBpIcZBga"
-                + "AFvHFRVbN/HSAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACPSURBVDhP"
-                + "YxgFIwAwQ2lsgBOI5wGxABBfAAlQChYD8SkIk3JgAsRXIUzSABOURgdOQLwXwiQN4DLwExCzQ5hYwUwgzoYwiQM2QHwPwsQK"
-                + "QMFhC2ESDzYC8QwIEwVMAeJlECbpYC0Qg1w6FYhBMX4biJcAMSsQYwWMUBofMANiUKzzAPFuID4PxKNg6AAGBgDVbRIf3/D2"
-                + "vgAAAABJRU5ErkJggg==")
+                + "AFvHFRVbN/HSAAAAAElFTkSuQmCC")
     public void arcStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(10, 10, 4, 0, 4.3); context.stroke();\n");
@@ -1792,12 +1599,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAs0lEQVQ4T2NkYGDYD8QHgZgawJ4RaEoDFFPDwIZRAykOxtEw"
                 + "pDgIGWgbhuZABxpBHXkOSJ8kw8FgF7YAsQwQhwHxMiD+D8TRQLwKiDOB+DsJBoMNPA/Ev4HYDE3jKSD/GhAnkGogyDBWHJq+"
                 + "AcUdSfA+2IVngdgYh4FzgOIppLoQFAGwyEDXOxsoAJKfTqShYBdS3ctUjxRQ8c8HxDpAfAmIQa7WBeIrQLwViP8Q6V2QMnsA"
-                + "0W80k6fnBs0AAAAASUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACjSURBVDhP"
-                + "Y2RgYNgPxAeBmBrAHkQ0gJnUAQ1MUAbVwKiBlINRAykHyAYqAnEyFIPYZAGYgfOA+BgQO0ExiA0SIxmADPQHYl4glgTiaCgG"
-                + "sUFiZBn6GUpjA8+BmBTvgwuH+xA2VrAPiPHJYwBiYhkUSUQDkIH4vASKIJAriQYgA+8A8WowDxWAxLYDMUlehlUBAkCsAsQw"
-                + "zSBXgyzaCOYRDRjsAb/2Fyf2EU9MAAAAAElFTkSuQmCC")
+                + "0W80k6fnBs0AAAAASUVORK5CYII=")
     public void arcCircleStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(4, 16, 4, 0, 2 * Math.PI); context.stroke(); context.strokeRect(0, 0, 20, 20);\n");
@@ -1818,11 +1620,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAbUlEQVQ4T2NkoDJgpLJ5DKMGYg1RWaCoNxCDguccEJ/EF+7E"
                 + "hGEx0AAtIP4HxNFAvAqIM4H4OzaDiTEQXd8poMA1IE6gloEgc74BsSM275PjQpCBc4D4LBBPR3cluQbijJdRAykvKkbDcBCG"
-                + "IQDFswwV4F8onAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABUSURBVDhP"
-                + "YxgFgw8wQ2l8QBKI/YHYA4hfAvF7IMYJmKA0PpAAxL5ArAzEJ4B4NRBTFSwH4jkQJvXAQyBWgzBRATFhiA0YQ+lzUHoUjIJR"
-                + "QAJgYAAAKqEIH3WHwEcAAAAASUVORK5CYII=")
+                + "IQDFswwV4F8onAAAAABJRU5ErkJggg==")
     public void arcAnticlockwiseStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(10, 10, 4, 0, 4.3, true); context.stroke();\n");
@@ -1846,12 +1644,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAp0lEQVQ4T2NkoDJgpLJ5DKMGYg1Rc6CoEVTmHJA+iS/c8YUh"
                 + "J1DjdCAOA+JlQPwfiKOBeBUQZwLxd2wG4zNwAVCDFhCboWk8BeRfA+IEUgwEeXM/EHPh8N43oLgjNu/jciHIS6BwS8Vh4Byg"
                 + "+FlokKAowWegMVBlCh4DscrhMpDqXgY5jKqRAjIQOdksBfJBvomiJNnAgo9qCRtHfOAXHi1tyAo2FE0ArxceFbIaufkAAAAA"
-                + "SUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACJSURBVDhP"
-                + "YxgFgw8wQml8wByIjSBMhnNAfBLCJB1wAvECIP4GxHOAeDaUDRIDyZEMQBpPQZgoACQGkiMJgLwJcg0uAJIDqcEAzFAaHfgB"
-                + "8Rsg3gzmYQJFKH0GSsMBE5TGBghF2HQoTRQg28v4AFUjBQSQkw0oyYCSDogNEsOZbOiasEfBgAAGBgDFsxrAzDMHqwAAAABJ"
-                + "RU5ErkJggg==")
+                + "SUVORK5CYII=")
     public void arcCircleAnticlockwiseStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(10, 10, 4, 0, 2 * Math.PI, true); context.stroke();\n");
@@ -1872,12 +1665,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAlElEQVQ4T2NkoDJgpLJ5DKMGUh6i+MOwgUEAaEU9EDsAMYh9"
                 + "AIgbGRoYHuCyGreBEMPuQw1C1v8ByDHEZSg+A+cDNSbgcMkCoIGJ2OTwGQhynQIOAz8ADRQccAPxeXkD0IWBpLoQFCnvsWgC"
-                + "RYoj0MALpBkIUg2J6X4gDoBqBhmSSF6ywZXQCIiPFg5kBhySNqqHIQBu3hwVauHmwwAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAClSURBVDhP"
-                + "YxgFIwAwQmnsoJ5BAEgWAFX5A2kQewPDf4ZGIPwAksYGcBsIMoyRYT+QZQARgIMHQEMNcRnKBKWxgQIgRjcMBBSAFvVD2RgA"
-                + "t4GMDPFQFjYQAKUxAD4X4gM4wxCfgRugNDZwAEpjANwGgmKTgeEChIMCQJECksMKmKE0JjjI8IPBnmElMCw5gDwNIP4BxDuA"
-                + "hkUCjXsAUjIKRiZgYAAArLcaWxWRPP8AAAAASUVORK5CYII=")
+                + "RYoj0MALpBkIUg2J6X4gDoBqBhmSSF6ywZXQCIiPFg5kBhySNqqHIQBu3hwVauHmwwAAAABJRU5ErkJggg==")
     public void arcFillPath() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = 'green'; context.beginPath();"
@@ -1905,13 +1693,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "Ah2BDXQDGcGXYjEUqqXHeebu/UE/fn1JWiI1cEQD85QbSCrGYQtoDk2hEiqgO5Qo0t+t6AaS2mDlDhp9yGAL6MGebwJJA/bQ"
                 + "yrMUOaBLudYGsjMG9ok1oJnZ8AZW7m5f0nQdNAGUayuaQhiq6hYSdT2lwxNI3NWQqGspgZxuHELDnhL5je2UQ4FXgDhlvqON"
                 + "Gl7wPfN0yJc6h1ID6uqyT1MYlEKZ6aptwL42D4dDTuv8AnU+ubZDHiH9Qo4CyqAEKlxv1+3QzJAGxrLQnnXVy374++pjS6z9"
-                + "f4dPi7M2FSLXHwIAAAAASUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAECSURBVDhP"
-                + "7ZPtEYIwDIaDLsAIuIFOoE4gI+gE4gTABI4gG3hOoG7ACG4gG+CbNkC1BZQ77/zhwzUfUN42JdDP44m3iWkKG2LGCj7AKDBu"
-                + "GDmVlOLi3MIWjMmHXeNJDM+xGy2aSFZjCyZ0hA110ssF85cSK8biNTFFWCKS7B0CmuONK4SFZod8Zh6dEbWX2UZJE5TP50sj"
-                + "dUOzwPhcjPFoK5EhqL/mULgjFOYOuTWG4hQcygVnWH9pU9DZqC3w3AxCM9U2KZpdaARLOknURaEaWgttTKEKs218ZHfJXuGy"
-                + "eMEMIp2VPP8pCe1hzcZmoRQ+7xOqcP16B9gAQjtXSX++DdEDir42LCGgXtoAAAAASUVORK5CYII=")
+                + "f4dPi7M2FSLXHwIAAAAASUVORK5CYII=")
     public void arcFillPathAngle() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = 'green'; context.beginPath();"
@@ -1936,11 +1718,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAr0lEQVQ4T2NkoDJgpLJ5DDQ3sIFMF8P1obswBGhgPxDPJdLg"
                 + "ZKC6QiBeA1OPzcvHgJJ9yIpwGA6yvAiIrZDlsRmIVSEWQ7FajCtSCLkSp6W4DCTkSpwW4ks2uDThtQyfgbg04g0OQgkbXTOh"
                 + "oCCYU9ANIBRZBA0EpRaYISA2RrpDT06EvAxSD3MliE0wwRNjIMigm1CXqBPKksQaCHIlCMDzLC6DiTWQkMPg8oPfQAB2pSIV"
-                + "qh5VTAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACASURBVDhP"
-                + "7c7BCYAwDAXQqiu6gYs4mUcnEMENHMOkzVcotElbb/ogpEISv/ueTjrM0kvde7102Kim8DThWd7JWqnG8MziGZ5VWQetP/a0"
-                + "YXM60BaK0kFqqTgdpBar0kG8XJ0O4gNN6QBHmtMBDr2SDg4p1SBdc1ItVLv/+j2cuwDuXB2rdVDEoAAAAABJRU5ErkJggg==")
+                + "qh5VTAAAAABJRU5ErkJggg==")
     public void closePath() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(4,4); context.lineTo(10,16);"
@@ -1959,10 +1737,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAWSURBVDhP"
-                + "YxgFo2AUjIJRMAqoAhgYAAZUAAE6HI5PAAAAAElFTkSuQmCC")
+                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==")
     public void closePathNoSubpath() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.closePath();context.stroke();\n");
@@ -1980,10 +1755,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAWSURBVDhP"
-                + "YxgFo2AUjIJRMAqoAhgYAAZUAAE6HI5PAAAAAElFTkSuQmCC")
+                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==")
     public void closePathPointOnly() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(4,4); context.closePath(); context.stroke();\n");
@@ -2001,10 +1773,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAWSURBVDhP"
-                + "YxgFo2AUjIJRMAqoAhgYAAZUAAE6HI5PAAAAAElFTkSuQmCC")
+                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==")
     public void closePathTwice() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.closePath(); context.closePath(); context.stroke();\n");
@@ -2026,11 +1795,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAm0lEQVQ4T2NkoDJgJNK8BgLq4PIwA/mAGnYAsRWaxmNAvgcQ"
                 + "uwFxPxDPRZNPBvILgXgNTBzZhSDNfUiSIUB2EZIlhOTBZiIbSKoB6BZgGAgSgCkCsZFdB/MRIXkUF4I0wVwJYiN7H2YgIXkM"
-                + "A0Eab0J1q6NFAIyLVx5bsgG5AgTgMYdmMF55YtMhDsdiCo8aSHRQ4VQ4GoYjIQwBM+0eFQy1UnkAAAAASUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAB2SURBVDhP"
-                + "Y6A2YITShEADlMYF4PJMUJoPiI9BmCgAJAaSuwLEySABNAASA8lhBSDNIRAmGIDYyJYQkscApBqALo8VwBSha4YBQvIYAKYQ"
-                + "phEdEJLHCm5CMS6AV54ZSiODF0C8D4ivgXmYgJD8KBgFo4DegIEBAO+EHxk/jOycAAAAAElFTkSuQmCC")
+                + "A0Eab0J1q6NFAIyLVx5bsgG5AgTgMYdmMF55YtMhDsdiCo8aSHRQ4VQ4GoYjIQwBM+0eFQy1UnkAAAAASUVORK5CYII=")
     public void closePathClosesOnlyLastSubpath() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2,2); context.lineTo(5,8); context.lineTo(8,2);"
@@ -2053,8 +1818,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZklEQVQ4T2Nk2Mf8nwEZOP1lROET4qDpZ6S6gfsYUF3oxECa"
                 + "C9H1M1LdQHgQURqWUIMQEUBtAyn1OsyncBdS3UBCyY1YedISMRGmjhpIRCARUDISwhCjPKQ02KhtIEZ5SLED0QpoADR/JhX5"
-                + "NimNAAAAAElFTkSuQmCC",
-            IE = "no ctor")
+                + "NimNAAAAAElFTkSuQmCC")
     public void putImageDataInside() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
@@ -2088,8 +1852,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAaUlEQVQ4T2Nk2Mf8nwEI9jmBSARwYvjLiCpCHI+R6gbuY4C4"
                 + "kFwXobubkeoGwm2AhiWc70RuGMJMoLaBMK/DzCc3TOFJg+oGEpfKCKsiK/HiM3bUQMKBTkjFaBgSCiHC8tQLQ2jhQnUDAUAL"
-                + "HZUFr6Y/AAAAAElFTkSuQmCC",
-            IE = "no ctor")
+                + "HZUFr6Y/AAAAAElFTkSuQmCC")
     public void putImageDataOutside() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
@@ -2123,8 +1886,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXklEQVQ4T+2SQQoAIAgEjX7Ww/tZVHoKCrZyj3pUGNZhk5An"
                 + "UXk1dwNWyb1Ic8OV44asH9KBCqcmPAI1th5+nW4J6cCtRrMKtit3LcAO6cDH5uOEAUQGwiEyhO90hwOflBRVULNh6QAAAABJ"
-                + "RU5ErkJggg==",
-            IE = "no ctor")
+                + "RU5ErkJggg==")
     public void putImageDataDirty() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
@@ -2170,8 +1932,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "EsxDvxloj2/nNfPjBBZgFibhl1TCRriGPjPh1hhaAjvQYpuQg3Vo9Y8v4TZcwZwR6FuqKTihpmANwgFkYdgdJOEn1MCb6fiK"
                 + "iGJ/V9FRjL6EF6A8s+0vQiV9N5zZyRKugfLtP0ItPgDFSipV+I5sAlbcHZZyZOVlDxRcYdmD4qdN2qAoIOfQ5YY/lNhpha+I"
                 + "lPw/6tovvV4G6NZJaso7XRLL/kD/clD96m6MNR1TbTokU4d/Y6uuVfCKnCJYbQSqolo4BF0k0evrG77KVhVrq+aXAAAAAElF"
-                + "TkSuQmCC",
-            IE = "no ctor")
+                + "TkSuQmCC")
     public void clip() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
@@ -2198,8 +1959,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAxElEQVQ4T2NkoDJgpLJ5DDgN/C861YDh/18Hxjd5E0ixFLeB"
                 + "IpPfAw0SYHyTS5Iv8Bn4H+SyUQMJxs8QCsP/wlPuMzD+V4D5CRa7/0Umg2ObAPgAVC8IThUwhUAD5wMNTCDTwANAAx1RDRSZ"
                 + "2MDAwFRPnoGMExjf5BSiGijQr8DAwnKfDAM/APUEAl14AMVAEOe/yKQCYCj0I+cQwmH4r5HxTT7QdxAwhJINerKAFF9/ApC9"
-                + "Qyjt4PUyMZqxqSGprCPGEgABn2EVn+gHngAAAABJRU5ErkJggg==",
-            IE = "no ctor")
+                + "Qyjt4PUyMZqxqSGprCPGEgABn2EVn+gHngAAAABJRU5ErkJggg==")
     public void clipWindingEvenOdd() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
@@ -2227,8 +1987,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA20lEQVQ4T2NkYGBoAGJ7IAaBg1CabIoRqhNkKAjA6FEDiQ8B"
                 + "pDCcbcHAkPIBqDUcqr2QgYFxArJR/xkYCoD8ECC2hor3Ag0oQVaDbqAW0BA5iIL/QP2MMHmICNRAoKANkG0EFNoAZEPVQ3Rh"
                 + "cSFjBNTAI0A6D6jkHMwFUAMtgJrAaoD8R4QMJMaFBA0EpT1gwm6SYWCIZmdgUJKFuGjOTgaG1BPI4TObgcFCn4FBxoyBYQ1I"
-                + "/D0DQ6EgA0M/ehgiGejxk4HBDKyYXIAnDMkzcjTrjZY2ZKQcqicbAN2xPZWYt5iSAAAAAElFTkSuQmCC",
-            IE = "no ctor")
+                + "/D0DQ6EgA0M/ehgiGejxk4HBDKyYXIAnDMkzcjTrjZY2ZKQcqicbAN2xPZWYt5iSAAAAAElFTkSuQmCC")
     @HtmlUnitNYI(FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAcElEQVR42mNgYGD4T2UMBygcaoCRaeB/EJ4NxO+AOBCPopVA"
                 + "/AWIA4gxEKjovw8QX8ajyAeIg4D4FzEGsgExOxB/waOIGcYmxkAPIPYG4nO4FGFj4zNwGRC/BGJ3cg1ESuX/qZ1T/v8fzSmj"
@@ -2271,11 +2030,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAmUlEQVQ4T63U0Q2AIAxFUdjAUVzBzd3AVRzBPhMJSFseDU1M"
                 + "NITr4YecFk9e3Et18JL4HvzBKfsO7K2DiCEaGcQQbYL4jiiLTgtGlEWnBWeVjc4KzigbnRVklZ3OCzLKTucFR0pVNwp6SlU3"
-                + "ClpKU8cENaWpY4J/patjg7XS1bHBT3nLy3ujeMPeh1Bu8uDIS4KjTllnhXTwAVWiHxW3nihqAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABvSURBVDhP"
-                + "1c5BCoAwDETRHMkjeHOP4JE0XXwoGNMkLYgfZjeLJ7/q1F3FHbpHm846R7brzCpKU0cV5auOMkpXRxnlUEcRZUhHEWVYR54y"
-                + "pSNPmdaRpSzpyFKWddQrp3TUK6d11JRLdNSUy3RfJnIDH55/ge/XbBAAAAAASUVORK5CYII=")
+                + "ClpKU8cENaWpY4J/patjg7XS1bHBT3nLy3ujeMPeh1Bu8uDIS4KjTllnhXTwAVWiHxW3nihqAAAAAElFTkSuQmCC")
     public void pathFill() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2);\n"
@@ -2304,12 +2059,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAzElEQVQ4T7WU0Q2DQAxDYQNGKJt0BTZgBDpJO0pH6AaMwAgw"
                 + "AonUQyHEnE8CJMQH1ruz5aSuLn7qi3mVBU4Cf5AHfEXXRVoLfItgIICLaFp59Xt4LLCRvzMBfInmg3Q+w5xtaDUd4IGsbX/B"
                 + "7SAPZG1b4C7TqDY52/52u0wjYIntQ6YRkLUd1gdNSrL9E39PUJGwPgiotvt/gcdggqhJsRdR2wrUAvtM6UlB5feZFk0KgqZM"
-                + "iycFAW2m4VJAo3dmO2V6uj9uXbDE5spLVqfJJhVVgK1QAAAAAElFTkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACUSURBVDhP"
-                + "1ZLBCYAwDEULLuAIHl3DjdzEURzBURzBqzf9gQZKSMkPnvzwKIi2fd+UX+UED8kOwmzA+9hygRGEkZe8DSwroBNpU6ptWG1L"
-                + "9yBWuyXsNPO3hbDTjDbVKatNj49EtY+6eqTGR7T1Bl6n6fGRjfQGttOUqhfbaUq1F9UOVYe6RpnADBZwy4OvaTv9dUp5Afx3"
-                + "gfLtY6izAAAAAElFTkSuQmCC")
+                + "iycFAW2m4VJAo3dmO2V6uj9uXbDE5spLVqfJJhVVgK1QAAAAAElFTkSuQmCC")
     public void pathFillTransform() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "      context.moveTo(2, 2);\n"
@@ -2347,12 +2097,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "bADfVhOlrk0MSqWqUvL1nP/ttKPGT9eYRyXwDvghWGCC7mRpS+AVgksA+IKmx8vfzVMCd9h9BoADNKOn0xnWbLtWUwENzLZr"
                 + "ZHXCCSDJVAOz7WigS5Y9QJKpNTZyuGig0A6A5Ewt4C+2s1UvQ16P2pbxSVa/AXlPbO+Jbg+iozMiK6s1INs+8wneRDPDva7q"
                 + "Yt5dZtsMHAHUDTet1k6YCwOoG25aDQNZCGia801Xo5ZXusW2ZKq7+i9QMi0H2Om8eVM8bWi9+R/7A246MhXPMagrAAAAAElF"
-                + "TkSuQmCC",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACjSURBVDhP"
-                + "1ZLBDYAgDEU7gifndBNG8eI+jMAG6i8JpKkNFPWgL/mBA/36CPQrInI4syJdAmIN6yRkQrrwIatAZ0Hc9LRdqpKqjeYDG1f2"
-                + "xoeqNprNYR2UJazNO83aOGEW6KCwe6du7ZaqxKXtUZVk7Zlo00UlHlUJa+cHjMFolA0/H1bJf4DhoMqGVC/wsCocUjUp2ndU"
-                + "TVj7saqEi15R/QBEJzGv1JNAAQutAAAAAElFTkSuQmCC")
+                + "TkSuQmCC")
     public void pathFillTransform2() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "      context.beginPath();\n"
@@ -2387,11 +2132,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAeklEQVQ4T9WTUQ7AQAREubmbqzS0pdHsCh/dT5K3YwaE5ofN"
                 + "PPgjkICdDbQ3xXvkKSCTj0t+XvI7VdgHVGFi5OklBkul8qk0bbYDbwfZp15VOAj0aZsVVo3pL63CEzkGxLCnoBdVVtgGvMaP"
-                + "J6qNbYVzQCMHpXWFCfAAXsokEVEKzTkAAAAASUVORK5CYII=",
-            IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABpSURBVDhP"
-                + "7ZPRCsAgCEV1X+6fO2ladGkxWDQfdl7MEDmI0s9r2GNDSP11IYOaCYfHZdwaqpSsYoWPTDcYOqZZTBlGaj9T032GDQXFfIY9"
-                + "MdvAGnQ98hgy7Glc1PeGFbx5J5FhAKaLDYlOKXoSF+jZIBEAAAAASUVORK5CYII=")
+                + "J6qNbYVzQCMHpXWFCfAAXsokEVEKzTkAAAAASUVORK5CYII=")
     public void saveRestore() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "      context.fillStyle = 'green';\n"
@@ -2434,8 +2175,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "klixcgcWJLdgx05ZYTLlO2OmmGiOWDqb03e+9zy930+A55OXMOs8beReevK+YcBRxGLQu0KlBMcQhCcQT8HsAA3RnHxJjsAG"
                 + "CmyUhuoago8fc2Bt79DyJ8B8GBYXD8wFRARqQkG3fOWwVYPOEJKvXDTBHIBw9Y4usC24rg5SAX9esj2UDBgrjwU1lD3Md1DU"
                 + "cac07tpEBdq3ZNKGQFRiDKEETGXCdQnPnwJd/c8WW9eAr84t2VeoK/gDdTv1Xvfv4fc9vAGT7zEVBadocQAAAABJRU5ErkJg"
-                + "gg==",
-            IE = {})
+                + "gg==")
     public void imageOnLoad() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

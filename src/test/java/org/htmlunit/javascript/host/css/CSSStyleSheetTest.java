@@ -145,10 +145,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"8", "§§URL§§style1.css 1", "§§URL§§style2.css 0",
-                       "§§URL§§style3.css 0", "§§URL§§style4.css 1",
-                       "§§URL§§style5.css 1", "§§URL§§style6.css 0",
-                       "§§URL§§style7.css 0", "§§URL§§style8.css 1"})
+    @Alerts({"8", "§§URL§§style1.css 1", "§§URL§§style2.css 0",
+             "§§URL§§style3.css 0", "§§URL§§style4.css 1",
+             "§§URL§§style5.css 1", "§§URL§§style6.css 0",
+             "§§URL§§style7.css 0", "§§URL§§style8.css 1"})
     public void hrefWrongContentType() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

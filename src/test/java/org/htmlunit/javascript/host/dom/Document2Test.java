@@ -206,8 +206,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"parent", "child"},
-            IE = "evaluate not available")
+    @Alerts({"parent", "child"})
     public void importNodeWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
@@ -249,8 +248,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"parent", "child", "child3"},
-            IE = "evaluate not available")
+    @Alerts({"parent", "child", "child3"})
     public void importNodesWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
@@ -342,8 +340,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLBodyElement]", "§§URL§§#", "§§URL§§#"},
-            IE = {"null", "§§URL§§#", "§§URL§§#"})
+    @Alerts({"[object HTMLBodyElement]", "§§URL§§#", "§§URL§§#"})
     public void activeElement_iframe() throws Exception {
         final String html =
                 "<html>\n"

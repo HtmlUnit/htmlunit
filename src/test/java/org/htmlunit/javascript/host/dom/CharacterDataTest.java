@@ -176,8 +176,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "", ""},
-            IE = {"", "", "", "exception"})
+    @Alerts({"", "", "", ""})
     public void deleteDataEmptyImput() throws Exception {
         final String html
             = "<html><head>\n"
@@ -217,8 +216,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception", "exception", "exception"},
-            IE = {"exception", "exception", "abcde", "exception"})
+    @Alerts({"exception", "exception", "exception", "exception"})
     public void deleteDataInvalidStart() throws Exception {
         final String html
             = "<html><head>\n"
@@ -257,8 +255,7 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Some Not So New Te", "Some ", "So"},
-            IE = {"exception", "exception", "exception"})
+    @Alerts({"Some Not So New Te", "Some ", "So"})
     public void deleteDataNegativeCount() throws Exception {
         final String html
             = "<html><head>\n"

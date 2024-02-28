@@ -1898,9 +1898,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "0", "0", "", "", "", "", "", "", "", "",
-                       "104", "104", "104", "104", "auto", "100px", "100px",
-                       "3px", "block", "content-box", "0px", "0px"})
+    @Alerts({"0", "0", "0", "0", "", "", "", "", "", "", "", "",
+             "104", "104", "104", "104", "auto", "100px", "100px",
+             "3px", "block", "content-box", "0px", "0px"})
     public void offsetWidth() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

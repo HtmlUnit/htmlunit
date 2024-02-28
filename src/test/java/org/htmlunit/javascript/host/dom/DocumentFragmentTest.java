@@ -160,8 +160,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "null", "null", "1", "myDiv", "myDiv"},
-            IE = {"undefined", "undefined", "undefined"})
+    @Alerts({"0", "null", "null", "1", "myDiv", "myDiv"})
     public void firstElementChild() throws Exception {
         final String html
             = "<html><head>\n"
@@ -199,8 +198,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "null", "null", "0", "null", "null", "1", "myDiv", "myDiv"},
-            IE = {"undefined", "undefined", "undefined"})
+    @Alerts({"0", "null", "null", "0", "null", "null", "1", "myDiv", "myDiv"})
     public void firstElementChildTextNode() throws Exception {
         final String html
             = "<html><head>\n"
@@ -308,8 +306,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "false", "true", "false", "true", "true", "false"},
-            IE = "-")
+    @Alerts({"false", "true", "false", "true", "false", "true", "true", "false"})
     public void getRootNode() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"

@@ -573,8 +573,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "foo",
-            IE = "")
+    @Alerts("foo")
     @BuggyWebDriver(CHROME = "")
     // ChromeDriver does not generate a "foo" but it occurs manually
     public void option_onClick() throws Exception {
