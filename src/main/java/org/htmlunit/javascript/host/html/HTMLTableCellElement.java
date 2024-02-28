@@ -27,6 +27,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomNode;
@@ -195,7 +196,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public int getColSpan() {
-        final String s = getDomNodeOrDie().getAttribute("colSpan");
+        final String s = StringUtils.replaceChars(getDomNodeOrDie().getAttribute("colSpan"), "\r\n", null);
         try {
             return Integer.parseInt(s);
         }
@@ -231,7 +232,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public int getRowSpan() {
-        final String s = getDomNodeOrDie().getAttribute("rowSpan");
+        final String s = StringUtils.replaceChars(getDomNodeOrDie().getAttribute("rowSpan"), "\r\n", null);
         try {
             return Integer.parseInt(s);
         }
