@@ -1044,10 +1044,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"iframe script", "loaded", "null", "[object Window]",
-                       "about:blank", "iframe script", "loaded"},
-            IE = {"iframe script", "loaded", "null", "[object Window]",
-                  "§§URL§§", "iframe script", "loaded"})
+    @Alerts({"iframe script", "loaded", "null", "[object Window]",
+             "about:blank", "iframe script", "loaded"})
     @HtmlUnitNYI(CHROME = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                            "about:blank", "iframe script", "loaded"},
             EDGE = {"iframe script", "loaded", "null", "loaded", "[object Window]",
@@ -1107,10 +1105,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"iframe external script", "loaded", "null", "[object Window]",
-                       "about:blank", "iframe external script", "loaded"},
-            IE = {"iframe external script", "loaded", "null", "[object Window]",
-                  "§§URL§§", "iframe external script", "loaded"})
+    @Alerts({"iframe external script", "loaded", "null", "[object Window]",
+             "about:blank", "iframe external script", "loaded"})
     @HtmlUnitNYI(CHROME = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                            "about:blank", "iframe external script", "loaded"},
             EDGE = {"iframe external script", "loaded", "null", "loaded", "[object Window]",

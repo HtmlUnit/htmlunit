@@ -214,8 +214,7 @@ public class History2Test extends WebDriverTestCase {
                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                        "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
-            IE = {})
+                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -372,9 +371,9 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object PopStateEvent]", "null",
-                "[object PopStateEvent]", "null",
-                "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
-                "[object PopStateEvent]", "{\"hi2\":\"there2\"}"})
+             "[object PopStateEvent]", "null",
+             "[object PopStateEvent]", "{\"hi2\":\"there2\"}",
+             "[object PopStateEvent]", "{\"hi2\":\"there2\"}"})
     public void replaceState() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -457,11 +456,10 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "true",
-                       "[object PopStateEvent]", "null", "true",
-                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
-            IE = {})
+    @Alerts({"[object PopStateEvent]", "null", "true",
+             "[object PopStateEvent]", "null", "true",
+             "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
+             "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

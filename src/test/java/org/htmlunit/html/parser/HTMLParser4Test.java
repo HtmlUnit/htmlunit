@@ -797,9 +797,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = "before1after1\\nbefore2\\nbefore3\\nbefore4after4\\nbefore5after5\\nbefore6<\\s>after6",
-            IE = "before1after1\\r\\n\\s\\r\\nbefore2\\s\\r\\nbefore3\\s\\r\\nbefore4after4"
-                    + "\\r\\n\\s\\r\\nbefore5after5\\r\\n\\s\\r\\nbefore6<\\s>after6\\r\\n\\s")
+    @Alerts("before1after1\\nbefore2\\nbefore3\\nbefore4after4\\nbefore5after5\\nbefore6<\\s>after6")
     @HtmlUnitNYI(CHROME = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
             EDGE = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
             FF = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",

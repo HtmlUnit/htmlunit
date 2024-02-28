@@ -2472,8 +2472,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object HTMLDocument]", "[object HTMLDocument]"},
-            CHROME = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
+    @Alerts(CHROME = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
             EDGE = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
             FF = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
             FF_ESR = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"})

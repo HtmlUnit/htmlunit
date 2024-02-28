@@ -1240,16 +1240,11 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                       "true", "true - false",
-                       "false", "boolean",
-                       "true", "boolean", "false - false",
-                       "true", "boolean"},
-            IE = {"undefined", "undefined", "false - false",
-                  "undefined", "true - false",
-                  "undefined", "undefined",
-                  "undefined", "undefined", "false - false",
-                  "undefined", "undefined"})
+    @Alerts({"true", "boolean", "false - false",
+             "true", "true - false",
+             "false", "boolean",
+             "true", "boolean", "false - false",
+             "true", "boolean"})
     public void returnValueSetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -1289,20 +1284,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                       "true", "true - false",
-                       "false", "boolean", "false",
-                       "true", "boolean", "false - false",
-                       "true", "boolean", "true",
-                       "true", "boolean", "true - false",
-                       "false", "boolean", "false"},
-            IE = {"undefined", "undefined", "false - false",
-                  "undefined", "true - false",
-                  "false", "boolean", "true",
-                  "undefined", "undefined", "false - false",
-                  "false", "boolean", "true",
-                  "undefined", "undefined", "true - false",
-                  "false", "boolean", "true"})
+    @Alerts({"true", "boolean", "false - false",
+             "true", "true - false",
+             "false", "boolean", "false",
+             "true", "boolean", "false - false",
+             "true", "boolean", "true",
+             "true", "boolean", "true - false",
+             "false", "boolean", "false"})
     public void returnValueSetterFalse() throws Exception {
         returnValueSetterUndefined("false");
     }
@@ -1311,20 +1299,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                       "true", "true - false",
-                       "true", "boolean", "false",
-                       "true", "boolean", "false - false",
-                       "true", "boolean", "true",
-                       "true", "boolean", "true - false",
-                       "true", "boolean", "false"},
-            IE = {"undefined", "undefined", "false - false",
-                  "undefined", "true - false",
-                  "true", "boolean", "false",
-                  "undefined", "undefined", "false - false",
-                  "true", "boolean", "false",
-                  "undefined", "undefined", "true - false",
-                  "true", "boolean", "false"})
+    @Alerts({"true", "boolean", "false - false",
+             "true", "true - false",
+             "true", "boolean", "false",
+             "true", "boolean", "false - false",
+             "true", "boolean", "true",
+             "true", "boolean", "true - false",
+             "true", "boolean", "false"})
     public void returnValueSetterTrue() throws Exception {
         returnValueSetterUndefined("true");
     }
@@ -1333,20 +1314,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                       "true", "true - false",
-                       "true", "boolean", "false",
-                       "true", "boolean", "false - false",
-                       "true", "boolean", "true",
-                       "true", "boolean", "true - false",
-                       "true", "boolean", "false"},
-            IE = {"undefined", "undefined", "false - false",
-                  "undefined", "true - false",
-                  "test", "string", "false",
-                  "undefined", "undefined", "false - false",
-                  "test", "string", "false",
-                  "undefined", "undefined", "true - false",
-                  "test", "string", "false"})
+    @Alerts({"true", "boolean", "false - false",
+             "true", "true - false",
+             "true", "boolean", "false",
+             "true", "boolean", "false - false",
+             "true", "boolean", "true",
+             "true", "boolean", "true - false",
+             "true", "boolean", "false"})
     public void returnValueSetterString() throws Exception {
         returnValueSetterUndefined("'test'");
     }
@@ -1355,20 +1329,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                       "true", "true - false",
-                       "false", "boolean", "false",
-                       "true", "boolean", "false - false",
-                       "true", "boolean", "true",
-                       "true", "boolean", "true - false",
-                       "false", "boolean", "false"},
-            IE = {"undefined", "undefined", "false - false",
-                  "undefined", "true - false",
-                  "0", "number", "true",
-                  "undefined", "undefined", "false - false",
-                  "0", "number", "true",
-                  "undefined", "undefined", "true - false",
-                  "0", "number", "true"})
+    @Alerts({"true", "boolean", "false - false",
+             "true", "true - false",
+             "false", "boolean", "false",
+             "true", "boolean", "false - false",
+             "true", "boolean", "true",
+             "true", "boolean", "true - false",
+             "false", "boolean", "false"})
     public void returnValueSetterZero() throws Exception {
         returnValueSetterUndefined("0");
     }
@@ -1377,20 +1344,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                       "true", "true - false",
-                       "true", "boolean", "false",
-                       "true", "boolean", "false - false",
-                       "true", "boolean", "true",
-                       "true", "boolean", "true - false",
-                       "true", "boolean", "false"},
-            IE = {"undefined", "undefined", "false - false",
-                  "undefined", "true - false",
-                  "1", "number", "false",
-                  "undefined", "undefined", "false - false",
-                  "1", "number", "false",
-                  "undefined", "undefined", "true - false",
-                  "1", "number", "false"})
+    @Alerts({"true", "boolean", "false - false",
+             "true", "true - false",
+             "true", "boolean", "false",
+             "true", "boolean", "false - false",
+             "true", "boolean", "true",
+             "true", "boolean", "true - false",
+             "true", "boolean", "false"})
     public void returnValueSetterOne() throws Exception {
         returnValueSetterUndefined("1");
     }
@@ -1399,20 +1359,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                       "true", "true - false",
-                       "true", "boolean", "false",
-                       "true", "boolean", "false - false",
-                       "true", "boolean", "true",
-                       "true", "boolean", "true - false",
-                       "true", "boolean", "false"},
-            IE = {"undefined", "undefined", "false - false",
-                  "undefined", "true - false",
-                  "-1", "number", "false",
-                  "undefined", "undefined", "false - false",
-                  "-1", "number", "false",
-                  "undefined", "undefined", "true - false",
-                  "-1", "number", "false"})
+    @Alerts({"true", "boolean", "false - false",
+             "true", "true - false",
+             "true", "boolean", "false",
+             "true", "boolean", "false - false",
+             "true", "boolean", "true",
+             "true", "boolean", "true - false",
+             "true", "boolean", "false"})
     public void returnValueSetterMinusOne() throws Exception {
         returnValueSetterUndefined("-1");
     }
@@ -1421,20 +1374,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                       "true", "true - false",
-                       "false", "boolean", "false",
-                       "true", "boolean", "false - false",
-                       "true", "boolean", "true",
-                       "true", "boolean", "true - false",
-                       "false", "boolean", "false"},
-            IE = {"undefined", "undefined", "false - false",
-                  "undefined", "true - false",
-                  "undefined", "undefined", "true",
-                  "undefined", "undefined", "false - false",
-                  "undefined", "undefined", "true",
-                  "undefined", "undefined", "true - false",
-                  "undefined", "undefined", "true"})
+    @Alerts({"true", "boolean", "false - false",
+             "true", "true - false",
+             "false", "boolean", "false",
+             "true", "boolean", "false - false",
+             "true", "boolean", "true",
+             "true", "boolean", "true - false",
+             "false", "boolean", "false"})
     public void returnValueSetterUndefined() throws Exception {
         returnValueSetterUndefined("undefined");
     }
@@ -1507,12 +1453,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false - false", "true - false", "true - true",
-                       "false - false", "false - false", "false - false",
-                       "false - false", "true - false"},
-            IE = {"false - false", "true - false", "true - false",
-                  "false - false", "false - false", "false - false",
-                  "false - false", "true - false"})
+    @Alerts({"false - false", "true - false", "true - true",
+             "false - false", "false - false", "false - false",
+             "false - false", "true - false"})
     public void preventDefault() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"

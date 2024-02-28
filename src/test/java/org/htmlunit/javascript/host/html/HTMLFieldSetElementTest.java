@@ -34,10 +34,8 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                       "undefined", "undefined", "undefined", "undefined", "undefined"},
-            IE = {"left", "right", "bottom", "middle",
-                  "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
+    @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+             "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -70,10 +68,8 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right",
-                       "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
-           IE = {"center", "error", "center", "error", "center", "left", "right",
-                 "bottom", "middle", "top", "absBottom", "absMiddle", "baseline", "textTop"})
+    @Alerts({"CenTer", "8", "foo", "left", "right",
+             "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

@@ -32,10 +32,8 @@ public class HTMLDetailsElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "false", "null", "true", "",
-                       "true", "", "true", "TrUE", "false", "null"},
-            IE = {"undefined", "null", "true", "null", "false", "null", "true", "null",
-                  "faLSE", "null", "faLSE", "TrUE", "faLSE", "null"})
+    @Alerts({"false", "null", "true", "", "false", "null", "true", "",
+             "true", "", "true", "TrUE", "false", "null"})
     public void open() throws Exception {
         final String html =
             "<html>\n"

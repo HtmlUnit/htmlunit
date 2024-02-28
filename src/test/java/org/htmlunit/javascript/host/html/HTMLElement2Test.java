@@ -462,11 +462,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999"},
-            IE = {"true", "true", "2.0555555555555553", "3.0555555555555553",
-                  "4.111111111111111", "5.111111111111111", "6.111111111111111",
-                  "7.166666666666667", "8.166666666666666", "9.222222222222221",
-                  "101.22222222222223", "203.44444444444446", "6132.333333333333"})
+    @Alerts({"true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999"})
     public void offsetTopWithPreviousSiblings() throws Exception {
         String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1628,9 +1624,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"First: body1", "Second:", "Second: body1 setActive not available"},
-            IE = {"First: body1", "Second:",
-                  "Second: body1 text1 [object HTMLButtonElement] text2 [object Window] onfocus text2"})
+    @Alerts({"First: body1", "Second:", "Second: body1 setActive not available"})
     // alert conflicts with focus/blur
     public void setActiveAndFocus() throws Exception {
         final String firstHtml =

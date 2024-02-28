@@ -128,11 +128,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-                       "string item", "string length", "string namedItem"},
-            IE = {"string 1", "string action", "string first_submit", "string item",
-                  "string length", "string namedItem", "string second_submit", "string val1",
-                  "string val2"})
+    @Alerts({"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+             "string item", "string length", "string namedItem"})
     public void for_in2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

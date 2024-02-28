@@ -964,12 +964,9 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"Show dialog", "false",
-                       "Show dialog\nHello World\nDismiss", "true",
-                       "Show dialog", "false"},
-            IE = {"Show dialog\nHello World\nDismiss", "true",
-                  "Show dialog\nHello World\nDismiss", "true",
-                  "Show dialog\nHello World\nDismiss", "true"})
+    @Alerts({"Show dialog", "false",
+             "Show dialog\nHello World\nDismiss", "true",
+             "Show dialog", "false"})
     public void useCaseIssue598() throws Exception {
         final String html =
             "<html>\n"

@@ -62,10 +62,8 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "function", "function", "function", "function", "function",
-                       "function", "function", "function", "function"},
-            IE = {"function", "undefined", "undefined", "undefined", "undefined", "undefined",
-                  "undefined", "undefined", "undefined", "undefined"})
+    @Alerts({"function", "function", "function", "function", "function", "function",
+             "function", "function", "function", "function"})
     public void functions() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -299,10 +297,8 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
-                       "Content-Type: application/octet-stream", "", "Hello HtmlUnit"},
-            IE = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
-                  "Content-Type: text/plain", "", "Hello HtmlUnit"})
+    @Alerts({"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
+             "Content-Type: application/octet-stream", "", "Hello HtmlUnit"})
     public void appendFileWithUnknownExtension() throws Exception {
         final String alerts = appendFile(".htmlunit", "test");
 
@@ -320,10 +316,8 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
-                       "Content-Type: application/octet-stream", "", "Hello HtmlUnit"},
-              IE = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
-                    "Content-Type: text/plain", "", "Hello HtmlUnit"})
+    @Alerts({"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
+             "Content-Type: application/octet-stream", "", "Hello HtmlUnit"})
     public void appendFileWithoutExtension() throws Exception {
         final String alerts = appendFile("", "test");
 
