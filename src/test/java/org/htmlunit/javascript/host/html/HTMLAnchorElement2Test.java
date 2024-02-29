@@ -1066,7 +1066,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "alternate", "help"})
+    @Alerts({"0", "2", "alternate", "help"})
     public void relList() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1090,7 +1090,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"})
+    @Alerts({"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"})
     public void setRelListString() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1127,7 +1127,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"})
+    @Alerts({"0", "2", "0", "0", "", "\\s\\s\\t"})
     public void setRelListStringBlank() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1156,7 +1156,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"})
+    @Alerts({"0", "2", "1", "1", "null", "null", "null", "null"})
     public void setRelListNull() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1193,7 +1193,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
+    @Alerts({"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
     public void setRelListUndefined() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -1230,11 +1230,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "user", "user", "",
-                       "", "",
-                       "Tester", "https://Tester:password@developer.mozilla.org/",
-                       "Tester", "https://Tester@developer.mozilla.org/",
-                       "Tester", "https://Tester@developer.mozilla.org/"})
+    @Alerts({"", "user", "user", "",
+             "", "",
+             "Tester", "https://Tester:password@developer.mozilla.org/",
+             "Tester", "https://Tester@developer.mozilla.org/",
+             "Tester", "https://Tester@developer.mozilla.org/"})
     @HtmlUnitNYI(CHROME = {"", "user", "user", "",
                            "", "",
                            "Tester", "https://Tester:password@developer.mozilla.org",
@@ -1299,11 +1299,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "password", "password", "",
-                       "", "",
-                       "Tester", "https://user:Tester@developer.mozilla.org/",
-                       "Tester", "https://:Tester@developer.mozilla.org/",
-                       "Tester", "https://:Tester@developer.mozilla.org/"})
+    @Alerts({"", "password", "password", "",
+             "", "",
+             "Tester", "https://user:Tester@developer.mozilla.org/",
+             "Tester", "https://:Tester@developer.mozilla.org/",
+             "Tester", "https://:Tester@developer.mozilla.org/"})
     @HtmlUnitNYI(CHROME = {"", "password", "password", "",
                            "", "",
                            "Tester", "https://user:Tester@developer.mozilla.org",

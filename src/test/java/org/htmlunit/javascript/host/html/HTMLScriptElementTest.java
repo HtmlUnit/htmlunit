@@ -970,7 +970,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "3"})
+    @Alerts({"1", "2", "3"})
     public void scriptType() throws Exception {
         final String html
             = "<html>\n"

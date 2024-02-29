@@ -70,8 +70,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError true",
-            IE = {})
+    @Alerts("TypeError true")
     @HtmlUnitNYI(CHROME = "TypeError false",
             EDGE = "TypeError false",
             FF = "TypeError false",
@@ -102,12 +101,12 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Crypto]", "public", "true", "verify",
-                       "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-                       "publicExponent 1,0,1",
-                       "private", "false", "sign",
-                       "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-                       "publicExponent 1,0,1"})
+    @Alerts({"[object Crypto]", "public", "true", "verify",
+             "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+             "publicExponent 1,0,1",
+             "private", "false", "sign",
+             "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+             "publicExponent 1,0,1"})
     @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
     public void rsassa() throws Exception {
         final String html

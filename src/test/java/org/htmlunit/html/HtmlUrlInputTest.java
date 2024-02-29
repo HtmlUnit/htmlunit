@@ -202,16 +202,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://example.com",
-                       "false",
-                       "false-false-true-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"http://example.com",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"http://example.com",
+             "false",
+             "false-false-true-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void patternValidationInvalid() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' value='http://example.com' name='k'>\n",
                     "", null);
@@ -221,16 +216,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://test.com",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=http%3A%2F%2Ftest.com", "2"},
-            IE = {"http://test.com",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=http%3A%2F%2Ftest.com", "2"})
+    @Alerts({"http://test.com",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=http%3A%2F%2Ftest.com", "2"})
     public void patternValidationValid() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' value='http://test.com' name='k'>\n", "", null);
     }
@@ -239,16 +229,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void patternValidationEmpty() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=''>\n", "", null);
     }
@@ -257,16 +242,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {" ",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void patternValidationBlank() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=' '>\n", "", null);
     }
@@ -275,16 +255,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"  \t",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void patternValidationWhitespace() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k' value='  \t'>\n", "", null);
     }
@@ -293,16 +268,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://test.com",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=http%3A%2F%2Ftest.com", "2"},
-            IE = {"",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"http://test.com",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=http%3A%2F%2Ftest.com", "2"})
     public void patternValidationTrimInitial() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=' http://test.com '>\n", "", null);
     }
@@ -311,16 +281,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {" http://test.com ",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"},
-            IE = {"  \t",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({" http://test.com ",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k'>\n", "", " http://test.com ");
     }
@@ -329,16 +294,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://example.com",
-                       "false",
-                       "false-false-false-false-false-false-false-true-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"http://example.com",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
+    @Alerts({"http://example.com",
+             "false",
+             "false-false-false-false-false-false-false-true-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void minLengthValidationInvalid() throws Exception {
         validation("<input type='url' minlength='20' id='e1' name='k'>\n", "", "http://example.com");
     }
@@ -347,16 +307,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://example.com",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=http%3A%2F%2Fexample.com", "2"},
-            IE = {"http://example.com",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
+    @Alerts({"http://example.com",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
     public void minLengthValidationInvalidInitial() throws Exception {
         validation("<input type='url' minlength='20' id='e1' name='k' value='http://example.com'>\n", "", null);
     }
@@ -365,16 +320,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void minLengthValidationInvalidNoInitial() throws Exception {
         validation("<input type='url' minlength='20' id='e1' name='k'>\n", "", null);
     }
@@ -383,16 +333,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://example.com/test",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"},
-            IE = {"http://example.com/test",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"})
+    @Alerts({"http://example.com/test",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"})
     public void minLengthValidationValid() throws Exception {
         validation("<input type='url' minlength='20' id='e1' name='k'>\n", "", "http://example.com/test");
     }
@@ -401,16 +346,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://example.com",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=http%3A%2F%2Fexample.com", "2"},
-            IE = {"http://example.com",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
+    @Alerts({"http://example.com",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
     public void maxLengthValidationValid() throws Exception {
         validation("<input type='url' maxlength='20' id='e1' name='k'>\n", "", "http://example.com");
     }
@@ -419,16 +359,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://example.com/t",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=http%3A%2F%2Fexample.com%2Ft", "2"},
-            IE = {"http://example.com/t",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=http%3A%2F%2Fexample.com%2Ft", "2"})
+    @Alerts({"http://example.com/t",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=http%3A%2F%2Fexample.com%2Ft", "2"})
     public void maxLengthValidationInvalid() throws Exception {
         validation("<input type='url' maxlength='20' id='e1' name='k'>\n", "", "http://example.com/test");
     }
@@ -437,16 +372,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://example.com/test",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"},
-            IE = {"http://example.com/test",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"})
+    @Alerts({"http://example.com/test",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"})
     public void maxLengthValidationInvalidInitial() throws Exception {
         validation("<input type='url' maxlength='20' "
                     + "id='e1' name='k' value='http://example.com/test'>\n", "", null);
@@ -488,16 +418,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void validationEmpty() throws Exception {
         validation("<input type='url' id='e1' name='k'>\n", "", null);
     }
@@ -506,16 +431,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "false",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"",
-                  "false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "false",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void validationCustomValidity() throws Exception {
         validation("<input type='url' id='e1' name='k'>\n", "elem.setCustomValidity('Invalid');", null);
     }
@@ -524,16 +444,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "false",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"",
-                  "false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "false",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void validationBlankCustomValidity() throws Exception {
         validation("<input type='url' id='e1' name='k'>\n", "elem.setCustomValidity(' ');\n", null);
     }
@@ -542,16 +457,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void validationResetCustomValidity() throws Exception {
         validation("<input type='url' id='e1' name='k'>\n",
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');", null);
@@ -561,16 +471,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "false",
-                       "false-false-false-false-false-false-false-false-false-false-true",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"",
-                  "false",
-                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "false",
+             "false-false-false-false-false-false-false-false-false-false-true",
+             "true",
+             "§§URL§§", "1"})
     public void validationRequired() throws Exception {
         validation("<input type='url' id='e1' name='k' required>\n", "", null);
     }
@@ -579,16 +484,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=http%3A%2F%2Fexample.com", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
     public void validationRequiredValueSet() throws Exception {
         validation("<input type='url' id='e1' name='k' required>\n", "elem.value='http://example.com';", null);
     }
@@ -597,16 +497,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "false",
-                       "false-false-true-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "false",
+             "false-false-true-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void validationPattern() throws Exception {
         validation("<input type='url' id='e1' name='k' pattern='.*test.*'>\n",
                     "elem.value='http://example.com';", null);

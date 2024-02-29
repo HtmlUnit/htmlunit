@@ -55,7 +55,7 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "error", "[object OfflineAudioContext]"})
+    @Alerts({"function", "error", "[object OfflineAudioContext]"})
     public void ctor() throws Exception {
         final String html
             = "<html>\n"
@@ -119,7 +119,7 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"OfflineAudioContext prep done", "Error with decoding audio data"})
+    @Alerts({"OfflineAudioContext prep done", "Error with decoding audio data"})
     public void decodeAudioData() throws Exception {
         final String html
             = "<html>\n"
@@ -155,7 +155,7 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"OfflineAudioContext prep done", "Error with decoding audio data"})
+    @Alerts({"OfflineAudioContext prep done", "Error with decoding audio data"})
     public void decodeAudioData2() throws Exception {
         final String html
             = "<html>\n"
@@ -191,7 +191,7 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "-3.4028234663852886e+38", "3.4028234663852886e+38", "1", "0.5"})
+    @Alerts({"1", "-3.4028234663852886e+38", "3.4028234663852886e+38", "1", "0.5"})
     public void createGain() throws Exception {
         final String html
             = "<html>\n"

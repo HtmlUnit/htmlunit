@@ -67,7 +67,7 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {})
+    @Alerts({})
     public void minimalUsage() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION

@@ -35,8 +35,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"foo=1&bar=2", ""},
-            IE = {})
+    @Alerts({"foo=1&bar=2", ""})
     public void ctor() throws Exception {
         final String html =
             "<html>\n"
@@ -59,13 +58,12 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"",
-                       "Failed to construct 'URLSearchParams': The provided value cannot be converted to a sequence",
-                       "foo=1&bar=2&null=null",
-                       "Failed to construct 'URLSearchParams': Sequence initializer must only contain pair elements",
-                       "a%2Cb=1%2C2%2C3",
-                       "Failed to construct 'URLSearchParams': The object must have a callable @@iterator property"},
-            IE = {})
+    @Alerts({"",
+             "Failed to construct 'URLSearchParams': The provided value cannot be converted to a sequence",
+             "foo=1&bar=2&null=null",
+             "Failed to construct 'URLSearchParams': Sequence initializer must only contain pair elements",
+             "a%2Cb=1%2C2%2C3",
+             "Failed to construct 'URLSearchParams': The object must have a callable @@iterator property"})
     public void ctorArray() throws Exception {
         final String html =
             "<html>\n"
@@ -125,8 +123,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"foo=1&bar=2", "foo=%5Bobject+Object%5D&bar=3"},
-            IE = {})
+    @Alerts({"foo=1&bar=2", "foo=%5Bobject+Object%5D&bar=3"})
     public void ctorObject() throws Exception {
         final String html =
             "<html>\n"
@@ -159,14 +156,13 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"foo=1&bar=%5Bobject+Object%5D&foobar=4%2C5%2C6",
-                       "foo=1&bar=2", "foo=1&bar=2",
-                       "Failed to construct 'URLSearchParams': Iterator object must be an object",
-                       "Failed to construct 'URLSearchParams': @@iterator must be a callable",
-                       "Failed to construct 'URLSearchParams': Expected next() function on iterator",
-                       "foo=1&bar=2",
-                       "Failed to construct 'URLSearchParams': The provided value cannot be converted to a sequence"},
-            IE = {})
+    @Alerts({"foo=1&bar=%5Bobject+Object%5D&foobar=4%2C5%2C6",
+             "foo=1&bar=2", "foo=1&bar=2",
+             "Failed to construct 'URLSearchParams': Iterator object must be an object",
+             "Failed to construct 'URLSearchParams': @@iterator must be a callable",
+             "Failed to construct 'URLSearchParams': Expected next() function on iterator",
+             "foo=1&bar=2",
+             "Failed to construct 'URLSearchParams': The provided value cannot be converted to a sequence"})
     public void ctorIterable() throws Exception {
         final String html =
             "<html>\n"
@@ -247,8 +243,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "foo=1&bar=2", "q=Html+Unit&unml=%C3%A4%C3%9C", "q=HtmlUnit&u=%3F%3F"},
-            IE = {})
+    @Alerts({"", "foo=1&bar=2", "q=Html+Unit&unml=%C3%A4%C3%9C", "q=HtmlUnit&u=%3F%3F"})
     public void string() throws Exception {
         final String html =
             "<html>\n"
@@ -284,8 +279,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"=emptyKey", "null=nullKey", "undefined=undefinedKey"},
-            IE = {})
+    @Alerts({"=emptyKey", "null=nullKey", "undefined=undefinedKey"})
     public void stringKeys() throws Exception {
         final String html =
             "<html>\n"
@@ -320,8 +314,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"emptyValue=", "nullValue=null", "undefinedValue=undefined"},
-            IE = {})
+    @Alerts({"emptyValue=", "nullValue=null", "undefinedValue=undefined"})
     public void stringValues() throws Exception {
         final String html =
             "<html>\n"
@@ -356,8 +349,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception param",
-            IE = {})
+    @Alerts("exception param")
     @HtmlUnitNYI(CHROME = "noValue=undefined",
             EDGE = "noValue=undefined",
             FF = "noValue=undefined",
@@ -390,10 +382,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key=value", "key=value&empty-key=undefined",
-                       "key=value&empty-key=undefined&key=overwrite",
-                       "key=value&empty-key=undefined&key=overwrite&key-null=null"},
-            IE = {})
+    @Alerts({"key=value", "key=value&empty-key=undefined",
+             "key=value&empty-key=undefined&key=overwrite",
+             "key=value&empty-key=undefined&key=overwrite&key-null=null"})
     public void append() throws Exception {
         final String html =
             "<html>\n"
@@ -426,10 +417,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"%3Fkey%3D%26=value", "true",
-                       "%3Fkey%3D%26=value&url=http%3A%2F%2Ffoo.com%2F%3Fx%3D1%26y%3D2%26z%3D3",
-                       "http://foo.com/?x=1&y=2&z=3"},
-            IE = {})
+    @Alerts({"%3Fkey%3D%26=value", "true",
+             "%3Fkey%3D%26=value&url=http%3A%2F%2Ffoo.com%2F%3Fx%3D1%26y%3D2%26z%3D3",
+             "http://foo.com/?x=1&y=2&z=3"})
     public void appendSpecialChars() throws Exception {
         final String html =
             "<html>\n"
@@ -460,11 +450,10 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key=value", "key=value&empty-key=undefined",
-                       "key=value&empty-key=undefined&key=overwrite",
-                       "key=value&empty-key=undefined&key=overwrite&key-null=null",
-                       "http://test.com/p?key=value&empty-key=undefined&key=overwrite&key-null=null"},
-            IE = {})
+    @Alerts({"key=value", "key=value&empty-key=undefined",
+             "key=value&empty-key=undefined&key=overwrite",
+             "key=value&empty-key=undefined&key=overwrite&key-null=null",
+             "http://test.com/p?key=value&empty-key=undefined&key=overwrite&key-null=null"})
     public void appendFromUrl() throws Exception {
         final String html =
             "<html>\n"
@@ -500,8 +489,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key2=val2&key2=val3", "", "", "", ""},
-            IE = {})
+    @Alerts({"key2=val2&key2=val3", "", "", "", ""})
     public void delete() throws Exception {
         final String html =
             "<html>\n"
@@ -536,8 +524,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key2=val2&key2=val3", "", "", "", "", "http://test.com/p"},
-            IE = {})
+    @Alerts({"key2=val2&key2=val3", "", "", "", "", "http://test.com/p"})
     public void deleteFromUrl() throws Exception {
         final String html =
             "<html>\n"
@@ -575,9 +562,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key+1=val1&key2=val2", "http://test.com/p?key%201=val1&key2=val2",
-                       "key2=val2", "http://test.com/p?key2=val2"},
-            IE = {})
+    @Alerts({"key+1=val1&key2=val2", "http://test.com/p?key%201=val1&key2=val2",
+             "key2=val2", "http://test.com/p?key2=val2"})
     @HtmlUnitNYI(CHROME = {"key+1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                            "key2=val2", "http://test.com/p?key2=val2"},
                  EDGE = {"key+1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
@@ -617,8 +603,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"val1", "val2", "null", "null", "null"},
-            IE = {})
+    @Alerts({"val1", "val2", "null", "null", "null"})
     public void get() throws Exception {
         final String html =
             "<html>\n"
@@ -648,8 +633,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "false", "false", "false"},
-            IE = {})
+    @Alerts({"true", "true", "false", "false", "false"})
     public void has() throws Exception {
         final String html =
             "<html>\n"
@@ -679,8 +663,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"val1,val3", "val2", "", "", ""},
-            IE = {})
+    @Alerts({"val1,val3", "val2", "", "", ""})
     public void getAll() throws Exception {
         final String html =
             "<html>\n"
@@ -710,12 +693,11 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key1=val1&key2=val2&key2=val3&key4=val4",
-                       "key1=new1&key2=val2&key2=val3&key4=val4",
-                       "key1=new1&key2=new2&key4=val4",
-                       "key1=new1&key2=new2&key4=val4&key3=undefined",
-                       "key1=new1&key2=new2&key4=null&key3=undefined"},
-            IE = {})
+    @Alerts({"key1=val1&key2=val2&key2=val3&key4=val4",
+             "key1=new1&key2=val2&key2=val3&key4=val4",
+             "key1=new1&key2=new2&key4=val4",
+             "key1=new1&key2=new2&key4=val4&key3=undefined",
+             "key1=new1&key2=new2&key4=null&key3=undefined"})
     public void set() throws Exception {
         final String html =
             "<html>\n"
@@ -751,13 +733,12 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key1=val1&key2=val2&key2=val3&key4=val4",
-                       "key1=new1&key2=val2&key2=val3&key4=val4",
-                       "key1=new1&key2=new2&key4=val4",
-                       "key1=new1&key2=new2&key4=val4&key3=undefined",
-                       "key1=new1&key2=new2&key4=null&key3=undefined",
-                       "http://test.com/p?key1=new1&key2=new2&key4=null&key3=undefined"},
-            IE = {})
+    @Alerts({"key1=val1&key2=val2&key2=val3&key4=val4",
+             "key1=new1&key2=val2&key2=val3&key4=val4",
+             "key1=new1&key2=new2&key4=val4",
+             "key1=new1&key2=new2&key4=val4&key3=undefined",
+             "key1=new1&key2=new2&key4=null&key3=undefined",
+             "http://test.com/p?key1=new1&key2=new2&key4=null&key3=undefined"})
     public void setFromUrl() throws Exception {
         final String html =
             "<html>\n"
@@ -795,9 +776,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
-                       "key1", "key2", "key1", "", "true"},
-            IE = {})
+    @Alerts({"function keys() { [native code] }", "[object URLSearchParams Iterator]",
+             "key1", "key2", "key1", "", "true"})
     public void keys() throws Exception {
         final String html =
             "<html>\n"
@@ -837,9 +817,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
-                       "val1", "", "val3", "val4", "true"},
-            IE = {})
+    @Alerts({"function values() { [native code] }", "[object URLSearchParams Iterator]",
+             "val1", "", "val3", "val4", "true"})
     public void values() throws Exception {
         final String html =
             "<html>\n"
@@ -879,8 +858,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"val1", "", "val3", "val4"},
-            IE = {})
+    @Alerts({"val1", "", "val3", "val4"})
     public void valuesForOf() throws Exception {
         final String html =
             "<html>\n"
@@ -909,10 +887,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key1-val1", "key2-val2", "key3-val3",
-                       "key1-val1", "key3-val3",
-                       "key2-val2", "key3-val3"},
-            IE = {})
+    @Alerts({"key1-val1", "key2-val2", "key3-val3",
+             "key1-val1", "key3-val3",
+             "key2-val2", "key3-val3"})
     public void forEach() throws Exception {
         final String html =
             "<html>\n"
@@ -949,9 +926,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "function entries() { [native code] }", "[object URLSearchParams Iterator]",
-                       "key1-val1", "key2-", "key1-val3", "-val4", "true"},
-            IE = {})
+    @Alerts({"true", "function entries() { [native code] }", "[object URLSearchParams Iterator]",
+             "key1-val1", "key2-", "key1-val3", "-val4", "true"})
     public void entries() throws Exception {
         final String html =
             "<html>\n"
@@ -995,8 +971,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key1,val1", "key2,", "key1,val3", ",val4"},
-            IE = {})
+    @Alerts({"key1,val1", "key2,", "key1,val3", ",val4"})
     public void entriesForOf() throws Exception {
         final String html =
             "<html>\n"
@@ -1025,8 +1000,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4", "0", "1"},
-            IE = {})
+    @Alerts({"4", "0", "1"})
     public void size() throws Exception {
         final String html =
             "<html>\n"
@@ -1058,11 +1032,10 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function URLSearchParams() { [native code] }",
-                       "function URLSearchParams() { [native code] }",
-                       "function URLSearchParams() { [native code] }",
-                       "key1=val1", "key1=val1", "key1=val1"},
-            IE = {})
+    @Alerts({"function URLSearchParams() { [native code] }",
+             "function URLSearchParams() { [native code] }",
+             "function URLSearchParams() { [native code] }",
+             "key1=val1", "key1=val1", "key1=val1"})
     public void testToString() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"

@@ -941,9 +941,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"<iframe></div></body></html></iframe>", "1",
-                       "1", "IFRAME", "null", "1",
-                       "3", "#text", "</div></body></html>"})
+    @Alerts({"<iframe></div></body></html></iframe>", "1",
+             "1", "IFRAME", "null", "1",
+             "3", "#text", "</div></body></html>"})
     @HtmlUnitNYI(CHROME = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
                            "1", "IFRAME", "null", "1",
                            "3", "#text", "</div></body></html>"},

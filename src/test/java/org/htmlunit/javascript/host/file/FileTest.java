@@ -259,7 +259,7 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "0", ""})
+    @Alerts({"[object File]", "htMluniT.txt", "", "true", "0", ""})
     public void ctorEmpty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
@@ -293,7 +293,7 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "8", "HtmlUnit"})
+    @Alerts({"[object File]", "htMluniT.txt", "", "true", "8", "HtmlUnit"})
     public void ctorString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
@@ -327,8 +327,8 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "application/octet-stream", "1234567", "8",
-                       "HtmlUnit"})
+    @Alerts({"[object File]", "htMluniT.txt", "application/octet-stream", "1234567", "8",
+             "HtmlUnit"})
     public void ctorStringWithOptions() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
@@ -363,8 +363,8 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "16",
-                       "HtmlUnitis great"})
+    @Alerts({"[object File]", "htMluniT.txt", "", "true", "16",
+             "HtmlUnitis great"})
     public void ctorStrings() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
@@ -398,7 +398,7 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "12", "HtmlUnitMMMK"})
+    @Alerts({"[object File]", "htMluniT.txt", "", "true", "12", "HtmlUnitMMMK"})
     public void ctorMixed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"

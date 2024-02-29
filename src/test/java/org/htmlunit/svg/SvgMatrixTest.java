@@ -203,9 +203,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             CHROME = {"false", "1.2322946209166628", "2.307671050377636",
                       "2.912292905471539", "3.8307511434768218", "5", "6"},
             EDGE = {"false", "1.2322946209166628", "2.307671050377636",
-                    "2.912292905471539", "3.8307511434768218", "5", "6"},
-            IE = {"false", "1.2322945594787597", "2.307671070098877",
-                  "2.912292718887329", "3.8307509422302246", "5", "6"})
+                    "2.912292905471539", "3.8307511434768218", "5", "6"})
     public void rotate() throws Exception {
         transformTest("rotate(4.5)");
     }
@@ -219,9 +217,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             CHROME = {"false", "3.1477355949224934", "4.346245800520598",
                       "-0.302920161854466", "-1.053635345580751", "5", "6"},
             EDGE = {"false", "3.1477355949224934", "4.346245800520598",
-                    "-0.302920161854466", "-1.053635345580751", "5", "6"},
-            IE = {"false", "3.147735595703125", "4.346245765686035",
-                  "-0.30292022228240967", "-1.0536353588104248", "5", "6"})
+                    "-0.302920161854466", "-1.053635345580751", "5", "6"})
     public void rotateFromVector() throws Exception {
         transformTest("rotateFromVector(17, 74)");
     }
@@ -230,7 +226,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void rotateFromVectorZeroX() throws Exception {
         transformTest("rotateFromVector(0, 74)");
     }
@@ -239,7 +235,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void rotateFromVectorZeroY() throws Exception {
         transformTest("rotateFromVector(17, 0)");
     }

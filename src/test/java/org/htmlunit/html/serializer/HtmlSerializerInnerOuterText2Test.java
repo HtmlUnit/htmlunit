@@ -1278,10 +1278,8 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\n    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
-                + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
-            IE = "first item\n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
-                + "third item\n4. item\nsome text last item")
+    @Alerts("\n    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
+                + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ")
     @HtmlUnitNYI(CHROME = "    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
                 + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
             EDGE = "    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
@@ -1299,10 +1297,8 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\n    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
-                + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
-            IE = "first item\n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
-                + "third item\n4. item\nsome text last item")
+    @Alerts("\n    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
+                + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ")
     @HtmlUnitNYI(CHROME = "    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
                 + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
             EDGE = "    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
@@ -1391,10 +1387,8 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\n    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
-                + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
-            IE = "first item\n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
-                + "third item\n4. item\nsome text last item")
+    @Alerts("\n    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
+                + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ")
     @HtmlUnitNYI(CHROME = "    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
                 + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
             EDGE = "    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
@@ -1412,10 +1406,8 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\n    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
-                + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
-            IE = "first item\n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
-                + "third item\n4. item\nsome text last item")
+    @Alerts("\n    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
+                + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ")
     @HtmlUnitNYI(CHROME = "    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
                 + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
             EDGE = "    \nfirst item\n\n    \n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"

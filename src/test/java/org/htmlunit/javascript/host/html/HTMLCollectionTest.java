@@ -352,7 +352,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myForm", "mySecondForm"})
+    @Alerts({"myForm", "mySecondForm"})
     public void forOf() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -378,7 +378,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myForm", "mySecondForm", "dynamicForm", "-", "myForm", "mySecondForm", "dynamicForm"})
+    @Alerts({"myForm", "mySecondForm", "dynamicForm", "-", "myForm", "mySecondForm", "dynamicForm"})
     public void forOfDynamicAtEnd() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -416,7 +416,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"myForm", "myForm", "mySecondForm", "-", "dynamicForm", "myForm", "mySecondForm"})
+    @Alerts({"myForm", "myForm", "mySecondForm", "-", "dynamicForm", "myForm", "mySecondForm"})
     public void forOfDynamicAtStart() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -972,7 +972,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1"})
+    @Alerts({"1", "1"})
     public void setLength() throws Exception {
         final String html
             = "<html>\n"
@@ -998,7 +998,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "Type error"})
+    @Alerts({"1", "Type error"})
     public void setLengthStrictMode() throws Exception {
         final String html
             = "<html>\n"

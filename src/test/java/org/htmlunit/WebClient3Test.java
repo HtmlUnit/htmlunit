@@ -461,8 +461,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(DEFAULT = "executed",
-             IE = "")
+    @Alerts("executed")
     public void javascriptContentDetectorWithoutContentType500() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<script>alert('executed')</script>", 500, "OK", null);

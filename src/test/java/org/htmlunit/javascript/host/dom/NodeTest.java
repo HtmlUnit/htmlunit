@@ -864,7 +864,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void insertBefore_noSecondArg() throws Exception {
         insertBefore("aNode.insertBefore(newNode);");
     }
@@ -933,7 +933,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void insertBeforeFragment_noSecondArg() throws Exception {
         insertBeforeFragment("aNode.insertBefore(fragment);");
     }
@@ -1020,8 +1020,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {})
+    @Alerts("exception")
     public void insertBefore_newElement() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

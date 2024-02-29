@@ -735,10 +735,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
-                       "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"},
-            IE = {"[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
-                  "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"})
+    @Alerts({"[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
+             "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"})
     public void set_opener() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2392,7 +2390,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"})
+    @Alerts({"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"})
     @HtmlUnitNYI(CHROME = {"[object Window]", "[object EventTarget]", "[object Object]"},
             EDGE = {"[object Window]", "[object EventTarget]", "[object Object]"},
             FF = {"[object Window]", "[object EventTarget]", "[object Object]"},
@@ -2421,8 +2419,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object Navigator]", "##test##"},
                 FF = {"[object Navigator]", "[object Navigator]"},
-                FF_ESR = {"[object Navigator]", "[object Navigator]"},
-                IE = {"[object Navigator]", "[object Navigator]"})
+                FF_ESR = {"[object Navigator]", "[object Navigator]"})
     public void clientInformation() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2468,7 +2465,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Window]", "true", "true"})
+    @Alerts({"[object Window]", "true", "true"})
     public void globalThis() throws Exception {
         final String html
             = "<html><head></head><body>\n"

@@ -68,11 +68,8 @@ public class MooTools121Test extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Alerts(DEFAULT = {"364", "1", "0",
-                       "should return the function bound to an object with multiple arguments"},
-            IE = {"364", "2", "0",
-                  "should return the function bound to an object with multiple arguments",
-                  "should return a CSS string representing the Element's styles"})
+    @Alerts({"364", "1", "0",
+             "should return the function bound to an object with multiple arguments"})
     @Test
     public void mooTools() throws Exception {
         final WebDriver driver = getWebDriver();

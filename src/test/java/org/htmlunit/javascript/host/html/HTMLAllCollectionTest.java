@@ -69,7 +69,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"coll 2", "b4-button4_1", "b4-button4_2"})
+    @Alerts({"coll 2", "b4-button4_1", "b4-button4_2"})
     public void namedItem_DuplicateId() throws Exception {
         namedItem("'b4'");
     }
@@ -78,7 +78,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"coll 2", "b5_1-button5", "b5_2-button5"})
+    @Alerts({"coll 2", "b5_1-button5", "b5_2-button5"})
     public void namedItem_DuplicateName() throws Exception {
         namedItem("'button5'");
     }
@@ -87,7 +87,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"coll 2", "b6-button6", "button6-button6_2"})
+    @Alerts({"coll 2", "b6-button6", "button6-button6_2"})
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("'button6'");
     }

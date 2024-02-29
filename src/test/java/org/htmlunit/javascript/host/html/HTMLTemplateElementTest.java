@@ -76,10 +76,10 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DocumentFragment]", "0-0",
-                       "[object DocumentFragment]", "0-0",
-                       "[object DocumentFragment]", "0-1",
-                       "[object DocumentFragment]", "0-2"})
+    @Alerts({"[object DocumentFragment]", "0-0",
+             "[object DocumentFragment]", "0-0",
+             "[object DocumentFragment]", "0-1",
+             "[object DocumentFragment]", "0-2"})
     public void content() throws Exception {
         final String html =
             "<html>\n"
@@ -120,7 +120,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DocumentFragment]", "0-0", "1-0"})
+    @Alerts({"[object DocumentFragment]", "0-0", "1-0"})
     public void appendChild() throws Exception {
         final String html =
             "<html>\n"

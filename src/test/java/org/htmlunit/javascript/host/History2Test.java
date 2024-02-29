@@ -207,14 +207,14 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                       "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                       "[object PopStateEvent]", "null", "true",
-                       "[object PopStateEvent]", "null", "true",
-                       "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                       "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
+    @Alerts({"[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+             "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+             "[object PopStateEvent]", "null", "true",
+             "[object PopStateEvent]", "null", "true",
+             "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+             "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+             "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
+             "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1126,8 +1126,8 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"back", "forward", "go", "length", "pushState", "replaceState",
-                       "scrollRestoration", "state"})
+    @Alerts({"back", "forward", "go", "length", "pushState", "replaceState",
+             "scrollRestoration", "state"})
     public void properties() throws Exception {
         final String html = "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION

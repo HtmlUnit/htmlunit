@@ -202,16 +202,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0123-456-7890",
-                       "false",
-                       "false-false-true-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"0123-456-7890",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"0123-456-7890",
+             "false",
+             "false-false-true-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void patternValidationInvalid() throws Exception {
         validation("<input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' id='e1' value='0123-456-7890' name='k'>\n",
                     "", null);
@@ -221,16 +216,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"123-456-7890",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=123-456-7890", "2"},
-            IE = {"123-456-7890",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=123-456-7890", "2"})
+    @Alerts({"123-456-7890",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=123-456-7890", "2"})
     public void patternValidationValid() throws Exception {
         validation("<input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' "
                 + "id='e1' value='123-456-7890' name='k'>\n", "", null);
@@ -240,16 +230,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void patternValidationEmpty() throws Exception {
         validation("<input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' id='e1' value='' name='k'>\n", "", null);
     }
@@ -258,16 +243,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {" ",
-                       "false",
-                       "false-false-true-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {" ",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({" ",
+             "false",
+             "false-false-true-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void patternValidationBlank() throws Exception {
         validation("<input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' id='e1' value=' ' name='k'>\n", "", null);
     }
@@ -276,16 +256,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"  \t",
-                       "false",
-                       "false-false-true-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"  \t",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"  \t",
+             "false",
+             "false-false-true-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void patternValidationWhitespace() throws Exception {
         validation("<input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' id='e1' value='  \t' name='k'>\n", "", null);
     }
@@ -294,16 +269,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {" 123-456-7890",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=+123-456-7890", "2"},
-            IE = {" 123-456-7890",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=+123-456-7890", "2"})
+    @Alerts({" 123-456-7890",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=+123-456-7890", "2"})
     public void patternValidationTrimInitial() throws Exception {
         validation("<input type='tel' pattern='\\s[0-9]{3}-[0-9]{3}-[0-9]{4}' "
                 + "id='e1' name='k' value=' 123-456-7890'>\n", "", null);
@@ -313,16 +283,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {" 123-456-7890",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=+123-456-7890", "2"},
-            IE = {" 123-456-7890",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=+123-456-7890", "2"})
+    @Alerts({" 123-456-7890",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=+123-456-7890", "2"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='tel' pattern='\\s[0-9]{3}-[0-9]{3}-[0-9]{4}' "
                 + "id='e1' name='k'>\n", "", " 123-456-7890");
@@ -332,16 +297,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1234",
-                       "false",
-                       "false-false-false-false-false-false-false-true-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"1234",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=1234", "2"})
+    @Alerts({"1234",
+             "false",
+             "false-false-false-false-false-false-false-true-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void minLengthValidationInvalid() throws Exception {
         validation("<input type='tel' minlength='5' id='e1' name='k'>\n", "", "1234");
     }
@@ -350,16 +310,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1234",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=1234", "2"},
-            IE = {"1234",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=1234", "2"})
+    @Alerts({"1234",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=1234", "2"})
     public void minLengthValidationInvalidInitial() throws Exception {
         validation("<input type='tel' minlength='20' id='e1' name='k' value='1234'>\n", "", null);
     }
@@ -368,16 +323,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void minLengthValidationInvalidNoInitial() throws Exception {
         validation("<input type='tel' minlength='5' id='e1' name='k'>\n", "", null);
     }
@@ -386,16 +336,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"123456789",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=123456789", "2"},
-            IE = {"123456789",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=123456789", "2"})
+    @Alerts({"123456789",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=123456789", "2"})
     public void minLengthValidationValid() throws Exception {
         validation("<input type='tel' minlength='5' id='e1' name='k'>\n", "", "123456789");
     }
@@ -404,16 +349,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1234",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=1234", "2"},
-            IE = {"1234",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=1234", "2"})
+    @Alerts({"1234",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=1234", "2"})
     public void maxLengthValidationValid() throws Exception {
         validation("<input type='tel' maxlength='5' id='e1' name='k'>\n", "", "1234");
     }
@@ -422,16 +362,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"12345",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=12345", "2"},
-            IE = {"12345",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=12345", "2"})
+    @Alerts({"12345",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=12345", "2"})
     public void maxLengthValidationInvalid() throws Exception {
         validation("<input type='tel' maxlength='5' id='e1' name='k'>\n", "", "1234567890");
     }
@@ -440,16 +375,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1234567890",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=1234567890", "2"},
-            IE = {"1234567890",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=1234567890", "2"})
+    @Alerts({"1234567890",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=1234567890", "2"})
     public void maxLengthValidationInvalidInitial() throws Exception {
         validation("<input type='tel' maxlength='5' id='e1' name='k' value='1234567890'>\n", "", null);
     }
@@ -490,16 +420,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void validationEmpty() throws Exception {
         validation("<input type='tel' id='e1' name='k'>\n", "", null);
     }
@@ -508,16 +433,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "false",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"",
-                  "false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "false",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void validationCustomValidity() throws Exception {
         validation("<input type='tel' id='e1' name='k'>\n", "elem.setCustomValidity('Invalid');", null);
     }
@@ -526,16 +446,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "false",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"",
-                  "false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "false",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void validationBlankCustomValidity() throws Exception {
         validation("<input type='tel' id='e1' name='k'>\n", "elem.setCustomValidity(' ');\n", null);
     }
@@ -544,16 +459,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=", "2"})
     public void validationResetCustomValidity() throws Exception {
         validation("<input type='tel' id='e1' name='k'>\n",
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');", null);
@@ -563,16 +473,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "false",
-                       "false-false-false-false-false-false-false-false-false-false-true",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"",
-                  "false",
-                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"",
+             "false",
+             "false-false-false-false-false-false-false-false-false-false-true",
+             "true",
+             "§§URL§§", "1"})
     public void validationRequired() throws Exception {
         validation("<input type='tel' id='e1' name='k' required>\n", "", null);
     }
@@ -581,16 +486,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=1234", "2"},
-            IE = {"",
-                  "true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true",
-                  "§§URL§§?k=1234", "2"})
+    @Alerts({"",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=1234", "2"})
     public void validationRequiredValueSet() throws Exception {
         validation("<input type='tel' id='e1' name='k' required>\n", "elem.value='1234';", null);
     }
@@ -599,16 +499,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0123-456-7890",
-                       "false",
-                       "false-false-true-false-false-false-false-false-false-false-false",
-                       "true",
-                       "§§URL§§", "1"},
-            IE = {"0123-456-7890",
-                  "false",
-                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                  "true",
-                  "§§URL§§", "1"})
+    @Alerts({"0123-456-7890",
+             "false",
+             "false-false-true-false-false-false-false-false-false-false-false",
+             "true",
+             "§§URL§§", "1"})
     public void validationPattern() throws Exception {
         validation("<input type='tel' id='e1' name='k' "
                 + "pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' value='0123-456-7890'>\n", "", null);

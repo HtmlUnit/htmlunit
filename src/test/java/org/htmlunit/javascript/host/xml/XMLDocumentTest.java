@@ -950,7 +950,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {})
+    @Alerts({})
     public void selectionNamespaces() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

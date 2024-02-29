@@ -73,8 +73,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = {})
+    @Alerts("1")
     public void assign() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -96,8 +95,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = {})
+    @Alerts("1")
     public void assignUndefined() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -119,8 +117,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {})
+    @Alerts("undefined")
     public void assignUndefined2() throws Exception {
         final String html
                 = "<html><head><script>\n"
@@ -141,8 +138,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {})
+    @Alerts("undefined")
     public void assignNull() throws Exception {
         final String html
                 = "<html><head><script>\n"
@@ -163,8 +159,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {})
+    @Alerts("undefined")
     public void assignNull2() throws Exception {
         final String html
                 = "<html><head><script>\n"
@@ -326,7 +321,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "true", "true"})
+    @Alerts({"2", "true", "true"})
     public void getOwnPropertySymbols() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -425,10 +420,7 @@ public class NativeObjectTest extends WebDriverTestCase {
                   "x.get.call = function call() {\n    [native code]\n}"},
             FF_ESR = {"[object HTMLInputElement]", "x = [object Object]",
                       "x.get = function value() {\n    [native code]\n}",
-                      "x.get.call = function call() {\n    [native code]\n}"},
-            IE = {"[object HTMLInputElementPrototype]", "x = [object Object]",
-                  "x.get = \nfunction value() {\n    [native code]\n}\n",
-                  "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
+                      "x.get.call = function call() {\n    [native code]\n}"})
     @HtmlUnitNYI(CHROME = {"[object HTMLInputElement]", "x = [object Object]",
                            "x.get = function value() { [native code] }",
                            "x.get.call = function call() { [native code] }"},

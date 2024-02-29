@@ -70,7 +70,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"name=f", "id=f", "foo=bar", "baz=blah"})
+    @Alerts({"name=f", "id=f", "foo=bar", "baz=blah"})
     public void attributesForOf() throws Exception {
         final String html =
               "<html>\n"
@@ -138,7 +138,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  {"myattr", "myattr2", "myattr", "myattr2", "myattr2"})
+    @Alerts({"myattr", "myattr2", "myattr", "myattr2", "myattr2"})
     public void getNamedItem_HTML_Case() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

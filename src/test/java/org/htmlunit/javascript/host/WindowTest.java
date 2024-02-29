@@ -1296,7 +1296,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "")
+    @Alerts("")
     public void showModelessDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -1633,21 +1633,13 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "before print"
+    @Alerts("before print"
                     + "§event beforeprint"
                     + "§[object Event]beforeprint-false-false-false-[object Window]"
                         + "-false-2-true-true-[object Window]-[object Window]-beforeprint"
                     + "§event afterprint"
                     + "§[object Event]afterprint-false-false-false-[object Window]"
                         + "-false-2-true-true-[object Window]-[object Window]-afterprint"
-                    + "§printed§",
-            IE = "before print"
-                    + "§event beforeprint"
-                    + "§[object Event]beforeprint-false-false-undefined-[object Window]"
-                        + "-false-2-true-undefined-[object Window]-[object Window]-beforeprint"
-                    + "§event afterprint"
-                    + "§[object Event]afterprint-false-false-undefined-[object Window]"
-                        + "-false-2-true-undefined-[object Window]-[object Window]-afterprint"
                     + "§printed§")
     @HtmlUnitNYI(CHROME = "before print"
                     + "§event beforeprint"

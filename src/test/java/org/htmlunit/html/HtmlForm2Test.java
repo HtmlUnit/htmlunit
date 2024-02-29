@@ -146,7 +146,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "TypeError")
+    @Alerts("TypeError")
     public void asFunctionFormsFunction() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1281,7 +1281,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {})
+    @Alerts({})
     public void submitFromInsideAnotherInvalidFormRef() throws Exception {
         final String html =
             "<!DOCTYPE html>\n"

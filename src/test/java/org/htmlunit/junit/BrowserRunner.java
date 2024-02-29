@@ -199,12 +199,6 @@ public class BrowserRunner extends Suite {
         String[] value() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Internet Explorer 11.
-         * @return the alerts
-         */
-        String[] IE() default { EMPTY_DEFAULT };
-
-        /**
          * Alerts for latest Edge.
          * @return the alerts
          */
@@ -249,12 +243,6 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] value() default { EMPTY_DEFAULT };
-
-        /**
-         * Alerts for Internet Explorer 11.
-         * @return the alerts
-         */
-        String[] IE() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Edge.

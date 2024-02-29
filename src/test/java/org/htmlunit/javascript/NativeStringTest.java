@@ -114,8 +114,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "3",
-            IE = {})
+    @Alerts("3")
     public void trimRight() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -137,8 +136,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "4",
-            IE = {})
+    @Alerts("4")
     public void trimLeft() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -198,7 +196,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false"})
+    @Alerts({"true", "true", "true", "false"})
     public void startsWith() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -226,7 +224,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false"})
+    @Alerts({"true", "true", "true", "false"})
     public void endsWith() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -254,7 +252,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "true", "false"})
+    @Alerts({"true", "true", "true", "true", "false"})
     public void includes() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -283,7 +281,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "abc", "abcabc"})
+    @Alerts({"", "abc", "abcabc"})
     public void repeat() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -330,8 +328,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(DEFAULT = {"Error", "true"},
-            IE = {})
+    @Alerts({"Error", "true"})
     public void includesRegExpMatch() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -361,8 +358,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(DEFAULT = {"Error", "true"},
-            IE = {})
+    @Alerts({"Error", "true"})
     public void startsWithRegExpMatch() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -392,8 +388,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(DEFAULT = {"Error", "true"},
-            IE = {})
+    @Alerts({"Error", "true"})
     public void endsWithRegExpMatch() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

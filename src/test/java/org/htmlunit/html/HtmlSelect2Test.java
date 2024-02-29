@@ -179,12 +179,9 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true"})
     public void validationEmpty() throws Exception {
         validation("<select id='e1'>s1</select>\n", "");
     }
@@ -193,12 +190,9 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true"})
+    @Alerts({"false",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "true"})
     public void validationCustomValidity() throws Exception {
         validation("<select id='e1'>s1</select>\n", "elem.setCustomValidity('Invalid');");
     }
@@ -207,12 +201,9 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true"})
+    @Alerts({"false",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "true"})
     public void validationBlankCustomValidity() throws Exception {
         validation("<select id='e1'>s1</select>\n", "elem.setCustomValidity(' ');\n");
     }
@@ -221,12 +212,9 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true"})
     public void validationResetCustomValidity() throws Exception {
         validation("<select id='e1'>s1</select>\n",
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
@@ -236,12 +224,9 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
-                       "false-false-false-false-false-false-false-false-false-false-true",
-                       "true"},
-            IE = {"false",
-                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
-                  "true"})
+    @Alerts({"false",
+             "false-false-false-false-false-false-false-false-false-false-true",
+             "true"})
     public void validationRequired() throws Exception {
         validation("<select id='e1' required>s1</select>\n", "");
     }
@@ -250,12 +235,9 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true"})
     public void validationRequiredSelected() throws Exception {
         validation("<select id='e1' size='4' required><option value='unit' selected>Html</option></select>\n", "");
     }
@@ -264,12 +246,9 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true"})
     public void validationRequiredSelect() throws Exception {
         validation("<select id='e1' size='4' required><option id='e2' value='unit'>Html</option></select>\n",
                 "document.getElementById('e2').selected=true;");
@@ -279,12 +258,9 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
-                       "false-false-false-false-false-false-false-false-false-false-true",
-                       "true"},
-            IE = {"false",
-                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
-                  "true"})
+    @Alerts({"false",
+             "false-false-false-false-false-false-false-false-false-false-true",
+             "true"})
     public void validationRequiredDeselect() throws Exception {
         validation("<select id='e1' size='4' required><option id='e2' value='unit' selected>Html</option></select>\n",
                 "document.getElementById('e2').selected=false;");

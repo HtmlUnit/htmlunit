@@ -333,7 +333,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"})
+    @Alerts({"TITLE", "undefined", "HEAD", "HTML", "HEAD", "BODY", "undefined"})
     public void simpleFilter() throws Exception {
         final String script = "var noScripts = {\n"
             + "  acceptNode: function(node) {\n"
@@ -397,7 +397,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"P", "undefined"})
+    @Alerts({"P", "undefined"})
     public void secondFilterReject() throws Exception {
         final String script = ""
             + "var noScripts = {\n"
@@ -419,7 +419,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"A", "P", "CODE", "PRE", "undefined"})
+    @Alerts({"A", "P", "CODE", "PRE", "undefined"})
     public void secondFilterSkip() throws Exception {
         final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
             + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP;"
@@ -438,7 +438,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"P", "undefined"})
+    @Alerts({"P", "undefined"})
     public void secondFilterRejectReverse() throws Exception {
         final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
             + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
@@ -454,7 +454,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"PRE", "CODE", "P", "A", "undefined"})
+    @Alerts({"PRE", "CODE", "P", "A", "undefined"})
     public void secondFilterSkipReverse() throws Exception {
         final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
             + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP; return NodeFilter.FILTER_ACCEPT}};\n"

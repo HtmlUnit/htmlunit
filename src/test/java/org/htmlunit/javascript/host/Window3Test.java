@@ -418,7 +418,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"document", "body"})
+    @Alerts({"document", "body"})
     public void scrollEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -466,7 +466,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"document", "body"})
+    @Alerts({"document", "body"})
     public void scrollByEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -556,7 +556,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"document", "body"})
+    @Alerts({"document", "body"})
     public void scrollToEvents() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -672,9 +672,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"5", "EMBED", "FORM", "IMG", "IMG", "OBJECT", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT"},
-            IE = {"11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA",
-                "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA"})
+    @Alerts({"5", "EMBED", "FORM", "IMG", "IMG", "OBJECT", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT"})
     // The following tags cause problems with WebDriver:
     // applet, body, frame, frameset, head, html, isindex, meta, plaintext, title
     // The iframe tag is treated as frame and as such has priority over the other tags, which would make the test
@@ -1249,8 +1247,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            IE = {})
+    @Alerts("§§URL§§")
     public void openWindow_refererHeader() throws Exception {
         final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head></head>\n"
@@ -1772,38 +1769,20 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"window DOMContentLoaded 1 capture",
-                       "window DOMContentLoaded 2 capture",
-                       "document DOMContentLoaded 1",
-                       "document DOMContentLoaded 1 capture",
-                       "document DOMContentLoaded 2",
-                       "document DOMContentLoaded 2 capture",
-                       "window DOMContentLoaded 1",
-                       "window DOMContentLoaded 2",
-                       "window at load 1",
-                       "window at load 1 capture",
-                       "window at load 2",
-                       "onload 2",
-                       "window at load 2 capture",
-                       "after"},
-            IE = {"window DOMContentLoaded 1 capture",
-                  "window DOMContentLoaded 2 capture",
-                  "document DOMContentLoaded 1",
-                  "document DOMContentLoaded 1 capture",
-                  "document DOMContentLoaded 2",
-                  "document DOMContentLoaded 2 capture",
-                  "window DOMContentLoaded 1",
-                  "window DOMContentLoaded 2",
-                  "window at load 1",
-                  "window at load 1 capture",
-                  "window at load 2",
-                  "onload 2",
-                  "window at load 2 capture",
-                  "document at load 1 capture",
-                  "document at load 2 capture",
-                  "document at load 1 capture",
-                  "document at load 2 capture",
-                  "after"})
+    @Alerts({"window DOMContentLoaded 1 capture",
+             "window DOMContentLoaded 2 capture",
+             "document DOMContentLoaded 1",
+             "document DOMContentLoaded 1 capture",
+             "document DOMContentLoaded 2",
+             "document DOMContentLoaded 2 capture",
+             "window DOMContentLoaded 1",
+             "window DOMContentLoaded 2",
+             "window at load 1",
+             "window at load 1 capture",
+             "window at load 2",
+             "onload 2",
+             "window at load 2 capture",
+             "after"})
     public void onload() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -1880,29 +1859,16 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"document at load capture",
-                       "element 1 onload",
-                       "window at error capture",
-                       "document at error capture",
-                       "element 2 onerror",
-                       "document DOMContentLoaded",
-                       "window DOMContentLoaded",
-                       "window at load",
-                       "window at load capture",
-                       "body onload"},
-            IE = {"window at error",
-                  "window at error capture",
-                  "document at load capture",
-                  "element 1 onload",
-                  "window at error capture",
-                  "document at error capture",
-                  "element 2 onerror",
-                  "document DOMContentLoaded",
-                  "window DOMContentLoaded",
-                  "window at load",
-                  "window at load capture",
-                  "body onload",
-                  "document at load capture"})
+    @Alerts({"document at load capture",
+             "element 1 onload",
+             "window at error capture",
+             "document at error capture",
+             "element 2 onerror",
+             "document DOMContentLoaded",
+             "window DOMContentLoaded",
+             "window at load",
+             "window at load capture",
+             "body onload"})
     @NotYetImplemented
     public void onloadScript() throws Exception {
         getMockWebConnection().setResponse(URL_SECOND, "");
@@ -1970,18 +1936,7 @@ public class Window3Test extends WebDriverTestCase {
                       "img1: element 1 onload",
                       "#document: window at load",
                       "#document: window at load capture",
-                      "#document: body onload"},
-            IE = {"img1: document at load capture",
-                  "img1: element 1 onload",
-                  "#document: document DOMContentLoaded",
-                  "#document: window DOMContentLoaded",
-                  "#document: window at load",
-                  "#document: window at load capture",
-                  "#document: body onload",
-                  "SCRIPT: document at load capture",
-                  "img2: window at error capture",
-                  "img2: document at error capture",
-                  "img2: element 2 onerror"})
+                      "#document: body onload"})
     public void onloadImg() throws Exception {
         final URL urlImage = new URL(URL_FIRST, "img.jpg");
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
@@ -2051,57 +2006,29 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"framing window DOMContentLoaded 1 capture",
-                       "framing document DOMContentLoaded 1",
-                       "framing document DOMContentLoaded 1 capture",
-                       "framing window DOMContentLoaded 1",
-                       "window DOMContentLoaded 1 capture",
-                       "window DOMContentLoaded 2 capture",
-                       "document DOMContentLoaded 1",
-                       "document DOMContentLoaded 1 capture",
-                       "document DOMContentLoaded 2",
-                       "document DOMContentLoaded 2 capture",
-                       "window DOMContentLoaded 1",
-                       "window DOMContentLoaded 2",
-                       "window at load 1",
-                       "window at load 1 capture",
-                       "window at load 2",
-                       "onload 2",
-                       "window at load 2 capture",
-                       "framing document at load 1 capture",
-                       "frame onload",
-                       "framing window at load 1",
-                       "framing window at load 1 capture",
-                       "frameset onload",
-                       "after"},
-            IE = {"framing window DOMContentLoaded 1 capture",
-                  "framing document DOMContentLoaded 1",
-                  "framing document DOMContentLoaded 1 capture",
-                  "framing window DOMContentLoaded 1",
-                  "framing document at load 1 capture",
-                  "window DOMContentLoaded 1 capture",
-                  "window DOMContentLoaded 2 capture",
-                  "document DOMContentLoaded 1",
-                  "document DOMContentLoaded 1 capture",
-                  "document DOMContentLoaded 2",
-                  "document DOMContentLoaded 2 capture",
-                  "window DOMContentLoaded 1",
-                  "window DOMContentLoaded 2",
-                  "window at load 1",
-                  "window at load 1 capture",
-                  "window at load 2",
-                  "onload 2",
-                  "window at load 2 capture",
-                  "framing document at load 1 capture",
-                  "frame onload",
-                  "framing window at load 1",
-                  "framing window at load 1 capture",
-                  "frameset onload",
-                  "document at load 1 capture",
-                  "document at load 2 capture",
-                  "document at load 1 capture",
-                  "document at load 2 capture",
-                  "after"})
+    @Alerts({"framing window DOMContentLoaded 1 capture",
+             "framing document DOMContentLoaded 1",
+             "framing document DOMContentLoaded 1 capture",
+             "framing window DOMContentLoaded 1",
+             "window DOMContentLoaded 1 capture",
+             "window DOMContentLoaded 2 capture",
+             "document DOMContentLoaded 1",
+             "document DOMContentLoaded 1 capture",
+             "document DOMContentLoaded 2",
+             "document DOMContentLoaded 2 capture",
+             "window DOMContentLoaded 1",
+             "window DOMContentLoaded 2",
+             "window at load 1",
+             "window at load 1 capture",
+             "window at load 2",
+             "onload 2",
+             "window at load 2 capture",
+             "framing document at load 1 capture",
+             "frame onload",
+             "framing window at load 1",
+             "framing window at load 1 capture",
+             "frameset onload",
+             "after"})
     public void onloadFrame() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -2523,28 +2450,17 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"listener: stop propagation & return false",
-                       "FIRED a1",
-                       "listener: return true",
-                       "property: return false",
-                       "listener: return true",
-                       "listener: prevented=false returnValue: true -> false (false)",
-                       "listener: prevented=true returnValue: false -> true (false)",
-                       "listener: prevented=true returnValue: false -> preventDefault() (false)",
-                       "property: prevented=true returnValue: false -> return true",
-                       "listener: prevented=true returnValue: false -> x (false)",
-                       "listener: prevented=true returnValue: false -> null (false)"},
-            IE = {"listener: stop propagation & return false",
-                  "FIRED a1",
-                  "listener: return true",
-                  "property: return false",
-                  "listener: return true",
-                  "listener: prevented=false returnValue: undefined -> false (false)",
-                  "listener: prevented=false returnValue: false -> true (true)",
-                  "listener: prevented=false returnValue: true -> preventDefault() (true)",
-                  "property: prevented=true returnValue: true -> return true",
-                  "listener: prevented=true returnValue: true -> x (x)",
-                  "listener: prevented=true returnValue: x -> null (null)"})
+    @Alerts({"listener: stop propagation & return false",
+             "FIRED a1",
+             "listener: return true",
+             "property: return false",
+             "listener: return true",
+             "listener: prevented=false returnValue: true -> false (false)",
+             "listener: prevented=true returnValue: false -> true (false)",
+             "listener: prevented=true returnValue: false -> preventDefault() (false)",
+             "property: prevented=true returnValue: false -> return true",
+             "listener: prevented=true returnValue: false -> x (false)",
+             "listener: prevented=true returnValue: false -> null (false)"})
     public void stopPropagation() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

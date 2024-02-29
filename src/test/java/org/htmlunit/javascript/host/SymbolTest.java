@@ -34,7 +34,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.iterator)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.iterator)", "true"})
     public void iterator() throws Exception {
         name("iterator");
     }
@@ -43,7 +43,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.match)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.match)", "true"})
     public void match() throws Exception {
         name("match");
     }
@@ -52,7 +52,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.replace)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.replace)", "true"})
     public void replace() throws Exception {
         name("replace");
     }
@@ -61,7 +61,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.search)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.search)", "true"})
     public void search() throws Exception {
         name("search");
     }
@@ -70,7 +70,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.split)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.split)", "true"})
     public void split() throws Exception {
         name("split");
     }
@@ -79,7 +79,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.hasInstance)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.hasInstance)", "true"})
     public void hasInstance() throws Exception {
         name("hasInstance");
     }
@@ -88,7 +88,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.isConcatSpreadable)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.isConcatSpreadable)", "true"})
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
     }
@@ -97,7 +97,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.unscopables)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.unscopables)", "true"})
     public void unscopables() throws Exception {
         name("unscopables");
     }
@@ -106,7 +106,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.species)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.species)", "true"})
     public void species() throws Exception {
         name("species");
     }
@@ -115,7 +115,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.toPrimitive)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.toPrimitive)", "true"})
     public void toPrimitive() throws Exception {
         name("toPrimitive");
     }
@@ -124,7 +124,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.toStringTag)", "true"})
+    @Alerts({"symbol", "Symbol(Symbol.toStringTag)", "true"})
     public void toStringTag() throws Exception {
         name("toStringTag");
     }
@@ -154,7 +154,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "exception"})
+    @Alerts({"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "exception"})
     public void string() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -181,7 +181,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)"})
+    @Alerts({"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)"})
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -209,7 +209,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "symbol", "symbol", "symbol"})
+    @Alerts({"function", "symbol", "symbol", "symbol"})
     public void typeOf() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -238,7 +238,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "Symbol(mario)"})
+    @Alerts({"false", "true", "Symbol(mario)"})
     public void symbolFor() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -268,7 +268,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false"})
+    @Alerts({"true", "false"})
     public void symbolForGlobal() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -298,7 +298,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception"})
+    @Alerts({"exception", "exception"})
     public void symbolNew() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -327,7 +327,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception"})
+    @Alerts({"exception", "exception"})
     public void globalSymbolRegistry() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -356,8 +356,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "called",
-            IE = {})
+    @Alerts("called")
     public void inFunction() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -380,8 +379,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "called",
-            IE = {})
+    @Alerts("called")
     public void inFunction2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -406,8 +404,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = {})
+    @Alerts("function")
     public void prototypeAddFunction() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -428,8 +425,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            IE = {})
+    @Alerts("object")
     public void prototypeTypeOf() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

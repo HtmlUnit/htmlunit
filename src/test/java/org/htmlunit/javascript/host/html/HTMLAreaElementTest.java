@@ -197,7 +197,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "alternate", "help"})
+    @Alerts({"0", "2", "alternate", "help"})
     public void relList() throws Exception {
         final String html
             = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"

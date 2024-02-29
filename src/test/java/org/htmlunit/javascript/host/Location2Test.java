@@ -232,10 +232,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"#a%20b", "§§URL§§#a%20b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                       "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"},
-            IE = {"#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                  "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"})
+    @Alerts({"#a%20b", "§§URL§§#a%20b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+             "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"})
     public void hashEncoding() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1131,9 +1129,7 @@ public class Location2Test extends WebDriverTestCase {
             FF = "assign,hash,host,hostname,href,origin,"
                + "pathname,port,protocol,reload,replace,search,toString",
             FF_ESR = "assign,hash,host,hostname,href,origin,"
-                   + "pathname,port,protocol,reload,replace,search,toString",
-            IE = "assign,hash,host,hostname,href,origin,"
-               + "pathname,port,protocol,reload,replace,search,toString")
+                   + "pathname,port,protocol,reload,replace,search,toString")
     @HtmlUnitNYI(CHROME = "assign,hash,host,hostname,href,origin,"
                         + "pathname,port,protocol,reload,replace,search,toString",
                  EDGE = "assign,hash,host,hostname,href,origin,"
@@ -1158,9 +1154,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "assign,hash,host,hostname,href,origin,"
-               + "pathname,port,protocol,reload,replace,search,toString")
+    @Alerts("")
     public void protoKeys() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -1181,20 +1175,19 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"assign - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
-                       "hash - {\"enumerable\":true,\"configurable\":false}",
-                       "host - {\"enumerable\":true,\"configurable\":false}",
-                       "hostname - {\"enumerable\":true,\"configurable\":false}",
-                       "href - {\"enumerable\":true,\"configurable\":false}",
-                       "origin - {\"enumerable\":true,\"configurable\":false}",
-                       "pathname - {\"enumerable\":true,\"configurable\":false}",
-                       "port - {\"enumerable\":true,\"configurable\":false}",
-                       "protocol - {\"enumerable\":true,\"configurable\":false}",
-                       "reload - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
-                       "replace - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
-                       "search - {\"enumerable\":true,\"configurable\":false}",
-                       "toString - {\"writable\":false,\"enumerable\":true,\"configurable\":false}"},
-            IE = {})
+    @Alerts({"assign - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+             "hash - {\"enumerable\":true,\"configurable\":false}",
+             "host - {\"enumerable\":true,\"configurable\":false}",
+             "hostname - {\"enumerable\":true,\"configurable\":false}",
+             "href - {\"enumerable\":true,\"configurable\":false}",
+             "origin - {\"enumerable\":true,\"configurable\":false}",
+             "pathname - {\"enumerable\":true,\"configurable\":false}",
+             "port - {\"enumerable\":true,\"configurable\":false}",
+             "protocol - {\"enumerable\":true,\"configurable\":false}",
+             "reload - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+             "replace - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+             "search - {\"enumerable\":true,\"configurable\":false}",
+             "toString - {\"writable\":false,\"enumerable\":true,\"configurable\":false}"})
     public void ownPropertyDescriptor() throws Exception {
         final String html
             = "<html><head></head>\n"

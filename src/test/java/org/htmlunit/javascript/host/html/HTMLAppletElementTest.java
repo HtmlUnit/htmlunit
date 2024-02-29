@@ -33,8 +33,8 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined",
-                       "undefined", "undefined", "undefined"})
+    @Alerts({"undefined", "undefined", "undefined", "undefined",
+             "undefined", "undefined", "undefined"})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"

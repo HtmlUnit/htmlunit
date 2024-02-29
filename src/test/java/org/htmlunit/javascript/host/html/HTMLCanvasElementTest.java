@@ -218,8 +218,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object CanvasRenderingContext2D]", "[object WebGLRenderingContext]",
-                       "[object WebGLRenderingContext]", "[object WebGL2RenderingContext]", "null", "null"})
+    @Alerts({"[object CanvasRenderingContext2D]", "[object WebGLRenderingContext]",
+             "[object WebGLRenderingContext]", "[object WebGL2RenderingContext]", "null", "null"})
     @NotYetImplemented
     public void getContext() throws Exception {
         final String html =

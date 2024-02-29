@@ -65,11 +65,10 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"https://developer.mozilla.org/", "https://developer.mozilla.org/",
-                       "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
-                       "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
-                       "http://www.example.com/", "type error", "type error" },
-            IE = {})
+    @Alerts({"https://developer.mozilla.org/", "https://developer.mozilla.org/",
+             "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
+             "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
+             "http://www.example.com/", "type error", "type error" })
     public void ctor() throws Exception {
         final String html =
             "<html>\n"
@@ -108,8 +107,7 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "http://developer.mozilla.org",
-            IE = {})
+    @Alerts("http://developer.mozilla.org")
     public void origin() throws Exception {
         final String html =
             "<html>\n"
@@ -183,8 +181,7 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "a=u&x="},
-            IE = {})
+    @Alerts({"", "a=u&x="})
     public void searchParams() throws Exception {
         final String html =
             "<html>\n"
@@ -211,8 +208,7 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "a=u&x=", "x=22", "x=22"},
-            IE = {})
+    @Alerts({"", "a=u&x=", "x=22", "x=22"})
     public void searchParamsSyncedWithUrlChanges() throws Exception {
         final String html =
             "<html>\n"
@@ -242,8 +238,7 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"/", "/en-US/docs", "/en-US/docs"},
-            IE = {})
+    @Alerts({"/", "/en-US/docs", "/en-US/docs"})
     public void getPathName() throws Exception {
         final String html =
                 "<html>\n"
@@ -269,10 +264,9 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"/path", "/path",
-                       "http://developer.mozilla.org/new/path?a=u&x",
-                       "http://developer.mozilla.org/?a=u&x"},
-            IE = {})
+    @Alerts({"/path", "/path",
+             "http://developer.mozilla.org/new/path?a=u&x",
+             "http://developer.mozilla.org/?a=u&x"})
     public void setPathName() throws Exception {
         final String html =
                 "<html>\n"
@@ -302,12 +296,11 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"", "#abcd", "#bcd",
-                       "#hash", "http://developer.mozilla.org/?a=b#hash",
-                       "", "http://developer.mozilla.org/?a=b",
-                       "#undefined", "http://developer.mozilla.org/#undefined",
-                       "#null", "http://developer.mozilla.org/#null"},
-            IE = {})
+    @Alerts({"", "#abcd", "#bcd",
+             "#hash", "http://developer.mozilla.org/?a=b#hash",
+             "", "http://developer.mozilla.org/?a=b",
+             "#undefined", "http://developer.mozilla.org/#undefined",
+             "#null", "http://developer.mozilla.org/#null"})
     public void hash() throws Exception {
         final String html =
                 "<html>\n"
@@ -353,12 +346,11 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"developer.mozilla.org", "developer.mozilla.org",
-                       "new.host", "new.host:1234", "new.host:1234", "0.0.91.160:80",
-                       "0.0.0.17:80", "0.0.6.182:80",
-                       "new.host", "new.host",
-                       "developer.mozilla.org", "developer.mozilla.org:4097", "developer.mozilla.org:80"},
-            IE = {})
+    @Alerts({"developer.mozilla.org", "developer.mozilla.org",
+             "new.host", "new.host:1234", "new.host:1234", "0.0.91.160:80",
+             "0.0.0.17:80", "0.0.6.182:80",
+             "new.host", "new.host",
+             "developer.mozilla.org", "developer.mozilla.org:4097", "developer.mozilla.org:80"})
     public void host() throws Exception {
         final String html =
                 "<html>\n"
@@ -429,8 +421,7 @@ public class URLTest extends WebDriverTestCase {
             EDGE = {"developer.mozilla.org",
                     "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
                     "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
-                    "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"},
-            IE = {})
+                    "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"})
     @HtmlUnitNYI(CHROME =  {"developer.mozilla.org",
                             "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
                             "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
@@ -472,9 +463,8 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "http://new.com/href", "http://new.com/hrefWithPort"},
-            IE = {})
+    @Alerts({"https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+             "http://new.com/href", "http://new.com/hrefWithPort"})
     public void href() throws Exception {
         final String html =
                 "<html>\n"
@@ -502,13 +492,12 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"flabada",
-                       "", "https://anonymous@developer.mozilla.org/",
-                       "pass", "https://anonymous:pass@developer.mozilla.org/",
-                       "17", "https://anonymous:17@developer.mozilla.org/",
-                       "undefined", "https://anonymous:undefined@developer.mozilla.org/",
-                       "null", "https://anonymous:null@developer.mozilla.org/"},
-            IE = {})
+    @Alerts({"flabada",
+             "", "https://anonymous@developer.mozilla.org/",
+             "pass", "https://anonymous:pass@developer.mozilla.org/",
+             "17", "https://anonymous:17@developer.mozilla.org/",
+             "undefined", "https://anonymous:undefined@developer.mozilla.org/",
+             "null", "https://anonymous:null@developer.mozilla.org/"})
     public void password() throws Exception {
         final String html =
                 "<html>\n"
@@ -550,9 +539,8 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"80", "123", "", "https://mydomain.com/svn/Repos/",
-                       "", "http://mydomain.com/svn/Repos/"},
-            IE = {})
+    @Alerts({"80", "123", "", "https://mydomain.com/svn/Repos/",
+             "", "http://mydomain.com/svn/Repos/"})
     public void port() throws Exception {
         final String html =
                 "<html>\n"
@@ -602,8 +590,7 @@ public class URLTest extends WebDriverTestCase {
                       "http:", "http://mydomain.com/svn/Repos/",
                       "http:", "http://mydomain.com/svn/Repos/",
                       "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"},
-            IE = {})
+                      "ex-unknown"})
     public void protocol() throws Exception {
         final String html =
                 "<html>\n"
@@ -682,8 +669,7 @@ public class URLTest extends WebDriverTestCase {
                       "axdeg:", "axdeg://mydomain.com/svn/Repos/",
                       "axdeg:", "axdeg://mydomain.com/svn/Repos/",
                       "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"},
-            IE = {})
+                      "ex-unknown"})
     public void protocol2() throws Exception {
         final String html =
                 "<html>\n"
@@ -758,8 +744,7 @@ public class URLTest extends WebDriverTestCase {
                       "axdeg:", "axdeg://mydomain.com/svn/Repos/",
                       "axdeg:", "axdeg://mydomain.com/svn/Repos/",
                       "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"},
-            IE = {})
+                      "ex-unknown"})
     public void protocol3() throws Exception {
         final String html =
                 "<html>\n"
@@ -840,8 +825,7 @@ public class URLTest extends WebDriverTestCase {
                       "ftps:", "ftps://mydomain.com/svn/Repos/",
                       "ws:", "ws://mydomain.com/svn/Repos/",
                       "wss:", "wss://mydomain.com/svn/Repos/",
-                      "file:", "file:///svn/Repos/"},
-            IE = {})
+                      "file:", "file:///svn/Repos/"})
     @HtmlUnitNYI(
             FF = {"https:",
                   "http:", "http://mydomain.com/svn/Repos/",
@@ -908,17 +892,16 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"?q=123",
-                       "?a=b&c=d", "https://developer.mozilla.org/search?a=b&c=d",
-                       "?a=7", "https://developer.mozilla.org/search?a=7",
-                       "?17", "https://developer.mozilla.org/search?17",
-                       "", "https://developer.mozilla.org/search",
-                       "?Html%20Unit", "https://developer.mozilla.org/search?Html%20Unit",
-                       "?Html?Unit", "https://developer.mozilla.org/search?Html?Unit",
-                       "?Html/Unit", "https://developer.mozilla.org/search?Html/Unit",
-                       "?undefined", "https://developer.mozilla.org/search?undefined",
-                       "?null", "https://developer.mozilla.org/search?null"},
-            IE = {})
+    @Alerts({"?q=123",
+             "?a=b&c=d", "https://developer.mozilla.org/search?a=b&c=d",
+             "?a=7", "https://developer.mozilla.org/search?a=7",
+             "?17", "https://developer.mozilla.org/search?17",
+             "", "https://developer.mozilla.org/search",
+             "?Html%20Unit", "https://developer.mozilla.org/search?Html%20Unit",
+             "?Html?Unit", "https://developer.mozilla.org/search?Html?Unit",
+             "?Html/Unit", "https://developer.mozilla.org/search?Html/Unit",
+             "?undefined", "https://developer.mozilla.org/search?undefined",
+             "?null", "https://developer.mozilla.org/search?null"})
     public void search() throws Exception {
         final String html =
                 "<html>\n"
@@ -977,8 +960,7 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"https://developer.mozilla.org/search?q%20a=1%202%203", "?q%20a=1%202%203"},
-            IE = {})
+    @Alerts({"https://developer.mozilla.org/search?q%20a=1%202%203", "?q%20a=1%202%203"})
     @HtmlUnitNYI(CHROME = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
                  EDGE = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
                  FF = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
@@ -1005,15 +987,14 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"anonymous",
-                       "user", "https://user:flabada@developer.mozilla.org/",
-                       "", "https://:flabada@developer.mozilla.org/",
-                       "anonymous", "anonymous", "", "",
-                       "user", "https://user:pass@developer.mozilla.org/",
-                       "17", "https://17:pass@developer.mozilla.org/",
-                       "undefined", "https://undefined:pass@developer.mozilla.org/",
-                       "null", "https://null:pass@developer.mozilla.org/"},
-            IE = {})
+    @Alerts({"anonymous",
+             "user", "https://user:flabada@developer.mozilla.org/",
+             "", "https://:flabada@developer.mozilla.org/",
+             "anonymous", "anonymous", "", "",
+             "user", "https://user:pass@developer.mozilla.org/",
+             "17", "https://17:pass@developer.mozilla.org/",
+             "undefined", "https://undefined:pass@developer.mozilla.org/",
+             "null", "https://null:pass@developer.mozilla.org/"})
     public void username() throws Exception {
         final String html =
                 "<html>\n"
@@ -1074,13 +1055,12 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function URL() { [native code] }",
-                       "function URL() { [native code] }",
-                       "function URL() { [native code] }",
-                       "https://developer.mozilla.org/",
-                       "https://developer.mozilla.org/",
-                       "https://developer.mozilla.org/"},
-            IE = {})
+    @Alerts({"function URL() { [native code] }",
+             "function URL() { [native code] }",
+             "function URL() { [native code] }",
+             "https://developer.mozilla.org/",
+             "https://developer.mozilla.org/",
+             "https://developer.mozilla.org/"})
     public void testToString() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -1102,8 +1082,7 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = "https://developer.mozilla.org/",
-            IE = {})
+    @Alerts("https://developer.mozilla.org/")
     public void testToJSON() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -1122,8 +1101,7 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"https://htmlunit.org/", "https://htmlunit.org/", "true"},
-            IE = {})
+    @Alerts({"https://htmlunit.org/", "https://htmlunit.org/", "true"})
     public void webkitURL() throws Exception {
         final String html
             = "<html><head>\n"

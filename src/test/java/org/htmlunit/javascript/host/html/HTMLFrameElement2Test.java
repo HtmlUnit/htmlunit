@@ -183,7 +183,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"§§URL§§subdir/frame.html", "§§URL§§frame.html"})
+    @Alerts({"§§URL§§subdir/frame.html", "§§URL§§frame.html"})
     public void location() throws Exception {
         location("Frame1.location = \"frame.html\"");
         location("Frame1.location.replace(\"frame.html\")");

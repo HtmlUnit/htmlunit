@@ -63,9 +63,8 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function values() { [native code] }",
-                       "[object Set Iterator]", "0", "1", "[object Object]"},
-            IE = {})
+    @Alerts({"function values() { [native code] }",
+             "[object Set Iterator]", "0", "1", "[object Object]"})
     public void iterator() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -99,9 +98,8 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function values() { [native code] }",
-                       "[object Set Iterator]", "0", "1", "[object Object]"},
-            IE = {})
+    @Alerts({"function values() { [native code] }",
+             "[object Set Iterator]", "0", "1", "[object Object]"})
     public void values() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -198,8 +196,7 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"7", "true", "false"},
-            IE = {})
+    @Alerts({"7", "true", "false"})
     public void constructorStringIteratorParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -270,7 +267,7 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "#77"})
+    @Alerts({"1", "#77"})
     public void constructorIteratorParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -310,10 +307,9 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "[object Window]",
-                       "undefined", "undefined", "[object Set]", "[object Window]",
-                       "null", "null", "[object Set]", "[object Window]"},
-            IE = {})
+    @Alerts({"ab", "ab", "[object Set]", "[object Window]",
+             "undefined", "undefined", "[object Set]", "[object Window]",
+             "null", "null", "[object Set]", "[object Window]"})
     public void forEach() throws Exception {
         final String html
             = "<html><head>\n"
@@ -341,10 +337,9 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "undefined",
-                       "undefined", "undefined", "[object Set]", "undefined",
-                       "null", "null", "[object Set]", "undefined"},
-            IE = {})
+    @Alerts({"ab", "ab", "[object Set]", "undefined",
+             "undefined", "undefined", "[object Set]", "undefined",
+             "null", "null", "[object Set]", "undefined"})
     public void forEachStrict() throws Exception {
         final String html
             = "<html><head>\n"
@@ -373,9 +368,8 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
-                       "null", "null", "[object Set]", "hello"},
-            IE = {})
+    @Alerts({"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
+             "null", "null", "[object Set]", "hello"})
     public void forEachThis() throws Exception {
         final String html
             = "<html><head>\n"
@@ -403,8 +397,7 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Set Iterator]",
-            IE = {})
+    @Alerts("[object Set Iterator]")
     public void iteratorPrototype() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -433,8 +426,7 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "0"},
-            IE = {})
+    @Alerts({"undefined", "0"})
     public void forEach_withElision() throws Exception {
         final String html
                 = "<html><head>\n"

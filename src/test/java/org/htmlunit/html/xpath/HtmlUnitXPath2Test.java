@@ -34,7 +34,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"})
+    @Alerts({"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"})
     public void optionText() throws Exception {
         final String content = "<html><head>\n"
             + "<script>\n"

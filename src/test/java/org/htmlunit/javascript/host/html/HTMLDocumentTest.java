@@ -877,7 +877,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "not defined")
+    @Alerts("not defined")
     public void frames() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1508,7 +1508,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "div1"})
+    @Alerts({"3", "div1"})
     public void querySelectorAll_quirks() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

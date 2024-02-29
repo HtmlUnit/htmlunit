@@ -88,8 +88,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"y", "false", "false", "false", "true"},
-            IE = {})
+    @Alerts({"y", "false", "false", "false", "true"})
     public void stickyCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'y');");
     }
@@ -98,8 +97,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"y", "false", "false", "false", "true"},
-            IE = {})
+    @Alerts({"y", "false", "false", "false", "true"})
     public void sticky() throws Exception {
         testEvaluateProperties("/foo/y;");
     }
@@ -144,8 +142,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gy", "true", "false", "false", "true"},
-            IE = {})
+    @Alerts({"gy", "true", "false", "false", "true"})
     public void globalStickyCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'gy');");
     }
@@ -154,8 +151,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gy", "true", "false", "false", "true"},
-            IE = {})
+    @Alerts({"gy", "true", "false", "false", "true"})
     public void globalSticky() throws Exception {
         testEvaluateProperties("/foo/gy;");
     }
@@ -182,8 +178,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"giy", "true", "true", "false", "true"},
-            IE = {})
+    @Alerts({"giy", "true", "true", "false", "true"})
     public void globalIgnoreCaseStickyCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'yig');");
     }
@@ -192,8 +187,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"giy", "true", "true", "false", "true"},
-            IE = {})
+    @Alerts({"giy", "true", "true", "false", "true"})
     public void globalIgnoreCaseSticky() throws Exception {
         testEvaluateProperties("/foo/ygi;");
     }
@@ -202,8 +196,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gmy", "true", "false", "true", "true"},
-            IE = {})
+    @Alerts({"gmy", "true", "false", "true", "true"})
     public void globalMultilineStickyCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'gmy');");
     }
@@ -212,8 +205,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"gmy", "true", "false", "true", "true"},
-            IE = {})
+    @Alerts({"gmy", "true", "false", "true", "true"})
     public void globalMultilineSticky() throws Exception {
         testEvaluateProperties("/foo/gmy;");
     }
@@ -240,8 +232,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"iy", "false", "true", "false", "true"},
-            IE = {})
+    @Alerts({"iy", "false", "true", "false", "true"})
     public void ignoreCaseStickyCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'yi');");
     }
@@ -250,8 +241,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"iy", "false", "true", "false", "true"},
-            IE = {})
+    @Alerts({"iy", "false", "true", "false", "true"})
     public void ignoreCaseSticky() throws Exception {
         testEvaluateProperties("/foo/iy;");
     }
@@ -260,8 +250,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"my", "false", "false", "true", "true"},
-            IE = {})
+    @Alerts({"my", "false", "false", "true", "true"})
     public void multilineStickyCtor() throws Exception {
         testEvaluateProperties("new RegExp('foo', 'my');");
     }
@@ -270,8 +259,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"my", "false", "false", "true", "true"},
-            IE = {})
+    @Alerts({"my", "false", "false", "true", "true"})
     public void multilineSticky() throws Exception {
         testEvaluateProperties("/foo/my;");
     }
@@ -303,8 +291,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = {})
+    @Alerts("false")
     public void stickyStartOfLine() throws Exception {
         final String script =
                 "var regex = /^foo/y;\n"
@@ -317,8 +304,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true"},
-            IE = {})
+    @Alerts({"false", "true"})
     public void stickyStartOfLineMultiline() throws Exception {
         final String script =
                 "var regex = /^foo/my;\n"
@@ -333,8 +319,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "a", "a"},
-            IE = {})
+    @Alerts({"2", "a", "a"})
     public void stickyAndGlobal() throws Exception {
         final String script =
                 "var result = 'aaba'.match(/a/yg);\n"
@@ -374,8 +359,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
-            IE = {})
+    @Alerts({"0", "undefined", "true", "false", "undefined"})
     @HtmlUnitNYI(CHROME = {"get undefined", "", "false", "false", "false"},
             EDGE = {"get undefined", "", "false", "false", "false"},
             FF = {"get undefined", "", "false", "false", "false"},
@@ -388,8 +372,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
-            IE = {})
+    @Alerts({"0", "undefined", "true", "false", "undefined"})
     @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
             EDGE = {"get undefined", "false", "false", "false", "false"},
             FF = {"get undefined", "false", "false", "false", "false"},
@@ -402,8 +385,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
-            IE = {})
+    @Alerts({"0", "undefined", "true", "false", "undefined"})
     @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
             EDGE = {"get undefined", "false", "false", "false", "false"},
             FF = {"get undefined", "false", "false", "false", "false"},
@@ -416,8 +398,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
-            IE = {})
+    @Alerts({"0", "undefined", "true", "false", "undefined"})
     @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
             EDGE = {"get undefined", "false", "false", "false", "false"},
             FF = {"get undefined", "false", "false", "false", "false"},
@@ -430,8 +411,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
-            IE = {})
+    @Alerts({"0", "undefined", "true", "false", "undefined"})
     @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
             EDGE = {"get undefined", "false", "false", "false", "false"},
             FF = {"get undefined", "false", "false", "false", "false"},
@@ -444,8 +424,7 @@ public class RegExpTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
-            IE = {})
+    @Alerts({"0", "undefined", "true", "false", "undefined"})
     @HtmlUnitNYI(CHROME = {"get undefined", "false", "false", "false", "false"},
             EDGE = {"get undefined", "false", "false", "false", "false"},
             FF = {"get undefined", "false", "false", "false", "false"},

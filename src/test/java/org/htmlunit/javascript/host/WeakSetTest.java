@@ -33,8 +33,7 @@ public class WeakSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = {})
+    @Alerts("true")
     public void constructorArray() throws Exception {
         final String html
             = "<html><head>\n"
@@ -58,8 +57,7 @@ public class WeakSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true"},
-            IE = {})
+    @Alerts({ "false", "true"})
     public void constructorSetParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -84,8 +82,7 @@ public class WeakSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "false"},
-            IE = {})
+    @Alerts({"false", "false", "false"})
     public void constructorMapParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -113,8 +110,7 @@ public class WeakSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false"},
-            IE = {})
+    @Alerts({"true", "false"})
     public void constructorIteratorParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -156,8 +152,7 @@ public class WeakSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "true"},
-            IE = {})
+    @Alerts({"undefined", "true"})
     public void has() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -182,8 +177,7 @@ public class WeakSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Type error", "Type error", "true"},
-            IE = {})
+    @Alerts({"Type error", "Type error", "true"})
     public void add() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

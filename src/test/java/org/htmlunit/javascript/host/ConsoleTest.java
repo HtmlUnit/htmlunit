@@ -86,7 +86,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {})
+    @Alerts({})
     public void timeStamp() throws Exception {
         final String html
             = "<html>\n"

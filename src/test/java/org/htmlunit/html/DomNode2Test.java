@@ -114,7 +114,7 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "true"})
+    @Alerts({"true", "true", "true", "true"})
     public void getRootNode() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"

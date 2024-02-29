@@ -217,7 +217,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void text() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -277,7 +277,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void firstChild_element_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -342,7 +342,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration_activeX() throws Exception {
         final String html = "<html><head>\n"
@@ -409,7 +409,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void firstChild_processingInstruction_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -472,7 +472,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void firstChild_documentType_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -534,7 +534,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void firstChild_comment_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -570,7 +570,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"foo", "fooc1", "null"})
+    @Alerts({"foo", "fooc1", "null"})
     public void firstElementChild() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -602,7 +602,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"foo", "fooc2", "null"})
+    @Alerts({"foo", "fooc2", "null"})
     public void lastElementChild() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -837,8 +837,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = {"1", "[object HTMLTemplateElement]", "[object DocumentFragment]",
-                       "[object HTMLTableElement]", "[object HTMLTableSectionElement]"})
+    @Alerts({"1", "[object HTMLTemplateElement]", "[object DocumentFragment]",
+             "[object HTMLTableElement]", "[object HTMLTableSectionElement]"})
     public void tableInsideTemplate_addTBody() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -868,8 +868,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = {"1", "[object HTMLTemplateElement]", "[object DocumentFragment]",
-                       "[object HTMLUListElement]"})
+    @Alerts({"1", "[object HTMLTemplateElement]", "[object DocumentFragment]",
+             "[object HTMLUListElement]"})
     public void tableInsideTemplate_addTBodyMoveUlOut() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"

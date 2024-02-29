@@ -212,11 +212,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function Window() { [native code] }", "function Window() { [native code] }", "true",
-                       "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
-                       "true", "function"},
-            IE = {"[object Window]", "[object Window]", "true",
-                  "[object HTMLDocument]", "[object HTMLDocument]", "true", "function"})
+    @Alerts({"function Window() { [native code] }", "function Window() { [native code] }", "true",
+             "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
+             "true", "function"})
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -1106,8 +1104,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2"},
-            IE = {})
+    @Alerts({"1", "2"})
     public void constInOfLoop() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

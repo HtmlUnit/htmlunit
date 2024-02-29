@@ -57,8 +57,7 @@ public class MediaStreamTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaStream]", "", "false"},
             CHROME = {"[object MediaStream]", "[object MediaStream]", "true"},
-            EDGE = {"[object MediaStream]", "[object MediaStream]", "true"},
-            IE = {})
+            EDGE = {"[object MediaStream]", "[object MediaStream]", "true"})
     public void webkitRTCPeerConnection() throws Exception {
         final String html
             = "<html><head>\n"

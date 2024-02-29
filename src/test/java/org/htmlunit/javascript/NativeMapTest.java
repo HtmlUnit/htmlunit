@@ -33,8 +33,7 @@ public class NativeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"key type string", "value type object"},
-            IE = {})
+    @Alerts({"key type string", "value type object"})
     public void entries() throws Exception {
         final String html =
             "<html>\n"

@@ -65,7 +65,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts(DEFAULT = {"2", "symbol", "symbol", "1", "c"})
+    @Alerts({"2", "symbol", "symbol", "1", "c"})
     public void getOwnPropertySymbols() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"

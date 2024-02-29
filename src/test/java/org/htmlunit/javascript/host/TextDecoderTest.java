@@ -39,7 +39,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"utf-8", "utf-8", "utf-8", "utf-8"})
+    @Alerts({"utf-8", "utf-8", "utf-8", "utf-8"})
     public void encoding() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -663,7 +663,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"0", "8", "72", "116"})
+    @Alerts({"0", "8", "72", "116"})
     public void encode() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -725,7 +725,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"", "exception"})
+    @Alerts({"", "exception"})
     public void decode2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

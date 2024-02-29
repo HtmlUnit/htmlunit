@@ -1666,7 +1666,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void optionsDelegateToSelect() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2753,7 +2753,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLOptionElement]", "[object HTMLOptionElement]", "[object HTMLOptionElement]"})
+    @Alerts({"[object HTMLOptionElement]", "[object HTMLOptionElement]", "[object HTMLOptionElement]"})
     public void optionsForOf() throws Exception {
         final String html =
               "<html>\n"

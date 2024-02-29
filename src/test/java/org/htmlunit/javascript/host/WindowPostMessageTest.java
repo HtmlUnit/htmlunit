@@ -38,10 +38,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                       "origin: ", "source: true false", "lastEventId: "},
-            IE = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                  "origin: ", "source: true false", "lastEventId: undefined"})
+    @Alerts({"type: message", "bubbles: false", "cancelable: false", "data: hello",
+             "origin: ", "source: true false", "lastEventId: "})
     public void postMessage() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[4] += "http://127.0.0.1:" + PORT;
@@ -82,10 +80,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                       "origin: ", "source: false true", "lastEventId: "},
-            IE = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                  "origin: ", "source: false true", "lastEventId: undefined"})
+    @Alerts({"type: message", "bubbles: false", "cancelable: false", "data: hello",
+             "origin: ", "source: false true", "lastEventId: "})
     public void postMessageFromIframe() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[4] += "http://localhost:" + PORT;
@@ -149,10 +145,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                       "origin: ", "source: false true", "lastEventId: "},
-            IE = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                  "origin: ", "source: false true", "lastEventId: undefined"})
+    @Alerts({"type: message", "bubbles: false", "cancelable: false", "data: hello",
+             "origin: ", "source: false true", "lastEventId: "})
     public void postMessageWithoutTargetOrigin() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[4] += "http://localhost:" + PORT;

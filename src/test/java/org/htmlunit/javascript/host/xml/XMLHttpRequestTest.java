@@ -1151,7 +1151,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ActiveXObject not available")
+    @Alerts("ActiveXObject not available")
     public void caseInsensitivityActiveXConstructor() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1478,7 +1478,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ActiveXObject not available")
+    @Alerts("ActiveXObject not available")
     public void caseSensitivity_activeX() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1985,8 +1985,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"q=HtmlUnit&u=%D0%BB%C6%89", "done", "application/x-www-form-urlencoded;charset=UTF-8",
-                       "q=HtmlUnit", "u=\u043B\u0189"})
+    @Alerts({"q=HtmlUnit&u=%D0%BB%C6%89", "done", "application/x-www-form-urlencoded;charset=UTF-8",
+             "q=HtmlUnit", "u=\u043B\u0189"})
     public void enctypeURLSearchParams() throws Exception {
         final String html
             = "<html>\n"

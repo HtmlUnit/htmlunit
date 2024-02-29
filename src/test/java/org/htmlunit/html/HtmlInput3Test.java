@@ -104,8 +104,8 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30",
-                       "-2018-06-12T19:30-2018-06-12T19:30"})
+    @Alerts({"2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30",
+             "-2018-06-12T19:30-2018-06-12T19:30"})
     public void none_datetimelocal() throws Exception {
         changeType("value='2018-06-12T19:30'", "2019-07-11T4:16", "datetime-local");
     }
@@ -114,8 +114,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2019-07-11T4:16--null",
-                       "--null"})
+    @Alerts({"2019-07-11T4:16--null", "--null"})
     public void noneNoValueAttr_datetimelocal() throws Exception {
         changeType("", "2019-07-11T4:16", "datetime-local");
     }
@@ -422,8 +421,8 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2020-04-7T1:13-2018-06-12T19:30-2018-06-12T19:30",
-                       "2020-04-7T1:13-2018-06-12T19:30-2018-06-12T19:30"})
+    @Alerts({"2020-04-7T1:13-2018-06-12T19:30-2018-06-12T19:30",
+             "2020-04-7T1:13-2018-06-12T19:30-2018-06-12T19:30"})
     public void none_datetime() throws Exception {
         changeType("value='2018-06-12T19:30'", "2020-04-7T1:13", "datetime");
     }
@@ -432,8 +431,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2020-04-7T1:13--null",
-                       "2020-04-7T1:13--null"})
+    @Alerts({"2020-04-7T1:13--null", "2020-04-7T1:13--null"})
     public void noneNoValueAttr_datetime() throws Exception {
         changeType("", "2020-04-7T1:13", "datetime");
     }
@@ -503,8 +501,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2019-07-11T4:16--null",
-                       "--null"})
+    @Alerts({"2019-07-11T4:16--null", "--null"})
     public void detached_datetimelocal() throws Exception {
         changeTypeDetached("2019-07-11T4:16", "datetime-local");
     }
@@ -662,8 +659,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2020-04-7T1:13--null",
-                       "2020-04-7T1:13--null"})
+    @Alerts({"2020-04-7T1:13--null", "2020-04-7T1:13--null"})
     public void detached_datetime() throws Exception {
         changeTypeDetached("2020-04-7T1:13", "datetime");
     }

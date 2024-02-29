@@ -111,8 +111,8 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined",
-                       "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
+    @Alerts({"undefined", "undefined", "undefined", "undefined",
+             "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
     public void type() throws Exception {
         final String html =
                 "<html>\n"

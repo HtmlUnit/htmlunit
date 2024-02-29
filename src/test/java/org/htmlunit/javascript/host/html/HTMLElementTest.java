@@ -2393,7 +2393,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined")
+    @Alerts("undefined")
     public void currentStyle() throws Exception {
         style("currentStyle");
     }
@@ -2402,7 +2402,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined")
+    @Alerts("undefined")
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
     }
@@ -2555,7 +2555,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DOMRect]", "0", "0"})
+    @Alerts({"[object DOMRect]", "0", "0"})
     public void getBoundingClientRectDisconnected() throws Exception {
         final String html = "<html>\n"
             + "<head><script>\n"
@@ -2719,7 +2719,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined")
+    @Alerts("undefined")
     public void uniqueIDFormatIE() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -3395,7 +3395,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "removeNode not available")
+    @Alerts("removeNode not available")
     public void removeNode() throws Exception {
         final String html
             = "<html><head>\n"

@@ -34,7 +34,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "false", "true", "true", "false", "false"})
+    @Alerts({"false", "false", "false", "true", "true", "false", "false"})
     public void isFinite() throws Exception {
         final String html =
             "<html>\n"
@@ -64,8 +64,8 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
-                       "false", "false", "false", "false", "false"})
+    @Alerts({"true", "true", "true", "false", "false", "false", "false",
+             "false", "false", "false", "false", "false"})
     public void isInteger() throws Exception {
         final String html =
             "<html>\n"
@@ -102,8 +102,8 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
-                       "false", "false", "false", "false", "false", "false", "false"})
+    @Alerts({"true", "true", "true", "false", "false", "false", "false",
+             "false", "false", "false", "false", "false", "false", "false"})
     public void isNaN() throws Exception {
         final String html =
             "<html>\n"
@@ -142,7 +142,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "false", "false", "false", "false", "true"})
+    @Alerts({"true", "false", "true", "false", "false", "false", "false", "true"})
     public void isSafeInteger() throws Exception {
         final String html =
             "<html>\n"

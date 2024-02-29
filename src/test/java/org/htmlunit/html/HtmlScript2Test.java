@@ -659,7 +659,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"onLoad", "body onLoad"})
+    @Alerts({"onLoad", "body onLoad"})
     public void onLoadTypeWhitespace() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "");
         onLoadOnError("src='simple.js' type='\t  text/javascript     '");

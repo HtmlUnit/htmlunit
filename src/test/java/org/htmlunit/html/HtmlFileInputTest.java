@@ -591,7 +591,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "exception"})
+    @Alerts({"null,null", "exception"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

@@ -672,9 +672,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"8-8-8-true", "-\\s\\s-\\s\\s-true",
-                       "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
-                       "-\\s3\\s9\\s-\\s3\\s9\\s-true"})
+    @Alerts({"8-8-8-true", "-\\s\\s-\\s\\s-true",
+             "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
+             "-\\s3\\s9\\s-\\s3\\s9\\s-true"})
     public void defaultValuesBlankValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1393,8 +1393,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                       "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "exception",
+             "null,null", "exception", "null,null"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -1403,8 +1403,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                       "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "exception",
+             "null,null", "exception", "null,null"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -1413,8 +1413,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                       "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "exception",
+             "null,null", "exception", "null,null"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }

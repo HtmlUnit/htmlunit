@@ -34,7 +34,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Enumerator not supported")
+    @Alerts("Enumerator not supported")
     public void basicEmptyEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"

@@ -752,7 +752,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "One", "Two*", "Three"})
+    @Alerts({"3", "One", "Two*", "Three"})
     public void removeMinusOne() throws Exception {
         remove("-1", false, false);
     }
@@ -761,7 +761,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"})
+    @Alerts({"3", "One", "Two*", "Three*"})
     public void removeMinusOneMulti() throws Exception {
         remove("-1", false, true);
     }
