@@ -21,7 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
-import static org.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_REQUIRES_NAME_OR_ID;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
@@ -2133,11 +2132,7 @@ public class Document extends Node {
     public String getAlinkColor() {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
-            String color = ((HTMLBodyElement) body).getALink();
-            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-                color = "#000000";
-            }
-            return color;
+            return ((HTMLBodyElement) body).getALink();
         }
         return null;
     }
@@ -2163,11 +2158,7 @@ public class Document extends Node {
     public String getBgColor() {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
-            String color = ((HTMLBodyElement) body).getBgColor();
-            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-                color = "#000000";
-            }
-            return color;
+            return ((HTMLBodyElement) body).getBgColor();
         }
         return null;
     }
@@ -2193,11 +2184,7 @@ public class Document extends Node {
     public String getFgColor() {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
-            String color = ((HTMLBodyElement) body).getText();
-            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-                color = "#000000";
-            }
-            return color;
+            return ((HTMLBodyElement) body).getText();
         }
         return null;
     }
@@ -2222,11 +2209,7 @@ public class Document extends Node {
     public String getLinkColor() {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
-            String color = ((HTMLBodyElement) body).getLink();
-            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-                color = "#000000";
-            }
-            return color;
+            return ((HTMLBodyElement) body).getLink();
         }
         return null;
     }
@@ -2251,11 +2234,7 @@ public class Document extends Node {
     public String getVlinkColor() {
         final HTMLElement body = getBody();
         if (body instanceof HTMLBodyElement) {
-            String color = ((HTMLBodyElement) body).getVLink();
-            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-                color = "#000000";
-            }
-            return color;
+            return ((HTMLBodyElement) body).getVLink();
         }
         return null;
     }

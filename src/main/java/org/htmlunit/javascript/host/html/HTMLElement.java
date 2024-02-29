@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
-import static org.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static org.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
@@ -1220,41 +1218,7 @@ public class HTMLElement extends Element {
      * @param value the color attribute's value
      */
     protected void setColorAttribute(final String name, final String value) {
-        String s = value;
-        if (!s.isEmpty()) {
-            final boolean restrict = getBrowserVersion().hasFeature(HTML_COLOR_RESTRICT);
-
-            boolean isName = false;
-            if (restrict) {
-                for (final String key : COLORS_MAP_IE.keySet()) {
-                    if (key.equalsIgnoreCase(value)) {
-                        isName = true;
-                        break;
-                    }
-                }
-            }
-            if (!isName && restrict) {
-                if (s.charAt(0) == '#') {
-                    s = s.substring(1);
-                }
-                final StringBuilder builder = new StringBuilder(7);
-                for (int x = 0; x < 6 && x < s.length(); x++) {
-                    final char ch = s.charAt(x);
-                    if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F')) {
-                        builder.append(ch);
-                    }
-                    else {
-                        builder.append('0');
-                    }
-                }
-                builder.insert(0, '#');
-                s = builder.toString();
-            }
-            if (getBrowserVersion().hasFeature(HTML_COLOR_TO_LOWER)) {
-                s = s.toLowerCase(Locale.ROOT);
-            }
-        }
-        getDomNodeOrDie().setAttribute(name, s);
+        getDomNodeOrDie().setAttribute(name, value);
     }
 
     /**

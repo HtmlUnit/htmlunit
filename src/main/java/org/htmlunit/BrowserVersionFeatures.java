@@ -280,10 +280,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLINPUT_FILE_SELECTION_START_END_NULL,
 
-    /** HTMLInputElement color type is not supported. */
-    @BrowserFeature(IE)
-    HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED,
-
     /** HTMLInputElement datetime-local type is supported. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED,
@@ -320,10 +316,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLSCRIPT_TRIM_TYPE,
 
-    /** willValidate returns always true. */
-    @BrowserFeature(IE)
-    HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE,
-
     /** willValidate does not check the readonly property. */
     @BrowserFeature({FF, FF_ESR})
     HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY,
@@ -347,18 +339,6 @@ public enum BrowserVersionFeatures {
     /** HTML attributes are always lower case. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTML_ATTRIBUTE_LOWER_CASE,
-
-    /** Expand #0 to #000000. */
-    @BrowserFeature(IE)
-    HTML_COLOR_EXPAND_ZERO,
-
-    /** Do not allow anything invalid in color, but restrict to valid values (names and hex digits) only. */
-    @BrowserFeature(IE)
-    HTML_COLOR_RESTRICT,
-
-    /** Convert the color (name and hex code) to lower case. */
-    @BrowserFeature(IE)
-    HTML_COLOR_TO_LOWER,
 
     /** HTML parser supports the 'command' tag. */
     @BrowserFeature({CHROME, EDGE, IE})
