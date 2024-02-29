@@ -31,7 +31,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_STRING_STARTS_ENDS_WITH;
 import static org.htmlunit.BrowserVersionFeatures.JS_STRING_TRIM_LEFT_RIGHT;
 import static org.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
 import static org.htmlunit.BrowserVersionFeatures.JS_WEAK_SET;
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
 
 import java.io.IOException;
@@ -81,7 +80,6 @@ import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import org.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import org.htmlunit.javascript.host.ActiveXObject;
 import org.htmlunit.javascript.host.ConsoleCustom;
 import org.htmlunit.javascript.host.DateCustom;
 import org.htmlunit.javascript.host.NumberCustom;
@@ -387,31 +385,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
             else {
                 prototype.setPrototype(objectPrototype);
-            }
-        }
-
-        // IE ActiveXObject simulation
-        // see http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx
-        // DEV Note: this is at the moment the only usage of HiddenFunctionObject
-        //           if we need more in the future, we have to enhance our JSX annotations
-        if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
-            final Scriptable prototype = prototypesPerJSName.get("ActiveXObject");
-            if (null != prototype) {
-                final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor",
-                        Context.class, Scriptable.class, Object[].class, Function.class, boolean.class);
-                final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
-                try {
-                    functionObject.addAsConstructor(window, prototype, ScriptableObject.DONTENUM);
-                }
-                catch (final Exception e) {
-                    // TODO see issue #1897
-                    if (LOG.isWarnEnabled()) {
-                        final String newline = System.lineSeparator();
-                        LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
-                                + e.getMessage() + newline
-                                + "prototype: " + prototype.getClassName());
-                    }
-                }
             }
         }
 

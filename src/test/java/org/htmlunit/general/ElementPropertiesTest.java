@@ -1236,7 +1236,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
+    @Alerts("charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,type,"
                 + "username")
     public void a() throws Exception {
@@ -1271,7 +1271,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
+    @Alerts("alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
                 + "protocol,referrerPolicy,rel,relList,search,shape,target,username")
     @HtmlUnitNYI(CHROME = "alt,coords,rel,relList",
             EDGE = "alt,coords,rel,relList",
@@ -1756,7 +1756,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
+    @Alerts("checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,willValidate")
     @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
             EDGE = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
@@ -2487,7 +2487,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
+    @Alerts("checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,value,willValidate")
     @HtmlUnitNYI(CHROME = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
             EDGE = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
@@ -2890,7 +2890,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
+    @Alerts("align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
                 + "createTFoot(),createTHead(),deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),frame,"
                 + "insertRow(),rows,rules,summary,tBodies,tFoot,tHead,"
                 + "width")
@@ -8238,7 +8238,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),"
+    @Alerts("decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),"
                     + "generateKey(),importKey(),sign(),unwrapKey(),verify(),wrapKey()")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");

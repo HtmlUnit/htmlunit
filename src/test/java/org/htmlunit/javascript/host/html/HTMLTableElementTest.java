@@ -563,14 +563,10 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"table: [object HTMLTableElement]",
-                       "row: [object HTMLTableRowElement]",
-                       "headcell: [object HTMLTableCellElement]",
-                       "datacell: [object HTMLTableCellElement]"},
-            IE = {"table: [object HTMLTableElement]",
-                  "row: [object HTMLTableRowElement]",
-                  "headcell: [object HTMLTableHeaderCellElement]",
-                  "datacell: [object HTMLTableDataCellElement]"})
+    @Alerts({"table: [object HTMLTableElement]",
+             "row: [object HTMLTableRowElement]",
+             "headcell: [object HTMLTableCellElement]",
+             "datacell: [object HTMLTableCellElement]"})
     public void stringValues() throws Exception {
         final String html =
             "<html><head>\n"

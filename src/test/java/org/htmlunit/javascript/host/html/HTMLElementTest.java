@@ -225,7 +225,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined"},
-            IE = {"text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined"},
             CHROME = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             EDGE = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
     @NotYetImplemented({FF, FF_ESR})
@@ -289,36 +288,21 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"null",
-                       "expando=undefined",
-                       "firstChild=null",
-                       "lastChild=null",
-                       "name=custom_attribute",
-                       "nextSibling=null",
-                       "nodeName=custom_attribute",
-                       "nodeType=2",
-                       "nodeValue=bleh",
-                       "(ownerDocument === document) = true",
-                       "(getRootNode() === att) = true",
-                       "parentNode=null",
-                       "previousSibling=null",
-                       "specified=true",
-                       "value=bleh"},
-            IE = {"null",
-                  "expando=true",
-                  "firstChild=[object Text]",
-                  "lastChild=[object Text]",
-                  "name=custom_attribute",
-                  "nextSibling=null",
-                  "nodeName=custom_attribute",
-                  "nodeType=2",
-                  "nodeValue=bleh",
-                  "(ownerDocument === document) = true",
-                  "-",
-                  "parentNode=null",
-                  "previousSibling=null",
-                  "specified=true",
-                  "value=bleh"})
+    @Alerts({"null",
+             "expando=undefined",
+             "firstChild=null",
+             "lastChild=null",
+             "name=custom_attribute",
+             "nextSibling=null",
+             "nodeName=custom_attribute",
+             "nodeType=2",
+             "nodeValue=bleh",
+             "(ownerDocument === document) = true",
+             "(getRootNode() === att) = true",
+             "parentNode=null",
+             "previousSibling=null",
+             "specified=true",
+             "value=bleh"})
     public void getAttributeNode() throws Exception {
         final String html =
               "<html>\n"
@@ -1197,10 +1181,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Outer = <p id=\"myNode\">New  cell value\n"
-                    + "  <textarea id=\"myLog\" cols=\"80\" rows=\"22\"></textarea>\n\n</p>",
-            IE = "Outer = <p id=\"myNode\">New  cell value\n"
-                    + "  <textarea id=\"myLog\" rows=\"22\" cols=\"80\"></textarea>\n\n")
+    @Alerts("Outer = <p id=\"myNode\">New  cell value\n"
+                    + "  <textarea id=\"myLog\" cols=\"80\" rows=\"22\"></textarea>\n\n</p>")
     @NotYetImplemented
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
@@ -3205,9 +3187,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false", "true", "true", "false", "false"},
-            IE = {"true", "true", "true", "false", "false", "false", "false", "true", "false", "false",
-                  "exception"})
+    @Alerts({"true", "true", "true", "false", "false", "false", "false", "true", "true", "false", "false"})
     public void contains() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3505,9 +3485,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mergeAttributes not available",
-            IE = {"false,false,false,false,false,true,true", "i", "",
-                  "false,false,false,false,false,true,true", "i", ""})
+    @Alerts("mergeAttributes not available")
     public void mergeAttributes() throws Exception {
         mergeAttributesTest("i2");
     }
@@ -3516,9 +3494,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mergeAttributes not available",
-            IE = {"false,false,false,false,false,true,true", "i", "",
-                  "false,false,false,false,false,true,true", "i", ""})
+    @Alerts("mergeAttributes not available")
     public void mergeAttributesTrue() throws Exception {
         mergeAttributesTest("i2, true");
     }
@@ -3527,9 +3503,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mergeAttributes not available",
-            IE = {"false,false,false,false,false,true,true", "i", "",
-                  "false,false,false,false,false,true,true", "i2", "i2"})
+    @Alerts("mergeAttributes not available")
     public void mergeAttributesfalse() throws Exception {
         mergeAttributesTest("i2, false");
     }
@@ -5315,12 +5289,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"true", "", "true", "", "false", "null", "true", "7",
-                       "true", "", "false", "null", "true", "", "false", "null",
-                       "true", "", "false", "null", "false", "null"},
-            IE = {"undefined", "", "undefined", "", "undefined", "null", "undefined", "7",
-                  "true", "7", "false", "7", "true", "7", "false", "7",
-                  "no", "7", "null", "7", "undefined", "7"})
+    @Alerts({"true", "", "true", "", "false", "null", "true", "7",
+             "true", "", "false", "null", "true", "", "false", "null",
+             "true", "", "false", "null", "false", "null"})
     public void editAutofocus() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

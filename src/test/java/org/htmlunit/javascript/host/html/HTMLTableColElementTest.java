@@ -64,9 +64,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "justify", "char", "center"},
-            IE = {"center", "error", "center", "error", "center", "left", "right",
-                  "error", "right", "error", "right", "center"})
+    @Alerts({"CenTer", "8", "foo", "left", "right", "justify", "char", "center"})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

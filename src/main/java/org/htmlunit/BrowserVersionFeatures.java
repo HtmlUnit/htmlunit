@@ -1293,14 +1293,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
-    /**
-     * The window.ActiveXObject is special in IE
-     * <a href="http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx">
-     * http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx</a>.
-     */
-    @BrowserFeature(IE)
-    JS_WINDOW_ACTIVEXOBJECT_HIDDEN,
-
     /** Changing the opener of a window to something not null and not a window is not valid. */
     @BrowserFeature(IE)
     JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT,

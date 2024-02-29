@@ -234,14 +234,10 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"<template></template>", "<template></template>",
-                       "<template><p></p></template>", "<template id=\"tEmpty\"></template>",
-                       "<template id=\"tText\">HtmlUnit</template>",
-                       "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"},
-            IE = {"<?XML:NAMESPACE PREFIX = \"PUBLIC\" NS = \"URN:COMPONENT\" /><template></template>",
-                  "<template><div></div></template>", "<template id=\"tEmpty\"></template>",
-                  "<template id=\"tText\">HtmlUnit</template>",
-                  "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
+    @Alerts({"<template></template>", "<template></template>",
+             "<template><p></p></template>", "<template id=\"tEmpty\"></template>",
+             "<template id=\"tText\">HtmlUnit</template>",
+             "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
     public void outerHTML() throws Exception {
         final String html =
             "<html>\n"

@@ -316,10 +316,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§index.html#test",
-                       "§§URL§§index.html#", "§§URL§§index.html"},
-            IE = {"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§index.html#test",
-                  "§§URL§§index.html#", "§§URL§§"})
+    @Alerts({"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§index.html#test",
+             "§§URL§§index.html#", "§§URL§§index.html"})
     public void getDefaultValueWithHashAndFileName() throws Exception {
         final String html
             = "<html><head>\n"
@@ -720,9 +718,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             FF = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                   "foo:||||||blabla", "p:||||||", "p:||||||/", "p:||||||/TeMp"},
             FF_ESR = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                      "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"},
-            IE = {"http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                  "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp"})
+                      "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"})
     public void propertiesNonStandardHref() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -809,10 +805,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "§§URL§§", "§§URL§§", "§§URL§§", "http://www.htmlunit.org",
-                       "http://www.htmlunit.org:1234", "https://www.htmlunit.org:1234"},
-            IE = {"undefined", "undefined", "undefined", "undefined", "undefined",
-                  "undefined", "undefined"})
+    @Alerts({"", "§§URL§§", "§§URL§§", "§§URL§§", "http://www.htmlunit.org",
+             "http://www.htmlunit.org:1234", "https://www.htmlunit.org:1234"})
     public void originAttrib() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -847,11 +841,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"-null", "-", "-  \t ", "no-referrer-no-referrer",
-                       "origin-origin", "unsafe-url-unsafe-url", "-unknown"},
-            IE = {"undefined-null", "undefined-", "undefined-  \t ",
-                  "undefined-no-referrer", "undefined-origin",
-                  "undefined-unsafe-url", "undefined-unknown"})
+    @Alerts({"-null", "-", "-  \t ", "no-referrer-no-referrer",
+             "origin-origin", "unsafe-url-unsafe-url", "-unknown"})
     public void referrerPolicy() throws Exception {
         final String html =
                 "<html>\n"
@@ -885,11 +876,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"origin-origin", "-unknown", "no-referrer-no-referrer",
-                       "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"},
-            IE = {"undefined-origin", "unknown-origin", "no-referrer-origin",
-                  "-origin", "NO-reFerrer-origin", "NO-reFerrer-origin",
-                  "NO-reFerrer- ", "NO-reFerrer-unknown"})
+    @Alerts({"origin-origin", "-unknown", "no-referrer-no-referrer",
+             "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"})
     public void setReferrerPolicy() throws Exception {
         final String html =
                 "<html>\n"
@@ -1503,10 +1491,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http:", "http:", "http://§§URL§§/foo.html#O",
-                       "http:", "http://§§URL§§/abc_xyz://localhost/foo.html"},
-            IE = {"http:", "invalid argument",
-                  "http:", "http://§§URL§§/abc_xyz://localhost/foo.html"})
+    @Alerts({"http:", "http:", "http://§§URL§§/foo.html#O",
+             "http:", "http://§§URL§§/abc_xyz://localhost/foo.html"})
     public void readWriteProtocolBroken() throws Exception {
         final String html =
               "<html>\n"
@@ -1578,9 +1564,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             CHROME =  {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
                        "%20%20%20%20", "http://%20%20%20%20:§§URL§§/foo.html#O"},
             EDGE =  {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
-                     "%20%20%20%20", "http://%20%20%20%20:§§URL§§/foo.html#O"},
-            IE =  {"localhost", "", "http://:§§URL§§/foo.html#O",
-                   "%20%20%20%20", "http://%20%20%20%20:§§URL§§/foo.html#O"})
+                     "%20%20%20%20", "http://%20%20%20%20:§§URL§§/foo.html#O"})
     @HtmlUnitNYI(CHROME = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
                            "%20%20%20%20", "http:// :§§URL§§/foo.html#O"},
                 EDGE = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",

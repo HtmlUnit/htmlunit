@@ -88,10 +88,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                   "abc", "", "50", "abc", "abc", "abc", "abc"},
             FF_ESR = {"error.fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
                       "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "", "", "abc",
-                      "abc", "", "50", "abc", "abc", "abc", "abc"},
-            IE = {"abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
-                  "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
-                  "abc", "", "50", "abc", "abc", "abc", "abc"})
+                      "abc", "", "50", "abc", "abc", "abc", "abc"})
     @Test
     public void setValueString() throws Exception {
         testValue("'abc'");
@@ -100,12 +97,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = {"", "", "", "", "", "", "", "", "",
-                       "", "", "", "", "", "", "#000000", "", "", "", "", "",
-                       "", "", "50", "", "", "", ""},
-            IE = {"", "", "", "", "", "", "", "", "",
-                  "", "", "", "", "", "", "", "", "", "", "", "",
-                  "", "", "50", "", "", "", ""})
+    @Alerts({"", "", "", "", "", "", "", "", "",
+             "", "", "", "", "", "", "#000000", "", "", "", "", "",
+             "", "", "50", "", "", "", ""})
     @Test
     public void setValueEmptyString() throws Exception {
         testValue("''");
@@ -125,10 +119,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                   ". ", "", "50", ". ", "", ". ", ""},
             FF_ESR = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
                       ". ", ". ", ". ", ". ", ". ", ". ", "#000000", "", ". ", "", "", ". ",
-                      ". ", "", "50", ". ", "", ". ", ""},
-            IE = {". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
-                  ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ",
-                  ". ", "", "50", ". ", ". ", ". ", ". "})
+                      ". ", "", "50", ". ", "", ". ", ""})
     @Test
     public void setValueBlankString() throws Exception {
         testValue("'  '");
@@ -145,10 +136,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                   "12", "12", "12", "12", "12", "12", "12"},
             FF_ESR = {"error.fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
                       "12", "12", "12", "12", "12", "12", "#000000", "", "12", "", "", "12",
-                      "12", "12", "12", "12", "12", "12", "12"},
-            IE = {"12", "12", "12", "", "12", "", "", "12", "12",
-                  "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12",
-                  "12", "12", "12", "12", "12", "12", "12"})
+                      "12", "12", "12", "12", "12", "12", "12"})
     @Test
     public void setValueNumber() throws Exception {
         testValue("12");
@@ -157,12 +145,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = {"", "null", "", "", "", "", "", "", "",
-                       "", "null", "", "null", "", "", "#000000", "", "", "", "", "",
-                       "", "", "50", "", "", "", ""},
-            IE = {"", "null", "", "", "", "", "", "", "",
-                  "", "null", "", "null", "", "null", "", "", "", "", "", "",
-                  "", "", "50", "", "", "", ""})
+    @Alerts({"", "null", "", "", "", "", "", "", "",
+             "", "null", "", "null", "", "", "#000000", "", "", "", "", "",
+             "", "", "50", "", "", "", ""})
     @Test
     public void setValueNull() throws Exception {
         testValue("null");
@@ -291,13 +276,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                       "password", "radio", "reset", "reset",
                       "submit", "submit", "text", "textarea", "color", "date", "text",
                       "datetime-local", "time", "text", "text", "number", "range",
-                      "search", "email", "tel", "url"},
-            IE = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
-                  "password", "radio", "reset", "reset",
-                  "submit", "submit", "text", "textarea", "text", "text", "text",
-                  "text", "text", "text", "text", "number", "range",
-                  "search", "email", "tel", "url"}
-            )
+                      "search", "email", "tel", "url"})
     public void type() throws Exception {
         testAttribute("type", "", null);
     }
@@ -305,13 +284,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = {"null", "undefined", "null", "[object FileList]", "null", "undefined", "undefined", "null",
-                       "null", "null", "undefined", "null", "undefined", "null", "undefined", "null", "null", "null",
-                       "null", "null", "null", "null", "null", "null", "null", "null", "null", "null"},
-            IE = {"undefined", "undefined", "undefined", "[object FileList]", "undefined", "undefined", "undefined",
-                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
+    @Alerts({"null", "undefined", "null", "[object FileList]", "null", "undefined", "undefined", "null",
+             "null", "null", "undefined", "null", "undefined", "null", "undefined", "null", "null", "null",
+             "null", "null", "null", "null", "null", "null", "null", "null", "null", "null"})
     @Test
     public void files() throws Exception {
         testAttribute("files", "", null);
@@ -332,14 +307,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = {"true", "undefined", "true", "true", "true", "undefined", "undefined",
-                       "true", "true", "true", "undefined", "true", "undefined", "true",
-                       "undefined", "true", "true", "true", "true", "true", "true",
-                       "true", "true", "true", "true", "true", "true", "true"},
-            IE = {"false", "undefined", "true", "false", "false", "undefined", "undefined",
-                  "false", "true", "false", "undefined", "false", "undefined", "false",
-                  "undefined", "false", "false", "false", "false", "false", "false",
-                  "false", "false", "false", "false", "false", "false", "false"})
+    @Alerts({"true", "undefined", "true", "true", "true", "undefined", "undefined",
+             "true", "true", "true", "undefined", "true", "undefined", "true",
+             "undefined", "true", "true", "true", "true", "true", "true",
+             "true", "true", "true", "true", "true", "true", "true"})
     @Test
     public void checkedWithAttribute() throws Exception {
         testAttribute("checked", "checked", null);
@@ -1239,11 +1210,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                     + "password, image, reset, button, file, number, range, search, tel, url, text, text",
                       "text, checkbox, date, datetime-local, text, time, text, color, "
                     + "email, text, submit, radio, hidden, password, "
-                    + "image, reset, button, file, number, range, search, tel, url, text, text"},
-            IE = {"text, checkbox, error, error, error, error, error, error, email, text, submit, radio, hidden, "
-                    + "password, image, reset, button, file, number, range, search, tel, url, error, text",
-                "text, checkbox, text, text, text, text, text, text, email, text, submit, radio, hidden, password, "
-                    + "image, reset, button, file, number, range, search, tel, url, text, text" })
+                    + "image, reset, button, file, number, range, search, tel, url, text, text"})
     public void changeType() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1469,9 +1436,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number"},
-            IE = {"undefined", "undefined", "undefined", "30", "30", "30",
-                  "undefined", "40", "string", "number"})
+    @Alerts({"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number"})
     public void minLength() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -1588,10 +1553,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"text TeXt", "password PassWord", "hidden Hidden",
-                       "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX"},
-            IE = {"text TeXt", "password PassWord", "hidden Hidden",
-                  "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox"})
+    @Alerts({"text TeXt", "password PassWord", "hidden Hidden",
+             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX"})
     public void typeCase() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -128,9 +128,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
                   "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             FF_ESR = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
-                      "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
-            IE = {"[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG",
-                  "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
+                      "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
     public void image() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
@@ -340,9 +338,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF = {"left", "right", "middle", "justify", "bottom", "middle",
                   "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             FF_ESR = {"left", "right", "middle", "justify", "bottom", "middle",
-                      "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
-            IE = {"left", "right", "center", "", "bottom", "middle",
-                  "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
+                      "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""})
     @NotYetImplemented({FF, FF_ESR})
     public void getAlign() throws Exception {
         final String html
@@ -381,10 +377,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
                   "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             FF_ESR = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
-                      "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
-            IE = {"center", "error", "center", "error", "center", "left", "right",
-                  "center", "error", "center", "bottom", "middle", "top", "absBottom",
-                  "absMiddle", "baseline", "textTop"})
+                      "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"})
     @NotYetImplemented({FF, FF_ESR})
     public void setAlign() throws Exception {
         final String html

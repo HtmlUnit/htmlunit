@@ -1408,10 +1408,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false-null", "true-true", "false-null",
-                       "false-null", "true-true", "false-null"},
-            IE = {"false-null", "true-true", "true-",
-                  "false-null", "true-true", "false-null"})
+    @Alerts({"false-null", "true-true", "false-null",
+             "false-null", "true-true", "false-null"})
     public void createOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

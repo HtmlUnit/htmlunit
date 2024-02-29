@@ -339,11 +339,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded"},
-            IE = {"exception", "application/x-www-form-urlencoded",
-                  "application/x-www-form-urlencoded"})
+    @Alerts({"application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded"})
     public void jsDefaultEnctype() throws Exception {
         jsEnctype(null);
         jsEncoding(null);
@@ -353,11 +351,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded"},
-            IE = {"exception", "application/x-www-form-urlencoded",
-                  "application/x-www-form-urlencoded"})
+    @Alerts({"application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded"})
     public void jsEmptyEnctype() throws Exception {
         jsEnctype("");
         jsEncoding("");
@@ -367,11 +363,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded"},
-            IE = {"exception", "application/x-www-form-urlencoded",
-                  "application/x-www-form-urlencoded"})
+    @Alerts({"application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded"})
     public void jsBlankEnctype() throws Exception {
         jsEnctype(" ");
         jsEncoding(" ");
@@ -381,11 +375,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded"},
-            IE = {"exception", "application/x-www-form-urlencoded",
-                  "application/x-www-form-urlencoded"})
+    @Alerts({"application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded"})
     public void jsUnknownEnctype() throws Exception {
         jsEnctype("unknown");
         jsEncoding("unknown");
@@ -427,11 +419,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded"},
-            IE = {"exception", "application/x-www-form-urlencoded",
-                  "application/x-www-form-urlencoded"})
+    @Alerts({"application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded"})
     public void jsXmlEnctype() throws Exception {
         jsEnctype("text/xml");
         jsEncoding("text/xml");
@@ -441,11 +431,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded",
-                       "application/x-www-form-urlencoded"},
-            IE = {"exception", "application/x-www-form-urlencoded",
-                  "application/x-www-form-urlencoded"})
+    @Alerts({"application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded"})
     public void jsJsonEnctype() throws Exception {
         jsEnctype("application/json");
         jsEncoding("application/json");
@@ -2067,12 +2055,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLInputElement]", "undefined",
-                       "[object HTMLInputElement]", "[object HTMLInputElement]",
-                       "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]"},
-            IE = {"[object HTMLInputElement]", "undefined",
-                  "undefined", "[object HTMLInputElement]",
-                  "undefined", "undefined", "[object HTMLInputElement]"})
+    @Alerts({"[object HTMLInputElement]", "undefined",
+             "[object HTMLInputElement]", "[object HTMLInputElement]",
+             "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]"})
     public void accessByNameAfterNameChange() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -2180,12 +2165,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"type: submit", "submitter: [object HTMLInputElement]",
-                       "srcElement null: false", "srcElement==form: true",
-                       "target null: false", "target==form: true"},
-            IE = {"type: submit", "submitter: undefined",
-                  "srcElement null: false", "srcElement==form: true",
-                  "target null: false", "target==form: true"})
+    @Alerts({"type: submit", "submitter: [object HTMLInputElement]",
+             "srcElement null: false", "srcElement==form: true",
+             "target null: false", "target==form: true"})
     public void onSubmitEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
