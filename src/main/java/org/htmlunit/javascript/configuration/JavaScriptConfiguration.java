@@ -103,14 +103,6 @@ import org.htmlunit.javascript.host.canvas.WebGLTexture;
 import org.htmlunit.javascript.host.canvas.WebGLTransformFeedback;
 import org.htmlunit.javascript.host.canvas.WebGLUniformLocation;
 import org.htmlunit.javascript.host.canvas.WebGLVertexArrayObject;
-import org.htmlunit.javascript.host.canvas.ext.ANGLE_instanced_arrays;
-import org.htmlunit.javascript.host.canvas.ext.EXT_texture_filter_anisotropic;
-import org.htmlunit.javascript.host.canvas.ext.OES_element_index_uint;
-import org.htmlunit.javascript.host.canvas.ext.OES_standard_derivatives;
-import org.htmlunit.javascript.host.canvas.ext.OES_texture_float;
-import org.htmlunit.javascript.host.canvas.ext.OES_texture_float_linear;
-import org.htmlunit.javascript.host.canvas.ext.WEBGL_compressed_texture_s3tc;
-import org.htmlunit.javascript.host.canvas.ext.WEBGL_debug_renderer_info;
 import org.htmlunit.javascript.host.crypto.Crypto;
 import org.htmlunit.javascript.host.crypto.CryptoKey;
 import org.htmlunit.javascript.host.crypto.SubtleCrypto;
@@ -481,7 +473,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     @SuppressWarnings("unchecked")
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
         AbstractList.class, AbstractRange.class,
-        ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
+        ActiveXObject.class, AnalyserNode.class,
         Animation.class, AnimationEvent.class,
         ApplicationCache.class,
         Atomics.class,
@@ -514,7 +506,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DOMSettableTokenList.class, DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
         DragEvent.class, DynamicsCompressorNode.class,
         Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventSource.class,
-        EventTarget.class, EXT_texture_filter_anisotropic.class, External.class, FederatedCredential.class,
+        EventTarget.class, External.class, FederatedCredential.class,
         File.class, FileList.class, FileReader.class,
         FileSystem.class, FileSystemDirectoryEntry.class, FileSystemDirectoryReader.class,
         FileSystemEntry.class, FileSystemFileEntry.class,
@@ -573,8 +565,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class,
         Namespace.class, NamespaceCollection.class,
         Navigator.class, NetworkInformation.class, Node.class, NodeFilter.class, NodeIterator.class,
-        NodeList.class, Notification.class, OES_element_index_uint.class, OES_standard_derivatives.class,
-        OES_texture_float.class, OES_texture_float_linear.class, OfflineAudioCompletionEvent.class,
+        NodeList.class, Notification.class,
+        OfflineAudioCompletionEvent.class,
         OfflineAudioContext.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
         PasswordCredential.class,
         Path2D.class,
@@ -646,7 +638,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         URL.class,
         URLSearchParams.class, ValidityState.class, VideoPlaybackQuality.class,
         VTTCue.class, WaveShaperNode.class, WebGL2RenderingContext.class,
-        WEBGL_compressed_texture_s3tc.class, WEBGL_debug_renderer_info.class, WebGLActiveInfo.class, WebGLBuffer.class,
+        WebGLActiveInfo.class, WebGLBuffer.class,
         WebGLContextEvent.class, WebGLFramebuffer.class, WebGLProgram.class,
         WebGLQuery.class,
         WebGLRenderbuffer.class,
