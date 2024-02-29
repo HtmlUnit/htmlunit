@@ -1463,17 +1463,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     WINDOW_EXECUTE_EVENTS,
 
-    /** XMLHttpRequest.getAllResponseHeaders() has a trailing separator. */
-    @BrowserFeature(IE)
-    XHR_ALL_RESPONSE_HEADERS_APPEND_SEPARATOR,
-
     /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
     @BrowserFeature({FF, FF_ESR, IE})
     XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF,
-
-    /** XMLHttpRequest triggers the opened event at the beginning of the send method again. */
-    @BrowserFeature(IE)
-    XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
 
     /**
      * Indicates that the Browser handles async and sync network errors the same way.
@@ -1481,21 +1473,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     XHR_HANDLE_SYNC_NETWORK_ERRORS,
 
-    /** ProgressEvent.lengthComputable is true. */
-    @BrowserFeature(IE)
-    XHR_LENGTH_COMPUTABLE,
-
     /** XMLHttpRequest triggers the load events also if the abort was signaled. */
     @BrowserFeature({FF, FF_ESR})
     XHR_LOAD_ALWAYS_AFTER_DONE,
-
-    /** XMLHttpRequest triggers the load start event async. */
-    @BrowserFeature(IE)
-    XHR_LOAD_START_ASYNC,
-
-    /** A cross origin request to {@code about:blank} is not allowed. */
-    @BrowserFeature(IE)
-    XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 
     /** Indicates if an empty url is allowed as url param for the open method. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -1509,14 +1489,6 @@ public enum BrowserVersionFeatures {
     /** If state unsent the response text is empty even if the response type is wrong. */
     @BrowserFeature({FF, FF_ESR})
     XHR_RESPONSE_TEXT_EMPTY_UNSENT,
-
-    /** Setting the responseType throws in state unsent. */
-    @BrowserFeature(IE)
-    XHR_RESPONSE_TYPE_THROWS_UNSENT,
-
-    /** Indicates if the XMLHttpRequest.send() method will send the mimeType of the blob as Content-Type header. */
-    @BrowserFeature(IE)
-    XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE,
 
     /** Indicates if the XMLHttpRequest.send() method will throw if aborted. */
     @BrowserFeature({CHROME, EDGE})

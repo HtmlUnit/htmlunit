@@ -15,18 +15,12 @@
 package org.htmlunit.javascript.host.xml;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_APPEND_SEPARATOR;
 import static org.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
-import static org.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static org.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
-import static org.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
 import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
-import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_START_ASYNC;
-import static org.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static org.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static org.htmlunit.BrowserVersionFeatures.XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC;
 import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TEXT_EMPTY_UNSENT;
-import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TYPE_THROWS_UNSENT;
 import static org.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
 import static org.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -254,17 +248,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         else {
             final ProgressEvent progressEvent = new ProgressEvent(this, eventName);
 
-            final boolean lengthComputable = getBrowserVersion().hasFeature(XHR_LENGTH_COMPUTABLE);
-            if (lengthComputable) {
-                progressEvent.setLengthComputable(true);
-            }
-
             if (webResponse_ != null) {
                 final long contentLength = webResponse_.getContentLength();
                 progressEvent.setLoaded(contentLength);
-                if (lengthComputable) {
-                    progressEvent.setTotal(contentLength);
-                }
             }
             event = progressEvent;
         }
@@ -306,19 +292,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             throw JavaScriptEngine.reportRuntimeError("InvalidStateError");
         }
 
-        if (state_ == UNSENT && getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT)) {
-            throw JavaScriptEngine.reportRuntimeError("InvalidStateError");
-        }
-
         if (RESPONSE_TYPE_DEFAULT.equals(responseType)
                 || RESPONSE_TYPE_ARRAYBUFFER.equals(responseType)
                 || RESPONSE_TYPE_BLOB.equals(responseType)
                 || RESPONSE_TYPE_DOCUMENT.equals(responseType)
-                || (RESPONSE_TYPE_JSON.equals(responseType)
-                        && !getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT))
+                || RESPONSE_TYPE_JSON.equals(responseType)
                 || RESPONSE_TYPE_TEXT.equals(responseType)) {
 
-            if (state_ == OPENED && !async_ && !getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT)) {
+            if (state_ == OPENED && !async_) {
                 throw JavaScriptEngine.reportRuntimeError(
                         "InvalidAccessError: synchronous XMLHttpRequests do not support responseType");
             }
@@ -636,12 +617,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
                 builder.append('\n');
             }
-            if (getBrowserVersion().hasFeature(XHR_ALL_RESPONSE_HEADERS_APPEND_SEPARATOR)) {
-                if (!getBrowserVersion().hasFeature(XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF)) {
-                    builder.append('\r');
-                }
-                builder.append('\n');
-            }
             return builder.toString();
         }
 
@@ -722,8 +697,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             final URL pageRequestUrl = containingPage.getUrl();
             isSameOrigin_ = isSameOrigin(pageRequestUrl, fullUrl);
-            final boolean alwaysAddOrigin = !getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
-                                            && HttpMethod.GET != request.getHttpMethod()
+            final boolean alwaysAddOrigin = HttpMethod.GET != request.getHttpMethod()
                                             && HttpMethod.PATCH != request.getHttpMethod()
                                             && HttpMethod.HEAD != request.getHttpMethod();
             if (alwaysAddOrigin || !isSameOrigin_) {
@@ -764,8 +738,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     private boolean isAllowCrossDomainsFor(final URL newUrl) {
-        return !(getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
-                    && UrlUtils.ABOUT.equals(newUrl.getProtocol()));
+        return UrlUtils.ABOUT.equals(newUrl.getProtocol());
     }
 
     private static boolean isSameOrigin(final URL originUrl, final URL newUrl) {
@@ -849,14 +822,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             jobID_ = ww.getJobManager().addJob(job, page);
 
-            if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
-                // quite strange but IE seems to fire state loading twice
-                // in async mode (at least with HTML of the unit tests)
-                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-            }
-            if (!getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
-                fireJavascriptEvent(Event.TYPE_LOAD_START);
-            }
+            fireJavascriptEvent(Event.TYPE_LOAD_START);
         }
     }
 
@@ -948,10 +914,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     void doSend() {
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (async_ && browserVersion.hasFeature(XHR_LOAD_START_ASYNC)) {
-            fireJavascriptEvent(Event.TYPE_LOAD_START);
-        }
-
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         boolean preflighted = false;
         try {
@@ -1101,18 +1063,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             if (async_) {
-                if (e instanceof SocketTimeoutException
-                        && browserVersion.hasFeature(XHR_LOAD_START_ASYNC)) {
-                    try {
-                        webResponse_ = wc.loadWebResponse(WebRequest.newAboutBlankRequest());
-                    }
-                    catch (final IOException eIgnored) {
-                        // ignore
-                    }
-                    setState(HEADERS_RECEIVED);
-                    fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-                }
-
                 if (!preflighted
                         && HttpClientConverter.isNoHttpResponseException(e)
                         && browserVersion.hasFeature(XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC)) {

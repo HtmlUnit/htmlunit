@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.file;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE;
-import static org.htmlunit.BrowserVersionFeatures.XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -323,8 +322,7 @@ public class Blob extends HtmlUnitScriptable {
         webRequest.setRequestBody(new String(getBytes(), UTF_8));
 
         final boolean contentTypeDefinedByCaller = webRequest.getAdditionalHeader(HttpHeader.CONTENT_TYPE) != null;
-        if (!contentTypeDefinedByCaller
-                && !getBrowserVersion().hasFeature(XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE)) {
+        if (!contentTypeDefinedByCaller) {
             final String mimeType = getType();
             if (StringUtils.isNotBlank(mimeType)) {
                 webRequest.setAdditionalHeader(HttpHeader.CONTENT_TYPE, mimeType);
