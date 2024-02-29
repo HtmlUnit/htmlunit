@@ -724,7 +724,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"prototype found", ""
+    @Alerts({"prototype found", ""
                     + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
                     + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
                     + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
@@ -1178,8 +1178,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
-                       "function Element() { [native code] }"})
+    @Alerts({"function Element() { [native code] }", "[object Element]",
+             "function Element() { [native code] }"})
     public void prototypConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1209,8 +1209,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
-                       "function Element() { [native code] }"})
+    @Alerts({"function Element() { [native code] }", "[object Element]",
+             "function Element() { [native code] }"})
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -1364,7 +1364,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"SyntaxError", "done"})
+    @Alerts({"SyntaxError", "done"})
     public void matchesInvalidSelector() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -1429,7 +1429,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"div-02", "div-03", "div-01", "article-01", "null"})
+    @Alerts({"div-02", "div-03", "div-01", "article-01", "null"})
     public void closest() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -1465,7 +1465,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "true", "true", "false", "false"})
+    @Alerts({"false", "true", "true", "true", "false", "false"})
     public void toggleAttribute() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -1510,7 +1510,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "<div id=\"div1\"></div>"})
+    @Alerts({"1", "1", "<div id=\"div1\"></div>"})
     public void after_noArgs_empty() throws Exception {
         modifySiblings("after", "after();", "");
     }
@@ -1519,7 +1519,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#HtmlUnit"})
+    @Alerts({"1", "1", "#HtmlUnit"})
     public void after_noArgs_notEmpty() throws Exception {
         modifySiblings("after", "after();", "HtmlUnit");
     }
@@ -1528,8 +1528,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "<div id=\"div1\"></div>", "#HeHo",
-                       "childList", "1", "0", "[object HTMLDivElement]", "null"})
+    @Alerts({"1", "2", "<div id=\"div1\"></div>", "#HeHo",
+             "childList", "1", "0", "[object HTMLDivElement]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "2", "<div id=\"div1\"></div>", "#HeHo"},
             EDGE = {"1", "2", "<div id=\"div1\"></div>", "#HeHo"},
             FF = {"1", "2", "<div id=\"div1\"></div>", "#HeHo"},
@@ -1542,8 +1542,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "#HeHo",
-                       "childList", "1", "0", "[object HTMLDivElement]", "null"})
+    @Alerts({"1", "2", "#HtmlUnit", "#HeHo",
+             "childList", "1", "0", "[object HTMLDivElement]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "#HeHo"},
             EDGE = {"1", "2", "#HtmlUnit", "#HeHo"},
             FF = {"1", "2", "#HtmlUnit", "#HeHo"},
@@ -1556,8 +1556,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "<div id=\"div1\"></div>", "<p></p>",
-                       "childList", "1", "0", "[object HTMLDivElement]", "null"})
+    @Alerts({"1", "2", "<div id=\"div1\"></div>", "<p></p>",
+             "childList", "1", "0", "[object HTMLDivElement]", "null"})
     @HtmlUnitNYI(CHROME =  {"1", "2", "<div id=\"div1\"></div>", "<p></p>"},
             EDGE = {"1", "2", "<div id=\"div1\"></div>", "<p></p>"},
             FF = {"1", "2", "<div id=\"div1\"></div>", "<p></p>"},
@@ -1570,8 +1570,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "<p></p>",
-                       "childList", "1", "0", "[object HTMLDivElement]", "null"})
+    @Alerts({"1", "2", "#HtmlUnit", "<p></p>",
+             "childList", "1", "0", "[object HTMLDivElement]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "<p></p>"},
             EDGE = {"1", "2", "#HtmlUnit", "<p></p>"},
             FF = {"1", "2", "#HtmlUnit", "<p></p>"},
@@ -1584,8 +1584,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]",
-                       "childList", "1", "0", "[object HTMLDivElement]", "null"})
+    @Alerts({"1", "2", "<div id=\"div1\"></div>", "#[object Object]",
+             "childList", "1", "0", "[object HTMLDivElement]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]"},
             EDGE = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]"},
             FF = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]"},
@@ -1598,8 +1598,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "#[object Object]",
-                       "childList", "1", "0", "[object HTMLDivElement]", "null"})
+    @Alerts({"1", "2", "#HtmlUnit", "#[object Object]",
+             "childList", "1", "0", "[object HTMLDivElement]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "#[object Object]"},
             EDGE = {"1", "2", "#HtmlUnit", "#[object Object]"},
             FF = {"1", "2", "#HtmlUnit", "#[object Object]"},
@@ -1612,8 +1612,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]",
-                       "childList", "3", "0", "[object HTMLDivElement]", "null"})
+    @Alerts({"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]",
+             "childList", "3", "0", "[object HTMLDivElement]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
             EDGE = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
             FF = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
@@ -1626,7 +1626,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "<div id=\"div1\"></div>"})
+    @Alerts({"1", "1", "<div id=\"div1\"></div>"})
     public void before_noArgs_empty() throws Exception {
         modifySiblings("before", "before();", "");
     }
@@ -1635,7 +1635,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#HtmlUnit"})
+    @Alerts({"1", "1", "#HtmlUnit"})
     public void before_noArgs_notEmpty() throws Exception {
         modifySiblings("before", "before();", "HtmlUnit");
     }
@@ -1644,8 +1644,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>",
-                       "childList", "1", "0", "null", "[object HTMLDivElement]"})
+    @Alerts({"1", "2",  "#HeHo", "<div id=\"div1\"></div>",
+             "childList", "1", "0", "null", "[object HTMLDivElement]"})
     @HtmlUnitNYI(CHROME = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>"},
             EDGE = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>"},
             FF = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>"},
@@ -1658,8 +1658,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#HeHo", "#HtmlUnit",
-                       "childList", "1", "0", "null", "[object HTMLDivElement]"})
+    @Alerts({"1", "2", "#HeHo", "#HtmlUnit",
+             "childList", "1", "0", "null", "[object HTMLDivElement]"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#HeHo", "#HtmlUnit"},
             EDGE = {"1", "2", "#HeHo", "#HtmlUnit"},
             FF = {"1", "2", "#HeHo", "#HtmlUnit"},
@@ -1672,8 +1672,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>",
-                       "childList", "1", "0", "null", "[object HTMLDivElement]"})
+    @Alerts({"1", "2",  "<p></p>", "<div id=\"div1\"></div>",
+             "childList", "1", "0", "null", "[object HTMLDivElement]"})
     @HtmlUnitNYI(CHROME = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>"},
             EDGE = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>"},
             FF = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>"},
@@ -1686,8 +1686,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "<p></p>", "#HtmlUnit",
-                       "childList", "1", "0", "null", "[object HTMLDivElement]"})
+    @Alerts({"1", "2", "<p></p>", "#HtmlUnit",
+             "childList", "1", "0", "null", "[object HTMLDivElement]"})
     @HtmlUnitNYI(CHROME = {"1", "2", "<p></p>", "#HtmlUnit"},
             EDGE = {"1", "2", "<p></p>", "#HtmlUnit"},
             FF = {"1", "2", "<p></p>", "#HtmlUnit"},
@@ -1700,8 +1700,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>",
-                       "childList", "1", "0", "null", "[object HTMLDivElement]"})
+    @Alerts({"1", "2", "#[object Object]", "<div id=\"div1\"></div>",
+             "childList", "1", "0", "null", "[object HTMLDivElement]"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>"},
             EDGE = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>"},
             FF = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>"},
@@ -1714,8 +1714,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#[object Object]", "#HtmlUnit",
-                       "childList", "1", "0", "null", "[object HTMLDivElement]"})
+    @Alerts({"1", "2", "#[object Object]", "#HtmlUnit",
+             "childList", "1", "0", "null", "[object HTMLDivElement]"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#[object Object]", "#HtmlUnit"},
             EDGE = {"1", "2", "#[object Object]", "#HtmlUnit"},
             FF = {"1", "2", "#[object Object]", "#HtmlUnit"},
@@ -1728,8 +1728,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit",
-                       "childList", "3", "0", "null", "[object HTMLDivElement]"})
+    @Alerts({"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit",
+             "childList", "3", "0", "null", "[object HTMLDivElement]"})
     @HtmlUnitNYI(CHROME = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
             EDGE = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
             FF = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
@@ -1742,8 +1742,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0",
-                       "childList", "0", "1", "null", "null"})
+    @Alerts({"1", "0",
+             "childList", "0", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "0"},
             EDGE = {"1", "0"},
             FF = {"1", "0"},
@@ -1756,8 +1756,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#HeHo",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "#HeHo",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "#HeHo"},
             EDGE = {"1", "1", "#HeHo"},
             FF = {"1", "1", "#HeHo"},
@@ -1770,8 +1770,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#HeHo",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "#HeHo",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "#HeHo"},
             EDGE = {"1", "1", "#HeHo"},
             FF = {"1", "1", "#HeHo"},
@@ -1784,8 +1784,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "<p></p>",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "<p></p>",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "<p></p>"},
             EDGE = {"1", "1", "<p></p>"},
             FF = {"1", "1", "<p></p>"},
@@ -1798,8 +1798,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "<p></p>",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "<p></p>",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "<p></p>"},
             EDGE = {"1", "1", "<p></p>"},
             FF = {"1", "1", "<p></p>"},
@@ -1812,8 +1812,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#[object Object]",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "#[object Object]",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "#[object Object]"},
             EDGE = {"1", "1", "#[object Object]"},
             FF = {"1", "1", "#[object Object]"},
@@ -1826,8 +1826,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#[object Object]",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "#[object Object]",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "#[object Object]"},
             EDGE = {"1", "1", "#[object Object]"},
             FF = {"1", "1", "#[object Object]"},
@@ -1840,8 +1840,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]",
-                       "childList", "4", "1", "null", "null"})
+    @Alerts({"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]",
+             "childList", "4", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
             EDGE = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
             FF = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
@@ -1854,8 +1854,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "3", "<p></p>", "#abcd", "<div></div>",
-                       "childList", "3", "1", "null", "null"})
+    @Alerts({"1", "3", "<p></p>", "#abcd", "<div></div>",
+             "childList", "3", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "3", "<p></p>", "#abcd", "<div></div>"},
             EDGE = {"1", "3", "<p></p>", "#abcd", "<div></div>"},
             FF = {"1", "3", "<p></p>", "#abcd", "<div></div>"},
@@ -1922,7 +1922,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0"})
+    @Alerts({"0", "0"})
     public void append_noArgs_empty() throws Exception {
         modifyChildren("append", "append();", "");
     }
@@ -1931,7 +1931,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#HtmlUnit"})
+    @Alerts({"1", "1", "#HtmlUnit"})
     public void append_noArgs_notEmpty() throws Exception {
         modifyChildren("append", "append();", "HtmlUnit");
     }
@@ -1940,8 +1940,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "#HeHo",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "#HeHo",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "#HeHo"},
             EDGE = {"0", "1", "#HeHo"},
             FF = {"0", "1", "#HeHo"},
@@ -1954,8 +1954,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "#HeHo",
-                       "childList", "1", "0", "[object Text]", "null"})
+    @Alerts({"1", "2", "#HtmlUnit", "#HeHo",
+             "childList", "1", "0", "[object Text]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "#HeHo"},
             EDGE = {"1", "2", "#HtmlUnit", "#HeHo"},
             FF = {"1", "2", "#HtmlUnit", "#HeHo"},
@@ -1968,8 +1968,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "<p></p>",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "<p></p>",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "<p></p>"},
             EDGE = {"0", "1", "<p></p>"},
             FF = {"0", "1", "<p></p>"},
@@ -1982,8 +1982,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "<p></p>",
-                       "childList", "1", "0", "[object Text]", "null"})
+    @Alerts({"1", "2", "#HtmlUnit", "<p></p>",
+             "childList", "1", "0", "[object Text]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "<p></p>"},
             EDGE = {"1", "2", "#HtmlUnit", "<p></p>"},
             FF = {"1", "2", "#HtmlUnit", "<p></p>"},
@@ -1996,8 +1996,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "#[object Object]",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "#[object Object]",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "#[object Object]"},
             EDGE = {"0", "1", "#[object Object]"},
             FF = {"0", "1", "#[object Object]"},
@@ -2010,8 +2010,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "#[object Object]",
-                       "childList", "1", "0", "[object Text]", "null"})
+    @Alerts({"1", "2", "#HtmlUnit", "#[object Object]",
+             "childList", "1", "0", "[object Text]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "#[object Object]"},
             EDGE = {"1", "2", "#HtmlUnit", "#[object Object]"},
             FF = {"1", "2", "#HtmlUnit", "#[object Object]"},
@@ -2024,8 +2024,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]",
-                       "childList", "3", "0", "[object Text]", "null"})
+    @Alerts({"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]",
+             "childList", "3", "0", "[object Text]", "null"})
     @HtmlUnitNYI(CHROME = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
             EDGE = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
             FF = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
@@ -2038,7 +2038,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0"})
+    @Alerts({"0", "0"})
     public void prepend_noArgs_empty() throws Exception {
         modifyChildren("prepend", "prepend();", "");
     }
@@ -2047,7 +2047,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#HtmlUnit"})
+    @Alerts({"1", "1", "#HtmlUnit"})
     public void prepend_noArgs_notEmpty() throws Exception {
         modifyChildren("prepend", "prepend();", "HtmlUnit");
     }
@@ -2056,8 +2056,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "#HeHo",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "#HeHo",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "#HeHo"},
             EDGE = {"0", "1", "#HeHo"},
             FF = {"0", "1", "#HeHo"},
@@ -2070,8 +2070,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#HeHo", "#HtmlUnit",
-                       "childList", "1", "0", "null", "[object Text]"})
+    @Alerts({"1", "2", "#HeHo", "#HtmlUnit",
+             "childList", "1", "0", "null", "[object Text]"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#HeHo", "#HtmlUnit"},
             EDGE = {"1", "2", "#HeHo", "#HtmlUnit"},
             FF = {"1", "2", "#HeHo", "#HtmlUnit"},
@@ -2084,8 +2084,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "<p></p>",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "<p></p>",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "<p></p>"},
             EDGE = {"0", "1", "<p></p>"},
             FF = {"0", "1", "<p></p>"},
@@ -2098,8 +2098,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "<p></p>", "#HtmlUnit",
-                       "childList", "1", "0", "null", "[object Text]"})
+    @Alerts({"1", "2", "<p></p>", "#HtmlUnit",
+             "childList", "1", "0", "null", "[object Text]"})
     @HtmlUnitNYI(CHROME = {"1", "2", "<p></p>", "#HtmlUnit"},
             EDGE = {"1", "2", "<p></p>", "#HtmlUnit"},
             FF = {"1", "2", "<p></p>", "#HtmlUnit"},
@@ -2112,8 +2112,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "#[object Object]",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "#[object Object]",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "#[object Object]"},
             EDGE = {"0", "1", "#[object Object]"},
             FF = {"0", "1", "#[object Object]"},
@@ -2126,8 +2126,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "2", "#[object Object]", "#HtmlUnit",
-                       "childList", "1", "0", "null", "[object Text]"})
+    @Alerts({"1", "2", "#[object Object]", "#HtmlUnit",
+             "childList", "1", "0", "null", "[object Text]"})
     @HtmlUnitNYI(CHROME = {"1", "2", "#[object Object]", "#HtmlUnit"},
             EDGE = {"1", "2", "#[object Object]", "#HtmlUnit"},
             FF = {"1", "2", "#[object Object]", "#HtmlUnit"},
@@ -2140,8 +2140,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit",
-                       "childList", "3", "0", "null", "[object Text]"})
+    @Alerts({"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit",
+             "childList", "3", "0", "null", "[object Text]"})
     @HtmlUnitNYI(CHROME = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
             EDGE = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
             FF = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
@@ -2154,7 +2154,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0"})
+    @Alerts({"0", "0"})
     public void replaceChildren_noArgs_empty() throws Exception {
         modifyChildren("replaceChildren", "replaceChildren();", "");
     }
@@ -2163,8 +2163,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#HeHo",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "#HeHo",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "#HeHo"},
             EDGE = {"1", "1", "#HeHo"},
             FF = {"1", "1", "#HeHo"},
@@ -2177,8 +2177,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "#HeHo",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "#HeHo",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "#HeHo"},
             EDGE = {"0", "1", "#HeHo"},
             FF = {"0", "1", "#HeHo"},
@@ -2191,8 +2191,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "<p></p>",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "<p></p>",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "<p></p>"},
             EDGE = {"1", "1", "<p></p>"},
             FF = {"1", "1", "<p></p>"},
@@ -2205,8 +2205,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "<p></p>",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "<p></p>",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "<p></p>"},
             EDGE = {"0", "1", "<p></p>"},
             FF = {"0", "1", "<p></p>"},
@@ -2219,8 +2219,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "1", "#[object Object]",
-                       "childList", "1", "1", "null", "null"})
+    @Alerts({"1", "1", "#[object Object]",
+             "childList", "1", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "1", "#[object Object]"},
             EDGE = {"1", "1", "#[object Object]"},
             FF = {"1", "1", "#[object Object]"},
@@ -2233,8 +2233,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "#[object Object]",
-                       "childList", "1", "0", "null", "null"})
+    @Alerts({"0", "1", "#[object Object]",
+             "childList", "1", "0", "null", "null"})
     @HtmlUnitNYI(CHROME = {"0", "1", "#[object Object]"},
             EDGE = {"0", "1", "#[object Object]"},
             FF = {"0", "1", "#[object Object]"},
@@ -2247,8 +2247,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]",
-                       "childList", "4", "1", "null", "null"})
+    @Alerts({"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]",
+             "childList", "4", "1", "null", "null"})
     @HtmlUnitNYI(CHROME = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
             EDGE = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
             FF = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
@@ -2261,8 +2261,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "3", "<p></p>", "#abcd", "<div></div>",
-                       "childList", "3", "2", "null", "null"})
+    @Alerts({"2", "3", "<p></p>", "#abcd", "<div></div>",
+             "childList", "3", "2", "null", "null"})
     @HtmlUnitNYI(CHROME = {"2", "3", "<p></p>", "#abcd", "<div></div>"},
             EDGE = {"2", "3", "<p></p>", "#abcd", "<div></div>"},
             FF = {"2", "3", "<p></p>", "#abcd", "<div></div>"},
@@ -2275,8 +2275,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"4", "3", "<p></p>", "#abcd", "<div></div>",
-                       "childList", "3", "4", "null", "null"})
+    @Alerts({"4", "3", "<p></p>", "#abcd", "<div></div>",
+             "childList", "3", "4", "null", "null"})
     @HtmlUnitNYI(CHROME = {"4", "3", "<p></p>", "#abcd", "<div></div>"},
             EDGE = {"4", "3", "<p></p>", "#abcd", "<div></div>"},
             FF = {"4", "3", "<p></p>", "#abcd", "<div></div>"},

@@ -44,8 +44,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "false", "null", "true", "",
-                       "true", "", "true", "TrUE", "false", "null"})
+    @Alerts({"false", "null", "true", "", "false", "null", "true", "",
+             "true", "", "true", "TrUE", "false", "null"})
     public void open() throws Exception {
         final String html =
             "<html>\n"
@@ -104,7 +104,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "false", "null", "true", "", "true", "blah", "false", "null"})
+    @Alerts({"false", "null", "false", "null", "true", "", "true", "blah", "false", "null"})
     public void openString() throws Exception {
         final String html =
             "<html>\n"
@@ -155,7 +155,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""})
+    @Alerts({"false", "null", "true", "", "true", ""})
     public void show() throws Exception {
         final String html =
             "<html>\n"
@@ -198,7 +198,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "", "true", ""})
+    @Alerts({"true", "", "true", ""})
     public void showAlreadyOpend() throws Exception {
         final String html =
             "<html>\n"
@@ -237,7 +237,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""})
+    @Alerts({"false", "null", "true", "", "true", ""})
     public void showModal() throws Exception {
         final String html =
             "<html>\n"
@@ -282,7 +282,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "", "InvalidStateError", "true", ""})
+    @Alerts({"true", "", "InvalidStateError", "true", ""})
     public void showModalAlreadyOpend() throws Exception {
         final String html =
             "<html>\n"
@@ -323,7 +323,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""})
+    @Alerts({"false", "null", "true", "", "true", ""})
     public void showAfterShow() throws Exception {
         final String html =
             "<html>\n"
@@ -368,7 +368,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "InvalidStateError", "true", ""})
+    @Alerts({"false", "null", "true", "", "InvalidStateError", "true", ""})
     public void showAfterShowModal() throws Exception {
         final String html =
             "<html>\n"
@@ -413,7 +413,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "InvalidStateError", "true", ""})
+    @Alerts({"false", "null", "true", "", "InvalidStateError", "true", ""})
     public void showModalAfterShow() throws Exception {
         final String html =
             "<html>\n"
@@ -458,7 +458,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""})
+    @Alerts({"false", "null", "true", "", "true", ""})
     public void showModalAfterShowModal() throws Exception {
         final String html =
             "<html>\n"
@@ -503,9 +503,9 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
-                       "false", "null", "", "false", "null", "",
-                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
+    @Alerts({"false", "null", "", "true", "", "",
+             "false", "null", "", "false", "null", "",
+             "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     public void close() throws Exception {
         final String html =
             "<html>\n"
@@ -556,8 +556,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
-                       "false", "null", "", "false", "null", "", "closed"})
+    @Alerts({"false", "null", "", "true", "", "",
+             "false", "null", "", "false", "null", "", "closed"})
     public void closeOnclose() throws Exception {
         final String html =
             "<html>\n"
@@ -604,9 +604,9 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
-                       "false", "null", "Html", "false", "null", "Html",
-                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
+    @Alerts({"false", "null", "", "true", "", "",
+             "false", "null", "Html", "false", "null", "Html",
+             "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     public void closeReturnValue() throws Exception {
         final String html =
             "<html>\n"
@@ -657,8 +657,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "", "1", "true", "1", "2", "false", "3", "4",
-                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
+    @Alerts({"false", "", "1", "true", "1", "2", "false", "3", "4",
+             "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     public void returnValue() throws Exception {
         final String html =
             "<html>\n"
@@ -710,7 +710,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "string ", "string null", "string undefined", "string 4", "string [object Object]"})
+    @Alerts({"false", "string ", "string null", "string undefined", "string 4", "string [object Object]"})
     public void returnValueSpecial() throws Exception {
         final String html =
             "<html>\n"
@@ -757,8 +757,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "false",
-                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
+    @Alerts({"false", "true", "false",
+             "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     @HtmlUnitNYI(CHROME = {"false", "true",
                            "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
                            "false"},
@@ -813,8 +813,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "false",
-                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
+    @Alerts({"false", "true", "false",
+             "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     @HtmlUnitNYI(CHROME = {"false", "true",
                            "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
                            "false"},
@@ -869,7 +869,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "true"})
+    @Alerts({"false", "true", "true"})
     public void formGet() throws Exception {
         final String html =
             "<html>\n"
@@ -919,7 +919,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "true"})
+    @Alerts({"false", "true", "true"})
     public void formOutsideDialog() throws Exception {
         final String html =
             "<html>\n"

@@ -44,7 +44,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false", "false"})
+    @Alerts({"[object GamepadEvent]", "gamepad", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -92,7 +92,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "42", "false", "false", "false"})
+    @Alerts({"[object GamepadEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -114,7 +114,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  {"[object GamepadEvent]", "null", "false", "false", "false"})
+    @Alerts({"[object GamepadEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -158,7 +158,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "HtmlUnitEvent", "false", "false", "false"})
+    @Alerts({"[object GamepadEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -180,7 +180,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false", "false"})
+    @Alerts({"[object GamepadEvent]", "gamepad", "false", "false", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -204,7 +204,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false", "false"})
+    @Alerts({"[object GamepadEvent]", "gamepad", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -227,7 +227,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false", "false"})
+    @Alerts({"[object GamepadEvent]", "gamepad", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

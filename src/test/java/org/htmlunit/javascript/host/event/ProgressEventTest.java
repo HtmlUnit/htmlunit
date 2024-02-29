@@ -49,7 +49,7 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ProgressEvent]", "progress", "false", "false", "false", "false", "0", "0"})
+    @Alerts({"[object ProgressEvent]", "progress", "false", "false", "false", "false", "0", "0"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -71,7 +71,7 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ProgressEvent]", "test", "true", "false", "false", "true", "234", "666"})
+    @Alerts({"[object ProgressEvent]", "test", "true", "false", "false", "true", "234", "666"})
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -98,7 +98,7 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

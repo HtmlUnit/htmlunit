@@ -42,7 +42,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object StorageEvent]", "storage", "false", "false", "false"})
+    @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -90,7 +90,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object StorageEvent]", "42", "false", "false", "false"})
+    @Alerts({"[object StorageEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -112,7 +112,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object StorageEvent]", "null", "false", "false", "false"})
+    @Alerts({"[object StorageEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -156,7 +156,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object StorageEvent]", "HtmlUnitEvent", "false", "false", "false"})
+    @Alerts({"[object StorageEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -178,7 +178,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object StorageEvent]", "storage", "false", "false", "false"})
+    @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -207,7 +207,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object StorageEvent]", "storage", "false", "false", "false"})
+    @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

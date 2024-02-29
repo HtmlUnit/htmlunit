@@ -49,7 +49,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
+    @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -97,7 +97,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceOrientationEvent]", "42", "false", "false", "false"})
+    @Alerts({"[object DeviceOrientationEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -119,7 +119,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  {"[object DeviceOrientationEvent]", "null", "false", "false", "false"})
+    @Alerts({"[object DeviceOrientationEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -163,7 +163,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceOrientationEvent]", "HtmlUnitEvent", "false", "false", "false"})
+    @Alerts({"[object DeviceOrientationEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -185,7 +185,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
+    @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -209,7 +209,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
+    @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -232,7 +232,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
+    @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
