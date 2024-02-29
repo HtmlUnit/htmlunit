@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLKEYGEN_END_TAG_FORBIDDEN;
-import static org.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAddress;
 import org.htmlunit.html.HtmlBlockQuote;
 import org.htmlunit.html.HtmlCenter;
@@ -28,7 +26,6 @@ import org.htmlunit.html.HtmlPlainText;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
-import org.htmlunit.javascript.host.ActiveXObject;
 
 /**
  * The JavaScript object {@code HTMLBlockElement}.
@@ -43,19 +40,6 @@ import org.htmlunit.javascript.host.ActiveXObject;
 @JsxClass(domClass = HtmlListing.class, value = IE)
 @JsxClass(domClass = HtmlPlainText.class, value = IE)
 public class HTMLBlockElement extends HTMLElement {
-
-    /**
-     * Sets the DOM node that corresponds to this JavaScript object.
-     * @param domNode the DOM node
-     */
-    @Override
-    public void setDomNode(final DomNode domNode) {
-        super.setDomNode(domNode);
-
-        if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
-            ActiveXObject.addProperty(this, "cite", true, true);
-        }
-    }
 
     /**
      * Returns the value of the {@code cite} property.

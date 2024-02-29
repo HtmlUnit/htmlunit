@@ -1391,10 +1391,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT,
 
-    /** Indicates that the browser uses the ActiveXObject for implementing XML support. */
-    @BrowserFeature(IE)
-    JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
-
     /** {@code XSLTProcessor.transformToDocument} supports output indent attribute. */
     @BrowserFeature({CHROME, EDGE})
     JS_XSLT_TRANSFORM_INDENT,

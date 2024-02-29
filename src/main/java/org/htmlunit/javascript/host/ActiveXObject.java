@@ -23,8 +23,6 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.WebClient;
-import org.htmlunit.WebWindow;
-import org.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -90,15 +88,6 @@ public class ActiveXObject extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("ActiveXObject Error: constructor parameter must be a String.");
         }
         final String activeXName = (String) args[0];
-
-        final WebWindow window = getWindow(ctorObj).getWebWindow();
-        final MSXMLActiveXObjectFactory factory = window.getWebClient().getMSXMLActiveXObjectFactory();
-        if (factory.supports(activeXName)) {
-            final Scriptable scriptable = factory.create(activeXName, window);
-            if (scriptable != null) {
-                return scriptable;
-            }
-        }
 
         final WebClient webClient = getWindow(ctorObj).getWebWindow().getWebClient();
         final Map<String, String> map = webClient.getActiveXObjectMap();

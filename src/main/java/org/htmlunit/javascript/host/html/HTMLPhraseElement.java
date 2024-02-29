@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_PHRASE_COMMON_CLASS_NAME;
-import static org.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAbbreviated;
 import org.htmlunit.html.HtmlAcronym;
 import org.htmlunit.html.HtmlBidirectionalOverride;
@@ -48,7 +46,6 @@ import org.htmlunit.html.HtmlTeletype;
 import org.htmlunit.html.HtmlUnderlined;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.host.ActiveXObject;
 
 /**
  * The JavaScript object {@code HTMLPhraseElement}.
@@ -86,44 +83,6 @@ import org.htmlunit.javascript.host.ActiveXObject;
 @JsxClass(domClass = HtmlUnderlined.class, value = IE)
 @JsxClass(domClass = HtmlVariable.class, value = IE)
 public class HTMLPhraseElement extends HTMLElement {
-
-    /**
-     * Sets the DOM node that corresponds to this JavaScript object.
-     * @param domNode the DOM node
-     */
-    @Override
-    public void setDomNode(final DomNode domNode) {
-        super.setDomNode(domNode);
-
-        if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
-            if (domNode instanceof HtmlAcronym
-                || domNode instanceof HtmlBidirectionalOverride
-                || domNode instanceof HtmlBig
-                || domNode instanceof HtmlBlink
-                || domNode instanceof HtmlBold
-                || domNode instanceof HtmlCitation
-                || domNode instanceof HtmlCode
-                || domNode instanceof HtmlDefinition
-                || domNode instanceof HtmlEmphasis
-                || domNode instanceof HtmlItalic
-                || domNode instanceof HtmlKeyboard
-                || domNode instanceof HtmlNoBreak
-                || domNode instanceof HtmlS
-                || domNode instanceof HtmlSample
-                || domNode instanceof HtmlSmall
-                || domNode instanceof HtmlStrong
-                || domNode instanceof HtmlStrike
-                || domNode instanceof HtmlSubscript
-                || domNode instanceof HtmlSuperscript
-                || domNode instanceof HtmlTeletype
-                || domNode instanceof HtmlUnderlined
-                || domNode instanceof HtmlVariable
-                ) {
-                ActiveXObject.addProperty(this, "cite", true, true);
-                ActiveXObject.addProperty(this, "dateTime", true, true);
-            }
-        }
-    }
 
     /**
      * Returns the value of the {@code cite} property.

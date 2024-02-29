@@ -37,7 +37,6 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebClient.PooledCSS3Parser;
 import org.htmlunit.WebWindow;
-import org.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.css.StyleAttributes;
@@ -56,7 +55,6 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.StringUtils;
-import org.htmlunit.xml.XmlPage;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -1533,35 +1531,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         // See if the document has the SelectionNamespaces property defined. If so,
         // create a PrefixResolver that resolves the defined namespaces.
-        PrefixResolver prefixResolver = null;
-        final Document doc = getOwnerDocument();
-        if (doc instanceof XmlPage) {
-            final HtmlUnitScriptable scriptable = ((XmlPage) doc).getScriptableObject();
-            if (scriptable instanceof XMLDOMDocument) {
-                final String selectionNS = ((XMLDOMDocument) scriptable).getProperty("SelectionNamespaces");
-                if (selectionNS != null && !selectionNS.isEmpty()) {
-                    final Map<String, String> namespaces = parseSelectionNamespaces(selectionNS.toString());
-                    if (namespaces != null) {
-                        prefixResolver = new PrefixResolver() {
-                            @Override
-                            public String getNamespaceForPrefix(final String prefix) {
-                                return namespaces.get(prefix);
-                            }
-
-                            @Override
-                            public String getNamespaceForPrefix(final String prefix, final Node node) {
-                                throw new UnsupportedOperationException();
-                            }
-
-                            @Override
-                            public boolean handlesNullPrefixes() {
-                                return false;
-                            }
-                        };
-                    }
-                }
-            }
-        }
+        final PrefixResolver prefixResolver = null;
         return XPathHelper.getByXPath(this, xpathExpr, prefixResolver);
     }
 
