@@ -88,11 +88,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function onabort() { [native code] }",
                       "function onabort() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onabort() { [native code] } ",
-                  " function onabort() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function onabort() { [native code] }",
                            "function onabort() { [native code] }",
@@ -120,11 +116,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function onerror() { [native code] }",
                       "function onerror() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onerror() { [native code] } ",
-                  " function onerror() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function onerror() { [native code] }",
                            "function onerror() { [native code] }",
@@ -152,11 +144,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function onload() { [native code] }",
                       "function onload() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onload() { [native code] } ",
-                  " function onload() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function onload() { [native code] }",
                            "function onload() { [native code] }",
@@ -184,11 +172,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function onloadstart() { [native code] }",
                       "function onloadstart() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onloadstart() { [native code] } ",
-                  " function onloadstart() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function onloadstart() { [native code] }",
                            "function onloadstart() { [native code] }",
@@ -216,11 +200,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function onloadend() { [native code] }",
                       "function onloadend() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onloadend() { [native code] } ",
-                  " function onloadend() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function onloadend() { [native code] }",
                            "function onloadend() { [native code] }",
@@ -248,11 +228,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function onprogress() { [native code] }",
                       "function onprogress() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onprogress() { [native code] } ",
-                  " function onprogress() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function onprogress() { [native code] }",
                            "function onprogress() { [native code] }",
@@ -289,11 +265,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function ontimeout() { [native code] }",
                       "function ontimeout() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function ontimeout() { [native code] } ",
-                  " function ontimeout() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function ontimeout() { [native code] }",
                            "function ontimeout() { [native code] }",

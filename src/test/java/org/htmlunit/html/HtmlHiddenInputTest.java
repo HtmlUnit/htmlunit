@@ -388,12 +388,9 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "false"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "false"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "false"})
     public void validationEmpty() throws Exception {
         validation("<input type='hidden' id='e1'>\n", "");
     }
@@ -402,12 +399,9 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "false"},
-            IE = {"true",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "false"})
+    @Alerts({"true",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "false"})
     public void validationCustomValidity() throws Exception {
         validation("<input type='hidden' id='e1'>\n", "elem.setCustomValidity('Invalid');");
     }
@@ -416,12 +410,9 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "false"},
-            IE = {"true",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "false"})
+    @Alerts({"true",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "false"})
     public void validationBlankCustomValidity() throws Exception {
         validation("<input type='hidden' id='e1'>\n", "elem.setCustomValidity(' ');\n");
     }
@@ -430,12 +421,9 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "false"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "false"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "false"})
     public void validationResetCustomValidity() throws Exception {
         validation("<input type='hidden' id='e1'>\n",
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
@@ -445,12 +433,9 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "false"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "false"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "false"})
     public void validationRequired() throws Exception {
         validation("<input type='hidden' id='e1' required>\n", "");
     }
@@ -459,12 +444,9 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "false"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "false"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "false"})
     public void validationRequiredValueSet() throws Exception {
         validation("<input type='hidden' id='e1' required>\n", "elem.value='secret';");
     }

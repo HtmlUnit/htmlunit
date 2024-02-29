@@ -48,9 +48,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
             CHROME = {"option1", "", "Number Three", "Number 4",
                       "      option1\n       Number Three\n      Number 4\n    "},
             EDGE = {"option1", "", "Number Three", "Number 4",
-                    "      option1\n       Number Three\n      Number 4\n    "},
-            IE = {"option1", "", "Number Three", "Number 4",
-                  "option1 Number Three Number 4"})
+                    "      option1\n       Number Three\n      Number 4\n    "})
     @HtmlUnitNYI(CHROME = {"option1", "", "Number Three", "Number 4",
                            "option1\nNumber Three\nNumber 4"},
             EDGE = {"option1", "", "Number Three", "Number 4",

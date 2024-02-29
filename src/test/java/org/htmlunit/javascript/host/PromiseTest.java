@@ -39,9 +39,8 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function", "function", "undefined", "undefined",
-                       "undefined", "undefined", "function", "function"},
-            IE = {})
+    @Alerts({"function", "function", "undefined", "undefined",
+             "undefined", "undefined", "function", "function"})
     public void staticMethods() throws Exception {
         final String html =
             "<html>\n"
@@ -74,8 +73,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = {})
+    @Alerts("1")
     public void length() throws Exception {
         final String html =
             "<html>\n"
@@ -117,8 +115,7 @@ public class PromiseTest extends WebDriverTestCase {
             FF_ESR = {"function () {\n    [native code]\n}",
                       "function () {\n    [native code]\n}",
                       "[object Window]",
-                      "done", "resolved value"},
-            IE = {})
+                      "done", "resolved value"})
     public void constructor() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -167,8 +164,7 @@ public class PromiseTest extends WebDriverTestCase {
             FF_ESR = {"function () {\n    [native code]\n}",
                       "function () {\n    [native code]\n}",
                       "undefined",
-                      "done", "resolved value"},
-            IE = {})
+                      "done", "resolved value"})
     public void constructorStrict() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -207,8 +203,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true"},
-            IE = {})
+    @Alerts({"true", "true", "true"})
     public void constructorWithoutFunction() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -253,8 +248,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Rejected"},
-            IE = {})
+    @Alerts({"done", "Rejected"})
     public void reject() throws Exception {
         final String html =
             "<html>\n"
@@ -290,8 +284,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "false", "[object Promise]"},
-            IE = {})
+    @Alerts({"done", "false", "[object Promise]"})
     public void rejectPromise() throws Exception {
         final String html =
             "<html>\n"
@@ -330,8 +323,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Resolved"},
-            IE = {})
+    @Alerts({"done", "Resolved"})
     public void resolve() throws Exception {
         final String html =
             "<html>\n"
@@ -367,8 +359,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "undefined"},
-            IE = {})
+    @Alerts({"done", "undefined"})
     public void resolveEmpty() throws Exception {
         final String html =
             "<html>\n"
@@ -404,8 +395,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "1"},
-            IE = {})
+    @Alerts({"done", "1"})
     public void resolveArray() throws Exception {
         final String html =
             "<html>\n"
@@ -441,8 +431,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "HtmlUnit"},
-            IE = {})
+    @Alerts({"done", "HtmlUnit"})
     public void resolveString() throws Exception {
         final String html =
             "<html>\n"
@@ -478,8 +467,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "true", "42"},
-            IE = {})
+    @Alerts({"done", "true", "42"})
     public void resolvePromise() throws Exception {
         final String html =
             "<html>\n"
@@ -732,8 +720,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "1", "2"},
-            IE = {})
+    @Alerts({"done", "1", "2"})
     public void thenChanining() throws Exception {
         final String html =
             "<html>\n"
@@ -775,8 +762,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "undefined"},
-            IE = {})
+    @Alerts({"done", "undefined"})
     public void then() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -810,8 +796,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "undefined"},
-            IE = {})
+    @Alerts({"done", "undefined"})
     public void thenAsync() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -849,8 +834,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "1 yes", "2 yes"},
-            IE = {})
+    @Alerts({"done", "1 yes", "2 yes"})
     public void thenTwice() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -887,8 +871,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "1 yes", "2 yes"},
-            IE = {})
+    @Alerts({"done", "1 yes", "2 yes"})
     public void thenTwiceAsync() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -929,8 +912,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "first", "second"},
-            IE = {})
+    @Alerts({"done", "first", "second"})
     public void thenAsyncPromiseResolved() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -972,8 +954,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "first", "second"},
-            IE = {})
+    @Alerts({"done", "first", "second"})
     public void thenAsyncPromiseRejected() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1018,8 +999,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "first", "second"},
-            IE = {})
+    @Alerts({"done", "first", "second"})
     public void thenAsyncPromiseAsyncResolved() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1065,8 +1045,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "first", "second"},
-            IE = {})
+    @Alerts({"done", "first", "second"})
     public void thenAsyncPromiseAsyncRejected() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1115,8 +1094,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Success first"},
-            IE = {})
+    @Alerts({"done", "Success first"})
     public void thenTestAsyncChainedResolve() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1160,8 +1138,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Failure first"},
-            IE = {})
+    @Alerts({"done", "Failure first"})
     public void thenTestAsyncChainedReject() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1205,8 +1182,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Success first"},
-            IE = {})
+    @Alerts({"done", "Success first"})
     public void thenTestAsyncChainedNotAFunction() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1249,8 +1225,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"Success", "string", "oh, no!", "after catch"},
-            IE = {})
+    @Alerts({"Success", "string", "oh, no!", "after catch"})
     public void catchTest() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1295,8 +1270,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"Success", "string", "oh, no!", "after catch"},
-            IE = {})
+    @Alerts({"Success", "string", "oh, no!", "after catch"})
     public void catchTestAsync() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1342,8 +1316,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Success first"},
-            IE = {})
+    @Alerts({"done", "Success first"})
     public void catchTestAsyncChained() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1609,8 +1582,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "object", "3", "3,1337,Success"},
-            IE = {})
+    @Alerts({"done", "object", "3", "3,1337,Success"})
     public void allAsyncArray() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1653,8 +1625,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "first 3,1337,Success", "second 3,Success"},
-            IE = {})
+    @Alerts({"done", "first 3,1337,Success", "second 3,Success"})
     public void allAsyncArray2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1698,8 +1669,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "object", "3", "3,1337,Success"},
-            IE = {})
+    @Alerts({"done", "object", "3", "3,1337,Success"})
     public void allAsyncSet() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1742,8 +1712,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "string", "Failed"},
-            IE = {})
+    @Alerts({"done", "string", "Failed"})
     public void allRejectAsync() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1787,8 +1756,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "first Failed", "second Failed"},
-            IE = {})
+    @Alerts({"done", "first Failed", "second Failed"})
     public void allRejectAsync2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1836,8 +1804,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Success 2"},
-            IE = {})
+    @Alerts({"done", "Success 2"})
     public void raceAsync() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1883,8 +1850,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "first Success 2", "second Success 2"},
-            IE = {})
+    @Alerts({"done", "first Success 2", "second Success 2"})
     public void raceAsync2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1935,8 +1901,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Failed"},
-            IE = {})
+    @Alerts({"done", "Failed"})
     public void raceRejectAsync() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1982,8 +1947,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "first Failed", "second Failed"},
-            IE = {})
+    @Alerts({"done", "first Failed", "second Failed"})
     public void raceRejectAsync2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2065,8 +2029,7 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function\\sPromise()\\s{\\s[native\\scode]\\s}", "true", "[GC]"},
             FF = {"function\\sPromise()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}", "true", "[GC]"},
-            FF_ESR = {"function\\sPromise()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}", "true", "[GC]"},
-            IE = {})
+            FF_ESR = {"function\\sPromise()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}", "true", "[GC]"})
     public void speciesValue() throws Exception {
         final String html =
                 "<html>\n"

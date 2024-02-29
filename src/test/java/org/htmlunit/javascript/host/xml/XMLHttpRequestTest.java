@@ -299,10 +299,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"orsc1", "open-done", "send-done",
-                       "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]"},
-            IE = {"orsc1", "open-done", "orsc1", "send-done",
-                  "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]"})
+    @Alerts({"orsc1", "open-done", "send-done",
+             "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]"})
     public void onload() throws Exception {
         final String html =
               "<html>\n"
@@ -830,8 +828,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "40644",
-            IE = {})
+    @Alerts("40644")
     public void overrideMimeType_charset_wrong() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1260,10 +1257,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
-                       "[object HTMLSpanElement]", "[object XMLDocument]", "[object XMLDocument]", "undefined"},
-            IE = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
-                  "[object HTMLSpanElement]", "[object XMLDocument]", "-", "undefined"})
+    @Alerts({"[object Element]", "[object Element]", "[object HTMLBodyElement]",
+             "[object HTMLSpanElement]", "[object XMLDocument]", "[object XMLDocument]", "undefined"})
     public void responseXML_getElementById() throws Exception {
         final String html =
               "<html>\n"
@@ -1830,11 +1825,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function() { return !0 }",
                       "function onreadystatechange() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  "function() { return !0 }",
-                  " function onreadystatechange() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function() { return !0 }",
                            "function onreadystatechange() { [native code] }",
@@ -2202,11 +2193,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onabort() { [native code] } ",
-                  " function onabort() { [native code] } ",
-                  "true", "true"})
+    @Alerts("undefined")
     public void getOwnPropertyDescriptor_onabort() throws Exception {
         getOwnPropertyDescriptor("onabort");
     }
@@ -2215,11 +2202,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onerror() { [native code] } ",
-                  " function onerror() { [native code] } ",
-                  "true", "true"})
+    @Alerts("undefined")
     public void getOwnPropertyDescriptor_onerror() throws Exception {
         getOwnPropertyDescriptor("onerror");
     }
@@ -2228,11 +2211,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onload() { [native code] } ",
-                  " function onload() { [native code] } ",
-                  "true", "true"})
+    @Alerts("undefined")
     public void getOwnPropertyDescriptor_onload() throws Exception {
         getOwnPropertyDescriptor("onload");
     }
@@ -2241,11 +2220,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onloadstart() { [native code] } ",
-                  " function onloadstart() { [native code] } ",
-                  "true", "true"})
+    @Alerts("undefined")
     public void getOwnPropertyDescriptor_onloadstart() throws Exception {
         getOwnPropertyDescriptor("onloadstart");
     }
@@ -2254,11 +2229,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onloadend() { [native code] } ",
-                  " function onloadend() { [native code] } ",
-                  "true", "true"})
+    @Alerts("undefined")
     public void getOwnPropertyDescriptor_onloadend() throws Exception {
         getOwnPropertyDescriptor("onloadend");
     }
@@ -2267,11 +2238,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onprogress() { [native code] } ",
-                  " function onprogress() { [native code] } ",
-                  "true", "true"})
+    @Alerts("undefined")
     public void getOwnPropertyDescriptor_onprogress() throws Exception {
         getOwnPropertyDescriptor("onprogress");
     }
@@ -2291,11 +2258,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             FF_ESR = {"[object Object]", "undefined", "undefined",
                       "function onreadystatechange() { [native code] }",
                       "function onreadystatechange() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function onreadystatechange() { [native code] } ",
-                  " function onreadystatechange() { [native code] } ",
-                  "true", "true"})
+                      "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                            "function onreadystatechange() { [native code] }",
                            "function onreadystatechange() { [native code] }",
@@ -2312,11 +2275,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = {"[object Object]", "undefined", "undefined",
-                  " function ontimeout() { [native code] } ",
-                  " function ontimeout() { [native code] } ",
-                  "true", "true"})
+    @Alerts("undefined")
     public void getOwnPropertyDescriptor_ontimeout() throws Exception {
         getOwnPropertyDescriptor("ontimeout");
     }
@@ -2411,10 +2370,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "exception", "exception", "exception", "exception", "exception",
-                       "", "", "", "", "exception"},
-            IE = {"", "arraybuffer", "blob", "blob", "text", "document", "document",
-                  "document", "document", "document", ""})
+    @Alerts({"", "exception", "exception", "exception", "exception", "exception",
+             "", "", "", "", "exception"})
     public void responseTypeSetAfterOpenSync() throws Exception {
         final String html =
               "<html>\n"
@@ -2490,10 +2447,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "arraybuffer", "blob", "json", "text", "document",
-                       "document", "document", "document", "document", ""},
-            IE = {"", "arraybuffer", "blob", "blob", "text", "document",
-                  "document", "document", "document", "document", ""})
+    @Alerts({"", "arraybuffer", "blob", "json", "text", "document",
+             "document", "document", "document", "document", ""})
     public void responseTypeSetAfterOpenAsync() throws Exception {
         final String html =
               "<html>\n"

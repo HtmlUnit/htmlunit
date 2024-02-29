@@ -1098,9 +1098,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"radioParam2#radioValue2", "selectParam#selectValue", "textParam#textValue",
-        "textareaParam#textarea value"},
-            IE = {})
+    @Alerts({"radioParam2#radioValue2", "selectParam#selectValue", "textParam#textValue",
+             "textareaParam#textarea value"})
     public void submitUsingFormAttribute() throws Exception {
         final String html =
             "<!DOCTYPE html>\n"
@@ -1151,9 +1150,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"radioParam2#radioValue2", "selectParam#selectValue", "textParam#textValue",
-        "textareaParam#textarea value"},
-            IE = {})
+    @Alerts({"radioParam2#radioValue2", "selectParam#selectValue", "textParam#textValue",
+             "textareaParam#textarea value"})
     public void submitUsingFormAttributeElementsDeclaredBeforeForm() throws Exception {
         final String html =
             "<!DOCTYPE html>\n"
@@ -1206,8 +1204,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "textParam#textValue",
-            IE = {})
+    @Alerts("textParam#textValue")
     public void submitUsingFormAttributeElementsDeeplyNested() throws Exception {
         final String html =
             "<!DOCTYPE html>\n"

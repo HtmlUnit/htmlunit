@@ -520,9 +520,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = {"true", "true", "true", "true", "true", "true", "true", "true",
-                "false", "true", "true", "true", "true", "true", "true", "true", "true"})
+    @Alerts("exception")
     public void parseError() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -567,8 +565,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://myNS",
-            IE = {})
+    @Alerts("http://myNS")
     public void createNSResolver() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -655,8 +652,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "button",
-            IE = {})
+    @Alerts("button")
     public void evaluate() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -680,16 +676,11 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"same doc: false", "in first: 3", "book", "ownerDocument: doc1", "getRootNode(): doc1",
-                       "in 2nd: 3", "ownerDocument: doc2", "getRootNode(): doc2",
-                       "first child ownerDocument: doc2", "first child getRootNode(): doc2", "in first: 2", "in 2nd: 4",
-                       "ownerDocument: doc1", "getRootNode(): doc1", "in first: 2", "in 2nd: 3",
-                       "ownerDocument: doc2", "getRootNode(): doc2", "in first: 1", "in 2nd: 4"},
-            IE = {"same doc: false", "in first: 3", "book", "ownerDocument: doc1", "-",
-                  "in 2nd: 3", "ownerDocument: doc2", "-",
-                  "first child ownerDocument: doc2", "-", "in first: 2", "in 2nd: 4",
-                  "ownerDocument: doc1", "-", "in first: 2", "in 2nd: 3",
-                  "ownerDocument: doc2", "-", "in first: 1", "in 2nd: 4"})
+    @Alerts({"same doc: false", "in first: 3", "book", "ownerDocument: doc1", "getRootNode(): doc1",
+             "in 2nd: 3", "ownerDocument: doc2", "getRootNode(): doc2",
+             "first child ownerDocument: doc2", "first child getRootNode(): doc2", "in first: 2", "in 2nd: 4",
+             "ownerDocument: doc1", "getRootNode(): doc1", "in first: 2", "in 2nd: 3",
+             "ownerDocument: doc2", "getRootNode(): doc2", "in first: 1", "in 2nd: 4"})
     public void moveChildBetweenDocuments() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -249,10 +249,7 @@ public class Uint8ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "0", "1", "1,3", "1,3,4,7,11,0,123"},
-            IE = {"[object Uint8Array]", "[object Uint8Array]",
-                  "[object Uint8Array]", "[object Uint8Array]",
-                  "[object Uint8Array]"})
+    @Alerts({"", "0", "1", "1,3", "1,3,4,7,11,0,123"})
     public void asString() throws Exception {
         final String html
             = "<html><head>\n"

@@ -335,12 +335,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-initial-initial", "-initial-initial",
-                       "exception", "-initial-initial", "-initial-initial",
-                       "-newDefault-newDefault", "-newDefault-newDefault"},
-            IE = {"-initial-initial", "-initial-initial",
-                  "-initial-initial", "-initial-initial",
-                  "-newDefault-newDefault", "-newDefault-newDefault"})
+    @Alerts({"-initial-initial", "-initial-initial",
+             "exception", "-initial-initial", "-initial-initial",
+             "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -381,12 +378,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-initial-initial", "-initial-initial",
-                       "exception", "-initial-initial", "-initial-initial",
-                       "-newDefault-newDefault", "-newDefault-newDefault"},
-            IE = {"-initial-initial", "-initial-initial",
-                  "-initial-initial", "-initial-initial",
-                  "-newDefault-newDefault", "-newDefault-newDefault"})
+    @Alerts({"-initial-initial", "-initial-initial",
+             "exception", "-initial-initial", "-initial-initial",
+             "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -426,12 +420,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-initial-initial", "-default-default",
-                       "exception", "-default-default", "-attribValue-attribValue",
-                       "-newDefault-newDefault"},
-            IE = {"-initial-initial", "-default-default",
-                  "-default-default", "-attribValue-attribValue",
-                  "-newDefault-newDefault"})
+    @Alerts({"-initial-initial", "-default-default",
+             "exception", "-default-default", "-attribValue-attribValue",
+             "-newDefault-newDefault"})
     public void value() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -528,12 +519,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
-                       "exception", "null,null",
-                       "exception", "null,null"},
-            IE = {"exception", "exception",
-                  "exception", "exception",
-                  "exception", "exception"})
+    @Alerts({"null,null", "exception value", "null,null",
+             "exception", "null,null",
+             "exception", "null,null"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -542,12 +530,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
-                       "exception", "null,null",
-                       "exception", "null,null"},
-            IE = {"exception", "exception",
-                  "exception", "exception",
-                  "exception", "exception"})
+    @Alerts({"null,null", "exception value", "null,null",
+             "exception", "null,null",
+             "exception", "null,null"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -556,12 +541,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
-                       "exception", "null,null",
-                       "exception", "null,null"},
-            IE = {"exception", "exception",
-                  "exception", "exception",
-                  "exception", "exception"})
+    @Alerts({"null,null", "exception value", "null,null",
+             "exception", "null,null",
+             "exception", "null,null"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -864,12 +846,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true"})
     public void validationEmpty() throws Exception {
         validation("<input type='file' id='e1'>\n", "");
     }
@@ -878,12 +857,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true"})
+    @Alerts({"false",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "true"})
     public void validationCustomValidity() throws Exception {
         validation("<input type='file' id='e1'>\n", "elem.setCustomValidity('Invalid');");
     }
@@ -892,12 +868,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true"})
+    @Alerts({"false",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "true"})
     public void validationBlankCustomValidity() throws Exception {
         validation("<input type='file' id='e1'>\n", "elem.setCustomValidity(' ');\n");
     }
@@ -906,12 +879,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
-                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true"})
     public void validationResetCustomValidity() throws Exception {
         validation("<input type='file' id='e1'>\n",
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
@@ -921,12 +891,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
-                       "false-false-false-false-false-false-false-false-false-false-true",
-                       "true"},
-            IE = {"false",
-                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
-                  "true"})
+    @Alerts({"false",
+             "false-false-false-false-false-false-false-false-false-false-true",
+             "true"})
     public void validationRequired() throws Exception {
         validation("<input type='file' id='e1' required>\n", "");
     }

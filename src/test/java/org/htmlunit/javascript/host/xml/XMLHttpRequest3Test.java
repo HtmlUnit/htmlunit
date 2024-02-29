@@ -73,8 +73,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR},
-            IE = {"0", "1", "1", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR})
+    @Alerts({"0", "1", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR})
     public void asyncUseWithNetworkConnectionFailure() throws Exception {
         final String html =
               "<html>\n"

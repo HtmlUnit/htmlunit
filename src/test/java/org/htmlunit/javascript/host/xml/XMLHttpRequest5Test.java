@@ -170,10 +170,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"application/xml;charset=UTF-8",
-                       "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"></body></html>"},
-            IE = {"application/xml; charset=utf-8",
-                  "\u00EF\u00BB\u00BF<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\" /></html>"})
+    @Alerts({"application/xml;charset=UTF-8",
+             "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"></body></html>"})
     @HtmlUnitNYI(CHROME = {"application/xml;charset=UTF-8",
                            "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
             EDGE = {"application/xml;charset=UTF-8",
@@ -227,24 +225,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
             FF_ESR = {"text/html;charset=UTF-8",
                       "<!DOCTYPE html>"
                                 + "<html><head><title>foo</title><script>\n"
-                             + "  function test() {\n"
-                             + "    try {\n"
-                             + "    var doc = document;\n"
-                             + "      var xhr = new XMLHttpRequest();\n"
-                             + "      xhr.open('POST', 'http://localhost:22222/second/', false);\n"
-                             + "      xhr.send(doc);\n"
-                             + "  } catch (exception) { \n"
-                             + "    alert(exception);\n"
-                             + "  }\n"
-                             + "}\n"
-                             + "</script></head>\n"
-                             + "<body onload=\"test()\">\n"
-                             + "</body></html>"},
-            IE = {"text/html; charset=ISO-8859-1",
-                  "<!DOCTYPE HTML>"
-                      + "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
-                             + "<html><head><title>foo</title>"
-                             + "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\"><script>\n"
                              + "  function test() {\n"
                              + "    try {\n"
                              + "    var doc = document;\n"

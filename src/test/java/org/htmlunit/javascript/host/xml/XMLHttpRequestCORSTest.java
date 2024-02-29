@@ -56,8 +56,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"error [object ProgressEvent]", "error", "false", "0", "false"},
-            IE =      {"error [object ProgressEvent]", "error", "false", "0", "true"})
+    @Alerts({"error [object ProgressEvent]", "error", "false", "0", "false"})
     public void noCorsHeaderCallsErrorHandler() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

@@ -31,8 +31,7 @@ import org.junit.runner.RunWith;
 public class PolyfillTest extends SimpleWebTestCase {
 
     @Test
-    @Alerts(DEFAULT = "Content fetched",
-            IE = {})
+    @Alerts("Content fetched")
     public void fetch() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

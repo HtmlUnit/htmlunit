@@ -298,9 +298,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             CHROME = {"dcl listener added", "head-end", "end",
                       "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
             EDGE = {"dcl listener added", "head-end", "end",
-                    "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
-            IE = {"dcl listener added", "head-end", "deferred-2", "end",
-                  "deferred-1", "deferred-3", "dcLoaded", "onload"})
+                    "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"})
     @HtmlUnitNYI(CHROME = {"dcl listener added", "head-end", "end",
                            "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             EDGE = {"dcl listener added", "head-end", "end",

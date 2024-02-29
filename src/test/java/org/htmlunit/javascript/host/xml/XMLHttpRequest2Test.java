@@ -1071,13 +1071,10 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "content-type: text/xml;charset=iso-8859-1\\n"
-                                + "date XYZ GMT\\n"
-                                + "server: Jetty(XXX)\\n"
-                                + "transfer-encoding: chunked\\n"},
-            IE = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                            + "Transfer-Encoding: chunked\\n"
-                            + "Server: Jetty(XXX)\\n\\n"})
+    @Alerts({"", "", "content-type: text/xml;charset=iso-8859-1\\n"
+                        + "date XYZ GMT\\n"
+                        + "server: Jetty(XXX)\\n"
+                        + "transfer-encoding: chunked\\n"})
     @HtmlUnitNYI(CHROME = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
                                         + "Transfer-Encoding: chunked\\n"
                                         + "Server: Jetty(XXX)\\n"},
