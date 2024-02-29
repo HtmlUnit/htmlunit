@@ -1000,51 +1000,57 @@ public class DomElement extends DomNamespaceNode implements Element {
                 mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
 
-            if (handleFocus) {
-                // give focus to current element (if possible) or only remove it from previous one
-                DomElement elementToFocus = null;
-                if (this instanceof SubmittableElement
-                    || this instanceof HtmlAnchor
-                        && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor) this).getHrefAttribute()
-                    || this instanceof HtmlArea
-                        && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea) this).getHrefAttribute()
-                            || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
-                    || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
-                    elementToFocus = this;
-                }
-                else if (this instanceof HtmlOption) {
-                    elementToFocus = ((HtmlOption) this).getEnclosingSelect();
+            final JavaScriptEngine jsEngine = (JavaScriptEngine)page.getWebClient().getJavaScriptEngine();
+            jsEngine.holdPosponedActions();
+            try {
+                if (handleFocus) {
+                    // give focus to current element (if possible) or only remove it from previous one
+                    DomElement elementToFocus = null;
+                    if (this instanceof SubmittableElement
+                        || this instanceof HtmlAnchor
+                            && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor)this).getHrefAttribute()
+                        || this instanceof HtmlArea
+                            && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea)this).getHrefAttribute()
+                                || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
+                        || this instanceof HtmlElement && ((HtmlElement)this).getTabIndex() != null) {
+                        elementToFocus = this;
+                    }
+                    else if (this instanceof HtmlOption) {
+                        elementToFocus = ((HtmlOption)this).getEnclosingSelect();
+                    }
+
+                    if (elementToFocus == null) {
+                        ((HtmlPage)page).setFocusedElement(null);
+                    }
+                    else {
+                        elementToFocus.focus();
+                    }
                 }
 
-                if (elementToFocus == null) {
-                    ((HtmlPage) page).setFocusedElement(null);
+                if (triggerMouseEvents) {
+                    mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
                 }
-                else {
-                    elementToFocus.focus();
+
+                MouseEvent event = null;
+                if (page.getWebClient().isJavaScriptEnabled()) {
+                    final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+                    if (browser.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+                        event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
+                    }
+                    else {
+                        event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
+                    }
+
+                    if (disableProcessLabelAfterBubbling) {
+                        event.disableProcessLabelAfterBubbling();
+                    }
                 }
+                return click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
+            } finally {
+                jsEngine.processPostponedActions();
             }
-
-            if (triggerMouseEvents) {
-                mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
-            }
-
-            MouseEvent event = null;
-            if (page.getWebClient().isJavaScriptEnabled()) {
-                final BrowserVersion browser = page.getWebClient().getBrowserVersion();
-                if (browser.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                    event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
-                }
-                else {
-                    event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
-                }
-
-                if (disableProcessLabelAfterBubbling) {
-                    event.disableProcessLabelAfterBubbling();
-                }
-            }
-            return click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
         }
     }
 

@@ -41,6 +41,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
@@ -312,7 +313,19 @@ public class HtmlImage extends HtmlElement {
                 htmlPage.addAfterLoadAction(action);
             }
             else {
-                fireEvent(event);
+                JavaScriptEngine jsEngine = (JavaScriptEngine) client.getJavaScriptEngine();
+                if (jsEngine.isScriptRunning()) {
+                    final PostponedAction action = new PostponedAction(getPage(), "HtmlImage.doOnLoad") {
+                        @Override
+                        public void execute() {
+                            HtmlImage.this.fireEvent(event);
+                        }
+                    };
+                    jsEngine.addPostponedAction(action);
+                }
+                else {
+                    fireEvent(event);
+                }
             }
         }
     }
