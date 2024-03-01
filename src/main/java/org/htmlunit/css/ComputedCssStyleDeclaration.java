@@ -19,6 +19,7 @@ import static org.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECT
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_18;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_10;
+import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.AUTO;
@@ -135,6 +136,7 @@ import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
 import org.htmlunit.javascript.host.Element;
+import org.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.platform.Platform;
 
@@ -1552,6 +1554,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 width = 10 + (int) (text.length() * browserVersion.getPixesPerChar() * 0.9);
             }
             else if (element instanceof HtmlTextInput || element instanceof HtmlPasswordInput) {
+                final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
+                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
+                    return 173;
+                }
                 width = 154; // FF
             }
             else if (element instanceof HtmlRadioButtonInput || element instanceof HtmlCheckBoxInput) {
