@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
-import static org.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
@@ -2331,7 +2330,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             }
 
             if ((auto && AUTO.equals(valueString))
-                    || INITIAL.equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL)
+                    || INITIAL.equals(valueString)
                     || INHERIT.equals(valueString)) {
                 setStyleAttribute(name, valueString, important);
                 return;

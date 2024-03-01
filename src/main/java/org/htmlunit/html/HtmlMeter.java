@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -50,9 +48,6 @@ public class HtmlMeter extends HtmlMedia implements LabelableElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_BLOCK2)) {
-            return DisplayStyle.INLINE_BLOCK;
-        }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.INLINE_BLOCK;
     }
 }

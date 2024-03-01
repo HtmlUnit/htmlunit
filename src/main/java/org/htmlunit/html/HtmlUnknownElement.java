@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_DIALOG_NONE;
 import static org.htmlunit.BrowserVersionFeatures.CSS_RP_DISPLAY_NONE;
 import static org.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
 import static org.htmlunit.BrowserVersionFeatures.MULTICOL_BLOCK;
@@ -111,10 +110,7 @@ public class HtmlUnknownElement extends HtmlElement {
                 }
                 break;
             case HtmlDialog.TAG_NAME:
-                if (hasFeature(CSS_DIALOG_NONE)) {
-                    return DisplayStyle.NONE;
-                }
-                break;
+                return DisplayStyle.NONE;
             case HtmlSlot.TAG_NAME:
                 if (getPage().getWebClient().getBrowserVersion().hasFeature(SLOT_CONTENTS)) {
                     return DisplayStyle.CONTENTS;

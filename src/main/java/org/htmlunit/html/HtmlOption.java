@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION;
 
 import java.io.IOException;
@@ -338,10 +336,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_BLOCK2)) {
-            return DisplayStyle.BLOCK;
-        }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.BLOCK;
     }
 
     /**
@@ -349,8 +344,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public boolean handles(final Event event) {
-        if (MouseEvent.TYPE_MOUSE_OVER.equals(event.getType())
-                && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_MOUSE_ON_DISABLED)) {
+        if (MouseEvent.TYPE_MOUSE_OVER.equals(event.getType())) {
             return true;
         }
         return super.handles(event);

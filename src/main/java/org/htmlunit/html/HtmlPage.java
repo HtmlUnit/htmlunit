@@ -15,7 +15,6 @@
 package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
@@ -2458,9 +2457,7 @@ public class HtmlPage extends SgmlPage {
                 oldFocusedElement.removeFocus();
                 oldFocusedElement.fireEvent(Event.TYPE_BLUR);
 
-                if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
-                    oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
-                }
+                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
             }
         }
 
@@ -2472,9 +2469,7 @@ public class HtmlPage extends SgmlPage {
             newElement.focus();
             newElement.fireEvent(Event.TYPE_FOCUS);
 
-            if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
-                newElement.fireEvent(Event.TYPE_FOCUS_IN);
-            }
+            newElement.fireEvent(Event.TYPE_FOCUS_IN);
         }
 
         // If a page reload happened as a result of the focus change then obviously this

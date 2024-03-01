@@ -17,8 +17,6 @@ package org.htmlunit.javascript.host.dom;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
@@ -1156,9 +1154,7 @@ public class Document extends Node {
         if (clazz == null
                 && ("Events".equals(eventType)
                 || "HashChangeEvent".equals(eventType)
-                        && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
                 || "BeforeUnloadEvent".equals(eventType)
-                        && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
                 || "PopStateEvent".equals(eventType)
                 || "FocusEvent".equals(eventType)
                 || "WheelEvent".equals(eventType)

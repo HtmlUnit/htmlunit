@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_HASH_IS_ENCODED;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
@@ -453,14 +452,7 @@ public class Location extends HtmlUnitScriptable {
 
         if (triggerHashChanged && hasChanged) {
             final Window w = getWindow();
-            final Event event;
-            if (getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)) {
-                event = new HashChangeEvent(w, Event.TYPE_HASH_CHANGE, oldURL, getHref());
-            }
-            else {
-                event = new Event(w, Event.TYPE_HASH_CHANGE);
-                event.initEvent(Event.TYPE_HASH_CHANGE, false, false);
-            }
+            final Event event = new HashChangeEvent(w, Event.TYPE_HASH_CHANGE, oldURL, getHref());
             w.executeEventLocally(event);
         }
     }

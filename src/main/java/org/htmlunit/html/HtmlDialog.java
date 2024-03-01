@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_DIALOG_NONE;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -59,10 +57,7 @@ public class HtmlDialog extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DIALOG_NONE)) {
-            return DisplayStyle.NONE;
-        }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.NONE;
     }
 
     /**

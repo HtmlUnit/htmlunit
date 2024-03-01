@@ -14,8 +14,6 @@
  */
 package org.htmlunit.css;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
-import static org.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_18;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_10;
@@ -272,7 +270,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
         final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
-        final boolean feature = hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
         final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
 
         // to make the fuzzer happy the recursion was removed
@@ -280,7 +277,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         String value = null;
         while (queue[0] != null) {
             value = getStyleAttributeWorker(definition, getDefaultValueIfEmpty,
-                        browserVersion, feature, isDefInheritable, queue);
+                        browserVersion, true, isDefInheritable, queue);
         }
 
         return value;
@@ -323,12 +320,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             final String defaultValue) {
         final DomElement domElement = getDomElement();
 
-        if (!domElement.isAttachedToPage()
-                && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+        if (!domElement.isAttachedToPage()) {
             return ComputedCssStyleDeclaration.EMPTY_FINAL;
         }
 
-        final boolean feature = hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
         final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
 
         // to make the fuzzer happy the recursion was removed
@@ -337,7 +332,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         String value = null;
         while (queue[0] != null) {
             value = getStyleAttributeWorker(definition, false,
-                    browserVersion, feature, isDefInheritable, queue);
+                    browserVersion, true, isDefInheritable, queue);
         }
 
         if (value == null || value.isEmpty() || value.equals(defaultValue)) {
@@ -391,12 +386,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         final DomElement domElem = getDomElement();
         if (!domElem.isAttachedToPage()) {
-            if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-                return "";
-            }
-            if (getStyleAttribute(Definition.WIDTH, true).isEmpty()) {
-                return AUTO;
-            }
+            return "";
         }
 
         final int windowWidth = domElem.getPage().getEnclosingWindow().getInnerWidth();
@@ -678,9 +668,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public String getDisplay() {
         final DomElement domElem = getDomElement();
         if (!domElem.isAttachedToPage()) {
-            if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-                return "";
-            }
+            return "";
         }
 
         // don't use defaultIfEmpty for performance
@@ -702,9 +690,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public String getFont() {
         final DomElement domElem = getDomElement();
         if (domElem.isAttachedToPage()) {
-            if (hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)) {
-                return getStyleAttribute(Definition.FONT, true);
-            }
+            return getStyleAttribute(Definition.FONT, true);
         }
         return "";
     }
@@ -748,12 +734,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         final DomElement elem = getDomElement();
         if (!elem.isAttachedToPage()) {
-            if (hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-                return "";
-            }
-            if (getStyleAttribute(Definition.HEIGHT, true).isEmpty()) {
-                return AUTO;
-            }
+            return "";
         }
         final int windowHeight = elem.getPage().getEnclosingWindow().getInnerHeight();
         return CssPixelValueConverter
@@ -834,7 +815,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return pixelString(defaultIfEmpty(superMarginX, "0px", null));
         }
         final DomElement element = getDomElement();
-        if (!element.isAttachedToPage() && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+        if (!element.isAttachedToPage()) {
             return "";
         }
 
@@ -977,7 +958,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public String getTop() {
         final DomElement element = getDomElement();
-        if (!element.isAttachedToPage() && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+        if (!element.isAttachedToPage()) {
             return "";
         }
         final String superTop = super.getTop();
@@ -2256,8 +2237,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
             final boolean isPixel) {
-        if (!getDomElement().isAttachedToPage()
-                && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+        if (!getDomElement().isAttachedToPage()) {
             return ComputedCssStyleDeclaration.EMPTY_FINAL;
         }
         if (str == null || str.isEmpty()) {
@@ -2275,8 +2255,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the string, or {@code toReturnIfEmptyOrDefault}
      */
     private String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
-        if (!getDomElement().isAttachedToPage()
-                && hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+        if (!getDomElement().isAttachedToPage()) {
             return ComputedCssStyleDeclaration.EMPTY_FINAL;
         }
         if (str == null || str.isEmpty() || str.equals(defaultValue)) {

@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -105,9 +103,6 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_BLOCK2)) {
-            return DisplayStyle.BLOCK;
-        }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.BLOCK;
     }
 }

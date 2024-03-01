@@ -17,7 +17,6 @@ package org.htmlunit.css;
 import static java.nio.charset.StandardCharsets.UTF_16BE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN;
 import static org.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
@@ -885,11 +884,9 @@ public class CssStyleSheet implements Serializable {
                 return element.isMouseOver();
 
             case "placeholder-shown":
-                if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN)) {
-                    return element instanceof HtmlInput
-                            && StringUtils.isEmpty(((HtmlInput) element).getValue())
-                            && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
-                }
+                return element instanceof HtmlInput
+                        && StringUtils.isEmpty(((HtmlInput) element).getValue())
+                        && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
 
             default:
                 if (value.startsWith("nth-child(")) {
@@ -1206,7 +1203,7 @@ public class CssStyleSheet implements Serializable {
                 }
 
                 if ("placeholder-shown".equals(value)) {
-                    return domNode.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN);
+                    return true;
                 }
 
                 return CSS4_PSEUDO_CLASSES.contains(value);

@@ -16,7 +16,6 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
@@ -1055,9 +1054,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 request.setCharset(UTF_8);
 
                 final Page openerPage = opener.getEnclosedPage();
-                if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
-                        && openerPage != null
-                        && openerPage.getUrl() != null) {
+                if (openerPage != null && openerPage.getUrl() != null) {
                     request.setRefererlHeader(openerPage.getUrl());
                 }
                 getPage(window, request);
@@ -1183,7 +1180,7 @@ public class WebClient implements Serializable, AutoCloseable {
                                                         getBrowserVersion().getAcceptEncodingHeader());
         request.setCharset(UTF_8);
 
-        if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {
+        if (openerPage != null) {
             request.setRefererlHeader(openerPage.getUrl());
         }
 

@@ -52,29 +52,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     CSS_CSSTEXT_FF_STYLE,
 
-    /** Is display style of HtmlDialog is 'none'. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    CSS_DIALOG_NONE,
-
     /** Is display style 'block'. */
     @BrowserFeature({FF, FF_ESR})
     CSS_DISPLAY_BLOCK,
 
-    /** Is display style 'block'. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    CSS_DISPLAY_BLOCK2,
-
-    /** 'initial' is a valid length value. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    CSS_LENGTH_INITIAL,
-
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
     @BrowserFeature({CHROME, EDGE})
     CSS_NOSCRIPT_DISPLAY_INLINE,
-
-    /** Is the css pseudo selector placeholder-shown supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN,
 
     /** The default value of the display property for the 'rp' tag is 'none'. */
     @BrowserFeature({FF, FF_ESR})
@@ -84,45 +68,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF_ESR)
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
-    /** For disconnected items style properties are blank. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
-
-    /** For disconnected items style font property is blank. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
-
-    /** Add the 'Referer' header to a request triggered by window.showModalDialog. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    DIALOGWINDOW_REFERER,
-
-    /** Indicates whether returnValue behaves HTML5-like with an empty string default. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE,
-
     /** The context menu MouseEvent has a detail of 1. */
     @BrowserFeature(FF)
     EVENT_CONTEXT_MENU_HAS_DETAIL_1,
-
-    /** Triggers the onfocus onfocusin blur onfocusout events in this order. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    EVENT_FOCUS_FOCUS_IN_BLUR_OUT,
 
     /** Triggers the onfocus event when focusing the body on load. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_FOCUS_ON_LOAD,
 
-    /** Mouse events are triggered on disabled elements also. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    EVENT_MOUSE_ON_DISABLED,
-
     /** <code>AnimationEvent</code> can not be created by calling document.createEvent('AnimationEvent'). */
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED,
-
-    /** Triggers "onchange" event handler after "onclick" event handler. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    EVENT_ONCHANGE_AFTER_ONCLICK,
 
     /** Triggers 'onclick' event handler using <code>PointerEvent</code>. */
     @BrowserFeature({CHROME, EDGE})
@@ -132,10 +88,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
-    /** MessageEvent default data value is null. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    EVENT_ONMESSAGE_DEFAULT_DATA_NULL,
-
     /** FF triggers a mouseover event even if the option is disabled. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION,
@@ -143,14 +95,6 @@ public enum BrowserVersionFeatures {
     /** <code>PopStateEvent</code> can not be created by calling document.createEvent('PopStateEvent'). */
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
-
-    /** Supports event type 'BeforeUnloadEvent'. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    EVENT_TYPE_BEFOREUNLOADEVENT,
-
-    /** Supports event type 'HashChangeEvent'. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    EVENT_TYPE_HASHCHANGEEVENT,
 
     /** Supports event type 'TextEvent'. */
     @BrowserFeature({CHROME, EDGE})

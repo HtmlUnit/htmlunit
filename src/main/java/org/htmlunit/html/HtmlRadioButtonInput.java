@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_AFTER_ONCLICK;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 
 import java.io.IOException;
@@ -174,22 +173,8 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      * {@inheritDoc}
      */
     @Override
-    protected ScriptResult doClickFireClickEvent(final Event event) {
-        if (!hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
-            executeOnChangeHandlerIfAppropriate(this);
-        }
-
-        return super.doClickFireClickEvent(event);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void doClickFireChangeEvent() {
-        if (hasFeature(EVENT_ONCHANGE_AFTER_ONCLICK)) {
-            executeOnChangeHandlerIfAppropriate(this);
-        }
+        executeOnChangeHandlerIfAppropriate(this);
     }
 
     /**
