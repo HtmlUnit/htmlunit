@@ -19,7 +19,6 @@ import java.util.WeakHashMap;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.host.ActiveXObject;
 import org.htmlunit.javascript.host.AudioScheduledSourceNode;
 import org.htmlunit.javascript.host.BarProp;
 import org.htmlunit.javascript.host.BatteryManager;
@@ -42,8 +41,6 @@ import org.htmlunit.javascript.host.MessagePort;
 import org.htmlunit.javascript.host.MimeType;
 import org.htmlunit.javascript.host.MimeTypeArray;
 import org.htmlunit.javascript.host.NamedNodeMap;
-import org.htmlunit.javascript.host.Namespace;
-import org.htmlunit.javascript.host.NamespaceCollection;
 import org.htmlunit.javascript.host.Navigator;
 import org.htmlunit.javascript.host.Notification;
 import org.htmlunit.javascript.host.PerformanceObserver;
@@ -247,21 +244,17 @@ import org.htmlunit.javascript.host.html.Audio;
 import org.htmlunit.javascript.host.html.DataTransfer;
 import org.htmlunit.javascript.host.html.HTMLAllCollection;
 import org.htmlunit.javascript.host.html.HTMLAnchorElement;
-import org.htmlunit.javascript.host.html.HTMLAppletElement;
 import org.htmlunit.javascript.host.html.HTMLAreaElement;
 import org.htmlunit.javascript.host.html.HTMLAudioElement;
 import org.htmlunit.javascript.host.html.HTMLBGSoundElement;
 import org.htmlunit.javascript.host.html.HTMLBRElement;
 import org.htmlunit.javascript.host.html.HTMLBaseElement;
-import org.htmlunit.javascript.host.html.HTMLBaseFontElement;
 import org.htmlunit.javascript.host.html.HTMLBlockElement;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLButtonElement;
 import org.htmlunit.javascript.host.html.HTMLCanvasElement;
 import org.htmlunit.javascript.host.html.HTMLCollection;
-import org.htmlunit.javascript.host.html.HTMLDDElement;
 import org.htmlunit.javascript.host.html.HTMLDListElement;
-import org.htmlunit.javascript.host.html.HTMLDTElement;
 import org.htmlunit.javascript.host.html.HTMLDataElement;
 import org.htmlunit.javascript.host.html.HTMLDataListElement;
 import org.htmlunit.javascript.host.html.HTMLDetailsElement;
@@ -283,9 +276,7 @@ import org.htmlunit.javascript.host.html.HTMLHeadingElement;
 import org.htmlunit.javascript.host.html.HTMLHtmlElement;
 import org.htmlunit.javascript.host.html.HTMLIFrameElement;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
-import org.htmlunit.javascript.host.html.HTMLInlineQuotationElement;
 import org.htmlunit.javascript.host.html.HTMLInputElement;
-import org.htmlunit.javascript.host.html.HTMLIsIndexElement;
 import org.htmlunit.javascript.host.html.HTMLLIElement;
 import org.htmlunit.javascript.host.html.HTMLLabelElement;
 import org.htmlunit.javascript.host.html.HTMLLegendElement;
@@ -298,7 +289,6 @@ import org.htmlunit.javascript.host.html.HTMLMenuElement;
 import org.htmlunit.javascript.host.html.HTMLMetaElement;
 import org.htmlunit.javascript.host.html.HTMLMeterElement;
 import org.htmlunit.javascript.host.html.HTMLModElement;
-import org.htmlunit.javascript.host.html.HTMLNextIdElement;
 import org.htmlunit.javascript.host.html.HTMLOListElement;
 import org.htmlunit.javascript.host.html.HTMLObjectElement;
 import org.htmlunit.javascript.host.html.HTMLOptGroupElement;
@@ -322,9 +312,7 @@ import org.htmlunit.javascript.host.html.HTMLTableCaptionElement;
 import org.htmlunit.javascript.host.html.HTMLTableCellElement;
 import org.htmlunit.javascript.host.html.HTMLTableColElement;
 import org.htmlunit.javascript.host.html.HTMLTableComponent;
-import org.htmlunit.javascript.host.html.HTMLTableDataCellElement;
 import org.htmlunit.javascript.host.html.HTMLTableElement;
-import org.htmlunit.javascript.host.html.HTMLTableHeaderCellElement;
 import org.htmlunit.javascript.host.html.HTMLTableRowElement;
 import org.htmlunit.javascript.host.html.HTMLTableSectionElement;
 import org.htmlunit.javascript.host.html.HTMLTemplateElement;
@@ -561,10 +549,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     @SuppressWarnings("unchecked")
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
-        AbstractList.class, AbstractRange.class,
-        ActiveXObject.class, AnalyserNode.class,
-        Animation.class, AnimationEvent.class,
-        Atomics.class,
+        AbstractList.class, AbstractRange.class, AnalyserNode.class,
+        Animation.class, AnimationEvent.class, Atomics.class,
         Attr.class, Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AudioScheduledSourceNode.class,
@@ -577,8 +563,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CDATASection.class, ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class,
         ClientRectList.class, ClipboardEvent.class,
         CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class,
-        ConstantSourceNode.class,
-        ConvolverNode.class, Coordinates.class, Credential.class, CredentialsContainer.class, Crypto.class,
+        ConstantSourceNode.class, ConvolverNode.class, Coordinates.class,
+        Credential.class, CredentialsContainer.class, Crypto.class,
         CryptoKey.class, CSS.class, CSSConditionRule.class,
         CSSCounterStyleRule.class, CSSFontFaceRule.class, CSSGroupingRule.class, CSSImportRule.class,
         CSSKeyframeRule.class, CSSKeyframesRule.class, CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class,
@@ -601,24 +587,22 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         FocusEvent.class, FontFace.class,
         FontFaceSet.class, FormData.class, GainNode.class, Gamepad.class,
         GamepadButton.class, GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,
-        HTMLAllCollection.class,
-        HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
-        HTMLBaseElement.class, HTMLBaseFontElement.class, HTMLBGSoundElement.class, HTMLBlockElement.class,
+        HTMLAllCollection.class, HTMLAnchorElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
+        HTMLBaseElement.class, HTMLBGSoundElement.class, HTMLBlockElement.class,
         HTMLBodyElement.class, HTMLBRElement.class, HTMLButtonElement.class,
         HTMLCanvasElement.class, HTMLCollection.class,
         HTMLDataElement.class, HTMLDataListElement.class,
-        HTMLDDElement.class, HTMLDetailsElement.class, HTMLDialogElement.class, HTMLDirectoryElement.class,
-        HTMLDivElement.class, HTMLDListElement.class, HTMLDocument.class, HTMLDTElement.class, HTMLElement.class,
+        HTMLDetailsElement.class, HTMLDialogElement.class, HTMLDirectoryElement.class,
+        HTMLDivElement.class, HTMLDListElement.class, HTMLDocument.class, HTMLElement.class,
         HTMLEmbedElement.class, HTMLFieldSetElement.class,
         HTMLFontElement.class, HTMLFormControlsCollection.class, HTMLFormElement.class, HTMLFrameElement.class,
         HTMLFrameSetElement.class,
         HTMLHeadElement.class, HTMLHeadingElement.class, HTMLHRElement.class, HTMLHtmlElement.class,
-        HTMLIFrameElement.class, HTMLImageElement.class, HTMLInlineQuotationElement.class, HTMLInputElement.class,
-        HTMLIsIndexElement.class, HTMLLabelElement.class,
+        HTMLIFrameElement.class, HTMLImageElement.class, HTMLInputElement.class, HTMLLabelElement.class,
         HTMLLegendElement.class, HTMLLIElement.class, HTMLLinkElement.class, HTMLListElement.class,
         HTMLMapElement.class, HTMLMarqueeElement.class,
         HTMLMediaElement.class, HTMLMenuElement.class, HTMLMetaElement.class,
-        HTMLMeterElement.class, HTMLModElement.class, HTMLNextIdElement.class,
+        HTMLMeterElement.class, HTMLModElement.class,
         HTMLObjectElement.class, HTMLOListElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLOutputElement.class,
         HTMLParagraphElement.class, HTMLParamElement.class, HTMLPhraseElement.class, HTMLPictureElement.class,
@@ -626,8 +610,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLSelectElement.class, HTMLSlotElement.class, HTMLSourceElement.class,
         HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
-        HTMLTableComponent.class, HTMLTableDataCellElement.class, HTMLTableElement.class,
-        HTMLTableHeaderCellElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
+        HTMLTableComponent.class, HTMLTableElement.class,
+        HTMLTableRowElement.class, HTMLTableSectionElement.class,
         HTMLTemplateElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class,
         HTMLTitleElement.class, HTMLTrackElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLVideoElement.class,
@@ -650,7 +634,6 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class,
-        Namespace.class, NamespaceCollection.class,
         Navigator.class, NetworkInformation.class, Node.class, NodeFilter.class, NodeIterator.class,
         NodeList.class, Notification.class,
         OfflineAudioCompletionEvent.class,

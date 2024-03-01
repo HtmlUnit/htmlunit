@@ -44,7 +44,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
-import org.htmlunit.javascript.host.ActiveXObjectImpl;
 
 /**
  * The JavaScript object {@code HTMLObjectElement}.
@@ -203,16 +202,6 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
                                 + xClassString + " because " + e.getMessage() + ".");
                     }
                     return;
-                }
-            }
-            if (webClient.getOptions().isActiveXNative()
-                    && System.getProperty("os.name").contains("Windows")) {
-                try {
-                    wrappedActiveX_ = new ActiveXObjectImpl(classid);
-                    wrappedActiveX_.setParentScope(getParentScope());
-                }
-                catch (final Exception e) {
-                    throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
                 }
             }
         }

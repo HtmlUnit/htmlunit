@@ -60,7 +60,6 @@ public class WebClientOptions implements Serializable {
 
     private boolean geolocationEnabled_;
     private boolean doNotTrackEnabled_;
-    private boolean activeXNative_;
     private String homePage_ = "https://www.htmlunit.org/";
     private ProxyConfig proxyConfig_;
     private int timeout_ = 90_000; // like Firefox 16 default's value for network.http.connection-timeout
@@ -508,29 +507,6 @@ public class WebClientOptions implements Serializable {
      */
     public void setThrowExceptionOnScriptError(final boolean enabled) {
         throwExceptionOnScriptError_ = enabled;
-    }
-
-    /**
-     * Sets whether to allow native ActiveX or no. Default value is false.
-     * Beware that you should never allow running native ActiveX components unless you fully trust
-     * the JavaScript code, as it is not controlled by the Java Virtual Machine.
-     *
-     * @param allow whether to allow or no
-     * @deprecated as of version 3.4.0
-    */
-    @Deprecated
-    public void setActiveXNative(final boolean allow) {
-        activeXNative_ = allow;
-    }
-
-    /**
-     * Returns whether native ActiveX components are allowed or no.
-     * @return whether native ActiveX components are allowed or no
-     * @deprecated as of version 3.4.0
-    */
-    @Deprecated
-    public boolean isActiveXNative() {
-        return activeXNative_;
     }
 
     /**
