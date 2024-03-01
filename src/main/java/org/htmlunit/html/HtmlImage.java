@@ -23,7 +23,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE
 import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0;
 import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0;
 import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0;
-import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30;
 
 import java.io.File;
 import java.io.IOException;
@@ -506,9 +505,6 @@ public class HtmlImage extends HtmlElement {
         final String src = getSrcAttribute();
         if (ATTRIBUTE_NOT_DEFINED == src) {
             final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-                return 30;
-            }
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
                     || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
                 return 0;
@@ -529,9 +525,6 @@ public class HtmlImage extends HtmlElement {
             return getHeight();
         }
         catch (final IOException e) {
-            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-                return 30;
-            }
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
                 return 16;
             }
@@ -573,10 +566,6 @@ public class HtmlImage extends HtmlElement {
         final String src = getSrcAttribute();
         if (ATTRIBUTE_NOT_DEFINED == src) {
             final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-
-            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-                return 28;
-            }
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
                     || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
                 return 0;
@@ -597,9 +586,6 @@ public class HtmlImage extends HtmlElement {
             return getWidth();
         }
         catch (final IOException e) {
-            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-                return 28;
-            }
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
                 return 16;
             }

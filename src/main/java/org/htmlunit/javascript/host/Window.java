@@ -14,9 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -853,9 +851,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxSetter
     public void setTop(final Object o) {
-        if (getBrowserVersion().hasFeature(JS_WINDOW_TOP_WRITABLE)) {
-            top_ = o;
-        }
+        // ignore
     }
 
     /**
@@ -887,10 +883,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxSetter
     public void setOpener(final Object newValue) {
-        if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
-            && newValue != null && !JavaScriptEngine.isUndefined(newValue) && !(newValue instanceof Window)) {
-            throw JavaScriptEngine.reportRuntimeError("Can't set opener to something other than a window!");
-        }
         opener_ = newValue;
     }
 

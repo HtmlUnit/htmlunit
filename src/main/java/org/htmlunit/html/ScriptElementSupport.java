@@ -15,8 +15,6 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
-import static org.htmlunit.BrowserVersionFeatures.JS_SCRIPT_HANDLE_204_AS_ERROR;
-import static org.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.nio.charset.Charset;
@@ -34,7 +32,6 @@ import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
-import org.htmlunit.javascript.host.event.EventHandler;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -202,13 +199,7 @@ public final class ScriptElementSupport {
                         executeEvent(element, Event.TYPE_ERROR);
                     }
                     else if (result == JavaScriptLoadResult.NO_CONTENT) {
-                        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-                        if (browserVersion.hasFeature(JS_SCRIPT_HANDLE_204_AS_ERROR)) {
-                            executeEvent(element, Event.TYPE_ERROR);
-                        }
-                        else {
-                            executeEvent(element, Event.TYPE_LOAD);
-                        }
+                        executeEvent(element, Event.TYPE_LOAD);
                     }
                 }
                 catch (final FailingHttpStatusCodeException e) {
@@ -350,15 +341,6 @@ public final class ScriptElementSupport {
         }
 
         final String scriptCode = getScriptCode(element);
-        if (event != ATTRIBUTE_NOT_DEFINED
-                && forr != ATTRIBUTE_NOT_DEFINED
-                && element.hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW)
-                && "window".equals(forr)) {
-            final Window window = element.getPage().getEnclosingWindow().getScriptableObject();
-            final EventHandler function = new EventHandler(element, event, scriptCode);
-            window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
-            return;
-        }
         if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
             final String url = element.getPage().getUrl().toExternalForm();
             final int line1 = element.getStartLineNumber();

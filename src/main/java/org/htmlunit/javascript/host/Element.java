@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
-import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
-import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -895,8 +892,7 @@ public class Element extends Node {
         }
 
         String html = null;
-        final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
-        if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
+        if (value != null && !"".equals(value)) {
             html = JavaScriptEngine.toString(value);
         }
 
@@ -950,19 +946,17 @@ public class Element extends Node {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode parent = domNode.getParentNode();
         if (null == parent) {
-            if (getBrowserVersion().hasFeature(JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED)) {
-                domNode.removeAllChildren();
-            }
             if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROWS_FOR_DETACHED)) {
                 throw JavaScriptEngine.reportRuntimeError("outerHTML is readonly for detached nodes");
             }
             return;
         }
 
-        if (value == null && !getBrowserVersion().hasFeature(JS_OUTER_HTML_NULL_AS_STRING)) {
+        if (value == null) {
             domNode.remove();
             return;
         }
+
         final String valueStr = JavaScriptEngine.toString(value);
         if (valueStr.isEmpty()) {
             domNode.remove();

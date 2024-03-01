@@ -14,19 +14,14 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_POP_STATE_EVENT_CLONE_STATE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.WebClient;
-import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -74,27 +69,7 @@ public class PopStateEvent extends Event {
      */
     public PopStateEvent(final EventTarget target, final String type, final Object state) {
         super(target, type);
-        if (state instanceof NativeObject && getBrowserVersion().hasFeature(JS_POP_STATE_EVENT_CLONE_STATE)) {
-            final NativeObject old = (NativeObject) state;
-            final NativeObject newState = new NativeObject();
-
-            final WebClient client = getWindow().getWebWindow().getWebClient();
-            final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
-
-            final ContextAction<Object> contextAction = cx -> {
-                for (final Object o : ScriptableObject.getPropertyIds(old)) {
-                    final String property = JavaScriptEngine.toString(o);
-                    newState.defineProperty(property, ScriptableObject.getProperty(old, property),
-                            ScriptableObject.EMPTY);
-                }
-                return null;
-            };
-            cf.call(contextAction);
-            state_ = newState;
-        }
-        else {
-            state_ = state;
-        }
+        state_ = state;
     }
 
     /**

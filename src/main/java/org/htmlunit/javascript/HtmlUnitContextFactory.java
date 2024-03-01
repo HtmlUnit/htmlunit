@@ -16,7 +16,6 @@ package org.htmlunit.javascript;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
-import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NEW_LINE;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -356,7 +355,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
                 return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NEWLINE:
-                return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NEW_LINE);
+                return false;
             default:
                 return super.hasFeature(cx, featureIndex);
         }

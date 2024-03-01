@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_FF_STYLE;
-import static org.htmlunit.BrowserVersionFeatures.JS_PAGERULE_SELECTORTEXT_EMPTY;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -74,10 +73,6 @@ public class CSSPageRule extends CSSRule {
      */
     @JsxGetter
     public String getSelectorText() {
-        if (getBrowserVersion().hasFeature(JS_PAGERULE_SELECTORTEXT_EMPTY)) {
-            return "";
-        }
-
         final String selectorText = getPageRule().getSelectorText();
         if (selectorText != null) {
             return selectorText.toLowerCase(Locale.ROOT);

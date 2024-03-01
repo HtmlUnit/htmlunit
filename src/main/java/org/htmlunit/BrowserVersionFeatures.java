@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.host.css.CSSGroupingRule;
-import org.htmlunit.javascript.host.event.PopStateEvent;
 
 /**
  * Constants of various features of each {@link BrowserVersion}.
@@ -701,17 +700,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0,
 
-    /**
-     * Getting the width and height of an image tag without a source returns 28x30;
-     * for invalid values returns same.
-     */
-    @BrowserFeature(IE)
-    JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30,
-
-    /** Indicates that innerHTML adds the child also for null values. */
-    @BrowserFeature(IE)
-    JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE,
-
     /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({CHROME, EDGE})
     JS_INNER_TEXT_SVG_NL,
@@ -818,34 +806,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, IE})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
-    /** element.outerHTML handles null value as string "null". */
-    @BrowserFeature(IE)
-    JS_OUTER_HTML_NULL_AS_STRING,
-
-    /** element.outerHTML removes all children from detached node. */
-    @BrowserFeature(IE)
-    JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED,
-
     /** element.outerHTML removes all children from detached node. */
     @BrowserFeature({CHROME, EDGE})
     JS_OUTER_HTML_THROWS_FOR_DETACHED,
-
-    /** Indicates that CSSPageRule.selectorText always returns an empty string. */
-    @BrowserFeature(IE)
-    JS_PAGERULE_SELECTORTEXT_EMPTY,
 
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
      * as class name. */
     @BrowserFeature({FF, FF_ESR})
     JS_PHRASE_COMMON_CLASS_NAME,
-
-    /** Indicates that the {@link PopStateEvent}.{@code state} is cloned. */
-    @BrowserFeature(IE)
-    JS_POP_STATE_EVENT_CLONE_STATE,
-
-    /** Indicates that the {@code pre.width} is string. */
-    @BrowserFeature(IE)
-    JS_PRE_WIDTH_STRING,
 
     /** Supports Promise. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -855,32 +823,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR, IE})
     JS_PROPERTY_DESCRIPTOR_NAME,
 
-    /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} starts with a new line. */
-    @BrowserFeature(IE)
-    JS_PROPERTY_DESCRIPTOR_NEW_LINE,
-
     /** Support {@code Reflect}. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_REFLECT,
-
-    /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
-    @BrowserFeature(IE)
-    JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS,
-
-    /** RegExp group <code>$0</code> returns the whole previous match (see {@link java.util.regex.Matcher#group()}). */
-    @BrowserFeature(IE)
-    JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
-
-    /**
-     * Javascript script tags handles a 204 (no content) response for the src
-     * attrib as error.
-     */
-    @BrowserFeature(IE)
-    JS_SCRIPT_HANDLE_204_AS_ERROR,
-
-    /** Javascript script tags supports the 'for' and the 'event' attribute. */
-    @BrowserFeature(IE)
-    JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
 
     /** Javascript selectorText property returns selectors in lower case. */
     @BrowserFeature({CHROME, EDGE, IE})
@@ -981,10 +926,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
-    /** Changing the opener of a window to something not null and not a window is not valid. */
-    @BrowserFeature(IE)
-    JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT,
-
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
@@ -1014,10 +955,6 @@ public enum BrowserVersionFeatures {
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
-
-    /** Window.top property is writable. */
-    @BrowserFeature(IE)
-    JS_WINDOW_TOP_WRITABLE,
 
     /** Supports XML. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})

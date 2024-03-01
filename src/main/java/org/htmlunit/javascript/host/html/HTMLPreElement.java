@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_PRE_WIDTH_STRING;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -84,9 +83,6 @@ public class HTMLPreElement extends HTMLElement {
      */
     @JsxGetter(propertyName = "width")
     public Object getWidth_js() {
-        if (getBrowserVersion().hasFeature(JS_PRE_WIDTH_STRING)) {
-            return getWidthOrHeight("width", Boolean.TRUE);
-        }
         final String value = getDomNodeOrDie().getAttributeDirect("width");
         final Integer intValue = HTMLCanvasElement.getValue(value);
         if (intValue != null) {
@@ -101,12 +97,7 @@ public class HTMLPreElement extends HTMLElement {
      */
     @JsxSetter(propertyName = "width")
     public void setWidth_js(final String width) {
-        if (getBrowserVersion().hasFeature(JS_PRE_WIDTH_STRING)) {
-            setWidthOrHeight("width", width, true);
-        }
-        else {
-            getDomNodeOrDie().setAttribute("width", width);
-        }
+        getDomNodeOrDie().setAttribute("width", width);
     }
 
     /**

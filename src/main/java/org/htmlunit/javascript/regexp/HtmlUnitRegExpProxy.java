@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.regexp;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS;
-import static org.htmlunit.BrowserVersionFeatures.JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -222,8 +219,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             sb.append(originalString, previousIndex, matcher.start());
             String localReplacement = replacement;
             if (replacement.contains("$")) {
-                localReplacement = computeReplacementValue(replacement, originalString, matcher,
-                        browserVersion_.hasFeature(JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH));
+                localReplacement = computeReplacementValue(replacement, originalString, matcher, false);
             }
             sb.append(localReplacement);
             previousIndex = matcher.end();
@@ -357,17 +353,12 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
         // lastParen
         if (groupCount > 0) {
-            if (groupCount > 9 && browserVersion_.hasFeature(JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS)) {
+            final String last = matcher.group(groupCount);
+            if (last == null) {
                 lastParen = new SubString();
             }
             else {
-                final String last = matcher.group(groupCount);
-                if (last == null) {
-                    lastParen = new SubString();
-                }
-                else {
-                    lastParen = new SubString(last, 0, last.length());
-                }
+                lastParen = new SubString(last, 0, last.length());
             }
         }
 
