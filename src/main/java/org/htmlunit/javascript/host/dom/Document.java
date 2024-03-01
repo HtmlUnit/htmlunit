@@ -21,8 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
-import static org.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
-import static org.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -129,7 +127,6 @@ import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLFrameSetElement;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.UrlUtils;
-import org.htmlunit.xml.XmlPage;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.DOMException;
@@ -1257,9 +1254,7 @@ public class Document extends Node {
         // this strange conversation preserves NodeFilter.SHOW_ALL
         final int whatToShowI = (int) Double.valueOf(whatToShow).longValue();
 
-        if (getBrowserVersion().hasFeature(JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE)) {
-            expandEntityReferences = false;
-        }
+        expandEntityReferences = false;
 
         final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, false);
         final TreeWalker t = new TreeWalker(root, whatToShowI, filterWrapper, expandEntityReferences);
@@ -4073,10 +4068,6 @@ public class Document extends Node {
         final DomNode domNode = getDomNodeOrDie();
         final Object domElement = domNode.getFirstByXPath("//*[@id = \"" + id + "\"]");
         if (domElement != null) {
-            if (!(domNode instanceof XmlPage) || domElement instanceof HtmlElement
-                    || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
-                return ((DomElement) domElement).getScriptableObject();
-            }
             if (LOG.isDebugEnabled()) {
                 LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");
             }

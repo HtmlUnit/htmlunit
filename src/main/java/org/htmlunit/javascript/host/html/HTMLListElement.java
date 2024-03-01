@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TYPE_ACCEPTS_ARBITRARY_VALUES;
-
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -59,18 +57,7 @@ public class HTMLListElement extends HTMLElement {
      * @return the value of the {@code type} property
      */
     protected String getType() {
-        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_TYPE_ACCEPTS_ARBITRARY_VALUES);
-
-        final String type = getDomNodeOrDie().getAttributeDirect("type");
-        if (acceptArbitraryValues
-            || "1".equals(type)
-            || "a".equals(type)
-            || "A".equals(type)
-            || "i".equals(type)
-            || "I".equals(type)) {
-            return type;
-        }
-        return "";
+        return getDomNodeOrDie().getAttributeDirect("type");
     }
 
     /**
@@ -78,17 +65,6 @@ public class HTMLListElement extends HTMLElement {
      * @param type the value of the {@code type} property
      */
     protected void setType(final String type) {
-        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_TYPE_ACCEPTS_ARBITRARY_VALUES);
-        if (acceptArbitraryValues
-                || "1".equals(type)
-                || "a".equals(type)
-                || "A".equals(type)
-                || "i".equals(type)
-                || "I".equals(type)) {
-            getDomNodeOrDie().setAttribute("type", type);
-            return;
-        }
-
-        throw JavaScriptEngine.reportRuntimeError("Cannot set the type property to invalid value: '" + type + "'");
+        getDomNodeOrDie().setAttribute("type", type);
     }
 }

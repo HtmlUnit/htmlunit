@@ -15,7 +15,6 @@
 package org.htmlunit.xml;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.JS_XML;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -145,7 +144,7 @@ public class XmlPage extends SgmlPage {
         }
 
         final Map<Integer, List<String>> attributesOrderMap;
-        if (node_ != null && getWebClient().getBrowserVersion().hasFeature(JS_XML)) {
+        if (node_ != null) {
             attributesOrderMap = XmlUtils.getAttributesOrderMap(node_.getOwnerDocument());
         }
         else {

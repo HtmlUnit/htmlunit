@@ -14,8 +14,6 @@
  */
 package org.htmlunit;
 
-import static org.htmlunit.BrowserVersionFeatures.URL_AUTH_CREDENTIALS;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
@@ -392,8 +390,7 @@ public class HttpWebConnection implements WebConnection {
 
         // if the used url contains credentials, we have to add this
         final Credentials requestUrlCredentials = webRequest.getUrlCredentials();
-        if (null != requestUrlCredentials
-                && webClient_.getBrowserVersion().hasFeature(URL_AUTH_CREDENTIALS)) {
+        if (null != requestUrlCredentials) {
             final URL requestUrl = webRequest.getUrl();
             final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
             // updating our client to keep the credentials for the next request

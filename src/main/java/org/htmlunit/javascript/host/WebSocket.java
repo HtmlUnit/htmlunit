@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.WEBSOCKET_ORIGIN_SET;
-
 import java.io.IOException;
 import java.net.URI;
 
@@ -103,7 +101,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             setDomNode(containingPage_.getDocumentElement(), false);
 
             final WebClient webClient = webWindow.getWebClient();
-            originSet_ = webClient.getBrowserVersion().hasFeature(WEBSOCKET_ORIGIN_SET);
+            originSet_ = true;
 
             webSocketImpl_ = new JettyWebSocketAdapter(webClient) {
 

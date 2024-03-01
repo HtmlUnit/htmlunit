@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
-import static org.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_BLANK_PATH;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -523,10 +522,7 @@ public class Location extends HtmlUnitScriptable {
     @JsxGetter(IE)
     public String getPathname() {
         if (UrlUtils.URL_ABOUT_BLANK == getUrl()) {
-            if (getBrowserVersion().hasFeature(URL_ABOUT_BLANK_HAS_BLANK_PATH)) {
-                return "blank";
-            }
-            return "/blank";
+            return "blank";
         }
         return getUrl().getPath();
     }

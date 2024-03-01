@@ -414,14 +414,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_SELECTOR_TEXT_LOWERCASE,
 
-    /** Ignore negative value when setting the length. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
-
-    /** Indicates that select.options.remove ignores the call if index is too large. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE,
-
     /** Indicates that select.options.remove ignores the call if index is too large. */
     @BrowserFeature({FF, FF_ESR})
     JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE,
@@ -430,74 +422,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_STORAGE_PRESERVED_INCLUDED,
 
-    /** Indicates that string.includes() is supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_STRING_INCLUDES,
-
-    /** Indicates that string.startsWith() and .endWith() are supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_STRING_REPEAT,
-
-    /** Indicates that string.startsWith() and .endWith() are supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_STRING_STARTS_ENDS_WITH,
-
-    /** Indicates that string.trimLeft() and .trimRight() are supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_STRING_TRIM_LEFT_RIGHT,
-
-    /** Stylesheet list contains only active style sheets. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_STYLESHEETLIST_ACTIVE_ONLY,
-
     /** Indicates wordSpacing support percent values. */
     @BrowserFeature({FF, FF_ESR})
     JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT,
 
-    /** Indicates that trying to access the style property with a wrong index returns undefined
-     * instead of "". */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED,
-
-    /** Supports Symbol. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_SYMBOL,
-
-    /** The width column property has a value of 'null' for null. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_TABLE_COLUMN_WIDTH_NULL_STRING,
-
-    /** Calling deleteCell without an index throws an exception. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
-
     /** Set span zo zero if provided value is invalid. */
     @BrowserFeature({CHROME, EDGE})
     JS_TABLE_SPAN_SET_ZERO_IF_INVALID,
-
-    /** Setting the property {@code maxLength} throws an exception, if the provided value is less than 0. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION,
-
-    /** Setting the value processes null as null value. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_TEXT_AREA_SET_VALUE_NULL,
-
-    /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always {@code false}. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
-
-    /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
-
-    /** Indicates that WeakSet is supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_WEAK_SET,
-
-    /** Setting the property width/height to arbitrary values is allowed. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
@@ -529,14 +460,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
 
-    /** Supports XML. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_XML,
-
-    /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
-
     /** {@code XSLTProcessor.transformToDocument} supports output indent attribute. */
     @BrowserFeature({CHROME, EDGE})
     JS_XSLT_TRANSFORM_INDENT,
@@ -551,35 +474,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     MULTICOL_BLOCK,
 
-    /** The default display style of slot is 'content'. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    SLOT_CONTENTS,
-
-    /**
-     * Indicates, that the pathname for the url 'blank' is empty;
-     * instead of 'blank'.
-     */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    URL_ABOUT_BLANK_HAS_BLANK_PATH,
-
-    /**
-     * Indicates, that the browser supports username and password as
-     * part of the url (e.g. http://john.smith:secret@localhost).
-     */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    URL_AUTH_CREDENTIALS,
-
     /** The protocol setter does not check for special protocols. */
     @BrowserFeature(FF_ESR)
     URL_IGNORE_SPECIAL,
-
-    /** Handles missing slashes. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    URL_MISSING_SLASHES,
-
-    /** Set the origin property for web socket events. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    WEBSOCKET_ORIGIN_SET,
 
     /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
     @BrowserFeature({FF, FF_ESR})
@@ -595,10 +492,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     XHR_LOAD_ALWAYS_AFTER_DONE,
 
-    /** Indicates if an empty url is allowed as url param for the open method. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    XHR_OPEN_ALLOW_EMTPY_URL,
-
     /** XMLHttpRequest triggers an additional progress event if a network error
      * was thrown in async mode. */
     @BrowserFeature(FF_ESR)
@@ -611,8 +504,4 @@ public enum BrowserVersionFeatures {
     /** Indicates if the XMLHttpRequest.send() method will throw if aborted. */
     @BrowserFeature({CHROME, EDGE})
     XHR_SEND_NETWORK_ERROR_IF_ABORTED,
-
-    /** Indicates that the content charset is used for response parsing. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    XHR_USE_CONTENT_CHARSET,
 }

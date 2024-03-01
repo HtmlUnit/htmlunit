@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -181,7 +180,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         if (!JavaScriptEngine.isUndefined(index)) {
             position = (int) JavaScriptEngine.toNumber(index);
         }
-        else if (getBrowserVersion().hasFeature(JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX)) {
+        else {
             throw JavaScriptEngine.reportRuntimeError("No enough arguments");
         }
 

@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
-import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -115,7 +114,7 @@ public class HTMLInputElement extends HTMLElement {
 
         final String val = JavaScriptEngine.toString(newValue);
         if ("file".equalsIgnoreCase(getType())) {
-            if (StringUtils.isNotEmpty(val) &&  getBrowserVersion().hasFeature(JS_SELECT_FILE_THROWS)) {
+            if (StringUtils.isNotEmpty(val)) {
                 throw JavaScriptEngine.reportRuntimeError("InvalidStateError: "
                         + "Failed to set the 'value' property on 'HTMLInputElement'.");
             }

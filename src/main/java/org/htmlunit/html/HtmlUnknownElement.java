@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import static org.htmlunit.BrowserVersionFeatures.CSS_RP_DISPLAY_NONE;
 import static org.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
 import static org.htmlunit.BrowserVersionFeatures.MULTICOL_BLOCK;
-import static org.htmlunit.BrowserVersionFeatures.SLOT_CONTENTS;
 
 import java.util.Map;
 
@@ -112,10 +111,7 @@ public class HtmlUnknownElement extends HtmlElement {
             case HtmlDialog.TAG_NAME:
                 return DisplayStyle.NONE;
             case HtmlSlot.TAG_NAME:
-                if (getPage().getWebClient().getBrowserVersion().hasFeature(SLOT_CONTENTS)) {
-                    return DisplayStyle.CONTENTS;
-                }
-                break;
+                return DisplayStyle.CONTENTS;
             default:
         }
         return DisplayStyle.INLINE;

@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION;
-import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_VALUE_NULL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -99,7 +97,7 @@ public class HTMLTextAreaElement extends HTMLElement {
     @JsxSetter
     @Override
     public void setValue(final Object value) {
-        if (null == value && getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_VALUE_NULL)) {
+        if (null == value) {
             getDomNodeOrDie().setText("");
             return;
         }
@@ -302,7 +300,7 @@ public class HTMLTextAreaElement extends HTMLElement {
         try {
             final int i = Integer.parseInt(maxLength);
 
-            if (i < 0 && getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION)) {
+            if (i < 0) {
                 throw JavaScriptEngine.throwAsScriptRuntimeEx(
                     new NumberFormatException("New value for maxLength '" + maxLength + "' is smaller than zero."));
             }

@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
-import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.AUTO;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
@@ -1193,10 +1192,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         final Map<String, StyleElement> style = getStyleMap();
         final int size = style.size();
         if (index >= size) {
-            if (getBrowserVersion().hasFeature(JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED)) {
-                return Undefined.instance;
-            }
-            return "";
+            return Undefined.instance;
         }
         return style.keySet().toArray(new String[size])[index];
     }

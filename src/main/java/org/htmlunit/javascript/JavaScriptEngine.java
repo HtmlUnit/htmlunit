@@ -16,12 +16,6 @@ package org.htmlunit.javascript;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
-import static org.htmlunit.BrowserVersionFeatures.JS_STRING_INCLUDES;
-import static org.htmlunit.BrowserVersionFeatures.JS_STRING_REPEAT;
-import static org.htmlunit.BrowserVersionFeatures.JS_STRING_STARTS_ENDS_WITH;
-import static org.htmlunit.BrowserVersionFeatures.JS_STRING_TRIM_LEFT_RIGHT;
-import static org.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
-import static org.htmlunit.BrowserVersionFeatures.JS_WEAK_SET;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
 
 import java.io.IOException;
@@ -229,10 +223,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "Continuation", "Iterator", "StopIteration", "BigInt");
 
-        if (!browserVersion.hasFeature(JS_SYMBOL)) {
-            deleteProperties(window, "Symbol");
-        }
-
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(window, "Error");
         if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
             errorObject.defineProperty("stackTraceLimit", 10, ScriptableObject.EMPTY);
@@ -418,27 +408,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "Date");
         deleteProperties(datePrototype, "toSource");
 
-        if (!browserVersion.hasFeature(JS_STRING_INCLUDES)) {
-            deleteProperties(stringPrototype, "includes");
-        }
-        if (!browserVersion.hasFeature(JS_STRING_REPEAT)) {
-            deleteProperties(stringPrototype, "repeat");
-        }
-        if (!browserVersion.hasFeature(JS_STRING_STARTS_ENDS_WITH)) {
-            deleteProperties(stringPrototype, "startsWith", "endsWith");
-        }
-        if (!browserVersion.hasFeature(JS_STRING_TRIM_LEFT_RIGHT)) {
-            deleteProperties(stringPrototype, "trimLeft", "trimRight");
-        }
-
         deleteProperties(scriptable, "uneval");
         removePrototypeProperties(scriptable, "Object", "toSource");
         removePrototypeProperties(scriptable, "Array", "toSource");
         removePrototypeProperties(scriptable, "Function", "toSource");
 
-        if (!browserVersion.hasFeature(JS_WEAK_SET)) {
-            deleteProperties(scriptable, "WeakSet");
-        }
         deleteProperties(scriptable, "isXMLName");
 
         NativeFunctionToStringFunction.installFix(scriptable, browserVersion);

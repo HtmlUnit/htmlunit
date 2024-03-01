@@ -14,13 +14,11 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_PROMISE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlMedia;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
@@ -126,11 +124,8 @@ public class HTMLMediaElement extends HTMLElement {
      */
     @JsxFunction
     public Object play() {
-        if (getBrowserVersion().hasFeature(JS_PROMISE)) {
-            return setupRejectedPromise(() ->
-                        new DOMException("HtmlUnit does not support media play().", DOMException.NOT_FOUND_ERR));
-        }
-        return Undefined.instance;
+        return setupRejectedPromise(() ->
+                    new DOMException("HtmlUnit does not support media play().", DOMException.NOT_FOUND_ERR));
     }
 
     /**

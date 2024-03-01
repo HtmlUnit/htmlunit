@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
-import static org.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
@@ -1141,36 +1140,7 @@ public class HTMLElement extends Element {
      *        if {@code null}, this method returns <code>0</code> in lieu of negative values
      */
     protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
-        String value = getDomNodeOrDie().getAttribute(attributeName);
-        if (getBrowserVersion().hasFeature(JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES)) {
-            return value;
-        }
-        if (!PERCENT_VALUE.matcher(value).matches()) {
-            try {
-                final float f = Float.parseFloat(value);
-                final int i = (int) f;
-                if (i < 0) {
-                    if (returnNegativeValues == null) {
-                        value = "0";
-                    }
-                    else if (!returnNegativeValues.booleanValue()) {
-                        value = "";
-                    }
-                    else {
-                        value = Integer.toString(i);
-                    }
-                }
-                else {
-                    value = Integer.toString(i);
-                }
-            }
-            catch (final NumberFormatException e) {
-                if (!getBrowserVersion().hasFeature(JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES)) {
-                    value = "";
-                }
-            }
-        }
-        return value;
+        return getDomNodeOrDie().getAttribute(attributeName);
     }
 
     /**
@@ -1182,30 +1152,7 @@ public class HTMLElement extends Element {
      *        this check/conversion is only done if the feature JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES
      *        is set for the simulated browser
      */
-    protected void setWidthOrHeight(final String attributeName, String value, final boolean allowNegativeValues) {
-        if (!getBrowserVersion().hasFeature(JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES) && !value.isEmpty()) {
-            if (value.endsWith("px")) {
-                value = value.substring(0, value.length() - 2);
-            }
-            boolean error = false;
-            if (!PERCENT_VALUE.matcher(value).matches()) {
-                try {
-                    final float f = Float.parseFloat(value);
-                    final int i = (int) f;
-                    if (i < 0 && !allowNegativeValues) {
-                        error = true;
-                    }
-                }
-                catch (final NumberFormatException e) {
-                    error = true;
-                }
-            }
-            if (error) {
-                final Exception e = new Exception("Cannot set the '" + attributeName
-                        + "' property to invalid value: '" + value + "'");
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-            }
-        }
+    protected void setWidthOrHeight(final String attributeName, final String value, final boolean allowNegativeValues) {
         getDomNodeOrDie().setAttribute(attributeName, value);
     }
 

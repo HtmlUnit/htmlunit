@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_COLUMN_WIDTH_NULL_STRING;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -102,13 +101,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @JsxSetter(propertyName = "width")
     public void setWidth_js(final Object width) {
-        final String value;
-        if (width == null && !getBrowserVersion().hasFeature(JS_TABLE_COLUMN_WIDTH_NULL_STRING)) {
-            value = "";
-        }
-        else {
-            value = JavaScriptEngine.toString(width);
-        }
+        final String value = JavaScriptEngine.toString(width);
         setWidthOrHeight("width", value, false);
     }
 

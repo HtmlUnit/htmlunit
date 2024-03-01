@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -92,7 +91,6 @@ public class StyleSheetList extends HtmlUnitScriptable {
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
 
         if (webClient.getOptions().isCssEnabled()) {
-            final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
             nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true);
 
             nodes_.setEffectOnCacheFunction(
@@ -112,10 +110,7 @@ public class StyleSheetList extends HtmlUnitScriptable {
                             return true;
                         }
                         if (node instanceof HtmlLink) {
-                            if (onlyActive) {
-                                return ((HtmlLink) node).isActiveStyleSheetLink();
-                            }
-                            return ((HtmlLink) node).isStyleSheetLink();
+                            return ((HtmlLink) node).isActiveStyleSheetLink();
                         }
                         return false;
                     });

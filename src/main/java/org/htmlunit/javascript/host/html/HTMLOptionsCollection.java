@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH;
-import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -42,7 +40,6 @@ import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -204,10 +201,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     @JsxSetter
     public void setLength(final int newLength) {
         if (newLength < 0) {
-            if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH)) {
-                return;
-            }
-            throw JavaScriptEngine.reportRuntimeError("Length is negative");
+            return;
         }
 
         final int currentLength = htmlSelect_.getOptionSize();
@@ -300,9 +294,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
         int idx = index;
         final BrowserVersion browser = getBrowserVersion();
         if (idx < 0) {
-            if (browser.hasFeature(JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE)) {
-                return;
-            }
+            return;
         }
 
         idx = Math.max(idx, 0);

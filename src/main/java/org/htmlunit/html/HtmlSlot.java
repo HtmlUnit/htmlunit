@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.SLOT_CONTENTS;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -48,9 +46,6 @@ public class HtmlSlot extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(SLOT_CONTENTS)) {
-            return DisplayStyle.CONTENTS;
-        }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.CONTENTS;
     }
 }

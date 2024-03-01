@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
-import static org.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
@@ -722,15 +721,13 @@ public class HtmlPage extends SgmlPage {
      */
     public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
         // to handle http: and http:/ in FF (Bug #474)
-        if (hasFeature(URL_MISSING_SLASHES)) {
-            boolean incorrectnessNotified = false;
-            while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {
-                if (!incorrectnessNotified) {
-                    notifyIncorrectness("Incorrect URL \"" + relativeUrl + "\" has been corrected");
-                    incorrectnessNotified = true;
-                }
-                relativeUrl = "http:/" + relativeUrl.substring(5);
+        boolean incorrectnessNotified = false;
+        while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {
+            if (!incorrectnessNotified) {
+                notifyIncorrectness("Incorrect URL \"" + relativeUrl + "\" has been corrected");
+                incorrectnessNotified = true;
             }
+            relativeUrl = "http:/" + relativeUrl.substring(5);
         }
 
         return WebClient.expandUrl(getBaseURL(), relativeUrl);

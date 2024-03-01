@@ -18,11 +18,9 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static org.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
-import static org.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static org.htmlunit.BrowserVersionFeatures.XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC;
 import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TEXT_EMPTY_UNSENT;
 import static org.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
-import static org.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -658,9 +656,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public void open(final String method, final Object urlParam, final Object asyncParam,
         final Object user, final Object password) {
-        if ((urlParam == null || "".equals(urlParam)) && !getBrowserVersion().hasFeature(XHR_OPEN_ALLOW_EMTPY_URL)) {
-            throw JavaScriptEngine.reportRuntimeError("URL for XHR.open can't be empty!");
-        }
 
         // async defaults to true if not specified
         boolean async = true;
@@ -1004,9 +999,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         }
                         @Override
                         public Charset getContentCharset() {
-                            if (charsetNameFinal.isEmpty()
-                                    || (charset == null && browserVersion
-                                                .hasFeature(XHR_USE_CONTENT_CHARSET))) {
+                            if (charsetNameFinal.isEmpty() || charset == null) {
                                 return super.getContentCharset();
                             }
                             return charset;
