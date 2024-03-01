@@ -31,7 +31,6 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -112,11 +111,6 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Before
     public void clearCookies() throws Exception {
         shutDownAll();
-
-        // [IE] real IE waits for the page to load until infinity
-        if (useRealBrowser() && getBrowserVersion().isIE()) {
-            Assert.fail("Blocks real IE");
-        }
 
         getMockWebConnection().setDefaultResponse("<html><head></head><body></body></html>");
         startWebServer(getMockWebConnection(), null);

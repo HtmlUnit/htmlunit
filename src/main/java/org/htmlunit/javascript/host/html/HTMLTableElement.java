@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -54,8 +53,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  */
 @JsxClass(domClass = HtmlTable.class)
 public class HTMLTableElement extends RowContainer {
-
-    private static final List<String> VALID_RULES_ = Arrays.asList("none", "groups", "rows", "cols");
 
     /**
      * Creates an instance.

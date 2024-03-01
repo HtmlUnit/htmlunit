@@ -111,12 +111,10 @@ import org.htmlunit.javascript.host.event.HashChangeEvent;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
-import org.htmlunit.javascript.host.event.MouseWheelEvent;
 import org.htmlunit.javascript.host.event.MutationEvent;
 import org.htmlunit.javascript.host.event.PointerEvent;
 import org.htmlunit.javascript.host.event.PopStateEvent;
 import org.htmlunit.javascript.host.event.ProgressEvent;
-import org.htmlunit.javascript.host.event.SVGZoomEvent;
 import org.htmlunit.javascript.host.event.TextEvent;
 import org.htmlunit.javascript.host.event.UIEvent;
 import org.htmlunit.javascript.host.event.WheelEvent;
@@ -160,7 +158,6 @@ public class Document extends Node {
     private static final Log LOG = LogFactory.getLog(Document.class);
     private static final Pattern TAG_NAME_PATTERN = Pattern.compile("\\w+");
     // all as lowercase for performance
-    private static final Set<String> EXECUTE_CMDS_IE = new HashSet<>();
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
@@ -212,10 +209,8 @@ public class Document extends Node {
         additionalEventMap.put("PointerEvent", PointerEvent.class);
         additionalEventMap.put("PopStateEvent", PopStateEvent.class);
         additionalEventMap.put("ProgressEvent", ProgressEvent.class);
-        additionalEventMap.put("MouseWheelEvent", MouseWheelEvent.class);
         additionalEventMap.put("FocusEvent", FocusEvent.class);
         additionalEventMap.put("WheelEvent", WheelEvent.class);
-        additionalEventMap.put("SVGZoomEvent", SVGZoomEvent.class);
         additionalEventMap.put("AnimationEvent", AnimationEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
     }
@@ -239,29 +234,7 @@ public class Document extends Node {
 
     static {
         // commands
-        String[] cmds = {
-            "2D-Position", "AbsolutePosition",
-            "BlockDirLTR", "BlockDirRTL", "BrowseMode",
-            "ClearAuthenticationCache", "CreateBookmark", "Copy", "Cut",
-            "DirLTR", "DirRTL",
-            "EditMode",
-            "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
-            "InsertIFrame", "InsertInputButton", "InsertInputCheckbox",
-            "InsertInputFileUpload", "InsertInputHidden", "InsertInputImage", "InsertInputPassword", "InsertInputRadio",
-            "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee",
-            "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea",
-            "LiveResize", "MultipleSelection", "Open",
-            "OverWrite", "PlayImage",
-            "Refresh", "RemoveParaFormat", "SaveAs",
-            "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
-            "UnBookmark",
-            "Paste"
-        };
-        for (final String cmd : cmds) {
-            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
-        }
-
-        cmds = new String[] {
+        String[] cmds = new String[] {
             "BackColor", "BackgroundImageCache" /* Undocumented */,
             "Bold",
             "CreateLink", "Delete",
@@ -277,7 +250,6 @@ public class Document extends Node {
             "Underline", "Undo", "Unlink", "Unselect"
         };
         for (final String cmd : cmds) {
-            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
             if (!"Bold".equals(cmd)) {
                 EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
             }
@@ -1035,9 +1007,6 @@ public class Document extends Node {
         }
 
         final String cmdLC = cmd.toLowerCase(Locale.ROOT);
-        if (getBrowserVersion().isIE()) {
-            return EXECUTE_CMDS_IE.contains(cmdLC);
-        }
         if (getBrowserVersion().isChrome() || getBrowserVersion().isEdge()) {
             return EXECUTE_CMDS_CHROME.contains(cmdLC) || (includeBold && "bold".equalsIgnoreCase(cmd));
         }

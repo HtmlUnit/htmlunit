@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.htmlunit.BrowserVersion;
 import org.junit.Test;
 
 /**
@@ -43,7 +42,7 @@ public class HtmlUnitRegExpProxy3Test {
         final Matcher matcher1group = Pattern.compile("(h)").matcher("hello");
         matcher1group.find();
 
-        final HtmlUnitRegExpProxy proxy = new HtmlUnitRegExpProxy(null, BrowserVersion.FIREFOX);
+        final HtmlUnitRegExpProxy proxy = new HtmlUnitRegExpProxy(null);
 
         assertEquals("$", proxy.computeReplacementValue("$$", theString, matcher0group, false));
         assertEquals("$$x$", proxy.computeReplacementValue("$$$$x$$", theString, matcher0group, false));

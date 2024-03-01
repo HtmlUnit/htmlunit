@@ -54,7 +54,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     private static final ConcurrentHashMap<String, String> EDGE_FORMATS_ = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, String> FF_FORMATS_ = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, String> FF_ESR_FORMATS_ = new ConcurrentHashMap<>();
-    private static final ConcurrentHashMap<String, String> IE_FORMATS_ = new ConcurrentHashMap<>();
 
     private transient DateTimeFormatHelper formatter_;
 
@@ -69,8 +68,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final String yyyySlash = "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd";
         final String yyyyDash = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
         final String yyyyDotBlankDot = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd.";
-        final String yyyyDotBlankDotIE = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd\u200E.";
-        final String rightToLeft = "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY";
 
         final Map<String, String> commonFormats = new HashMap<>();
         commonFormats.put("", mmSlash);
@@ -142,8 +139,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("zh-SG", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
         commonFormats.put("fr-CH", ddDot);
 
-        IE_FORMATS_.putAll(commonFormats);
-
         FF_FORMATS_.putAll(commonFormats);
         FF_ESR_FORMATS_.putAll(commonFormats);
 
@@ -156,39 +151,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         CHROME_FORMATS_.putAll(commonFormats);
         CHROME_FORMATS_.put("sq", mmSlash);
-
-        IE_FORMATS_.put("ar", rightToLeft);
-        IE_FORMATS_.put("ar-AE", rightToLeft);
-        IE_FORMATS_.put("ar-BH", rightToLeft);
-        IE_FORMATS_.put("ar-DZ", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
-        IE_FORMATS_.put("ar-MA", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
-        IE_FORMATS_.put("ar-SA", rightToLeft);
-        IE_FORMATS_.put("ar-TN", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
-        IE_FORMATS_.put("ban", ddDot);
-        IE_FORMATS_.put("cs", ddDot);
-        IE_FORMATS_.put("da", ddDash);
-        IE_FORMATS_.put("en-CA", yyyyDash);
-        IE_FORMATS_.put("en-IN", ddDash);
-        IE_FORMATS_.put("en-PH", ddSlash);
-        IE_FORMATS_.put("es-US", mmSlash);
-        IE_FORMATS_.put("hi", ddDash);
-        IE_FORMATS_.put("hr", ddDotDot);
-        IE_FORMATS_.put("hu", yyyyDotBlankDotIE);
-        IE_FORMATS_.put("it-CH", ddDot);
-        IE_FORMATS_.put("iw", ddSlash);
-        IE_FORMATS_.put("ja", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
-        IE_FORMATS_.put("ja-JP-u-ca-japanese", "\u200Eyy\u200E/\u200EMM\u200E/\u200Edd");
-        IE_FORMATS_.put("ko", "\u200EYYYY\u200E\uB144 \u200EMM\u200E\uC6D4 \u200Edd\u200E\uC77C");
-        IE_FORMATS_.put("lv", ddDot);
-        IE_FORMATS_.put("mt", ddSlash);
-        IE_FORMATS_.put("no", ddDot);
-        IE_FORMATS_.put("sr", ddDotDot);
-        IE_FORMATS_.put("sr-BA", ddDot);
-        IE_FORMATS_.put("sr-CS", ddDot);
-        IE_FORMATS_.put("sr-ME", ddDot);
-        IE_FORMATS_.put("sr-RS", ddDot);
-        IE_FORMATS_.put("zh", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
-        IE_FORMATS_.put("zh-HK", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
     }
 
     /**
@@ -204,9 +166,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         }
         else if (browserVersion.isEdge()) {
             formats = EDGE_FORMATS_;
-        }
-        else if (browserVersion.isIE()) {
-            formats = IE_FORMATS_;
         }
         else if (browserVersion.isFirefoxESR()) {
             formats = FF_ESR_FORMATS_;

@@ -514,15 +514,10 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         driver.findElement(By.name("onloadFrameAnchor")).click();
-        final boolean ie = getBrowserVersion().isIE();
         verifyAlerts(driver, "Body alert.");
-        if (!ie) {
-            verifyAlerts(driver, "Onload alert.");
-        }
+        verifyAlerts(driver, "Onload alert.");
+
         driver.switchTo().defaultContent();
-        if (ie) {
-            verifyAlerts(driver, "Onload alert.");
-        }
         Thread.sleep(1000);
 
         driver.switchTo().frame("header");
@@ -597,15 +592,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         driver.findElement(By.name("onloadFrameAnchor")).click();
-        final boolean ie = getBrowserVersion().isIE();
         verifyAlerts(driver, "Body alert.");
-        if (!ie) {
-            verifyAlerts(driver, "Onload alert.");
-        }
+        verifyAlerts(driver, "Onload alert.");
         driver.switchTo().defaultContent();
-        if (ie) {
-            verifyAlerts(driver, "Onload alert.");
-        }
         Thread.sleep(1000);
 
         driver.switchTo().frame("header");

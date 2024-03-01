@@ -60,7 +60,6 @@ import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.NodeList;
-import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventHandler;
 import org.htmlunit.javascript.host.html.HTMLCollection;
@@ -685,17 +684,6 @@ public class Element extends Node {
             element = element.getParentElement();
         }
         return false;
-    }
-
-    /**
-     * Creates a new TextRange object for this element.
-     * @return a new TextRange object for this element
-     */
-    protected TextRange createTextRange() {
-        final TextRange range = new TextRange(this);
-        range.setParentScope(getParentScope());
-        range.setPrototype(getPrototype(range.getClass()));
-        return range;
     }
 
     /**

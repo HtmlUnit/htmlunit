@@ -183,28 +183,13 @@ public class ElementClosesElementTest extends WebDriverTestCase {
 
             if ("svg".equals(parent)) {
                 expected = "1";
-                if (getBrowserVersion().isIE()) {
-                    expected = "exception";
-                }
-                else if (svgChildZero.contains(child)) {
+                if (svgChildZero.contains(child)) {
                     expected = "0";
                 }
             }
 
             if ("command".equals(parent) && getBrowserVersion().isFirefox()) {
                 expected = "1";
-            }
-
-            if (getBrowserVersion().isIE()) {
-                if ("isindex".equals(parent) && useRealBrowser()) {
-                    // ie is really strange here - the isindex tag is replaced
-                    // by a form containing an input field - and this has no childs
-                    // simulating this in 2023 is not worth the time
-                    expected = "0";
-                }
-                if ("template".equals(parent) && !childZero.contains(child)) {
-                    expected = "1";
-                }
             }
         }
 

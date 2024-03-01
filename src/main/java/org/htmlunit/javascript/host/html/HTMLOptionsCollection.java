@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.corejs.javascript.Context;
@@ -292,7 +291,6 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     @JsxFunction
     public void remove(final int index) {
         int idx = index;
-        final BrowserVersion browser = getBrowserVersion();
         if (idx < 0) {
             return;
         }

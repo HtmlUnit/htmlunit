@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.CssStyleSheet;
@@ -33,7 +32,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ronald Brill
  */
 @JsxClass(isJSObject = false, value = {CHROME, EDGE})
-@JsxClass(IE)
 public class StyleMedia extends HtmlUnitScriptable {
 
     /**
@@ -62,5 +60,4 @@ public class StyleMedia extends HtmlUnitScriptable {
         final MediaListImpl mediaList = CssStyleSheet.parseMedia(media, webWindow.getWebClient());
         return CssStyleSheet.isActive(mediaList, webWindow);
     }
-
 }

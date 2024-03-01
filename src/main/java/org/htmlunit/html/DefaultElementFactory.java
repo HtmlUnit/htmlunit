@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import org.htmlunit.util.OrderedFastHashMap;
@@ -160,7 +159,6 @@ public class DefaultElementFactory implements ElementFactory {
         boolean doBrowserCompatibilityCheck = checkBrowserCompatibility;
         switch (tagName) {
             case KEYGEN_:
-                final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
                 element = new HtmlUnknownElement(page, qualifiedName, attributeMap);
                 break;
 

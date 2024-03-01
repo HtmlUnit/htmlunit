@@ -30,7 +30,6 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -291,11 +290,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "<iframe id='iframe1'></iframe>\n"
             + "</body></html>";
-
-        // [IE] real IE waits for the page to load until infinity
-        if (useRealBrowser() && getBrowserVersion().isIE()) {
-            Assert.fail("Blocks real IE");
-        }
 
         loadPageVerifyTitle2(html);
     }

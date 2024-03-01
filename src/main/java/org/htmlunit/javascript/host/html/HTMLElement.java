@@ -37,7 +37,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -204,7 +203,6 @@ import org.htmlunit.javascript.host.event.MouseEvent;
 public class HTMLElement extends Element {
 
     private static final Class<?>[] METHOD_PARAMS_OBJECT = {Object.class};
-    private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
     /* http://msdn.microsoft.com/en-us/library/ie/aa358802.aspx */
     private static final Map<String, String> COLORS_MAP_IE = new HashMap<>();
     private static final Set<String> ENTER_KEY_HINT_VALUES = new HashSet<>();

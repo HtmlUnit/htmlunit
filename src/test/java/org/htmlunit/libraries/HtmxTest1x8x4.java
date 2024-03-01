@@ -14,7 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import org.htmlunit.WebClient;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.junit.Test;
@@ -35,14 +34,5 @@ public class HtmxTest1x8x4 extends HtmxTest {
     @Alerts("passes:483failures:0")
     public void htmx() throws Exception {
         htmx("htmx-1.8.4");
-    }
-
-    @Override
-    protected void setupWebClient(final WebClient webClient) {
-        super.setupWebClient(webClient);
-
-        if (webClient.getBrowserVersion().isIE()) {
-            webClient.getOptions().setThrowExceptionOnScriptError(false);
-        }
     }
 }

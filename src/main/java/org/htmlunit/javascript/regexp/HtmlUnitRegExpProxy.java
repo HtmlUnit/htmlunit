@@ -26,7 +26,6 @@ import java.util.regex.PatternSyntaxException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.NotYetImplementedException;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.RegExpProxy;
@@ -53,16 +52,13 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     private static final Map<String, Pattern> PATTENS = new HashMap<>();
 
     private final RegExpProxy wrapped_;
-    private final BrowserVersion browserVersion_;
 
     /**
      * Wraps a proxy to enhance it.
      * @param wrapped the original proxy
-     * @param browserVersion the current browser version
      */
-    public HtmlUnitRegExpProxy(final RegExpProxy wrapped, final BrowserVersion browserVersion) {
+    public HtmlUnitRegExpProxy(final RegExpProxy wrapped) {
         wrapped_ = wrapped;
-        browserVersion_ = browserVersion;
     }
 
     /**

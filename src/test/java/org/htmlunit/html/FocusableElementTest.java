@@ -104,13 +104,7 @@ public class FocusableElementTest extends SimpleWebTestCase {
         page.setFocusedElement(select2);
         page.setFocusedElement(select1);
         final String expectedString;
-        if (getBrowserVersion().isIE()) {
-            expectedString = "focusin select1,focus select1,focusout select1,focusin select2,blur select1,"
-                + "focus select2,focusout select2,focusin select1,blur select2,focus select1,";
-        }
-        else {
-            expectedString = "focus select1,blur select1,focus select2,blur select2,focus select1,";
-        }
+        expectedString = "focus select1,blur select1,focus select2,blur select2,focus select1,";
         assertEquals(expectedString, textArea.getText());
     }
 }

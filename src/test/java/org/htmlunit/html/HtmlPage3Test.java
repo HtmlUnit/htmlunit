@@ -28,7 +28,6 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -221,11 +220,6 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-
-        // [IE] real IE waits for the page to load until infinity
-        if (useRealBrowser() && getBrowserVersion().isIE()) {
-            Assert.fail("Blocks real IE");
-        }
 
         loadPage2(html);
         verifyWindowName2(getWebDriver(), getExpectedAlerts());

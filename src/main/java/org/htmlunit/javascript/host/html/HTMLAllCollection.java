@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomElement;
@@ -113,7 +112,6 @@ public class HTMLAllCollection extends HTMLCollection {
         // See if there is an element in the element array with the specified id.
         final List<DomElement> matching = new ArrayList<>();
 
-        final BrowserVersion browser = getBrowserVersion();
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
@@ -144,7 +142,6 @@ public class HTMLAllCollection extends HTMLCollection {
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        final BrowserVersion browser = getBrowserVersion();
         boolean nullIfNotFound = false;
         if (args[0] instanceof Number) {
             final double val = ((Number) args[0]).doubleValue();

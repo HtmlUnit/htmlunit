@@ -459,7 +459,6 @@ public abstract class HtmlElement extends DomElement {
      * @return the form which contains this element
      */
     public HtmlForm getEnclosingForm() {
-        final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
         final String formId = getAttribute("form");
         if (ATTRIBUTE_NOT_DEFINED != formId) {
             final Element formById = getPage().getElementById(formId);

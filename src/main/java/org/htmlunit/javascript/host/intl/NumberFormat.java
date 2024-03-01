@@ -49,7 +49,6 @@ public class NumberFormat extends HtmlUnitScriptable {
     private static final ConcurrentHashMap<String, String> EDGE_FORMATS_ = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, String> FF_FORMATS_ = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, String> FF_ESR_FORMATS_ = new ConcurrentHashMap<>();
-    private static final ConcurrentHashMap<String, String> IE_FORMATS_ = new ConcurrentHashMap<>();
 
     private transient NumberFormatHelper formatter_;
 
@@ -71,15 +70,6 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("it-CH", "\u2019");
         commonFormats.put("pt-PT", "\u00a0,");
         commonFormats.put("sq", "\u00a0,");
-
-        IE_FORMATS_.putAll(commonFormats);
-        IE_FORMATS_.put("ar-DZ", ",.");
-        IE_FORMATS_.put("ar-LY", ",.");
-        IE_FORMATS_.put("ar-MA", ",.");
-        IE_FORMATS_.put("ar-TN", ",.");
-        IE_FORMATS_.put("fr", "\u00a0,");
-        IE_FORMATS_.put("fr-BE", ".");
-        IE_FORMATS_.put("ban", ".,");
 
         commonFormats.put("ar-AE", ",.0");
         commonFormats.put("fr", "\u202f,");
@@ -124,9 +114,6 @@ public class NumberFormat extends HtmlUnitScriptable {
         }
         else if (browserVersion.isEdge()) {
             formats = EDGE_FORMATS_;
-        }
-        else if (browserVersion.isIE()) {
-            formats = IE_FORMATS_;
         }
         else if (browserVersion.isFirefoxESR()) {
             formats = FF_ESR_FORMATS_;

@@ -37,7 +37,6 @@ import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1733,11 +1732,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body>abc</body>\n"
             + "</html>";
-
-        // [IE] real IE waits for the page to load until infinity
-        if (useRealBrowser() && getBrowserVersion().isIE()) {
-            Assert.fail("Blocks real IE");
-        }
 
         loadPageVerifyTitle2(html);
     }

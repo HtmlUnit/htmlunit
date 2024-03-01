@@ -136,7 +136,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     protected void parentOf(final String parent, final String child) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
-            + "<title>" + (getBrowserVersion().isIE() ? "Blank Page" : "New Tab") + "</title>\n"
+            + "<title>New Tab</title>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"

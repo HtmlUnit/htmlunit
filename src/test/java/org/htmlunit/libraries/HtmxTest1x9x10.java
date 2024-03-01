@@ -41,10 +41,6 @@ public class HtmxTest1x9x10 extends HtmxTest {
             CHROME = "passes:679failures:0",
             EDGE = "passes:679failures:0")
     public void htmx() throws Exception {
-        // the test page runs in an endless loop in ie
-        if (getBrowserVersion().isIE()) {
-            return;
-        }
         htmx("htmx-1.9.10");
     }
 

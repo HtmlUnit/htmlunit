@@ -158,10 +158,8 @@ public class DigitTest extends WebDriverTestCase {
                     break;
 
                 case 'v':
-                    if (!getBrowserVersion().isIE()) {
-                        expected = "\u000B";
-                        input = "\\" + ch;
-                    }
+                    expected = "\u000B";
+                    input = "\\" + ch;
                     break;
 
                 default:

@@ -29,7 +29,6 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -846,11 +845,6 @@ public class CookieManagerTest extends WebDriverTestCase {
 
             + "</script></body>\n"
             + "</html>";
-
-        // [IE] real IE waits for the page to load until infinity
-        if (useRealBrowser() && getBrowserVersion().isIE()) {
-            Assert.fail("Blocks real IE");
-        }
 
         final URL firstUrl = new URL("http://host1.htmlunit.org:" + PORT + "/");
         getMockWebConnection().setResponse(firstUrl, html);

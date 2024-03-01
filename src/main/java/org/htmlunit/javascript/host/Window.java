@@ -160,7 +160,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private Screen screen_;
     private History history_;
     private Location location_;
-    private ApplicationCache applicationCache_;
     private Selection selection_;
     private Event currentEvent_;
     private String status_ = "";
@@ -334,15 +333,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     public Document getDocument() {
         return document_;
-    }
-
-    /**
-     * Returns the application cache.
-     * @return the application cache
-     */
-    @JsxGetter(IE)
-    public ApplicationCache getApplicationCache() {
-        return applicationCache_;
     }
 
     /**
@@ -788,10 +778,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         location_.setPrototype(getPrototype(location_.getClass()));
         location_.jsConstructor();
         location_.initialize(this, pageToEnclose);
-
-        applicationCache_ = new ApplicationCache();
-        applicationCache_.setParentScope(this);
-        applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));
 
         // like a JS new Object()
         final Context ctx = Context.getCurrentContext();

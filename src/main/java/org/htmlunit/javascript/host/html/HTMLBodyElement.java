@@ -25,10 +25,8 @@ import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
-import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.StringUtils;
 
@@ -215,15 +213,6 @@ public class HTMLBodyElement extends HTMLElement {
     @Override
     public int getClientWidth() {
         return super.getClientWidth() + 16;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction(IE)
-    public TextRange createTextRange() {
-        return super.createTextRange();
     }
 
     /**

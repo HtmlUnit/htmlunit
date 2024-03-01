@@ -1356,13 +1356,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 // handling of alerts requires some time
                 // at least for tests with many alerts we have to take this into account
                 maxWait += 100;
-
-                if (useRealBrowser()) {
-                    if (getBrowserVersion().isIE()) {
-                        // alerts for real IE are really slow
-                        maxWait += 5000;
-                    }
-                }
             }
             catch (final NoAlertPresentException e) {
                 Thread.sleep(10);

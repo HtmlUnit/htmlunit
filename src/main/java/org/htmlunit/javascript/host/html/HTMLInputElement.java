@@ -41,7 +41,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.NodeList;
-import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.file.FileList;
 
@@ -744,15 +743,6 @@ public class HTMLInputElement extends HTMLElement {
     @JsxFunction
     public boolean checkValidity() {
         return getDomNodeOrDie().isValid();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction(IE)
-    public TextRange createTextRange() {
-        return super.createTextRange();
     }
 
     /**

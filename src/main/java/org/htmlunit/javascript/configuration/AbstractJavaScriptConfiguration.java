@@ -18,7 +18,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -97,9 +96,6 @@ public abstract class AbstractJavaScriptConfiguration {
             }
             else if (browserVersion.isEdge()) {
                 expectedBrowser = EDGE;
-            }
-            else if (browserVersion.isIE()) {
-                expectedBrowser = IE;
             }
             else if (browserVersion.isFirefoxESR()) {
                 expectedBrowser = FF_ESR;

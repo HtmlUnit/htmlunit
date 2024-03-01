@@ -18,7 +18,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlButton;
@@ -28,7 +27,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.NodeList;
-import org.htmlunit.javascript.host.dom.TextRange;
 
 /**
  * The JavaScript object that represents a {@link HtmlButton} (&lt;button type=...&gt;).
@@ -90,15 +88,6 @@ public class HTMLButtonElement extends HTMLElement {
             labels_ = new LabelsNodeList(getDomNodeOrDie());
         }
         return labels_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction(IE)
-    public TextRange createTextRange() {
-        return super.createTextRange();
     }
 
     /**

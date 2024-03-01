@@ -148,7 +148,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             //success
         }
 
-        final boolean urlWithCredentials = !getBrowserVersion().isIE();
+        final boolean urlWithCredentials = true;
 
         try {
             //  now a url with credentials
@@ -198,7 +198,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             //success
         }
 
-        final boolean urlWithCredentials = !getBrowserVersion().isIE();
+        final boolean urlWithCredentials = true;
 
         try {
             // now a url with credentials
@@ -262,7 +262,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             //success
         }
 
-        final boolean urlWithCredentials = !getBrowserVersion().isIE();
+        final boolean urlWithCredentials = true;
 
         try {
             // now a url with credentials
@@ -320,20 +320,10 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         try {
             final URL url = new URL("http://joe:jetty@localhost:" + PORT + "/");
             final HtmlPage page = loadPage(html, url);
-            if (getBrowserVersion().isIE()) {
-                assertTrue(getCollectedAlerts(page).contains("SecRet"));
-            }
-            else {
-                fail("Should not be authorized");
-            }
+            fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
-            if (getBrowserVersion().isIE()) {
-                fail("Should be authorized");
-            }
-            else {
-                //success
-            }
+            //success
         }
     }
 
@@ -359,7 +349,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             //success
         }
 
-        final boolean urlWithCredentials = !getBrowserVersion().isIE();
+        final boolean urlWithCredentials = true;
 
         try {
             // now a url with correct credentials

@@ -21,12 +21,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.util.List;
-
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomNode;
-import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlTableCell;
 import org.htmlunit.html.HtmlTableRow;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -100,10 +97,6 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         if ("collapse".equals(style.getStyleAttribute(StyleAttributes.Definition.BORDER_COLLAPSE, true))) {
             final HtmlTableRow row = getRow();
             if (row != null) {
-                final HtmlElement thiz = getDomNodeOrDie();
-                final List<HtmlTableCell> cells = row.getCells();
-                final boolean leftmost = cells.indexOf(thiz) == 0;
-                final boolean rightmost = cells.indexOf(thiz) == cells.size() - 1;
                 w -= 0.5 * style.getBorderLeftValue();
                 w -= 0.5 * style.getBorderRightValue();
             }

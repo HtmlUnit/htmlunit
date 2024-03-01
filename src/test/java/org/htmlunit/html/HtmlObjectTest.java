@@ -26,7 +26,6 @@ import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.StatusHandler;
 import org.htmlunit.WebClient;
-import org.htmlunit.javascript.host.ActiveXObjectTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.junit.Assume;
@@ -57,9 +56,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     @Alerts("undefined")
     public void classid() throws Exception {
-        if (getBrowserVersion().isIE() && !ActiveXObjectTest.isJacobInstalled()) {
-            return;
-        }
         final String html = "<html><head>\n"
             // Window Media Player CLASSID
             + "<object id='wm' classid='clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6'></object>\n"

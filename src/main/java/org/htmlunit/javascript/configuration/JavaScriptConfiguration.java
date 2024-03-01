@@ -20,7 +20,6 @@ import java.util.WeakHashMap;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.host.ActiveXObject;
-import org.htmlunit.javascript.host.ApplicationCache;
 import org.htmlunit.javascript.host.AudioScheduledSourceNode;
 import org.htmlunit.javascript.host.BarProp;
 import org.htmlunit.javascript.host.BatteryManager;
@@ -147,7 +146,6 @@ import org.htmlunit.javascript.host.dom.DOMPoint;
 import org.htmlunit.javascript.host.dom.DOMPointReadOnly;
 import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
 import org.htmlunit.javascript.host.dom.DOMRequest;
-import org.htmlunit.javascript.host.dom.DOMSettableTokenList;
 import org.htmlunit.javascript.host.dom.DOMStringList;
 import org.htmlunit.javascript.host.dom.DOMStringMap;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
@@ -167,7 +165,6 @@ import org.htmlunit.javascript.host.dom.Range;
 import org.htmlunit.javascript.host.dom.Selection;
 import org.htmlunit.javascript.host.dom.ShadowRoot;
 import org.htmlunit.javascript.host.dom.Text;
-import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.dom.TreeWalker;
 import org.htmlunit.javascript.host.dom.XPathEvaluator;
 import org.htmlunit.javascript.host.dom.XPathNSResolver;
@@ -195,7 +192,6 @@ import org.htmlunit.javascript.host.event.InputEvent;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.javascript.host.event.MIDIConnectionEvent;
 import org.htmlunit.javascript.host.event.MIDIMessageEvent;
-import org.htmlunit.javascript.host.event.MSGestureEvent;
 import org.htmlunit.javascript.host.event.MediaEncryptedEvent;
 import org.htmlunit.javascript.host.event.MediaKeyMessageEvent;
 import org.htmlunit.javascript.host.event.MediaQueryListEvent;
@@ -204,7 +200,6 @@ import org.htmlunit.javascript.host.event.MediaStreamTrackEvent;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.event.MouseScrollEvent;
-import org.htmlunit.javascript.host.event.MouseWheelEvent;
 import org.htmlunit.javascript.host.event.MutationEvent;
 import org.htmlunit.javascript.host.event.OfflineAudioCompletionEvent;
 import org.htmlunit.javascript.host.event.PageTransitionEvent;
@@ -216,7 +211,6 @@ import org.htmlunit.javascript.host.event.ProgressEvent;
 import org.htmlunit.javascript.host.event.PromiseRejectionEvent;
 import org.htmlunit.javascript.host.event.RTCDataChannelEvent;
 import org.htmlunit.javascript.host.event.RTCPeerConnectionIceEvent;
-import org.htmlunit.javascript.host.event.SVGZoomEvent;
 import org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
 import org.htmlunit.javascript.host.event.SpeechSynthesisEvent;
 import org.htmlunit.javascript.host.event.StorageEvent;
@@ -251,7 +245,6 @@ import org.htmlunit.javascript.host.geo.Position;
 import org.htmlunit.javascript.host.geo.PositionError;
 import org.htmlunit.javascript.host.html.Audio;
 import org.htmlunit.javascript.host.html.DataTransfer;
-import org.htmlunit.javascript.host.html.Enumerator;
 import org.htmlunit.javascript.host.html.HTMLAllCollection;
 import org.htmlunit.javascript.host.html.HTMLAnchorElement;
 import org.htmlunit.javascript.host.html.HTMLAppletElement;
@@ -445,7 +438,103 @@ import org.htmlunit.javascript.host.speech.SpeechSynthesisVoice;
 import org.htmlunit.javascript.host.speech.WebkitSpeechGrammar;
 import org.htmlunit.javascript.host.speech.WebkitSpeechGrammarList;
 import org.htmlunit.javascript.host.speech.WebkitSpeechRecognition;
-import org.htmlunit.javascript.host.svg.*;
+import org.htmlunit.javascript.host.svg.SVGAElement;
+import org.htmlunit.javascript.host.svg.SVGAngle;
+import org.htmlunit.javascript.host.svg.SVGAnimateElement;
+import org.htmlunit.javascript.host.svg.SVGAnimateMotionElement;
+import org.htmlunit.javascript.host.svg.SVGAnimateTransformElement;
+import org.htmlunit.javascript.host.svg.SVGAnimatedAngle;
+import org.htmlunit.javascript.host.svg.SVGAnimatedBoolean;
+import org.htmlunit.javascript.host.svg.SVGAnimatedEnumeration;
+import org.htmlunit.javascript.host.svg.SVGAnimatedInteger;
+import org.htmlunit.javascript.host.svg.SVGAnimatedLength;
+import org.htmlunit.javascript.host.svg.SVGAnimatedLengthList;
+import org.htmlunit.javascript.host.svg.SVGAnimatedNumber;
+import org.htmlunit.javascript.host.svg.SVGAnimatedNumberList;
+import org.htmlunit.javascript.host.svg.SVGAnimatedPreserveAspectRatio;
+import org.htmlunit.javascript.host.svg.SVGAnimatedRect;
+import org.htmlunit.javascript.host.svg.SVGAnimatedString;
+import org.htmlunit.javascript.host.svg.SVGAnimatedTransformList;
+import org.htmlunit.javascript.host.svg.SVGAnimationElement;
+import org.htmlunit.javascript.host.svg.SVGCircleElement;
+import org.htmlunit.javascript.host.svg.SVGClipPathElement;
+import org.htmlunit.javascript.host.svg.SVGComponentTransferFunctionElement;
+import org.htmlunit.javascript.host.svg.SVGDefsElement;
+import org.htmlunit.javascript.host.svg.SVGDescElement;
+import org.htmlunit.javascript.host.svg.SVGElement;
+import org.htmlunit.javascript.host.svg.SVGEllipseElement;
+import org.htmlunit.javascript.host.svg.SVGFEBlendElement;
+import org.htmlunit.javascript.host.svg.SVGFEColorMatrixElement;
+import org.htmlunit.javascript.host.svg.SVGFEComponentTransferElement;
+import org.htmlunit.javascript.host.svg.SVGFECompositeElement;
+import org.htmlunit.javascript.host.svg.SVGFEConvolveMatrixElement;
+import org.htmlunit.javascript.host.svg.SVGFEDiffuseLightingElement;
+import org.htmlunit.javascript.host.svg.SVGFEDisplacementMapElement;
+import org.htmlunit.javascript.host.svg.SVGFEDistantLightElement;
+import org.htmlunit.javascript.host.svg.SVGFEDropShadowElement;
+import org.htmlunit.javascript.host.svg.SVGFEFloodElement;
+import org.htmlunit.javascript.host.svg.SVGFEFuncAElement;
+import org.htmlunit.javascript.host.svg.SVGFEFuncBElement;
+import org.htmlunit.javascript.host.svg.SVGFEFuncGElement;
+import org.htmlunit.javascript.host.svg.SVGFEFuncRElement;
+import org.htmlunit.javascript.host.svg.SVGFEGaussianBlurElement;
+import org.htmlunit.javascript.host.svg.SVGFEImageElement;
+import org.htmlunit.javascript.host.svg.SVGFEMergeElement;
+import org.htmlunit.javascript.host.svg.SVGFEMergeNodeElement;
+import org.htmlunit.javascript.host.svg.SVGFEMorphologyElement;
+import org.htmlunit.javascript.host.svg.SVGFEOffsetElement;
+import org.htmlunit.javascript.host.svg.SVGFEPointLightElement;
+import org.htmlunit.javascript.host.svg.SVGFESpecularLightingElement;
+import org.htmlunit.javascript.host.svg.SVGFESpotLightElement;
+import org.htmlunit.javascript.host.svg.SVGFETileElement;
+import org.htmlunit.javascript.host.svg.SVGFETurbulenceElement;
+import org.htmlunit.javascript.host.svg.SVGFilterElement;
+import org.htmlunit.javascript.host.svg.SVGForeignObjectElement;
+import org.htmlunit.javascript.host.svg.SVGGElement;
+import org.htmlunit.javascript.host.svg.SVGGeometryElement;
+import org.htmlunit.javascript.host.svg.SVGGradientElement;
+import org.htmlunit.javascript.host.svg.SVGGraphicsElement;
+import org.htmlunit.javascript.host.svg.SVGImageElement;
+import org.htmlunit.javascript.host.svg.SVGLength;
+import org.htmlunit.javascript.host.svg.SVGLengthList;
+import org.htmlunit.javascript.host.svg.SVGLineElement;
+import org.htmlunit.javascript.host.svg.SVGLinearGradientElement;
+import org.htmlunit.javascript.host.svg.SVGMPathElement;
+import org.htmlunit.javascript.host.svg.SVGMarkerElement;
+import org.htmlunit.javascript.host.svg.SVGMaskElement;
+import org.htmlunit.javascript.host.svg.SVGMatrix;
+import org.htmlunit.javascript.host.svg.SVGMetadataElement;
+import org.htmlunit.javascript.host.svg.SVGNumber;
+import org.htmlunit.javascript.host.svg.SVGNumberList;
+import org.htmlunit.javascript.host.svg.SVGPathElement;
+import org.htmlunit.javascript.host.svg.SVGPatternElement;
+import org.htmlunit.javascript.host.svg.SVGPoint;
+import org.htmlunit.javascript.host.svg.SVGPointList;
+import org.htmlunit.javascript.host.svg.SVGPolygonElement;
+import org.htmlunit.javascript.host.svg.SVGPolylineElement;
+import org.htmlunit.javascript.host.svg.SVGPreserveAspectRatio;
+import org.htmlunit.javascript.host.svg.SVGRadialGradientElement;
+import org.htmlunit.javascript.host.svg.SVGRect;
+import org.htmlunit.javascript.host.svg.SVGRectElement;
+import org.htmlunit.javascript.host.svg.SVGSVGElement;
+import org.htmlunit.javascript.host.svg.SVGScriptElement;
+import org.htmlunit.javascript.host.svg.SVGSetElement;
+import org.htmlunit.javascript.host.svg.SVGStopElement;
+import org.htmlunit.javascript.host.svg.SVGStringList;
+import org.htmlunit.javascript.host.svg.SVGStyleElement;
+import org.htmlunit.javascript.host.svg.SVGSwitchElement;
+import org.htmlunit.javascript.host.svg.SVGSymbolElement;
+import org.htmlunit.javascript.host.svg.SVGTSpanElement;
+import org.htmlunit.javascript.host.svg.SVGTextContentElement;
+import org.htmlunit.javascript.host.svg.SVGTextElement;
+import org.htmlunit.javascript.host.svg.SVGTextPathElement;
+import org.htmlunit.javascript.host.svg.SVGTextPositioningElement;
+import org.htmlunit.javascript.host.svg.SVGTitleElement;
+import org.htmlunit.javascript.host.svg.SVGTransform;
+import org.htmlunit.javascript.host.svg.SVGTransformList;
+import org.htmlunit.javascript.host.svg.SVGUnitTypes;
+import org.htmlunit.javascript.host.svg.SVGUseElement;
+import org.htmlunit.javascript.host.svg.SVGViewElement;
 import org.htmlunit.javascript.host.worker.ServiceWorker;
 import org.htmlunit.javascript.host.worker.ServiceWorkerContainer;
 import org.htmlunit.javascript.host.worker.ServiceWorkerRegistration;
@@ -475,7 +564,6 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         AbstractList.class, AbstractRange.class,
         ActiveXObject.class, AnalyserNode.class,
         Animation.class, AnimationEvent.class,
-        ApplicationCache.class,
         Atomics.class,
         Attr.class, Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
@@ -503,9 +591,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Document.class, DocumentFragment.class, DocumentType.class, DOMError.class, DOMException.class,
         DOMImplementation.class, DOMMatrix.class, DOMMatrixReadOnly.class, DOMParser.class, DOMPoint.class,
         DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class,
-        DOMSettableTokenList.class, DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
+        DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
         DragEvent.class, DynamicsCompressorNode.class,
-        Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventSource.class,
+        Element.class, ErrorEvent.class, Event.class, EventSource.class,
         EventTarget.class, External.class, FederatedCredential.class,
         File.class, FileList.class, FileReader.class,
         FileSystem.class, FileSystemDirectoryEntry.class, FileSystemDirectoryReader.class,
@@ -561,7 +649,6 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
-        MouseWheelEvent.class, MSGestureEvent.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class,
         Namespace.class, NamespaceCollection.class,
         Navigator.class, NetworkInformation.class, Node.class, NodeFilter.class, NodeIterator.class,
@@ -615,14 +702,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGImageElement.class, SVGLength.class, SVGLengthList.class, SVGLinearGradientElement.class,
         SVGLineElement.class, SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class,
         SVGMetadataElement.class, SVGMPathElement.class, SVGNumber.class, SVGNumberList.class,
-        SVGPathElement.class, SVGPathSeg.class, SVGPathSegArcAbs.class,
-        SVGPathSegArcRel.class, SVGPathSegClosePath.class, SVGPathSegCurvetoCubicAbs.class,
-        SVGPathSegCurvetoCubicRel.class, SVGPathSegCurvetoCubicSmoothAbs.class, SVGPathSegCurvetoCubicSmoothRel.class,
-        SVGPathSegCurvetoQuadraticAbs.class, SVGPathSegCurvetoQuadraticRel.class,
-        SVGPathSegCurvetoQuadraticSmoothAbs.class, SVGPathSegCurvetoQuadraticSmoothRel.class,
-        SVGPathSegLinetoAbs.class, SVGPathSegLinetoHorizontalAbs.class, SVGPathSegLinetoHorizontalRel.class,
-        SVGPathSegLinetoRel.class, SVGPathSegLinetoVerticalAbs.class, SVGPathSegLinetoVerticalRel.class,
-        SVGPathSegList.class, SVGPathSegMovetoAbs.class, SVGPathSegMovetoRel.class, SVGPatternElement.class,
+        SVGPathElement.class,
+        SVGPatternElement.class,
         SVGPoint.class, SVGPointList.class, SVGPolygonElement.class, SVGPolylineElement.class,
         SVGPreserveAspectRatio.class, SVGRadialGradientElement.class, SVGRect.class, SVGRectElement.class,
         SVGScriptElement.class, SVGSetElement.class, SVGStopElement.class,
@@ -630,8 +711,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGSymbolElement.class, SVGTextContentElement.class, SVGTextElement.class,
         SVGTextPathElement.class, SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class,
         SVGTransformList.class, SVGTSpanElement.class, SVGUnitTypes.class, SVGUseElement.class, SVGViewElement.class,
-        SVGZoomEvent.class, SyncManager.class, Text.class, TextDecoder.class,
-        TextEncoder.class, TextEvent.class, TextMetrics.class, TextRange.class, TextTrack.class, TextTrackCue.class,
+        SyncManager.class, Text.class, TextDecoder.class,
+        TextEncoder.class, TextEvent.class, TextMetrics.class, TextTrack.class, TextTrackCue.class,
         TextTrackCueList.class, TextTrackList.class, TimeEvent.class, TimeRanges.class,
         Touch.class, TouchEvent.class, TouchList.class, TrackEvent.class, TransitionEvent.class, TreeWalker.class,
         UIEvent.class,

@@ -27,7 +27,6 @@ import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -116,7 +115,6 @@ public class FileReader extends EventTarget {
 
         final byte[] bytes = ((Blob) object).getBytes();
         final String value = new String(Base64.encodeBase64(bytes), StandardCharsets.US_ASCII);
-        final BrowserVersion browserVersion = getBrowserVersion();
 
         String contentType = ((Blob) object).getType();
         if (StringUtils.isEmpty(contentType)) {
