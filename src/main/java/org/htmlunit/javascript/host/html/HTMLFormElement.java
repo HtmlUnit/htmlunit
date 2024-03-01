@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
-import static org.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL_NOT_DEFINED;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
@@ -549,17 +547,14 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 return true;
             }
             final FormFieldWithNameHistory elementWithNames = (FormFieldWithNameHistory) element;
-            if (getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_ORIGINAL_NAME)) {
-                if (name.equals(elementWithNames.getOriginalName())) {
-                    return true;
-                }
+            if (name.equals(elementWithNames.getOriginalName())) {
+                return true;
             }
             else if (name.equals(element.getAttributeDirect(DomElement.NAME_ATTRIBUTE))) {
                 return true;
             }
 
-            if (getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_NEW_NAMES)
-                    && elementWithNames.getNewNames().contains(name)) {
+            if (elementWithNames.getNewNames().contains(name)) {
                 return true;
             }
         }

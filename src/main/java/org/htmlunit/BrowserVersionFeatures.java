@@ -104,33 +104,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     EVENT_TYPE_WHEELEVENT,
 
-    /** Indicates if a form field is directly reachable by its new name once this has been changed. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    FORMFIELD_REACHABLE_BY_NEW_NAMES,
-
-    /** Indicates if a form field is directly reachable by its original name once this has been changed. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    FORMFIELD_REACHABLE_BY_ORIGINAL_NAME,
-
-    /** Form elements are able to refer to the for by using the from attribute. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    FORM_FORM_ATTRIBUTE_SUPPORTED,
-
     /** Form elements are able to refer to the for by using the from attribute. */
     @BrowserFeature({CHROME, EDGE})
     FORM_IGNORE_REL_NOREFERRER,
 
-    /** Form submit forces a real request also if only the hash was changed. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
-
     /** Form submit includes the Cache-Control: max-age=0 header. */
     @BrowserFeature({CHROME, EDGE})
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE,
-
-    /** Forms are ignoring the rel='noreferrer' attribute. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    FORM_SUBMISSION_HEADER_ORIGIN,
 
     /** If the frame src has 'about:' scheme always use 'about:blank' as source. */
     @BrowserFeature({FF, FF_ESR})
