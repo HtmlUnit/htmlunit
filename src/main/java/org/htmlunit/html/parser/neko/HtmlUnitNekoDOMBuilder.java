@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html.parser.neko;
 
-import static org.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
 import static org.htmlunit.BrowserVersionFeatures.HTML_COMMAND_TAG;
 import static org.htmlunit.BrowserVersionFeatures.HTML_ISINDEX_TAG;
 import static org.htmlunit.BrowserVersionFeatures.HTML_MAIN_TAG;
@@ -259,9 +258,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         try {
             setFeature(FEATURE_AUGMENTATIONS, true);
-            if (!webClient.getBrowserVersion().hasFeature(HTML_ATTRIBUTE_LOWER_CASE)) {
-                setProperty("http://cyberneko.org/html/properties/names/attrs", "no-change");
-            }
             setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
             setFeature(FEATURE_PARSE_NOSCRIPT, !webClient.isJavaScriptEnabled());
             setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME, false);

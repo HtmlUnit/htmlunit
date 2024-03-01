@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
-
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Collections;
@@ -198,8 +196,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         }
 
         // for FF, if value is still default value, change value too
-        if (hasFeature(HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE)
-                && getText().equals(getDefaultValue())) {
+        if (getText().equals(getDefaultValue())) {
             setTextInternal(defaultValue);
         }
         defaultValue_ = defaultValue;

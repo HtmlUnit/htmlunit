@@ -17,11 +17,8 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL;
 import static org.htmlunit.BrowserVersionFeatures.URL_IGNORE_SPECIAL;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -432,8 +429,7 @@ public class HTMLAnchorElement extends HTMLElement {
         }
         catch (final MalformedURLException e) {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
-            if (anchor.getHrefAttribute().startsWith("http")
-                    && browser.hasFeature(JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL)) {
+            if (anchor.getHrefAttribute().startsWith("http")) {
                 return "";
             }
             return "/";
@@ -503,12 +499,7 @@ public class HTMLAnchorElement extends HTMLElement {
         catch (final MalformedURLException e) {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
             if (anchor.getHrefAttribute().startsWith("http")) {
-                if (browser.hasFeature(JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL)) {
-                    return ":";
-                }
-                if (browser.hasFeature(JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL)) {
-                    return "http:";
-                }
+                return ":";
             }
             return StringUtils.substringBefore(anchor.getHrefAttribute(), "/");
         }

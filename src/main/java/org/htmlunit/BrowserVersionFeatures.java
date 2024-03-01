@@ -116,14 +116,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME,
 
-    /** HtmlAllCollection.item(int) requires int parameter. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLALLCOLLECTION_INTEGER_INDEX,
-
-    /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
-
     /** Should org.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR})
     HTMLBASEFONT_END_TAG_FORBIDDEN,
@@ -140,10 +132,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
 
-    /** HtmlCollection returns null instead of undefined if an element was not found. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLCOLLECTION_NULL_IF_NOT_FOUND,
-
     /** Calling cookies setter with blank string does not reset the cookies. */
     @BrowserFeature({CHROME, EDGE})
     HTMLDOCUMENT_COOKIES_IGNORE_BLANK,
@@ -157,10 +145,6 @@ public enum BrowserVersionFeatures {
     /** Calls to <code>document.XYZ</code> also looks at frames. */
     @BrowserFeature({CHROME, EDGE})
     HTMLDOCUMENT_GET_ALSO_FRAMES,
-
-    /** Allows invalid 'align' values. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLELEMENT_ALIGN_INVALID,
 
     /** Removing the active element from the dom tree triggers the onblur event. */
     @BrowserFeature({CHROME, EDGE})
@@ -182,33 +166,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_HTMLUNKNOWNELEMENT,
 
-    /** Mark the image as invisible if no src attribute defined. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLIMAGE_INVISIBLE_NO_SRC,
-
     /** Clicking an image input submits the value as param if defined. */
     @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
-    /** HTMLInputElement: minlength and maxlength attributes are supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED,
-
     /** When clicking a {@code checkbox} or {@code radio} input the surrounding anchor is not clicked. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
-
-    /** HTMLInputElement: type {@code file} selectionSart/End are null. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLINPUT_FILE_SELECTION_START_END_NULL,
-
-    /** HTMLInputElement datetime-local type is supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED,
-
-    /** HTMLInputElement date and time types are supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLINPUT_TYPE_DATETIME_SUPPORTED,
 
     /** HTMLInputElement image type is not supported. */
     @BrowserFeature({CHROME, EDGE})
@@ -226,29 +190,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
 
-    /** Removing the selected attribute, de selects the option. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
-
-    /** Trims the value of the type attribute before to verify it. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLSCRIPT_TRIM_TYPE,
-
     /** willValidate does not check the readonly property. */
     @BrowserFeature({FF, FF_ESR})
     HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY,
 
-    /** Setting defaultValue updates the value also. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
-
     /** Should org.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR})
     HTMLTRACK_END_TAG_FORBIDDEN,
-
-    /** HTML attributes are always lower case. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTML_ATTRIBUTE_LOWER_CASE,
 
     /** HTML parser supports the 'command' tag. */
     @BrowserFeature({CHROME, EDGE})
@@ -278,28 +226,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS,
 
-    /** Indicates that the start date for two digits cookies is 1970
-     * instead of 2000 (Two digits years are interpreted as 20xx
-     * if before 1970 and as 19xx otherwise).
-     */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTTP_COOKIE_START_DATE_1970,
-
     /** Browser sends Sec-ch headers. */
     @BrowserFeature({CHROME, EDGE})
     HTTP_HEADER_CH_UA,
-
-    /** Browser sends Sec-Fetch headers. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTTP_HEADER_SEC_FETCH,
-
-    /** Browser sends Upgrade-Insecure-Requests header. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    HTTP_HEADER_UPGRADE_INSECURE_REQUEST,
-
-    /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_ALIGN_ACCEPTS_ARBITRARY_VALUES,
 
     /** The anchor hostname setter ignores blank url's. */
     @BrowserFeature({FF, FF_ESR})
@@ -314,17 +243,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE,
 
-    /** The anchor pathname property returns nothing for broken http(s) url's. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL,
-
     /** The anchor pathname prefixes file url's with '/'. */
     @BrowserFeature({CHROME, EDGE})
     JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
-
-    /** The anchor protocol property returns ':' for broken http(s) url's. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL,
 
     /** The anchor protocol property converts drive letters to uppercase. */
     @BrowserFeature({CHROME, EDGE})
@@ -333,12 +254,6 @@ public enum BrowserVersionFeatures {
     /** The anchor protocol property returns 'http' for broken http(s) url's. */
     @BrowserFeature({FF, FF_ESR})
     JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL,
-
-    /**
-     * Javascript fetch api is supported.
-     */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_API_FETCH,
 
     /** An area element without a href attribute is focusable. */
     @BrowserFeature({FF, FF_ESR})

@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -22,7 +21,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -172,18 +170,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlign() {
-        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
-
-        final String align = getDomNodeOrDie().getAttributeDirect("align");
-        if (acceptArbitraryValues) {
-            return align;
-        }
-
-        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase(Locale.ROOT));
-        if (null != normalizedValue) {
-            return normalizedValue;
-        }
-        return "";
+        return getDomNodeOrDie().getAttributeDirect("align");
     }
 
     /**
@@ -192,19 +179,8 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxSetter
     public void setAlign(final String align) {
-        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
-        if (acceptArbitraryValues) {
-            getDomNodeOrDie().setAttribute("align", align);
-            return;
-        }
-
-        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase(Locale.ROOT));
-        if (null != normalizedValue) {
-            getDomNodeOrDie().setAttribute("align", normalizedValue);
-            return;
-        }
-
-        throw JavaScriptEngine.reportRuntimeError("Cannot set the align property to invalid value: '" + align + "'");
+        getDomNodeOrDie().setAttribute("align", align);
+        return;
     }
 
     /**

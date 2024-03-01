@@ -17,8 +17,6 @@ package org.htmlunit;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
-import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
-import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -1767,20 +1765,16 @@ public class WebClient implements Serializable, AutoCloseable {
             wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getAcceptLanguageHeader());
         }
 
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
-                && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_DEST)) {
+        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_DEST)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_DEST, "document");
         }
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
-                && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_MODE)) {
+        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_MODE)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "navigate");
         }
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
-                && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_SITE)) {
+        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_SITE)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
         }
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
-                && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_USER)) {
+        if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_USER)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
         }
 
@@ -1798,8 +1792,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     getBrowserVersion().getSecClientHintUserAgentPlatformHeader());
         }
 
-        if (getBrowserVersion().hasFeature(HTTP_HEADER_UPGRADE_INSECURE_REQUEST)
-                && !wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
+        if (!wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
             wrs.setAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS, "1");
         }
     }

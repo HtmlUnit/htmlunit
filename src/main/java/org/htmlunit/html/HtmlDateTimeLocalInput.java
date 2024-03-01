@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -62,8 +60,7 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
     @Override
     public void setValue(final String newValue) {
         try {
-            if (hasFeature(HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED)
-                    && StringUtils.isNotEmpty(newValue)) {
+            if (StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValue(newValue);
@@ -89,8 +86,7 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
      * @return if the input element has a valid min value
      */
     private boolean isMinValid() {
-        if (hasFeature(HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED)
-                && !getMin().isEmpty()) {
+        if (!getMin().isEmpty()) {
             try {
                 final LocalDateTime dateValue = LocalDateTime.parse(getRawValue(), FORMATTER_);
                 final LocalDateTime minDate = LocalDateTime.parse(getMin(), FORMATTER_);
@@ -111,8 +107,7 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
      * @return if the input element has a valid max value
      */
     private boolean isMaxValid() {
-        if (hasFeature(HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED)
-                && !getMax().isEmpty()) {
+        if (!getMax().isEmpty()) {
             try {
                 final LocalDateTime dateValue = LocalDateTime.parse(getRawValue(), FORMATTER_);
                 final LocalDateTime maxDate = LocalDateTime.parse(getMax(), FORMATTER_);

@@ -14,9 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
@@ -945,7 +942,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     private boolean isMaxLengthValid() {
         if (!isMinMaxLengthSupported()
                 || valueModifiedByJavascript_
-                || !hasFeature(HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED)
                 || getMaxLength() == Integer.MAX_VALUE
                 || getDefaultValue().equals(getValue())) {
             return true;
@@ -964,7 +960,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     private boolean isMinLengthValid() {
         if (!isMinMaxLengthSupported()
                 || valueModifiedByJavascript_
-                || !hasFeature(HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED)
                 || getMinLength() == Integer.MIN_VALUE
                 || getDefaultValue().equals(getValue())) {
             return true;
@@ -1070,7 +1065,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public boolean isTooShortValidityState() {
         if (!isMinMaxLengthSupported()
                 || valueModifiedByJavascript_
-                || !hasFeature(HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED)
                 || getMinLength() == Integer.MIN_VALUE
                 || getDefaultValue().equals(getValue())) {
             return false;
@@ -1231,24 +1225,16 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     private static boolean isSupported(final String type, final BrowserVersion browserVersion) {
         boolean supported = false;
         switch (type) {
-            case "date":
-                supported = browserVersion.hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED);
-                break;
-            case "datetime-local":
-                supported = browserVersion.hasFeature(HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED);
-                break;
             case "month":
                 supported = browserVersion.hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED);
-                break;
-            case "time":
-                supported = browserVersion.hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED);
                 break;
             case "week":
                 supported = browserVersion.hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED);
                 break;
             case "color":
-                supported = true;
-                break;
+            case "date":
+            case "datetime-local":
+            case "time":
             case "email":
             case "text":
             case "submit":

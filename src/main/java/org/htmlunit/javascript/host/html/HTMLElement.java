@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static org.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
@@ -1227,17 +1226,7 @@ public class HTMLElement extends Element {
      * @return the value of the {@code align} property
      */
     protected String getAlign(final boolean returnInvalidValues) {
-        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
-
-        final String align = getDomNodeOrDie().getAttributeDirect("align");
-        if (returnInvalidValues || acceptArbitraryValues
-            || "center".equals(align)
-            || "justify".equals(align)
-            || "left".equals(align)
-            || "right".equals(align)) {
-            return align;
-        }
-        return "";
+        return getDomNodeOrDie().getAttributeDirect("align");
     }
 
     /**
@@ -1247,24 +1236,9 @@ public class HTMLElement extends Element {
      *        (i.e., it will not actually set the align attribute)
      */
     protected void setAlign(final String align, final boolean ignoreIfNoError) {
-        final String alignLC = align.toLowerCase(Locale.ROOT);
-        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
-        if (acceptArbitraryValues
-                || "center".equals(alignLC)
-                || "justify".equals(alignLC)
-                || "left".equals(alignLC)
-                || "right".equals(alignLC)
-                || "bottom".equals(alignLC)
-                || "middle".equals(alignLC)
-                || "top".equals(alignLC)) {
-            if (!ignoreIfNoError) {
-                final String newValue = acceptArbitraryValues ? align : alignLC;
-                getDomNodeOrDie().setAttribute("align", newValue);
-            }
-            return;
+        if (!ignoreIfNoError) {
+            getDomNodeOrDie().setAttribute("align", align);
         }
-
-        throw JavaScriptEngine.reportRuntimeError("Cannot set the align property to invalid value: '" + align + "'");
     }
 
     /**

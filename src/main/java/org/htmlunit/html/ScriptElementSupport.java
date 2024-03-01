@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.nio.charset.Charset;
@@ -22,7 +21,6 @@ import java.nio.charset.Charset;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
@@ -297,11 +295,7 @@ public final class ScriptElementSupport {
      * @return true if the script is JavaScript
      */
     public static boolean isJavaScript(final DomElement element, String typeAttribute, final String languageAttribute) {
-        final BrowserVersion browserVersion = element.getPage().getWebClient().getBrowserVersion();
-
-        if (browserVersion.hasFeature(HTMLSCRIPT_TRIM_TYPE)) {
-            typeAttribute = typeAttribute.trim();
-        }
+        typeAttribute = typeAttribute.trim();
 
         if (StringUtils.isNotEmpty(typeAttribute)) {
             return MimeType.isJavascriptMimeType(typeAttribute);

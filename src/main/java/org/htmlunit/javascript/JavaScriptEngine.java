@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_API_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM;
 import static org.htmlunit.BrowserVersionFeatures.JS_CONSOLE_TIMESTAMP;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
@@ -508,7 +507,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static void applyPolyfills(final WebClient webClient, final BrowserVersion browserVersion,
             final Context context, final HtmlUnitScriptable scriptable) throws IOException {
 
-        if (webClient.getOptions().isFetchPolyfillEnabled() && browserVersion.hasFeature(JS_API_FETCH)) {
+        if (webClient.getOptions().isFetchPolyfillEnabled()) {
             Polyfill.getFetchPolyfill().apply(context, scriptable);
         }
     }

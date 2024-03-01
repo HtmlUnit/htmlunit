@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -275,10 +274,8 @@ public class HTMLOptionElement extends HTMLElement {
     @Override
     public void removeAttribute(final String name) {
         super.removeAttribute(name);
-        if (getBrowserVersion().hasFeature(HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS)) {
-            if ("selected".equals(name)) {
-                setSelected(false);
-            }
+        if ("selected".equals(name)) {
+            setSelected(false);
         }
     }
 

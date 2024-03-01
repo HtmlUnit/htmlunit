@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
-import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
 import static org.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
@@ -51,7 +50,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.Cache;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.FailingHttpStatusCodeException;
@@ -1065,13 +1063,10 @@ public class HtmlPage extends SgmlPage {
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
 
         // at least overwrite this headers
-        final BrowserVersion browserVersion = client.getBrowserVersion();
         request.setAdditionalHeader(HttpHeader.ACCEPT, client.getBrowserVersion().getScriptAcceptHeader());
-        if (browserVersion.hasFeature(HTTP_HEADER_SEC_FETCH)) {
-            request.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
-            request.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "no-cors");
-            request.setAdditionalHeader(HttpHeader.SEC_FETCH_DEST, "script");
-        }
+        request.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
+        request.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "no-cors");
+        request.setAdditionalHeader(HttpHeader.SEC_FETCH_DEST, "script");
 
         request.setRefererlHeader(referringRequest.getUrl());
         request.setCharset(scriptCharset);

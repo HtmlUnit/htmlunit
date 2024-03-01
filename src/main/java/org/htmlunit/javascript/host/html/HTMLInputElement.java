@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
@@ -239,12 +238,7 @@ public class HTMLInputElement extends HTMLElement {
             return ((SelectableTextInput) dom).getSelectionStart();
         }
 
-        if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_SELECTION_START_END_NULL)) {
-            return null;
-        }
-        throw JavaScriptEngine.reportRuntimeError(
-                "Failed to read the 'selectionStart' property from 'HTMLInputElement': "
-                + "The input element's type (" + getType() + ") does not support selection.");
+        return null;
     }
 
     /**
@@ -287,11 +281,7 @@ public class HTMLInputElement extends HTMLElement {
             return ((SelectableTextInput) dom).getSelectionEnd();
         }
 
-        if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_SELECTION_START_END_NULL)) {
-            return null;
-        }
-        throw JavaScriptEngine.reportRuntimeError("Failed to read the 'selectionEnd' property from 'HTMLInputElement': "
-                + "The input element's type (" + getType() + ") does not support selection.");
+        return null;
     }
 
     /**

@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -63,8 +62,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlign() {
-        final boolean invalidValues = getBrowserVersion().hasFeature(HTMLELEMENT_ALIGN_INVALID);
-        return getAlign(invalidValues);
+        return getAlign(true);
     }
 
     /**

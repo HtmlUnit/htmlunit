@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_INTEGER_INDEX;
-import static org.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -27,7 +25,6 @@ import java.util.List;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -131,10 +128,7 @@ public class HTMLAllCollection extends HTMLCollection {
             return getScriptableForElement(matching.get(0));
         }
         if (matching.isEmpty()) {
-            if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND)) {
-                return null;
-            }
-            return Undefined.instance;
+            return null;
         }
 
         // many elements => build a sub collection
@@ -152,24 +146,22 @@ public class HTMLAllCollection extends HTMLCollection {
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         final BrowserVersion browser = getBrowserVersion();
         boolean nullIfNotFound = false;
-        if (browser.hasFeature(HTMLALLCOLLECTION_INTEGER_INDEX)) {
-            if (args[0] instanceof Number) {
-                final double val = ((Number) args[0]).doubleValue();
-                if (val != (int) val) {
-                    return null;
-                }
-                if (val >= 0) {
-                    nullIfNotFound = true;
-                }
+        if (args[0] instanceof Number) {
+            final double val = ((Number) args[0]).doubleValue();
+            if (val != (int) val) {
+                return null;
             }
-            else {
-                final String val = JavaScriptEngine.toString(args[0]);
-                try {
-                    args[0] = Integer.parseInt(val);
-                }
-                catch (final NumberFormatException e) {
-                    // ignore
-                }
+            if (val >= 0) {
+                nullIfNotFound = true;
+            }
+        }
+        else {
+            final String val = JavaScriptEngine.toString(args[0]);
+            try {
+                args[0] = Integer.parseInt(val);
+            }
+            catch (final NumberFormatException e) {
+                // ignore
             }
         }
 
