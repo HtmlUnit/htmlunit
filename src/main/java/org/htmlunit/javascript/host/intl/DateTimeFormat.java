@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.intl;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
-
 import java.time.ZoneId;
 import java.time.chrono.Chronology;
 import java.time.chrono.HijrahChronology;
@@ -230,7 +228,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         if (pattern == null) {
             pattern = formats.get("");
         }
-        if (!browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK) && !locale.startsWith("ar")) {
+        if (!locale.startsWith("ar")) {
             pattern = pattern.replace("\u200E", "");
         }
 
@@ -327,12 +325,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
             switch (locale) {
                 case "ja-JP-u-ca-japanese":
                     chronology_ = JapaneseChronology.INSTANCE;
-                    break;
-
-                case "ar":
-                    if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
-                        chronology_ = HijrahChronology.INSTANCE;
-                    }
                     break;
 
                 case "ar-SA":

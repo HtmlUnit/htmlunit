@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
-import static org.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
@@ -481,9 +480,6 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlign() {
-        if (getBrowserVersion().hasFeature(JS_ALIGN_FOR_INPUT_IGNORES_VALUES)) {
-            return "";
-        }
         return getAlign(true);
     }
 
@@ -493,8 +489,7 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxSetter
     public void setAlign(final String align) {
-        final boolean ignoreIfNoError = getBrowserVersion().hasFeature(JS_ALIGN_FOR_INPUT_IGNORES_VALUES);
-        setAlign(align, ignoreIfNoError);
+        setAlign(align, false);
     }
 
     /**

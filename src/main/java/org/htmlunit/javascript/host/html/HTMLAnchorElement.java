@@ -22,7 +22,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_INVALID_THROWS;
 import static org.htmlunit.BrowserVersionFeatures.URL_IGNORE_SPECIAL;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -524,18 +523,12 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setProtocol(final String protocol) throws Exception {
         if (protocol.isEmpty()) {
-            if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
-                throw JavaScriptEngine.typeError("Invalid protocol '" + protocol + "'.");
-            }
             return;
         }
 
         String bareProtocol = StringUtils.substringBefore(protocol, ":");
         if (getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)) {
             if (!UrlUtils.isValidScheme(bareProtocol)) {
-                if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
-                    throw JavaScriptEngine.typeError("Invalid protocol '" + protocol + "'.");
-                }
                 return;
             }
 
@@ -545,9 +538,7 @@ public class HTMLAnchorElement extends HTMLElement {
                 setUrl(url);
             }
             catch (final MalformedURLException e) {
-                if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
-                    throw JavaScriptEngine.typeError("Invalid protocol '" + protocol + "'.");
-                }
+                // ignore
             }
 
             return;

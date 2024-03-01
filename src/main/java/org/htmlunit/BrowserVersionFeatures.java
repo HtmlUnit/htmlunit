@@ -23,7 +23,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.host.css.CSSGroupingRule;
 import org.htmlunit.javascript.host.event.PopStateEvent;
-import org.htmlunit.javascript.host.intl.DateTimeFormat;
 
 /**
  * Constants of various features of each {@link BrowserVersion}.
@@ -383,13 +382,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_ALIGN_ACCEPTS_ARBITRARY_VALUES,
 
-    /** Setting the property align of an input element ignores the value
-     * if the value is one of center, justify, left or right.
-     * For all other values an exception is still thrown.
-     */
-    @BrowserFeature(IE)
-    JS_ALIGN_FOR_INPUT_IGNORES_VALUES,
-
     /** The anchor hostname setter ignores blank url's. */
     @BrowserFeature({FF, FF_ESR})
     JS_ANCHOR_HOSTNAME_IGNORE_BLANK,
@@ -423,17 +415,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL,
 
-    /** The anchor protocol property setter throws an error if the protocol is not valid. */
-    @BrowserFeature(IE)
-    JS_ANCHOR_PROTOCOL_INVALID_THROWS,
-
-    /**
-     * Javascript property anchors includes all anchors with a name or an id property.
-     * If not set name property is required.
-     */
-    @BrowserFeature(IE)
-    JS_ANCHOR_REQUIRES_NAME_OR_ID,
-
     /**
      * Javascript fetch api is supported.
      */
@@ -464,33 +445,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_BGSOUND_AS_UNKNOWN,
 
-    /** Whether {@code Blob} stores the content type case sensitive. */
-    @BrowserFeature(IE)
-    JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE,
-
     /** BlobEvent ctor requires a data value. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_BLOB_EVENT_REQUIRES_DATA,
 
-    /** Body {@code margin} is 8px. */
-    @BrowserFeature(IE)
-    JS_BODY_MARGINS_8,
-
-    /** HtmlElement.getBoundingClientRect throws an error if the element is not attached to the page. */
-    @BrowserFeature(IE)
-    JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED,
-
     /** toDataURL for canvas returns the CHROME version of the PNG. */
     @BrowserFeature({CHROME, EDGE})
     JS_CANVAS_DATA_URL_CHROME_PNG,
-
-    /** toDataURL for canvas returns the IE version of the PNG. */
-    @BrowserFeature(IE)
-    JS_CANVAS_DATA_URL_IE_PNG,
-
-    /** Do not allow invalid clear values. */
-    @BrowserFeature(IE)
-    JS_CLEAR_RESTRICT,
 
     /** ClientHeight for input is 17. */
     @BrowserFeature({CHROME, EDGE})
@@ -503,14 +464,6 @@ public enum BrowserVersionFeatures {
     /** ClientHeight for radio button and checkbox is 10. */
     @BrowserFeature({FF, FF_ESR})
     JS_CLIENTHEIGHT_RADIO_CHECKBOX_10,
-
-    /** ClientRectList.item throws instead of returning null if an element was not found. */
-    @BrowserFeature(IE)
-    JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND,
-
-    /** ClientWidth for text/password input is 143. */
-    @BrowserFeature(IE)
-    JS_CLIENTWIDTH_INPUT_TEXT_143,
 
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
@@ -532,33 +485,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DATE_LOCALE_DATE_SHORT,
 
-    /** {@link DateTimeFormat} uses the Unicode Character {@code 'LEFT-TO-RIGHT MARK'}. */
-    @BrowserFeature(IE)
-    JS_DATE_WITH_LEFT_TO_RIGHT_MARK,
-
-    /** Javascript doctyp.entities returns null (FF10). */
-    @BrowserFeature(IE)
-    JS_DOCTYPE_ENTITIES_NULL,
-
-    /** Javascript doctyp.notations returns null (FF10). */
-    @BrowserFeature(IE)
-    JS_DOCTYPE_NOTATIONS_NULL,
-
     /** Indicates that document.createAttribute converts the local name to lowercase. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
 
-    /** The browser supports the design mode 'Inherit'. */
-    @BrowserFeature(IE)
-    JS_DOCUMENT_DESIGN_MODE_INHERIT,
-
     /** Javascript document.evaluate creates a new result object even if provided as param. */
     @BrowserFeature({CHROME, EDGE})
     JS_DOCUMENT_EVALUATE_RECREATES_RESULT,
-
-    /** Javascript document.forms(...) supported. */
-    @BrowserFeature(IE)
-    JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
     /** The browser has selection {@code rangeCount}. */
     @BrowserFeature({FF, FF_ESR, IE})

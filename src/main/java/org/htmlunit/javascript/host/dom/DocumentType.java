@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -121,10 +119,6 @@ public class DocumentType extends Node {
         if (null != entities) {
             return entities;
         }
-
-        if (getBrowserVersion().hasFeature(JS_DOCTYPE_ENTITIES_NULL)) {
-            return null;
-        }
         return Undefined.instance;
     }
 
@@ -137,10 +131,6 @@ public class DocumentType extends Node {
         final NamedNodeMap notations = ((DomDocumentType) getDomNodeOrDie()).getNotations();
         if (null != notations) {
             return notations;
-        }
-
-        if (getBrowserVersion().hasFeature(JS_DOCTYPE_NOTATIONS_NULL)) {
-            return null;
         }
         return Undefined.instance;
     }

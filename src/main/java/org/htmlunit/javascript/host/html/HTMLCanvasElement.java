@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_CANVAS_DATA_URL_CHROME_PNG;
-import static org.htmlunit.BrowserVersionFeatures.JS_CANVAS_DATA_URL_IE_PNG;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -151,14 +150,6 @@ public class HTMLCanvasElement extends HTMLElement {
                 typeInUse = JavaScriptEngine.toString(type);
             }
             return context2d_.toDataURL(typeInUse);
-        }
-
-        if (getBrowserVersion().hasFeature(JS_CANVAS_DATA_URL_IE_PNG)) {
-            return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAAARnQU1BAA"
-                + "Cxjwv8YQUAAADGSURBVHhe7cExAQAAAMKg9U9tCF8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAONUAv9QAAcDhjokAAAAASUV"
-                + "ORK5CYII=";
         }
 
         if (getBrowserVersion().hasFeature(JS_CANVAS_DATA_URL_CHROME_PNG)) {

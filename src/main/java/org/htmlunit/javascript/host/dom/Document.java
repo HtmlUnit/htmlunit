@@ -21,10 +21,7 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_REQUIRES_NAME_OR_ID;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
@@ -418,12 +415,7 @@ public class Document extends Node {
     @JsxGetter
     public String getDesignMode() {
         if (designMode_ == null) {
-            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT)) {
-                designMode_ = "inherit";
-            }
-            else {
-                designMode_ = "off";
-            }
+            designMode_ = "off";
         }
         return designMode_;
     }
@@ -434,38 +426,19 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setDesignMode(final String mode) {
-        final BrowserVersion browserVersion = getBrowserVersion();
-        final boolean inherit = browserVersion.hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
-        if (inherit) {
-            if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
-                throw JavaScriptEngine.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
-            }
-
-            if ("on".equalsIgnoreCase(mode)) {
-                designMode_ = "on";
-            }
-            else if ("off".equalsIgnoreCase(mode)) {
-                designMode_ = "off";
-            }
-            else if ("inherit".equalsIgnoreCase(mode)) {
-                designMode_ = "inherit";
+        if ("on".equalsIgnoreCase(mode)) {
+            designMode_ = "on";
+            final SgmlPage page = getPage();
+            if (page != null && page.isHtmlPage()
+                    && getBrowserVersion().hasFeature(JS_DOCUMENT_SELECTION_RANGE_COUNT)) {
+                final HtmlPage htmlPage = (HtmlPage) page;
+                final DomNode child = htmlPage.getBody().getFirstChild();
+                final DomNode rangeNode = child == null ? htmlPage.getBody() : child;
+                htmlPage.setSelectionRange(new SimpleRange(rangeNode, 0));
             }
         }
-        else {
-            if ("on".equalsIgnoreCase(mode)) {
-                designMode_ = "on";
-                final SgmlPage page = getPage();
-                if (page != null && page.isHtmlPage()
-                        && getBrowserVersion().hasFeature(JS_DOCUMENT_SELECTION_RANGE_COUNT)) {
-                    final HtmlPage htmlPage = (HtmlPage) page;
-                    final DomNode child = htmlPage.getBody().getFirstChild();
-                    final DomNode rangeNode = child == null ? htmlPage.getBody() : child;
-                    htmlPage.setSelectionRange(new SimpleRange(rangeNode, 0));
-                }
-            }
-            else if ("off".equalsIgnoreCase(mode)) {
-                designMode_ = "off";
-            }
+        else if ("off".equalsIgnoreCase(mode)) {
+            designMode_ = "off";
         }
     }
 
@@ -862,10 +835,6 @@ public class Document extends Node {
                         return false;
                     }
                     final HtmlAnchor anchor = (HtmlAnchor) node;
-                    if (getBrowserVersion().hasFeature(JS_ANCHOR_REQUIRES_NAME_OR_ID)) {
-                        return anchor.hasAttribute(DomElement.NAME_ATTRIBUTE)
-                                || anchor.hasAttribute(DomElement.ID_ATTRIBUTE);
-                    }
                     return anchor.hasAttribute(DomElement.NAME_ATTRIBUTE);
                 });
 
@@ -1784,9 +1753,6 @@ public class Document extends Node {
             @Override
             public Object call(final Context cx, final Scriptable scope,
                     final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
                 throw JavaScriptEngine.typeError("document.forms is not a function");
             }
         };
@@ -1807,9 +1773,6 @@ public class Document extends Node {
             @Override
             public Object call(final Context cx, final Scriptable scope,
                     final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
                 throw JavaScriptEngine.typeError("document.embeds is not a function");
             }
         };
@@ -1828,9 +1791,6 @@ public class Document extends Node {
             @Override
             public Object call(final Context cx, final Scriptable scope,
                     final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
                 throw JavaScriptEngine.typeError("document.images is not a function");
             }
         };
@@ -1849,9 +1809,6 @@ public class Document extends Node {
             @Override
             public Object call(final Context cx, final Scriptable scope,
                     final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
                 throw JavaScriptEngine.typeError("document.scripts is not a function");
             }
         };

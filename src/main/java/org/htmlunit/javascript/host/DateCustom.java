@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_DATE_LOCALE_DATE_SHORT;
-import static org.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
 import java.util.Date;
 
@@ -51,11 +50,7 @@ public final class DateCustom {
         final String formatString;
         final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
 
-        if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
-            // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
-            formatString = "\u200EM\u200E/\u200Ed\u200E/\u200Eyyyy";
-        }
-        else if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT)) {
+        if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT)) {
             formatString = "M/d/yyyy";
         }
         else {
@@ -78,14 +73,7 @@ public final class DateCustom {
             final Scriptable thisObj, final Object[] args, final Function function) {
         final String formatString;
         final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
-
-        if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
-            // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
-            formatString = "\u200Eh\u200E:\u200Emm\u200E:\u200Ess\u200E \u200Ea";
-        }
-        else {
-            formatString = "h:mm:ss a";
-        }
+        formatString = "h:mm:ss a";
         final FastDateFormat format =  FastDateFormat.getInstance(formatString, browserVersion.getBrowserLocale());
         return format.format(getDateValue(thisObj));
     }

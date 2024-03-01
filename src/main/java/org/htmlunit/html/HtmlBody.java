@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -171,15 +169,9 @@ public class HtmlBody extends HtmlElement {
      */
     @Override
     public void setDefaults(final ComputedCssStyleDeclaration style) {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(JS_BODY_MARGINS_8)) {
-            style.setDefaultLocalStyleAttribute("margin", "8px");
-            style.setDefaultLocalStyleAttribute("padding", "0px");
-        }
-        else {
-            style.setDefaultLocalStyleAttribute("margin-left", "8px");
-            style.setDefaultLocalStyleAttribute("margin-right", "8px");
-            style.setDefaultLocalStyleAttribute("margin-top", "8px");
-            style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
-        }
+        style.setDefaultLocalStyleAttribute("margin-left", "8px");
+        style.setDefaultLocalStyleAttribute("margin-right", "8px");
+        style.setDefaultLocalStyleAttribute("margin-top", "8px");
+        style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
     }
 }

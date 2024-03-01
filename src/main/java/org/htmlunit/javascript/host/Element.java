@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
@@ -348,11 +347,6 @@ public class Element extends Node {
      */
     @JsxFunction
     public ClientRect getBoundingClientRect() {
-        if (!getDomNodeOrDie().isAttachedToPage()
-                && getBrowserVersion().hasFeature(JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED)) {
-            throw JavaScriptEngine.reportRuntimeError("Element is not attache to a page");
-        }
-
         final ClientRect textRectangle = new ClientRect(1, 1, 1, 1);
         textRectangle.setParentScope(getWindow());
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));

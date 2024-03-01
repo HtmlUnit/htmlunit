@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.file;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -139,10 +138,7 @@ public class Blob extends HtmlUnitScriptable {
 
         @Override
         public String getType(final BrowserVersion browserVersion) {
-            if (!browserVersion.hasFeature(JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE)) {
-                return type_.toLowerCase(Locale.ROOT);
-            }
-            return type_;
+            return type_.toLowerCase(Locale.ROOT);
         }
 
         @Override
