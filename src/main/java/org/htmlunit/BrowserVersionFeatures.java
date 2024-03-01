@@ -969,17 +969,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_SELECT_FILE_THROWS,
 
-    /** Indicates that select.options has a wong class name. */
-    @BrowserFeature(IE)
-    JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
-
     /** Ignore negative value when setting the length. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
-
-    /** The 'in' operator returns always true for HtmlOptionsCollection. */
-    @BrowserFeature(IE)
-    JS_SELECT_OPTIONS_IN_ALWAYS_TRUE,
 
     /** Indicates that select.options returns null if requested index is outside. */
     @BrowserFeature(IE)
@@ -1267,42 +1259,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
 
-    /** Indicates <code>.querySelectorAll()</code> and <code>.querySelector()</code> is not supported in quirks mode. */
-    @BrowserFeature(IE)
-    QUERYSELECTORALL_NOT_IN_QUIRKS,
-
-    /** IE throws a syntax error if a css3 pseudo selector is used on a detached node. */
-    @BrowserFeature(IE)
-    QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE,
-
-    /** Set the value attribute of a reset input to 'Reset' if no value attribute specified. */
-    @BrowserFeature(IE)
-    RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
-
     /** The default display style of slot is 'content'. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     SLOT_CONTENTS,
-
-    /**
-     * Method addRule returns the rule position instead of -1.
-     */
-    @BrowserFeature(IE)
-    STYLESHEET_ADD_RULE_RETURNS_POS,
-
-    /**
-     * Indicates that the href property for a &lt;link rel="stylesheet" type="text/css" href="" /&gt;
-     * (href empty) is null.
-     */
-    @BrowserFeature(IE)
-    STYLESHEET_HREF_EMPTY_IS_NULL,
-
-    /** Set the value attribute of a submit input to 'Submit Query' if no value attribute specified. */
-    @BrowserFeature(IE)
-    SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
-
-    /** Indicates that unknown tags inside an SVG element are handled as DOM elements, not SVG elements. */
-    @BrowserFeature(IE)
-    SVG_UNKNOWN_ARE_DOM,
 
     /**
      * Indicates, that the pathname for the url 'blank' is empty;
@@ -1333,10 +1292,6 @@ public enum BrowserVersionFeatures {
     /** Set the origin property for web socket events. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     WEBSOCKET_ORIGIN_SET,
-
-    /** Execute window events. */
-    @BrowserFeature(IE)
-    WINDOW_EXECUTE_EVENTS,
 
     /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
     @BrowserFeature({FF, FF_ESR, IE})
@@ -1372,8 +1327,4 @@ public enum BrowserVersionFeatures {
     /** Indicates that the content charset is used for response parsing. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     XHR_USE_CONTENT_CHARSET,
-
-    /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
-    @BrowserFeature(IE)
-    XPATH_SELECTION_NAMESPACES,
 }

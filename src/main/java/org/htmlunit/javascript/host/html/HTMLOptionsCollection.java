@@ -14,9 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH;
-import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IN_ALWAYS_TRUE;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV;
@@ -92,18 +90,6 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     public HTMLOptionsCollection(final HtmlUnitScriptable parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null
-                && getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME)) {
-            return "HTMLSelectElement";
-        }
-        return super.getClassName();
     }
 
     /**
@@ -333,15 +319,6 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
         }
 
         htmlSelect_.removeOption(idx);
-    }
-
-    @Override
-    public boolean has(final int index, final Scriptable start) {
-        if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_IN_ALWAYS_TRUE)) {
-            return true;
-        }
-
-        return super.has(index, start);
     }
 
     /**

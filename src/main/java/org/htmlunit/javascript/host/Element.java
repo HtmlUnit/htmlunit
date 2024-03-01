@@ -19,7 +19,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NU
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
-import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -40,7 +39,6 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
@@ -64,14 +62,12 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
-import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventHandler;
 import org.htmlunit.javascript.host.html.HTMLCollection;
-import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLElement.ProxyDomNode;
 import org.htmlunit.javascript.host.html.HTMLScriptElement;
@@ -517,27 +513,6 @@ public class Element extends Node {
         final DomAttr newDomAttr = newAtt.getDomNodeOrDie();
         getDomNodeOrDie().setAttributeNode(newDomAttr);
         return replacedAtt;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(final String name, final Scriptable start) {
-        final Object response = super.get(name, start);
-
-        // IE support .querySelector(All) but not in quirks mode
-        // => TODO: find a better way to handle this!
-        if (response instanceof FunctionObject
-                && ("querySelectorAll".equals(name) || "querySelector".equals(name))
-                && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-            final Document doc = getWindow().getDocument();
-            if (doc instanceof HTMLDocument && doc.getDocumentMode() < 8) {
-                return NOT_FOUND;
-            }
-        }
-
-        return response;
     }
 
     /**

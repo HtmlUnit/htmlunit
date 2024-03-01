@@ -14,13 +14,10 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
@@ -53,31 +50,7 @@ public class HtmlSubmitInput extends HtmlInput implements LabelableElement {
      */
     HtmlSubmitInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(qualifiedName, page, addValueIfNeeded(page, attributes));
-    }
-
-    /**
-     * Add missing attribute if needed by fixing attribute map rather to add it afterwards as this second option
-     * triggers the instantiation of the script object at a time where the DOM node has not yet been added to its
-     * parent.
-     */
-    private static Map<String, DomAttr> addValueIfNeeded(final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
-
-        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-        if (browserVersion.hasFeature(SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)) {
-            for (final String key : attributes.keySet()) {
-                if (VALUE_ATTRIBUTE.equalsIgnoreCase(key)) {
-                    return attributes; // value attribute was specified
-                }
-            }
-
-            // value attribute was not specified, add it
-            final DomAttr newAttr = new DomAttr(page, null, VALUE_ATTRIBUTE, DEFAULT_VALUE, true);
-            attributes.put(VALUE_ATTRIBUTE, newAttr);
-        }
-
-        return attributes;
+        super(qualifiedName, page, attributes);
     }
 
     /**

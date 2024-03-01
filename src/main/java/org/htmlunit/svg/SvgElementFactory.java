@@ -14,8 +14,6 @@
  */
 package org.htmlunit.svg;
 
-import static org.htmlunit.BrowserVersionFeatures.SVG_UNKNOWN_ARE_DOM;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -112,12 +110,7 @@ public class SvgElementFactory implements ElementFactory {
             }
         }
         if (element == null) {
-            if (page.getWebClient().getBrowserVersion().hasFeature(SVG_UNKNOWN_ARE_DOM)) {
-                element = new DomElement(namespaceURI, qualifiedNameLC, page, attributeMap);
-            }
-            else {
-                element = new SvgElement(namespaceURI, qualifiedNameLC, page, attributeMap);
-            }
+            element = new SvgElement(namespaceURI, qualifiedNameLC, page, attributeMap);
         }
         return element;
     }

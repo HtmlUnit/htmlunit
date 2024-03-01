@@ -14,9 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
-import static org.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -53,7 +50,6 @@ import org.htmlunit.html.xpath.XPathHelper;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
-import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.DOMException;
@@ -1524,15 +1520,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getCanonicalXPath()
      */
     public <T> List<T> getByXPath(final String xpathExpr) {
-        // strange feature of the old IE XML support
-        if (!hasFeature(XPATH_SELECTION_NAMESPACES)) {
-            return XPathHelper.getByXPath(this, xpathExpr, null);
-        }
-
-        // See if the document has the SelectionNamespaces property defined. If so,
-        // create a PrefixResolver that resolves the defined namespaces.
-        final PrefixResolver prefixResolver = null;
-        return XPathHelper.getByXPath(this, xpathExpr, prefixResolver);
+        return XPathHelper.getByXPath(this, xpathExpr, null);
     }
 
     /**
@@ -1807,14 +1795,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
 
             if (selectorList != null) {
-                int documentMode = 9;
-                if (webClient.getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                    final HtmlUnitScriptable sobj = getPage().getScriptableObject();
-                    if (sobj instanceof HTMLDocument) {
-                        documentMode = ((HTMLDocument) sobj).getDocumentMode();
-                    }
-                }
-                CssStyleSheet.validateSelectors(selectorList, documentMode, this);
+                CssStyleSheet.validateSelectors(selectorList, 9, this);
 
             }
             return selectorList;

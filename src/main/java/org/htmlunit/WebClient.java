@@ -21,7 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
 import static org.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
-import static org.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -606,7 +605,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         Page newPage = null;
         FrameWindow.PageDenied pageDenied = PageDenied.NONE;
-        if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(WINDOW_EXECUTE_EVENTS)) {
+        if (windows_.contains(webWindow)) {
             if (webWindow instanceof FrameWindow) {
                 final String contentSecurityPolicy =
                         webResponse.getResponseHeaderValue(HttpHeader.CONTENT_SECURIRY_POLICY);

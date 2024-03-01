@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -91,9 +90,6 @@ public class StyleSheet extends HtmlUnitScriptable {
                 // <link rel="stylesheet" type="text/css" href="..." />
                 final HtmlLink link = (HtmlLink) node;
                 final String href = link.getHrefAttribute();
-                if ("".equals(href) && getBrowserVersion().hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
-                    return null;
-                }
                 // Expand relative URLs.
                 try {
                     final HtmlPage page = (HtmlPage) link.getPage();

@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.STYLESHEET_ADD_RULE_RETURNS_POS;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -317,9 +316,6 @@ public class CSSStyleSheet extends StyleSheet {
             catch (final DOMException ex) {
                 throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);
             }
-        }
-        if (getBrowserVersion().hasFeature(STYLESHEET_ADD_RULE_RETURNS_POS)) {
-            return getCssStyleSheet().getWrappedSheet().getCssRules().getLength() - 1;
         }
         return -1;
     }

@@ -30,7 +30,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THR
 import static org.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static org.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static org.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
-import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -66,7 +65,6 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -132,11 +130,9 @@ import org.htmlunit.javascript.host.event.SVGZoomEvent;
 import org.htmlunit.javascript.host.event.TextEvent;
 import org.htmlunit.javascript.host.event.UIEvent;
 import org.htmlunit.javascript.host.event.WheelEvent;
-import org.htmlunit.javascript.host.html.DocumentProxy;
 import org.htmlunit.javascript.host.html.HTMLAllCollection;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLCollection;
-import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLFrameSetElement;
 import org.htmlunit.util.EncodingSniffer;
@@ -1155,37 +1151,6 @@ public class Document extends Node {
     @JsxGetter(value = IE, propertyName = "URLUnencoded")
     public String getURLUnencoded_js() {
         return getURL_js();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(final String name, final Scriptable start) {
-        final Object response = super.get(name, start);
-
-        // IE support .querySelector(All) but not in quirks mode
-        // => TODO: find a better way to handle this!
-        if (response instanceof FunctionObject
-            && ("querySelectorAll".equals(name) || "querySelector".equals(name))
-            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-            Document document = null;
-            if (start instanceof DocumentProxy) {
-                // if in prototype no domNode is set -> use start
-                document = ((DocumentProxy) start).getDelegee();
-            }
-            else if (start instanceof HTMLDocument) {
-                final DomNode page = ((HTMLDocument) start).getDomNodeOrNull();
-                if (page != null) {
-                    document = page.getScriptableObject();
-                }
-            }
-            if (document instanceof HTMLDocument && document.getDocumentMode() < 8) {
-                return NOT_FOUND;
-            }
-        }
-
-        return response;
     }
 
     /**

@@ -19,8 +19,6 @@ import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN;
 import static org.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
-import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
-import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.io.IOException;
@@ -106,10 +104,8 @@ import org.htmlunit.html.HtmlRadioButtonInput;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.ValidatableElement;
-import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.host.css.MediaList;
 import org.htmlunit.javascript.host.dom.Document;
-import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.UrlUtils;
@@ -757,13 +753,6 @@ public class CssStyleSheet implements Serializable {
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final Condition condition, final DomElement element) {
-        if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-            final HtmlUnitScriptable sobj = element.getPage().getScriptableObject();
-            if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
-                return false;
-            }
-        }
-
         final String value = condition.getValue();
         switch (value) {
             case "root":
@@ -1207,13 +1196,6 @@ public class CssStyleSheet implements Serializable {
                 }
                 if (documentMode < 9) {
                     return CSS2_PSEUDO_CLASSES.contains(value);
-                }
-
-                if (!CSS2_PSEUDO_CLASSES.contains(value)
-                        && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE)
-                        && !domNode.isAttachedToPage()
-                        && !domNode.hasChildNodes()) {
-                    throw new CSSException("Syntax Error");
                 }
 
                 if ("nth-child()".equals(value)) {
