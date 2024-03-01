@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLKEYGEN_END_TAG_FORBIDDEN;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.html.HtmlAddress;
@@ -80,7 +79,7 @@ public class HTMLBlockElement extends HTMLElement {
      */
     @Override
     protected boolean isEndTagForbidden() {
-        return getBrowserVersion().hasFeature(HTMLKEYGEN_END_TAG_FORBIDDEN) && "KEYGEN".equals(getNodeName());
+        return false;
     }
 
     /**

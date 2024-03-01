@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
-import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
@@ -52,9 +51,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.AbstractCssStyleDeclaration;
-import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssPixelValueConverter;
-import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.css.StyleElement;
@@ -182,25 +179,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     protected AbstractCssStyleDeclaration getCssStyleDeclaration() {
         return styleDeclaration_;
-    }
-
-    /**
-     * IE makes unknown style properties accessible.
-     * @param name the name of the requested property
-     * @return the object value, {@link #NOT_FOUND} if nothing is found
-     */
-    @Override
-    protected Object getWithPreemption(final String name) {
-        if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)
-                && (styleDeclaration_ instanceof ElementCssStyleDeclaration
-                        || styleDeclaration_ instanceof ComputedCssStyleDeclaration)) {
-            final StyleElement element = styleDeclaration_.getStyleElement(name);
-            if (element != null && element.getValue() != null) {
-                return element.getValue();
-            }
-        }
-
-        return NOT_FOUND;
     }
 
     /**

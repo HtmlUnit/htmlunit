@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.KEYGEN_AS_BLOCK;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -163,12 +161,7 @@ public class DefaultElementFactory implements ElementFactory {
         switch (tagName) {
             case KEYGEN_:
                 final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-                if (browserVersion.hasFeature(KEYGEN_AS_BLOCK)) {
-                    element = new HtmlBlockQuote(qualifiedName, page, attributeMap);
-                }
-                else {
-                    element = new HtmlUnknownElement(page, qualifiedName, attributeMap);
-                }
+                element = new HtmlUnknownElement(page, qualifiedName, attributeMap);
                 break;
 
             case HtmlAbbreviated.TAG_NAME:

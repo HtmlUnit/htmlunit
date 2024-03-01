@@ -18,7 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
 import static org.htmlunit.BrowserVersionFeatures.HTML_COMMAND_TAG;
 import static org.htmlunit.BrowserVersionFeatures.HTML_ISINDEX_TAG;
 import static org.htmlunit.BrowserVersionFeatures.HTML_MAIN_TAG;
-import static org.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -60,7 +59,6 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlHiddenInput;
 import org.htmlunit.html.HtmlImage;
-import org.htmlunit.html.HtmlMeta;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlSvg;
 import org.htmlunit.html.HtmlTable;
@@ -73,7 +71,6 @@ import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
-import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
@@ -402,26 +399,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         if (!insideSvg_ && "body".equals(tagLower)) {
             body_ = (HtmlElement) newElement;
-        }
-        else if (newElement instanceof HtmlMeta && page_.hasFeature(META_X_UA_COMPATIBLE)) {
-            final HtmlMeta meta = (HtmlMeta) newElement;
-            if ("X-UA-Compatible".equals(meta.getHttpEquivAttribute())) {
-                final String content = meta.getContentAttribute();
-                if (content.startsWith("IE=")) {
-                    final String mode = content.substring(3).trim();
-                    final int version = page_.getWebClient().getBrowserVersion().getBrowserVersionNumeric();
-                    try {
-                        int value = Integer.parseInt(mode);
-                        if (value > version) {
-                            value = version;
-                        }
-                        ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(value);
-                    }
-                    catch (final Exception e) {
-                        // ignore
-                    }
-                }
-            }
         }
         else if (createdByJavascript_ && newElement instanceof ScriptElement) {
             final ScriptElement script = (ScriptElement) newElement;

@@ -243,7 +243,7 @@ public enum BrowserVersionFeatures {
     HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
 
     /** Handle blank source like empty. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
 
     /** Empty src attribute sets display to false. */
@@ -298,10 +298,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_TYPE_WEEK_SUPPORTED,
 
-    /** Should the HTMLElement of {@code keygen} have no end tag. */
-    @BrowserFeature(IE)
-    HTMLKEYGEN_END_TAG_FORBIDDEN,
-
     /** If the type is present for a link only use if type is text/css. */
     @BrowserFeature({CHROME, EDGE})
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
@@ -323,7 +319,7 @@ public enum BrowserVersionFeatures {
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
     /** Should org.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden(). */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     HTMLTRACK_END_TAG_FORBIDDEN,
 
     /** HTML attributes are always lower case. */
@@ -331,7 +327,7 @@ public enum BrowserVersionFeatures {
     HTML_ATTRIBUTE_LOWER_CASE,
 
     /** HTML parser supports the 'command' tag. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     HTML_COMMAND_TAG,
 
     /** HTML parser supports the 'isindex' tag. */
@@ -355,7 +351,7 @@ public enum BrowserVersionFeatures {
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
     /** domain '.org' is handled as 'org'. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS,
 
     /** Indicates that the start date for two digits cookies is 1970
@@ -391,7 +387,7 @@ public enum BrowserVersionFeatures {
 
     /** The anchor pathname detects url's starting with one letter as file url's
      * and replaces them with the file protocol. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE,
 
     /** The anchor pathname property returns nothing for broken http(s) url's. */
@@ -399,7 +395,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL,
 
     /** The anchor pathname prefixes file url's with '/'. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
 
     /** The anchor protocol property returns ':' for broken http(s) url's. */
@@ -493,7 +489,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_EVALUATE_RECREATES_RESULT,
 
     /** The browser has selection {@code rangeCount}. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     JS_DOCUMENT_SELECTION_RANGE_COUNT,
 
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
@@ -617,7 +613,7 @@ public enum BrowserVersionFeatures {
     JS_ERROR_CAPTURE_STACK_TRACE,
 
     /** Javascript {@code Error.stackTraceLimit}. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     JS_ERROR_STACK_TRACE_LIMIT,
 
     /** Javascript InputEvent reads the inputType property from data. */
@@ -625,7 +621,7 @@ public enum BrowserVersionFeatures {
     JS_EVENT_INPUT_CTOR_INPUTTYPE,
 
     /** Javascript KeyboardEvent reads the which property from data. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     JS_EVENT_KEYBOARD_CTOR_WHICH,
 
     /** do not trigger the onload event if the frame content
@@ -670,7 +666,7 @@ public enum BrowserVersionFeatures {
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
     /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     JS_IFRAME_ALWAYS_EXECUTE_ONLOAD,
 
     /**
@@ -717,7 +713,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_IGNORE_NEGATIVE_SELECTION_START,
 
     /** FF accepts all chars. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     JS_INPUT_NUMBER_ACCEPT_ALL,
 
     /** FF comma at end is not an integer. */
@@ -745,7 +741,7 @@ public enum BrowserVersionFeatures {
     JS_INTL_V8_BREAK_ITERATOR,
 
     /** Indicates that isSearchProviderInstalled returns zero instead of undefined. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO,
 
     /** location.hash returns an encoded hash. */
@@ -803,7 +799,7 @@ public enum BrowserVersionFeatures {
     JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
     /** element.outerHTML removes all children from detached node. */
@@ -820,7 +816,7 @@ public enum BrowserVersionFeatures {
     JS_PROMISE,
 
     /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} contains name. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
 
     /** Support {@code Reflect}. */
@@ -828,7 +824,7 @@ public enum BrowserVersionFeatures {
     JS_REFLECT,
 
     /** Javascript selectorText property returns selectors in lower case. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature({CHROME, EDGE})
     JS_SELECTOR_TEXT_LOWERCASE,
 
     /** Indicates that setting the value to null has no effect. */
@@ -848,7 +844,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE,
 
     /** Whether to add to the storage even preserved words. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     JS_STORAGE_PRESERVED_INCLUDED,
 
     /** Indicates that string.includes() is supported. */
@@ -870,12 +866,6 @@ public enum BrowserVersionFeatures {
     /** Stylesheet list contains only active style sheets. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_STYLESHEETLIST_ACTIVE_ONLY,
-
-    /** IE supports accessing unsupported style elements via getter
-     * like val = elem.style.htmlunit;.
-     */
-    @BrowserFeature(IE)
-    JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
 
     /** Indicates wordSpacing support percent values. */
     @BrowserFeature({FF, FF_ESR})
@@ -972,17 +962,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
 
-    /** Handle {@code <keygen>} as {@code <block>}. */
-    @BrowserFeature(IE)
-    KEYGEN_AS_BLOCK,
-
-    /**
-     * Indicates that the browser considers the meta X-UA-Compatible when determining
-     * compatibility/quirks mode.
-     */
-    @BrowserFeature(IE)
-    META_X_UA_COMPATIBLE,
-
     /**
      * The default display style of multicol is 'block'.
      */
@@ -1008,7 +987,7 @@ public enum BrowserVersionFeatures {
     URL_AUTH_CREDENTIALS,
 
     /** The protocol setter does not check for special protocols. */
-    @BrowserFeature({FF_ESR, IE})
+    @BrowserFeature(FF_ESR)
     URL_IGNORE_SPECIAL,
 
     /** Handles missing slashes. */
@@ -1020,7 +999,7 @@ public enum BrowserVersionFeatures {
     WEBSOCKET_ORIGIN_SET,
 
     /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
-    @BrowserFeature({FF, FF_ESR, IE})
+    @BrowserFeature({FF, FF_ESR})
     XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF,
 
     /**

@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLKEYGEN_END_TAG_FORBIDDEN;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -55,17 +53,5 @@ public class HtmlBlockQuote extends HtmlElement {
      */
     public final String getCiteAttribute() {
         return getAttributeDirect("cite");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DisplayStyle getDefaultStyleDisplay() {
-        if ("keygen".equals(getNodeName()) && hasFeature(HTMLKEYGEN_END_TAG_FORBIDDEN)) {
-            return DisplayStyle.INLINE;
-        }
-
-        return super.getDefaultStyleDisplay();
     }
 }
