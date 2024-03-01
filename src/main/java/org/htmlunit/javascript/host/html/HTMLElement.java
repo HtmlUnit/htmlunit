@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
-import static org.htmlunit.BrowserVersionFeatures.JS_VALIGN_CONVERTS_TO_LOWERCASE;
 import static org.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
@@ -1278,9 +1277,6 @@ public class HTMLElement extends Element {
         final String valign = getDomNodeOrDie().getAttributeDirect("valign");
         final String valignLC = valign.toLowerCase(Locale.ROOT);
         if (valid == null || ArrayUtils.contains(valid, valignLC)) {
-            if (getBrowserVersion().hasFeature(JS_VALIGN_CONVERTS_TO_LOWERCASE)) {
-                return valignLC;
-            }
             return valign;
         }
         return defaultValue;
@@ -1295,12 +1291,7 @@ public class HTMLElement extends Element {
         final String valign = JavaScriptEngine.toString(vAlign);
         final String valignLC = valign.toLowerCase(Locale.ROOT);
         if (valid == null || ArrayUtils.contains(valid, valignLC)) {
-            if (getBrowserVersion().hasFeature(JS_VALIGN_CONVERTS_TO_LOWERCASE)) {
-                getDomNodeOrDie().setAttribute("valign", valignLC);
-            }
-            else {
-                getDomNodeOrDie().setAttribute("valign", valign);
-            }
+            getDomNodeOrDie().setAttribute("valign", valign);
         }
         else {
             throw JavaScriptEngine.reportRuntimeError("Cannot set the vAlign property to invalid value: " + vAlign);

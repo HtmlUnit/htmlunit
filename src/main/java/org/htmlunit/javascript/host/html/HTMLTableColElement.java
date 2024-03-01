@@ -14,9 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES;
 import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_COLUMN_WIDTH_NULL_STRING;
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -84,10 +82,6 @@ public class HTMLTableColElement extends HTMLTableComponent {
         final double d = JavaScriptEngine.toNumber(span);
         int i = (int) d;
         if (i < 1) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
-                final Exception e = new Exception("Cannot set the span property to invalid value: " + span);
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-            }
             i = 1;
         }
         getDomNodeOrDie().setAttribute("span", Integer.toString(i));
@@ -99,9 +93,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
-        final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES);
-        final Boolean returnNegativeValues = ie ? Boolean.FALSE : null;
-        return getWidthOrHeight("width", returnNegativeValues);
+        return getWidthOrHeight("width", null);
     }
 
     /**

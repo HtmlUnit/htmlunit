@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID;
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
 
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -77,14 +76,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @return the valid "vAlign" values for this element, depending on the browser being emulated
      */
     private String[] getValidVAlignValues() {
-        final String[] valid;
-        if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
-            valid = VALIGN_VALID_VALUES_IE;
-        }
-        else {
-            valid = null;
-        }
-        return valid;
+        return null;
     }
 
     /**

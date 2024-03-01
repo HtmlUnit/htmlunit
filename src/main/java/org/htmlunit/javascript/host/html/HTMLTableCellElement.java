@@ -14,11 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES;
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_OFFSET_INCLUDES_BORDER;
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
 import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -82,8 +78,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             return 0;
         }
         final ComputedCssStyleDeclaration style = getWindow().getWebWindow().getComputedStyle(getDomNodeOrDie(), null);
-        final boolean includeBorder = getBrowserVersion().hasFeature(JS_TABLE_CELL_OFFSET_INCLUDES_BORDER);
-        return style.getCalculatedHeight(includeBorder, true);
+        return style.getCalculatedHeight(false, true);
     }
 
     /**
@@ -107,11 +102,10 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             if (row != null) {
                 final HtmlElement thiz = getDomNodeOrDie();
                 final List<HtmlTableCell> cells = row.getCells();
-                final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_CELL_OFFSET_INCLUDES_BORDER);
                 final boolean leftmost = cells.indexOf(thiz) == 0;
                 final boolean rightmost = cells.indexOf(thiz) == cells.size() - 1;
-                w -= (ie && leftmost ? 0 : 0.5) * style.getBorderLeftValue();
-                w -= (ie && rightmost ? 0 : 0.5) * style.getBorderRightValue();
+                w -= 0.5 * style.getBorderLeftValue();
+                w -= 0.5 * style.getBorderRightValue();
             }
         }
 
@@ -218,9 +212,6 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             getDomNodeOrDie().setAttribute("colSpan", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-            }
             getDomNodeOrDie().setAttribute("colSpan", "1");
         }
     }
@@ -258,9 +249,6 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             getDomNodeOrDie().setAttribute("rowSpan", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-            }
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
                 getDomNodeOrDie().setAttribute("rowSpan", "0");
             }
@@ -313,9 +301,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
-        final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES);
-        final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
-        return getWidthOrHeight("width", returnNegativeValues);
+        return getWidthOrHeight("width", null);
     }
 
     /**
@@ -324,8 +310,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter(propertyName = "width")
     public void setWidth_js(final String width) {
-        setWidthOrHeight("width", width,
-                !getBrowserVersion().hasFeature(JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES));
+        setWidthOrHeight("width", width, true);
     }
 
     /**
@@ -334,9 +319,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "height")
     public String getHeight_js() {
-        final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES);
-        final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
-        return getWidthOrHeight("height", returnNegativeValues);
+        return getWidthOrHeight("height", null);
     }
 
     /**
@@ -345,8 +328,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter(propertyName = "height")
     public void setHeight_js(final String height) {
-        setWidthOrHeight("height", height,
-                !getBrowserVersion().hasFeature(JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES));
+        setWidthOrHeight("height", height, true);
     }
 
     /**

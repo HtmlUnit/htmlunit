@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -41,9 +40,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 @JsxClass(domClass = HtmlTableHeader.class)
 @JsxClass(domClass = HtmlTableFooter.class)
 public class HTMLTableSectionElement extends RowContainer {
-
-    /** The valid "vAlign" values for this element, when emulating IE. */
-    private static final String[] VALIGN_VALID_VALUES_IE = {"top", "bottom", "middle", "baseline"};
 
     /** The default value of the "vAlign" property. */
     private static final String VALIGN_DEFAULT_VALUE = "top";
@@ -86,9 +82,6 @@ public class HTMLTableSectionElement extends RowContainer {
      * @return the valid "vAlign" values for this element, depending on the browser being emulated
      */
     private String[] getValidVAlignValues() {
-        if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
-            return VALIGN_VALID_VALUES_IE;
-        }
         return null;
     }
 

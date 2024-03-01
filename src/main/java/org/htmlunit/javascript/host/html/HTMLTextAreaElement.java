@@ -14,12 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT;
-import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION;
-import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION;
 import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION;
-import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION;
-import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION;
 import static org.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_VALUE_NULL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -136,18 +131,12 @@ public class HTMLTextAreaElement extends HTMLElement {
         try {
             final int i = Float.valueOf(cols).intValue();
             if (i < 0) {
-                if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION)) {
-                    throw new NumberFormatException("New value for cols '" + cols + "' is smaller than zero.");
-                }
                 getDomNodeOrDie().setAttribute("cols", null);
                 return;
             }
             getDomNodeOrDie().setAttribute("cols", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-            }
             getDomNodeOrDie().setAttribute("cols", "20");
         }
     }
@@ -176,19 +165,12 @@ public class HTMLTextAreaElement extends HTMLElement {
         try {
             final int i = Float.valueOf(rows).intValue();
             if (i < 0) {
-                if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION)) {
-                    throw new NumberFormatException("New value for rows '" + rows + "' is smaller than zero.");
-                }
                 getDomNodeOrDie().setAttribute("rows", null);
                 return;
             }
             getDomNodeOrDie().setAttribute("rows", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION)) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-            }
-
             getDomNodeOrDie().setAttribute("rows", "2");
         }
     }
@@ -307,9 +289,6 @@ public class HTMLTextAreaElement extends HTMLElement {
             return Integer.parseInt(maxLength);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT)) {
-                return Integer.MAX_VALUE;
-            }
             return -1;
         }
     }

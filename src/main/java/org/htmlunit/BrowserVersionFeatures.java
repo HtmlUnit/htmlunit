@@ -1041,22 +1041,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_SYMBOL,
 
-    /** The width cell height does not return negative values. */
-    @BrowserFeature(IE)
-    JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES,
-
-    /** The width cell offset calculation takes border into account. */
-    @BrowserFeature(IE)
-    JS_TABLE_CELL_OFFSET_INCLUDES_BORDER,
-
-    /** The width cell property does not return negative values. */
-    @BrowserFeature(IE)
-    JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES,
-
-    /** The width column property does not return negative values. */
-    @BrowserFeature(IE)
-    JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES,
-
     /** The width column property has a value of 'null' for null. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_TABLE_COLUMN_WIDTH_NULL_STRING,
@@ -1069,45 +1053,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_TABLE_SPAN_SET_ZERO_IF_INVALID,
 
-    /** Throws an exception if the value for column span is less than one. */
-    @BrowserFeature(IE)
-    JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID,
-
-    /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline". */
-    @BrowserFeature(IE)
-    JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
-
-    /** Getting the property maxLength if it is not defined in the DOM returns MAX_INT.
-     * FF and Chrome return -1.
-     */
-    @BrowserFeature(IE)
-    JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT,
-
-    /** Setting the property cols throws an exception, if the provided value is less than 0.
-     * FF ignores the provided value in this case.
-     */
-    @BrowserFeature(IE)
-    JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION,
-
-    /** Setting the property cols throws an exception, if the provided value is not convertible into an integer.
-     * FF ignores the provided value in this case and sets cols to 0.
-     */
-    @BrowserFeature(IE)
-    JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
-
     /** Setting the property {@code maxLength} throws an exception, if the provided value is less than 0. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION,
-
-    /** Setting the property {@code rows} throws an exception, if the provided value is less than 0. */
-    @BrowserFeature(IE)
-    JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION,
-
-    /** Setting the property rows throws an exception, if the provided value is not convertible into an integer.
-     * FF ignores the provided value in this case and sets rows to 0.
-     */
-    @BrowserFeature(IE)
-    JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** Setting the value processes null as null value. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -1117,20 +1065,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
 
-    /**
-     * Indicates that the filter to be used by the TreeWalker has to be a function (so no object with a method
-     * <code>acceptNode(..)</code> is supported).
-     */
-    @BrowserFeature(IE)
-    JS_TREEWALKER_FILTER_FUNCTION_ONLY,
-
     /** Setting the property align to arbitrary values is allowed. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
-
-    /** Setting the property valign converts to lowercase. */
-    @BrowserFeature(IE)
-    JS_VALIGN_CONVERTS_TO_LOWERCASE,
 
     /** Indicates that WeakSet is supported. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -1147,18 +1084,6 @@ public enum BrowserVersionFeatures {
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
-
-    /** <code>window.name</code> returns also form fields (e.g. input, textarea). */
-    @BrowserFeature(IE)
-    JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME,
-
-    /** Support for accessing the frame of a window by id additionally to using the name. */
-    @BrowserFeature(IE)
-    JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID,
-
-    /** <code>window..frames['id']</code> returns the frame window instead of the frame element. */
-    @BrowserFeature(IE)
-    JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
     /** Javascript InstallTrigger property set to null. */
     @BrowserFeature({FF, FF_ESR})

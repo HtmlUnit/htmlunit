@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -25,7 +24,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Supplier;
 
 import org.htmlunit.html.DomNode;
@@ -485,12 +483,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public String getRules() {
-        String rules = getDomNodeOrDie().getAttributeDirect("rules");
-        if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)
-                && !VALID_RULES_.contains(rules)) {
-            rules = "";
-        }
-        return rules;
+        return getDomNodeOrDie().getAttributeDirect("rules");
     }
 
     /**
@@ -498,13 +491,7 @@ public class HTMLTableElement extends RowContainer {
      * @param rules the new property
      */
     @JsxSetter
-    public void setRules(String rules) {
-        if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
-            rules = rules.toLowerCase(Locale.ROOT);
-            if (!rules.isEmpty() && !VALID_RULES_.contains(rules)) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(new Exception("Invalid argument"));
-            }
-        }
+    public void setRules(final String rules) {
         setAttribute("rules", rules);
     }
 

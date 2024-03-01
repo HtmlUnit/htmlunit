@@ -15,9 +15,6 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -82,7 +79,6 @@ import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlEmbed;
 import org.htmlunit.html.HtmlForm;
-import org.htmlunit.html.HtmlFrame;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlMap;
@@ -1353,14 +1349,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                     // May be attempting to retrieve element by ID (try map-backed operation again instead of XPath).
                     try {
                         final HtmlElement htmlElement = page.getHtmlElementById(name);
-                        if (getBrowserVersion().hasFeature(JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW)
-                                && htmlElement instanceof HtmlFrame) {
-                            final HtmlFrame frame = (HtmlFrame) htmlElement;
-                            result = getScriptableFor(frame.getEnclosedWindow());
-                        }
-                        else {
-                            result = getScriptableFor(htmlElement);
-                        }
+                        result = getScriptableFor(htmlElement);
                     }
                     catch (final ElementNotFoundException e) {
                         result = NOT_FOUND;
@@ -1411,8 +1400,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         // vs using XPath-based operations throughout.
         final List<DomElement> elements = page.getElementsByName(name);
 
-        final boolean includeFormFields = getBrowserVersion().hasFeature(JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME);
-        final Filter filter = new Filter(includeFormFields);
+        final Filter filter = new Filter(false);
 
         elements.removeIf(domElement -> !filter.matches(domElement));
 
@@ -2140,9 +2128,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Object getOffscreenBuffering() {
-        if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)) {
-            return "auto";
-        }
         return true;
     }
 
@@ -4211,12 +4196,6 @@ class HTMLCollectionFrames extends HTMLCollection {
             if (name.equals(window.getName())) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Property \"" + name + "\" evaluated (by name) to " + window);
-                }
-                return getScriptableForElement(window);
-            }
-            if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID) && frameElt.getId().equals(name)) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
                 }
                 return getScriptableForElement(window);
             }
