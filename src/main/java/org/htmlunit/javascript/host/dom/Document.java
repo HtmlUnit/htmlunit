@@ -4037,9 +4037,7 @@ public class Document extends Node {
         final DomNode domNode = getDomNodeOrDie();
         final Object domElement = domNode.getFirstByXPath("//*[@id = \"" + id + "\"]");
         if (domElement != null) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");
-            }
+            return ((DomElement) domElement).getScriptableObject();
         }
         return null;
     }
