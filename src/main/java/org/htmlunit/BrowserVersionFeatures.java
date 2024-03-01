@@ -497,14 +497,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR, IE})
     JS_DOCUMENT_SELECTION_RANGE_COUNT,
 
-    /** Javascript property document.domain doesn't allow setting domain of {@code about:blank}. */
-    @BrowserFeature(IE)
-    JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
-
-    /** createHTMLDucument requires a title. */
-    @BrowserFeature(IE)
-    JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE,
-
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DOMIMPLEMENTATION_FEATURE_CORE_3,
@@ -657,10 +649,6 @@ public enum BrowserVersionFeatures {
     /** Support for document.formName('inputName'). */
     @BrowserFeature(IE)
     JS_FORM_USABLE_AS_FUNCTION,
-
-    /** contentDocument throws if the frame document access is denied. */
-    @BrowserFeature(IE)
-    JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS,
 
     /** Supports globalThis. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})

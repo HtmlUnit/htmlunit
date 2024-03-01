@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS;
 import static org.htmlunit.BrowserVersionFeatures.JS_IFRAME_ALWAYS_EXECUTE_ONLOAD;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -26,7 +25,6 @@ import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.FrameWindow;
 import org.htmlunit.html.FrameWindow.PageDenied;
 import org.htmlunit.html.HtmlInlineFrame;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -92,9 +90,6 @@ public class HTMLIFrameElement extends HTMLElement {
     public DocumentProxy getContentDocument() {
         final FrameWindow frameWindow = getFrame().getEnclosedWindow();
         if (PageDenied.NONE != frameWindow.getPageDenied()) {
-            if (getBrowserVersion().hasFeature(JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS)) {
-                throw JavaScriptEngine.reportRuntimeError("Error access denied");
-            }
             return null;
         }
         return ((Window) frameWindow.getScriptableObject()).getDocument_js();

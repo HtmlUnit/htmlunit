@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CORE_3;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_1;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_3;
@@ -267,11 +266,6 @@ public class DOMImplementation extends HtmlUnitScriptable {
      */
     @JsxFunction
     public HTMLDocument createHTMLDocument(final Object titleObj) {
-        if (JavaScriptEngine.isUndefined(titleObj)
-                && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE)) {
-            throw JavaScriptEngine.reportRuntimeError("Title is required");
-        }
-
         // a similar impl is in
         // org.htmlunit.javascript.host.dom.DOMParser.parseFromString(String, Object)
         try {

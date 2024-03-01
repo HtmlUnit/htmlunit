@@ -23,7 +23,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static org.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -51,7 +50,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
@@ -1353,16 +1351,6 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setDomain(String newDomain) {
-        final BrowserVersion browserVersion = getBrowserVersion();
-
-        // IE doesn't allow to set domain of about:blank
-        if (UrlUtils.URL_ABOUT_BLANK == getPage().getUrl()
-            && browserVersion.hasFeature(JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
-            throw JavaScriptEngine.reportRuntimeError("Illegal domain value, cannot set domain from \""
-                    + UrlUtils.URL_ABOUT_BLANK + "\" to: \""
-                    + newDomain + "\".");
-        }
-
         newDomain = newDomain.toLowerCase(Locale.ROOT);
 
         final String currentDomain = getDomain();
