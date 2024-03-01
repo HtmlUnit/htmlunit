@@ -15,7 +15,6 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME;
-import static org.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -222,9 +221,7 @@ public abstract class BaseFrameElement extends HtmlElement {
                 return true;
             }
 
-            final URL encUrl = UrlUtils.encodeUrl(url,
-                    window.getWebClient().getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
-                    charset);
+            final URL encUrl = UrlUtils.encodeUrl(url, charset);
             if (UrlUtils.sameFile(encUrl, window.getEnclosedPage().getUrl())) {
                 return true;
             }

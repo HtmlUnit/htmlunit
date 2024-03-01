@@ -15,9 +15,7 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH;
-import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE;
-import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -115,9 +113,6 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
         }
 
         if (index >= htmlSelect_.getOptionSize()) {
-            if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE)) {
-                return null;
-            }
             return Undefined.instance;
         }
 
@@ -307,9 +302,6 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
         if (idx < 0) {
             if (browser.hasFeature(JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE)) {
                 return;
-            }
-            if (index < 0 && getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV)) {
-                throw JavaScriptEngine.reportRuntimeError("Invalid index for option collection: " + index);
             }
         }
 

@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
-import static org.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -1511,8 +1510,7 @@ public class WebClient implements Serializable, AutoCloseable {
         WebAssert.notNull("method", method);
         WebAssert.notNull("parameters", parameters);
 
-        url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
-                                        webRequest.getCharset());
+        url = UrlUtils.encodeUrl(url, webRequest.getCharset());
         webRequest.setUrl(url);
 
         if (LOG.isDebugEnabled()) {
@@ -1584,9 +1582,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (locationString == null) {
                     return webResponse;
                 }
-                if (!getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING)) {
-                    locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
-                }
+                locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
                 newUrl = expandUrl(url, locationString);
             }
             catch (final MalformedURLException e) {

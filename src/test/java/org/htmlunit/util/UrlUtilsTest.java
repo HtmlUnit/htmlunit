@@ -447,23 +447,23 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     public void percent() throws Exception {
         URL url = new URL("http://localhost/bug%21.html");
         assertEquals("http://localhost/bug%21.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug%0F.html");
         assertEquals("http://localhost/bug%0F.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug%ff.html");
         assertEquals("http://localhost/bug%ff.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug%AB.html");
         assertEquals("http://localhost/bug%AB.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://john.smith:secret@localhost/bug%AB.html");
         assertEquals("http://john.smith:secret@localhost/bug%AB.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
     }
 
     /**
@@ -474,35 +474,35 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     public void percentEncoding() throws Exception {
         URL url = new URL("http://localhost/bug%.html");
         assertEquals("http://localhost/bug%25.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug%a.html");
         assertEquals("http://localhost/bug%25a.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug%ak.html");
         assertEquals("http://localhost/bug%25ak.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug.html?namelist=Woman%2g%20Daily");
         assertEquals("http://localhost/bug.html?namelist=Woman%252g%20Daily",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug.html?namelist=Woman%u2122%20Daily");
         assertEquals("http://localhost/bug.html?namelist=Woman%25u2122%20Daily",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug.html?%");
         assertEquals("http://localhost/bug.html?%25",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug.html?%2");
         assertEquals("http://localhost/bug.html?%252",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/bug.html?%2x");
         assertEquals("http://localhost/bug.html?%252x",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
     }
 
     /**
@@ -513,27 +513,27 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     public void percentEncoding2() throws Exception {
         URL url = new URL("http://localhost/foo%%20bar.html");
         assertEquals("http://localhost/foo%25%20bar.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/foo%20bar.html");
         assertEquals("http://localhost/foo%20bar.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/foo%ar.html");
         assertEquals("http://localhost/foo%25ar.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/foo%%xyz.html");
         assertEquals("http://localhost/foo%25%25xyz.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/foo%20%xyz.html");
         assertEquals("http://localhost/foo%20%25xyz.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
 
         url = new URL("http://localhost/foo%2x%bar.html");
         assertEquals("http://localhost/foo%252x%bar.html",
-                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+                UrlUtils.encodeUrl(url, ISO_8859_1));
     }
 
     /**

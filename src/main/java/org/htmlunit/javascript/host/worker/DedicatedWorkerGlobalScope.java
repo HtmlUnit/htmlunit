@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.worker;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -253,12 +252,9 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         final DedicatedWorkerGlobalScope workerScope = (DedicatedWorkerGlobalScope) thisObj;
 
         final WebClient webClient = workerScope.owningWindow_.getWebWindow().getWebClient();
-        final boolean checkContentType = !webClient.getBrowserVersion()
-                .hasFeature(JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL);
-
         for (final Object arg : args) {
             final String url = JavaScriptEngine.toString(arg);
-            workerScope.loadAndExecute(webClient, url, cx, checkContentType);
+            workerScope.loadAndExecute(webClient, url, cx, true);
         }
     }
 

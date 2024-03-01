@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.xml;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EMPTY_STRING_IS_ERROR;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_PARSERERROR_ON_ERROR;
-import static org.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -207,14 +206,7 @@ public class XMLDocument extends Document {
         elements.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
                 node -> {
-                    final String nodeName;
-                    if (getBrowserVersion().hasFeature(JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL)) {
-                        nodeName = node.getLocalName();
-                    }
-                    else {
-                        nodeName = node.getNodeName();
-                    }
-
+                    final String nodeName = node.getNodeName();
                     return nodeName.equals(tagName);
                 });
         return elements;

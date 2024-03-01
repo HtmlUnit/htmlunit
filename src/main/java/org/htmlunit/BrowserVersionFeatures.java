@@ -973,30 +973,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
-    /** Indicates that select.options returns null if requested index is outside. */
-    @BrowserFeature(IE)
-    JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE,
-
     /** Indicates that select.options.remove ignores the call if index is too large. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE,
 
-    /** Indicates that select.options[i] throws an exception if the requested index is negative. */
-    @BrowserFeature(IE)
-    JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV,
-
     /** Indicates that select.options.remove ignores the call if index is too large. */
     @BrowserFeature({FF, FF_ESR})
     JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE,
-
-    /** Indicates that select.value = 'val' only checks the value attribute and
-     * not the option text. */
-    @BrowserFeature(IE)
-    JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE,
-
-    /** Whether to get any property from the items first. */
-    @BrowserFeature(IE)
-    JS_STORAGE_GET_FROM_ITEMS,
 
     /** Whether to add to the storage even preserved words. */
     @BrowserFeature({FF, FF_ESR, IE})
@@ -1102,12 +1085,6 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_138,
 
     /**
-     * Difference of window.outer/inner height is 86.
-     */
-    @BrowserFeature(IE)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_86,
-
-    /**
      * Difference of window.outer/inner height is 91.
      */
     @BrowserFeature({FF, FF_ESR})
@@ -1121,39 +1098,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_WINDOW_TOP_WRITABLE,
 
-    /**
-     * Method importScripts does not check the content type for js.
-     */
-    @BrowserFeature(IE)
-    JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL,
-
     /** Supports XML. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_XML,
 
-    /** XMLDocument: .getElementsByTagName() to search the nodes by their local name. */
-    @BrowserFeature(IE)
-    JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL,
-
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
-
-    /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
-    @BrowserFeature(IE)
-    JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING,
-
-    /**
-     * Indicates that new XMLSerializer().serializeToString(..) called with a document fragment created by an
-     * HTMLPage always returns ''.
-     */
-    @BrowserFeature(IE)
-    JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY,
-
-    /** Indicates that <code>XMLSerializer.serializeToString(..)</code> serializes a single CDataSection as escaped
-     * text instead of <code>&lt;![CDATA[xxx]]&gt;</code>. */
-    @BrowserFeature(IE)
-    JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT,
 
     /** {@code XSLTProcessor.transformToDocument} supports output indent attribute. */
     @BrowserFeature({CHROME, EDGE})
@@ -1180,10 +1131,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     MULTICOL_BLOCK,
 
-    /** */
-    @BrowserFeature(IE)
-    PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
-
     /** The default display style of slot is 'content'. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     SLOT_CONTENTS,
@@ -1205,10 +1152,6 @@ public enum BrowserVersionFeatures {
     /** The protocol setter does not check for special protocols. */
     @BrowserFeature({FF_ESR, IE})
     URL_IGNORE_SPECIAL,
-
-    /** Replace only ' ' with %20 when encode the query part of an url. */
-    @BrowserFeature(IE)
-    URL_MINIMAL_QUERY_ENCODING,
 
     /** Handles missing slashes. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})

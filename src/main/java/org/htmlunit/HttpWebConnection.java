@@ -286,7 +286,7 @@ public class HttpWebConnection implements WebConnection {
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
         // chars in the URL.
-        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false, charset);
+        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), charset);
 
         URI uri = UrlUtils.toURI(url, escapeQuery(url.getQuery()));
         if (getVirtualHost() != null) {

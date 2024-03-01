@@ -19,7 +19,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
-import static org.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static org.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
@@ -77,7 +76,6 @@ import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.html.FrameWindow.PageDenied;
-import org.htmlunit.html.impl.SelectableTextInput;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.httpclient.HttpClientConverter;
@@ -2470,12 +2468,6 @@ public class HtmlPage extends SgmlPage {
 
         // use newElement in the code below because element elementWithFocus_
         // might be changed by another thread
-        if (newElement instanceof SelectableTextInput
-                && hasFeature(PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
-            final SelectableTextInput sti = (SelectableTextInput) newElement;
-            setSelectionRange(new SimpleRange(newElement, sti.getSelectionStart(), newElement, sti.getSelectionEnd()));
-        }
-
         if (newElement != null) {
             newElement.focus();
             newElement.fireEvent(Event.TYPE_FOCUS);

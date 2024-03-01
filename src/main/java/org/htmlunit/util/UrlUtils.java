@@ -269,11 +269,10 @@ public final class UrlUtils {
      * <code>"http://first/?a=b c"</code> to <code>"http://first/?a=b%20c"</code>.</p>
      *
      * @param url the URL to encode
-     * @param minimalQueryEncoding whether or not to perform minimal query encoding, like IE does
      * @param charset the charset
      * @return the encoded URL
      */
-    public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding, final Charset charset) {
+    public static URL encodeUrl(final URL url, final Charset charset) {
         if (!isNormalUrlProtocol(url.getProtocol())) {
             return url; // javascript:, about:, data: and anything not supported like foo:
         }
@@ -285,12 +284,7 @@ public final class UrlUtils {
             }
             String query = url.getQuery();
             if (query != null) {
-                if (minimalQueryEncoding) {
-                    query = org.apache.commons.lang3.StringUtils.replace(query, " ", "%20");
-                }
-                else {
-                    query = encode(query, QUERY_ALLOWED_CHARS, charset);
-                }
+                query = encode(query, QUERY_ALLOWED_CHARS, charset);
             }
             String anchor = url.getRef();
             if (anchor != null) {
