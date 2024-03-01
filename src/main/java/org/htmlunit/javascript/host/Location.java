@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_HASH_IS_ENCODED;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
-import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 import static org.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_BLANK_PATH;
@@ -389,10 +388,7 @@ public class Location extends HtmlUnitScriptable {
         }
 
         if (StringUtils.isEmpty(hash)) {
-            if (browserVersion.hasFeature(JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED)
-                    && getHref().endsWith("#")) {
-                return "#";
-            }
+            // nothing to do
         }
         else if (browserVersion.hasFeature(JS_LOCATION_HASH_HASH_IS_ENCODED)) {
             return "#" + UrlUtils.encodeHash(hash);

@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_ALL;
 import static org.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_EMPTY_STRING;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -118,9 +117,6 @@ public class MediaList extends HtmlUnitScriptable {
                 final BrowserVersion browserVersion = getBrowserVersion();
                 if (browserVersion.hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
                     return "";
-                }
-                if (browserVersion.hasFeature(JS_MEDIA_LIST_ALL)) {
-                    return "all";
                 }
             }
             return cssMediaList_.getMediaText();

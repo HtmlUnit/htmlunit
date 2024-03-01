@@ -21,9 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPOR
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_CHANGE_TYPE_DROPS_VALUE;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION;
 import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
 import java.net.MalformedURLException;
@@ -44,7 +41,6 @@ import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.html.HTMLInputElement;
@@ -1165,18 +1161,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         final WebClient webClient = page.getWebClient();
         final BrowserVersion browser = webClient.getBrowserVersion();
         if (!currentType.equalsIgnoreCase(newType)) {
-            if (newType != null && browser.hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
-                newType = org.htmlunit.util.StringUtils.toRootLowerCase(newType);
-            }
-
             if (!isSupported(org.htmlunit.util.StringUtils
                                     .toRootLowerCase(newType), browser)) {
                 if (setThroughAttribute) {
                     newType = "text";
-                }
-                else if (browser.hasFeature(JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION)) {
-                    throw JavaScriptEngine.reportRuntimeError("Invalid argument '" + newType
-                            + "' for setting property type.");
                 }
             }
 
@@ -1205,19 +1193,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                         .getFactory(HtmlInput.TAG_NAME)
                         .createElement(page, HtmlInput.TAG_NAME, attributes);
 
-                if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
-                    // a hack for the moment (IE)
-                    if (!(newInput instanceof HtmlSubmitInput)
-                            && !(newInput instanceof HtmlResetInput)
-                            && !(newInput instanceof HtmlCheckBoxInput)
-                            && !(newInput instanceof HtmlRadioButtonInput)
-                            && !(newInput instanceof HtmlImageInput)) {
-                        newInput.setRawValue(getRawValue());
-                    }
-                }
-                else {
-                    newInput.adjustValueAfterTypeChange(this, browser);
-                }
+                newInput.adjustValueAfterTypeChange(this, browser);
 
                 // the input hasn't yet been inserted into the DOM tree (likely has been
                 // created via document.createElement()), so simply replace it with the

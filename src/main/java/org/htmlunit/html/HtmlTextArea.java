@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -162,10 +161,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
             }
         }
 
-        int pos = 0;
-        if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-            pos = newValue.length();
-        }
+        final int pos = newValue.length();
         setSelectionStart(pos);
         setSelectionEnd(pos);
     }

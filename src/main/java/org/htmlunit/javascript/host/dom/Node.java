@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
-import static org.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -347,7 +345,7 @@ public class Node extends EventTarget {
             // extract refChild
             final DomNode refChildNode;
             if (JavaScriptEngine.isUndefined(refChildObject)) {
-                if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
+                if (args.length == 2) {
                     refChildNode = null;
                 }
                 else {
@@ -829,19 +827,7 @@ public class Node extends EventTarget {
         }
 
         if (!(element instanceof Node)) {
-            if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
-                return false;
-            }
             throw JavaScriptEngine.reportRuntimeError("Could not convert JavaScript argument arg 0");
-        }
-
-        if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
-            if (element instanceof CharacterData) {
-                return false;
-            }
-            if (this instanceof CharacterData) {
-                throw JavaScriptEngine.reportRuntimeError("Function 'contains' not available for text nodes.");
-            }
         }
 
         for (Node parent = (Node) element; parent != null; parent = parent.getParentElement()) {

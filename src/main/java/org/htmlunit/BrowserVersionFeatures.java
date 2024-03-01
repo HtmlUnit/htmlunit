@@ -795,17 +795,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INNER_TEXT_SVG_NL,
 
-    /** Indicates that innerText add svg title content also. */
-    @BrowserFeature(IE)
-    JS_INNER_TEXT_SVG_TITLE,
-
     /** Indicates that innerText setter supports null values. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_INNER_TEXT_VALUE_NULL,
-
-    /** The value is ignored when the type of an input is changed. */
-    @BrowserFeature(IE)
-    JS_INPUT_CHANGE_TYPE_DROPS_VALUE,
 
     /** The value is ignored when the type of an week/month input is changed. */
     @BrowserFeature({CHROME, EDGE})
@@ -827,14 +819,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_INPUT_NUMBER_SELECTION_START_END_NULL,
 
-    /** Setting the type property of an input converts the type to lowercase. */
-    @BrowserFeature(IE)
-    JS_INPUT_SET_TYPE_LOWERCASE,
-
-    /** Setting of unsupported type value throw exception. */
-    @BrowserFeature(IE)
-    JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION,
-
     /** Setting the value of an Input Date will check for correct format. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_INPUT_SET_VALUE_DATE_SUPPORTED,
@@ -843,17 +827,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_INPUT_SET_VALUE_EMAIL_TRIMMED,
 
-    /** Setting the value of an Input Text/Password/TextArea resets the selection. */
-    @BrowserFeature(IE)
-    JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START,
-
     /** Setting the value of an Input URL to blank will result in an empty value. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_INPUT_URL_VALUE_TRIMMED,
-
-    /** Intl is named Object. */
-    @BrowserFeature(IE)
-    JS_INTL_NAMED_OBJECT,
 
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature({CHROME, EDGE})
@@ -862,10 +838,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that isSearchProviderInstalled returns zero instead of undefined. */
     @BrowserFeature({CHROME, EDGE, IE})
     JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO,
-
-    /** The property form of a label returns the form the label is assigned to. */
-    @BrowserFeature(IE)
-    JS_LABEL_FORM_OF_SELF,
 
     /** location.hash returns an encoded hash. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -881,13 +853,6 @@ public enum BrowserVersionFeatures {
     JS_LOCATION_HASH_IS_DECODED,
 
     /**
-     * Property location.hash returns '#' for urls ending with a hash
-     * sign (e.g. http://localhost/something/#).
-     */
-    @BrowserFeature(IE)
-    JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED,
-
-    /**
      * Set this property if the browser evaluates<br>
      * window.location.hash to #%C3%BC; (like Firefox)<br>
      * for url 'http://localhost/something/#&uuml;'.<br>
@@ -900,17 +865,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_LOCATION_RELOAD_REFERRER,
 
-    /** Indicates that an empty media list is represented by the string 'all'. */
-    @BrowserFeature(IE)
-    JS_MEDIA_LIST_ALL,
-
     /** Indicates that an empty media list is represented by the string ''. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_MEDIA_LIST_EMPTY_STRING,
-
-    /** Type property of menu has always '' as value. */
-    @BrowserFeature(IE)
-    JS_MENU_TYPE_EMPTY,
 
     /** Type property of menu returns the current (maybe invalid) value. */
     @BrowserFeature({FF, FF_ESR})
@@ -920,10 +877,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
 
-    /** Indicates if the String representation of a native function begins and ends with a {@code \n}.*/
-    @BrowserFeature(IE)
-    JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
-
     /** Indicates if the String representation of a native function has a newline for empty parameter list. */
     @BrowserFeature({FF, FF_ESR})
     JS_NATIVE_FUNCTION_TOSTRING_NL,
@@ -931,14 +884,6 @@ public enum BrowserVersionFeatures {
     /** Navigator.doNotTrack returns unspecified if not set. */
     @BrowserFeature({FF, FF_ESR})
     JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
-
-    /** <code>Node.contains</code> returns false instead of throwing an exception. */
-    @BrowserFeature(IE)
-    JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG,
-
-    /** The reference argument of <code>Node.insertBefore(..)</code> is optional. */
-    @BrowserFeature(IE)
-    JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
     /** Indicates that Object.assign() is supported. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})

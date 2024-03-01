@@ -15,7 +15,6 @@
 package org.htmlunit.html.serializer;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
-import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_TITLE;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
@@ -151,9 +150,7 @@ public class HtmlSerializerInnerOuterText {
             }
         }
         else if (node instanceof SvgTitle) {
-            if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_TITLE)) {
-                appendChildren(builder, node, mode, insideHead);
-            }
+            // nothing to do
         }
         else {
             appendChildren(builder, node, mode, insideHead);

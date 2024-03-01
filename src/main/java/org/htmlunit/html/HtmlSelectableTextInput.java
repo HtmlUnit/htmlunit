@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -54,10 +52,7 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
 
         final SgmlPage page = getPage();
         if (page != null && page.isHtmlPage()) {
-            int pos = 0;
-            if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-                pos = newValue.length();
-            }
+            final int pos = newValue.length();
             setSelectionStart(pos);
             setSelectionEnd(pos);
         }

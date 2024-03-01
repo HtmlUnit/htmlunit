@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
-
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,8 +39,7 @@ public class HtmlColorInput extends HtmlInput implements LabelableElement {
     HtmlColorInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        if (getValueAttribute() == ATTRIBUTE_NOT_DEFINED
-                && !hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
+        if (getValueAttribute() == ATTRIBUTE_NOT_DEFINED) {
             setValue("#000000");
         }
     }

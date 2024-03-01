@@ -15,7 +15,6 @@
 package org.htmlunit.javascript;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_COMPACT;
-import static org.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static org.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NL;
 
 import org.htmlunit.BrowserVersion;
@@ -41,14 +40,7 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
      * @param browserVersion the simulated browser
      */
     public static void installFix(final Scriptable window, final BrowserVersion browserVersion) {
-        if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
-            final ScriptableObject fnPrototype =
-                    (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
-            final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
-            final Function newToString = new NativeFunctionToStringFunction(originalToString);
-            ScriptableObject.putProperty(fnPrototype, "toString", newToString);
-        }
-        else if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_COMPACT)) {
+        if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_COMPACT)) {
             final ScriptableObject fnPrototype =
                     (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
             final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");

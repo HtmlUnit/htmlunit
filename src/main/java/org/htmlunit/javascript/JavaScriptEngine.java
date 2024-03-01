@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_CONSOLE_TIMESTAMP;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static org.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THIS;
-import static org.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static org.htmlunit.BrowserVersionFeatures.JS_OBJECT_ASSIGN;
 import static org.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROMISE;
@@ -269,9 +268,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Intl intl = new Intl();
         intl.setParentScope(window);
         window.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
-        if (browserVersion.hasFeature(JS_INTL_NAMED_OBJECT)) {
-            intl.setClassName("Object");
-        }
         intl.defineProperties(browserVersion);
 
         // strange but this is the reality for browsers

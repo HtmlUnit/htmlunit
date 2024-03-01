@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_LABEL_FORM_OF_SELF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -95,14 +94,6 @@ public class HTMLLabelElement extends HTMLElement {
     @JsxGetter
     @Override
     public HTMLFormElement getForm() {
-        if (getBrowserVersion().hasFeature(JS_LABEL_FORM_OF_SELF)) {
-            final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
-            if (form == null) {
-                return null;
-            }
-            return (HTMLFormElement) getScriptableFor(form);
-        }
-
         final HtmlLabel label = (HtmlLabel) getDomNodeOrDie();
         final HtmlElement labeledElement = label.getLabeledElement();
 
