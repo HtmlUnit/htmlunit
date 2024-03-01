@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.xml;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EMPTY_STRING_IS_ERROR;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EXCEPTION_ON_ERROR;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_PARSERERROR_ON_ERROR;
 import static org.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -44,7 +43,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.dom.Attr;
-import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.svg.SvgElement;
@@ -122,11 +120,6 @@ public class XMLDocument extends Document {
                 LOG.debug("Error parsing XML\n" + strXML, e);
             }
 
-            if (getBrowserVersion().hasFeature(JS_DOMPARSER_EXCEPTION_ON_ERROR)) {
-                throw asJavaScriptException(
-                        new DOMException("Syntax Error",
-                            DOMException.SYNTAX_ERR));
-            }
             if (getBrowserVersion().hasFeature(JS_DOMPARSER_PARSERERROR_ON_ERROR)) {
                 try {
                     final XmlPage page = createParserErrorXmlPage("Syntax Error", webWindow);

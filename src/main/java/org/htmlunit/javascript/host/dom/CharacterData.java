@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -104,15 +103,6 @@ public class CharacterData extends Node {
     public void deleteData(final int offset, final int count) {
         if (offset < 0) {
             throw JavaScriptEngine.reportRuntimeError("Provided offset: " + offset + " is less than zero.");
-        }
-
-        if (getBrowserVersion().hasFeature(JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT)) {
-            if (count < 0) {
-                throw JavaScriptEngine.reportRuntimeError("Provided count: " + count + " is less than zero.");
-            }
-            if (count == 0) {
-                return;
-            }
         }
 
         final DomCharacterData domCharacterData = getDomCharacterDataOrDie();

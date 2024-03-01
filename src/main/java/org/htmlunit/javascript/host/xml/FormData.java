@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.xml;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -164,12 +163,7 @@ public class FormData extends HtmlUnitScriptable {
             }
             contentType = file.getType();
             if (StringUtils.isEmpty(contentType)) {
-                if (getBrowserVersion().hasFeature(JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN)) {
-                    contentType = MimeType.TEXT_PLAIN;
-                }
-                else {
-                    contentType = MimeType.APPLICATION_OCTET_STREAM;
-                }
+                contentType = MimeType.APPLICATION_OCTET_STREAM;
             }
             requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, contentType, (Charset) null));
         }

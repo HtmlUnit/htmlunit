@@ -15,7 +15,6 @@
 package org.htmlunit.javascript;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
-import static org.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NEW_LINE;
 
@@ -185,28 +184,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
                         && source.charAt(start++) == '-'
                         && source.charAt(start++) == '-') {
                     source = source.replaceFirst("<!--", "// <!--");
-                }
-
-                // IE ignores the last line containing uncommented -->
-                // if (browserVersion_.hasFeature(JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED)
-                //         && sourceCodeTrimmed.endsWith("-->")) {
-                // **** Memory Optimization ****
-                // see above
-                if (browserVersion_.hasFeature(JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED)) {
-                    int end = source.length() - 1;
-                    while ((end > -1) && (source.charAt(end) <= ' ')) {
-                        end--;
-                    }
-                    if (1 < end
-                            && source.charAt(end--) == '>'
-                            && source.charAt(end--) == '-'
-                            && source.charAt(end--) == '-') {
-                        final int lastDoubleSlash = source.lastIndexOf("//");
-                        final int lastNewLine = Math.max(source.lastIndexOf('\n'), source.lastIndexOf('\r'));
-                        if (lastNewLine > lastDoubleSlash) {
-                            source = source.substring(0, lastNewLine);
-                        }
-                    }
                 }
             }
 

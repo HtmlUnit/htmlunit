@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
-import static org.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_WITHOUT_HASH;
 import static org.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static org.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
 
@@ -1579,7 +1578,7 @@ public class WebClient implements Serializable, AutoCloseable {
             && status != HttpClientConverter.NOT_MODIFIED
             && getOptions().isRedirectEnabled()) {
 
-            URL newUrl;
+            final URL newUrl;
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
@@ -1590,10 +1589,6 @@ public class WebClient implements Serializable, AutoCloseable {
                     locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
                 }
                 newUrl = expandUrl(url, locationString);
-
-                if (getBrowserVersion().hasFeature(HTTP_REDIRECT_WITHOUT_HASH)) {
-                    newUrl = UrlUtils.getUrlWithNewRef(newUrl, null);
-                }
             }
             catch (final MalformedURLException e) {
                 getIncorrectnessListener().notify("Got a redirect status code [" + status + " "

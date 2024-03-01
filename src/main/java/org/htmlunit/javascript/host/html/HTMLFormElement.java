@@ -18,7 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAM
 import static org.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL_NOT_DEFINED;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
-import static org.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -302,13 +301,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxSetter
     public void setEnctype(final String enctype) {
         WebAssert.notNull("encoding", enctype);
-        if (getBrowserVersion().hasFeature(JS_FORM_REJECT_INVALID_ENCODING)
-                && !FormEncodingType.URL_ENCODED.getName().equals(enctype)
-                && !FormEncodingType.MULTIPART.getName().equals(enctype)
-                && !FormEncodingType.TEXT_PLAIN.getName().equals(enctype)) {
-            throw JavaScriptEngine.reportRuntimeError(
-                    "Cannot set the encoding property to invalid value: '" + enctype + "'");
-        }
         getHtmlForm().setEnctypeAttribute(enctype);
     }
 

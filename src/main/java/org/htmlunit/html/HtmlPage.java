@@ -19,7 +19,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
-import static org.htmlunit.BrowserVersionFeatures.JS_IGNORES_UTF8_BOM_SOMETIMES;
 import static org.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static org.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
@@ -1121,29 +1120,18 @@ public class HtmlPage extends SgmlPage {
         }
 
         Charset scriptEncoding = Charset.forName("windows-1252");
-        final boolean ignoreBom;
         final Charset contentCharset = EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
         if (contentCharset == null) {
             // use info from script tag or fall back to utf-8
             if (scriptCharset != null && ISO_8859_1 != scriptCharset) {
-                ignoreBom = true;
                 scriptEncoding = scriptCharset;
             }
-            else {
-                ignoreBom = ISO_8859_1 != scriptCharset;
-            }
         }
-        else if (ISO_8859_1 == contentCharset) {
-            ignoreBom = true;
-        }
-        else {
-            ignoreBom = true;
+        else if (ISO_8859_1 != contentCharset) {
             scriptEncoding = contentCharset;
         }
 
-        final String scriptCode = response.getContentAsString(scriptEncoding,
-                                ignoreBom
-                                && getWebClient().getBrowserVersion().hasFeature(JS_IGNORES_UTF8_BOM_SOMETIMES));
+        final String scriptCode = response.getContentAsString(scriptEncoding, false);
         if (null != scriptCode) {
             final AbstractJavaScriptEngine<?> javaScriptEngine = client.getJavaScriptEngine();
             final Scriptable scope = getEnclosingWindow().getScriptableObject();

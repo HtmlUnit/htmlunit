@@ -324,14 +324,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
-    /** When calculation the value of a text area ie uses a recursive approach. */
-    @BrowserFeature(IE)
-    HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN,
-
-    /** willValidate does not check the readonly property. */
-    @BrowserFeature(IE)
-    HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY,
-
     /** Should org.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR, IE})
     HTMLTRACK_END_TAG_FORBIDDEN,
@@ -364,12 +356,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
-    /** Indicates that the path is extracted from the location.
-     * Sample: from the location /foo/boo only /foo is used.
-     */
-    @BrowserFeature(IE)
-    HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
-
     /** domain '.org' is handled as 'org'. */
     @BrowserFeature({FF, FF_ESR, IE})
     HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS,
@@ -392,10 +378,6 @@ public enum BrowserVersionFeatures {
     /** Browser sends Upgrade-Insecure-Requests header. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTTP_HEADER_UPGRADE_INSECURE_REQUEST,
-
-    /** Redirection is done without the hash. */
-    @BrowserFeature(IE)
-    HTTP_REDIRECT_WITHOUT_HASH,
 
     /** Setting the property align to arbitrary values is allowed. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -686,10 +668,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DOMPARSER_EMPTY_STRING_IS_ERROR,
 
-    /** <code>DOMParser.parseFromString(..)</code> throws an exception if an error occurs. */
-    @BrowserFeature(IE)
-    JS_DOMPARSER_EXCEPTION_ON_ERROR,
-
     /** {@code DOMParser.parseFromString(..)} creates a document containing a {@code parsererror} element. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
@@ -697,14 +675,6 @@ public enum BrowserVersionFeatures {
     /** DOMTokenList returns false instead of throwing an exception when receiver is blank. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK,
-
-    /** DOMTokenList uses an enhanced set of whitespace chars. */
-    @BrowserFeature(IE)
-    JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS,
-
-    /** DOMTokenList index access returns null if index is outside. */
-    @BrowserFeature(IE)
-    JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE,
 
     /** DOMTokenList ignores duplicates when determining the length. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -717,14 +687,6 @@ public enum BrowserVersionFeatures {
     /** DOMTokenList removed all whitespace chars during remove. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE,
-
-    /** Javascript property function {@code delete} throws an exception if the given count is negative. */
-    @BrowserFeature(IE)
-    JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT,
-
-    /** Indicates that attributeNS returns an empty string instead of null if not found. */
-    @BrowserFeature(IE)
-    JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY,
 
     /** Javascript {@code Error.captureStackTrace}. */
     @BrowserFeature({CHROME, EDGE})
@@ -751,29 +713,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_FILEREADER_CONTENT_TYPE,
 
-    /** Whether {@code FileReader} includes {@code base64} for empty content or not. */
-    @BrowserFeature(IE)
-    JS_FILEREADER_EMPTY_NULL,
-
     /** Indicates that the action property will not be expanded if defined as empty string. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_FORM_ACTION_EXPANDURL_NOT_DEFINED,
 
-    /** use content-type text/plain if the file type is unknown'. */
-    @BrowserFeature(IE)
-    JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN,
-
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,
-
-    /** Setting form.encoding only allowed for valid encodings. */
-    @BrowserFeature(IE)
-    JS_FORM_REJECT_INVALID_ENCODING,
-
-    /** Calling form.submit() twice forces double download. */
-    @BrowserFeature(IE)
-    JS_FORM_SUBMIT_FORCES_DOWNLOAD,
 
     /** Support for document.formName('inputName'). */
     @BrowserFeature(IE)
@@ -806,14 +752,6 @@ public enum BrowserVersionFeatures {
     /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
     @BrowserFeature({FF, FF_ESR, IE})
     JS_IFRAME_ALWAYS_EXECUTE_ONLOAD,
-
-    /** Ignore the last line containing uncommented. */
-    @BrowserFeature(IE)
-    JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
-
-    /** Ignore the UTF8 BOM header when loading external js in some situations. */
-    @BrowserFeature(IE)
-    JS_IGNORES_UTF8_BOM_SOMETIMES,
 
     /**
      * The complete property returns also true, if the image download was failing
@@ -852,14 +790,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that innerHTML adds the child also for null values. */
     @BrowserFeature(IE)
     JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE,
-
-    /** Indicates that innerHTML uses {@code lf} instead of {@code lf}. */
-    @BrowserFeature(IE)
-    JS_INNER_HTML_LF,
-
-    /** Indicates that innerText adds script content also. */
-    @BrowserFeature(IE)
-    JS_INNER_TEXT_SCRIPT,
 
     /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({CHROME, EDGE})

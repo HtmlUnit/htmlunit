@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.file;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_FILEREADER_CONTENT_TYPE;
-import static org.htmlunit.BrowserVersionFeatures.JS_FILEREADER_EMPTY_NULL;
 
 import java.io.IOException;
 import java.net.URLConnection;
@@ -122,7 +121,7 @@ public class FileReader extends EventTarget {
         final BrowserVersion browserVersion = getBrowserVersion();
 
         String contentType = ((Blob) object).getType();
-        if (StringUtils.isEmpty(contentType) && !browserVersion.hasFeature(JS_FILEREADER_EMPTY_NULL)) {
+        if (StringUtils.isEmpty(contentType)) {
             contentType = MimeType.APPLICATION_OCTET_STREAM;
         }
 
@@ -139,25 +138,12 @@ public class FileReader extends EventTarget {
             }
         }
 
-        if (browserVersion.hasFeature(JS_FILEREADER_EMPTY_NULL)) {
-            if (value.isEmpty()) {
-                result_ = "null";
+        final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
+        if (!value.isEmpty() || includeConentType) {
+            if (contentType == null) {
+                contentType = MimeType.APPLICATION_OCTET_STREAM;
             }
-            else {
-                if (contentType != null) {
-                    result_ += contentType;
-                }
-                result_ += ";base64," + value;
-            }
-        }
-        else {
-            final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
-            if (!value.isEmpty() || includeConentType) {
-                if (contentType == null) {
-                    contentType = MimeType.APPLICATION_OCTET_STREAM;
-                }
-                result_ += contentType + ";base64," + value;
-            }
+            result_ += contentType + ";base64," + value;
         }
         readyState_ = DONE;
 

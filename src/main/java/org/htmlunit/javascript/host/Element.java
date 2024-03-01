@@ -15,9 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
-import static org.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
-import static org.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_LF;
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
 import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
@@ -460,8 +458,7 @@ public class Element extends Node {
     @JsxFunction
     public String getAttributeNS(final String namespaceURI, final String localName) {
         final String value = getDomNodeOrDie().getAttributeNS(namespaceURI, localName);
-        if (ATTRIBUTE_NOT_DEFINED == value
-                && !getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
+        if (ATTRIBUTE_NOT_DEFINED == value) {
             return null;
         }
         return value;
@@ -1093,17 +1090,12 @@ public class Element extends Node {
             if (node instanceof HtmlElement) {
                 final HtmlElement element = (HtmlElement) node;
                 if ("p".equals(element.getTagName())) {
-                    if (getBrowserVersion().hasFeature(JS_INNER_HTML_LF)) {
-                        builder.append('\n'); // \r\n because it's to implement something IE specific
+                    int i = builder.length() - 1;
+                    while (i >= 0 && Character.isWhitespace(builder.charAt(i))) {
+                        i--;
                     }
-                    else {
-                        int i = builder.length() - 1;
-                        while (i >= 0 && Character.isWhitespace(builder.charAt(i))) {
-                            i--;
-                        }
-                        builder.setLength(i + 1);
-                        builder.append('\n');
-                    }
+                    builder.setLength(i + 1);
+                    builder.append('\n');
                 }
                 if (!"script".equals(element.getTagName())) {
                     printChildren(builder, node, html);
@@ -1249,9 +1241,7 @@ public class Element extends Node {
      * @param style the style of the element
      */
     protected void setStyle(final String style) {
-        if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
-            getStyle().setCssText(style);
-        }
+        getStyle().setCssText(style);
     }
 
     /**

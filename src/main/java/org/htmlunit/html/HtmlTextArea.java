@@ -16,8 +16,6 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
-import static org.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN;
-import static org.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.io.PrintWriter;
@@ -108,29 +106,12 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public final String getText() {
-        if (hasFeature(HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN)) {
-            return readValueIE();
-        }
         return readValue();
     }
 
     private String readValue() {
         final StringBuilder builder = new StringBuilder();
         for (final DomNode node : getChildren()) {
-            if (node instanceof DomText) {
-                builder.append(((DomText) node).getData());
-            }
-        }
-        // if content starts with new line, it is ignored (=> for the parser?)
-        if (builder.length() != 0 && builder.charAt(0) == '\n') {
-            builder.deleteCharAt(0);
-        }
-        return builder.toString();
-    }
-
-    private String readValueIE() {
-        final StringBuilder builder = new StringBuilder();
-        for (final DomNode node : getDescendants()) {
             if (node instanceof DomText) {
                 builder.append(((DomText) node).getData());
             }
@@ -165,26 +146,19 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
             appendChild(newChild);
         }
         else {
-            if (hasFeature(HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN)) {
-                removeAllChildren();
+            DomNode next = child.getNextSibling();
+            while (next != null && !(next instanceof DomText)) {
+                child = next;
+                next = child.getNextSibling();
+            }
+
+            if (next == null) {
+                removeChild(child);
                 final DomText newChild = new DomText(getPage(), newValue);
                 appendChild(newChild);
             }
             else {
-                DomNode next = child.getNextSibling();
-                while (next != null && !(next instanceof DomText)) {
-                    child = next;
-                    next = child.getNextSibling();
-                }
-
-                if (next == null) {
-                    removeChild(child);
-                    final DomText newChild = new DomText(getPage(), newValue);
-                    appendChild(newChild);
-                }
-                else {
-                    ((DomText) next).setData(newValue);
-                }
+                ((DomText) next).setData(newValue);
             }
         }
 
@@ -629,8 +603,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public boolean willValidate() {
-        return !isDisabled()
-                && (hasFeature(HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
+        return !isDisabled() && !isReadOnly();
     }
 
     /**

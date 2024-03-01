@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.FORM_IGNORE_REL_NOREFERRER;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
-import static org.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 
 import java.net.MalformedURLException;
@@ -193,11 +192,10 @@ public class HtmlForm extends HtmlElement {
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        final boolean forceDownload = webClient.getBrowserVersion().hasFeature(JS_FORM_SUBMIT_FORCES_DOWNLOAD);
         // Calling form.submit() twice forces double download.
         final boolean checkHash =
                 !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
-        webClient.download(webWindow, target, request, checkHash, forceDownload, false, "JS form.submit()");
+        webClient.download(webWindow, target, request, checkHash, false, false, "JS form.submit()");
     }
 
     /**

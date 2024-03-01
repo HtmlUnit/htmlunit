@@ -15,8 +15,6 @@
 package org.htmlunit.javascript.host.dom;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE;
@@ -52,7 +50,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 public class DOMTokenList extends HtmlUnitScriptable {
 
     private static final String WHITESPACE_CHARS = " \t\r\n\u000C";
-    private static final String WHITESPACE_CHARS_IE_11 = WHITESPACE_CHARS + "\u000B";
 
     private String attributeName_;
 
@@ -296,7 +293,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         final Object value = item(index);
-        if (value == null && !getBrowserVersion().hasFeature(JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE)) {
+        if (value == null) {
             return Undefined.instance;
         }
         return value;
@@ -332,9 +329,6 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     private String whitespaceChars() {
-        if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS)) {
-            return WHITESPACE_CHARS_IE_11;
-        }
         return WHITESPACE_CHARS;
     }
 
