@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static org.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
@@ -755,7 +754,7 @@ public class HTMLElement extends Element {
     @JsxSetter
     public void setInnerText(final Object value) {
         final String valueString;
-        if (value == null && getBrowserVersion().hasFeature(JS_INNER_TEXT_VALUE_NULL)) {
+        if (value == null) {
             valueString = null;
         }
         else {

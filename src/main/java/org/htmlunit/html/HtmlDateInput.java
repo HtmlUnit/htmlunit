@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -98,8 +96,7 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
      * @return if the input element has a valid min value
      */
     private boolean isMinValid() {
-        if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)
-                && !getMin().isEmpty()) {
+        if (!getMin().isEmpty()) {
             try {
                 final LocalDate dateValue = LocalDate.parse(getRawValue(), FORMATTER_);
                 final LocalDate minDate = LocalDate.parse(getMin(), FORMATTER_);
@@ -120,8 +117,7 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
      * @return if the input element has a valid max value
      */
     private boolean isMaxValid() {
-        if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)
-                && !getMax().isEmpty()) {
+        if (!getMax().isEmpty()) {
             try {
                 final LocalDate dateValue = LocalDate.parse(getRawValue(), FORMATTER_);
                 final LocalDate maxDate = LocalDate.parse(getMax(), FORMATTER_);
@@ -140,7 +136,7 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
     @Override
     public void setValue(final String newValue) {
         try {
-            if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED) && StringUtils.isNotEmpty(newValue)) {
+            if (StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValue(newValue);

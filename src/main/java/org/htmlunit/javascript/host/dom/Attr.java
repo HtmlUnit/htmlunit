@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -25,7 +24,6 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
-import org.htmlunit.html.DomText;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -167,12 +165,7 @@ public class Attr extends Node {
      */
     @Override
     public Node getLastChild() {
-        if (getBrowserVersion().hasFeature(JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL)) {
-            return null;
-        }
-
-        final DomText text = new DomText(getDomNodeOrDie().getPage(), getNodeValue());
-        return text.getScriptableObject();
+        return null;
     }
 
     /**

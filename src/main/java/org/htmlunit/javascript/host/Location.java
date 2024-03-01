@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_HASH_IS_ENCODED;
-import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
-import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 import static org.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_BLANK_PATH;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -285,9 +282,7 @@ public class Location extends HtmlUnitScriptable {
         }
         try {
             URL url = page.getUrl();
-            final boolean encodeHash = webWindow.getWebClient()
-                    .getBrowserVersion().hasFeature(JS_LOCATION_HREF_HASH_IS_ENCODED);
-            final String hash = getHash(encodeHash);
+            final String hash = getHash(true);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
             }
@@ -378,22 +373,17 @@ public class Location extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public String getHash() {
-        final BrowserVersion browserVersion = getBrowserVersion();
-        final boolean decodeHash = browserVersion.hasFeature(JS_LOCATION_HASH_IS_DECODED);
         String hash = hash_;
 
-        if (hash_ != null && (decodeHash || hash_.equals(getUrl().getRef()))) {
+        if (hash_ != null) {
             hash = decodeHash(hash);
         }
 
         if (StringUtils.isEmpty(hash)) {
             // nothing to do
         }
-        else if (browserVersion.hasFeature(JS_LOCATION_HASH_HASH_IS_ENCODED)) {
-            return "#" + UrlUtils.encodeHash(hash);
-        }
         else {
-            return "#" + hash;
+            return "#" + UrlUtils.encodeHash(hash);
         }
 
         return "";

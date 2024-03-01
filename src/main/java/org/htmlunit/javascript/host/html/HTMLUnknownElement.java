@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_HTML_HYPHEN_ELEMENT_CLASS_NAME;
-import static org.htmlunit.BrowserVersionFeatures.JS_HTML_RUBY_ELEMENT_CLASS_NAME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -80,17 +78,15 @@ public class HTMLUnknownElement extends HTMLElement {
             final HtmlElement element = getDomNodeOrNull();
             if (element != null) {
                 final String name = element.getNodeName();
-                if (getBrowserVersion().hasFeature(JS_HTML_RUBY_ELEMENT_CLASS_NAME)
-                        && (HtmlRb.TAG_NAME.equals(name)
+                if (HtmlRb.TAG_NAME.equals(name)
                                 || HtmlRp.TAG_NAME.equals(name)
                                 || HtmlRt.TAG_NAME.equals(name)
                                 || HtmlRtc.TAG_NAME.equals(name)
-                                || HtmlRuby.TAG_NAME.equals(name))) {
+                                || HtmlRuby.TAG_NAME.equals(name)) {
                     return "HTMLElement";
                 }
 
-                if (name.indexOf('-') != -1
-                    && getBrowserVersion().hasFeature(JS_HTML_HYPHEN_ELEMENT_CLASS_NAME)) {
+                if (name.indexOf('-') != -1) {
                     return "HTMLElement";
                 }
             }

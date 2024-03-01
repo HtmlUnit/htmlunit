@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COOKIES_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -800,8 +799,7 @@ public class HTMLDocument extends Document {
     @Override
     public Attr createAttribute(final String attributeName) {
         String name = attributeName;
-        if (StringUtils.isNotEmpty(name)
-                && getBrowserVersion().hasFeature(JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE)) {
+        if (StringUtils.isNotEmpty(name)) {
             name = org.htmlunit.util.StringUtils.toRootLowerCase(name);
         }
 

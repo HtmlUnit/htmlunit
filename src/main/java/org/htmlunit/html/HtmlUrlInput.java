@@ -14,12 +14,9 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_URL_VALUE_TRIMMED;
-
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 
 /**
@@ -45,13 +42,10 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
     }
 
     private static Map<String, DomAttr> trimValueAttribute(final SgmlPage page, final Map<String, DomAttr> attributes) {
-        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-        if (browserVersion.hasFeature(JS_INPUT_URL_VALUE_TRIMMED)) {
-            for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-                if (VALUE_ATTRIBUTE.equalsIgnoreCase(entry.getKey())) {
-                    entry.getValue().setValue(entry.getValue().getValue().trim());
-                    break;
-                }
+        for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
+            if (VALUE_ATTRIBUTE.equalsIgnoreCase(entry.getKey())) {
+                entry.getValue().setValue(entry.getValue().getValue().trim());
+                break;
             }
         }
 
@@ -63,15 +57,11 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
      */
     @Override
     public String getValue() {
-        if (hasFeature(JS_INPUT_URL_VALUE_TRIMMED)) {
-            final String raw = getRawValue();
-            if (StringUtils.isBlank(raw)) {
-                return "";
-            }
-            return raw;
+        final String raw = getRawValue();
+        if (StringUtils.isBlank(raw)) {
+            return "";
         }
-
-        return super.getValue();
+        return raw;
     }
 
     /**

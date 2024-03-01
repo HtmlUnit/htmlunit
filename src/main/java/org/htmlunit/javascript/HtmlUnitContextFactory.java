@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 
 import java.io.Serializable;
@@ -349,7 +348,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_INTL_402:
                 return true;
             case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
-                return browserVersion_.hasFeature(JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION);
+                return true;
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
                 return true;
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:

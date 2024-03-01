@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_GROUPINGRULE_INSERTRULE_INDEX_OPTIONAL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -98,13 +97,7 @@ public class CSSGroupingRule extends CSSRule {
             positionInt = 0;
         }
         else if (JavaScriptEngine.isUndefined(position)) {
-            if (getBrowserVersion().hasFeature(JS_GROUPINGRULE_INSERTRULE_INDEX_OPTIONAL)) {
-                positionInt = 0;
-            }
-            else {
-                throw JavaScriptEngine.typeError("Failed to execute 'insertRule' on 'CSSGroupingRule':"
-                        + " 2 arguments required, but only 1 present.");
-            }
+            positionInt = 0;
         }
         else {
             positionInt = JavaScriptEngine.toInt32(position);

@@ -14,10 +14,8 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL_NOT_DEFINED;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -174,11 +172,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxGetter
     public String getAction() {
         final String action = getHtmlForm().getActionAttribute();
-
-        if (ATTRIBUTE_NOT_DEFINED == action
-                && !getBrowserVersion().hasFeature(JS_FORM_ACTION_EXPANDURL_NOT_DEFINED)) {
-            return action;
-        }
 
         try {
             return ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();

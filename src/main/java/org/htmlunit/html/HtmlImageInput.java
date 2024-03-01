@@ -15,7 +15,6 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_NAME_VALUE_PARAMS;
-import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
 import java.io.File;
 import java.io.IOException;
@@ -233,8 +232,7 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
                 imageWebResponse_ = webClient.loadWebResponse(request);
             }
 
-            downloaded_ = hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
-                    || (imageWebResponse_ != null && imageWebResponse_.getContentType().contains("image"));
+            downloaded_ = true;
         }
     }
 

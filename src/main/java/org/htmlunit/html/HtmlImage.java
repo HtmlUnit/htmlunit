@@ -18,8 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLANK_SRC_AS_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
-import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
-import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0;
 import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0;
 import static org.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0;
 
@@ -513,7 +511,7 @@ public class HtmlImage extends HtmlElement {
 
         final WebClient webClient = getPage().getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0) && StringUtils.isEmpty(src)) {
+        if (StringUtils.isEmpty(src)) {
             return 0;
         }
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
@@ -574,7 +572,7 @@ public class HtmlImage extends HtmlElement {
 
         final WebClient webClient = getPage().getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0) && StringUtils.isEmpty(src)) {
+        if (StringUtils.isEmpty(src)) {
             return 0;
         }
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
@@ -673,8 +671,7 @@ public class HtmlImage extends HtmlElement {
             closeImageData();
 
             downloaded_ = true;
-            isComplete_ = hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
-                    || (imageWebResponse_ != null && imageWebResponse_.getContentType().contains("image"));
+            isComplete_ = true;
 
             width_ = -1;
             height_ = -1;
@@ -790,9 +787,7 @@ public class HtmlImage extends HtmlElement {
      * @return true if the image was successfully downloaded
      */
     public boolean isComplete() {
-        return isComplete_ || (hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
-                                ? ATTRIBUTE_NOT_DEFINED == getSrcAttribute()
-                                : imageData_ != null);
+        return isComplete_ || ATTRIBUTE_NOT_DEFINED == getSrcAttribute();
     }
 
     /**

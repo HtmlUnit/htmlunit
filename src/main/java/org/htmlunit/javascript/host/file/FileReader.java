@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.file;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_FILEREADER_CONTENT_TYPE;
-
 import java.io.IOException;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -138,13 +136,10 @@ public class FileReader extends EventTarget {
             }
         }
 
-        final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
-        if (!value.isEmpty() || includeConentType) {
-            if (contentType == null) {
-                contentType = MimeType.APPLICATION_OCTET_STREAM;
-            }
-            result_ += contentType + ";base64," + value;
+        if (contentType == null) {
+            contentType = MimeType.APPLICATION_OCTET_STREAM;
         }
+        result_ += contentType + ";base64," + value;
         readyState_ = DONE;
 
         final Event event = new Event(this, Event.TYPE_LOAD);

@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -230,8 +229,7 @@ public class HTMLInputElement extends HTMLElement {
     public Object getSelectionStart() {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
-            if ("number".equalsIgnoreCase(getType())
-                    && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_SELECTION_START_END_NULL)) {
+            if ("number".equalsIgnoreCase(getType())) {
                 return null;
             }
 
@@ -249,8 +247,7 @@ public class HTMLInputElement extends HTMLElement {
     public void setSelectionStart(final int start) {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
-            if ("number".equalsIgnoreCase(getType())
-                    && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_SELECTION_START_END_NULL)) {
+            if ("number".equalsIgnoreCase(getType())) {
                 throw JavaScriptEngine.reportRuntimeError("Failed to set the 'selectionStart' property"
                         + "from 'HTMLInputElement': "
                         + "The input element's type ('number') does not support selection.");
@@ -273,8 +270,7 @@ public class HTMLInputElement extends HTMLElement {
     public Object getSelectionEnd() {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
-            if ("number".equalsIgnoreCase(getType())
-                    && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_SELECTION_START_END_NULL)) {
+            if ("number".equalsIgnoreCase(getType())) {
                 return null;
             }
 
@@ -292,8 +288,7 @@ public class HTMLInputElement extends HTMLElement {
     public void setSelectionEnd(final int end) {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
-            if ("number".equalsIgnoreCase(getType())
-                    && getBrowserVersion().hasFeature(JS_INPUT_NUMBER_SELECTION_START_END_NULL)) {
+            if ("number".equalsIgnoreCase(getType())) {
                 throw JavaScriptEngine.reportRuntimeError("Failed to set the 'selectionEnd' property"
                         + "from 'HTMLInputElement': "
                         + "The input element's type ('number') does not support selection.");

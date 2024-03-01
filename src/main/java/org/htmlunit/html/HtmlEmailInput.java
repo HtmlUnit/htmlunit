@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_EMAIL_TRIMMED;
-
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -63,15 +61,11 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
      */
     @Override
     public String getValue() {
-        if (hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED)) {
-            final String raw = getRawValue();
-            if (StringUtils.isBlank(raw)) {
-                return "";
-            }
-            return raw.trim();
+        final String raw = getRawValue();
+        if (StringUtils.isBlank(raw)) {
+            return "";
         }
-
-        return super.getValue();
+        return raw.trim();
     }
 
     @Override

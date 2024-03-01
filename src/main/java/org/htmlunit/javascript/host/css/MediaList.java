@@ -14,13 +14,11 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_EMPTY_STRING;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.css.CssMediaList;
 import org.htmlunit.cssparser.parser.media.MediaQuery;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -114,10 +112,7 @@ public class MediaList extends HtmlUnitScriptable {
     public Object getDefaultValue(final Class<?> hint) {
         if (getPrototype() != null && cssMediaList_ != null) {
             if (cssMediaList_.getLength() == 0) {
-                final BrowserVersion browserVersion = getBrowserVersion();
-                if (browserVersion.hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
-                    return "";
-                }
+                return "";
             }
             return cssMediaList_.getMediaText();
         }

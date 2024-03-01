@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.xml;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EMPTY_STRING_IS_ERROR;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_PARSERERROR_ON_ERROR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -104,7 +102,7 @@ public class XMLDocument extends Document {
     public boolean loadXML(final String strXML) {
         final WebWindow webWindow = getWindow().getWebWindow();
         try {
-            if (StringUtils.isEmpty(strXML) && getBrowserVersion().hasFeature(JS_DOMPARSER_EMPTY_STRING_IS_ERROR)) {
+            if (StringUtils.isEmpty(strXML)) {
                 throw new IOException("Error parsing XML '" + strXML + "'");
             }
 
@@ -119,14 +117,12 @@ public class XMLDocument extends Document {
                 LOG.debug("Error parsing XML\n" + strXML, e);
             }
 
-            if (getBrowserVersion().hasFeature(JS_DOMPARSER_PARSERERROR_ON_ERROR)) {
-                try {
-                    final XmlPage page = createParserErrorXmlPage("Syntax Error", webWindow);
-                    setDomNode(page);
-                }
-                catch (final IOException eI) {
-                    LOG.error("Could not handle ParserError", e);
-                }
+            try {
+                final XmlPage page = createParserErrorXmlPage("Syntax Error", webWindow);
+                setDomNode(page);
+            }
+            catch (final IOException eI) {
+                LOG.error("Could not handle ParserError", e);
             }
 
             return false;

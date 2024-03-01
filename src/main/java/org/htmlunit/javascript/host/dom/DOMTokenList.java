@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD;
-import static org.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -90,12 +86,9 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         final String[] parts = StringUtils.split(value, whitespaceChars());
-        if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES)) {
-            final HashSet<String> elements = new HashSet<>(parts.length);
-            elements.addAll(Arrays.asList(parts));
-            return elements.size();
-        }
-        return parts.length;
+        final HashSet<String> elements = new HashSet<>(parts.length);
+        elements.addAll(Arrays.asList(parts));
+        return elements.size();
     }
 
     private String getAttribValue() {
@@ -153,7 +146,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
                 value = value + token;
                 changed = true;
             }
-            else if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD)) {
+            else {
                 value = String.join(" ", StringUtils.split(value, whitespaceChars()));
                 changed = true;
             }
@@ -183,7 +176,6 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         String value = String.join(" ", StringUtils.split(oldValue, whitespaceChars()));
-        boolean changed = false;
         int pos = position(value, token);
         while (pos != -1) {
             int from = pos;
@@ -205,19 +197,12 @@ public class DOMTokenList extends HtmlUnitScriptable {
             }
             result.append(value, to, value.length());
             value = result.toString();
-            changed = true;
 
             pos = position(value, token);
         }
 
-        if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE)) {
-            value = String.join(" ", StringUtils.split(value, whitespaceChars()));
-            changed = true;
-        }
-
-        if (changed) {
-            updateAttribute(value);
-        }
+        value = String.join(" ", StringUtils.split(value, whitespaceChars()));
+        updateAttribute(value);
     }
 
     /**
@@ -242,8 +227,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean contains(final String token) {
-        if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK)
-                && StringUtils.isBlank(token)) {
+        if (StringUtils.isBlank(token)) {
             return false;
         }
 

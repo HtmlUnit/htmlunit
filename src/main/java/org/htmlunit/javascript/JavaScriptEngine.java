@@ -14,15 +14,8 @@
  */
 package org.htmlunit.javascript;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM;
-import static org.htmlunit.BrowserVersionFeatures.JS_CONSOLE_TIMESTAMP;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
-import static org.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THIS;
-import static org.htmlunit.BrowserVersionFeatures.JS_OBJECT_ASSIGN;
-import static org.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
-import static org.htmlunit.BrowserVersionFeatures.JS_PROMISE;
-import static org.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static org.htmlunit.BrowserVersionFeatures.JS_STRING_INCLUDES;
 import static org.htmlunit.BrowserVersionFeatures.JS_STRING_REPEAT;
 import static org.htmlunit.BrowserVersionFeatures.JS_STRING_STARTS_ENDS_WITH;
@@ -60,7 +53,6 @@ import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.IdFunctionObject;
 import org.htmlunit.corejs.javascript.NativeConsole;
 import org.htmlunit.corejs.javascript.RhinoException;
 import org.htmlunit.corejs.javascript.Script;
@@ -237,17 +229,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "Continuation", "Iterator", "StopIteration", "BigInt");
 
-        if (!browserVersion.hasFeature(JS_PROMISE)) {
-            deleteProperties(window, "Promise");
-        }
-
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
             deleteProperties(window, "Symbol");
-        }
-
-        if (!browserVersion.hasFeature(JS_REFLECT)) {
-            deleteProperties(window, "Reflect");
-            deleteProperties(window, "Proxy");
         }
 
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(window, "Error");
@@ -385,12 +368,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         configureRhino(webClient, browserVersion, window);
 
-        // only for window / IE
-        if (!browserVersion.hasFeature(JS_CONSOLE_TIMESTAMP)) {
-            final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(window, "console");
-            ScriptableObject.defineProperty(window, "Console", console, ScriptableObject.DONTENUM);
-        }
-
         window.setPrototypes(prototypes);
         window.initialize(webWindow, page);
 
@@ -429,10 +406,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final BrowserVersion browserVersion, final HtmlUnitScriptable scriptable) {
 
         NativeConsole.init(scriptable, false, webClient.getWebConsole());
-        if (browserVersion.hasFeature(JS_CONSOLE_TIMESTAMP)) {
-            final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(scriptable, "console");
-            console.defineFunctionProperties(new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
-        }
+        final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(scriptable, "console");
+        console.defineFunctionProperties(new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "String");
@@ -461,10 +436,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         removePrototypeProperties(scriptable, "Array", "toSource");
         removePrototypeProperties(scriptable, "Function", "toSource");
 
-        if (!browserVersion.hasFeature(JS_OBJECT_ASSIGN)) {
-            ((IdFunctionObject) ScriptableObject.getProperty(scriptable, "Object")).delete("assign");
-        }
-
         if (!browserVersion.hasFeature(JS_WEAK_SET)) {
             deleteProperties(scriptable, "WeakSet");
         }
@@ -472,20 +443,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         NativeFunctionToStringFunction.installFix(scriptable, browserVersion);
 
-        if (!browserVersion.hasFeature(JS_GLOBAL_THIS)) {
-            deleteProperties(scriptable, "globalThis");
-        }
-
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
-
-        if (!browserVersion.hasFeature(JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS)) {
-            ((ScriptableObject) ScriptableObject.getProperty(scriptable, "Object")).delete("getOwnPropertySymbols");
-        }
-
-        if (!browserVersion.hasFeature(JS_ARRAY_FROM)) {
-            deleteProperties((ScriptableObject) ScriptableObject.getProperty(scriptable, "Array"), "from", "of");
-        }
 
         numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
                 NumberCustom.class, ScriptableObject.DONTENUM);
