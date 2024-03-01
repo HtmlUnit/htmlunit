@@ -563,6 +563,15 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Returns {@code true} if this <code>BrowserVersion</code> instance represents some
+     * version of Internet Explorer.
+     * @return whether version is a version of IE
+     */
+    public boolean isIE() {
+        return getNickname().startsWith("IE");
+    }
+
+    /**
+     * Returns {@code true} if this <code>BrowserVersion</code> instance represents some
      * version of Google Chrome. Note that Google Chrome does not return 'Chrome'
      * in the application name, we have to look in the nickname.
      * @return whether this version is a version of a Chrome browser
