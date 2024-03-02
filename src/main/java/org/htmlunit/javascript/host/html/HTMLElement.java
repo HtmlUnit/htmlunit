@@ -1903,7 +1903,6 @@ public class HTMLElement extends Element {
      * Returns the {@code ongotpointercapture} event handler for this element.
      * @return the {@code ongotpointercapture} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOngotpointercapture() {
         return getEventHandler(Event.TYPE_GOTPOINTERCAPTURE);
@@ -1913,7 +1912,6 @@ public class HTMLElement extends Element {
      * Sets the {@code ongotpointercapture} event handler for this element.
      * @param ongotpointercapture the {@code ongotpointercapture} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOngotpointercapture(final Object ongotpointercapture) {
         setEventHandler(Event.TYPE_GOTPOINTERCAPTURE, ongotpointercapture);
@@ -2022,7 +2020,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onlostpointercapture} event handler for this element.
      * @return the {@code onlostpointercapture} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
         return getEventHandler(Event.TYPE_LOSTPOINTERCAPTURE);
@@ -2032,7 +2029,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onlostpointercapture} event handler for this element.
      * @param onlostpointercapture the {@code onlostpointercapture} event handler for this element
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object onlostpointercapture) {
         setEventHandler(Event.TYPE_LOSTPOINTERCAPTURE, onlostpointercapture);
@@ -2150,7 +2146,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointercancel} event handler for this element.
      * @return the {@code onpointercancel} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOnpointercancel() {
         return getEventHandler(Event.TYPE_POINTERCANCEL);
@@ -2160,7 +2155,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointercancel} event handler for this element.
      * @param onpointercancel the {@code onpointercancel} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOnpointercancel(final Object onpointercancel) {
         setEventHandler(Event.TYPE_POINTERCANCEL, onpointercancel);
@@ -2170,7 +2164,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerdown} event handler for this element.
      * @return the {@code onpointerdown} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOnpointerdown() {
         return getEventHandler(Event.TYPE_POINTERDOWN);
@@ -2180,7 +2173,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerdown} event handler for this element.
      * @param onpointerdown the {@code onpointerdown} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOnpointerdown(final Object onpointerdown) {
         setEventHandler(Event.TYPE_POINTERDOWN, onpointerdown);
@@ -2190,7 +2182,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerenter} event handler for this element.
      * @return the {@code onpointerenter} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOnpointerenter() {
         return getEventHandler(Event.TYPE_POINTERENTER);
@@ -2200,7 +2191,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerenter} event handler for this element.
      * @param onpointerenter the {@code onpointerenter} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOnpointerenter(final Object onpointerenter) {
         setEventHandler(Event.TYPE_POINTERENTER, onpointerenter);
@@ -2210,7 +2200,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerleave} event handler for this element.
      * @return the {@code onpointerleave} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOnpointerleave() {
         return getEventHandler(Event.TYPE_POINTERLEAVE);
@@ -2220,7 +2209,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerleave} event handler for this element.
      * @param onpointerleave the {@code onpointerleave} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOnpointerleave(final Object onpointerleave) {
         setEventHandler(Event.TYPE_POINTERLEAVE, onpointerleave);
@@ -2230,7 +2218,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointermove} event handler for this element.
      * @return the {@code onpointermove} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOnpointermove() {
         return getEventHandler(Event.TYPE_POINTERMOVE);
@@ -2240,7 +2227,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointermove} event handler for this element.
      * @param onpointermove the {@code onpointermove} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOnpointermove(final Object onpointermove) {
         setEventHandler(Event.TYPE_POINTERMOVE, onpointermove);
@@ -2250,7 +2236,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerout} event handler for this element.
      * @return the {@code onpointerout} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOnpointerout() {
         return getEventHandler(Event.TYPE_POINTEROUT);
@@ -2260,7 +2245,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerout} event handler for this element.
      * @param onpointerout the {@code onpointerout} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOnpointerout(final Object onpointerout) {
         setEventHandler(Event.TYPE_POINTEROUT, onpointerout);
@@ -2270,7 +2254,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerover} event handler for this element.
      * @return the {@code onpointerover} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOnpointerover() {
         return getEventHandler(Event.TYPE_POINTEROVER);
@@ -2280,7 +2263,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerover} event handler for this element.
      * @param onpointerover the {@code onpointerover} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOnpointerover(final Object onpointerover) {
         setEventHandler(Event.TYPE_POINTEROVER, onpointerover);
@@ -2290,7 +2272,6 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerup} event handler for this element.
      * @return the {@code onpointerup} event handler for this element
      */
-    @Override
     @JsxGetter
     public Function getOnpointerup() {
         return getEventHandler(Event.TYPE_POINTERUP);
@@ -2300,7 +2281,6 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerup} event handler for this element.
      * @param onpointerup the {@code onpointerup} event handler for this element
      */
-    @Override
     @JsxSetter
     public void setOnpointerup(final Object onpointerup) {
         setEventHandler(Event.TYPE_POINTERUP, onpointerup);

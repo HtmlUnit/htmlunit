@@ -19,7 +19,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
 
@@ -80,15 +79,6 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the {@code appMinorVersion} property.
-     * @return the {@code appMinorVersion} property
-     */
-    @JsxGetter(IE)
-    public String getAppMinorVersion() {
-        return getBrowserVersion().getApplicationMinorVersion();
-    }
-
-    /**
      * Returns the {@code appName} property.
      * @return the {@code appName} property
      */
@@ -104,15 +94,6 @@ public class Navigator extends HtmlUnitScriptable {
     @JsxGetter
     public String getAppVersion() {
         return getBrowserVersion().getApplicationVersion();
-    }
-
-    /**
-     * Returns the language of the browser.
-     * @return the language
-     */
-    @JsxGetter(IE)
-    public String getBrowserLanguage() {
-        return getLanguage();
     }
 
     /**
@@ -159,15 +140,6 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the {@code cpuClass} property.
-     * @return the {@code cpuClass} property
-     */
-    @JsxGetter(IE)
-    public String getCpuClass() {
-        return getBrowserVersion().getCpuClass();
-    }
-
-    /**
      * Returns the {@code onLine} property.
      * @return the {@code onLine} property
      */
@@ -205,30 +177,12 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the property {@code systemLanguage}.
-     * @return the property {@code systemLanguag}
-     */
-    @JsxGetter(IE)
-    public String getSystemLanguage() {
-        return getBrowserVersion().getSystemLanguage();
-    }
-
-    /**
      * Returns the property {@code userAgent}.
      * @return the property {@code userAgent}
      */
     @JsxGetter
     public String getUserAgent() {
         return getBrowserVersion().getUserAgent();
-    }
-
-    /**
-     * Returns the property {@code userLanguage}.
-     * @return the property {@code userLanguage}
-     */
-    @JsxGetter(IE)
-    public String getUserLanguage() {
-        return getBrowserVersion().getUserLanguage();
     }
 
     /**
@@ -294,7 +248,7 @@ public class Navigator extends HtmlUnitScriptable {
      * Returns {@code false} always as data tainting support is not enabled in HtmlUnit.
      * @return false
      */
-    @JsxFunction({FF, FF_ESR, IE})
+    @JsxFunction({FF, FF_ESR})
     public boolean taintEnabled() {
         return false;
     }

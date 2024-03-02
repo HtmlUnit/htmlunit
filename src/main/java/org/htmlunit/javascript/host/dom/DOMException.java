@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.dom;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -112,12 +111,6 @@ public class DOMException extends HtmlUnitScriptable {
     /** Data clone error. */
     @JsxConstant
     public static final int DATA_CLONE_ERR = 25;
-    /** Parse error. */
-    @JsxConstant(IE)
-    public static final int PARSE_ERR = 81;
-    /** Serialize error. */
-    @JsxConstant(IE)
-    public static final int SERIALIZE_ERR = 82;
 
     private final int code_;
     private final String message_;

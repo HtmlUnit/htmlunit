@@ -139,36 +139,36 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code pointercancel} event handler for this element.
+     * @return the {@code pointercancel} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointercancel() {
         return getEventHandler(Event.TYPE_POINTERCANCEL);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code pointercancel} event handler.
+     * @param pointercancel the {@code pointercancel} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointercancel(final Object pointercancel) {
         setEventHandler(Event.TYPE_POINTERCANCEL, pointercancel);
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code pointerout} event handler for this element.
+     * @return the {@code pointerout} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerout() {
         return getEventHandler(Event.TYPE_POINTEROUT);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code pointerout} event handler.
+     * @param pointerout the {@code pointerout} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerout(final Object pointerout) {
         setEventHandler(Event.TYPE_POINTEROUT, pointerout);
@@ -247,18 +247,18 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code pointerenter} event handler.
+     * @return the {@code pointerenter} event handler
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerenter() {
         return getEventHandler(Event.TYPE_POINTERENTER);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code pointerenter} event handler.
+     * @param pointerenter the {@code pointerenter} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerenter(final Object pointerenter) {
         setEventHandler(Event.TYPE_POINTERENTER, pointerenter);
@@ -391,18 +391,18 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code pointerup} event handler for this element.
+     * @return the {@code pointerup} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerup() {
         return getEventHandler(Event.TYPE_POINTERUP);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code pointerup} event handler.
+     * @param pointerup the {@code pointerup} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerup(final Object pointerup) {
         setEventHandler(Event.TYPE_POINTERUP, pointerup);
@@ -463,18 +463,18 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code pointerleave} event handler.
+     * @return the {@code pointerleave} event handler
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerleave() {
         return getEventHandler(Event.TYPE_POINTERLEAVE);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code pointerleave} event handler.
+     * @param pointerleave the {@code pointerleave} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerleave(final Object pointerleave) {
         setEventHandler(Event.TYPE_POINTERLEAVE, pointerleave);
@@ -805,18 +805,18 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code pointermove} event handler for this element.
+     * @return the {@code pointermove} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointermove() {
         return getEventHandler(Event.TYPE_POINTERMOVE);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code pointermove} event handler.
+     * @param pointermove the {@code pointermove} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointermove(final Object pointermove) {
         setEventHandler(Event.TYPE_POINTERMOVE, pointermove);
@@ -877,18 +877,18 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code lostpointercapture} event handler for this element.
+     * @return the {@code lostpointercapture} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
         return getEventHandler(Event.TYPE_LOSTPOINTERCAPTURE);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code lostpointercapture} event handler.
+     * @param lostpointercapture the {@code lostpointercapture} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object lostpointercapture) {
         setEventHandler(Event.TYPE_LOSTPOINTERCAPTURE, lostpointercapture);
@@ -913,18 +913,18 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code pointerover} event handler for this element.
+     * @return the {@code pointerover} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerover() {
         return getEventHandler(Event.TYPE_POINTEROVER);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code pointerover} event handler.
+     * @param pointerover the {@code pointerover} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerover(final Object pointerover) {
         setEventHandler(Event.TYPE_POINTEROVER, pointerover);
@@ -1075,18 +1075,18 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code pointerdown} event handler for this element.
+     * @return the {@code pointerdown} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerdown() {
         return getEventHandler(Event.TYPE_POINTERDOWN);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code pointerdown} event handler.
+     * @param pointerdown the {@code pointerdown} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerdown(final Object pointerdown) {
         setEventHandler(Event.TYPE_POINTERDOWN, pointerdown);
@@ -1453,18 +1453,18 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code gotpointercapture} event handler for this element.
+     * @return the {@code gotpointercapture} event handler for this element
      */
-    @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOngotpointercapture() {
         return getEventHandler(Event.TYPE_GOTPOINTERCAPTURE);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code gotpointercapture} event handler.
+     * @param gotpointercapture the {@code gotpointercapture} event handler
      */
-    @Override
     @JsxSetter({CHROME, EDGE})
     public void setOngotpointercapture(final Object gotpointercapture) {
         setEventHandler(Event.TYPE_GOTPOINTERCAPTURE, gotpointercapture);

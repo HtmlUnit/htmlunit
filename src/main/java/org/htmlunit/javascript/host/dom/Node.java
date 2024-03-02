@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -806,7 +804,6 @@ public class Node extends EventTarget {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
-    @JsxGetter(IE)
     public Object getAttributes() {
         return null;
     }
@@ -847,7 +844,6 @@ public class Node extends EventTarget {
      * Returns true when the current element has any attributes or not.
      * @return true if an attribute is specified on this element
      */
-    @JsxFunction(IE)
     public boolean hasAttributes() {
         return getDomNodeOrDie().hasAttributes();
     }
@@ -856,7 +852,6 @@ public class Node extends EventTarget {
      * Returns the namespace prefix.
      * @return the namespace prefix
      */
-    @JsxGetter(IE)
     public Object getPrefix() {
         return getDomNodeOrDie().getPrefix();
     }
@@ -865,7 +860,6 @@ public class Node extends EventTarget {
      * Returns the local name of this attribute.
      * @return the local name of this attribute
      */
-    @JsxGetter(IE)
     public Object getLocalName() {
         return getDomNodeOrDie().getLocalName();
     }
@@ -874,7 +868,6 @@ public class Node extends EventTarget {
      * Returns the URI that identifies an XML namespace.
      * @return the URI that identifies an XML namespace
      */
-    @JsxGetter(IE)
     public Object getNamespaceURI() {
         return getDomNodeOrDie().getNamespaceURI();
     }

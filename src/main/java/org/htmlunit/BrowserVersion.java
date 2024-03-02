@@ -79,11 +79,6 @@ public final class BrowserVersion implements Serializable {
     private static final String TIMEZONE_NEW_YORK = "America/New_York";
 
     /**
-     * The X86 CPU class.
-     */
-    private static final String CPU_CLASS_X86 = "x86";
-
-    /**
      * The WIN32 platform.
      */
     private static final String PLATFORM_WIN32 = "Win32";
@@ -226,7 +221,6 @@ public final class BrowserVersion implements Serializable {
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
-        CHROME.cpuClass_ = null;
         CHROME.productSub_ = "20030107";
         CHROME.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -273,7 +267,6 @@ public final class BrowserVersion implements Serializable {
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
-        EDGE.cpuClass_ = null;
         EDGE.productSub_ = "20030107";
         EDGE.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -457,13 +450,10 @@ public final class BrowserVersion implements Serializable {
     private String productSub_;
     private String vendor_ = "";
     private Locale browserLocale_ = Locale.forLanguageTag(LANGUAGE_ENGLISH_US);
-    private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
     private String platform_ = PLATFORM_WIN32;
-    private String systemLanguage_ = LANGUAGE_ENGLISH_US;
     private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
-    private String userLanguage_ = LANGUAGE_ENGLISH_US;
     private final Set<PluginConfiguration> plugins_;
     private final Set<BrowserVersionFeatures> features_;
     private String acceptEncodingHeader_;
@@ -687,16 +677,6 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
-     * Returns the type of CPU in the machine, for example "x86".
-     * Default value is {@link #CPU_CLASS_X86} if not explicitly configured.
-     * @return the type of CPU in the machine
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533697.aspx">MSDN documentation</a>
-     */
-    public String getCpuClass() {
-        return cpuClass_;
-    }
-
-    /**
      * Returns {@code true} if the browser is currently online.
      * Default value is {@code true} if not explicitly configured.
      * @return {@code true} if the browser is currently online
@@ -717,16 +697,6 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
-     * Returns the system language, for example "en-us".
-     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
-     * @return the system language
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534653.aspx">MSDN documentation</a>
-     */
-    public String getSystemLanguage() {
-        return systemLanguage_;
-    }
-
-    /**
      * Returns the system {@link TimeZone}.
      * Default value is {@code America/New_York} if not explicitly configured.
      * @return the system {@link TimeZone}
@@ -741,16 +711,6 @@ public final class BrowserVersion implements Serializable {
      */
     public String getUserAgent() {
         return userAgent_;
-    }
-
-    /**
-     * Returns the user language, for example "en-us".
-     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
-     * @return the user language
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534713.aspx">MSDN documentation</a>
-     */
-    public String getUserLanguage() {
-        return userLanguage_;
     }
 
     /**
@@ -951,12 +911,9 @@ public final class BrowserVersion implements Serializable {
                 .setApplicationMinorVersion(version.getApplicationMinorVersion())
                 .setVendor(version.getVendor())
                 .setBrowserLanguage(version.getBrowserLanguage())
-                .setCpuClass(version.getCpuClass())
                 .setOnLine(version.isOnLine())
                 .setPlatform(version.getPlatform())
-                .setSystemLanguage(version.getSystemLanguage())
                 .setSystemTimezone(version.getSystemTimezone())
-                .setUserLanguage(version.getUserLanguage())
                 .setBuildId(version.getBuildId())
                 .setProductSub(version.getProductSub())
                 .setAcceptEncodingHeader(version.getAcceptEncodingHeader())
@@ -1045,15 +1002,6 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
-         * @param cpuClass the cpuClass to set
-         * @return this for fluent use
-         */
-        public BrowserVersionBuilder setCpuClass(final String cpuClass) {
-            workPiece_.cpuClass_ = cpuClass;
-            return this;
-        }
-
-        /**
          * @param onLine the onLine to set
          * @return this for fluent use
          */
@@ -1072,15 +1020,6 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
-         * @param systemLanguage the systemLanguage to set
-         * @return this for fluent use
-         */
-        public BrowserVersionBuilder setSystemLanguage(final String systemLanguage) {
-            workPiece_.systemLanguage_ = systemLanguage;
-            return this;
-        }
-
-        /**
          * @param systemTimezone the systemTimezone to set
          * @return this for fluent use
          */
@@ -1095,15 +1034,6 @@ public final class BrowserVersion implements Serializable {
          */
         public BrowserVersionBuilder setUserAgent(final String userAgent) {
             workPiece_.userAgent_ = userAgent;
-            return this;
-        }
-
-        /**
-         * @param userLanguage the userLanguage to set
-         * @return this for fluent use
-         */
-        public BrowserVersionBuilder setUserLanguage(final String userLanguage) {
-            workPiece_.userLanguage_ = userLanguage;
             return this;
         }
 
