@@ -14,13 +14,9 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.html.DomComment;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxFunction;
-import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
  * A JavaScript object for {@code Comment}.
@@ -48,37 +44,5 @@ public class Comment extends CharacterData {
     @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
-    }
-
-    /**
-     * Returns the text of this element.
-     * @return the text
-     */
-    @JsxGetter(IE)
-    public String getText() {
-        return "<!--" + getData() + "-->";
-    }
-
-    /**
-     * Gets the attribute node for the specified attribute.
-     * @param attributeName the name of the attribute to retrieve
-     * @return the attribute node for the specified attribute
-     */
-    @JsxFunction(IE)
-    public Object getAttributeNode(final String attributeName) {
-        return null;
-    }
-
-    /**
-     * Returns the value of the specified attribute.
-     * @param attributeName attribute name
-     * @param flags IE-specific flags (see the MSDN documentation for more info)
-     * @return the value of the specified attribute, {@code null} if the attribute is not defined
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
-     * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
-     */
-    @JsxFunction(IE)
-    public Object getAttribute(final String attributeName, final Integer flags) {
-        return null;
     }
 }

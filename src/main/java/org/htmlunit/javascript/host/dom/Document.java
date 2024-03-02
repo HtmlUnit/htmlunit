@@ -25,7 +25,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
+// import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -225,7 +225,6 @@ public class Document extends Node {
     private String designMode_;
     private String compatMode_;
     private int documentMode_ = -1;
-    private String uniqueID_;
     private String domain_;
     private String lastModified_;
     private ScriptableObject currentScript_;
@@ -774,15 +773,6 @@ public class Document extends Node {
     }
 
     /**
-     * Gets the default character set from the current regional language settings.
-     * @return the default character set from the current regional language settings
-     */
-    @JsxGetter(IE)
-    public String getDefaultCharset() {
-        return "windows-1252";
-    }
-
-    /**
      * Returns the value of the JavaScript property {@code anchors}.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537435.aspx">MSDN documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
@@ -895,7 +885,6 @@ public class Document extends Node {
      * Returns the {@code documentMode} property.
      * @return the {@code documentMode} property
      */
-    @JsxGetter(IE)
     public int getDocumentMode() {
         if (documentMode_ != -1) {
             return documentMode_;
@@ -1044,19 +1033,6 @@ public class Document extends Node {
     }
 
     /**
-     * Retrieves an auto-generated, unique identifier for the object.
-     * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
-     * @return an auto-generated, unique identifier for the object
-     */
-    @JsxGetter(IE)
-    public String getUniqueID() {
-        if (uniqueID_ == null) {
-            uniqueID_ = "ms__id" + Document.UniqueID_Counter_.getAndIncrement();
-        }
-        return uniqueID_;
-    }
-
-    /**
      * Returns the value of the {@code URL} property.
      * @return the value of the {@code URL} property
      */
@@ -1071,15 +1047,6 @@ public class Document extends Node {
      */
     @JsxGetter
     public String getDocumentURI() {
-        return getURL_js();
-    }
-
-    /**
-     * Returns the value of the {@code URLUnencoded} property.
-     * @return the value of the {@code URLUnencoded} property
-     */
-    @JsxGetter(value = IE, propertyName = "URLUnencoded")
-    public String getURLUnencoded_js() {
         return getURL_js();
     }
 
@@ -1393,51 +1360,6 @@ public class Document extends Node {
     @JsxSetter
     public void setOnfocus(final Object handler) {
         setEventHandler(Event.TYPE_FOCUS, handler);
-    }
-
-    /**
-     * Returns the {@code onfocus} event handler for this element.
-     * @return the {@code onfocus} event handler for this element
-     */
-    @JsxGetter
-    public Object getOnfocus() {
-        return getEventHandler(Event.TYPE_FOCUS);
-    }
-
-    /**
-     * Sets the {@code onfocusin} event handler for this element.
-     * @param handler the {@code onfocusin} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnfocusin(final Object handler) {
-        setEventHandler(Event.TYPE_FOCUS_IN, handler);
-    }
-
-    /**
-     * Returns the {@code onfocusin} event handler for this element.
-     * @return the {@code onfocusin} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Object getOnfocusin() {
-        return getEventHandler(Event.TYPE_FOCUS_IN);
-    }
-
-    /**
-     * Sets the {@code onfocusout} event handler for this element.
-     * @param handler the {@code onfocusout} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnfocusout(final Object handler) {
-        setEventHandler(Event.TYPE_FOCUS_OUT, handler);
-    }
-
-    /**
-     * Returns the {@code onfocusout} event handler for this element.
-     * @return the {@code onfocusout} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Object getOnfocusout() {
-        return getEventHandler(Event.TYPE_FOCUS_OUT);
     }
 
     /**
@@ -2117,19 +2039,6 @@ public class Document extends Node {
         if (body instanceof HTMLBodyElement) {
             ((HTMLBodyElement) body).setVLink(color);
         }
-    }
-
-    /**
-     * Returns the value of the {@code frames} property.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537459.aspx">MSDN documentation</a>
-     * @return the live collection of frames contained by this document
-     */
-    @JsxGetter(IE)
-    public Object getFrames() {
-        if (ScriptableObject.getTopLevelScope(this) == null) {
-            throw JavaScriptEngine.constructError("Error", "Not implemented");
-        }
-        return getWindow().getFrames_js();
     }
 
     /**
@@ -2831,7 +2740,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnplaying() {
-        return getEventHandler(Event.TYPE_PLAYNG);
+        return getEventHandler(Event.TYPE_PLAYING);
     }
 
     /**
@@ -2840,7 +2749,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnplaying(final Object onplaying) {
-        setEventHandler(Event.TYPE_PLAYNG, onplaying);
+        setEventHandler(Event.TYPE_PLAYING, onplaying);
     }
 
     /**
@@ -3474,510 +3383,6 @@ public class Document extends Node {
     }
 
     /**
-     * Returns the {@code onhelp} event handler for this element.
-     * @return the {@code onhelp} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnhelp() {
-        return getEventHandler(Event.TYPE_HELP);
-    }
-
-    /**
-     * Sets the {@code onhelp} event handler for this element.
-     * @param onhelp the {@code onhelp} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnhelp(final Object onhelp) {
-        setEventHandler(Event.TYPE_HELP, onhelp);
-    }
-
-    /**
-     * Returns the {@code onmscontentzoom} event handler for this element.
-     * @return the {@code onmscontentzoom} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmscontentzoom() {
-        return getEventHandler(Event.TYPE_MSCONTENTZOOM);
-    }
-
-    /**
-     * Sets the {@code onmscontentzoom} event handler for this element.
-     * @param onmscontentzoom the {@code onmscontentzoom} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmscontentzoom(final Object onmscontentzoom) {
-        setEventHandler(Event.TYPE_MSCONTENTZOOM, onmscontentzoom);
-    }
-
-    /**
-     * Returns the {@code onmsfullscreenchange} event handler for this element.
-     * @return the {@code onmsfullscreenchange} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsfullscreenchange() {
-        return getEventHandler(Event.TYPE_MSFULLSCREENCHANGE);
-    }
-
-    /**
-     * Sets the {@code onmsfullscreenchange} event handler for this element.
-     * @param onmsfullscreenchange the {@code onmsfullscreenchange} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsfullscreenchange(final Object onmsfullscreenchange) {
-        setEventHandler(Event.TYPE_MSFULLSCREENCHANGE, onmsfullscreenchange);
-    }
-
-    /**
-     * Returns the {@code onmsfullscreenerror} event handler for this element.
-     * @return the {@code onmsfullscreenerror} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsfullscreenerror() {
-        return getEventHandler(Event.TYPE_MSFULLSCREENERROR);
-    }
-
-    /**
-     * Sets the {@code onmsfullscreenerror} event handler for this element.
-     * @param onmsfullscreenerror the {@code onmsfullscreenerror} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsfullscreenerror(final Object onmsfullscreenerror) {
-        setEventHandler(Event.TYPE_MSFULLSCREENERROR, onmsfullscreenerror);
-    }
-
-    /**
-     * Returns the {@code onmsgesturechange} event handler for this element.
-     * @return the {@code onmsgesturechange} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturechange() {
-        return getEventHandler(Event.TYPE_MSGESTURECHANGE);
-    }
-
-    /**
-     * Sets the {@code onmsgesturechange} event handler for this element.
-     * @param onmsgesturechange the {@code onmsgesturechange} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturechange(final Object onmsgesturechange) {
-        setEventHandler(Event.TYPE_MSGESTURECHANGE, onmsgesturechange);
-    }
-
-    /**
-     * Returns the {@code onmsgesturedoubletap} event handler for this element.
-     * @return the {@code onmsgesturedoubletap} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturedoubletap() {
-        return getEventHandler(Event.TYPE_MSGESTUREDOUBLETAP);
-    }
-
-    /**
-     * Sets the {@code onmsgesturedoubletap} event handler for this element.
-     * @param onmsgesturedoubletap the {@code onmsgesturedoubletap} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturedoubletap(final Object onmsgesturedoubletap) {
-        setEventHandler(Event.TYPE_MSGESTUREDOUBLETAP, onmsgesturedoubletap);
-    }
-
-    /**
-     * Returns the {@code onmsgestureend} event handler for this element.
-     * @return the {@code onmsgestureend} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgestureend() {
-        return getEventHandler(Event.TYPE_MSGESTUREEND);
-    }
-
-    /**
-     * Sets the {@code onmsgestureend} event handler for this element.
-     * @param onmsgestureend the {@code onmsgestureend} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsgestureend(final Object onmsgestureend) {
-        setEventHandler(Event.TYPE_MSGESTUREEND, onmsgestureend);
-    }
-
-    /**
-     * Returns the {@code onmsgesturehold} event handler for this element.
-     * @return the {@code onmsgesturehold} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturehold() {
-        return getEventHandler(Event.TYPE_MSGESTUREHOLD);
-    }
-
-    /**
-     * Sets the {@code onmsgesturehold} event handler for this element.
-     * @param onmsgesturehold the {@code onmsgesturehold} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturehold(final Object onmsgesturehold) {
-        setEventHandler(Event.TYPE_MSGESTUREHOLD, onmsgesturehold);
-    }
-
-    /**
-     * Returns the {@code onmsgesturestart} event handler for this element.
-     * @return the {@code onmsgesturestart} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturestart() {
-        return getEventHandler(Event.TYPE_MSGESTURESTART);
-    }
-
-    /**
-     * Sets the {@code onmsgesturestart} event handler for this element.
-     * @param onmsgesturestart the {@code onmsgesturestart} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturestart(final Object onmsgesturestart) {
-        setEventHandler(Event.TYPE_MSGESTURESTART, onmsgesturestart);
-    }
-
-    /**
-     * Returns the {@code onmsgesturetap} event handler for this element.
-     * @return the {@code onmsgesturetap} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturetap() {
-        return getEventHandler(Event.TYPE_MSGESTURETAP);
-    }
-
-    /**
-     * Sets the {@code onmsgesturetap} event handler for this element.
-     * @param onmsgesturetap the {@code onmsgesturetap} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturetap(final Object onmsgesturetap) {
-        setEventHandler(Event.TYPE_MSGESTURETAP, onmsgesturetap);
-    }
-
-    /**
-     * Returns the {@code onmsinertiastart} event handler for this element.
-     * @return the {@code onmsinertiastart} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsinertiastart() {
-        return getEventHandler(Event.TYPE_MSINERTIASTART);
-    }
-
-    /**
-     * Sets the {@code onmsinertiastart} event handler for this element.
-     * @param onmsinertiastart the {@code onmsinertiastart} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsinertiastart(final Object onmsinertiastart) {
-        setEventHandler(Event.TYPE_MSINERTIASTART, onmsinertiastart);
-    }
-
-    /**
-     * Returns the {@code onmsmanipulationstatechanged} event handler for this element.
-     * @return the {@code onmsmanipulationstatechanged} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsmanipulationstatechanged() {
-        return getEventHandler(Event.TYPE_MSMANIPULATIONSTATECHANGED);
-    }
-
-    /**
-     * Sets the {@code onmsmanipulationstatechanged} event handler for this element.
-     * @param onmsmanipulationstatechanged the {@code onmsmanipulationstatechanged} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsmanipulationstatechanged(final Object onmsmanipulationstatechanged) {
-        setEventHandler(Event.TYPE_MSMANIPULATIONSTATECHANGED, onmsmanipulationstatechanged);
-    }
-
-    /**
-     * Returns the {@code onmspointercancel} event handler for this element.
-     * @return the {@code onmspointercancel} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointercancel() {
-        return getEventHandler(Event.TYPE_MSPOINTERCANCEL);
-    }
-
-    /**
-     * Sets the {@code onmspointercancel} event handler for this element.
-     * @param onmspointercancel the {@code onmspointercancel} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmspointercancel(final Object onmspointercancel) {
-        setEventHandler(Event.TYPE_MSPOINTERCANCEL, onmspointercancel);
-    }
-
-    /**
-     * Returns the {@code onmspointerdown} event handler for this element.
-     * @return the {@code onmspointerdown} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerdown() {
-        return getEventHandler(Event.TYPE_MSPOINTERDOWN);
-    }
-
-    /**
-     * Sets the {@code onmspointerdown} event handler for this element.
-     * @param onmspointerdown the {@code onmspointerdown} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerdown(final Object onmspointerdown) {
-        setEventHandler(Event.TYPE_MSPOINTERDOWN, onmspointerdown);
-    }
-
-    /**
-     * Returns the {@code onmspointerenter} event handler for this element.
-     * @return the {@code onmspointerenter} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerenter() {
-        return getEventHandler(Event.TYPE_MSPOINTENTER);
-    }
-
-    /**
-     * Sets the {@code onmspointerenter} event handler for this element.
-     * @param onmspointerenter the {@code onmspointerenter} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerenter(final Object onmspointerenter) {
-        setEventHandler(Event.TYPE_MSPOINTENTER, onmspointerenter);
-    }
-
-    /**
-     * Returns the {@code onmspointerleave} event handler for this element.
-     * @return the {@code onmspointerleave} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerleave() {
-        return getEventHandler(Event.TYPE_MSPOINTERLEAVE);
-    }
-
-    /**
-     * Sets the {@code onmspointerleave} event handler for this element.
-     * @param onmspointerleave the {@code onmspointerleave} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerleave(final Object onmspointerleave) {
-        setEventHandler(Event.TYPE_MSPOINTERLEAVE, onmspointerleave);
-    }
-
-    /**
-     * Returns the {@code onmspointermove} event handler for this element.
-     * @return the {@code onmspointermove} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointermove() {
-        return getEventHandler(Event.TYPE_MSPOINTERMOVE);
-    }
-
-    /**
-     * Sets the {@code onmspointermove} event handler for this element.
-     * @param onmspointermove the {@code onmspointermove} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmspointermove(final Object onmspointermove) {
-        setEventHandler(Event.TYPE_MSPOINTERMOVE, onmspointermove);
-    }
-
-    /**
-     * Returns the {@code onmspointerout} event handler for this element.
-     * @return the {@code onmspointerout} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerout() {
-        return getEventHandler(Event.TYPE_MSPOINTEROUT);
-    }
-
-    /**
-     * Sets the {@code onmspointerout} event handler for this element.
-     * @param onmspointerout the {@code onmspointerout} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerout(final Object onmspointerout) {
-        setEventHandler(Event.TYPE_MSPOINTEROUT, onmspointerout);
-    }
-
-    /**
-     * Returns the {@code onmspointerover} event handler for this element.
-     * @return the {@code onmspointerover} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerover() {
-        return getEventHandler(Event.TYPE_MSPOINTEROVER);
-    }
-
-    /**
-     * Sets the {@code onmspointerover} event handler for this element.
-     * @param onmspointerover the {@code onmspointerover} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerover(final Object onmspointerover) {
-        setEventHandler(Event.TYPE_MSPOINTEROVER, onmspointerover);
-    }
-
-    /**
-     * Returns the {@code onmspointerup} event handler for this element.
-     * @return the {@code onmspointerup} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerup() {
-        return getEventHandler(Event.TYPE_MSPOINTERUP);
-    }
-
-    /**
-     * Sets the {@code onmspointerup} event handler for this element.
-     * @param onmspointerup the {@code onmspointerup} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerup(final Object onmspointerup) {
-        setEventHandler(Event.TYPE_MSPOINTERUP, onmspointerup);
-    }
-
-    /**
-     * Returns the {@code onmssitemodejumplistitemremoved} event handler for this element.
-     * @return the {@code onmssitemodejumplistitemremoved} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmssitemodejumplistitemremoved() {
-        return getEventHandler(Event.TYPE_MSSITEMODEJUMPLISTITEMREMOVED);
-    }
-
-    /**
-     * Sets the {@code onmssitemodejumplistitemremoved} event handler for this element.
-     * @param onmssitemodejumplistitemremoved the {@code onmssitemodejumplistitemremoved} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmssitemodejumplistitemremoved(final Object onmssitemodejumplistitemremoved) {
-        setEventHandler(Event.TYPE_MSSITEMODEJUMPLISTITEMREMOVED, onmssitemodejumplistitemremoved);
-    }
-
-    /**
-     * Returns the {@code onmsthumbnailclick} event handler for this element.
-     * @return the {@code onmsthumbnailclick} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsthumbnailclick() {
-        return getEventHandler(Event.TYPE_MSTHUMBNAILCLICK);
-    }
-
-    /**
-     * Sets the {@code onmsthumbnailclick} event handler for this element.
-     * @param onmsthumbnailclick the {@code onmsthumbnailclick} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsthumbnailclick(final Object onmsthumbnailclick) {
-        setEventHandler(Event.TYPE_MSTHUMBNAILCLICK, onmsthumbnailclick);
-    }
-
-    /**
-     * Returns the {@code onstop} event handler for this element.
-     * @return the {@code onstop} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnstop() {
-        return getEventHandler(Event.TYPE_STOP);
-    }
-
-    /**
-     * Sets the {@code onstop} event handler for this element.
-     * @param onstop the {@code onstop} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnstop(final Object onstop) {
-        setEventHandler(Event.TYPE_STOP, onstop);
-    }
-
-    /**
-     * Returns the {@code onstoragecommit} event handler for this element.
-     * @return the {@code onstoragecommit} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnstoragecommit() {
-        return getEventHandler(Event.TYPE_STORAGECOMMIT);
-    }
-
-    /**
-     * Sets the {@code onstoragecommit} event handler for this element.
-     * @param onstoragecommit the {@code onstoragecommit} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnstoragecommit(final Object onstoragecommit) {
-        setEventHandler(Event.TYPE_STORAGECOMMIT, onstoragecommit);
-    }
-
-    /**
-     * Returns the {@code onactivate} event handler for this element.
-     * @return the {@code onactivate} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnactivate() {
-        return getEventHandler(Event.TYPE_ACTIVATE);
-    }
-
-    /**
-     * Sets the {@code onactivate} event handler for this element.
-     * @param onactivate the {@code onactivate} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnactivate(final Object onactivate) {
-        setEventHandler(Event.TYPE_ACTIVATE, onactivate);
-    }
-
-    /**
-     * Returns the {@code onbeforeactivate} event handler for this element.
-     * @return the {@code onbeforeactivate} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnbeforeactivate() {
-        return getEventHandler(Event.TYPE_BEFOREACTIVATE);
-    }
-
-    /**
-     * Sets the {@code onbeforeactivate} event handler for this element.
-     * @param onbeforeactivate the {@code onbeforeactivate} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnbeforeactivate(final Object onbeforeactivate) {
-        setEventHandler(Event.TYPE_BEFOREACTIVATE, onbeforeactivate);
-    }
-
-    /**
-     * Returns the {@code onbeforedeactivate} event handler for this element.
-     * @return the {@code onbeforedeactivate} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnbeforedeactivate() {
-        return getEventHandler(Event.TYPE_BEFOREDEACTIVATE);
-    }
-
-    /**
-     * Sets the {@code onbeforedeactivate} event handler for this element.
-     * @param onbeforedeactivate the {@code onbeforedeactivate} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnbeforedeactivate(final Object onbeforedeactivate) {
-        setEventHandler(Event.TYPE_BEFOREDEACTIVATE, onbeforedeactivate);
-    }
-
-    /**
-     * Returns the {@code ondeactivate} event handler for this element.
-     * @return the {@code ondeactivate} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOndeactivate() {
-        return getEventHandler(Event.TYPE_DEACTIVATE);
-    }
-
-    /**
-     * Sets the {@code ondeactivate} event handler for this element.
-     * @param ondeactivate the {@code ondeactivate} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOndeactivate(final Object ondeactivate) {
-        setEventHandler(Event.TYPE_DEACTIVATE, ondeactivate);
-    }
-
-    /**
      * @return the {@code currentScript}
      */
     @JsxGetter
@@ -4016,15 +3421,6 @@ public class Document extends Node {
         all.setAvoidObjectDetection(true);
         all.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> true);
         return all;
-    }
-
-    /**
-     * Gets the window in which this document is contained.
-     * @return the window
-     */
-    @JsxGetter(IE)
-    public Object getParentWindow() {
-        return getWindow();
     }
 
     /**

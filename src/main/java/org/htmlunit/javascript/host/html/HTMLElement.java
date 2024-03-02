@@ -2130,7 +2130,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnplaying() {
-        return getEventHandler(Event.TYPE_PLAYNG);
+        return getEventHandler(Event.TYPE_PLAYING);
     }
 
     /**
@@ -2139,7 +2139,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnplaying(final Object onplaying) {
-        setEventHandler(Event.TYPE_PLAYNG, onplaying);
+        setEventHandler(Event.TYPE_PLAYING, onplaying);
     }
 
     /**

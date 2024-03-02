@@ -1224,7 +1224,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter
     public Function getOnplaying() {
-        return getEventHandler(Event.TYPE_PLAYNG);
+        return getEventHandler(Event.TYPE_PLAYING);
     }
 
     /**
@@ -1233,7 +1233,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter
     public void setOnplaying(final Object playing) {
-        setEventHandler(Event.TYPE_PLAYNG, playing);
+        setEventHandler(Event.TYPE_PLAYING, playing);
     }
 
     /**

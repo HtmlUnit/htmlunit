@@ -2757,7 +2757,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Function getOnplaying() {
-        return getEventHandler(Event.TYPE_PLAYNG);
+        return getEventHandler(Event.TYPE_PLAYING);
     }
 
     /**
@@ -2766,7 +2766,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxSetter
     public void setOnplaying(final Object onplaying) {
-        setHandlerForJavaScript(Event.TYPE_PLAYNG, onplaying);
+        setHandlerForJavaScript(Event.TYPE_PLAYING, onplaying);
     }
 
     /**
