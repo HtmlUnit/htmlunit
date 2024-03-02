@@ -249,7 +249,6 @@ import org.htmlunit.javascript.host.html.HTMLAudioElement;
 import org.htmlunit.javascript.host.html.HTMLBGSoundElement;
 import org.htmlunit.javascript.host.html.HTMLBRElement;
 import org.htmlunit.javascript.host.html.HTMLBaseElement;
-import org.htmlunit.javascript.host.html.HTMLBlockElement;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLButtonElement;
 import org.htmlunit.javascript.host.html.HTMLCanvasElement;
@@ -297,7 +296,6 @@ import org.htmlunit.javascript.host.html.HTMLOptionsCollection;
 import org.htmlunit.javascript.host.html.HTMLOutputElement;
 import org.htmlunit.javascript.host.html.HTMLParagraphElement;
 import org.htmlunit.javascript.host.html.HTMLParamElement;
-import org.htmlunit.javascript.host.html.HTMLPhraseElement;
 import org.htmlunit.javascript.host.html.HTMLPictureElement;
 import org.htmlunit.javascript.host.html.HTMLPreElement;
 import org.htmlunit.javascript.host.html.HTMLProgressElement;
@@ -590,7 +588,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Geolocation.class, GeolocationCoordinates.class, GeolocationPosition.class, GeolocationPositionError.class,
         HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class, HTMLAnchorElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
-        HTMLBaseElement.class, HTMLBGSoundElement.class, HTMLBlockElement.class,
+        HTMLBaseElement.class, HTMLBGSoundElement.class,
         HTMLBodyElement.class, HTMLBRElement.class, HTMLButtonElement.class,
         HTMLCanvasElement.class, HTMLCollection.class,
         HTMLDataElement.class, HTMLDataListElement.class,
@@ -607,7 +605,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLMeterElement.class, HTMLModElement.class,
         HTMLObjectElement.class, HTMLOListElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLOutputElement.class,
-        HTMLParagraphElement.class, HTMLParamElement.class, HTMLPhraseElement.class, HTMLPictureElement.class,
+        HTMLParagraphElement.class, HTMLParamElement.class, HTMLPictureElement.class,
         HTMLPreElement.class, HTMLProgressElement.class, HTMLQuoteElement.class, HTMLScriptElement.class,
         HTMLSelectElement.class, HTMLSlotElement.class, HTMLSourceElement.class,
         HTMLSpanElement.class,

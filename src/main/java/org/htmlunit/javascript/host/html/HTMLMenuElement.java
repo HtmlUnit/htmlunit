@@ -15,14 +15,11 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_PASS;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlMenu;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * The JavaScript object {@code HTMLMenuElement}.
@@ -54,7 +51,6 @@ public class HTMLMenuElement extends HTMLListElement {
      * @return the value of the {@code type} property
      */
     @Override
-    @JsxGetter(IE)
     public String getType() {
         final String type = getDomNodeOrDie().getAttributeDirect("type");
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_PASS)) {
@@ -76,7 +72,6 @@ public class HTMLMenuElement extends HTMLListElement {
      * @param type the value of the {@code type} property
      */
     @Override
-    @JsxSetter(IE)
     public void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_PASS)) {
             getDomNodeOrDie().setAttribute(DomElement.TYPE_ATTRIBUTE, type);

@@ -21,7 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
 import static org.htmlunit.BrowserVersionFeatures.URL_IGNORE_SPECIAL;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -844,77 +843,5 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setRelList(final Object rel) {
         setRel(JavaScriptEngine.toString(rel));
-    }
-
-    /**
-     * Returns the {@code protocolLong} attribute.
-     * @return the {@code protocolLong} attribute
-     */
-    @JsxGetter(IE)
-    public String getProtocolLong() {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code Methods} attribute.
-     * @return the {@code Methods} attribute
-     */
-    @JsxGetter(propertyName = "Methods", value = IE)
-    public String getMethods_js() {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code Methods} attribute.
-     * @param methods {@code Methods} attribute
-     */
-    @JsxSetter(propertyName = "Methods", value = IE)
-    public void setMethods_js(final String methods) {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code mimeType} attribute.
-     * @return the {@code mimeType} attribute
-     */
-    @JsxGetter(IE)
-    public String getMimeType() {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code mimeType} attribute.
-     * @param mimeType {@code mimeType} attribute
-     */
-    @JsxSetter(IE)
-    public void setMimeType(final String mimeType) {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code nameProp} attribute.
-     * @return the {@code nameProp} attribute
-     */
-    @JsxGetter(IE)
-    public String getNameProp() {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Returns the {@code urn} attribute.
-     * @return the {@code urn} attribute
-     */
-    @JsxGetter(IE)
-    public String getUrn() {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
-    }
-
-    /**
-     * Sets the {@code urn} attribute.
-     * @param urn {@code urn} attribute
-     */
-    @JsxSetter(IE)
-    public void setUrn(final String urn) {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 }

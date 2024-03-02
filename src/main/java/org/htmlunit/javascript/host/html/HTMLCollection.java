@@ -15,13 +15,10 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NAMED_ITEM_ID_FIRST;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Supplier;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Callable;
@@ -255,30 +252,5 @@ public class HTMLCollection extends AbstractList implements Callable {
             }
         }
         return null;
-    }
-
-    /**
-     * Returns all the elements in this element array that have the specified tag name.
-     * This method returns an empty element array if there are no elements with the
-     * specified tag name.
-     * @param tagName the name of the tag of the elements to return
-     * @return all the elements in this element array that have the specified tag name
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536776.aspx">MSDN doc</a>
-     */
-    @JsxFunction(IE)
-    public Object tags(final String tagName) {
-        final HTMLCollection tags = new HTMLCollection(getDomNodeOrDie(), false);
-        tags.setElementsSupplier(
-                (Supplier<List<DomNode>> & Serializable)
-                () -> {
-                    final List<DomNode> list = new ArrayList<>();
-                    for (final DomNode elem : this.getElements()) {
-                        if (tagName.equalsIgnoreCase(elem.getLocalName())) {
-                            list.add(elem);
-                        }
-                    }
-                    return list;
-                });
-        return tags;
     }
 }
