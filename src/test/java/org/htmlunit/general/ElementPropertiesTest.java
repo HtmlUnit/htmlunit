@@ -8690,4 +8690,18 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void cssStyleRule() throws Exception {
         testString("", "document.styleSheets[4].cssRules[0]");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.geo.Geolocation}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "clearWatch(),getCurrentPosition(),watchPosition()",
+            EDGE = "clearWatch(),getCurrentPosition(),watchPosition()",
+            FF = "clearWatch(),getCurrentPosition(),watchPosition()",
+            FF_ESR = "clearWatch(),getCurrentPosition(),watchPosition()")
+    public void geolocation() throws Exception {
+        testString("", " navigator.geolocation");
+    }
 }

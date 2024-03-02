@@ -19,7 +19,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 
 /**
- * A JavaScript object for {@code PositionError}.
+ * A JavaScript object for GeolocationPositionError.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

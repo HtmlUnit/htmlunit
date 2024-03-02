@@ -2680,6 +2680,39 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.geo.GeolocationCoordinates}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function GeolocationCoordinates() { [native code] }")
+    public void geolocationCoordinates() throws Exception {
+        test("GeolocationCoordinates");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.geo.GeolocationPosition}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function GeolocationPosition() { [native code] }")
+    public void geolocationPosition() throws Exception {
+        test("GeolocationPosition");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.geo.GeolocationPositionError}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function GeolocationPositionError() { [native code] }")
+    public void geolocationPositionError() throws Exception {
+        test("GeolocationPositionError");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
