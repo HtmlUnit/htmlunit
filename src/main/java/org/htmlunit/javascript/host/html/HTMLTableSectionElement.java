@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.html.HtmlTableBody;
 import org.htmlunit.html.HtmlTableFooter;
 import org.htmlunit.html.HtmlTableHeader;
@@ -119,25 +117,5 @@ public class HTMLTableSectionElement extends RowContainer {
     @JsxSetter
     public void setChOff(final String chOff) {
         super.setChOff(chOff);
-    }
-
-    /**
-     * Returns the value of the {@code bgColor} attribute.
-     * @return the value of the {@code bgColor} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
-     */
-    @JsxGetter(IE)
-    public String getBgColor() {
-        return getDomNodeOrDie().getAttribute("bgColor");
-    }
-
-    /**
-     * Sets the value of the {@code bgColor} attribute.
-     * @param bgColor the value of the {@code bgColor} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
-     */
-    @JsxSetter(IE)
-    public void setBgColor(final String bgColor) {
-        setColorAttribute("bgColor", bgColor);
     }
 }

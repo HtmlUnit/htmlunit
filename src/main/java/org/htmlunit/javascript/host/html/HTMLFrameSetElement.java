@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.html.HtmlFrameSet;
@@ -106,24 +105,6 @@ public class HTMLFrameSetElement extends HTMLElement {
     public String getCols() {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         return htmlFrameSet.getColsAttribute();
-    }
-
-    /**
-     * Gets the {@code border} attribute.
-     * @return the {@code border} attribute
-     */
-    @JsxGetter(IE)
-    public String getBorder() {
-        return getDomNodeOrDie().getAttributeDirect("border");
-    }
-
-    /**
-     * Sets the {@code border} attribute.
-     * @param border the {@code border} attribute
-     */
-    @JsxSetter(IE)
-    public void setBorder(final String border) {
-        getDomNodeOrDie().setAttribute("border", border);
     }
 
     /**
@@ -449,23 +430,4 @@ public class HTMLFrameSetElement extends HTMLElement {
     public void setOnbeforeprint(final Object beforeprint) {
         setEventHandler(Event.TYPE_BEFOREPRINT, beforeprint);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(IE)
-    public Function getOnresize() {
-        return super.getOnresize();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter(IE)
-    public void setOnresize(final Object resize) {
-        super.setOnresize(resize);
-    }
-
 }

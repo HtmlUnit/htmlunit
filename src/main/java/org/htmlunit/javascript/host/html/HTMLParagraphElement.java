@@ -14,11 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
-import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.html.HtmlParagraph;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -33,9 +29,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  */
 @JsxClass(domClass = HtmlParagraph.class)
 public class HTMLParagraphElement extends HTMLElement {
-
-    /** Valid values for the {@link #getClear() clear} property. */
-    private static final String[] VALID_CLEAR_VALUES = {"left", "right", "all", "none"};
 
     /**
      * Creates an instance.
@@ -68,30 +61,5 @@ public class HTMLParagraphElement extends HTMLElement {
     @JsxSetter
     public void setAlign(final String align) {
         setAlign(align, false);
-    }
-
-    /**
-     * Returns the value of the {@code clear} property.
-     * @return the value of the {@code clear} property
-     */
-    @JsxGetter(IE)
-    public String getClear() {
-        final String clear = getDomNodeOrDie().getAttributeDirect("clear");
-        if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
-            return "";
-        }
-        return clear;
-    }
-
-    /**
-     * Sets the value of the {@code clear} property.
-     * @param clear the value of the {@code clear} property
-     */
-    @JsxSetter(IE)
-    public void setClear(final String clear) {
-        if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
-            throw JavaScriptEngine.reportRuntimeError("Invalid clear property value: '" + clear + "'.");
-        }
-        getDomNodeOrDie().setAttribute("clear", clear);
     }
 }

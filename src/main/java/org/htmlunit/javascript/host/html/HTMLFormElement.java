@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.Serializable;
 import java.net.MalformedURLException;
@@ -366,31 +365,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
         }
 
         this.getHtmlForm().submit(submittable);
-    }
-
-    /**
-     * Retrieves a form object or an object from an elements collection.
-     * @param index Integer or String that specifies the object or collection to retrieve.
-     *              If this parameter is an integer, it is the zero-based index of the object.
-     *              If this parameter is a string, all objects with matching name or id properties are retrieved,
-     *              and a collection is returned if more than one match is made
-     * @param subIndex Optional. Integer that specifies the zero-based index of the object to retrieve
-     *              when a collection is returned
-     * @return an object or a collection of objects if successful, or null otherwise
-     */
-    @JsxFunction(IE)
-    public Object item(final Object index, final Object subIndex) {
-        if (index instanceof Number) {
-            return getElements().item(index);
-        }
-
-        final String name = JavaScriptEngine.toString(index);
-        final Object response = getWithPreemption(name);
-        if (subIndex instanceof Number && response instanceof HTMLCollection) {
-            return ((HTMLCollection) response).item(subIndex);
-        }
-
-        return response;
     }
 
     /**

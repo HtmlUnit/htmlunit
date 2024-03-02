@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_IFRAME_ALWAYS_EXECUTE_ONLOAD;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.FrameWindow;
@@ -137,24 +136,6 @@ public class HTMLIFrameElement extends HTMLElement {
     public void setOnload(final Object eventHandler) {
         super.setOnload(eventHandler);
         isAttachedToPageDuringOnload_ = getDomNodeOrDie().isAttachedToPage();
-    }
-
-    /**
-     * Gets the {@code border} attribute.
-     * @return the {@code border} attribute
-     */
-    @JsxGetter(IE)
-    public String getBorder() {
-        return getDomNodeOrDie().getAttributeDirect("border");
-    }
-
-    /**
-     * Sets the {@code border} attribute.
-     * @param border the {@code border} attribute
-     */
-    @JsxSetter(IE)
-    public void setBorder(final String border) {
-        getDomNodeOrDie().setAttribute("border", border);
     }
 
     /**

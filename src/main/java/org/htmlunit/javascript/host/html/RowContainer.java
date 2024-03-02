@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.io.Serializable;
 import java.util.function.Predicate;
 
@@ -150,28 +148,6 @@ public class RowContainer extends HTMLElement {
             }
         }
         return getScriptableFor(newRow);
-    }
-
-    /**
-     * Moves the row at the specified source index to the specified target index, returning
-     * the row that was moved.
-     * @param sourceIndex the index of the row to move
-     * @param targetIndex the index to move the row to
-     * @return the row that was moved
-     */
-    @JsxFunction(IE)
-    public Object moveRow(final int sourceIndex, final int targetIndex) {
-        final HTMLCollection rows = (HTMLCollection) getRows();
-        final int rowCount = rows.getLength();
-        final boolean sourceIndexValid = sourceIndex >= 0 && sourceIndex < rowCount;
-        final boolean targetIndexValid = targetIndex >= 0 && targetIndex < rowCount;
-        if (sourceIndexValid && targetIndexValid) {
-            final HtmlUnitScriptable sourceRow = (HtmlUnitScriptable) rows.item(Integer.valueOf(sourceIndex));
-            final HtmlUnitScriptable targetRow = (HtmlUnitScriptable) rows.item(Integer.valueOf(targetIndex));
-            targetRow.getDomNodeOrDie().insertBefore(sourceRow.getDomNodeOrDie());
-            return sourceRow;
-        }
-        return null;
     }
 
     /**

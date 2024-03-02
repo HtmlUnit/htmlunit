@@ -14,13 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
-
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.corejs.javascript.Context;
@@ -30,7 +23,6 @@ import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
-import org.htmlunit.html.DomNode;
 import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
@@ -41,7 +33,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
-import org.htmlunit.javascript.host.dom.NodeList;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -55,7 +46,6 @@ import org.htmlunit.javascript.host.dom.NodeList;
  * @author Ronald Brill
  */
 @JsxClass
-@JsxClass(isJSObject = false, value = IE)
 public class HTMLOptionsCollection extends HtmlUnitScriptable {
 
     private HtmlSelect htmlSelect_;
@@ -315,26 +305,6 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     @JsxSetter
     public void setSelectedIndex(final int index) {
         htmlSelect_.setSelectedIndex(index);
-    }
-
-    /**
-     * Returns the child nodes of the current element.
-     * @return the child nodes of the current element
-     */
-    @JsxGetter(IE)
-    public NodeList getChildNodes() {
-        final NodeList childNodes = new NodeList(htmlSelect_, false);
-        childNodes.setElementsSupplier(
-                (Supplier<List<DomNode>> & Serializable)
-                () -> {
-                    final List<DomNode> response = new ArrayList<>();
-                    for (final DomNode child : htmlSelect_.getChildren()) {
-                        response.add(child);
-                    }
-
-                    return response;
-                });
-        return childNodes;
     }
 
     @JsxSymbol

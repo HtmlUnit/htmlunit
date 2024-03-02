@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlFieldSet;
 import org.htmlunit.html.HtmlForm;
@@ -47,24 +45,6 @@ public class HTMLFieldSetElement extends HTMLElement {
     @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
-    }
-
-    /**
-     * Returns the value of the {@code align} property.
-     * @return the value of the {@code align} property
-     */
-    @JsxGetter(IE)
-    public String getAlign() {
-        return getAlign(false);
-    }
-
-    /**
-     * Sets the value of the {@code align} property.
-     * @param align the value of the {@code align} property
-     */
-    @JsxSetter(IE)
-    public void setAlign(final String align) {
-        setAlign(align, false);
     }
 
     /**

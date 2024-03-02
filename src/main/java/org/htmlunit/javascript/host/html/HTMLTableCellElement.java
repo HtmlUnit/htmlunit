@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
@@ -328,60 +327,6 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public void setOuterHTML(final Object value) {
         throw JavaScriptEngine.reportRuntimeError("outerHTML is read-only for tag '"
                         + getDomNodeOrDie().getTagName() + "'");
-    }
-
-    /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
-     */
-    @JsxGetter(IE)
-    public String getBorderColor() {
-        return getDomNodeOrDie().getAttribute("borderColor");
-    }
-
-    /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
-     */
-    @JsxSetter(IE)
-    public void setBorderColor(final String borderColor) {
-        setColorAttribute("borderColor", borderColor);
-    }
-
-    /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
-     */
-    @JsxGetter(IE)
-    public String getBorderColorDark() {
-        return "";
-    }
-
-    /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
-     */
-    @JsxSetter(IE)
-    public void setBorderColorDark(final String borderColor) {
-        // ignore
-    }
-
-    /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
-     */
-    @JsxGetter(IE)
-    public String getBorderColorLight() {
-        return "";
-    }
-
-    /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
-     */
-    @JsxSetter(IE)
-    public void setBorderColorLight(final String borderColor) {
-        // ignore
     }
 
     /**

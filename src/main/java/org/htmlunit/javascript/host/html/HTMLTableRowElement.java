@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -200,59 +198,5 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     @Override
     public void setOuterHTML(final Object value) {
         throw JavaScriptEngine.reportRuntimeError("outerHTML is read-only for tag 'tr'");
-    }
-
-    /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
-     */
-    @JsxGetter(IE)
-    public String getBorderColor() {
-        return getDomNodeOrDie().getAttribute("borderColor");
-    }
-
-    /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
-     */
-    @JsxSetter(IE)
-    public void setBorderColor(final String borderColor) {
-        setColorAttribute("borderColor", borderColor);
-    }
-
-    /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
-     */
-    @JsxGetter(IE)
-    public String getBorderColorDark() {
-        return getDomNodeOrDie().getAttribute("borderColorDark");
-    }
-
-    /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
-     */
-    @JsxSetter(IE)
-    public void setBorderColorDark(final String borderColor) {
-        setColorAttribute("borderColorDark", borderColor);
-    }
-
-    /**
-     * Gets the {@code borderColor} attribute.
-     * @return the attribute
-     */
-    @JsxGetter(IE)
-    public String getBorderColorLight() {
-        return getDomNodeOrDie().getAttribute("borderColorLight");
-    }
-
-    /**
-     * Sets the {@code borderColor} attribute.
-     * @param borderColor the new attribute
-     */
-    @JsxSetter(IE)
-    public void setBorderColorLight(final String borderColor) {
-        setColorAttribute("borderColorLight", borderColor);
     }
 }
