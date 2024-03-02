@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
-import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
@@ -153,7 +152,7 @@ public class HtmlPage4Test extends WebServerTestCase {
             final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
             client.setAlertHandler(alertHandler);
             final HtmlPage page = client.getPage(URL_FIRST + "one.html");
-            ((HTMLBodyElement) page.getBody().getScriptableObject()).getCurrentStyle();
+            page.getEnclosingWindow().getComputedStyle(page.getBody(), null);
 
             assertEquals(getExpectedAlerts(), alertHandler.getCollectedAlerts());
             assertEquals(initialTempFiles + 1, getTempFiles());

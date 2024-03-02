@@ -24,24 +24,19 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomElement;
@@ -84,7 +79,6 @@ import org.htmlunit.html.HtmlNoEmbed;
 import org.htmlunit.html.HtmlNoFrames;
 import org.htmlunit.html.HtmlNoLayer;
 import org.htmlunit.html.HtmlNoScript;
-import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPlainText;
 import org.htmlunit.html.HtmlRb;
 import org.htmlunit.html.HtmlRp;
@@ -116,13 +110,9 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.ClientRect;
 import org.htmlunit.javascript.host.Element;
-import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.css.CSSStyleDeclaration;
-import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.DOMStringMap;
-import org.htmlunit.javascript.host.dom.DOMTokenList;
 import org.htmlunit.javascript.host.dom.Node;
-import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventHandler;
 import org.htmlunit.javascript.host.event.MouseEvent;
@@ -162,7 +152,7 @@ import org.htmlunit.javascript.host.event.MouseEvent;
 @JsxClass(domClass = HtmlDefinition.class, value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(domClass = HtmlDefinitionDescription.class, value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(domClass = HtmlDefinitionTerm.class, value = {CHROME, EDGE, FF, FF_ESR})
-@JsxClass(domClass = HtmlElement.class, value = {FF, FF_ESR, IE})
+@JsxClass(domClass = HtmlElement.class, value = {FF, FF_ESR})
 @JsxClass(domClass = HtmlEmphasis.class, value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(domClass = HtmlFigure.class)
 @JsxClass(domClass = HtmlFigureCaption.class)
@@ -204,13 +194,6 @@ public class HTMLElement extends Element {
     private static final Set<String> ENTER_KEY_HINT_VALUES = new HashSet<>();
 
     // private static final Log LOG = LogFactory.getLog(HTMLElement.class);
-
-    /**
-     * Static counter for {@link #uniqueID_}.
-     */
-    private static final AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
-
-    private String uniqueID_;
 
     static {
         ENTER_KEY_HINT_VALUES.add("enter");
@@ -324,7 +307,6 @@ public class HTMLElement extends Element {
      * Returns true if this element is disabled.
      * @return true if this element is disabled
      */
-    @JsxGetter(IE)
     public boolean isDisabled() {
         return getDomNodeOrDie().hasAttribute(ATTRIBUTE_DISABLED);
     }
@@ -333,7 +315,6 @@ public class HTMLElement extends Element {
      * Sets whether or not to disable this element.
      * @param disabled True if this is to be disabled
      */
-    @JsxSetter(IE)
     public void setDisabled(final boolean disabled) {
         final HtmlElement element = getDomNodeOrDie();
         if (disabled) {
@@ -364,56 +345,6 @@ public class HTMLElement extends Element {
             return org.htmlunit.util.StringUtils.toRootLowerCase(domNode.getLocalName());
         }
         return domNode.getLocalName();
-    }
-
-    /**
-     * An IE-only method which clears all custom attributes.
-     */
-    @JsxFunction(IE)
-    public void clearAttributes() {
-        final HtmlElement node = getDomNodeOrDie();
-
-        // Remove custom attributes defined directly in HTML.
-        final List<String> removals = new ArrayList<>();
-        for (final String attributeName : node.getAttributesMap().keySet()) {
-            // Quick hack to figure out what's a "custom" attribute, and what isn't.
-            // May not be 100% correct.
-            if (!ScriptableObject.hasProperty(getPrototype(), attributeName)) {
-                removals.add(attributeName);
-            }
-        }
-        for (final String attributeName : removals) {
-            node.removeAttribute(attributeName);
-        }
-
-        // Remove custom attributes defined at runtime via JavaScript.
-        for (final Object id : getAllIds()) {
-            if (id instanceof Integer) {
-                final int i = ((Integer) id).intValue();
-                delete(i);
-            }
-            else if (id instanceof String) {
-                delete((String) id);
-            }
-        }
-    }
-
-    /**
-     * An IE-only method which copies all custom attributes from the specified source element
-     * to this element.
-     * @param source the source element from which to copy the custom attributes
-     * @param preserveIdentity if {@code false}, the <code>name</code> and <code>id</code> attributes are not copied
-     */
-    @JsxFunction(IE)
-    public void mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
-        final HtmlElement src = source.getDomNodeOrDie();
-        final HtmlElement target = getDomNodeOrDie();
-
-        // Merge ID and name if we aren't preserving identity.
-        if (preserveIdentity instanceof Boolean && !((Boolean) preserveIdentity).booleanValue()) {
-            target.setId(src.getId());
-            target.setAttribute(DomElement.NAME_ATTRIBUTE, src.getAttributeDirect(DomElement.NAME_ATTRIBUTE));
-        }
     }
 
     /**
@@ -448,28 +379,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Removes this object from the document hierarchy.
-     * @param removeChildren whether to remove children or no
-     * @return a reference to the object that is removed
-     */
-    @JsxFunction(IE)
-    public HTMLElement removeNode(final boolean removeChildren) {
-        final HTMLElement parent = (HTMLElement) getParentElement();
-        if (parent != null) {
-            parent.removeChild(this);
-            if (!removeChildren) {
-                final NodeList collection = getChildNodes();
-                final int length = collection.getLength();
-                for (int i = 0; i < length; i++) {
-                    final Node object = (Node) collection.item(Integer.valueOf(0));
-                    parent.appendChild(object);
-                }
-            }
-        }
-        return this;
-    }
-
-    /**
      * Gets the attribute node for the specified attribute.
      * @param attributeName the name of the attribute to retrieve
      * @return the attribute node for the specified attribute
@@ -477,96 +386,6 @@ public class HTMLElement extends Element {
     @Override
     public HtmlUnitScriptable getAttributeNode(final String attributeName) {
         return getAttributes().getNamedItem(attributeName);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction(IE)
-    public HTMLCollection getElementsByClassName(final String className) {
-        return super.getElementsByClassName(className);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(propertyName = "className", value = IE)
-    public Object getClassName_js() {
-        return super.getClassName_js();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(IE)
-    public String getOuterHTML() {
-        return super.getOuterHTML();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter(IE)
-    public void setOuterHTML(final Object value) {
-        super.setOuterHTML(value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(IE)
-    public String getInnerHTML() {
-        return super.getInnerHTML();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter(IE)
-    public void setInnerHTML(final Object value) {
-        super.setInnerHTML(value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter(propertyName = "className", value = IE)
-    public void setClassName_js(final String className) {
-        super.setClassName_js(className);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction(IE)
-    public void insertAdjacentHTML(final String position, final String text) {
-        super.insertAdjacentHTML(position, text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction(IE)
-    public void insertAdjacentText(final String where, final String text) {
-        super.insertAdjacentText(where, text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction(IE)
-    public Object insertAdjacentElement(final String where, final Object insertedElement) {
-        return super.insertAdjacentElement(where, insertedElement);
     }
 
     /**
@@ -775,22 +594,8 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(IE)
     public void scrollIntoView() {
         /* do nothing at the moment */
-    }
-
-    /**
-     * Retrieves an auto-generated, unique identifier for the object.
-     * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
-     * @return an auto-generated, unique identifier for the object
-     */
-    @JsxGetter(IE)
-    public String getUniqueID() {
-        if (uniqueID_ == null) {
-            uniqueID_ = "ms__id" + HTMLElement.UniqueID_Counter_.incrementAndGet();
-        }
-        return uniqueID_;
     }
 
     /**
@@ -823,19 +628,6 @@ public class HTMLElement extends Element {
     @JsxFunction
     public void focus() {
         getDomNodeOrDie().focus();
-    }
-
-    /**
-     * Sets the object as active without setting focus to the object.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536738.aspx">MSDN documentation</a>
-     */
-    @JsxFunction(IE)
-    public void setActive() {
-        final Window window = getWindow();
-        if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
-            final HtmlElement element = getDomNodeOrDie();
-            ((HtmlPage) element.getPage()).setFocusedElement(element);
-        }
     }
 
     /**
@@ -903,24 +695,6 @@ public class HTMLElement extends Element {
     @JsxSetter
     public void setLang(final String lang) {
         getDomNodeOrDie().setAttribute("lang", lang);
-    }
-
-    /**
-     * Returns the {@code language} property.
-     * @return the {@code language} property
-     */
-    @JsxGetter(IE)
-    public String getLanguage() {
-        return getDomNodeOrDie().getAttributeDirect("language");
-    }
-
-    /**
-     * Sets the {@code language} property.
-     * @param language the {@code language} property
-     */
-    @JsxSetter(IE)
-    public void setLanguage(final String language) {
-        getDomNodeOrDie().setAttribute("language", language);
     }
 
     /**
@@ -1361,34 +1135,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Gets the token list of class attribute.
-     * @return the token list of class attribute
-     */
-    @Override
-    @JsxGetter(IE)
-    public DOMTokenList getClassList() {
-        return super.getClassList();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter(IE)
-    public HTMLCollection getChildren() {
-        return super.getChildren();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter(IE)
-    public Element getParentElement() {
-        return super.getParentElement();
-    }
-
-    /**
      * Returns the {@code dataset} attribute.
      * @return the {@code dataset} attribute
      */
@@ -1471,26 +1217,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Mock for the moment.
-     * @param retargetToElement if true, all events are targeted directly to this element;
-     * if false, events can also fire at descendants of this element
-     */
-    @JsxFunction(IE)
-    @Override
-    public void setCapture(final boolean retargetToElement) {
-        super.setCapture(retargetToElement);
-    }
-
-    /**
-     * Mock for the moment.
-     */
-    @JsxFunction(IE)
-    @Override
-    public void releaseCapture() {
-        super.releaseCapture();
-    }
-
-    /**
      * Returns the {@code contentEditable} property.
      * @return the {@code contentEditable} property
      */
@@ -1554,27 +1280,6 @@ public class HTMLElement extends Element {
     @JsxSetter
     public void setStyle(final String style) {
         super.setStyle(style);
-    }
-
-    /**
-     * Returns the runtime style object for this element.
-     * @return the runtime style object for this element
-     */
-    @JsxGetter(IE)
-    public CSSStyleDeclaration getRuntimeStyle() {
-        return super.getStyle();
-    }
-
-    /**
-     * Returns the current (calculated) style object for this element.
-     * @return the current (calculated) style object for this element
-     */
-    @JsxGetter(IE)
-    public ComputedCSSStyleDeclaration getCurrentStyle() {
-        if (!getDomNodeOrDie().isAttachedToPage()) {
-            return null;
-        }
-        return getWindow().getComputedStyle(this, null);
     }
 
     /**
@@ -1647,42 +1352,6 @@ public class HTMLElement extends Element {
     @JsxGetter
     public Object getOnfocus() {
         return getEventHandler(Event.TYPE_FOCUS);
-    }
-
-    /**
-     * Sets the {@code onfocusin} event handler for this element.
-     * @param handler the {@code onfocusin} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnfocusin(final Object handler) {
-        setEventHandler(Event.TYPE_FOCUS_IN, handler);
-    }
-
-    /**
-     * Returns the {@code onfocusin} event handler for this element.
-     * @return the {@code onfocusin} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Object getOnfocusin() {
-        return getEventHandler(Event.TYPE_FOCUS_IN);
-    }
-
-    /**
-     * Sets the {@code onfocusout} event handler for this element.
-     * @param handler the {@code onfocusout} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnfocusout(final Object handler) {
-        setEventHandler(Event.TYPE_FOCUS_OUT, handler);
-    }
-
-    /**
-     * Returns the {@code onfocusout} event handler for this element.
-     * @return the {@code onfocusout} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Object getOnfocusout() {
-        return getEventHandler(Event.TYPE_FOCUS_OUT);
     }
 
     /**
@@ -1902,15 +1571,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction(IE)
-    public boolean contains(final Object element) {
-        return super.contains(element);
-    }
-
-    /**
      * Returns the {@code hidden} property.
      * @return the {@code hidden} property
      */
@@ -1931,24 +1591,6 @@ public class HTMLElement extends Element {
         else {
             getDomNodeOrDie().removeAttribute("hidden");
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(IE)
-    public String getId() {
-        return super.getId();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter(IE)
-    public void setId(final String newId) {
-        super.setId(newId);
     }
 
     /**
@@ -3004,192 +2646,6 @@ public class HTMLElement extends Element {
     @JsxSetter({FF, FF_ESR})
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
         setEventHandler(Event.TYPE_MOZFULLSCREENERROR, onmozfullscreenerror);
-    }
-
-    /**
-     * Returns the {@code onactivate} event handler for this element.
-     * @return the {@code onactivate} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnactivate() {
-        return getEventHandler(Event.TYPE_ACTIVATE);
-    }
-
-    /**
-     * Sets the {@code onactivate} event handler for this element.
-     * @param onactivate the {@code onactivate} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnactivate(final Object onactivate) {
-        setEventHandler(Event.TYPE_ACTIVATE, onactivate);
-    }
-
-    /**
-     * Returns the {@code onbeforeactivate} event handler for this element.
-     * @return the {@code onbeforeactivate} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnbeforeactivate() {
-        return getEventHandler(Event.TYPE_BEFOREACTIVATE);
-    }
-
-    /**
-     * Sets the {@code onbeforeactivate} event handler for this element.
-     * @param onbeforeactivate the {@code onbeforeactivate} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnbeforeactivate(final Object onbeforeactivate) {
-        setEventHandler(Event.TYPE_BEFOREACTIVATE, onbeforeactivate);
-    }
-
-    /**
-     * Returns the {@code onbeforecopy} event handler for this element.
-     * @return the {@code onbeforecopy} event handler for this element
-     */
-    @Override
-    @JsxGetter(IE)
-    public Function getOnbeforecopy() {
-        return getEventHandler(Event.TYPE_BEFORECOPY);
-    }
-
-    /**
-     * Sets the {@code onbeforecopy} event handler for this element.
-     * @param onbeforecopy the {@code onbeforecopy} event handler for this element
-     */
-    @Override
-    @JsxSetter(IE)
-    public void setOnbeforecopy(final Object onbeforecopy) {
-        setEventHandler(Event.TYPE_BEFORECOPY, onbeforecopy);
-    }
-
-    /**
-     * Returns the {@code onbeforecut} event handler for this element.
-     * @return the {@code onbeforecut} event handler for this element
-     */
-    @Override
-    @JsxGetter(IE)
-    public Function getOnbeforecut() {
-        return getEventHandler(Event.TYPE_BEFORECUT);
-    }
-
-    /**
-     * Sets the {@code onbeforecut} event handler for this element.
-     * @param onbeforecut the {@code onbeforecut} event handler for this element
-     */
-    @Override
-    @JsxSetter(IE)
-    public void setOnbeforecut(final Object onbeforecut) {
-        setEventHandler(Event.TYPE_BEFORECUT, onbeforecut);
-    }
-
-    /**
-     * Returns the {@code onbeforedeactivate} event handler for this element.
-     * @return the {@code onbeforedeactivate} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnbeforedeactivate() {
-        return getEventHandler(Event.TYPE_BEFOREDEACTIVATE);
-    }
-
-    /**
-     * Sets the {@code onbeforedeactivate} event handler for this element.
-     * @param onbeforedeactivate the {@code onbeforedeactivate} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnbeforedeactivate(final Object onbeforedeactivate) {
-        setEventHandler(Event.TYPE_BEFOREDEACTIVATE, onbeforedeactivate);
-    }
-
-    /**
-     * Returns the {@code onbeforepaste} event handler for this element.
-     * @return the {@code onbeforepaste} event handler for this element
-     */
-    @Override
-    @JsxGetter(IE)
-    public Function getOnbeforepaste() {
-        return getEventHandler(Event.TYPE_BEFOREPASTE);
-    }
-
-    /**
-     * Sets the {@code onbeforepaste} event handler for this element.
-     * @param onbeforepaste the {@code onbeforepaste} event handler for this element
-     */
-    @Override
-    @JsxSetter(IE)
-    public void setOnbeforepaste(final Object onbeforepaste) {
-        setEventHandler(Event.TYPE_BEFOREPASTE, onbeforepaste);
-    }
-
-    /**
-     * Returns the {@code ondeactivate} event handler for this element.
-     * @return the {@code ondeactivate} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOndeactivate() {
-        return getEventHandler(Event.TYPE_DEACTIVATE);
-    }
-
-    /**
-     * Sets the {@code ondeactivate} event handler for this element.
-     * @param ondeactivate the {@code ondeactivate} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOndeactivate(final Object ondeactivate) {
-        setEventHandler(Event.TYPE_DEACTIVATE, ondeactivate);
-    }
-
-    /**
-     * Returns the {@code onhelp} event handler for this element.
-     * @return the {@code onhelp} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnhelp() {
-        return getEventHandler(Event.TYPE_HELP);
-    }
-
-    /**
-     * Sets the {@code onhelp} event handler for this element.
-     * @param onhelp the {@code onhelp} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnhelp(final Object onhelp) {
-        setEventHandler(Event.TYPE_HELP, onhelp);
-    }
-
-    /**
-     * Returns the {@code onmscontentzoom} event handler for this element.
-     * @return the {@code onmscontentzoom} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmscontentzoom() {
-        return getEventHandler(Event.TYPE_MSCONTENTZOOM);
-    }
-
-    /**
-     * Sets the {@code onmscontentzoom} event handler for this element.
-     * @param onmscontentzoom the {@code onmscontentzoom} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmscontentzoom(final Object onmscontentzoom) {
-        setEventHandler(Event.TYPE_MSCONTENTZOOM, onmscontentzoom);
-    }
-
-    /**
-     * Returns the {@code onmsmanipulationstatechanged} event handler for this element.
-     * @return the {@code onmsmanipulationstatechanged} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Function getOnmsmanipulationstatechanged() {
-        return getEventHandler(Event.TYPE_MSMANIPULATIONSTATECHANGED);
-    }
-
-    /**
-     * Sets the {@code onmsmanipulationstatechanged} event handler for this element.
-     * @param onmsmanipulationstatechanged the {@code onmsmanipulationstatechanged} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnmsmanipulationstatechanged(final Object onmsmanipulationstatechanged) {
-        setEventHandler(Event.TYPE_MSMANIPULATIONSTATECHANGED, onmsmanipulationstatechanged);
     }
 
     /**

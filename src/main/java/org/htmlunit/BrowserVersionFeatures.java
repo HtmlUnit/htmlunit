@@ -397,11 +397,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_OUTER_HTML_THROWS_FOR_DETACHED,
 
-    /** Indicates that HTMLPhraseElements returning 'HTMLElement'
-     * as class name. */
-    @BrowserFeature({FF, FF_ESR})
-    JS_PHRASE_COMMON_CLASS_NAME,
-
     /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} contains name. */
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
