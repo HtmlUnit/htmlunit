@@ -31,7 +31,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  */
-@JsxClass({CHROME, EDGE, IE})
+@JsxClass({CHROME, EDGE})
 public class TextEvent extends UIEvent {
 
     /** Constant for {@code DOM_INPUT_METHOD_UNKNOWN}. */

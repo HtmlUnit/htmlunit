@@ -138,7 +138,7 @@ public class File extends Blob {
      * Returns the {@code lastModifiedDate} property.
      * @return the {@code lastModifiedDate} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public String getLastModifiedDate() {
         final Date date = new Date(getLastModified());
         final BrowserVersion browser = getBrowserVersion();

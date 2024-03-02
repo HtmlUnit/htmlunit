@@ -876,7 +876,7 @@ public class Document extends Node {
      *
      * @throws IOException if an IO problem occurs
      */
-    @JsxFunction({CHROME, EDGE, IE})
+    @JsxFunction({CHROME, EDGE})
     public void close() throws IOException {
     }
 
@@ -1087,7 +1087,7 @@ public class Document extends Node {
      * Returns the {@code cookie} property.
      * @return the {@code cookie} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public String getCookie() {
         return "";
     }
@@ -1837,7 +1837,7 @@ public class Document extends Node {
      * @param elementName - value of the {@code name} attribute to look for
      * @return all HTML elements that have a {@code name} attribute with the specified value
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR, IE})
+    @JsxFunction
     public NodeList getElementsByName(final String elementName) {
         return null;
     }
@@ -2154,7 +2154,7 @@ public class Document extends Node {
      * Returns the {@code xmlEncoding} property.
      * @return the {@code xmlEncoding} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public String getXmlEncoding() {
         return getPage().getXmlEncoding();
     }
@@ -2163,7 +2163,7 @@ public class Document extends Node {
      * Returns the {@code xmlStandalone} property.
      * @return the {@code xmlStandalone} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public boolean isXmlStandalone() {
         return getPage().getXmlStandalone();
     }
@@ -2172,7 +2172,7 @@ public class Document extends Node {
      * Returns the {@code xmlVersion} property.
      * @return the {@code xmlVersion} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public String getXmlVersion() {
         return getPage().getXmlVersion();
     }
@@ -2757,7 +2757,7 @@ public class Document extends Node {
      * Returns the {@code onmousewheel} event handler for this element.
      * @return the {@code onmousewheel} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnmousewheel() {
         return getEventHandler(Event.TYPE_MOUSEWHEEL);
     }
@@ -2766,7 +2766,7 @@ public class Document extends Node {
      * Sets the {@code onmousewheel} event handler for this element.
      * @param onmousewheel the {@code onmousewheel} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnmousewheel(final Object onmousewheel) {
         setEventHandler(Event.TYPE_MOUSEWHEEL, onmousewheel);
     }
@@ -2847,7 +2847,7 @@ public class Document extends Node {
      * Returns the {@code onpointercancel} event handler for this element.
      * @return the {@code onpointercancel} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointercancel() {
         return getEventHandler(Event.TYPE_POINTERCANCEL);
     }
@@ -2856,7 +2856,7 @@ public class Document extends Node {
      * Sets the {@code onpointercancel} event handler for this element.
      * @param onpointercancel the {@code onpointercancel} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointercancel(final Object onpointercancel) {
         setEventHandler(Event.TYPE_POINTERCANCEL, onpointercancel);
     }
@@ -2865,7 +2865,7 @@ public class Document extends Node {
      * Returns the {@code onpointerdown} event handler for this element.
      * @return the {@code onpointerdown} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerdown() {
         return getEventHandler(Event.TYPE_POINTERDOWN);
     }
@@ -2874,7 +2874,7 @@ public class Document extends Node {
      * Sets the {@code onpointerdown} event handler for this element.
      * @param onpointerdown the {@code onpointerdown} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerdown(final Object onpointerdown) {
         setEventHandler(Event.TYPE_POINTERDOWN, onpointerdown);
     }
@@ -2883,7 +2883,7 @@ public class Document extends Node {
      * Returns the {@code onpointerenter} event handler for this element.
      * @return the {@code onpointerenter} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerenter() {
         return getEventHandler(Event.TYPE_POINTERENTER);
     }
@@ -2892,7 +2892,7 @@ public class Document extends Node {
      * Sets the {@code onpointerenter} event handler for this element.
      * @param onpointerenter the {@code onpointerenter} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerenter(final Object onpointerenter) {
         setEventHandler(Event.TYPE_POINTERENTER, onpointerenter);
     }
@@ -2901,7 +2901,7 @@ public class Document extends Node {
      * Returns the {@code onpointerleave} event handler for this element.
      * @return the {@code onpointerleave} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerleave() {
         return getEventHandler(Event.TYPE_POINTERLEAVE);
     }
@@ -2910,7 +2910,7 @@ public class Document extends Node {
      * Sets the {@code onpointerleave} event handler for this element.
      * @param onpointerleave the {@code onpointerleave} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerleave(final Object onpointerleave) {
         setEventHandler(Event.TYPE_POINTERLEAVE, onpointerleave);
     }
@@ -2955,7 +2955,7 @@ public class Document extends Node {
      * Returns the {@code onpointermove} event handler for this element.
      * @return the {@code onpointermove} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointermove() {
         return getEventHandler(Event.TYPE_POINTERMOVE);
     }
@@ -2964,7 +2964,7 @@ public class Document extends Node {
      * Sets the {@code onpointermove} event handler for this element.
      * @param onpointermove the {@code onpointermove} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointermove(final Object onpointermove) {
         setEventHandler(Event.TYPE_POINTERMOVE, onpointermove);
     }
@@ -2973,7 +2973,7 @@ public class Document extends Node {
      * Returns the {@code onpointerout} event handler for this element.
      * @return the {@code onpointerout} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerout() {
         return getEventHandler(Event.TYPE_POINTEROUT);
     }
@@ -2982,7 +2982,7 @@ public class Document extends Node {
      * Sets the {@code onpointerout} event handler for this element.
      * @param onpointerout the {@code onpointerout} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerout(final Object onpointerout) {
         setEventHandler(Event.TYPE_POINTEROUT, onpointerout);
     }
@@ -2991,7 +2991,7 @@ public class Document extends Node {
      * Returns the {@code onpointerover} event handler for this element.
      * @return the {@code onpointerover} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerover() {
         return getEventHandler(Event.TYPE_POINTEROVER);
     }
@@ -3000,7 +3000,7 @@ public class Document extends Node {
      * Sets the {@code onpointerover} event handler for this element.
      * @param onpointerover the {@code onpointerover} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerover(final Object onpointerover) {
         setEventHandler(Event.TYPE_POINTEROVER, onpointerover);
     }
@@ -3009,7 +3009,7 @@ public class Document extends Node {
      * Returns the {@code onpointerup} event handler for this element.
      * @return the {@code onpointerup} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerup() {
         return getEventHandler(Event.TYPE_POINTERUP);
     }
@@ -3018,7 +3018,7 @@ public class Document extends Node {
      * Sets the {@code onpointerup} event handler for this element.
      * @param onpointerup the {@code onpointerup} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerup(final Object onpointerup) {
         setEventHandler(Event.TYPE_POINTERUP, onpointerup);
     }
@@ -3189,7 +3189,7 @@ public class Document extends Node {
      * Returns the {@code onselectionchange} event handler for this element.
      * @return the {@code onselectionchange} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnselectionchange() {
         return getEventHandler(Event.TYPE_SELECTIONCHANGE);
     }
@@ -3198,7 +3198,7 @@ public class Document extends Node {
      * Sets the {@code onselectionchange} event handler for this element.
      * @param onselectionchange the {@code onselectionchange} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnselectionchange(final Object onselectionchange) {
         setEventHandler(Event.TYPE_SELECTIONCHANGE, onselectionchange);
     }

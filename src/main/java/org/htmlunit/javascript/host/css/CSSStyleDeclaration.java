@@ -1966,7 +1966,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Gets the {@code widows} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public String getWidows() {
         if (styleDeclaration_ == null) {
             return null; // prototype
@@ -1978,7 +1978,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Sets the {@code widows} style attribute.
      * @param widows the new attribute
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setWidows(final String widows) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {
@@ -1997,7 +1997,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Gets the {@code orphans} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public String getOrphans() {
         if (styleDeclaration_ == null) {
             return null; // prototype
@@ -2009,7 +2009,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Sets the {@code orphans} style attribute.
      * @param orphans the new attribute
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOrphans(final String orphans) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {

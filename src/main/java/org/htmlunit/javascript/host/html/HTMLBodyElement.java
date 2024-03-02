@@ -18,7 +18,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.html.HtmlBody;
@@ -615,7 +614,7 @@ public class HTMLBodyElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnresize() {
         return super.getOnresize();
     }
@@ -624,7 +623,7 @@ public class HTMLBodyElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnresize(final Object onresize) {
         super.setOnresize(onresize);
     }

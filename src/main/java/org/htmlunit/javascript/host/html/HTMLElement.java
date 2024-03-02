@@ -1544,7 +1544,7 @@ public class HTMLElement extends Element {
      * Returns the {@code dataset} attribute.
      * @return the {@code dataset} attribute
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR, IE})
+    @JsxGetter
     public DOMStringMap getDataset() {
         return new DOMStringMap(this);
     }
@@ -2588,7 +2588,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onmousewheel} event handler for this element.
      * @return the {@code onmousewheel} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE})
     public Function getOnmousewheel() {
         return getEventHandler(Event.TYPE_MOUSEWHEEL);
     }
@@ -2597,7 +2597,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onmousewheel} event handler for this element.
      * @param onmousewheel the {@code onmousewheel} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter({CHROME, EDGE})
     public void setOnmousewheel(final Object onmousewheel) {
         setEventHandler(Event.TYPE_MOUSEWHEEL, onmousewheel);
     }

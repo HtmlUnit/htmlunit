@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.dom;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -28,7 +27,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, IE})
+@JsxClass({CHROME, EDGE})
 public class DOMError extends HtmlUnitScriptable {
 
     /**

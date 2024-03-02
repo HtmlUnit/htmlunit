@@ -14,11 +14,8 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -152,7 +149,7 @@ public class UIEvent extends Event {
      * @param view the view to use for this event
      * @param detail the detail to set for the event
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR, IE})
+    @JsxFunction
     public void initUIEvent(
             final String type,
             final boolean bubbles,
