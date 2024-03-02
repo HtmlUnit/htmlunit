@@ -236,10 +236,10 @@ import org.htmlunit.javascript.host.file.FileSystemDirectoryEntry;
 import org.htmlunit.javascript.host.file.FileSystemDirectoryReader;
 import org.htmlunit.javascript.host.file.FileSystemEntry;
 import org.htmlunit.javascript.host.file.FileSystemFileEntry;
-import org.htmlunit.javascript.host.geo.Coordinates;
+import org.htmlunit.javascript.host.geo.GeolocationCoordinates;
 import org.htmlunit.javascript.host.geo.Geolocation;
-import org.htmlunit.javascript.host.geo.Position;
-import org.htmlunit.javascript.host.geo.PositionError;
+import org.htmlunit.javascript.host.geo.GeolocationPosition;
+import org.htmlunit.javascript.host.geo.GeolocationPositionError;
 import org.htmlunit.javascript.host.html.Audio;
 import org.htmlunit.javascript.host.html.DataTransfer;
 import org.htmlunit.javascript.host.html.HTMLAllCollection;
@@ -563,7 +563,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CDATASection.class, ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class,
         ClientRectList.class, ClipboardEvent.class,
         CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class,
-        ConstantSourceNode.class, ConvolverNode.class, Coordinates.class,
+        ConstantSourceNode.class, ConvolverNode.class,
         Credential.class, CredentialsContainer.class, Crypto.class,
         CryptoKey.class, CSS.class, CSSConditionRule.class,
         CSSCounterStyleRule.class, CSSFontFaceRule.class, CSSGroupingRule.class, CSSImportRule.class,
@@ -586,7 +586,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         FileSystemEntry.class, FileSystemFileEntry.class,
         FocusEvent.class, FontFace.class,
         FontFaceSet.class, FormData.class, GainNode.class, Gamepad.class,
-        GamepadButton.class, GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,
+        GamepadButton.class, GamepadEvent.class,
+        Geolocation.class, GeolocationCoordinates.class, GeolocationPosition.class, GeolocationPositionError.class,
+        HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class, HTMLAnchorElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
         HTMLBaseElement.class, HTMLBGSoundElement.class, HTMLBlockElement.class,
         HTMLBodyElement.class, HTMLBRElement.class, HTMLButtonElement.class,
@@ -646,7 +648,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PerformanceObserver.class, PerformanceObserverEntryList.class,
         PerformanceResourceTiming.class, PerformanceTiming.class, PeriodicSyncManager.class, PeriodicWave.class,
         Permissions.class, PermissionStatus.class, Plugin.class, PluginArray.class,
-        PointerEvent.class, PopStateEvent.class, Position.class, PositionError.class, Presentation.class,
+        PointerEvent.class, PopStateEvent.class, Presentation.class,
         PresentationAvailability.class, PresentationConnection.class, PresentationConnectionAvailableEvent.class,
         PresentationConnectionCloseEvent.class, PresentationRequest.class,
         ProcessingInstruction.class, ProgressEvent.class, PromiseRejectionEvent.class,

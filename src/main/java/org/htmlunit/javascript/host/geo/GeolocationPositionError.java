@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.geo;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
@@ -26,8 +24,8 @@ import org.htmlunit.javascript.configuration.JsxConstant;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(IE)
-public class PositionError extends HtmlUnitScriptable {
+@JsxClass
+public class GeolocationPositionError extends HtmlUnitScriptable {
 
     /** The constant for {@code PERMISSION_DENIED}. */
     @JsxConstant
@@ -42,6 +40,6 @@ public class PositionError extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    public PositionError() {
+    public GeolocationPositionError() {
     }
 }

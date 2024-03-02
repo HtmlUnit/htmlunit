@@ -41,7 +41,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 
 /**
- * A JavaScript object for {@code Geolocation}.
+ * A JavaScript object for Geolocation.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -149,10 +149,10 @@ public class Geolocation extends HtmlUnitScriptable {
                 final double longitude = Double.parseDouble(getJSONValue(content, "lng"));
                 final double accuracy = Double.parseDouble(getJSONValue(content, "accuracy"));
 
-                final Coordinates coordinates = new Coordinates(latitude, longitude, accuracy);
+                final GeolocationCoordinates coordinates = new GeolocationCoordinates(latitude, longitude, accuracy);
                 coordinates.setPrototype(getPrototype(coordinates.getClass()));
 
-                final Position position = new Position(coordinates);
+                final GeolocationPosition position = new GeolocationPosition(coordinates);
                 position.setPrototype(getPrototype(position.getClass()));
 
                 final WebWindow ww = getWindow().getWebWindow();

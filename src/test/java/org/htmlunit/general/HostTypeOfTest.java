@@ -1097,7 +1097,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.geo.Coordinates}.
+     * Test {@link org.htmlunit.javascript.host.geo.GeolocationCoordinates}.
      *
      * @throws Exception if an error occurs
      */
@@ -6144,7 +6144,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.geo.Position}.
+     * Test {@link org.htmlunit.javascript.host.geo.GeolocationPosition}.
      *
      * @throws Exception if an error occurs
      */

@@ -14,29 +14,28 @@
  */
 package org.htmlunit.javascript.host.geo;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code Position}.
+ * A JavaScript object for GeolocationPosition.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(IE)
-public class Position extends HtmlUnitScriptable {
+@JsxClass
+public class GeolocationPosition extends HtmlUnitScriptable {
 
-    private Coordinates coordinates_;
+    private GeolocationCoordinates coordinates_;
 
     /**
      * Creates an instance.
      */
-    public Position() {
+    public GeolocationPosition() {
     }
 
-    Position(final Coordinates coordinates) {
+    GeolocationPosition(final GeolocationCoordinates coordinates) {
         coordinates_ = coordinates;
     }
 
@@ -45,7 +44,7 @@ public class Position extends HtmlUnitScriptable {
      * @return the coordinates
      */
     @JsxGetter
-    public Coordinates getCoords() {
+    public GeolocationCoordinates getCoords() {
         return coordinates_;
     }
 }

@@ -14,19 +14,18 @@
  */
 package org.htmlunit.javascript.host.geo;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code Coordinates}.
+ * A JavaScript object for GeolocationCoordinates.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(IE)
-public class Coordinates extends HtmlUnitScriptable {
+@JsxClass
+public class GeolocationCoordinates extends HtmlUnitScriptable {
 
     private double latitude_;
     private double longitude_;
@@ -35,10 +34,10 @@ public class Coordinates extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    public Coordinates() {
+    public GeolocationCoordinates() {
     }
 
-    Coordinates(final double latitude, final double longitude, final double accuracy) {
+    GeolocationCoordinates(final double latitude, final double longitude, final double accuracy) {
         latitude_ = latitude;
         longitude_ = longitude;
         accuracy_ = accuracy;
