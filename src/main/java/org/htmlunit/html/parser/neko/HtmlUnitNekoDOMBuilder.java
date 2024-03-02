@@ -15,8 +15,6 @@
 package org.htmlunit.html.parser.neko;
 
 import static org.htmlunit.BrowserVersionFeatures.HTML_COMMAND_TAG;
-import static org.htmlunit.BrowserVersionFeatures.HTML_ISINDEX_TAG;
-import static org.htmlunit.BrowserVersionFeatures.HTML_MAIN_TAG;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -27,7 +25,6 @@ import java.util.Deque;
 import java.util.Locale;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.tuple.Triple;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ObjectInstantiationException;
 import org.htmlunit.WebClient;
@@ -37,7 +34,6 @@ import org.htmlunit.cyberneko.HTMLElements;
 import org.htmlunit.cyberneko.HTMLEventInfo;
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancingListener;
-import org.htmlunit.cyberneko.util.FastHashMap;
 import org.htmlunit.cyberneko.xerces.parsers.AbstractSAXParser;
 import org.htmlunit.cyberneko.xerces.xni.Augmentations;
 import org.htmlunit.cyberneko.xerces.xni.QName;
@@ -102,86 +98,32 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         implements ContentHandler, LexicalHandler, HTMLTagBalancingListener, HTMLParserDOMBuilder {
 
     // cache Neko Elements for performance and memory efficiency
-    private static final FastHashMap<Triple<Boolean, Boolean, Boolean>, HTMLElements>
-                HTMLELEMENTS_CACHE = new FastHashMap<>();
+    private static final HTMLElements HTMLELEMENTS;
+    private static final HTMLElements HTMLELEMENTS_WITH_CMD;
 
     static {
         // continue short code enumeration
         final short isIndexShortCode = HTMLElements.UNKNOWN + 1;
-
         final short commandShortCode = isIndexShortCode + 1;
-        final short mainShortCode = commandShortCode + 1;
 
         // isIndex is special - we have to add it here because all browsers moving this to
         // the body (even if it is not supported)
         final HTMLElements.Element isIndex = new HTMLElements.Element(isIndexShortCode, "ISINDEX",
                 HTMLElements.Element.CONTAINER, HTMLElements.BODY, null);
-        final HTMLElements.Element isIndexSupported = new HTMLElements.Element(isIndexShortCode, "ISINDEX",
-                HTMLElements.Element.BLOCK, HTMLElements.BODY, new short[] {isIndexShortCode});
 
         final HTMLElements.Element command = new HTMLElements.Element(commandShortCode, "COMMAND",
                 HTMLElements.Element.EMPTY, new short[] {HTMLElements.BODY, HTMLElements.HEAD}, null);
-        final HTMLElements.Element main = new HTMLElements.Element(mainShortCode, "MAIN",
-                HTMLElements.Element.INLINE, HTMLElements.BODY, null);
 
-        Triple<Boolean, Boolean, Boolean> key;
         HTMLElements value;
 
-        // !COMMAND_TAG !ISINDEX_TAG !MAIN_TAG
-        key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
         value = new HTMLElements();
         value.setElement(isIndex);
-        HTMLELEMENTS_CACHE.put(key, value);
+        HTMLELEMENTS = value;
 
-        // !COMMAND_TAG !ISINDEX_TAG MAIN_TAG
-        key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.TRUE);
-        value = new HTMLElements();
-        value.setElement(main);
-        value.setElement(isIndex);
-        HTMLELEMENTS_CACHE.put(key, value);
-
-        // !COMMAND_TAG ISINDEX_TAG !MAIN_TAG
-        key = Triple.of(Boolean.FALSE, Boolean.TRUE, Boolean.FALSE);
-        value = new HTMLElements();
-        value.setElement(isIndexSupported);
-        HTMLELEMENTS_CACHE.put(key, value);
-
-        // !COMMAND_TAG ISINDEX_TAG MAIN_TAG
-        key = Triple.of(Boolean.FALSE, Boolean.TRUE, Boolean.TRUE);
-        value = new HTMLElements();
-        value.setElement(isIndexSupported);
-        value.setElement(main);
-        HTMLELEMENTS_CACHE.put(key, value);
-
-        // COMMAND_TAG !ISINDEX_TAG !MAIN_TAG
-        key = Triple.of(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE);
         value = new HTMLElements();
         value.setElement(command);
         value.setElement(isIndex);
-        HTMLELEMENTS_CACHE.put(key, value);
-
-        // COMMAND_TAG !ISINDEX_TAG MAIN_TAG
-        key = Triple.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE);
-        value = new HTMLElements();
-        value.setElement(command);
-        value.setElement(isIndex);
-        value.setElement(main);
-        HTMLELEMENTS_CACHE.put(key, value);
-
-        // COMMAND_TAG ISINDEX_TAG !MAIN_TAG
-        key = Triple.of(Boolean.TRUE, Boolean.TRUE, Boolean.FALSE);
-        value = new HTMLElements();
-        value.setElement(command);
-        value.setElement(isIndexSupported);
-        HTMLELEMENTS_CACHE.put(key, value);
-
-        // COMMAND_TAG ISINDEX_TAG MAIN_TAG
-        key = Triple.of(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
-        value = new HTMLElements();
-        value.setElement(command);
-        value.setElement(isIndexSupported);
-        value.setElement(main);
-        HTMLELEMENTS_CACHE.put(key, value);
+        HTMLELEMENTS_WITH_CMD = value;
     }
 
     private enum HeadParsed { YES, SYNTHESIZED, NO }
@@ -276,11 +218,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * @return the configuration
      */
     private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {
-        final HTMLElements elements = HTMLELEMENTS_CACHE.get(
-                Triple.of(browserVersion.hasFeature(HTML_COMMAND_TAG),
-                        browserVersion.hasFeature(HTML_ISINDEX_TAG),
-                        browserVersion.hasFeature(HTML_MAIN_TAG)));
-        return new HTMLConfiguration(elements);
+        if (browserVersion.hasFeature(HTML_COMMAND_TAG)) {
+            return new HTMLConfiguration(HTMLELEMENTS_WITH_CMD);
+        }
+        return new HTMLConfiguration(HTMLELEMENTS);
     }
 
     /**

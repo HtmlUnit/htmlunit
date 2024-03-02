@@ -1951,7 +1951,7 @@ public class Document extends Node {
     /**
      * Mock for the moment.
      */
-    @JsxFunction({FF, FF_ESR, IE})
+    @JsxFunction({FF, FF_ESR})
     public void releaseCapture() {
     }
 

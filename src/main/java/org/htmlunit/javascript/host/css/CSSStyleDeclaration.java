@@ -1749,7 +1749,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Gets the {@code rubyAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({IE, FF, FF_ESR})
+    @JsxGetter({FF, FF_ESR})
     public String getRubyAlign() {
         if (styleDeclaration_ == null) {
             return null; // prototype
@@ -1761,7 +1761,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Sets the {@code rubyAlign} style attribute.
      * @param rubyAlign the new attribute
      */
-    @JsxSetter({IE, FF, FF_ESR})
+    @JsxSetter({FF, FF_ESR})
     public void setRubyAlign(final String rubyAlign) {
         setStyleAttribute(Definition.RUBY_ALIGN.getAttributeName(), rubyAlign);
     }

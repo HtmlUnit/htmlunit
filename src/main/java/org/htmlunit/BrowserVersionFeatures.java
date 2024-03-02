@@ -18,7 +18,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.javascript.configuration.BrowserFeature;
 
@@ -201,14 +200,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTML_COMMAND_TAG,
 
-    /** HTML parser supports the 'isindex' tag. */
-    @BrowserFeature(IE)
-    HTML_ISINDEX_TAG,
-
-    /** HTML parser supports the 'main' tag. */
-    @BrowserFeature(IE)
-    HTML_MAIN_TAG,
-
     /** Additionally support dates in format "d/M/yyyy". */
     @BrowserFeature({FF, FF_ESR})
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1,
@@ -318,10 +309,6 @@ public enum BrowserVersionFeatures {
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,
-
-    /** Support for document.formName('inputName'). */
-    @BrowserFeature(IE)
-    JS_FORM_USABLE_AS_FUNCTION,
 
     /** HTMLObject Validity isValid ignores custom error property. */
     @BrowserFeature({CHROME, EDGE})

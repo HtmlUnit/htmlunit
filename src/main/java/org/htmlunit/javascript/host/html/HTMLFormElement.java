@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
-import static org.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
 
 import java.io.Serializable;
 import java.net.MalformedURLException;
@@ -30,7 +29,6 @@ import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.FormFieldWithNameHistory;
@@ -543,19 +541,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTION)) {
-            throw JavaScriptEngine.reportRuntimeError("Not a function.");
-        }
-        if (args.length > 0) {
-            final Object arg = args[0];
-            if (arg instanceof String) {
-                return ScriptableObject.getProperty(this, (String) arg);
-            }
-            else if (arg instanceof Number) {
-                return ScriptableObject.getProperty(this, ((Number) arg).intValue());
-            }
-        }
-        return Undefined.instance;
+        throw JavaScriptEngine.reportRuntimeError("Not a function.");
     }
 
     /**
@@ -563,10 +549,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTION)) {
-            throw JavaScriptEngine.reportRuntimeError("Not a function.");
-        }
-        return null;
+        throw JavaScriptEngine.reportRuntimeError("Not a function.");
     }
 
     @Override

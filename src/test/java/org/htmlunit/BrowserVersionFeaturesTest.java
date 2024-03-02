@@ -105,9 +105,6 @@ public class BrowserVersionFeaturesTest  {
     }
 
     private static SupportedBrowser expectedBrowserName(final BrowserVersion browser) {
-        if (browser == BrowserVersion.CHROME) {
-            return SupportedBrowser.CHROME;
-        }
         if (browser == BrowserVersion.EDGE) {
             return SupportedBrowser.EDGE;
         }
@@ -118,7 +115,7 @@ public class BrowserVersionFeaturesTest  {
             return SupportedBrowser.FF_ESR;
         }
 
-        return SupportedBrowser.IE;
+        return SupportedBrowser.CHROME;
     }
 
     /**
