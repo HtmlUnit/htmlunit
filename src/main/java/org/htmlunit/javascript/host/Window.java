@@ -19,7 +19,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,7 +39,6 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.AlertHandler;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ConfirmHandler;
-import org.htmlunit.DialogWindow;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.Page;
 import org.htmlunit.PrintHandler;
@@ -106,7 +104,6 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
-import org.htmlunit.javascript.host.html.DataTransfer;
 import org.htmlunit.javascript.host.html.DocumentProxy;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -548,18 +545,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the JavaScript property {@code clipboardData}.
-     * @return the {@link DataTransfer}
-     */
-    @JsxGetter(IE)
-    public DataTransfer getClipboardData() {
-        final DataTransfer dataTransfer = new DataTransfer();
-        dataTransfer.setParentScope(this);
-        dataTransfer.setPrototype(getPrototype(dataTransfer.getClass()));
-        return dataTransfer;
-    }
-
-    /**
      * Returns the window property. This is a synonym for {@code self}.
      * @return the window property (a reference to <code>this</code>)
      */
@@ -992,17 +977,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.moveBy() not implemented");
         }
-    }
-
-    /**
-     * Loads the new HTML document corresponding to the specified URL.
-     * @param url the location of the new HTML document to load
-     * @throws IOException if loading the specified location fails
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536638%28VS.85%29.aspx">MSDN Documentation</a>
-     */
-    @JsxFunction(IE)
-    public void navigate(final String url) throws IOException {
-        getLocation().assign(url);
     }
 
     /**
@@ -1589,14 +1563,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * An undocumented IE function.
-     */
-    @JsxFunction(value = IE, functionName = "CollectGarbage")
-    public void collectGarbage() {
-        // Empty.
-    }
-
-    /**
      * Returns computed style of the element. Computed style represents the final computed values
      * of all CSS properties for the element. This method's return value is of the same type as
      * that of <code>element.style</code>, but the value returned by this method is read-only.
@@ -1646,56 +1612,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             selection_.setPrototype(getPrototype(selection_.getClass()));
         }
         return selection_;
-    }
-
-    /**
-     * Creates a modal dialog box that displays the specified HTML document.
-     * @param url the URL of the document to load and display
-     * @param arguments object to be made available via <code>window.dialogArguments</code> in the dialog window
-     * @param features string that specifies the window ornaments for the dialog window
-     * @return the value of the {@code returnValue} property as set by the modal dialog's window
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
-     * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
-     */
-    @JsxFunction(IE)
-    public Object showModalDialog(final String url, final Object arguments, final String features) {
-        final WebWindow webWindow = getWebWindow();
-        final WebClient client = webWindow.getWebClient();
-        try {
-            final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
-            final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            // TODO: Theoretically, we shouldn't return until the dialog window has been close()'ed...
-            // But we have to return so that the window can be close()'ed...
-            // Maybe we can use Rhino's continuation support to save state and restart when
-            // the dialog window is close()'ed? Would only work in interpreted mode, though.
-            final ScriptableObject jsDialog = dialog.getScriptableObject();
-            return jsDialog.get("returnValue", jsDialog);
-        }
-        catch (final IOException e) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-        }
-    }
-
-    /**
-     * Creates a modeless dialog box that displays the specified HTML document.
-     * @param url the URL of the document to load and display
-     * @param arguments object to be made available via <code>window.dialogArguments</code> in the dialog window
-     * @param features string that specifies the window ornaments for the dialog window
-     * @return a reference to the new window object created for the modeless dialog
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>
-     */
-    @JsxFunction(IE)
-    public Object showModelessDialog(final String url, final Object arguments, final String features) {
-        final WebWindow webWindow = getWebWindow();
-        final WebClient client = webWindow.getWebClient();
-        try {
-            final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
-            final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            return dialog.getScriptableObject();
-        }
-        catch (final IOException e) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-        }
     }
 
     /**
@@ -1759,46 +1675,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                         || object instanceof HtmlSelect
                         || object instanceof HtmlTextArea);
         }
-    }
-
-    /**
-     * Gets the name of the scripting engine.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/efy5bay1.aspx">MSDN doc</a>
-     * @return "JScript"
-     */
-    @JsxFunction(value = IE, functionName = "ScriptEngine")
-    public String scriptEngine() {
-        return "JScript";
-    }
-
-    /**
-     * Gets the build version of the scripting engine.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/yftk84kt.aspx">MSDN doc</a>
-     * @return the build version
-     */
-    @JsxFunction(value = IE, functionName = "ScriptEngineBuildVersion")
-    public int scriptEngineBuildVersion() {
-        return 12_345;
-    }
-
-    /**
-     * Gets the major version of the scripting engine.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/x7cbaet3.aspx">MSDN doc</a>
-     * @return the major version
-     */
-    @JsxFunction(value = IE, functionName = "ScriptEngineMajorVersion")
-    public int scriptEngineMajorVersion() {
-        return getBrowserVersion().getBrowserVersionNumeric();
-    }
-
-    /**
-     * Gets the minor version of the scripting engine.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/wzaz8hhz.aspx">MSDN doc</a>
-     * @return the minor version
-     */
-    @JsxFunction(value = IE, functionName = "ScriptEngineMinorVersion")
-    public int scriptEngineMinorVersion() {
-        return 0;
     }
 
     /**
@@ -2138,24 +2014,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onfocusin} event handler.
-     * @return the {@code onfocusin} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnfocusin() {
-        return getEventHandler(Event.TYPE_FOCUS_IN);
-    }
-
-    /**
-     * Sets the {@code onfocusin} event handler.
-     * @param onfocusin the {@code onfocusin} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnfocusin(final Object onfocusin) {
-        setHandlerForJavaScript(Event.TYPE_FOCUS_IN, onfocusin);
-    }
-
-    /**
      * Returns the {@code onfocus} event handler.
      * @return the {@code onfocus} event handler
      */
@@ -2225,24 +2083,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerout(final Object onpointerout) {
         setHandlerForJavaScript(Event.TYPE_POINTEROUT, onpointerout);
-    }
-
-    /**
-     * Returns the {@code onhelp} event handler.
-     * @return the {@code onhelp} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnhelp() {
-        return getEventHandler(Event.TYPE_HELP);
-    }
-
-    /**
-     * Sets the {@code onhelp} event handler.
-     * @param onhelp the {@code onhelp} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnhelp(final Object onhelp) {
-        setHandlerForJavaScript(Event.TYPE_HELP, onhelp);
     }
 
     /**
@@ -2408,24 +2248,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onmspointerleave} event handler.
-     * @return the {@code onmspointerleave} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerleave() {
-        return getEventHandler(Event.TYPE_MSPOINTERLEAVE);
-    }
-
-    /**
-     * Sets the {@code onmspointerleave} event handler.
-     * @param onmspointerleave the {@code onmspointerleave} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerleave(final Object onmspointerleave) {
-        setHandlerForJavaScript(Event.TYPE_MSPOINTERLEAVE, onmspointerleave);
-    }
-
-    /**
      * Returns the {@code onwebkitanimationstart} event handler.
      * @return the {@code onwebkitanimationstart} event handler
      */
@@ -2459,24 +2281,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOnkeyup(final Object onkeyup) {
         setHandlerForJavaScript(Event.TYPE_KEY_UP, onkeyup);
-    }
-
-    /**
-     * Returns the {@code onmsgesturestart} event handler.
-     * @return the {@code onmsgesturestart} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturestart() {
-        return getEventHandler(Event.TYPE_MSGESTURESTART);
-    }
-
-    /**
-     * Sets the {@code onmsgesturestart} event handler.
-     * @param onmsgesturestart the {@code onmsgesturestart} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturestart(final Object onmsgesturestart) {
-        setHandlerForJavaScript(Event.TYPE_MSGESTURESTART, onmsgesturestart);
     }
 
     /**
@@ -2531,24 +2335,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOndrag(final Object ondrag) {
         setHandlerForJavaScript(Event.TYPE_DRAG, ondrag);
-    }
-
-    /**
-     * Returns the {@code onfocusout} event handler.
-     * @return the {@code onfocusout} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnfocusout() {
-        return getEventHandler(Event.TYPE_FOCUS_OUT);
-    }
-
-    /**
-     * Sets the {@code onfocusout} event handler.
-     * @param onfocusout the {@code onfocusout} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnfocusout(final Object onfocusout) {
-        setHandlerForJavaScript(Event.TYPE_FOCUS_OUT, onfocusout);
     }
 
     /**
@@ -2678,42 +2464,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onreadystatechange} event handler.
-     * @return the {@code onreadystatechange} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnreadystatechange() {
-        return getEventHandler(Event.TYPE_READY_STATE_CHANGE);
-    }
-
-    /**
-     * Sets the {@code onreadystatechange} event handler.
-     * @param onreadystatechange the {@code onreadystatechange} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnreadystatechange(final Object onreadystatechange) {
-        setHandlerForJavaScript(Event.TYPE_READY_STATE_CHANGE, onreadystatechange);
-    }
-
-    /**
-     * Returns the {@code onmspointerover} event handler.
-     * @return the {@code onmspointerover} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerover() {
-        return getEventHandler(Event.TYPE_MSPOINTEROVER);
-    }
-
-    /**
-     * Sets the {@code onmspointerover} event handler.
-     * @param onmspointerover the {@code onmspointerover} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerover(final Object onmspointerover) {
-        setHandlerForJavaScript(Event.TYPE_MSPOINTEROVER, onmspointerover);
-    }
-
-    /**
      * Returns the {@code onpointermove} event handler.
      * @return the {@code onpointermove} event handler
      */
@@ -2729,24 +2479,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter({CHROME, EDGE})
     public void setOnpointermove(final Object onpointermove) {
         setHandlerForJavaScript(Event.TYPE_POINTERMOVE, onpointermove);
-    }
-
-    /**
-     * Returns the {@code onmspointermove} event handler.
-     * @return the {@code onmspointermove} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointermove() {
-        return getEventHandler(Event.TYPE_MSPOINTERMOVE);
-    }
-
-    /**
-     * Sets the {@code onmspointermove} event handler.
-     * @param onmspointermove the {@code onmspointermove} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmspointermove(final Object onmspointermove) {
-        setHandlerForJavaScript(Event.TYPE_MSPOINTERMOVE, onmspointermove);
     }
 
     /**
@@ -2861,7 +2593,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the {@code onafterprint} event handler.
      * @return the {@code onafterprint} event handler
      */
-    @JsxGetter({FF, FF_ESR, IE})
+    @JsxGetter({FF, FF_ESR})
     public Function getOnafterprint() {
         return getEventHandler(Event.TYPE_AFTERPRINT);
     }
@@ -2870,7 +2602,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Sets the {@code onafterprint} event handler.
      * @param onafterprint the {@code onafterprint} event handler
      */
-    @JsxSetter({FF, FF_ESR, IE})
+    @JsxSetter({FF, FF_ESR})
     public void setOnafterprint(final Object onafterprint) {
         setHandlerForJavaScript(Event.TYPE_AFTERPRINT, onafterprint);
     }
@@ -2981,24 +2713,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOnpageshow(final Object onpageshow) {
         setHandlerForJavaScript(Event.TYPE_PAGESHOW, onpageshow);
-    }
-
-    /**
-     * Returns the {@code onmspointerenter} event handler.
-     * @return the {@code onmspointerenter} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerenter() {
-        return getEventHandler(Event.TYPE_MSPOINTENTER);
-    }
-
-    /**
-     * Sets the {@code onmspointerenter} event handler.
-     * @param onmspointerenter the {@code onmspointerenter} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerenter(final Object onmspointerenter) {
-        setHandlerForJavaScript(Event.TYPE_MSPOINTENTER, onmspointerenter);
     }
 
     /**
@@ -3272,24 +2986,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onmsgestureend} event handler.
-     * @return the {@code onmsgestureend} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgestureend() {
-        return getEventHandler(Event.TYPE_MSGESTUREEND);
-    }
-
-    /**
-     * Sets the {@code onmsgestureend} event handler.
-     * @param onmsgestureend the {@code onmsgestureend} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmsgestureend(final Object onmsgestureend) {
-        setHandlerForJavaScript(Event.TYPE_MSGESTUREEND, onmsgestureend);
-    }
-
-    /**
      * Returns the {@code onresize} event handler.
      * @return the {@code onresize} event handler
      */
@@ -3398,24 +3094,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onmspointerdown} event handler.
-     * @return the {@code onmspointerdown} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerdown() {
-        return getEventHandler(Event.TYPE_MSPOINTERDOWN);
-    }
-
-    /**
-     * Sets the {@code onmspointerdown} event handler.
-     * @param onmspointerdown the {@code onmspointerdown} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerdown(final Object onmspointerdown) {
-        setHandlerForJavaScript(Event.TYPE_MSPOINTERDOWN, onmspointerdown);
-    }
-
-    /**
      * Returns the {@code onpointerleave} event handler.
      * @return the {@code onpointerleave} event handler
      */
@@ -3437,7 +3115,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the {@code onbeforeprint} event handler.
      * @return the {@code onbeforeprint} event handler
      */
-    @JsxGetter({FF, FF_ESR, IE})
+    @JsxGetter({FF, FF_ESR})
     public Function getOnbeforeprint() {
         return getEventHandler(Event.TYPE_BEFOREPRINT);
     }
@@ -3446,7 +3124,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Sets the {@code onbeforeprint} event handler.
      * @param onbeforeprint the {@code onbeforeprint} event handler
      */
-    @JsxSetter({FF, FF_ESR, IE})
+    @JsxSetter({FF, FF_ESR})
     public void setOnbeforeprint(final Object onbeforeprint) {
         setHandlerForJavaScript(Event.TYPE_BEFOREPRINT, onbeforeprint);
     }
@@ -3485,24 +3163,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOnanimationstart(final Object onanimationstart) {
         setHandlerForJavaScript(Event.TYPE_ANIMATIONSTART, onanimationstart);
-    }
-
-    /**
-     * Returns the {@code onmspointercancel} event handler.
-     * @return the {@code onmspointercancel} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointercancel() {
-        return getEventHandler(Event.TYPE_MSPOINTERCANCEL);
-    }
-
-    /**
-     * Sets the {@code onmspointercancel} event handler.
-     * @param onmspointercancel the {@code onmspointercancel} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmspointercancel(final Object onmspointercancel) {
-        setHandlerForJavaScript(Event.TYPE_MSPOINTERCANCEL, onmspointercancel);
     }
 
     /**
@@ -3560,24 +3220,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onmspointerup} event handler.
-     * @return the {@code onmspointerup} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerup() {
-        return getEventHandler(Event.TYPE_MSPOINTERUP);
-    }
-
-    /**
-     * Sets the {@code onmspointerup} event handler.
-     * @param onmspointerup the {@code onmspointerup} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerup(final Object onmspointerup) {
-        setHandlerForJavaScript(Event.TYPE_MSPOINTERUP, onmspointerup);
-    }
-
-    /**
      * Returns the {@code onabort} event handler.
      * @return the {@code onabort} event handler
      */
@@ -3614,24 +3256,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onmsinertiastart} event handler.
-     * @return the {@code onmsinertiastart} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmsinertiastart() {
-        return getEventHandler(Event.TYPE_MSINERTIASTART);
-    }
-
-    /**
-     * Sets the {@code onmsinertiastart} event handler.
-     * @param onmsinertiastart the {@code onmsinertiastart} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmsinertiastart(final Object onmsinertiastart) {
-        setHandlerForJavaScript(Event.TYPE_MSINERTIASTART, onmsinertiastart);
-    }
-
-    /**
      * Returns the {@code onmouseup} event handler.
      * @return the {@code onmouseup} event handler
      */
@@ -3647,24 +3271,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOnmouseup(final Object onmouseup) {
         setHandlerForJavaScript(MouseEvent.TYPE_MOUSE_UP, onmouseup);
-    }
-
-    /**
-     * Returns the {@code onmsgesturetap} event handler.
-     * @return the {@code onmsgesturetap} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturetap() {
-        return getEventHandler(Event.TYPE_MSGESTURETAP);
-    }
-
-    /**
-     * Sets the {@code onmsgesturetap} event handler.
-     * @param onmsgesturetap the {@code onmsgesturetap} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturetap(final Object onmsgesturetap) {
-        setHandlerForJavaScript(Event.TYPE_MSGESTURETAP, onmsgesturetap);
     }
 
     /**
@@ -3701,24 +3307,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOnonline(final Object ononline) {
         setHandlerForJavaScript(Event.TYPE_ONLINE, ononline);
-    }
-
-    /**
-     * Returns the {@code onmsgesturedoubletap} event handler.
-     * @return the {@code onmsgesturedoubletap} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturedoubletap() {
-        return getEventHandler(Event.TYPE_MSGESTUREDOUBLETAP);
-    }
-
-    /**
-     * Sets the {@code onmsgesturedoubletap} event handler.
-     * @param onmsgesturedoubletap the {@code onmsgesturedoubletap} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturedoubletap(final Object onmsgesturedoubletap) {
-        setHandlerForJavaScript(Event.TYPE_MSGESTUREDOUBLETAP, onmsgesturedoubletap);
     }
 
     /**
@@ -3773,24 +3361,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter({CHROME, EDGE})
     public void setOnwebkittransitionend(final Object onwebkittransitionend) {
         setHandlerForJavaScript(Event.TYPE_WEBKITTRANSITIONEND, onwebkittransitionend);
-    }
-
-    /**
-     * Returns the {@code onmspointerout} event handler.
-     * @return the {@code onmspointerout} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmspointerout() {
-        return getEventHandler(Event.TYPE_MSPOINTEROUT);
-    }
-
-    /**
-     * Sets the {@code onmspointerout} event handler.
-     * @param onmspointerout the {@code onmspointerout} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmspointerout(final Object onmspointerout) {
-        setHandlerForJavaScript(Event.TYPE_MSPOINTEROUT, onmspointerout);
     }
 
     /**
@@ -3974,24 +3544,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onmsgesturehold} event handler.
-     * @return the {@code onmsgesturehold} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturehold() {
-        return getEventHandler(Event.TYPE_MSGESTUREHOLD);
-    }
-
-    /**
-     * Sets the {@code onmsgesturehold} event handler.
-     * @param onmsgesturehold the {@code onmsgesturehold} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturehold(final Object onmsgesturehold) {
-        setHandlerForJavaScript(Event.TYPE_MSGESTUREHOLD, onmsgesturehold);
-    }
-
-    /**
      * Returns the {@code ondeviceorientationabsolute} event handler.
      * @return the {@code ondeviceorientationabsolute} event handler
      */
@@ -4028,24 +3580,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code onmsgesturechange} event handler.
-     * @return the {@code onmsgesturechange} event handler
-     */
-    @JsxGetter(IE)
-    public Function getOnmsgesturechange() {
-        return getEventHandler(Event.TYPE_MSGESTURECHANGE);
-    }
-
-    /**
-     * Sets the {@code onmsgesturechange} event handler.
-     * @param onmsgesturechange the {@code onmsgesturechange} event handler
-     */
-    @JsxSetter(IE)
-    public void setOnmsgesturechange(final Object onmsgesturechange) {
-        setHandlerForJavaScript(Event.TYPE_MSGESTURECHANGE, onmsgesturechange);
-    }
-
-    /**
      * Returns the {@code ongotpointercapture} event handler.
      * @return the {@code ongotpointercapture} event handler
      */
@@ -4079,19 +3613,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOnpopstate(final Object onpopstate) {
         setHandlerForJavaScript(Event.TYPE_POPSTATE, onpopstate);
-    }
-
-    /**
-     * Returns the {@code doNotTrack} property.
-     * @return the {@code doNotTrack} property
-     */
-    @JsxGetter(IE)
-    public Object getDoNotTrack() {
-        final WebClient client = getWindow().getWebWindow().getWebClient();
-        if (client.getOptions().isDoNotTrackEnabled()) {
-            return 1;
-        }
-        return null;
     }
 
     /**

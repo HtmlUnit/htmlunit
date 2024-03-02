@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -35,9 +34,6 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxFunction;
-import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.HashChangeEvent;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -214,7 +210,6 @@ public class Location extends HtmlUnitScriptable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
      */
-    @JsxFunction(IE)
     public void assign(final String url) throws IOException {
         setHref(url);
     }
@@ -226,7 +221,6 @@ public class Location extends HtmlUnitScriptable {
      * @throws IOException if there is a problem reloading the page
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
      */
-    @JsxFunction(IE)
     public void reload(final boolean force) throws IOException {
         final WebWindow webWindow = window_.getWebWindow();
         final HtmlPage htmlPage = (HtmlPage) webWindow.getEnclosedPage();
@@ -245,7 +239,6 @@ public class Location extends HtmlUnitScriptable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536712.aspx">MSDN Documentation</a>
      */
-    @JsxFunction(IE)
     public void replace(final String url) throws IOException {
         window_.getWebWindow().getHistory().removeCurrent();
         setHref(url);
@@ -254,21 +247,8 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the location URL.
      * @return the location URL
-     */
-    @JsxFunction(functionName = "toString", value = IE)
-    public String jsToString() {
-        if (window_ != null) {
-            return getHref();
-        }
-        return "";
-    }
-
-    /**
-     * Returns the location URL.
-     * @return the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
      */
-    @JsxGetter(IE)
     public String getHref() {
         final WebWindow webWindow = window_.getWebWindow();
         final Page page = webWindow.getEnclosedPage();
@@ -303,7 +283,6 @@ public class Location extends HtmlUnitScriptable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
      */
-    @JsxSetter(IE)
     public void setHref(final String newLocation) throws IOException {
         WebWindow webWindow = getWindow(getStartingScope()).getWebWindow();
         final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
@@ -337,36 +316,10 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the search portion of the location URL (the portion following the '?').
-     * @return the search portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
-     */
-    @JsxGetter(IE)
-    public String getSearch() {
-        final String search = getUrl().getQuery();
-        if (search == null) {
-            return "";
-        }
-        return "?" + search;
-    }
-
-    /**
-     * Sets the search portion of the location URL (the portion following the '?').
-     * @param search the new search portion of the location URL
-     * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
-     */
-    @JsxSetter(IE)
-    public void setSearch(final String search) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewQuery(getUrl(), search));
-    }
-
-    /**
      * Returns the hash portion of the location URL (the portion following the '#').
      * @return the hash portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
-    @JsxGetter(IE)
     public String getHash() {
         String hash = hash_;
 
@@ -400,7 +353,6 @@ public class Location extends HtmlUnitScriptable {
      * @param hash the new hash portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
-    @JsxSetter(IE)
     public void setHash(final String hash) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
@@ -450,137 +402,6 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the hostname portion of the location URL.
-     * @return the hostname portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
-     */
-    @JsxGetter(IE)
-    public String getHostname() {
-        return getUrl().getHost();
-    }
-
-    /**
-     * Sets the hostname portion of the location URL.
-     * @param hostname the new hostname portion of the location URL
-     * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
-     */
-    @JsxSetter(IE)
-    public void setHostname(final String hostname) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
-    }
-
-    /**
-     * Returns the host portion of the location URL (the '[hostname]:[port]' portion).
-     * @return the host portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
-     */
-    @JsxGetter(IE)
-    public String getHost() {
-        final URL url = getUrl();
-        final int port = url.getPort();
-        final String host = url.getHost();
-
-        if (port == -1) {
-            return host;
-        }
-        return host + ":" + port;
-    }
-
-    /**
-     * Sets the host portion of the location URL (the '[hostname]:[port]' portion).
-     * @param host the new host portion of the location URL
-     * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
-     */
-    @JsxSetter(IE)
-    public void setHost(final String host) throws Exception {
-        final String hostname;
-        final int port;
-        final int index = host.indexOf(':');
-        if (index == -1) {
-            hostname = host;
-            port = -1;
-        }
-        else {
-            hostname = host.substring(0, index);
-            port = Integer.parseInt(host.substring(index + 1));
-        }
-        final URL url = UrlUtils.getUrlWithNewHostAndPort(getUrl(), hostname, port);
-        setUrl(url);
-    }
-
-    /**
-     * Returns the pathname portion of the location URL.
-     * @return the pathname portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
-     */
-    @JsxGetter(IE)
-    public String getPathname() {
-        if (UrlUtils.URL_ABOUT_BLANK == getUrl()) {
-            return "blank";
-        }
-        return getUrl().getPath();
-    }
-
-    /**
-     * Sets the pathname portion of the location URL.
-     * @param pathname the new pathname portion of the location URL
-     * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
-     */
-    @JsxSetter(IE)
-    public void setPathname(final String pathname) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewPath(getUrl(), pathname));
-    }
-
-    /**
-     * Returns the port portion of the location URL.
-     * @return the port portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
-     */
-    @JsxGetter(IE)
-    public String getPort() {
-        final int port = getUrl().getPort();
-        if (port == -1) {
-            return "";
-        }
-        return Integer.toString(port);
-    }
-
-    /**
-     * Sets the port portion of the location URL.
-     * @param port the new port portion of the location URL
-     * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
-     */
-    @JsxSetter(IE)
-    public void setPort(final String port) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
-    }
-
-    /**
-     * Returns the protocol portion of the location URL, including the trailing ':'.
-     * @return the protocol portion of the location URL, including the trailing ':'
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
-     */
-    @JsxGetter(IE)
-    public String getProtocol() {
-        return getUrl().getProtocol() + ":";
-    }
-
-    /**
-     * Sets the protocol portion of the location URL.
-     * @param protocol the new protocol portion of the location URL
-     * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
-     */
-    @JsxSetter(IE)
-    public void setProtocol(final String protocol) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), protocol));
-    }
-
-    /**
      * Returns this location's current URL.
      * @return this location's current URL
      */
@@ -603,14 +424,5 @@ public class Location extends HtmlUnitScriptable {
         webRequest.setRefererlHeader(getUrl());
 
         webWindow.getWebClient().getPage(webWindow, webRequest);
-    }
-
-    /**
-     * Returns the {@code origin} property.
-     * @return the {@code origin} property
-     */
-    @JsxGetter(IE)
-    public String getOrigin() {
-        return getUrl().getProtocol() + "://" + getHost();
     }
 }

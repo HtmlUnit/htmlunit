@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlDomTreeWalker;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -117,16 +115,6 @@ public class TreeWalker extends HtmlUnitScriptable {
     public Object getFilter() {
         //TODO: we should return the original filter
         return walker_.getFilter();
-    }
-
-    /**
-     * Gets the flag specifying whether or not to reject EntityReference nodes.
-     *
-     * @return the value of the expandEntityReferences flag
-     */
-    @JsxGetter(IE)
-    public boolean isExpandEntityReferences() {
-        return walker_.getExpandEntityReferences();
     }
 
     /**

@@ -209,10 +209,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTML_MAIN_TAG,
 
-    /** Supports &lt;object&gt; {@code classid} attribute. */
-    @BrowserFeature(IE)
-    HTML_OBJECT_CLASSID,
-
     /** Additionally support dates in format "d/M/yyyy". */
     @BrowserFeature({FF, FF_ESR})
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1,

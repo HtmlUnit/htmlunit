@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.util.HashSet;
 
 import org.apache.commons.logging.LogFactory;
@@ -97,46 +95,6 @@ public class Range extends AbstractRange {
     }
 
     /**
-     * Gets the node within which the Range begins.
-     * @return <code>undefined</code> if not initialized
-     */
-    @JsxGetter(IE)
-    @Override
-    public Object getStartContainer() {
-        return super.getStartContainer();
-    }
-
-    /**
-     * Gets the node within which the Range ends.
-     * @return <code>undefined</code> if not initialized
-     */
-    @JsxGetter(IE)
-    @Override
-    public Object getEndContainer() {
-        return super.getEndContainer();
-    }
-
-    /**
-     * Gets the offset within the starting node of the Range.
-     * @return <code>0</code> if not initialized
-     */
-    @JsxGetter(IE)
-    @Override
-    public int getStartOffset() {
-        return super.getStartOffset();
-    }
-
-    /**
-     * Gets the offset within the end node of the Range.
-     * @return <code>0</code> if not initialized
-     */
-    @JsxGetter(IE)
-    @Override
-    public int getEndOffset() {
-        return super.getEndOffset();
-    }
-
-    /**
      * Sets the attributes describing the start of a Range.
      * @param refNode the reference node
      * @param offset the offset value within the node
@@ -184,16 +142,6 @@ public class Range extends AbstractRange {
             i++;
         }
         return i;
-    }
-
-    /**
-     * Indicates if the range is collapsed.
-     * @return {@code true} if the range is collapsed
-     */
-    @JsxGetter(IE)
-    @Override
-    public boolean isCollapsed() {
-        return super.isCollapsed();
     }
 
     /**

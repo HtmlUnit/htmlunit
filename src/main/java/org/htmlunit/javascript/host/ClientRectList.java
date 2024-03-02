@@ -18,7 +18,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ronald Brill
  */
 @JsxClass(className = "DOMRectList", value = {CHROME, EDGE, FF, FF_ESR})
-@JsxClass(IE)
 public class ClientRectList extends HtmlUnitScriptable {
 
     private List<ClientRect> clientRects_;

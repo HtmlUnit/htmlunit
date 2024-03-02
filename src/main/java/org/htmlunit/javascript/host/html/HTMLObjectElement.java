@@ -14,14 +14,9 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTML_OBJECT_CLASSID;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.applet.Applet;
 import java.lang.reflect.Method;
-import java.util.Map;
 
-import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
@@ -33,7 +28,6 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlObject;
-import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -123,24 +117,6 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     }
 
     /**
-     * Returns the value of the {@code alt} property.
-     * @return the value of the {@code alt} property
-     */
-    @JsxGetter(IE)
-    public String getAlt() {
-        return getDomNodeOrDie().getAttributeDirect("alt");
-    }
-
-    /**
-     * Returns the value of the {@code alt} property.
-     * @param alt the value
-     */
-    @JsxSetter(IE)
-    public void setAlt(final String alt) {
-        getDomNodeOrDie().setAttribute("alt", alt);
-    }
-
-    /**
      * Gets the {@code border} attribute.
      * @return the {@code border} attribute
      */
@@ -162,7 +138,6 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * Gets the {@code classid} attribute.
      * @return the {@code classid} attribute
      */
-    @JsxGetter(IE)
     public String getClassid() {
         return getDomNodeOrDie().getAttributeDirect("classid");
     }
@@ -171,36 +146,8 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * Sets the {@code classid} attribute.
      * @param classid the {@code classid} attribute
      */
-    @JsxSetter(IE)
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
-        if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(HTML_OBJECT_CLASSID)) {
-            final WebClient webClient = getWindow().getWebWindow().getWebClient();
-            final Map<String, String> map = webClient.getActiveXObjectMap();
-            if (map != null) {
-                final String xClassString = map.get(classid);
-                if (xClassString != null) {
-                    try {
-                        final Class<?> xClass = Class.forName(xClassString);
-                        final Object object = xClass.newInstance();
-                        boolean contextCreated = false;
-                        if (Context.getCurrentContext() == null) {
-                            new HtmlUnitContextFactory(webClient).enterContext();
-                            contextCreated = true;
-                        }
-                        wrappedActiveX_ = Context.toObject(object, getParentScope());
-                        if (contextCreated) {
-                            Context.exit();
-                        }
-                    }
-                    catch (final Exception e) {
-                        throw JavaScriptEngine.reportRuntimeError("ActiveXObject Error: failed instantiating class "
-                                + xClassString + " because " + e.getMessage() + ".");
-                    }
-                    return;
-                }
-            }
-        }
     }
 
     /**

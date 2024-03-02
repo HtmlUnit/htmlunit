@@ -14,20 +14,15 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentType;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.w3c.dom.NamedNodeMap;
 
 /**
  * A JavaScript object for {@code DocumentType}.
@@ -89,46 +84,6 @@ public class DocumentType extends Node {
     @JsxGetter
     public String getSystemId() {
         return ((DomDocumentType) getDomNodeOrDie()).getSystemId();
-    }
-
-    /**
-     * Returns the internal subset.
-     * @return the internal subset
-     */
-    @JsxGetter(IE)
-    public String getInternalSubset() {
-        final String subset = ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
-        if (StringUtils.isNotEmpty(subset)) {
-            return subset;
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns entities.
-     * @return entities
-     */
-    @JsxGetter(IE)
-    public Object getEntities() {
-        final NamedNodeMap entities = ((DomDocumentType) getDomNodeOrDie()).getEntities();
-        if (null != entities) {
-            return entities;
-        }
-        return Undefined.instance;
-    }
-
-    /**
-     * Returns notations.
-     * @return notations
-     */
-    @JsxGetter(IE)
-    public Object getNotations() {
-        final NamedNodeMap notations = ((DomDocumentType) getDomNodeOrDie()).getNotations();
-        if (null != notations) {
-            return notations;
-        }
-        return Undefined.instance;
     }
 
     /**

@@ -101,21 +101,6 @@ public class Screen implements Serializable {
     }
 
     /**
-     * @return the {@code bufferDepth} property
-     */
-    public int getBufferDepth() {
-        return 0;
-    }
-
-    /**
-     * Sets the {@code bufferDepth} property.
-     * @param bufferDepth the {@code bufferDepth} property
-     */
-    public void setBufferDepth(final int bufferDepth) {
-        // ignore
-    }
-
-    /**
      * @return the {@code colorDepth} property
      */
     public int getColorDepth() {
@@ -161,21 +146,6 @@ public class Screen implements Serializable {
     }
 
     /**
-     * @return the {@code fontSmoothingEnabled} property
-     */
-    public boolean isFontSmoothingEnabled() {
-        return true;
-    }
-
-    /**
-     * Sets the {@code fontSmoothingEnabled} property.
-     * @param fontSmoothingEnabled the {@code fontSmoothingEnabled} property
-     */
-    public void setFontSmoothingEnabled(final boolean fontSmoothingEnabled) {
-        // ignore
-    }
-
-    /**
      * @return the {@code height} property
      */
     public int getHeight() {
@@ -206,36 +176,6 @@ public class Screen implements Serializable {
     }
 
     /**
-     * @return the {@code logicalXDPI} property
-     */
-    public int getLogicalXDPI() {
-        return 96;
-    }
-
-    /**
-     * Sets the {@code logicalXDPI} property.
-     * @param logicalXDPI the {@code logicalXDPI} property
-     */
-    public void setLogicalXDPI(final int logicalXDPI) {
-        // ignore
-    }
-
-    /**
-     * @return the {@code logicalYDPI} property
-     */
-    public int getLogicalYDPI() {
-        return 96;
-    }
-
-    /**
-     * Sets the {@code logicalYDPI} property.
-     * @param logicalYDPI the {@code logicalYDPI} property
-     */
-    public void setLogicalYDPI(final int logicalYDPI) {
-        // ignore
-    }
-
-    /**
      * @return the {@code pixelDepth} property
      */
     public int getPixelDepth() {
@@ -247,36 +187,6 @@ public class Screen implements Serializable {
      * @param pixelDepth the {@code pixelDepth} property
      */
     public void setPixelDepth(final int pixelDepth) {
-        // ignore
-    }
-
-    /**
-     * @return the {@code systemXDPI} property
-     */
-    public int getSystemXDPI() {
-        return 96;
-    }
-
-    /**
-     * Sets the {@code systemXDPI} property.
-     * @param systemXDPI the {@code systemXDPI} property
-     */
-    public void setSystemXDPI(final int systemXDPI) {
-        // ignore
-    }
-
-    /**
-     * @return the {@code systemYDPI} property
-     */
-    public int getSystemYDPI() {
-        return 96;
-    }
-
-    /**
-     * Sets the {@code systemYDPI} property.
-     * @param systemYDPI the {@code systemYDPI} property
-     */
-    public void setSystemYDPI(final int systemYDPI) {
         // ignore
     }
 
