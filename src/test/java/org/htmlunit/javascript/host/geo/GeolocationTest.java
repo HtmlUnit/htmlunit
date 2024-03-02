@@ -14,34 +14,19 @@
  */
 package org.htmlunit.javascript.host.geo;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.htmlunit.CollectingAlertHandler;
-import org.htmlunit.WebClient;
-import org.htmlunit.WebServerTestCase;
+import org.htmlunit.WebClientOptions;
+import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.htmlunit.junit.BrowserRunner.OS;
-import org.htmlunit.util.ServletContentWrapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Tests for {@link Geolocation}.
@@ -52,102 +37,100 @@ import org.junit.runner.RunWith;
  * @author cd alexndr
  */
 @RunWith(BrowserRunner.class)
-public class GeolocationTest extends WebServerTestCase {
+public class GeolocationTest extends WebDriverTestCase {
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts("12.34567891 98.76543211")
-    @NotYetImplemented(value = {EDGE, FF_ESR, FF, CHROME},
-            os = OS.Linux) //since it runs on Windows only (for now)
-    public void getCurrentPosition_enabled() throws Exception {
-        getCurrentPosition(true);
+    @Alerts("exception")
+    public void ctor() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      new Geolocation();\n"
+            + "    } catch (e) { log('exception') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    public void getCurrentPosition_disabled() throws Exception {
-        getCurrentPosition(false);
-    }
+    @Alerts("[object Geolocation]")
+    public void navigatorGeolocation() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(navigator.geolocation);\n"
+            + "    } catch (e) { log('exception') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
 
-    private void getCurrentPosition(final boolean geolocationEnabled) throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/test", GetCurrentPositionTestServlet.class);
-        servlets.put("/browserLocation", BrowserLocationServlet.class);
-        startWebServer("./", new String[0], servlets);
-
-        Geolocation.setProviderUrl(URL_FIRST + "browserLocation");
-        final WebClient client = getWebClient();
-        if (geolocationEnabled) {
-            client.getOptions().setGeolocationEnabled(true);
-        }
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        client.getPage(URL_FIRST + "test");
-        client.waitForBackgroundJavaScript(2000);
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        loadPageVerifyTitle2(html);
     }
 
     /**
-     * Helper class for {@link GeolocationTest#getCurrentPosition(boolean)}.
+     * @throws Exception if the test fails
      */
-    public static class GetCurrentPositionTestServlet extends ServletContentWrapper {
-        /**
-         * Constructor.
-         */
-        public GetCurrentPositionTestServlet() {
-            super("<html><head><script>\n"
-                    + "  function test() {\n"
-                    + "    if (navigator.geolocation) {\n"
-                    + "      navigator.geolocation.getCurrentPosition(\n"
-                    + "      function(position) {\n"
-                    + "        alert (position.coords.latitude + ' ' + position.coords.longitude);\n"
-                    + "      },\n"
-                    + "      function(error) {\n"
-                    + "        switch (error.code) {\n"
-                    + "          case error.TIMEOUT:\n"
-                    + "            alert('Timeout');\n"
-                    + "            break;\n"
-                    + "          case error.POSITION_UNAVAILABLE:\n"
-                    + "            alert('Position unavailable');\n"
-                    + "            break;\n"
-                    + "          case error.PERMISSION_DENIED:\n"
-                    + "            alert('Permission denied');\n"
-                    + "            break;\n"
-                    + "          case error.UNKNOWN_ERROR:\n"
-                    + "            alert('Unknown error');\n"
-                    + "            break;\n"
-                    + "        }\n"
-                    + "      });\n"
-                    + "    }\n"
-                    + "  }\n"
-                    + "</script></head><body onload='test()'>\n"
-                    + "</body></html");
-        }
-    }
+    @Test
+    @Alerts({"Latitude : 12.3456",
+             "Longitude: 7.654321",
+             "Accuracy: 0.1234"})
+    public void getCurrentPosition() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function success(pos) {\n"
+            + "    const crd = pos.coords;\n"
+            + "    log(`Latitude : ${crd.latitude}`);\n"
+            + "    log(`Longitude: ${crd.longitude}`);\n"
+            + "    log(`Accuracy: ${crd.accuracy}`);\n"
+            + "  }\n"
 
-    /**
-     * Helper class for {@link GeolocationTest#getCurrentPosition(boolean)}.
-     */
-    public static class BrowserLocationServlet extends HttpServlet {
+            + "  function error(err) {\n"
+            + "    log(`ERROR(${err.code}): ${err.message}`);\n"
+            + "  }"
 
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
-            throws ServletException, IOException {
-            resp.setContentType("application/json");
-            final Writer writer = resp.getWriter();
-            writer.write("{\n"
-                    + "                \"accuracy\" : 12.3,\n"
-                    + "                \"location\" : {\n"
-                    + "                   \"lat\" : 12.34567891,\n"
-                    + "                   \"lng\" : 98.76543211\n"
-                    + "                },\n"
-                    + "                \"status\" : \"OK\"\n"
-                    + "             }");
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      navigator.geolocation.getCurrentPosition(success, error);\n"
+            + "    } catch (e) { log('exception') }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = getWebDriver();
+        if (useRealBrowser()) {
+            final Map<String, Object> pos = new HashMap<>();
+            pos.put("latitude", 12.3456);
+            pos.put("longitude", 7.654321);
+            pos.put("accuracy", 0.1234);
+            if (driver instanceof ChromeDriver) {
+                ((ChromeDriver) driver).executeCdpCommand("Emulation.setGeolocationOverride", pos);
+            }
+            else if (driver instanceof EdgeDriver) {
+                ((EdgeDriver) driver).executeCdpCommand("Emulation.setGeolocationOverride", pos);
+            }
         }
+        else {
+            final WebClientOptions.Geolocation geo =
+                    new WebClientOptions.Geolocation(12.3456, 7.654321, 0.1234, null, null, null, null);
+            ((HtmlUnitDriver) driver).getWebClient().getOptions().setGeolocationEnabled(true);
+            ((HtmlUnitDriver) driver).getWebClient().getOptions().setGeolocation(geo);
+        }
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 }

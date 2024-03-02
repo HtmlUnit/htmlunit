@@ -14,20 +14,8 @@
  */
 package org.htmlunit.javascript.host.geo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.BrowserVersion;
-import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Function;
@@ -51,9 +39,8 @@ public class Geolocation extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);
 
-    /* Do not use this URL without Google permission! */
-    private static String PROVIDER_URL_ = "https://maps.googleapis.com/maps/api/browserlocation/json";
     private Function successHandler_;
+    private Function errorHandler_;
 
     /**
      * Creates an instance.
@@ -62,10 +49,11 @@ public class Geolocation extends HtmlUnitScriptable {
     }
 
     /**
-     * JavaScript constructor.
+     * Creates an instance.
      */
     @JsxConstructor
     public void jsConstructor() {
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 
     /**
@@ -75,9 +63,10 @@ public class Geolocation extends HtmlUnitScriptable {
      * @param options optional options
      */
     @JsxFunction
-    public void getCurrentPosition(final Function successCallback, final Object errorCallback,
+    public void getCurrentPosition(final Function successCallback, final Function errorCallback,
             final Object options) {
         successHandler_ = successCallback;
+        errorHandler_ = errorCallback;
 
         final WebWindow webWindow = getWindow().getWebWindow();
         if (webWindow.getWebClient().getOptions().isGeolocationEnabled()) {
@@ -109,139 +98,20 @@ public class Geolocation extends HtmlUnitScriptable {
     }
 
     void doGetPosition() {
-        final String os = System.getProperty("os.name").toLowerCase(Locale.ROOT);
-        String wifiStringString = null;
-        if (os.contains("win")) {
-            wifiStringString = getWifiStringWindows();
-        }
+        final WebWindow ww = getWindow().getWebWindow();
+        final WebClient webClient = ww.getWebClient();
 
-        if (wifiStringString == null) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Operating System not supported: " + os);
-            }
-        }
-        else {
-            String url = PROVIDER_URL_;
-            if (url.contains("?")) {
-                url += '&';
-            }
-            else {
-                url += '?';
-            }
-            url += "browser=firefox&sensor=true";
-            url += wifiStringString;
+        final org.htmlunit.WebClientOptions.Geolocation geolocation = webClient.getOptions().getGeolocation();
 
-            while (url.length() >= 1900) {
-                url = url.substring(0, url.lastIndexOf("&wifi="));
-            }
+        final GeolocationCoordinates coordinates = new GeolocationCoordinates(
+                geolocation.getLatitude(), geolocation.getLongitude(), geolocation.getAccuracy());
+        coordinates.setPrototype(getPrototype(coordinates.getClass()));
 
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Invoking URL: " + url);
-            }
+        final GeolocationPosition position = new GeolocationPosition(coordinates);
+        position.setPrototype(getPrototype(position.getClass()));
 
-            try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
-                final Page page = webClient.getPage(url);
-                final String content = page.getWebResponse().getContentAsString();
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Receieved Content: " + content);
-                }
-                final double latitude = Double.parseDouble(getJSONValue(content, "lat"));
-                final double longitude = Double.parseDouble(getJSONValue(content, "lng"));
-                final double accuracy = Double.parseDouble(getJSONValue(content, "accuracy"));
-
-                final GeolocationCoordinates coordinates = new GeolocationCoordinates(latitude, longitude, accuracy);
-                coordinates.setPrototype(getPrototype(coordinates.getClass()));
-
-                final GeolocationPosition position = new GeolocationPosition(coordinates);
-                position.setPrototype(getPrototype(position.getClass()));
-
-                final WebWindow ww = getWindow().getWebWindow();
-                final JavaScriptEngine jsEngine =
-                        (JavaScriptEngine) ww.getWebClient().getJavaScriptEngine();
-                jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(), successHandler_, this,
-                        getParentScope(), new Object[] {position});
-            }
-            catch (final Exception e) {
-                LOG.error("", e);
-            }
-        }
-    }
-
-    private static String getJSONValue(final String content, final String key) {
-        final StringBuilder builder = new StringBuilder();
-        int index = content.indexOf("\"" + key + "\"") + key.length() + 2;
-        for (index = content.indexOf(':', index) + 1; index < content.length(); index++) {
-            final char ch = content.charAt(index);
-            if (ch == ',' || ch == '}') {
-                break;
-            }
-            builder.append(ch);
-        }
-        return builder.toString().trim();
-    }
-
-    static String getWifiStringWindows() {
-        final StringBuilder builder = new StringBuilder();
-        try {
-            final List<String> lines = runCommand("netsh wlan show networks mode=bssid");
-            for (final Iterator<String> it = lines.iterator(); it.hasNext();) {
-                String line = it.next();
-                if (line.startsWith("SSID ")) {
-                    final String name = line.substring(line.lastIndexOf(' ') + 1);
-                    if (it.hasNext()) {
-                        it.next();
-                    }
-                    if (it.hasNext()) {
-                        it.next();
-                    }
-                    if (it.hasNext()) {
-                        it.next();
-                    }
-                    while (it.hasNext()) {
-                        line = it.next();
-                        if (line.trim().startsWith("BSSID ")) {
-                            final String mac = line.substring(line.lastIndexOf(' ') + 1);
-                            if (it.hasNext()) {
-                                line = it.next().trim();
-                                if (line.startsWith("Signal")) {
-                                    final String signal = line.substring(line.lastIndexOf(' ') + 1, line.length() - 1);
-                                    final int signalStrength = Integer.parseInt(signal) / 2 - 100;
-                                    builder.append("&wifi=mac:")
-                                        .append(mac.replace(':', '-'))
-                                        .append("%7Cssid:")
-                                        .append(name)
-                                        .append("%7Css:")
-                                        .append(signalStrength);
-                                }
-                            }
-                        }
-                        if (StringUtils.isBlank(line)) {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        catch (final IOException e) {
-            //
-        }
-        return builder.toString();
-    }
-
-    private static List<String> runCommand(final String command) throws IOException {
-        final List<String> list = new ArrayList<>();
-        final Process p = Runtime.getRuntime().exec(command);
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(p.getInputStream(), Charset.defaultCharset()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                list.add(line);
-            }
-        }
-        return list;
-    }
-
-    static void setProviderUrl(final String url) {
-        PROVIDER_URL_ = url;
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) ww.getWebClient().getJavaScriptEngine();
+        jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(), successHandler_, this,
+                getParentScope(), new Object[] {position});
     }
 }

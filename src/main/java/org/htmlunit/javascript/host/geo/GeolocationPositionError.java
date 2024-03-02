@@ -15,8 +15,10 @@
 package org.htmlunit.javascript.host.geo;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
+import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for GeolocationPositionError.
@@ -41,5 +43,13 @@ public class GeolocationPositionError extends HtmlUnitScriptable {
      * Default constructor.
      */
     public GeolocationPositionError() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 }

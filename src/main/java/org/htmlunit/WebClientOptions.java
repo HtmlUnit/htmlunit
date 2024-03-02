@@ -58,7 +58,6 @@ public class WebClientOptions implements Serializable {
     private String[] sslClientProtocols_;
     private String[] sslClientCipherSuites_;
 
-    private boolean geolocationEnabled_;
     private boolean doNotTrackEnabled_;
     private String homePage_ = "https://www.htmlunit.org/";
     private ProxyConfig proxyConfig_;
@@ -74,6 +73,9 @@ public class WebClientOptions implements Serializable {
     private boolean downloadImages_;
     private int screenWidth_ = DEFAULT_SCRREN_WIDTH;
     private int screenHeight_ = DEFAULT_SCRREN_HEIGHT;
+
+    private boolean geolocationEnabled_;
+    private Geolocation geolocation_;
 
     private boolean webSocketEnabled_ = true;
     private int webSocketMaxTextMessageSize_ = -1;
@@ -410,24 +412,6 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isPopupBlockerEnabled() {
         return popupBlockerEnabled_;
-    }
-
-    /**
-     * Enables/disables Geolocation support. By default, this property is disabled.
-     *
-     * @param enabled {@code true} to enable Geolocation support
-     */
-    public void setGeolocationEnabled(final boolean enabled) {
-        geolocationEnabled_ = enabled;
-    }
-
-    /**
-     * Returns {@code true} if Geolocation is enabled.
-     *
-     * @return {@code true} if Geolocation is enabled
-     */
-    public boolean isGeolocationEnabled() {
-        return geolocationEnabled_;
     }
 
     /**
@@ -878,5 +862,123 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isFetchPolyfillEnabled() {
         return isFetchPolyfillEnabled_;
+    }
+
+    /**
+     * Enables/disables Geolocation support. By default, this property is disabled.
+     *
+     * @param enabled {@code true} to enable Geolocation support
+     */
+    public void setGeolocationEnabled(final boolean enabled) {
+        geolocationEnabled_ = enabled;
+    }
+
+    /**
+     * @return {@code true} if Geolocation is enabled
+     */
+    public boolean isGeolocationEnabled() {
+        return geolocationEnabled_;
+    }
+
+    /**
+     * @return the {@link Geolocation}
+     */
+    public Geolocation getGeolocation() {
+        return geolocation_;
+    }
+
+    /**
+     * Sets the {@link Geolocation} to be used.
+     * @param geolocation the new location or null
+     */
+    public void setGeolocation(final Geolocation geolocation) {
+        geolocation_ = geolocation;
+    }
+
+    public static class Geolocation {
+        private final double accuracy_;
+        private final double latitude_;
+        private final double longitude_;
+        private final Double altitude_;
+        private final Double altitudeAccuracy_;
+        private final Double heading_;
+        private final Double speed_;
+
+        /**
+         * Ctor.
+         *
+         * @param accuracy the accuracy
+         * @param latitude the latitude
+         * @param longitude the longitude
+         * @param altitude the altitude or null
+         * @param altitudeAccuracy the altitudeAccuracy or null
+         * @param heading the heading or null
+         * @param speed the speed or null
+         */
+        public Geolocation(
+                final double latitude,
+                final double longitude,
+                final double accuracy,
+                final Double altitude,
+                final Double altitudeAccuracy,
+                final Double heading,
+                final Double speed) {
+            latitude_ = latitude;
+            longitude_ = longitude;
+            accuracy_ = accuracy;
+            altitude_ = altitude;
+            altitudeAccuracy_ = altitudeAccuracy;
+            heading_ = heading;
+            speed_ = speed;
+        }
+
+        /**
+         * @return the accuracy
+         */
+        public double getAccuracy() {
+            return accuracy_;
+        }
+
+        /**
+         * @return the latitude
+         */
+        public double getLatitude() {
+            return latitude_;
+        }
+
+        /**
+         * @return the longitude
+         */
+        public double getLongitude() {
+            return longitude_;
+        }
+
+        /**
+         * @return the longitude
+         */
+        public Double getAltitude() {
+            return altitude_;
+        }
+
+        /**
+         * @return the altitudeAccuracy
+         */
+        public Double getAltitudeAccuracy() {
+            return altitudeAccuracy_;
+        }
+
+        /**
+         * @return the heading
+         */
+        public Double getHeading() {
+            return heading_;
+        }
+
+        /**
+         * @return the speed
+         */
+        public Double getSpeed() {
+            return speed_;
+        }
     }
 }
