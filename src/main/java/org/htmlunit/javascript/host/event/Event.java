@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.event;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
 
@@ -730,7 +729,6 @@ public class Event extends HtmlUnitScriptable {
      * Sets the object that fired the event.
      * @param srcElement the object that fired the event
      */
-    @JsxSetter(IE)
     public void setSrcElement(final Object srcElement) {
         srcElement_ = srcElement;
     }

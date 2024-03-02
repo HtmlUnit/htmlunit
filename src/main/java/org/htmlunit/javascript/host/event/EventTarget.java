@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +42,6 @@ import org.htmlunit.javascript.host.dom.Document;
  * @author Atsushi Nakagawa
  */
 @JsxClass
-@JsxClass(isJSObject = false, value = IE)
 public class EventTarget extends HtmlUnitScriptable {
 
     private EventListenersContainer eventListenersContainer_;

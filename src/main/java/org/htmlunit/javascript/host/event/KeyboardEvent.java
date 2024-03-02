@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.event;
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_KEYBOARD_CTOR_WHICH;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,14 +59,6 @@ public class KeyboardEvent extends UIEvent {
     /** Constant for {@code DOM_KEY_LOCATION_NUMPAD}. */
     @JsxConstant
     public static final int DOM_KEY_LOCATION_NUMPAD = 3;
-
-    /** Constant for {@code DOM_KEY_LOCATION_MOBILE}. */
-    @JsxConstant(IE)
-    public static final int DOM_KEY_LOCATION_MOBILE = 4;
-
-    /** Constant for {@code DOM_KEY_LOCATION_JOYSTICK}. */
-    @JsxConstant(IE)
-    public static final int DOM_KEY_LOCATION_JOYSTICK = 5;
 
     /** Constant for {@code DOM_VK_CANCEL}. */
     @JsxConstant({FF, FF_ESR})
@@ -1182,7 +1173,6 @@ public class KeyboardEvent extends UIEvent {
      * Returns the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed.
      * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
      */
-    @JsxGetter(IE)
     @Override
     public int getWhich() {
         return which_;
@@ -1247,29 +1237,6 @@ public class KeyboardEvent extends UIEvent {
      */
     protected void setKey(final String key) {
         key_ = key;
-    }
-
-    /**
-     * Returns the value of a key or keys pressed by the user.
-     * @return the value of a key or keys pressed by the user
-     */
-    @JsxGetter(IE)
-    public String getChar() {
-        int code = getKeyCode();
-        if (code == 0) {
-            code = getCharCode();
-        }
-        switch (code) {
-            case DOM_VK_SHIFT:
-                return "";
-            case DOM_VK_RETURN:
-                return "\n";
-            case DOM_VK_PERIOD:
-                return ".";
-
-            default:
-                return String.valueOf(isShiftKey() ? (char) which_ : Character.toLowerCase((char) which_));
-        }
     }
 
     /**

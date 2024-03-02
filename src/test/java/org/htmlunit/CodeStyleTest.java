@@ -849,7 +849,6 @@ public class CodeStyleTest {
             final String line = lines.get(i);
             if (line.startsWith("        CHROME = ")
                     || line.startsWith("        EDGE = ")
-                    || line.startsWith("        IE = ")
                     || line.startsWith("        FF = ")
                     || line.startsWith("        FF_ESR = ")) {
                 addFailure("Incorrect indentation in " + relativePath + ", line: " + (i + 2));

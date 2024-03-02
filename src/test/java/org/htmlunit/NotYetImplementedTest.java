@@ -131,12 +131,6 @@ public class NotYetImplementedTest {
                         }
                         browser += "FF";
                     }
-                    if (nyiString.contains("IE = ")) {
-                        if (browser.length() > 0) {
-                            browser += ", ";
-                        }
-                        browser += "IE";
-                    }
                 }
                 if (browser.length() < 2) {
                     throw new IllegalArgumentException("'" + nyiString + "' seems to be not supported by @HtmlUnitNYI");
@@ -203,7 +197,6 @@ public class NotYetImplementedTest {
         String lastFile = null;
 
         int count = 0;
-        int countIE = 0;
         int countFFESR = 0;
         int countFF = 0;
         int countChrome = 0;
@@ -253,10 +246,6 @@ public class NotYetImplementedTest {
             builder.append("    <td>").append(description).append("</td>\n");
             builder.append("  </tr>\n");
 
-            if (browser.contains("IE")) {
-                countIE++;
-            }
-
             if (browser.contains("FF_ESR")) {
                 browser = browser.replace("FF_ESR", "");
                 countFFESR++;
@@ -268,7 +257,6 @@ public class NotYetImplementedTest {
                 countChrome++;
             }
             if (browser.contains("All")) {
-                countIE++;
                 countFFESR++;
                 countFF++;
                 countChrome++;
@@ -281,11 +269,6 @@ public class NotYetImplementedTest {
         overview.append("  <tr>\n");
         overview.append("    <td class='numeric'>").append(Integer.toString(count)).append("</td>\n");
         overview.append("    <td>methods marked as NotYetImplemented</td>\n");
-        overview.append("  </tr>\n");
-
-        overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countIE)).append("</td>\n");
-        overview.append("    <td>for IE</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");

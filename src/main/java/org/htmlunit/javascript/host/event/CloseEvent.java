@@ -14,13 +14,10 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
@@ -69,24 +66,6 @@ public class CloseEvent extends Event {
             reason_ = JavaScriptEngine.toString(details.get("reason"));
             wasClean_ = JavaScriptEngine.toBoolean(details.get("wasClean"));
         }
-    }
-
-    /**
-     * Initializes this close event.
-     * @param type the event type
-     * @param bubbles whether or not the event should bubble
-     * @param cancelable whether or not the event the event should be cancelable
-     * @param wasClean the wasClean flag
-     * @param reasonCode the reason code
-     * @param reason the reason
-     */
-    @JsxFunction(IE)
-    public void initCloseEvent(final String type, final boolean bubbles, final boolean cancelable,
-            final boolean wasClean, final int reasonCode, final String reason) {
-        super.initEvent(type, bubbles, cancelable);
-        wasClean_ = wasClean;
-        code_ = reasonCode;
-        reason_ = reason;
     }
 
     /**
