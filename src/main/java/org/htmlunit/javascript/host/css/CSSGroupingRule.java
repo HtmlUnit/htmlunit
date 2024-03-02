@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,6 @@ import org.w3c.dom.DOMException;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule">MDN doc</a>
  */
 @JsxClass
-@JsxClass(isJSObject = false, value = IE)
 public class CSSGroupingRule extends CSSRule {
 
     /** The collection of rules defined in this rule. */

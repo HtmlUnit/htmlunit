@@ -14,10 +14,7 @@
  */
 package org.htmlunit.javascript.host.svg;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.svg.SvgPattern;
 
@@ -29,16 +26,6 @@ import org.htmlunit.svg.SvgPattern;
  */
 @JsxClass(domClass = SvgPattern.class)
 public class SVGPatternElement extends SVGElement {
-
-    /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
-    @JsxConstant(IE)
-    public static final int SVG_UNIT_TYPE_UNKNOWN = 0;
-    /** Constant for {@code SVG_UNIT_TYPE_USERSPACEONUSE}. */
-    @JsxConstant(IE)
-    public static final int SVG_UNIT_TYPE_USERSPACEONUSE = 1;
-    /** Constant for {@code SVG_UNIT_TYPE_OBJECTBOUNDINGBOX}. */
-    @JsxConstant(IE)
-    public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**
      * Creates an instance.

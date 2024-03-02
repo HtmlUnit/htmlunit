@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
@@ -50,7 +48,6 @@ public class CSSRule extends HtmlUnitScriptable {
     /**
      * The rule is a {@code CSSUnknownRule}.
      */
-    @JsxConstant(IE)
     public static final int UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
@@ -128,7 +125,6 @@ public class CSSRule extends HtmlUnitScriptable {
     /**
      * The rule is a {@code CSSViewportRule}.
      */
-    @JsxConstant(IE)
     public static final int VIEWPORT_RULE  = 15;
 
     private final CSSStyleSheet stylesheet_;

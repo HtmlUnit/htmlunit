@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.file;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -172,13 +171,6 @@ public class File extends Blob {
      */
     @JsxFunction
     public void slice() {
-    }
-
-    /**
-     * Closes the file.
-     */
-    @JsxFunction(IE)
-    public void msClose() {
     }
 
     /**

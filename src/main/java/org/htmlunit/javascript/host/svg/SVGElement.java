@@ -18,7 +18,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -83,24 +82,6 @@ public class SVGElement extends Element {
     @JsxSetter
     public void setStyle(final String style) {
         super.setStyle(style);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(IE)
-    public String getId() {
-        return super.getId();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter(IE)
-    public void setId(final String newId) {
-        super.setId(newId);
     }
 
     /**

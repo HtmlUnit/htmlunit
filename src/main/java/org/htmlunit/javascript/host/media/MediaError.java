@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.media;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
@@ -45,10 +43,6 @@ public class MediaError extends HtmlUnitScriptable {
     /** Source Not Supported Error. */
     @JsxConstant
     public static final int MEDIA_ERR_SRC_NOT_SUPPORTED = 4;
-
-    /** Source Not Supported Error. */
-    @JsxConstant(IE)
-    public static final int MS_MEDIA_ERR_ENCRYPTED = 5;
 
     /**
      * Creates an instance.

@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -30,7 +28,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSConditionRule">MDN doc</a>
  */
 @JsxClass
-@JsxClass(isJSObject = false, value = IE)
 public class CSSConditionRule extends CSSGroupingRule {
 
     /**

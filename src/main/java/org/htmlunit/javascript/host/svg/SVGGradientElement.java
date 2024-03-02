@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.svg;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -41,15 +39,6 @@ public class SVGGradientElement extends SVGElement {
     /** The constant {@code SVG_SPREADMETHOD_REPEAT}. */
     @JsxConstant
     public static final int SVG_SPREADMETHOD_REPEAT = 3;
-    /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
-    @JsxConstant(IE)
-    public static final int SVG_UNIT_TYPE_UNKNOWN = 0;
-    /** Constant for {@code SVG_UNIT_TYPE_USERSPACEONUSE}. */
-    @JsxConstant(IE)
-    public static final int SVG_UNIT_TYPE_USERSPACEONUSE = 1;
-    /** Constant for {@code SVG_UNIT_TYPE_OBJECTBOUNDINGBOX}. */
-    @JsxConstant(IE)
-    public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**
      * Creates an instance.

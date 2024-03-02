@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.worker;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -61,7 +59,6 @@ import org.htmlunit.util.MimeType;
  * @author Rural Hunter
  */
 @JsxClass
-@JsxClass(className = "WorkerGlobalScope", value = IE)
 public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrWorkerGlobalScope {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);

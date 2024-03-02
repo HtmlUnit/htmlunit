@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
-import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -66,19 +62,6 @@ public class Attr extends Node {
             domNode.setValue(parent.getAttribute(getName()));
         }
         domNode.remove();
-    }
-
-    /**
-     * Returns {@code true} if the attribute is a custom property.
-     * @return {@code true} if the attribute is a custom property
-     */
-    @JsxGetter(IE)
-    public boolean isExpando() {
-        final Object owner = getOwnerElement();
-        if (null == owner) {
-            return false;
-        }
-        return !ScriptableObject.hasProperty((Scriptable) owner, getName());
     }
 
     /**

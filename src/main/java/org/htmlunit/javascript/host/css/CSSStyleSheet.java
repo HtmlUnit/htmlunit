@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -148,25 +146,6 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * Returns the owner node.
-     * @return the owner node
-     */
-    @JsxGetter(IE)
-    @Override
-    public HTMLElement getOwnerNode() {
-        return super.getOwnerNode();
-    }
-
-    /**
-     * Returns the owner element, same as {@link #getOwnerNode()}.
-     * @return the owner element
-     */
-    @JsxGetter(IE)
-    public HTMLElement getOwningElement() {
-        return getOwnerNode();
-    }
-
-    /**
      * Retrieves the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
@@ -183,15 +162,6 @@ public class CSSStyleSheet extends StyleSheet {
     public CSSRuleList getCssRules() {
         initCssRules();
         return cssRules_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxGetter(IE)
-    @Override
-    public String getHref() {
-        return super.getHref();
     }
 
     /**

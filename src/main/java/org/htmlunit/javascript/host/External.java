@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host;
 import static org.htmlunit.BrowserVersionFeatures.JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -47,14 +46,6 @@ public class External extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-    }
-
-    /**
-     * Empty implementation.
-     */
-    @JsxFunction(value = IE, functionName = "AutoCompleteSaveForm")
-    public void autoCompleteSaveForm() {
-        // dummy
     }
 
     /**

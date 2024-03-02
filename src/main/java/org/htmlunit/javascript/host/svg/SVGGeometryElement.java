@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.svg;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -27,7 +25,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
  * @author Ronald Brill
  */
 @JsxClass
-@JsxClass(isJSObject = false, value = IE)
 public class SVGGeometryElement extends SVGGraphicsElement {
 
     /**

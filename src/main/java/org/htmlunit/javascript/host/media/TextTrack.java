@@ -14,10 +14,7 @@
  */
 package org.htmlunit.javascript.host.media;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.event.EventTarget;
 
@@ -29,28 +26,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
  */
 @JsxClass
 public class TextTrack extends EventTarget {
-
-    /** Constant for {@code NONE}. */
-    @JsxConstant(IE)
-    public static final int NONE = 0;
-    /** Constant for {@code LOADING}. */
-    @JsxConstant(IE)
-    public static final int LOADING = 1;
-    /** Constant for {@code LOADED}. */
-    @JsxConstant(IE)
-    public static final int LOADED = 2;
-    /** Constant for {@code ERROR}. */
-    @JsxConstant(IE)
-    public static final int ERROR = 3;
-    /** Constant for {@code DISABLED}. */
-    @JsxConstant(IE)
-    public static final int DISABLED = 0;
-    /** Constant for {@code HIDDEN}. */
-    @JsxConstant(IE)
-    public static final int HIDDEN = 1;
-    /** Constant for {@code SHOWING}. */
-    @JsxConstant(IE)
-    public static final int SHOWING = 2;
 
     /**
      * Creates an instance.

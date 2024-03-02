@@ -21,7 +21,6 @@ import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
 import static org.htmlunit.BrowserVersionFeatures.XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC;
 import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TEXT_EMPTY_UNSENT;
 import static org.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -1270,18 +1269,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Returns the {@code upload} property - IE version.
-     * @return the {@code upload} property
-     */
-    @JsxGetter(value = IE, propertyName = "upload")
-    public XMLHttpRequestEventTarget getUploadIE_js() {
-        final XMLHttpRequestEventTarget upload = new XMLHttpRequestEventTarget();
-        upload.setParentScope(getParentScope());
-        upload.setPrototype(getPrototype(upload.getClass()));
-        return upload;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @JsxGetter
@@ -1312,28 +1299,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /**
      * {@inheritDoc}
      */
-    @JsxGetter(IE)
-    @Override
-    public Function getOntimeout() {
-        return super.getOntimeout();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @JsxSetter
     @Override
     public void setOntimeout(final Function timeoutHandler) {
         super.setOntimeout(timeoutHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxGetter(IE)
-    @Override
-    public Function getOnprogress() {
-        return super.getOnprogress();
     }
 
     /**
@@ -1348,28 +1317,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /**
      * {@inheritDoc}
      */
-    @JsxGetter(IE)
-    @Override
-    public Function getOnload() {
-        return super.getOnload();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @JsxSetter
     @Override
     public void setOnload(final Function loadHandler) {
         super.setOnload(loadHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxGetter(IE)
-    @Override
-    public Function getOnloadstart() {
-        return super.getOnloadstart();
     }
 
     /**
@@ -1384,15 +1335,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /**
      * {@inheritDoc}
      */
-    @JsxGetter(IE)
-    @Override
-    public Function getOnloadend() {
-        return super.getOnloadend();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @JsxSetter
     @Override
     public void setOnloadend(final Function loadendHandler) {
@@ -1402,28 +1344,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /**
      * {@inheritDoc}
      */
-    @JsxGetter(IE)
-    @Override
-    public Function getOnabort() {
-        return super.getOnabort();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @JsxSetter
     @Override
     public void setOnabort(final Function abortHandler) {
         super.setOnabort(abortHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxGetter(IE)
-    @Override
-    public Function getOnerror() {
-        return super.getOnerror();
     }
 
     /**

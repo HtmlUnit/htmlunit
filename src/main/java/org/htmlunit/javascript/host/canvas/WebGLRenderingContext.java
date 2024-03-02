@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.canvas;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -336,9 +334,6 @@ public class WebGLRenderingContext extends HtmlUnitScriptable {
     /** The constant {@code TEXTURE}. */
     @JsxConstant
     public static final int TEXTURE = 0x1702;
-    /** The constant {@code STENCIL_INDEX}. */
-    @JsxConstant(IE)
-    public static final int STENCIL_INDEX = 0x1901;
     /** The constant {@code DEPTH_COMPONENT}. */
     @JsxConstant
     public static final int DEPTH_COMPONENT = 0x1902;
