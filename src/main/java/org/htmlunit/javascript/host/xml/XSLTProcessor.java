@@ -15,10 +15,6 @@
 package org.htmlunit.javascript.host.xml;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_XSLT_TRANSFORM_INDENT;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
@@ -61,7 +57,7 @@ import org.w3c.dom.NodeList;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR})
+@JsxClass
 public class XSLTProcessor extends HtmlUnitScriptable {
 
     private Node style_;

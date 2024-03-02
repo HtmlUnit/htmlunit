@@ -66,7 +66,7 @@ public class Navigator extends HtmlUnitScriptable {
     /**
      * JavaScript constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
     }
 
@@ -128,7 +128,7 @@ public class Navigator extends HtmlUnitScriptable {
      * Returns the language of the browser.
      * @return the language
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Scriptable getLanguages() {
         final String acceptLang = getBrowserVersion().getAcceptLanguageHeader();
         if (StringUtils.isEmpty(acceptLang)) {
@@ -199,7 +199,7 @@ public class Navigator extends HtmlUnitScriptable {
      * @see <a href="https://developer.mozilla.org/en/navigator.productSub">Mozilla Doc</a>
      * @return false
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public String getProductSub() {
         return getBrowserVersion().getProductSub();
     }
@@ -333,7 +333,7 @@ public class Navigator extends HtmlUnitScriptable {
      * Returns the {@code vendorSub} property.
      * @return the {@code vendorSub} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public String getVendorSub() {
         return "";
     }
@@ -342,7 +342,7 @@ public class Navigator extends HtmlUnitScriptable {
      * Returns the {@code doNotTrack} property.
      * @return the {@code doNotTrack} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Object getDoNotTrack() {
         final WebClient client = getWindow().getWebWindow().getWebClient();
         if (client.getOptions().isDoNotTrackEnabled()) {
@@ -379,7 +379,7 @@ public class Navigator extends HtmlUnitScriptable {
      * Returns the {@code mimeTypes} property.
      * @return the {@code mimeTypes} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public MediaDevices getMediaDevices() {
         if (mediaDevices_ == null) {
             mediaDevices_ = new MediaDevices();

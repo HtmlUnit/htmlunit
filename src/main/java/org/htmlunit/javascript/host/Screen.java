@@ -57,7 +57,7 @@ public class Screen extends EventTarget {
      * JavaScript constructor.
      */
     @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
     }
@@ -83,7 +83,7 @@ public class Screen extends EventTarget {
      * Returns the {@code availLeft} property.
      * @return the {@code availLeft} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public int getAvailLeft() {
         return screen_.getAvailLeft();
     }
@@ -92,7 +92,7 @@ public class Screen extends EventTarget {
      * Returns the {@code availTop} property.
      * @return the {@code availTop} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public int getAvailTop() {
         return screen_.getAvailTop();
     }
@@ -245,7 +245,7 @@ public class Screen extends EventTarget {
      * Returns the {@code orientation} property.
      * @return the {@code orientation} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public ScreenOrientation getOrientation() {
         final ScreenOrientation screenOrientation = new ScreenOrientation();
         screenOrientation.setPrototype(getPrototype(screenOrientation.getClass()));

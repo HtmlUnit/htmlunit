@@ -70,7 +70,7 @@ public class UIEvent extends Event {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     @Override
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
@@ -168,7 +168,7 @@ public class UIEvent extends Event {
      * @return a number that indicates which button was pressed on the mouse,
      * or the numeric keyCode or the character code (charCode) of the key pressed on the keyboard
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public int getWhich() {
         return 0;
     }

@@ -15,10 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_FF_STYLE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.util.Locale;
 
@@ -52,7 +48,7 @@ public class CSSPageRule extends CSSRule {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     @Override
     public void jsConstructor() {
         super.jsConstructor();
@@ -84,7 +80,7 @@ public class CSSPageRule extends CSSRule {
      * Sets the textual representation of the selector for the rule set.
      * @param selectorText the textual representation of the selector for the rule set
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setSelectorText(final String selectorText) {
         try {
             getPageRule().setSelectorText(selectorText);

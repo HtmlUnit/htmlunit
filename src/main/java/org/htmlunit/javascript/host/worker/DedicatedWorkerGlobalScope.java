@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.worker;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -64,7 +60,7 @@ import org.htmlunit.util.MimeType;
  * @author Ronald Brill
  * @author Rural Hunter
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR})
+@JsxClass
 @JsxClass(className = "WorkerGlobalScope", value = IE)
 public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrWorkerGlobalScope {
 

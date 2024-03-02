@@ -15,10 +15,6 @@
 package org.htmlunit.javascript.host.file;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -242,7 +238,7 @@ public class Blob extends HtmlUnitScriptable {
      * @return a Promise that resolves with an ArrayBuffer containing the
      * data in binary form.
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction
     public Object arrayBuffer() {
         return setupPromise(() -> {
             final byte[] bytes = getBytes();
@@ -301,7 +297,7 @@ public class Blob extends HtmlUnitScriptable {
      * @return a Promise that resolves with a string containing the
      * contents of the blob, interpreted as UTF-8.
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction
     public Object text() {
         return setupPromise(() -> getBackend().getText());
     }

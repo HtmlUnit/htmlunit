@@ -67,7 +67,7 @@ public class NodeList extends AbstractList implements Callable {
     /**
      * JavaScript constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
     }
 
@@ -121,7 +121,7 @@ public class NodeList extends AbstractList implements Callable {
      * Returns an Iterator allowing to go through all keys contained in this object.
      * @return an {@link NativeArrayIterator}
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction
     public ES6Iterator keys() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.KEYS);
     }
@@ -130,7 +130,7 @@ public class NodeList extends AbstractList implements Callable {
      * Returns an Iterator allowing to go through all keys contained in this object.
      * @return an {@link NativeArrayIterator}
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction
     @JsxSymbol(value = {CHROME, EDGE, FF, FF_ESR}, symbolName = "iterator")
     public ES6Iterator values() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
@@ -140,7 +140,7 @@ public class NodeList extends AbstractList implements Callable {
      * Returns an Iterator allowing to go through all key/value pairs contained in this object.
      * @return an {@link NativeArrayIterator}
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction
     public ES6Iterator entries() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
     }
@@ -149,7 +149,7 @@ public class NodeList extends AbstractList implements Callable {
      * Calls the {@code callback} given in parameter once for each value pair in the list, in insertion order.
      * @param callback function to execute for each element
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction
     public void forEach(final Object callback) {
         final List<DomNode> nodes = getElements();
 

@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.apache.commons.logging.Log;
@@ -114,19 +110,19 @@ public class CSSRule extends HtmlUnitScriptable {
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
-    @JsxConstant({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstant
     public static final int COUNTER_STYLE_RULE        = 11;
 
     /**
      * The rule is a {@code CSSSupportsRule}.
      */
-    @JsxConstant({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstant
     public static final int SUPPORTS_RULE             = 12;
 
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
-    @JsxConstant({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstant
     public static final int FONT_FEATURE_VALUES_RULE  = 14;
 
     /**
@@ -150,7 +146,7 @@ public class CSSRule extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }

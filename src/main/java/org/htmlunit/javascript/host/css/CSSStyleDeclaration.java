@@ -138,7 +138,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor(final String type, final ScriptableObject details) {
         throw JavaScriptEngine.typeError("CSSStyleDeclaration ctor is not available");
     }

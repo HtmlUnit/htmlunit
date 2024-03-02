@@ -15,8 +15,6 @@
 package org.htmlunit.javascript.host.event;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_EVENT_KEYBOARD_CTOR_WHICH;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -1054,7 +1052,7 @@ public class KeyboardEvent extends UIEvent {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     @Override
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
@@ -1278,7 +1276,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns a physical key on the keyboard.
      * @return a physical key on the keyboard
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public String getCode() {
         return code_;
     }
@@ -1346,7 +1344,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns whether or not the event is fired after the compositionstart and before the compositionend events.
      * @return whether or not the event is fired while composing
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public boolean getIsComposing() {
         return isComposing_;
     }

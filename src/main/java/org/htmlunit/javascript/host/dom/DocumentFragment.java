@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
@@ -54,7 +49,7 @@ public class DocumentFragment extends Node {
      * JavaScript constructor.
      */
     @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
     }
@@ -112,7 +107,7 @@ public class DocumentFragment extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public int getChildElementCount() {
         return super.getChildElementCount();
     }
@@ -121,7 +116,7 @@ public class DocumentFragment extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Element getFirstElementChild() {
         return super.getFirstElementChild();
     }
@@ -130,7 +125,7 @@ public class DocumentFragment extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Element getLastElementChild() {
         return super.getLastElementChild();
     }
@@ -139,7 +134,7 @@ public class DocumentFragment extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -149,7 +144,7 @@ public class DocumentFragment extends Node {
      * @param id the ID to search for
      * @return the element, or {@code null} if it could not be found
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction
     public HtmlUnitScriptable getElementById(final Object id) {
         if (id == null || JavaScriptEngine.isUndefined(id)) {
             return null;

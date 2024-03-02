@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
@@ -42,7 +38,7 @@ import org.w3c.dom.DOMException;
  * @author Frank Danek
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule">MDN doc</a>
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR})
+@JsxClass
 @JsxClass(isJSObject = false, value = IE)
 public class CSSGroupingRule extends CSSRule {
 
@@ -59,7 +55,7 @@ public class CSSGroupingRule extends CSSRule {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     @Override
     public void jsConstructor() {
         super.jsConstructor();

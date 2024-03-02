@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import java.util.List;
 
 import org.htmlunit.html.DomAttr;
@@ -38,7 +33,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR})
+@JsxClass
 public class XPathResult extends HtmlUnitScriptable {
 
     /**

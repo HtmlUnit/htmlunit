@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.html.DomElement;
@@ -48,7 +44,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      * JavaScript constructor.
      */
     @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
     }
@@ -75,7 +71,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      * Returns the {@code name} attribute.
      * @return the {@code name} attribute
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     @Override
     public String getName() {
         return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
@@ -85,7 +81,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      * Sets the {@code name} attribute.
      * @param name the {@code name} attribute
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     @Override
     public void setName(final String name) {
         getDomNodeOrDie().setAttribute(DomElement.NAME_ATTRIBUTE, name);

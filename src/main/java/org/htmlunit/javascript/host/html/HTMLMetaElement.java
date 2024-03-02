@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.html.DomElement;
@@ -46,7 +42,7 @@ public class HTMLMetaElement extends HTMLElement {
      * JavaScript constructor.
      */
     @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
     }
@@ -146,7 +142,7 @@ public class HTMLMetaElement extends HTMLElement {
     /**
      * @return the {@code meta} attribute
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public String getMedia() {
         return getDomNodeOrDie().getAttribute("media");
     }
@@ -154,7 +150,7 @@ public class HTMLMetaElement extends HTMLElement {
     /**
      * @param media the media attribute
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setMedia(final String media) {
         getDomNodeOrDie().setAttribute("media", media);
     }

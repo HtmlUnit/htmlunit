@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -528,7 +526,7 @@ public class Event extends HtmlUnitScriptable {
     public static final String TYPE_MSSITEMODEJUMPLISTITEMREMOVED = "mssitemodejumplistitemremoved";
 
     /** No event phase. */
-    @JsxConstant({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstant
     public static final int NONE = 0;
 
     /** The first event phase: the capturing phase. */
@@ -681,7 +679,7 @@ public class Event extends HtmlUnitScriptable {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor(final String type, final ScriptableObject details) {
         boolean bubbles = false;
         boolean cancelable = false;
@@ -1064,7 +1062,7 @@ public class Event extends HtmlUnitScriptable {
     /**
      * @return the return value property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Object getReturnValue() {
         return !preventDefault_;
     }
@@ -1072,7 +1070,7 @@ public class Event extends HtmlUnitScriptable {
     /**
      * @param newValue the new return value
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setReturnValue(final Object newValue) {
         if (isCancelable()) {
             final boolean bool = !JavaScriptEngine.toBoolean(newValue);
@@ -1085,7 +1083,7 @@ public class Event extends HtmlUnitScriptable {
     /**
      * @return the return composed property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Object getComposed() {
         return false;
     }

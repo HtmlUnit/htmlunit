@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -48,7 +46,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * JavaScript constructor.
      */
     @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
     }
@@ -204,7 +202,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onlanguagechange} event handler.
      * @return the {@code onlanguagechange} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnlanguagechange() {
         return getEventHandler(Event.TYPE_LANGUAGECHANGE);
     }
@@ -213,7 +211,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onlanguagechange} event handler.
      * @param languagechange the {@code onlanguagechange} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnlanguagechange(final Object languagechange) {
         setEventHandler(Event.TYPE_LANGUAGECHANGE, languagechange);
     }
@@ -240,7 +238,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onmessageerror} event handler for this element.
      * @return the {@code onmessageerror} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnmessageerror() {
         return getEventHandler(Event.TYPE_ONMESSAGEERROR);
     }
@@ -249,7 +247,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onmessageerror} event handler for this element.
      * @param onmessageerror the {@code onmessageerror} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnmessageerror(final Object onmessageerror) {
         setEventHandler(Event.TYPE_ONMESSAGEERROR, onmessageerror);
     }
@@ -330,7 +328,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onpopstate} event handler.
      * @return the {@code onpopstate} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnpopstate() {
         return getEventHandler(Event.TYPE_POPSTATE);
     }
@@ -339,7 +337,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onpopstate} event handler.
      * @param popstate the {@code onpopstate} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnpopstate(final Object popstate) {
         setEventHandler(Event.TYPE_POPSTATE, popstate);
     }
@@ -348,7 +346,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onrejectionhandled} event handler.
      * @return the {@code onrejectionhandled} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnrejectionhandled() {
         return getEventHandler(Event.TYPE_REJECTIONHANDLED);
     }
@@ -357,7 +355,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onrejectionhandled} event handler.
      * @param rejectionhandled the {@code onrejectionhandled} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnrejectionhandled(final Object rejectionhandled) {
         setEventHandler(Event.TYPE_REJECTIONHANDLED, rejectionhandled);
     }
@@ -384,7 +382,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onunhandledrejection} event handler.
      * @return the {@code onunhandledrejection} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnunhandledrejection() {
         return getEventHandler(Event.TYPE_UNHANDLEDREJECTION);
     }
@@ -393,7 +391,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onunhandledrejection} event handler.
      * @param unhandledrejection the {@code onunhandledrejection} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnunhandledrejection(final Object unhandledrejection) {
         setEventHandler(Event.TYPE_UNHANDLEDREJECTION, unhandledrejection);
     }

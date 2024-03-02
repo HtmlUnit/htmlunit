@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.crypto;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import java.security.SecureRandom;
 import java.util.Locale;
 
@@ -52,7 +47,7 @@ public class Crypto extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
@@ -94,7 +89,7 @@ public class Crypto extends HtmlUnitScriptable {
      * Returns the {@code subtle} property.
      * @return the {@code stuble} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public SubtleCrypto getSubtle() {
         final SubtleCrypto stuble = new SubtleCrypto();
         final Window window = getWindow();

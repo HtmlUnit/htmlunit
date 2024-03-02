@@ -16,8 +16,6 @@ package org.htmlunit.javascript.host;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -36,7 +34,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR})
+@JsxClass
 public class Notification extends EventTarget {
 
     /**

@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -61,7 +56,7 @@ public class History extends HtmlUnitScriptable {
     /**
      * JavaScript constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
     }
 
@@ -175,7 +170,7 @@ public class History extends HtmlUnitScriptable {
      * Returns the {@code scrollRestoration} property.
      * @return the {@code scrollRestoration} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public String getScrollRestoration() {
         return scrollRestoration_;
     }
@@ -183,7 +178,7 @@ public class History extends HtmlUnitScriptable {
     /**
      * @param scrollRestoration the new value
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setScrollRestoration(final String scrollRestoration) {
         if (SCROLL_RESTAURATION_AUTO.equals(scrollRestoration)) {
             scrollRestoration_ = SCROLL_RESTAURATION_AUTO;

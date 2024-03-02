@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
@@ -33,7 +29,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Frank Danek
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSConditionRule">MDN doc</a>
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR})
+@JsxClass
 @JsxClass(isJSObject = false, value = IE)
 public class CSSConditionRule extends CSSGroupingRule {
 
@@ -65,7 +61,7 @@ public class CSSConditionRule extends CSSGroupingRule {
      * Returns the text of the condition of the rule.
      * @return the text of the condition of the rule
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public String getConditionText() {
         return getConditionRule().getMediaList().getMediaText();
     }

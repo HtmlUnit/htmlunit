@@ -16,10 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static org.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.Serializable;
@@ -87,7 +83,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * JavaScript constructor.
      */
     @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
     }
@@ -146,7 +142,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         return elements;
     }
 
-    @JsxSymbol({CHROME, EDGE, FF, FF_ESR})
+    @JsxSymbol
     public ES6Iterator iterator() {
         return getElements().iterator();
     }
@@ -234,7 +230,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the value of the rel property.
      * @return the rel property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public String getRel() {
         return getHtmlForm().getRelAttribute();
     }
@@ -243,7 +239,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the rel property.
      * @param rel rel attribute value
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setRel(final String rel) {
         getHtmlForm().setAttribute("rel", rel);
     }
@@ -252,7 +248,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the {@code relList} attribute.
      * @return the {@code relList} attribute
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public DOMTokenList getRelList() {
         return new DOMTokenList(this, "rel");
     }
@@ -261,7 +257,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the relList property.
      * @param rel attribute value
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setRelList(final Object rel) {
         if (JavaScriptEngine.isUndefined(rel)) {
             setRel("undefined");
@@ -335,7 +331,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * an &lt;input&gt; or &lt;button&gt; element whose type attribute is submit.
      * If you omit the submitter parameter, the form element itself is used as the submitter.
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction
     public void requestSubmit(final Object submitter) {
         if (JavaScriptEngine.isUndefined(submitter)) {
             submit();

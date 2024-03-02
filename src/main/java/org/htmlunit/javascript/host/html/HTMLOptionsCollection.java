@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.Serializable;
@@ -58,7 +54,7 @@ import org.htmlunit.javascript.host.dom.NodeList;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF_ESR})
+@JsxClass
 @JsxClass(isJSObject = false, value = IE)
 public class HTMLOptionsCollection extends HtmlUnitScriptable {
 
@@ -73,7 +69,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     /**
      * JavaScript constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
     }
 
@@ -341,7 +337,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
         return childNodes;
     }
 
-    @JsxSymbol({CHROME, EDGE, FF, FF_ESR})
+    @JsxSymbol
     public ES6Iterator iterator() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
     }

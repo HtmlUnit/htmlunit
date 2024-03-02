@@ -51,7 +51,7 @@ public class HTMLBodyElement extends HTMLElement {
      * JavaScript constructor.
      */
     @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
     }
@@ -363,7 +363,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onlanguagechange} event handler for this element.
      * @return the {@code onlanguagechange} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnlanguagechange() {
         return getEventHandler(Event.TYPE_LANGUAGECHANGE);
     }
@@ -372,7 +372,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onlanguagechange} event handler for this element.
      * @param onlanguagechange the {@code onlanguagechange} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnlanguagechange(final Object onlanguagechange) {
         setEventHandler(Event.TYPE_LANGUAGECHANGE, onlanguagechange);
     }
@@ -489,7 +489,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onrejectionhandled} event handler for this element.
      * @return the {@code onrejectionhandled} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnrejectionhandled() {
         return getEventHandler(Event.TYPE_REJECTIONHANDLED);
     }
@@ -498,7 +498,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onrejectionhandled} event handler for this element.
      * @param onrejectionhandled the {@code onrejectionhandled} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnrejectionhandled(final Object onrejectionhandled) {
         setEventHandler(Event.TYPE_REJECTIONHANDLED, onrejectionhandled);
     }
@@ -525,7 +525,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onunhandledrejection} event handler for this element.
      * @return the {@code onunhandledrejection} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnunhandledrejection() {
         return getEventHandler(Event.TYPE_UNHANDLEDREJECTION);
     }
@@ -534,7 +534,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onunhandledrejection} event handler for this element.
      * @param onunhandledrejection the {@code onunhandledrejection} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnunhandledrejection(final Object onunhandledrejection) {
         setEventHandler(Event.TYPE_UNHANDLEDREJECTION, onunhandledrejection);
     }
@@ -597,7 +597,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onmessageerror} event handler for this element.
      * @return the {@code onmessageerror} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Function getOnmessageerror() {
         return getEventHandler(Event.TYPE_ONMESSAGEERROR);
     }
@@ -606,7 +606,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onmessageerror} event handler for this element.
      * @param onmessageerror the {@code onmessageerror} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter
     public void setOnmessageerror(final Object onmessageerror) {
         setEventHandler(Event.TYPE_ONMESSAGEERROR, onmessageerror);
     }

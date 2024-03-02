@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -120,7 +115,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      * Gets the node within which the Range begins.
      * @return <code>undefined</code> if not initialized
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Object getStartContainer() {
         if (startContainer_ == null) {
             return Undefined.instance;
@@ -132,7 +127,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      * Gets the node within which the Range ends.
      * @return <code>undefined</code> if not initialized
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public Object getEndContainer() {
         if (endContainer_ == null) {
             return Undefined.instance;
@@ -144,7 +139,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      * Gets the offset within the starting node of the Range.
      * @return <code>0</code> if not initialized
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public int getStartOffset() {
         return startOffset_;
     }
@@ -153,7 +148,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      * Gets the offset within the end node of the Range.
      * @return <code>0</code> if not initialized
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public int getEndOffset() {
         return endOffset_;
     }
@@ -162,7 +157,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      * Indicates if the range is collapsed.
      * @return {@code true} if the range is collapsed
      */
-    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter
     public boolean isCollapsed() {
         return startContainer_ == endContainer_ && startOffset_ == endOffset_;
     }

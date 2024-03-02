@@ -64,7 +64,7 @@ public class URL extends HtmlUnitScriptable {
      * @param base a string representing the base URL to use in case url
      * is a relative URL. If not specified, it defaults to ''.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor
     @JsxConstructorAlias(value = {CHROME, EDGE, FF, FF_ESR}, alias = "webkitURL")
     public void jsConstructor(final String url, final Object base) {
         String baseStr = null;
