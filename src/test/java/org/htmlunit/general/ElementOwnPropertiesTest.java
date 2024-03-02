@@ -17287,4 +17287,54 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void geolocation() throws Exception {
         testString("", " navigator.geolocation");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.geo.Geolocation}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),HEADERS_RECEIVED[E],"
+                + "LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),readyState[GCE],"
+                + "response[GCE],responseText[GCE],responseType[GSCE],responseURL[GCE],responseXML[GCE],send(),"
+                + "setPrivateToken(),setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+                + "upload[GCE],withCredentials[GSCE]",
+            EDGE = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),HEADERS_RECEIVED[E],"
+                + "LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),readyState[GCE],"
+                + "response[GCE],responseText[GCE],responseType[GSCE],responseURL[GCE],responseXML[GCE],send(),"
+                + "setPrivateToken(),setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+                + "upload[GCE],withCredentials[GSCE]",
+            FF = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),HEADERS_RECEIVED[E],"
+                + "LOADING[E],mozAnon[GCE],mozSystem[GCE],onreadystatechange[GSCE],open(),OPENED[E],"
+                + "overrideMimeType(),readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],"
+                + "responseURL[GCE],responseXML[GCE],send(),setRequestHeader(),status[GCE],statusText[GCE],"
+                + "timeout[GSCE],UNSENT[E],upload[GCE],withCredentials[GSCE]",
+            FF_ESR = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),HEADERS_RECEIVED[E],"
+                + "LOADING[E],mozAnon[GCE],mozSystem[GCE],onreadystatechange[GSCE],open(),OPENED[E],"
+                + "overrideMimeType(),readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],"
+                + "responseURL[GCE],responseXML[GCE],send(),setRequestHeader(),status[GCE],statusText[GCE],"
+                + "timeout[GSCE],UNSENT[E],upload[GCE],withCredentials[GSCE]")
+    @HtmlUnitNYI(CHROME = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
+            + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
+            + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
+            + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+            + "upload[GCE],withCredentials[GSCE]",
+        EDGE = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
+            + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
+            + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
+            + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+            + "upload[GCE],withCredentials[GSCE]",
+        FF = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
+            + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
+            + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
+            + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+            + "upload[GCE],withCredentials[GSCE]",
+        FF_ESR = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
+            + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
+            + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
+            + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+            + "upload[GCE],withCredentials[GSCE]")
+    public void xmlHttpRequest() throws Exception {
+        testString("", "new XMLHttpRequest()");
+    }
 }

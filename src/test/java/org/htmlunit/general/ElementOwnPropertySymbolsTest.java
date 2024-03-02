@@ -3024,4 +3024,18 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void geolocation() throws Exception {
         testString("", " navigator.geolocation");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.geo.Geolocation}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [XMLHttpRequest]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [XMLHttpRequest]",
+            FF = "Symbol(Symbol.toStringTag) [C] [XMLHttpRequest]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [XMLHttpRequest]")
+    public void xmlHttpRequest() throws Exception {
+        testString("", "new XMLHttpRequest()");
+    }
 }

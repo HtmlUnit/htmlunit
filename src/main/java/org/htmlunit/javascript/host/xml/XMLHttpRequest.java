@@ -1296,69 +1296,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         timeout_ = timeout;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @JsxSetter
-    @Override
-    public void setOntimeout(final Function timeoutHandler) {
-        super.setOntimeout(timeoutHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxSetter
-    @Override
-    public void setOnprogress(final Function progressHandler) {
-        super.setOnprogress(progressHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxSetter
-    @Override
-    public void setOnload(final Function loadHandler) {
-        super.setOnload(loadHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxSetter
-    @Override
-    public void setOnloadstart(final Function loadstartHandler) {
-        super.setOnloadstart(loadstartHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxSetter
-    @Override
-    public void setOnloadend(final Function loadendHandler) {
-        super.setOnloadend(loadendHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxSetter
-    @Override
-    public void setOnabort(final Function abortHandler) {
-        super.setOnabort(abortHandler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxSetter
-    @Override
-    public void setOnerror(final Function errorHandler) {
-        super.setOnerror(errorHandler);
-    }
-
     private static final class NetworkErrorWebResponse extends WebResponse {
         private final WebRequest request_;
         private final IOException error_;
