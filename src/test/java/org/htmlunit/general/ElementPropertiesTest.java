@@ -8732,25 +8732,25 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "removeEventListener(),response,responseText,responseType,responseURL,responseXML,send(),"
                 + "setRequestHeader(),status,statusText,timeout,UNSENT,upload,withCredentials")
     @HtmlUnitNYI(CHROME = "abort(),addEventListener(),dispatchEvent(),DONE,getAllResponseHeaders(),getResponseHeader(),"
-            + "HEADERS_RECEIVED,LOADING,onabort,onerror,onload,onloadend,onloadstart,onprogress,onreadystatechange,"
-            + "ontimeout,open(),OPENED,overrideMimeType(),readyState,removeEventListener(),response,responseText,"
-            + "responseType,responseXML,send(),setRequestHeader(),status,statusText,timeout,UNSENT,"
-            + "upload,withCredentials",
-        EDGE = "abort(),addEventListener(),dispatchEvent(),DONE,getAllResponseHeaders(),getResponseHeader(),"
-            + "HEADERS_RECEIVED,LOADING,onabort,onerror,onload,onloadend,onloadstart,onprogress,onreadystatechange,"
-            + "ontimeout,open(),OPENED,overrideMimeType(),readyState,removeEventListener(),response,responseText,"
-            + "responseType,responseXML,send(),setRequestHeader(),status,statusText,timeout,UNSENT,"
-            + "upload,withCredentials",
-        FF = "abort(),addEventListener(),dispatchEvent(),DONE,getAllResponseHeaders(),getResponseHeader(),"
-            + "HEADERS_RECEIVED,LOADING,onabort,onerror,onload,onloadend,onloadstart,onprogress,onreadystatechange,"
-            + "ontimeout,open(),OPENED,overrideMimeType(),readyState,removeEventListener(),response,responseText,"
-            + "responseType,responseXML,send(),setRequestHeader(),status,statusText,timeout,UNSENT,"
-            + "upload,withCredentials",
-        FF_ESR = "abort(),addEventListener(),dispatchEvent(),DONE,getAllResponseHeaders(),getResponseHeader(),"
-            + "HEADERS_RECEIVED,LOADING,onabort,onerror,onload,onloadend,onloadstart,onprogress,onreadystatechange,"
-            + "ontimeout,open(),OPENED,overrideMimeType(),readyState,removeEventListener(),response,responseText,"
-            + "responseType,responseXML,send(),setRequestHeader(),status,statusText,timeout,UNSENT,"
-            + "upload,withCredentials")
+                + "HEADERS_RECEIVED,LOADING,onabort,onerror,onload,onloadend,onloadstart,onprogress,onreadystatechange,"
+                + "ontimeout,open(),OPENED,overrideMimeType(),readyState,removeEventListener(),response,responseText,"
+                + "responseType,responseXML,send(),setRequestHeader(),status,statusText,timeout,UNSENT,"
+                + "upload,withCredentials",
+            EDGE = "abort(),addEventListener(),dispatchEvent(),DONE,getAllResponseHeaders(),getResponseHeader(),"
+                + "HEADERS_RECEIVED,LOADING,onabort,onerror,onload,onloadend,onloadstart,onprogress,onreadystatechange,"
+                + "ontimeout,open(),OPENED,overrideMimeType(),readyState,removeEventListener(),response,responseText,"
+                + "responseType,responseXML,send(),setRequestHeader(),status,statusText,timeout,UNSENT,"
+                + "upload,withCredentials",
+            FF = "abort(),addEventListener(),dispatchEvent(),DONE,getAllResponseHeaders(),getResponseHeader(),"
+                + "HEADERS_RECEIVED,LOADING,onabort,onerror,onload,onloadend,onloadstart,onprogress,onreadystatechange,"
+                + "ontimeout,open(),OPENED,overrideMimeType(),readyState,removeEventListener(),response,responseText,"
+                + "responseType,responseXML,send(),setRequestHeader(),status,statusText,timeout,UNSENT,"
+                + "upload,withCredentials",
+            FF_ESR = "abort(),addEventListener(),dispatchEvent(),DONE,getAllResponseHeaders(),getResponseHeader(),"
+                + "HEADERS_RECEIVED,LOADING,onabort,onerror,onload,onloadend,onloadstart,onprogress,onreadystatechange,"
+                + "ontimeout,open(),OPENED,overrideMimeType(),readyState,removeEventListener(),response,responseText,"
+                + "responseType,responseXML,send(),setRequestHeader(),status,statusText,timeout,UNSENT,"
+                + "upload,withCredentials")
     public void xmlHttpRequest() throws Exception {
         testString("", "new XMLHttpRequest()");
     }

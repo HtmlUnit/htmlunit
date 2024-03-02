@@ -17315,25 +17315,25 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "responseURL[GCE],responseXML[GCE],send(),setRequestHeader(),status[GCE],statusText[GCE],"
                 + "timeout[GSCE],UNSENT[E],upload[GCE],withCredentials[GSCE]")
     @HtmlUnitNYI(CHROME = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
-            + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
-            + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
-            + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
-            + "upload[GCE],withCredentials[GSCE]",
-        EDGE = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
-            + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
-            + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
-            + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
-            + "upload[GCE],withCredentials[GSCE]",
-        FF = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
-            + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
-            + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
-            + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
-            + "upload[GCE],withCredentials[GSCE]",
-        FF_ESR = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
-            + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
-            + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
-            + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
-            + "upload[GCE],withCredentials[GSCE]")
+                + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
+                + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
+                + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+                + "upload[GCE],withCredentials[GSCE]",
+            EDGE = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
+                + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
+                + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
+                + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+                + "upload[GCE],withCredentials[GSCE]",
+            FF = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
+                + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
+                + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
+                + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+                + "upload[GCE],withCredentials[GSCE]",
+            FF_ESR = "abort(),constructor(),DONE[E],getAllResponseHeaders(),getResponseHeader(),"
+                + "HEADERS_RECEIVED[E],LOADING[E],onreadystatechange[GSCE],open(),OPENED[E],overrideMimeType(),"
+                + "readyState[GCE],response[GCE],responseText[GCE],responseType[GSCE],responseXML[GCE],send(),"
+                + "setRequestHeader(),status[GCE],statusText[GCE],timeout[GSCE],UNSENT[E],"
+                + "upload[GCE],withCredentials[GSCE]")
     public void xmlHttpRequest() throws Exception {
         testString("", "new XMLHttpRequest()");
     }

@@ -113,6 +113,7 @@ public class Screen extends EventTarget {
     public int getColorDepth() {
         return screen_.getColorDepth();
     }
+
     /**
      * Returns the {@code height} property.
      * @return the {@code height} property
