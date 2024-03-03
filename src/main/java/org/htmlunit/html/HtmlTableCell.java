@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
+
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,16 +48,22 @@ public abstract class HtmlTableCell extends HtmlElement {
     }
 
     /**
-     * Returns the value of the colspan attribute, or <code>1</code> if the attribute wasn't specified.
      * @return the value of the colspan attribute, or <code>1</code> if the attribute wasn't specified
      */
     public int getColumnSpan() {
-        final String spanString = StringUtils.replaceChars(getAttributeDirect("colspan"), "\r\n", null);
+        final String spanString = StringUtils.replaceChars(getAttributeDirect("colspan"), "\r\n\t ", null);
         if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
         try {
-            return Integer.parseInt(spanString);
+            final int span = (int) Double.parseDouble(spanString);
+            if (span < 1) {
+                return 1;
+            }
+            if (span > 1000) {
+                return 1000;
+            }
+            return span;
         }
         catch (final NumberFormatException e) {
             return 1;
@@ -63,16 +71,33 @@ public abstract class HtmlTableCell extends HtmlElement {
     }
 
     /**
-     * Returns the value of the rowspan attribute, or <code>1</code> if the attribute wasn't specified.
      * @return the value of the rowspan attribute, or <code>1</code> if the attribute wasn't specified
      */
     public int getRowSpan() {
-        final String spanString = StringUtils.replaceChars(getAttributeDirect("rowspan"), "\r\n", null);
+        final String spanString = StringUtils.replaceChars(getAttributeDirect("rowspan"), "\r\n\t ", null);
         if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
         try {
-            return Integer.parseInt(spanString);
+            final int span = (int) Double.parseDouble(spanString);
+            if (getPage().getWebClient().getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
+                if (span < 0) {
+                    return 1;
+                }
+                if (span < 1) {
+                    return 0;
+                }
+            }
+            else {
+                if (span < 1) {
+                    return 1;
+                }
+            }
+
+            if (span > 65534) {
+                return 65534;
+            }
+            return span;
         }
         catch (final NumberFormatException e) {
             return 1;

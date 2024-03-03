@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomNode;
@@ -179,13 +178,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public int getColSpan() {
-        final String s = StringUtils.replaceChars(getDomNodeOrDie().getAttribute("colSpan"), "\r\n\t ", null);
-        try {
-            return Integer.parseInt(s);
-        }
-        catch (final NumberFormatException e) {
-            return 1;
-        }
+        return ((HtmlTableCell) getDomNodeOrDie()).getColumnSpan();
     }
 
     /**
@@ -212,13 +205,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public int getRowSpan() {
-        final String s = StringUtils.replaceChars(getDomNodeOrDie().getAttribute("rowSpan"), "\r\n\t ", null);
-        try {
-            return Integer.parseInt(s);
-        }
-        catch (final NumberFormatException e) {
-            return 1;
-        }
+        return ((HtmlTableCell) getDomNodeOrDie()).getRowSpan();
     }
 
     /**

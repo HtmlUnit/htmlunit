@@ -19,6 +19,9 @@
             </action>
 
             <action type="fix" dev="Lai Quang Duong">
+                Invalid numbers are processed correct now when using the rowSpan/colSpan properties.
+            </action>
+            <action type="fix" dev="Lai Quang Duong">
                 Whitespace gets removed from rowspan/colspan attributes when using rowSpan/colSpan properties.
             </action>
             <action type="fix" dev="Lai Quang Duong">

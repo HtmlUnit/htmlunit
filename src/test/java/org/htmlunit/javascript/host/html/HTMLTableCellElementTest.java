@@ -354,6 +354,68 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"1", "1", "3", "3", "3"})
+    public void colSpanInvalid() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <tr>\n"
+            + "    <td id='td1' colspan='-1'>b</td>\n"
+            + "    <td id='td2' colspan='0'>b</td>\n"
+            + "    <td id='td3' colspan='3.14'>b</td>\n"
+            + "    <td id='td4' colspan='3.5'>b</td>\n"
+            + "    <td id='td5' colspan='3.7'>b</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+            + "  var td4 = document.getElementById('td4');\n"
+            + "  var td5 = document.getElementById('td5');\n"
+            + "  log(td1.colSpan);\n"
+            + "  log(td2.colSpan);\n"
+            + "  log(td3.colSpan);\n"
+            + "  log(td4.colSpan);\n"
+            + "  log(td5.colSpan);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"999", "1000", "1000"})
+    public void colSpanLarge() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <tr>\n"
+            + "    <td id='td1' colspan='999'>b</td>\n"
+            + "    <td id='td2' colspan='1000'>b</td>\n"
+            + "    <td id='td3' colspan='1001'>b</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+            + "  log(td1.colSpan);\n"
+            + "  log(td2.colSpan);\n"
+            + "  log(td3.colSpan);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"1", "3", "1", "2", "1", "5", "1", "2", "1"},
             CHROME = {"1", "3", "1", "2", "0", "5", "1", "2", "0"},
             EDGE = {"1", "3", "1", "2", "0", "5", "1", "2", "0"})
@@ -420,6 +482,73 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  var td1 = document.getElementById('td1');\n"
             + "  log(td1.rowSpan);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "0", "3", "3", "3"},
+            FF = {"1", "1", "3", "3", "3"},
+            FF_ESR = {"1", "1", "3", "3", "3"})
+    public void rowSpanInvalid() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <tr>\n"
+            + "    <td id='td1' rowspan='-1'>b</td>\n"
+            + "    <td id='td2' rowspan='0'>b</td>\n"
+            + "    <td id='td3' rowspan='3.14'>b</td>\n"
+            + "    <td id='td4' rowspan='3.5'>b</td>\n"
+            + "    <td id='td5' rowspan='3.7'>b</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+            + "  var td4 = document.getElementById('td4');\n"
+            + "  var td5 = document.getElementById('td5');\n"
+            + "  log(td1.rowSpan);\n"
+            + "  log(td2.rowSpan);\n"
+            + "  log(td3.rowSpan);\n"
+            + "  log(td4.rowSpan);\n"
+            + "  log(td5.rowSpan);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"999", "1001", "65534", "65534"})
+    public void rowSpanLarge() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <tr>\n"
+            + "    <td id='td1' rowspan='999'>b</td>\n"
+            + "    <td id='td2' rowspan='1001'>b</td>\n"
+            + "    <td id='td3' rowspan='65534'>b</td>\n"
+            + "    <td id='td4' rowspan='65535'>b</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+            + "  var td4 = document.getElementById('td4');\n"
+            + "  log(td1.rowSpan);\n"
+            + "  log(td2.rowSpan);\n"
+            + "  log(td3.rowSpan);\n"
+            + "  log(td4.rowSpan);\n"
             + "</script>\n"
             + "</body></html>";
 
