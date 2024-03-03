@@ -498,10 +498,7 @@ public final class BrowserVersion implements Serializable {
 
     private void initFeatures() {
         final SupportedBrowser expectedBrowser;
-        if (isChrome()) {
-            expectedBrowser = SupportedBrowser.CHROME;
-        }
-        else if (isEdge()) {
+        if (isEdge()) {
             expectedBrowser = SupportedBrowser.EDGE;
         }
         else if (isFirefoxESR()) {
@@ -511,7 +508,7 @@ public final class BrowserVersion implements Serializable {
             expectedBrowser = SupportedBrowser.FF;
         }
         else {
-            expectedBrowser = SupportedBrowser.IE;
+            expectedBrowser = SupportedBrowser.CHROME;
         }
 
         for (final BrowserVersionFeatures features : BrowserVersionFeatures.values()) {
