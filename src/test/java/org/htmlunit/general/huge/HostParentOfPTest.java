@@ -476,11 +476,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _PromiseRejectionEvent_PromiseRejectionEvent() throws Exception {
         test("PromiseRejectionEvent", "PromiseRejectionEvent");
     }
@@ -490,11 +486,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _PushManager_PushManager() throws Exception {
         test("PushManager", "PushManager");
     }
@@ -504,11 +496,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _PushSubscription_PushSubscription() throws Exception {
         test("PushSubscription", "PushSubscription");
     }
@@ -517,11 +505,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _PushSubscriptionOptions_PushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions", "PushSubscriptionOptions");
     }

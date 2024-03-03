@@ -2677,7 +2677,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    public void GeolocationPositionError() throws Exception {
+    public void geolocationPositionError() throws Exception {
         test("GeolocationPositionError");
     }
 

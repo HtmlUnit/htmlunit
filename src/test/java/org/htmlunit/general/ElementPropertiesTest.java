@@ -8706,7 +8706,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.geo.Geolocation}.
+     * Test {@link org.htmlunit.javascript.host.xml.XMLHttpRequest}.
      *
      * @throws Exception if the test fails
      */

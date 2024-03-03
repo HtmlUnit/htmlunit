@@ -103,26 +103,15 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
     static {
         // continue short code enumeration
-        final short isIndexShortCode = HTMLElements.UNKNOWN + 1;
-        final short commandShortCode = isIndexShortCode + 1;
-
-        // isIndex is special - we have to add it here because all browsers moving this to
-        // the body (even if it is not supported)
-        final HTMLElements.Element isIndex = new HTMLElements.Element(isIndexShortCode, "ISINDEX",
-                HTMLElements.Element.CONTAINER, HTMLElements.BODY, null);
+        final short commandShortCode = HTMLElements.UNKNOWN + 1;
 
         final HTMLElements.Element command = new HTMLElements.Element(commandShortCode, "COMMAND",
                 HTMLElements.Element.EMPTY, new short[] {HTMLElements.BODY, HTMLElements.HEAD}, null);
 
-        HTMLElements value;
+        HTMLELEMENTS = new HTMLElements();
 
-        value = new HTMLElements();
-        value.setElement(isIndex);
-        HTMLELEMENTS = value;
-
-        value = new HTMLElements();
+        final HTMLElements value = new HTMLElements();
         value.setElement(command);
-        value.setElement(isIndex);
         HTMLELEMENTS_WITH_CMD = value;
     }
 

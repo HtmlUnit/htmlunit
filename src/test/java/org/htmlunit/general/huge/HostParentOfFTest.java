@@ -262,4 +262,30 @@ public class HostParentOfFTest extends HostParentOf {
         test("Geolocation", "Geolocation");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _GeolocationCoordinates_GeolocationCoordinates() throws Exception {
+        test("GeolocationCoordinates", "GeolocationCoordinates");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _GeolocationPosition_GeolocationPosition() throws Exception {
+        test("GeolocationPosition", "GeolocationPosition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _GeolocationPositionError_GeolocationPositionError() throws Exception {
+        test("GeolocationPositionError", "GeolocationPositionError");
+    }
 }
