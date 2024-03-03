@@ -562,14 +562,24 @@ public class HtmlForm extends HtmlElement {
     public List<HtmlElement> getElements() {
         final List<HtmlElement> elements = new ArrayList<>();
 
-        for (final HtmlElement element : getPage().getDocumentElement().getHtmlElementDescendants()) {
-            if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())
-                    && element.getEnclosingForm() == this) {
-                elements.add(element);
+        if (isAttachedToPage()) {
+            for (final HtmlElement element : getPage().getDocumentElement().getHtmlElementDescendants()) {
+                if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())
+                        && element.getEnclosingForm() == this) {
+                    elements.add(element);
+                }
+            }
+        }
+        else {
+            for (final HtmlElement element : getHtmlElementDescendants()) {
+                if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())) {
+                    elements.add(element);
+                }
             }
         }
 
         return elements;
+
     }
 
     /**

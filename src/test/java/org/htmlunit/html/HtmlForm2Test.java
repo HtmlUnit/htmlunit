@@ -1727,4 +1727,90 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final String url = getMockWebConnection().getLastWebRequest().getUrl().toExternalForm();
         assertTrue(url.endsWith(getExpectedAlerts()[0]));
     }
+
+    /**
+     * @throws Exception if the test page can't be loaded
+     */
+    @Test
+    @Alerts({"2", "inp", "submitButton"})
+    public void elements() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.forms[0].elements.length);\n"
+            + "    log(document.forms[0].elements[0].id);\n"
+            + "    log(document.forms[0].elements[1].id);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='form1' method='get' action='foo'>\n"
+            + "  <input name='field1' value='val1' id='inp'/>\n"
+            + "  <input type='submit' id='submitButton'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test page can't be loaded
+     */
+    @Test
+    @Alerts({"1", "[object HTMLInputElement]"})
+    public void elementsDetached() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let frm = document.createElement('form');\n"
+            + "    frm.appendChild(document.createElement('input'));\n"
+            + "    frm.remove();\n"
+            + "    log(frm.elements.length);\n"
+            + "    log(frm.elements[0]);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test page can't be loaded
+     */
+    @Test
+    @Alerts({"2", "inpt1", "inpt2", "1", "inpt1"})
+    public void elementsDetachedFormAttribute() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let frm = document.getElementById('formId');\n"
+
+            + "    log(frm.elements.length);\n"
+            + "    log(frm.elements[0].id);\n"
+            + "    log(frm.elements[1].id);\n"
+
+            + "    frm.remove();\n"
+            + "    log(frm.elements.length);\n"
+            + "    log(frm.elements[0].id);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='formId'>\n"
+            + "    <input id='inpt1' type='text' name='textParam' value='textValue'>\n"
+            + "  </form>\n"
+
+            + "  <input form='formId' id='inpt2' type='text' name='textParam' value='textValue'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
