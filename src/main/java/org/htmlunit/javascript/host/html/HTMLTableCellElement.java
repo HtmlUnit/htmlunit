@@ -38,6 +38,7 @@ import org.htmlunit.javascript.host.event.MouseEvent;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 @JsxClass(domClass = HtmlTableCell.class)
 public class HTMLTableCellElement extends HTMLTableComponent {
@@ -178,7 +179,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public int getColSpan() {
-        final String s = StringUtils.replaceChars(getDomNodeOrDie().getAttribute("colSpan"), "\r\n", null);
+        final String s = StringUtils.replaceChars(getDomNodeOrDie().getAttribute("colSpan"), "\r\n\t ", null);
         try {
             return Integer.parseInt(s);
         }
@@ -211,7 +212,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public int getRowSpan() {
-        final String s = StringUtils.replaceChars(getDomNodeOrDie().getAttribute("rowSpan"), "\r\n", null);
+        final String s = StringUtils.replaceChars(getDomNodeOrDie().getAttribute("rowSpan"), "\r\n\t ", null);
         try {
             return Integer.parseInt(s);
         }

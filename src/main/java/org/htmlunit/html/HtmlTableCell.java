@@ -27,6 +27,7 @@ import org.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Lai Quang Duong
  * @see HtmlTableDataCell
  * @see HtmlTableHeaderCell
  */
