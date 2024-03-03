@@ -2291,11 +2291,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _Event_PromiseRejectionEvent() throws Exception {
         test("Event", "PromiseRejectionEvent");
     }
@@ -3904,11 +3900,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _EventTarget_ServiceWorker() throws Exception {
         test("EventTarget", "ServiceWorker");
     }
@@ -3917,11 +3909,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _EventTarget_ServiceWorkerContainer() throws Exception {
         test("EventTarget", "ServiceWorkerContainer");
     }
@@ -3930,11 +3918,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _EventTarget_ServiceWorkerRegistration() throws Exception {
         test("EventTarget", "ServiceWorkerRegistration");
     }
