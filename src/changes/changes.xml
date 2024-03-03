@@ -7,7 +7,24 @@
     </properties>
 
     <body>
-        <release version="3.12.0" date="March xx, 2024" description="htmlunit-websocket-client, Bugfixes">
+        <release version="4.0.0" date="March xx, 2024" description="IE support removed, htmlunit-websocket-client, Bugfixes">
+            <action type="remove" dev="rbri">
+                IE is no longer supported. This implies the largest change of the code base during the last &gt; 10 years.
+                More than 200 flags removed from the code and about 6.000 test case expectations adjusted.
+                And also many IE specifc classes are gone.
+            </action>
+            <action type="add" dev="rbri">
+                New subproject htmlunit-websocket-client. For the start this is a shaded version of the latest
+                Jetty 9 websocket-client.
+            </action>
+
+            <action type="fix" dev="rbri" issue="#740">
+                Form elements available also when form detached from DOM (regression in 3.6.0).
+            </action>
+            <action type="update" dev="rbri">
+                Geoloction implementation changed, the location is now part of the WebClientOptions, means you can set the
+                location to an arbitrary position.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache log4j-api to 2.23.0.
             </action>
@@ -25,10 +42,6 @@
             </action>
             <action type="update" dev="rbri">
                 Spotbugs annotations removed - there was no real benefit from having them in the code.
-            </action>
-            <action type="add" dev="rbri">
-                New subproject htmlunit-websocket-client. For the start this is a shaded version of the latest
-                Jetty 9 websocket-client.
             </action>
         </release>
 
