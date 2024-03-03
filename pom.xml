@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>3.12.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -27,7 +27,7 @@
 
         <htmlunitcssparser.version>3.11.0</htmlunitcssparser.version>
         <htmlunitcsp.version>3.11.0</htmlunitcsp.version>
-        <htmlunitneko.version>3.12.0-SNAPSHOT</htmlunitneko.version>
+        <htmlunitneko.version>4.0.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>3.11.0</htmlunitxpath.version>
         <htmlunitcorejs.version>3.12.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>3.12.0-SNAPSHOT</htmlunitwebsocketclient.version>

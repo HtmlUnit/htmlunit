@@ -18,6 +18,9 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="fix" dev="Lai Quang Duong" issue="https://github.com/HtmlUnit/htmlunit-neko/pull/92">
+                neko: infinity loop problem fixed while processing &lt;plaintext&gt; using document.write().
+            </action>
             <action type="fix" dev="rbri" issue="#740">
                 Form elements available also when form detached from DOM (regression in 3.6.0).
             </action>
