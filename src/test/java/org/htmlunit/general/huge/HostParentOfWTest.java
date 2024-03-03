@@ -248,11 +248,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _WebKitCSSMatrix_DOMMatrix() throws Exception {
         test("WebKitCSSMatrix", "DOMMatrix");
     }
@@ -391,11 +387,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _webkitURL_URL() throws Exception {
         test("webkitURL", "URL");
     }
@@ -404,11 +396,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _webkitURL_webkitURL() throws Exception {
         test("webkitURL", "webkitURL");
     }

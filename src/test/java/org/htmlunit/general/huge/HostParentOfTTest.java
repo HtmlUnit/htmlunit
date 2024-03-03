@@ -435,11 +435,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("true")
     public void _URL_webkitURL() throws Exception {
         test("URL", "webkitURL");
     }
