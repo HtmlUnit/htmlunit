@@ -25,7 +25,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-// import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -1360,6 +1359,15 @@ public class Document extends Node {
     @JsxSetter
     public void setOnfocus(final Object handler) {
         setEventHandler(Event.TYPE_FOCUS, handler);
+    }
+
+    /**
+     * Returns the {@code onfocus} event handler for this element.
+     * @return the {@code onfocus} event handler for this element
+     */
+    @JsxGetter
+    public Object getOnfocus() {
+        return getEventHandler(Event.TYPE_FOCUS);
     }
 
     /**
