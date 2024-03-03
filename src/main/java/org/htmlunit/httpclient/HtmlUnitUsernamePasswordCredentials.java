@@ -25,6 +25,7 @@ import org.apache.http.util.LangUtils;
  * Wrapper for {@link UsernamePasswordCredentials} to avoid direct references spread around.
  *
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class HtmlUnitUsernamePasswordCredentials implements Credentials, Serializable {
 
@@ -50,7 +51,9 @@ public class HtmlUnitUsernamePasswordCredentials implements Credentials, Seriali
      * @param password the password
      */
     public HtmlUnitUsernamePasswordCredentials(final String userName, final char[] password) {
-        httpClientUsernamePasswordCredentials_ = new UsernamePasswordCredentials(userName, password != null ? String.valueOf(password) : null);
+        httpClientUsernamePasswordCredentials_ = new UsernamePasswordCredentials(
+                userName,
+                password == null ? null : String.valueOf(password));
     }
 
     @Override

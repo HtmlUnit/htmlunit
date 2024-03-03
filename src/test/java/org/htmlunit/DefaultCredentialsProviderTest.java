@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
  * Tests for {@link DefaultCredentialsProvider}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
@@ -94,4 +95,19 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         assertNull(credentials);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void passwordNull() throws Exception {
+        final String realm = "blah";
+        final String scheme = new BasicScheme().getSchemeName();
+
+        final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
+        provider.addCredentials("username", (char[]) null, HttpHeader.HOST_LC, 80, realm);
+
+        final Credentials credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        assertEquals("username", credentials.getUserPrincipal().getName());
+        assertNull(credentials.getPassword());
+    }
 }
