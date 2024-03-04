@@ -427,9 +427,8 @@ public final class EncodingSniffer {
 
     /**
      * The number of HTML bytes to sniff for encoding info embedded in <code>meta</code> tags;
-     * relatively large because we don't have a fallback.
      */
-    private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 4096;
+    private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 1024;
 
     /**
      * The number of XML bytes to sniff for encoding info embedded in the XML declaration;
