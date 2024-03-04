@@ -19,6 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_16BE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -469,6 +470,7 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
+    @Deprecated
     public static Charset sniffEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
         final Charset charset;
@@ -493,6 +495,7 @@ public final class EncodingSniffer {
      * @param headers the HTTP response headers
      * @return {@code true} if the specified HTTP response headers indicate an HTML response
      */
+    @Deprecated
     static boolean isHtml(final List<NameValuePair> headers) {
         return contentTypeEndsWith(headers, MimeType.TEXT_HTML);
     }
@@ -503,6 +506,7 @@ public final class EncodingSniffer {
      * @param headers the HTTP response headers
      * @return {@code true} if the specified HTTP response headers indicate an XML response
      */
+    @Deprecated
     static boolean isXml(final List<NameValuePair> headers) {
         return contentTypeEndsWith(headers, MimeType.TEXT_XML, MimeType.APPLICATION_XML, "text/vnd.wap.wml", "+xml");
     }
@@ -551,6 +555,7 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
+    @Deprecated
     public static Charset sniffHtmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
@@ -583,6 +588,7 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
+    @Deprecated
     public static Charset sniffXmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
@@ -602,6 +608,7 @@ public final class EncodingSniffer {
         return encoding;
     }
 
+    @Deprecated
     private static Charset sniffCssEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
@@ -635,6 +642,7 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
+    @Deprecated
     public static Charset sniffUnknownContentTypeEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
@@ -658,6 +666,7 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified HTTP headers, or {@code null} if the encoding
      *         could not be determined
      */
+    @Deprecated
     public static Charset sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
         for (final NameValuePair pair : headers) {
             final String name = pair.getName();
@@ -723,7 +732,20 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
      *         could not be determined
      */
-    static Charset sniffEncodingFromMetaTag(final byte[] bytes) {
+    @Deprecated
+    static Charset sniffEncodingFromMetaTag(final byte[] bytes)throws IOException {
+        return sniffEncodingFromMetaTag(new ByteArrayInputStream(bytes));
+    }
+
+    /**
+     * Attempts to sniff an encoding from an HTML <code>meta</code> tag in the specified byte array.
+     *
+     * @param is the content stream to check for an HTML <code>meta</code> tag
+     * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
+     *         could not be determined
+     */
+    public static Charset sniffEncodingFromMetaTag(final InputStream is) throws IOException {
+        final byte[] bytes = read(is, SIZE_OF_HTML_CONTENT_SNIFFED);
         for (int i = 0; i < bytes.length; i++) {
             if (matches(bytes, i, COMMENT_START)) {
                 i = indexOfSubArray(bytes, COMMENT_END, i);
@@ -915,7 +937,7 @@ public final class EncodingSniffer {
      * @return the encoding found in the specified <code>Content-Type</code> value, or {@code null} if no
      *         encoding was found
      */
-    static Charset extractEncodingFromContentType(final String s) {
+    public static Charset extractEncodingFromContentType(final String s) {
         if (s == null) {
             return null;
         }
@@ -986,7 +1008,20 @@ public final class EncodingSniffer {
      * @param bytes the XML content to sniff
      * @return the encoding of the specified XML content, or {@code null} if it could not be determined
      */
-    static Charset sniffEncodingFromXmlDeclaration(final byte[] bytes) {
+    @Deprecated
+    static Charset sniffEncodingFromXmlDeclaration(final byte[] bytes) throws IOException {
+        return sniffEncodingFromXmlDeclaration(new ByteArrayInputStream(bytes));
+    }
+
+    /**
+     * Searches the specified XML content for an XML declaration and returns the encoding if found,
+     * otherwise returns {@code null}.
+     *
+     * @param is the content stream to check for the charset declaration
+     * @return the encoding of the specified XML content, or {@code null} if it could not be determined
+     */
+    public static Charset sniffEncodingFromXmlDeclaration(final InputStream is) throws IOException {
+        final byte[] bytes = read(is, SIZE_OF_XML_CONTENT_SNIFFED);
         Charset encoding = null;
         if (bytes.length > 5
                 && XML_DECLARATION_PREFIX[0] == bytes[0]
@@ -1026,12 +1061,18 @@ public final class EncodingSniffer {
         return encoding;
     }
 
+    @Deprecated
+    static Charset sniffEncodingFromCssDeclaration(final byte[] bytes) throws IOException {
+        return sniffEncodingFromXmlDeclaration(new ByteArrayInputStream(bytes));
+    }
+
     /**
      * Parses and returns the charset declaration at the start of a css file if any, otherwise returns {@code null}.
      *
      * <p>e.g. <pre>@charset "UTF-8"</pre>
      */
-    static Charset sniffEncodingFromCssDeclaration(final byte[] bytes) {
+    public static Charset sniffEncodingFromCssDeclaration(final InputStream is) throws IOException {
+        byte[] bytes = read(is, SIZE_OF_CSS_CONTENT_SNIFFED);
         if (bytes.length < CSS_CHARSET_DECLARATION_PREFIX.length) {
             return null;
         }
