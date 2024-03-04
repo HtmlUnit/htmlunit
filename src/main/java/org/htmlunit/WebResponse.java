@@ -30,7 +30,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.DefaultPageCreator.PageType;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.NameValuePair;
@@ -204,9 +203,7 @@ public class WebResponse implements Serializable {
      * Returns the content charset for this response, even if no charset was specified explicitly.
      * This method always returns a valid charset. This method first checks the {@code Content-Type}
      * header; if not found, it checks the request charset; as a last resort, this method
-     * returns {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
-     * If no charset is defined for an xml response, then UTF-8 is used
-     * @see <a href="http://www.w3.org/TR/xml/#charencoding">Character Encoding</a>
+     * returns {@link java.nio.charset.StandardCharsets#UTF_8}.
      * @return the content charset for this response
      */
     public Charset getContentCharset() {
@@ -214,14 +211,6 @@ public class WebResponse implements Serializable {
         if (charset != null) {
             return charset;
         }
-
-        final String contentType = getContentType();
-
-        // xml pages are using a different content type
-        if (PageType.XML == DefaultPageCreator.determinePageType(contentType)) {
-            return UTF_8;
-        }
-
         return getWebRequest().getDefaultResponseContentCharset();
     }
 
