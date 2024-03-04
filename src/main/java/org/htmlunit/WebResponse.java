@@ -32,6 +32,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.util.EncodingSniffer;
+import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 
 /**
@@ -190,13 +191,48 @@ public class WebResponse implements Serializable {
      *         or {@code null} if none was specified
      */
     public Charset getContentCharsetOrNull() {
-        try (InputStream is = getContentAsStream()) {
-            return EncodingSniffer.sniffEncoding(getResponseHeaders(), is);
+        try (InputStream is = getContentAsStreamWithBomIfApplicable()) {
+            if (is instanceof BOMInputStream) {
+                String bomCharsetName = ((BOMInputStream)is).getBOMCharsetName();
+                if (bomCharsetName != null) {
+                    return Charset.forName(bomCharsetName);
+                }
+            }
+
+            String contentType = getResponseHeaderValue(HttpHeader.CONTENT_TYPE_LC);
+            if (contentType != null) {
+                final int index = contentType.indexOf(';');
+                if (index != -1) {
+                    Charset charset = EncodingSniffer.extractEncodingFromContentType(contentType);
+                    if (charset != null) {
+                        return charset;
+                    }
+                    contentType = contentType.substring(0, index);
+                }
+
+                Charset charset = null;
+                switch (DefaultPageCreator.determinePageType(contentType)) {
+                case HTML:
+                    charset = EncodingSniffer.sniffEncodingFromMetaTag(is);
+                    break;
+                case XML:
+                    charset = EncodingSniffer.sniffEncodingFromXmlDeclaration(is);
+                    break;
+                default:
+                    if (MimeType.TEXT_CSS.equals(contentType)) {
+                        charset = EncodingSniffer.sniffEncodingFromCssDeclaration(is);
+                    }
+                    break;
+                }
+                if (charset != null) {
+                    return charset;
+                }
+            }
         }
         catch (final IOException e) {
             LOG.warn("Error trying to sniff encoding.", e);
-            return null;
         }
+        return null;
     }
 
     /**
