@@ -616,7 +616,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsearch[GSCE],onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],"
                 + "prefix[GCE],prepend(),previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
-                + "scrollHeight[GCE],scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTop[GSCE],"
+                + "scroll(),scrollBy(),scrollHeight[GCE],scrollIntoView(),scrollIntoViewIfNeeded(),"
+                + "scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
                 + "scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNS(),tagName[GCE],"
                 + "toggleAttribute(),webkitMatchesSelector()",
             EDGE = "after(),append(),attributes[GCE],before(),childElementCount[GCE],children[GCE],"
@@ -630,7 +631,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsearch[GSCE],onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],"
                 + "prefix[GCE],prepend(),previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
-                + "scrollHeight[GCE],scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTop[GSCE],"
+                + "scroll(),scrollBy(),scrollHeight[GCE],scrollIntoView(),scrollIntoViewIfNeeded(),"
+                + "scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
                 + "scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNS(),tagName[GCE],"
                 + "toggleAttribute(),webkitMatchesSelector()",
             FF = "after(),append(),attributes[GCE],before(),childElementCount[GCE],children[GCE],classList[GCE],"
@@ -642,8 +644,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "lastElementChild[GCE],localName[GCE],matches(),mozMatchesSelector(),namespaceURI[GCE],"
                 + "nextElementSibling[GCE],outerHTML[GSCE],prefix[GCE],prepend(),previousElementSibling[GCE],"
                 + "querySelector(),querySelectorAll(),releaseCapture(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],setAttribute(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "scroll(),scrollBy(),scrollHeight[GCE],scrollIntoView(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
+                + "scrollWidth[GCE],setAttribute(),"
                 + "setAttributeNode(),setAttributeNS(),setCapture(),tagName[GCE],toggleAttribute(),"
                 + "webkitMatchesSelector()",
             FF_ESR = "after(),append(),attributes[GCE],before(),childElementCount[GCE],children[GCE],classList[GCE],"
@@ -655,8 +658,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "lastElementChild[GCE],localName[GCE],matches(),mozMatchesSelector(),namespaceURI[GCE],"
                 + "nextElementSibling[GCE],outerHTML[GSCE],prefix[GCE],prepend(),previousElementSibling[GCE],"
                 + "querySelector(),querySelectorAll(),releaseCapture(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],setAttribute(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "scroll(),scrollBy(),scrollHeight[GCE],scrollIntoView(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
+                + "scrollWidth[GCE],setAttribute(),"
                 + "setAttributeNode(),setAttributeNS(),setCapture(),tagName[GCE],toggleAttribute(),"
                 + "webkitMatchesSelector()")
     public void element() throws Exception {
@@ -783,8 +787,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onsearch[GSCE],"
                 + "onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "scroll(),scrollBy(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),"
+                + "scrollTop[GSCE],scrollWidth[GCE],"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),"
                 + "tagName[GCE],toggleAttribute(),webkitMatchesSelector()",
             EDGE = "after(),append(),attributes[GCE],before(),childElementCount[GCE],"
@@ -798,8 +804,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onsearch[GSCE],"
                 + "onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "scroll(),scrollBy(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),"
+                + "scrollTop[GSCE],scrollWidth[GCE],"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),"
                 + "tagName[GCE],toggleAttribute(),webkitMatchesSelector()",
             FF_ESR = "after(),append(),attributes[GCE],before(),childElementCount[GCE],"
@@ -814,8 +822,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling[GCE],outerHTML[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releaseCapture(),"
                 + "remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "scroll(),scrollBy(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],scrollWidth[GCE],"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),setCapture(),"
                 + "tagName[GCE],toggleAttribute(),webkitMatchesSelector()",
             FF = "after(),append(),attributes[GCE],before(),childElementCount[GCE],"
@@ -830,8 +839,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling[GCE],outerHTML[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releaseCapture(),"
                 + "remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "scroll(),scrollBy(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],scrollWidth[GCE],"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),setCapture(),"
                 + "tagName[GCE],toggleAttribute(),webkitMatchesSelector()")
     public void element2() throws Exception {

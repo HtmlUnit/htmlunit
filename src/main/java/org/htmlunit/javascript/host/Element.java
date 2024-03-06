@@ -1195,6 +1195,36 @@ public class Element extends Node {
     }
 
     /**
+     * Implement the {@code scroll()} JavaScript function but don't actually do
+     * anything. The requirement
+     * is just to prevent scripts that call that method from failing
+     */
+    @JsxFunction
+    public void scroll() {
+        /* do nothing at the moment */
+    }
+
+    /**
+     * Implement the {@code scrollBy()} JavaScript function but don't actually do
+     * anything. The requirement
+     * is just to prevent scripts that call that method from failing
+     */
+    @JsxFunction
+    public void scrollBy() {
+        /* do nothing at the moment */
+    }
+
+    /**
+     * Implement the {@code scrollTo()} JavaScript function but don't actually do
+     * anything. The requirement
+     * is just to prevent scripts that call that method from failing
+     */
+    @JsxFunction
+    public void scrollTo() {
+        /* do nothing at the moment */
+    }
+
+    /**
      * Implement the {@code scrollIntoView()} JavaScript function but don't actually do
      * anything. The requirement
      * is just to prevent scripts that call that method from failing

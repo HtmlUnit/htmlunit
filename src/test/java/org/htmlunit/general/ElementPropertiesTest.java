@@ -714,7 +714,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "prefix,prepend(),"
                 + "querySelector(),querySelectorAll(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
-                + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,"
+                + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),"
+                + "scrollIntoViewIfNeeded(),scrollLeft,scrollTo(),scrollTop,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             EDGE = "append(),attributes,"
@@ -729,7 +730,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "prefix,prepend(),"
                 + "querySelector(),querySelectorAll(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
-                + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,"
+                + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),"
+                + "scrollIntoViewIfNeeded(),scrollLeft,scrollTo(),scrollTop,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF_ESR = "append(),attributes,"
@@ -742,7 +744,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "prefix,prepend(),"
                 + "querySelector(),querySelectorAll(),releaseCapture(),removeAttribute(),removeAttributeNode(),"
                 + "removeAttributeNS(),replaceChildren(),"
-                + "scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),"
+                + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),"
+                + "scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),setAttributeNS(),setCapture(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF = "append(),attributes,"
@@ -755,7 +758,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "prefix,prepend(),"
                 + "querySelector(),querySelectorAll(),releaseCapture(),removeAttribute(),removeAttributeNode(),"
                 + "removeAttributeNS(),replaceChildren(),"
-                + "scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),"
+                + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),"
+                + "scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),setAttributeNS(),setCapture(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()")
     public void element() throws Exception {
@@ -856,7 +860,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,prepend(),"
                 + "previousElementSibling,remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "replaceChildren(),replaceWith(),"
-                + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,"
+                + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),"
+                + "scrollLeft,scrollTo(),scrollTop,"
                 + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             EDGE = "after(),append(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
@@ -869,7 +874,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,prepend(),"
                 + "previousElementSibling,remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "replaceChildren(),replaceWith(),"
-                + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,"
+                + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),"
+                + "scrollLeft,scrollTo(),scrollTop,"
                 + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF_ESR = "after(),append(),attributes,before(),"
@@ -881,8 +887,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "insertAdjacentHTML(),insertAdjacentText(),localName,matches(),mozMatchesSelector(),namespaceURI,"
                 + "nextElementSibling,outerHTML,prefix,prepend(),previousElementSibling,"
                 + "releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
-                + "replaceChildren(),replaceWith(),scrollHeight,"
-                + "scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
+                + "replaceChildren(),replaceWith(),"
+                + "scroll(),scrollBy(),scrollHeight,"
+                + "scrollIntoView(),scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),setCapture(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF = "after(),append(),attributes,before(),"
@@ -895,8 +902,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling,outerHTML,prefix,prepend(),previousElementSibling,"
                 + "releaseCapture(),remove(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
-                + "scrollHeight,"
-                + "scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
+                + "scroll(),scrollBy(),scrollHeight,"
+                + "scrollIntoView(),scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),setCapture(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()")
     public void element2() throws Exception {
