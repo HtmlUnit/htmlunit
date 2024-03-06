@@ -594,14 +594,6 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    public void scrollIntoView() {
-        /* do nothing at the moment */
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public HtmlElement getDomNodeOrDie() {
         return (HtmlElement) super.getDomNodeOrDie();
     }
