@@ -45,9 +45,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        log(document.getElementById('label1').htmlFor);\n"
             + "      }\n"
@@ -59,8 +57,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -73,9 +70,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        log(document.getElementById('label1').htmlFor);\n"
             + "      }\n"
@@ -87,8 +82,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -101,9 +95,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        log(document.getElementById('label1').htmlFor);\n"
             + "      }\n"
@@ -115,8 +107,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -129,9 +120,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        log(document.getElementById('label1').htmlFor);\n"
             + "      }\n"
@@ -143,8 +132,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -157,9 +145,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').htmlFor = 'unknown';\n"
@@ -180,8 +166,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -194,9 +179,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').htmlFor = 'div1';\n"
@@ -217,8 +200,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -231,9 +213,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').htmlFor = 'text1';\n"
@@ -254,8 +234,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -268,8 +247,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1'>Item</label>\n"
             + "  <input type='text' id='text1'>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -282,8 +260,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for=''>Item</label>\n"
             + "  <input type='text' id='text1'>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -296,8 +273,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='unknown'>Item</label>\n"
             + "  <input type='text' id='text1'>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -310,8 +286,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='div1'>Item</label>\n"
             + "  <div id='div1'></div>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -324,8 +299,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='button1'>Item</label>\n"
             + "  <button id='button1'></button>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -338,8 +312,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='text1'>Item</label>\n"
             + "  <input type='text' id='text1'>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -352,8 +325,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='hidden1'>Item</label>\n"
             + "  <input type='hidden' id='hidden1'>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -366,8 +338,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='meter1'>Item</label>\n"
             + "  <meter id='meter1'></meter>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -380,8 +351,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='output1'>Item</label>\n"
             + "  <output id='output1'></output>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -394,8 +364,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='progress1'>Item</label>\n"
             + "  <progress id='progress1'></progress>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -408,8 +377,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='select1'>Item</label>\n"
             + "  <select id='select1'><option>Option</option></select>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -422,8 +390,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
               "  <label id='label1' for='text1'>Item</label>\n"
             + "  <textarea id='text1'></textarea>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -437,8 +404,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <div id='div1'></div>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -453,8 +419,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <button id='button2'></button>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -469,8 +434,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <input type='text' id='text2'>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -485,8 +449,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <input type='hidden' id='hidden2'>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -501,8 +464,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <meter id='meter2'></meter>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -517,8 +479,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <output id='output2'></output>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -533,8 +494,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <progress id='progress2'></progress>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -549,8 +509,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <select id='select2'><option>Option</option></select>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -565,8 +524,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <textarea id='text2'></textarea>\n"
             + "  </label>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -581,8 +539,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </label>\n"
             + "  <input type='text' id='text2'>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -597,8 +554,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </label>\n"
             + "  <input type='text' id='text2'>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     /**
@@ -613,20 +569,20 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </label>\n"
             + "  <div id='div1'></div>\n";
 
-        final WebDriver driver = loadPage2(generateControlPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateControlPage(html));
     }
 
     private static String generateControlPage(final String snippet) {
         return "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(e) {\n"
-            + "        document.title += e + (e ? ':' + e.id : '') + ';';\n"
+            + LOG_TITLE_FUNCTION
+            + "      function dump(e) {\n"
+            + "        log(e + (e ? ':' + e.id : ''));\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
-            + "  <body onload='log(document.getElementById(\"label1\").control);'>\n"
+            + "  <body onload='dump(document.getElementById(\"label1\").control)'>\n"
             + snippet
             + "  </body>\n"
             + "</html>";
@@ -642,9 +598,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').control = document.getElementById('text1');\n"
@@ -661,8 +615,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -675,8 +628,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "  <label id='label1'>Item</label>\n"
             + "  <input type='text' id='text1'>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     /**
@@ -691,8 +643,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <input type='text' id='text1'>\n"
             + "  </form>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     /**
@@ -707,8 +658,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <input type='text' id='text1'>\n"
             + "  </form>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     /**
@@ -724,8 +674,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <input type='text' id='text2'>\n"
             + "  </form>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     /**
@@ -740,8 +689,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <div id='div1'></div>\n"
             + "  </form>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     /**
@@ -756,8 +704,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <input type='text' id='text1'>\n"
             + "  </form>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     /**
@@ -774,8 +721,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <input type='text' id='text2'>\n"
             + "  </form>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     /**
@@ -791,8 +737,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    </label>\n"
             + "  </form>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     /**
@@ -808,19 +753,19 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    </label>\n"
             + "  </form>\n";
 
-        final WebDriver driver = loadPage2(generateFormPage(html));
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(generateFormPage(html));
     }
 
     private static String generateFormPage(final String snippet) {
         return "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(e) {\n"
-            + "        document.title += e + (e ? ':' + e.id : '') + ';';\n"
+            + LOG_TITLE_FUNCTION
+            + "      function dump(e) {\n"
+            + "        log(e + (e ? ':' + e.id : ''));\n"
             + "      }\n"
             + "      function doTest() {\n"
-            + "        log(document.getElementById('label1').form);\n"
+            + "        dump(document.getElementById('label1').form);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -840,9 +785,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').form = document.getElementById('form1');\n"
@@ -861,8 +804,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -997,9 +939,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <label id='a1'>a1</label>\n"
             + "    <label id='a2' accesskey='A'>a2</label>\n"
             + "    <script>\n"
-            + "      function log(x) {\n"
-            + "        document.title += x + ';';\n"
-            + "      }\n"
+            + LOG_TITLE_FUNCTION
             + "      var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
             + "      log(a1.accessKey);\n"
             + "      log(a2.accessKey);\n"
@@ -1019,7 +959,6 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        loadPageVerifyTitle2(html);
     }
 }

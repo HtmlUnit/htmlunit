@@ -226,7 +226,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"})
+    @Alerts({"onLoad1", "onLoadJs1", "onLoad2", "body onLoad"})
     public void onLoadOrder() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.css"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");
@@ -236,9 +236,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
-                + "    function log(x) {\n"
-                + "      document.title += x + ';';\n"
-                + "    }\n"
+                + LOG_TITLE_FUNCTION
                 + "  </script>\n"
                 + "  <link rel='stylesheet' href='simple1.css' onload='log(\"onLoad1\")'>\n"
                 + "  <script type='text/javascript' src='simple1.js' onload='log(\"onLoadJs1\")'></script>\n"
@@ -248,8 +246,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(";", getExpectedAlerts()));
+        loadPageVerifyTitle2(html);
     }
 
     /**
