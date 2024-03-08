@@ -579,7 +579,6 @@ public class HtmlForm extends HtmlElement {
         }
 
         return elements;
-
     }
 
     /**
