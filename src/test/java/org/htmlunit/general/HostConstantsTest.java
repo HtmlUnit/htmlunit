@@ -34,8 +34,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 /**
  * Test all {@code constant}s defined in host classes.
@@ -80,9 +78,7 @@ public class HostConstantsTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "function log(x) {\n"
-                + "  document.getElementById('log').value += x + '\\n';\n"
-                + "}\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var all = [];\n"
@@ -103,31 +99,27 @@ public class HostConstantsTest extends WebDriverTestCase {
                 //    + "    }\n"
                 //    + "    alert(string);\n"
 
-                + "    var string = '';\n"
                 + "    for (var i in all) {\n"
                 + "      var x = all[i];\n"
-                + "      string += x + ':' + " + host_ + "[x] + ' ';\n"
+                + "      log(x + ':' + " + host_ + "[x]);\n"
                 + "    }\n"
-                + "    log(string);\n"
                 + "  } catch (e) {}\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
-    private String getExpectedString() throws Exception {
+    private String[] getExpectedString() throws Exception {
         if (host_.endsWith("Array") || "Image".equals(host_) || "Option".equals(host_)) {
-            return "";
+            return new String[0];
         }
         if ("Error".equals(host_) && getBrowserVersion().hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
-            return "stackTraceLimit:10";
+            return new String[] {"stackTraceLimit:10"};
         }
 
         final JavaScriptConfiguration javaScriptConfig = JavaScriptConfiguration.getInstance(getBrowserVersion());
@@ -157,11 +149,7 @@ public class HostConstantsTest extends WebDriverTestCase {
                 return o1.substring(0, o1.indexOf(':')).compareTo(o2.substring(0, o2.indexOf(':')));
             }
         });
-        final StringBuilder builder = new StringBuilder();
-        for (final String key : constants) {
-            builder.append(key).append(' ');
-        }
-        return builder.toString().trim();
+        return constants.toArray(new String[0]);
     }
 
     /**
