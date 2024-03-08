@@ -263,6 +263,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      var dynLink = document.createElement('link');\n"
                 + "      dynLink.rel = 'stylesheet';\n"
@@ -272,21 +273,14 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
                 + "      document.head.appendChild(dynLink);\n"
                 + "    }\n"
-
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'></body>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -300,6 +294,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      var dynLink = document.createElement('link');\n"
                 + "      dynLink.rel = 'stylesheet';\n"
@@ -309,22 +304,15 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
                 + "      document.head.appendChild(dynLink);\n"
                 + "    }\n"
-
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'></body>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**

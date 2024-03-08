@@ -37,7 +37,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Tests for {@link Window}.
@@ -424,10 +423,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  function log(msg) {\n"
-            + "    var ta = document.getElementById('myTextArea');\n"
-            + "    ta.value += msg + '; ';\n"
-            + "  }\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
             + "    window.scroll(10, 20);\n"
@@ -436,14 +432,11 @@ public class Window3Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()' onscroll='log(\"body\")'>\n"
             + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
-
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -472,10 +465,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  function log(msg) {\n"
-            + "    var ta = document.getElementById('myTextArea');\n"
-            + "    ta.value += msg + '; ';\n"
-            + "  }\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
             + "    window.scrollBy(10, 20);\n"
@@ -484,14 +474,11 @@ public class Window3Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()' onscroll='log(\"body\")'>\n"
             + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
-
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -562,10 +549,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  function log(msg) {\n"
-            + "    var ta = document.getElementById('myTextArea');\n"
-            + "    ta.value += msg + '; ';\n"
-            + "  }\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
             + "    window.scrollTo(10, 20);\n"
@@ -574,14 +558,11 @@ public class Window3Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()' onscroll='log(\"body\")'>\n"
             + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
-
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+        loadPageVerifyTextArea2(html);
     }
 
     /**

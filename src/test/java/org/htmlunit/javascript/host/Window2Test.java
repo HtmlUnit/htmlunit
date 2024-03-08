@@ -1519,25 +1519,19 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      var id = window.setTimeout( function() { log('result'); }, 20);\n"
             + "      log(typeof id);\n"
             + "      log('done');\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1549,25 +1543,19 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      var id = window.setTimeout( function(p1) { log(p1); }, 20, 42);\n"
             + "      log(typeof id);\n"
             + "      log('done');\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1579,26 +1567,20 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      try{\n"
             + "        var id = window.setTimeout('log(7)');\n"
             + "        log('done 2');\n"
             + "      } catch(e) { log(e); }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1610,26 +1592,20 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      try{\n"
             + "        window.setTimeout();\n"
             + "        log('done');\n"
             + "      } catch(e) { log(e instanceof TypeError); }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1674,26 +1650,20 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    var id;\n"
             + "    function test() {\n"
             + "      id = window.setInterval( function() { log('result'); clearInterval(id); }, 20);\n"
             + "      log(typeof id);\n"
             + "      log('done');\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1705,26 +1675,20 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    var id;\n"
             + "    function test() {\n"
             + "      id = window.setInterval( function(p1) { log(p1); clearInterval(id); }, 20, 42);\n"
             + "      log(typeof id);\n"
             + "      log('done');\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1736,6 +1700,7 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    var id;\n"
             + "    function test() {\n"
             + "      try{\n"
@@ -1743,20 +1708,13 @@ public class Window2Test extends WebDriverTestCase {
             + "        log('done 2');\n"
             + "      } catch(e) { log(e); }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1768,26 +1726,20 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      try{\n"
             + "        window.setInterval();\n"
             + "        log('done');\n"
             + "      } catch(e) { log(e instanceof TypeError); }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
