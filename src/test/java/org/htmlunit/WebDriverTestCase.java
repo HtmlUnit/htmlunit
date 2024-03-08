@@ -1115,7 +1115,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         for (int i = 0; i < expectedAlerts.length; i++) {
             expected.append(expectedAlerts[i]).append('\u00A7');
         }
-        assertEquals(expected.toString(), textArea.getAttribute("value"));
+        verify(() -> textArea.getAttribute("value"), expected.toString());
 
         return driver;
     }

@@ -79,25 +79,20 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        log(Promise.length);\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -120,6 +115,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -133,20 +129,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "      }\n"
                 + "    }\n"
                 + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -170,6 +160,7 @@ public class PromiseTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "  <script>\n"
                 + "    'use strict';"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -183,20 +174,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "      }\n"
                 + "    }\n"
                 + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -208,6 +193,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        try{\n"
@@ -228,20 +214,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "      }\n"
                 + "    }\n"
                 + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -254,6 +234,7 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        Promise.reject('Rejected').then(function(value) {\n"
@@ -264,20 +245,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -290,6 +265,7 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var original = Promise.reject(42);\n"
@@ -303,20 +279,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log(original === cast);\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -329,6 +299,7 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        Promise.resolve('Resolved').then(function(value) {\n"
@@ -339,20 +310,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -365,6 +330,7 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        Promise.resolve().then(function(value) {\n"
@@ -375,20 +341,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -401,6 +361,7 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p = Promise.resolve([1,2,3]);\n"
@@ -410,21 +371,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -437,6 +391,7 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p = Promise.resolve('HtmlUnit');\n"
@@ -446,21 +401,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -473,6 +421,7 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var original = Promise.resolve(42);\n"
@@ -484,20 +433,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log(original === cast);\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -509,6 +452,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
 
@@ -527,20 +471,14 @@ public class PromiseTest extends WebDriverTestCase {
 
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -552,6 +490,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        function MyThenable() {\n"
@@ -576,20 +515,14 @@ public class PromiseTest extends WebDriverTestCase {
 
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -601,6 +534,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
 
@@ -620,20 +554,14 @@ public class PromiseTest extends WebDriverTestCase {
 
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -645,6 +573,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
 
@@ -663,20 +592,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        });\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -688,6 +611,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = Promise.resolve({ id: 17 });\n"
@@ -700,20 +624,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        });\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -726,6 +644,7 @@ public class PromiseTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p = new Promise(function(resolve, reject) {\n"
@@ -741,21 +660,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -767,6 +679,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = Promise.resolve(void 0);\n"
@@ -776,20 +689,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -801,6 +708,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -814,20 +722,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -839,6 +741,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = Promise.resolve('yes');\n"
@@ -851,20 +754,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -876,6 +773,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -892,20 +790,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -917,6 +809,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -934,20 +827,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -959,6 +846,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -979,20 +867,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1004,6 +886,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -1025,20 +908,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1050,6 +927,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -1074,20 +952,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1099,6 +971,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -1118,20 +991,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1143,6 +1010,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -1162,20 +1030,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1187,6 +1049,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -1205,20 +1068,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1230,6 +1087,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -1249,21 +1107,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        });\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1275,6 +1126,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -1295,21 +1147,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        });\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1321,6 +1166,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
@@ -1340,20 +1186,14 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        log('done');\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
-        final WebDriver driver = loadPage2(html);
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1365,6 +1205,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        document.getElementById('btn1').onclick = function() {\n"
@@ -1379,22 +1220,18 @@ public class PromiseTest extends WebDriverTestCase {
                 + "        };\n"
                 + "      }\n"
                 + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  <button id='btn1'>BTN1</button>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>\n";
+
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("btn1")).click();
 
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1406,6 +1243,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
 
@@ -1423,20 +1261,14 @@ public class PromiseTest extends WebDriverTestCase {
 
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1448,6 +1280,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
 
@@ -1469,20 +1302,14 @@ public class PromiseTest extends WebDriverTestCase {
 
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1494,6 +1321,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
 
@@ -1517,20 +1345,14 @@ public class PromiseTest extends WebDriverTestCase {
 
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1542,6 +1364,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
 
@@ -1562,20 +1385,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "        });\n"
             + "      }\n"
             + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1587,6 +1404,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = Promise.resolve(3);\n"
@@ -1605,20 +1423,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1630,6 +1441,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = Promise.resolve(3);\n"
@@ -1649,20 +1461,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1674,6 +1479,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = Promise.resolve(3);\n"
@@ -1692,20 +1498,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1717,6 +1516,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = Promise.resolve(3);\n"
@@ -1736,20 +1536,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1761,6 +1554,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = Promise.resolve(3);\n"
@@ -1784,20 +1578,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1809,6 +1596,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = new Promise(function(resolve, reject) {\n"
@@ -1830,20 +1618,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1855,6 +1636,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = new Promise(function(resolve, reject) {\n"
@@ -1881,20 +1663,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1906,6 +1681,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = new Promise(function(resolve, reject) {\n"
@@ -1927,20 +1703,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1952,6 +1721,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
             + "        var p1 = new Promise(function(resolve, reject) {\n"
@@ -1978,20 +1748,13 @@ public class PromiseTest extends WebDriverTestCase {
             + "        log('done');\n"
             + "      }\n"
             + "    }\n"
-            + "\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-
-        verify(() -> driver.findElement(By.id("log"))
-                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
