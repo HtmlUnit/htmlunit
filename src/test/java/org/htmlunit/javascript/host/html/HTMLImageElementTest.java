@@ -1220,6 +1220,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded
      * and the <tt>onload</tt> handler gets invoked.
