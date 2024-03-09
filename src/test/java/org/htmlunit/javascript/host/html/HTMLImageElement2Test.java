@@ -14,11 +14,20 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
+import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -51,4 +60,103 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
         loadPageWithAlerts(html);
         assertEquals(URL_FIRST, conn.getLastWebRequest().getUrl());
     }
+
+    /**
+     * Make sure this works without an exception.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    public void onload_complex_JavascriptDisabled() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test(i) {\n"
+                + "    alert('in');\n"
+                + "    var image = new Image();\n"
+                + "    image.onload = function () { alert(\"Image.onload(\" + i + \")\") };\n"
+                + "    image.src = '" + URL_SECOND + "';\n"
+                + "    alert('out');\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test(0)'>\n"
+                + "<button id='myId'"
+                +           "onmousedown=\"alert('mousedown'); test(1)\" "
+                +           "onmouseup=\"alert('mouseup'); test(2)\" "
+                +           "onclick=\"alert('click'); test(3)\"></button>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        client.getOptions().setJavaScriptEnabled(false);
+
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = loadPage(html);
+        page.getElementById("myId").click();
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+        assertEquals(URL_FIRST, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Make sure this works without an exception.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    public void onload_complex_JavascriptEngineDisabled() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test(i) {\n"
+                + "    alert('in');\n"
+                + "    var image = new Image();\n"
+                + "    image.onload = function () { alert(\"Image.onload(\" + i + \")\") };\n"
+                + "    image.src = '" + URL_SECOND + "';\n"
+                + "    alert('out');\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test(0)'>\n"
+                + "<button id='myId'"
+                +           "onmousedown=\"alert('mousedown'); test(1)\" "
+                +           "onmouseup=\"alert('mouseup'); test(2)\" "
+                +           "onclick=\"alert('click'); test(3)\"></button>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final List<String> collectedAlerts = new ArrayList<>();
+            webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+
+            webClient.setWebConnection(webConnection);
+
+            final HtmlPage page = loadPage(html);
+            page.getElementById("myId").click();
+            assertEquals(getExpectedAlerts(), collectedAlerts);
+            assertEquals(URL_SECOND, webConnection.getLastWebRequest().getUrl());
+        }
+    }
+
 }

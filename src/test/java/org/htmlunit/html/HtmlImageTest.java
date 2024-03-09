@@ -317,39 +317,4 @@ public class HtmlImageTest extends SimpleWebTestCase {
         img.click(2, 7);
         assertEquals(getExpectedAlerts()[0] + getExpectedAlerts()[1], page.getTitleText());
     }
-
-    /**
-     * @throws Exception on test failure
-     */
-    @Test
-    @Alerts({"in-out-Image.onload(0)-", "mousedown-in-out-Image.onload(1)-mouseup-in-out-click-in-out-Image.onload(2)-Image.onload(3)-"})
-    public void onload() throws Exception {
-        final String html =
-                "<html>\n"
-                + "<head>\n"
-                + "<script>\n"
-                + "  function log(msg) { window.document.title += msg + '-';}\n"
-                + "  function test(i) {\n"
-                + "    log('in');\n"
-                + "    var image = new Image();\n"
-                + "    image.onload = function () { log(\"Image.onload(\" + i + \")\") };\n"
-                + "    image.src = '4x7.jpg';\n"
-                + "    log('out');\n"
-                + "  }\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body onload=\"test(0)\">\n"
-                + "<button onmousedown=\"log('mousedown'); test(1)\""
-                + "        onmouseup=\"log('mouseup'); test(2)\""
-                + "        onclick=\"log('click'); test(3)\"></button>\n"
-                + "</body>\n"
-                + "</html>\n";
-
-        final HtmlPage page = loadPage(html);
-        assertEquals(getExpectedAlerts()[0], page.getTitleText());
-
-        page.setTitleText("");
-        page.<HtmlButton>getFirstByXPath("//button").click();
-        assertEquals(getExpectedAlerts()[1], page.getTitleText());
-    }
 }

@@ -18,6 +18,9 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="fix" dev="Lai Quang Duong">
+                Image.onload() must be processed as postponed action.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: [Symbol.species] for Promise fixed'.
             </action>

@@ -972,7 +972,8 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         // make enclosing window the current one
         final SgmlPage page = getPage();
-        page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
+        final WebClient webClient = page.getWebClient();
+        webClient.setCurrentWindow(page.getEnclosingWindow());
 
         if (!ignoreVisibility) {
             if (!(page instanceof HtmlPage)) {
@@ -1000,7 +1001,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
 
-            final JavaScriptEngine jsEngine = (JavaScriptEngine)page.getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine<?> jsEngine = webClient.getJavaScriptEngine();
             jsEngine.holdPosponedActions();
             try {
                 if (handleFocus) {
@@ -1008,19 +1009,19 @@ public class DomElement extends DomNamespaceNode implements Element {
                     DomElement elementToFocus = null;
                     if (this instanceof SubmittableElement
                         || this instanceof HtmlAnchor
-                            && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor)this).getHrefAttribute()
+                            && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor) this).getHrefAttribute()
                         || this instanceof HtmlArea
-                            && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea)this).getHrefAttribute()
-                                || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
-                        || this instanceof HtmlElement && ((HtmlElement)this).getTabIndex() != null) {
+                            && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea) this).getHrefAttribute()
+                                || webClient.getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
+                        || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
                         elementToFocus = this;
                     }
                     else if (this instanceof HtmlOption) {
-                        elementToFocus = ((HtmlOption)this).getEnclosingSelect();
+                        elementToFocus = ((HtmlOption) this).getEnclosingSelect();
                     }
 
                     if (elementToFocus == null) {
-                        ((HtmlPage)page).setFocusedElement(null);
+                        ((HtmlPage) page).setFocusedElement(null);
                     }
                     else {
                         elementToFocus.focus();
@@ -1032,8 +1033,8 @@ public class DomElement extends DomNamespaceNode implements Element {
                 }
 
                 MouseEvent event = null;
-                if (page.getWebClient().isJavaScriptEnabled()) {
-                    final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+                if (webClient.isJavaScriptEnabled()) {
+                    final BrowserVersion browser = webClient.getBrowserVersion();
                     if (browser.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
                         event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
                                 ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
@@ -1048,7 +1049,8 @@ public class DomElement extends DomNamespaceNode implements Element {
                     }
                 }
                 return click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
-            } finally {
+            }
+            finally {
                 jsEngine.processPostponedActions();
             }
         }
