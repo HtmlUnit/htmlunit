@@ -18,6 +18,12 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="fix" dev="RhinoTeam">
+                core-js: [Symbol.species] for Promise fixed'.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: [Symbol.species] support improved.
+            </action>
             <action type="fix" dev="rbri" issue="#742">
                 Stubs for element.scroll()/scrollBy()/scrollTo() added.
             </action>
