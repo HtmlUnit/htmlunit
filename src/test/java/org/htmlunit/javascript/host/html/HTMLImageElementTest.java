@@ -1489,22 +1489,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         "mousedown", "in", "out",
         "mouseup", "in", "out",
         "click", "in", "out", "Image.onload(1)", "Image.onload(2)", "Image.onload(3)"})
-    @HtmlUnitNYI(CHROME = {"in", "Image.onload(0)", "out",
-        "mousedown", "in", "Image.onload(1)", "out",
-        "mouseup", "in", "Image.onload(2)", "out",
-        "click", "in", "Image.onload(3)", "out"},
-        EDGE = {"in", "Image.onload(0)", "out",
-                "mousedown", "in", "Image.onload(1)", "out",
-                "mouseup", "in", "Image.onload(2)", "out",
-                "click", "in", "Image.onload(3)", "out"},
-        FF = {"in", "Image.onload(0)", "out",
-              "mousedown", "in", "Image.onload(1)", "out",
-              "mouseup", "in", "Image.onload(2)", "out",
-              "click", "in", "Image.onload(3)", "out"},
-        FF_ESR = {"in", "Image.onload(0)", "out",
-                  "mousedown", "in", "Image.onload(1)", "out",
-                  "mouseup", "in", "Image.onload(2)", "out",
-                  "click", "in", "Image.onload(3)", "out"})
     public void onload_complex() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

@@ -18,7 +18,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -623,7 +622,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("before1")
-    @NotYetImplemented
     public void createHTMLDocumentInnerAddImgAddDocToIframe() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
@@ -641,7 +639,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "      var srcNode = doc.documentElement;\n"
                 + "      var newNode = destDocument.importNode(srcNode, true);\n"
                 + "      destDocument.replaceChild(newNode, destDocument.documentElement);\n"
-                // + "      alert('before');\n"
                 + "      window.parent.document.title += 'before';"
 
                 + "    } catch(e) { window.parent.document.title += 'exception'; }\n"
