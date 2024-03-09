@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,6 +31,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
@@ -1217,5 +1219,326 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageVerifyTitle2(html);
+    }
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "1"})
+    public void onLoad_calledWhenImageDownloaded_static() throws Exception {
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <img src='img.jpg' onload='test()'>\n"
+                + LOG_TEXTAREA
+
+                + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
+                    // first script to be sure that img onload doesn't get executed after first JS execution
+                + "    log(0);\n"
+                + "  </script>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      log(1);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+        assertEquals(urlImage, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("1")
+    public void onLoad_calledWhenImageDownloaded_dynamic() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var i = document.createElement('img');\n"
+            + "  i.src = '" + URL_SECOND + "';\n"
+            + "  i.src = '" + URL_THIRD + "';\n"
+            + "  i.onload = function() { log(1); };\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+        assertEquals(URL_THIRD, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("1")
+    public void onLoad_calledWhenImageDownloaded_dynamic_onLoad_already_set() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var i = document.createElement('img');\n"
+            + "  i.onload = function() { log(1); };\n"
+            + "  i.src = '" + URL_SECOND + "';\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image is created if the page is already
+     * finished, the onload handler is called.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "2"})
+    public void onLoad_calledWhenImageDownloaded_dynamic_twoSteps() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var i = document.createElement('img');\n"
+            + "  i.src = '" + URL_SECOND + "';\n"
+            + "  i.onload = function() {\n"
+            + "    log(1);\n"
+            + "    var i2 = document.createElement('img');\n"
+            + "    i2.src = '" + URL_THIRD + "';\n"
+            + "    i2.onload = function() {\n"
+            + "      log(2);\n"
+            + "    };\n"
+            + "  };\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+        assertEquals(URL_THIRD, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute set from a script, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"image one", "image two"})
+    public void onLoad_calledWhenImageDownloaded_mixed() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html
+            = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<img id='img' name='img'/>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var i = document.getElementById('img');\n"
+            + "  i.onload = function() {\n"
+            + "    log('image one');\n"
+            + "    i.onload = function() {\n"
+            + "      log('image two');\n"
+            + "    };\n"
+            + "    i.src = '" + URL_THIRD + "';\n"
+            + "  };\n"
+            + "  i.setAttribute('src','" + URL_SECOND + "');\n"
+            + "  var t = setTimeout(function() {clearTimeout(t);}, 500);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+
+        final List<String> requestedUrls = getMockWebConnection().getRequestedUrls(URL_FIRST);
+        assertEquals(requestedUrls.size(), 3);
+        assertEquals("", requestedUrls.get(0));
+        assertEquals("second/", requestedUrls.get(1));
+        assertEquals(URL_THIRD.toString(), requestedUrls.get(2));
+        assertEquals(URL_THIRD, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, the <tt>onload</tt> handler
+     * does not get invoked if we can't download the image.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onLoad_notCalledWhenImageNotDownloaded() throws Exception {
+        final String html = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "</script>\n"
+            + "<img src='" + URL_SECOND + "' onload='log(1)'>\n"
+            + "</body></html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_SECOND, "foo", 404, "Not Found", MimeType.TEXT_HTML, new ArrayList<NameValuePair>());
+
+        loadPageVerifyTextArea2(html);
+        assertEquals(URL_SECOND, conn.getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "2", "1"})
+    public void onLoad_order() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  log('0');"
+            + "  var i = document.createElement('img');\n"
+            + "  i.onload = function() {\n"
+            + "    log(1);\n"
+            + "  };\n"
+            + "  i.src = '" + URL_SECOND + "';\n"
+            + "  log('2');"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "2", "1"})
+    public void onLoad_orderNotAttached() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  log('0');"
+            + "  var i = new Image();\n"
+            + "  i.onload = function() {\n"
+            + "    log(1);\n"
+            + "  };\n"
+            + "  i.src = '" + URL_SECOND + "';\n"
+            + "  log('2');"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"in", "out", "Image.onload(0)",
+             "mousedown", "in", "out", "Image.onload(1)",
+             "mouseup", "in", "out",
+             "click", "in", "out", "Image.onload(2)", "Image.onload(3)"})
+    @BuggyWebDriver({"in", "out", "Image.onload(0)",
+        "mousedown", "in", "out",
+        "mouseup", "in", "out",
+        "click", "in", "out", "Image.onload(1)", "Image.onload(2)", "Image.onload(3)"})
+    @HtmlUnitNYI(CHROME = {"in", "Image.onload(0)", "out",
+        "mousedown", "in", "Image.onload(1)", "out",
+        "mouseup", "in", "Image.onload(2)", "out",
+        "click", "in", "Image.onload(3)", "out"},
+        EDGE = {"in", "Image.onload(0)", "out",
+                "mousedown", "in", "Image.onload(1)", "out",
+                "mouseup", "in", "Image.onload(2)", "out",
+                "click", "in", "Image.onload(3)", "out"},
+        FF = {"in", "Image.onload(0)", "out",
+              "mousedown", "in", "Image.onload(1)", "out",
+              "mouseup", "in", "Image.onload(2)", "out",
+              "click", "in", "Image.onload(3)", "out"},
+        FF_ESR = {"in", "Image.onload(0)", "out",
+                  "mousedown", "in", "Image.onload(1)", "out",
+                  "mouseup", "in", "Image.onload(2)", "out",
+                  "click", "in", "Image.onload(3)", "out"})
+    public void onload_complex() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+        }
+
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TEXTAREA_FUNCTION
+
+                + "  function test(i) {\n"
+                + "    log('in');\n"
+                + "    var image = new Image();\n"
+                + "    image.onload = function () { log(\"Image.onload(\" + i + \")\") };\n"
+                + "    image.src = '" + URL_SECOND + "';\n"
+                + "    log('out');\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload=\"test(0)\">\n"
+                + "<button id='myId'"
+                +           "onmousedown=\"log('mousedown'); test(1)\" "
+                +           "onmouseup=\"log('mouseup'); test(2)\" "
+                +           "onclick=\"log('click'); test(3)\"></button>\n"
+                + LOG_TEXTAREA
+                + "</body>\n"
+                + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myId")).click();
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 }
