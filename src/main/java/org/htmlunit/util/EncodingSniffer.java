@@ -425,6 +425,8 @@ public final class EncodingSniffer {
 
     private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes(US_ASCII);
 
+    private static final byte[] CSS_CHARSET_DECLARATION_PREFIX = "@charset \"".getBytes(US_ASCII);
+
     /**
      * The number of HTML bytes to sniff for encoding info embedded in <code>meta</code> tags;
      */
@@ -435,6 +437,8 @@ public final class EncodingSniffer {
      * relatively small because it's always at the very beginning of the file.
      */
     private static final int SIZE_OF_XML_CONTENT_SNIFFED = 512;
+
+    private static final int SIZE_OF_CSS_CONTENT_SNIFFED = 1024;
 
     /**
      * Disallow instantiation of this class.
@@ -473,6 +477,9 @@ public final class EncodingSniffer {
         }
         else if (isXml(headers)) {
             charset = sniffXmlEncoding(headers, content);
+        }
+        else if (contentTypeEndsWith(headers, MimeType.TEXT_CSS)) {
+            charset = sniffCssEncoding(headers, content);
         }
         else {
             charset = sniffUnknownContentTypeEncoding(headers, content);
@@ -592,6 +599,25 @@ public final class EncodingSniffer {
 
         bytes = readAndPrepend(content, SIZE_OF_XML_CONTENT_SNIFFED, bytes);
         encoding = sniffEncodingFromXmlDeclaration(bytes);
+        return encoding;
+    }
+
+    private static Charset sniffCssEncoding(final List<NameValuePair> headers, final InputStream content)
+        throws IOException {
+
+        byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
+            return encoding;
+        }
+
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
+            return encoding;
+        }
+
+        bytes = readAndPrepend(content, SIZE_OF_CSS_CONTENT_SNIFFED, bytes);
+        encoding = sniffEncodingFromCssDeclaration(bytes);
         return encoding;
     }
 
@@ -996,6 +1022,33 @@ public final class EncodingSniffer {
         }
         if (encoding != null && LOG.isDebugEnabled()) {
             LOG.debug("Encoding found in XML declaration: '" + encoding + "'.");
+        }
+        return encoding;
+    }
+
+    /**
+     * Parses and returns the charset declaration at the start of a css file if any, otherwise returns {@code null}.
+     *
+     * <p>e.g. <pre>@charset "UTF-8"</pre>
+     */
+    static Charset sniffEncodingFromCssDeclaration(final byte[] bytes) {
+        if (bytes.length < CSS_CHARSET_DECLARATION_PREFIX.length) {
+            return null;
+        }
+        for (int i = 0; i < CSS_CHARSET_DECLARATION_PREFIX.length; i++) {
+            if (bytes[i] != CSS_CHARSET_DECLARATION_PREFIX[i]) {
+                return null;
+            }
+        }
+
+        Charset encoding = null;
+        final int index = ArrayUtils.indexOf(bytes, (byte) '"', CSS_CHARSET_DECLARATION_PREFIX.length);
+        if (index + 1 < bytes.length && bytes[index + 1] == ';') {
+            encoding = toCharset(new String(bytes, CSS_CHARSET_DECLARATION_PREFIX.length, index - CSS_CHARSET_DECLARATION_PREFIX.length, US_ASCII));
+            // https://www.w3.org/TR/css-syntax-3/#input-byte-stream "Why use utf-8 when the declaration says utf-16?"
+            if (encoding == UTF_16BE || encoding == UTF_16LE) {
+                encoding = UTF_8;
+            }
         }
         return encoding;
     }
