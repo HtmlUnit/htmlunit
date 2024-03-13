@@ -717,9 +717,17 @@ public final class EncodingSniffer {
                         Charset charset = null;
                         if ("charset".equals(name)) {
                             charset = toCharset(value);
+                            // https://html.spec.whatwg.org/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding
+                            if (charset == null && value.equals("x-user-defined")) {
+                                charset = Charset.forName("windows-1252");
+                            }
                         }
                         else if ("content".equals(name)) {
                             charset = extractEncodingFromContentType(value);
+                            // https://html.spec.whatwg.org/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding
+                            if (charset == null && value.contains("x-user-defined")) {
+                                charset = Charset.forName("windows-1252");
+                            }
                             if (charset == null) {
                                 continue;
                             }
