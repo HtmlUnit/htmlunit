@@ -189,12 +189,22 @@ public abstract class BaseFrameElement extends HtmlElement {
                 return;
             }
 
-            final WebRequest request = new WebRequest(url, page.getCharset(), page.getUrl());
+            final Charset pageCharset = page.getCharset();
+            final URL pageUrl = page.getUrl();
+            final WebRequest request = new WebRequest(url, pageCharset, pageUrl);
 
             if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
                 return;
             }
+
+            // Use parent document's charset as container charset if same origin
+            // https://html.spec.whatwg.org/multipage/parsing.html#determining-the-character-encoding
+            if (pageUrl.getProtocol().equals(url.getProtocol())
+                    && pageUrl.getAuthority().equals(url.getAuthority())) {
+                request.setDefaultResponseContentCharset(pageCharset);
+            }
+
             try {
                 webClient.getPage(enclosedWindow_, request);
             }
