@@ -668,6 +668,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
             request.setCharset(UTF_8);
+            // https://xhr.spec.whatwg.org/#response-body
+            request.setDefaultResponseContentCharset(UTF_8);
             request.setRefererlHeader(containingPage.getUrl());
 
             try {
@@ -962,8 +964,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
-            // this kind of web responses using UTF-8 as default encoding
-            webResponse_.defaultCharsetUtf8();
 
             boolean allowOriginResponse = true;
             if (!isSameOrigin_) {

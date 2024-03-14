@@ -190,6 +190,7 @@ public class WebResponseWrapper extends WebResponse {
      * {@inheritDoc}
      * The default behavior of this method is to call defaultCharsetUtf8() on the wrapped webResponse object.
      */
+    @Deprecated
     @Override
     public void defaultCharsetUtf8() {
         wrappedWebResponse_.defaultCharsetUtf8();
