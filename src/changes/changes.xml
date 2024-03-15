@@ -18,6 +18,12 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="fix" dev="Lai Quang Duong">
+                core-js: fix return value when assigning to Symbol.__proto__.
+            </action>
+            <action type="add" dev="rbri">
+                core-js: [Symbol.species] support added to typed arrays
+            </action>
             <action type="update" dev="Lai Quang Duong">
                 Update EncodingSniffer.ENCODING_FROM_LABEL with the latest at https://encoding.spec.whatwg.org/#names-and-labels
             </action>
