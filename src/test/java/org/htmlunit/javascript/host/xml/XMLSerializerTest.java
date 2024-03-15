@@ -682,34 +682,32 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
-        EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
-        FF = "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
-                + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
-        FF_ESR = "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
-                + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+            EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            FF = "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            FF_ESR = "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
-        FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     public void outputEncoding1252() throws Exception {
         transform("<xsl:output encoding='Windows-1252' />");
     }
-
 
     /**
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
-        EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
-        FF = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n"
+            EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            FF = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n"
                 + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
-        FF_ESR = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n"
+            FF_ESR = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n"
                 + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
-        FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     public void outputEncoding1251() throws Exception {
         transform("<xsl:output encoding='Windows-1251' />");
     }
-
 
     /**
      * @throws Exception if the test fails
