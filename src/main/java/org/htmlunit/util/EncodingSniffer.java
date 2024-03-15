@@ -46,6 +46,7 @@ import org.htmlunit.HttpHeader;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public final class EncodingSniffer {
 
