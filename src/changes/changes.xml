@@ -18,6 +18,9 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="fix" dev="rbri">
+                Fix the encoding detection for xslt transformations.
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 Image.onload() must be processed as postponed action.
             </action>

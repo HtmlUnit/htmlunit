@@ -616,21 +616,21 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(CHROME = "<catalog>\n"
                     + "  <cd>\n"
                     + "    <title>Empire Burlesque</title>\n"
-                    + "    <artist>Bob Dylan</artist>\n"
+                    + "    <artist>Bob Dylan \u1042</artist>\n"
                     + "  </cd>\n"
                     + "</catalog>",
             EDGE = "<catalog>\n"
                     + "  <cd>\n"
                     + "    <title>Empire Burlesque</title>\n"
-                    + "    <artist>Bob Dylan</artist>\n"
+                    + "    <artist>Bob Dylan \u1042</artist>\n"
                     + "  </cd>\n"
                     + "</catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF_ESR = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
-    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
-            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     public void outputXmlIndent() throws Exception {
         transform("<xsl:output method='xml' indent='yes' />");
     }
@@ -642,21 +642,21 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(CHROME = "<catalog>\n"
                     + "  <cd>\n"
                     + "    <title>Empire Burlesque</title>\n"
-                    + "    <artist>Bob Dylan</artist>\n"
+                    + "    <artist>Bob Dylan \u1042</artist>\n"
                     + "  </cd>\n"
                     + "</catalog>",
             EDGE = "<catalog>\n"
                     + "  <cd>\n"
                     + "    <title>Empire Burlesque</title>\n"
-                    + "    <artist>Bob Dylan</artist>\n"
+                    + "    <artist>Bob Dylan \u1042</artist>\n"
                     + "  </cd>\n"
                     + "</catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF_ESR = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
-    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
-            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     public void outputIndent() throws Exception {
         transform("<xsl:output indent='yes' />");
     }
@@ -665,14 +665,14 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
-            EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
+    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF_ESR = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
-    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
-            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     public void outputNoIndent() throws Exception {
         transform("<xsl:output indent='no' />");
     }
@@ -681,7 +681,41 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
+    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+        EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+        FF = "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
+                + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+        FF_ESR = "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
+                + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+        FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    public void outputEncoding1252() throws Exception {
+        transform("<xsl:output encoding='Windows-1252' />");
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+        EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+        FF = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n"
+                + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+        FF_ESR = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n"
+                + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+        FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    public void outputEncoding1251() throws Exception {
+        transform("<xsl:output encoding='Windows-1251' />");
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     public void outputOmitXmlDeclaration() throws Exception {
         transform("<xsl:output omit-xml-declaration='yes' />");
     }
@@ -690,14 +724,14 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
-            EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
+    @Alerts(CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
             FF_ESR = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
-    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
-            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
+                    + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
+    @HtmlUnitNYI(FF_ESR = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>",
+            FF = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan \u1042</artist></cd></catalog>")
     public void noOutput() throws Exception {
         transform("");
     }
@@ -706,7 +740,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
         final String xml
                 = "<?xml version='1.0' encoding='ISO-8859-1'?>"
                 + "<catalog><cd><title>Empire Burlesque</title>"
-                + "<artist>Bob Dylan</artist>"
+                + "<artist>Bob Dylan &#x1042;</artist>"
                 + "</cd>"
                 + "</catalog>";
 

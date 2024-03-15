@@ -17,7 +17,8 @@ package org.htmlunit.javascript.host.xml;
 import static org.htmlunit.BrowserVersionFeatures.JS_XSLT_TRANSFORM_INDENT;
 
 import java.io.ByteArrayOutputStream;
-import java.io.StringWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,6 @@ import java.util.Map;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -47,6 +47,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.dom.DocumentFragment;
 import org.htmlunit.javascript.host.dom.Node;
+import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.XmlUtils;
 import org.htmlunit.xml.XmlPage;
 import org.w3c.dom.NodeList;
@@ -167,7 +168,20 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                             transformer.transform(xmlSource, new StreamResult(out));
                             final WebResponseData data =
                                     new WebResponseData(out.toByteArray(), 200, null, Collections.emptyList());
-                            final WebResponse response = new WebResponse(data, null, 0);
+                            final WebResponse response = new WebResponse(data, null, 0) {
+
+                                // XmlUtils.buildDocument reads the out stream using the contentCharset
+                                // we have to provide the correct one
+                                @Override
+                                public Charset getContentCharset() {
+                                    final Charset cs = EncodingSniffer.toCharset(
+                                            transformer.getOutputProperty(OutputKeys.ENCODING));
+                                    if (cs == null) {
+                                        return StandardCharsets.UTF_8;
+                                    }
+                                    return cs;
+                                }
+                            };
                             return XmlUtils.buildDocument(response);
                         }
                     }
@@ -197,10 +211,15 @@ public class XSLTProcessor extends HtmlUnitScriptable {
 
             // output is not DOM (text)
             xmlSource = new DOMSource(source.getDomNodeOrDie());
-            final StringWriter writer = new StringWriter();
-            final Result streamResult = new StreamResult(writer);
-            transformer.transform(xmlSource, streamResult);
-            return writer.toString();
+            try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+                transformer.transform(xmlSource, new StreamResult(out));
+
+                final Charset cs = EncodingSniffer.toCharset(transformer.getOutputProperty(OutputKeys.ENCODING));
+                if (cs == null) {
+                    return out.toString(StandardCharsets.UTF_8);
+                }
+                return out.toString(cs);
+            }
         }
         catch (final RuntimeException re) {
             throw re;
