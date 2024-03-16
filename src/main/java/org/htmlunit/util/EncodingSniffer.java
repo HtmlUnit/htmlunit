@@ -19,6 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_16BE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -426,17 +427,20 @@ public final class EncodingSniffer {
 
     private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes(US_ASCII);
 
+    private static final byte[] CSS_CHARSET_DECLARATION_PREFIX = "@charset \"".getBytes(US_ASCII);
+
     /**
      * The number of HTML bytes to sniff for encoding info embedded in <code>meta</code> tags;
-     * relatively large because we don't have a fallback.
      */
-    private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 4096;
+    private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 1024;
 
     /**
      * The number of XML bytes to sniff for encoding info embedded in the XML declaration;
      * relatively small because it's always at the very beginning of the file.
      */
     private static final int SIZE_OF_XML_CONTENT_SNIFFED = 512;
+
+    private static final int SIZE_OF_CSS_CONTENT_SNIFFED = 1024;
 
     /**
      * Disallow instantiation of this class.
@@ -467,6 +471,7 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
+    @Deprecated
     public static Charset sniffEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
         final Charset charset;
@@ -476,18 +481,11 @@ public final class EncodingSniffer {
         else if (isXml(headers)) {
             charset = sniffXmlEncoding(headers, content);
         }
+        else if (contentTypeEndsWith(headers, MimeType.TEXT_CSS)) {
+            charset = sniffCssEncoding(headers, content);
+        }
         else {
             charset = sniffUnknownContentTypeEncoding(headers, content);
-        }
-
-        // this is was browsers do
-        if (charset != null) {
-            if ("US-ASCII".equals(charset.name())) {
-                return Charset.forName("windows-1252");
-            }
-            if ("GB2312".equals(charset.name())) {
-                return Charset.forName("GBK");
-            }
         }
         return charset;
     }
@@ -498,6 +496,7 @@ public final class EncodingSniffer {
      * @param headers the HTTP response headers
      * @return {@code true} if the specified HTTP response headers indicate an HTML response
      */
+    @Deprecated
     static boolean isHtml(final List<NameValuePair> headers) {
         return contentTypeEndsWith(headers, MimeType.TEXT_HTML);
     }
@@ -508,6 +507,7 @@ public final class EncodingSniffer {
      * @param headers the HTTP response headers
      * @return {@code true} if the specified HTTP response headers indicate an XML response
      */
+    @Deprecated
     static boolean isXml(final List<NameValuePair> headers) {
         return contentTypeEndsWith(headers, MimeType.TEXT_XML, MimeType.APPLICATION_XML, "text/vnd.wap.wml", "+xml");
     }
@@ -556,17 +556,18 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
+    @Deprecated
     public static Charset sniffHtmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
-        if (encoding != null) {
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
             return encoding;
         }
 
@@ -588,22 +589,43 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
+    @Deprecated
     public static Charset sniffXmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
-        if (encoding != null) {
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
             return encoding;
         }
 
         bytes = readAndPrepend(content, SIZE_OF_XML_CONTENT_SNIFFED, bytes);
         encoding = sniffEncodingFromXmlDeclaration(bytes);
+        return encoding;
+    }
+
+    @Deprecated
+    private static Charset sniffCssEncoding(final List<NameValuePair> headers, final InputStream content)
+        throws IOException {
+
+        byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
+            return encoding;
+        }
+
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
+            return encoding;
+        }
+
+        bytes = readAndPrepend(content, SIZE_OF_CSS_CONTENT_SNIFFED, bytes);
+        encoding = sniffEncodingFromCssDeclaration(bytes);
         return encoding;
     }
 
@@ -621,16 +643,20 @@ public final class EncodingSniffer {
      *         or {@code null} if the encoding could not be determined
      * @throws IOException if an IO error occurs
      */
+    @Deprecated
     public static Charset sniffUnknownContentTypeEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        final byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        final byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
+            return encoding;
+        }
         return encoding;
     }
 
@@ -641,6 +667,7 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified HTTP headers, or {@code null} if the encoding
      *         could not be determined
      */
+    @Deprecated
     public static Charset sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
         for (final NameValuePair pair : headers) {
             final String name = pair.getName();
@@ -706,7 +733,20 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
      *         could not be determined
      */
-    static Charset sniffEncodingFromMetaTag(final byte[] bytes) {
+    @Deprecated
+    static Charset sniffEncodingFromMetaTag(final byte[] bytes)throws IOException {
+        return sniffEncodingFromMetaTag(new ByteArrayInputStream(bytes));
+    }
+
+    /**
+     * Attempts to sniff an encoding from an HTML <code>meta</code> tag in the specified byte array.
+     *
+     * @param is the content stream to check for an HTML <code>meta</code> tag
+     * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
+     *         could not be determined
+     */
+    public static Charset sniffEncodingFromMetaTag(final InputStream is) throws IOException {
+        final byte[] bytes = read(is, SIZE_OF_HTML_CONTENT_SNIFFED);
         for (int i = 0; i < bytes.length; i++) {
             if (matches(bytes, i, COMMENT_START)) {
                 i = indexOfSubArray(bytes, COMMENT_END, i);
@@ -725,9 +765,17 @@ public final class EncodingSniffer {
                         Charset charset = null;
                         if ("charset".equals(name)) {
                             charset = toCharset(value);
+                            // https://html.spec.whatwg.org/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding
+                            if (charset == null && value.equals("x-user-defined")) {
+                                charset = Charset.forName("windows-1252");
+                            }
                         }
                         else if ("content".equals(name)) {
                             charset = extractEncodingFromContentType(value);
+                            // https://html.spec.whatwg.org/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding
+                            if (charset == null && value.contains("x-user-defined")) {
+                                charset = Charset.forName("windows-1252");
+                            }
                             if (charset == null) {
                                 continue;
                             }
@@ -890,7 +938,7 @@ public final class EncodingSniffer {
      * @return the encoding found in the specified <code>Content-Type</code> value, or {@code null} if no
      *         encoding was found
      */
-    static Charset extractEncodingFromContentType(final String s) {
+    public static Charset extractEncodingFromContentType(final String s) {
         if (s == null) {
             return null;
         }
@@ -961,7 +1009,20 @@ public final class EncodingSniffer {
      * @param bytes the XML content to sniff
      * @return the encoding of the specified XML content, or {@code null} if it could not be determined
      */
-    static Charset sniffEncodingFromXmlDeclaration(final byte[] bytes) {
+    @Deprecated
+    static Charset sniffEncodingFromXmlDeclaration(final byte[] bytes) throws IOException {
+        return sniffEncodingFromXmlDeclaration(new ByteArrayInputStream(bytes));
+    }
+
+    /**
+     * Searches the specified XML content for an XML declaration and returns the encoding if found,
+     * otherwise returns {@code null}.
+     *
+     * @param is the content stream to check for the charset declaration
+     * @return the encoding of the specified XML content, or {@code null} if it could not be determined
+     */
+    public static Charset sniffEncodingFromXmlDeclaration(final InputStream is) throws IOException {
+        final byte[] bytes = read(is, SIZE_OF_XML_CONTENT_SNIFFED);
         Charset encoding = null;
         if (bytes.length > 5
                 && XML_DECLARATION_PREFIX[0] == bytes[0]
@@ -1001,6 +1062,39 @@ public final class EncodingSniffer {
         return encoding;
     }
 
+    @Deprecated
+    static Charset sniffEncodingFromCssDeclaration(final byte[] bytes) throws IOException {
+        return sniffEncodingFromXmlDeclaration(new ByteArrayInputStream(bytes));
+    }
+
+    /**
+     * Parses and returns the charset declaration at the start of a css file if any, otherwise returns {@code null}.
+     *
+     * <p>e.g. <pre>@charset "UTF-8"</pre>
+     */
+    public static Charset sniffEncodingFromCssDeclaration(final InputStream is) throws IOException {
+        byte[] bytes = read(is, SIZE_OF_CSS_CONTENT_SNIFFED);
+        if (bytes.length < CSS_CHARSET_DECLARATION_PREFIX.length) {
+            return null;
+        }
+        for (int i = 0; i < CSS_CHARSET_DECLARATION_PREFIX.length; i++) {
+            if (bytes[i] != CSS_CHARSET_DECLARATION_PREFIX[i]) {
+                return null;
+            }
+        }
+
+        Charset encoding = null;
+        final int index = ArrayUtils.indexOf(bytes, (byte) '"', CSS_CHARSET_DECLARATION_PREFIX.length);
+        if (index + 1 < bytes.length && bytes[index + 1] == ';') {
+            encoding = toCharset(new String(bytes, CSS_CHARSET_DECLARATION_PREFIX.length, index - CSS_CHARSET_DECLARATION_PREFIX.length, US_ASCII));
+            // https://www.w3.org/TR/css-syntax-3/#input-byte-stream "Why use utf-8 when the declaration says utf-16?"
+            if (encoding == UTF_16BE || encoding == UTF_16LE) {
+                encoding = UTF_8;
+            }
+        }
+        return encoding;
+    }
+
     /**
      * Returns {@code Charset} if the specified charset name is supported on this platform.
      *
@@ -1008,11 +1102,12 @@ public final class EncodingSniffer {
      * @return {@code Charset} if the specified charset name is supported on this platform
      */
     public static Charset toCharset(final String charsetName) {
-        if (StringUtils.isEmpty(charsetName)) {
+        String nameFromLabel = translateEncodingLabel(charsetName);
+        if (nameFromLabel == null) {
             return null;
         }
         try {
-            return Charset.forName(charsetName);
+            return Charset.forName(nameFromLabel);
         }
         catch (final IllegalCharsetNameException | UnsupportedCharsetException e) {
             return null;
@@ -1180,14 +1275,25 @@ public final class EncodingSniffer {
      * @param encodingLabel the label to translate
      * @return the normalized encoding name or null if not found
      */
+    @Deprecated
     public static String translateEncodingLabel(final Charset encodingLabel) {
-        if (null == encodingLabel) {
+        return translateEncodingLabel(encodingLabel.name());
+    }
+
+    /**
+     * Translates the given encoding label into a normalized form
+     * according to <a href="http://encoding.spec.whatwg.org/#encodings">Reference</a>.
+     * @param encodingLabel the label to translate
+     * @return the normalized encoding name or null if not found
+     */
+    public static String translateEncodingLabel(final String encodingLabel) {
+        if (StringUtils.isEmpty(encodingLabel)) {
             return null;
         }
-        final String encLC = encodingLabel.name().toLowerCase(Locale.ROOT);
+        final String encLC = encodingLabel.toLowerCase(Locale.ROOT);
         final String enc = ENCODING_FROM_LABEL.get(encLC);
         if (encLC.equals(enc)) {
-            return encodingLabel.name();
+            return encodingLabel;
         }
         return enc;
     }

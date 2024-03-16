@@ -98,9 +98,19 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
+     * The default behavior of this method is to return getHeaderContentCharset() on the wrapped webResponse object.
+     */
+    @Override
+    public Charset getHeaderContentCharset() {
+        return wrappedWebResponse_.getHeaderContentCharset();
+    }
+
+    /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped webResponse object.
      */
     @Override
+    @Deprecated
     public Charset getContentCharsetOrNull() {
         return wrappedWebResponse_.getContentCharsetOrNull();
     }
@@ -190,6 +200,7 @@ public class WebResponseWrapper extends WebResponse {
      * {@inheritDoc}
      * The default behavior of this method is to call defaultCharsetUtf8() on the wrapped webResponse object.
      */
+    @Deprecated
     @Override
     public void defaultCharsetUtf8() {
         wrappedWebResponse_.defaultCharsetUtf8();

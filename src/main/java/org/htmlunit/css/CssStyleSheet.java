@@ -14,8 +14,6 @@
  */
 package org.htmlunit.css;
 
-import static java.nio.charset.StandardCharsets.UTF_16BE;
-import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
@@ -39,9 +37,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
@@ -305,6 +301,8 @@ public class CssStyleSheet implements Serializable {
                 final BrowserVersion browser = client.getBrowserVersion();
                 request = new WebRequest(new URL(url), browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
                 request.setRefererlHeader(page.getUrl());
+                // https://www.w3.org/TR/css-syntax-3/#input-byte-stream
+                request.setDefaultResponseContentCharset(UTF_8);
 
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response
@@ -321,6 +319,9 @@ public class CssStyleSheet implements Serializable {
                         return new CssStyleSheet(element, "", uri);
                     }
                 }
+
+                // https://www.w3.org/TR/css-syntax-3/#input-byte-stream
+                request.setDefaultResponseContentCharset(UTF_8);
 
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response
@@ -354,32 +355,7 @@ public class CssStyleSheet implements Serializable {
                     return new CssStyleSheet(element, "", uri);
                 }
                 try {
-                    Charset cssEncoding = Charset.forName("windows-1252");
-                    final Charset contentCharset =
-                            EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
-                    if (contentCharset == null && request.getCharset() != null) {
-                        cssEncoding = request.getCharset();
-                    }
-                    else if (contentCharset != null) {
-                        cssEncoding = contentCharset;
-                    }
-
-                    if (in instanceof BOMInputStream) {
-                        final BOMInputStream bomIn = (BOMInputStream) in;
-                        // there seems to be a bug in BOMInputStream
-                        // we have to call this before hasBOM(ByteOrderMark)
-                        if (bomIn.hasBOM()) {
-                            if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
-                                cssEncoding = UTF_8;
-                            }
-                            else if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
-                                cssEncoding = UTF_16BE;
-                            }
-                            else if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
-                                cssEncoding = UTF_16LE;
-                            }
-                        }
-                    }
+                    Charset cssEncoding = response.getContentCharset();
                     try (InputSource source = new InputSource(new InputStreamReader(in, cssEncoding))) {
                         source.setURI(uri);
                         sheet = new CssStyleSheet(element, source, uri);
