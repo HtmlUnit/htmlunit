@@ -29,6 +29,8 @@ import org.htmlunit.javascript.host.dom.DocumentFragment;
 @JsxClass(domClass = HtmlTemplate.class)
 public class HTMLTemplateElement extends HTMLElement {
 
+    private DocumentFragment content_;
+
     /**
      * Creates a new instance.
      */
@@ -49,11 +51,13 @@ public class HTMLTemplateElement extends HTMLElement {
      */
     @JsxGetter
     public DocumentFragment getContent() {
-        final DocumentFragment result = new DocumentFragment();
-        result.setPrototype(getPrototype(result.getClass()));
-        result.setParentScope(getParentScope());
-        result.setDomNode(((HtmlTemplate) getDomNodeOrDie()).getContent());
-
-        return result;
+        if (content_ == null) {
+            final DocumentFragment result = new DocumentFragment();
+            result.setPrototype(getPrototype(result.getClass()));
+            result.setParentScope(getParentScope());
+            result.setDomNode(((HtmlTemplate) getDomNodeOrDie()).getContent());
+            content_ = result;
+        }
+        return content_;
     }
 }

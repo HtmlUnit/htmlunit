@@ -120,6 +120,42 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"true", "true", "true", "true"})
+    public void contentSame() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var template = document.createElement('template');\n"
+            + "        log(template.content === template.content);\n"
+
+            + "        template = document.getElementById('tEmpty');\n"
+            + "        log(template.content === template.content);\n"
+
+            + "        template = document.getElementById('tText');\n"
+            + "        log(template.content === template.content);\n"
+
+            + "        template = document.getElementById('tDiv');\n"
+            + "        log(template.content === template.content);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <template id='tEmpty'></template>\n"
+            + "    <template id='tText'>HtmlUnit</template>\n"
+            + "    <template id='tDiv'><div>HtmlUnit</div><div>is great</div></template>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"[object DocumentFragment]", "0-0", "1-0"})
     public void appendChild() throws Exception {
         final String html =
