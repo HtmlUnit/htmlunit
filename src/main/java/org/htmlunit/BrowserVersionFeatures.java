@@ -388,6 +388,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
 
+    /** script tags created from js as child of templates are processed if added to the dom. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH,
+
     /** Javascript selectorText property returns selectors in lower case. */
     @BrowserFeature({CHROME, EDGE})
     JS_SELECTOR_TEXT_LOWERCASE,

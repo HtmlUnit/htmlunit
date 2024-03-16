@@ -18,6 +18,12 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="fix" dev="rbri">
+                Execution of script tags included in template tags parsed from js is different in chrome.
+            </action>
+            <action type="fix" dev="rbri">
+                Template.content always returns the same object.
+            </action>
             <action type="fix" dev="René Schwietzke" issue="#714">
                 Ensure that reading more characters at the end of the buffer is not stopped due to the buffer appearing 
                 being at the end with reading, rather we read till we get a -1.

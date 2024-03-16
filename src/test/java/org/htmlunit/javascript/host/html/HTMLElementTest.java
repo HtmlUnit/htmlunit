@@ -3984,6 +3984,82 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"executed", "appendChild done"},
+            FF = "appendChild done",
+            FF_ESR = "appendChild done")
+    public void appendChildExecuteTemplateChildJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var template = responseBody.querySelector('template');\n"
+            + "    var scriptElem = template.content.firstChild;\n"
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.appendChild(scriptElem);\n"
+            + "      log('appendChild done');\n"
+            + "    } catch(e) { log('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"executed", "appendChild done1", "appendChild done2"},
+            FF = {"appendChild done1", "appendChild done2"},
+            FF_ESR = {"appendChild done1", "appendChild done2"})
+    public void appendChildExecuteTemplateFragmentJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var templateContent = responseBody.querySelector('template').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.appendChild(scriptElem);\n"
+            + "      log('appendChild done1');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      outernode.appendChild(scriptElem);\n"
+            + "      log('appendChild done2');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "  <div id='secondNode'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("declared")
     public void appendChildDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -4063,6 +4139,120 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"executed", "insertBefore done"},
+            FF = "insertBefore done",
+            FF_ESR = "insertBefore done")
+    public void insertBeforeExecuteTemplateChildJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var template = responseBody.querySelector('template');\n"
+            + "    var scriptElem = template.content.firstChild;\n"
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { log('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"executed", "insertBefore done1", "insertBefore done2"},
+            FF = {"insertBefore done1", "insertBefore done2"},
+            FF_ESR = {"insertBefore done1", "insertBefore done2"})
+    public void insertBeforeExecuteTemplateFragmentJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var templateContent = responseBody.querySelector('template').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done1');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done2');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "  <div id='secondNode'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "executed", "insertBefore done1", "insertBefore done2"})
+    public void insertBeforeExecuteTemplateFragmentDom() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log('before');\n"
+            + "    var templateContent = document.getElementById('myTemplate').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done1');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done2');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <template id='myTemplate'><script>alerter();</script></template>\n"
+            + "  <div id='myNode'></div>\n"
+            + "  <div id='secondNode'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("declared")
     public void insertBeforeDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -4134,6 +4324,82 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"executed", "replaceChild done"},
+            FF = "replaceChild done",
+            FF_ESR = "replaceChild done")
+    public void replaceChildExecuteTemplateChildJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var template = responseBody.querySelector('template');\n"
+            + "    var scriptElem = template.content.firstChild;\n"
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.replaceChild(scriptElem, document.getElementById('inner'));\n"
+            + "      log('replaceChild done');\n"
+            + "    } catch(e) { log('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"executed", "replaceChild done1", "replaceChild done2"},
+            FF = {"replaceChild done1", "replaceChild done2"},
+            FF_ESR = {"replaceChild done1", "replaceChild done2"})
+    public void replaceChildExecuteTemplateFragmentJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var templateContent = responseBody.querySelector('template').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.replaceChild(scriptElem, document.getElementById('inner'));\n"
+            + "      log('replaceChild done1');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      outernode.replaceChild(scriptElem, document.getElementById('inner2'));\n"
+            + "      log('replaceChild done2');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "  <div id='secondNode'><div id='inner2'></div></div>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -4414,6 +4680,82 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"executed", "insertAdjacentElement done"},
+            FF = "insertAdjacentElement done",
+            FF_ESR = "insertAdjacentElement done")
+    public void insertAdjacentElementExecuteTemplateChildJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var template = responseBody.querySelector('template');\n"
+            + "    var scriptElem = template.content.firstChild;\n"
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertAdjacentElement('afterend', scriptElem);\n"
+            + "      log('insertAdjacentElement done');\n"
+            + "    } catch(e) { log('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"executed", "insertAdjacentElement done1", "insertAdjacentElement done2"},
+            FF = {"insertAdjacentElement done1", "insertAdjacentElement done2"},
+            FF_ESR = {"insertAdjacentElement done1", "insertAdjacentElement done2"})
+    public void insertAdjacentElementExecuteTemplateFragmentJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var templateContent = responseBody.querySelector('template').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertAdjacentElement('afterend', scriptElem);\n"
+            + "      log('insertAdjacentElement done1');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      outernode.insertAdjacentElement('afterend', scriptElem);\n"
+            + "      log('insertAdjacentElement done2');\n"
+            + "    } catch(e) { log('exception-append2'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "  <div id='secondNode'></div>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }

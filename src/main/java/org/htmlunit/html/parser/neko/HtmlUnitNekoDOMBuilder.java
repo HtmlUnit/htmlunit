@@ -15,6 +15,7 @@
 package org.htmlunit.html.parser.neko;
 
 import static org.htmlunit.BrowserVersionFeatures.HTML_COMMAND_TAG;
+import static org.htmlunit.BrowserVersionFeatures.JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -333,7 +334,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         else if (createdByJavascript_
                 && newElement instanceof ScriptElement
                 && (!insideTemplate_
-                        || !page_.getWebClient().getBrowserVersion().hasFeature(HTML_COMMAND_TAG))) {
+                        || !page_.getWebClient().getBrowserVersion()
+                                .hasFeature(JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH))) {
             final ScriptElement script = (ScriptElement) newElement;
             script.markAsCreatedByDomParser();
         }
