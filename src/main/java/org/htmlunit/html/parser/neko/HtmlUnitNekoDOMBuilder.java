@@ -135,6 +135,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private HtmlForm consumingForm_;
     private boolean formEndingIsAdjusting_;
     private boolean insideSvg_;
+    private boolean insideTemplate_;
 
     private static final String FEATURE_AUGMENTATIONS = "http://cyberneko.org/html/features/augmentations";
     private static final String FEATURE_PARSE_NOSCRIPT
@@ -300,6 +301,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         if (newElement instanceof HtmlSvg) {
             insideSvg_ = true;
         }
+        else if (newElement instanceof HtmlTemplate) {
+            insideTemplate_ = true;
+        }
 
         // Forms own elements simply by enclosing source-wise rather than DOM parent-child relationship
         // Forms without a </form> will keep consuming forever
@@ -326,7 +330,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         if (!insideSvg_ && "body".equals(tagLower)) {
             body_ = (HtmlElement) newElement;
         }
-        else if (createdByJavascript_ && newElement instanceof ScriptElement) {
+        else if (createdByJavascript_
+                && newElement instanceof ScriptElement
+                && (!insideTemplate_
+                        || !page_.getWebClient().getBrowserVersion().hasFeature(HTML_COMMAND_TAG))) {
             final ScriptElement script = (ScriptElement) newElement;
             script.markAsCreatedByDomParser();
         }
@@ -470,6 +477,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         if ("svg".equals(tagLower)) {
             insideSvg_ = false;
+        }
+        else if ("template".equals(tagLower)) {
+            insideTemplate_ = false;
         }
 
         // this only avoids a problem when the stack is empty here
