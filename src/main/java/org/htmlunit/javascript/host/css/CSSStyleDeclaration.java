@@ -931,7 +931,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Returns an Iterator allowing to go through all keys contained in this object.
      * @return an {@link NativeArrayIterator}
      */
-    @JsxSymbol(value = {CHROME, EDGE, FF, FF_ESR}, symbolName = "iterator")
+    @JsxSymbol(symbolName = "iterator")
     public ES6Iterator values() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
     }

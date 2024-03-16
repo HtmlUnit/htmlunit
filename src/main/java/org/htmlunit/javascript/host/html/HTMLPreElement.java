@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.html.HtmlExample;
 import org.htmlunit.html.HtmlListing;
 import org.htmlunit.html.HtmlPreformattedText;
@@ -33,9 +28,9 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlExample.class, value = {CHROME, EDGE, FF, FF_ESR})
+@JsxClass(domClass = HtmlExample.class)
 @JsxClass(domClass = HtmlPreformattedText.class)
-@JsxClass(domClass = HtmlListing.class, value = {CHROME, EDGE, FF, FF_ESR})
+@JsxClass(domClass = HtmlListing.class)
 public class HTMLPreElement extends HTMLElement {
 
     /**

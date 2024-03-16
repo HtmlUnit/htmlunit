@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlOutput;
@@ -35,7 +30,7 @@ import org.htmlunit.javascript.host.dom.NodeList;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlOutput.class, value = {CHROME, EDGE, FF, FF_ESR})
+@JsxClass(domClass = HtmlOutput.class)
 public class HTMLOutputElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */

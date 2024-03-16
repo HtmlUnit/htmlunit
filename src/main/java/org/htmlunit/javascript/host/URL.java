@@ -16,10 +16,6 @@ package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.URL_IGNORE_SPECIAL;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.net.MalformedURLException;
 import java.util.List;
@@ -65,7 +61,7 @@ public class URL extends HtmlUnitScriptable {
      * is a relative URL. If not specified, it defaults to ''.
      */
     @JsxConstructor
-    @JsxConstructorAlias(value = {CHROME, EDGE, FF, FF_ESR}, alias = "webkitURL")
+    @JsxConstructorAlias(alias = "webkitURL")
     public void jsConstructor(final String url, final Object base) {
         String baseStr = null;
         if (!JavaScriptEngine.isUndefined(base)) {

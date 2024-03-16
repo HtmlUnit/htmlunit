@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.html.DomElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -33,7 +28,7 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(className = "NativeXPathNSResolver", isJSObject = false, value = {CHROME, EDGE, FF, FF_ESR})
+@JsxClass(className = "NativeXPathNSResolver", isJSObject = false)
 public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolver {
 
     private Node element_;

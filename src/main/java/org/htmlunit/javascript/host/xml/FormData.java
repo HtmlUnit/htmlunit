@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.xml;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -176,7 +171,7 @@ public class FormData extends HtmlUnitScriptable {
      * Removes the entry (if exists).
      * @param name the name of the field to remove
      */
-    @JsxFunction(functionName = "delete", value = {CHROME, EDGE, FF, FF_ESR})
+    @JsxFunction(functionName = "delete")
     public void delete_js(final String name) {
         if (StringUtils.isEmpty(name)) {
             return;
@@ -292,7 +287,7 @@ public class FormData extends HtmlUnitScriptable {
      * @return An Iterator that contains all the requestParameters name[0] and value[1]
      */
     @JsxFunction
-    @JsxSymbol(value = {CHROME, EDGE, FF, FF_ESR}, symbolName = "iterator")
+    @JsxSymbol(symbolName = "iterator")
     public Scriptable entries() {
         return new FormDataIterator(this, "FormData Iterator", FormDataIterator.Type.BOTH, requestParameters_);
     }

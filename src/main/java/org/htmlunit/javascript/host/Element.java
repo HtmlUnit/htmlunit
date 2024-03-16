@@ -546,7 +546,7 @@ public class Element extends Node {
      * Returns the class defined for this element.
      * @return the class name
      */
-    @JsxGetter(propertyName = "className", value = {CHROME, EDGE, FF, FF_ESR})
+    @JsxGetter(propertyName = "className")
     public Object getClassName_js() {
         return getDomNodeOrDie().getAttributeDirect("class");
     }
@@ -555,7 +555,7 @@ public class Element extends Node {
      * Sets the class attribute for this element.
      * @param className the new class name
      */
-    @JsxSetter(propertyName = "className", value = {CHROME, EDGE, FF, FF_ESR})
+    @JsxSetter(propertyName = "className")
     public void setClassName_js(final String className) {
         getDomNodeOrDie().setAttribute("class", className);
     }

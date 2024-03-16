@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.html.HtmlBlockQuote;
 import org.htmlunit.html.HtmlInlineQuotation;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -33,8 +28,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@JsxClass(domClass = HtmlInlineQuotation.class, value = {CHROME, EDGE, FF, FF_ESR})
-@JsxClass(domClass = HtmlBlockQuote.class, value = {CHROME, EDGE, FF, FF_ESR})
+@JsxClass(domClass = HtmlInlineQuotation.class)
+@JsxClass(domClass = HtmlBlockQuote.class)
 public class HTMLQuoteElement extends HTMLElement {
 
     /**
