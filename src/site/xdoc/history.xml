@@ -28,6 +28,41 @@
                 Its current success is due to the huge contributions from people we've never even met in person.
             </p>
         </section>
-
+        
+        <section name="Mike Bowler - What I recall...">
+            <p>
+                It was about 2001 and I was leading an XP team at a client.<br/>
+                We needed to have some way to write automated tests for the UI and the tools that were available at the time were unsatisfactory for our needs.
+            </p>
+            <ul>
+              <li>HttpUnit worked but it modelled the wire transfer protocol rather than the page and those tests just felt awkward to write.</li>
+              <li>I believe that an early version of Watir was already available at that time but it only supported IE and there were no indications
+                that it would become cross platform, as actually happened.</li>
+            </ul>
+            <p>
+                So I modelled out how I wanted to write my tests by interacting with fields on the page and validating behaviour in that way and I
+                created the first version of HtmlUnit to support that.
+            </p>
+            <p>
+                For probably the first six months, there was no javascript support. This was purely form submission and simple interaction.
+                This was because the notion of supporting the entirety of Javascript was daunting, and I just didn't have the time
+                for that - this was all being built in my spare time.
+            </p>
+            <p>
+                Then I discovered the Rhino engine, that appeared to do all the hard work for me, and I started to integrate that.
+                I quickly discovered that while Rhino did an amazing job of covering the language itself, it was still far more work than I'd
+                anticipated to integrate it into a simulated browser.
+            </p>
+            <p>
+                It was slow going and initially, it only supported the parts of javascript that I needed but then after about a year of development,
+                I started to get other people submitting patches, and development picked up speed.
+            </p>
+            <p>
+                As the development community grew around HtmlUnit, it really started to mature as a product.
+            </p>
+            <p>
+                After a number of years, I stepped away to focus on other things, knowing that the product was in good hands and would continue to improve.
+            </p>
+        </section>
     </body>
 </document>
