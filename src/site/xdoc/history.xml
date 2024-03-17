@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>HtmlUnit History</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section name="Content" id="content">
+            <macro name="toc">
+            </macro>
+        </section>
+
+        <section name="The beginning">
+            <p>
+                Back around 2001, Mike Bowler was working with an eXtreme Programming (XP) team at one of his clients.
+                The team was building a web application and wanted to write automated unit and acceptance tests but at that time,
+                they didn't have the browser automation tools that are available today.
+                The one tool that could be found, only simulated the HTTP protocol and not the interaction of the page.
+            </p>
+            <p>
+                So Mike got annoyed with the lack of tooling and created HtmlUnit to fill that gap. Starting with just
+                simple form handling and page interaction, HtmlUnit grew to support JavaScript so that it could truly simulate
+                what the page would do in a real browser.
+                While developement started off slow, with just one person working on it, HtmlUnit has grown to have an engaged community.
+                Its current success is due to the huge contributions from people we've never even met in person.
+            </p>
+        </section>
+
+    </body>
+</document>

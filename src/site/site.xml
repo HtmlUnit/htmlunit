@@ -51,6 +51,7 @@
         <menu name="User docs">
             <item name="Logging" href="/logging.html"/>
             <item name="FAQ" href="/faq.html"/>
+            <item name="History" href="/history.html"/>
         </menu>
         <menu name="Support">
             <item name="Issues tracker" href="https://github.com/HtmlUnit/htmlunit/issues"/>
