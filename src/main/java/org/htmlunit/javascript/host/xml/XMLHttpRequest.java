@@ -332,7 +332,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 int offset = 0;
                 try (InputStream inputStream = webResponse_.getContentAsStream()) {
                     int readLen;
-                    while ((readLen = inputStream.read(buffer, 0, bufferLength)) != -1) {
+                    while ((readLen = IOUtils.read(inputStream, buffer, 0, bufferLength)) != -1) {
                         final long newLength = offset + readLen;
                         // gzip content and the unzipped content is larger
                         if (newLength > contentLength) {

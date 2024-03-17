@@ -29,6 +29,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -121,7 +122,7 @@ public class PrimitiveWebServer implements Closeable {
 
                             if (contentLenght > 0) {
                                 final byte[] charArray = new byte[contentLenght];
-                                in.read(charArray, 0, contentLenght);
+                                IOUtils.read(in, charArray, 0, contentLenght);
                                 requestString += new String(charArray);
                             }
                         }

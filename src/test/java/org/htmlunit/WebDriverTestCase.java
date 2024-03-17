@@ -52,6 +52,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
@@ -809,7 +810,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
             if (requestParameters.isEmpty() && request.getContentLength() > 0) {
                 final byte[] buffer = new byte[request.getContentLength()];
-                request.getInputStream().read(buffer, 0, buffer.length);
+                IOUtils.read(request.getInputStream(), buffer, 0, buffer.length);
                 webRequest.setRequestBody(new String(buffer, webRequest.getCharset()));
             }
             else {
