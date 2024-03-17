@@ -59,10 +59,10 @@ public class MyFacesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: missing formal parameter",
-            EDGE = "org.htmlunit.ScriptException: missing formal parameter",
-            FF = "org.htmlunit.ScriptException: missing formal parameter",
-            FF_ESR = "org.htmlunit.ScriptException: missing formal parameter")
+    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: syntax error",
+            EDGE = "org.htmlunit.ScriptException: syntax error",
+            FF = "org.htmlunit.ScriptException: syntax error",
+            FF_ESR = "org.htmlunit.ScriptException: syntax error")
     public void checkForJsCompileErrors_4_0_2() throws Exception {
         try {
             getWebDriver().get(URL_FIRST + "index.html");
