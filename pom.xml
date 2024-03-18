@@ -38,7 +38,7 @@
         <selenium.version>4.18.1</selenium.version>
 
         <jetty.version>9.4.54.v20240208</jetty.version>
-        <log4j.version>2.23.0</log4j.version>
+        <log4j.version>2.23.1</log4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
@@ -46,7 +46,7 @@
         <pmd.version>6.50.0</pmd.version>
         <junit.version>4.13.2</junit.version>
         <archunit.version>1.2.1</archunit.version>
-        <dependencycheck.version>9.0.9</dependencycheck.version>
+        <dependencycheck.version>9.0.10</dependencycheck.version>
     </properties>
 
     <build>
@@ -126,7 +126,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.7.0</version>
                 <executions>
                     <execution>
                         <id>make-assembly</id>
@@ -184,7 +184,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
