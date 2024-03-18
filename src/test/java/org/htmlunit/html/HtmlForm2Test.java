@@ -20,6 +20,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -36,6 +37,7 @@ import org.htmlunit.FormEncodingType;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
@@ -48,6 +50,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.By.ById;
 import org.openqa.selenium.By.ByTagName;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Tests for {@link HtmlForm}, with BrowserRunner.
@@ -1812,5 +1815,114 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitRequestCharset() throws Exception {
+        submitRequestCharset("utf-8", null, null, null, ISO_8859_1);
+        submitRequestCharset(null, "utf-8", null, null, ISO_8859_1);
+        submitRequestCharset("iso-8859-1", null, "utf-8", null, ISO_8859_1);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", null, ISO_8859_1);
+        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", null, ISO_8859_1);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", null, ISO_8859_1);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitRequestCharsetTextPlain() throws Exception {
+        submitRequestCharset("utf-8", null, null, "text/plain", null);
+        submitRequestCharset(null, "utf-8", null, "text/plain", null);
+        submitRequestCharset("iso-8859-1", null, "utf-8", "text/plain", null);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "text/plain", null);
+        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", "text/plain", null);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "text/plain", null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitRequestCharsetMultipartFormData() throws Exception {
+        submitRequestCharset("utf-8", null, null, "multipart/form-data", null);
+        submitRequestCharset(null, "utf-8", null, "multipart/form-data", null);
+        submitRequestCharset("iso-8859-1", null, "utf-8", "multipart/form-data", null);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "multipart/form-data", null);
+        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", "multipart/form-data", null);
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "multipart/form-data", null);
+    }
+
+    /**
+     * Utility for {@link #submitRequestCharset()}
+     * @param headerCharset the charset for the content type header if not null
+     * @param metaCharset the charset for the meta http-equiv content type tag if not null
+     * @param formCharset the charset for the form's accept-charset attribute if not null
+     * @param expectedRequestCharset the charset expected for the form submission
+     * @throws Exception if the test fails
+     */
+    private void submitRequestCharset(final String headerCharset,
+            final String metaCharset, final String formCharset,
+            final String formEnctype,
+            final Charset expectedRequestCharset) throws Exception {
+
+        final String formAcceptCharset;
+        if (formCharset == null) {
+            formAcceptCharset = "";
+        }
+        else {
+            formAcceptCharset = " accept-charset='" + formCharset + "'";
+        }
+
+        final String formEnc;
+        if (formEnctype == null) {
+            formEnc = "";
+        }
+        else {
+            formEnc = " enctype='" + formEnctype + "'";
+        }
+
+        final String metaContentType;
+        if (metaCharset == null) {
+            metaContentType = "";
+        }
+        else {
+            metaContentType = "<meta http-equiv='Content-Type' content='text/html; charset="
+                + metaCharset + "'>\n";
+        }
+
+        final String html = "<html><head><title>foo</title>\n"
+            + metaContentType
+            + "</head><body>\n"
+            + "<form name='form1' method='post' action='foo'" + formAcceptCharset + formEnc + ">\n"
+            + "<input type='text' name='textField' value='foo'/>\n"
+            + "<input type='text' name='nonAscii' value='Flo\u00DFfahrt'/>\n"
+            + "<input type='submit' name='button' id='myButton' value='foo'/>\n"
+            + "</form></body></html>";
+
+        String contentType = MimeType.TEXT_HTML;
+        if (headerCharset != null) {
+            contentType += ";charset=" + headerCharset;
+        }
+        getMockWebConnection().setDefaultResponse(html, 200, "ok", contentType);
+
+        final WebDriver driver = loadPage2(URL_FIRST, null);
+        driver.findElement(By.id("myButton")).click();
+
+        assertSame(expectedRequestCharset, getMockWebConnection().getLastWebRequest().getCharset());
+
+        if (driver instanceof HtmlUnitDriver) {
+            final WebClient webClient = ((HtmlUnitDriver) driver).getWebClient();
+
+            final HtmlPage page = webClient.getPage(URL_FIRST);
+
+            final HtmlForm form = page.getFormByName("form1");
+            form.getInputByName("button").click();
+
+            assertSame(expectedRequestCharset, getMockWebConnection().getLastWebRequest().getCharset());
+        }
     }
 }

@@ -14,12 +14,9 @@
  */
 package org.htmlunit.html;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -952,12 +949,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitRequestCharset() throws Exception {
-        submitRequestCharset("utf-8", null, null, UTF_8);
-        submitRequestCharset(null, "utf-8", null, UTF_8);
-        submitRequestCharset("iso-8859-1", null, "utf-8", UTF_8);
-        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", UTF_8);
-        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", ISO_8859_1);
-        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", UTF_8);
+        pageCharset("utf-8", null, null);
+        pageCharset(null, "utf-8", null);
+        pageCharset("iso-8859-1", null, "utf-8");
+        pageCharset("iso-8859-1", null, "utf-8, iso-8859-1");
+        pageCharset("utf-8", null, "iso-8859-1 utf-8");
+        pageCharset("iso-8859-1", null, "utf-8, iso-8859-1");
     }
 
     /**
@@ -965,12 +962,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @param headerCharset the charset for the content type header if not null
      * @param metaCharset the charset for the meta http-equiv content type tag if not null
      * @param formCharset the charset for the form's accept-charset attribute if not null
-     * @param expectedRequestCharset the charset expected for the form submission
      * @throws Exception if the test fails
      */
-    private void submitRequestCharset(final String headerCharset,
-            final String metaCharset, final String formCharset,
-            final Charset expectedRequestCharset) throws Exception {
+    private void pageCharset(final String headerCharset,
+            final String metaCharset, final String formCharset) throws Exception {
 
         final String formAcceptCharset;
         if (formCharset == null) {
@@ -1010,11 +1005,6 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset).toUpperCase(Locale.ROOT);
         assertEquals(firstPageEncoding, page.getCharset().name());
-
-        final HtmlForm form = page.getFormByName("form1");
-        form.getInputByName("button").click();
-
-        assertSame(expectedRequestCharset, webConnection.getLastWebRequest().getCharset());
     }
 
     /**
