@@ -30,7 +30,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -253,7 +252,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void _ISO88591___() throws Exception {
         charset(TestCharset.ISO88591, null, null, null);
     }
@@ -263,7 +261,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void _ISO88591__UTF8_() throws Exception {
         charset(TestCharset.ISO88591, null, TestCharset.UTF8, null);
     }
@@ -291,7 +288,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void _ISO88591_ISO88591__() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
@@ -310,7 +306,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void _ISO88591_ISO88591_UTF8_() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
@@ -464,7 +459,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void _UTF8_ISO88591_UTF8_() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
@@ -474,7 +468,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void _UTF8_ISO88591__() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
@@ -574,7 +567,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void __ISO88591_UTF8_() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
@@ -584,7 +576,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void __ISO88591__() throws Exception {
         charset(null, TestCharset.ISO88591, null, null);
     }
@@ -666,7 +657,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void ___UTF8_() throws Exception {
         charset(null, null, TestCharset.UTF8, null);
     }
@@ -676,7 +666,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void ____() throws Exception {
         charset(null, null, null, null);
     }
@@ -713,7 +702,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void _GB2312_ISO88591_UTF8_() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
@@ -723,7 +711,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
     public void _GB2312_ISO88591__() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, null);
     }

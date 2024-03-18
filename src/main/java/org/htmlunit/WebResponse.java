@@ -14,7 +14,6 @@
  */
 package org.htmlunit;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_16BE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -92,7 +91,6 @@ public class WebResponse implements Serializable {
     private final long loadTime_;
     private final WebResponseData responseData_;
     private final WebRequest request_;
-    private boolean defaultCharsetUtf8_;
     private boolean wasBlocked_;
     private String blockReason_;
 
@@ -212,22 +210,19 @@ public class WebResponse implements Serializable {
      * @return the content charset for this response
      */
     public Charset getContentCharset() {
-        Charset charset = getContentCharsetOrNull();
-        if (charset == null) {
-            final String contentType = getContentType();
-
-            // xml pages are using a different content type
-            if (null != contentType
-                && (defaultCharsetUtf8_
-                    || PageType.XML == DefaultPageCreator.determinePageType(contentType))) {
-                return UTF_8;
-            }
+        final Charset charset = getContentCharsetOrNull();
+        if (charset != null) {
+            return charset;
         }
 
-        if (charset == null) {
-            charset = ISO_8859_1;
+        final String contentType = getContentType();
+
+        // xml pages are using a different content type
+        if (PageType.XML == DefaultPageCreator.determinePageType(contentType)) {
+            return UTF_8;
         }
-        return charset;
+
+        return getWebRequest().getDefaultResponseContentCharset();
     }
 
     /**
@@ -343,9 +338,11 @@ public class WebResponse implements Serializable {
 
     /**
      * Mark this response for using UTF-8 as default charset.
+     * @deprecated as of version 4.0.0; use {@link WebRequest#setDefaultResponseContentCharset(Charset)} instead
      */
+    @Deprecated
     public void defaultCharsetUtf8() {
-        defaultCharsetUtf8_ = true;
+        getWebRequest().setDefaultResponseContentCharset(UTF_8);
     }
 
     /**

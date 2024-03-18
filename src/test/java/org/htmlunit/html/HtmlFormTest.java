@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.ElementNotFoundException;
@@ -949,12 +947,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitRequestCharset() throws Exception {
-        pageCharset("utf-8", null, null);
-        pageCharset(null, "utf-8", null);
-        pageCharset("iso-8859-1", null, "utf-8");
-        pageCharset("iso-8859-1", null, "utf-8, iso-8859-1");
-        pageCharset("utf-8", null, "iso-8859-1 utf-8");
-        pageCharset("iso-8859-1", null, "utf-8, iso-8859-1");
+        pageCharset("utf-8", null, null, "UTF-8");
+        pageCharset(null, "utf-8", null, "UTF-8");
+        pageCharset("iso-8859-1", null, "utf-8", "windows-1252");
+        pageCharset("iso-8859-1", null, "utf-8, iso-8859-1", "windows-1252");
+        pageCharset("utf-8", null, "iso-8859-1 utf-8", "UTF-8");
+        pageCharset("iso-8859-1", null, "utf-8, iso-8859-1", "windows-1252");
     }
 
     /**
@@ -965,7 +963,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     private void pageCharset(final String headerCharset,
-            final String metaCharset, final String formCharset) throws Exception {
+            final String metaCharset, final String formCharset,
+            final String expectedRequestCharset) throws Exception {
 
         final String formAcceptCharset;
         if (formCharset == null) {
@@ -1003,8 +1002,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html, 200, "ok", contentType);
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final String firstPageEncoding = Objects.toString(metaCharset, headerCharset).toUpperCase(Locale.ROOT);
-        assertEquals(firstPageEncoding, page.getCharset().name());
+        assertEquals(expectedRequestCharset, page.getCharset().name());
     }
 
     /**

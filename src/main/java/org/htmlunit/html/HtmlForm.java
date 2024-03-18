@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static java.nio.charset.StandardCharsets.UTF_16;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.FORM_IGNORE_REL_NOREFERRER;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
@@ -23,6 +21,7 @@ import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -284,8 +283,10 @@ public class HtmlForm extends HtmlElement {
         String anchor = null;
         String queryFormFields = "";
         Charset enc = getSubmitCharset();
-        if (UTF_16 == enc) {
-            enc = UTF_8;
+        if (StandardCharsets.UTF_16 == enc
+                || StandardCharsets.UTF_16BE == enc
+                || StandardCharsets.UTF_16LE == enc) {
+            enc = StandardCharsets.UTF_8;
         }
 
         if (HttpMethod.GET == method) {

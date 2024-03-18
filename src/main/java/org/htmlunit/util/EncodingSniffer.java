@@ -479,16 +479,6 @@ public final class EncodingSniffer {
         else {
             charset = sniffUnknownContentTypeEncoding(headers, content);
         }
-
-        // this is was browsers do
-        if (charset != null) {
-            if ("US-ASCII".equals(charset.name())) {
-                return Charset.forName("windows-1252");
-            }
-            if ("GB2312".equals(charset.name())) {
-                return Charset.forName("GBK");
-            }
-        }
         return charset;
     }
 
@@ -559,14 +549,14 @@ public final class EncodingSniffer {
     public static Charset sniffHtmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
-        if (encoding != null) {
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
             return encoding;
         }
 
@@ -591,14 +581,14 @@ public final class EncodingSniffer {
     public static Charset sniffXmlEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
-        if (encoding != null) {
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
             return encoding;
         }
 
@@ -624,13 +614,16 @@ public final class EncodingSniffer {
     public static Charset sniffUnknownContentTypeEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
 
-        Charset encoding = sniffEncodingFromHttpHeaders(headers);
-        if (encoding != null || content == null) {
+        final byte[] bytes = read(content, 3);
+        Charset encoding = sniffEncodingFromUnicodeBom(bytes);
+        if (encoding != null) {
             return encoding;
         }
 
-        final byte[] bytes = read(content, 3);
-        encoding = sniffEncodingFromUnicodeBom(bytes);
+        encoding = sniffEncodingFromHttpHeaders(headers);
+        if (encoding != null || content == null) {
+            return encoding;
+        }
         return encoding;
     }
 
@@ -1008,11 +1001,12 @@ public final class EncodingSniffer {
      * @return {@code Charset} if the specified charset name is supported on this platform
      */
     public static Charset toCharset(final String charsetName) {
-        if (StringUtils.isEmpty(charsetName)) {
+        final String nameFromLabel = translateEncodingLabel(charsetName);
+        if (nameFromLabel == null) {
             return null;
         }
         try {
-            return Charset.forName(charsetName);
+            return Charset.forName(nameFromLabel);
         }
         catch (final IllegalCharsetNameException | UnsupportedCharsetException e) {
             return null;
@@ -1180,14 +1174,25 @@ public final class EncodingSniffer {
      * @param encodingLabel the label to translate
      * @return the normalized encoding name or null if not found
      */
+    @Deprecated
     public static String translateEncodingLabel(final Charset encodingLabel) {
-        if (null == encodingLabel) {
+        return translateEncodingLabel(encodingLabel.name());
+    }
+
+    /**
+     * Translates the given encoding label into a normalized form
+     * according to <a href="http://encoding.spec.whatwg.org/#encodings">Reference</a>.
+     * @param encodingLabel the label to translate
+     * @return the normalized encoding name or null if not found
+     */
+    public static String translateEncodingLabel(final String encodingLabel) {
+        if (StringUtils.isEmpty(encodingLabel)) {
             return null;
         }
-        final String encLC = encodingLabel.name().toLowerCase(Locale.ROOT);
+        final String encLC = encodingLabel.toLowerCase(Locale.ROOT);
         final String enc = ENCODING_FROM_LABEL.get(encLC);
         if (encLC.equals(enc)) {
-            return encodingLabel.name();
+            return encodingLabel;
         }
         return enc;
     }
