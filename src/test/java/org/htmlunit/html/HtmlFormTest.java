@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.HttpMethod;
@@ -1003,7 +1003,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html, 200, "ok", contentType);
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset).toUpperCase(Locale.ROOT);
+        final String firstPageEncoding = Objects.toString(metaCharset, headerCharset).toUpperCase(Locale.ROOT);
         assertEquals(firstPageEncoding, page.getCharset().name());
     }
 

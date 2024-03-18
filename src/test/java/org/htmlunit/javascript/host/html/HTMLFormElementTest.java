@@ -1545,7 +1545,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void submitMultipartTextFieldWithRightEncoding() throws Exception {
         final String html = "<html><body onload='document.forms[0].submit()'>\n"
             + "<form action='foo.html' enctype='multipart/form-data' method='post'>\n"
-            + "  <input name='myField' value='éèêäöü'>\n"
+            + "  <input name='myField' value='éèê\u00e4\u00f6\u00fc'>\n"
             + "</form></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -1555,7 +1555,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         final String expected = "Content-Disposition: form-data; name=\"myField\"\r\n"
             + "\r\n"
-            + "éèêäöü";
+            + "éèê\u00e4\u00f6\u00fc";
 
         assertTrue("Body: " + body, body.contains(expected));
     }
@@ -1648,12 +1648,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"application/x-www-form-urlencoded", "myField=éèêäöü"})
+    @Alerts({"application/x-www-form-urlencoded", "myField=éèê\u00e4\u00f6\u00fc"})
     public void submitUrlEncodedUnicode() throws Exception {
         final String html = "<html>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
                 + "  <form action='foo.html' enctype='application/x-www-form-urlencoded' method='post'>\n"
-                + "    <input name='myField' value='éèêäöü'>\n"
+                + "    <input name='myField' value='éèê\u00e4\u00f6\u00fc'>\n"
                 + "  </form>\n"
                 + "</body>\n"
                 + "</html>";
@@ -1856,12 +1856,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text/plain", "myField=éèêäöü\u00a9\r\n"})
+    @Alerts({"text/plain", "myField=éèê\u00e4\u00f6\u00fc\u00a9\r\n"})
     public void submitPlainTextUnicode() throws Exception {
         final String html = "<html>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
                 + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
-                + "    <input name='myField' value='éèêäöü\u00a9'>\n"
+                + "    <input name='myField' value='éèê\u00e4\u00f6\u00fc\u00a9'>\n"
                 + "  </form>\n"
                 + "</body>\n"
                 + "</html>";
@@ -1883,12 +1883,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text/plain", "myField=éèêäöü\u00a9\r\n"})
+    @Alerts({"text/plain", "myField=éèê\u00e4\u00f6\u00fc\u00a9?\r\n"})
     public void submitPlainTextISO_8859_1() throws Exception {
         final String html = "<html>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
                 + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
-                + "    <input name='myField' value='éèêäöü\u00a9'>\n"
+                + "    <input name='myField' value='éèê\u00e4\u00f6\u00fc\u00a9\u05d4'>\n"
                 + "  </form>\n"
                 + "</body>\n"
                 + "</html>";
@@ -1903,6 +1903,36 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
+        assertNull(getMockWebConnection().getLastWebRequest().getCharset());
+    }
+
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"text/plain", "myField=Ã©Ã¨ÃªÃ¤Ã¶Ã¼Â©?\r\n"})
+    public void submitPlainTextISO_8859_1_AcceptCharsetUtf8() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' accept-charset='utf8' method='post'>\n"
+                + "    <input name='myField' value='éèê\u00e4\u00f6\u00fc\u00a9\u05d4'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html, URL_FIRST, "text/html;charset=ISO-8859-1", ISO_8859_1, null);
+        Thread.sleep(100);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertEquals(getExpectedAlerts()[1], body);
+        assertNull(getMockWebConnection().getLastWebRequest().getCharset());
     }
 
     /**
@@ -1930,6 +1960,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
+        assertNull(getMockWebConnection().getLastWebRequest().getCharset());
     }
 
     /**
@@ -1957,6 +1988,35 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertEquals(getExpectedAlerts()[1], body);
+        assertNull(getMockWebConnection().getLastWebRequest().getCharset());
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"text/plain", "myField=HtmlUnit \u00D0\u00BB\u00C6\u0089\r\n"})
+    public void submitPlainTextUnicodeUTF16AcceptCharsetUtf8() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' accept-charset='utf8' method='post'>\n"
+                + "    <input name='myField' value='HtmlUnit \u043B\u0189'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html, URL_FIRST, "text/html;charset=UTF-16", UTF_16, null);
+        Thread.sleep(100);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertEquals(getExpectedAlerts()[1], body);
+        assertNull(getMockWebConnection().getLastWebRequest().getCharset());
     }
 
     /**
