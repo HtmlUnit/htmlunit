@@ -25,7 +25,7 @@
                 Template.content always returns the same object.
             </action>
             <action type="fix" dev="René Schwietzke" issue="#714">
-                Ensure that reading more characters at the end of the buffer is not stopped due to the buffer appearing 
+                Ensure that reading more characters at the end of the buffer is not stopped due to the buffer appearing
                 being at the end with reading, rather we read till we get a -1.
                 Streams can deliver less than requested size and hence the buffer looks like it it almost finished, but it is technically not.
             </action>
