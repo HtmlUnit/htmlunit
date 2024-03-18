@@ -2084,7 +2084,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text/plain;charset=UTF-8", "HtmlUnit \u00D0\u00BB\u00C6\u0089"})
+    @Alerts({"text/plain;charset=UTF-8", "HtmlUnit \u043B\u0189"})
     public void enctypeString() throws Exception {
         final String html
             = "<html>\n"

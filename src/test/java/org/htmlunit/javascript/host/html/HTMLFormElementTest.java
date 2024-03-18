@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
@@ -1855,18 +1856,45 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text/plain", "myField=éèêäöü\r\n"})
+    @Alerts({"text/plain", "myField=éèêäöü\u00a9\r\n"})
     public void submitPlainTextUnicode() throws Exception {
         final String html = "<html>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
                 + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
-                + "    <input name='myField' value='éèêäöü'>\n"
+                + "    <input name='myField' value='éèêäöü\u00a9'>\n"
                 + "  </form>\n"
                 + "</body>\n"
                 + "</html>";
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
+        Thread.sleep(100);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertEquals(getExpectedAlerts()[1], body);
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"text/plain", "myField=éèêäöü\u00a9\r\n"})
+    public void submitPlainTextISO_8859_1() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
+                + "    <input name='myField' value='éèêäöü\u00a9'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html, URL_FIRST, "text/html;charset=ISO-8859-1", ISO_8859_1, null);
         Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()

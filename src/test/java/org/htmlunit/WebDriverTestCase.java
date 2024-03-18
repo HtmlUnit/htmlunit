@@ -811,7 +811,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (requestParameters.isEmpty() && request.getContentLength() > 0) {
                 final byte[] buffer = new byte[request.getContentLength()];
                 IOUtils.read(request.getInputStream(), buffer, 0, buffer.length);
-                webRequest.setRequestBody(new String(buffer, webRequest.getCharset()));
+
+                final String encoding = request.getCharacterEncoding();
+                if (encoding == null) {
+                    webRequest.setRequestBody(new String(buffer, ISO_8859_1));
+                    webRequest.setCharset(null);
+                }
+                else {
+                    webRequest.setRequestBody(new String(buffer, encoding));
+                    webRequest.setCharset(Charset.forName(encoding));
+                }
             }
             else {
                 webRequest.setRequestParameters(requestParameters);
