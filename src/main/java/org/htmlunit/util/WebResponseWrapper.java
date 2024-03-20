@@ -32,6 +32,7 @@ import org.htmlunit.WebResponse;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Atsushi Nakagawa
+ * @author Lai Quang Duong
  */
 public class WebResponseWrapper extends WebResponse {
 

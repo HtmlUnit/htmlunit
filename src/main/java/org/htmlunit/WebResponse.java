@@ -44,6 +44,7 @@ import org.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class WebResponse implements Serializable {
 

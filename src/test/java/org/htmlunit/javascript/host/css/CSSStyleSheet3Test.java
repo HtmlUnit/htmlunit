@@ -42,6 +42,7 @@ import org.openqa.selenium.WebDriverException;
  * Tests encoding handling for {@link CSSStyleSheet}.
  *
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class CSSStyleSheet3Test extends WebDriverTestCase {

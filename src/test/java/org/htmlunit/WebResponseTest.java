@@ -48,6 +48,7 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class WebResponseTest extends WebServerTestCase {
