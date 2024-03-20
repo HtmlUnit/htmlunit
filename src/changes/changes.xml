@@ -19,6 +19,9 @@
             </action>
 
             <action type="fix" dev="rbri">
+                Fix for a ClassCastException in HtmlUnitNekoDOMBuilder (oss-fuzz).
+            </action>
+            <action type="fix" dev="rbri">
                 Execution of script tags included in template tags parsed from js is different in chrome.
             </action>
             <action type="fix" dev="rbri">

@@ -714,7 +714,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                     copyAttributes(body_, attrs);
                 }
                 else if ("html".equals(lp)) {
-                    copyAttributes((DomElement) body_.getParentNode(), attrs);
+                    final DomNode parent = body_.getParentNode();
+                    if (parent instanceof DomElement) {
+                        copyAttributes((DomElement) parent, attrs);
+                    }
                 }
             }
         }
