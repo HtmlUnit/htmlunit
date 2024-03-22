@@ -359,7 +359,7 @@ public class CssStyleSheet implements Serializable {
                     return new CssStyleSheet(element, "", uri);
                 }
                 try {
-                    Charset cssEncoding2 = response.getContentCharset();
+                    final Charset cssEncoding2 = response.getContentCharset();
                     try (InputSource source = new InputSource(new InputStreamReader(in, cssEncoding2))) {
                         source.setURI(uri);
                         sheet = new CssStyleSheet(element, source, uri);
