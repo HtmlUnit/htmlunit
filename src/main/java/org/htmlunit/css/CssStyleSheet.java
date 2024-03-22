@@ -101,7 +101,6 @@ import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.ValidatableElement;
 import org.htmlunit.javascript.host.css.MediaList;
 import org.htmlunit.javascript.host.dom.Document;
-import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.UrlUtils;
 
