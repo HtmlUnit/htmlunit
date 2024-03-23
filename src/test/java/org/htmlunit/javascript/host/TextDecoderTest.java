@@ -14,15 +14,10 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -226,7 +221,10 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("iso-8859-8-i")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF_ESR = "exception")
     public void encoding_iso_8859_8i() throws Exception {
         encoding("csiso88598i");
         encoding("iso-8859-8-i");
@@ -238,7 +236,10 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("iso-8859-10")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF_ESR = "exception")
     public void encoding_iso_8859_10() throws Exception {
         encoding("csisolatin6");
         encoding("iso-8859-10");
@@ -265,7 +266,10 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("iso-8859-14")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF_ESR = "exception")
     public void encoding_iso_8859_14() throws Exception {
         encoding("iso-8859-14");
         encoding("iso8859-14");
@@ -300,7 +304,10 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("iso-8859-16")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF_ESR = "exception")
     public void encoding_iso_8859_16() throws Exception {
         encoding("iso-8859-16");
     }
@@ -621,7 +628,10 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("x-user-defined")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF_ESR = "exception")
     public void encoding_x_user_defined() throws Exception {
         encoding("x-user-defined");
     }

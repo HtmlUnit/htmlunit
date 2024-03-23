@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 
@@ -1258,7 +1256,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             EDGE = { "underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"},
             FF = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"},
             FF_ESR = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @NotYetImplemented
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2146,7 +2144,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "0px", "", "0px", "50%", "100px", "50%", "100px"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @NotYetImplemented
     public void topLeft() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

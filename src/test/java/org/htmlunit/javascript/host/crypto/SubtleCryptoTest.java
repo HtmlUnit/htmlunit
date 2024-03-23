@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.crypto;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
@@ -107,7 +102,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
              "private", "false", "sign",
              "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
              "publicExponent 1,0,1"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @NotYetImplemented
     public void rsassa() throws Exception {
         final String html
             = "<html><head><script>\n"

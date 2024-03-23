@@ -16,8 +16,6 @@ package org.htmlunit.javascript.host.intl;
 
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 
 import org.apache.commons.lang3.CharUtils;
 import org.htmlunit.WebDriverTestCase;
@@ -190,7 +188,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("20.12.2013 n. Chr.")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @NotYetImplemented
     public void format_weekday_long_era() throws Exception {
         test("var options = { era: 'long' };",
                 "new Intl.DateTimeFormat('de-DE', options).format(date)");

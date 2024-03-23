@@ -14,11 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -249,7 +244,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "1"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @NotYetImplemented
     public void dynamicAddedStyleSheet() throws Exception {
         final String html =
               "<html>\n"
