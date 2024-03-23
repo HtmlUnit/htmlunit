@@ -17,6 +17,7 @@ package org.htmlunit.util;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.singletonList;
 import static org.htmlunit.util.EncodingSniffer.extractEncodingFromContentType;
+import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromCssDeclaration;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromHttpHeaders;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromMetaTag;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromXmlDeclaration;
@@ -108,6 +109,27 @@ public class EncodingSnifferTest {
 
     private static void xmlDeclaration(final Charset expectedEncoding, final String content) {
         assertSame(expectedEncoding, sniffEncodingFromXmlDeclaration(content.getBytes()));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromCssDeclaration() throws Exception {
+        cssDeclaration(null, "");
+        cssDeclaration(null, "foo");
+        cssDeclaration(null, "@charset");
+        cssDeclaration(null, "@charset \"utf-8");
+        cssDeclaration(null, "@charset \"utf-8\"");
+        cssDeclaration(null, "@charset\"utf-8\";");
+        cssDeclaration(null, "@charset 'utf-8';");
+        cssDeclaration(UTF_8, "@charset \"utf-8\";");
+        cssDeclaration(null, " @charset \"utf-8\";");
+        cssDeclaration(null, "@charset \"blah\";");
+    }
+
+    private static void cssDeclaration(final Charset expectedEncoding, final String content) {
+        assertSame(expectedEncoding, sniffEncodingFromCssDeclaration(content.getBytes()));
     }
 
     /**

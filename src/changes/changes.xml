@@ -18,6 +18,15 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="add" dev="Lai Quang Duong">
+                CSS @charset definition support added.
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                Treat 'x-user-defined'' in meta tag as windows-1252.
+            </action>
+            <action type="update" dev="Lai Quang Duong">
+                Bunch of improvements for the encoding handling.
+            </action>
             <action type="fix" dev="rbri">
                 Fix for a ClassCastException in HtmlUnitNekoDOMBuilder (oss-fuzz).
             </action>
