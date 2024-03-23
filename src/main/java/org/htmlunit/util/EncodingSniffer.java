@@ -428,9 +428,8 @@ public final class EncodingSniffer {
 
     /**
      * The number of HTML bytes to sniff for encoding info embedded in <code>meta</code> tags;
-     * relatively large because we don't have a fallback.
      */
-    private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 4096;
+    private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 1024;
 
     /**
      * The number of XML bytes to sniff for encoding info embedded in the XML declaration;
@@ -718,9 +717,17 @@ public final class EncodingSniffer {
                         Charset charset = null;
                         if ("charset".equals(name)) {
                             charset = toCharset(value);
+                            // https://html.spec.whatwg.org/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding
+                            if (charset == null && "x-user-defined".equals(value)) {
+                                charset = Charset.forName("windows-1252");
+                            }
                         }
                         else if ("content".equals(name)) {
                             charset = extractEncodingFromContentType(value);
+                            // https://html.spec.whatwg.org/multipage/parsing.html#prescan-a-byte-stream-to-determine-its-encoding
+                            if (charset == null && value != null && value.contains("x-user-defined")) {
+                                charset = Charset.forName("windows-1252");
+                            }
                             if (charset == null) {
                                 continue;
                             }

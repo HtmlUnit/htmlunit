@@ -415,6 +415,15 @@ public class WebClient7Test extends WebDriverTestCase {
         contentEncoding(true, "ascii", "ascii", null, "!abcd\u20AC\u00F6\u00FF");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("!abcd\u20AC\u00F6\u00FF")
+    public void contentEncodingXUserDefined() throws Exception {
+        contentEncoding(false, "x-user-defined", "windows-1252", null, "!abcd\u20AC\u00F6\u00FF");
+    }
+
     private void anchorUrlEncoding(final boolean header, final String charset) throws Exception {
         urlEncoding(header, charset,
                 null,
