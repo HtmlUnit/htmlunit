@@ -14,9 +14,6 @@
  */
 package org.htmlunit;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,6 +22,7 @@ import java.net.IDN;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -80,9 +78,12 @@ public class WebRequest implements Serializable {
     private Credentials urlCredentials_;
     private Credentials credentials_;
     private int timeout_;
-    private transient Charset charset_ = ISO_8859_1;
-    private transient Charset defaultResponseContentCharset_ = UTF_8; // https://datatracker.ietf.org/doc/html/rfc6838#section-4.2.1
     private transient Set<HttpHint> httpHints_;
+
+    private transient Charset charset_ = StandardCharsets.ISO_8859_1;
+    // https://datatracker.ietf.org/doc/html/rfc6838#section-4.2.1
+    // private transient Charset defaultResponseContentCharset_ = StandardCharsets.UTF_8;
+    private transient Charset defaultResponseContentCharset_ = StandardCharsets.ISO_8859_1;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List<NameValuePair> requestParameters_ = Collections.emptyList();
