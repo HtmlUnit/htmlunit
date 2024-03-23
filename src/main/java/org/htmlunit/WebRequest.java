@@ -15,6 +15,7 @@
 package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -80,7 +81,7 @@ public class WebRequest implements Serializable {
     private Credentials credentials_;
     private int timeout_;
     private transient Charset charset_ = ISO_8859_1;
-    private transient Charset defaultResponseContentCharset_ = ISO_8859_1;
+    private transient Charset defaultResponseContentCharset_ = UTF_8; // https://datatracker.ietf.org/doc/html/rfc6838#section-4.2.1
     private transient Set<HttpHint> httpHints_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
@@ -617,7 +618,7 @@ public class WebRequest implements Serializable {
     /**
      * Sets the default character set to use for the response when it does not specify one.
      * <p>
-     * Unless set, the default is {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
+     * Unless set, the default is {@link java.nio.charset.StandardCharsets#UTF_8}.
      * @param defaultResponseContentCharset the default character set of the response
      */
     public void setDefaultResponseContentCharset(final Charset defaultResponseContentCharset) {
