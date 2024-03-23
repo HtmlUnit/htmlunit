@@ -39,6 +39,8 @@ import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.UrlUtils;
 import org.w3c.dom.Attr;
 
+import com.tngtech.archunit.thirdparty.com.google.common.base.Objects;
+
 /**
  * Base class for frame and iframe.
  *
@@ -189,12 +191,22 @@ public abstract class BaseFrameElement extends HtmlElement {
                 return;
             }
 
-            final WebRequest request = new WebRequest(url, page.getCharset(), page.getUrl());
+            final Charset pageCharset = page.getCharset();
+            final URL pageUrl = page.getUrl();
+            final WebRequest request = new WebRequest(url, pageCharset, pageUrl);
 
             if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
                 return;
             }
+
+            // Use parent document's charset as container charset if same origin
+            // https://html.spec.whatwg.org/multipage/parsing.html#determining-the-character-encoding
+            if (Objects.equal(pageUrl.getProtocol(), url.getProtocol())
+                    && Objects.equal(pageUrl.getAuthority(), url.getAuthority())) {
+                request.setDefaultResponseContentCharset(pageCharset);
+            }
+
             try {
                 webClient.getPage(enclosedWindow_, request);
             }
