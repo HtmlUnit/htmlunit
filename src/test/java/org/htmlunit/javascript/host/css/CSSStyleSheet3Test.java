@@ -89,13 +89,16 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
                 new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.GB2312};
         final TestCharset[] charsetResponseHeader = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
         final TestCharset[] charsetResponseEncoding = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
+        final TestCharset[] charsetAt = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
         final String[] bom = {null, BOM_UTF_8, BOM_UTF_16LE, BOM_UTF_16BE};
 
         for (final Object charsetHtml : charsetHtmlResponseHeader) {
             for (final Object responseHeader : charsetResponseHeader) {
                 for (final Object responseEncoding : charsetResponseEncoding) {
-                    for (final Object b : bom) {
-                        list.add(new Object[] {charsetHtml, responseHeader, responseEncoding, b});
+                    for (final Object at : charsetAt) {
+                        for (final Object b : bom) {
+                            list.add(new Object[] {charsetHtml, responseHeader, responseEncoding, at, b});
+                        }
                     }
                 }
             }
@@ -122,9 +125,15 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     public TestCharset charsetResponseEncoding_;
 
     /**
-     * The bom.
+     * The charsetAt.
      */
     @Parameter(3)
+    public TestCharset charsetAt_;
+
+    /**
+     * The bom.
+     */
+    @Parameter(4)
     public String bom_;
 
     /**
@@ -135,13 +144,14 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Alerts({"\"a\"", "\"\u00E4\"", "\"\u0623\u0647\u0644\u0627\u064B\"", "\"\u043C\u0438\u0440\"", "\"\u623F\u95F4\""})
     @Default
     public void charset() throws Exception {
-        charset(charsetHtmlResponseHeader_, charsetResponseHeader_, charsetResponseEncoding_, bom_);
+        charset(charsetHtmlResponseHeader_, charsetResponseHeader_, charsetResponseEncoding_, charsetAt_, bom_);
     }
 
     private void charset(
             final TestCharset charsetHtmlResponse,
             final TestCharset charsetCssResponseHeader,
             final TestCharset charsetCssResponseEncoding,
+            final TestCharset charsetCssAt,
             final String bom) throws Exception {
 
         // use always a different url to avoid caching effects
@@ -189,11 +199,16 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
             cssContentType = cssContentType + "; charset="
                                     + charsetCssResponseHeader.getCharset().name().toLowerCase();
         }
-        final String css = ".c1::before { content: \"a\"}"
+
+        String css = ".c1::before { content: \"a\"}"
                 + ".c2::before { content: \"\u00E4\"}"
                 + ".c3::before { content: \"\u0623\u0647\u0644\u0627\u064B\"}"
                 + ".c4::before { content: \"\u043C\u0438\u0440\"}"
                 + ".c5::before { content: \"\u623F\u95F4\"}";
+
+        if (charsetAt_ != null) {
+            css = "@charset \"" + charsetCssAt.name() + "\";\n" + css;
+        }
 
         byte[] style = null;
         if (charsetCssResponseEncoding == null) {
@@ -253,8 +268,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591___() throws Exception {
-        charset(TestCharset.ISO88591, null, null, null);
+    public void _ISO88591____() throws Exception {
+        charset(TestCharset.ISO88591, null, null, null, null);
     }
 
     /**
@@ -262,8 +277,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591__UTF8_() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.UTF8, null);
+    public void _ISO88591__UTF8__() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.UTF8, null, null);
     }
 
     /**
@@ -271,8 +286,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591__ISO88591_() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, null);
+    public void _ISO88591__ISO88591__() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -280,8 +295,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591_UTF8_ISO88591_() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
+    public void _ISO88591_UTF8_ISO88591__() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -289,8 +304,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591_ISO88591__() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null);
+    public void _ISO88591_ISO88591___() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, null);
     }
 
     /**
@@ -298,8 +313,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591__BOMUTF8() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
+    public void _ISO88591_ISO88591___BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, BOM_UTF_8);
     }
 
     /**
@@ -307,8 +322,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591_ISO88591_UTF8_() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
+    public void _ISO88591_ISO88591_UTF8__() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, null);
     }
 
     /**
@@ -316,8 +331,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_UTF8_BOMUTF8() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
+    public void _ISO88591_ISO88591_UTF8__BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_8);
     }
 
     /**
@@ -325,8 +340,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591_ISO88591_ISO88591_() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    public void _ISO88591_ISO88591_ISO88591__() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -334,8 +349,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -343,8 +358,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_ISO88591_BOMUTF16LE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_ISO88591__BOMUTF16LE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -352,8 +367,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -361,8 +376,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_UTF8_BOMUTF16LE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_UTF8__BOMUTF16LE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -370,8 +385,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591__BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591___BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -379,8 +394,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591__BOMUTF16LE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16LE);
+    public void _ISO88591_ISO88591___BOMUTF16LE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, BOM_UTF_16LE);
     }
 
     /**
@@ -388,8 +403,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _ISO88591_UTF8_UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -397,8 +412,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8_UTF8_BOMUTF16LE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16LE);
+    public void _ISO88591_UTF8_UTF8__BOMUTF16LE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
     /**
@@ -406,8 +421,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8__BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
+    public void _ISO88591_UTF8___BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -415,8 +430,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8__BOMUTF16LE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16LE);
+    public void _ISO88591_UTF8___BOMUTF16LE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, null, null, BOM_UTF_16LE);
     }
 
     /**
@@ -424,8 +439,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591_UTF8_ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -433,8 +448,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8_ISO88591_BOMUTF16LE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16LE);
+    public void _ISO88591_UTF8_ISO88591__BOMUTF16LE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
     /**
@@ -442,8 +457,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8__ISO88591_() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, null);
+    public void _UTF8__ISO88591__() throws Exception {
+        charset(TestCharset.UTF8, null, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -451,8 +466,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8_ISO88591_ISO88591_() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    public void _UTF8_ISO88591_ISO88591__() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -460,8 +475,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _UTF8_ISO88591_UTF8_() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
+    public void _UTF8_ISO88591_UTF8__() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null, null);
     }
 
     /**
@@ -469,8 +484,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _UTF8_ISO88591__() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, null, null);
+    public void _UTF8_ISO88591___() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, null, null, null);
     }
 
     /**
@@ -478,8 +493,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8_UTF8_ISO88591_() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null);
+    public void _UTF8_UTF8_ISO88591__() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -487,8 +502,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _UTF8_UTF8_ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -496,8 +511,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8_ISO88591_BOMUTF16LE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16LE);
+    public void _UTF8_UTF8_ISO88591__BOMUTF16LE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
     /**
@@ -505,8 +520,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _UTF8_UTF8_UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -514,8 +529,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8_UTF8_BOMUTF16LE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16LE);
+    public void _UTF8_UTF8_UTF8__BOMUTF16LE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
     /**
@@ -523,8 +538,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8__BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
+    public void _UTF8_UTF8___BOMUTF16BE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -532,8 +547,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8__BOMUTF16LE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
+    public void _UTF8_UTF8___BOMUTF16LE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, null, null, BOM_UTF_16LE);
     }
 
     /**
@@ -541,8 +556,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_UTF8_BOMUTF8() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
+    public void _UTF8_ISO88591_UTF8__BOMUTF8() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_8);
     }
 
     /**
@@ -550,8 +565,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591__BOMUTF8() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8);
+    public void _UTF8_ISO88591___BOMUTF8() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, null, null, BOM_UTF_8);
     }
 
     /**
@@ -559,8 +574,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void __ISO88591_ISO88591_() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    public void __ISO88591_ISO88591__() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -568,8 +583,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void __ISO88591_UTF8_() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.UTF8, null);
+    public void __ISO88591_UTF8__() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.UTF8, null, null);
     }
 
     /**
@@ -577,8 +592,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void __ISO88591__() throws Exception {
-        charset(null, TestCharset.ISO88591, null, null);
+    public void __ISO88591___() throws Exception {
+        charset(null, TestCharset.ISO88591, null, null, null);
     }
 
     /**
@@ -586,8 +601,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void __UTF8_ISO88591_() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, null);
+    public void __UTF8_ISO88591__() throws Exception {
+        charset(null, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -595,8 +610,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8_ISO88591_BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void __UTF8_ISO88591__BOMUTF16BE() throws Exception {
+        charset(null, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -604,8 +619,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8_ISO88591_BOMUTF16LE() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16LE);
+    public void __UTF8_ISO88591__BOMUTF16LE() throws Exception {
+        charset(null, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
     /**
@@ -613,8 +628,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8_UTF8_BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
+    public void __UTF8_UTF8__BOMUTF16BE() throws Exception {
+        charset(null, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -622,8 +637,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8_UTF8_BOMUTF16LE() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16LE);
+    public void __UTF8_UTF8__BOMUTF16LE() throws Exception {
+        charset(null, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
     /**
@@ -631,8 +646,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8__BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.UTF8, null, BOM_UTF_16BE);
+    public void __UTF8___BOMUTF16BE() throws Exception {
+        charset(null, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -640,8 +655,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8__BOMUTF16LE() throws Exception {
-        charset(null, TestCharset.UTF8, null, BOM_UTF_16LE);
+    public void __UTF8___BOMUTF16LE() throws Exception {
+        charset(null, TestCharset.UTF8, null, null, BOM_UTF_16LE);
     }
 
     /**
@@ -649,8 +664,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void ___ISO88591_() throws Exception {
-        charset(null, null, TestCharset.ISO88591, null);
+    public void ___ISO88591__() throws Exception {
+        charset(null, null, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -658,8 +673,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void ___UTF8_() throws Exception {
-        charset(null, null, TestCharset.UTF8, null);
+    public void ___UTF8__() throws Exception {
+        charset(null, null, TestCharset.UTF8, null, null);
     }
 
     /**
@@ -667,8 +682,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void ____() throws Exception {
-        charset(null, null, null, null);
+    public void _____() throws Exception {
+        charset(null, null, null, null, null);
     }
 
     /**
@@ -676,8 +691,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_UTF8_BOMUTF8() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
+    public void __ISO88591_UTF8__BOMUTF8() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_8);
     }
 
     /**
@@ -685,8 +700,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591__BOMUTF8() throws Exception {
-        charset(null, TestCharset.ISO88591, null, BOM_UTF_8);
+    public void __ISO88591___BOMUTF8() throws Exception {
+        charset(null, TestCharset.ISO88591, null, null, BOM_UTF_8);
     }
 
     /**
@@ -694,8 +709,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_ISO88591_ISO88591_() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    public void _GB2312_ISO88591_ISO88591__() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -703,8 +718,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _GB2312_ISO88591_UTF8_() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null);
+    public void _GB2312_ISO88591_UTF8__() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null, null);
     }
 
     /**
@@ -712,8 +727,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _GB2312_ISO88591__() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, null, null);
+    public void _GB2312_ISO88591___() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, null, null, null);
     }
 
     /**
@@ -721,8 +736,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_UTF8_ISO88591_() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null);
+    public void _GB2312_UTF8_ISO88591__() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -730,8 +745,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312__ISO88591_() throws Exception {
-        charset(TestCharset.GB2312, null, TestCharset.ISO88591, null);
+    public void _GB2312__ISO88591__() throws Exception {
+        charset(TestCharset.GB2312, null, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -739,8 +754,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
-    public void _GB2312__UTF8_() throws Exception {
-        charset(TestCharset.GB2312, null, TestCharset.UTF8, null);
+    public void _GB2312__UTF8__() throws Exception {
+        charset(TestCharset.GB2312, null, TestCharset.UTF8, null, null);
     }
 
     /**
@@ -748,8 +763,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
-    public void _GB2312___() throws Exception {
-        charset(TestCharset.GB2312, null, null, null);
+    public void _GB2312____() throws Exception {
+        charset(TestCharset.GB2312, null, null, null, null);
     }
 
     /**
@@ -757,8 +772,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_UTF8_BOMUTF8() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
+    public void _GB2312_ISO88591_UTF8__BOMUTF8() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_8);
     }
 
     /**
@@ -766,8 +781,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591__BOMUTF8() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, null, BOM_UTF_8);
+    public void _GB2312_ISO88591___BOMUTF8() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, null, null, BOM_UTF_8);
     }
 
     /**
@@ -775,8 +790,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
+    public void _GB2312_ISO88591_ISO88591__BOMUTF8() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
     /**
@@ -784,8 +799,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _GB2312_ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -793,8 +808,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_ISO88591_BOMUTF16LE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16LE);
+    public void _GB2312_ISO88591_ISO88591__BOMUTF16LE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
     /**
@@ -802,8 +817,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _GB2312_ISO88591_UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -811,8 +826,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_UTF8_BOMUTF16LE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16LE);
+    public void _GB2312_ISO88591_UTF8__BOMUTF16LE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
     /**
@@ -820,8 +835,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591__BOMUTF16BE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, null, BOM_UTF_16BE);
+    public void _GB2312_ISO88591___BOMUTF16BE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -829,8 +844,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591__BOMUTF16LE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, null, BOM_UTF_16LE);
+    public void _GB2312_ISO88591___BOMUTF16LE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, null, null, BOM_UTF_16LE);
     }
 
     /**
@@ -838,8 +853,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
+    public void _ISO88591_ISO88591_ISO88591__BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
     /**
@@ -847,8 +862,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
+    public void _UTF8_ISO88591_ISO88591__BOMUTF8() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
     /**
@@ -856,8 +871,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _UTF8_ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -865,8 +880,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_ISO88591_BOMUTF16LE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16LE);
+    public void _UTF8_ISO88591_ISO88591__BOMUTF16LE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
     /**
@@ -874,8 +889,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _UTF8_ISO88591_UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -883,8 +898,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_UTF8_BOMUTF16LE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16LE);
+    public void _UTF8_ISO88591_UTF8__BOMUTF16LE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
     /**
@@ -892,8 +907,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591__BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
+    public void _UTF8_ISO88591___BOMUTF16BE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -901,8 +916,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591__BOMUTF16LE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
+    public void _UTF8_ISO88591___BOMUTF16LE() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, null, null, BOM_UTF_16LE);
     }
 
     /**
@@ -910,8 +925,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_ISO88591_BOMUTF8() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
+    public void __ISO88591_ISO88591__BOMUTF8() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
     /**
@@ -919,8 +934,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_ISO88591_BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void __ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -928,8 +943,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_ISO88591_BOMUTF16LE() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16LE);
+    public void __ISO88591_ISO88591__BOMUTF16LE() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
     /**
@@ -937,8 +952,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_UTF8_BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
+    public void __ISO88591_UTF8__BOMUTF16BE() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -946,8 +961,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_UTF8_BOMUTF16LE() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16LE);
+    public void __ISO88591_UTF8__BOMUTF16LE() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
     /**
@@ -955,8 +970,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591__BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.ISO88591, null, BOM_UTF_16BE);
+    public void __ISO88591___BOMUTF16BE() throws Exception {
+        charset(null, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -964,8 +979,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591__BOMUTF16LE() throws Exception {
-        charset(null, TestCharset.ISO88591, null, BOM_UTF_16LE);
+    public void __ISO88591___BOMUTF16LE() throws Exception {
+        charset(null, TestCharset.ISO88591, null, null, BOM_UTF_16LE);
     }
 
     /**
@@ -973,8 +988,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _GB2312_UTF8_ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -982,8 +997,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8_ISO88591_BOMUTF16LE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16LE);
+    public void _GB2312_UTF8_ISO88591__BOMUTF16LE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
     /**
@@ -991,8 +1006,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _GB2312_UTF8_UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -1000,8 +1015,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8_UTF8_BOMUTF16LE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16LE);
+    public void _GB2312_UTF8_UTF8__BOMUTF16LE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
     /**
@@ -1009,8 +1024,8 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8__BOMUTF16BE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, null, BOM_UTF_16BE);
+    public void _GB2312_UTF8___BOMUTF16BE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -1018,7 +1033,439 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8__BOMUTF16LE() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, null, BOM_UTF_16LE);
+    public void _GB2312_UTF8___BOMUTF16LE() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, null, null, BOM_UTF_16LE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _GB2312_ISO88591_ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _GB2312_ISO88591_UTF8_UTF8_() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _GB2312_ISO88591__UTF8_() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, null, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _GB2312_UTF8_ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _GB2312__ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.GB2312, null, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _ISO88591_ISO88591_ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _ISO88591_ISO88591_UTF8_UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _ISO88591_ISO88591__UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _ISO88591_UTF8_ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _ISO88591__ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _UTF8_ISO88591_ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _UTF8_ISO88591_UTF8_UTF8_() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _UTF8_ISO88591__UTF8_() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, null, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _UTF8_UTF8_ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _UTF8__ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void __ISO88591_ISO88591_UTF8_() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void __ISO88591_UTF8_UTF8_() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void __ISO88591__UTF8_() throws Exception {
+        charset(null, TestCharset.ISO88591, null, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void __UTF8_ISO88591_UTF8_() throws Exception {
+        charset(null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void ___ISO88591_UTF8_() throws Exception {
+        charset(null, null, TestCharset.ISO88591, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _GB2312_ISO88591_ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _GB2312_ISO88591_UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _GB2312_UTF8_ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _GB2312_ISO88591__ISO88591_() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _GB2312__ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.GB2312, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
+    public void _GB2312__UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.GB2312, null, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
+    public void _GB2312___ISO88591_() throws Exception {
+        charset(TestCharset.GB2312, null, null, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _ISO88591_ISO88591_ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _ISO88591_ISO88591_UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _ISO88591_ISO88591__ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _ISO88591_UTF8_ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _ISO88591__ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _ISO88591__UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _ISO88591___ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, null, null, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _UTF8_ISO88591_ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _UTF8_ISO88591_UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void _UTF8_ISO88591__ISO88591_() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _UTF8_UTF8_ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void _UTF8__ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
+    public void _UTF8__UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.UTF8, null, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
+    public void _UTF8___ISO88591_() throws Exception {
+        charset(TestCharset.UTF8, null, null, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void __ISO88591_ISO88591_ISO88591_() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void __ISO88591_UTF8_ISO88591_() throws Exception {
+        charset(null, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void __ISO88591__ISO88591_() throws Exception {
+        charset(null, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void __UTF8_ISO88591_ISO88591_() throws Exception {
+        charset(null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    public void ___ISO88591_ISO88591_() throws Exception {
+        charset(null, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void ___UTF8_ISO88591_() throws Exception {
+        charset(null, null, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    public void ____ISO88591_() throws Exception {
+        charset(null, null, null, TestCharset.ISO88591, null);
     }
 }
