@@ -38,6 +38,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
+import org.htmlunit.WebClient;
 
 /**
  * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the
@@ -692,9 +693,7 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified HTTP headers, or {@code null} if the encoding
      *         could not be determined
      *
-     * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
-     * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
-     * instead
+     * @deprecated as of version 4.0.0; method will be removed without replacement
      */
     @Deprecated
     public static Charset sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
@@ -1101,7 +1100,7 @@ public final class EncodingSniffer {
      * @return the charset declaration at the start of a css file if any, otherwise returns {@code null}.
      *
      * <p>e.g. <pre>@charset "UTF-8"</pre>
-     *
+     * 
      * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
      * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
      * instead
@@ -1322,7 +1321,7 @@ public final class EncodingSniffer {
      * @param encodingLabel the label to translate
      * @return the normalized encoding name or null if not found
      *
-     * @deprecated as of version 4.0.0; use {@link #translateEncodingLabel(String) } instead
+     * @deprecated as of version 4.0.0; method will be removed without replacement
      */
     @Deprecated
     public static String translateEncodingLabel(final Charset encodingLabel) {
