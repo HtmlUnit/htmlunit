@@ -41,7 +41,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -345,10 +344,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
 
         final File tmpFile = File.createTempFile("htmlunit-test", "." + extension);
         try {
-            String path = tmpFile.getAbsolutePath();
-            if (driver instanceof InternetExplorerDriver) {
-                path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
-            }
+            final String path = tmpFile.getAbsolutePath();
             driver.findElement(By.name("myInput")).sendKeys(path);
             driver.findElement(By.id("mySubmit")).submit();
         }
