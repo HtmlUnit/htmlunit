@@ -1377,6 +1377,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static boolean isUndefined(final Object obj) {
         return org.htmlunit.corejs.javascript.Undefined.isUndefined(obj);
     }
+
     /**
      * @param obj the value to check
      * @return whether obj is NAN
