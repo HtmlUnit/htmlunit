@@ -38,7 +38,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
-import org.htmlunit.WebClient;
 
 /**
  * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the
@@ -1100,7 +1099,7 @@ public final class EncodingSniffer {
      * @return the charset declaration at the start of a css file if any, otherwise returns {@code null}.
      *
      * <p>e.g. <pre>@charset "UTF-8"</pre>
-     * 
+     *
      * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
      * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
      * instead
@@ -1118,21 +1117,20 @@ public final class EncodingSniffer {
      * <p>e.g. <pre>@charset "UTF-8"</pre>
      */
     public static Charset sniffEncodingFromCssDeclaration(final InputStream is) throws IOException {
-        final byte[] sniffedCssContent = new byte[SIZE_OF_CSS_CONTENT_SNIFFED];
-        final int sniffedBytes = IOUtils.read(is, sniffedCssContent);
-        if (sniffedBytes < CSS_CHARSET_DECLARATION_PREFIX.length) {
+        byte[] bytes = read(is, SIZE_OF_CSS_CONTENT_SNIFFED);
+        if (bytes.length < CSS_CHARSET_DECLARATION_PREFIX.length) {
             return null;
         }
         for (int i = 0; i < CSS_CHARSET_DECLARATION_PREFIX.length; i++) {
-            if (sniffedCssContent[i] != CSS_CHARSET_DECLARATION_PREFIX[i]) {
+            if (bytes[i] != CSS_CHARSET_DECLARATION_PREFIX[i]) {
                 return null;
             }
         }
 
         Charset encoding = null;
-        final int index = ArrayUtils.indexOf(sniffedCssContent, (byte) '"', CSS_CHARSET_DECLARATION_PREFIX.length);
-        if (index + 1 < sniffedBytes && sniffedCssContent[index + 1] == ';') {
-            encoding = toCharset(new String(sniffedCssContent, CSS_CHARSET_DECLARATION_PREFIX.length, index - CSS_CHARSET_DECLARATION_PREFIX.length, US_ASCII));
+        final int index = ArrayUtils.indexOf(bytes, (byte) '"', CSS_CHARSET_DECLARATION_PREFIX.length);
+        if (index + 1 < bytes.length && bytes[index + 1] == ';') {
+            encoding = toCharset(new String(bytes, CSS_CHARSET_DECLARATION_PREFIX.length, index - CSS_CHARSET_DECLARATION_PREFIX.length, US_ASCII));
             // https://www.w3.org/TR/css-syntax-3/#input-byte-stream "Why use utf-8 when the declaration says utf-16?"
             if (encoding == UTF_16BE || encoding == UTF_16LE) {
                 encoding = UTF_8;
