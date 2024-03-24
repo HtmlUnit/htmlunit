@@ -15,14 +15,13 @@
 package org.htmlunit.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.util.Collections.singletonList;
 import static org.htmlunit.util.EncodingSniffer.extractEncodingFromContentType;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromCssDeclaration;
-import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromHttpHeaders;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromMetaTag;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromXmlDeclaration;
 import static org.junit.Assert.assertSame;
 
+import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
 
 import org.htmlunit.HttpHeader;
@@ -33,6 +32,8 @@ import org.junit.Test;
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class EncodingSnifferTest {
 
@@ -50,8 +51,7 @@ public class EncodingSnifferTest {
     }
 
     private static void header(final Charset expectedEncoding, final String headerName, final String headerValue) {
-        final NameValuePair header = new NameValuePair(headerName, headerValue);
-        assertSame(expectedEncoding, sniffEncodingFromHttpHeaders(singletonList(header)));
+        assertSame(expectedEncoding, extractEncodingFromContentType(headerValue));
     }
 
     /**
@@ -82,8 +82,8 @@ public class EncodingSnifferTest {
         meta(UTF_8, "abc <meta http-equiv='Content-Type' content='text/html; chArsEt=UtF-8'/>");
     }
 
-    private static void meta(final Charset expectedEncoding, final String content) {
-        assertSame(expectedEncoding, sniffEncodingFromMetaTag(content.getBytes()));
+    private static void meta(final Charset expectedEncoding, final String content) throws Exception {
+        assertSame(expectedEncoding, sniffEncodingFromMetaTag(new ByteArrayInputStream(content.getBytes())));
     }
 
     /**
@@ -107,8 +107,8 @@ public class EncodingSnifferTest {
         xmlDeclaration(UTF_8, "<?xml encoding=\"utf-8\"?>");
     }
 
-    private static void xmlDeclaration(final Charset expectedEncoding, final String content) {
-        assertSame(expectedEncoding, sniffEncodingFromXmlDeclaration(content.getBytes()));
+    private static void xmlDeclaration(final Charset expectedEncoding, final String content) throws Exception {
+        assertSame(expectedEncoding, sniffEncodingFromXmlDeclaration(new ByteArrayInputStream(content.getBytes())));
     }
 
     /**
@@ -128,8 +128,8 @@ public class EncodingSnifferTest {
         cssDeclaration(null, "@charset \"blah\";");
     }
 
-    private static void cssDeclaration(final Charset expectedEncoding, final String content) {
-        assertSame(expectedEncoding, sniffEncodingFromCssDeclaration(content.getBytes()));
+    private static void cssDeclaration(final Charset expectedEncoding, final String content) throws Exception {
+        assertSame(expectedEncoding, sniffEncodingFromCssDeclaration(new ByteArrayInputStream(content.getBytes())));
     }
 
     /**

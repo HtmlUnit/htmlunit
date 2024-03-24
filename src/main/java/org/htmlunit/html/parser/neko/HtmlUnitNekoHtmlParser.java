@@ -20,7 +20,6 @@ import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -173,12 +172,10 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
         final HtmlUnitNekoDOMBuilder domBuilder =
                 new HtmlUnitNekoDOMBuilder(this, page, url, null, createdByJavascript);
 
-        Charset charset = webResponse.getContentCharsetOrNull();
+        final Charset charset = webResponse.getContentCharset();
         try {
-            if (charset == null) {
-                charset = StandardCharsets.ISO_8859_1;
-            }
-            else {
+            if (!webResponse.wasContentCharsetTentative()) {
+                // The charset is certain so ignore any others found in the document
                 domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
             }
 

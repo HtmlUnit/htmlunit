@@ -99,9 +99,21 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped webResponse object.
+     * The default behavior of this method is to return getHeaderContentCharset() on the wrapped webResponse object.
      */
     @Override
+    public Charset getHeaderContentCharset() {
+        return wrappedWebResponse_.getHeaderContentCharset();
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped webResponse object.
+     *
+     * @deprecated as of version 4.0.0; use {@link #getContentCharset()} instead
+     */
+    @Override
+    @Deprecated
     public Charset getContentCharsetOrNull() {
         return wrappedWebResponse_.getContentCharsetOrNull();
     }

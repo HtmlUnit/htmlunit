@@ -30,9 +30,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.DefaultPageCreator.PageType;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.util.EncodingSniffer;
+import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 
 /**
@@ -92,6 +92,7 @@ public class WebResponse implements Serializable {
     private final long loadTime_;
     private final WebResponseData responseData_;
     private final WebRequest request_;
+    private boolean wasContentCharsetTentative_;
     private boolean wasBlocked_;
     private String blockReason_;
 
@@ -186,11 +187,32 @@ public class WebResponse implements Serializable {
     }
 
     /**
+     * Returns the content charset specified explicitly in the {@code Content-Type} header
+     * or {@code null} if none was specified.
+     * @return the content charset specified header or {@code null} if none was specified
+     */
+    public Charset getHeaderContentCharset() {
+        final String contentType = getResponseHeaderValue(HttpHeader.CONTENT_TYPE_LC);
+        if (contentType == null) {
+            return null;
+        }
+
+        final int index = contentType.indexOf(';');
+        if (index == -1) {
+            return null;
+        }
+        return EncodingSniffer.extractEncodingFromContentType(contentType);
+    }
+
+    /**
      * Returns the content charset specified explicitly in the header or in the content,
      * or {@code null} if none was specified.
      * @return the content charset specified explicitly in the header or in the content,
      *         or {@code null} if none was specified
+     *
+     * @deprecated as of version 4.0.0; use {@link #getContentCharset()} instead
      */
+    @Deprecated
     public Charset getContentCharsetOrNull() {
         try (InputStream is = getContentAsStream()) {
             return EncodingSniffer.sniffEncoding(getResponseHeaders(), is);
@@ -203,27 +225,73 @@ public class WebResponse implements Serializable {
 
     /**
      * Returns the content charset for this response, even if no charset was specified explicitly.
+     * <p>
      * This method always returns a valid charset. This method first checks the {@code Content-Type}
-     * header; if not found, it checks the request charset; as a last resort, this method
-     * returns {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
-     * If no charset is defined for an xml response, then UTF-8 is used
-     * @see <a href="http://www.w3.org/TR/xml/#charencoding">Character Encoding</a>
+     * header or in the content BOM for viable charset. If not found, it attempts to determine the
+     * charset based on the type of the content. As a last resort, this method returns the
+     * value of {@link org.htmlunit.WebRequest.getDefaultResponseContentCharset()} which is
+     * {@link java.nio.charset.StandardCharsets#UTF_8} by default.
      * @return the content charset for this response
      */
     public Charset getContentCharset() {
-        final Charset charset = getContentCharsetOrNull();
-        if (charset != null) {
-            return charset;
+        wasContentCharsetTentative_ = false;
+
+        try (InputStream is = getContentAsStreamWithBomIfApplicable()) {
+            if (is instanceof BOMInputStream) {
+                final String bomCharsetName = ((BOMInputStream) is).getBOMCharsetName();
+                if (bomCharsetName != null) {
+                    return Charset.forName(bomCharsetName);
+                }
+            }
+
+            Charset charset = getHeaderContentCharset();
+            if (charset != null) {
+                return charset;
+            }
+
+            final String contentType = getContentType();
+            switch (DefaultPageCreator.determinePageType(contentType)) {
+                case HTML:
+                    charset = EncodingSniffer.sniffEncodingFromMetaTag(is);
+                    wasContentCharsetTentative_ = true;
+                    break;
+                case XML:
+                    charset = EncodingSniffer.sniffEncodingFromXmlDeclaration(is);
+                    if (charset == null) {
+                        charset = UTF_8;
+                    }
+                    break;
+                default:
+                    if (MimeType.TEXT_CSS.equals(contentType)) {
+                        charset = EncodingSniffer.sniffEncodingFromCssDeclaration(is);
+                    }
+                    break;
+            }
+
+            if (charset != null) {
+                return charset;
+            }
         }
-
-        final String contentType = getContentType();
-
-        // xml pages are using a different content type
-        if (PageType.XML == DefaultPageCreator.determinePageType(contentType)) {
-            return UTF_8;
+        catch (final IOException e) {
+            LOG.warn("Error trying to sniff encoding.", e);
+            wasContentCharsetTentative_ = true;
         }
-
         return getWebRequest().getDefaultResponseContentCharset();
+    }
+
+    /**
+     * Returns whether the charset of the previous call to {@link #getContentCharset()} was "tentative".
+     * <p>
+     * A charset is classed as "tentative" if its detection is prone to false positive/negatives.
+     * <p>
+     * For example, HTML meta-tag sniffing can be fooled by text that looks-like-a-meta-tag inside
+     * JavaScript code (false positive) or if the meta-tag is after the first 1024 bytes (false negative).
+     * @return {@code true} if the charset of the previous call to {@link #getContentCharset()} was
+     * "tentative".
+     * @see https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence
+     */
+    public boolean wasContentCharsetTentative() {
+        return wasContentCharsetTentative_;
     }
 
     /**
