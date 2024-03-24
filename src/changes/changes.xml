@@ -34,7 +34,8 @@
                 Fix the priority of BOM by moving it to the highest priority charset to be in line with html/xml/js/css etc. specifications.
             </action>
             <action type="update" dev="Lai Quang Duong">
-                Huge refactoring of the encoding handling.
+                Huge refactoring of the encoding handling. some methods of the EncodingSniffer are now deprecates; please have a look at the
+                javadoc for hints about possible replacements.
             </action>
             <action type="fix" dev="rbri">
                 Fix for a ClassCastException in HtmlUnitNekoDOMBuilder (oss-fuzz).
