@@ -1117,7 +1117,7 @@ public final class EncodingSniffer {
      * <p>e.g. <pre>@charset "UTF-8"</pre>
      */
     public static Charset sniffEncodingFromCssDeclaration(final InputStream is) throws IOException {
-        byte[] bytes = read(is, SIZE_OF_CSS_CONTENT_SNIFFED);
+        final byte[] bytes = read(is, SIZE_OF_CSS_CONTENT_SNIFFED);
         if (bytes.length < CSS_CHARSET_DECLARATION_PREFIX.length) {
             return null;
         }

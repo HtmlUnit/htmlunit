@@ -18,14 +18,23 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="fix" dev="Lai Quang Duong">
+                Fix &lt;iframe&gt; so that the parent charset is used when no charset could otherwise be found.
+            </action>
+            <action type="update" dev="Lai Quang Duong">
+                The number of prescan bytes of an HTML document is changed from 4096 to 1024 bytes to be in line with specs.
+            </action>
             <action type="add" dev="Lai Quang Duong">
                 CSS @charset definition support added.
             </action>
             <action type="add" dev="Lai Quang Duong">
                 Treat 'x-user-defined'' in meta tag as windows-1252.
             </action>
+            <action type="fix" dev="Lai Quang Duong">
+                Fix the priority of BOM by moving it to the highest priority charset to be in line with html/xml/js/css etc. specifications.
+            </action>
             <action type="update" dev="Lai Quang Duong">
-                Bunch of improvements for the encoding handling.
+                Huge refactoring of the encoding handling.
             </action>
             <action type="fix" dev="rbri">
                 Fix for a ClassCastException in HtmlUnitNekoDOMBuilder (oss-fuzz).
