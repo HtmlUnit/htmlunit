@@ -49,6 +49,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Interpreter;
 import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.NativeConsole;
 import org.htmlunit.corejs.javascript.RhinoException;
@@ -58,6 +59,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.StackStyle;
 import org.htmlunit.corejs.javascript.Symbol;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -1281,7 +1283,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return the new array object
      */
     public static Scriptable newArray(final Scriptable scope, final int length) {
-        return Context.getCurrentContext().newArray(scope, length);
+        final NativeArray result = new NativeArray(length);
+        ScriptRuntime.setBuiltinProtoAndParent(result, scope, TopLevel.Builtins.Array);
+        return result;
     }
 
     /**
@@ -1332,7 +1336,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return the new array object
      */
     public static Scriptable newArray(final Scriptable scope, final Object[] elements) {
-        return Context.getCurrentContext().newArray(scope, elements);
+        if (elements.getClass().getComponentType() != ScriptRuntime.ObjectClass) {
+            throw new IllegalArgumentException();
+        }
+
+        final NativeArray result = new NativeArray(elements);
+        ScriptRuntime.setBuiltinProtoAndParent(result, scope, TopLevel.Builtins.Array);
+        return result;
     }
 
     /**
