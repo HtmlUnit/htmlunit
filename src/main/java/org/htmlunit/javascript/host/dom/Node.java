@@ -25,9 +25,6 @@ import java.util.function.Supplier;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.Interpreter;
-import org.htmlunit.corejs.javascript.JavaScriptException;
-import org.htmlunit.corejs.javascript.RhinoException;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
@@ -45,7 +42,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.NamedNodeMap;
-import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -210,9 +206,8 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
-                throw asJavaScriptException(
-                    new DOMException("Node cannot be inserted at the specified point in the hierarchy",
-                        DOMException.HIERARCHY_REQUEST_ERR));
+                throw JavaScriptEngine.constructError("ReferenceError",
+                        "Node cannot be inserted at the specified point in the hierarchy");
             }
 
             // Get XML node for the DOM node passed in
@@ -245,37 +240,6 @@ public class Node extends EventTarget {
                 frame.loadInnerPage();
             }
         }
-    }
-
-    /**
-     * Encapsulates the given {@link DOMException} into a Rhino-compatible exception.
-     *
-     * @param exception the exception to encapsulate
-     * @return the created exception
-     */
-    protected RhinoException asJavaScriptException(final DOMException exception) {
-        final Window w = getWindow();
-        exception.setPrototype(w.getPrototype(exception.getClass()));
-        exception.setParentScope(w);
-
-        // get current line and file name
-        // this method can only be used in interpreted mode. If one day we choose to use compiled mode,
-        // then we'll have to find an other way here.
-        final String fileName;
-        final int lineNumber;
-        if (Context.getCurrentContext().getOptimizationLevel() == -1) {
-            final int[] linep = new int[1];
-            final String sourceName = new Interpreter().getSourcePositionFromStack(Context.getCurrentContext(), linep);
-            fileName = sourceName.replaceFirst("script in (.*) from .*", "$1");
-            lineNumber = linep[0];
-        }
-        else {
-            throw new Error("HtmlUnit not ready to run in compiled mode");
-        }
-
-        exception.setLocation(fileName, lineNumber);
-
-        return new JavaScriptException(exception, fileName, lineNumber);
     }
 
     /**
