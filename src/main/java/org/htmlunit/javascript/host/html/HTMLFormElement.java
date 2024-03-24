@@ -25,7 +25,6 @@ import java.util.function.Supplier;
 import org.htmlunit.FormEncodingType;
 import org.htmlunit.WebAssert;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -140,7 +139,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     @JsxSymbol
-    public ES6Iterator iterator() {
+    public Scriptable iterator() {
         return getElements().iterator();
     }
 

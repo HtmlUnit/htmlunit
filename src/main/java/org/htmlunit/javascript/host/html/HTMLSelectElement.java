@@ -18,7 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_REMOVE_IGNORE_IF_IND
 
 import java.util.List;
 
-import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
@@ -417,7 +416,7 @@ public class HTMLSelectElement extends HTMLElement {
     }
 
     @JsxSymbol
-    public ES6Iterator iterator() {
+    public Scriptable iterator() {
         return getOptions().iterator();
     }
 }

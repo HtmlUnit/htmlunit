@@ -23,8 +23,6 @@ import java.util.List;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ES6Iterator;
-import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -112,8 +110,8 @@ public class HTMLCollection extends AbstractList implements Callable {
     }
 
     @JsxSymbol
-    public ES6Iterator iterator() {
-        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
+    public Scriptable iterator() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 
     /**

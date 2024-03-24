@@ -21,9 +21,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
@@ -117,8 +115,8 @@ public class NodeList extends AbstractList implements Callable {
      * @return an {@link NativeArrayIterator}
      */
     @JsxFunction
-    public ES6Iterator keys() {
-        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.KEYS);
+    public Scriptable keys() {
+        return JavaScriptEngine.newArrayIteratorTypeKeys(getParentScope(), this);
     }
 
     /**
@@ -127,8 +125,8 @@ public class NodeList extends AbstractList implements Callable {
      */
     @JsxFunction
     @JsxSymbol(symbolName = "iterator")
-    public ES6Iterator values() {
-        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
+    public Scriptable values() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 
     /**
@@ -136,8 +134,8 @@ public class NodeList extends AbstractList implements Callable {
      * @return an {@link NativeArrayIterator}
      */
     @JsxFunction
-    public ES6Iterator entries() {
-        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
+    public Scriptable entries() {
+        return JavaScriptEngine.newArrayIteratorTypeEntries(getParentScope(), this);
     }
 
     /**

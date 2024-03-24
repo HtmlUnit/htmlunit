@@ -17,9 +17,7 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.EvaluatorException;
-import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.ElementFactory;
@@ -308,7 +306,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     }
 
     @JsxSymbol
-    public ES6Iterator iterator() {
-        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
+    public Scriptable iterator() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 }

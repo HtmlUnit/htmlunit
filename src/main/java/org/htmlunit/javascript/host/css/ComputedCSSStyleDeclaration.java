@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host.css;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.ES6Iterator;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -79,7 +79,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     @JsxSymbol(value = {FF, FF_ESR}, symbolName = "iterator")
-    public ES6Iterator values() {
+    public Scriptable values() {
         return super.values();
     }
 

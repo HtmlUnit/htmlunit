@@ -41,8 +41,6 @@ import java.util.Set;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.corejs.javascript.ES6Iterator;
-import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.AbstractCssStyleDeclaration;
@@ -919,8 +917,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return an {@link NativeArrayIterator}
      */
     @JsxSymbol(symbolName = "iterator")
-    public ES6Iterator values() {
-        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
+    public Scriptable values() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 
     /**

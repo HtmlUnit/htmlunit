@@ -49,6 +49,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Interpreter;
 import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.NativeConsole;
 import org.htmlunit.corejs.javascript.RhinoException;
 import org.htmlunit.corejs.javascript.Script;
@@ -1239,7 +1240,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Encapsulates the given {@link DOMException} into a Rhino-compatible exception.
@@ -1282,6 +1282,45 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static Scriptable newArray(final Scriptable scope, final int length) {
         return Context.getCurrentContext().newArray(scope, length);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Create a new ArrayIterator of type NativeArrayIterator.ARRAY_ITERATOR_TYPE.KEYS
+     *
+     * @param scope the scope to create the object in
+     * @param arrayLike the backend
+     * @return the new NativeArrayIterator
+     */
+    public static Scriptable newArrayIteratorTypeKeys(final Scriptable scope, final Scriptable arrayLike) {
+        return new NativeArrayIterator(scope, arrayLike, NativeArrayIterator.ARRAY_ITERATOR_TYPE.KEYS);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Create a new ArrayIterator of type NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES
+     *
+     * @param scope the scope to create the object in
+     * @param arrayLike the backend
+     * @return the new NativeArrayIterator
+     */
+    public static Scriptable newArrayIteratorTypeValues(final Scriptable scope, final Scriptable arrayLike) {
+        return new NativeArrayIterator(scope, arrayLike, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Create a new ArrayIterator of type NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES
+     *
+     * @param scope the scope to create the object in
+     * @param arrayLike the backend
+     * @return the new NativeArrayIterator
+     */
+    public static Scriptable newArrayIteratorTypeEntries(final Scriptable scope, final Scriptable arrayLike) {
+        return new NativeArrayIterator(scope, arrayLike, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
     }
 
     /**
