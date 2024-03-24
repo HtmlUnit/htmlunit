@@ -18,6 +18,9 @@
                 Jetty 9 websocket-client.
             </action>
 
+            <action type="update" dev="rbri">
+                Upgrade commons-logging to 1.3.1
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 Fix &lt;iframe&gt; so that the parent charset is used when no charset could otherwise be found.
             </action>
