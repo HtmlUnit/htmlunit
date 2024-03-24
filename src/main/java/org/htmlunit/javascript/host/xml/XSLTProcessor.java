@@ -216,9 +216,9 @@ public class XSLTProcessor extends HtmlUnitScriptable {
 
                 final Charset cs = EncodingSniffer.toCharset(transformer.getOutputProperty(OutputKeys.ENCODING));
                 if (cs == null) {
-                    return out.toString(StandardCharsets.UTF_8);
+                    return new String(out.toByteArray(), StandardCharsets.UTF_8);
                 }
-                return out.toString(cs);
+                return new String(out.toByteArray(), cs);
             }
         }
         catch (final RuntimeException re) {
