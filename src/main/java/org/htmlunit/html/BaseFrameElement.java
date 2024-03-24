@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -38,8 +39,6 @@ import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.UrlUtils;
 import org.w3c.dom.Attr;
-
-import com.tngtech.archunit.thirdparty.com.google.common.base.Objects;
 
 /**
  * Base class for frame and iframe.
@@ -202,8 +201,8 @@ public abstract class BaseFrameElement extends HtmlElement {
 
             // Use parent document's charset as container charset if same origin
             // https://html.spec.whatwg.org/multipage/parsing.html#determining-the-character-encoding
-            if (Objects.equal(pageUrl.getProtocol(), url.getProtocol())
-                    && Objects.equal(pageUrl.getAuthority(), url.getAuthority())) {
+            if (Objects.equals(pageUrl.getProtocol(), url.getProtocol())
+                    && Objects.equals(pageUrl.getAuthority(), url.getAuthority())) {
                 request.setDefaultResponseContentCharset(pageCharset);
             }
 
