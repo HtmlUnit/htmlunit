@@ -25,7 +25,6 @@ import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
@@ -102,7 +101,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             throw JavaScriptEngine.typeError("Function not provided");
         }
 
-        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : Undefined.instance);
+        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : JavaScriptEngine.Undefined);
         final Object[] params = (args.length > 2)
                 ? Arrays.copyOfRange(args, 2, args.length)
                 : JavaScriptEngine.emptyArgs;
@@ -126,7 +125,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             throw JavaScriptEngine.typeError("Function not provided");
         }
 
-        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : Undefined.instance);
+        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : JavaScriptEngine.Undefined);
         final Object[] params = (args.length > 2)
                 ? Arrays.copyOfRange(args, 2, args.length)
                 : JavaScriptEngine.emptyArgs;

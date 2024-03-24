@@ -22,11 +22,11 @@ import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -91,11 +91,11 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         if (htmlSelect_ == null || index < 0) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
 
         if (index >= htmlSelect_.getOptionSize()) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
 
         return getScriptableFor(htmlSelect_.getOption(index));

@@ -18,7 +18,6 @@ import java.util.HashSet;
 
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.impl.SimpleRange;
@@ -243,7 +242,7 @@ public class Range extends AbstractRange {
             ancestor = ancestor.getParent();
         }
 
-        return Undefined.instance;
+        return JavaScriptEngine.Undefined;
     }
 
     /**

@@ -390,6 +390,17 @@ public class ArchitectureTest {
         .should().dependOnClassesThat().haveFullyQualifiedName("org.htmlunit.corejs.javascript.ScriptRuntime");
 
     /**
+     * Do not use core-js org.htmlunit.corejs.javascript.Undefined.instance directly.
+     */
+    @ArchTest
+    public static final ArchRule corejsUndefinedRule = noClasses()
+        .that()
+            .doNotHaveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine")
+            .and().resideOutsideOfPackage("org.htmlunit.corejs..")
+
+        .should().dependOnClassesThat().haveFullyQualifiedName("org.htmlunit.corejs.javascript.Undefined");
+
+    /**
      * Do not use jetty.
      */
     @ArchTest

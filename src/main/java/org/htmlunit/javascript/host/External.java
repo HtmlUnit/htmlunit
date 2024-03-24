@@ -18,8 +18,8 @@ import static org.htmlunit.BrowserVersionFeatures.JS_IS_SEARCH_PROVIDER_INSTALLE
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -65,6 +65,6 @@ public class External extends HtmlUnitScriptable {
         if (getBrowserVersion().hasFeature(JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO)) {
             return 0;
         }
-        return Undefined.instance;
+        return JavaScriptEngine.Undefined;
     }
 }

@@ -31,7 +31,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.RegExpProxy;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.corejs.javascript.regexp.NativeRegExp;
 import org.htmlunit.corejs.javascript.regexp.RegExpImpl;
 import org.htmlunit.corejs.javascript.regexp.SubString;
@@ -159,7 +158,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 for (int i = 0; i <= matcher.groupCount(); i++) {
                     Object group = matcher.group(i);
                     if (group == null) {
-                        group = Undefined.instance;
+                        group = JavaScriptEngine.Undefined;
                     }
                     groups.add(group);
                 }

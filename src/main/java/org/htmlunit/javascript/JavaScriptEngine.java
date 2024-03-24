@@ -55,7 +55,6 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.StackStyle;
 import org.htmlunit.corejs.javascript.Symbol;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -104,6 +103,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     /** ScriptRuntime.emptyArgs. */
     public static final Object[] emptyArgs = ScriptRuntime.emptyArgs;
+
+    /** org.htmlunit.corejs.javascript.Undefined.instance. */
+    public static final Object Undefined = org.htmlunit.corejs.javascript.Undefined.instance;
 
     private WebClient webClient_;
     private HtmlUnitContextFactory contextFactory_;
@@ -1287,7 +1289,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return whether obj is undefined
      */
     public static boolean isUndefined(final Object obj) {
-        return Undefined.isUndefined(obj);
+        return org.htmlunit.corejs.javascript.Undefined.isUndefined(obj);
     }
     /**
      * @param obj the value to check

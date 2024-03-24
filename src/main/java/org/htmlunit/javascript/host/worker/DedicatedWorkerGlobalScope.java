@@ -29,7 +29,6 @@ import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
@@ -165,7 +164,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     public void postMessage(final Object message) {
         final MessageEvent event = new MessageEvent();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
-                                    owningWindow_, Undefined.instance);
+                                    owningWindow_, JavaScriptEngine.Undefined);
         event.setParentScope(owningWindow_);
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
@@ -192,7 +191,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     void messagePosted(final Object message) {
         final MessageEvent event = new MessageEvent();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
-                                    owningWindow_, Undefined.instance);
+                                    owningWindow_, JavaScriptEngine.Undefined);
         event.setParentScope(owningWindow_);
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 

@@ -18,7 +18,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -39,7 +38,7 @@ public class TextEvent extends UIEvent {
      * Default constructor.
      */
     public TextEvent() {
-        data_ = Undefined.instance;
+        data_ = JavaScriptEngine.Undefined;
     }
 
     /**

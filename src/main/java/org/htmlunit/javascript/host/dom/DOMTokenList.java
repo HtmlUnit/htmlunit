@@ -19,7 +19,6 @@ import java.util.HashSet;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -273,7 +272,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
     public Object get(final int index, final Scriptable start) {
         final Object value = item(index);
         if (value == null) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return value;
     }

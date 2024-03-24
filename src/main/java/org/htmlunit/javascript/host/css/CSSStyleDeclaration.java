@@ -45,7 +45,6 @@ import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.AbstractCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.css.StyleAttributes.Definition;
@@ -1172,13 +1171,13 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         if (index < 0) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
 
         final Map<String, StyleElement> style = getStyleMap();
         final int size = style.size();
         if (index >= size) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return style.keySet().toArray(new String[size])[index];
     }

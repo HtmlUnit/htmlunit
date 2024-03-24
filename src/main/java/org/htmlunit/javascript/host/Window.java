@@ -63,7 +63,6 @@ import org.htmlunit.corejs.javascript.NativeConsole.Level;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Slot;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
@@ -339,7 +338,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter
     public Object getEvent() {
         if (currentEvent_ == null) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return currentEvent_;
     }
@@ -1324,12 +1323,12 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @Override
     public Object get(final int index, final Scriptable start) {
         if (index < 0 || getWebWindow() == null) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
 
         final HTMLCollection frames = getFrames();
         if (frames == null || index >= frames.getLength()) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return frames.item(Integer.valueOf(index));
     }
@@ -1815,7 +1814,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             targetOrigin = JavaScriptEngine.toString(args[1]);
         }
 
-        Object transfer = Undefined.instance;
+        Object transfer = JavaScriptEngine.Undefined;
         if (args.length > 2) {
             transfer = args[2];
         }

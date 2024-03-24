@@ -26,7 +26,6 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -276,7 +275,7 @@ public class Node extends EventTarget {
             refChildObject = args[1];
         }
         else {
-            refChildObject = Undefined.instance;
+            refChildObject = JavaScriptEngine.Undefined;
         }
         Object insertedChild = null;
 

@@ -18,7 +18,6 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -56,7 +55,7 @@ public class MessageEvent extends Event {
         setType(TYPE_MESSAGE);
         origin_ = "";
         lastEventId_ = "";
-        data_ = Undefined.instance;
+        data_ = JavaScriptEngine.Undefined;
     }
 
     /**

@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -118,7 +117,7 @@ public class AbstractRange extends HtmlUnitScriptable {
     @JsxGetter
     public Object getStartContainer() {
         if (startContainer_ == null) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return startContainer_;
     }
@@ -130,7 +129,7 @@ public class AbstractRange extends HtmlUnitScriptable {
     @JsxGetter
     public Object getEndContainer() {
         if (endContainer_ == null) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return endContainer_;
     }

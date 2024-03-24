@@ -17,8 +17,8 @@ package org.htmlunit.javascript.host.dom;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -149,7 +149,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxGetter
     public Object getCode() {
         if (code_ == -1) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return code_;
     }
@@ -161,7 +161,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxGetter
     public Object getMessage() {
         if (message_ == null) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return message_;
     }
@@ -173,7 +173,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxGetter({FF, FF_ESR})
     public Object getLineNumber() {
         if (lineNumber_ == -1) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return lineNumber_;
     }
@@ -185,7 +185,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxGetter({FF, FF_ESR})
     public Object getFilename() {
         if (fileName_ == null) {
-            return Undefined.instance;
+            return JavaScriptEngine.Undefined;
         }
         return fileName_;
     }
