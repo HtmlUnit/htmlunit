@@ -20,9 +20,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.html.CharacterDataChangeEvent;
 import org.htmlunit.html.CharacterDataChangeListener;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
@@ -129,8 +127,8 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      * @return an {@link NativeArray} of {@link MutationRecord}s
      */
     @JsxFunction
-    public NativeArray takeRecords() {
-        return new NativeArray(0);
+    public Scriptable takeRecords() {
+        return JavaScriptEngine.newArray(getParentScope(), 0);
     }
 
     /**
@@ -158,8 +156,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
             jsEngine.addPostponedAction(new PostponedAction(owningPage, "MutationObserver.characterDataChanged") {
                 @Override
                 public void execute() {
-                    final NativeArray array = new NativeArray(new Object[] {mutationRecord});
-                    ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
+                    final Scriptable array = JavaScriptEngine.newArray(scope, new Object[] {mutationRecord});
                     jsEngine.callFunction(owningPage, function_, scope, MutationObserver.this, new Object[] {array});
                 }
             });
@@ -208,10 +205,9 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
                 jsEngine.addPostponedAction(new PostponedAction(owningPage, "MutationObserver.attributeReplaced") {
                     @Override
                     public void execute() {
-                        final NativeArray array = new NativeArray(new Object[] {mutationRecord});
-                        ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
-                        jsEngine.callFunction(owningPage, function_, scope,
-                                                MutationObserver.this, new Object[] {array});
+                        final Scriptable array = JavaScriptEngine.newArray(scope, new Object[] {mutationRecord});
+                        jsEngine.callFunction(owningPage, function_,
+                                scope, MutationObserver.this, new Object[] {array});
                     }
                 });
             }
