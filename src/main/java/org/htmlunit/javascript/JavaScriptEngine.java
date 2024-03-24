@@ -47,6 +47,8 @@ import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.Interpreter;
+import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeConsole;
 import org.htmlunit.corejs.javascript.RhinoException;
 import org.htmlunit.corejs.javascript.Script;
@@ -68,6 +70,7 @@ import org.htmlunit.javascript.host.DateCustom;
 import org.htmlunit.javascript.host.NumberCustom;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
 import org.htmlunit.javascript.host.html.HTMLOptionElement;
 import org.htmlunit.javascript.host.intl.Intl;
@@ -1233,6 +1236,40 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static EcmaError constructError(final String error, final String message) {
         return ScriptRuntime.constructError(error, message);
+    }
+
+    /**
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Encapsulates the given {@link DOMException} into a Rhino-compatible exception.
+     *
+     * @param window
+     * @param exception the exception to encapsulate
+     * @return the created exception
+     */
+    public static RhinoException asJavaScriptException(final Window window, final DOMException exception) {
+        exception.setParentScope(window);
+        exception.setPrototype(window.getPrototype(exception.getClass()));
+
+        // get current line and file name
+        // this method can only be used in interpreted mode. If one day we choose to use compiled mode,
+        // then we'll have to find an other way here.
+        final String fileName;
+        final int lineNumber;
+        if (Context.getCurrentContext().getOptimizationLevel() == -1) {
+            final int[] linep = new int[1];
+            final String sourceName = new Interpreter().getSourcePositionFromStack(Context.getCurrentContext(), linep);
+            fileName = sourceName.replaceFirst("script in (.*) from .*", "$1");
+            lineNumber = linep[0];
+        }
+        else {
+            throw new Error("HtmlUnit not ready to run in compiled mode");
+        }
+
+        exception.setLocation(fileName, lineNumber);
+
+        return new JavaScriptException(exception, fileName, lineNumber);
     }
 
     /**

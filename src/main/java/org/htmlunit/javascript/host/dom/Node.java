@@ -205,8 +205,10 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
-                throw JavaScriptEngine.constructError("ReferenceError",
-                        "Node cannot be inserted at the specified point in the hierarchy");
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+                            DOMException.HIERARCHY_REQUEST_ERR));
             }
 
             // Get XML node for the DOM node passed in
@@ -293,8 +295,10 @@ public class Node extends EventTarget {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
                     if (!isNodeInsertable(child.getScriptableObject())) {
-                        throw JavaScriptEngine.constructError("ReferenceError",
-                                "Node cannot be inserted at the specified point in the hierarchy");
+                        throw JavaScriptEngine.asJavaScriptException(
+                                getWindow(),
+                                new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+                                    DOMException.HIERARCHY_REQUEST_ERR));
                     }
                 }
             }
