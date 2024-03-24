@@ -229,7 +229,7 @@ public class WebResponse implements Serializable {
      * This method always returns a valid charset. This method first checks the {@code Content-Type}
      * header or in the content BOM for viable charset. If not found, it attempts to determine the
      * charset based on the type of the content. As a last resort, this method returns the
-     * value of {@link org.htmlunit.WebRequest.getDefaultResponseContentCharset()} which is
+     * value of {@link org.htmlunit.WebRequest#getDefaultResponseContentCharset()} which is
      * {@link java.nio.charset.StandardCharsets#UTF_8} by default.
      * @return the content charset for this response
      */
@@ -288,7 +288,8 @@ public class WebResponse implements Serializable {
      * JavaScript code (false positive) or if the meta-tag is after the first 1024 bytes (false negative).
      * @return {@code true} if the charset of the previous call to {@link #getContentCharset()} was
      * "tentative".
-     * @see https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence
+     * @see <a href="https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence">
+     * https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence</a>
      */
     public boolean wasContentCharsetTentative() {
         return wasContentCharsetTentative_;

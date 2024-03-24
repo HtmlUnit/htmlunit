@@ -914,7 +914,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     /**
      * Returns an Iterator allowing to go through all keys contained in this object.
-     * @return an {@link NativeArrayIterator}
+     * @return a NativeArrayIterator
      */
     @JsxSymbol(symbolName = "iterator")
     public Scriptable values() {

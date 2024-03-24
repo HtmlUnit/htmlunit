@@ -112,7 +112,7 @@ public class NodeList extends AbstractList implements Callable {
 
     /**
      * Returns an Iterator allowing to go through all keys contained in this object.
-     * @return an {@link NativeArrayIterator}
+     * @return a NativeArrayIterator
      */
     @JsxFunction
     public Scriptable keys() {
@@ -121,7 +121,7 @@ public class NodeList extends AbstractList implements Callable {
 
     /**
      * Returns an Iterator allowing to go through all keys contained in this object.
-     * @return an {@link NativeArrayIterator}
+     * @return a NativeArrayIterator
      */
     @JsxFunction
     @JsxSymbol(symbolName = "iterator")
@@ -131,7 +131,7 @@ public class NodeList extends AbstractList implements Callable {
 
     /**
      * Returns an Iterator allowing to go through all key/value pairs contained in this object.
-     * @return an {@link NativeArrayIterator}
+     * @return a NativeArrayIterator
      */
     @JsxFunction
     public Scriptable entries() {

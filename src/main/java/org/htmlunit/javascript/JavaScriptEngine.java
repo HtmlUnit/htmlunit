@@ -1246,7 +1246,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      *
      * Encapsulates the given {@link DOMException} into a Rhino-compatible exception.
      *
-     * @param window
+     * @param window the window to be used as parent scope
      * @param exception the exception to encapsulate
      * @return the created exception
      */

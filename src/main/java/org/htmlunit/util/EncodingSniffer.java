@@ -773,6 +773,7 @@ public final class EncodingSniffer {
      * @param is the content stream to check for an HTML <code>meta</code> tag
      * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
      *         could not be determined
+     * @throws IOException if an IO error occurs
      */
     public static Charset sniffEncodingFromMetaTag(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_HTML_CONTENT_SNIFFED);
@@ -1051,6 +1052,7 @@ public final class EncodingSniffer {
      *
      * @param is the content stream to check for the charset declaration
      * @return the encoding of the specified XML content, or {@code null} if it could not be determined
+     * @throws IOException if an IO error occurs
      */
     public static Charset sniffEncodingFromXmlDeclaration(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_XML_CONTENT_SNIFFED);
@@ -1111,10 +1113,11 @@ public final class EncodingSniffer {
 
     /**
      * Parses and returns the charset declaration at the start of a css file if any, otherwise returns {@code null}.
+     * <p>e.g. <pre>@charset "UTF-8"</pre>
+     *
      * @param is the input stream to parse
      * @return the charset declaration at the start of a css file if any, otherwise returns {@code null}.
-     *
-     * <p>e.g. <pre>@charset "UTF-8"</pre>
+     * @throws IOException if an IO error occurs
      */
     public static Charset sniffEncodingFromCssDeclaration(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_CSS_CONTENT_SNIFFED);
