@@ -43,7 +43,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
@@ -185,17 +184,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     protected String getStylePriority(final String name) {
         return styleDeclaration_.getStylePriority(name);
-    }
-
-    /**
-     * Determines the StyleElement for the given name.
-     * This ignores the case of the name.
-     *
-     * @param name the name of the requested StyleElement
-     * @return the StyleElement or null if not found
-     */
-    private StyleElement getStyleElementCaseInSensitive(final String name) {
-        return styleDeclaration_.getStyleElementCaseInSensitive(name);
     }
 
     /**
@@ -1301,7 +1289,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setOpacity(final Object opacity) {
-        if (ScriptRuntime.isNaN(opacity)) {
+        if (JavaScriptEngine.isNaN(opacity)) {
             return;
         }
 
@@ -1939,7 +1927,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     private void setStyleLengthAttribute(final String name, final Object value, final String important,
                 final boolean auto, final boolean percent, final boolean unitRequired, final String[] validValues) {
 
-        if (ScriptRuntime.isNaN(value)) {
+        if (JavaScriptEngine.isNaN(value)) {
             return;
         }
 

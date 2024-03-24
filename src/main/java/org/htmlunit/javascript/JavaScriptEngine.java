@@ -102,6 +102,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
+    /** ScriptRuntime.emptyArgs. */
+    public static final Object[] emptyArgs = ScriptRuntime.emptyArgs;
+
     private WebClient webClient_;
     private HtmlUnitContextFactory contextFactory_;
     private JavaScriptConfiguration jsConfig_;
@@ -1205,10 +1208,20 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * Report a runtime error using the error reporter for the current thread.
      *
      * @param message the error message to report
-     * @return RuntimeException as dummy the method always throws
+     * @return EcmaError
      */
     public static EcmaError typeError(final String message) {
         return ScriptRuntime.typeError(message);
+    }
+
+    /**
+     * Report a runtime error using the error reporter for the current thread.
+     *
+     * @param message the error message to report
+     * @return EcmaError
+     */
+    public static EcmaError rangeError(final String message) {
+        return ScriptRuntime.rangeError(message);
     }
 
     /**
@@ -1275,6 +1288,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static boolean isUndefined(final Object obj) {
         return Undefined.isUndefined(obj);
+    }
+    /**
+     * @param obj the value to check
+     * @return whether obj is NAN
+     */
+    public static boolean isNaN(final Object obj) {
+        return ScriptRuntime.isNaN(obj);
     }
 
     /**

@@ -21,8 +21,8 @@ import java.util.Locale;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Contains some missing features of Rhino NativeNumber.
@@ -53,7 +53,7 @@ public final class NumberCustom {
                 return NumberFormat.getInstance(locale).format(Double.parseDouble(thisObj.toString()));
             }
             catch (final IllformedLocaleException e) {
-                throw ScriptRuntime.rangeError("Invalid language tag: " + localeStr);
+                throw JavaScriptEngine.rangeError("Invalid language tag: " + localeStr);
             }
         }
 

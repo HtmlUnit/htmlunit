@@ -26,7 +26,6 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.NativeArray;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -244,7 +243,8 @@ public class Blob extends HtmlUnitScriptable {
             final byte[] bytes = getBytes();
             final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
             System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
-            ScriptRuntime.setObjectProtoAndParent(buffer, getParentScope());
+            buffer.setParentScope(getParentScope());
+            buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
             return buffer;
         });
     }

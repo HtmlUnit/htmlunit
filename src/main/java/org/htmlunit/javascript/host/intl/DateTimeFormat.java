@@ -31,7 +31,6 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeArray;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -196,7 +195,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
     private static String getPattern(final Map<String, String> formats, final String locale) {
         if ("no-NO-NY".equals(locale)) {
-            throw ScriptRuntime.rangeError("Invalid language tag: " + locale);
+            throw JavaScriptEngine.rangeError("Invalid language tag: " + locale);
         }
         String pattern = formats.get(locale);
         if (pattern == null && locale.indexOf('-') != -1) {

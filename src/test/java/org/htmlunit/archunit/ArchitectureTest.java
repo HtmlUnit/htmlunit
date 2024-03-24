@@ -374,6 +374,22 @@ public class ArchitectureTest {
         .should().dependOnClassesThat().resideInAnyPackage("org.htmlunit.corejs..");
 
     /**
+     * Do not use core-js ScriptRuntime outside of the JavaScriptEngine.
+     */
+    @ArchTest
+    public static final ArchRule corejsScriptRuntimeRule = noClasses()
+        .that()
+            .doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.URLSearchParams")
+
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.HtmlUnitContextFactory")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine$3")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.regexp.HtmlUnitRegExpProxy")
+            .and().resideOutsideOfPackage("org.htmlunit.corejs..")
+
+        .should().dependOnClassesThat().haveFullyQualifiedName("org.htmlunit.corejs.javascript.ScriptRuntime");
+
+    /**
      * Do not use jetty.
      */
     @ArchTest
