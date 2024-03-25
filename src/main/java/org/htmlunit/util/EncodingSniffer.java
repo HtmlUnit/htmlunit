@@ -335,20 +335,19 @@ public final class EncodingSniffer {
         // Legacy multi-byte Chinese (simplified) encodings
         // ------------------------------------------------
 
-        // gb18030
-        ENCODING_FROM_LABEL.put("chinese", "gb18030");
-        ENCODING_FROM_LABEL.put("csgb2312", "gb18030");
-        ENCODING_FROM_LABEL.put("csiso58gb231280", "gb18030");
-        ENCODING_FROM_LABEL.put("gb18030", "gb18030");
-        ENCODING_FROM_LABEL.put("gb2312", "gb18030");
-        ENCODING_FROM_LABEL.put("gb_2312", "gb18030");
-        ENCODING_FROM_LABEL.put("gb_2312-80", "gb18030");
-        ENCODING_FROM_LABEL.put("gbk", "gb18030");
-        ENCODING_FROM_LABEL.put("iso-ir-58", "gb18030");
-        ENCODING_FROM_LABEL.put("x-gbk", "gb18030");
+        // gbk
+        ENCODING_FROM_LABEL.put("chinese", "gbk");
+        ENCODING_FROM_LABEL.put("csgb2312", "gbk");
+        ENCODING_FROM_LABEL.put("csiso58gb231280", "gbk");
+        ENCODING_FROM_LABEL.put("gb2312", "gbk");
+        ENCODING_FROM_LABEL.put("gb_2312", "gbk");
+        ENCODING_FROM_LABEL.put("gb_2312-80", "gbk");
+        ENCODING_FROM_LABEL.put("gbk", "gbk");
+        ENCODING_FROM_LABEL.put("iso-ir-58", "gbk");
+        ENCODING_FROM_LABEL.put("x-gbk", "gbk");
 
-        // hz-gb-2312
-        ENCODING_FROM_LABEL.put("hz-gb-2312", "hz-gb-2312");
+        // gb18030
+        ENCODING_FROM_LABEL.put("gb18030", "gb18030");
 
         // Legacy multi-byte Chinese (traditional) encodings
         // ------------------------------------------------
