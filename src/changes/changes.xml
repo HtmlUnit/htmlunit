@@ -14,7 +14,8 @@
                 And also many IE specifc classes are gone.
             </action>
             <action type="remove" dev="rbri">
-                Applets are no longer supported.
+                Applets are no longer supported. This implies the AppletConfirmHandler and the applet related configuration
+                settings are also removed.
             </action>
             <action type="add" dev="rbri">
                 New subproject htmlunit-websocket-client. For the start this is a shaded version of the latest
