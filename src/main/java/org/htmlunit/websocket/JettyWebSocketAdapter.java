@@ -21,7 +21,6 @@ import java.util.concurrent.Future;
 
 import org.htmlunit.WebClient;
 import org.htmlunit.WebClientOptions;
-import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.jetty.util.ssl.SslContextFactory;
 import org.htmlunit.jetty.websocket.api.Session;
 import org.htmlunit.jetty.websocket.api.WebSocketPolicy;
@@ -104,10 +103,8 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
         if (content instanceof String) {
             outgoingSession_.getRemote().sendString((String) content);
         }
-        else if (content instanceof NativeArrayBuffer) {
-            final byte[] bytes = ((NativeArrayBuffer) content).getBuffer();
-            final ByteBuffer buffer = ByteBuffer.wrap(bytes);
-            outgoingSession_.getRemote().sendBytes(buffer);
+        else if (content instanceof ByteBuffer) {
+            outgoingSession_.getRemote().sendBytes((ByteBuffer) content);
         }
         else {
             throw new IllegalStateException(

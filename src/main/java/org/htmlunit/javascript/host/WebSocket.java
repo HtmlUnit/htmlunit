@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.ByteBuffer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -411,6 +412,12 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxFunction
     public void send(final Object content) {
         try {
+            if (content instanceof NativeArrayBuffer) {
+                final byte[] bytes = ((NativeArrayBuffer) content).getBuffer();
+                final ByteBuffer buffer = ByteBuffer.wrap(bytes);
+                webSocketImpl_.send(buffer);
+                return;
+            }
             webSocketImpl_.send(content);
         }
         catch (final IOException e) {
