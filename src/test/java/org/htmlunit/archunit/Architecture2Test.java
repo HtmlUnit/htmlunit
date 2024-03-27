@@ -113,8 +113,6 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
 
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlAppletTest")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.html.HTMLAppletElement2Test")
         .should().callMethod(BrowserVersion.class, "isChrome", new Class[] {});
 
     /**
@@ -134,8 +132,6 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
 
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlAppletTest")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.html.HTMLAppletElement2Test")
         .should().callMethod(BrowserVersion.class, "isEdge", new Class[] {});
 
     /**
@@ -152,8 +148,6 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.css.BrowserConfiguration$FFLatest")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.css.BrowserConfiguration$ChromeAndEdgeAndFirefox")
 
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlAppletTest")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.html.HTMLAppletElement2Test")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.general.huge.ElementClosesElementTest")
         .should().callMethod(BrowserVersion.class, "isFirefox", new Class[] {});
 

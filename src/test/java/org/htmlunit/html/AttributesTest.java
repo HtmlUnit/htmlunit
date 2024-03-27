@@ -70,7 +70,7 @@ public class AttributesTest extends TestCase {
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = {
             "HtmlAbbreviated", "HtmlAcronym",
-            "HtmlAnchor", "HtmlAddress", "HtmlApplet", "HtmlArea",
+            "HtmlAnchor", "HtmlAddress", "HtmlArea",
             "HtmlArticle", "HtmlAside", "HtmlAudio",
             "HtmlBackgroundSound", "HtmlBase", "HtmlBaseFont",
             "HtmlBidirectionalIsolation",

@@ -236,12 +236,6 @@ public void homePage_proxy() throws Exception {
             </p>
             </subsection>
 
-            <subsection name="AppletConfirmHandler">
-            <p>
-                Like in real browsers, you have to confirm before the browser starts an applet.
-            </p>
-            </subsection>
-
             <subsection name="CSSErrorHandler">
             <p>
                 For CSS parser error processing.

@@ -13,6 +13,9 @@
                 More than 200 flags removed from the code and about 6.000 test case expectations adjusted.
                 And also many IE specifc classes are gone.
             </action>
+            <action type="remove" dev="rbri">
+                Applets are no longer supported.
+            </action>
             <action type="add" dev="rbri">
                 New subproject htmlunit-websocket-client. For the start this is a shaded version of the latest
                 Jetty 9 websocket-client.

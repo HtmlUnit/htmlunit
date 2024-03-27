@@ -78,8 +78,7 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule awtPackageRule = noClasses()
         .that()
-            .doNotHaveFullyQualifiedName("org.htmlunit.html.applets.AppletContextImpl")
-            .and().resideOutsideOfPackage("org.htmlunit.platform..")
+            .resideOutsideOfPackage("org.htmlunit.platform..")
             .and().resideOutsideOfPackage("org.htmlunit.corejs.javascript.tools..")
             .and().resideOutsideOfPackage("org.htmlunit.jetty..")
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");

@@ -14,21 +14,12 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import java.applet.Applet;
-import java.lang.reflect.Method;
-
-import org.htmlunit.corejs.javascript.BaseFunction;
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeJavaObject;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Wrapper;
 import org.htmlunit.html.DomElement;
-import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlObject;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -60,60 +51,6 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDomNode(final DomNode domNode) {
-        super.setDomNode(domNode);
-
-        if (domNode.getPage().getWebClient().getOptions().isAppletEnabled()) {
-            try {
-                createAppletMethodAndProperties();
-            }
-            catch (final Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    private void createAppletMethodAndProperties() throws Exception {
-        final HtmlObject appletNode = (HtmlObject) getDomNodeOrDie();
-        final Applet applet = appletNode.getApplet();
-        if (applet == null) {
-            return;
-        }
-
-        // Rhino should provide the possibility to declare delegate for Functions as it does for properties!!!
-        for (final Method method : applet.getClass().getMethods()) {
-            final Function f = new BaseFunction() {
-                @Override
-                public Object call(final Context cx, final Scriptable scope,
-                        final Scriptable thisObj, final Object[] args) {
-
-                    final Object[] realArgs = new Object[method.getParameterTypes().length];
-                    for (int i = 0; i < realArgs.length; i++) {
-                        final Object arg;
-                        if (i > args.length) {
-                            arg = null;
-                        }
-                        else {
-                            arg = Context.jsToJava(args[i], method.getParameterTypes()[i]);
-                        }
-                        realArgs[i] = arg;
-                    }
-                    try {
-                        return method.invoke(applet, realArgs);
-                    }
-                    catch (final Exception e) {
-                        throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-                    }
-                }
-            };
-            ScriptableObject.defineProperty(this, method.getName(), f, ScriptableObject.READONLY);
-        }
     }
 
     /**

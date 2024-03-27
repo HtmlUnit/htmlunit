@@ -322,9 +322,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none"},
-            FF = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"},
-            FF_ESR = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"})
+    @Alerts(DEFAULT = {"inline", "inline", "inline", "block", "inline", "block", "block", "none"},
+            FF = {"inline", "inline", "inline", "block", "none", "block", "block", "none"},
+            FF_ESR = {"inline", "inline", "inline", "block", "none", "block", "block", "none"})
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -336,8 +336,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    <aside id='aside'></aside>\n"
             + "    <audio id='audio'></audio>\n"
             + "  </p>\n"
-
-            // + "  <applet id='applet'></applet>\n"
 
             + "  <img usemap='#imgmap'>\n"
             + "    <map name='imgmap'>\n"
@@ -359,7 +357,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('abbr');\n"
             + "    x('acronym');\n"
             + "    x('address');\n"
-            // + "    x('applet');\n"
             + "    x('area');\n"
             + "    x('article');\n"
             + "    x('aside');\n"

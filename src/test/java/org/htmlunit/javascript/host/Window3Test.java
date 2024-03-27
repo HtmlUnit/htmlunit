@@ -655,7 +655,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"5", "EMBED", "FORM", "IMG", "IMG", "OBJECT", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT"})
     // The following tags cause problems with WebDriver:
-    // applet, body, frame, frameset, head, html, isindex, meta, plaintext, title
+    // body, frame, frameset, head, html, isindex, meta, plaintext, title
     // The iframe tag is treated as frame and as such has priority over the other tags, which would make the test
     // useless.
     public void elementsByName() throws Exception {
@@ -679,7 +679,6 @@ public class Window3Test extends WebDriverTestCase {
             + "  <acronym name='element1'></acronym>\n"
             + "  <a name='element1'></a>\n"
             + "  <address name='element1'></address>\n"
-            // + "  <applet name='element1'></applet>\n"
             + "  <article name='element1'></article>\n"
             + "  <audio name='element1'></audio>\n"
             + "  <bgsound name='element1'>\n"

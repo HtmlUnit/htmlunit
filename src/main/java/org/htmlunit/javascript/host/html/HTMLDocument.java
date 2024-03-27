@@ -42,7 +42,6 @@ import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.FrameWindow;
-import org.htmlunit.html.HtmlApplet;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
@@ -707,7 +706,7 @@ public class HTMLDocument extends Document {
         final List<DomElement> elements = page.getElementsByName(name);
         final List<DomNode> matchingElements = new ArrayList<>();
         for (final DomElement elt : elements) {
-            if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
+            if (elt instanceof HtmlForm || elt instanceof HtmlImage
                     || (alsoFrames && elt instanceof BaseFrameElement)) {
                 matchingElements.add(elt);
             }

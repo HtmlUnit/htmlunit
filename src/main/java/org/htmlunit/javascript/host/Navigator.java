@@ -237,11 +237,11 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * Indicates if Java is enabled.
-     * @return true/false (see {@link org.htmlunit.WebClientOptions#isAppletEnabled()}
+     * @return false
      */
     @JsxFunction
     public boolean javaEnabled() {
-        return getWindow().getWebWindow().getWebClient().getOptions().isAppletEnabled();
+        return false;
     }
 
     /**

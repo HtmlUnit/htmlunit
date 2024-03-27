@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.WebClient;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,9 +65,6 @@ public class Navigator2Test extends SimpleWebTestCase {
     @Test
     public void javaEnabled() throws Exception {
         attribute("javaEnabled()", "false");
-        final WebClient webClient = getWebClient();
-        webClient.getOptions().setAppletEnabled(true);
-        attribute("javaEnabled()", "true");
     }
 
     /**

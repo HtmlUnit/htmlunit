@@ -170,7 +170,6 @@ public class WebClient implements Serializable, AutoCloseable {
     private PrintHandler printHandler_;
     private WebStartHandler webStartHandler_;
     private FrameContentHandler frameContentHandler_;
-    private AppletConfirmHandler appletConfirmHandler_;
 
     private AjaxController ajaxController_ = new AjaxController();
 
@@ -2071,22 +2070,6 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void setPrintHandler(final PrintHandler handler) {
         printHandler_ = handler;
-    }
-
-    /**
-     * Sets the applet confirm handler.
-     * @param handler the new applet confirm handler handler
-     */
-    public void setAppletConfirmHandler(final AppletConfirmHandler handler) {
-        appletConfirmHandler_ = handler;
-    }
-
-    /**
-     * Returns the current applet confirm handler.
-     * @return the current applet confirm handler
-     */
-    public AppletConfirmHandler getAppletConfirmHandler() {
-        return appletConfirmHandler_;
     }
 
     /**

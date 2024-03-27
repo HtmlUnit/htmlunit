@@ -28,7 +28,6 @@ import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
-import org.htmlunit.html.HtmlApplet;
 import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlBreak;
 import org.htmlunit.html.HtmlCheckBoxInput;
@@ -110,10 +109,6 @@ public class HtmlSerializerVisibleText {
         }
         else if (node instanceof DomComment) {
             appendComment(builder, (DomComment) node, mode);
-        }
-        else if (node instanceof HtmlApplet
-                && node.getPage().getWebClient().getOptions().isAppletEnabled()) {
-            appendApplet(builder, (HtmlApplet) node, mode);
         }
         else if (node instanceof HtmlBreak) {
             appendBreak(builder, (HtmlBreak) node, mode);
@@ -640,18 +635,6 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendComment(final HtmlSerializerTextBuilder builder,
             final DomComment domComment, final Mode mode) {
-        // nothing to do
-    }
-
-    /**
-     * Process {@link HtmlApplet}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param htmlApplet the target to process
-     * @param mode the {@link Mode} to use for processing
-     */
-    protected void appendApplet(final HtmlSerializerTextBuilder builder,
-            final HtmlApplet htmlApplet, final Mode mode) {
         // nothing to do
     }
 

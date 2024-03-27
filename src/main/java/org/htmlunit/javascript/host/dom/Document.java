@@ -65,7 +65,6 @@ import org.htmlunit.html.DomText;
 import org.htmlunit.html.FrameWindow;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlAnchor;
-import org.htmlunit.html.HtmlApplet;
 import org.htmlunit.html.HtmlArea;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
@@ -811,9 +810,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getApplets() {
-        final HTMLCollection applets = new HTMLCollection(getDomNodeOrDie(), false);
-        applets.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof HtmlApplet);
-        return applets;
+        return new HTMLCollection(getDomNodeOrDie(), false);
     }
 
     /**

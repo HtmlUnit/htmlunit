@@ -47,7 +47,6 @@ public class WebClientOptions implements Serializable {
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;
     private boolean throwExceptionOnScriptError_ = true;
-    private boolean appletEnabled_;
     private boolean popupBlockerEnabled_;
     private boolean isRedirectEnabled_ = true;
     private File tempFileDirectory_;
@@ -372,26 +371,6 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isCssEnabled() {
         return cssEnabled_;
-    }
-
-    /**
-     * Enables/disables Applet support. By default, this property is disabled.<br>
-     * <p>
-     * Note: Applet support is experimental and minimal
-     * </p>
-     * @param enabled {@code true} to enable Applet support
-     */
-    public void setAppletEnabled(final boolean enabled) {
-        appletEnabled_ = enabled;
-    }
-
-    /**
-     * Returns {@code true} if Applet are enabled.
-     *
-     * @return {@code true} if Applet is enabled
-     */
-    public boolean isAppletEnabled() {
-        return appletEnabled_;
     }
 
     /**

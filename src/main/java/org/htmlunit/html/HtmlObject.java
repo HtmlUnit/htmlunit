@@ -16,28 +16,13 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR;
 
-import java.applet.Applet;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.AppletConfirmHandler;
-import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.WebClient;
-import org.htmlunit.WebRequest;
-import org.htmlunit.WebResponse;
-import org.htmlunit.html.applets.AppletClassLoader;
-import org.htmlunit.html.applets.AppletStubImpl;
 import org.htmlunit.javascript.host.html.HTMLObjectElement;
-import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
@@ -54,15 +39,9 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     private static final Log LOG = LogFactory.getLog(HtmlObject.class);
 
-    private static final String APPLET_TYPE = "application/x-java-applet";
-    private static final String ARCHIVE = "archive";
-    private static final String CACHE_ARCHIVE = "cache_archive";
-    private static final String CODEBASE = "codebase";
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "object";
 
-    private Applet applet_;
     private String customValidity_;
 
     /**
@@ -307,144 +286,6 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
-    }
-
-    /**
-     * Gets the applet referenced by this tag. Instantiates it if necessary.
-     *
-     * @return the applet or null, if the installed AppletConfirmHandler
-     * prohibits this applet
-     * @throws IOException in case of problem
-     */
-    public Applet getApplet() throws IOException {
-        setupAppletIfNeeded();
-        return applet_;
-    }
-
-    /**
-     * Download the associated content specified in the code attribute.
-     *
-     * @throws IOException if an error occurs while downloading the content
-     */
-    @SuppressWarnings("unchecked")
-    private synchronized void setupAppletIfNeeded() throws IOException {
-        if (applet_ != null) {
-            return;
-        }
-
-        if (StringUtils.isBlank(getTypeAttribute()) || !getTypeAttribute().startsWith(APPLET_TYPE)) {
-            return;
-        }
-
-        final HashMap<String, String> params = new HashMap<>();
-        params.put(NAME_ATTRIBUTE, getNameAttribute());
-
-        params.put("height", getHeightAttribute());
-        params.put("width", getWidthAttribute());
-
-        final DomNodeList<HtmlElement> paramTags = getElementsByTagName("param");
-        for (final HtmlElement paramTag : paramTags) {
-            final HtmlParameter parameter = (HtmlParameter) paramTag;
-            params.put(parameter.getNameAttribute(), parameter.getValueAttribute());
-        }
-
-        if (StringUtils.isEmpty(params.get(CODEBASE)) && StringUtils.isNotEmpty(getCodebaseAttribute())) {
-            params.put(CODEBASE, getCodebaseAttribute());
-        }
-
-        if (StringUtils.isEmpty(params.get(ARCHIVE)) && StringUtils.isNotEmpty(getArchiveAttribute())) {
-            params.put(ARCHIVE, getArchiveAttribute());
-        }
-
-        final HtmlPage page = (HtmlPage) getPage();
-        final WebClient webclient = page.getWebClient();
-
-        final AppletConfirmHandler handler = webclient.getAppletConfirmHandler();
-        if (null != handler && !handler.confirm(this)) {
-            return;
-        }
-
-        String appletClassName = getAttributeDirect("code");
-        if (StringUtils.isEmpty(appletClassName)) {
-            appletClassName = params.get("code");
-        }
-        if (appletClassName.endsWith(".class")) {
-            appletClassName = appletClassName.substring(0, appletClassName.length() - 6);
-        }
-
-        try (AppletClassLoader appletClassLoader =
-                new AppletClassLoader(getPage().getEnclosingWindow().getScriptableObject(),
-                                            Thread.currentThread().getContextClassLoader())) {
-
-            final String documentUrl = page.getUrl().toExternalForm();
-            String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
-            final String codebaseProperty = params.get(CODEBASE);
-            if (StringUtils.isNotEmpty(codebaseProperty)) {
-                // codebase can be relative to the page
-                baseUrl = UrlUtils.resolveUrl(baseUrl, codebaseProperty);
-            }
-            if (!baseUrl.endsWith("/")) {
-                baseUrl = baseUrl + "/";
-            }
-
-            // check archive
-            List<URL> archiveUrls = new ArrayList<>();
-            String[] archives = org.htmlunit.util.StringUtils.splitAtComma(params.get(ARCHIVE));
-            if (null != archives) {
-                for (final String tmpArchive : archives) {
-                    final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive.trim());
-                    final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
-
-                    appletClassLoader.addArchiveToClassPath(archiveUrl);
-                    archiveUrls.add(archiveUrl);
-                }
-            }
-            archives = org.htmlunit.util.StringUtils.splitAtComma(params.get(CACHE_ARCHIVE));
-            if (null != archives) {
-                for (final String tmpArchive : archives) {
-                    final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive.trim());
-                    final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
-
-                    appletClassLoader.addArchiveToClassPath(archiveUrl);
-                    archiveUrls.add(archiveUrl);
-                }
-            }
-            archiveUrls = Collections.unmodifiableList(archiveUrls);
-
-            // no archive attribute, single class
-            if (archiveUrls.isEmpty()) {
-                final String tempUrl = UrlUtils.resolveUrl(baseUrl, getAttributeDirect("code"));
-                final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
-
-                final WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));
-                try {
-                    webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
-                    appletClassLoader.addClassToClassPath(appletClassName, response);
-                }
-                catch (final FailingHttpStatusCodeException e) {
-                    // that is what the browser does, the applet only fails, if
-                    // the main class is not loadable
-                    LOG.error(e.getMessage(), e);
-                }
-            }
-
-            try {
-                final Class<Applet> appletClass = (Class<Applet>) appletClassLoader.loadClass(appletClassName);
-                applet_ = appletClass.newInstance();
-                applet_.setStub(new AppletStubImpl(getHtmlPageOrNull(), params,
-                        UrlUtils.toUrlUnsafe(baseUrl), UrlUtils.toUrlUnsafe(documentUrl)));
-                applet_.init();
-                applet_.start();
-            }
-            catch (final ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Loading applet '" + appletClassName + "' failed\n"
-                            + "    " + e
-                            + "\n    Classpath:\n" + appletClassLoader.info());
-                }
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     /**

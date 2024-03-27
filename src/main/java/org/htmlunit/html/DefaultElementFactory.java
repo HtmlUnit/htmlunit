@@ -57,7 +57,7 @@ public class DefaultElementFactory implements ElementFactory {
      */
     public static final List<String> SUPPORTED_TAGS_ = Collections.unmodifiableList(Arrays.asList(
         KEYGEN_, HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
-        HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME,
+        HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlArea.TAG_NAME,
         HtmlArticle.TAG_NAME, HtmlAside.TAG_NAME, HtmlAudio.TAG_NAME,
         HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
         HtmlBidirectionalIsolation.TAG_NAME, HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME,
@@ -176,10 +176,6 @@ public class DefaultElementFactory implements ElementFactory {
 
             case HtmlAnchor.TAG_NAME:
                 element = new HtmlAnchor(qualifiedName, page, attributeMap);
-                break;
-
-            case HtmlApplet.TAG_NAME:
-                element = new HtmlApplet(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlArea.TAG_NAME:

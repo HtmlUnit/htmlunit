@@ -28,7 +28,6 @@ import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
-import org.htmlunit.html.HtmlApplet;
 import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlBreak;
 import org.htmlunit.html.HtmlCheckBoxInput;
@@ -113,10 +112,6 @@ public class HtmlSerializerNormalizedText {
             appendText(builder, (DomText) node);
         }
         else if (node instanceof DomComment) {
-            // nothing to do
-        }
-        else if (node instanceof HtmlApplet
-                && node.getPage().getWebClient().getOptions().isAppletEnabled()) {
             // nothing to do
         }
         else if (node instanceof HtmlBreak) {
