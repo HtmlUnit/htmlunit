@@ -62,13 +62,17 @@ public class ArchitectureTest {
         .that().haveNameMatching(".*Util.?")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.cssparser.util.ParserUtils")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.httpclient.util.HttpDateUtils")
+
         .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.AwtFontUtil")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.FontUtil")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.NoOpFontUtil")
 
         .and().doNotHaveFullyQualifiedName("org.htmlunit.csp.Utils")
 
-        .and().resideOutsideOfPackage("org.htmlunit.jetty..")
+        .and().resideOutsideOfPackage("org.htmlunit.jetty.util..")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.api.util.QuoteUtil")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.common.util.ReflectUtils")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.common.util.TextUtil")
 
         .should().resideInAPackage("org.htmlunit.util");
 
