@@ -68,7 +68,6 @@ public class BrowserVersionFeaturesTest  {
         browsers.add(BrowserVersion.EDGE);
         browsers.add(BrowserVersion.FIREFOX);
         browsers.add(BrowserVersion.FIREFOX_ESR);
-        browsers.add(BrowserVersion.INTERNET_EXPLORER);
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             int useCount = 0;

@@ -277,41 +277,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    public void firstChild_element_activeX() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    } catch (e) {\n"
-            + "      log('exception');\n"
-            + "      return;\n"
-            + "    }\n"
-            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    log(doc.firstChild.nodeName);\n"
-            + "    log(doc.documentElement.nodeName);\n"
-            + "  }\n"
-            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "</body></html>";
-
-        final String xml =
-               "<foo>\n"
-             + "    <foofoo name='first'>something</foofoo>\n"
-             + "    <foofoo name='second'>something else</foofoo>\n"
-             + "</foo>";
-
-        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"foo", "foo"})
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration() throws Exception {
@@ -325,43 +290,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String xml =
-               "<?xml version=\"1.0\"?>\n"
-             + "<foo>\n"
-             + "  <foofoo name='first'>something</foofoo>\n"
-             + "  <foofoo name='second'>something else</foofoo>\n"
-             + "</foo>";
-
-        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("exception")
-    // Xerces does not offer any way to access the XML declaration
-    public void firstChild_xmlDeclaration_activeX() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    } catch (e) {\n"
-            + "      log('exception');\n"
-            + "      return;\n"
-            + "    }\n"
-            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    log(doc.firstChild.nodeName);\n"
-            + "    log(doc.documentElement.nodeName);\n"
-            + "  }\n"
-            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -409,42 +337,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    public void firstChild_processingInstruction_activeX() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    } catch (e) {\n"
-            + "      log('exception');\n"
-            + "      return;\n"
-            + "    }\n"
-            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    log(doc.firstChild.nodeName);\n"
-            + "    log(doc.documentElement.nodeName);\n"
-            + "  }\n"
-            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "</body></html>";
-
-        final String xml =
-               "<?apache include file=\"header.html\" ?>\n"
-             + "<foo>\n"
-             + "  <foofoo name='first'>something</foofoo>\n"
-             + "  <foofoo name='second'>something else</foofoo>\n"
-             + "</foo>";
-
-        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"dtd", "a"})
     public void firstChild_documentType() throws Exception {
         final String html = "<html><head>\n"
@@ -472,38 +364,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    public void firstChild_documentType_activeX() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    } catch (e) {\n"
-            + "      log('exception');\n"
-            + "      return;\n"
-            + "    }\n"
-            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    log(doc.firstChild.nodeName);\n"
-            + "    log(doc.documentElement.nodeName);\n"
-            + "  }\n"
-            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String xml =
-              "<!DOCTYPE dtd [ <!ELEMENT a (b+)> <!ELEMENT b (#PCDATA)> ]>\n"
-            + "<a><b>1</b><b>2</b></a>";
-
-        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"#comment", "foo"})
     public void firstChild_comment() throws Exception {
         final String html = "<html><head>\n"
@@ -515,42 +375,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "</body></html>";
-
-        final String xml =
-              "<!--comment-->\n"
-            + "<foo>\n"
-            + "  <foofoo name='first'>something</foofoo>\n"
-            + "  <foofoo name='second'>something else</foofoo>\n"
-            + "</foo>";
-
-        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("exception")
-    public void firstChild_comment_activeX() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    } catch (e) {\n"
-            + "      log('exception');\n"
-            + "      return;\n"
-            + "    }\n"
-            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    log(doc.firstChild.nodeName);\n"
-            + "    log(doc.documentElement.nodeName);\n"
-            + "  }\n"
-            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";

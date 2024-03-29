@@ -14,18 +14,8 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.WebClient;
-import org.htmlunit.html.HtmlElement;
-import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.javascript.MockActiveXObject;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.junit.Test;
@@ -64,121 +54,6 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
             + "<body onload='test()'>\n"
             + "  <object id='id1' classid='" + clsid + "'></object>\n"
             + "</body></html>";
-
-        final WebClient client = getWebClientWithMockWebConnection();
-        final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid, "org.htmlunit.javascript.MockActiveXObject");
-        client.setActiveXObjectMap(activeXObjectMap);
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * Simple hack to proof, that a test driver can manipulate
-     * a activeX mock at runtime.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({})
-    public void activeXInteraction() throws Exception {
-        final String clsid = "clsid:TESTING-CLASS-ID";
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var obj = document.all.id1;\n"
-            + "    if (obj.GetMessage) {\n"
-            + "      alert(obj.GetMessage());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "  <object id='id1' classid='" + clsid + "'></object>\n"
-            + "  <button id='myButton' onClick='test()'>Click Me</button>\n"
-            + "</body></html>";
-
-        final WebClient client = getWebClientWithMockWebConnection();
-        final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid, "org.htmlunit.javascript.MockActiveXObject");
-        client.setActiveXObjectMap(activeXObjectMap);
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = loadPage(html);
-
-        page.getHtmlElementById("myButton").click();
-
-        final HtmlElement elem = page.getHtmlElementById("id1");
-        final HTMLObjectElement jsElem = (HTMLObjectElement) elem.getScriptableObject();
-        final MockActiveXObject activeX = (MockActiveXObject) jsElem.unwrap();
-        if (null != activeX) {
-            activeX.setMessage("ActiveX is still alive");
-            page.getHtmlElementById("myButton").click();
-        }
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"undefined", "string", "test"})
-    public void activeXUnknownProperty() throws Exception {
-        final String clsid = "clsid:TESTING-CLASS-ID";
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var obj = document.all.id1;\n"
-            + "    alert(typeof obj.unknown);\n"
-            + "    obj.unknown = 'test';\n"
-            + "    alert(typeof obj.unknown);\n"
-            + "    alert(obj.unknown);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test();'>\n"
-            + "  <object id='id1' classid='" + clsid + "'></object>\n"
-            + "</body></html>";
-
-        final WebClient client = getWebClientWithMockWebConnection();
-        final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid, "org.htmlunit.javascript.MockActiveXObject");
-        client.setActiveXObjectMap(activeXObjectMap);
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"undefined", "function", "test"})
-    public void activeXUnknownMethod() throws Exception {
-        final String clsid = "clsid:TESTING-CLASS-ID";
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var obj = document.all.id1;\n"
-            + "    alert(typeof obj.unknown);\n"
-            + "    obj.unknown = function() { return 'test'; };\n"
-            + "    alert(typeof obj.unknown);\n"
-            + "    alert(obj.unknown());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test();'>\n"
-            + "  <object id='id1' classid='" + clsid + "'></object>\n"
-            + "</body></html>";
-
-        final WebClient client = getWebClientWithMockWebConnection();
-        final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid, "org.htmlunit.javascript.MockActiveXObject");
-        client.setActiveXObjectMap(activeXObjectMap);
 
         loadPageWithAlerts(html);
     }

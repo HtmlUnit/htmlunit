@@ -60,15 +60,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    return xhttp.responseXML;\n"
             + "  }\n";
 
-    /** Helper. */
-    public static final String LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION = ""
-            + "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
-            + "    xhttp = new ActiveXObject(\"Microsoft.XMLHTTP\");\n"
-            + "    xhttp.open(\"GET\", file, false);\n"
-            + "    xhttp.send();\n"
-            + "    return xhttp.responseXML;\n"
-            + "  }\n";
-
     /**
      * Helper.
      * @param file the file parameter
@@ -109,12 +100,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
             + "    serializer = new XMLSerializer();\n"
             + "    return serializer.serializeToString(doc);\n"
-            + "  }\n";
-
-    /** Helper. */
-    public static final String SERIALIZE_ACTIVEX_XML_DOCUMENT_TO_STRING_FUNCTION = ""
-            + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
-            + "    return doc.xml;\n"
             + "  }\n";
 
     /**

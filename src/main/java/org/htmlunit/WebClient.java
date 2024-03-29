@@ -210,7 +210,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
     private ScriptPreProcessor scriptPreProcessor_;
 
-    private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
     private RefreshHandler refreshHandler_ = new NiceRefreshHandler(2);
     private JavaScriptErrorListener javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
 
@@ -1875,25 +1874,6 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public ScriptPreProcessor getScriptPreProcessor() {
         return scriptPreProcessor_;
-    }
-
-    /**
-     * Sets the active X object map for this {@link WebClient}. The <code>Map</code> is used to map the
-     * string passed into the <code>ActiveXObject</code> constructor to a java class name. Therefore
-     * you can emulate <code>ActiveXObject</code>s in a web page's JavaScript by mapping the object
-     * name to a java class to emulate the active X object.
-     * @param activeXObjectMap the new preprocessor or null if none is specified
-     */
-    public void setActiveXObjectMap(final Map<String, String> activeXObjectMap) {
-        activeXObjectMap_ = activeXObjectMap;
-    }
-
-    /**
-     * Returns the active X object map for this {@link WebClient}.
-     * @return the active X object map
-     */
-    public Map<String, String> getActiveXObjectMap() {
-        return activeXObjectMap_;
     }
 
     /**

@@ -3865,14 +3865,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    text += '  </html>\\n';\n"
             + "    text += '  </xsl:template>\\n';\n"
             + "    text += '</xsl:stylesheet>';\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async = false;\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
+
+            + "    var parser=new DOMParser();\n"
+            + "    var doc=parser.parseFromString(text,'text/xml');\n"
+
             + "    var elem = doc.documentElement.getElementsByTagName('html').item(0);\n"
             + "    log(elem.getAttribute('hi'));\n"
             + "    elem.setAttribute('hi', 'ho');\n"

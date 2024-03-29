@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import org.htmlunit.corejs.javascript.NativeJavaObject;
-import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Wrapper;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlObject;
@@ -34,9 +31,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlObject.class)
-public class HTMLObjectElement extends HTMLElement implements Wrapper {
-
-    private Scriptable wrappedActiveX_;
+public class HTMLObjectElement extends HTMLElement {
 
     /**
      * Creates an instance.
@@ -85,64 +80,6 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      */
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(final String name, final Scriptable start) {
-        // for java mocks do a bit more, we have handle unknown properties
-        // ourself
-        if (wrappedActiveX_ instanceof NativeJavaObject) {
-            final NativeJavaObject obj = (NativeJavaObject) wrappedActiveX_;
-            final Object result = obj.get(name, start);
-            if (Scriptable.NOT_FOUND != result) {
-                return result;
-            }
-            return super.get(name, start);
-        }
-
-        if (wrappedActiveX_ != null) {
-            return wrappedActiveX_.get(name, start);
-        }
-        return super.get(name, start);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void put(final String name, final Scriptable start, final Object value) {
-        // for java mocks do a bit more, we have handle unknown properties
-        // ourself
-        if (wrappedActiveX_ instanceof NativeJavaObject) {
-            if (wrappedActiveX_.has(name, start)) {
-                wrappedActiveX_.put(name, start, value);
-            }
-            else {
-                super.put(name, start, value);
-            }
-            return;
-        }
-
-        if (wrappedActiveX_ != null) {
-            wrappedActiveX_.put(name, start, value);
-            return;
-        }
-
-        super.put(name, start, value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object unwrap() {
-        if (wrappedActiveX_ instanceof Wrapper) {
-            return ((Wrapper) wrappedActiveX_).unwrap();
-        }
-        return wrappedActiveX_;
     }
 
     /**

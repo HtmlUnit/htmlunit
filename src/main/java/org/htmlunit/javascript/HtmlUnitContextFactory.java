@@ -17,7 +17,6 @@ package org.htmlunit.javascript;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 
 import java.io.Serializable;
-import java.util.Map;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ScriptException;
@@ -248,14 +247,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
         // make sure no java classes are usable from js
         cx.setClassShutter(fullClassName -> {
-            final  Map<String, String> activeXObjectMap = webClient_.getActiveXObjectMap();
-            if (activeXObjectMap != null) {
-                for (final String mappedClass : activeXObjectMap.values()) {
-                    if (fullClassName.equals(mappedClass)) {
-                        return true;
-                    }
-                }
-            }
             return false;
         });
 

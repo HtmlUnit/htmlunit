@@ -355,8 +355,7 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule corejsPackageRule = noClasses()
         .that()
-            .doNotHaveFullyQualifiedName("org.htmlunit.ProxyAutoConfig")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebConsole")
+            .doNotHaveFullyQualifiedName("org.htmlunit.WebConsole")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebConsole$1")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.ScriptException")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomElement")
@@ -364,10 +363,8 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog$1")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.util.WebClientUtils")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter")
 
             .and().resideOutsideOfPackage("org.htmlunit.javascript..")
-            .and().resideOutsideOfPackage("org.htmlunit.activex.javascript..")
 
             .and().resideOutsideOfPackage("org.htmlunit.corejs..")
         .should().dependOnClassesThat().resideInAnyPackage("org.htmlunit.corejs..");

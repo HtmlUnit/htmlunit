@@ -190,7 +190,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      *
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the ActiveXObject constructor
+     * @param args the arguments
      * @param ctorObj the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access

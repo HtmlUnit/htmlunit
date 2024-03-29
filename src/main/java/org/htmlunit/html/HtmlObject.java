@@ -261,7 +261,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
     }
 
     /**
-     * Initialize the ActiveX(Mock).
+     * Initialize the clsid.
      * {@inheritDoc}
      */
     @Override
