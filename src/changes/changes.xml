@@ -23,6 +23,9 @@
             </action>
 
             <action type="update" dev="rbri">
+                Refactor pac file support and add missing convert_addr() function support.
+            </action>
+            <action type="update" dev="rbri">
                 The EncodingSniffer now uses the StandardEncodingTranslator from neko.
             </action>
             <action type="update" dev="rbri">

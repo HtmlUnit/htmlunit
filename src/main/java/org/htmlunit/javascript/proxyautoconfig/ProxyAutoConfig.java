@@ -12,78 +12,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.javascript.proxyautoconfig;
 
-import java.lang.reflect.Method;
 import java.net.InetAddress;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.util.SubnetUtils;
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.NativeFunction;
-import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxFunction;
 
 /**
  * Provides an implementation of Proxy Auto-Config (PAC).
  *
- * @see <a href="http://lib.ru/WEBMASTER/proxy-live.txt">PAC file format</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/
+ * Proxy_Auto-Configuration_PAC_file">Proxy Auto-Configuration (PAC) file</a>
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public final class ProxyAutoConfig {
+@JsxClass
+public final class ProxyAutoConfig extends HtmlUnitScriptable {
+
     private static final String TIMEZONE_GMT = "GMT";
 
     private ProxyAutoConfig() {
-    }
-
-    /**
-     * Evaluates the <code>FindProxyForURL</code> method of the specified content.
-     * @param content the JavaScript content
-     * @param url the URL to be retrieved
-     * @return semicolon-separated result
-     */
-    public static String evaluate(final String content, final URL url) {
-        try (Context cx = Context.enter()) {
-            final ProxyAutoConfig config = new ProxyAutoConfig();
-            final ScriptableObject scope = cx.initSafeStandardObjects();
-
-            config.defineMethod("isPlainHostName", scope);
-            config.defineMethod("dnsDomainIs", scope);
-            config.defineMethod("localHostOrDomainIs", scope);
-            config.defineMethod("isResolvable", scope);
-            config.defineMethod("isInNet", scope);
-            config.defineMethod("dnsResolve", scope);
-            config.defineMethod("myIpAddress", scope);
-            config.defineMethod("dnsDomainLevels", scope);
-            config.defineMethod("shExpMatch", scope);
-            config.defineMethod("weekdayRange", scope);
-            config.defineMethod("dateRange", scope);
-            config.defineMethod("timeRange", scope);
-
-            cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}", "<init>", 1, null);
-            cx.evaluateString(scope, content, "<Proxy Auto-Config>", 1, null);
-
-            final Object[] functionArgs = {url.toExternalForm(), url.getHost()};
-            final NativeFunction f = (NativeFunction) scope.get("FindProxyForURL", scope);
-            final Object result = f.call(cx, scope, scope, functionArgs);
-            return JavaScriptEngine.toString(result);
-        }
-    }
-
-    private void defineMethod(final String methodName, final ScriptableObject scope) {
-        for (final Method method : getClass().getMethods()) {
-            if (method.getName().equals(methodName)) {
-                final FunctionObject functionObject = new FunctionObject(methodName, method, scope);
-                scope.defineProperty(methodName, functionObject, ScriptableObject.EMPTY);
-            }
-        }
     }
 
     /**
@@ -91,6 +49,7 @@ public final class ProxyAutoConfig {
      * @param host the hostname from the URL (excluding port number).
      * @return true if there is no domain name in the hostname (no dots).
      */
+    @JsxFunction
     public static boolean isPlainHostName(final String host) {
         return host.indexOf('.') == -1;
     }
@@ -101,6 +60,7 @@ public final class ProxyAutoConfig {
      * @param domain the domain name to test the hostname against
      * @return true if the domain of hostname matches.
      */
+    @JsxFunction
     public static boolean dnsDomainIs(final String host, final String domain) {
         return host.endsWith(domain);
     }
@@ -113,6 +73,7 @@ public final class ProxyAutoConfig {
      * @return true if the hostname matches exactly the specified hostname,
      * or if there is no domain name part in the hostname, but the unqualified hostname matches.
      */
+    @JsxFunction
     public static boolean localHostOrDomainIs(final String host, final String hostdom) {
         return host.length() > 1 && host.equals(hostdom) || host.indexOf('.') == -1 && hostdom.startsWith(host);
     }
@@ -122,6 +83,7 @@ public final class ProxyAutoConfig {
      * @param host the hostname from the URL.
      * @return true if the specific hostname is resolvable.
      */
+    @JsxFunction
     public static boolean isResolvable(final String host) {
         return dnsResolve(host) != null;
     }
@@ -135,6 +97,7 @@ public final class ProxyAutoConfig {
      * 0 means ignore, 255 means match
      * @return true if the IP address of the host matches the specified IP address pattern.
      */
+    @JsxFunction
     public static boolean isInNet(final String host, final String pattern, final String mask) {
         final String dnsResolve = dnsResolve(host);
         if (null == dnsResolve) {
@@ -150,6 +113,7 @@ public final class ProxyAutoConfig {
      * @param host the hostname to resolve
      * @return the resolved IP address
      */
+    @JsxFunction
     public static String dnsResolve(final String host) {
         try {
             return InetAddress.getByName(host).getHostAddress();
@@ -163,6 +127,7 @@ public final class ProxyAutoConfig {
      * Returns the IP address of the local host, as a string in the dot-separated integer format.
      * @return the IP address of the local host, as a string in the dot-separated integer format.
      */
+    @JsxFunction
     public static String myIpAddress() {
         try {
             return InetAddress.getLocalHost().getHostAddress();
@@ -177,6 +142,7 @@ public final class ProxyAutoConfig {
      * @param host the hostname from the URL
      * @return the number (integer) of DNS domain levels (number of dots) in the hostname.
      */
+    @JsxFunction
     public static int dnsDomainLevels(final String host) {
         int levels = 0;
         for (int i = host.length() - 1; i >= 0; i--) {
@@ -193,6 +159,7 @@ public final class ProxyAutoConfig {
      * @param shexp the shell expression
      * @return if the string matches
      */
+    @JsxFunction
     public static boolean shExpMatch(final String str, final String shexp) {
         final String regexp = shexp.replace(".", "\\.").replace("*", ".*").replace("?", ".");
         return str.matches(regexp);
@@ -205,6 +172,7 @@ public final class ProxyAutoConfig {
      * @param gmt string of "GMT", or not specified
      * @return if today is in range
      */
+    @JsxFunction
     public static boolean weekdayRange(final String wd1, Object wd2, final Object gmt) {
         TimeZone timezone = TimeZone.getDefault();
         if (TIMEZONE_GMT.equals(JavaScriptEngine.toString(gmt))
@@ -240,6 +208,7 @@ public final class ProxyAutoConfig {
      * @param value7 the value 7
      * @return if today is in range
      */
+    @JsxFunction
     public static boolean dateRange(final String value1, final Object value2, final Object value3,
             final Object value4, final Object value5, final Object value6, final Object value7) {
         final Object[] values = {value1, value2, value3, value4, value5, value6, value7};
@@ -390,6 +359,7 @@ public final class ProxyAutoConfig {
      * @param value7 the value 7
      * @return if the time now is in the range
      */
+    @JsxFunction
     public static boolean timeRange(final String value1, final Object value2, final Object value3,
             final Object value4, final Object value5, final Object value6, final Object value7) {
         final Object[] values = {value1, value2, value3, value4, value5, value6, value7};
@@ -468,5 +438,22 @@ public final class ProxyAutoConfig {
             calendar.set(Calendar.SECOND, second);
         }
         return calendar;
+    }
+
+    /**
+     * Concatenates the four dot-separated bytes into one 4-byte word and converts it to decimal.
+     * @param ip any dotted address such as an IP address or mask.
+     * @return concatenates the four dot-separated bytes into one 4-byte word and converts it to decimal.
+     */
+    @JsxFunction(functionName = "convert_addr")
+    public static long convertAddr(final String ip) {
+        final String[] parts = StringUtils.split(ip, '.');
+
+        final int result =
+                    ((Integer.parseInt(parts[0]) & 0xff) << 24)
+                        | ((Integer.parseInt(parts[1]) & 0xff) << 16)
+                        | ((Integer.parseInt(parts[2]) & 0xff) << 8)
+                        | (Integer.parseInt(parts[3]) & 0xff);
+        return result;
     }
 }

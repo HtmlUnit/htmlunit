@@ -1522,7 +1522,7 @@ public class WebClient implements Serializable, AutoCloseable {
                             .getWebResponse().getContentAsString();
                         proxyConfig.setProxyAutoConfigContent(content);
                     }
-                    final String allValue = ProxyAutoConfig.evaluate(content, url);
+                    final String allValue = JavaScriptEngine.evaluateProxyAutoConfig(getBrowserVersion(), content, url);
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("Proxy Auto-Config: value '" + allValue + "' for URL " + url);
                     }

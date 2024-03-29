@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -52,6 +53,7 @@ import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.NativeConsole;
+import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.RhinoException;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
@@ -68,6 +70,7 @@ import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import org.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import org.htmlunit.javascript.configuration.ProxyAutoConfigJavaScriptConfiguration;
 import org.htmlunit.javascript.host.ConsoleCustom;
 import org.htmlunit.javascript.host.DateCustom;
 import org.htmlunit.javascript.host.NumberCustom;
@@ -564,7 +567,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     private static void configureFunctions(final ClassConfiguration config, final ScriptableObject scriptable) {
-        final int attributes = ScriptableObject.EMPTY;
         // the functions
         final Map<String, Method> functionMap = config.getFunctionMap();
         if (functionMap != null) {
@@ -572,7 +574,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final String functionName = functionInfo.getKey();
                 final Method method = functionInfo.getValue();
                 final FunctionObject functionObject = new FunctionObject(functionName, method, scriptable);
-                scriptable.defineProperty(functionName, functionObject, attributes);
+                scriptable.defineProperty(functionName, functionObject, ScriptableObject.EMPTY);
             }
         }
     }
@@ -1401,5 +1403,33 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         };
 
         return (String) factory.call(action);
+    }
+
+    /**
+     * Evaluates the <code>FindProxyForURL</code> method of the specified content.
+     * @param browserVersion the browser version to use
+     * @param content the JavaScript content
+     * @param url the URL to be retrieved
+     * @return semicolon-separated result
+     */
+    public static String evaluateProxyAutoConfig(final BrowserVersion browserVersion, final String content, final URL url) {
+        try (Context cx = Context.enter()) {
+            final ProxyAutoConfigJavaScriptConfiguration jsConfig =
+                    ProxyAutoConfigJavaScriptConfiguration.getInstance(browserVersion);
+
+            final ScriptableObject scope = cx.initSafeStandardObjects();
+
+            for (final ClassConfiguration config : jsConfig.getAll()) {
+                configureFunctions(config, scope);
+            }
+
+            cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}", "<init>", 1, null);
+            cx.evaluateString(scope, content, "<Proxy Auto-Config>", 1, null);
+
+            final Object[] functionArgs = {url.toExternalForm(), url.getHost()};
+            final NativeFunction f = (NativeFunction) scope.get("FindProxyForURL", scope);
+            final Object result = f.call(cx, scope, scope, functionArgs);
+            return toString(result);
+        }
     }
 }
