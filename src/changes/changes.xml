@@ -26,6 +26,9 @@
             </action>
 
             <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.16.0.
+            </action>
+            <action type="update" dev="rbri">
                 Refactor pac file support and add missing convert_addr() function support.
             </action>
             <action type="update" dev="rbri">
