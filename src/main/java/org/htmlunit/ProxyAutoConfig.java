@@ -26,7 +26,6 @@ import org.apache.commons.net.util.SubnetUtils;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeFunction;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.JavaScriptEngine;
 
@@ -53,7 +52,7 @@ public final class ProxyAutoConfig {
     public static String evaluate(final String content, final URL url) {
         try (Context cx = Context.enter()) {
             final ProxyAutoConfig config = new ProxyAutoConfig();
-            final Scriptable scope = cx.initSafeStandardObjects();
+            final ScriptableObject scope = cx.initSafeStandardObjects();
 
             config.defineMethod("isPlainHostName", scope);
             config.defineMethod("dnsDomainIs", scope);
@@ -70,20 +69,19 @@ public final class ProxyAutoConfig {
 
             cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}", "<init>", 1, null);
             cx.evaluateString(scope, content, "<Proxy Auto-Config>", 1, null);
-            final Object[] functionArgs = {url.toExternalForm(), url.getHost()};
-            final Object fObj = scope.get("FindProxyForURL", scope);
 
-            final NativeFunction f = (NativeFunction) fObj;
+            final Object[] functionArgs = {url.toExternalForm(), url.getHost()};
+            final NativeFunction f = (NativeFunction) scope.get("FindProxyForURL", scope);
             final Object result = f.call(cx, scope, scope, functionArgs);
             return JavaScriptEngine.toString(result);
         }
     }
 
-    private void defineMethod(final String methodName, final Scriptable scope) {
+    private void defineMethod(final String methodName, final ScriptableObject scope) {
         for (final Method method : getClass().getMethods()) {
             if (method.getName().equals(methodName)) {
                 final FunctionObject functionObject = new FunctionObject(methodName, method, scope);
-                ((ScriptableObject) scope).defineProperty(methodName, functionObject, ScriptableObject.EMPTY);
+                scope.defineProperty(methodName, functionObject, ScriptableObject.EMPTY);
             }
         }
     }

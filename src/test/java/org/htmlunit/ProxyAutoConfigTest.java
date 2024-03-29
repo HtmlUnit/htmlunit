@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,6 +28,7 @@ import org.junit.Test;
  * Tests for the {@link ProxyAutoConfig}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class ProxyAutoConfigTest extends SimpleWebTestCase {
 
@@ -95,6 +98,37 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
                 undefined, undefined, undefined, undefined, undefined, undefined));
         assertFalse(ProxyAutoConfig.timeRange(String.valueOf(after),
                 undefined, undefined, undefined, undefined, undefined, undefined));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void simple() {
+        final String content = "function FindProxyForURL(url, host) { "
+                + "return \"PROXY proxy.example.com:8080; DIRECT\"; }";
+        final String value = ProxyAutoConfig.evaluate(content, URL_FIRST);
+        assertEquals("PROXY proxy.example.com:8080; DIRECT", value);
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
+    public void someConditions() throws MalformedURLException {
+        final String content = "function FindProxyForURL(url, host) {\n"
+                + "   if (shExpMatch(host,\"*.example.com\")) {\n"
+                + "      return \"DIRECT\";\n"
+                + "   }\n"
+
+                + "   return \"PROXY proxy.example.com:8000; DIRECT\";\n"
+                + "}";
+
+        String value = ProxyAutoConfig.evaluate(content, new URL("ftp://www.example.com"));
+        assertEquals("DIRECT", value);
+
+        value = ProxyAutoConfig.evaluate(content, new URL("ftp://example.com"));
+        assertEquals("PROXY proxy.example.com:8000; DIRECT", value);
     }
 
     /**
