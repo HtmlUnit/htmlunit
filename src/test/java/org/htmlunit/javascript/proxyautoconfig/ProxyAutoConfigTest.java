@@ -120,11 +120,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void someConditions() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (shExpMatch(host,\"*.example.com\")) {\n"
-                + "      return \"DIRECT\";\n"
-                + "   }\n"
+                + "  if (shExpMatch(host,\"*.example.com\")) {\n"
+                + "    return \"DIRECT\";\n"
+                + "  }\n"
 
-                + "   return \"PROXY proxy.example.com:8000; DIRECT\";\n"
+                + "  return \"PROXY proxy.example.com:8000; DIRECT\";\n"
                 + "}";
 
         String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -180,11 +180,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void isPlainHostNameFalse() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (isPlainHostName('www.mozilla.org')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (isPlainHostName('www.mozilla.org')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -198,11 +198,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void isPlainHostNameTrue() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (isPlainHostName('www')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (isPlainHostName('www')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -216,11 +216,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void dnsDomainIsFalse() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (dnsDomainIs('www', '.mozilla.org')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (dnsDomainIs('www', '.mozilla.org')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -234,11 +234,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void dnsDomainIsTrue() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (dnsDomainIs('www.mozilla.org', '.mozilla.org')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (dnsDomainIs('www.mozilla.org', '.mozilla.org')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -252,9 +252,9 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void localHostOrDomainIsFalseDomain() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (localHostOrDomainIs('www.google.com', 'www.mozilla.org')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (localHostOrDomainIs('www.google.com', 'www.mozilla.org')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
                 + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
@@ -270,11 +270,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void localHostOrDomainIsFalseHostname() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (localHostOrDomainIs('home.mozilla.org', 'www.mozilla.org')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (localHostOrDomainIs('home.mozilla.org', 'www.mozilla.org')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -288,11 +288,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void localHostOrDomainIsTrue() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (localHostOrDomainIs('www.mozilla.org', 'www.mozilla.org')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (localHostOrDomainIs('www.mozilla.org', 'www.mozilla.org')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -306,11 +306,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void localHostOrDomainIsTrueNoDomain() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (localHostOrDomainIs('www', 'www.mozilla.org')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (localHostOrDomainIs('www', 'www.mozilla.org')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -324,11 +324,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void isResolvableFalse() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (isResolvable('A17.2547876535.817')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (isResolvable('A17.2547876535.817')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -342,11 +342,11 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void isResolvableTrue() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   if (isResolvable('www.mozilla.org')) {\n"
-                + "      return 'DIRECT';\n"
-                + "   }\n"
+                + "  if (isResolvable('www.mozilla.org')) {\n"
+                + "    return 'DIRECT';\n"
+                + "  }\n"
 
-                + "   return 'PROXY proxy.example.com:8000; DIRECT';\n"
+                + "  return 'PROXY proxy.example.com:8000; DIRECT';\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -360,7 +360,7 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void dnsResolve() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   return dnsResolve('www.wetator.org');\n"
+                + "  return dnsResolve('www.wetator.org');\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -374,7 +374,7 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void convertAddr() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   return convert_addr('192.0.2.172');\n"
+                + "  return convert_addr('192.0.2.172');\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,
@@ -388,7 +388,7 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void myIpAddress() throws MalformedURLException {
         final String content = "function FindProxyForURL(url, host) {\n"
-                + "   return myIpAddress();\n"
+                + "  return myIpAddress();\n"
                 + "}";
 
         final String value = JavaScriptEngine.evaluateProxyAutoConfig(BrowserVersion.CHROME,

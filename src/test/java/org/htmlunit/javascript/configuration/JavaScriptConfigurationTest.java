@@ -140,7 +140,8 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 }
                 if ("org.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())
                         || "Reflect".equals(klass.getSimpleName())
-                        || "DedicatedWorkerGlobalScope".equals(klass.getSimpleName())) {
+                        || "DedicatedWorkerGlobalScope".equals(klass.getSimpleName())
+                        || "ProxyAutoConfig".equals(klass.getSimpleName())) {
                     continue;
                 }
                 if (klass.getAnnotation(JsxClasses.class) != null) {
@@ -307,7 +308,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         test(browserVersion);
     }
 
-    private void test(final BrowserVersion browserVersion) throws IOException {
+    private static void test(final BrowserVersion browserVersion) throws IOException {
         try (WebClient webClient = new WebClient(browserVersion)) {
             final MockWebConnection conn = new MockWebConnection();
             conn.setDefaultResponse("<html><body onload='document.body.firstChild'></body></html>");
