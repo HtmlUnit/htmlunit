@@ -47,7 +47,6 @@ MozTransitionDelay
 MozTransitionDuration
 MozTransitionProperty
 MozTransitionTimingFunction
-MozUserFocus
 MozUserInput
 MozUserModify
 MozUserSelect
@@ -523,6 +522,8 @@ textTransform
 textUnderlineOffset
 textUnderlinePosition
 textWrap
+textWrapMode
+textWrapStyle
 top
 touchAction
 transform
@@ -611,6 +612,7 @@ webkitTransitionProperty
 webkitTransitionTimingFunction
 webkitUserSelect
 whiteSpace
+whiteSpaceCollapse
 width
 willChange
 wordBreak

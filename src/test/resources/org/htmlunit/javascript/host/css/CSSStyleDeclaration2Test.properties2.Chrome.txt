@@ -156,6 +156,7 @@ display
 dominantBaseline
 emptyCells
 fallback
+fieldSizing
 fill
 fillOpacity
 fillRule
@@ -426,6 +427,7 @@ textOverflow
 textRendering
 textShadow
 textSizeAdjust
+textSpacingTrim
 textTransform
 textUnderlineOffset
 textUnderlinePosition
