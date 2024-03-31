@@ -84,7 +84,7 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(122, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(124, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 115;
 
@@ -246,8 +246,8 @@ public final class BrowserVersion implements Serializable {
         CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
-        CHROME.secClientHintUserAgentHeader_ = "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\""
-                        + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
+        CHROME.secClientHintUserAgentHeader_ = "\"Google Chrome\";v=\""
+                        + CHROME.getBrowserVersionNumeric() + "\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\""
                         + CHROME.getBrowserVersionNumeric() + "\"";
         CHROME.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
@@ -292,8 +292,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
-        EDGE.secClientHintUserAgentHeader_ = "\"Not A(Brand\";v=\"99\", \"Microsoft Edge\";v=\""
-                            + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
+        EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\""
+                            + EDGE.getBrowserVersionNumeric() + "\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\""
                             + EDGE.getBrowserVersionNumeric() + "\"";
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,

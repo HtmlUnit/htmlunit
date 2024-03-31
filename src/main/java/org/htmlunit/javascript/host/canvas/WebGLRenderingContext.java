@@ -430,9 +430,15 @@ public class WebGLRenderingContext extends HtmlUnitScriptable {
     /** The constant {@code RGBA4}. */
     @JsxConstant
     public static final int RGBA4 = 0x8056;
+    /** The constant {@code RGB8}. */
+    @JsxConstant({CHROME, EDGE})
+    public static final int RGB8 = 0x8051;
     /** The constant {@code RGB5_A1}. */
     @JsxConstant
     public static final int RGB5_A1 = 0x8057;
+    /** The constant {@code RGBA8}. */
+    @JsxConstant({CHROME, EDGE})
+    public static final int RGBA8 = 0x8058;
     /** The constant {@code TEXTURE_BINDING_2D}. */
     @JsxConstant
     public static final int TEXTURE_BINDING_2D = 0x8069;
