@@ -98,9 +98,7 @@ public class ExternalTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: 0"},
-            FF = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"},
-            FF_ESR = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
+    @Alerts({"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
     public void isSearchProviderInstalled() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
