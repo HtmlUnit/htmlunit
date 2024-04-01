@@ -14130,7 +14130,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),content[GCE],shadowRootDelegatesFocus[GSCE],shadowRootMode[GSCE]",
             FF_ESR = "constructor(),content[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),content[GCE]",
-            EDGE = "constructor(),content[GCE]")
+            EDGE = "constructor(),content[GCE]",
+            FF = "constructor(),content[GCE]")
     public void template() throws Exception {
         test("template");
     }

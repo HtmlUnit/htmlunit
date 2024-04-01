@@ -3337,7 +3337,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "content,shadowRootDelegatesFocus,shadowRootMode",
             FF_ESR = "content")
     @HtmlUnitNYI(CHROME = "content",
-            EDGE = "content")
+            EDGE = "content",
+            FF = "content")
     public void template() throws Exception {
         test("template");
     }
@@ -6836,7 +6837,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "containIntrinsicBlockSize,"
                 + "containIntrinsicHeight,containIntrinsicInlineSize,containIntrinsicSize,containIntrinsicWidth,"
                 + "content,contentVisibility,counterIncrement,counterReset,counterSet,cssFloat,cssText,cursor,cx,cy,"
-                + "d,descentOverride,direction,display,dominantBaseline,emptyCells,fallback,fill,fillOpacity,"
+                + "d,descentOverride,direction,display,dominantBaseline,emptyCells,fallback,"
+                + "fieldSizing,fill,fillOpacity,"
                 + "fillRule,filter,flex,flexBasis,flexDirection,flexFlow,flexGrow,flexShrink,flexWrap,float,"
                 + "floodColor,floodOpacity,font,fontDisplay,fontFamily,fontFeatureSettings,fontKerning,"
                 + "fontOpticalSizing,fontPalette,fontSize,fontStretch,fontStyle,fontSynthesis,"
@@ -6881,8 +6883,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "system,tableLayout,tabSize,textAlign,textAlignLast,textAnchor,textCombineUpright,textDecoration,"
                 + "textDecorationColor,textDecorationLine,textDecorationSkipInk,textDecorationStyle,"
                 + "textDecorationThickness,textEmphasis,textEmphasisColor,textEmphasisPosition,textEmphasisStyle,"
-                + "textIndent,textOrientation,textOverflow,textRendering,textShadow,textSizeAdjust,textTransform,"
-                + "textUnderlineOffset,textUnderlinePosition,textWrap,timelineScope,"
+                + "textIndent,textOrientation,textOverflow,textRendering,textShadow,textSizeAdjust,textSpacingTrim,"
+                + "textTransform,textUnderlineOffset,textUnderlinePosition,textWrap,timelineScope,"
                 + "top,touchAction,transform,transformBox,transformOrigin,"
                 + "transformStyle,transition,transitionBehavior,transitionDelay,transitionDuration,transitionProperty,"
                 + "transitionTimingFunction,translate,"
@@ -6958,7 +6960,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "container,containerName,containerType,containIntrinsicBlockSize,"
                 + "containIntrinsicHeight,containIntrinsicInlineSize,containIntrinsicSize,containIntrinsicWidth,"
                 + "content,contentVisibility,counterIncrement,counterReset,counterSet,cssFloat,cssText,cursor,cx,cy,"
-                + "d,descentOverride,direction,display,dominantBaseline,emptyCells,fallback,fill,fillOpacity,"
+                + "d,descentOverride,direction,display,dominantBaseline,emptyCells,fallback,"
+                + "fieldSizing,fill,fillOpacity,"
                 + "fillRule,filter,flex,flexBasis,flexDirection,flexFlow,flexGrow,flexShrink,flexWrap,float,"
                 + "floodColor,floodOpacity,font,fontDisplay,fontFamily,fontFeatureSettings,fontKerning,"
                 + "fontOpticalSizing,fontPalette,fontSize,fontStretch,fontStyle,fontSynthesis,"
@@ -7003,8 +7006,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "system,tableLayout,tabSize,textAlign,textAlignLast,textAnchor,textCombineUpright,textDecoration,"
                 + "textDecorationColor,textDecorationLine,textDecorationSkipInk,textDecorationStyle,"
                 + "textDecorationThickness,textEmphasis,textEmphasisColor,textEmphasisPosition,textEmphasisStyle,"
-                + "textIndent,textOrientation,textOverflow,textRendering,textShadow,textSizeAdjust,textTransform,"
-                + "textUnderlineOffset,textUnderlinePosition,textWrap,timelineScope,"
+                + "textIndent,textOrientation,textOverflow,textRendering,textShadow,textSizeAdjust,textSpacingTrim,"
+                + "textTransform,textUnderlineOffset,textUnderlinePosition,textWrap,timelineScope,"
                 + "top,touchAction,transform,transformBox,transformOrigin,"
                 + "transformStyle,transition,transitionBehavior,transitionDelay,transitionDuration,transitionProperty,"
                 + "transitionTimingFunction,translate,"
@@ -7062,7 +7065,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "-moz-padding-start,-moz-perspective,-moz-perspective-origin,-moz-tab-size,-moz-text-size-adjust,"
                 + "-moz-transform,-moz-transform-origin,-moz-transform-style,-moz-transition,-moz-transition-delay,"
                 + "-moz-transition-duration,-moz-transition-property,-moz-transition-timing-function,"
-                + "-moz-user-focus,-moz-user-input,-moz-user-modify,-moz-user-select,-moz-window-dragging,"
+                + "-moz-user-input,-moz-user-modify,-moz-user-select,-moz-window-dragging,"
                 + "-webkit-align-content,-webkit-align-items,-webkit-align-self,-webkit-animation,"
                 + "-webkit-animation-delay,-webkit-animation-direction,-webkit-animation-duration,"
                 + "-webkit-animation-fill-mode,-webkit-animation-iteration-count,-webkit-animation-name,"
@@ -7189,7 +7192,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "MozForceBrokenImageIcon,MozHyphens,MozMarginEnd,MozMarginStart,MozOrient,"
                 + "MozPaddingEnd,MozPaddingStart,MozPerspective,MozPerspectiveOrigin,MozTabSize,MozTextSizeAdjust,"
                 + "MozTransform,MozTransformOrigin,MozTransformStyle,MozTransition,MozTransitionDelay,"
-                + "MozTransitionDuration,MozTransitionProperty,MozTransitionTimingFunction,MozUserFocus,"
+                + "MozTransitionDuration,MozTransitionProperty,MozTransitionTimingFunction,"
                 + "MozUserInput,MozUserModify,MozUserSelect,MozWindowDragging,object-fit,object-position,objectFit,"
                 + "objectPosition,offset,offset-anchor,offset-distance,"
                 + "offset-path,offset-position,offset-rotate,offsetAnchor,"
@@ -7236,11 +7239,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "text-decoration-thickness,text-emphasis,text-emphasis-color,text-emphasis-position,"
                 + "text-emphasis-style,text-indent,text-justify,text-orientation,text-overflow,text-rendering,"
                 + "text-shadow,text-transform,text-underline-offset,text-underline-position,text-wrap,"
-                + "textAlign,textAlignLast,"
+                + "text-wrap-mode,text-wrap-style,textAlign,textAlignLast,"
                 + "textAnchor,textCombineUpright,textDecoration,textDecorationColor,textDecorationLine,"
                 + "textDecorationSkipInk,textDecorationStyle,textDecorationThickness,textEmphasis,textEmphasisColor,"
                 + "textEmphasisPosition,textEmphasisStyle,textIndent,textJustify,textOrientation,textOverflow,"
-                + "textRendering,textShadow,textTransform,textUnderlineOffset,textUnderlinePosition,textWrap,top,"
+                + "textRendering,textShadow,textTransform,textUnderlineOffset,textUnderlinePosition,textWrap,"
+                + "textWrapMode,textWrapStyle,top,"
                 + "touch-action,touchAction,transform,transform-box,transform-origin,transform-style,transformBox,"
                 + "transformOrigin,transformStyle,transition,transition-delay,transition-duration,"
                 + "transition-property,transition-timing-function,transitionDelay,transitionDuration,"
@@ -7279,7 +7283,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitTransformStyle,WebkitTransition,webkitTransition,WebkitTransitionDelay,"
                 + "webkitTransitionDelay,WebkitTransitionDuration,webkitTransitionDuration,WebkitTransitionProperty,"
                 + "webkitTransitionProperty,WebkitTransitionTimingFunction,webkitTransitionTimingFunction,"
-                + "WebkitUserSelect,webkitUserSelect,white-space,whiteSpace,width,will-change,willChange,word-break,"
+                + "WebkitUserSelect,webkitUserSelect,white-space,white-space-collapse,"
+                + "whiteSpace,whiteSpaceCollapse,width,will-change,willChange,word-break,"
                 + "word-spacing,word-wrap,wordBreak,wordSpacing,wordWrap,writing-mode,writingMode,x,y,z-index,"
                 + "zIndex",
             FF_ESR = "-moz-animation,-moz-animation-delay,-moz-animation-direction,-moz-animation-duration,"

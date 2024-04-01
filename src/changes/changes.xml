@@ -26,6 +26,12 @@
             </action>
 
             <action type="update" dev="rbri">
+                Chrome/Edge 123.
+            </action>
+            <action type="update" dev="rbri">
+                Firefox 124.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.16.0.
             </action>
             <action type="update" dev="rbri">

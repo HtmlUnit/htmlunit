@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
@@ -62,9 +61,6 @@ public class External extends HtmlUnitScriptable {
      */
     @JsxFunction(functionName = "IsSearchProviderInstalled")
     public Object isSearchProviderInstalled() {
-        if (getBrowserVersion().hasFeature(JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO)) {
-            return 0;
-        }
         return JavaScriptEngine.Undefined;
     }
 }

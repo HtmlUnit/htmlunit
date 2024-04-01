@@ -148,6 +148,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "gzip, deflate, br",
             CHROME = "gzip, deflate, br, zstd",
             EDGE = "gzip, deflate, br, zstd")
+    @HtmlUnitNYI(CHROME = "gzip, deflate, br",
+            EDGE = "gzip, deflate, br")
     public void acceptEncoding() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
@@ -388,6 +390,38 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-Mode: navigate",
                       "Sec-Fetch-Site: same-origin",
                       "Sec-Fetch-User: ?1"})
+    @HtmlUnitNYI(CHROME = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
+                           "Host: localhost:§§PORT§§",
+                           "Connection: keep-alive",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
+                           "sec-ch-ua-mobile: ?0",
+                           "sec-ch-ua-platform: \"Windows\"",
+                           "Upgrade-Insecure-Requests: 1",
+                           "User-Agent: §§USER_AGENT§§",
+                           "Accept: §§ACCEPT§§",
+                           "Sec-Fetch-Site: same-origin",
+                           "Sec-Fetch-Mode: navigate",
+                           "Sec-Fetch-User: ?1",
+                           "Sec-Fetch-Dest: document",
+                           "Referer: http://localhost:§§PORT§§/",
+                           "Accept-Encoding: gzip, deflate, br",
+                           "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-User: ?1",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"})
     public void formGet() throws Exception {
         String html = "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"

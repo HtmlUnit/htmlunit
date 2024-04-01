@@ -3010,10 +3010,10 @@ public final class StyleAttributes implements Serializable {
         TEXT_SHADOW_("text-shadow", "text-shadow", ffNone()),
 
         /** The style property {@code textSizeAdjust}. */
-        TEXT_SPACING_TRIM("textSpacingTrim", "text-spacing-trim", chromeAndEdgeNormal()),
-
-        /** The style property {@code textSizeAdjust}. */
         TEXT_SIZE_ADJUST("textSizeAdjust", "text-size-adjust", chromeAndEdgeAuto()),
+
+        /** The style property {@code textSpacingTrim}. */
+        TEXT_SPACING_TRIM("textSpacingTrim", "text-spacing-trim", chromeAndEdgeNormal()),
 
         /** The style property {@code textTransform}. */
         TEXT_TRANSFORM("textTransform", "text-transform", chromeAndEdgeNone(), ffNone()),
@@ -4126,7 +4126,7 @@ public final class StyleAttributes implements Serializable {
         WHITE_SPACE_COLLAPSE("whiteSpaceCollapse", "white-space-collapse",
                 chromeAndEdge("collapse"), ffLatest("collapse")),
 
-        /** The style property {@code whiteSpaceCollapse}. */
+        /** The style property {@code white-space-collapse}. */
         WHITE_SPACE_COLLAPSE_("white-space-collapse", "white-space-collapse",
                 ffLatest("collapse")),
 

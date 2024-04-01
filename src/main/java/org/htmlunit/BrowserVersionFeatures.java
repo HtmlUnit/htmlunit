@@ -303,7 +303,7 @@ public enum BrowserVersionFeatures {
 
     /** do not trigger the onload event if the frame content
      * was not shown because of the csp. */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature(FF_ESR)
     JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY,
 
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
@@ -351,10 +351,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
-
-    /** Indicates that isSearchProviderInstalled returns zero instead of undefined. */
-    @BrowserFeature({CHROME, EDGE})
-    JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO,
 
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})
