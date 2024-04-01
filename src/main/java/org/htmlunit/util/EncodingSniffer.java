@@ -455,8 +455,8 @@ public final class EncodingSniffer {
                 i += META_START.length;
                 for (Attribute att = getAttribute(bytes, i); att != null; att = getAttribute(bytes, i)) {
                     i = att.getUpdatedIndex();
-                    final String name = att.getName();
-                    final String value = att.getValue();
+                    final String name = att.getName().toLowerCase(Locale.ROOT);
+                    final String value = att.getValue().toLowerCase(Locale.ROOT);
                     if ("charset".equals(name) || "content".equals(name)) {
                         Charset charset = null;
                         if ("charset".equals(name)) {
