@@ -764,9 +764,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            CHROME = {"loaded", "null"},
-            EDGE = {"loaded", "null"})
+    @Alerts(DEFAULT = {"loaded", "null"},
+            FF_ESR = "null")
     public void csp_None() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'none';"),
@@ -810,9 +809,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            CHROME = {"loaded", "null"},
-            EDGE = {"loaded", "null"})
+    @Alerts(DEFAULT = {"loaded", "null"},
+            FF_ESR = "null")
     public void csp_UrlDifferentPort() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
@@ -823,9 +821,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            CHROME = {"loaded", "null"},
-            EDGE = {"loaded", "null"})
+    @Alerts(DEFAULT = {"loaded", "null"},
+            FF_ESR = "null")
     public void csp_many() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY,

@@ -716,7 +716,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             EDGE = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                     "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
             FF = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                  "foo:||||||blabla", "p:||||||", "p:||||||/", "p:||||||/TeMp"},
+                  "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"},
             FF_ESR = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                       "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"})
     public void propertiesNonStandardHref() throws Exception {
