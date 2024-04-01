@@ -14,6 +14,9 @@
  */
 package org.htmlunit.javascript.host.canvas;
 
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
