@@ -479,14 +479,14 @@ public class Event extends HtmlUnitScriptable {
     @JsxConstant({FF, FF_ESR})
     public static final int META_MASK = 0x8;
 
-    private Object srcElement_;        // IE-only writable equivalent of target.
+    private Object srcElement_;        // writable equivalent of target.
     private EventTarget target_;       // W3C standard read-only equivalent of srcElement.
     private Scriptable currentTarget_; // Changes during event capturing and bubbling.
     private String type_ = "";         // The event type.
     private int keyCode_;              // Key code for a keypress
-    private boolean shiftKey_;         // Exposed here in IE, only in mouse events in FF.
-    private boolean ctrlKey_;          // Exposed here in IE, only in mouse events in FF.
-    private boolean altKey_;           // Exposed here in IE, only in mouse events in FF.
+    private boolean shiftKey_;
+    private boolean ctrlKey_;
+    private boolean altKey_;
     private String propertyName_;
     private boolean stopPropagation_;
     private boolean stopImmediatePropagation_;
@@ -945,8 +945,7 @@ public class Event extends HtmlUnitScriptable {
 
     /**
      * Returns {@code true} if this event has been aborted via <code>preventDefault()</code> in
-     * standards-compliant browsers, or via the event's <code>returnValue</code> property in IE, or
-     * by the event handler returning {@code false}.
+     * standards-compliant browsers
      *
      * @param result the event handler result (if {@code false}, the event is considered aborted)
      * @return {@code true} if this event has been aborted

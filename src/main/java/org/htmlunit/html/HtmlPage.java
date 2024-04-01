@@ -2506,8 +2506,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
      *
-     * <p>Returns the page's current selection ranges. Note that some browsers, like IE, only allow
-     * a single selection at a time.</p>
+     * <p>Returns the page's current selection ranges.</p>
      *
      * @return the page's current selection ranges
      */

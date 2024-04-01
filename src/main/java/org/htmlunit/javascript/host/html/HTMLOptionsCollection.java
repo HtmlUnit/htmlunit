@@ -100,13 +100,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     }
 
     /**
-     * <p>If IE is emulated, and this class does not have the specified property, and the owning
-     * select *does* have the specified property, this method delegates the call to the parent
-     * select element.</p>
-     *
-     * @param name {@inheritDoc}
-     * @param start {@inheritDoc}
-     * @param value {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void put(final String name, final Scriptable start, final Object value) {

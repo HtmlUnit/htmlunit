@@ -163,7 +163,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
 
     /**
      * Deletes the cell at the specified index in the element's cells collection. If the index
-     * is -1 (or while simulating IE, when there is no index specified), then the last cell is deleted.
+     * is -1, then the last cell is deleted.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536406.aspx">MSDN Documentation</a>
      * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-11738598">W3C DOM Level2</a>
      * @param index specifies the cell to delete.

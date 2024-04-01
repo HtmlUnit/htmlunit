@@ -48,12 +48,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * Returns {@code true} if the disabled attribute is set for this element. Note that this
-     * method always returns {@code false} when emulating IE, because IE does not allow individual
-     * option groups to be disabled.
-     *
-     * @return {@code true} if the disabled attribute is set for this element (always {@code false}
-     *         when emulating IE)
+     * @return {@code true} if the disabled attribute is set for this element
      */
     @Override
     public final boolean isDisabled() {

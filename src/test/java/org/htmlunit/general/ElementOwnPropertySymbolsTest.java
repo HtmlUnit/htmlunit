@@ -271,7 +271,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
 
                 dataset.addValue(implementedProperties.size(), "Implemented", method.getName());
                 dataset.addValue(realProperties.size(),
-                        browserVersion.getNickname().replace("FF", "Firefox ").replace("IE", "Internet Explorer "),
+                        browserVersion.getNickname().replace("FF", "Firefox "),
                        method.getName());
                 dataset.addValue(erroredProperties.size(), "Should not be implemented", method.getName());
             }

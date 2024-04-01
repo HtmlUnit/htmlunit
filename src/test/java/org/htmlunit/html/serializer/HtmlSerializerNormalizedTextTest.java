@@ -280,7 +280,6 @@ public class HtmlSerializerNormalizedTextTest {
         serializer.append("\u3000", Mode.NORMALIZE);
         assertEquals("\u3000", serializer.getText());
 
-        // real IE treats this as space, will not consider this for performance reasons
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("\uFEFF", Mode.NORMALIZE);
         assertEquals("\uFEFF", serializer.getText());

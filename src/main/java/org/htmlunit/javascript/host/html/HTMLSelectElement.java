@@ -105,8 +105,7 @@ public class HTMLSelectElement extends HTMLElement {
     /**
      * Adds a new item to the list (optionally) before the specified item.
      * @param newOptionObject the DomNode to insert
-     * @param beforeOptionObject for Firefox: the DomNode to insert the previous element before (null if at end),
-     * for Internet Explorer: the index where the element should be placed (optional).
+     * @param beforeOptionObject the DomNode to insert the previous element before (null if at end).
      */
     @JsxFunction
     public void add(final HTMLOptionElement newOptionObject, final Object beforeOptionObject) {

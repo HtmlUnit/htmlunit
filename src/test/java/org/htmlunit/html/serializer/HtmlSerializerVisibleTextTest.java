@@ -269,7 +269,6 @@ public class HtmlSerializerVisibleTextTest {
         serializer.append("\u3000", Mode.WHITE_SPACE_NORMAL);
         assertEquals("\u3000", serializer.getText());
 
-        // real IE treats this as space, will not consider this for performance reasons
         serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
         serializer.append("\uFEFF", Mode.WHITE_SPACE_NORMAL);
         assertEquals("\uFEFF", serializer.getText());

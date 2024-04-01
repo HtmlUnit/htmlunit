@@ -1144,8 +1144,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns whether the tag is lower case in .outerHTML/.innerHTML.
-     * It seems to be a feature for HTML5 elements for IE.
      * @return whether the tag is lower case in .outerHTML/.innerHTML
      */
     protected boolean isLowerCaseInOuterHtml() {

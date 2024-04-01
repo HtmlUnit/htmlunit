@@ -183,7 +183,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * Executes the <code>onreadystatechange</code> handler when simulating IE, as well as executing
+     * Executes the <code>onreadystatechange</code> handler, as well as executing
      * the script itself, if necessary.
      * {@inheritDoc}
      */

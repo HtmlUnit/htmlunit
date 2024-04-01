@@ -48,8 +48,7 @@ public class HtmlRp extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Marks this frame as created by javascript. This is needed to handle
-     * some special IE behavior.
+     * Marks this frame as created by javascript.
      */
     public void markAsCreatedByJavascript() {
         createdByJavascript_ = true;
@@ -58,8 +57,7 @@ public class HtmlRp extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Returns true if this frame was created by javascript. This is needed to handle
-     * some special IE behavior.
+     * Returns true if this frame was created by javascript.
      * @return true or false
      */
     public boolean wasCreatedByJavascript() {

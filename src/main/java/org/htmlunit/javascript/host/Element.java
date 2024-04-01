@@ -180,15 +180,11 @@ public class Element extends Node {
     }
 
     /**
-     * Returns the value of the specified attribute.
      * @param attributeName attribute name
-     * @param flags IE-specific flags (see the MSDN documentation for more info)
      * @return the value of the specified attribute, {@code null} if the attribute is not defined
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
-     * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
     @JsxFunction
-    public String getAttribute(final String attributeName, final Integer flags) {
+    public String getAttribute(final String attributeName) {
         String value = getDomNodeOrDie().getAttribute(attributeName);
 
         if (ATTRIBUTE_NOT_DEFINED == value) {
@@ -1015,7 +1011,6 @@ public class Element extends Node {
                 htmlElement = scriptObject;
             }
             builder.append('<').append(tag);
-            // Add the attributes. IE does not use quotes, FF does.
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 if (!attr.getSpecified()) {
                     continue;

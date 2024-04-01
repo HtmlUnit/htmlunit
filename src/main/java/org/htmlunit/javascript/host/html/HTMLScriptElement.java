@@ -137,7 +137,7 @@ public class HTMLScriptElement extends HTMLElement {
     }
 
     /**
-     * Overwritten for special IE handling.
+     * Overwritten for special handling.
      *
      * @param childObject the node to add to this node
      * @return the newly added child node

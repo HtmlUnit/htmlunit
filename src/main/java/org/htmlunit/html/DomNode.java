@@ -82,19 +82,19 @@ import org.xml.sax.SAXException;
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
 
-    /** A ready state constant for IE (state 1). */
+    /** A ready state constant (state 1). */
     public static final String READY_STATE_UNINITIALIZED = "uninitialized";
 
-    /** A ready state constant for IE (state 2). */
+    /** A ready state constant (state 2). */
     public static final String READY_STATE_LOADING = "loading";
 
-    /** A ready state constant for IE (state 3). */
+    /** A ready state constant (state 3). */
     public static final String READY_STATE_LOADED = "loaded";
 
-    /** A ready state constant for IE (state 4). */
+    /** A ready state constant (state 4). */
     public static final String READY_STATE_INTERACTIVE = "interactive";
 
-    /** A ready state constant for IE (state 5). */
+    /** A ready state constant (state 5). */
     public static final String READY_STATE_COMPLETE = "complete";
 
     /** The name of the "element" property. Used when watching property change events. */
@@ -126,7 +126,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     private HtmlUnitScriptable scriptObject_;
 
-    /** The ready state is an IE-only value that is available to a large number of elements. */
+    /** The ready state is an value that is available to a large number of elements. */
     private String readyState_;
 
     /**

@@ -183,7 +183,7 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
     }
 
     /**
-     * {@inheritDoc} Also sets the value to the new default value, just like IE.
+     * {@inheritDoc} Also sets the value to the new default value.
      * @see SubmittableElement#setDefaultValue(String)
      */
     @Override

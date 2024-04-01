@@ -20,8 +20,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for {@code Comment}.
- * <p>JavaScript: in IE, Comment is Element, but in FF: Comment is CharacterDataImpl.
- * However, in DOM, Comment is CharacterDataImpl.</p>
  *
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour

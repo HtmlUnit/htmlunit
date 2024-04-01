@@ -286,9 +286,6 @@ public final class ScriptElementSupport {
      * Returns true if a script with the specified type and language attributes is actually JavaScript.
      * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
      * are content types case insensitive.<br>
-     * IE supports only a limited number of values for the type attribute. For testing you can
-     * use <a href="http://www.robinlionheart.com/stds/html4/scripts">
-     * http://www.robinlionheart.com/stds/html4/scripts</a>.
      * @param element the element
      * @param typeAttribute the type attribute specified in the script tag
      * @param languageAttribute the language attribute specified in the script tag

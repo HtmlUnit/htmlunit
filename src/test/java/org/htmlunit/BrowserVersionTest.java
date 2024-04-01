@@ -46,7 +46,7 @@ public class BrowserVersionTest {
      */
     @Test
     public void testClone() {
-        final BrowserVersion ff = BrowserVersion.INTERNET_EXPLORER;
+        final BrowserVersion ff = BrowserVersion.FIREFOX;
 
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 32.0 r0", "32.0.0.445", "Flash.ocx");

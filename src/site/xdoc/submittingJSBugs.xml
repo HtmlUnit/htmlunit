@@ -19,7 +19,7 @@
                 isolate the root cause of a single JavaScript property or method,
                 but just saying 'jQuery' or a given web site is not working, doesn't help much.<br/>
                 To find the offending line, you can put <code>alert()</code> at various places,
-                compare the result of HtmlUnit to a real browser (Chrome, Firefox or Internet Explorer),
+                compare the result of HtmlUnit to a real browser (Chrome, Firefox or Edge),
                 and you will mostly be able to provide a tiny failing test case which contains
                 few lines of JavaScript (independent of the whole JavaScript library),
                 please have a look at <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/javascript/ArgumentsTest.java">some sample test cases</a>.<br/>

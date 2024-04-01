@@ -19,7 +19,7 @@
             </p>
             <p>
                 It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries,
-                simulating Chrome, Firefox or Internet Explorer depending on the configuration used.
+                simulating Chrome, Firefox or Edge depending on the configuration used.
             </p> 
             <p>
                 It is typically used for testing purposes or to retrieve information from websites.
@@ -210,7 +210,7 @@
 
         <section name="JavaScript Support">
             <p>
-                HtmlUnit provides excellent JavaScript support, simulating the behavior of the configured browser (Firefox or Internet Explorer).
+                HtmlUnit provides excellent JavaScript support, simulating the behavior of the configured browser (Chrone, Firefox or Edge).
                 It uses the Rhino JavaScript engine for the core language (plus workarounds for some Rhino bugs) and provides the implementation
                 for the objects specific to execution in a browser.
             </p>

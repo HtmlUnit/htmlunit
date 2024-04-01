@@ -2265,7 +2265,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * Returns the specified length value as a pixel length value, as long as we're not emulating IE.
+     * Returns the specified length value as a pixel length value.
      * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)}
      * if you need percentage support).
      * @param value the length value to convert to a pixel length value
