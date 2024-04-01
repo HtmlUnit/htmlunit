@@ -1056,6 +1056,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code fallback}. */
         FALLBACK("fallback", "fallback", chromeAndEdgeEmpty()),
 
+        /** The style property {@code fieldSizing}. */
+        FIELD_SIZING("fieldSizing", "field-sizing", chromeAndEdge("fixed")),
+
         /** The style property {@code fill}. */
         FILL("fill", "fill", ff("rgb(0, 0, 0)"), chromeAndEdge("rgb(0, 0, 0)")),
 
@@ -2130,10 +2133,10 @@ public final class StyleAttributes implements Serializable {
                 ff("flat")),
 
         /** The style property {@code MozTransition}. */
-        MOZ_TRANSITION("MozTransition", "-moz-transition", ff("all 0s ease 0s")),
+        MOZ_TRANSITION("MozTransition", "-moz-transition", ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code -moz-transition}. */
-        MOZ_TRANSITION__("-moz-transition", "-moz-transition", ff("all 0s ease 0s")),
+        MOZ_TRANSITION__("-moz-transition", "-moz-transition", ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code MozTransitionDelay}. */
         MOZ_TRANSITION_DELAY("MozTransitionDelay", "-moz-transition-delay",
@@ -2168,10 +2171,10 @@ public final class StyleAttributes implements Serializable {
                 "-moz-transition-timing-function", ff("ease")),
 
         /** The style property {@code MozUserFocus}. */
-        MOZ_USER_FOCUS("MozUserFocus", "-moz-user-focus", ffNone()),
+        MOZ_USER_FOCUS("MozUserFocus", "-moz-user-focus", ffEsr("none")),
 
         /** The style property {@code -moz-user-focus}. */
-        MOZ_USER_FOCUS__("-moz-user-focus", "-moz-user-focus", ffNone()),
+        MOZ_USER_FOCUS__("-moz-user-focus", "-moz-user-focus", ffEsr("none")),
 
         /** The style property {@code MozUserInput}. */
         MOZ_USER_INPUT("MozUserInput", "-moz-user-input", ff("auto")),
@@ -3007,6 +3010,9 @@ public final class StyleAttributes implements Serializable {
         TEXT_SHADOW_("text-shadow", "text-shadow", ffNone()),
 
         /** The style property {@code textSizeAdjust}. */
+        TEXT_SPACING_TRIM("textSpacingTrim", "text-spacing-trim", chromeAndEdgeNormal()),
+
+        /** The style property {@code textSizeAdjust}. */
         TEXT_SIZE_ADJUST("textSizeAdjust", "text-size-adjust", chromeAndEdgeAuto()),
 
         /** The style property {@code textTransform}. */
@@ -3029,10 +3035,22 @@ public final class StyleAttributes implements Serializable {
         TEXT_UNDERLINE_POSITION_("text-underline-position", "text-underline-position", ff("auto")),
 
         /** The style property {@code textWrap}. */
-        TEXT_WRAP("textWrap", "text-wrap", chromeAndEdge("wrap"), ffLatest("auto")),
+        TEXT_WRAP("textWrap", "text-wrap", chromeAndEdge("wrap"), ffLatest("wrap")),
 
         /** The style property {@code text-wrap}. */
-        TEXT_WRAP_("text-wrap", "text-wrap", ffLatest("auto")),
+        TEXT_WRAP_("text-wrap", "text-wrap", ffLatest("wrap")),
+
+        /** The style property {@code textWrapMode}. */
+        TEXT_WRAP_MODE("textWrapMode", "text-wrap-mode", ffLatest("wrap")),
+
+        /** The style property {@code text-wrap-mode}. */
+        TEXT_WRAP_MODE_("text-wrap-mode", "text-wrap-mode", ffLatest("wrap")),
+
+        /** The style property {@code textWrapStyle}. */
+        TEXT_WRAP_STYLE("textWrapStyle", "text-wrap-mode", ffLatest("auto")),
+
+        /** The style property {@code text-wrap-style}. */
+        TEXT_WRAP_STYLE_("text-wrap-style", "text-wrap-style", ffLatest("auto")),
 
         /** The style property {@code timelineScope}. */
         TIMELINE_SCOPE("timelineScope", "timeline-scope", chromeAndEdgeNone()),
@@ -3071,7 +3089,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code transition}. */
         TRANSITION("transition", "transition", chromeAndEdge("all 0s ease 0s"),
-                ff("all 0s ease 0s")),
+                ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code transitionBehavior}. */
         TRANSITION_BEHAVIOR("transitionBehavior", "transition-behavior", chromeAndEdgeNormal()),
@@ -3109,7 +3127,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",
-                ff("isolate"), chromeAndEdgeNormal()),
+                ff("isolate"), chromeAndEdge("isolate")),
 
         /** The style property {@code unicode-bidi}. */
         UNICODE_BIDI_("unicode-bidi", "unicode-bidi", ff("isolate")),
@@ -4031,13 +4049,13 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitTransition}. */
         WEBKIT_TRANSITION("webkitTransition", "webkit-transition", chromeAndEdge("all 0s ease 0s"),
-                ff("all 0s ease 0s")),
+                ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code WebkitTransition}. */
-        WEBKIT_TRANSITION_("WebkitTransition", "webkit-transition", ff("all 0s ease 0s")),
+        WEBKIT_TRANSITION_("WebkitTransition", "webkit-transition", ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code -webkit-transition}. */
-        WEBKIT_TRANSITION__("-webkit-transition", "webkit-transition", ff("all 0s ease 0s")),
+        WEBKIT_TRANSITION__("-webkit-transition", "webkit-transition", ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code webkitTransitionDelay}. */
         WEBKIT_TRANSITION_DELAY("webkitTransitionDelay", "webkit-transition-delay", chromeAndEdge("0s"), ff("0s")),
@@ -4105,7 +4123,12 @@ public final class StyleAttributes implements Serializable {
         WHITE_SPACE_("white-space", "white-space", ffNormal()),
 
         /** The style property {@code whiteSpaceCollapse}. */
-        WHITE_SPACE_COLLAPSE("whiteSpaceCollapse", "white-space-collapse", chromeAndEdge("collapse")),
+        WHITE_SPACE_COLLAPSE("whiteSpaceCollapse", "white-space-collapse",
+                chromeAndEdge("collapse"), ffLatest("collapse")),
+
+        /** The style property {@code whiteSpaceCollapse}. */
+        WHITE_SPACE_COLLAPSE_("white-space-collapse", "white-space-collapse",
+                ffLatest("collapse")),
 
         /** The style property {@code widows}. */
         WIDOWS("widows", "widows", chromeAndEdge("2")),
