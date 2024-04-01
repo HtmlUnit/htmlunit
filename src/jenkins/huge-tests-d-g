@@ -19,8 +19,7 @@ pipeline {
   post {
     always {
       junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
-      recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', sourceDirectory: 'src', tools: [
-        java()]
+      recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
       step([$class: 'Mailer',
         notifyEveryUnstableBuild: true,
         recipients: "rbri@rbri.de"])
