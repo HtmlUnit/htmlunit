@@ -80,6 +80,7 @@ public class EncodingSnifferTest {
         meta(UTF_8, "abc <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>");
         meta(UTF_8, "abc <meta http-equiv='Content-Type' content='text/html; CHARSET=UTF-8'/>");
         meta(UTF_8, "abc <meta http-equiv='Content-Type' content='text/html; chArsEt=UtF-8'/>");
+        meta(UTF_8, "<meta a='b' c=d e=\"f\" CONTENT='text/html; CHARSET=utf-8' />");
     }
 
     private static void meta(final Charset expectedEncoding, final String content) throws Exception {
