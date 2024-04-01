@@ -945,7 +945,7 @@ public class Event extends HtmlUnitScriptable {
 
     /**
      * Returns {@code true} if this event has been aborted via <code>preventDefault()</code> in
-     * standards-compliant browsers
+     * standards-compliant browsers.
      *
      * @param result the event handler result (if {@code false}, the event is considered aborted)
      * @return {@code true} if this event has been aborted

@@ -511,8 +511,8 @@ public class HTMLInputElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public String getAttribute(final String attributeName, final Integer flags) {
-        final String superAttribute = super.getAttribute(attributeName, flags);
+    public String getAttribute(final String attributeName) {
+        final String superAttribute = super.getAttribute(attributeName);
         if (DomElement.VALUE_ATTRIBUTE.equalsIgnoreCase(attributeName)) {
             if ((superAttribute == null || !superAttribute.isEmpty())
                     && getDefaultValue().isEmpty()) {
