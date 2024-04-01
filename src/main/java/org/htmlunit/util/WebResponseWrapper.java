@@ -71,6 +71,15 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
+     * The default behavior of this method is to return wasContentCharsetTentative() on the wrapped webResponse object.
+     */
+    @Override
+    public boolean wasContentCharsetTentative() {
+        return wrappedWebResponse_.wasContentCharsetTentative();
+    }
+
+    /**
+     * {@inheritDoc}
      * The default behavior of this method is to return getContentAsString() on the wrapped webResponse object.
      */
     @Override
