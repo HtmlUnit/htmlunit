@@ -352,6 +352,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
 
+    /** Indicates that window.Iterator is supported. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_ITERATOR_VISIBLE_IN_WINDOW,
+
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})
     JS_LOCATION_RELOAD_REFERRER,

@@ -41,6 +41,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
@@ -445,6 +446,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "gzip, deflate, br",
             CHROME = "gzip, deflate, br, zstd",
             EDGE = "gzip, deflate, br, zstd")
+    @HtmlUnitNYI(CHROME = "gzip, deflate, br",
+            EDGE = "gzip, deflate, br")
     public void acceptEncodingHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
