@@ -346,7 +346,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF_ESR = "true")
     public void _DOMRequest_DOMRequest() throws Exception {
         test("DOMRequest", "DOMRequest");
@@ -2740,7 +2739,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF_ESR = "true")
     public void _EventTarget_DOMRequest() throws Exception {
         test("EventTarget", "DOMRequest");
