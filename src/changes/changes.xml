@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.0.0" date="March xx, 2024" description="IE support removed, htmlunit-websocket-client, Chrome/Edge 123, Firefox 124, Bugfixes">
+        <release version="4.0.0" date="April 01, 2024" description="IE support removed, htmlunit-websocket-client, Chrome/Edge 123, Firefox 124, Bugfixes">
             <action type="remove" dev="rbri">
                 IE is no longer supported. This implies the largest change of the code base during the last &gt; 10 years.
                 More than 200 flags removed from the code and about 6.000 test case expectations adjusted.
