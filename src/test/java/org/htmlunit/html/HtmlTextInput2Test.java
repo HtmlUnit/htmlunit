@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import java.awt.GraphicsEnvironment;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.platform.AwtClipboardHandler;
+import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,6 +41,16 @@ import org.junit.runner.RunWith;
 */
 @RunWith(BrowserRunner.class)
 public class HtmlTextInput2Test extends SimpleWebTestCase {
+
+    private static boolean SKIP_ = false;
+
+    static {
+        if (GraphicsEnvironment.isHeadless()) {
+            // skip the tests in headless mode
+            SKIP_ = true;
+        }
+    }
+
 
     /**
      * Verifies that asNormalizedText() returns the value string.
@@ -629,6 +641,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void clipboardCopy() throws Exception {
+        Assume.assumeFalse(SKIP_);
         final String html =
                 "<html><head>\n"
                 + "</head>\n"
@@ -662,6 +675,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void clipboardPaste() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html =
                 "<html><head>\n"
                 + "</head>\n"

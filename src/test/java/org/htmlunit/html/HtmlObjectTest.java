@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,16 +34,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlObjectTest extends SimpleWebTestCase {
-
-    private static boolean SKIP_ = false;
-
-    static {
-        if (GraphicsEnvironment.isHeadless()) {
-            // skip the tests in headless mode
-            SKIP_ = true;
-        }
-    }
-
     /**
      * @throws Exception if the test fails
      */
