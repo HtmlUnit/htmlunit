@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.1.0" date="April xx, 2024" description="Bugfixes">
+            <action type="update" dev="rbri">
+                keyboard-howto updated and enhanced. Some documentation about clipboard handling added.
+            </action>
+            <action type="add" dev="rbri">
+                Missing unit test for the ClipboardHandler added.
+            </action>
         </release>
 
 

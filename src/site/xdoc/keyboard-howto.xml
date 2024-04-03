@@ -7,44 +7,129 @@
     </properties>
 
     <body>
-        <section>
+        <section name="Focus">
             <p>
-                For a given WebClient, the focus can be on at most one element at any given time.  Focus
-                doesn't have to be on any element within the WebClient.
+                For a given WebClient, the focus can be on at most one element at any given time.
+                Focus doesn't have to be on any element within the WebClient.
             </p>
             <p>
-                There are several ways to move the focus from one element to another.  The simplest is to call
-                HtmlPage.setFocusedElement(HtmlElement).
+                There are several ways to move the focus from one element to another.
+                The simplest is to call <strong>HtmlPage.setFocusedElement(HtmlElement)</strong>.
                 This method will remove focus from whatever element currently has it, if any, and will set
-                it to the new component.  Along the way, it will fire off any "onfocus" and "onblur" handlers
+                it to the new component. Along the way, it will fire off any "onfocus" and "onblur" handlers
                 that have been defined.
             </p>
             <p>
-                The element currently owning the focus can be determined with a call to
-                HtmlPage.getFocusedElement().
+            <source><![CDATA[
+  final HtmlInput userName = page.getHtmlElementById("userName");
+  page.setFocusedElement(userName);
+]]></source>
             </p>
+            
+            <p>
+                The element currently owning the focus can be determined with a call to
+                <strong>HtmlPage.getFocusedElement()</strong>.
+            </p>
+            <p>
+            <source><![CDATA[
+  HtmlElement elem = page.getFocusedElement();
+]]></source>
+            </p>
+        </section>
+
+        <section name="Item traversal">
             <p>
                 To simulate keyboard navigation via the tab key, you can call
-                HtmlPage.tabToNextElement() and HtmlPage.tabToPreviousElement()
-                to cycle forward or backwards through the defined tab order.  This tab order is
-                defined by the
+                <strong>HtmlPage.tabToNextElement()</strong> and <strong>HtmlPage.tabToPreviousElement()</strong>
+                to cycle forward or backwards through the defined tab order. 
+                This tab order is defined by the
                 <a href="http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex">tabindex</a>
-                attribute on the various elements as defined by the HTML specification.  You can query
-                the defined tab order with the method
-                HtmlPage.getTabbableElements()
+                attribute on the various elements as defined by the HTML specification.
+                You can query the defined tab order with the method <strong>HtmlPage.getTabbableElements()</strong>
                 which will return a list of all tabbable elements in defined tab order.
-            </p>
-            <p>
-                Access keys, often called keyboard mnemonics, can be simulated with the method
-                HtmlPage.pressAccessKey(char).
-            </p>
-            <p>
-                To use special keys, you can use htmlElement.type(int) with KeyboardEvent.DOM_VK_PAGE_DOWN.
             </p>
             <p>
                 Finally, there is an assertion for testing that will verify that every tabbable element
                 has a defined tabindex attribute.  This is done with
-                WebAssert.assertAllTabIndexAttributesSet().
+                <strong>WebAssert.assertAllTabIndexAttributesSet(page)</strong>.
+            </p>
+        </section>
+
+        <section name="Access keys">
+            <p>
+                Access keys, often called keyboard mnemonics, can be simulated with the method
+                <strong>HtmlPage.pressAccessKey(char)</strong>.
+            </p>
+        </section>
+
+        <section name="Special keys">
+            <p>
+                To use special keys, you can use htmlElement.type(int) with KeyboardEvent.DOM_VK_PAGE_DOWN.
+            </p>
+            <p>
+                To simulate typing while holding modifier keys (Shift/Ctrl/Alt) use the Keybord class.<br></br>
+                Example: Simulate Ctrl+c to copy to the clipboard (details in the next section).
+            <source><![CDATA[
+  final HtmlInput input = (HtmlInput) page.getElementById("i1");
+
+  final Keyboard kb = new Keyboard();
+  kb.press(KeyboardEvent.DOM_VK_CONTROL);
+  kb.type('c');
+  kb.release(KeyboardEvent.DOM_VK_CONTROL);
+  input.type(kb);
+]]></source>
+            </p>
+        </section>
+
+        <section name="Clipboard">
+            <p>
+                The clipboard interaction is disabled by default for the WebClient. This avoids side effect during testing
+                and removes the need of having a running graphical subsystem (windows/X/xvfb).
+            </p>
+            <p>
+                To enable the clipboard support set a clipboard handle for the WebClient. HtmlUnit provides the AwtClipboardHandler
+                the implements the interaction with your system/desktop clipboard.
+            <source><![CDATA[
+  final ClipboardHandler clipboardHandler = new AwtClipboardHandler();
+  webClient().setClipboardHandler(clipboardHandler);
+]]></source>
+            </p>
+            <p>
+                Usually you like to control the clipboard content from your test case.
+            <source><![CDATA[
+  clipboardHandler.setClipboardContent("HtmlUnit");
+]]></source>
+            </p>
+            <p>
+                Of course you can also implement your own ClipboardHandler to get full control.
+            </p>
+            <p>
+                To access the clipboard use the usual shortcuts.
+            <source><![CDATA[
+  final Keyboard kb = new Keyboard();
+
+  // select all
+  kb.press(KeyboardEvent.DOM_VK_CONTROL);
+  kb.type('c');
+  kb.release(KeyboardEvent.DOM_VK_CONTROL);
+
+  // copy
+  kb.press(KeyboardEvent.DOM_VK_CONTROL);
+  kb.type('c');
+  kb.release(KeyboardEvent.DOM_VK_CONTROL);
+
+  input.type(kb);
+]]></source>
+            <source><![CDATA[
+  final Keyboard kb = new Keyboard();
+
+  // paste
+  kb.press(KeyboardEvent.DOM_VK_CONTROL);
+  kb.type('v');
+  kb.release(KeyboardEvent.DOM_VK_CONTROL);
+
+  input.type(kb);
+]]></source>
             </p>
         </section>
     </body>
