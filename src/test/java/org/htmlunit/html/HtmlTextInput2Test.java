@@ -17,12 +17,14 @@ package org.htmlunit.html;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.htmlunit.ClipboardHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.platform.AwtClipboardHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -620,5 +622,112 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
         assertEquals(getExpectedAlerts()[4], input.getValue());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clipboardCopy() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <form>\n"
+                + "    <input type='text' id='i1' value='aswjdfue'>\n"
+                + "  </form>\n"
+                + "  <button id='check' onclick='test()'>Test</button>\n"
+                + "</body></html>";
+
+        final ClipboardHandler clipboardHandler = new AwtClipboardHandler();
+        getWebClient().setClipboardHandler(clipboardHandler);
+
+        clipboardHandler.setClipboardContent("");
+        final HtmlPage page = loadPage(html);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("i1");
+
+        final Keyboard kb = new Keyboard();
+        kb.press(KeyboardEvent.DOM_VK_CONTROL);
+        kb.type('a');
+        kb.type('c');
+        kb.release(KeyboardEvent.DOM_VK_CONTROL);
+        input.type(kb);
+
+        assertEquals("aswjdfue", clipboardHandler.getClipboardContent());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clipboardPaste() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <form>\n"
+                + "    <input type='text' id='i1'>\n"
+                + "  </form>\n"
+                + "  <button id='check' onclick='test()'>Test</button>\n"
+                + "</body></html>";
+
+        final ClipboardHandler clipboardHandler = new AwtClipboardHandler();
+        getWebClient().setClipboardHandler(clipboardHandler);
+
+        clipboardHandler.setClipboardContent("xyz");
+        final HtmlPage page = loadPage(html);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("i1");
+
+        final Keyboard kb = new Keyboard();
+        kb.press(KeyboardEvent.DOM_VK_CONTROL);
+        kb.type('v');
+        kb.release(KeyboardEvent.DOM_VK_CONTROL);
+        input.type(kb);
+
+        assertEquals("xyz", input.getValue());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clipboardPasteFakeClipboard() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <form>\n"
+                + "    <input type='text' id='i1'>\n"
+                + "  </form>\n"
+                + "  <button id='check' onclick='test()'>Test</button>\n"
+                + "</body></html>";
+
+        final ClipboardHandler clipboardHandler = new ClipboardHandler() {
+            @Override
+            public String getClipboardContent() {
+                return "#dbbb";
+            }
+
+            @Override
+            public void setClipboardContent(final String string) {
+            }
+
+        };
+        getWebClient().setClipboardHandler(clipboardHandler);
+
+        clipboardHandler.setClipboardContent("xyz");
+        final HtmlPage page = loadPage(html);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("i1");
+
+        final Keyboard kb = new Keyboard();
+        kb.press(KeyboardEvent.DOM_VK_CONTROL);
+        kb.type('v');
+        kb.release(KeyboardEvent.DOM_VK_CONTROL);
+        input.type(kb);
+
+        assertEquals("#dbbb", input.getValue());
     }
 }

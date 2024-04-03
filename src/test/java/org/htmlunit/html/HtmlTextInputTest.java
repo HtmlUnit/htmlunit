@@ -16,6 +16,7 @@ package org.htmlunit.html;
 
 import static org.junit.Assert.fail;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -1077,5 +1078,41 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         driver.findElement(By.id("myButton")).click();
         assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest().getUrl());
         assertEquals(Integer.parseInt(getExpectedAlerts()[5]), getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"abcx", "", "abcx", "abcx"})
+    public void clipboard() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').value);\n"
+                + "      log(document.getElementById('i2').value);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <form>\n"
+                + "    <input type='text' id='i1' value='abcx'>\n"
+                + "    <input type='text' id='i2'>\n"
+                + "  </form>\n"
+                + "  <button id='check' onclick='test()'>Test</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check")).click();
+        verifyTitle2(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
+
+        driver.findElement(By.id("i1")).sendKeys(Keys.CONTROL + "a");
+        driver.findElement(By.id("i1")).sendKeys(Keys.CONTROL + "c");
+
+        driver.findElement(By.id("i2")).sendKeys(Keys.CONTROL + "v");
+        driver.findElement(By.id("check")).click();
+        verifyTitle2(driver, getExpectedAlerts());
     }
 }
