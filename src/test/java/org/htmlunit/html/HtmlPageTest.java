@@ -70,6 +70,7 @@ import org.w3c.dom.NodeList;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPageTest extends SimpleWebTestCase {

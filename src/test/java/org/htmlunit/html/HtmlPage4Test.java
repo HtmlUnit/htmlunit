@@ -47,6 +47,7 @@ import org.junit.runner.RunWith;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage4Test extends WebServerTestCase {
