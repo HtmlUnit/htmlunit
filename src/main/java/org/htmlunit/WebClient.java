@@ -2747,12 +2747,10 @@ public class WebClient implements Serializable, AutoCloseable {
         // discard expired cookies
         cookieManager.clearExpired(new Date());
 
-        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
-
-        HttpClientConverter.addMatching(cookieManager.getCookies(), normalizedUrl, getBrowserVersion(), matches);
-
-        final Set<Cookie> cookies = new LinkedHashSet<>(HttpClientConverter.fromHttpClient(matches));
-        return Collections.unmodifiableSet(cookies);
+        final Set<Cookie> matchingCookies = new LinkedHashSet<>();
+        HttpClientConverter.addMatching(cookieManager.getCookies(), normalizedUrl,
+                getBrowserVersion(), matchingCookies);
+        return Collections.unmodifiableSet(matchingCookies);
     }
 
     /**
