@@ -93,6 +93,7 @@ public class HtmlPageTest5 extends SimpleWebTestCase {
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
+
     /**
      * Test tabbing where there are no tabbable elements.
      * @throws Exception if something goes wrong

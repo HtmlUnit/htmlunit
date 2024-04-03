@@ -16,6 +16,7 @@ package org.htmlunit.html;
 
 import static org.junit.Assert.fail;
 
+import java.awt.GraphicsEnvironment;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -24,6 +25,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
+import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -41,6 +43,15 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTextInputTest extends WebDriverTestCase {
+
+    private static boolean SKIP_ = false;
+
+    static {
+        if (GraphicsEnvironment.isHeadless()) {
+            // skip the tests in headless mode
+            SKIP_ = true;
+        }
+    }
 
     /**
      * Verifies getVisibleText().
@@ -1086,6 +1097,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"abcx", "", "abcx", "abcx"})
     public void clipboard() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html =
                 "<html><head>\n"
                 + "  <script>\n"

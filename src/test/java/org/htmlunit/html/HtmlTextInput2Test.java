@@ -51,7 +51,6 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
         }
     }
 
-
     /**
      * Verifies that asNormalizedText() returns the value string.
      * @throws Exception if the test fails
@@ -642,6 +641,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     public void clipboardCopy() throws Exception {
         Assume.assumeFalse(SKIP_);
+
         final String html =
                 "<html><head>\n"
                 + "</head>\n"
