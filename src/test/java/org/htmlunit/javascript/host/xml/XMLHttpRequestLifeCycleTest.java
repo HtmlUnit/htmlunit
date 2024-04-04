@@ -1224,9 +1224,9 @@ public final class XMLHttpRequestLifeCycleTest {
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND));
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
-            try {
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
+
                 final WebDriver driver = getWebDriver();
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1237,9 +1237,6 @@ public final class XMLHttpRequestLifeCycleTest {
                         mockWebConnection.getLastWebRequest().getUrl());
                 assertEquals(HttpMethod.GET,
                         mockWebConnection.getLastWebRequest().getHttpMethod());
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
 
@@ -1265,13 +1262,12 @@ public final class XMLHttpRequestLifeCycleTest {
                     "",  200, "OK", MimeType.TEXT_HTML, headers);
             MiniServer.configureDropGetRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
-            miniServer1.start();
-            try {
-                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
-                miniServer2.start();
+            try (MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection)) {
+                miniServer1.start();
 
-                try {
+                try (MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection)) {
+                    miniServer2.start();
+
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1283,12 +1279,6 @@ public final class XMLHttpRequestLifeCycleTest {
                     assertEquals(HttpMethod.GET,
                             mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
-                finally {
-                    miniServer2.shutDown();
-                }
-            }
-            finally {
-                miniServer1.shutDown();
             }
         }
 
@@ -1307,13 +1297,12 @@ public final class XMLHttpRequestLifeCycleTest {
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT));
             MiniServer.configureDropRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
-            miniServer1.start();
-            try {
-                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
-                miniServer2.start();
+            try (MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection)) {
+                miniServer1.start();
 
-                try {
+                try (MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection)) {
+                    miniServer2.start();
+
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1325,12 +1314,6 @@ public final class XMLHttpRequestLifeCycleTest {
                     assertEquals(HttpMethod.OPTIONS,
                             mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
-                finally {
-                    miniServer2.shutDown();
-                }
-            }
-            finally {
-                miniServer1.shutDown();
             }
         }
 
@@ -1350,9 +1333,9 @@ public final class XMLHttpRequestLifeCycleTest {
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
-            try {
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
+
                 final WebDriver driver = getWebDriver();
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1363,9 +1346,6 @@ public final class XMLHttpRequestLifeCycleTest {
                         mockWebConnection.getLastWebRequest().getUrl());
                 assertEquals(HttpMethod.GET,
                         mockWebConnection.getLastWebRequest().getHttpMethod());
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
 
@@ -1389,13 +1369,12 @@ public final class XMLHttpRequestLifeCycleTest {
                     "",  200, "OK", MimeType.TEXT_HTML, headers);
             MiniServer.configureDropGetRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
-            miniServer1.start();
-            try {
-                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
-                miniServer2.start();
+            try (MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection)) {
+                miniServer1.start();
 
-                try {
+                try (MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection)) {
+                    miniServer2.start();
+
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1407,12 +1386,6 @@ public final class XMLHttpRequestLifeCycleTest {
                     assertEquals(HttpMethod.GET,
                             mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
-                finally {
-                    miniServer2.shutDown();
-                }
-            }
-            finally {
-                miniServer1.shutDown();
             }
         }
 
@@ -1429,13 +1402,12 @@ public final class XMLHttpRequestLifeCycleTest {
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
             MiniServer.configureDropRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
-            miniServer1.start();
-            try {
-                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
-                miniServer2.start();
+            try (MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection)) {
+                miniServer1.start();
 
-                try {
+                try (MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection)) {
+                    miniServer2.start();
+
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1447,12 +1419,6 @@ public final class XMLHttpRequestLifeCycleTest {
                     assertEquals(HttpMethod.OPTIONS,
                             mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
-                finally {
-                    miniServer2.shutDown();
-                }
-            }
-            finally {
-                miniServer1.shutDown();
             }
         }
 
@@ -1471,9 +1437,9 @@ public final class XMLHttpRequestLifeCycleTest {
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND));
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
-            try {
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
+
                 final WebDriver driver = getWebDriver();
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1484,9 +1450,6 @@ public final class XMLHttpRequestLifeCycleTest {
                         mockWebConnection.getLastWebRequest().getUrl());
                 assertEquals(HttpMethod.GET,
                         mockWebConnection.getLastWebRequest().getHttpMethod());
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
 
@@ -1512,13 +1475,12 @@ public final class XMLHttpRequestLifeCycleTest {
                     "",  200, "OK", MimeType.TEXT_HTML, headers);
             MiniServer.configureDropGetRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
-            miniServer1.start();
-            try {
-                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
-                miniServer2.start();
+            try (MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection)) {
+                miniServer1.start();
 
-                try {
+                try (MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection)) {
+                    miniServer2.start();
+
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1530,12 +1492,6 @@ public final class XMLHttpRequestLifeCycleTest {
                     assertEquals(HttpMethod.GET,
                             mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
-                finally {
-                    miniServer2.shutDown();
-                }
-            }
-            finally {
-                miniServer1.shutDown();
             }
         }
 
@@ -1554,13 +1510,12 @@ public final class XMLHttpRequestLifeCycleTest {
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT));
             MiniServer.configureDropRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
-            miniServer1.start();
-            try {
-                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
-                miniServer2.start();
+            try (MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection)) {
+                miniServer1.start();
 
-                try {
+                try (MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection)) {
+                    miniServer2.start();
+
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1572,12 +1527,6 @@ public final class XMLHttpRequestLifeCycleTest {
                     assertEquals(HttpMethod.OPTIONS,
                             mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
-                finally {
-                    miniServer2.shutDown();
-                }
-            }
-            finally {
-                miniServer1.shutDown();
             }
         }
 
@@ -1597,9 +1546,9 @@ public final class XMLHttpRequestLifeCycleTest {
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
-            try {
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
+
                 final WebDriver driver = getWebDriver();
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1610,9 +1559,6 @@ public final class XMLHttpRequestLifeCycleTest {
                         mockWebConnection.getLastWebRequest().getUrl());
                 assertEquals(HttpMethod.GET,
                         mockWebConnection.getLastWebRequest().getHttpMethod());
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
 
@@ -1636,13 +1582,12 @@ public final class XMLHttpRequestLifeCycleTest {
                     "",  200, "OK", MimeType.TEXT_HTML, headers);
             MiniServer.configureDropGetRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
-            miniServer1.start();
-            try {
-                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
-                miniServer2.start();
+            try (MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection)) {
+                miniServer1.start();
 
-                try {
+                try (MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection)) {
+                    miniServer2.start();
+
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1654,12 +1599,6 @@ public final class XMLHttpRequestLifeCycleTest {
                     assertEquals(HttpMethod.GET,
                             mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
-                finally {
-                    miniServer2.shutDown();
-                }
-            }
-            finally {
-                miniServer1.shutDown();
             }
         }
 
@@ -1676,13 +1615,12 @@ public final class XMLHttpRequestLifeCycleTest {
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
             MiniServer.configureDropRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
-            miniServer1.start();
-            try {
-                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
-                miniServer2.start();
+            try (MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection)) {
+                miniServer1.start();
 
-                try {
+                try (MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection)) {
+                    miniServer2.start();
+
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
@@ -1694,12 +1632,6 @@ public final class XMLHttpRequestLifeCycleTest {
                     assertEquals(HttpMethod.OPTIONS,
                             mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
-                finally {
-                    miniServer2.shutDown();
-                }
-            }
-            finally {
-                miniServer1.shutDown();
             }
         }
     }

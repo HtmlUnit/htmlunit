@@ -15,6 +15,7 @@
 package org.htmlunit;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -41,7 +42,7 @@ import org.htmlunit.util.NameValuePair;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public class MiniServer extends Thread {
+public class MiniServer extends Thread implements Closeable {
     private static final Log LOG = LogFactory.getLog(MiniServer.class);
 
     private final int port_;
@@ -195,13 +196,19 @@ public class MiniServer extends Thread {
      * @throws InterruptedException in case of error
      * @throws IOException in case of error
      */
-    public void shutDown() throws InterruptedException, IOException {
+    @Override
+    public void close() throws IOException {
         shutdown_ = true;
         if (serverSocket_ != null) {
             serverSocket_.close();
         }
         interrupt();
-        join(5000);
+        try {
+            join(5000);
+        }
+        catch (final InterruptedException e) {
+            throw new IOException("MoniServer join() failed", e);
+        }
     }
 
     @Override
