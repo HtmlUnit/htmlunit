@@ -72,7 +72,6 @@ public class NoHttpResponseTest {
         @Alerts(DEFAULT = "§§URL§§page2?textfield=",
                 FF = "WebDriverException",
                 FF_ESR = "WebDriverException")
-        // TODO [IE] does not run in real IE (browser waits for a looooooong time)
         @HtmlUnitNYI(FF = "§§URL§§page2?textfield=",
                 FF_ESR = "§§URL§§page2?textfield=")
         public void submit() throws Exception {

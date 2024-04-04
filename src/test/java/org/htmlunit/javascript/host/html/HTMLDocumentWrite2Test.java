@@ -234,7 +234,6 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented
-    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeInNewWindowAndReadFormCollection() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -292,7 +291,6 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("<form></form>#[object HTMLFormElement]")
-    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"

@@ -833,7 +833,6 @@ public class Location2Test extends WebDriverTestCase {
             assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
         }
         finally {
-            // TODO [IE] when run with real IE the window is closed and all following tests are broken
             releaseResources();
             shutDownAll();
         }

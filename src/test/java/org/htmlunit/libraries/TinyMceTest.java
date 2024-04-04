@@ -46,7 +46,6 @@ public class TinyMceTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"348", "0"})
-    // TODO [IE]XML tinymce 3.2.7 is not compatible with IE
     public void api() throws Exception {
         test("api", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));
     }
@@ -59,7 +58,6 @@ public class TinyMceTest extends WebDriverTestCase {
             CHROME = {"89", "1"},
             EDGE = {"89", "1"})
     @NotYetImplemented
-    // TODO [IE]XML tinymce 3.2.7 is not compatible with IE
     public void basic() throws Exception {
         test("basic", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));
     }

@@ -445,7 +445,6 @@ public class WebClient6Test extends WebDriverTestCase {
      * Regression test for bug 2822048: a 302 redirect without Location header.
      * @throws Exception if an error occurs
      */
-    // TODO [IE]ERRORPAGE real IE displays his own error page (res://ieframe.dll/dnserror.htm#<url>)
     @Test
     public void redirect302WithoutLocation() throws Exception {
         final String html = "<html><body><a href='page2'>to redirect</a></body></html>";

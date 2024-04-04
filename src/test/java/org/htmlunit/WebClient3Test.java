@@ -361,7 +361,6 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Executed", "later"})
-    // TODO [IE]ERRORPAGE real IE displays own error page if response is to small
     public void execJavascriptOnErrorPages() throws Exception {
         final String errorHtml = "<html>\n"
                 + "<head>\n"
