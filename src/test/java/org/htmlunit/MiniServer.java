@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.BindException;
 import java.net.MalformedURLException;
@@ -26,6 +27,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
 import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -130,6 +132,23 @@ public class MiniServer extends Thread implements Closeable {
                         if (responseData == null) {
                             LOG.info("Closing impolitely in & output streams");
                             s.getOutputStream().close();
+                        }
+                        else if (responseData.getByteContent() != null) {
+                            try (OutputStream os = s.getOutputStream()) {
+                                os.write(("HTTP/1.0 " + responseData.getStatusCode() + " "
+                                        + responseData.getStatusMessage())
+                                        .getBytes(StandardCharsets.US_ASCII));
+                                os.write("\n".getBytes(StandardCharsets.US_ASCII));
+                                for (final NameValuePair header : responseData.getHeaders()) {
+                                    os.write((header.getName() + ": "
+                                                + header.getValue()).getBytes(StandardCharsets.US_ASCII));
+                                    os.write("\n".getBytes(StandardCharsets.US_ASCII));
+                                }
+                                os.write("\n".getBytes(StandardCharsets.US_ASCII));
+                                os.write(responseData.getByteContent(), 0, responseData.getByteContent().length);
+                                // bytes and no content length - don't attach anything
+                                os.flush();
+                            }
                         }
                         else {
                             try (PrintWriter pw = new PrintWriter(s.getOutputStream())) {
