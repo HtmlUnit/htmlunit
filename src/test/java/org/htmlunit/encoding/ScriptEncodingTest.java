@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.html;
+package org.htmlunit.encoding;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -51,7 +51,7 @@ import org.openqa.selenium.WebDriverException;
  * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
-public class HtmlScript3Test extends WebDriverTestCase {
+public class ScriptEncodingTest extends WebDriverTestCase {
 
     private static final String BOM_UTF_16LE = "BOMUTF16LE";
     private static final String BOM_UTF_16BE = "BOMUTF16BE";
