@@ -32,9 +32,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.MiniServer;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
+import org.htmlunit.html.HtmlScript;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -1232,6 +1234,10 @@ public class ScriptEncodingTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
+    @HtmlUnitNYI(CHROME = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            EDGE = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            FF = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            FF_ESR = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"})
     public void ____UTF8__false() throws Exception {
         charset(null, null, null, TestCharset.UTF8, null, false);
     }
@@ -1241,6 +1247,10 @@ public class ScriptEncodingTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
+    @HtmlUnitNYI(CHROME = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            EDGE = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            FF = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            FF_ESR = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"})
     public void ____UTF8__true() throws Exception {
         charset(null, null, null, TestCharset.UTF8, null, true);
     }
@@ -1250,6 +1260,10 @@ public class ScriptEncodingTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
+    @HtmlUnitNYI(CHROME = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            EDGE = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            FF = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            FF_ESR = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"})
     public void ______false() throws Exception {
         charset(null, null, null, null, null, false);
     }
@@ -1259,6 +1273,10 @@ public class ScriptEncodingTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
+    @HtmlUnitNYI(CHROME = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            EDGE = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            FF = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"},
+            FF_ESR = {"a", "Ã¤", "Ø£ÙÙØ§Ù", "Ð¼Ð¸Ñ", "æ¿é´"})
     public void ______true() throws Exception {
         charset(null, null, null, null, null, true);
     }
