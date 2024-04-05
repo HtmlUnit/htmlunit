@@ -610,7 +610,7 @@
             </build>
         </profile>
         <profile>
-            <id>only-encoding</id>
+            <id>only-encoding-tests</id>
             <activation>
                 <property>
                     <name>onlyEngoding</name>

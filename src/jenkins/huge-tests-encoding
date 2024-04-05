@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+  options {
+    lock resource: 'htmlunit-test-ports'
+    disableConcurrentBuilds()
+    timestamps()
+    timeout(time: 25, unit: 'MINUTES')
+  }
+  tools {
+    jdk 'openjdk-11+28'
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh 'mvn clean test -P only-encoding-tests -Dgpg.skip -Djava.awt.headless=true'
+      }
+    }
+  }
+  post {
+    always {
+      junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
+      recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
+      step([$class: 'Mailer',
+        notifyEveryUnstableBuild: true,
+        recipients: "rbri@rbri.de"])
+    }
+  }
+}
