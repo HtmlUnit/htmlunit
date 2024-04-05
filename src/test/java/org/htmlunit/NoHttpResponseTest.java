@@ -84,18 +84,15 @@ public class NoHttpResponseTest {
             expandExpectedAlertsVariables(URL_FIRST);
             final WebDriver driver = getWebDriver();
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
-            try {
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
+
                 driver.get(URL_FIRST.toString());
                 driver.findElement(By.id("inputSubmit")).click();
                 assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
             }
             catch (final WebDriverException e) {
                 assertEquals(getExpectedAlerts()[0], "WebDriverException");
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
 
@@ -113,15 +110,12 @@ public class NoHttpResponseTest {
 
             final WebDriver driver = getWebDriver();
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
-            try {
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
+
                 driver.get(URL_FIRST.toString());
                 driver.findElement(By.id("jsSubmit")).click();
                 assertTitle(driver, getExpectedAlerts()[0]);
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
     }
@@ -150,16 +144,12 @@ public class NoHttpResponseTest {
 
             expandExpectedAlertsVariables(URL_FIRST);
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
 
-            try {
                 HtmlPage page = getWebClient().getPage(URL_FIRST);
                 page = page.getElementById("inputSubmit").click();
                 assertEquals(getExpectedAlerts()[0], page.getUrl());
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
 
@@ -174,15 +164,12 @@ public class NoHttpResponseTest {
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
-            try {
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
+
                 HtmlPage page = getWebClient().getPage(URL_FIRST);
                 page = page.getElementById("jsSubmit").click();
                 assertEquals("right submit", page.getTitleText());
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
 
@@ -194,9 +181,9 @@ public class NoHttpResponseTest {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             MiniServer.configureDropRequest(URL_FIRST);
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
-            try {
+            try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
+                miniServer.start();
+
                 final WebRequest request = new WebRequest(new URL(URL_FIRST.toString()),
                         getBrowserVersion().getHtmlAcceptHeader(), getBrowserVersion().getAcceptEncodingHeader());
                 request.setCharset(StandardCharsets.UTF_8);
@@ -210,9 +197,6 @@ public class NoHttpResponseTest {
                     assertEquals(0, e.getStatusCode());
                     assertEquals("0 No HTTP Response for " + URL_FIRST.toString(), e.getMessage());
                 }
-            }
-            finally {
-                miniServer.shutDown();
             }
         }
     }
