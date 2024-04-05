@@ -29,7 +29,9 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
+import org.htmlunit.MiniServer;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebTestCase;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.BrowserRunner.Alerts;
@@ -54,8 +56,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
     private static final String BOM_UTF_16LE = "BOMUTF16LE";
     private static final String BOM_UTF_16BE = "BOMUTF16BE";
     private static final String BOM_UTF_8 = "BOMUTF8";
-
-    private static int ServerRestartCount_ = 0;
 
     private enum TestCharset {
         UTF8("UTF8", UTF_8),
@@ -154,9 +154,9 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
     @Default
-    public void charset_false() throws Exception {
+    public void charset() throws Exception {
         charset(charsetHtmlResponseHeader_, charsetAttribute_,
-                charsetResponseHeader_, charsetResponseEncoding_, bom_, false);
+                charsetResponseHeader_, charsetResponseEncoding_, bom_, gzip_);
     }
 
     private void charset(
@@ -172,7 +172,7 @@ public class HtmlScript3Test extends WebDriverTestCase {
 
         String html
             = "<html><head>\n"
-            + "  <script>var logMsg = ''; function log(msg) { logMsg += msg + '§§'; }</script>\n"
+            + "  <script>var logMsg = ''; function log(msg) { logMsg += msg + '\\xA7\\xA7'; }</script>\n"
             + "  <script type='text/javascript'>window.onerror=function(msg) { log(msg); }</script>"
             + "  <script src='" + scriptUrl + "'";
         if (charsetAttribute != null) {
@@ -223,50 +223,53 @@ public class HtmlScript3Test extends WebDriverTestCase {
         }
 
         String htmlContentType = MimeType.TEXT_HTML;
-        if (charsetHtmlResponse != null) {
-            htmlContentType = htmlContentType + "; charset=" + charsetHtmlResponse.getCharset().name();
-        }
-
         Charset htmlResponseCharset = ISO_8859_1;
         if (charsetHtmlResponse != null) {
+            htmlContentType = htmlContentType + "; charset=" + charsetHtmlResponse.getCharset().name();
             htmlResponseCharset = charsetHtmlResponse.getCharset();
         }
 
+        getMockWebConnection().setResponse(URL_FIRST,
+                html.getBytes(htmlResponseCharset), 200, "OK", htmlContentType, null);
+
         expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedAlerts = getExpectedAlerts();
-        try {
-            ServerRestartCount_++;
-            if (ServerRestartCount_ == 200) {
-                stopWebServers();
-                ServerRestartCount_ = 0;
-            }
-            final WebDriver driver = loadPage2(html, URL_FIRST, htmlContentType, htmlResponseCharset, null);
 
-            final String logMsg = (String) ((JavascriptExecutor) driver).executeScript("return logMsg;");
-            final String[] actualAlerts = logMsg.split("§§");
 
-            if (actualAlerts.length == 1) {
-                assertEquals(1, actualAlerts.length);
 
-                final String msg = actualAlerts[0];
-                assertEquals(expectedAlerts[0], "Invalid token");
-                assertTrue(msg, msg.contains("Invalid or unexpected token")
-                                || msg.contains("illegal character")
-                                || msg.contains("Ungültiges Zeichen"));
-            }
-            else {
-                assertArrayEquals(getExpectedAlerts(), actualAlerts);
-            }
-        }
-        catch (final WebDriverException e) {
-            if (!e.getCause().getMessage().contains("illegal character")
-                && !e.getCause().getMessage().contains("is not defined.")) {
-                throw e;
-            }
+        try (MiniServer miniServer1 = new MiniServer(PORT, getMockWebConnection())) {
+            miniServer1.start();
 
-            assertTrue(expectedAlerts.length == 1);
-            final String msg = e.getCause().getMessage();
-            assertTrue(msg, msg.contains(expectedAlerts[0]));
+            try {
+                final WebDriver driver = getWebDriver();
+                driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                final String logMsg = (String) ((JavascriptExecutor) driver).executeScript("return logMsg;");
+                final String[] actualAlerts = logMsg.split("§§");
+
+                if (actualAlerts.length == 1) {
+                    assertEquals(1, actualAlerts.length);
+
+                    final String msg = actualAlerts[0];
+                    assertEquals(expectedAlerts[0], "Invalid token");
+                    assertTrue(msg, msg.contains("Invalid or unexpected token")
+                                    || msg.contains("illegal character")
+                                    || msg.contains("Ungültiges Zeichen"));
+                }
+                else {
+                    assertArrayEquals(getExpectedAlerts(), actualAlerts);
+                }
+            }
+            catch (final WebDriverException e) {
+                if (!e.getCause().getMessage().contains("illegal character")
+                    && !e.getCause().getMessage().contains("is not defined.")) {
+                    throw e;
+                }
+
+                assertTrue(expectedAlerts.length == 1);
+                final String msg = e.getCause().getMessage();
+                assertTrue(msg, msg.contains(expectedAlerts[0]));
+            }
         }
     }
 
@@ -364,24 +367,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591__ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591__ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
     public void _ISO88591__ISO88591_UTF8__false() throws Exception {
         charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, null, false);
@@ -394,24 +379,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
     public void _ISO88591__ISO88591_UTF8__true() throws Exception {
         charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, null, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591__ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591__ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
     }
 
     /**
@@ -436,24 +403,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591__ISO88591_ISO88591_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591__ISO88591_ISO88591_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "�", "?????", "???", "??"})
     public void _ISO88591_UTF8__ISO88591__false() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, null, TestCharset.ISO88591, null, false);
@@ -466,42 +415,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts({"a", "�", "?????", "???", "??"})
     public void _ISO88591_UTF8__ISO88591__true() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, null, TestCharset.ISO88591, null, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_UTF8__BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_UTF8__BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_UTF8_UTF8_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_UTF8_UTF8_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE, true);
     }
 
     /**
@@ -526,24 +439,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_UTF8_ISO88591_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_UTF8_ISO88591_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
     public void _ISO88591_UTF8_ISO88591___false() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, null, false);
@@ -556,24 +451,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
     public void _ISO88591_UTF8_ISO88591___true() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, null, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8, true);
     }
 
     /**
@@ -598,42 +475,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591_UTF8_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591_UTF8_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "ä", "?????", "???", "??"})
     public void _ISO88591_UTF8_ISO88591_ISO88591__false() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, false);
@@ -646,26 +487,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts({"a", "ä", "?????", "???", "??"})
     public void _ISO88591_UTF8_ISO88591_ISO88591__true() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591_ISO88591_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591,
-                TestCharset.ISO88591, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591_ISO88591_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591,
-                TestCharset.ISO88591, BOM_UTF_16BE, true);
     }
 
     /**
@@ -726,42 +547,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_UTF8__BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_UTF8__BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_UTF8_UTF8_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_UTF8_UTF8_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "�", "?????", "???", "??"})
     public void _ISO88591_ISO88591_UTF8_ISO88591__false() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, false);
@@ -774,26 +559,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts({"a", "�", "?????", "???", "??"})
     public void _ISO88591_ISO88591_UTF8_ISO88591__true() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_UTF8_ISO88591_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8,
-                TestCharset.ISO88591, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_UTF8_ISO88591_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8,
-                TestCharset.ISO88591, BOM_UTF_16BE, true);
     }
 
     /**
@@ -818,24 +583,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "Ã¤", "Ø£Ù‡Ù„Ø§Ù‹", "Ð¼Ð¸Ñ€", "æˆ¿é—´"})
     public void _ISO88591_ISO88591_ISO88591_UTF8__false() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, false);
@@ -854,44 +601,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591_UTF8_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591,
-                TestCharset.UTF8, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591_UTF8_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591,
-                TestCharset.UTF8, BOM_UTF_16BE, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "ä", "?????", "???", "??"})
     public void _ISO88591_ISO88591_ISO88591_ISO88591__false() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, false);
@@ -904,26 +613,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts({"a", "ä", "?????", "???", "??"})
     public void _ISO88591_ISO88591_ISO88591_ISO88591__true() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591_ISO88591_BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591,
-                TestCharset.ISO88591, BOM_UTF_16BE, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591_ISO88591_BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591,
-                TestCharset.ISO88591, BOM_UTF_16BE, true);
     }
 
     /**
@@ -1146,24 +835,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_UTF8___BOMUTF16BE_false() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, null, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_UTF8___BOMUTF16BE_true() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, null, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "ä", "?????", "???", "??"})
     public void _UTF8__ISO88591_ISO88591__false() throws Exception {
         charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.ISO88591, null, false);
@@ -1248,114 +919,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts({"a", "�", "?????", "???", "??"})
     public void _UTF8___ISO88591__true() throws Exception {
         charset(TestCharset.UTF8, null, null, TestCharset.ISO88591, null, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_ISO88591_ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_ISO88591_ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_ISO88591_ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_ISO88591_ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_UTF8_ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_UTF8_ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_UTF8_ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_UTF8_ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8__ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8__ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8__ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8__ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, null, BOM_UTF_8, true);
     }
 
     /**
@@ -1704,114 +1267,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __ISO88591_ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __ISO88591_ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __ISO88591_ISO88591__BOMUTF8_false() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __ISO88591_ISO88591__BOMUTF8_true() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __UTF8_ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __UTF8_ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __UTF8_ISO88591__BOMUTF8_false() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __UTF8_ISO88591__BOMUTF8_true() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void ___ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(null, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void ___ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(null, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void ___ISO88591__BOMUTF8_false() throws Exception {
-        charset(null, null, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void ___ISO88591__BOMUTF8_true() throws Exception {
-        charset(null, null, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"a", "ä", "?????", "???", "??"})
     public void _GB2312_ISO88591_ISO88591_ISO88591__false() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, false);
@@ -2148,385 +1603,5 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts({"a", "盲", "兀賴賱丕賸", "屑懈褉", "鎴块棿"})
     public void _GB2312_____true() throws Exception {
         charset(TestCharset.GB2312, null, null, null, null, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_ISO88591_ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_ISO88591_ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_ISO88591_ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_ISO88591_ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_UTF8_ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_UTF8_ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_UTF8_ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_UTF8_ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312__ISO88591_UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312__ISO88591_UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312__ISO88591__BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, null, TestCharset.ISO88591, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312__ISO88591__BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, null, TestCharset.ISO88591, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_ISO88591_ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_ISO88591_ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_UTF8_ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312_UTF8_ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312__ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312__ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591,
-                TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_ISO88591_ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591,
-                TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591_UTF8_ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591__ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _ISO88591__ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_ISO88591_ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_ISO88591_ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_UTF8_ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8_UTF8_ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8__ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _UTF8__ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __ISO88591_ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __ISO88591_ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __UTF8_ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void __UTF8_ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void ___ISO88591_ISO88591_BOMUTF8_false() throws Exception {
-        charset(null, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void ___ISO88591_ISO88591_BOMUTF8_true() throws Exception {
-        charset(null, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312____BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, null, null, null, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312____BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, null, null, null, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312___UTF8_BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, null, null, TestCharset.UTF8, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312___UTF8_BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, null, null, TestCharset.UTF8, BOM_UTF_8, true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312___ISO88591_BOMUTF8_false() throws Exception {
-        charset(TestCharset.GB2312, null, null, TestCharset.ISO88591, BOM_UTF_8, false);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
-    public void _GB2312___ISO88591_BOMUTF8_true() throws Exception {
-        charset(TestCharset.GB2312, null, null, TestCharset.ISO88591, BOM_UTF_8, true);
     }
 }

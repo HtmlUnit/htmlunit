@@ -1069,7 +1069,7 @@ public class HtmlPage extends SgmlPage {
 
         // use info from script tag or fall back to utf-8
         // https://www.rfc-editor.org/rfc/rfc9239#section-4.2
-        if (scriptCharset != null && StandardCharsets.ISO_8859_1 != scriptCharset) {
+        if (scriptCharset != null) {
             request.setDefaultResponseContentCharset(scriptCharset);
         }
         else {
