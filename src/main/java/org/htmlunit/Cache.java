@@ -24,7 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
-import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.http.HttpUtils;
 import org.htmlunit.util.HeaderUtils;
 import org.htmlunit.util.UrlUtils;
 
@@ -285,7 +285,7 @@ public class Cache implements Serializable {
         if (matcher.matches()) {
             return new Date();
         }
-        return HttpClientConverter.parseHttpDate(value);
+        return HttpUtils.parseDate(value);
     }
 
     /**

@@ -36,6 +36,7 @@ import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.http.HttpStatus;
+import org.htmlunit.http.HttpUtils;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
@@ -171,7 +172,10 @@ public final class HttpClientConverter {
      *
      * @param s the string to parse as a date
      * @return the date version of the specified string, or {@code null}
+     *
+     * @deprecated as of version 4.1.0; use {@link HttpUtils#parseDate(String)} instead
      */
+    @Deprecated
     public static Date parseHttpDate(final String s) {
         if (s == null) {
             return null;
@@ -184,7 +188,10 @@ public final class HttpClientConverter {
      *
      * @param date The date to format.
      * @return An RFC 1123 formatted date string.
+     *
+     * @deprecated as of version 4.1.0; use {@link HttpUtils#parseDate(String)} instead
      */
+    @Deprecated
     public static String formatDate(final Date date) {
         return DateUtils.formatDate(date);
     }

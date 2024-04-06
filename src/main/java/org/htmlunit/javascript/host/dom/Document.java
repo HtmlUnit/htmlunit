@@ -80,7 +80,7 @@ import org.htmlunit.html.HtmlSvg;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.UnknownElementFactory;
 import org.htmlunit.html.impl.SimpleRange;
-import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.http.HttpUtils;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -1857,7 +1857,7 @@ public class Document extends Node {
     }
 
     private static Date parseDateOrNow(final String stringDate) {
-        final Date date = HttpClientConverter.parseHttpDate(stringDate);
+        final Date date = HttpUtils.parseDate(stringDate);
         if (date == null) {
             return new Date();
         }
