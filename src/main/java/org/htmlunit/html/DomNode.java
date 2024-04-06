@@ -50,7 +50,6 @@ import org.htmlunit.html.xpath.XPathHelper;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
-import org.htmlunit.util.StringUtils;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -1480,29 +1479,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void setReadyState(final String state) {
         readyState_ = state;
-    }
-
-    /**
-     * Parses the SelectionNamespaces property into a map of prefix/namespace pairs.
-     * The default namespace (specified by xmlns=) is placed in the map using the
-     * empty string ("") key.
-     *
-     * @param selectionNS the value of the SelectionNamespaces property
-     * @return map of prefix/namespace value pairs
-     */
-    private static Map<String, String> parseSelectionNamespaces(final String selectionNS) {
-        final Map<String, String> result = new HashMap<>();
-        final String[] toks = StringUtils.splitAtJavaWhitespace(selectionNS);
-        for (final String tok : toks) {
-            if (tok.startsWith("xmlns=")) {
-                result.put("", tok.substring(7, tok.length() - 7));
-            }
-            else if (tok.startsWith("xmlns:")) {
-                final String[] prefix = tok.substring(6).split("=");
-                result.put(prefix[0], prefix[1].substring(1, prefix[1].length() - 1));
-            }
-        }
-        return result.isEmpty() ? null : result;
     }
 
     /**

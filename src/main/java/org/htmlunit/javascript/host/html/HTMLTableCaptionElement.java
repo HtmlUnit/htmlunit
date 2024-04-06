@@ -29,9 +29,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 @JsxClass(domClass = HtmlCaption.class)
 public class HTMLTableCaptionElement extends HTMLElement {
 
-    /** The default value of the "vAlign" property. */
-    private static final String VALIGN_DEFAULT_VALUE = "";
-
     /**
      * Creates an instance.
      */

@@ -37,7 +37,6 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -210,11 +209,6 @@ public class Document extends Node {
         additionalEventMap.put("AnimationEvent", AnimationEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
     }
-
-    /**
-     * Static counter for {@link #uniqueID_}.
-     */
-    private static final AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
 
     private Window window_;
     private DOMImplementation implementation_;
