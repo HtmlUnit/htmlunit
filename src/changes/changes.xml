@@ -8,6 +8,16 @@
 
     <body>
         <release version="4.1.0" date="April xx, 2024" description="Bugfixes">
+            <action type="add" dev="rbri" issue="#764">
+                Class HttpStatus defining a complete list of Http status codes added.
+            </action>
+            <action type="update" dev="rbri">
+                Http status code constants in are HttpClientConverter deprecated.
+                Please use the constants from HttpStatus.
+            </action>
+            <action type="update" dev="rbri">
+                Deprecated http status code constants removed from WebResponse.
+            </action>
             <action type="fix" dev="rbri">
                 Wrong script encoding was uses in some cases (regression in 4.0.0).
             </action>

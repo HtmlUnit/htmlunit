@@ -33,6 +33,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
@@ -522,7 +523,8 @@ public class CacheTest extends SimpleWebTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
         final WebRequest request = new WebRequest(cssUrl);
-        final WebResponseData data = new WebResponseData(css.getBytes("UTF-8"), 200, "OK", headers);
+        final WebResponseData data = new WebResponseData(css.getBytes("UTF-8"),
+                HttpStatus.SC_OK_200, HttpStatus.SC_OK_200_MSG, headers);
         final WebResponse response = new WebResponse(data, request, 100);
         client.getCache().cacheIfPossible(new WebRequest(cssUrl), response, headers);
 

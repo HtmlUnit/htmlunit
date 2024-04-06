@@ -46,43 +46,79 @@ import org.htmlunit.util.UrlUtils;
  */
 public final class HttpClientConverter {
 
-    /** Forwarder to HttpStatus.SC_OK. */
+    /** Forwarder to HttpStatus.SC_OK.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_OK} instead
+     */
+    @Deprecated
     public static final int OK = HttpStatus.SC_OK;
 
-    /** Forwarder to HttpStatus.SC_NO_CONTENT. */
+    /** Forwarder to HttpStatus.SC_NO_CONTENT.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_NO_CONTENT} instead
+     */
+    @Deprecated
     public static final int NO_CONTENT = HttpStatus.SC_NO_CONTENT;
 
-    /** Forwarder to HttpStatus.MULTIPLE_CHOICES. */
+    /** Forwarder to HttpStatus.MULTIPLE_CHOICES.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_MULTIPLE_CHOICES} instead
+     */
+    @Deprecated
     public static final int MULTIPLE_CHOICES = HttpStatus.SC_MULTIPLE_CHOICES;
 
-    /** Forwarder to HttpStatus.MOVED_PERMANENTLY. */
+    /** Forwarder to HttpStatus.MOVED_PERMANENTLY.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_MOVED_PERMANENTLY} instead
+     */
+    @Deprecated
     public static final int MOVED_PERMANENTLY = HttpStatus.SC_MOVED_PERMANENTLY;
 
-    /** Forwarder to HttpStatus.MOVED_TEMPORARILY. */
+    /** Forwarder to HttpStatus.MOVED_TEMPORARILY.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_MOVED_TEMPORARILY} instead
+     */
+    @Deprecated
     public static final int MOVED_TEMPORARILY = HttpStatus.SC_MOVED_TEMPORARILY;
 
     /** Forwarder to HttpStatus.SEE_OTHER. */
     public static final int SEE_OTHER = HttpStatus.SC_SEE_OTHER;
 
-    /** Forwarder to HttpStatus.TEMPORARY_REDIRECT. */
+    /** Forwarder to HttpStatus.TEMPORARY_REDIRECT.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_TEMPORARY_REDIRECT} instead
+     */
+    @Deprecated
     public static final int TEMPORARY_REDIRECT = HttpStatus.SC_TEMPORARY_REDIRECT;
 
-    /** 308. */
+    /** 308.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_PERMANENT_REDIRECT_308} instead
+     */
+    @Deprecated
     public static final int PERMANENT_REDIRECT = 308;
 
-    /** Forwarder to HttpStatus.NOT_MODIFIED. */
+    /** Forwarder to HttpStatus.NOT_MODIFIED.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_NOT_MODIFIED} instead
+     */
+    @Deprecated
     public static final int NOT_MODIFIED = HttpStatus.SC_NOT_MODIFIED;
 
-    /** Forwarder to HttpStatus.SC_USE_PROXY. */
+    /** Forwarder to HttpStatus.SC_USE_PROXY.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_USE_PROXY} instead
+     */
+    @Deprecated
     public static final int USE_PROXY = HttpStatus.SC_USE_PROXY;
 
-    /** Forwarder to HttpStatus.SC_FORBIDDEN. */
+    /** Forwarder to HttpStatus.SC_FORBIDDEN.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_FORBIDDEN} instead
+     */
+    @Deprecated
     public static final int FORBIDDEN = HttpStatus.SC_FORBIDDEN;
 
-    /** Forwarder to HttpStatus.SC_NOT_FOUND. */
+    /** Forwarder to HttpStatus.SC_NOT_FOUND.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_NOT_FOUND} instead
+     */
+    @Deprecated
     public static final int NOT_FOUND = HttpStatus.SC_NOT_FOUND;
 
-    /** Forwarder to HttpStatus.SC_INTERNAL_SERVER_ERROR. */
+    /** Forwarder to HttpStatus.SC_INTERNAL_SERVER_ERROR.
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_INTERNAL_SERVER_ERROR} instead
+     */
+    @Deprecated
     public static final int INTERNAL_SERVER_ERROR = HttpStatus.SC_INTERNAL_SERVER_ERROR;
 
     private HttpClientConverter() {

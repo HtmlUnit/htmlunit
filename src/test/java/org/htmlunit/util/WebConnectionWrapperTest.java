@@ -23,7 +23,7 @@ import org.htmlunit.WebConnection;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
-import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.http.HttpStatus;
 import org.junit.Test;
 
 /**
@@ -39,7 +39,8 @@ public class WebConnectionWrapperTest extends SimpleWebTestCase {
     @Test
     public void wrapper() throws Exception {
         final List<NameValuePair> emptyList = Collections.emptyList();
-        final WebResponseData data = new WebResponseData(new byte[]{}, HttpClientConverter.OK, "", emptyList);
+        final WebResponseData data = new WebResponseData(new byte[]{},
+                HttpStatus.SC_OK_200, HttpStatus.SC_OK_200_MSG, emptyList);
         final WebResponse response = new WebResponse(data, URL_FIRST, HttpMethod.GET, 0);
         final WebRequest wrs = new WebRequest(URL_FIRST);
 

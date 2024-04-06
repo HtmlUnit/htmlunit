@@ -30,7 +30,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -47,41 +47,6 @@ import org.htmlunit.util.NameValuePair;
  * @author Lai Quang Duong
  */
 public class WebResponse implements Serializable {
-
-    /**
-     * Forwarder to HttpStatus.SC_OK.
-     * @deprecated as of version 3.1.0; use {@link HttpClientConverter#OK} instead
-     */
-    @Deprecated
-    public static final int OK = HttpClientConverter.OK;
-
-    /**
-     * Forwarder to HttpStatus.SC_FORBIDDEN.
-     * @deprecated as of version 3.1.0; use {@link HttpClientConverter#FORBIDDEN} instead
-     */
-    @Deprecated
-    public static final int FORBIDDEN = HttpClientConverter.FORBIDDEN;
-
-    /**
-     * Forwarder to HttpStatus.SC_NOT_FOUND.
-     * @deprecated as of version 3.1.0; use {@link HttpClientConverter#NOT_FOUND} instead
-     */
-    @Deprecated
-    public static final int NOT_FOUND = HttpClientConverter.NOT_FOUND;
-
-    /**
-     * Forwarder to HttpStatus.SC_NO_CONTENT.
-     * @deprecated as of version 3.1.0; use {@link HttpClientConverter#NO_CONTENT} instead
-     */
-    @Deprecated
-    public static final int NO_CONTENT = HttpClientConverter.NO_CONTENT;
-
-    /**
-     * Forwarder to HttpStatus.SC_INTERNAL_SERVER_ERROR.
-     * @deprecated as of version 3.1.0; use {@link HttpClientConverter#INTERNAL_SERVER_ERROR} instead
-     */
-    @Deprecated
-    public static final int INTERNAL_SERVER_ERROR = HttpClientConverter.INTERNAL_SERVER_ERROR;
 
     private static final Log LOG = LogFactory.getLog(WebResponse.class);
     private static final ByteOrderMark[] BOM_HEADERS = {
@@ -420,7 +385,7 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccess() {
         final int statusCode = getStatusCode();
-        return statusCode >= HttpClientConverter.OK && statusCode < HttpClientConverter.MULTIPLE_CHOICES;
+        return statusCode >= HttpStatus.SC_OK_200 && statusCode < HttpStatus.SC_MULTIPLE_CHOICES_300;
     }
 
     /**
@@ -428,8 +393,8 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccessOrUseProxy() {
         final int statusCode = getStatusCode();
-        return (statusCode >= HttpClientConverter.OK && statusCode < HttpClientConverter.MULTIPLE_CHOICES)
-                || statusCode == HttpClientConverter.USE_PROXY;
+        return (statusCode >= HttpStatus.SC_OK_200 && statusCode < HttpStatus.SC_MULTIPLE_CHOICES_300)
+                || statusCode == HttpStatus.SC_USE_PROXY_305;
     }
 
     /**
@@ -437,9 +402,9 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccessOrUseProxyOrNotModified() {
         final int statusCode = getStatusCode();
-        return (statusCode >= HttpClientConverter.OK && statusCode < HttpClientConverter.MULTIPLE_CHOICES)
-                || statusCode == HttpClientConverter.USE_PROXY
-                || statusCode == HttpClientConverter.NOT_MODIFIED;
+        return (statusCode >= HttpStatus.SC_OK_200 && statusCode < HttpStatus.SC_MULTIPLE_CHOICES_300)
+                || statusCode == HttpStatus.SC_USE_PROXY_305
+                || statusCode == HttpStatus.SC_NOT_MODIFIED_304;
     }
 
     /**

@@ -24,7 +24,7 @@ import java.util.Map;
 import org.apache.commons.io.ByteOrderMark;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -569,8 +569,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(scriptUrl, (String) null, HttpClientConverter.NO_CONTENT, "No Content",
-                                                MimeType.TEXT_JAVASCRIPT, null);
+        getMockWebConnection().setResponse(scriptUrl, (String) null,
+                HttpStatus.SC_NO_CONTENT_204, HttpStatus.SC_NO_CONTENT_204_MSG, MimeType.TEXT_JAVASCRIPT, null);
         loadPageVerifyTitle2(html);
     }
 
@@ -935,7 +935,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html = "<html><body><script src='" + URL_SECOND + "'/></body></html>";
 
         final ArrayList<NameValuePair> headers = new ArrayList<>();
-        getMockWebConnection().setResponse(URL_SECOND, (String) null, HttpClientConverter.NO_CONTENT, "No Content",
+        getMockWebConnection().setResponse(URL_SECOND, (String) null,
+                HttpStatus.SC_NO_CONTENT_204, HttpStatus.SC_NO_CONTENT_204_MSG,
                 MimeType.TEXT_JAVASCRIPT,
                 headers);
 

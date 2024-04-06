@@ -31,6 +31,7 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebConnectionWrapper;
@@ -73,7 +74,7 @@ public class DetailsTest extends WebServerTestCase {
                     // construct alternative response
                     final String content = "<html><html>";
                     final WebResponseData data = new WebResponseData(content.getBytes(Charsets.UTF_8),
-                            200, "blocked", Collections.emptyList());
+                            HttpStatus.SC_OK_200, "blocked", Collections.emptyList());
                     final WebResponse blocked = new WebResponse(data, request, 0L);
                     // if you like to check later on for blocked responses
                     blocked.markAsBlocked("Blocked URL: '" + requestUrl.toExternalForm() + "'");
@@ -131,7 +132,7 @@ public class DetailsTest extends WebServerTestCase {
                     // construct alternative response
                     final String alternativeContent = "<html><html>";
                     final WebResponseData data = new WebResponseData(alternativeContent.getBytes(Charsets.UTF_8),
-                            200, "blocked", Collections.emptyList());
+                            HttpStatus.SC_OK_200, "blocked", Collections.emptyList());
                     final WebResponse blocked = new WebResponse(data, webRequest, 0L);
                     // if you like to check later on for blocked responses
                     blocked.markAsBlocked("Blocked URL: '" + url.toExternalForm()

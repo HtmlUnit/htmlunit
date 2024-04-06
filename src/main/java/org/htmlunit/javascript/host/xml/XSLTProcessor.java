@@ -39,6 +39,7 @@ import org.htmlunit.WebResponseData;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
+import org.htmlunit.http.HttpStatus;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -166,8 +167,8 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                         // the StreamResult is used
                         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
                             transformer.transform(xmlSource, new StreamResult(out));
-                            final WebResponseData data =
-                                    new WebResponseData(out.toByteArray(), 200, null, Collections.emptyList());
+                            final WebResponseData data = new WebResponseData(out.toByteArray(),
+                                    HttpStatus.SC_OK_200, HttpStatus.SC_OK_200_MSG, Collections.emptyList());
                             final WebResponse response = new WebResponse(data, null, 0) {
 
                                 // XmlUtils.buildDocument reads the out stream using the contentCharset
