@@ -8,11 +8,6 @@
 
     <body>
         <release version="4.1.0" date="April xx, 2024" description="Bugfixes">
-            <action type="update" dev="rbri">
-                INCOMPATIBLE CHANGE: DefaultCredentialsProvider moved from package 'org.htmlunit' into 'org.htmlunit.httpclient'.
-            </action>
-
-
             <action type="fix" dev="rbri">
                 Wrong script encoding was uses in some cases (regression in 4.0.0).
             </action>
