@@ -12,7 +12,7 @@
                 Class HttpStatus defining a complete list of Http status codes added.
             </action>
             <action type="update" dev="rbri">
-                Http status code constants in are HttpClientConverter deprecated.
+                Http status code constants in HttpClientConverter are deprecated.
                 Please use the constants from HttpStatus.
             </action>
             <action type="update" dev="rbri">
@@ -28,7 +28,6 @@
                 Missing unit test for the ClipboardHandler added.
             </action>
         </release>
-
 
         <release version="4.0.0" date="April 01, 2024" description="IE support removed, htmlunit-websocket-client, Chrome/Edge 123, Firefox 124, Bugfixes">
             <action type="remove" dev="rbri">
