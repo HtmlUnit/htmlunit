@@ -524,7 +524,7 @@ public class CacheTest extends SimpleWebTestCase {
         headers.add(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
         final WebRequest request = new WebRequest(cssUrl);
         final WebResponseData data = new WebResponseData(css.getBytes("UTF-8"),
-                HttpStatus.SC_OK_200, HttpStatus.SC_OK_200_MSG, headers);
+                HttpStatus.OK_200, HttpStatus.OK_200_MSG, headers);
         final WebResponse response = new WebResponse(data, request, 100);
         client.getCache().cacheIfPossible(new WebRequest(cssUrl), response, headers);
 

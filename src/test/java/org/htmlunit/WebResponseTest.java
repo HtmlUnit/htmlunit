@@ -97,7 +97,7 @@ public class WebResponseTest extends WebServerTestCase {
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK_200, HttpStatus.SC_OK_200_MSG,
+        conn.setResponse(URL_FIRST, xml, HttpStatus.OK_200, HttpStatus.OK_200_MSG,
                 "text/xml; charset=\"ISO-8859-1\"", null);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);

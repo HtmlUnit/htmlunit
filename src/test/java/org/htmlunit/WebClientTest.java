@@ -635,7 +635,7 @@ public class WebClientTest extends SimpleWebTestCase {
         }
         else {
             // A redirect should have happened
-            assertEquals(HttpStatus.SC_OK_200, webResponse.getStatusCode());
+            assertEquals(HttpStatus.OK_200, webResponse.getStatusCode());
             assertEquals(newLocation, webResponse.getWebRequest().getUrl());
             assertEquals("Second", page.getTitleText());
             assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());

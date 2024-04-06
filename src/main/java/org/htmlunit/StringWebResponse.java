@@ -70,7 +70,7 @@ public class StringWebResponse extends WebResponse {
         final byte[] content = StringUtils.toByteArray(contentString, charset);
         final List<NameValuePair> compiledHeaders = new ArrayList<>();
         compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, "text/html; charset=" + charset));
-        return new WebResponseData(content, HttpStatus.SC_OK_200, HttpStatus.SC_OK_200_MSG, compiledHeaders);
+        return new WebResponseData(content, HttpStatus.OK_200, HttpStatus.OK_200_MSG, compiledHeaders);
     }
 
     private static WebRequest buildWebRequest(final URL originatingURL, final Charset charset) {

@@ -44,7 +44,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
     public void constructorWithWebResponse() throws Exception {
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData webResponseData = new WebResponseData(ArrayUtils.EMPTY_BYTE_ARRAY,
-                HttpStatus.SC_NOT_FOUND_404, HttpStatus.SC_NOT_FOUND_404_MSG, emptyList);
+                HttpStatus.NOT_FOUND_404, HttpStatus.NOT_FOUND_404_MSG, emptyList);
         final WebResponse webResponse = new WebResponse(webResponseData, URL_FIRST, HttpMethod.GET, 10);
         final FailingHttpStatusCodeException e = new FailingHttpStatusCodeException(webResponse);
 

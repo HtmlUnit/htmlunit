@@ -1019,7 +1019,7 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.DOWNLOAD_ERROR;
         }
         catch (final FailingHttpStatusCodeException e) {
-            if (e.getStatusCode() == HttpStatus.SC_NO_CONTENT_204) {
+            if (e.getStatusCode() == HttpStatus.NO_CONTENT_204) {
                 return JavaScriptLoadResult.NO_CONTENT;
             }
             client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
@@ -1093,7 +1093,7 @@ public class HtmlPage extends SgmlPage {
         client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
 
         final int statusCode = response.getStatusCode();
-        if (statusCode == HttpStatus.SC_NO_CONTENT_204) {
+        if (statusCode == HttpStatus.NO_CONTENT_204) {
             throw new FailingHttpStatusCodeException(response);
         }
 

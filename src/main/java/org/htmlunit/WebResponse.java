@@ -385,7 +385,7 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccess() {
         final int statusCode = getStatusCode();
-        return statusCode >= HttpStatus.SC_OK_200 && statusCode < HttpStatus.SC_MULTIPLE_CHOICES_300;
+        return statusCode >= HttpStatus.OK_200 && statusCode < HttpStatus.MULTIPLE_CHOICES_300;
     }
 
     /**
@@ -393,8 +393,8 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccessOrUseProxy() {
         final int statusCode = getStatusCode();
-        return (statusCode >= HttpStatus.SC_OK_200 && statusCode < HttpStatus.SC_MULTIPLE_CHOICES_300)
-                || statusCode == HttpStatus.SC_USE_PROXY_305;
+        return (statusCode >= HttpStatus.OK_200 && statusCode < HttpStatus.MULTIPLE_CHOICES_300)
+                || statusCode == HttpStatus.USE_PROXY_305;
     }
 
     /**
@@ -402,9 +402,9 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccessOrUseProxyOrNotModified() {
         final int statusCode = getStatusCode();
-        return (statusCode >= HttpStatus.SC_OK_200 && statusCode < HttpStatus.SC_MULTIPLE_CHOICES_300)
-                || statusCode == HttpStatus.SC_USE_PROXY_305
-                || statusCode == HttpStatus.SC_NOT_MODIFIED_304;
+        return (statusCode >= HttpStatus.OK_200 && statusCode < HttpStatus.MULTIPLE_CHOICES_300)
+                || statusCode == HttpStatus.USE_PROXY_305
+                || statusCode == HttpStatus.NOT_MODIFIED_304;
     }
 
     /**

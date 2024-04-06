@@ -68,7 +68,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
     private static final class OnlyLocalConnectionWrapper extends WebConnectionWrapper {
         private static final WebResponseData responseData =
                 new WebResponseData("not found".getBytes(StandardCharsets.US_ASCII),
-                        HttpStatus.SC_NOT_FOUND_404, HttpStatus.SC_NOT_FOUND_404_MSG,
+                        HttpStatus.NOT_FOUND_404, HttpStatus.NOT_FOUND_404_MSG,
                         new ArrayList<NameValuePair>());
 
 

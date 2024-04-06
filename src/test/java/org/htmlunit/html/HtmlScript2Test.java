@@ -570,7 +570,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setResponse(scriptUrl, (String) null,
-                HttpStatus.SC_NO_CONTENT_204, HttpStatus.SC_NO_CONTENT_204_MSG, MimeType.TEXT_JAVASCRIPT, null);
+                HttpStatus.NO_CONTENT_204, HttpStatus.NO_CONTENT_204_MSG, MimeType.TEXT_JAVASCRIPT, null);
         loadPageVerifyTitle2(html);
     }
 
@@ -936,7 +936,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
         final ArrayList<NameValuePair> headers = new ArrayList<>();
         getMockWebConnection().setResponse(URL_SECOND, (String) null,
-                HttpStatus.SC_NO_CONTENT_204, HttpStatus.SC_NO_CONTENT_204_MSG,
+                HttpStatus.NO_CONTENT_204, HttpStatus.NO_CONTENT_204_MSG,
                 MimeType.TEXT_JAVASCRIPT,
                 headers);
 

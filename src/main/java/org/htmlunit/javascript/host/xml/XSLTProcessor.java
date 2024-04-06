@@ -168,7 +168,7 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
                             transformer.transform(xmlSource, new StreamResult(out));
                             final WebResponseData data = new WebResponseData(out.toByteArray(),
-                                    HttpStatus.SC_OK_200, HttpStatus.SC_OK_200_MSG, Collections.emptyList());
+                                    HttpStatus.OK_200, HttpStatus.OK_200_MSG, Collections.emptyList());
                             final WebResponse response = new WebResponse(data, null, 0) {
 
                                 // XmlUtils.buildDocument reads the out stream using the contentCharset

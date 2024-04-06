@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -36,6 +35,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
@@ -47,79 +47,79 @@ import org.htmlunit.util.UrlUtils;
 public final class HttpClientConverter {
 
     /** Forwarder to HttpStatus.SC_OK.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_OK} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#OK} instead
      */
     @Deprecated
-    public static final int OK = HttpStatus.SC_OK;
+    public static final int OK = org.apache.http.HttpStatus.SC_OK;
 
     /** Forwarder to HttpStatus.SC_NO_CONTENT.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_NO_CONTENT} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#NO_CONTENT} instead
      */
     @Deprecated
-    public static final int NO_CONTENT = HttpStatus.SC_NO_CONTENT;
+    public static final int NO_CONTENT = org.apache.http.HttpStatus.SC_NO_CONTENT;
 
     /** Forwarder to HttpStatus.MULTIPLE_CHOICES.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_MULTIPLE_CHOICES} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#MULTIPLE_CHOICES} instead
      */
     @Deprecated
-    public static final int MULTIPLE_CHOICES = HttpStatus.SC_MULTIPLE_CHOICES;
+    public static final int MULTIPLE_CHOICES = org.apache.http.HttpStatus.SC_MULTIPLE_CHOICES;
 
     /** Forwarder to HttpStatus.MOVED_PERMANENTLY.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_MOVED_PERMANENTLY} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#MOVED_PERMANENTLY} instead
      */
     @Deprecated
-    public static final int MOVED_PERMANENTLY = HttpStatus.SC_MOVED_PERMANENTLY;
+    public static final int MOVED_PERMANENTLY = org.apache.http.HttpStatus.SC_MOVED_PERMANENTLY;
 
     /** Forwarder to HttpStatus.MOVED_TEMPORARILY.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_MOVED_TEMPORARILY} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#MOVED_TEMPORARILY} instead
      */
     @Deprecated
-    public static final int MOVED_TEMPORARILY = HttpStatus.SC_MOVED_TEMPORARILY;
+    public static final int MOVED_TEMPORARILY = org.apache.http.HttpStatus.SC_MOVED_TEMPORARILY;
 
     /** Forwarder to HttpStatus.SEE_OTHER. */
-    public static final int SEE_OTHER = HttpStatus.SC_SEE_OTHER;
+    public static final int SEE_OTHER = org.apache.http.HttpStatus.SC_SEE_OTHER;
 
     /** Forwarder to HttpStatus.TEMPORARY_REDIRECT.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_TEMPORARY_REDIRECT} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#TEMPORARY_REDIRECT} instead
      */
     @Deprecated
-    public static final int TEMPORARY_REDIRECT = HttpStatus.SC_TEMPORARY_REDIRECT;
+    public static final int TEMPORARY_REDIRECT = org.apache.http.HttpStatus.SC_TEMPORARY_REDIRECT;
 
     /** 308.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_PERMANENT_REDIRECT_308} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#PERMANENT_REDIRECT_308} instead
      */
     @Deprecated
     public static final int PERMANENT_REDIRECT = 308;
 
     /** Forwarder to HttpStatus.NOT_MODIFIED.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_NOT_MODIFIED} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#NOT_MODIFIED} instead
      */
     @Deprecated
-    public static final int NOT_MODIFIED = HttpStatus.SC_NOT_MODIFIED;
+    public static final int NOT_MODIFIED = org.apache.http.HttpStatus.SC_NOT_MODIFIED;
 
     /** Forwarder to HttpStatus.SC_USE_PROXY.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_USE_PROXY} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#USE_PROXY} instead
      */
     @Deprecated
-    public static final int USE_PROXY = HttpStatus.SC_USE_PROXY;
+    public static final int USE_PROXY = org.apache.http.HttpStatus.SC_USE_PROXY;
 
     /** Forwarder to HttpStatus.SC_FORBIDDEN.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_FORBIDDEN} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#FORBIDDEN} instead
      */
     @Deprecated
-    public static final int FORBIDDEN = HttpStatus.SC_FORBIDDEN;
+    public static final int FORBIDDEN = org.apache.http.HttpStatus.SC_FORBIDDEN;
 
     /** Forwarder to HttpStatus.SC_NOT_FOUND.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_NOT_FOUND} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#NOT_FOUND} instead
      */
     @Deprecated
-    public static final int NOT_FOUND = HttpStatus.SC_NOT_FOUND;
+    public static final int NOT_FOUND = org.apache.http.HttpStatus.SC_NOT_FOUND;
 
     /** Forwarder to HttpStatus.SC_INTERNAL_SERVER_ERROR.
-     * @deprecated as of version 4.1.0; use {@link HttpStatus#SC_INTERNAL_SERVER_ERROR} instead
+     * @deprecated as of version 4.1.0; use {@link HttpStatus#INTERNAL_SERVER_ERRO} instead
      */
     @Deprecated
-    public static final int INTERNAL_SERVER_ERROR = HttpStatus.SC_INTERNAL_SERVER_ERROR;
+    public static final int INTERNAL_SERVER_ERROR = org.apache.http.HttpStatus.SC_INTERNAL_SERVER_ERROR;
 
     private HttpClientConverter() {
     }

@@ -153,7 +153,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_OK_200);
+                response.setStatus(HttpStatus.OK_200);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
@@ -175,7 +175,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     throws ServletException, IOException {
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_OK_200);
+                response.setStatus(HttpStatus.OK_200);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
@@ -201,7 +201,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_FORBIDDEN_403);
+                response.setStatus(HttpStatus.FORBIDDEN_403);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
@@ -227,7 +227,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR_500);
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
@@ -239,7 +239,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
             @Override
             protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setStatus(HttpStatus.SC_FORBIDDEN_403);
+                response.setStatus(HttpStatus.FORBIDDEN_403);
             }
         }
 
@@ -247,7 +247,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
             @Override
             protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR_500);
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
             }
         }
 
@@ -262,7 +262,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_OK_200);
+                response.setStatus(HttpStatus.OK_200);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.flush();

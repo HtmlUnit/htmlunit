@@ -544,7 +544,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final long loadTime = 500L;
 
         final ProtocolVersion protocolVersion = new ProtocolVersion("HTTP", 1, 0);
-        final StatusLine statusLine = new BasicStatusLine(protocolVersion, HttpStatus.SC_OK_200, null);
+        final StatusLine statusLine = new BasicStatusLine(protocolVersion, HttpStatus.OK_200, null);
         final HttpResponse httpResponse = new BasicHttpResponse(statusLine);
 
         final HttpEntity responseEntity = new StringEntity(content);
@@ -556,7 +556,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             final WebResponse response = (WebResponse) method.invoke(connection,
                     httpResponse, new WebRequest(url), downloadedContent, Long.valueOf(loadTime));
 
-            assertEquals(HttpStatus.SC_OK_200, response.getStatusCode());
+            assertEquals(HttpStatus.OK_200, response.getStatusCode());
             assertEquals(url, response.getWebRequest().getUrl());
             assertEquals(loadTime, response.getLoadTime());
             assertEquals(content, response.getContentAsString());
