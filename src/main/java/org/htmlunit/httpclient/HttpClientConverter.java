@@ -165,7 +165,7 @@ public final class HttpClientConverter {
      * @param enc the charset
      * @return the query string from the given parameters
      *
-     * @deprecated as of version 4.1.0; use {@link HttpUtils#toQueryFormFields(Iterable, Charset))} instead
+     * @deprecated as of version 4.1.0; use {@link HttpUtils#toQueryFormFields(Iterable, Charset)} instead
      */
     @Deprecated
     public static String toQueryFormFields(final List<NameValuePair> parameters, final Charset enc) {
