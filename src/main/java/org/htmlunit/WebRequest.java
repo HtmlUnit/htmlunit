@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.http.auth.Credentials;
+import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.util.NameValuePair;
@@ -357,8 +358,7 @@ public class WebRequest implements Serializable {
                 return normalize(getRequestParameters());
             }
 
-            return normalize(HttpClientConverter.parseUrlQuery(getUrl().getQuery(), getCharset()));
-
+            return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
         }
 
         if (getEncodingType() == FormEncodingType.URL_ENCODED && HttpMethod.POST == getHttpMethod()) {
