@@ -614,7 +614,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final String date = "Thu, 02 Mar 2023 02:00:00 GMT";
         final String etag = "foo";
-        final String lastModified = "Thu, 01 Mar 2023 01:00:00 GMT";
+        final String lastModified = "Wed, 01 Mar 2023 01:00:00 GMT";
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Date", date));
@@ -649,7 +649,7 @@ public class CacheTest extends SimpleWebTestCase {
         assertEquals(null, cached.getResponseHeaderValue("X-Content-Type-Options"));
 
         final String updatedEtag = "bar";
-        final String updatedLastModified = "Thu, 01 Mar 2023 02:00:00 GMT";
+        final String updatedLastModified = "Wed, 01 Mar 2023 02:00:00 GMT";
 
         final List<NameValuePair> headers3 = new ArrayList<>();
         headers3.add(new NameValuePair(CACHE_CONTROL, "some-other-value, no-cache"));
