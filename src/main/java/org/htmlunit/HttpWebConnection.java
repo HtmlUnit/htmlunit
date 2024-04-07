@@ -105,11 +105,11 @@ import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.TextUtils;
 import org.htmlunit.WebRequest.HttpHint;
+import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import org.htmlunit.httpclient.HtmlUnitCookieStore;
 import org.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
-import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.httpclient.SocksConnectionSocketFactory;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
@@ -296,8 +296,7 @@ public class HttpWebConnection implements WebConnection {
         // POST, PUT and PATCH
         if (httpMethod instanceof HttpEntityEnclosingRequest) {
             // developer note:
-            // this has to be in sync with
-            // org.htmlunit.WebRequest.getRequestParameters()
+            // this has to be in sync with org.htmlunit.WebRequest.getRequestParameters()
 
             final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
@@ -305,8 +304,7 @@ public class HttpWebConnection implements WebConnection {
                 final HttpPost postMethod = (HttpPost) method;
                 if (webRequest.getRequestBody() == null) {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                    final String query = URLEncodedUtils.format(
-                                            HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
+                    final String query = HttpUtils.toQueryFormFields(pairs, charset);
 
                     final StringEntity urlEncodedEntity;
                     if (webRequest.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
@@ -375,8 +373,7 @@ public class HttpWebConnection implements WebConnection {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
             if (!webRequest.getRequestParameters().isEmpty()) {
                 final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                final String query = URLEncodedUtils.format(
-                                        HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
+                final String query = HttpUtils.toQueryFormFields(pairs, charset);
                 uri = UrlUtils.toURI(url, query);
                 httpMethod.setURI(uri);
             }

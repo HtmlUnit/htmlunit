@@ -26,8 +26,7 @@ import java.util.List;
 
 import org.apache.http.auth.BasicUserPrincipal;
 import org.apache.http.auth.Credentials;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.http.HttpUtils;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
@@ -345,8 +344,7 @@ public class WebRequestTest {
         assertEquals("world", request.getParameters().get(0).getValue());
 
         // test for our internal conversation
-        String query = URLEncodedUtils.
-                format(HttpClientConverter.nameValuePairsToHttpClient(pairs), StandardCharsets.UTF_8);
+        String query = HttpUtils.toQueryFormFields(pairs, StandardCharsets.UTF_8);
         assertEquals("http://localhost/test?hello=world", UrlUtils.toURI(url, query).toString());
 
         pairs.add(new NameValuePair("empty", ""));
@@ -355,8 +353,7 @@ public class WebRequestTest {
         assertEquals("", request.getParameters().get(1).getValue());
 
         // test for our internal conversation
-        query = URLEncodedUtils.
-                format(HttpClientConverter.nameValuePairsToHttpClient(pairs), StandardCharsets.UTF_8);
+        query = HttpUtils.toQueryFormFields(pairs, StandardCharsets.UTF_8);
         assertEquals("http://localhost/test?hello=world&empty=", UrlUtils.toURI(url, query).toString());
 
         pairs.add(new NameValuePair("null", null));
@@ -365,8 +362,7 @@ public class WebRequestTest {
         assertEquals("", request.getParameters().get(2).getValue());
 
         // test for our internal conversation
-        query = URLEncodedUtils.
-                format(HttpClientConverter.nameValuePairsToHttpClient(pairs), StandardCharsets.UTF_8);
+        query = HttpUtils.toQueryFormFields(pairs, StandardCharsets.UTF_8);
         assertEquals("http://localhost/test?hello=world&empty=&null", UrlUtils.toURI(url, query).toString());
     }
 

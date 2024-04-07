@@ -19,6 +19,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -97,57 +98,57 @@ public class HttpUtilsTest extends WebTestCase {
     public void testParseURLCodedContent() throws Exception {
         List<NameValuePair> result;
 
-        result = parseUrlQuery("");
+        result = HttpUtils.parseUrlQuery("", StandardCharsets.UTF_8);
         Assert.assertTrue(result.isEmpty());
 
-        result = parseUrlQuery("Name0");
+        result = HttpUtils.parseUrlQuery("Name0", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "Name0", null);
 
-        result = parseUrlQuery("Name1=Value1");
+        result = HttpUtils.parseUrlQuery("Name1=Value1", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "Name1", "Value1");
 
-        result = parseUrlQuery("Name2=");
+        result = HttpUtils.parseUrlQuery("Name2=", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "Name2", "");
 
-        result = parseUrlQuery("Name3");
+        result = HttpUtils.parseUrlQuery("Name3", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "Name3", null);
 
-        result = parseUrlQuery("Name4=Value%204%21");
+        result = HttpUtils.parseUrlQuery("Name4=Value%204%21", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "Name4", "Value 4!");
 
-        result = parseUrlQuery("Name4=Value%2B4%21");
+        result = HttpUtils.parseUrlQuery("Name4=Value%2B4%21", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "Name4", "Value+4!");
 
-        result = parseUrlQuery("Name4=Value%204%21%20%214");
+        result = HttpUtils.parseUrlQuery("Name4=Value%204%21%20%214", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "Name4", "Value 4! !4");
 
-        result = parseUrlQuery("Name5=aaa&Name6=bbb");
+        result = HttpUtils.parseUrlQuery("Name5=aaa&Name6=bbb", StandardCharsets.UTF_8);
         Assert.assertEquals(2, result.size());
         assertNameValuePair(result.get(0), "Name5", "aaa");
         assertNameValuePair(result.get(1), "Name6", "bbb");
 
-        result = parseUrlQuery("Name7=aaa&Name7=b%2Cb&Name7=ccc");
+        result = HttpUtils.parseUrlQuery("Name7=aaa&Name7=b%2Cb&Name7=ccc", StandardCharsets.UTF_8);
         Assert.assertEquals(3, result.size());
         assertNameValuePair(result.get(0), "Name7", "aaa");
         assertNameValuePair(result.get(1), "Name7", "b,b");
         assertNameValuePair(result.get(2), "Name7", "ccc");
 
-        result = parseUrlQuery("Name8=xx%2C%20%20yy%20%20%2Czz");
+        result = HttpUtils.parseUrlQuery("Name8=xx%2C%20%20yy%20%20%2Czz", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "Name8", "xx,  yy  ,zz");
 
-        result = parseUrlQuery("price=10%20%E2%82%AC");
+        result = HttpUtils.parseUrlQuery("price=10%20%E2%82%AC", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "price", "10 \u20AC");
 
-        result = parseUrlQuery("a=b\"c&d=e");
+        result = HttpUtils.parseUrlQuery("a=b\"c&d=e", StandardCharsets.UTF_8);
         Assert.assertEquals(2, result.size());
         assertNameValuePair(result.get(0), "a", "b\"c");
         assertNameValuePair(result.get(1), "d", "e");
@@ -157,21 +158,17 @@ public class HttpUtilsTest extends WebTestCase {
     public void testParseInvalidURLCodedContent() throws Exception {
         List<NameValuePair> result;
 
-        result = parseUrlQuery("name=%");
+        result = HttpUtils.parseUrlQuery("name=%", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "name", "%");
 
-        result = parseUrlQuery("name=%a");
+        result = HttpUtils.parseUrlQuery("name=%a", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "name", "%a");
 
-        result = parseUrlQuery("name=%wa%20");
+        result = HttpUtils.parseUrlQuery("name=%wa%20", StandardCharsets.UTF_8);
         Assert.assertEquals(1, result.size());
         assertNameValuePair(result.get(0), "name", "%wa ");
-    }
-
-    private static List<NameValuePair> parseUrlQuery(final String params) {
-        return HttpUtils.parseUrlQuery(params, StandardCharsets.UTF_8);
     }
 
     private static void assertNameValuePair(
@@ -180,5 +177,51 @@ public class HttpUtilsTest extends WebTestCase {
             final String expectedValue) {
         Assert.assertEquals(parameter.getName(), expectedName);
         Assert.assertEquals(parameter.getValue(), expectedValue);
+    }
+
+    @Test
+    public void toQueryFormFields() {
+        final List<NameValuePair> params = new ArrayList<>();
+        Assert.assertEquals("", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name0", null));
+        Assert.assertEquals("Name0", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name1", "Value1"));
+        Assert.assertEquals("Name1=Value1", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name2", ""));
+        Assert.assertEquals("Name2=", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name4", "Value 4&"));
+        Assert.assertEquals("Name4=Value+4%26", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name4", "Value+4&"));
+        Assert.assertEquals("Name4=Value%2B4%26", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name4", "Value 4& =4"));
+        Assert.assertEquals("Name4=Value+4%26+%3D4", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name5", "aaa"));
+        params.add(new NameValuePair("Name6", "bbb"));
+        Assert.assertEquals("Name5=aaa&Name6=bbb", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name7", "aaa"));
+        params.add(new NameValuePair("Name7", "b,b"));
+        params.add(new NameValuePair("Name7", "ccc"));
+        Assert.assertEquals("Name7=aaa&Name7=b%2Cb&Name7=ccc",
+                HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
+
+        params.clear();
+        params.add(new NameValuePair("Name8", "xx,  yy  ,zz"));
+        Assert.assertEquals("Name8=xx%2C++yy++%2Czz", HttpUtils.toQueryFormFields(params, StandardCharsets.US_ASCII));
     }
 }

@@ -9,7 +9,7 @@
     <body>
         <release version="4.1.0" date="April xx, 2024" description="Bugfixes">
             <action type="update" dev="rbri">
-                HttpClientConverter.parseUrlQuery(String, Charset) is deprecated.
+                HttpClientConverter.parseUrlQuery(String, Charset) and toQueryFormFields(List<NameValuePair>, Charset) are deprecated.
                 Please use HttpUtils instead.
             </action>
             <action type="update" dev="rbri">

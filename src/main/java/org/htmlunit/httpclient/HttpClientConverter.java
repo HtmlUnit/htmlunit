@@ -164,7 +164,10 @@ public final class HttpClientConverter {
      * @param parameters the paramters
      * @param enc the charset
      * @return the query string from the given parameters
+     *
+     * @deprecated as of version 4.1.0; use {@link HttpUtils#toQueryFormFields(Iterable, Charset))} instead
      */
+    @Deprecated
     public static String toQueryFormFields(final List<NameValuePair> parameters, final Charset enc) {
         return URLEncodedUtils.format(nameValuePairsToHttpClient(parameters), enc);
     }

@@ -39,9 +39,32 @@ import org.htmlunit.util.NameValuePair;
 public final class HttpUtils {
 
     /**
+     * Safe characters for x-www-form-urlencoded data;
+     * i.e. alphanumeric plus {@code "-", "_", ".", "*"}
+     */
+    private static final BitSet URLENCODER   = new BitSet(256);
+
+    static {
+        for (int i = 'a'; i <= 'z'; i++) {
+            URLENCODER.set(i);
+        }
+        for (int i = 'A'; i <= 'Z'; i++) {
+            URLENCODER.set(i);
+        }
+
+        for (int i = '0'; i <= '9'; i++) {
+            URLENCODER.set(i);
+        }
+        URLENCODER.set('_');
+        URLENCODER.set('-');
+        URLENCODER.set('.');
+        URLENCODER.set('*');
+    }
+
+    /**
      * Date format pattern used to parse HTTP date headers in RFC 1123 format.
      */
-    public static final String PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
+    private static final String PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
     /** RFC 1123 date formatter. */
     private static final DateTimeFormatter FORMATTER_RFC1123 = new DateTimeFormatterBuilder()
@@ -107,10 +130,10 @@ public final class HttpUtils {
 
         for (final DateTimeFormatter dateFormatter : STANDARD_PATTERNS) {
             try {
-                final Instant instant = Instant.from(dateFormatter.parse(v));
-                return new Date(instant.toEpochMilli());
+                return new Date(Instant.from(dateFormatter.parse(v)).toEpochMilli());
             }
             catch (final DateTimeParseException ignore) {
+                // ignore
             }
         }
         return null;
@@ -142,24 +165,22 @@ public final class HttpUtils {
             return new ArrayList<>(0);
         }
 
-        final TokenParser tokenParser = TokenParser.INSTANCE;
-        final ParseRange cursor = new ParseRange(0, s.length());
-
         final BitSet delimSet = new BitSet();
         delimSet.set('&');
         delimSet.set(';');
 
+        final ParseRange cursor = new ParseRange(0, s.length());
         final List<NameValuePair> list = new ArrayList<>();
         while (!cursor.atEnd()) {
             delimSet.set('=');
-            final String name = tokenParser.parseToken(s, cursor, delimSet);
+            final String name = parseToken(s, cursor, delimSet);
             String value = null;
             if (!cursor.atEnd()) {
                 final int delim = s.charAt(cursor.getPos());
                 cursor.updatePos(cursor.getPos() + 1);
                 if (delim == '=') {
                     delimSet.clear('=');
-                    value = tokenParser.parseToken(s, cursor, delimSet);
+                    value = parseToken(s, cursor, delimSet);
                     if (!cursor.atEnd()) {
                         cursor.updatePos(cursor.getPos() + 1);
                     }
@@ -212,107 +233,141 @@ public final class HttpUtils {
         return charset.decode(bb).toString();
     }
 
+    /**
+     * @param parameters the paramters
+     * @param charset the charset
+     * @return the query string from the given parameters
+     */
+    public static String toQueryFormFields(final Iterable<? extends NameValuePair> parameters, final Charset charset) {
+        final StringBuilder result = new StringBuilder();
+        for (final NameValuePair parameter : parameters) {
+            final String encodedName = encodeFormFields(parameter.getName(), charset);
+            final String encodedValue = encodeFormFields(parameter.getValue(), charset);
+            if (result.length() > 0) {
+                result.append('&');
+            }
+            result.append(encodedName);
+            if (encodedValue != null) {
+                result.append('=');
+                result.append(encodedValue);
+            }
+        }
+        return result.toString();
+    }
+
+    private static String encodeFormFields(final String content, Charset charset) {
+        if (content == null) {
+            return null;
+        }
+        if (charset == null) {
+            charset = StandardCharsets.UTF_8;
+        }
+
+        final StringBuilder buf = new StringBuilder();
+        final ByteBuffer bb = charset.encode(content);
+        while (bb.hasRemaining()) {
+            final int b = bb.get() & 0xff;
+            if (URLENCODER.get(b)) {
+                buf.append((char) b);
+            }
+            else if (b == ' ') {
+                buf.append('+');
+            }
+            else {
+                buf.append("%");
+                final char hex1 = Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, 16));
+                final char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, 16));
+                buf.append(hex1);
+                buf.append(hex2);
+            }
+        }
+        return buf.toString();
+    }
+
     private HttpUtils() {
     }
 
-    private static class TokenParser {
-
-        /** US-ASCII CR, carriage return (13). */
-        private static final char CR = '\r';
-
-        /** US-ASCII LF, line feed (10). */
-        private static final char LF = '\n';
-
-        /** US-ASCII SP, space (32). */
-        private static final char SP = ' ';
-
-        /** US-ASCII HT, horizontal-tab (9). */
-        private static final char HT = '\t';
-
-        public static boolean isWhitespace(final char ch) {
-            return ch == SP || ch == HT || ch == CR || ch == LF;
-        }
-
-        private static final TokenParser INSTANCE = new TokenParser();
-
-        /**
-         * Extracts from the sequence of chars a token terminated with any of the given delimiters
-         * discarding semantically insignificant whitespace characters.
-         *
-         * @param buf buffer with the sequence of chars to be parsed
-         * @param range defines the bounds and current position of the buffer
-         * @param delimiters set of delimiting characters. Can be {@code null} if the token
-         *  is not delimited by any character.
-         */
-        private String parseToken(final String buf, final ParseRange range, final BitSet delimiters) {
-            final StringBuilder dst = new StringBuilder();
-            boolean whitespace = false;
-            while (!range.atEnd()) {
-                final char current = buf.charAt(range.getPos());
-                if (delimiters.get(current)) {
-                    break;
-                }
-                else if (isWhitespace(current)) {
-                    skipWhiteSpace(buf, range);
-                    whitespace = true;
-                }
-                else {
-                    if (whitespace && dst.length() > 0) {
-                        dst.append(' ');
-                    }
-                    copyContent(buf, range, delimiters, dst);
-                    whitespace = false;
-                }
+    /**
+     * Extracts from the sequence of chars a token terminated with any of the given delimiters
+     * discarding semantically insignificant whitespace characters.
+     *
+     * @param buf buffer with the sequence of chars to be parsed
+     * @param range defines the bounds and current position of the buffer
+     * @param delimiters set of delimiting characters. Can be {@code null} if the token
+     *  is not delimited by any character.
+     */
+    private static String parseToken(final String buf, final ParseRange range, final BitSet delimiters) {
+        final StringBuilder dst = new StringBuilder();
+        boolean whitespace = false;
+        while (!range.atEnd()) {
+            final char current = buf.charAt(range.getPos());
+            if (delimiters.get(current)) {
+                break;
             }
-            return dst.toString();
+            else if (isWhitespace(current)) {
+                skipWhiteSpace(buf, range);
+                whitespace = true;
+            }
+            else {
+                if (whitespace && dst.length() > 0) {
+                    dst.append(' ');
+                }
+                copyContent(buf, range, delimiters, dst);
+                whitespace = false;
+            }
+        }
+        return dst.toString();
+    }
+
+    /**
+     * Skips semantically insignificant whitespace characters and moves the cursor to the closest
+     * non-whitespace character.
+     *
+     * @param buf buffer with the sequence of chars to be parsed
+     * @param range defines the bounds and current position of the buffer
+     */
+    private static void skipWhiteSpace(final String buf, final ParseRange range) {
+        int pos = range.getPos();
+        final int indexTo = range.getUpperBound();
+
+        for (int i = pos; i < indexTo; i++) {
+            if (!isWhitespace(buf.charAt(i))) {
+                break;
+            }
+            pos++;
+        }
+        range.updatePos(pos);
+    }
+
+    /**
+     * Transfers content into the destination buffer until a whitespace character or any of
+     * the given delimiters is encountered.
+     *
+     * @param buf buffer with the sequence of chars to be parsed
+     * @param range defines the bounds and current position of the buffer
+     * @param delimiters set of delimiting characters. Can be {@code null} if the value
+     *  is delimited by a whitespace only.
+     * @param dst destination buffer
+     */
+    private static void copyContent(final String buf, final ParseRange range,
+            final BitSet delimiters, final StringBuilder dst) {
+        int pos = range.getPos();
+        final int indexTo = range.getUpperBound();
+
+        for (int i = pos; i < indexTo; i++) {
+            final char current = buf.charAt(i);
+            if ((delimiters.get(current)) || isWhitespace(current)) {
+                break;
+            }
+            pos++;
+            dst.append(current);
         }
 
-        /**
-         * Skips semantically insignificant whitespace characters and moves the cursor to the closest
-         * non-whitespace character.
-         *
-         * @param buf buffer with the sequence of chars to be parsed
-         * @param range defines the bounds and current position of the buffer
-         */
-        public void skipWhiteSpace(final String buf, final ParseRange range) {
-            int pos = range.getPos();
-            final int indexFrom = pos;
-            final int indexTo = range.getUpperBound();
-            for (int i = indexFrom; i < indexTo; i++) {
-                final char current = buf.charAt(i);
-                if (!isWhitespace(current)) {
-                    break;
-                }
-                pos++;
-            }
-            range.updatePos(pos);
-        }
+        range.updatePos(pos);
+    }
 
-        /**
-         * Transfers content into the destination buffer until a whitespace character or any of
-         * the given delimiters is encountered.
-         *
-         * @param buf buffer with the sequence of chars to be parsed
-         * @param range defines the bounds and current position of the buffer
-         * @param delimiters set of delimiting characters. Can be {@code null} if the value
-         *  is delimited by a whitespace only.
-         * @param dst destination buffer
-         */
-        public void copyContent(final String buf, final ParseRange range,
-                final BitSet delimiters, final StringBuilder dst) {
-            int pos = range.getPos();
-            final int indexFrom = pos;
-            final int indexTo = range.getUpperBound();
-            for (int i = indexFrom; i < indexTo; i++) {
-                final char current = buf.charAt(i);
-                if ((delimiters.get(current)) || isWhitespace(current)) {
-                    break;
-                }
-                pos++;
-                dst.append(current);
-            }
-            range.updatePos(pos);
-        }
+    private static boolean isWhitespace(final char ch) {
+        return ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n';
     }
 
     private static final class ParseRange {
@@ -320,13 +375,6 @@ public final class HttpUtils {
         private int pos_;
 
         ParseRange(final int pos, final int upperBound) {
-            super();
-            if (pos < 0) {
-                throw new IndexOutOfBoundsException("Lower bound cannot be negative");
-            }
-            if (pos > upperBound) {
-                throw new IndexOutOfBoundsException("Lower bound cannot be greater then upper bound");
-            }
             upperBound_ = upperBound;
             pos_ = pos;
         }
@@ -340,9 +388,6 @@ public final class HttpUtils {
         }
 
         void updatePos(final int pos) {
-            if (pos > upperBound_) {
-                throw new IndexOutOfBoundsException("pos: " + pos + " > upperBound: " + upperBound_);
-            }
             pos_ = pos;
         }
 

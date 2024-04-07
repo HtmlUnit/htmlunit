@@ -48,7 +48,7 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
-import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.http.HttpUtils;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.SubmitEvent;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -293,7 +293,7 @@ public class HtmlForm extends HtmlElement {
             if (actionUrl.contains("#")) {
                 anchor = StringUtils.substringAfter(actionUrl, "#");
             }
-            queryFormFields = HttpClientConverter.toQueryFormFields(parameters, enc);
+            queryFormFields = HttpUtils.toQueryFormFields(parameters, enc);
 
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
