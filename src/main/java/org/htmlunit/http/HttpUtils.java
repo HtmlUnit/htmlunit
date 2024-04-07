@@ -14,15 +14,13 @@
  */
 package org.htmlunit.http;
 
-import java.lang.ref.SoftReference;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
 
 /**
  * Http related utils.
@@ -31,90 +29,95 @@ import java.util.TimeZone;
  */
 public final class HttpUtils {
 
-    private static final TimeZone GMT = TimeZone.getTimeZone("GMT");
-    private static final Date DEFAULT_TWO_DIGIT_YEAR_START;
+    /**
+     * Date format pattern used to parse HTTP date headers in RFC 1123 format.
+     */
+    public static final String PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
-    private static final ThreadLocal<SoftReference<Map<String, SimpleDateFormat>>>
-        THREADLOCAL_FORMATS = new ThreadLocal<>();
-
-    private static final String PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
-
-    private static final String[] DEFAULT_PATTERNS = new String[] {
-        PATTERN_RFC1123,
-        "EEE, dd-MMM-yy HH:mm:ss zzz", // RFC1036
-        "EEE MMM d HH:mm:ss yyyy" // ASCTIME
-    };
-
-    static {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone(GMT);
-        calendar.set(2000, Calendar.JANUARY, 1, 0, 0, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-
-        DEFAULT_TWO_DIGIT_YEAR_START = calendar.getTime();
-    }
+    /** RFC 1123 date formatter. */
+    private static final DateTimeFormatter FORMATTER_RFC1123 = new DateTimeFormatterBuilder()
+            .parseLenient()
+            .parseCaseInsensitive()
+            .appendPattern(PATTERN_RFC1123)
+            .toFormatter(Locale.ENGLISH);
 
     /**
-     * Parses the specified date string, assuming that it is formatted
-     * according to RFC 1123, RFC 1036 or as an ANSI C HTTP date header.
-     *
-     * @param dateString the string to parse as a date
-     * @return the date version of the specified string,
-     *  or {@code null} if the specified string is {@code null} or unparseable
+     * Date format pattern used to parse HTTP date headers in RFC 1036 format.
      */
-    public static Date parseDate(final String dateString) {
-        if (dateString == null) {
+    public static final String PATTERN_RFC1036 = "EEE, dd-MMM-yy HH:mm:ss zzz";
+
+    /** RFC 1036 date formatter. */
+    private static final DateTimeFormatter FORMATTER_RFC1036 = new DateTimeFormatterBuilder()
+            .parseLenient()
+            .parseCaseInsensitive()
+            .appendPattern(PATTERN_RFC1036)
+            .toFormatter(Locale.ENGLISH);
+
+    /**
+     * Date format pattern used to parse HTTP date headers in ANSI C
+     * {@code asctime()} format.
+     */
+    private static final String PATTERN_ASCTIME = "EEE MMM d HH:mm:ss yyyy";
+
+    /** ASCII time date formatter. */
+    private static final DateTimeFormatter FORMATTER_ASCTIME = new DateTimeFormatterBuilder()
+            .parseLenient()
+            .parseCaseInsensitive()
+            .appendPattern(PATTERN_ASCTIME)
+            .toFormatter(Locale.ENGLISH);
+
+    /**
+     * Standard date formatters: {@link #FORMATTER_RFC1123}, {@link #FORMATTER_RFC1036}, {@link #FORMATTER_ASCTIME}.
+     */
+    private static final DateTimeFormatter[] STANDARD_PATTERNS = new DateTimeFormatter[] {
+        FORMATTER_RFC1123,
+        FORMATTER_RFC1036,
+        FORMATTER_ASCTIME
+    };
+
+    private static final ZoneId GMT_ID = ZoneId.of("GMT");
+
+    /**
+     * Parses a date value.  The formats used for parsing the date value are retrieved from
+     * the default http params.
+     *
+     * @param dateValue the date value to parse
+     *
+     * @return the parsed date or null if input could not be parsed
+     */
+    public static Date parseDate(final String dateValue) {
+        if (dateValue == null) {
             return null;
         }
 
-        String dateValue = dateString;
+        String v = dateValue;
         // trim single quotes around date if present
-        if (dateValue.length() > 1 && dateValue.startsWith("'") && dateValue.endsWith("'")) {
-            dateValue = dateValue.substring(1, dateValue.length() - 1);
+        if (v.length() > 1 && v.startsWith("'") && v.endsWith("'")) {
+            v = v.substring(1, v.length() - 1);
         }
 
-        for (final String datePattern : DEFAULT_PATTERNS) {
-            final SimpleDateFormat dateFormat = formatFor(datePattern);
-
-            final ParsePosition pos = new ParsePosition(0);
-            final Date result = dateFormat.parse(dateValue, pos);
-            if (pos.getIndex() != 0) {
-                return result;
+        for (final DateTimeFormatter dateFormatter : STANDARD_PATTERNS) {
+            try {
+                final Instant instant = Instant.from(dateFormatter.parse(v));
+                return new Date(instant.toEpochMilli());
+            }
+            catch (final DateTimeParseException ignore) {
             }
         }
         return null;
     }
 
     /**
-     * Formats the given date according to the RFC 1123 pattern
-     * 'EEE, dd MMM yyyy HH:mm:ss zzz'.
+     * Formats the given date according to the RFC 1123 pattern.
      *
      * @param date The date to format.
      * @return An RFC 1123 formatted date string.
+     *
+     * @see #PATTERN_RFC1123
      */
     public static String formatDate(final Date date) {
-        final SimpleDateFormat formatter = formatFor(PATTERN_RFC1123);
-        return formatter.format(date);
-    }
-
-    // cache the format per thread
-    private static SimpleDateFormat formatFor(final String pattern) {
-        final SoftReference<Map<String, SimpleDateFormat>> ref = THREADLOCAL_FORMATS.get();
-        Map<String, SimpleDateFormat> formats = ref == null ? null : ref.get();
-        if (formats == null) {
-            formats = new HashMap<>();
-            THREADLOCAL_FORMATS.set(new SoftReference<>(formats));
-        }
-
-        SimpleDateFormat format = formats.get(pattern);
-        if (format == null) {
-            format = new SimpleDateFormat(pattern, Locale.US);
-            format.setTimeZone(GMT);
-            format.set2DigitYearStart(DEFAULT_TWO_DIGIT_YEAR_START);
-            formats.put(pattern, format);
-        }
-
-        return format;
+        final Instant instant = Instant.ofEpochMilli(date.getTime());
+        return FORMATTER_RFC1123.format(instant.atZone(GMT_ID));
     }
 
     private HttpUtils() {

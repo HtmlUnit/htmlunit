@@ -44,7 +44,7 @@ public class HttpUtilsTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBasicDateParse() throws Exception {
+    public void testBasicDateParse() {
         final Date expected = createDate(2004, Month.NOVEMBER, 13);
         Assert.assertEquals(expected, HttpUtils.parseDate("Sat, 13 Nov 2004 00:00:00 GMT"));
         Assert.assertEquals(expected, HttpUtils.parseDate("Saturday, 13 Nov 2004 00:00:00 GMT"));
@@ -52,6 +52,7 @@ public class HttpUtilsTest extends WebTestCase {
         Assert.assertEquals(expected, HttpUtils.parseDate("Saturday, 13-Nov-2004 00:00:00 GMT"));
         Assert.assertEquals(expected, HttpUtils.parseDate("Sat, 13 Nov 2004 00:00:00 GMT"));
     }
+
     @Test
     public void testMalformedDate() {
         Assert.assertNull(HttpUtils.parseDate("Sat, 13 Nov 2004 00:00:00 GMD"));
@@ -60,27 +61,32 @@ public class HttpUtilsTest extends WebTestCase {
     }
 
     @Test
-    public void testNullInput() throws Exception {
+    public void testParseInvalid() {
+        Assert.assertNull(HttpUtils.parseDate("Friday, 13-Nov-04 00:00:00 GMT"));
+    }
+
+    @Test
+    public void testParseNull() {
         Assert.assertNull(HttpUtils.parseDate(null));
     }
 
     @Test
-    public void testTwoDigitYearDateParse() throws Exception {
+    public void testTwoDigitYearDateParse() {
         Assert.assertEquals(createDate(2004, Month.NOVEMBER, 13),
                 HttpUtils.parseDate("Saturday, 13-Nov-04 00:00:00 GMT"));
 
         Assert.assertEquals(createDate(2074, Month.NOVEMBER, 13),
-                HttpUtils.parseDate("Saturday, 13-Nov-74 00:00:00 GMT"));
+                HttpUtils.parseDate("Tuesday, 13-Nov-74 00:00:00 GMT"));
     }
 
     @Test
-    public void testParseQuotedDate() throws Exception {
+    public void testParseQuotedDate() {
         Assert.assertEquals(createDate(2004, Month.NOVEMBER, 13),
                 HttpUtils.parseDate("'Sat, 13 Nov 2004 00:00:00 GMT'"));
     }
 
     @Test
-    public void testFormatDate() throws Exception {
+    public void testFormatDate() {
         Assert.assertEquals("Sat, 13 Nov 2004 00:00:00 GMT",
                 HttpUtils.formatDate(createDate(2004, Month.NOVEMBER, 13)));
     }
