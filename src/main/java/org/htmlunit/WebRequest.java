@@ -366,7 +366,7 @@ public class WebRequest implements Serializable {
                 return normalize(getRequestParameters());
             }
 
-            return normalize(HttpClientConverter.parseUrlQuery(getRequestBody(), getCharset()));
+            return normalize(HttpUtils.parseUrlQuery(getRequestBody(), getCharset()));
         }
 
         if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
