@@ -240,8 +240,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
         getMockWebConnection().setResponse(url, html);
 
         final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie(url.getHost(), "one", "two", "/", null, false));
-        mgr.addCookie(new Cookie(url.getHost(), "three", "four", "/", null, false));
+        mgr.addCookie(new Cookie(url.getHost(), "one", "two", "/", null, false, false, null));
+        mgr.addCookie(new Cookie(url.getHost(), "three", "four", "/", null, false, false, null));
 
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

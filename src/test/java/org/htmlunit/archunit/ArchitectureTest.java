@@ -348,7 +348,6 @@ public class ArchitectureTest {
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebClient")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebRequest")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.http.Cookie")
 
             .and().resideOutsideOfPackage("org.htmlunit.httpclient..")
         .should().dependOnClassesThat().resideInAnyPackage("org.apache.http..");

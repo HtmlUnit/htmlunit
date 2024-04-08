@@ -56,7 +56,8 @@ public class CookieManager5Test extends WebServerTestCase {
             WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
             assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
 
-            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value");
+            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value",
+                    null, null, false, false, null);
             webClient.getCookieManager().addCookie(cookie);
             webClient.getPage(CookieManager4Test.URL_HOST3);
             lastRequest = getMockWebConnection().getLastWebRequest();
@@ -77,7 +78,8 @@ public class CookieManager5Test extends WebServerTestCase {
             WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
             assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
 
-            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value");
+            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value",
+                    null, null, false, false, null);
             webClient.getCookieManager().addCookie(cookie);
             webClient.getPage(CookieManager4Test.URL_HOST4);
             lastRequest = getMockWebConnection().getLastWebRequest();
@@ -98,7 +100,8 @@ public class CookieManager5Test extends WebServerTestCase {
             WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
             assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
 
-            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value");
+            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value",
+                    null, null, false, false, null);
             webClient.getCookieManager().addCookie(cookie);
             webClient.getPage(CookieManager4Test.URL_HOST1);
             lastRequest = getMockWebConnection().getLastWebRequest();
@@ -119,7 +122,8 @@ public class CookieManager5Test extends WebServerTestCase {
             WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
             assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
 
-            final Cookie cookie = new Cookie("host2." + CookieManager4Test.DOMAIN, "name", "value");
+            final Cookie cookie = new Cookie("host2." + CookieManager4Test.DOMAIN, "name", "value",
+                    null, null, false, false, null);
             webClient.getCookieManager().addCookie(cookie);
             webClient.getPage(CookieManager4Test.URL_HOST1);
             lastRequest = getMockWebConnection().getLastWebRequest();
@@ -144,7 +148,7 @@ public class CookieManager5Test extends WebServerTestCase {
             webClient.getCookieManager().clearCookies();
 
             final Date expires = new Date(System.currentTimeMillis() + 10_000L);
-            Cookie cookie = new Cookie("localhost", "first", "1", null, expires, false, false);
+            Cookie cookie = new Cookie("localhost", "first", "1", null, expires, false, false, null);
             webClient.getCookieManager().addCookie(cookie);
 
             assertEquals(1, webClient.getCookieManager().getCookies().size());

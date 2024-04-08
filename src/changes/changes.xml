@@ -12,16 +12,24 @@
                 INCOMPATIBLE CHANGE: Cookie moved from package 'org.htmlunit.util' to 'org.htmlunit.http'.
             </action>
             <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: All convenience constructores removed from Cookie - the construction should
+                always be done with all properties.
+            </action>
+            <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: DefaultCredentialsProvider moved from package 'org.htmlunit' to 'org.htmlunit.httpclient'.
+            </action>
+
+            <action type="add" dev="rbri" issue="#764">
+                HttpClientCookie added.
             </action>
         </release>
 
         <release version="4.1.0" date="April xx, 2024" description="Bugfixes">
-            <action type="update" dev="rbri">
+            <action type="update" dev="rbri" issue="#764">
                 HttpClientConverter.parseUrlQuery(String, Charset) and toQueryFormFields(List<NameValuePair>, Charset) are deprecated.
                 Please use HttpUtils instead.
             </action>
-            <action type="update" dev="rbri">
+            <action type="update" dev="rbri" issue="#764">
                 HttpClientConverter.formatDate(Date) and HttpClientConverter.parseDate(String) are deprecated.
                 Please use HttpUtils instead.
             </action>

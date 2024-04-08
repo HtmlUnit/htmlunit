@@ -100,30 +100,10 @@ public class CookieManager2Test extends SimpleWebTestCase {
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", null, "/", null, false));
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", null, "/", null, false, false, null));
 
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts()[0], page.getTitleText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("my_name=my_data§")
-    public void cookie_maxAgeMinusOne() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, CookieManagerTest.HTML_ALERT_COOKIE);
-        webClient.setWebConnection(webConnection);
-
-        final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_name", "my_data", "/", -1, false));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], page.getTitleText());

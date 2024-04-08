@@ -16,11 +16,10 @@ package org.htmlunit.http;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.impl.cookie.BasicClientCookie;
 
 /**
  * A cookie. This class is immutable.
@@ -32,49 +31,14 @@ import org.apache.http.impl.cookie.BasicClientCookie;
  */
 public class Cookie implements Serializable {
 
-    private final ClientCookie httpClientCookie_;
-
-    /**
-     * Creates a new cookie with the specified name and value which applies to the specified domain.
-     * The new cookie applies to all paths, never expires and is not secure.
-     * @param domain the domain to which this cookie applies
-     * @param name the cookie name
-     * @param value the cookie name
-     */
-    public Cookie(final String domain, final String name, final String value) {
-        this(domain, name, value, null, null, false);
-    }
-
-    /**
-     * Creates a new cookie with the specified name and value which applies to the specified domain,
-     * the specified path, and expires on the specified date.
-     * @param domain the domain to which this cookie applies
-     * @param name the cookie name
-     * @param value the cookie name
-     * @param path the path to which this cookie applies
-     * @param expires the date on which this cookie expires
-     * @param secure whether or not this cookie is secure (i.e. HTTPS vs HTTP)
-     */
-    public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
-        final boolean secure) {
-        this(domain, name, value, path, expires, secure, false, null);
-    }
-
-    /**
-     * Creates a new cookie with the specified name and value which applies to the specified domain,
-     * the specified path, and expires on the specified date.
-     * @param domain the domain to which this cookie applies
-     * @param name the cookie name
-     * @param value the cookie name
-     * @param path the path to which this cookie applies
-     * @param expires the date on which this cookie expires
-     * @param secure whether or not this cookie is secure (i.e. HTTPS vs HTTP)
-     * @param httpOnly whether or not this cookie should be only used for HTTP(S) headers
-     */
-    public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
-        final boolean secure, final boolean httpOnly) {
-        this(domain, name, value, path, expires, secure, httpOnly, null);
-    }
+    private final String domain_;
+    private final String name_;
+    private final String value_;
+    private final String path_;
+    private final Date expiryDate_;
+    private final boolean isSecure_;
+    private final boolean isHttpOnly_;
+    private final String samesite_;
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain,
@@ -94,50 +58,21 @@ public class Cookie implements Serializable {
             throw new IllegalArgumentException("Cookie domain must be specified");
         }
 
-        final BasicClientCookie cookie = new BasicClientCookie(name, value == null ? "" : value);
-
-        cookie.setDomain(domain);
-        // BasicDomainHandler.match(Cookie, CookieOrigin) checks the attib also (see #333)
-        cookie.setAttribute(ClientCookie.DOMAIN_ATTR, domain);
-
-        cookie.setPath(path);
-        if (expires != null) {
-            cookie.setExpiryDate(expires);
+        domain_ = domain.toLowerCase(Locale.ROOT);
+        name_ = name;
+        if (value == null) {
+            value_ = "";
         }
-        cookie.setSecure(secure);
-        if (httpOnly) {
-            cookie.setAttribute("httponly", "true");
+        else {
+            value_ = value;
         }
+        path_ = path;
+        expiryDate_ = expires;
 
-        if (sameSite != null) {
-            cookie.setAttribute("samesite", sameSite);
-        }
+        isSecure_ = secure;
+        isHttpOnly_ = httpOnly;
 
-        httpClientCookie_ = cookie;
-    }
-
-    /**
-     * Creates a new HtmlUnit cookie from the HttpClient cookie provided.
-     * @param clientCookie the HttpClient cookie
-     */
-    public Cookie(final ClientCookie clientCookie) {
-        httpClientCookie_ = clientCookie;
-    }
-
-    /**
-     * Creates a new cookie with the specified name and value which applies to the specified domain,
-     * the specified path, and expires after the specified amount of time.
-     * @param domain the domain to which this cookie applies
-     * @param name the cookie name
-     * @param value the cookie name
-     * @param path the path to which this cookie applies
-     * @param maxAge the number of seconds for which this cookie is valid; <code>-1</code> indicates that the
-     *        cookie should never expire; other negative numbers are not allowed
-     * @param secure whether or not this cookie is secure (i.e. HTTPS vs HTTP)
-     */
-    public Cookie(final String domain, final String name, final String value, final String path, final int maxAge,
-        final boolean secure) {
-        this(domain, name, value, path, convertToExpiryDate(maxAge), secure);
+        samesite_ = sameSite;
     }
 
     private static Date convertToExpiryDate(final int maxAge) {
@@ -157,7 +92,7 @@ public class Cookie implements Serializable {
      * @return the cookie name
      */
     public String getName() {
-        return httpClientCookie_.getName();
+        return name_;
     }
 
     /**
@@ -165,7 +100,7 @@ public class Cookie implements Serializable {
      * @return the cookie value
      */
     public String getValue() {
-        return httpClientCookie_.getValue();
+        return value_;
     }
 
     /**
@@ -173,7 +108,7 @@ public class Cookie implements Serializable {
      * @return the domain to which this cookie applies ({@code null} for all domains)
      */
     public String getDomain() {
-        return httpClientCookie_.getDomain();
+        return domain_;
     }
 
     /**
@@ -181,7 +116,7 @@ public class Cookie implements Serializable {
      * @return the path to which this cookie applies ({@code null} for all paths)
      */
     public String getPath() {
-        return httpClientCookie_.getPath();
+        return path_;
     }
 
     /**
@@ -189,7 +124,7 @@ public class Cookie implements Serializable {
      * @return the date on which this cookie expires ({@code null} if it never expires)
      */
     public Date getExpires() {
-        return httpClientCookie_.getExpiryDate();
+        return expiryDate_;
     }
 
     /**
@@ -197,7 +132,7 @@ public class Cookie implements Serializable {
      * @return whether or not this cookie is secure (i.e. HTTPS vs HTTP)
      */
     public boolean isSecure() {
-        return httpClientCookie_.isSecure();
+        return isSecure_;
     }
 
     /**
@@ -206,14 +141,14 @@ public class Cookie implements Serializable {
      * @return whether or not this cookie is HttpOnly (i.e. not available in JS).
      */
     public boolean isHttpOnly() {
-        return httpClientCookie_.getAttribute("httponly") != null;
+        return isHttpOnly_;
     }
 
     /**
      * @return the SameSite value or {@code null} if not set.
      */
     public String getSameSite() {
-        return httpClientCookie_.getAttribute("samesite");
+        return samesite_;
     }
 
     /**
@@ -259,13 +194,5 @@ public class Cookie implements Serializable {
                     .append(getDomain())
                     .append(path)
                     .toHashCode();
-    }
-
-    /**
-     * Converts this cookie to an HttpClient cookie.
-     * @return an HttpClient version of this cookie
-     */
-    public org.apache.http.cookie.Cookie toHttpClient() {
-        return httpClientCookie_;
     }
 }

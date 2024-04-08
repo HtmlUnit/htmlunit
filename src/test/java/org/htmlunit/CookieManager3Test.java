@@ -45,7 +45,7 @@ public class CookieManager3Test {
         assertTrue(mgr.getCookies().isEmpty());
 
         // Add a cookie to the manager.
-        final Cookie cookie = new Cookie("localhost", "a", "b");
+        final Cookie cookie = new Cookie("localhost", "a", "b", null, null, false, false, null);
         mgr.addCookie(cookie);
         assertFalse(mgr.getCookies().isEmpty());
 
@@ -71,7 +71,8 @@ public class CookieManager3Test {
         assertTrue(mgr.getCookies().isEmpty());
 
         // Add a cookie after disabling cookies.
-        final Cookie cookie2 = new Cookie("a", "b", "c", "d", new Date(System.currentTimeMillis() + 5000), false);
+        final Cookie cookie2 = new Cookie("a", "b", "c", "d",
+                new Date(System.currentTimeMillis() + 5000), false, false, null);
         mgr.addCookie(cookie2);
         assertTrue(mgr.getCookies().isEmpty());
         assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10_000)));

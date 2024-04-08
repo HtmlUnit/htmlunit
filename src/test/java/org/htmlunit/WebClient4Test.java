@@ -372,7 +372,7 @@ public class WebClient4Test extends WebServerTestCase {
 
         // add cookie to the cookie manager and test if sent
         final CookieManager mgr = client.getCookieManager();
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", "my_value", "/", null, false));
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", "my_value", "/", null, false, false, null));
         wr = new WebRequest(URL_FIRST, HttpMethod.GET);
         client.getPage(wr);
         assertEquals("my_key=my_value", webConnection.getLastAdditionalHeaders().get(HttpHeader.COOKIE));
