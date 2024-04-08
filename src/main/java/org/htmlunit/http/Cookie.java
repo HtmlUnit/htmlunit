@@ -38,7 +38,7 @@ public class Cookie implements Serializable {
     private final Date expiryDate_;
     private final boolean isSecure_;
     private final boolean isHttpOnly_;
-    private final String samesite_;
+    private final String sameSite_;
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain,
@@ -72,19 +72,7 @@ public class Cookie implements Serializable {
         isSecure_ = secure;
         isHttpOnly_ = httpOnly;
 
-        samesite_ = sameSite;
-    }
-
-    private static Date convertToExpiryDate(final int maxAge) {
-        if (maxAge < -1) {
-            throw new IllegalArgumentException("invalid max age:  " + maxAge);
-        }
-
-        if (maxAge >= 0) {
-            return new Date(System.currentTimeMillis() + (maxAge * 1000L));
-        }
-
-        return null;
+        sameSite_ = sameSite;
     }
 
     /**
@@ -148,7 +136,7 @@ public class Cookie implements Serializable {
      * @return the SameSite value or {@code null} if not set.
      */
     public String getSameSite() {
-        return samesite_;
+        return sameSite_;
     }
 
     /**
