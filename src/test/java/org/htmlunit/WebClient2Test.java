@@ -26,6 +26,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.Cookie;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;

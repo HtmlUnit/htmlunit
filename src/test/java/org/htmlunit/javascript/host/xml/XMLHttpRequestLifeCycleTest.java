@@ -31,11 +31,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.htmlunit.HttpMethod;
 import org.htmlunit.MiniServer;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;

@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;

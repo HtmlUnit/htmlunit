@@ -16,9 +16,9 @@ package org.htmlunit.javascript.host.html;
 
 import java.util.List;
 
-import org.htmlunit.HttpMethod;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;

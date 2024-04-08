@@ -17,8 +17,8 @@ package org.htmlunit.javascript.host.css;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;

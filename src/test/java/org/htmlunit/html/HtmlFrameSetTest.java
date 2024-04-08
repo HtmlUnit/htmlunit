@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.htmlunit.CollectingAlertHandler;
-import org.htmlunit.HttpHeader;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;

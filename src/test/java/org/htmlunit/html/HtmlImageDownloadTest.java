@@ -23,10 +23,10 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
-import org.htmlunit.HttpHeader;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebServerTestCase;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.platform.image.ImageData;
 import org.htmlunit.platform.image.ImageIOImageData;

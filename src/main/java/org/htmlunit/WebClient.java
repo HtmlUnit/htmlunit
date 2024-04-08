@@ -77,6 +77,8 @@ import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.http.Cookie;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.DefaultCredentialsProvider;

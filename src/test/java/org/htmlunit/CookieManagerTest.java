@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.http.client.utils.DateUtils;
 import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;

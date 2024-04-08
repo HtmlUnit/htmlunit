@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;

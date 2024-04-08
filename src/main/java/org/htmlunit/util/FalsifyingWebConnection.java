@@ -21,12 +21,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.HttpHeader;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebConnection;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
+import org.htmlunit.http.HttpHeader;
 
 /**
  * Extension of {@link WebConnectionWrapper} providing facility methods to deliver something other than

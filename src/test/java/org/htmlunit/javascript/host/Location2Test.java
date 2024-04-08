@@ -18,10 +18,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.htmlunit.HttpHeader;
-import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;

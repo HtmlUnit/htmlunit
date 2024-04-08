@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.http.client.utils.DateUtils;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.http.Cookie;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;

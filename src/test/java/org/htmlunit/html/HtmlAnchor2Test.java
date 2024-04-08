@@ -28,8 +28,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 
 import org.htmlunit.CollectingAlertHandler;
-import org.htmlunit.HttpHeader;
-import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
@@ -39,6 +37,8 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.attachment.AttachmentHandler;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;

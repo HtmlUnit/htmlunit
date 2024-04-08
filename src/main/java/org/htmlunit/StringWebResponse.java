@@ -21,6 +21,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;

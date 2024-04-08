@@ -27,6 +27,7 @@ import java.util.zip.Deflater;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.html.HtmlInlineFrame;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;

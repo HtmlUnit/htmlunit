@@ -30,6 +30,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;

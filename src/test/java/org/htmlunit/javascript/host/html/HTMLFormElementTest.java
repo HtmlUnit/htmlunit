@@ -24,9 +24,9 @@ import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.FormEncodingType;
-import org.htmlunit.HttpHeader;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;

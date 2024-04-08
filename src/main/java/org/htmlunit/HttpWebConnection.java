@@ -105,6 +105,8 @@ import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.TextUtils;
 import org.htmlunit.WebRequest.HttpHint;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import org.htmlunit.httpclient.HtmlUnitCookieStore;

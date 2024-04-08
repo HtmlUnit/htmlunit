@@ -24,6 +24,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.util.HeaderUtils;
 import org.htmlunit.util.UrlUtils;

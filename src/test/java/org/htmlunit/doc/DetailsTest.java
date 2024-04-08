@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpWebConnection;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebClient;
@@ -31,6 +30,7 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;

@@ -20,9 +20,9 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import java.net.URL;
 import java.util.Map;
 
-import org.htmlunit.HttpHeader;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;

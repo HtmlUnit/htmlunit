@@ -14,10 +14,10 @@
  */
 package org.htmlunit.html;
 
-import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;

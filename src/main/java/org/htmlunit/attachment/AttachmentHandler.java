@@ -17,9 +17,9 @@ package org.htmlunit.attachment;
 import java.io.Serializable;
 import java.util.Locale;
 
-import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
+import org.htmlunit.http.HttpHeader;
 
 /**
  * <p>A handler for attachments, which represent pages received from the server which contain

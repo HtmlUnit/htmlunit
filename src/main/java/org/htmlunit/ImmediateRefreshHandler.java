@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
 
+import org.htmlunit.http.HttpMethod;
+
 /**
  * This refresh handler immediately refreshes the specified page,
  * using the specified URL and ignoring the wait time.

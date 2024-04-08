@@ -18,6 +18,9 @@
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: DefaultCredentialsProvider moved from package 'org.htmlunit' to 'org.htmlunit.httpclient'.
             </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: HttpHeader and HttpMethod moved from package 'org.htmlunit' to 'org.htmlunit.http'.
+            </action>
 
             <action type="add" dev="rbri" issue="#764">
                 HttpClientCookie added.

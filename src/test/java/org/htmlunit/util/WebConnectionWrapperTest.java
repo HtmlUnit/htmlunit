@@ -17,12 +17,12 @@ package org.htmlunit.util;
 import java.util.Collections;
 import java.util.List;
 
-import org.htmlunit.HttpMethod;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebConnection;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpStatus;
 import org.junit.Test;
 

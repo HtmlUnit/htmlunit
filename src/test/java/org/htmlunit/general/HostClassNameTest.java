@@ -14,9 +14,9 @@
  */
 package org.htmlunit.general;
 
-import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.annotations.StandardsMode;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.javascript.host.css.CSSFontFaceRule;
 import org.htmlunit.javascript.host.css.CSSImportRule;
 import org.htmlunit.javascript.host.css.CSSMediaRule;

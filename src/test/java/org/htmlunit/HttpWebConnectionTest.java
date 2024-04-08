@@ -51,6 +51,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.KeyDataPair;

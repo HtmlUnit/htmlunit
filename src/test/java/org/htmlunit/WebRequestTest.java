@@ -26,6 +26,8 @@ import java.util.List;
 
 import org.apache.http.auth.BasicUserPrincipal;
 import org.apache.http.auth.Credentials;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.NameValuePair;

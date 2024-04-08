@@ -24,7 +24,7 @@ import static org.junit.Assert.assertSame;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
 
-import org.htmlunit.HttpHeader;
+import org.htmlunit.http.HttpHeader;
 import org.junit.Test;
 
 /**

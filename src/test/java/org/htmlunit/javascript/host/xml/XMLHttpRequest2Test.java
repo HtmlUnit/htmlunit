@@ -38,11 +38,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.htmlunit.HttpHeader;
-import org.htmlunit.HttpMethod;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationServlet;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;

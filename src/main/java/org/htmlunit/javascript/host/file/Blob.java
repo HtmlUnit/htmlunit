@@ -23,13 +23,13 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.HttpHeader;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;

@@ -16,6 +16,7 @@ package org.htmlunit;
 
 import java.io.IOException;
 
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;

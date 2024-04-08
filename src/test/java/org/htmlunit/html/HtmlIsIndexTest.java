@@ -17,10 +17,10 @@ package org.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;

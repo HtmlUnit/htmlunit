@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.Cookie;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;

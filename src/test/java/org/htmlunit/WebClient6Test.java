@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;

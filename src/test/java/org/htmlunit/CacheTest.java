@@ -15,12 +15,12 @@
 package org.htmlunit;
 
 import static org.apache.http.client.utils.DateUtils.formatDate;
-import static org.htmlunit.HttpHeader.CACHE_CONTROL;
-import static org.htmlunit.HttpHeader.ETAG;
-import static org.htmlunit.HttpHeader.EXPIRES;
-import static org.htmlunit.HttpHeader.IF_MODIFIED_SINCE;
-import static org.htmlunit.HttpHeader.IF_NONE_MATCH;
-import static org.htmlunit.HttpHeader.LAST_MODIFIED;
+import static org.htmlunit.http.HttpHeader.CACHE_CONTROL;
+import static org.htmlunit.http.HttpHeader.ETAG;
+import static org.htmlunit.http.HttpHeader.EXPIRES;
+import static org.htmlunit.http.HttpHeader.IF_MODIFIED_SINCE;
+import static org.htmlunit.http.HttpHeader.IF_NONE_MATCH;
+import static org.htmlunit.http.HttpHeader.LAST_MODIFIED;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -33,6 +33,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;

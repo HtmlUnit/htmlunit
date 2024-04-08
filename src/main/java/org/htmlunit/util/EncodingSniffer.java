@@ -35,8 +35,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.HttpHeader;
 import org.htmlunit.cyberneko.xerces.util.StandardEncodingTranslator;
+import org.htmlunit.http.HttpHeader;
 
 /**
  * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the

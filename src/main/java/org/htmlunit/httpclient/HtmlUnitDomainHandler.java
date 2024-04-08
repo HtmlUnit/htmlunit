@@ -28,7 +28,7 @@ import org.apache.http.impl.cookie.BasicDomainHandler;
 import org.apache.http.util.Args;
 import org.apache.http.util.TextUtils;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.HttpHeader;
+import org.htmlunit.http.HttpHeader;
 
 /**
  * Customized BasicDomainHandler for HtmlUnit.

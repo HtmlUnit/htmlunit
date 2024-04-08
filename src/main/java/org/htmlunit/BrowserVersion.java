@@ -26,6 +26,7 @@ import java.util.Set;
 import java.util.TimeZone;
 
 import org.apache.commons.io.FilenameUtils;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.configuration.SupportedBrowser;

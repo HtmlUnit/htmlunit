@@ -34,6 +34,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.http.auth.Credentials;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.util.NameValuePair;

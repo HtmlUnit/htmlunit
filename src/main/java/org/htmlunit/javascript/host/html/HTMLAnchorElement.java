@@ -30,13 +30,13 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.HttpHeader;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;

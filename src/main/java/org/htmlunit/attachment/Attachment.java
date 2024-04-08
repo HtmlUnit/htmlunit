@@ -14,9 +14,9 @@
  */
 package org.htmlunit.attachment;
 
-import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
+import org.htmlunit.http.HttpHeader;
 
 /**
  * An attachment represents a page received from the server which contains a

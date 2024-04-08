@@ -68,6 +68,8 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.http.HttpHeader;
+import org.htmlunit.http.HttpMethod;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.util.NameValuePair;
 import org.junit.After;
