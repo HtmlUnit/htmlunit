@@ -28,11 +28,9 @@ import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -43,19 +41,6 @@ import org.htmlunit.util.UrlUtils;
 public final class HttpClientConverter {
 
     private HttpClientConverter() {
-    }
-
-    /**
-     * Converts the specified name/value pairs into HttpClient name/value pairs.
-     * @param pairs the name/value pairs to convert
-     * @return the converted name/value pairs
-     */
-    public static List<org.apache.http.NameValuePair> nameValuePairsToHttpClient(final List<NameValuePair> pairs) {
-        final List<org.apache.http.NameValuePair> resultingPairs = new ArrayList<>(pairs.size());
-        for (final NameValuePair pair : pairs) {
-            resultingPairs.add(new BasicNameValuePair(pair.getName(), pair.getValue()));
-        }
-        return resultingPairs;
     }
 
     /**
@@ -71,7 +56,7 @@ public final class HttpClientConverter {
      * @param url the url to be used
      * @return the new CookieOrigin
      */
-    public static CookieOrigin buildCookieOrigin(final URL url) {
+    private static CookieOrigin buildCookieOrigin(final URL url) {
         final URL normalizedUrl = replaceForCookieIfNecessary(url);
 
         int port = normalizedUrl.getPort();
@@ -138,19 +123,6 @@ public final class HttpClientConverter {
             array.add(toHttpClient(cookie));
         }
         return array;
-    }
-
-    /**
-     * Converts the specified array of HttpClient cookies into a list of cookies.
-     * @param cookies the cookies to be converted
-     * @return the specified HttpClient cookies, as cookies
-     */
-    public static List<org.htmlunit.http.Cookie> fromHttpClient(final List<Cookie> cookies) {
-        final List<org.htmlunit.http.Cookie> list = new ArrayList<>(cookies.size());
-        for (final Cookie c : cookies) {
-            list.add(new HttpClientCookie((ClientCookie) c));
-        }
-        return list;
     }
 
     public static void addMatching(final Set<org.htmlunit.http.Cookie> cookies,

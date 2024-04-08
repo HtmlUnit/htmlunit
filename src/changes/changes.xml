@@ -21,7 +21,14 @@
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: HttpHeader and HttpMethod moved from package 'org.htmlunit' to 'org.htmlunit.http'.
             </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: Methods nameValuePairsToHttpClient(List<NameValuePair>), and fromHttpClient(List<Cookie>)
+                removed from HttpClientConverter. Method buildCookieOrigin(URL) is now private.
+            </action>
 
+            <action type="update" dev="rbri">
+                Deprecated constants and methods removed from HttpClientConverter.
+            </action>
             <action type="add" dev="rbri" issue="#764">
                 HttpClientCookie added.
             </action>
