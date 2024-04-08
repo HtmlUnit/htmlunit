@@ -28,8 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.Cookie;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.util.Cookie;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.util;
+package org.htmlunit.http;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.junit.Test;
@@ -21,6 +21,7 @@ import org.junit.Test;
  * Tests for {@link Cookie}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class CookieTest extends SimpleWebTestCase {
 

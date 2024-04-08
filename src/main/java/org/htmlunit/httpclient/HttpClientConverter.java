@@ -253,7 +253,7 @@ public final class HttpClientConverter {
         return url;
     }
 
-    public static List<org.htmlunit.util.Cookie> parseCookie(final String cookieString, final URL pageUrl,
+    public static List<org.htmlunit.http.Cookie> parseCookie(final String cookieString, final URL pageUrl,
             final BrowserVersion browserVersion)
             throws MalformedCookieException {
         final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
@@ -263,9 +263,9 @@ public final class HttpClientConverter {
         final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
         final List<Cookie> cookies = cookieSpec.parse(new BufferedHeader(buffer), buildCookieOrigin(pageUrl));
 
-        final List<org.htmlunit.util.Cookie> htmlUnitCookies = new ArrayList<>(cookies.size());
+        final List<org.htmlunit.http.Cookie> htmlUnitCookies = new ArrayList<>(cookies.size());
         for (final Cookie cookie : cookies) {
-            final org.htmlunit.util.Cookie htmlUnitCookie = new org.htmlunit.util.Cookie((ClientCookie) cookie);
+            final org.htmlunit.http.Cookie htmlUnitCookie = new org.htmlunit.http.Cookie((ClientCookie) cookie);
             htmlUnitCookies.add(htmlUnitCookie);
         }
         return htmlUnitCookies;
@@ -276,9 +276,9 @@ public final class HttpClientConverter {
      * @param cookies the cookies to be converted
      * @return the specified cookies, as HttpClient cookies
      */
-    public static List<Cookie> toHttpClient(final Collection<org.htmlunit.util.Cookie> cookies) {
+    public static List<Cookie> toHttpClient(final Collection<org.htmlunit.http.Cookie> cookies) {
         final ArrayList<Cookie> array = new ArrayList<>(cookies.size());
-        for (final org.htmlunit.util.Cookie cookie : cookies) {
+        for (final org.htmlunit.http.Cookie cookie : cookies) {
             array.add(cookie.toHttpClient());
         }
         return array;
@@ -289,21 +289,21 @@ public final class HttpClientConverter {
      * @param cookies the cookies to be converted
      * @return the specified HttpClient cookies, as cookies
      */
-    public static List<org.htmlunit.util.Cookie> fromHttpClient(final List<Cookie> cookies) {
-        final List<org.htmlunit.util.Cookie> list = new ArrayList<>(cookies.size());
+    public static List<org.htmlunit.http.Cookie> fromHttpClient(final List<Cookie> cookies) {
+        final List<org.htmlunit.http.Cookie> list = new ArrayList<>(cookies.size());
         for (final Cookie c : cookies) {
-            list.add(new org.htmlunit.util.Cookie((ClientCookie) c));
+            list.add(new org.htmlunit.http.Cookie((ClientCookie) c));
         }
         return list;
     }
 
-    public static void addMatching(final Set<org.htmlunit.util.Cookie> cookies,
+    public static void addMatching(final Set<org.htmlunit.http.Cookie> cookies,
             final URL normalizedUrl, final BrowserVersion browserVersion,
-            final Set<org.htmlunit.util.Cookie> matches) {
+            final Set<org.htmlunit.http.Cookie> matches) {
         if (cookies.size() > 0) {
             final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(normalizedUrl);
             final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
-            for (final org.htmlunit.util.Cookie cookie : cookies) {
+            for (final org.htmlunit.http.Cookie cookie : cookies) {
                 if (cookieSpec.match(cookie.toHttpClient(), cookieOrigin)) {
                     matches.add(cookie);
                 }

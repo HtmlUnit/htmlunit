@@ -7,6 +7,15 @@
     </properties>
 
     <body>
+        <release version="5.0.0" date="April xx, 2024" description="HTTP/2, Bugfixes">
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: Cookie moved from package 'org.htmlunit.util' to 'org.htmlunit.http'.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: DefaultCredentialsProvider moved from package 'org.htmlunit' to 'org.htmlunit.httpclient'.
+            </action>
+        </release>
+
         <release version="4.1.0" date="April xx, 2024" description="Bugfixes">
             <action type="update" dev="rbri">
                 HttpClientConverter.parseUrlQuery(String, Charset) and toQueryFormFields(List<NameValuePair>, Charset) are deprecated.

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.httpclient;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -28,7 +28,6 @@ import org.apache.http.auth.Credentials;
 import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
-import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 
 /**
  * Default HtmlUnit implementation of the <code>CredentialsProvider</code> interface. Provides

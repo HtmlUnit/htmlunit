@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import org.htmlunit.util.Cookie;
+import org.htmlunit.http.Cookie;
 import org.junit.Test;
 
 /**

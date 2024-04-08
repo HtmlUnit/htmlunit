@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.util;
+package org.htmlunit.http;
 
 import java.io.Serializable;
 import java.util.Date;

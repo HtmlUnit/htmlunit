@@ -48,6 +48,7 @@ import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlScript;
+import org.htmlunit.http.Cookie;
 import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -64,7 +65,6 @@ import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.Selection;
 import org.htmlunit.javascript.host.event.Event;
-import org.htmlunit.util.Cookie;
 import org.htmlunit.util.UrlUtils;
 
 /**

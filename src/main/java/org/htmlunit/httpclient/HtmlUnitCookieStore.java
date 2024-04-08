@@ -47,7 +47,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      */
     @Override
     public synchronized void addCookie(final Cookie cookie) {
-        manager_.addCookie(new org.htmlunit.util.Cookie((ClientCookie) cookie));
+        manager_.addCookie(new org.htmlunit.http.Cookie((ClientCookie) cookie));
     }
 
     /**

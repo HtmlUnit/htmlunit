@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.WebClient;
+import org.htmlunit.http.Cookie;
 import org.htmlunit.javascript.host.WebSocket;
-import org.htmlunit.util.Cookie;
 
 /**
  * A helper class for {@link WebSocket}.
