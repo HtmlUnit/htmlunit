@@ -16,6 +16,9 @@
                 always be done with all properties.
             </action>
             <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: Cookies are no longer supported when loding a html page from a file (url).
+            </action>
+            <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: DefaultCredentialsProvider moved from package 'org.htmlunit' to 'org.htmlunit.httpclient'.
             </action>
             <action type="update" dev="rbri">

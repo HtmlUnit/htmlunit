@@ -279,12 +279,11 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that cookies work when working with local files (not remote sites with real domains).
-     * Required for local testing of Dojo 1.1.1.
+     * Verifies that cookies do not work using local files (not remote sites with real domains).
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "", "blah=bleh"})
+    @Alerts({"", "", ""})
     public void cookieInLocalFile() throws Exception {
         final WebClient client = getWebClient();
 

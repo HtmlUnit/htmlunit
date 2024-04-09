@@ -2740,12 +2740,15 @@ public class WebClient implements Serializable, AutoCloseable {
             return Collections.emptySet();
         }
 
-        final URL normalizedUrl = HttpClientConverter.replaceForCookieIfNecessary(url);
-
-        final String host = normalizedUrl.getHost();
+        final String host = url.getHost();
         // URLs like "about:blank" don't have cookies and we need to catch these
         // cases here before HttpClient complains
         if (host.isEmpty()) {
+            return Collections.emptySet();
+        }
+
+        final String protocol = url.getProtocol();
+        if (protocol == null || !protocol.toLowerCase(Locale.ROOT).startsWith("http")) {
             return Collections.emptySet();
         }
 
@@ -2753,8 +2756,7 @@ public class WebClient implements Serializable, AutoCloseable {
         cookieManager.clearExpired(new Date());
 
         final Set<Cookie> matchingCookies = new LinkedHashSet<>();
-        HttpClientConverter.addMatching(cookieManager.getCookies(), normalizedUrl,
-                getBrowserVersion(), matchingCookies);
+        HttpClientConverter.addMatching(cookieManager.getCookies(), url, getBrowserVersion(), matchingCookies);
         return Collections.unmodifiableSet(matchingCookies);
     }
 

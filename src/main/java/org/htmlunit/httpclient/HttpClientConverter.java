@@ -14,11 +14,11 @@
  */
 package org.htmlunit.httpclient;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.http.NoHttpResponseException;
@@ -31,7 +31,6 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.util.UrlUtils;
 
 /**
  * Helper methods to convert from/to HttpClient.
@@ -57,46 +56,33 @@ public final class HttpClientConverter {
      * @return the new CookieOrigin
      */
     private static CookieOrigin buildCookieOrigin(final URL url) {
-        final URL normalizedUrl = replaceForCookieIfNecessary(url);
-
-        int port = normalizedUrl.getPort();
+        int port = url.getPort();
         if (port == -1) {
-            port = normalizedUrl.getDefaultPort();
+            port = url.getDefaultPort();
         }
 
         return new CookieOrigin(
-                normalizedUrl.getHost(),
+                url.getHost(),
                 port,
-                normalizedUrl.getPath(),
-                "https".equals(normalizedUrl.getProtocol()));
-    }
-
-    /**
-     * {@link CookieOrigin} doesn't like empty hosts and negative ports,
-     * but these things happen if we're dealing with a local file.
-     * This method allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
-     *
-     * @param url the URL to replace if necessary
-     * @return the replacement URL, or the original URL if no replacement was necessary
-     */
-    public static URL replaceForCookieIfNecessary(URL url) {
-        final String protocol = url.getProtocol();
-        final boolean file = "file".equals(protocol);
-        if (file) {
-            try {
-                url = UrlUtils.getUrlWithNewHostAndPort(url,
-                        HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN, 0);
-            }
-            catch (final MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return url;
+                url.getPath(),
+                "https".equals(url.getProtocol()));
     }
 
     public static List<org.htmlunit.http.Cookie> parseCookie(final String cookieString, final URL pageUrl,
             final BrowserVersion browserVersion)
             throws MalformedCookieException {
+        final String host = pageUrl.getHost();
+        // URLs like "about:blank" don't have cookies and we need to catch these
+        // cases here before HttpClient complains
+        if (host.isEmpty()) {
+            return new ArrayList<>(0);
+        }
+
+        final String protocol = pageUrl.getProtocol();
+        if (protocol == null || !protocol.toLowerCase(Locale.ROOT).startsWith("http")) {
+            return new ArrayList<>(0);
+        }
+
         final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
         buffer.append("Set-Cookie: ");
         buffer.append(cookieString);
@@ -126,10 +112,22 @@ public final class HttpClientConverter {
     }
 
     public static void addMatching(final Set<org.htmlunit.http.Cookie> cookies,
-            final URL normalizedUrl, final BrowserVersion browserVersion,
+            final URL url, final BrowserVersion browserVersion,
             final Set<org.htmlunit.http.Cookie> matches) {
+        final String host = url.getHost();
+        // URLs like "about:blank" don't have cookies and we need to catch these
+        // cases here before HttpClient complains
+        if (host.isEmpty()) {
+            return;
+        }
+
+        final String protocol = url.getProtocol();
+        if (protocol == null || !protocol.toLowerCase(Locale.ROOT).startsWith("http")) {
+            return;
+        }
+
         if (cookies.size() > 0) {
-            final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(normalizedUrl);
+            final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(url);
             final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
             for (final org.htmlunit.http.Cookie cookie : cookies) {
                 if (cookieSpec.match(toHttpClient(cookie), cookieOrigin)) {

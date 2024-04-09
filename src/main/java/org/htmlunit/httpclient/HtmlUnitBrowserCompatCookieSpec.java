@@ -71,9 +71,6 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
     /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
     public static final String EMPTY_COOKIE_NAME = "HTMLUNIT_EMPTY_COOKIE";
 
-    /** Workaround for domain of local files. */
-    public static final String LOCAL_FILESYSTEM_DOMAIN = "LOCAL_FILESYSTEM";
-
     /**
      * Comparator for sending cookies in right order.
      * See specification:

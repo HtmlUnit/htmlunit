@@ -90,8 +90,7 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
             return host.equals(domain);
         }
 
-        if (dotIndex == -1
-                && !HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN.equalsIgnoreCase(domain)) {
+        if (dotIndex == -1) {
             try {
                 InetAddress.getByName(domain);
             }
