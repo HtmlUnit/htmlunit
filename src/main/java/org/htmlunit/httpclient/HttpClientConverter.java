@@ -148,6 +148,9 @@ public final class HttpClientConverter {
                 cookie.getValue() == null ? "" : cookie.getValue());
 
         httpClientCookie.setDomain(cookie.getDomain());
+        // BasicDomainHandler.match(Cookie, CookieOrigin) checks the attib also (see #333)
+        httpClientCookie.setAttribute(ClientCookie.DOMAIN_ATTR, httpClientCookie.getDomain());
+
         httpClientCookie.setPath(cookie.getPath());
         httpClientCookie.setExpiryDate(cookie.getExpires());
 
