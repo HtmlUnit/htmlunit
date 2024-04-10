@@ -2756,7 +2756,11 @@ public class WebClient implements Serializable, AutoCloseable {
         cookieManager.clearExpired(new Date());
 
         final Set<Cookie> matchingCookies = new LinkedHashSet<>();
-        HttpClientConverter.addMatching(cookieManager.getCookies(), url, getBrowserVersion(), matchingCookies);
+        for (final Cookie cookie : cookieManager.getCookies()) {
+            if (cookie.matches(url, getBrowserVersion())) {
+                matchingCookies.add(cookie);
+            }
+        }
         return Collections.unmodifiableSet(matchingCookies);
     }
 

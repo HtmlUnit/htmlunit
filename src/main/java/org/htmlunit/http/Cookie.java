@@ -14,12 +14,18 @@
  */
 package org.htmlunit.http;
 
+import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS;
+
 import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.htmlunit.BrowserVersion;
 
 /**
  * A cookie. This class is immutable.
@@ -183,4 +189,105 @@ public class Cookie implements Serializable {
                     .append(path)
                     .toHashCode();
     }
+
+    public boolean matches(final URL url, final BrowserVersion browserVersion) {
+        final String host = url.getHost();
+        // URLs like "about:blank" don't have cookies and we need to catch these
+        // cases here before HttpClient complains
+        if (host.isEmpty()) {
+            return false;
+        }
+
+        final String protocol = url.getProtocol();
+        if (protocol == null || !protocol.startsWith("http")) {
+            return false;
+        }
+
+        // domain check
+        if (!matchesDomain(host, browserVersion)
+                || !matchesPath(url.getPath())
+                || !matchesIsSecure(protocol, host)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean matchesDomain(final String host, final BrowserVersion browserVersion) {
+        String domain = getDomain();
+        if (domain == null) {
+            return false;
+        }
+
+        final int dotIndex = domain.indexOf('.');
+        if (dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
+            domain = domain.toLowerCase(Locale.ROOT);
+            if (browserVersion.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)) {
+                domain = domain.substring(1);
+            }
+            return host.equals(domain);
+        }
+
+        if (dotIndex == -1) {
+            try {
+                InetAddress.getByName(domain);
+            }
+            catch (final UnknownHostException e) {
+                return false;
+            }
+        }
+
+        if (domain.startsWith(".")) {
+            domain = domain.substring(1);
+        }
+        domain = domain.toLowerCase(Locale.ROOT);
+        if (host.equals(domain)) {
+            return true;
+        }
+
+        if (HttpUtils.isIPv4Address(host) || HttpUtils.isIPv6Address(host)) {
+            return false;
+        }
+
+        if (host.endsWith(domain)) {
+            final int prefix = host.length() - domain.length();
+            // Either a full match or a prefix ending with a '.'
+            if (prefix == 0) {
+                return true;
+            }
+            if (prefix > 1 && host.charAt(prefix - 1) == '.') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean matchesPath(final String urlPath) {
+        String normalizedCookiePath = getPath();
+        if (normalizedCookiePath == null) {
+            normalizedCookiePath = "/";
+        }
+        if (normalizedCookiePath.length() > 1 && normalizedCookiePath.endsWith("/")) {
+            normalizedCookiePath = normalizedCookiePath.substring(0, normalizedCookiePath.length() - 1);
+        }
+        if (urlPath.startsWith(normalizedCookiePath)) {
+            if ("/".equals(normalizedCookiePath)) {
+                return true;
+            }
+            if (urlPath.length() == normalizedCookiePath.length()) {
+                return true;
+            }
+            if (urlPath.charAt(normalizedCookiePath.length()) == '/') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean matchesIsSecure(final String protocol, final String host) {
+        return !isSecure()
+                || "https".equals(protocol)
+                || "localhost".equalsIgnoreCase(host);
+    }
+
 }

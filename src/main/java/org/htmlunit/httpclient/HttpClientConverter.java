@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.cookie.ClientCookie;
@@ -109,32 +108,6 @@ public final class HttpClientConverter {
             array.add(toHttpClient(cookie));
         }
         return array;
-    }
-
-    public static void addMatching(final Set<org.htmlunit.http.Cookie> cookies,
-            final URL url, final BrowserVersion browserVersion,
-            final Set<org.htmlunit.http.Cookie> matches) {
-        final String host = url.getHost();
-        // URLs like "about:blank" don't have cookies and we need to catch these
-        // cases here before HttpClient complains
-        if (host.isEmpty()) {
-            return;
-        }
-
-        final String protocol = url.getProtocol();
-        if (protocol == null || !protocol.toLowerCase(Locale.ROOT).startsWith("http")) {
-            return;
-        }
-
-        if (cookies.size() > 0) {
-            final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(url);
-            final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
-            for (final org.htmlunit.http.Cookie cookie : cookies) {
-                if (cookieSpec.match(toHttpClient(cookie), cookieOrigin)) {
-                    matches.add(cookie);
-                }
-            }
-        }
     }
 
     private static ClientCookie toHttpClient(final org.htmlunit.http.Cookie cookie) {
