@@ -27,6 +27,9 @@
                 Deprecated http status code constants removed from WebResponse.
             </action>
 
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.16.1.
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 core-js: set-callTrap should be called with the value, not the descriptor of value.
             </action>
