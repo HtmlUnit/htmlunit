@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -41,10 +40,6 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
-            + "      if (typeof TextDecoder === 'undefined') {\n"
-            + "        log('no TextDecoder');\n"
-            + "        return;\n"
-            + "      };\n"
             + "      var enc = new TextDecoder();\n"
             + "      log(enc.encoding);\n"
 
@@ -221,10 +216,6 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("iso-8859-8-i")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
     public void encoding_iso_8859_8i() throws Exception {
         encoding("csiso88598i");
         encoding("iso-8859-8-i");
@@ -236,10 +227,6 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("iso-8859-10")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
     public void encoding_iso_8859_10() throws Exception {
         encoding("csisolatin6");
         encoding("iso-8859-10");
@@ -266,10 +253,6 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("iso-8859-14")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
     public void encoding_iso_8859_14() throws Exception {
         encoding("iso-8859-14");
         encoding("iso8859-14");
@@ -304,10 +287,6 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("iso-8859-16")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
     public void encoding_iso_8859_16() throws Exception {
         encoding("iso-8859-16");
     }
@@ -628,10 +607,6 @@ public class TextDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("x-user-defined")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
     public void encoding_x_user_defined() throws Exception {
         encoding("x-user-defined");
     }
@@ -652,10 +627,6 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
-            + "      if (typeof TextDecoder === 'undefined') {\n"
-            + "        log('no TextDecoder');\n"
-            + "        return;\n"
-            + "      };\n"
             + "      try {\n"
             + "        enc = new TextDecoder('" + encoding + "');\n"
             + "        log(enc.encoding);\n"
@@ -680,11 +651,8 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
-            + "      if (typeof TextEncoder === 'undefined') {\n"
-            + "        log('no TextEncoder');\n"
-            + "        return;\n"
-            + "      };\n"
             + "      var enc = new TextEncoder();\n"
+
             + "      var encoded = enc.encode('');\n"
             + "      log(encoded.length);\n"
 
@@ -712,10 +680,6 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
-            + "      if (typeof TextDecoder === 'undefined') {\n"
-            + "        log('no TextDecoder');\n"
-            + "        return;\n"
-            + "      };\n"
             + "      var enc = new TextEncoder();\n"
             + "      var encoded = enc.encode('HtmlUnit');\n"
 
@@ -742,10 +706,6 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
-            + "      if (typeof TextDecoder === 'undefined') {\n"
-            + "        log('no TextDecoder');\n"
-            + "        return;\n"
-            + "      };\n"
             + "      var dec = new TextDecoder('utf-8');\n"
             + "      try {\n"
             + "        log(dec.decode(undefined));\n"
@@ -754,6 +714,62 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "      try {\n"
             + "        log(dec.decode(null));\n"
             + "      } catch(e) { log('exception'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("ex")
+    public void decodeReplacement() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function doTest() {\n"
+            + "      try {\n"
+            + "        var dec = new TextDecoder('iso-2022-kr');\n"
+            + "      } catch(e) { log('ex'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"", "ex-null", "\uf7cf!"})
+    public void decodeXuserDefined() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function doTest() {\n"
+            + "      var dec = new TextDecoder('x-user-defined');\n"
+
+            + "      try {\n"
+            + "        log(dec.decode(undefined));\n"
+            + "      } catch(e) { log('ex-undefined'); }\n"
+
+            + "      try {\n"
+            + "        log(dec.decode(null));\n"
+            + "      } catch(e) { log('ex-null'); }\n"
+
+            + "      try {\n"
+            + "        var bytes = new Uint8Array([ 207, 33]);"
+            + "        log(dec.decode(bytes));\n"
+            + "      } catch(e) { log('exception' + e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
