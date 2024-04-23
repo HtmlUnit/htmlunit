@@ -60,6 +60,7 @@ import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.attachment.AttachmentHandler;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.csp.Policy;
 import org.htmlunit.csp.url.URI;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
@@ -89,6 +90,7 @@ import org.htmlunit.javascript.host.Location;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.event.Event;
+import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLIFrameElement;
 import org.htmlunit.protocol.data.DataURLConnection;
 import org.htmlunit.util.Cookie;
@@ -1392,6 +1394,24 @@ public class WebClient implements Serializable, AutoCloseable {
         return webResponse;
     }
 
+    private WebResponse makeWebResponseForBlobUrl(final WebRequest webRequest) {
+        final Window window = getCurrentWindow().getScriptableObject();
+        final Blob fileOrBlob = window.getDocument().resolveBlobUrl(webRequest.getUrl().toString());
+        if (fileOrBlob == null) {
+            throw ScriptRuntime.typeError("Cannot load data from " + webRequest.getUrl());
+        }
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        String type = fileOrBlob.getType();
+        if (!type.isEmpty()) {
+            headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE, fileOrBlob.getType()));
+        }
+
+        final DownloadedContent content = new DownloadedContent.InMemory(fileOrBlob.getBytes());
+        final WebResponseData responseData = new WebResponseData(content, 200, "OK", headers);
+        return new WebResponse(responseData, webRequest, 0);
+    }
+
     /**
      * Tries to guess the content type of the file.<br>
      * This utility could be located in a helper class but we can compare this functionality
@@ -1481,6 +1501,9 @@ public class WebClient implements Serializable, AutoCloseable {
 
             case "data":
                 return makeWebResponseForDataUrl(webRequest);
+
+            case "blob":
+                return makeWebResponseForBlobUrl(webRequest);
 
             default:
                 return loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
