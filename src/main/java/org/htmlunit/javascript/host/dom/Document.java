@@ -37,6 +37,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -114,6 +115,7 @@ import org.htmlunit.javascript.host.event.ProgressEvent;
 import org.htmlunit.javascript.host.event.TextEvent;
 import org.htmlunit.javascript.host.event.UIEvent;
 import org.htmlunit.javascript.host.event.WheelEvent;
+import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLAllCollection;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLCollection;
@@ -220,6 +222,8 @@ public class Document extends Node {
     private ScriptableObject currentScript_;
     private transient FontFaceSet fonts_;
     private transient StyleSheetList styleSheetList_;
+
+    private final Map<String, Blob> blobUrl2Blobs = new HashMap<>();
 
     static {
         // commands
@@ -3471,5 +3475,32 @@ public class Document extends Node {
     @Override
     public boolean contains(final Object element) {
         return getDocumentElement().contains(element);
+    }
+
+    /**
+     * Generate and return the URL for the given blob.
+     * @see org.htmlunit.javascript.host.URL.createObjectURL()
+     */
+    public String generateBlobUrl(final Blob blob) {
+        URL url = getPage().getUrl();
+        String origin = (url == UrlUtils.URL_ABOUT_BLANK) ? "null" : (url.getProtocol() + "://" + url.getAuthority());
+        String blobUrl = "blob:" + origin + "/" + UUID.randomUUID();
+        blobUrl2Blobs.put(blobUrl, blob);
+        return blobUrl;
+    }
+
+    /**
+     * Returns the Blob for the given URL or {@code null} if not found.
+     */
+    public Blob resolveBlobUrl(final String url) {
+        return blobUrl2Blobs.get(url);
+    }
+
+    /**
+     * Revokes the URL for the given blob.
+     * @see org.htmlunit.javascript.host.URL.revokeObjectURL()
+     */
+    public void revokeBlobUrl(final String url) {
+        blobUrl2Blobs.remove(url);
     }
 }

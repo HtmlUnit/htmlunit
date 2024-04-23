@@ -132,7 +132,6 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void createObjectURL() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

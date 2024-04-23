@@ -21,6 +21,8 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -30,6 +32,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxStaticFunction;
+import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.file.File;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
@@ -96,7 +99,12 @@ public class URL extends HtmlUnitScriptable {
     public static String createObjectURL(final Object fileOrBlob) {
         if (fileOrBlob instanceof File) {
             final File file = (File) fileOrBlob;
-            return file.getFile().toURI().normalize().toString();
+            return getWindow(file).getDocument().generateBlobUrl(file);
+        }
+
+        if (fileOrBlob instanceof Blob) {
+            final Blob blob = (Blob) fileOrBlob;
+            return getWindow(blob).getDocument().generateBlobUrl(blob);
         }
 
         return null;
@@ -107,7 +115,8 @@ public class URL extends HtmlUnitScriptable {
      *          created by calling URL.createObjectURL().
      */
     @JsxStaticFunction
-    public static void revokeObjectURL(final Object objectURL) {
+    public static void revokeObjectURL(final Scriptable objectURL) {
+        getWindow(objectURL).getDocument().revokeBlobUrl(Context.toString(objectURL));
     }
 
     /**
