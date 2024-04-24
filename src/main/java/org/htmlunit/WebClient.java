@@ -60,7 +60,6 @@ import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.attachment.AttachmentHandler;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.csp.Policy;
 import org.htmlunit.csp.url.URI;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
@@ -1398,7 +1397,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final Window window = getCurrentWindow().getScriptableObject();
         final Blob fileOrBlob = window.getDocument().resolveBlobUrl(webRequest.getUrl().toString());
         if (fileOrBlob == null) {
-            throw ScriptRuntime.typeError("Cannot load data from " + webRequest.getUrl());
+            throw JavaScriptEngine.typeError("Cannot load data from " + webRequest.getUrl());
         }
 
         final List<NameValuePair> headers = new ArrayList<>();
