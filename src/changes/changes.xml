@@ -27,11 +27,14 @@
                 Deprecated http status code constants removed from WebResponse.
             </action>
 
+            <action type="fix" dev="rbri">
+                XMLHttpRequest now supports the x-user-defined trick to transfer binary data.
+            </action>
             <action type="add" dev="Lai Quang Duong">
                 Support for URL.createObjectURL() and URL.revokeObjectURL() added.
             </action>
-            <action type="fix" dev="rbri">
-                neko: x-user-defined encoding is now supported.
+            <action type="add" dev="rbri">
+                neko: x-user-defined encoding is now supported; like in real browsers x-user-defined is mapped to windows-1252.
             </action>
             <action type="fix" dev="Lai Quang Duong">
                 neko: Another bunch of fixes for encodings.
