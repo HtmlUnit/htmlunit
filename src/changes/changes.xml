@@ -27,6 +27,9 @@
                 Deprecated http status code constants removed from WebResponse.
             </action>
 
+            <action type="add" dev="Lai Quang Duong">
+                Support for URL.createObjectURL() and URL.revokeObjectURL() added.
+            </action>
             <action type="fix" dev="rbri">
                 neko: x-user-defined encoding is now supported.
             </action>

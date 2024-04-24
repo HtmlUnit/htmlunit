@@ -1402,8 +1402,8 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         final List<NameValuePair> headers = new ArrayList<>();
-        String type = fileOrBlob.getType();
-        if (!type.isEmpty()) {
+        final String type = fileOrBlob.getType();
+        if (!StringUtils.isEmpty(type)) {
             headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE, fileOrBlob.getType()));
         }
 

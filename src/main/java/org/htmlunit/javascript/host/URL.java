@@ -43,6 +43,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author cd alexndr
+ * @author Lai Quang Duong
  */
 @JsxClass
 public class URL extends HtmlUnitScriptable {
