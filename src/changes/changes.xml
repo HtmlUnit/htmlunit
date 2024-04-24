@@ -27,6 +27,15 @@
                 Deprecated http status code constants removed from WebResponse.
             </action>
 
+            <action type="fix" dev="rbri">
+                neko: x-user-defined encoding is now supported.
+            </action>
+            <action type="fix" dev="Lai Quang Duong">
+                neko: Another bunch of fixes for encodings.
+            </action>
+            <action type="update" dev="rbri">
+                TextDecoder - fix handling of various charsets (incl. replacement and x-user-defined)
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-text to 1.12.0.
             </action>
