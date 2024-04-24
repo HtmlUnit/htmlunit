@@ -152,6 +152,33 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             Please find more details and samples in the <a href="filedownload-howto.html">File download</a> section.
         </section>
 
+
+        <section name="Clipboard">
+            <p>
+                The clipboard interaction is disabled by default for the WebClient. This avoids side effect during testing
+                and removes the need of having a running graphical subsystem (windows/X/xvfb).
+            </p>
+            <p>
+                To enable the clipboard support set a clipboard handler for the WebClient. HtmlUnit provides the AwtClipboardHandler
+                the implements the interaction with your system/desktop clipboard. The AwtClipboardHandler works only if you are running
+                on top of an graphical subsystem (windows/X/xvfb).
+            <source><![CDATA[
+  final ClipboardHandler clipboardHandler = new AwtClipboardHandler();
+  webClient().setClipboardHandler(clipboardHandler);
+]]></source>
+            </p>
+            <p>
+                Then you can control the clipboard content from your program like this.
+            <source><![CDATA[
+  clipboardHandler.setClipboardContent("HtmlUnit");
+]]></source>
+            </p>
+            <p>
+                Of course you can also implement your own ClipboardHandler to get full control and avoid interaction with the underlying
+                operation system. Writing your own ClipboardHandler is also required if you are working in headless mode.
+            </p>
+        </section>
+
         <section name="Content blocking" id="content_blocking">
             <p>
                 Out of the box HtmlUnit does not include any content blocking mechanism. But there are several

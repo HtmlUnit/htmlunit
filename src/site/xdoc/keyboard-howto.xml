@@ -95,13 +95,18 @@
 ]]></source>
             </p>
             <p>
+                <strong>Attention:</strong>The provided AwtClipboardHandler does not work if you java vm runs in headless mode.
+                In case you like to interact with the clipboard for the headless mode, please write a small impl of the ClipboardHandler
+                yourself.
+            </p>
+            <p>
                 Usually you like to control the clipboard content from your test case.
             <source><![CDATA[
   clipboardHandler.setClipboardContent("HtmlUnit");
 ]]></source>
             </p>
             <p>
-                Of course you can also implement your own ClipboardHandler to get full control.
+                Of course you can also implement your <a href="details.html#Clipboard">own ClipboardHandler</a> to get full control.
             </p>
             <p>
                 To access the clipboard use the usual shortcuts.

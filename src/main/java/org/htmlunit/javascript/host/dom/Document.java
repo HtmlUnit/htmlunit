@@ -3483,7 +3483,7 @@ public class Document extends Node {
      * Generate and return the URL for the given blob.
      * @param blob the Blob containing the data
      * @return the URL
-     * @see org.htmlunit.javascript.host.URL.createObjectURL()
+     * {@link org.htmlunit.javascript.host.URL#createObjectURL(Object)}
      */
     public String generateBlobUrl(final Blob blob) {
         final URL url = getPage().getUrl();
@@ -3509,7 +3509,7 @@ public class Document extends Node {
     /**
      * Revokes the URL for the given blob.
      * @param url the url to revoke
-     * @see org.htmlunit.javascript.host.URL.revokeObjectURL()
+     * {@link org.htmlunit.javascript.host.URL#revokeObjectURL(Scriptable)}
      */
     public void revokeBlobUrl(final String url) {
         blobUrl2Blobs_.remove(url);
