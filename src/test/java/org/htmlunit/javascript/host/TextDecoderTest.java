@@ -745,6 +745,7 @@ public class TextDecoderTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception on test failure
      */
