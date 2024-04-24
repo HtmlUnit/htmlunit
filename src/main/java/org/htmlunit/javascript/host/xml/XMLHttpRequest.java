@@ -92,6 +92,7 @@ import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebResponseWrapper;
+import org.htmlunit.util.XUserDefinedCharset;
 import org.htmlunit.xml.XmlPage;
 
 /**
@@ -985,13 +986,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     if (index != -1) {
                         charsetName = overriddenMimeType_.substring(index + "charset=".length());
                     }
-                    final Charset charset = EncodingSniffer.toCharset(charsetName);
+
                     final String charsetNameFinal = charsetName;
+                    final Charset charset;
+                    if (XUserDefinedCharset.NAME.equalsIgnoreCase(charsetName)) {
+                        charset = XUserDefinedCharset.INSTANCE;
+                    }
+                    else {
+                        charset = EncodingSniffer.toCharset(charsetName);
+                    }
                     webResponse_ = new WebResponseWrapper(webResponse_) {
                         @Override
                         public String getContentType() {
                             return overriddenMimeType_;
                         }
+
                         @Override
                         public Charset getContentCharset() {
                             if (charsetNameFinal.isEmpty() || charset == null) {

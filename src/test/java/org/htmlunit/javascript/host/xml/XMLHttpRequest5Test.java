@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.xml;
 
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,6 +150,39 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         Assert.assertEquals("Unexpected Content-Type header", getExpectedAlerts()[0],
                 contentType == null ? "null" : contentType);
         Assert.assertEquals(getExpectedAlerts()[1], requestBody == null ? "null" : requestBody);
+    }
+
+    @Test
+    @Alerts({"0", "127", "128", "255"})
+    public void sendXUserDefined() throws Exception {
+        final URL responseUrl = new URL(URL_FIRST, "/response");
+        getMockWebConnection().setResponse(responseUrl, "\u0000\u007f\u0080\u00ff");
+
+        startWebServer(getMockWebConnection(), StandardCharsets.US_ASCII);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var xhr = new XMLHttpRequest();\n"
+                + "      xhr.open('POST', '/response', false);\n"
+                + "      xhr.overrideMimeType('text/plain; charset=x-user-defined');\n"
+                + "      xhr.send(null);\n"
+                + "      log(xhr.responseText.charCodeAt(0) & 0xff);\n"
+                + "      log(xhr.responseText.charCodeAt(1) & 0xff);\n"
+                + "      log(xhr.responseText.charCodeAt(2) & 0xff);\n"
+                + "      log(xhr.responseText.charCodeAt(3) & 0xff);\n"
+                + "  } catch (exception) { \n"
+                + "    log(exception);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     @Test

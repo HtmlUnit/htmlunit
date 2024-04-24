@@ -14,23 +14,19 @@
  */
 package org.htmlunit.javascript.host;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
-import org.apache.commons.io.IOUtils;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.cyberneko.xerces.util.StandardEncodingTranslator;
-import org.htmlunit.cyberneko.xerces.util.XUserDefinedInputStreamReader;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.util.XUserDefinedCharset;
 
 /**
  * A JavaScript object for {@code TextDecoder}.
@@ -98,15 +94,8 @@ public class TextDecoder extends HtmlUnitScriptable {
         }
 
         if (arrayBuffer != null) {
-            if (XUserDefinedInputStreamReader.USER_DEFINED.equalsIgnoreCase(whatwgEncoding_)) {
-                try (ByteArrayInputStream bis = new ByteArrayInputStream(arrayBuffer.getBuffer())) {
-                    try (Reader reader = new XUserDefinedInputStreamReader(bis)) {
-                        return IOUtils.toString(reader);
-                    }
-                }
-                catch (final IOException e) {
-                    return "";
-                }
+            if (XUserDefinedCharset.NAME.equalsIgnoreCase(whatwgEncoding_)) {
+                return new String(arrayBuffer.getBuffer(), XUserDefinedCharset.INSTANCE);
             }
 
             final String ianaEncoding = StandardEncodingTranslator
