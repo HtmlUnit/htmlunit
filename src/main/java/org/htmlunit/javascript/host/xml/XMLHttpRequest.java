@@ -706,7 +706,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     passwordCred = password.toString();
                 }
 
-                request.setCredentials(new HtmlUnitUsernamePasswordCredentials(userCred, passwordCred));
+                request.setCredentials(new HtmlUnitUsernamePasswordCredentials(userCred, passwordCred.toCharArray()));
             }
             webRequest_ = request;
         }
