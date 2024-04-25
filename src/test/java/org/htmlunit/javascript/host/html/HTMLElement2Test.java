@@ -1147,9 +1147,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"3", " ", "1", " Hello World ", " Hello World "})
     @HtmlUnitNYI(CHROME = {"3", " ", "3", " ", " Hello World "},
-        EDGE = {"3", " ", "3", " ", " Hello World "},
-        FF = {"3", " ", "3", " ", " Hello World "},
-        FF_ESR = {"3", " ", "3", " ", " Hello World "})
+            EDGE = {"3", " ", "3", " ", " Hello World "},
+            FF = {"3", " ", "3", " ", " Hello World "},
+            FF_ESR = {"3", " ", "3", " ", " Hello World "})
     public void outerText_removeSurroundings() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1213,12 +1213,12 @@ public class HTMLElement2Test extends WebDriverTestCase {
              " <div id=\"myTestDiv0\"></div> undefined [object Object] "})
     @HtmlUnitNYI(CHROME = {"11", "11", " ", "[object HTMLDivElement]", " ",
                            " <div id=\"myTestDiv0\"></div> undefined [object Object] "},
-        EDGE = {"11", "11", " ", "[object HTMLDivElement]", " ",
-                " <div id=\"myTestDiv0\"></div> undefined [object Object] "},
-        FF = {"11", "11", " ", "[object HTMLDivElement]", " ",
-              " <div id=\"myTestDiv0\"></div> undefined [object Object] "},
-        FF_ESR = {"11", "11", " ", "[object HTMLDivElement]", " ",
-                  " <div id=\"myTestDiv0\"></div> undefined [object Object] "})
+            EDGE = {"11", "11", " ", "[object HTMLDivElement]", " ",
+                    " <div id=\"myTestDiv0\"></div> undefined [object Object] "},
+            FF = {"11", "11", " ", "[object HTMLDivElement]", " ",
+                  " <div id=\"myTestDiv0\"></div> undefined [object Object] "},
+            FF_ESR = {"11", "11", " ", "[object HTMLDivElement]", " ",
+                      " <div id=\"myTestDiv0\"></div> undefined [object Object] "})
     public void outerText_Empty() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

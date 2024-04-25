@@ -28,7 +28,7 @@
             </action>
 
             <action type="add" dev="rbri">
-               First simple version of HtmlElement innerText setter implemented.
+                First simple version of HtmlElement innerText setter implemented.
             </action>
             <action type="fix" dev="rbri">
                 XMLHttpRequest now supports the x-user-defined trick to transfer binary data.
