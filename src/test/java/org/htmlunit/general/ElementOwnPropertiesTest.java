@@ -1182,7 +1182,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1209,7 +1209,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1233,7 +1233,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1256,7 +1256,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void abbr() throws Exception {
         test("abbr");
     }
@@ -1405,7 +1405,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1432,7 +1432,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1456,7 +1456,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1479,7 +1479,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void acronym() throws Exception {
         test("acronym");
     }
@@ -1674,7 +1674,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1701,7 +1701,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1725,7 +1725,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1748,7 +1748,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void address() throws Exception {
         test("address");
     }
@@ -1945,7 +1945,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1972,7 +1972,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -1996,7 +1996,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2019,7 +2019,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void article() throws Exception {
         test("article");
     }
@@ -2168,7 +2168,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2195,7 +2195,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2219,7 +2219,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -2241,7 +2241,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void aside() throws Exception {
         test("aside");
     }
@@ -2290,7 +2290,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeked[GSCE],onseeking[GSCE],"
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],"
-                + "ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
+                + "ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GSCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
@@ -2311,7 +2311,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onratechange[GSCE],onreset[GSCE],onresize[GSCE],onscroll[GSCE],onseeked[GSCE],onseeking[GSCE],"
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],"
-                + "ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
+                + "ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GSCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void bgsound() throws Exception {
         test("bgsound");
@@ -2475,7 +2475,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2502,7 +2502,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2526,7 +2526,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2549,7 +2549,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void basefont() throws Exception {
         test("basefont");
     }
@@ -2698,7 +2698,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2725,7 +2725,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2749,7 +2749,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -2771,7 +2771,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void bdi() throws Exception {
         test("bdi");
     }
@@ -2920,7 +2920,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2947,7 +2947,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -2971,7 +2971,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -2993,7 +2993,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void bdo() throws Exception {
         test("bdo");
     }
@@ -3142,7 +3142,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3169,7 +3169,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3193,7 +3193,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -3215,7 +3215,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void big() throws Exception {
         test("big");
     }
@@ -3428,7 +3428,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3455,7 +3455,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3479,7 +3479,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3502,7 +3502,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void b() throws Exception {
         test("b");
     }
@@ -3741,7 +3741,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3768,7 +3768,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3792,7 +3792,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3815,7 +3815,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void center() throws Exception {
         test("center");
     }
@@ -3964,7 +3964,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -3991,7 +3991,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4015,7 +4015,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -4037,7 +4037,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void cite() throws Exception {
         test("cite");
     }
@@ -4186,7 +4186,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4213,7 +4213,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4237,7 +4237,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -4259,7 +4259,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void code() throws Exception {
         test("code");
     }
@@ -4436,7 +4436,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4463,7 +4463,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4487,7 +4487,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -4509,7 +4509,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void dfn() throws Exception {
         test("dfn");
     }
@@ -4658,7 +4658,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4685,7 +4685,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4709,7 +4709,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -4732,7 +4732,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void dd() throws Exception {
         test("dd");
     }
@@ -4973,7 +4973,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5000,7 +5000,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5024,7 +5024,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5047,7 +5047,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void dt() throws Exception {
         test("dt");
     }
@@ -5218,7 +5218,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5245,7 +5245,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5269,7 +5269,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -5291,7 +5291,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void em() throws Exception {
         test("em");
     }
@@ -5470,7 +5470,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5497,7 +5497,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5521,7 +5521,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -5543,7 +5543,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void figcaption() throws Exception {
         test("figcaption");
     }
@@ -5692,7 +5692,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5719,7 +5719,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5743,7 +5743,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -5766,7 +5766,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void figure() throws Exception {
         test("figure");
     }
@@ -5981,7 +5981,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6008,7 +6008,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6032,7 +6032,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6055,7 +6055,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void footer() throws Exception {
         test("footer");
     }
@@ -6286,7 +6286,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6313,7 +6313,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6337,7 +6337,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6360,7 +6360,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void header() throws Exception {
         test("header");
     }
@@ -6656,7 +6656,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize[GSCE],onscroll[GSCE],onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onselectionchange[GSCE],"
                 + "onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
-                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
+                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GSCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
@@ -6678,7 +6678,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onselectionchange[GSCE],"
                 + "onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
-                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
+                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GSCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void image() throws Exception {
         test("image");
@@ -6856,7 +6856,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6883,7 +6883,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6907,7 +6907,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -6930,7 +6930,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void i() throws Exception {
         test("i");
     }
@@ -7079,7 +7079,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7106,7 +7106,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7130,7 +7130,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -7152,7 +7152,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void kbd() throws Exception {
         test("kbd");
     }
@@ -7275,7 +7275,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7302,7 +7302,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void layer() throws Exception {
         test("layer");
     }
@@ -7529,7 +7529,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7556,7 +7556,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7580,7 +7580,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -7602,7 +7602,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void main() throws Exception {
         test("main");
     }
@@ -7765,7 +7765,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7792,7 +7792,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -7816,7 +7816,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -7838,7 +7838,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void mark() throws Exception {
         test("mark");
     }
@@ -8093,7 +8093,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8120,7 +8120,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8144,7 +8144,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -8166,7 +8166,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void nav() throws Exception {
         test("nav");
     }
@@ -8329,7 +8329,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8356,7 +8356,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8380,7 +8380,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -8402,7 +8402,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void nobr() throws Exception {
         test("nobr");
     }
@@ -8551,7 +8551,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8578,7 +8578,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8602,7 +8602,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -8624,7 +8624,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void noembed() throws Exception {
         test("noembed");
     }
@@ -8773,7 +8773,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8800,7 +8800,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8824,7 +8824,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -8846,7 +8846,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void noframes() throws Exception {
         test("noframes");
     }
@@ -8943,7 +8943,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -8970,7 +8970,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void nolayer() throws Exception {
         test("nolayer");
     }
@@ -9119,7 +9119,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9146,7 +9146,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9170,7 +9170,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -9192,7 +9192,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void noscript() throws Exception {
         test("noscript");
     }
@@ -9537,7 +9537,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9564,7 +9564,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9588,7 +9588,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -9610,7 +9610,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void plaintext() throws Exception {
         test("plaintext");
     }
@@ -9791,7 +9791,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -9818,7 +9818,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "constructor()",
             FF = "constructor()")
     public void rb() throws Exception {
@@ -9983,7 +9983,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10010,7 +10010,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "constructor()",
             FF = "constructor()")
     public void rp() throws Exception {
@@ -10161,7 +10161,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10188,7 +10188,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "constructor()",
             FF = "constructor()")
     public void rt() throws Exception {
@@ -10340,7 +10340,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10367,7 +10367,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "constructor()",
             FF = "constructor()")
     public void rtc() throws Exception {
@@ -10518,7 +10518,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -10545,7 +10545,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "constructor()",
             FF = "constructor()")
     public void ruby() throws Exception {
@@ -10692,7 +10692,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],"
                 + "ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],"
@@ -10715,7 +10715,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],"
                 + "ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -10736,7 +10736,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onselectionchange[GSCE],"
                 + "onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
-                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
+                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GSCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
@@ -10758,7 +10758,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onselectionchange[GSCE],"
                 + "onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
-                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
+                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GSCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void s() throws Exception {
         test("s");
@@ -10903,7 +10903,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onselectionchange[GSCE],"
                 + "onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
-                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],outerText[GCE],"
+                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],outerText[GSCE],"
                 + "style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
@@ -10926,7 +10926,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onselectionchange[GSCE],"
                 + "onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
-                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],outerText[GCE],"
+                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],outerText[GSCE],"
                 + "style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
@@ -10947,7 +10947,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize[GSCE],onscroll[GSCE],onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onselectionchange[GSCE],"
                 + "onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
-                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
+                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GSCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
@@ -10969,7 +10969,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeked[GSCE],onseeking[GSCE],onselect[GSCE],onselectionchange[GSCE],"
                 + "onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
-                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
+                + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GSCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void samp() throws Exception {
         test("samp");
@@ -11147,7 +11147,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11174,7 +11174,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11198,7 +11198,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -11220,7 +11220,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void section() throws Exception {
         test("section");
     }
@@ -11433,7 +11433,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11460,7 +11460,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11484,7 +11484,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -11506,7 +11506,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void small() throws Exception {
         test("small");
     }
@@ -11687,7 +11687,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11714,7 +11714,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11738,7 +11738,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11761,7 +11761,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void strike() throws Exception {
         test("strike");
     }
@@ -11910,7 +11910,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11937,7 +11937,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11961,7 +11961,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -11984,7 +11984,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void strong() throws Exception {
         test("strong");
     }
@@ -12150,7 +12150,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12177,7 +12177,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12201,7 +12201,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -12223,7 +12223,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void sub() throws Exception {
         test("sub");
     }
@@ -12372,7 +12372,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12399,7 +12399,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12423,7 +12423,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12446,7 +12446,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void summary() throws Exception {
         test("summary");
     }
@@ -12595,7 +12595,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12622,7 +12622,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -12646,7 +12646,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -12668,7 +12668,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void sup() throws Exception {
         test("sup");
     }
@@ -13124,7 +13124,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13151,7 +13151,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13175,7 +13175,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -13197,7 +13197,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void tt() throws Exception {
         test("tt");
     }
@@ -13400,7 +13400,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13427,7 +13427,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13451,7 +13451,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13474,7 +13474,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void u() throws Exception {
         test("u");
     }
@@ -13641,7 +13641,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13668,7 +13668,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13692,7 +13692,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -13714,7 +13714,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void var() throws Exception {
         test("var");
     }
@@ -13900,7 +13900,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             EDGE = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13927,7 +13927,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled[GSCE],onsubmit[GSCE],onsuspend[GSCE],ontimeupdate[GSCE],"
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
-                + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "outerText[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF = "accessKey[GSCE],autofocus[GSCE],"
                 + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
@@ -13951,7 +13951,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
             FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
@@ -13973,7 +13973,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect[GSCE],onselectionchange[GSCE],onselectstart[GSCE],onstalled[GSCE],onsubmit[GSCE],"
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
-                + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
+                + "onwaiting[GSCE],outerText[GSCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]")
     public void wbr() throws Exception {
         test("wbr");
     }

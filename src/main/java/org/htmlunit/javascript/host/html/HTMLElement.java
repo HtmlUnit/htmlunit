@@ -400,17 +400,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Gets the outerText attribute.
-     * (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText)
-     * @return the contents of this node as text
-     */
-    @JsxGetter
-    public String getOuterText() {
-        // as first hack
-        return getInnerText();
-    }
-
-    /**
      * Replaces all child elements of this element with the supplied text value.
      * (see https://html.spec.whatwg.org/multipage/dom.html#the-innertext-idl-attribute)
      * @param value the new value for the contents of this element
@@ -438,6 +427,50 @@ public class HTMLElement extends Element {
                 domNode.appendChild(new DomText(page, parts[i]));
             }
         }
+    }
+
+    /**
+     * The outerText property of the HTMLElement interface returns the same value as HTMLElement.innerText.
+     * (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText)
+     * @return the contents of this node as text
+     */
+    @JsxGetter
+    public String getOuterText() {
+        return getInnerText();
+    }
+
+    /**
+     * Replaces the whole current node with the given text.
+     * (see https://html.spec.whatwg.org/multipage/dom.html#the-innertext-idl-attribute)
+     * @param value the new value for the contents of this element
+     */
+    @JsxSetter
+    public void setOuterText(final Object value) {
+        final String valueString;
+        if (value == null) {
+            valueString = null;
+        }
+        else {
+            valueString = JavaScriptEngine.toString(value);
+        }
+
+        final DomNode domNode = getDomNodeOrDie();
+        final SgmlPage page = domNode.getPage();
+
+        if (StringUtils.isEmpty(valueString)) {
+            domNode.getParentNode().insertBefore(new DomText(page, ""), domNode);
+        }
+        else {
+            final String[] parts = valueString.split("\\r?\\n");
+            for (int i = 0; i < parts.length; i++) {
+                if (i != 0) {
+                    domNode.getParentNode().insertBefore(page.createElement(HtmlBreak.TAG_NAME), domNode);
+                }
+                domNode.getParentNode().insertBefore(new DomText(page, parts[i]), domNode);
+            }
+        }
+
+        domNode.remove();
     }
 
     /**
