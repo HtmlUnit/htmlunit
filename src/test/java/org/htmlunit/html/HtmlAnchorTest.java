@@ -153,7 +153,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "page2.html",
             FF_ESR = "page2.html")
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
@@ -300,7 +299,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "page2.html",
             FF_ESR = "page2.html")
     public void clickNestedRadioElement() throws Exception {
         final String html =
@@ -606,8 +604,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("click href click doubleClick href ")
     @BuggyWebDriver(
-            FF = "click doubleClick click href href ",
-            FF_ESR = "click doubleClick click href href ")
+            FF = "click click doubleClick href href ",
+            FF_ESR = "click click doubleClick href href ")
     @NotYetImplemented
     public void doubleClick() throws Exception {
         final String html =
