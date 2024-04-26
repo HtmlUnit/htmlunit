@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.1.0" date="April xx, 2024" description="Bugfixes">
+        <release version="4.1.0" date="April xx, 2024" description="Chrome/Edge 124, Firefox 125, Bugfixes">
             <action type="update" dev="rbri">
                 HttpClientConverter.parseUrlQuery(String, Charset) and toQueryFormFields(List&lt;NameValuePair&gt;, Charset) are deprecated.
                 Please use HttpUtils instead.
