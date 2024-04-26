@@ -31,8 +31,6 @@ import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
 import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.htmlunit.HttpHeader;
-import org.htmlunit.WebClient;
-import org.htmlunit.WebClientInternals;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
@@ -43,7 +41,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Tests for {@link WebSocket}.
@@ -620,44 +617,6 @@ public class WebSocketTest extends WebDriverTestCase {
                     throw new IllegalArgumentException("Unknown request: " + data);
                 }
             }
-        }
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void listener() throws Exception {
-        startWebServer("src/test/resources/org/htmlunit/javascript/host",
-                null, null, new EventsWebSocketHandler());
-        try {
-            final WebDriver driver = getWebDriver();
-            final int[] webSocketCreated = {0};
-
-            if (driver instanceof HtmlUnitDriver) {
-                final WebClient webClient = getWebClient();
-                final WebClientInternals internals = webClient.getInternals();
-
-                internals.addListener(new WebClientInternals.Listener() {
-                    @Override
-                    public void webSocketCreated(final WebSocket webSocket) {
-                        webSocketCreated[0]++;
-                    }
-                });
-            }
-
-            driver.get(URL_FIRST + "WebSocketTest_listener.html");
-
-            if (driver instanceof HtmlUnitDriver) {
-                final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
-                while (webSocketCreated[0] < 0 && System.currentTimeMillis() < maxWait) {
-                    Thread.sleep(30);
-                }
-                assertEquals(1, webSocketCreated[0]);
-            }
-        }
-        finally {
-            stopWebServers();
         }
     }
 

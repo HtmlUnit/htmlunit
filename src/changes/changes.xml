@@ -27,6 +27,9 @@
                 Deprecated http status code constants removed from WebResponse.
             </action>
 
+            <action type="remove" dev="rbri">
+                Internal class WebClientInternals removed.
+            </action>
             <action type="add" dev="rbri">
                 First simple version of HtmlElement innerText setter implemented.
             </action>

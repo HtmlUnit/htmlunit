@@ -7147,7 +7147,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "container,container-name,container-type,containerName,containerType,"
                 + "containIntrinsicBlockSize,containIntrinsicHeight,"
                 + "containIntrinsicInlineSize,containIntrinsicSize,containIntrinsicWidth,"
-                + "content,counter-increment,counter-reset,counter-set,"
+                + "content,content-visibility,contentVisibility,counter-increment,counter-reset,counter-set,"
                 + "counterIncrement,counterReset,counterSet,cssFloat,cssText,cursor,cx,cy,d,direction,display,"
                 + "dominant-baseline,dominantBaseline,empty-cells,emptyCells,fill,fill-opacity,fill-rule,"
                 + "fillOpacity,fillRule,filter,flex,flex-basis,flex-direction,flex-flow,flex-grow,flex-shrink,"

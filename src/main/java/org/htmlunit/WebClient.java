@@ -218,7 +218,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
     private final WebClientOptions options_ = new WebClientOptions();
     private final boolean javaScriptEngineEnabled_;
-    private final WebClientInternals internals_ = new WebClientInternals();
     private final StorageHolder storageHolder_ = new StorageHolder();
 
     /**
@@ -2725,16 +2724,6 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebClientOptions getOptions() {
         return options_;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns the internals object of this WebClient.
-     * @return the internals object
-     */
-    public WebClientInternals getInternals() {
-        return internals_;
     }
 
     /**

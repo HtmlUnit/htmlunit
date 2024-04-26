@@ -191,8 +191,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             containingPage_.addAutoCloseable(this);
             url_ = new URI(url);
 
-            webClient.getInternals().created(this);
-
             webSocketImpl_.connect(url_);
         }
         catch (final Exception e) {
