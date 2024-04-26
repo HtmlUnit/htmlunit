@@ -992,7 +992,11 @@ public final class StyleAttributes implements Serializable {
         CONTENT("content", "content", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code contentVisibility}. */
-        CONTENT_VISISBILITY("contentVisibility", "content-visibility", chromeAndEdge("visible")),
+        CONTENT_VISISBILITY("contentVisibility", "content-visibility", chromeAndEdge("visible"),
+                ffLatest("visible")),
+
+        /** The style property {@code content-visibility}. */
+        CONTENT_VISISBILITY_("content-visibility", "content-visibility", ffLatest("visible")),
 
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chromeAndEdgeNone(), ffNone()),
@@ -3979,7 +3983,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_TEXT_SIZE_ADJUST__("-webkit-text-size-adjust", "webkit-text-size-adjust", ff("auto")),
 
         /** The style property {@code webkitTextStroke}. */
-        WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chromeAndEdgeEmpty(), ff("0px rgb(0, 0, 0)")),
+        WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chromeAndEdgeAndFirefox("0px rgb(0, 0, 0)")),
 
         /** The style property {@code WebkitTextStroke}. */
         WEBKIT_TEXT_STROKE_("WebkitTextStroke", "webkit-text-stroke", ff("0px rgb(0, 0, 0)")),

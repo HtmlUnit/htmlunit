@@ -255,6 +255,7 @@ container-name
 containerName
 containerType
 content
+contentVisibility
 counterIncrement
 counterReset
 counterSet
