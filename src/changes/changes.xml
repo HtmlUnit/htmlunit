@@ -27,6 +27,9 @@
                 Deprecated http status code constants removed from WebResponse.
             </action>
 
+            <action type="update" dev="rbri">
+                Upgrade commons-codec to 1.17.0.
+            </action>
             <action type="remove" dev="rbri">
                 Internal class WebClientInternals removed.
             </action>
