@@ -88,6 +88,17 @@ public class ArchitectureTest {
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
+     * Do not use org.apache.commons.codec.binary.Base64 - use the jdk instead.
+     */
+    @ArchTest
+    public static final ArchRule jdkBase64Rule = noClasses()
+        .that()
+            .resideOutsideOfPackage("org.htmlunit.jetty..")
+            .and().resideOutsideOfPackage("org.htmlunit.csp..")
+        .should().dependOnClassesThat().haveFullyQualifiedName("java.util.Base64");
+
+
+    /**
      * JsxClasses are always in the javascript package.
      */
     @ArchTest
