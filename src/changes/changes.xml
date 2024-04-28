@@ -27,6 +27,15 @@
                 Deprecated http status code constants removed from WebResponse.
             </action>
 
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fixed handling of unicode characters in the lexer.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: slightly improved Context.close() impl and try-with-resources usage.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: slightly improved Context.close() impl and try-with-resources usage.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.17.0.
             </action>
@@ -37,7 +46,7 @@
                 First simple version of HtmlElement innerText setter implemented.
             </action>
             <action type="fix" dev="rbri">
-                XMLHttpRequest now supports the x-user-defined trick to transfer binary data.
+                XMLHttpRequest now supports the 'x-user-defined' trick to transfer binary data.
             </action>
             <action type="add" dev="Lai Quang Duong">
                 Support for URL.createObjectURL() and URL.revokeObjectURL() added.
