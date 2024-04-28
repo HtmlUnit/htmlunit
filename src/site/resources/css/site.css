@@ -1,0 +1,10 @@
+a.externalLink{padding-right:inherit}
+a.externalLink[href^=http]{background:inherit;padding-right:inherit}
+a.externalLink[href$=".asc"]{background:inherit;padding-right:inherit}
+a.externalLink[href$=".jpg"],a.externalLink[href$=".jpeg"],a.externalLink[href$=".gif"],a.externalLink[href$=".png"]{background:inherit;padding-right:18px}
+a.externalLink[href$=".tar.gz"],a.externalLink[href$=".zip"]{background:url('../images/package-x-generic.png') right center no-repeat;padding-right:18px}
+a.externalLink[href$=".md5"],a.externalLink[href$=".sha1"]{background:url('../images/document-properties.png') right center no-repeat;padding-right:18px}
+a.externalLink[href^=https]{background:inherit;padding-right:inherit}
+a.externalLink[href^=file]{background:url('../images/drive-harddisk.png') right center no-repeat;padding-right:18px}
+a.externalLink[href^=ftp]{background:url('../images/network-server.png') right center no-repeat;padding-right:18px}
+a.externalLink[href^=mailto]{background:url('../images/contact-new.png') right center no-repeat;padding-right:18px}
