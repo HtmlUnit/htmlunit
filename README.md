@@ -90,7 +90,7 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 * Excellent JavaScript support
 
 ## Getting Started
-You can start here: 
+You can start here:
 * [Getting Started][7]
 * [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
 * [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
@@ -111,10 +111,10 @@ Read on if you want to try the latest bleeding-edge snapshot.
 
 ### Maven
 
-Add the snapshot repository and dependency to your `pom.xml`: 
+Add the snapshot repository and dependency to your `pom.xml`:
 
 ```xml
-    <!-- ... --> 
+    <!-- ... -->
     <repository>
       <id>OSS Sonatype snapshots</id>
       <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
@@ -139,7 +139,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
 
     <!-- ... -->
 ```
-  
+
 ### Gradle
 
 Add the snapshot repository and dependency to your `build.gradle`:
