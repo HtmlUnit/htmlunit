@@ -33,9 +33,6 @@
             <action type="fix" dev="rbri">
                 core-js: slightly improved Context.close() impl and try-with-resources usage.
             </action>
-            <action type="fix" dev="rbri">
-                core-js: slightly improved Context.close() impl and try-with-resources usage.
-            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.17.0.
             </action>
