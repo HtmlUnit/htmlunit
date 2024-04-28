@@ -24,6 +24,17 @@ such as:
 > Note as well that you can use HtmlUnit with [Selenium](https://www.selenium.dev/) via
 > their [htmlunit-driver](https://github.com/SeleniumHQ/htmlunit-driver)!
 
+
+## Sponsoring
+
+Constantly updating and maintaining the HtmlUnit code base already takes a lot of time.
+
+I would like to make 2 major extensions in the next few months
+* [Add HTTP/2 support](https://github.com/HtmlUnit/htmlunit/issues/370)
+* [Replace the Rhino based JavaScript engine](https://github.com/HtmlUnit/htmlunit/issues/755)
+
+For doing this I need your [sponsoring](https://github.com/sponsors/rbri).
+
 ## Get it!
 
 * [Download from GitHub][12]
