@@ -332,21 +332,9 @@ public class ExternalTest {
             return true;
         }
 
-        // version 10 requires JDK 11
-        if ("checkstyle".equals(artifactId) && (version.startsWith("10."))) {
-            return true;
-        }
         // version 3.11.x seem to requires JDK11
         if ("maven-site-plugin".equals(artifactId)
                 && (version.startsWith("3.11.") || version.startsWith("3.12."))) {
-            return true;
-        }
-
-        // https://issues.apache.org/jira/browse/MJAVADOC-700
-        // https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
-        // <sourcepath>${basedir}/src/main/java</sourcepath>
-        if ("maven-javadoc-plugin".equals(artifactId)
-                && (version.startsWith("3.3.") || version.startsWith("3.4."))) {
             return true;
         }
 
