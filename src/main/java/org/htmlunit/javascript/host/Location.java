@@ -230,7 +230,7 @@ public class Location extends HtmlUnitScriptable {
             request.setRefererlHeader(htmlPage.getUrl());
         }
 
-        webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS location.reload");
+        webWindow.getWebClient().download(webWindow, "", request, false, false, false, "JS location.reload");
     }
 
     /**
