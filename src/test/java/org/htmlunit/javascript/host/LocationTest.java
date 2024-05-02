@@ -385,11 +385,11 @@ public class LocationTest extends SimpleWebTestCase {
                 "reload",
                 "hash: no hash",
                 "update hash then reload",
-                "hash: no hash", // FIXME: this should be "hash: #0"
+                "hash: #0",
                 "update hash then reload",
-                "hash: no hash", // FIXME: this should be "hash: #1"
+                "hash: #1",
                 "reload",
-                "hash: no hash", // FIXME: this should be "hash: #1"
+                "hash: #1",
         };
         assertEquals(expected, alerts);
     }
@@ -434,9 +434,9 @@ public class LocationTest extends SimpleWebTestCase {
                 "reload",
                 "hash: #0",
                 "update hash then reload",
-                "hash: #0", // FIXME: this should be "hash: #1"
+                "hash: #1",
                 "update hash then reload",
-                "hash: #0", // FIXME: this should be "hash: #2"
+                "hash: #2",
         };
         assertEquals(expected, alerts);
     }

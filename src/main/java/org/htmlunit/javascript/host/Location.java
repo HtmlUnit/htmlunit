@@ -227,6 +227,8 @@ public class Location extends HtmlUnitScriptable {
         final HtmlPage htmlPage = (HtmlPage) webWindow.getEnclosedPage();
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
+        // update request url with location.href in case hash was changed
+        request.setUrl(new URL(getHref()));
         if (webWindow.getWebClient().getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
             request.setRefererlHeader(htmlPage.getUrl());
         }
