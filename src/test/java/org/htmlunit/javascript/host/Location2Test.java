@@ -991,6 +991,115 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§a.html")
+    public void reloadGetNoHash() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head></head>\n"
+            + "  <body>\n"
+            + "    <button onclick='window.location.reload();' id='reload'>reload</button>\n"
+            + "    <button onclick='window.document.title=window.location.toString();' id='log'>log location</button>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html"));
+        assertEquals(1, getMockWebConnection().getRequestCount());
+
+        driver.findElement(By.id("reload")).click();
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertEquals(URL_FIRST + "a.html", getMockWebConnection().getLastWebRequest().getUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
+        final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
+
+        assertEquals(URL_FIRST + "a.html", driver.getCurrentUrl());
+        driver.findElement(By.id("log")).click();
+        assertEquals(URL_FIRST + "a.html", driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "§§URL§§a.html"},
+            FF = {"1", "null"},
+            FF_ESR = {"1", "null"})
+    public void reloadGetHash() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head></head>\n"
+            + "  <body>\n"
+            + "    <button onclick='window.location.hash=\"1\";window.location.reload();' id='reload'>reload</button>\n"
+            + "    <button onclick='window.document.title=window.location.toString();' id='log'>log location</button>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html"));
+        assertEquals(1, getMockWebConnection().getRequestCount());
+
+        driver.findElement(By.id("reload")).click();
+        assertEquals(getExpectedAlerts()[0], "" + getMockWebConnection().getRequestCount());
+
+        assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertEquals(URL_FIRST + "a.html", getMockWebConnection().getLastWebRequest().getUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
+        final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[1], "" + additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
+
+        assertEquals(URL_FIRST + "a.html#1", driver.getCurrentUrl());
+        driver.findElement(By.id("log")).click();
+        assertEquals(URL_FIRST + "a.html#1", driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "§§URL§§a.html"},
+            FF = {"1", "null"},
+            FF_ESR = {"1", "null"})
+    public void reloadGetHashChanged() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head></head>\n"
+            + "  <body>\n"
+            + "    <button onclick='window.location.hash=\"1\";window.location.reload();' id='reload'>reload</button>\n"
+            + "    <button onclick='window.document.title=window.location.toString();' id='log'>log location</button>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html#abc"));
+        assertEquals(1, getMockWebConnection().getRequestCount());
+
+        driver.findElement(By.id("reload")).click();
+        assertEquals(getExpectedAlerts()[0], "" + getMockWebConnection().getRequestCount());
+
+        assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertEquals(URL_FIRST + "a.html", getMockWebConnection().getLastWebRequest().getUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
+        final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[1], "" + additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
+
+        assertEquals(URL_FIRST + "a.html#1", driver.getCurrentUrl());
+        driver.findElement(By.id("log")).click();
+        assertEquals(URL_FIRST + "a.html#1", driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
             EDGE = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
             FF = {"3", "§§URL§§", "§§URL§§/"},
