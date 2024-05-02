@@ -53,6 +53,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Frank Danek
  * @author Adam Afeltowicz
  * @author Atsushi Nakagawa
+ * @author Kanoko Yamamoto
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
  */
@@ -230,7 +231,7 @@ public class Location extends HtmlUnitScriptable {
             request.setRefererlHeader(htmlPage.getUrl());
         }
 
-        webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS location.reload");
+        webWindow.getWebClient().download(webWindow, "", request, false, false, false, "JS location.reload");
     }
 
     /**

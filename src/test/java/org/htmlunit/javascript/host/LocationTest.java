@@ -40,6 +40,7 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Lai Quang Duong
+ * @author Kanoko Yamamoto
  */
 @RunWith(BrowserRunner.class)
 public class LocationTest extends SimpleWebTestCase {
@@ -412,30 +413,30 @@ public class LocationTest extends SimpleWebTestCase {
         String date = page.getElementById("date").asNormalizedText();
         page = page.getElementById("reload").click();
         String newDate = page.getElementById("date").asNormalizedText();
-        assertEquals(date, newDate); // FIXME: this should be assertNotEquals
+        assertNotSame(date, newDate);
 
         Thread.sleep(100);
 
         date = newDate;
         page = page.getElementById("updateHashThenReload").click();
         newDate = page.getElementById("date").asNormalizedText();
-        assertEquals(date, newDate); // FIXME: this should be assertNotEquals
+        assertNotSame(date, newDate);
 
         Thread.sleep(100);
 
         date = newDate;
         page = page.getElementById("updateHashThenReload").click();
         newDate = page.getElementById("date").asNormalizedText();
-        assertEquals(date, newDate); // FIXME: this should be assertNotEquals
+        assertNotSame(date, newDate);
 
         String[] expected = {
                 "hash: #0",
                 "reload",
-                // FIXME: missing "hash: #0"
+                "hash: #0",
                 "update hash then reload",
-                // FIXME: missing "hash: #1"
+                "hash: #0", // FIXME: this should be "hash: #1"
                 "update hash then reload",
-                // FIXME: missing "hash: #2"
+                "hash: #0", // FIXME: this should be "hash: #2"
         };
         assertEquals(expected, alerts);
     }
