@@ -26,6 +26,7 @@ import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.util.UrlUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,6 +39,7 @@ import org.junit.runner.RunWith;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class LocationTest extends SimpleWebTestCase {
@@ -340,21 +342,102 @@ public class LocationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void reload() throws Exception {
-        final String content =
-              "<html>\n"
-            + "  <head><title>test</title></head>\n"
-            + "  <body>\n"
-            + "    <a href='javascript:window.location.reload();' id='link1'>reload</a>\n"
-            + "  </body>\n"
-            + "</html>";
+    public void reloadNoHash() throws Exception {
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
 
-        final HtmlPage page1 = loadPage(content);
-        final HtmlAnchor link = page1.getHtmlElementById("link1");
-        final HtmlPage page2 = link.click();
+        final URL url = getClass().getResource("LocationTest_reload.html");
+        assertNotNull(url);
 
-        assertEquals(page1.getTitleText(), page2.getTitleText());
-        assertNotSame(page1, page2);
+        HtmlPage page = client.getPage(url);
+        Thread.sleep(100);
+
+        String date = page.getElementById("date").asNormalizedText();
+        page = page.getElementById("reload").click();
+        String newDate = page.getElementById("date").asNormalizedText();
+        assertNotSame(date, newDate);
+
+        Thread.sleep(100);
+
+        date = newDate;
+        page = page.getElementById("updateHashThenReload").click();
+        newDate = page.getElementById("date").asNormalizedText();
+        assertNotSame(date, newDate);
+
+        Thread.sleep(100);
+
+        date = newDate;
+        page = page.getElementById("updateHashThenReload").click();
+        newDate = page.getElementById("date").asNormalizedText();
+        assertNotSame(date, newDate);
+
+        Thread.sleep(100);
+
+        date = newDate;
+        page = page.getElementById("reload").click();
+        newDate = page.getElementById("date").asNormalizedText();
+        assertNotSame(date, newDate);
+
+        String[] expected = {
+                "hash: no hash",
+                "reload",
+                "hash: no hash",
+                "update hash then reload",
+                "hash: no hash", // FIXME: this should be "hash: #0"
+                "update hash then reload",
+                "hash: no hash", // FIXME: this should be "hash: #1"
+                "reload",
+                "hash: no hash", // FIXME: this should be "hash: #1"
+        };
+        assertEquals(expected, alerts);
+    }
+
+    /**
+     * Tests that location.reload() works correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void reloadWithHash() throws Exception {
+        final WebClient client = getWebClient();
+        final List<String> alerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+
+        final URL url = getClass().getResource("LocationTest_reload.html");
+        assertNotNull(url);
+
+        HtmlPage page = client.getPage(UrlUtils.getUrlWithNewRef(url, "0"));
+        Thread.sleep(100);
+
+        String date = page.getElementById("date").asNormalizedText();
+        page = page.getElementById("reload").click();
+        String newDate = page.getElementById("date").asNormalizedText();
+        assertEquals(date, newDate); // FIXME: this should be assertNotEquals
+
+        Thread.sleep(100);
+
+        date = newDate;
+        page = page.getElementById("updateHashThenReload").click();
+        newDate = page.getElementById("date").asNormalizedText();
+        assertEquals(date, newDate); // FIXME: this should be assertNotEquals
+
+        Thread.sleep(100);
+
+        date = newDate;
+        page = page.getElementById("updateHashThenReload").click();
+        newDate = page.getElementById("date").asNormalizedText();
+        assertEquals(date, newDate); // FIXME: this should be assertNotEquals
+
+        String[] expected = {
+                "hash: #0",
+                "reload",
+                // FIXME: missing "hash: #0"
+                "update hash then reload",
+                // FIXME: missing "hash: #1"
+                "update hash then reload",
+                // FIXME: missing "hash: #2"
+        };
+        assertEquals(expected, alerts);
     }
 
     /**

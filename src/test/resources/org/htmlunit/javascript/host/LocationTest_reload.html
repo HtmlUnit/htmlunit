@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function update() {
+  var hash = location.hash === "" ? "no hash" : location.hash;
+  alert("hash: " + hash);
+  document.getElementById("date").innerText += Date.now();
+  document.getElementById("hash").innerText += hash;
+}
+
+function reload() {
+  alert("reload");
+  location.reload();
+}
+
+function updateHashThenReload() {
+  location.hash = location.hash === "" ? "0" : (parseInt(location.hash.replace("#", "")) + 1);
+  alert("update hash then reload");
+  location.reload();
+}
+</script>
+</head>
+<body onload="update()">
+<span id="date"></span>
+<span id="hash"></span>
+<input id="reload" type="button" value="Reload" onclick="reload()">
+<input id="updateHashThenReload" type="button" value="Update hash then reload" onclick="updateHashThenReload()">
+</body>
+</html>
