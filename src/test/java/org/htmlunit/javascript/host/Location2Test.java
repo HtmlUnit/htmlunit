@@ -24,7 +24,6 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
@@ -47,6 +46,8 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Atsushi Nakagawa
+ * @author Lai Quang Duong
+ * @author Kanoko Yamamoto
  */
 @RunWith(BrowserRunner.class)
 public class Location2Test extends WebDriverTestCase {
@@ -991,14 +992,17 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§a.html")
+    @Alerts(DEFAULT = "§§URL§§a.html",
+            FF = "null",
+            FF_ESR = "null")
     public void reloadGetNoHash() throws Exception {
         final String html =
               "<html>\n"
             + "  <head></head>\n"
             + "  <body>\n"
             + "    <button onclick='window.location.reload();' id='reload'>reload</button>\n"
-            + "    <button onclick='window.document.title=window.location.toString();' id='log'>log location</button>\n"
+            + "    <button onclick='window.document.title=window.location.toString();' "
+                        + "id='log'>log location</button>\n"
             + "  </body>\n"
             + "</html>";
 
@@ -1020,6 +1024,59 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(URL_FIRST + "a.html", driver.getCurrentUrl());
         driver.findElement(By.id("log")).click();
         assertEquals(URL_FIRST + "a.html", driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§a.html",
+            FF = "null",
+            FF_ESR = "null")
+    public void reloadGetHashDetails() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_SESSION_STORAGE_FUNCTION
+            + "      function test() {\n"
+            + "        log('1 ' + window.location);\n"
+            + "        window.location.hash='1';\n"
+            + "        log('2 ' + window.location);\n"
+            + "        window.location.reload();\n"
+            + "        log('3 ' + window.location);"
+            + "      }\n"
+            + "      log('load');\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <button onclick='test()' id='reload'>reload</button>\n"
+            + "    <button onclick='log(\"4 \" + window.location.toString());' id='log'>log location</button>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html"));
+        assertEquals(1, getMockWebConnection().getRequestCount());
+
+        driver.findElement(By.id("reload")).click();
+        // real ff seems to process the reload a bit async
+        Thread.sleep(100);
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertEquals(URL_FIRST + "a.html", getMockWebConnection().getLastWebRequest().getUrl());
+        expandExpectedAlertsVariables(URL_FIRST);
+        final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
+
+        assertEquals(URL_FIRST + "a.html#1", driver.getCurrentUrl());
+        driver.findElement(By.id("log")).click();
+        verifySessionStorage2(driver, new String[] {"load", "1 http://localhost:22222/a.html",
+            "2 http://localhost:22222/a.html#1", "3 http://localhost:22222/a.html#1",
+            "load", "4 http://localhost:22222/a.html#1"});
     }
 
     /**
@@ -1116,8 +1173,6 @@ public class Location2Test extends WebDriverTestCase {
             EDGE = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
             FF = {"3", "§§URL§§", "§§URL§§/"},
             FF_ESR = {"3", "§§URL§§", "§§URL§§/"})
-    // FF opens a confirmation window for the post
-    @BuggyWebDriver(FF_ESR = {"2", "null", "§§URL§§/"})
     public void reloadPost() throws Exception {
         final String form =
                 "<html>\n"

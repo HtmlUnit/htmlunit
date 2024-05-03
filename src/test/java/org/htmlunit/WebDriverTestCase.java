@@ -168,6 +168,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
     public static final String LOG_WINDOW_NAME_FUNCTION =
             "  function log(msg) { window.top.name += msg + '\\u00a7'; }\n  window.top.name = '';";
 
+    /**
+     * Function used in many tests.
+     */
+    public static final String LOG_SESSION_STORAGE_FUNCTION =
+            "  function log(msg) { "
+            + "var l = sessionStorage.getItem('Log');"
+            + "sessionStorage.setItem('Log', (null === l?'':l) + msg + '\\u00a7'); }\n";
 
     /**
      * Function used in many tests.
@@ -1170,6 +1177,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         return verifyJsVariable(driver, "window.top.name", expected.toString());
+    }
+
+    protected final WebDriver verifySessionStorage2(final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
+        final StringBuilder expected = new StringBuilder();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expected.append(expectedAlerts[i]).append('\u00A7');
+        }
+
+        return verifyJsVariable(driver, "sessionStorage.getItem('Log')", expected.toString());
     }
 
     /**

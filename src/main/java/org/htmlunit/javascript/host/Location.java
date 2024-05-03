@@ -53,6 +53,8 @@ import org.htmlunit.util.UrlUtils;
  * @author Frank Danek
  * @author Adam Afeltowicz
  * @author Atsushi Nakagawa
+ * @author Lai Quang Duong
+ * @author Kanoko Yamamoto
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
  */
@@ -226,11 +228,13 @@ public class Location extends HtmlUnitScriptable {
         final HtmlPage htmlPage = (HtmlPage) webWindow.getEnclosedPage();
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
+        // update request url with location.href in case hash was changed
+        request.setUrl(new URL(getHref()));
         if (webWindow.getWebClient().getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
             request.setRefererlHeader(htmlPage.getUrl());
         }
 
-        webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS location.reload");
+        webWindow.getWebClient().download(webWindow, "", request, false, false, false, "JS location.reload");
     }
 
     /**

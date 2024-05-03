@@ -1168,6 +1168,9 @@
         <contributor>
             <name>Piotr P. Karwasz</name>
         </contributor>
+        <contributor>
+            <name>Kanoko Yamamoto</name>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as depencency -->
