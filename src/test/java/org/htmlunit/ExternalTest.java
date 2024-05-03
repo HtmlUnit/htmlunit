@@ -58,7 +58,7 @@ public class ExternalTest {
     static String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static String EDGE_DRIVER_ = "124.0.2477";
+    static String EDGE_DRIVER_ = "124.0.2478";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -335,6 +335,17 @@ public class ExternalTest {
         // version 3.11.x seem to requires JDK11
         if ("maven-site-plugin".equals(artifactId)
                 && (version.startsWith("3.11.") || version.startsWith("3.12."))) {
+            return true;
+        }
+
+        // pmd 7 has problems parsing our code
+        if ("maven-pmd-plugin".equals(artifactId)
+                && (version.equals("3.22.0"))) {
+            return true;
+        }
+        System.out.println(artifactId + " " + version);
+        if (artifactId.startsWith("pmd-")
+                && (version.startsWith("7.0.") || version.startsWith("7.1."))) {
             return true;
         }
 
