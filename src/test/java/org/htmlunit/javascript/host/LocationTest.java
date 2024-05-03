@@ -356,29 +356,37 @@ public class LocationTest extends SimpleWebTestCase {
 
         String date = page.getElementById("date").asNormalizedText();
         page = page.getElementById("reload").click();
+
         String newDate = page.getElementById("date").asNormalizedText();
         assertNotSame(date, newDate);
+        assertEquals(url, page.getUrl());
 
         Thread.sleep(100);
 
         date = newDate;
         page = page.getElementById("updateHashThenReload").click();
+
         newDate = page.getElementById("date").asNormalizedText();
         assertNotSame(date, newDate);
+        assertEquals(true, page.getUrl().toString().endsWith("#0"));
 
         Thread.sleep(100);
 
         date = newDate;
         page = page.getElementById("updateHashThenReload").click();
+
         newDate = page.getElementById("date").asNormalizedText();
         assertNotSame(date, newDate);
+        assertEquals(true, page.getUrl().toString().endsWith("#1"));
 
         Thread.sleep(100);
 
         date = newDate;
         page = page.getElementById("reload").click();
+
         newDate = page.getElementById("date").asNormalizedText();
         assertNotSame(date, newDate);
+        assertEquals(true, page.getUrl().toString().endsWith("#1"));
 
         String[] expected = {
                 "hash: no hash",
@@ -412,22 +420,28 @@ public class LocationTest extends SimpleWebTestCase {
 
         String date = page.getElementById("date").asNormalizedText();
         page = page.getElementById("reload").click();
+
         String newDate = page.getElementById("date").asNormalizedText();
         assertNotSame(date, newDate);
+        assertEquals(true, page.getUrl().toString().endsWith("#0"));
 
         Thread.sleep(100);
 
         date = newDate;
         page = page.getElementById("updateHashThenReload").click();
+
         newDate = page.getElementById("date").asNormalizedText();
         assertNotSame(date, newDate);
+        assertEquals(true, page.getUrl().toString().endsWith("#1"));
 
         Thread.sleep(100);
 
         date = newDate;
         page = page.getElementById("updateHashThenReload").click();
+
         newDate = page.getElementById("date").asNormalizedText();
         assertNotSame(date, newDate);
+        assertEquals(true, page.getUrl().toString().endsWith("#2"));
 
         String[] expected = {
                 "hash: #0",
