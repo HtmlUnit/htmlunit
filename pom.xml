@@ -43,7 +43,7 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>10.16.0</checkstyle.version>
-        <spotbugs.version>4.8.4</spotbugs.version>
+        <spotbugs.version>4.8.5</spotbugs.version>
         <pmd.version>6.55.0</pmd.version>
         <junit.version>4.13.2</junit.version>
         <archunit.version>1.3.0</archunit.version>
