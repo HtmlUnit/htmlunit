@@ -2325,4 +2325,83 @@ public class ElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0,0", "10,30", "0,0", "type error", "0,0", "onscroll 0,0"})
+    @HtmlUnitNYI(CHROME = {"0,0", "onscroll 10,30", "10,30", "onscroll 0,0", "0,0", "type error", "0,0"},
+            EDGE = {"0,0", "onscroll 10,30", "10,30", "onscroll 0,0", "0,0", "type error", "0,0"},
+            FF = {"0,0", "onscroll 10,30", "10,30", "onscroll 0,0", "0,0", "type error", "0,0"},
+            FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 0,0", "0,0", "type error", "0,0"})
+    public void scrollBy() throws Exception {
+        final String html
+            = "<html><body onload='test()'>\n"
+            + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
+            + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
+            + "</div>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  d.onscroll = (event) => { log('onscroll ' + d.scrollLeft + ',' + d.scrollTop); };"
+
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scrollBy(10, 30);\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scrollBy(-10, -40);\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  try { d.scrollBy(44); } catch(e) { log('type error'); }\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0,0", "10,30", "0,0", "44,0", "44,0", "onscroll 44,0"})
+    @HtmlUnitNYI(CHROME = {"0,0", "onscroll 10,30", "10,30", "onscroll 0,0", "0,0",
+                           "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"},
+            EDGE = {"0,0", "onscroll 10,30", "10,30", "onscroll 0,0", "0,0",
+                    "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"},
+            FF = {"0,0", "onscroll 10,30", "10,30", "onscroll 0,0", "0,0",
+                  "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"},
+            FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 0,0", "0,0",
+                      "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"})
+    public void scrollByOptions() throws Exception {
+        final String html
+            = "<html><body onload='test()'>\n"
+            + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
+            + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
+            + "</div>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  d.onscroll = (event) => { log('onscroll ' + d.scrollLeft + ',' + d.scrollTop); };"
+
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scrollBy({left: 10, top: 30});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scrollBy({left: -10, top: -40});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scrollBy({left: 44});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scrollBy({abcd: 7});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }

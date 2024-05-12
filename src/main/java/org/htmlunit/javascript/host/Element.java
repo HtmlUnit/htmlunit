@@ -34,6 +34,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
@@ -1200,13 +1201,35 @@ public class Element extends Node {
     }
 
     /**
-     * Implement the {@code scrollBy()} JavaScript function but don't actually do
-     * anything. The requirement
-     * is just to prevent scripts that call that method from failing
+     * Scrolls the element by the given amount.
+     * @param x the horizontal pixel value that you want to scroll by
+     * @param y the vertical pixel value that you want to scroll by
      */
     @JsxFunction
-    public void scrollBy() {
-        /* do nothing at the moment */
+    public void scrollBy(final Scriptable x, final Scriptable y) {
+        int xOff = 0;
+        int yOff = 0;
+        if (y != null) {
+            xOff = JavaScriptEngine.toInt32(x);
+            yOff = JavaScriptEngine.toInt32(y);
+        }
+        else {
+            if (!(x instanceof NativeObject)) {
+                throw JavaScriptEngine.typeError("eee");
+            }
+            if (x.has("left", x)) {
+                xOff = JavaScriptEngine.toInt32(x.get("left", x));
+            }
+            if (x.has("top", x)) {
+                yOff = JavaScriptEngine.toInt32(x.get("top", x));
+            }
+        }
+
+        setScrollLeft(getScrollLeft() + xOff);
+        setScrollTop(getScrollTop() + yOff);
+
+        final Event event = new Event(this, Event.TYPE_SCROLL);
+        fireEvent(event);
     }
 
     /**
