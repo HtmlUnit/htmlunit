@@ -1191,13 +1191,13 @@ public class Element extends Node {
     }
 
     /**
-     * Implement the {@code scroll()} JavaScript function but don't actually do
-     * anything. The requirement
-     * is just to prevent scripts that call that method from failing
+     * Scrolls to a particular set of coordinates inside a given element.
+     * @param x the horizontal pixel value that you want to scroll to
+     * @param y the vertical pixel value that you want to scroll to
      */
     @JsxFunction
-    public void scroll() {
-        /* do nothing at the moment */
+    public void scroll(final Scriptable x, final Scriptable y) {
+        scrollTo(x, y);
     }
 
     /**

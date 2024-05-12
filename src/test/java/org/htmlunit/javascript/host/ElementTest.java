@@ -2503,4 +2503,93 @@ public class ElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0,0", "10,30", "12,34", "0,0", "type error", "0,0", "onscroll 0,0"})
+    @HtmlUnitNYI(CHROME = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
+                           "onscroll 0,0", "0,0", "type error", "0,0"},
+            EDGE = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
+                    "onscroll 0,0", "0,0", "type error", "0,0"},
+            FF = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
+                  "onscroll 0,0", "0,0", "type error", "0,0"},
+            FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
+                      "onscroll 0,0", "0,0", "type error", "0,0"})
+    public void scroll() throws Exception {
+        final String html
+            = "<html><body onload='test()'>\n"
+            + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
+            + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
+            + "</div>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  d.onscroll = (event) => { log('onscroll ' + d.scrollLeft + ',' + d.scrollTop); };"
+
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scroll(10, 30);\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scroll(12, 34);\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scroll(-17, -100);\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  try { d.scroll(44); } catch(e) { log('type error'); }\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0,0", "10,30", "12,34", "0,0", "44,0", "44,0", "onscroll 44,0"})
+    @HtmlUnitNYI(CHROME = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
+                           "onscroll 0,0", "0,0", "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"},
+            EDGE = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
+                    "onscroll 0,0", "0,0", "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"},
+            FF = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
+                  "onscroll 0,0", "0,0", "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"},
+            FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
+                      "onscroll 0,0", "0,0", "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"})
+    public void scrollOptions() throws Exception {
+        final String html
+            = "<html><body onload='test()'>\n"
+            + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
+            + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
+            + "</div>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  d.onscroll = (event) => { log('onscroll ' + d.scrollLeft + ',' + d.scrollTop); };"
+
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scroll({left: 10, top: 30});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scroll({left: 12, top: 34});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scroll({left: -17, top: -100});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scroll({left: 44});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+
+            + "  d.scroll({abcd: 7});\n"
+            + "  log(d.scrollLeft + ',' + d.scrollTop);\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.2.0" date="May xx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#742">
+                Initial simple implementation of element.scroll()/scrollBy()/scrollTo().
+            </action>
             <action type="add" dev="Kanoko Yamamoto, Lai Quang Duong">
                 Fixes for hash processing in Location.reload().
             </action>
