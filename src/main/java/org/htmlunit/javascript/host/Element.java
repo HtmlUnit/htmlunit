@@ -1233,13 +1233,38 @@ public class Element extends Node {
     }
 
     /**
-     * Implement the {@code scrollTo()} JavaScript function but don't actually do
-     * anything. The requirement
-     * is just to prevent scripts that call that method from failing
+     * Scrolls to a particular set of coordinates inside a given element.
+     * @param x the horizontal pixel value that you want to scroll to
+     * @param y the vertical pixel value that you want to scroll to
      */
     @JsxFunction
-    public void scrollTo() {
-        /* do nothing at the moment */
+    public void scrollTo(final Scriptable x, final Scriptable y) {
+        int xOff = 0;
+        int yOff = 0;
+        if (y != null) {
+            xOff = JavaScriptEngine.toInt32(x);
+            yOff = JavaScriptEngine.toInt32(y);
+        }
+        else {
+            if (!(x instanceof NativeObject)) {
+                throw JavaScriptEngine.typeError("eee");
+            }
+
+            xOff = getScrollLeft();
+            yOff = getScrollTop();
+            if (x.has("left", x)) {
+                xOff = JavaScriptEngine.toInt32(x.get("left", x));
+            }
+            if (x.has("top", x)) {
+                yOff = JavaScriptEngine.toInt32(x.get("top", x));
+            }
+        }
+
+        setScrollLeft(xOff);
+        setScrollTop(yOff);
+
+        final Event event = new Event(this, Event.TYPE_SCROLL);
+        fireEvent(event);
     }
 
     /**
