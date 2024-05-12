@@ -59,6 +59,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.NativeConsole.Level;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -1008,7 +1009,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @param y the vertical position to scroll to
      */
     @JsxFunction
-    public void scroll(final int x, final int y) {
+    public void scroll(final Scriptable x, final Scriptable y) {
         scrollTo(x, y);
     }
 
@@ -1018,11 +1019,29 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @param y the vertical distance to scroll by
      */
     @JsxFunction
-    public void scrollBy(final int x, final int y) {
+    public void scrollBy(final Scriptable x, final Scriptable y) {
         final HTMLElement body = document_.getBody();
         if (body != null) {
-            body.setScrollLeft(body.getScrollLeft() + x);
-            body.setScrollTop(body.getScrollTop() + y);
+            int xOff = 0;
+            int yOff = 0;
+            if (y != null) {
+                xOff = JavaScriptEngine.toInt32(x);
+                yOff = JavaScriptEngine.toInt32(y);
+            }
+            else {
+                if (!(x instanceof NativeObject)) {
+                    throw JavaScriptEngine.typeError("eee");
+                }
+                if (x.has("left", x)) {
+                    xOff = JavaScriptEngine.toInt32(x.get("left", x));
+                }
+                if (x.has("top", x)) {
+                    yOff = JavaScriptEngine.toInt32(x.get("top", x));
+                }
+            }
+
+            body.setScrollLeft(body.getScrollLeft() + xOff);
+            body.setScrollTop(body.getScrollTop() + yOff);
 
             final Event event = new Event(body, Event.TYPE_SCROLL);
             body.fireEvent(event);
@@ -1065,11 +1084,32 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @param y the vertical position to scroll to
      */
     @JsxFunction
-    public void scrollTo(final int x, final int y) {
+    public void scrollTo(final Scriptable x, final Scriptable y) {
         final HTMLElement body = document_.getBody();
         if (body != null) {
-            body.setScrollLeft(x);
-            body.setScrollTop(y);
+            int xOff = 0;
+            int yOff = 0;
+            if (y != null) {
+                xOff = JavaScriptEngine.toInt32(x);
+                yOff = JavaScriptEngine.toInt32(y);
+            }
+            else {
+                if (!(x instanceof NativeObject)) {
+                    throw JavaScriptEngine.typeError("eee");
+                }
+
+                xOff = body.getScrollLeft();
+                yOff = body.getScrollTop();
+
+                if (x.has("left", x)) {
+                    xOff = JavaScriptEngine.toInt32(x.get("left", x));
+                }
+                if (x.has("top", x)) {
+                    yOff = JavaScriptEngine.toInt32(x.get("top", x));
+                }
+            }
+            body.setScrollLeft(xOff);
+            body.setScrollTop(yOff);
 
             final Event event = new Event(body, Event.TYPE_SCROLL);
             body.fireEvent(event);

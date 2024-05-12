@@ -988,6 +988,65 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for bug 2897457.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"},
+            FF_ESR = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"})
+    @NotYetImplemented({FF, FF_ESR})
+    public void scrollingOptions1() throws Exception {
+        scrollingOptions(true);
+    }
+
+    /**
+     * Regression test for bug 2897457.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            FF = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"},
+            FF_ESR = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"})
+    public void scrollingOptions2() throws Exception {
+        scrollingOptions(false);
+    }
+
+    private void scrollingOptions(final boolean addHugeDiv) throws Exception {
+        final String html
+            = "<html><body onload='test()'>\n"
+            + (addHugeDiv ? "<div id='d' style='width:10000px;height:10000px;background-color:blue;'></div>\n" : "")
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var b = document.body;\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  window.scrollTo({left: 100, top: 200});\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  window.scrollBy({left: 10, top: 30});\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  window.scrollTo({left: -5, top: -20});\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  if(window.scrollByLines) {\n"
+            + "    window.scrollByLines(5);\n"
+            + "    log(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  } else {\n"
+            + "    log('no scrollByLines()');\n"
+            + "  }\n"
+            + "  window.scroll({left: 0, top: 0});\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  if(window.scrollByPages) {\n"
+            + "    window.scrollByPages(2);\n"
+            + "    log(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  } else {\n"
+            + "    log('no scrollByPages()');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
