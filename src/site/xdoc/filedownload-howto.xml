@@ -91,7 +91,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                     only detects responses having a content-disposition header of type 'attachment'.
                 </p>
                 <p>
-                    The method <source><![CDATA[boolean handleAttachment(final WebResponse response)]]></source>
+                    The method <source><![CDATA[boolean handleAttachment(final WebResponse response, final String attachmentFilename)]]></source>
                     is called if the response was detected as attachment (see above isAttachment()). You can process the attachment in your implementation
                     (e.g. by saving it to a file) or simply return false. Based on the result of the call, the AttachmentHandler supports two operation modes.
                 </p>
@@ -99,14 +99,14 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                   <li>
                     <strong>true</strong> signals the rest of the code the
                     response is handled by your code; there is NO replacement of the current page with an UnexpectedPage and also the method 
-                    <source><![CDATA[void handleAttachment(Page page)]]></source> from you AttachmentHandler is NOT called.
+                    <source><![CDATA[void handleAttachment(Page page, final String attachmentFilename)]]></source> from you AttachmentHandler is NOT called.
                   </li>
                   <li>
                     By returning <strong>false</strong>, the response will be processed further like this:
 	                <ul>
 	                  <li>at first a new window will be created, </li>
 	                  <li>next the UnexpectedPage will be build,</li>
-	                  <li>then the method <source><![CDATA[void handleAttachment(Page page)]]></source> from you AttachmentHandler is called and </li>
+	                  <li>then the method <source><![CDATA[void handleAttachment(Page page, final String attachmentFilename)]]></source> from you AttachmentHandler is called and </li>
 	                  <li>finally the UnexpectedPage will be placed inside the new window.</li>
 	                </ul>
                   </li>
@@ -122,14 +122,14 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
 
         client.setAttachmentHandler(new AttachmentHandler() {
             @Override
-            public boolean handleAttachment(final WebResponse response) {
+            public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
                 attachments.add(response);
                 return true;
             }
 
             @Override
-            public void handleAttachment(final Page page) {
-                throw new IllegalAccessError("handleAttachment(Page) called");
+            public void handleAttachment(final Page page, final String attachmentFilename) {
+                throw new IllegalAccessError("handleAttachment(Page, String) called");
             }
         });
 
