@@ -997,7 +997,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         getWebClient().setAttachmentHandler(new AttachmentHandler() {
 
             @Override
-            public boolean handleAttachment(final WebResponse response) {
+            public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
                 pages.add(response);
                 return true;
             }
@@ -1047,7 +1047,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
             }
 
             @Override
-            public boolean handleAttachment(final WebResponse response) {
+            public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
                 pages.add(response);
                 return true;
             }
@@ -1154,7 +1154,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final LinkedList<WebResponse> pages = new LinkedList<>();
         getWebClient().setAttachmentHandler(new AttachmentHandler() {
             @Override
-            public boolean handleAttachment(final WebResponse response) {
+            public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
                 pages.add(response);
                 return true;
             }

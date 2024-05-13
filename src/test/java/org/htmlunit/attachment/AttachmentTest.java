@@ -328,7 +328,7 @@ public class AttachmentTest extends SimpleWebTestCase {
 
         client.setAttachmentHandler(new AttachmentHandler() {
             @Override
-            public boolean handleAttachment(final WebResponse response) {
+            public boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
                 attachments.add(response);
                 return true;
             }

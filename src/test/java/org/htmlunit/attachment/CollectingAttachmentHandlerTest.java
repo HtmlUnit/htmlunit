@@ -38,6 +38,6 @@ public class CollectingAttachmentHandlerTest extends SimpleWebTestCase {
 
         final CollectingAttachmentHandler deserialized =
                 (CollectingAttachmentHandler) SerializationUtils.deserialize(bytes);
-        deserialized.handleAttachment(new UnexpectedPage(null, null));
+        deserialized.handleAttachment(new UnexpectedPage(null, null), null);
     }
 }

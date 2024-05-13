@@ -8,6 +8,11 @@
 
     <body>
         <release version="4.2.0" date="May xx, 2024" description="Bugfixes">
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: The signature of two methods from org.htmlunit.attachment.AttachmentHandler was changed.
+                Please implement handleAttachment(Page, String) instead of handleAttachment(Page)
+                and handleAttachment(WebResponse, String) instead of handleAttachment(WebResponse).
+            </action>
             <action type="update" dev="Lai Quang Duong">
                 Improve Attachment.getSuggestedFilename() by making it prioritize the value of Anchor.download if exist.
             </action>
