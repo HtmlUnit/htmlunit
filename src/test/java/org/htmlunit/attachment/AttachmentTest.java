@@ -180,6 +180,37 @@ public class AttachmentTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void filenameFromAnchor() throws Exception {
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        client.setWebConnection(conn);
+        final List<Attachment> attachments = new ArrayList<>();
+        client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
+
+        final String content = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "var blob = new Blob(['foo'], {type: 'text/plain'}),\n"
+                + "  url = URL.createObjectURL(blob),\n"
+                + "  elem = document.createElement('a');\n"
+                + "elem.href = url, elem.download = 'foo.txt', elem.click();\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "</html>\n";
+
+        conn.setResponse(URL_FIRST, content);
+        client.getPage(URL_FIRST);
+
+        final Attachment result = attachments.get(0);
+        assertEquals(result.getSuggestedFilename(), "foo.txt");
+        assertEquals("foo", ((TextPage) result.getPage()).getContent());
+        attachments.clear();
+    }
+
+    /**
      * This was causing a ClassCastException in Location.setHref as of 2013-10-08 because the TextPage
      * used for the attachment was wrongly associated to the HTMLDocument of the first page.
      * @throws Exception if an error occurs
