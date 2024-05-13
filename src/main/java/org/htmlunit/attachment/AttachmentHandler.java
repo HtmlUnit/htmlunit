@@ -51,7 +51,7 @@ public interface AttachmentHandler extends Serializable {
     /**
      * Handles the specified attached page. This is some kind of information
      * that the page was handled as attachment.
-     * This method will only be called if {@link #handleAttachment(WebResponse)}
+     * This method will only be called if {@link #handleAttachment(WebResponse, String)}
      * has returned false for the response.
      * @param page an attached page, which doesn't get loaded inline
      * @param attachmentFilename the filename to use for the attachment or {@code null} if unspecified
