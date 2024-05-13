@@ -1404,6 +1404,14 @@ public class WebClient implements Serializable, AutoCloseable {
         if (!StringUtils.isEmpty(type)) {
             headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE, fileOrBlob.getType()));
         }
+        if (fileOrBlob instanceof org.htmlunit.javascript.host.file.File) {
+            final org.htmlunit.javascript.host.file.File file = (org.htmlunit.javascript.host.file.File)fileOrBlob;
+            final String fileName = file.getName();
+            if (!StringUtils.isEmpty(fileName)) {
+                // https://datatracker.ietf.org/doc/html/rfc6266#autoid-10
+                headers.add(new NameValuePair(HttpHeader.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\""));
+            }
+        }
 
         final DownloadedContent content = new DownloadedContent.InMemory(fileOrBlob.getBytes());
         final WebResponseData responseData = new WebResponseData(content, 200, "OK", headers);

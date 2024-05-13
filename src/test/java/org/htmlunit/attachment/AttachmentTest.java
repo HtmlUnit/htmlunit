@@ -211,6 +211,60 @@ public class AttachmentTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void filenameFromFile() throws Exception {
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        client.setWebConnection(conn);
+        final List<Attachment> attachments = new ArrayList<>();
+        client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
+
+        {
+            final String content = "<html>\n"
+                    + "<head>\n"
+                    + "<script>\n"
+                    + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
+                    + "  url = URL.createObjectURL(blob),\n"
+                    + "  elem = document.createElement('a');\n"
+                    + "elem.href = url, elem.download = '', elem.click();\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "</html>\n";
+
+            conn.setResponse(URL_FIRST, content);
+            client.getPage(URL_FIRST);
+
+            final Attachment result = attachments.get(0);
+            assertEquals(result.getSuggestedFilename(), "bar.txt");
+            assertEquals("bar", ((TextPage)result.getPage()).getContent());
+            attachments.clear();
+        }
+        // prioritize name from Anchor.download over File.name
+        {
+            final String content = "<html>\n"
+                    + "<head>\n"
+                    + "<script>\n"
+                    + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
+                    + "  url = URL.createObjectURL(blob),\n"
+                    + "  elem = document.createElement('a');\n"
+                    + "elem.href = url, elem.download = 'foobar.txt', elem.click();\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "</html>\n";
+
+            conn.setResponse(URL_FIRST, content);
+            client.getPage(URL_FIRST);
+
+            final Attachment result = attachments.get(0);
+            assertEquals(result.getSuggestedFilename(), "foobar.txt");
+            assertEquals("bar", ((TextPage)result.getPage()).getContent());
+            attachments.clear();
+        }
+    }
+
+    /**
      * This was causing a ClassCastException in Location.setHref as of 2013-10-08 because the TextPage
      * used for the attachment was wrongly associated to the HTMLDocument of the first page.
      * @throws Exception if an error occurs
