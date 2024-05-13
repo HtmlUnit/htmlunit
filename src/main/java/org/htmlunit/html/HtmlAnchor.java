@@ -113,6 +113,7 @@ public class HtmlAnchor extends HtmlElement {
         if (ATTRIBUTE_NOT_DEFINED == getHrefAttribute()) {
             return;
         }
+        final String downloadAttribute = getDownloadAttribute();
         HtmlPage page = (HtmlPage) getPage();
         if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
@@ -133,7 +134,7 @@ public class HtmlAnchor extends HtmlElement {
             }
 
             final String target;
-            if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != getDownloadAttribute()) {
+            if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != downloadAttribute) {
                 target = WebClient.TARGET_BLANK;
             }
             else {
@@ -186,14 +187,14 @@ public class HtmlAnchor extends HtmlElement {
         final String target;
         if (shiftKey || ctrlKey
                 || (webClient.getAttachmentHandler() == null
-                        && ATTRIBUTE_NOT_DEFINED != getDownloadAttribute())) {
+                        && ATTRIBUTE_NOT_DEFINED != downloadAttribute)) {
             target = WebClient.TARGET_BLANK;
         }
         else {
             target = page.getResolvedTarget(getTargetAttribute());
         }
         page.getWebClient().download(page.getEnclosingWindow(), target, webRequest,
-                true, false, ATTRIBUTE_NOT_DEFINED != getDownloadAttribute(), "Link click");
+                true, false, (ATTRIBUTE_NOT_DEFINED != downloadAttribute) ? downloadAttribute : null, "Link click");
     }
 
     private boolean relContainsNoreferrer() {

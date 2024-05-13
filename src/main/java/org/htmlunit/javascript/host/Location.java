@@ -234,7 +234,7 @@ public class Location extends HtmlUnitScriptable {
             request.setRefererlHeader(htmlPage.getUrl());
         }
 
-        webWindow.getWebClient().download(webWindow, "", request, false, false, false, "JS location.reload");
+        webWindow.getWebClient().download(webWindow, "", request, false, false, null, "JS location.reload");
     }
 
     /**
@@ -320,7 +320,7 @@ public class Location extends HtmlUnitScriptable {
             request.setRefererlHeader(page.getUrl());
 
             webWindow = window_.getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS set location");
+            webWindow.getWebClient().download(webWindow, "", request, true, false, null, "JS set location");
         }
         catch (final MalformedURLException e) {
             if (LOG.isErrorEnabled()) {

@@ -540,7 +540,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow)
         throws IOException, FailingHttpStatusCodeException {
-        return loadWebResponseInto(webResponse, webWindow, false);
+        return loadWebResponseInto(webResponse, webWindow, null);
     }
 
     /**
@@ -556,8 +556,8 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
-     * @param forceAttachment handle this as attachment (is set to true if the call was triggered from
-     * anchor with download property set).
+     * @param forceAttachmentWithFilename if not {@code null}, handle this as an attachment with the specified name or if an empty string ("")
+     * use the filename provided in the response
      * @throws IOException if an IO error occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
@@ -565,7 +565,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see #setAttachmentHandler(AttachmentHandler)
      */
     public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow,
-            final boolean forceAttachment)
+            final String forceAttachmentWithFilename)
             throws IOException, FailingHttpStatusCodeException {
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
@@ -580,8 +580,8 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         if (attachmentHandler_ != null
-                && (forceAttachment || attachmentHandler_.isAttachment(webResponse))) {
-            if (attachmentHandler_.handleAttachment(webResponse)) {
+                && (forceAttachmentWithFilename != null || attachmentHandler_.isAttachment(webResponse))) {
+            if (attachmentHandler_.handleAttachment(webResponse, StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename)) {
                 // the handling is done by the attachment handler;
                 // do not open a new window
                 return webWindow.getEnclosedPage();
@@ -589,7 +589,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
             final WebWindow w = openWindow(null, null, webWindow);
             final Page page = pageCreator_.createPage(webResponse, w);
-            attachmentHandler_.handleAttachment(page);
+            attachmentHandler_.handleAttachment(page, StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename);
             return page;
         }
 
@@ -2526,18 +2526,18 @@ public class WebClient implements Serializable, AutoCloseable {
         private final WebResponse response_;
         private final WeakReference<Page> originalPage_;
         private final WebRequest request_;
-        private final boolean forceAttachment_;
+        private final String forceAttachmentWithFilename_;
 
         // we can't us the WebRequest from the WebResponse because
         // we need the original request e.g. after a redirect
         LoadJob(final WebRequest request, final WebResponse response,
-                final WebWindow requestingWindow, final String target, final boolean forceAttachment) {
+                final WebWindow requestingWindow, final String target, final String forceAttachmentWithFilename) {
             request_ = request;
             requestingWindow_ = requestingWindow;
             target_ = target;
             response_ = response;
             originalPage_ = new WeakReference<>(requestingWindow.getEnclosedPage());
-            forceAttachment_ = forceAttachment;
+            forceAttachmentWithFilename_ = forceAttachmentWithFilename;
         }
 
         public boolean isOutdated() {
@@ -2568,13 +2568,13 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param request the request to perform
      * @param checkHash if true check for hashChenage
      * @param forceLoad if true always load the request even if there is already the same in the queue
-     * @param forceAttachment if true the AttachmentHandler isAttachment() method is not called, the
+     * @param forceAttachmentWithFilename if not {@code null} the AttachmentHandler isAttachment() method is not called, the
      * response has to be handled as attachment in any case
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
         final WebRequest request, final boolean checkHash, final boolean forceLoad,
-        final boolean forceAttachment, final String description) {
+        final String forceAttachmentWithFilename, final String description) {
 
         final WebWindow targetWindow = resolveWindow(requestingWindow, target);
         final URL url = request.getUrl();
@@ -2631,7 +2631,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 LOG.error("NoHttpResponseException while downloading; generating a NoHttpResponse", e);
                 response = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, request, 0);
             }
-            loadJob = new LoadJob(request, response, requestingWindow, target, forceAttachment);
+            loadJob = new LoadJob(request, response, requestingWindow, target, forceAttachmentWithFilename);
         }
         catch (final IOException e) {
             throw new RuntimeException(e);
@@ -2683,7 +2683,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
             final WebWindow win = openTargetWindow(loadJob.requestingWindow_, loadJob.target_, TARGET_SELF);
             final Page pageBeforeLoad = win.getEnclosedPage();
-            loadWebResponseInto(loadJob.response_, win, loadJob.forceAttachment_);
+            loadWebResponseInto(loadJob.response_, win, loadJob.forceAttachmentWithFilename_);
 
             // start execution here.
             if (scriptEngine_ != null) {
