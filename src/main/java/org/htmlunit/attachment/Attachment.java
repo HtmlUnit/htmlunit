@@ -56,6 +56,10 @@ public class Attachment {
     public String getSuggestedFilename() {
         final WebResponse response = page_.getWebResponse();
         final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
+        if (disp == null) {
+            return null;
+        }
+
         int start = disp.indexOf("filename=");
         if (start == -1) {
             return null;
