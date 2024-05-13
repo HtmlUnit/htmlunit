@@ -54,7 +54,19 @@ public interface AttachmentHandler extends Serializable {
      * has returned false for the response.
      * @param page an attached page, which doesn't get loaded inline
      */
-    void handleAttachment(Page page);
+    default void handleAttachment(Page page) {
+        handleAttachment(page, null);
+    }
+
+    /**
+     * Handles the specified attached page. This is some kind of information
+     * that the page was handled as attachment.
+     * This method will only be called if {@link #handleAttachment(WebResponse)}
+     * has returned false for the response.
+     * @param page an attached page, which doesn't get loaded inline
+     * @param attachmentFilename the filename to use for the attachment or {@code null} if unspecified
+     */
+    void handleAttachment(Page page, final String attachmentFilename);
 
     /**
      * Process the specified attachment. If this method returns false,
@@ -67,6 +79,21 @@ public interface AttachmentHandler extends Serializable {
      * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
      */
     default boolean handleAttachment(final WebResponse response) {
+        return handleAttachment(response, null);
+    }
+
+    /**
+     * Process the specified attachment. If this method returns false,
+     * the client will open a new window with a page created from this
+     * response as content.
+     * Overwrite this method (and return true) if you do not need to create
+     * a new window for the response.
+     * @param response the response to process
+     * @param attachmentFilename the filename to use for the attachment or {@code null} if unspecified
+     * @return {@code true} if the specified response represents is handled by this method
+     * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
+     */
+    default boolean handleAttachment(final WebResponse response, final String attachmentFilename) {
         return false;
     }
 

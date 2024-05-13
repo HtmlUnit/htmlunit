@@ -911,7 +911,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         getWebClient().setAttachmentHandler(new AttachmentHandler() {
 
             @Override
-            public void handleAttachment(final Page page) {
+            public void handleAttachment(final Page page, final String attachmentFilename) {
                 pages.add(page);
             }
         });
@@ -957,7 +957,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
             }
 
             @Override
-            public void handleAttachment(final Page page) {
+            public void handleAttachment(final Page page, final String attachmentFilename) {
                 pages.add(page);
             }
         });
@@ -1002,7 +1002,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
             }
 
             @Override
-            public void handleAttachment(final Page page) {
+            public void handleAttachment(final Page page, final String attachmentFilename) {
                 throw new IllegalAccessError("handleAttachment(Page) called");
             }
         });
@@ -1052,7 +1052,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
             }
 
             @Override
-            public void handleAttachment(final Page page) {
+            public void handleAttachment(final Page page, final String attachmentFilename) {
                 throw new IllegalAccessError("handleAttachment(Page) called");
             }
         });
@@ -1113,7 +1113,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final LinkedList<Page> pages = new LinkedList<>();
         getWebClient().setAttachmentHandler(new AttachmentHandler() {
             @Override
-            public void handleAttachment(final Page page) {
+            public void handleAttachment(final Page page, final String attachmentFilename) {
                 pages.add(page);
             }
         });
@@ -1159,7 +1159,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
             }
 
             @Override
-            public void handleAttachment(final Page page) {
+            public void handleAttachment(final Page page, final String attachmentFilename) {
                 throw new IllegalAccessError("handleAttachment(Page) called");
             }
         });

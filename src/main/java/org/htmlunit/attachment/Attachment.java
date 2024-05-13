@@ -32,12 +32,25 @@ public class Attachment {
     /** The attached page. */
     private final Page page_;
 
+    /** The file name of this attachment. */
+    private final String attachmentFilename_;
+
     /**
      * Creates a new attachment for the specified page.
      * @param page the attached page
      */
     public Attachment(final Page page) {
+        this(page, null);
+    }
+
+    /**
+     * Creates a new attachment for the specified page.
+     * @param page the attached page
+     * @param attachmentFilename the file name of this attachment
+     */
+    public Attachment(final Page page, final String attachmentFilename) {
         page_ = page;
+        attachmentFilename_ = attachmentFilename;
     }
 
     /**
@@ -54,6 +67,10 @@ public class Attachment {
      * @return the attachment's suggested filename, or {@code null} if none was suggested
      */
     public String getSuggestedFilename() {
+        if (attachmentFilename_ != null) {
+            return attachmentFilename_;
+        }
+
         final WebResponse response = page_.getWebResponse();
         final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
         if (disp == null) {
