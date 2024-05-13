@@ -556,8 +556,8 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
-     * @param forceAttachmentWithFilename if not {@code null}, handle this as an attachment with the specified name or if an empty string ("")
-     * use the filename provided in the response
+     * @param forceAttachmentWithFilename if not {@code null}, handle this as an attachment with the specified name
+     * or if an empty string ("") use the filename provided in the response
      * @throws IOException if an IO error occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
@@ -581,7 +581,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
         if (attachmentHandler_ != null
                 && (forceAttachmentWithFilename != null || attachmentHandler_.isAttachment(webResponse))) {
-            if (attachmentHandler_.handleAttachment(webResponse, StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename)) {
+            if (attachmentHandler_.handleAttachment(webResponse,
+                        StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename)) {
                 // the handling is done by the attachment handler;
                 // do not open a new window
                 return webWindow.getEnclosedPage();
@@ -589,7 +590,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
             final WebWindow w = openWindow(null, null, webWindow);
             final Page page = pageCreator_.createPage(webResponse, w);
-            attachmentHandler_.handleAttachment(page, StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename);
+            attachmentHandler_.handleAttachment(page,
+                                StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename);
             return page;
         }
 
@@ -1405,7 +1407,7 @@ public class WebClient implements Serializable, AutoCloseable {
             headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE, fileOrBlob.getType()));
         }
         if (fileOrBlob instanceof org.htmlunit.javascript.host.file.File) {
-            final org.htmlunit.javascript.host.file.File file = (org.htmlunit.javascript.host.file.File)fileOrBlob;
+            final org.htmlunit.javascript.host.file.File file = (org.htmlunit.javascript.host.file.File) fileOrBlob;
             final String fileName = file.getName();
             if (!StringUtils.isEmpty(fileName)) {
                 // https://datatracker.ietf.org/doc/html/rfc6266#autoid-10
@@ -2576,8 +2578,8 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param request the request to perform
      * @param checkHash if true check for hashChenage
      * @param forceLoad if true always load the request even if there is already the same in the queue
-     * @param forceAttachmentWithFilename if not {@code null} the AttachmentHandler isAttachment() method is not called, the
-     * response has to be handled as attachment in any case
+     * @param forceAttachmentWithFilename if not {@code null} the AttachmentHandler isAttachment() method is not called,
+     * the response has to be handled as attachment in any case
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,

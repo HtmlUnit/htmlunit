@@ -8,6 +8,13 @@
 
     <body>
         <release version="4.2.0" date="May xx, 2024" description="Bugfixes">
+            <action type="update" dev="Lai Quang Duong">
+                Improve Attachment.getSuggestedFilename() by making it prioritize the value of Anchor.download if exist.
+            </action>
+            <action type="update" dev="Lai Quang Duong">
+                Improve Attachment.getSuggestedFilename() by making it return the value of File.name
+                if the attachment was downloaded through a blob-url created from a File.
+            </action>
             <action type="fix" dev="rbri">
                 Options support added for window.scroll()/scrollBy()/scrollTo().
             </action>

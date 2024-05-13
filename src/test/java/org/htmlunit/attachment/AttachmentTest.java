@@ -42,6 +42,7 @@ import org.junit.runner.RunWith;
  * @author Sudhan Moghe
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class AttachmentTest extends SimpleWebTestCase {
@@ -221,47 +222,57 @@ public class AttachmentTest extends SimpleWebTestCase {
         final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        {
-            final String content = "<html>\n"
-                    + "<head>\n"
-                    + "<script>\n"
-                    + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
-                    + "  url = URL.createObjectURL(blob),\n"
-                    + "  elem = document.createElement('a');\n"
-                    + "elem.href = url, elem.download = '', elem.click();\n"
-                    + "</script>\n"
-                    + "</head>\n"
-                    + "</html>\n";
+        final String content = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
+                + "  url = URL.createObjectURL(blob),\n"
+                + "  elem = document.createElement('a');\n"
+                + "elem.href = url, elem.download = '', elem.click();\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "</html>\n";
 
-            conn.setResponse(URL_FIRST, content);
-            client.getPage(URL_FIRST);
+        conn.setResponse(URL_FIRST, content);
+        client.getPage(URL_FIRST);
 
-            final Attachment result = attachments.get(0);
-            assertEquals(result.getSuggestedFilename(), "bar.txt");
-            assertEquals("bar", ((TextPage)result.getPage()).getContent());
-            attachments.clear();
-        }
-        // prioritize name from Anchor.download over File.name
-        {
-            final String content = "<html>\n"
-                    + "<head>\n"
-                    + "<script>\n"
-                    + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
-                    + "  url = URL.createObjectURL(blob),\n"
-                    + "  elem = document.createElement('a');\n"
-                    + "elem.href = url, elem.download = 'foobar.txt', elem.click();\n"
-                    + "</script>\n"
-                    + "</head>\n"
-                    + "</html>\n";
+        final Attachment result = attachments.get(0);
+        assertEquals(result.getSuggestedFilename(), "bar.txt");
+        assertEquals("bar", ((TextPage) result.getPage()).getContent());
+        attachments.clear();
+    }
 
-            conn.setResponse(URL_FIRST, content);
-            client.getPage(URL_FIRST);
 
-            final Attachment result = attachments.get(0);
-            assertEquals(result.getSuggestedFilename(), "foobar.txt");
-            assertEquals("bar", ((TextPage)result.getPage()).getContent());
-            attachments.clear();
-        }
+    /**
+     * Prioritize name from Anchor.download over File.name.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void filenameFromFilePrioritizeAnchorDownloadOverFileName() throws Exception {
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        client.setWebConnection(conn);
+        final List<Attachment> attachments = new ArrayList<>();
+        client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
+
+        final String content = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
+                + "  url = URL.createObjectURL(blob),\n"
+                + "  elem = document.createElement('a');\n"
+                + "elem.href = url, elem.download = 'foobar.txt', elem.click();\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "</html>\n";
+
+        conn.setResponse(URL_FIRST, content);
+        client.getPage(URL_FIRST);
+
+        final Attachment result = attachments.get(0);
+        assertEquals(result.getSuggestedFilename(), "foobar.txt");
+        assertEquals("bar", ((TextPage) result.getPage()).getContent());
+        attachments.clear();
     }
 
     /**

@@ -71,6 +71,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Lai Quang Duong
  */
 public class HtmlForm extends HtmlElement {
     private static final Log LOG = LogFactory.getLog(HtmlForm.class);

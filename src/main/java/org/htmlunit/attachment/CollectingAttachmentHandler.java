@@ -28,6 +28,7 @@ import org.htmlunit.WebAssert;
  * @author Sudhan Moghe
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class CollectingAttachmentHandler implements AttachmentHandler {
 

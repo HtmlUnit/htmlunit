@@ -41,6 +41,7 @@ import org.htmlunit.WebResponse;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Alex Gorbatovsky
+ * @author Lai Quang Duong
  * @see org.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler)
  * @see org.htmlunit.WebClient#getAttachmentHandler()
  * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
@@ -66,7 +67,7 @@ public interface AttachmentHandler extends Serializable {
      * @param page an attached page, which doesn't get loaded inline
      * @param attachmentFilename the filename to use for the attachment or {@code null} if unspecified
      */
-    void handleAttachment(Page page, final String attachmentFilename);
+    void handleAttachment(Page page, String attachmentFilename);
 
     /**
      * Process the specified attachment. If this method returns false,

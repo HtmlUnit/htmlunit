@@ -53,6 +53,7 @@ import org.junit.runner.RunWith;
  * @author Stefan Anzinger
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class HtmlAnchor2Test extends SimpleWebTestCase {

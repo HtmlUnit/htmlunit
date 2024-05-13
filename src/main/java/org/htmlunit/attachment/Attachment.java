@@ -26,6 +26,7 @@ import org.htmlunit.WebResponse;
  * @author Sudhan Moghe
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class Attachment {
 

@@ -49,6 +49,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Dmitri Zoubkov
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public class HtmlAnchor extends HtmlElement {
 
