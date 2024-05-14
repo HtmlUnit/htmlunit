@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.xml;
 
+import java.io.File;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -183,6 +184,92 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                 + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts({"onreadystatechange [object Event]", "readystatechange", "1",
+             "NetworkError"})
+    public void sendLocalFile() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/tiny-png.img");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        startWebServer(getMockWebConnection(), StandardCharsets.US_ASCII);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var xhr = new XMLHttpRequest();\n"
+                + "      xhr.onreadystatechange = function(event) {\n"
+                + "                    log('onreadystatechange ' + event);\n"
+                + "                    log(event.type);\n"
+                + "                    log(xhr.readyState);\n"
+                + "                  };\n"
+                + "      xhr.onerror = function(event) {\n"
+                + "                    log('error ' + event);\n"
+                + "                    log(event.type);\n"
+                + "                    log(event.lengthComputable);\n"
+                + "                    log(event.loaded);\n"
+                + "                    log(event.total);\n"
+                + "                  };\n"
+                + "      xhr.open('GET', '" + fileURL + "', false);\n"
+                + "      xhr.send('');\n"
+                + "  } catch (exception) { \n"
+                + "    log(exception.name);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts({"onreadystatechange [object Event]", "readystatechange", "1",
+             "onreadystatechange [object Event]", "readystatechange", "4",
+             "error [object ProgressEvent]", "error", "false", "0", "0"})
+    public void sendLocalFileAsync() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/tiny-png.img");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        startWebServer(getMockWebConnection(), StandardCharsets.US_ASCII);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var xhr = new XMLHttpRequest();\n"
+                + "      xhr.onreadystatechange = function(event) {\n"
+                + "                    log('onreadystatechange ' + event);\n"
+                + "                    log(event.type);\n"
+                + "                    log(xhr.readyState);\n"
+                + "                  };\n"
+                + "      xhr.onerror = function(event) {\n"
+                + "                    log('error ' + event);\n"
+                + "                    log(event.type);\n"
+                + "                    log(event.lengthComputable);\n"
+                + "                    log(event.loaded);\n"
+                + "                    log(event.total);\n"
+                + "                  };\n"
+                + "      xhr.open('GET', '" + fileURL + "', true);\n"
+                + "      xhr.send('');\n"
+                + "  } catch (exception) { \n"
+                + "    log(exception);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     @Test
