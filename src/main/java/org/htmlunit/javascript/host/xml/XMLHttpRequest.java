@@ -883,6 +883,16 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * The real send job.
      */
     void doSend() {
+        if (webRequest_.getUrl().getProtocol().equals("file")) {
+            // accessing to local resource is forbidden for security reason
+            setState(DONE);
+            fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+            fireJavascriptEvent(Event.TYPE_ERROR);
+            fireJavascriptEvent(Event.TYPE_LOAD_END);
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(
+                    new RuntimeException("Not allowed to load local resource: " + webRequest_.getUrl()));
+        }
+
         final BrowserVersion browserVersion = getBrowserVersion();
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         boolean preflighted = false;
