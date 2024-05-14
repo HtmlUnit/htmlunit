@@ -22,7 +22,8 @@
                 Make HtmlElement.type() allow full-width space (\u3000), six-per-em space (\u2006) and tab (\t) characters.
             </action>
             <action type="update" dev="Lai Quang Duong">
-                Prevent iframes from loading local resource for security reason.
+                Prevent iframes from loading local resource for security reason (reading local file resources is still allowed
+                if the enclosing document itself was loaded from file).
             </action>
             <action type="update" dev="Lai Quang Duong">
                 Prevent XMLHttpRequest from loading local resource for security reason.

@@ -191,14 +191,15 @@ public abstract class BaseFrameElement extends HtmlElement {
                 return;
             }
 
+            final URL pageUrl = page.getUrl();
+
             // accessing to local resource is forbidden for security reason
-            if ("file".equals(url.getProtocol())) {
+            if (!"file".equals(pageUrl.getProtocol()) && "file".equals(url.getProtocol())) {
                 notifyIncorrectness("Not allowed to load local resource: " + source);
                 return;
             }
 
             final Charset pageCharset = page.getCharset();
-            final URL pageUrl = page.getUrl();
             final WebRequest request = new WebRequest(url, pageCharset, pageUrl);
 
             if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
