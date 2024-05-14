@@ -18,6 +18,12 @@
                 for the XMLHttpRequest ActiveX object that is no longer there.
             </action>
 
+            <action type="fix" dev="Lai Quang Duong">
+                Make HtmlElement.type() allow full-width space (\u3000), six-per-em space (\u2006) and tab (\t) characters.
+            </action>
+            <action type="update" dev="Lai Quang Duong">
+                Prevent iframes from loading local resource for security reason.
+            </action>
             <action type="update" dev="Lai Quang Duong">
                 Prevent XMLHttpRequest from loading local resource for security reason.
             </action>

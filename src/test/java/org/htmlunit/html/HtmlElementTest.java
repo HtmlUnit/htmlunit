@@ -37,6 +37,7 @@ import org.w3c.dom.NodeList;
  * @author Sudhan Moghe
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class HtmlElementTest extends SimpleWebTestCase {
@@ -1223,5 +1224,15 @@ public class HtmlElementTest extends SimpleWebTestCase {
             assertEquals(Boolean.parseBoolean(getExpectedAlerts()[1]), page.getElementById("d2").isDisplayed());
             assertEquals(Boolean.parseBoolean(getExpectedAlerts()[2]), page.getElementById("d3").isDisplayed());
         }
+    }
+
+    @Test
+    public void acceptChar() throws Exception {
+        final String html = "<html><body><input></body></html>";
+        final HtmlPage page = loadPage(html);
+        final String value = "abc[ ][\t][　][\u2006]123あいう漢字[!@#$%^&*()-=_+]{}<>?/\\";
+        final HtmlInput input = page.getFirstByXPath("//input");
+        input.type(value);
+        assertEquals(value, input.getValue());
     }
 }

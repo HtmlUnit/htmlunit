@@ -68,6 +68,7 @@ import org.w3c.dom.Text;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Ronny Shapiro
+ * @author Lai Quang Duong
  */
 public abstract class HtmlElement extends DomElement {
 
@@ -843,7 +844,8 @@ public abstract class HtmlElement extends DomElement {
     protected boolean acceptChar(final char c) {
         // This range is this is private use area
         // see http://www.unicode.org/charts/PDF/UE000.pdf
-        return (c < '\uE000' || c > '\uF8FF') && (c == ' ' || !Character.isWhitespace(c));
+        return (c < '\uE000' || c > '\uF8FF')
+                && (c == ' ' || c == '\t' || c == '\u3000' || c == '\u2006' || !Character.isWhitespace(c));
     }
 
     /**
