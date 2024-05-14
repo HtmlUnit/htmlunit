@@ -14,6 +14,10 @@
                 and handleAttachment(WebResponse, String) instead of handleAttachment(WebResponse).
             </action>
             <action type="update" dev="Lai Quang Duong">
+                INCOMPATIBLE CHANGE: Ctor XMLHttpRequest(boolean caseSensitiveProperties) removed. This was only introduced
+                for the XMLHttpRequest ActiveX object that is no longer there.
+            </action>
+            <action type="update" dev="Lai Quang Duong">
                 Improve Attachment.getSuggestedFilename() by making it prioritize the value of Anchor.download if exist.
             </action>
             <action type="update" dev="Lai Quang Duong">

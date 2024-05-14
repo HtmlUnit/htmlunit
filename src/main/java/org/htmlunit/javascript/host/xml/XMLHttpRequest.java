@@ -146,10 +146,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private static final String ALLOW_ORIGIN_ALL = "*";
 
-    private static final String[] ALL_PROPERTIES_ = {"onreadystatechange", "readyState", "responseText", "responseXML",
-        "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
-        "setRequestHeader"};
-
     private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<>(Arrays.asList(
         "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
         HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
@@ -163,7 +159,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private int jobID_;
     private WebResponse webResponse_;
     private String overriddenMimeType_;
-    private final boolean caseSensitiveProperties_;
     private boolean withCredentials_;
     private boolean isSameOrigin_;
     private int timeout_;
@@ -174,7 +169,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * Creates a new instance.
      */
     public XMLHttpRequest() {
-        this(true);
+        state_ = UNSENT;
+        responseType_ = RESPONSE_TYPE_DEFAULT;
     }
 
     /**
@@ -184,16 +180,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxConstructor
     public void jsConstructor() {
         // don't call super here
-    }
-
-    /**
-     * Creates a new instance.
-     * @param caseSensitiveProperties if properties and methods are case sensitive
-     */
-    public XMLHttpRequest(final boolean caseSensitiveProperties) {
-        caseSensitiveProperties_ = caseSensitiveProperties;
-        state_ = UNSENT;
-        responseType_ = RESPONSE_TYPE_DEFAULT;
     }
 
     /**
@@ -1231,38 +1217,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxSetter
     public void setWithCredentials(final boolean withCredentials) {
         withCredentials_ = withCredentials;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(String name, final Scriptable start) {
-        if (!caseSensitiveProperties_) {
-            for (final String property : ALL_PROPERTIES_) {
-                if (property.equalsIgnoreCase(name)) {
-                    name = property;
-                    break;
-                }
-            }
-        }
-        return super.get(name, start);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void put(String name, final Scriptable start, final Object value) {
-        if (!caseSensitiveProperties_) {
-            for (final String property : ALL_PROPERTIES_) {
-                if (property.equalsIgnoreCase(name)) {
-                    name = property;
-                    break;
-                }
-            }
-        }
-        super.put(name, start, value);
     }
 
     /**
