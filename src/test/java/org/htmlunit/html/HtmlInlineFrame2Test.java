@@ -17,6 +17,7 @@ package org.htmlunit.html;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Map;
 
@@ -95,7 +96,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test, the right frame is used for a target, even if some frames
+     * Test, the correct frame is used for a target, even if some frames
      * have the same name.
      *
      * @throws Exception if the test fails
@@ -305,5 +306,30 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void localFile() throws Exception {
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/xhtml.html");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        final String html = "<html>"
+                + "<head><title>Top Page</title></head>\n"
+                + "<body>\n"
+                + "  <iframe id='myFrame' src='" + fileURL + "'></iframe>\n"
+                + "  <div>HtmlUnit</div>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, "Top Page");
+        assertEquals("HtmlUnit", driver.findElement(By.tagName("body")).getText());
+
+        driver.switchTo().frame("myFrame");
+        assertEquals("", driver.findElement(By.tagName("body")).getText());
     }
 }

@@ -54,6 +54,7 @@ import org.w3c.dom.Attr;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public abstract class BaseFrameElement extends HtmlElement {
 
@@ -187,6 +188,12 @@ public abstract class BaseFrameElement extends HtmlElement {
             }
             catch (final MalformedURLException e) {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
+                return;
+            }
+
+            // accessing to local resource is forbidden for security reason
+            if ("file".equals(url.getProtocol())) {
+                notifyIncorrectness("Not allowed to load local resource: " + source);
                 return;
             }
 
