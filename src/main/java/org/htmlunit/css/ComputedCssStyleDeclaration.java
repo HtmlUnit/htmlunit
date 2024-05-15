@@ -1893,14 +1893,30 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     private boolean isScrollable(final boolean horizontal, final boolean ignoreSize) {
         final boolean scrollable;
         final DomElement element = getDomElement();
-        final String overflow = getStyleAttribute(Definition.OVERFLOW, true);
+
+        String overflow;
         if (horizontal) {
-            // TODO: inherit, overflow-x
+            overflow = getStyleAttribute(Definition.OVERFLOW_Y_, false);
+            if (StringUtils.isEmpty(overflow)) {
+                overflow = getStyleAttribute(Definition.OVERFLOW_Y, false);
+            }
+            // fall back to default
+            if (StringUtils.isEmpty(overflow)) {
+                overflow = getStyleAttribute(Definition.OVERFLOW, true);
+            }
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
                 && (ignoreSize || getContentWidth() > getCalculatedWidth());
         }
         else {
-            // TODO: inherit, overflow-y
+            overflow = getStyleAttribute(Definition.OVERFLOW_X_, false);
+            if (StringUtils.isEmpty(overflow)) {
+                overflow = getStyleAttribute(Definition.OVERFLOW_X, false);
+            }
+            // fall back to default
+            if (StringUtils.isEmpty(overflow)) {
+                overflow = getStyleAttribute(Definition.OVERFLOW, true);
+            }
+
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
                 && (ignoreSize || getContentHeight() > getEmptyHeight());
         }
