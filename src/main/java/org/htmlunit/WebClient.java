@@ -59,6 +59,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.cookie.MalformedCookieException;
+import org.htmlunit.attachment.Attachment;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.csp.Policy;
 import org.htmlunit.csp.url.URI;
@@ -565,7 +566,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see #setAttachmentHandler(AttachmentHandler)
      */
     public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow,
-            final String forceAttachmentWithFilename)
+            String forceAttachmentWithFilename)
             throws IOException, FailingHttpStatusCodeException {
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
@@ -581,6 +582,13 @@ public class WebClient implements Serializable, AutoCloseable {
 
         if (attachmentHandler_ != null
                 && (forceAttachmentWithFilename != null || attachmentHandler_.isAttachment(webResponse))) {
+
+            // check content disposition header for nothing provided
+            if (StringUtils.isEmpty(forceAttachmentWithFilename)) {
+                final String disp = webResponse.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
+                forceAttachmentWithFilename = Attachment.getSuggestedFilename(disp);
+            }
+
             if (attachmentHandler_.handleAttachment(webResponse,
                         StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename)) {
                 // the handling is done by the attachment handler;

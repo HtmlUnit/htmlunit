@@ -74,27 +74,38 @@ public class Attachment {
 
         final WebResponse response = page_.getWebResponse();
         final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
-        if (disp == null) {
+        return getSuggestedFilename(disp);
+    }
+
+    /**
+     * Returns the attachment's filename, as suggested by the <code>Content-Disposition</code>
+     * header, or {@code null} if no filename was suggested.
+     * @param contentDispositonHeader the <code>Content-Disposition</code> header
+     *
+     * @return the attachment's suggested filename, or {@code null} if none was suggested
+     */
+    public static String getSuggestedFilename(final String contentDispositonHeader) {
+        if (contentDispositonHeader == null) {
             return null;
         }
 
-        int start = disp.indexOf("filename=");
+        int start = contentDispositonHeader.indexOf("filename=");
         if (start == -1) {
             return null;
         }
         start += "filename=".length();
-        if (start >= disp.length()) {
+        if (start >= contentDispositonHeader.length()) {
             return null;
         }
 
-        int end = disp.indexOf(';', start);
+        int end = contentDispositonHeader.indexOf(';', start);
         if (end == -1) {
-            end = disp.length();
+            end = contentDispositonHeader.length();
         }
-        if (disp.charAt(start) == '"' && disp.charAt(end - 1) == '"') {
+        if (contentDispositonHeader.charAt(start) == '"' && contentDispositonHeader.charAt(end - 1) == '"') {
             start++;
             end--;
         }
-        return disp.substring(start, end);
+        return contentDispositonHeader.substring(start, end);
     }
 }
