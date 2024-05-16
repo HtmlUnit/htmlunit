@@ -18,6 +18,9 @@
                 for the XMLHttpRequest ActiveX object that is no longer there.
             </action>
 
+            <action type="update" dev="rbri">
+                Upgrade commons-logging to 1.3.2
+            </action>
             <action type="fix" dev="rbri" issue="#742">
                 ComputedCssStyleDeclaration.isScrollable(boolean, boolean) now checks also for the overflow-x/overflow-y styles.
             </action>
