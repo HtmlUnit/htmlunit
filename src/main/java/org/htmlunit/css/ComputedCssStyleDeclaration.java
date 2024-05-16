@@ -1404,7 +1404,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             if (includeBorder) {
                 height += getBorderVertical();
             }
-            else if (isScrollable(false, true) && !(element instanceof HtmlBody)) {
+            else if (isScrollable(true, true) && !(element instanceof HtmlBody)) {
                 height -= 17;
             }
 
@@ -1460,7 +1460,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             if (includeBorder) {
                 width += getBorderHorizontal();
             }
-            else if (isScrollable(true, true) && !(element instanceof HtmlBody)) {
+            else if (isScrollable(false, true) && !(element instanceof HtmlBody)) {
                 width -= 17;
             }
 
@@ -1896,9 +1896,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         String overflow;
         if (horizontal) {
-            overflow = getStyleAttribute(Definition.OVERFLOW_Y_, false);
+            overflow = getStyleAttribute(Definition.OVERFLOW_X_, false);
             if (StringUtils.isEmpty(overflow)) {
-                overflow = getStyleAttribute(Definition.OVERFLOW_Y, false);
+                overflow = getStyleAttribute(Definition.OVERFLOW_X, false);
             }
             // fall back to default
             if (StringUtils.isEmpty(overflow)) {
@@ -1908,9 +1908,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 && (ignoreSize || getContentWidth() > getCalculatedWidth());
         }
         else {
-            overflow = getStyleAttribute(Definition.OVERFLOW_X_, false);
+            overflow = getStyleAttribute(Definition.OVERFLOW_Y_, false);
             if (StringUtils.isEmpty(overflow)) {
-                overflow = getStyleAttribute(Definition.OVERFLOW_X, false);
+                overflow = getStyleAttribute(Definition.OVERFLOW_Y, false);
             }
             // fall back to default
             if (StringUtils.isEmpty(overflow)) {
