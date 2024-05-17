@@ -171,14 +171,16 @@ public class WebRequest implements Serializable {
         else if (path.contains("/.")) {
             url = buildUrlWithNewPath(url, removeDots(path));
         }
-        final String idn = IDN.toASCII(url.getHost());
-        if (!idn.equals(url.getHost())) {
-            try {
+
+        try {
+            final String idn = IDN.toASCII(url.getHost());
+            if (!idn.equals(url.getHost())) {
                 url = UrlUtils.getUrlWithNewHost(url, idn);
             }
-            catch (final Exception e) {
-                throw new RuntimeException("Cannot change hostname of URL: " + url.toExternalForm(), e);
-            }
+        }
+        catch (final Exception e) {
+            throw new IllegalArgumentException(
+                    "Cannot convert the hostname of URL: '" + url.toExternalForm() + "' to ASCII.", e);
         }
 
         try {

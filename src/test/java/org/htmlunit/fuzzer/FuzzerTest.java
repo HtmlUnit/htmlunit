@@ -155,6 +155,15 @@ public class FuzzerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void case67067() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=67067
+        test("test-67067.html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void case67493() throws Exception {
         // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=67493
         test("test-67493.html");
