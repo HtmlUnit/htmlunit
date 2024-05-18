@@ -16,7 +16,10 @@ package org.htmlunit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.TimeZone;
 
 import org.junit.Test;
 
@@ -66,5 +69,23 @@ public class BrowserVersionTest {
         clone.getPlugins().clear();
         assertTrue(clone.getPlugins().isEmpty());
         assertFalse(ff.getPlugins().isEmpty());
+    }
+
+    /**
+     * Test of BrowserVersion.BrowserVersionBuilder.
+     */
+    @Test
+    public void differentTimeZone() {
+        final BrowserVersion ffBerlin = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
+                                                .setSystemTimezone(TimeZone.getTimeZone("Europe/Berlin"))
+                                                .build();
+
+        // Nickname is used as key for dictionaries storing browser setups
+        assertTrue(BrowserVersion.FIREFOX.getNickname().equals(ffBerlin.getNickname()));
+
+        assertFalse(BrowserVersion.FIREFOX == ffBerlin);
+        assertFalse(BrowserVersion.FIREFOX.equals(ffBerlin));
+
+        assertNotEquals(BrowserVersion.FIREFOX.getSystemTimezone(), ffBerlin.getSystemTimezone());
     }
 }
