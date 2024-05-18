@@ -18,6 +18,10 @@
                 for the XMLHttpRequest ActiveX object that is no longer there.
             </action>
 
+            <action type="update" dev="rbri" issue="#789">
+                Handling of Attachments is improved. Now we treat responses only haven and Content-Type header of application/octetstream
+                in the same way as if the Content-Disposition header was set to attachment. This is was real browsers also do.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-logging to 1.3.2
             </action>
