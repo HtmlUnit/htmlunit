@@ -42,7 +42,7 @@ public class DefaultPageCreator2Test {
         assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("application/javascript"));
 
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType(MimeType.TEXT_XML));
-        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType(MimeType.APPLICATION_XML));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType(MimeType.APPLICATION_XHTML));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("text/vnd.wap.wml"));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/vnd.mozilla.xul+xml"));

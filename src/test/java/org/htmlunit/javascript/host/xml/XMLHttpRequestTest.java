@@ -484,7 +484,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse("<note/>", "application/xml");
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.APPLICATION_XML);
         loadPageVerifyTitle2(html);
     }
 

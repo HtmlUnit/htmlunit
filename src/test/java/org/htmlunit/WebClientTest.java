@@ -1279,7 +1279,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         // tests XHTML files, types will be determined based on a mixture of file suffixes and contents
         // note that "xhtml.php" returns content type "text/xml" in Firefox, but "application/xml" is good enough...
-        assertEquals("xhtml.php", "application/xml", c.guessContentType(getTestFile("xhtml.php")));
+        assertEquals("xhtml.php", MimeType.APPLICATION_XML, c.guessContentType(getTestFile("xhtml.php")));
         assertEquals("xhtml.htm", MimeType.TEXT_HTML, c.guessContentType(getTestFile("xhtml.htm")));
         assertEquals("xhtml.html", MimeType.TEXT_HTML, c.guessContentType(getTestFile("xhtml.html")));
         assertEquals("xhtml.xhtml", MimeType.APPLICATION_XHTML, c.guessContentType(getTestFile("xhtml.xhtml")));
@@ -1515,7 +1515,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         webConnection.setResponse(URL_FIRST, content, "Text/Xml");
         assertTrue(XmlPage.class.isInstance(client.getPage(URL_FIRST)));
-        webConnection.setResponse(URL_FIRST, content, "ApplicaTion/Xml");
+        webConnection.setResponse(URL_FIRST, content, MimeType.APPLICATION_XML);
         assertTrue(XmlPage.class.isInstance(client.getPage(URL_FIRST)));
 
         webConnection.setResponse(URL_FIRST, content, MimeType.TEXT_PLAIN);

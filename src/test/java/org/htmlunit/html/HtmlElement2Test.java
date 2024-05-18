@@ -25,6 +25,7 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -395,7 +396,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
             + "</body></html>\n";
 
         final String xml = "<html xmlns=\"http://www.w3.org/1999/xhtml\"></html>";
-        getMockWebConnection().setResponse(URL_SECOND, xml, "application/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.APPLICATION_XML);
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }

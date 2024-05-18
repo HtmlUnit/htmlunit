@@ -131,7 +131,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return PageType.HTML;
 
             case MimeType.TEXT_XML:
-            case "application/xml":
+            case MimeType.APPLICATION_XML:
             case "text/vnd.wap.wml":
                 return PageType.XML;
 

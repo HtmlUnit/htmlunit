@@ -31,6 +31,7 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomProcessingInstruction;
+import org.htmlunit.util.MimeType;
 import org.htmlunit.util.XmlUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMConfiguration;
@@ -378,7 +379,7 @@ public class XmlPage extends SgmlPage {
      */
     @Override
     public String getContentType() {
-        return "application/xml";
+        return MimeType.APPLICATION_XML;
     }
 
     /**
