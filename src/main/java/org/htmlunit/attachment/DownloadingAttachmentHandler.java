@@ -57,7 +57,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 	}
 
 	private String getFilenameFromUrlIfEmpty(Page page, String attachmentFilename) {
-		if (attachmentFilename==null) {
+		if (attachmentFilename==null || attachmentFilename.trim().isEmpty()) {
 			String file = page.getWebResponse().getWebRequest().getUrl().getFile();
 			attachmentFilename = file.substring(file.lastIndexOf('/') + 1);
 		}
