@@ -83,7 +83,7 @@ public interface AttachmentHandler extends Serializable {
     default boolean isAttachment(final WebResponse response) {
         final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
         if (disp == null) {
-            // if there is no content disposition header and content type application/octet-stream
+            // if there is no content disposition header and content type 'application/octet-stream'
             // is handled like an attachment by the browsers
             // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#applicationoctet-stream
             // They treat it as if the Content-Disposition header was set to attachment, and propose a "Save As" dialog.
