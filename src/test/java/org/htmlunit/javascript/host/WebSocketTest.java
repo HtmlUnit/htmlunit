@@ -34,6 +34,7 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.After;
 import org.junit.Test;
@@ -111,22 +112,51 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception undefined", "exception null", "exception empty", "exception invalid"})
+    @Alerts(DEFAULT = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
+                       "ws://localhost:22222/", "ws://localhost:22222/", "exception invalid"},
+            FF = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
+                  "exception empty", "ws://localhost:22222/", "exception invalid"},
+            FF_ESR = {"exception no param", "exception undefined", "exception null",
+                      "exception empty", "exception blank", "exception invalid"})
+    @HtmlUnitNYI(
+            CHROME = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
+                      "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"},
+            EDGE = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
+                    "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"},
+            FF = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
+                  "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"})
     public void initialWithoutUrl() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      new WebSocket(undefined);\n"
+            + "      let ws = new WebSocket();\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { log('exception no param') }\n"
+
+            + "    try {\n"
+            + "      let ws = new WebSocket(undefined);\n"
+            + "      log(ws.url);"
             + "    } catch(e) { log('exception undefined') }\n"
+
             + "    try {\n"
-            + "      new WebSocket(null);\n"
+            + "      let ws = new WebSocket(null);\n"
+            + "      log(ws.url);"
             + "    } catch(e) { log('exception null') }\n"
+
             + "    try {\n"
-            + "      new WebSocket('');\n"
+            + "      let ws = new WebSocket('');\n"
+            + "      log(ws.url);"
             + "    } catch(e) { log('exception empty') }\n"
+
             + "    try {\n"
-            + "      new WebSocket('#');\n"
+            + "      let ws = new WebSocket(' ');\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { log('exception blank') }\n"
+
+            + "    try {\n"
+            + "      let ws = new WebSocket('#');\n"
+            + "      log(ws.url);"
             + "    } catch(e) { log('exception invalid') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

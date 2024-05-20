@@ -14,13 +14,18 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_WEBSOCKET_CTOR_ACCEPTS_UNDEFINED;
+
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.nio.ByteBuffer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
@@ -41,6 +46,7 @@ import org.htmlunit.javascript.host.event.CloseEvent;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
+import org.htmlunit.util.UrlUtils;
 import org.htmlunit.websocket.JettyWebSocketAdapter;
 import org.htmlunit.websocket.WebSocketAdapter;
 
@@ -51,7 +57,9 @@ import org.htmlunit.websocket.WebSocketAdapter;
  * @author Ronald Brill
  * @author Madis Pärn
  *
- * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/WebSocket">Mozilla documentation</a>
+ * @see <a href=
+ *      "https://developer.mozilla.org/en/WebSockets/WebSockets_reference/WebSocket">Mozilla
+ *      documentation</a>
  */
 @JsxClass
 public class WebSocket extends EventTarget implements AutoCloseable {
@@ -91,7 +99,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Creates a new instance.
-     * @param url the URL to which to connect
+     *
+     * @param url    the URL to which to connect
      * @param window the top level window
      */
     private WebSocket(final String url, final Window window) {
@@ -203,20 +212,40 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * JavaScript constructor.
-     * @param cx the current context
-     * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
-     * @param ctorObj the function object
+     *
+     * @param cx        the current context
+     * @param scope     the scope
+     * @param args      the arguments to the WebSocket constructor
+     * @param ctorObj   the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
-            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
+    public static Scriptable jsConstructor(final Context cx, final Scriptable scope, final Object[] args,
+            final Function ctorObj, final boolean inNewExpr) {
         if (args.length < 1 || args.length > 2) {
-            throw JavaScriptEngine.reportRuntimeError(
-                    "WebSocket Error: constructor must have one or two String parameters.");
+            throw JavaScriptEngine
+                    .reportRuntimeError("WebSocket Error: constructor must have one or two String parameters.");
         }
+
+        final Window win = getWindow(ctorObj);
+        if (win.getWebWindow().getWebClient().getBrowserVersion().hasFeature(JS_WEBSOCKET_CTOR_ACCEPTS_UNDEFINED)) {
+            String urlString = JavaScriptEngine.toString(args[0]);
+            try {
+                final Page page = win.getWebWindow().getEnclosedPage();
+                if (page instanceof HtmlPage) {
+                    URL url = ((HtmlPage) page).getFullyQualifiedUrl(urlString);
+                    url = UrlUtils.getUrlWithNewProtocol(url, "ws");
+                    urlString = url.toExternalForm();
+                }
+            }
+            catch (final MalformedURLException e) {
+                throw JavaScriptEngine.reportRuntimeError(
+                        "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.");
+            }
+            return new WebSocket(urlString, win);
+        }
+
         if (JavaScriptEngine.isUndefined(args[0])) {
             throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter is undefined.");
         }
@@ -232,6 +261,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Returns the event handler that fires on close.
+     *
      * @return the event handler that fires on close
      */
     @JsxGetter
@@ -241,6 +271,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Sets the event handler that fires on close.
+     *
      * @param closeHandler the event handler that fires on close
      */
     @JsxSetter
@@ -250,6 +281,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Returns the event handler that fires on error.
+     *
      * @return the event handler that fires on error
      */
     @JsxGetter
@@ -259,6 +291,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Sets the event handler that fires on error.
+     *
      * @param errorHandler the event handler that fires on error
      */
     @JsxSetter
@@ -268,6 +301,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Returns the event handler that fires on message.
+     *
      * @return the event handler that fires on message
      */
     @JsxGetter
@@ -277,6 +311,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Sets the event handler that fires on message.
+     *
      * @param messageHandler the event handler that fires on message
      */
     @JsxSetter
@@ -286,6 +321,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Returns the event handler that fires on open.
+     *
      * @return the event handler that fires on open
      */
     @JsxGetter
@@ -295,6 +331,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Sets the event handler that fires on open.
+     *
      * @param openHandler the event handler that fires on open
      */
     @JsxSetter
@@ -303,8 +340,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Returns The current state of the connection. The possible values are: {@link #CONNECTING}, {@link #OPEN},
-     * {@link #CLOSING} or {@link #CLOSED}.
+     * Returns The current state of the connection. The possible values are:
+     * {@link #CONNECTING}, {@link #OPEN}, {@link #CLOSING} or {@link #CLOSED}.
+     *
      * @return the current state of the connection
      */
     @JsxGetter
@@ -353,12 +391,12 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Sets the used binary type.
+     *
      * @param type the type
      */
     @JsxSetter
     public void setBinaryType(final String type) {
-        if ("arraybuffer".equals(type)
-            || "blob".equals(type)) {
+        if ("arraybuffer".equals(type) || "blob".equals(type)) {
             binaryType_ = type;
         }
     }
@@ -372,10 +410,13 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     /**
-     * Closes the WebSocket connection or connection attempt, if any.
-     * If the connection is already {@link #CLOSED}, this method does nothing.
-     * @param code A numeric value indicating the status code explaining why the connection is being closed
-     * @param reason A human-readable string explaining why the connection is closing
+     * Closes the WebSocket connection or connection attempt, if any. If the
+     * connection is already {@link #CLOSED}, this method does nothing.
+     *
+     * @param code   A numeric value indicating the status code explaining why the
+     *               connection is being closed
+     * @param reason A human-readable string explaining why the connection is
+     *               closing
      */
     @JsxFunction
     public void close(final Object code, final Object reason) {
@@ -405,6 +446,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     /**
      * Transmits data to the server over the WebSocket connection.
+     *
      * @param content the body of the message being sent with the request
      */
     @JsxFunction
@@ -440,8 +482,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             return;
         }
         final Scriptable scope = function.getParentScope();
-        final JavaScriptEngine engine
-            = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
+        final JavaScriptEngine engine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
         engine.callFunction(containingPage_, function, scope, this, args);
     }
 }
