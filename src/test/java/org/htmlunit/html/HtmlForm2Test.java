@@ -443,11 +443,11 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "gzip, deflate, br",
-            CHROME = "gzip, deflate, br, zstd",
-            EDGE = "gzip, deflate, br, zstd")
+    @Alerts(DEFAULT = "gzip, deflate, br, zstd",
+            FF_ESR = "gzip, deflate, br")
     @HtmlUnitNYI(CHROME = "gzip, deflate, br",
-            EDGE = "gzip, deflate, br")
+            EDGE = "gzip, deflate, br",
+            FF = "gzip, deflate, br")
     public void acceptEncodingHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
