@@ -18,6 +18,9 @@
                 for the XMLHttpRequest ActiveX object that is no longer there.
             </action>
 
+            <action type="add" dev="rbri">
+                Function Element.getHTML() added for Chrome/Edge.
+            </action>
             <action type="update" dev="rbri">
                 WebSocket ctor resolves the url relative to the page for the latest Chrome/Edge/FF.
             </action>
