@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -91,7 +90,7 @@ public class HashChangeEvent extends Event {
      * @param oldURL the old URL
      * @param newURL the new URL
      */
-    @JsxFunction({FF, FF_ESR})
+    @JsxFunction(FF_ESR)
     public void initHashChangeEvent(final String type, final boolean bubbles, final boolean cancelable,
         final String oldURL, final String newURL) {
         initEvent(type, bubbles, cancelable);

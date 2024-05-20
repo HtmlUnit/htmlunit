@@ -18,6 +18,9 @@
                 for the XMLHttpRequest ActiveX object that is no longer there.
             </action>
 
+            <action type="fix" dev="rbri">
+                HashChangeEvent.initHashChangeEvent() no longer supported by Firefox 126.
+            </action>
             <action type="add" dev="rbri">
                 Firefox 126 sends the Priority header.
             </action>
