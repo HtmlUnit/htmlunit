@@ -129,6 +129,9 @@ public final class HttpHeader {
     /** sec-ch-ua-platform. */
     public static final String SEC_CH_UA_PLATFORM = "sec-ch-ua-platform";
 
+    /** Priority. */
+    public static final String PRIORITY = "Priority";
+
     /** Access-Control-Request-Method. */
     public static final String ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
     /** Access-Control-Request-Headers. */

@@ -923,6 +923,12 @@ public class HttpWebConnection implements WebConnection {
                     list.add(new SecClientHintUserAgentPlatformHeaderHttpRequestInterceptor(headerValue));
                 }
             }
+            else if (HttpHeader.PRIORITY.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.PRIORITY);
+                if (headerValue != null) {
+                    list.add(new PriorityHeaderHttpRequestInterceptor(headerValue));
+                }
+            }
             else if (HttpHeader.UPGRADE_INSECURE_REQUESTS.equals(header)) {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS);
                 if (headerValue != null) {
@@ -1155,6 +1161,20 @@ public class HttpWebConnection implements WebConnection {
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_CH_UA_PLATFORM, value_);
+        }
+    }
+
+    private static final class PriorityHeaderHttpRequestInterceptor
+            implements HttpRequestInterceptor {
+        private final String value_;
+
+        PriorityHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader(HttpHeader.PRIORITY, value_);
         }
     }
 

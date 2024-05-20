@@ -17,6 +17,7 @@ package org.htmlunit;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
+import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_PRIORITY;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -1815,6 +1816,10 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         if (!wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_USER)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_PRIORITY)
+                && !wrs.isAdditionalHeader(HttpHeader.PRIORITY)) {
+            wrs.setAdditionalHeader(HttpHeader.PRIORITY, "u=1");
         }
 
         if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)

@@ -216,6 +216,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTTP_HEADER_CH_UA,
 
+    /** Browser sends Priority headers. */
+    @BrowserFeature(FF)
+    HTTP_HEADER_PRIORITY,
+
     /** The anchor hostname setter ignores blank url's. */
     @BrowserFeature({FF, FF_ESR})
     JS_ANCHOR_HOSTNAME_IGNORE_BLANK,

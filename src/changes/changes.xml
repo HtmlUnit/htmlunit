@@ -19,6 +19,9 @@
             </action>
 
             <action type="add" dev="rbri">
+                Firefox 126 sends the Priority header.
+            </action>
+            <action type="add" dev="rbri">
                 Function Element.getHTML() added for Chrome/Edge.
             </action>
             <action type="update" dev="rbri">
