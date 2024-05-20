@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.2.0" date="May xx, 2024" description="Bugfixes">
+        <release version="4.2.0" date="May xx, 2024" description="Chrome/Edge 125, Firefox 126, Bugfixes">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: The signature of two methods from org.htmlunit.attachment.AttachmentHandler was changed.
                 Please implement handleAttachment(Page, String) instead of handleAttachment(Page)
