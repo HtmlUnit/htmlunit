@@ -421,16 +421,16 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_INSTALL_TRIGGER_NULL,
 
     /**
-     * Difference of window.outer/inner height is 131.
+     * Difference of window.outer/inner height is 136.
      */
     @BrowserFeature(EDGE)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_131,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136,
 
     /**
-     * Difference of window.outer/inner height is 138.
+     * Difference of window.outer/inner height is 147.
      */
     @BrowserFeature(CHROME)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_148,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_147,
 
     /**
      * Difference of window.outer/inner height is 91.
