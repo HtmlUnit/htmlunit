@@ -95,6 +95,8 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("is", ",.");
 
         CHROME_FORMATS_.putAll(commonFormats);
+        CHROME_FORMATS_.put("en-ZA", ",.");
+
         EDGE_FORMATS_.putAll(commonFormats);
 
         CHROME_FORMATS_.put("sq", ",.");

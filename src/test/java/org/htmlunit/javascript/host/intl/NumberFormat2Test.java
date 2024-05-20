@@ -588,7 +588,8 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("31\u00a0415,927")
+    @Alerts(DEFAULT = "31\u00a0415,927",
+            CHROME = "31,415.927")
     public void format_en_za() throws Exception {
         test("new Intl.NumberFormat('en-ZA').format(number)");
     }
