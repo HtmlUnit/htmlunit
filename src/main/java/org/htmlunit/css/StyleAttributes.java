@@ -134,9 +134,12 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code all}. */
         ALL("all", "all", chromeAndEdgeAndFirefox("")),
 
+        /** The style property {@code anchorName}. */
+        ANCHOR_NAME("anchorName", "anchor.name", chromeAndEdgeNone()),
+
         /** The style property {@code animation}. */
         ANIMATION("animation", "animation", chromeAndEdge("none 0s ease 0s 1 normal none running"),
-                ff("0s ease 0s 1 normal none running none")),
+                ffLatest("none"), ffEsr("0s ease 0s 1 normal none running none")),
 
         /** The style property {@code animationComposition}. */
         ANIMATION_COMPOSITION("animationComposition", "animation-composition", chromeAndEdge("replace"),
@@ -1360,7 +1363,7 @@ public final class StyleAttributes implements Serializable {
         GRID_COLUMN_START_("grid-column-start", "grid-column-start", ff("auto")),
 
         /** The style property {@code gridGap}. */
-        GRID_GAP("gridGap", "grid-gap", chromeAndEdge("normal normal"), ff("normal")),
+        GRID_GAP("gridGap", "grid-gap", chromeAndEdge("normal"), ff("normal")),
 
         /** The style property {@code grid-gap}. */
         GRID_GAP_("grid-gap", "grid-gap", ff("normal")),
@@ -1468,6 +1471,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code inset}. */
         INSET("inset", "inset", chromeAndEdgeAuto(), ff("auto")),
+
+        /** The style property {@code insetArea}. */
+        INSET_AREA("insetArea", "inset-area", chromeAndEdgeNone()),
 
         /** The style property {@code insetBlock}. */
         INSET_BLOCK("insetBlock", "inset-block", chromeAndEdgeAuto(), ff("auto")),
@@ -1809,10 +1815,12 @@ public final class StyleAttributes implements Serializable {
         MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ffNormal()),
 
         /** The style property {@code MozAnimation}. */
-        MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("0s ease 0s 1 normal none running none")),
+        MOZ_ANIMATION("MozAnimation", "-moz-animation", ffLatest("none"),
+                ffEsr("0s ease 0s 1 normal none running none")),
 
         /** The style property {@code -moz-animation}. */
-        MOZ_ANIMATION__("-moz-animation", "-moz-animation", ff("0s ease 0s 1 normal none running none")),
+        MOZ_ANIMATION__("-moz-animation", "-moz-animation", ffLatest("none"),
+                ffEsr("0s ease 0s 1 normal none running none")),
 
         /** The style property {@code MozAnimationDelay}. */
         MOZ_ANIMATION_DELAY("MozAnimationDelay", "-moz-animation-delay", ff("0s")),
@@ -1872,10 +1880,10 @@ public final class StyleAttributes implements Serializable {
         MOZ_APPEARANCE__("-moz-appearance", "-moz-appearance", ffNone()),
 
         /** The style property {@code MozBackfaceVisibility}. */
-        MOZ_BACKFACE_VISIBILITY("MozBackfaceVisibility", "-moz-backface-visibility", ff("visible")),
+        MOZ_BACKFACE_VISIBILITY("MozBackfaceVisibility", "-moz-backface-visibility", ffEsr("visible")),
 
         /** The style property {@code -moz-backface-visibility}. */
-        MOZ_BACKFACE_VISIBILITY__("-moz-backface-visibility", "-moz-backface-visibility", ff("visible")),
+        MOZ_BACKFACE_VISIBILITY__("-moz-backface-visibility", "-moz-backface-visibility", ffEsr("visible")),
 
         /** The style property {@code MozBorderBottomColors}. */
         MOZ_BORDER_BOTTOM_COLORS("MozBorderBottomColors", "-moz-border-bottom-colors",
@@ -2079,18 +2087,16 @@ public final class StyleAttributes implements Serializable {
         MOZ_PADDING_START__("-moz-padding-start", "-moz-padding-start", ff("0px")),
 
         /** The style property {@code MozPerspective}. */
-        MOZ_PERSPECTIVE("MozPerspective", "-moz-perspective", ffNone()),
+        MOZ_PERSPECTIVE("MozPerspective", "-moz-perspective", ffEsr("none")),
 
         /** The style property {@code -moz-perspective}. */
-        MOZ_PERSPECTIVE__("-moz-perspective", "-moz-perspective", ffNone()),
+        MOZ_PERSPECTIVE__("-moz-perspective", "-moz-perspective", ffEsr("none")),
 
         /** The style property {@code MozPerspectiveOrigin}. */
-        MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ff("622px 172.5px")),
+        MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin", "-moz-perspective-origin", ffEsr("622px 172.5px")),
 
         /** The style property {@code -moz-perspective-origin}. */
-        MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin",
-                "-moz-perspective-origin", ff("622px 172.5px")),
+        MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin", "-moz-perspective-origin", ffEsr("622px 172.5px")),
 
         /** The style property {@code MozTabSize}. */
         MOZ_TAB_SIZE("MozTabSize", "-moz-tab-size", ff("8")),
@@ -2129,50 +2135,42 @@ public final class StyleAttributes implements Serializable {
                 ff("622px 172.5px")),
 
         /** The style property {@code MozTransformStyle}. */
-        MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
-                ff("flat")),
+        MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style", ffEsr("flat")),
 
         /** The style property {@code -moz-transform-style}. */
-        MOZ_TRANSFORM_STYLE__("-moz-transform-style", "-moz-transform-style",
-                ff("flat")),
+        MOZ_TRANSFORM_STYLE__("-moz-transform-style", "-moz-transform-style", ffEsr("flat")),
 
         /** The style property {@code MozTransition}. */
-        MOZ_TRANSITION("MozTransition", "-moz-transition", ffEsr("all 0s ease 0s"), ffLatest("all")),
+        MOZ_TRANSITION("MozTransition", "-moz-transition", ffEsr("all 0s ease 0s")),
 
         /** The style property {@code -moz-transition}. */
-        MOZ_TRANSITION__("-moz-transition", "-moz-transition", ffEsr("all 0s ease 0s"), ffLatest("all")),
+        MOZ_TRANSITION__("-moz-transition", "-moz-transition", ffEsr("all 0s ease 0s")),
 
         /** The style property {@code MozTransitionDelay}. */
-        MOZ_TRANSITION_DELAY("MozTransitionDelay", "-moz-transition-delay",
-                ff("0s")),
+        MOZ_TRANSITION_DELAY("MozTransitionDelay", "-moz-transition-delay", ffEsr("0s")),
 
         /** The style property {@code -moz-transition-delay}. */
-        MOZ_TRANSITION_DELAY__("-moz-transition-delay", "-moz-transition-delay",
-                ff("0s")),
+        MOZ_TRANSITION_DELAY__("-moz-transition-delay", "-moz-transition-delay", ffEsr("0s")),
 
         /** The style property {@code MozTransitionDuration}. */
-        MOZ_TRANSITION_DURATION("MozTransitionDuration", "-moz-transition-duration",
-                ff("0s")),
+        MOZ_TRANSITION_DURATION("MozTransitionDuration", "-moz-transition-duration", ffEsr("0s")),
 
         /** The style property {@code -moz-transition-duration}. */
-        MOZ_TRANSITION_DURATION__("-moz-transition-duration", "-moz-transition-duration",
-                ff("0s")),
+        MOZ_TRANSITION_DURATION__("-moz-transition-duration", "-moz-transition-duration", ffEsr("0s")),
 
         /** The style property {@code MozTransitionProperty}. */
-        MOZ_TRANSITION_PROPERTY("MozTransitionProperty", "-moz-transition-property",
-                ff("all")),
+        MOZ_TRANSITION_PROPERTY("MozTransitionProperty", "-moz-transition-property", ffEsr("all")),
 
         /** The style property {@code -moz-transition-property}. */
-        MOZ_TRANSITION_PROPERTY__("-moz-transition-property", "-moz-transition-property",
-                ff("all")),
+        MOZ_TRANSITION_PROPERTY__("-moz-transition-property", "-moz-transition-property", ffEsr("all")),
 
         /** The style property {@code MozTransitionTimingFunction}. */
         MOZ_TRANSITION_TIMING_FUNCTION("MozTransitionTimingFunction",
-                "-moz-transition-timing-function", ff("ease")),
+                "-moz-transition-timing-function", ffEsr("ease")),
 
         /** The style property {@code -moz-transition-timing-function}. */
         MOZ_TRANSITION_TIMING_FUNCTION__("-moz-transition-timing-function",
-                "-moz-transition-timing-function", ff("ease")),
+                "-moz-transition-timing-function", ffEsr("ease")),
 
         /** The style property {@code MozUserFocus}. */
         MOZ_USER_FOCUS("MozUserFocus", "-moz-user-focus", ffEsr("none")),
@@ -2511,6 +2509,21 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code position}. */
         POSITION("position", "position", chromeAndEdge("static"), ff("static")),
+
+        /** The style property {@code positionAnchor}. */
+        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdge("implicit")),
+
+        /** The style property {@code positionTry}. */
+        POSITION_TRY("positionTry", "position-try", chromeAndEdgeNormal()),
+
+        /** The style property {@code positionTryOptions}. */
+        POSITION_TRY_OPTIONS("positionTryOptions", "position-try-options", chromeAndEdgeNone()),
+
+        /** The style property {@code positionTryOrder}. */
+        POSITION_TRY_ORDER("positionTryOrder", "position-try-order", chromeAndEdgeNormal()),
+
+        /** The style property {@code positionVisibility}. */
+        POSITION_VISIBILITY("positionVisibility", "position-visibility", chromeAndEdge("always")),
 
         /** The style property {@code prefix}. */
         PREFIX("prefix", "prefix", chromeAndEdgeEmpty()),
@@ -3169,6 +3182,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code viewTimelineName}. */
         VIEW_TIMELINE_NAME("viewTimelineName", "view-timeline-name", chromeAndEdgeNone()),
 
+        /** The style property {@code viewTransitionClass}. */
+        VIEW_TRANSITION_CLASS("viewTransitionClass", "view-transition-class", chromeAndEdgeNone()),
+
         /** The style property {@code viewTransitionName}. */
         VIEW_TRANSITION_NAME("viewTransitionName", "view-transition-name", chromeAndEdgeNone()),
 
@@ -3205,15 +3221,15 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code webkitAnimation}. */
         WEBKIT_ANIMATION("webkitAnimation", "webkit-animation",
                 chromeAndEdge("none 0s ease 0s 1 normal none running"),
-                ff("0s ease 0s 1 normal none running none")),
+                ffLatest("none"), ffEsr("0s ease 0s 1 normal none running none")),
 
         /** The style property {@code WebkitAnimation}. */
-        WEBKIT_ANIMATION_("WebkitAnimation", "webkit-animation",
-                ff("0s ease 0s 1 normal none running none")),
+        WEBKIT_ANIMATION_("WebkitAnimation", "webkit-animation", ffLatest("none"),
+                ffEsr("0s ease 0s 1 normal none running none")),
 
         /** The style property {@code -webkit-animation}. */
-        WEBKIT_ANIMATION__("-webkit-animation", "webkit-animation",
-                ff("0s ease 0s 1 normal none running none")),
+        WEBKIT_ANIMATION__("-webkit-animation", "webkit-animation", ffLatest("none"),
+                ffEsr("0s ease 0s 1 normal none running none")),
 
         /** The style property {@code webkitAnimationDelay}. */
         WEBKIT_ANIMATION_DELAY("webkitAnimationDelay", "webkit-animation-delay", chromeAndEdge("0s"), ff("0s")),
@@ -4184,7 +4200,7 @@ public final class StyleAttributes implements Serializable {
         Z_INDEX_("z-index", "z-index", ff("auto"), chromeAndEdgeNotIterable("auto")),
 
         /** The style property {@code zoom}. */
-        ZOOM("zoom", "zoom", chromeAndEdge("1"));
+        ZOOM("zoom", "zoom", chromeAndEdge("1"), ffLatest("1"));
 
         private final String propertyName_;
         private final String attributeName_;
