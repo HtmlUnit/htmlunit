@@ -8,7 +8,6 @@ MozAnimationName
 MozAnimationPlayState
 MozAnimationTimingFunction
 MozAppearance
-MozBackfaceVisibility
 MozBorderEnd
 MozBorderEndColor
 MozBorderEndStyle
@@ -35,18 +34,10 @@ MozMarginStart
 MozOrient
 MozPaddingEnd
 MozPaddingStart
-MozPerspective
-MozPerspectiveOrigin
 MozTabSize
 MozTextSizeAdjust
 MozTransform
 MozTransformOrigin
-MozTransformStyle
-MozTransition
-MozTransitionDelay
-MozTransitionDuration
-MozTransitionProperty
-MozTransitionTimingFunction
 MozUserInput
 MozUserModify
 MozUserSelect
@@ -626,3 +617,4 @@ writingMode
 x
 y
 zIndex
+zoom
