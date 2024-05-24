@@ -1419,4 +1419,27 @@ public class MalformedHtmlTest extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts()[0], getMockWebConnection().getLastWebRequest().getUrl());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"5", "3", "[object HTMLSelectElement]", "[object HTMLTableElement]", "[object HTMLScriptElement]"})
+    public void selectInsideEmptyTable() throws Exception {
+        final String html = "<html><head></head><body>\n"
+                + "<table><select name='Lang'><option value='da'>Dansk</option></select></table>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "log(document.body.childNodes.length);\n"
+                + "log(document.body.children.length);\n"
+                + "log(document.body.children[0]);\n"
+                + "log(document.body.children[1]);\n"
+                + "log(document.body.children[2]);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        loadPageVerifyTitle2(html);
+    }
 }
