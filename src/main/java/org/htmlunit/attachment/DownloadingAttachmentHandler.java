@@ -7,10 +7,14 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Page;
+import org.htmlunit.WebResponseData;
 
 public class DownloadingAttachmentHandler implements AttachmentHandler {
 
+    private static final Log LOG = LogFactory.getLog(DownloadingAttachmentHandler.class);
 	private Path downloadFolder;
 
 	public DownloadingAttachmentHandler(Path downloadFolder) throws IOException {
@@ -30,7 +34,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 		try {
 			contentAsStream = page.getWebResponse().getContentAsStream();
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error("Failed to get attachment response content as stream");
 			return;
 		}
 		try {
@@ -39,15 +43,18 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 			try {
 				Files.copy(contentAsStream, findNextAvailableFilename(attachmentFilename));
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				logFailureToSaveAttachment();
 				return;
 			}
 		} catch (IOException e) {
-			System.out.println("something wrong happened");
-			e.printStackTrace();
+			logFailureToSaveAttachment();
 			return;
 		}
 		page.getWebResponse().cleanUp();
+	}
+
+	private void logFailureToSaveAttachment() {
+		LOG.error("Failed to write attachment response to ".concat(downloadFolder.toString()));
 	}
 
 	private String getFilenameFromUrlIfEmpty(Page page, String attachmentFilename) {
