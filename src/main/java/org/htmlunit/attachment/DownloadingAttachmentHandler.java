@@ -13,13 +13,12 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 
 	private Path downloadFolder;
 
-	public DownloadingAttachmentHandler(Path downloadFolder) {
+	public DownloadingAttachmentHandler(Path downloadFolder) throws IOException {
 		this.downloadFolder = downloadFolder;
-//		TODO throwing unchecked exception seems like a bad idea, wait for feedback from Ronald
-		if (!Files.isWritable(downloadFolder)) throw new RuntimeException("Can't write to ".concat(downloadFolder.toString()));
+		if (!Files.isWritable(downloadFolder)) throw new IOException("Can't write to ".concat(downloadFolder.toString()));
 	}
 
-	public DownloadingAttachmentHandler() {
+	public DownloadingAttachmentHandler() throws IOException {
 		this(Path.of(System.getProperty("java.io.tmpdir")));
 	}
 	
@@ -31,7 +30,6 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 		try {
 			contentAsStream = page.getWebResponse().getContentAsStream();
 		} catch (IOException e) {
-//			TODO throw exception?
 			e.printStackTrace();
 			return;
 		}
@@ -41,19 +39,15 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 			try {
 				Files.copy(contentAsStream, findNextAvailableFilename(attachmentFilename));
 			} catch (IOException e1) {
-//				TODO throw exception?
 				e1.printStackTrace();
 				return;
 			}
 		} catch (IOException e) {
-//			TODO throw exception?
 			System.out.println("something wrong happened");
 			e.printStackTrace();
 			return;
 		}
 		page.getWebResponse().cleanUp();
-
-		System.out.println("Handling attahcment");
 	}
 
 	private String getFilenameFromUrlIfEmpty(Page page, String attachmentFilename) {
