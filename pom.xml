@@ -42,7 +42,7 @@
         <slf4j.version>2.0.13</slf4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>10.16.0</checkstyle.version>
+        <checkstyle.version>10.17.0</checkstyle.version>
         <spotbugs.version>4.8.5</spotbugs.version>
         <pmd.version>6.55.0</pmd.version>
         <junit.version>4.13.2</junit.version>
@@ -237,7 +237,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <configuration>
@@ -274,7 +274,7 @@
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.17.0</version>
+                <version>1.18.1</version>
                 <executions>
                     <execution>
                         <goals>
