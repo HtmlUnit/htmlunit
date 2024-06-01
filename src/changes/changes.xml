@@ -19,6 +19,18 @@
             </action>
 
             <action type="fix" dev="rbri">
+                neko: fix the setup of the fragment parser; this fixes some problems with range.createContextualFragment().
+            </action>
+            <action type="update" dev="rbri">
+                neko: code cleanup, more tests, some unused stuff removed.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: AttributeMap.cloneMap() fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: fix fragment parsing without providing a context takes care of html tags in the fragment.
+            </action>
+            <action type="fix" dev="rbri">
                 HashChangeEvent.initHashChangeEvent() no longer supported by Firefox 126.
             </action>
             <action type="add" dev="rbri">

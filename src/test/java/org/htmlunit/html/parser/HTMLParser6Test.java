@@ -76,4 +76,55 @@ public class HTMLParser6Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<select id=\"mySelect\"><option>op1</option></select>"
+            + "<select><option value=\"da\">Dansk</option></select> ")
+    public void fragmentParserHtmlInsideSelect() throws Exception {
+        final String fragment = "<select><option value=\"da\">Dansk</option></select>";
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var element = document.getElementById('mySelect');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('" + fragment + "');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    log(element.parentNode.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <select id='mySelect'><option>op1</option></select>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<option id=\"myOption\">op1</option><option value=\"da\">Dansk</option>")
+    public void fragmentParserHtmlInsideOption() throws Exception {
+        final String fragment = "<select><option value=\"da\">Dansk</option></select>";
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var element = document.getElementById('myOption');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('" + fragment + "');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    log(element.parentNode.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <select><option id='myOption'>op1</option></select>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
