@@ -18,6 +18,9 @@
                 for the XMLHttpRequest ActiveX object that is no longer there.
             </action>
 
+            <action type="add" dev="rbri">
+                GWT 2.11.0 tests.
+            </action>
             <action type="fix" dev="rbri">
                 neko: fix the setup of the fragment parser; this fixes some problems with range.createContextualFragment().
             </action>

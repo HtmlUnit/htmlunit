@@ -24,13 +24,13 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Tests for <a href="https://htmx.org/">htmx</a>.
+ * Tests for <a href="https://www.gwtproject.org/">GWT Project</a>.
  *
+ * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

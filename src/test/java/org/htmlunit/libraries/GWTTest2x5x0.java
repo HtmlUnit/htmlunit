@@ -24,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Tests for version 2.5.0 of Tests for <a href="https://www.gwtproject.org/">GWT Project</a>.
+ * Tests for version 2.5.0 of <a href="https://www.gwtproject.org/">GWT Project</a>.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -120,7 +120,8 @@ public class GWTTest2x5x0 extends GWTTest {
     /**
      * @throws Exception if an error occurs
      */
-    // todo @Test
+    // this is a blinker with HtmlUnit at the moment
+    // @Test
     public void showcase() throws Exception {
         final String url = URL_FIRST + "Showcase/Showcase.html";
 

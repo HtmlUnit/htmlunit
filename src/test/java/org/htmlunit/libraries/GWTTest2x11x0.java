@@ -24,9 +24,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Tests for version 2.11.0 of Tests for <a href="https://www.gwtproject.org/">GWT Project</a>.
+ * Tests for version 2.11.0 of <a href="https://www.gwtproject.org/">GWT Project</a>.
  *
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
