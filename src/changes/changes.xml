@@ -18,9 +18,6 @@
                 for the XMLHttpRequest ActiveX object that is no longer there.
             </action>
 
-            <action type="fix" dev="rbri">
-                neko: Another cleanup round; interfaces HTMLComponent, HTMLEventInfo removed, streamlined singleton handling.
-            </action>
             <action type="add" dev="rbri">
                 GWT 2.11.0 tests.
             </action>
