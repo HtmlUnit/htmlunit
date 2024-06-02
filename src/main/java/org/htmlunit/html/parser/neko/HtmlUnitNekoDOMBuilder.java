@@ -32,6 +32,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.cyberneko.HTMLConfiguration;
 import org.htmlunit.cyberneko.HTMLElements;
+import org.htmlunit.cyberneko.HTMLEventInfo;
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancingListener;
 import org.htmlunit.cyberneko.xerces.parsers.AbstractSAXParser;
@@ -758,7 +759,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     }
 
     private static boolean isSynthesized(final Augmentations augs) {
-        return augs.isSynthesized();
+        return augs instanceof HTMLEventInfo && ((HTMLEventInfo) augs).isSynthesized();
     }
 
     private static void appendChild(final DomNode parent, final DomNode child) {
