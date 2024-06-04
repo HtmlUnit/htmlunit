@@ -345,7 +345,9 @@ public class ExternalTest {
         }
         System.out.println(artifactId + " " + version);
         if (artifactId.startsWith("pmd-")
-                && (version.startsWith("7.0.") || version.startsWith("7.1."))) {
+                && (version.startsWith("7.0.")
+                        || version.startsWith("7.1.")
+                        || version.startsWith("7.2."))) {
             return true;
         }
 
