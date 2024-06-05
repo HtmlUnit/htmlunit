@@ -27,9 +27,9 @@
 
         <htmlunitcssparser.version>4.2.0</htmlunitcssparser.version>
         <htmlunitcsp.version>4.2.0</htmlunitcsp.version>
-        <htmlunitneko.version>4.2.0-SNAPSHOT</htmlunitneko.version>
+        <htmlunitneko.version>4.2.0</htmlunitneko.version>
         <htmlunitxpath.version>4.2.0</htmlunitxpath.version>
-        <htmlunitcorejs.version>4.2.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitcorejs.version>4.2.0</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>4.2.0</htmlunitwebsocketclient.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
@@ -691,7 +691,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
