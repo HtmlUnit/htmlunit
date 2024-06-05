@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.2.0" date="May xx, 2024" description="Chrome/Edge 125, Firefox 126, Bugfixes">
+        <release version="4.2.0" date="June 05, 2024" description="Chrome/Edge 125, Firefox 126, neko fragment parsing, Bugfixes">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: The signature of two methods from org.htmlunit.attachment.AttachmentHandler was changed.
                 Please implement handleAttachment(Page, String) instead of handleAttachment(Page)
@@ -18,6 +18,12 @@
                 for the XMLHttpRequest ActiveX object that is no longer there.
             </action>
 
+            <action type="add" dev="rbri">
+                core-js: NetworkError introduced.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: fix Html element creation when parsing XHTML files.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-net to 3.11.0.
             </action>
@@ -28,7 +34,7 @@
                 neko: fix the setup of the fragment parser; this fixes some problems with range.createContextualFragment().
             </action>
             <action type="update" dev="rbri">
-                neko: code cleanup, more tests, some unused stuff removed.
+                neko: code cleanup, more tests, some unused stuff removed; javadoc fixes.
             </action>
             <action type="fix" dev="rbri">
                 neko: AttributeMap.cloneMap() fixed.
