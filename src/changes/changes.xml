@@ -12,7 +12,7 @@
                 Upgrade Apache commons-net to 3.11.1.
             </action>
             <action type="fix" dev="rbri" issue="#798">
-              Fix NPE during click processiong when JavaScript engine disabled.
+                Fix NPE during click processiong when JavaScript engine disabled.
             </action>
         </release>
 
