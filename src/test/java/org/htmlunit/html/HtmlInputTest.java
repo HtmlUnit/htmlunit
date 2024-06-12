@@ -252,6 +252,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             final HtmlPage page = loadPage(webClient, htmlContent, null, URL_FIRST);
+            assertFalse(page.getWebClient().isJavaScriptEngineEnabled());
+
             final HtmlForm form = page.getHtmlElementById("form1");
             final HtmlTextInput input = form.getInputByName("text1");
 

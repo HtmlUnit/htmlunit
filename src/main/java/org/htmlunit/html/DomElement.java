@@ -1002,7 +1002,9 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
 
             final AbstractJavaScriptEngine<?> jsEngine = webClient.getJavaScriptEngine();
-            jsEngine.holdPosponedActions();
+            if (webClient.isJavaScriptEnabled()) {
+                jsEngine.holdPosponedActions();
+            }
             try {
                 if (handleFocus) {
                     // give focus to current element (if possible) or only remove it from previous one
@@ -1051,7 +1053,9 @@ public class DomElement extends DomNamespaceNode implements Element {
                 return click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
             }
             finally {
-                jsEngine.processPostponedActions();
+                if (webClient.isJavaScriptEnabled()) {
+                    jsEngine.processPostponedActions();
+                }
             }
         }
     }

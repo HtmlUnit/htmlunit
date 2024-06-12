@@ -1219,10 +1219,32 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</body></html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
-            final HtmlPage page = loadPage(html);
+            final HtmlPage page = loadPage(webClient, html, null);
+
+            assertFalse(page.getWebClient().isJavaScriptEngineEnabled());
             assertEquals(Boolean.parseBoolean(getExpectedAlerts()[0]), page.getElementById("d1").isDisplayed());
             assertEquals(Boolean.parseBoolean(getExpectedAlerts()[1]), page.getElementById("d2").isDisplayed());
             assertEquals(Boolean.parseBoolean(getExpectedAlerts()[2]), page.getElementById("d3").isDisplayed());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false", "false"})
+    public void clickJsEngineDisabled() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head>\n"
+            + "</body>\n"
+            + "<div id='d1'>hello</div>\n"
+            + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null);
+
+            assertFalse(page.getWebClient().isJavaScriptEngineEnabled());
+            assertEquals(page, page.getElementById("d1").click());
         }
     }
 
