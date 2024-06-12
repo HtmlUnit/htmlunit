@@ -340,7 +340,8 @@ public class ExternalTest {
 
         // pmd 7 has problems parsing our code
         if ("maven-pmd-plugin".equals(artifactId)
-                && ("3.22.0".equals(version))) {
+                && ("3.22.0".equals(version)
+                        || "3.23.0".equals(version))) {
             return true;
         }
         System.out.println(artifactId + " " + version);
