@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: Object.defineProperty() has to take care of ConsString.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-net to 3.11.1.
             </action>

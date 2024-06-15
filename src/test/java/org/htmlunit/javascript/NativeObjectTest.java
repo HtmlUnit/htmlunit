@@ -446,4 +446,30 @@ public class NativeObjectTest extends WebDriverTestCase {
 
         loadPageVerifyTextArea2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before: [object Object]", "after: [object Object]", "true"})
+    public void definePropertyUsingConsString() throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  'use strict';\n"
+            + "  var f = function () {};\n"
+            + "  var a1='proto';\n"
+            + "  var p = a1 + 'type';\n"
+            + "  log('before: ' + f.prototype);\n"
+            + "  Object.defineProperty(f, p, {});\n"
+            + "  log('after: ' + f.prototype);\n"
+            + "  var p = new f();\n"
+            + "  log(p instanceof f);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
