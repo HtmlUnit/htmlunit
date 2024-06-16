@@ -23,14 +23,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.zip.Deflater;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
@@ -582,55 +580,6 @@ public class WebClient3Test extends WebDriverTestCase {
 
             driver.get(url);
             assertEquals(title, driver.getTitle());
-        }
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("America/New_York")
-    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
-    public void timeZone() throws Exception {
-        final String html
-            = "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(Intl.DateTimeFormat().resolvedOptions().timeZone);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Asia/Tokyo")
-    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
-    public void timeZoneTokyo() throws Exception {
-        final String html
-            = "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(Intl.DateTimeFormat().resolvedOptions().timeZone);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        shutDownAll();
-        try {
-            final BrowserVersion.BrowserVersionBuilder builder
-                = new BrowserVersion.BrowserVersionBuilder(getBrowserVersion());
-            builder.setSystemTimezone(TimeZone.getTimeZone("Asia/Tokyo"));
-            setBrowserVersion(builder.build());
-
-            loadPageVerifyTitle2(html);
-        }
-        finally {
-            shutDownAll();
         }
     }
 

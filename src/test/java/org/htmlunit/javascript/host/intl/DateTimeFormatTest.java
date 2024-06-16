@@ -14,10 +14,15 @@
  */
 package org.htmlunit.javascript.host.intl;
 
+import java.util.Locale;
+import java.util.TimeZone;
+
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,13 +42,13 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts({"zh-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
              "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
-    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+    @HtmlUnitNYI(CHROME = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            EDGE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            EDGE = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            FF = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            FF = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                   "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            FF_ESR = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            FF_ESR = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                       "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void resolvedOptionsValues() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -122,5 +127,209 @@ public class DateTimeFormatTest extends WebDriverTestCase {
                 + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("America/New_York")
+    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    public void timeZone() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Intl.DateTimeFormat().resolvedOptions().timeZone);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("GMT")
+    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    public void timeZoneGMT() throws Exception {
+        timeZone("GMT");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("UTC")
+    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    public void timeZoneUTC() throws Exception {
+        timeZone("UTC");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("EST")
+    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    public void timeZoneEST() throws Exception {
+        timeZone("EST");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Europe/Berlin")
+    public void timeZoneBerlin() throws Exception {
+        timeZone("Europe/Berlin");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("America/New_York")
+    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    public void timeZoneNewYork() throws Exception {
+        timeZone("America/New_York");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Asia/Tokyo")
+    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    public void timeZoneTokyo() throws Exception {
+        timeZone("Asia/Tokyo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("JST")
+    @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    public void timeZoneJST() throws Exception {
+        timeZone("JST");
+    }
+
+    private void timeZone(final String tz) throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Intl.DateTimeFormat().resolvedOptions().timeZone);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        shutDownAll();
+        try {
+            final BrowserVersion.BrowserVersionBuilder builder
+                = new BrowserVersion.BrowserVersionBuilder(getBrowserVersion());
+            builder.setSystemTimezone(TimeZone.getTimeZone(tz));
+            setBrowserVersion(builder.build());
+
+            loadPageVerifyTitle2(html);
+        }
+        finally {
+            shutDownAll();
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-US")
+    public void locale() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Intl.DateTimeFormat().resolvedOptions().locale);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "de",
+            EDGE = "de-DE")
+    @BuggyWebDriver(FF = "en-US", FF_ESR = "en-US")
+    @HtmlUnitNYI(CHROME = "de-DE",
+            FF = "de-DE",
+            FF_ESR = "de-DE")
+    public void localeGermany() throws Exception {
+        locale(Locale.GERMANY.toLanguageTag());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "de",
+            EDGE = "de-DE")
+    @BuggyWebDriver(FF = "en-US", FF_ESR = "en-US")
+    @HtmlUnitNYI(EDGE = "de")
+    public void localeGerman() throws Exception {
+        locale(Locale.GERMAN.toLanguageTag());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("fr")
+    @BuggyWebDriver(FF = "en-US", FF_ESR = "en-US")
+    public void localeFrench() throws Exception {
+        locale(Locale.FRENCH.toLanguageTag());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("en-GB")
+    @BuggyWebDriver(FF = "en-US", FF_ESR = "en-US")
+    @HtmlUnitNYI(CHROME = "en-CA",
+            EDGE = "en-CA",
+            FF = "en-CA",
+            FF_ESR = "en-CA")
+    public void localeCanada() throws Exception {
+        locale(Locale.CANADA.toLanguageTag());
+    }
+
+    private void locale(final String language) throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Intl.DateTimeFormat().resolvedOptions().locale);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        shutDownAll();
+        try {
+            final BrowserVersion.BrowserVersionBuilder builder
+                = new BrowserVersion.BrowserVersionBuilder(getBrowserVersion());
+            builder.setBrowserLanguage(language);
+            setBrowserVersion(builder.build());
+
+            loadPageVerifyTitle2(html);
+        }
+        finally {
+            shutDownAll();
+        }
     }
 }

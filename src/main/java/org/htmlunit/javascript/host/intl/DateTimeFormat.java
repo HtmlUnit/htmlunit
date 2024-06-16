@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
@@ -256,7 +257,17 @@ public class DateTimeFormat extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Scriptable resolvedOptions() {
-        return Context.getCurrentContext().newObject(getParentScope());
+        final Context cx = Context.getCurrentContext();
+        final Scriptable options = cx.newObject(getParentScope());
+        options.put("timeZone", options, cx.getTimeZone().getID());
+
+        if (StringUtils.isEmpty(formatter_.locale_)) {
+            options.put("locale", options, cx.getLocale().toLanguageTag());
+        }
+        else {
+            options.put("locale", options, formatter_.locale_);
+        }
+        return options;
     }
 
     /**
@@ -266,8 +277,10 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         private final DateTimeFormatter formatter_;
         private Chronology chronology_;
+        private String locale_;
 
         DateTimeFormatHelper(final String locale, final BrowserVersion browserVersion, final String pattern) {
+            locale_ = locale;
             if (locale.startsWith("ar")
                     && (!"ar-DZ".equals(locale)
                                     && !"ar-LY".equals(locale)

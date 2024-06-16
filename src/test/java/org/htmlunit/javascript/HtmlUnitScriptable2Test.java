@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -206,46 +202,6 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * Test JavaScript: 'new Date().getTimezoneOffset()' compared to java.text.SimpleDateFormat.format().
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void dateGetTimezoneOffset() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var offset = Math.abs(new Date().getTimezoneOffset());\n"
-            + "    var timezone = '' + (offset/60);\n"
-            + "    if (timezone.length == 1)\n"
-            + "      timezone = '0' + timezone;\n"
-            + "    log(timezone);\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "</body></html>";
-        final String timeZone = new SimpleDateFormat("Z", Locale.ROOT)
-                .format(Calendar.getInstance(Locale.ROOT).getTime());
-        final String hour = timeZone.substring(1, 3);
-        String strMinutes = timeZone.substring(3, 5);
-        final int minutes = Integer.parseInt(strMinutes);
-        final StringBuilder sb = new StringBuilder();
-        if (minutes != 0) {
-            sb.append(hour, 1, hour.length());
-            strMinutes = String.valueOf((double) minutes / 60);
-            strMinutes = strMinutes.substring(1);
-            sb.append(strMinutes);
-        }
-        else {
-            sb.append(hour);
-        }
-        setExpectedAlerts(sb.toString());
         loadPageVerifyTitle2(html);
     }
 
