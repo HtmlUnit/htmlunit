@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Document.lastModified now takes care of the browser timezone.
+            </action>
             <action type="add" dev="rbri">
                 Intl.DateTimeFormat().resolvedOptions().locale support added.
             </action>

@@ -26,8 +26,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.http.client.utils.DateUtils;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPageTest;
@@ -653,139 +655,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * Property lastModified returns the last modification date of the document.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
-    public void lastModified() throws Exception {
-        final List<NameValuePair> responseHeaders = new ArrayList<>();
-        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
-        testLastModified(responseHeaders);
-
-        // for some strange reasons, the selenium driven browser is in an invalid
-        // state after this test
-        releaseResources();
-        shutDownAll();
-    }
-
-    /**
-     * Property lastModified returns the last modification date of the document.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
-    public void lastModifiedAndDate() throws Exception {
-        final List<NameValuePair> responseHeaders = new ArrayList<>();
-        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
-        testLastModified(responseHeaders);
-
-        // Last-Modified header has priority compared to Date header
-        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
-        testLastModified(responseHeaders);
-
-        // for some strange reasons, the selenium driven browser is in an invalid
-        // state after this test
-        releaseResources();
-        shutDownAll();
-    }
-
-    /**
-     * Property lastModified returns the last modification date of the document.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"string", "§§URL§§"})
-    public void lastModifiedOnlyDate() throws Exception {
-        final List<NameValuePair> responseHeaders = new ArrayList<>();
-        responseHeaders.clear();
-        responseHeaders.add(new NameValuePair("Date", "Fri, 16 Oct 2009 13:59:47 GMT"));
-
-        expandExpectedAlertsVariables(DateUtils.formatDate(new Date()).substring(0, 17));
-        final String html = "<html><head><script>\n"
-                + LOG_TITLE_FUNCTION
-                + "function doTest() {\n"
-                + "  log(typeof document.lastModified);\n"
-                + "  var d = new Date(document.lastModified);\n"
-                + "  log(d.toGMTString().substr(0, 17));\n" // to have results not depending on the user's time zone
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='doTest()'>\n"
-                + "</body></html>";
-
-        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
-
-        final WebDriver driver = loadPage2(URL_FIRST, ISO_8859_1);
-        verifyTitle2(driver, getExpectedAlerts());
-
-        // for some strange reasons, the selenium driven browser is in an invalid
-        // state after this test
-        releaseResources();
-        shutDownAll();
-    }
-
-    private void testLastModified(final List<NameValuePair> responseHeaders) throws Exception {
-        final String html = "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "function doTest() {\n"
-            + "  log(typeof document.lastModified);\n"
-            + "  var d = new Date(document.lastModified);\n"
-            + "  log(d.toGMTString());\n" // to have results not depending on the user's time zone
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='doTest()'>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
-
-        final WebDriver driver = loadPage2(URL_FIRST, ISO_8859_1);
-        verifyTitle2(driver, getExpectedAlerts());
-    }
-
-    /**
-     * If neither Date header nor Last-Modified header is present, current time is taken.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"true", "true"})
-    public void lastModified_noDateHeader() throws Exception {
-        final String html = "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "function doTest() {\n"
-            + "  var justBeforeLoading = " + System.currentTimeMillis() + ";\n"
-            + "  var d = new Date(document.lastModified);\n"
-            + "  log(d.valueOf() >= justBeforeLoading - 1000);\n" // date string format has no ms, take 1s marge
-            + "  log(d.valueOf() <= new Date().valueOf());\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='doTest()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * Regression test for bug 2919853 (format of <tt>document.lastModified</tt> was incorrect).
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void lastModified_format() throws Exception {
-        final String html
-            = "<html><body onload='document.getElementById(\"i\").value = document.lastModified'>\n"
-            + "<input id='i'></input></body></html>";
-
-        final WebDriver driver = loadPageWithAlerts2(html);
-        final String lastModified = driver.findElement(By.id("i")).getAttribute("value");
-
-        try {
-            new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.ROOT).parse(lastModified);
-        }
-        catch (final ParseException e) {
-            fail(e.getMessage());
-        }
     }
 
     /**
@@ -3045,5 +2914,262 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Property lastModified returns the last modification date of the document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 09:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModified() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, getBrowserVersion().getSystemTimezone().getID());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 13:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedGMT() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "GMT");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 13:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedUTC() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "UTC");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedBerlin() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "Europe/Berlin");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 22:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedJST() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "JST");
+    }
+
+    /**
+     * Property lastModified returns the last modification date of the document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 09:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedAndDate() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, getBrowserVersion().getSystemTimezone().getID());
+
+        // Last-Modified header has priority compared to Date header
+        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, getBrowserVersion().getSystemTimezone().getID());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 13:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedAndDateGMT() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "GMT");
+
+        // Last-Modified header has priority compared to Date header
+        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "GMT");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 13:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedAndDateUTC() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "UTC");
+
+        // Last-Modified header has priority compared to Date header
+        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "UTC");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedAndDateBerlin() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "Europe/Berlin");
+
+        // Last-Modified header has priority compared to Date header
+        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "Europe/Berlin");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "10/16/2009 22:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @BuggyWebDriver(FF = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            FF_ESR = {"string", "10/16/2009 15:59:47", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedAndDateJST() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "JST");
+
+        // Last-Modified header has priority compared to Date header
+        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders, "JST");
+    }
+
+    /**
+     * Property lastModified returns the last modification date of the document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "§§URL§§"})
+    public void lastModifiedOnlyDate() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.clear();
+        responseHeaders.add(new NameValuePair("Date", "Fri, 16 Oct 2009 13:59:47 GMT"));
+
+        expandExpectedAlertsVariables(DateUtils.formatDate(new Date()).substring(0, 17));
+        final String html = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function doTest() {\n"
+                + "  log(typeof document.lastModified);\n"
+                + "  var d = new Date(document.lastModified);\n"
+                + "  log(d.toGMTString().substr(0, 17));\n" // to have results not depending on the user's time zone
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
+
+        final WebDriver driver = loadPage2(URL_FIRST, ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
+
+        // for some strange reasons, the selenium driven browser is in an invalid
+        // state after this test
+        releaseResources();
+        shutDownAll();
+    }
+
+    private void testLastModified(final List<NameValuePair> responseHeaders, final String tz) throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  log(typeof document.lastModified);\n"
+            + "  log(document.lastModified);\n"
+            + "  var d = new Date(document.lastModified);\n"
+            + "  log(d.toGMTString());\n" // to have results not depending on the user's time zone
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        shutDownAll();
+        try {
+            getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
+
+            final BrowserVersion.BrowserVersionBuilder builder
+                = new BrowserVersion.BrowserVersionBuilder(getBrowserVersion());
+            builder.setSystemTimezone(TimeZone.getTimeZone(tz));
+            setBrowserVersion(builder.build());
+
+            final WebDriver driver = loadPage2(URL_FIRST, ISO_8859_1);
+            verifyTitle2(driver, getExpectedAlerts());
+        }
+        finally {
+            shutDownAll();
+        }
+    }
+
+    /**
+     * If neither Date header nor Last-Modified header is present, current time is taken.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void lastModified_noDateHeader() throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  var justBeforeLoading = " + System.currentTimeMillis() + ";\n"
+            + "  var d = new Date(document.lastModified);\n"
+            + "  log(d.valueOf() >= justBeforeLoading - 1000);\n" // date string format has no ms, take 1s marge
+            + "  log(d.valueOf() <= new Date().valueOf());\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Regression test for bug 2919853 (format of <tt>document.lastModified</tt> was incorrect).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void lastModified_format() throws Exception {
+        final String html
+            = "<html><body onload='document.getElementById(\"i\").value = document.lastModified'>\n"
+            + "<input id='i'></input></body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final String lastModified = driver.findElement(By.id("i")).getAttribute("value");
+
+        try {
+            new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.ROOT).parse(lastModified);
+        }
+        catch (final ParseException e) {
+            fail(e.getMessage());
+        }
     }
 }

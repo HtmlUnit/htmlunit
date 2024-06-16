@@ -29,7 +29,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -160,8 +161,9 @@ public class Document extends Node {
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
-    /** The format to use for the <code>lastModified</code> attribute. */
-    private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
+    /** The formatter to use for the <code>lastModified</code> attribute. */
+    private static final DateTimeFormatter LAST_MODIFIED_DATE_FORMATTER
+                                            = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 
     /** Contains all supported DOM level 2 events. */
     private static final Map<String, Class<? extends Event>> SUPPORTED_DOM2_EVENT_TYPE_MAP;
@@ -1857,7 +1859,9 @@ public class Document extends Node {
             else {
                 lastModified = new Date();
             }
-            lastModified_ = new SimpleDateFormat(LAST_MODIFIED_DATE_FORMAT, Locale.ROOT).format(lastModified);
+
+            final ZoneId zoneid = Context.getCurrentContext().getTimeZone().toZoneId();
+            lastModified_ = LAST_MODIFIED_DATE_FORMATTER.format(lastModified.toInstant().atZone(zoneid));
         }
         return lastModified_;
     }
