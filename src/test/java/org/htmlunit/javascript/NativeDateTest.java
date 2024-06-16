@@ -132,25 +132,6 @@ public class NativeDateTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug <a href="https://sourceforge.net/p/htmlunit/bugs/1467/">1467</a>.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1/1/2000")
-    public void toLocaleDateString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(new Date(2000, 0, 1).toLocaleDateString());\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -233,28 +214,4 @@ public class NativeDateTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"12:00:00 AM", "7:08:09 AM"})
-    public void toLocaleTimeString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(new Date(2000, 0, 1).toLocaleTimeString());\n"
-            + "  var date = new Date(2013, 0, 1);\n"
-            + "  date.setHours(7);\n"
-            + "  date.setMinutes(8);\n"
-            + "  date.setSeconds(9);\n"
-            + "  log(date.toLocaleTimeString());\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
 }

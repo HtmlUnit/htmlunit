@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="add" dev="Lai Quang Duong">
+                core-js: Date/Time format functions are now taking care of the browser locale.
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                core-js: Date.prototype.toLocaleString takes care of locales argument.
+            </action>
             <action type="fix" dev="rbri">
                 core-js: Object.defineProperty() has to take care of ConsString.
             </action>

@@ -73,7 +73,6 @@ import org.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ProxyAutoConfigJavaScriptConfiguration;
 import org.htmlunit.javascript.host.ConsoleCustom;
-import org.htmlunit.javascript.host.DateCustom;
 import org.htmlunit.javascript.host.NumberCustom;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
@@ -434,9 +433,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         deleteProperties(scriptable, "isXMLName");
 
         NativeFunctionToStringFunction.installFix(scriptable, browserVersion);
-
-        datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
-                DateCustom.class, ScriptableObject.DONTENUM);
 
         numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
                 NumberCustom.class, ScriptableObject.DONTENUM);
