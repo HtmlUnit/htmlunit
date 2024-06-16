@@ -42,13 +42,13 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts({"zh-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
              "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
-    @HtmlUnitNYI(CHROME = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+    @HtmlUnitNYI(CHROME = {"zh-CN", "undefined", "undefined", "America/New_York", "undefined", "undefined", "undefined",
                            "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            EDGE = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            EDGE = {"zh-CN", "undefined", "undefined", "America/New_York", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            FF = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            FF = {"zh-CN", "undefined", "undefined", "America/New_York", "undefined", "undefined", "undefined",
                   "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            FF_ESR = {"zh-CN", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+            FF_ESR = {"zh-CN", "undefined", "undefined", "America/New_York", "undefined", "undefined", "undefined",
                       "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void resolvedOptionsValues() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
