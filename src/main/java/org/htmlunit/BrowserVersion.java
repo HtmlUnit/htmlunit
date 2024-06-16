@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -437,6 +438,10 @@ public final class BrowserVersion implements Serializable {
         uploadMimeTypes_ = new HashMap<>();
 
         initFeatures();
+    }
+
+    public boolean isSameBrowser(final BrowserVersion other) {
+        return Objects.equals(nickname_, other.nickname_) && browserVersionNumeric_ == other.browserVersionNumeric_;
     }
 
     private void initFeatures() {

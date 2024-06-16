@@ -89,6 +89,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.devtools.v85.emulation.Emulation;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -490,7 +492,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected WebDriver buildWebDriver() throws IOException {
         if (useRealBrowser()) {
-            if (BrowserVersion.EDGE == getBrowserVersion()) {
+            if (BrowserVersion.EDGE.isSameBrowser(getBrowserVersion())) {
                 final EdgeDriverService service = new EdgeDriverService.Builder()
                         .withLogOutput(System.out)
                         .usingDriverExecutable(new File(EDGE_BIN_))
@@ -500,14 +502,24 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                         .build();
 
-                final EdgeOptions options = new EdgeOptions();
-                // options.addArguments("--lang=en-US");
-                // options.addArguments("--remote-allow-origins=*");
+                final String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
 
-                return new EdgeDriver(service, options);
+                final EdgeOptions options = new EdgeOptions();
+                options.addArguments("--lang=" + locale);
+                options.addArguments("--remote-allow-origins=*");
+
+                final EdgeDriver edge = new EdgeDriver(service, options);
+
+                final DevTools devTools = edge.getDevTools();
+                devTools.createSession();
+
+                final String tz = getBrowserVersion().getSystemTimezone().getID();
+                devTools.send(Emulation.setTimezoneOverride(tz));
+
+                return edge;
             }
 
-            if (BrowserVersion.CHROME == getBrowserVersion()) {
+            if (BrowserVersion.CHROME.isSameBrowser(getBrowserVersion())) {
                 final ChromeDriverService service = new ChromeDriverService.Builder()
                         .withLogOutput(System.out)
                         .usingDriverExecutable(new File(CHROME_BIN_))
@@ -517,18 +529,28 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                         .build();
 
+                final String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
+
                 final ChromeOptions options = new ChromeOptions();
-                options.addArguments("--lang=en-US");
+                options.addArguments("--lang=" + locale);
                 options.addArguments("--remote-allow-origins=*");
 
-                return new ChromeDriver(service, options);
+                final ChromeDriver chrome = new ChromeDriver(service, options);
+
+                final DevTools devTools = chrome.getDevTools();
+                devTools.createSession();
+
+                final String tz = getBrowserVersion().getSystemTimezone().getID();
+                devTools.send(Emulation.setTimezoneOverride(tz));
+
+                return chrome;
             }
 
-            if (BrowserVersion.FIREFOX == getBrowserVersion()) {
+            if (BrowserVersion.FIREFOX.isSameBrowser(getBrowserVersion())) {
                 return createFirefoxDriver(GECKO_BIN_, FF_BIN_);
             }
 
-            if (BrowserVersion.FIREFOX_ESR == getBrowserVersion()) {
+            if (BrowserVersion.FIREFOX_ESR.isSameBrowser(getBrowserVersion())) {
                 return createFirefoxDriver(GECKO_BIN_, FF_ESR_BIN_);
             }
 
@@ -536,13 +558,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         if (webDriver_ == null) {
+
+            final BrowserVersion browserVersion = getBrowserVersion();
+
             final DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(Browser.HTMLUNIT.browserName());
-            capabilities.setVersion(getBrowserName(getBrowserVersion()));
+            capabilities.setVersion(getBrowserName(browserVersion));
+
             webDriver_ = new HtmlUnitDriver(capabilities) {
                 @Override
                 protected WebClient newWebClient(final BrowserVersion version) {
-                    final WebClient webClient = super.newWebClient(version);
+                    final WebClient webClient = super.newWebClient(browserVersion);
                     if (isWebClientCached()) {
                         webClient.getOptions().setHistorySizeLimit(0);
                     }
@@ -559,7 +585,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return webDriver_;
     }
 
-    private static FirefoxDriver createFirefoxDriver(final String geckodriverBinary, final String binary) {
+    private FirefoxDriver createFirefoxDriver(final String geckodriverBinary, final String binary) {
         final FirefoxDriverService service = new GeckoDriverService.Builder()
                 .withLogOutput(System.out)
                 .usingDriverExecutable(new File(geckodriverBinary))
@@ -568,9 +594,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final FirefoxOptions options = new FirefoxOptions();
         options.setBinary(binary);
 
+        final String tz = getBrowserVersion().getSystemTimezone().getID();
+
+        String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
+        locale = locale + "," + getBrowserVersion().getBrowserLocale().getLanguage();
+
         final FirefoxProfile profile = new FirefoxProfile();
-        profile.setPreference("intl.accept_languages", "en-US,en");
+        profile.setPreference("intl.accept_languages", locale);
+        // no idea so far how to set this
+        // profile.setPreference("intl.tz", tz);
         options.setProfile(profile);
+
         return new FirefoxDriver(service, options);
     }
 
