@@ -35,8 +35,7 @@ try (final WebClient webClient = new WebClient()) {
             <p>
                 Often you will want to simulate a specific browser. This is done by passing a
                 org.htmlunit.BrowserVersion into the WebClient constructor.
-                Constants have been provided for some common browsers, but you can create your own specific
-                version by instantiating a BrowserVersion.
+                Constants have been provided for some common browsers.
             </p>
             <source><![CDATA[
 @Test
@@ -47,16 +46,26 @@ public void homePage_Firefox() throws Exception {
     }
 }]]></source>
             <p>
-                Specifying this BrowserVersion will change the user agent header that is sent up to the
-                server and will change the behavior of some of the JavaScript.
+                Specifying this BrowserVersion will change
+                <ul>
+                  <li>the user agent HTTP header,</li>
+                  <li>the values and the order of many other HTTP headers,</li>
+                  <li>the list of supported mime types,</li>
+                  <li>the behavior of the web client,</li>
+                  <li>the supported javascript methods and and also the behaviour of some js functions,</li>
+                  <li>the behavior of the web client, and</li>
+                  <li>the default values for various css properties</li>
+                </ul>
+                to match the real browsers.
             </p>
-        </section>
 
-        <section name="Using the options to adjust the browser">
-            <p>
-                There are various options available to make fine grained adjustments to the browser.
-            </p>
-            <source><![CDATA[
+            <p>In most cases, it should be sufficient to use the predefined BrowserVersion constants.</p>
+
+            <subsection name="Using the options to adjust the browser">
+                <p>
+                    There are various options available to make fine grained adjustments to the browser.
+                </p>
+                <source><![CDATA[
 @Test
 public void homePage_Firefox() throws Exception {
     try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
@@ -69,14 +78,14 @@ public void homePage_Firefox() throws Exception {
         Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
     }
 }]]></source>
-            <p>
-                The default values for most options are similar to the default values
-                of real browsers - but (as always) there is one important exception:<br/>
-                HtmlUnit stops the Javascript execution at the first unhandled exception -
-                Browsers do not stop. You can change this by changing the throwExceptionOnScriptError
-                option to false.
-            </p>
-            <source><![CDATA[
+                <p>
+                    The default values for most options are similar to the default values
+                    of real browsers - but (as always) there is one important exception:<br/>
+                    HtmlUnit stops the Javascript execution at the first unhandled exception -
+                    Browsers do not stop. You can change this by changing the throwExceptionOnScriptError
+                    option to false.
+                </p>
+                <source><![CDATA[
 @Test
 public void homePage_Firefox() throws Exception {
     try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
@@ -87,10 +96,33 @@ public void homePage_Firefox() throws Exception {
         Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
     }
 }]]></source>
-            <p>
-                For a complete list and more details please have a look at the 
-                <a href="apidocs/org/htmlunit/WebClientOptions.html">WebClientOptions API</a>.
-            </p>
+                <p>
+                    For a complete list and more details please have a look at the 
+                    <a href="apidocs/org/htmlunit/WebClientOptions.html">WebClientOptions API</a>.
+                </p>
+            </subsection>
+
+            <subsection name="Change the browser language / time zone">
+                <p>
+                    All browser versions provided by default have 'en-US' as the language and 'America/New_York' as the time zone.<br/>
+                    To change these default settings, a customised copy of the corresponding BrowserVersion must be created using the 
+                    BrowserVersionBuilder. This new BrowserVersion can then be used to create a WebClient.
+                </p>
+                <source><![CDATA[
+final BrowserVersion.BrowserVersionBuilder builder = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX);
+
+builder.setSystemTimezone(TimeZone.getTimeZone("Europe/Berlin"));
+builder.setBrowserLanguage("de-DE");
+builder.setAcceptLanguageHeader("de-DE,de");
+
+final BrowserVersion germanFirefox = builder.build();
+try (final WebClient webClient = new WebClient(germanFirefox)) {
+    ....]]></source>
+                <p>
+                    For a complete list and more details please have a look at the 
+                    <a href="apidocs/org/htmlunit/BrowserVersion.BrowserVersionBuilder.html">BrowserVersion.BrowserVersionBuilder API</a>.
+                </p>
+            </subsection>
         </section>
 
         <section name="Using HtmlUnit behind a proxy">
