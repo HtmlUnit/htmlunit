@@ -19,13 +19,13 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -42,7 +42,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  */
 @JsxClass
 public class File extends Blob {
-    private static final String LAST_MODIFIED_DATE_FORMAT = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzzz)";
+    private static final DateTimeFormatter LAST_MODIFIED_DATE_FORMATTER
+                            = DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z");
 
     private static class FileBackend extends Backend {
         private final java.io.File file_;
@@ -139,13 +140,14 @@ public class File extends Blob {
      */
     @JsxGetter({CHROME, EDGE})
     public String getLastModifiedDate() {
-        final Date date = new Date(getLastModified());
-        final BrowserVersion browser = getBrowserVersion();
-        final Locale locale = browser.getBrowserLocale();
-        final TimeZone timezone = browser.getSystemTimezone();
+        final Context cx = Context.getCurrentContext();
+        final ZoneId zoneid = cx.getTimeZone().toZoneId();
 
-        final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT, timezone, locale);
-        return format.format(date);
+        // strange only the time zone is locale dependent
+        String date = LAST_MODIFIED_DATE_FORMATTER.format(Instant.ofEpochMilli(getLastModified()).atZone(zoneid));
+        date += DateTimeFormatter.ofPattern(" (zzzz)", cx.getLocale())
+                    .format(Instant.ofEpochMilli(getLastModified()).atZone(zoneid));
+        return date;
     }
 
     /**

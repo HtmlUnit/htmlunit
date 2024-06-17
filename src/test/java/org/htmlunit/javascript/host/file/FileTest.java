@@ -17,8 +17,11 @@ package org.htmlunit.javascript.host.file;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.commons.io.FileUtils;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -430,5 +433,123 @@ public class FileTest extends WebDriverTestCase {
 
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
+            FF = "undefined",
+            FF_ESR = "undefined")
+    public void lastModifiedDate() throws Exception {
+        lastModifiedDate(getBrowserVersion().getSystemTimezone().getID(), getBrowserVersion().getBrowserLocale());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sun Jul 26 2015 14:21:47 GMT+0000 (Greenwich Mean Time)",
+            FF = "undefined",
+            FF_ESR = "undefined")
+    public void lastModifiedDateGMT() throws Exception {
+        lastModifiedDate("GMT", getBrowserVersion().getBrowserLocale());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sun Jul 26 2015 14:21:47 GMT+0000 (Coordinated Universal Time)",
+            FF = "undefined",
+            FF_ESR = "undefined")
+    public void lastModifiedDateUTC() throws Exception {
+        lastModifiedDate("UTC", getBrowserVersion().getBrowserLocale());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sun Jul 26 2015 16:21:47 GMT+0200 (Mitteleuropäische Sommerzeit)",
+            FF = "undefined",
+            FF_ESR = "undefined")
+    public void lastModifiedDateBerlin() throws Exception {
+        lastModifiedDate("Europe/Berlin", Locale.GERMANY);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sun Jul 26 2015 23:21:47 GMT+0900 (日本標準時)",
+            FF = "undefined",
+            FF_ESR = "undefined")
+    public void lastModifiedDateJST() throws Exception {
+        lastModifiedDate("JST", Locale.JAPAN);
+    }
+
+    private void lastModifiedDate(final String tz, final Locale locale) throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  if (document.testForm.fileupload.files) {\n"
+            + "    var files = document.testForm.fileupload.files;\n"
+            + "    var file = files[0];\n"
+            + "    log(file.lastModifiedDate);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        try {
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", ISO_8859_1);
+
+            // do not use millis here because different file systems
+            // have different precisions
+            assertTrue(tstFile.setLastModified(1437920507000L));
+
+            final String path = tstFile.getCanonicalPath();
+
+            shutDownAll();
+            try {
+                final BrowserVersion.BrowserVersionBuilder builder
+                    = new BrowserVersion.BrowserVersionBuilder(getBrowserVersion());
+                builder.setSystemTimezone(TimeZone.getTimeZone(tz));
+                builder.setBrowserLanguage(locale.toLanguageTag());
+                setBrowserVersion(builder.build());
+
+                final WebDriver driver = loadPage2(html);
+                driver.findElement(By.name("fileupload")).sendKeys(path);
+
+                driver.findElement(By.id("testBtn")).click();
+
+                final String[] expected = getExpectedAlerts();
+                if (expected.length > 1) {
+                    expected[1] = tstFile.getName();
+                }
+
+                verifyTitle2(driver, getExpectedAlerts());
+            }
+            finally {
+                shutDownAll();
+            }
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
     }
 }
