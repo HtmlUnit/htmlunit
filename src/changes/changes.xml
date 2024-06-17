@@ -9,7 +9,7 @@
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
             <action type="fix" dev="rbri">
-                File.LastModifiedDate formatting fixed.
+                File.lastModifiedDate formatting fixed.
             </action>
             <action type="fix" dev="rbri">
                 Document.lastModified now takes care of the browser timezone.
