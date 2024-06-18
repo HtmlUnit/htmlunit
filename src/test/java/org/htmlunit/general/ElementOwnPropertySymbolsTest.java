@@ -40,6 +40,7 @@ import org.htmlunit.javascript.host.crypto.SubtleCrypto;
 import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.CDATASection;
 import org.htmlunit.javascript.host.dom.NodeList;
+import org.htmlunit.javascript.host.dom.XPathEvaluator;
 import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.performance.Performance;
@@ -2837,6 +2838,28 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Alerts("Symbol(Symbol.toStringTag) [C] [SubtleCrypto]")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");
+    }
+
+    /**
+     * Test {@link XPathEvaluator}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Symbol(Symbol.toStringTag) [C] [XPathEvaluator]")
+    public void xPathEvaluator() throws Exception {
+        testString("", "new XPathEvaluator()");
+    }
+
+    /**
+     * Test {@link XPathExpression}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Symbol(Symbol.toStringTag) [C] [XPathExpression]")
+    public void xPathExpression() throws Exception {
+        testString("var res = new XPathEvaluator().createExpression('//span')", "res");
     }
 
     /**
