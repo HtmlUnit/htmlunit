@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri" issue='#788'>
+                Documentation for changing the browser timezone/language added.
+            </action>
             <action type="fix" dev="rbri">
                 File.lastModifiedDate formatting fixed.
             </action>
