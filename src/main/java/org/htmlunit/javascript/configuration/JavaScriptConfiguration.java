@@ -67,7 +67,6 @@ import org.htmlunit.javascript.host.URL;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.WebSocket;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.XPathExpression;
 import org.htmlunit.javascript.host.animations.Animation;
 import org.htmlunit.javascript.host.animations.AnimationEvent;
 import org.htmlunit.javascript.host.animations.KeyframeEffect;
@@ -164,6 +163,7 @@ import org.htmlunit.javascript.host.dom.ShadowRoot;
 import org.htmlunit.javascript.host.dom.Text;
 import org.htmlunit.javascript.host.dom.TreeWalker;
 import org.htmlunit.javascript.host.dom.XPathEvaluator;
+import org.htmlunit.javascript.host.dom.XPathExpression;
 import org.htmlunit.javascript.host.dom.XPathNSResolver;
 import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.event.AudioProcessingEvent;
@@ -715,7 +715,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebkitSpeechRecognitionEvent.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class, XMLSerializer.class,
-        XPathEvaluator.class, XPathExpression.class,
+        XPathEvaluator.class, XPathEvaluator.class, XPathExpression.class,
         XPathNSResolver.class, XPathResult.class, XSLTProcessor.class
     };
 

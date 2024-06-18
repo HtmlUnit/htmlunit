@@ -40,6 +40,7 @@ import org.htmlunit.javascript.host.crypto.SubtleCrypto;
 import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.CDATASection;
 import org.htmlunit.javascript.host.dom.NodeList;
+import org.htmlunit.javascript.host.dom.XPathEvaluator;
 import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.performance.Performance;
@@ -85,7 +86,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "    var div = document.createElement('div');\n"
                 + "    var svg = document.getElementById('mySvg');\n"
                 + "    try{\n"
-                + "      " + preparation + "\n"
+                 + "      " + preparation + "\n"
                 + "      process(" + string + ");\n"
                 + "    } catch (e) {\n"
                 + "      log('exception');\n"
@@ -106,10 +107,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
 
                 // TODO remove if fixed in Rhino
                 + "      if ('__proto__' == property) continue;\n"
-                + "      if (typeof object[property] == 'function') {\n"
+
+                + "      let desc = Object.getOwnPropertyDescriptor(object.constructor.prototype, property);\n"
+                + "      if (desc.get === undefined && typeof object[property] == 'function') {\n"
                 + "        all.push(property + '()');\n"
                 + "      } else {\n"
-                + "        let desc = Object.getOwnPropertyDescriptor(object.constructor.prototype, property);\n"
                 + "        property += '[';\n"
                 + "        if (desc.get != undefined) property += 'G';\n"
                 + "        if (desc.set != undefined) property += 'S';\n"
@@ -935,7 +937,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ondragenter[GSCE],ondragleave[GSCE],ondragover[GSCE],ondragstart[GSCE],ondrop[GSCE],"
                 + "ondurationchange[GSCE],onemptied[GSCE],onended[GSCE],onerror[GSCE],onfocus[GSCE],"
                 + "ongotpointercapture[GSCE],onhashchange[GSCE],oninput[GSCE],oninvalid[GSCE],onkeydown[GSCE],"
-                + "onkeypress[GSCE],onkeyup[GSCE],onlanguagechange[GSCE],onload(),onloadeddata[GSCE],"
+                + "onkeypress[GSCE],onkeyup[GSCE],onlanguagechange[GSCE],onload[GSCE],onloadeddata[GSCE],"
                 + "onloadedmetadata[GSCE],onloadstart[GSCE],onlostpointercapture[GSCE],onmessage[GSCE],"
                 + "onmousedown[GSCE],onmouseenter[GSCE],onmouseleave[GSCE],onmousemove[GSCE],onmouseout[GSCE],"
                 + "onmouseover[GSCE],onmouseup[GSCE],onmousewheel[GSCE],onoffline[GSCE],ononline[GSCE],"
@@ -966,7 +968,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ondragenter[GSCE],ondragleave[GSCE],ondragover[GSCE],ondragstart[GSCE],ondrop[GSCE],"
                 + "ondurationchange[GSCE],onemptied[GSCE],onended[GSCE],onerror[GSCE],onfocus[GSCE],"
                 + "ongotpointercapture[GSCE],onhashchange[GSCE],oninput[GSCE],oninvalid[GSCE],onkeydown[GSCE],"
-                + "onkeypress[GSCE],onkeyup[GSCE],onlanguagechange[GSCE],onload(),onloadeddata[GSCE],"
+                + "onkeypress[GSCE],onkeyup[GSCE],onlanguagechange[GSCE],onload[GSCE],onloadeddata[GSCE],"
                 + "onloadedmetadata[GSCE],onloadstart[GSCE],onlostpointercapture[GSCE],onmessage[GSCE],"
                 + "onmousedown[GSCE],onmouseenter[GSCE],onmouseleave[GSCE],onmousemove[GSCE],onmouseout[GSCE],"
                 + "onmouseover[GSCE],onmouseup[GSCE],onmousewheel[GSCE],onoffline[GSCE],ononline[GSCE],"
@@ -998,7 +1000,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ondeviceorientation[GSCE],ondrag[GSCE],ondragend[GSCE],ondragenter[GSCE],"
                 + "ondragleave[GSCE],ondragover[GSCE],ondragstart[GSCE],ondrop[GSCE],ondurationchange[GSCE],"
                 + "onemptied[GSCE],onended[GSCE],onerror[GSCE],onfocus[GSCE],onhashchange[GSCE],oninput[GSCE],"
-                + "oninvalid[GSCE],onkeydown[GSCE],onkeypress[GSCE],onkeyup[GSCE],onlanguagechange[GSCE],onload(),"
+                + "oninvalid[GSCE],onkeydown[GSCE],onkeypress[GSCE],onkeyup[GSCE],onlanguagechange[GSCE],onload[GSCE],"
                 + "onloadeddata[GSCE],onloadedmetadata[GSCE],onloadstart[GSCE],onmessage[GSCE],onmousedown[GSCE],"
                 + "onmouseenter[GSCE],onmouseleave[GSCE],onmousemove[GSCE],onmouseout[GSCE],onmouseover[GSCE],"
                 + "onmouseup[GSCE],onmozfullscreenchange[GSCE],onmozfullscreenerror[GSCE],onoffline[GSCE],"
@@ -1025,7 +1027,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ondeviceorientation[GSCE],ondrag[GSCE],ondragend[GSCE],ondragenter[GSCE],"
                 + "ondragleave[GSCE],ondragover[GSCE],ondragstart[GSCE],ondrop[GSCE],ondurationchange[GSCE],"
                 + "onemptied[GSCE],onended[GSCE],onerror[GSCE],onfocus[GSCE],onhashchange[GSCE],oninput[GSCE],"
-                + "oninvalid[GSCE],onkeydown[GSCE],onkeypress[GSCE],onkeyup[GSCE],onlanguagechange[GSCE],onload(),"
+                + "oninvalid[GSCE],onkeydown[GSCE],onkeypress[GSCE],onkeyup[GSCE],onlanguagechange[GSCE],onload[GSCE],"
                 + "onloadeddata[GSCE],onloadedmetadata[GSCE],onloadstart[GSCE],onmessage[GSCE],onmousedown[GSCE],"
                 + "onmouseenter[GSCE],onmouseleave[GSCE],onmousemove[GSCE],onmouseout[GSCE],onmouseover[GSCE],"
                 + "onmouseup[GSCE],onmozfullscreenchange[GSCE],onmozfullscreenerror[GSCE],onoffline[GSCE],"
@@ -3269,14 +3271,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "aLink[GSCE],background[GSCE],bgColor[GSCE],constructor(),link[GSCE],onafterprint[GSCE],"
                 + "onbeforeprint[GSCE],onbeforeunload[GSCE],onblur[GSCE],onerror[GSCE],onfocus[GSCE],"
-                + "onhashchange[GSCE],onlanguagechange[GSCE],onload(),onmessage[GSCE],onmessageerror[GSCE],"
+                + "onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],onmessage[GSCE],onmessageerror[GSCE],"
                 + "onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],"
                 + "onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],onstorage[GSCE],"
                 + "onunhandledrejection[GSCE],onunload[GSCE],text[GSCE],"
                 + "vLink[GSCE]",
             EDGE = "aLink[GSCE],background[GSCE],bgColor[GSCE],constructor(),link[GSCE],onafterprint[GSCE],"
                 + "onbeforeprint[GSCE],onbeforeunload[GSCE],onblur[GSCE],onerror[GSCE],onfocus[GSCE],"
-                + "onhashchange[GSCE],onlanguagechange[GSCE],onload(),onmessage[GSCE],onmessageerror[GSCE],"
+                + "onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],onmessage[GSCE],onmessageerror[GSCE],"
                 + "onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],"
                 + "onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],onstorage[GSCE],"
                 + "onunhandledrejection[GSCE],onunload[GSCE],text[GSCE],"
@@ -17106,15 +17108,63 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link XPathEvaluator}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),createExpression(),createNSResolver(),evaluate()",
+            EDGE = "constructor(),createExpression(),createNSResolver(),evaluate()",
+            FF = "constructor(),createExpression(),createNSResolver(),evaluate()",
+            FF_ESR = "constructor(),createExpression(),createNSResolver(),evaluate()")
+    public void xPathEvaluator() throws Exception {
+        testString("", "new XPathEvaluator()");
+    }
+
+    /**
+     * Test {@link XPathExpression}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),evaluate()",
+            EDGE = "constructor(),evaluate()",
+            FF = "constructor(),evaluate()",
+            FF_ESR = "constructor(),evaluate()")
+    public void xPathExpression() throws Exception {
+        testString("var res = new XPathEvaluator().createExpression('//span')", "res");
+    }
+
+    /**
      * Test {@link XPathResult}.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @Alerts(CHROME = "ANY_TYPE[E],ANY_UNORDERED_NODE_TYPE[E],BOOLEAN_TYPE[E],booleanValue[GCE],constructor(),"
+                + "FIRST_ORDERED_NODE_TYPE[E],invalidIteratorState[GCE],iterateNext(),NUMBER_TYPE[E],"
+                + "numberValue[GCE],ORDERED_NODE_ITERATOR_TYPE[E],ORDERED_NODE_SNAPSHOT_TYPE[E],resultType[GCE],"
+                + "singleNodeValue[GCE],snapshotItem(),snapshotLength[GCE],STRING_TYPE[E],stringValue[GCE],"
+                + "UNORDERED_NODE_ITERATOR_TYPE[E],"
+                + "UNORDERED_NODE_SNAPSHOT_TYPE[E]",
+            EDGE = "ANY_TYPE[E],ANY_UNORDERED_NODE_TYPE[E],BOOLEAN_TYPE[E],booleanValue[GCE],constructor(),"
+                + "FIRST_ORDERED_NODE_TYPE[E],invalidIteratorState[GCE],iterateNext(),NUMBER_TYPE[E],"
+                + "numberValue[GCE],ORDERED_NODE_ITERATOR_TYPE[E],ORDERED_NODE_SNAPSHOT_TYPE[E],resultType[GCE],"
+                + "singleNodeValue[GCE],snapshotItem(),snapshotLength[GCE],STRING_TYPE[E],stringValue[GCE],"
+                + "UNORDERED_NODE_ITERATOR_TYPE[E],"
+                + "UNORDERED_NODE_SNAPSHOT_TYPE[E]",
+            FF = "ANY_TYPE[E],ANY_UNORDERED_NODE_TYPE[E],BOOLEAN_TYPE[E],booleanValue[GCE],constructor(),"
+                + "FIRST_ORDERED_NODE_TYPE[E],invalidIteratorState[GCE],iterateNext(),NUMBER_TYPE[E],"
+                + "numberValue[GCE],ORDERED_NODE_ITERATOR_TYPE[E],ORDERED_NODE_SNAPSHOT_TYPE[E],resultType[GCE],"
+                + "singleNodeValue[GCE],snapshotItem(),snapshotLength[GCE],STRING_TYPE[E],stringValue[GCE],"
+                + "UNORDERED_NODE_ITERATOR_TYPE[E],"
+                + "UNORDERED_NODE_SNAPSHOT_TYPE[E]",
+            FF_ESR = "ANY_TYPE[E],ANY_UNORDERED_NODE_TYPE[E],BOOLEAN_TYPE[E],booleanValue[GCE],constructor(),"
+                + "FIRST_ORDERED_NODE_TYPE[E],invalidIteratorState[GCE],iterateNext(),NUMBER_TYPE[E],"
+                + "numberValue[GCE],ORDERED_NODE_ITERATOR_TYPE[E],ORDERED_NODE_SNAPSHOT_TYPE[E],resultType[GCE],"
+                + "singleNodeValue[GCE],snapshotItem(),snapshotLength[GCE],STRING_TYPE[E],stringValue[GCE],"
+                + "UNORDERED_NODE_ITERATOR_TYPE[E],"
+                + "UNORDERED_NODE_SNAPSHOT_TYPE[E]")
     public void xPathResult() throws Exception {
         testString("var res = document.evaluate('/html/body', document, null, XPathResult.ANY_TYPE, null);", "res");
     }

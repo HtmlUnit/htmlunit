@@ -39,6 +39,7 @@ import org.htmlunit.javascript.host.crypto.Crypto;
 import org.htmlunit.javascript.host.crypto.SubtleCrypto;
 import org.htmlunit.javascript.host.dom.CDATASection;
 import org.htmlunit.javascript.host.dom.NodeList;
+import org.htmlunit.javascript.host.dom.XPathEvaluator;
 import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.performance.Performance;
@@ -8315,6 +8316,34 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "UNORDERED_NODE_SNAPSHOT_TYPE")
     public void xPathResult() throws Exception {
         testString("var res = document.evaluate('/html/body', document, null, XPathResult.ANY_TYPE, null);", "res");
+    }
+
+    /**
+     * Test {@link XPathEvaluator}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "createExpression(),createNSResolver(),evaluate()",
+            EDGE = "createExpression(),createNSResolver(),evaluate()",
+            FF = "createExpression(),createNSResolver(),evaluate()",
+            FF_ESR = "createExpression(),createNSResolver(),evaluate()")
+    public void xPathEvaluator() throws Exception {
+        testString("", "new XPathEvaluator()");
+    }
+
+    /**
+     * Test {@link XPathExpression}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "evaluate()",
+            EDGE = "evaluate()",
+            FF = "evaluate()",
+            FF_ESR = "evaluate()")
+    public void xPathExpression() throws Exception {
+        testString("var res = new XPathEvaluator().createExpression('//span')", "res");
     }
 
     /**
