@@ -35,7 +35,7 @@ import org.htmlunit.xpath.xml.utils.WrappedRuntimeException;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-class XPathAdapter {
+public class XPathAdapter {
 
     private enum STATE {
         DEFAULT,
@@ -58,22 +58,17 @@ class XPathAdapter {
      * Constructor.
      * @param exprString the XPath expression
      * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
-     * @param errorListener the error listener, or {@code null} if default should be used
      * @param caseSensitive whether the attributes should be case-sensitive
      * @throws TransformerException if a syntax or other error occurs
      */
-    XPathAdapter(final String exprString, final PrefixResolver prefixResolver,
-        final ErrorListener errorListener, final boolean caseSensitive)
+    public XPathAdapter(final String exprString, final PrefixResolver prefixResolver, final boolean caseSensitive)
                 throws TransformerException {
 
         initFunctionTable();
 
-        ErrorListener errListener = errorListener;
-        if (errListener == null) {
-            errListener = new DefaultErrorHandler();
-        }
-        final XPathParser parser = new XPathParser(errListener);
-        final Compiler compiler = new Compiler(errorListener, funcTable_);
+        final ErrorListener errorHandler = new DefaultErrorHandler();
+        final XPathParser parser = new XPathParser(errorHandler);
+        final Compiler compiler = new Compiler(errorHandler, funcTable_);
 
         final String expression = preProcessXPath(exprString, caseSensitive);
         parser.initXPath(compiler, expression, prefixResolver);

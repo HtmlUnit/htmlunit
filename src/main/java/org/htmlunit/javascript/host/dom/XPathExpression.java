@@ -14,12 +14,19 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import javax.xml.transform.TransformerException;
+
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.xpath.HtmlUnitPrefixResolver;
+import org.htmlunit.html.xpath.XPathAdapter;
+import org.htmlunit.html.xpath.XPathHelper;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
+import org.w3c.dom.Node;
 
 /**
  * A JavaScript object for {@code XPathExpression}.
@@ -30,7 +37,7 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
 @JsxClass
 public class XPathExpression extends HtmlUnitScriptable {
 
-    private final String xpath_;
+    private final XPathAdapter xpath_;
     private final PrefixResolver prefixResolver_;
 
     /**
@@ -48,9 +55,16 @@ public class XPathExpression extends HtmlUnitScriptable {
     public void jsConstructor() {
     }
 
-    XPathExpression(final String expression, final PrefixResolver prefixResolver) {
-        xpath_ = expression;
-        prefixResolver_ = prefixResolver;
+    XPathExpression(final String expression, final PrefixResolver prefixResolver) throws TransformerException {
+        final DomNode node = getDomNodeOrDie();
+        PrefixResolver resolver = prefixResolver;
+        if (resolver == null) {
+            final Node xpathExpressionContext = node.getOwnerDocument().getDocumentElement();
+            resolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
+        }
+        prefixResolver_ = resolver;
+        final boolean caseSensitive = node.getPage().hasCaseSensitiveTagNames();
+        xpath_ = new XPathAdapter(expression, prefixResolver, caseSensitive);
     }
 
     /**
@@ -81,7 +95,7 @@ public class XPathExpression extends HtmlUnitScriptable {
                 xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
             }
 
-            xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(xpath_, prefixResolver_), type);
+            xPathResult.init(XPathHelper.getByXPath(contextNode, xpath_, prefixResolver_), type);
             return xPathResult;
         }
         catch (final Exception e) {

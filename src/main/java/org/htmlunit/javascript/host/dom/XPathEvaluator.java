@@ -142,11 +142,17 @@ public class XPathEvaluator extends HtmlUnitScriptable {
 
         final XPathEvaluator evaluator = (XPathEvaluator) thisObj;
 
-        final String xpath = JavaScriptEngine.toString(args[0]);
-        final XPathExpression xPathExpression  = new XPathExpression(xpath, prefixResolver);
-        xPathExpression.setParentScope(evaluator.getParentScope());
-        xPathExpression.setPrototype(evaluator.getPrototype(xPathExpression.getClass()));
+        try {
+            final String xpath = JavaScriptEngine.toString(args[0]);
+            final XPathExpression xPathExpression  = new XPathExpression(xpath, prefixResolver);
+            xPathExpression.setParentScope(evaluator.getParentScope());
+            xPathExpression.setPrototype(evaluator.getPrototype(xPathExpression.getClass()));
 
-        return xPathExpression;
+            return xPathExpression;
+        }
+        catch (final Exception e) {
+            throw JavaScriptEngine.constructError("SyntaxError",
+                    "Failed to compile xpath '" + args[0] + "' (" + e.getMessage() + ")");
+        }
     }
 }

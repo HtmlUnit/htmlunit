@@ -29,13 +29,13 @@ import org.w3c.dom.Node;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
+public final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 
     /**
      * Creates a new instance.
      * @param xpathExpressionContext the context from which XPath expression prefixes will be resolved
      */
-    HtmlUnitPrefixResolver(final Node xpathExpressionContext) {
+    public HtmlUnitPrefixResolver(final Node xpathExpressionContext) {
         super(xpathExpressionContext);
     }
 
