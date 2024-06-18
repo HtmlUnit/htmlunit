@@ -35,7 +35,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
-    public void simple() throws Exception {
+    public void evaluate() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
@@ -49,6 +49,99 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "  var nsResolver = xpe.createNSResolver(document.documentElement);\n"
             + "  res += nsResolver + '§';\n"
             + "  var result = xpe.evaluate('//span', document.body, nsResolver, 0, null);\n"
+            + "  var found = [];\n"
+            + "  var next;\n"
+            + "  while (next = result.iterateNext()) {\n"
+            + "    res += next.id + '§';\n"
+            + "  }\n"
+            + "} catch(e) { res += 'exception' + '§'; }\n"
+            + "log(res);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
+    public void evaluateWithoutResult() throws Exception {
+        final String html = "<html><body>\n"
+            + "<span id='first'>hello</span>\n"
+            + "<div><span id='second'>world</span></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var res = '';\n"
+            + "try {\n"
+            + "  res += typeof window.XPathEvaluator + '§';\n"
+            + "  var xpe = new XPathEvaluator();\n"
+            + "  res += xpe + '§';\n"
+            + "  var nsResolver = xpe.createNSResolver(document.documentElement);\n"
+            + "  res += nsResolver + '§';\n"
+            + "  var result = xpe.evaluate('//span', document.body, nsResolver, 0);\n"
+            + "  var found = [];\n"
+            + "  var next;\n"
+            + "  while (next = result.iterateNext()) {\n"
+            + "    res += next.id + '§';\n"
+            + "  }\n"
+            + "} catch(e) { res += 'exception' + '§'; }\n"
+            + "log(res);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
+    public void evaluateWithoutTypeResult() throws Exception {
+        final String html = "<html><body>\n"
+            + "<span id='first'>hello</span>\n"
+            + "<div><span id='second'>world</span></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var res = '';\n"
+            + "try {\n"
+            + "  res += typeof window.XPathEvaluator + '§';\n"
+            + "  var xpe = new XPathEvaluator();\n"
+            + "  res += xpe + '§';\n"
+            + "  var nsResolver = xpe.createNSResolver(document.documentElement);\n"
+            + "  res += nsResolver + '§';\n"
+            + "  var result = xpe.evaluate('//span', document.body, nsResolver);\n"
+            + "  var found = [];\n"
+            + "  var next;\n"
+            + "  while (next = result.iterateNext()) {\n"
+            + "    res += next.id + '§';\n"
+            + "  }\n"
+            + "} catch(e) { res += 'exception' + '§'; }\n"
+            + "log(res);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
+    public void evaluateWithoutResolverTypeResult() throws Exception {
+        final String html = "<html><body>\n"
+            + "<span id='first'>hello</span>\n"
+            + "<div><span id='second'>world</span></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var res = '';\n"
+            + "try {\n"
+            + "  res += typeof window.XPathEvaluator + '§';\n"
+            + "  var xpe = new XPathEvaluator();\n"
+            + "  res += xpe + '§';\n"
+            + "  var nsResolver = xpe.createNSResolver(document.documentElement);\n"
+            + "  res += nsResolver + '§';\n"
+            + "  var result = xpe.evaluate('//span', document.body);\n"
             + "  var found = [];\n"
             + "  var next;\n"
             + "  while (next = result.iterateNext()) {\n"

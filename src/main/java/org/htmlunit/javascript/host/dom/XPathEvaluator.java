@@ -76,12 +76,6 @@ public class XPathEvaluator extends HtmlUnitScriptable {
     public XPathResult evaluate(final String expression, final Object contextNodeObj,
             final Object resolver, final int type, final Object result) {
         try {
-            XPathResult xPathResult = (XPathResult) result;
-            if (xPathResult == null) {
-                xPathResult = new XPathResult();
-                xPathResult.setParentScope(getParentScope());
-                xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
-            }
             // contextNodeObj can be either a node or an array with the node as the first element.
             if (!(contextNodeObj instanceof Node)) {
                 throw JavaScriptEngine.reportRuntimeError("Illegal value for parameter 'context'");
@@ -96,6 +90,17 @@ public class XPathEvaluator extends HtmlUnitScriptable {
                 prefixResolver = new NativeFunctionPrefixResolver(
                                         (NativeFunction) resolver, contextNode.getParentScope());
             }
+
+            final XPathResult xPathResult;
+            if (result instanceof XPathResult) {
+                xPathResult = (XPathResult) result;
+            }
+            else {
+                xPathResult = new XPathResult();
+                xPathResult.setParentScope(getParentScope());
+                xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
+            }
+
             xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression, prefixResolver), type);
             return xPathResult;
         }
@@ -104,4 +109,28 @@ public class XPathEvaluator extends HtmlUnitScriptable {
         }
     }
 
+    /**
+     * Compiles an XPathExpression which can then be used for (repeated) evaluations of the XPath expression.
+     * @param expression the XPath expression string to be parsed
+     * @param resolver the resolver permits translation of all prefixes, including the XML namespace prefix,
+     *        within the XPath expression into appropriate namespace URIs.
+     * @return a XPathExpression representing the compiled form of the XPath expression.
+     */
+    @JsxFunction
+    public XPathExpression createExpression(final String expression, final Object resolver) {
+        PrefixResolver prefixResolver = null;
+        if (resolver instanceof PrefixResolver) {
+            prefixResolver = (PrefixResolver) resolver;
+        }
+        else if (resolver instanceof NativeFunction) {
+            prefixResolver = new NativeFunctionPrefixResolver(
+                                    (NativeFunction) resolver, getParentScope());
+        }
+
+        final XPathExpression xPathExpression  = new XPathExpression(expression, prefixResolver);
+        xPathExpression.setParentScope(getParentScope());
+        xPathExpression.setPrototype(getPrototype(xPathExpression.getClass()));
+
+        return xPathExpression;
+    }
 }
