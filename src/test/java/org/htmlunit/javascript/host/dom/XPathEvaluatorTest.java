@@ -232,4 +232,106 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void createExpressionNoXPath() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var res = '';\n"
+            + "try {\n"
+            + "  var expression = new XPathEvaluator().createExpression();\n"
+            + "  res += expression;\n"
+            + "} catch(e) { res += 'exception'; }\n"
+            + "log(res);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "[object XPathEvaluator]", "[object XPathExpression]§"})
+    public void createExpressionUndefinedXPath() throws Exception {
+        final String html = "<html><body>\n"
+                + "<span id='first'>hello</span>\n"
+                + "<div><span id='second'>world</span></div>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var res = '';\n"
+                + "try {\n"
+                + "  res += typeof window.XPathEvaluator + '§';\n"
+                + "  var xpe = new XPathEvaluator();\n"
+                + "  res += xpe + '§';\n"
+                + "  var expression = xpe.createExpression(undefined);\n"
+                + "  res += expression + '§';\n"
+                + "  var result = expression.evaluate(document.body);\n"
+                + "  var found = [];\n"
+                + "  var next;\n"
+                + "  while (next = result.iterateNext()) {\n"
+                + "    res += next.id + '§';\n"
+                + "  }\n"
+                + "} catch(e) { res += 'exception' + e + '§'; }\n"
+                + "log(res);\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "[object XPathEvaluator]", "[object XPathExpression]§"})
+    public void createExpressionNullXPath() throws Exception {
+        final String html = "<html><body>\n"
+                + "<span id='first'>hello</span>\n"
+                + "<div><span id='second'>world</span></div>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var res = '';\n"
+                + "try {\n"
+                + "  res += typeof window.XPathEvaluator + '§';\n"
+                + "  var xpe = new XPathEvaluator();\n"
+                + "  res += xpe + '§';\n"
+                + "  var expression = xpe.createExpression(null);\n"
+                + "  res += expression + '§';\n"
+                + "  var result = expression.evaluate(document.body);\n"
+                + "  var found = [];\n"
+                + "  var next;\n"
+                + "  while (next = result.iterateNext()) {\n"
+                + "    res += next.id + '§';\n"
+                + "  }\n"
+                + "} catch(e) { res += 'exception' + '§'; }\n"
+                + "log(res);\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError")
+    public void createExpressionInvalid() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var res = '';\n"
+            + "try {\n"
+            + "  var expression = new XPathEvaluator().createExpression('@@');\n"
+            + "  res += expression;\n"
+            + "} catch(e) { res += e.name; }\n"
+            + "log(res);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

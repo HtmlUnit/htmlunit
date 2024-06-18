@@ -14,7 +14,10 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeFunction;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -111,25 +114,38 @@ public class XPathEvaluator extends HtmlUnitScriptable {
 
     /**
      * Compiles an XPathExpression which can then be used for (repeated) evaluations of the XPath expression.
-     * @param expression the XPath expression string to be parsed
-     * @param resolver the resolver permits translation of all prefixes, including the XML namespace prefix,
-     *        within the XPath expression into appropriate namespace URIs.
+     * @param context the context
+     * @param scope the scope
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
      * @return a XPathExpression representing the compiled form of the XPath expression.
      */
     @JsxFunction
-    public XPathExpression createExpression(final String expression, final Object resolver) {
-        PrefixResolver prefixResolver = null;
-        if (resolver instanceof PrefixResolver) {
-            prefixResolver = (PrefixResolver) resolver;
-        }
-        else if (resolver instanceof NativeFunction) {
-            prefixResolver = new NativeFunctionPrefixResolver(
-                                    (NativeFunction) resolver, getParentScope());
+    public static XPathExpression createExpression(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (args.length < 1) {
+            throw JavaScriptEngine.reportRuntimeError("Missing 'expression' parameter");
         }
 
-        final XPathExpression xPathExpression  = new XPathExpression(expression, prefixResolver);
-        xPathExpression.setParentScope(getParentScope());
-        xPathExpression.setPrototype(getPrototype(xPathExpression.getClass()));
+        PrefixResolver prefixResolver = null;
+        if (args.length > 1) {
+            final Object resolver = args[1];
+            if (resolver instanceof PrefixResolver) {
+                prefixResolver = (PrefixResolver) resolver;
+            }
+            else if (resolver instanceof NativeFunction) {
+                prefixResolver = new NativeFunctionPrefixResolver(
+                                        (NativeFunction) resolver, scope.getParentScope());
+            }
+        }
+
+        final XPathEvaluator evaluator = (XPathEvaluator) thisObj;
+
+        final String xpath = JavaScriptEngine.toString(args[0]);
+        final XPathExpression xPathExpression  = new XPathExpression(xpath, prefixResolver);
+        xPathExpression.setParentScope(evaluator.getParentScope());
+        xPathExpression.setPrototype(evaluator.getPrototype(xPathExpression.getClass()));
 
         return xPathExpression;
     }
