@@ -104,7 +104,8 @@ public void homePage_Firefox() throws Exception {
 
             <subsection name="Change the browser language / time zone">
                 <p>
-                    All browser versions provided by default have 'en-US' as the language and 'America/New_York' as the time zone.<br/>
+                    Changing the language/time zone cannot be done from the options, it must be done before the WebClient is created.<br/>
+                    All Browser Versions are shipped with 'en-US' as language and 'America/New_York' as timezone.<br/>
                     To change these default settings, a customised copy of the corresponding BrowserVersion must be created using the 
                     BrowserVersionBuilder. This new BrowserVersion can then be used to create a WebClient.
                 </p>
