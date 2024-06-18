@@ -68,10 +68,11 @@ public abstract class DomNamespaceNode extends DomNode {
      */
     @Override
     public String getNamespaceURI() {
-        if (getPage().isHtmlPage() && !(getPage() instanceof XHtmlPage)
+        if (getPage().isHtmlPage()
+            && !(getPage() instanceof XHtmlPage)
             && Html.XHTML_NAMESPACE.equals(namespaceURI_)
             && XPathHelper.isProcessingXPath()) {
-            // for Xalan processing we have to strip the 'default' XHTML namespace for HTML pages to be able to find
+            // for xpath processing we have to strip the 'default' XHTML namespace for HTML pages to be able to find
             // the elements by XPath without needing to add the namespace to it
             return null;
         }
@@ -84,7 +85,8 @@ public abstract class DomNamespaceNode extends DomNode {
     @Override
     public String getLocalName() {
         final boolean caseSensitive = getPage().hasCaseSensitiveTagNames();
-        if (!caseSensitive && XPathHelper.isProcessingXPath()) { // and this method was called from Xalan
+        if (!caseSensitive
+                && XPathHelper.isProcessingXPath()) { // and this method was called from xpath processor
             return localNameLC_;
         }
         return localName_;
