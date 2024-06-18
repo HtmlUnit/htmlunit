@@ -119,7 +119,8 @@ final BrowserVersion germanFirefox = builder.build();
 try (final WebClient webClient = new WebClient(germanFirefox)) {
     ....]]></source>
                 <p>
-                    For a complete list and more details please have a look at the 
+                    There is no support for changing the language/timezone after the WebClient has been created.<br/>
+                    For more details please have a look at the 
                     <a href="apidocs/org/htmlunit/BrowserVersion.BrowserVersionBuilder.html">BrowserVersion.BrowserVersionBuilder API</a>.
                 </p>
             </subsection>
