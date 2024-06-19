@@ -260,7 +260,11 @@ public class URL extends HtmlUnitScriptable {
             return null;
         }
 
-        return url_.getProtocol() + "://" + url_.getHost();
+        if (url_.getPort() < 0 || url_.getPort() == url_.getDefaultPort()) {
+            return url_.getProtocol() + "://" + url_.getHost();
+        }
+
+        return url_.getProtocol() + "://" + url_.getHost() + ':' + url_.getPort();
     }
 
     /**

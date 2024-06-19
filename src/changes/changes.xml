@@ -9,6 +9,9 @@
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
             <action type="fix" dev="rbri">
+                URL.origin should include the port (if it is not the default one).
+            </action>
+            <action type="fix" dev="rbri">
                 Calling new DocumentFragment() now creates a properly initialized object.
             </action>
             <action type="add" dev="rbri">
