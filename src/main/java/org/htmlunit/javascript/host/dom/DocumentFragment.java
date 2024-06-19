@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.dom;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -52,6 +53,10 @@ public class DocumentFragment extends Node {
     @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
+
+        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final DomDocumentFragment fragment = new DomDocumentFragment(page);
+        setDomNode(fragment);
     }
 
     /**

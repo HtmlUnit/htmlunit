@@ -339,4 +339,27 @@ public class DocumentFragmentTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(content);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("0")
+    public void ctor() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var fragment = new DocumentFragment();\n"
+            + "      log(fragment.querySelectorAll('p').length);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>bla\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(content);
+    }
 }

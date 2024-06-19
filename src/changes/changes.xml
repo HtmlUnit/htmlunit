@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Calling new DocumentFragment() now creates a properly initialized object.
+            </action>
             <action type="add" dev="rbri">
                 XPathEvaluator.createExpression() and XPathExpression.evaluate() added.
             </action>
