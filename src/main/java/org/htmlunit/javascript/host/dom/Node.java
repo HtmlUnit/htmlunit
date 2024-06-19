@@ -971,12 +971,12 @@ public class Node extends EventTarget {
             throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
-        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        final Node thisNode = (Node) thisObj;
+        final DomNode thisDomNode = thisNode.getDomNodeOrDie();
 
         for (final Object arg : args) {
-            final Node node = toNodeOrTextNode((Node) thisObj, arg);
-            final DomNode newNode = node.getDomNodeOrDie();
-            thisDomNode.appendChild(newNode);
+            final Node node = toNodeOrTextNode(thisNode, arg);
+            thisDomNode.appendChild(node.getDomNodeOrDie());
         }
     }
 
