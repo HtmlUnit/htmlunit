@@ -18,12 +18,14 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.NativeFunctionPrefixResolver;
+import org.htmlunit.javascript.host.Window;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
@@ -144,7 +146,8 @@ public class XPathEvaluator extends HtmlUnitScriptable {
 
         try {
             final String xpath = JavaScriptEngine.toString(args[0]);
-            final XPathExpression xPathExpression  = new XPathExpression(xpath, prefixResolver);
+            final DomNode doc = ((Window) scope).getDocument().getDocumentElement().getDomNodeOrDie();
+            final XPathExpression xPathExpression  = new XPathExpression(xpath, prefixResolver, doc);
             xPathExpression.setParentScope(evaluator.getParentScope());
             xPathExpression.setPrototype(evaluator.getPrototype(xPathExpression.getClass()));
 

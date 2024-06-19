@@ -16,6 +16,9 @@ package org.htmlunit.javascript.host.dom;
 
 import javax.xml.transform.TransformerException;
 
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.xpath.HtmlUnitPrefixResolver;
 import org.htmlunit.html.xpath.XPathAdapter;
@@ -55,12 +58,11 @@ public class XPathExpression extends HtmlUnitScriptable {
     public void jsConstructor() {
     }
 
-    XPathExpression(final String expression, final PrefixResolver prefixResolver) throws TransformerException {
-        final DomNode node = getDomNodeOrDie();
+    XPathExpression(final String expression, final PrefixResolver prefixResolver,
+            final DomNode node) throws TransformerException {
         PrefixResolver resolver = prefixResolver;
         if (resolver == null) {
-            final Node xpathExpressionContext = node.getOwnerDocument().getDocumentElement();
-            resolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
+            resolver = new HtmlUnitPrefixResolver(node);
         }
         prefixResolver_ = resolver;
         final boolean caseSensitive = node.getPage().hasCaseSensitiveTagNames();
@@ -69,21 +71,39 @@ public class XPathExpression extends HtmlUnitScriptable {
 
     /**
      * Executes an XPath expression on the given node or document and returns an XPathResult.
-     * @param contextNodeObj a {@link Node} representing the context to use for evaluating the expression.
-     * @param type type of result to be returned by evaluating the expression. This must be
-     * one of the XPathResult.Constants.
-     * @param result the result object which may be reused and returned by this method
+     * @param context the context
+     * @param scope the scope
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
      * @return the result of the evaluation of the XPath expression
      */
     @JsxFunction
-    public XPathResult evaluate(final Object contextNodeObj, final int type, final Object result) {
+    public static XPathResult evaluate(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (args.length < 1) {
+            throw JavaScriptEngine.reportRuntimeError("Missing 'contextNode' parameter");
+        }
+
+        int type = 0; // ANY
+        if (args.length > 1) {
+            type = (int) JavaScriptEngine.toInteger(args[1]);
+        }
+
+        Object result = null;
+        if (args.length > 2) {
+            result = args[2];
+        }
+
         try {
-            // contextNodeObj can be either a node or an array with the node as the first element.
-            if (!(contextNodeObj instanceof Node)) {
+            final XPathExpression expression = (XPathExpression) thisObj;
+
+            final Object contextNodeObj = args[0];
+            if (!(contextNodeObj instanceof org.htmlunit.javascript.host.dom.Node)) {
                 throw JavaScriptEngine.reportRuntimeError("Illegal value for parameter 'context'");
             }
 
-            final Node contextNode = (Node) contextNodeObj;
+            final Node contextNode = ((org.htmlunit.javascript.host.dom.Node) contextNodeObj).getDomNodeOrDie();
 
             final XPathResult xPathResult;
             if (result instanceof XPathResult) {
@@ -91,11 +111,11 @@ public class XPathExpression extends HtmlUnitScriptable {
             }
             else {
                 xPathResult = new XPathResult();
-                xPathResult.setParentScope(getParentScope());
-                xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
+                xPathResult.setParentScope(expression.getParentScope());
+                xPathResult.setPrototype(expression.getPrototype(xPathResult.getClass()));
             }
 
-            xPathResult.init(XPathHelper.getByXPath(contextNode, xpath_, prefixResolver_), type);
+            xPathResult.init(XPathHelper.getByXPath(contextNode, expression.xpath_, expression.prefixResolver_), type);
             return xPathResult;
         }
         catch (final Exception e) {
