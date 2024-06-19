@@ -58,13 +58,13 @@ public final class XPathHelper {
      * Evaluates an XPath expression from the specified node, returning the resultant nodes.
      *
      * @param <T> the type class
-     * @param node the node to start searching from
+     * @param contextNode the node to start searching from
      * @param xpathExpr the XPath expression
      * @param prefixResolver the prefix resolver to use for resolving namespace prefixes, or null
      * @return the list of objects found
      */
     @SuppressWarnings("unchecked")
-    public static <T> List<T> getByXPath(final DomNode node, final String xpathExpr,
+    public static <T> List<T> getByXPath(final DomNode contextNode, final String xpathExpr,
             final PrefixResolver prefixResolver) {
         if (xpathExpr == null) {
             throw new IllegalArgumentException("Null is not a valid XPath expression");
@@ -73,24 +73,23 @@ public final class XPathHelper {
         PrefixResolver resolver = prefixResolver;
         if (resolver == null) {
             final Node xpathExpressionContext;
-            if (node.getNodeType() == Node.DOCUMENT_NODE) {
-                xpathExpressionContext = ((Document) node).getDocumentElement();
+            if (contextNode.getNodeType() == Node.DOCUMENT_NODE) {
+                xpathExpressionContext = ((Document) contextNode).getDocumentElement();
             }
             else {
-                xpathExpressionContext = node;
+                xpathExpressionContext = contextNode;
             }
 
             resolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
         }
 
         try {
-            final boolean caseSensitive = node.getPage().hasCaseSensitiveTagNames();
-            final XPathAdapter xpath = new XPathAdapter(xpathExpr, prefixResolver, caseSensitive);
-
-            return getByXPath(node, xpath, prefixResolver);
+            final boolean caseSensitive = contextNode.getPage().hasCaseSensitiveTagNames();
+            final XPathAdapter xpath = new XPathAdapter(xpathExpr, resolver, caseSensitive);
+            return getByXPath(contextNode, xpath, prefixResolver);
         }
         catch (final Exception e) {
-            throw new RuntimeException("Could not retrieve XPath >" + xpathExpr + "< on " + node, e);
+            throw new RuntimeException("Could not retrieve XPath >" + xpathExpr + "< on " + contextNode, e);
         }
     }
 
@@ -100,7 +99,6 @@ public final class XPathHelper {
 
         PROCESS_XPATH_.set(Boolean.TRUE);
         try {
-
             final XPathContext xpathSupport = new XPathContext();
             final int ctxtNode = xpathSupport.getDTMHandleFromNode(node);
             final XObject result = xpath.execute(xpathSupport, ctxtNode, prefixResolver);
