@@ -18,7 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.Page;
+import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes.Definition;
@@ -244,31 +244,34 @@ public class HtmlSerializerInnerOuterText {
 
     private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         if (domNode instanceof DomElement) {
-            final Page page = domNode.getPage();
+            final SgmlPage page = domNode.getPage();
             if (page != null) {
-                final WebWindow window = page.getEnclosingWindow();
-                if (window.getWebClient().getOptions().isCssEnabled()) {
+                if (page.getWebClient().getOptions().isCssEnabled()) {
                     DomNode node = domNode;
                     while (node != null) {
                         if (node instanceof DomElement) {
-                            final ComputedCssStyleDeclaration style =
-                                    window.getComputedStyle((DomElement) domNode, null);
-                            final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
-                            if (StringUtils.isNoneEmpty(value)) {
-                                if ("normal".equalsIgnoreCase(value)) {
-                                    return Mode.WHITE_SPACE_NORMAL;
-                                }
-                                if ("nowrap".equalsIgnoreCase(value)) {
-                                    return Mode.WHITE_SPACE_NORMAL;
-                                }
-                                if ("pre".equalsIgnoreCase(value)) {
-                                    return Mode.WHITE_SPACE_PRE;
-                                }
-                                if ("pre-wrap".equalsIgnoreCase(value)) {
-                                    return Mode.WHITE_SPACE_PRE;
-                                }
-                                if ("pre-line".equalsIgnoreCase(value)) {
-                                    return Mode.WHITE_SPACE_PRE_LINE;
+                            final WebWindow window = page.getEnclosingWindow();
+                            if (window != null) {
+                                final ComputedCssStyleDeclaration style =
+                                        window.getComputedStyle((DomElement) domNode, null);
+                                final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
+
+                                if (StringUtils.isNoneEmpty(value)) {
+                                    if ("normal".equalsIgnoreCase(value)) {
+                                        return Mode.WHITE_SPACE_NORMAL;
+                                    }
+                                    if ("nowrap".equalsIgnoreCase(value)) {
+                                        return Mode.WHITE_SPACE_NORMAL;
+                                    }
+                                    if ("pre".equalsIgnoreCase(value)) {
+                                        return Mode.WHITE_SPACE_PRE;
+                                    }
+                                    if ("pre-wrap".equalsIgnoreCase(value)) {
+                                        return Mode.WHITE_SPACE_PRE;
+                                    }
+                                    if ("pre-line".equalsIgnoreCase(value)) {
+                                        return Mode.WHITE_SPACE_PRE_LINE;
+                                    }
                                 }
                             }
                         }
