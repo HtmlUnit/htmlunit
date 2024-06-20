@@ -952,6 +952,28 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§ORIGIN§§")
+    public void documentOrigin() throws Exception {
+        final String html =
+                "<html><body><script>\n"
+                + "  alert(document.location.origin);\n"
+                + "</script></body></html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final URL url = URL_FIRST;
+        final String origin = url.getProtocol() + "://" + url.getHost() + ':' + url.getPort();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expectedAlerts[i] = expectedAlerts[i].replaceAll("§§ORIGIN§§", origin);
+        }
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, expectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "null",
             CHROME = "§§URL§§a.html?p1=sieben&p2",
             EDGE = "§§URL§§a.html?p1=sieben&p2")
