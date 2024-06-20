@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="add" dev="rbri">
+                DocumentFragment append()/prepend()/replaceChildren() added.
+            </action>
             <action type="fix" dev="rbri">
                 URL.origin should include the port (if it is not the default one).
             </action>

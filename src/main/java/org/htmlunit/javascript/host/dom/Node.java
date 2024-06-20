@@ -967,7 +967,7 @@ public class Node extends EventTarget {
      */
     protected static void append(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        if (!(thisObj instanceof Element)) {
+        if (!(thisObj instanceof Node)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
@@ -990,14 +990,16 @@ public class Node extends EventTarget {
      */
     protected static void prepend(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        if (!(thisObj instanceof Element)) {
+        if (!(thisObj instanceof Node)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
-        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        final Node thisNode = (Node) thisObj;
+        final DomNode thisDomNode = thisNode.getDomNodeOrDie();
         final DomNode firstChild = thisDomNode.getFirstChild();
+
         for (final Object arg : args) {
-            final Node node = toNodeOrTextNode((Node) thisObj, arg);
+            final Node node = toNodeOrTextNode(thisNode, arg);
             final DomNode newNode = node.getDomNodeOrDie();
             if (firstChild == null) {
                 thisDomNode.appendChild(newNode);
@@ -1018,15 +1020,16 @@ public class Node extends EventTarget {
      */
     protected static void replaceChildren(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        if (!(thisObj instanceof Element)) {
+        if (!(thisObj instanceof Node)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
-        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        final Node thisNode = (Node) thisObj;
+        final DomNode thisDomNode = thisNode.getDomNodeOrDie();
         thisDomNode.removeAllChildren();
 
         for (final Object arg : args) {
-            final Node node = toNodeOrTextNode((Node) thisObj, arg);
+            final Node node = toNodeOrTextNode(thisNode, arg);
             thisDomNode.appendChild(node.getDomNodeOrDie());
         }
     }
