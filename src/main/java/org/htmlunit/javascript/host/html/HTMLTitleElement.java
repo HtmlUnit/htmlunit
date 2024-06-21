@@ -14,10 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import org.htmlunit.html.DomNode;
-import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlTitle;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -54,11 +51,8 @@ public class HTMLTitleElement extends HTMLElement {
      */
     @JsxGetter
     public Object getText() {
-        final DomNode firstChild = getDomNodeOrDie().getFirstChild();
-        if (firstChild != null) {
-            return firstChild.getNodeValue();
-        }
-        return "";
+        final HtmlTitle htmlTitle = (HtmlTitle) getDomNodeOrDie();
+        return htmlTitle.getText();
     }
 
     /**
@@ -67,28 +61,7 @@ public class HTMLTitleElement extends HTMLElement {
      */
     @JsxSetter
     public void setText(final String text) {
-        final DomNode htmlElement = getDomNodeOrDie();
-        DomNode firstChild = htmlElement.getFirstChild();
-        if (firstChild == null) {
-            firstChild = new DomText(htmlElement.getPage(), text);
-            htmlElement.appendChild(firstChild);
-        }
-        else {
-            firstChild.setNodeValue(text);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxSetter
-    @Override
-    public void setInnerHTML(final Object value) {
-        String text = null;
-        if (value != null && !"".equals(value)) {
-            text = JavaScriptEngine.toString(value);
-        }
-
-        setText(text);
+        final HtmlTitle htmlTitle = (HtmlTitle) getDomNodeOrDie();
+        htmlTitle.setText(text);
     }
 }
