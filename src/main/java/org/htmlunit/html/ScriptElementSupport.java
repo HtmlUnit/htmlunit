@@ -82,8 +82,8 @@ public final class ScriptElementSupport {
 
         final ScriptElement script = (ScriptElement) element;
         final String srcAttrib = script.getSrcAttribute();
-        final boolean hasSrcAttrib = ATTRIBUTE_NOT_DEFINED == srcAttrib;
-        if (!hasSrcAttrib && script.isDeferred()) {
+        final boolean hasNoSrcAttrib = ATTRIBUTE_NOT_DEFINED == srcAttrib;
+        if (!hasNoSrcAttrib && script.isDeferred()) {
             return;
         }
 
@@ -91,9 +91,9 @@ public final class ScriptElementSupport {
         if (webWindow != null) {
             final StringBuilder description = new StringBuilder()
                     .append("Execution of ")
-                    .append(hasSrcAttrib ? "inline " : "external ")
+                    .append(hasNoSrcAttrib ? "inline " : "external ")
                     .append(element.getClass().getSimpleName());
-            if (!hasSrcAttrib) {
+            if (!hasNoSrcAttrib) {
                 description.append(" (").append(srcAttrib).append(')');
             }
             final PostponedAction action = new PostponedAction(element.getPage(), description.toString()) {
