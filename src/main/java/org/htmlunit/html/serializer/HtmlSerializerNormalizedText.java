@@ -611,6 +611,9 @@ public class HtmlSerializerNormalizedText {
         }
 
         public void append(final String content, final Mode mode) {
+            if (content == null) {
+                return;
+            }
             final int length = content.length();
             if (length == 0) {
                 return;
