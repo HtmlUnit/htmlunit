@@ -82,4 +82,33 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
 
         loadPageVerifyTextArea2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"Page Title", "</> htmx rocks!", "</> htmx rocks!"})
+    public void innerHtml() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Page Title</title>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var title = document.getElementsByTagName('title')[0];\n"
+            + "        log(title.text);\n"
+            + "        title.innerHTML = '</> htmx rocks!';\n"
+            + "        log(title.text);\n"
+            + "        log(window.document.title);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
 }

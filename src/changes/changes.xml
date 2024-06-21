@@ -8,6 +8,15 @@
 
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Assigning innerHTML for a title node behaves like assigning text, no HTML parsing takes place.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix some NPE in HtmlSerializer's.
+            </action>
+            <action type="fix" dev="rbri">
+                Assigning innerHTML for a title node behaves like assigning text, no HTML parsing takes place.
+            </action>
             <action type="add" dev="rbri">
                 DocumentFragment append()/prepend()/replaceChildren() added.
             </action>
@@ -48,7 +57,7 @@
                 Upgrade Apache commons-net to 3.11.1.
             </action>
             <action type="fix" dev="rbri" issue="#798">
-                Fix NPE during click processiong when JavaScript engine disabled.
+                Fix NPE during click processing when JavaScript engine disabled.
             </action>
         </release>
 

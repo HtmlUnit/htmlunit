@@ -1667,7 +1667,6 @@ public class DomElement extends DomNamespaceNode implements Element {
             parseHtmlSnippet(source);
         }
     }
-
 }
 
 /**

@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlTitle;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -75,5 +76,19 @@ public class HTMLTitleElement extends HTMLElement {
         else {
             firstChild.setNodeValue(text);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setInnerHTML(final Object value) {
+        String text = null;
+        if (value != null && !"".equals(value)) {
+            text = JavaScriptEngine.toString(value);
+        }
+
+        setText(text);
     }
 }
