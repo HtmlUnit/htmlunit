@@ -793,6 +793,9 @@ public class HtmlSerializerVisibleText {
 
         // see https://drafts.csswg.org/css-text-3/#white-space
         public void append(final String content, final Mode mode) {
+            if (content == null) {
+                return;
+            }
             int length = content.length();
             if (length == 0) {
                 return;
