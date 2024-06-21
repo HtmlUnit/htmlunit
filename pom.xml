@@ -34,8 +34,8 @@
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
 
-        <htmlunitdriver.version>4.21.0</htmlunitdriver.version>
-        <selenium.version>4.21.0</selenium.version>
+        <htmlunitdriver.version>4.22.0-SNAPSHOT</htmlunitdriver.version>
+        <selenium.version>4.22.0</selenium.version>
 
         <jetty.version>9.4.54.v20240208</jetty.version>
         <log4j.version>2.23.1</log4j.version>
