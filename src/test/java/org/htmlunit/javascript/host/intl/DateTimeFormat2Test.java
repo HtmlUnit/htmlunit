@@ -44,7 +44,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
-            + "    var date = new Date(Date.UTC(2013, 11, 20, 3, 0, 0));\n"
+            + "    var date = new Date(Date.UTC(2013, 11, 20, 7, 0, 0));\n"
             + "    try {\n");
         for (int i = 0; i < string.length - 1; i++) {
             html.append(string[i]).append("\n");

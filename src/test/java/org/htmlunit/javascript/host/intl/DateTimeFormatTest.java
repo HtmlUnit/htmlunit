@@ -108,7 +108,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "12/20/2013"})
+    @Alerts({"true", "12/19/2013"})
+    @BuggyWebDriver(FF = {"true", "12/20/2013"}, FF_ESR = {"true", "12/20/2013"})
     public void dateTimeFormat() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
@@ -127,6 +128,102 @@ public class DateTimeFormatTest extends WebDriverTestCase {
                 + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "12/20/2013"})
+    public void dateTimeFormatGMT() throws Exception {
+        dateTimeFormat("GMT");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "12/20/2013"})
+    public void dateTimeFormatUTC() throws Exception {
+        dateTimeFormat("UTC");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "12/19/2013"})
+    @BuggyWebDriver(FF = {"true", "12/20/2013"}, FF_ESR = {"true", "12/20/2013"})
+    public void dateTimeFormatEST() throws Exception {
+        dateTimeFormat("EST");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "12/20/2013"})
+    public void dateTimeFormatBerlin() throws Exception {
+        dateTimeFormat("Europe/Berlin");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "12/19/2013"})
+    @BuggyWebDriver(FF = {"true", "12/20/2013"}, FF_ESR = {"true", "12/20/2013"})
+    public void dateTimeFormatNewYork() throws Exception {
+        dateTimeFormat("America/New_York");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "12/20/2013"})
+    public void dateTimeFormatTokyo() throws Exception {
+        dateTimeFormat("Asia/Tokyo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "12/20/2013"})
+    public void dateTimeFormatJST() throws Exception {
+        dateTimeFormat("JST");
+    }
+
+    private void dateTimeFormat(final String tz) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var dateFormat = Intl.DateTimeFormat('en');\n"
+                + "    log(dateFormat instanceof Intl.DateTimeFormat);\n"
+
+                + "    var date = new Date(Date.UTC(2013, 11, 20, 3, 0, 0));\n"
+                + "    log(dateFormat.format(date));\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        shutDownAll();
+        try {
+            final BrowserVersion.BrowserVersionBuilder builder
+                = new BrowserVersion.BrowserVersionBuilder(getBrowserVersion());
+            builder.setSystemTimezone(TimeZone.getTimeZone(tz));
+            setBrowserVersion(builder.build());
+
+            loadPageVerifyTitle2(html);
+        }
+        finally {
+            shutDownAll();
+        }
     }
 
     /**
@@ -152,8 +249,11 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("GMT")
+    @Alerts(DEFAULT = "+00:00",
+            FF = "GMT",
+            FF_ESR = "GMT")
     @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    @HtmlUnitNYI(CHROME = "GMT", EDGE = "GMT")
     public void timeZoneGMT() throws Exception {
         timeZone("GMT");
     }
@@ -172,8 +272,11 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("EST")
+    @Alerts(DEFAULT = "Etc/GMT+5",
+            FF = "EST",
+            FF_ESR = "EST")
     @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    @HtmlUnitNYI(CHROME = "EST", EDGE = "EST")
     public void timeZoneEST() throws Exception {
         timeZone("EST");
     }
@@ -211,8 +314,11 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("JST")
+    @Alerts(DEFAULT = "Asia/Tokyo",
+            FF = "JST",
+            FF_ESR = "JST")
     @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
+    @HtmlUnitNYI(CHROME = "JST", EDGE = "JST")
     public void timeZoneJST() throws Exception {
         timeZone("JST");
     }

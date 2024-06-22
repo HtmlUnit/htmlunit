@@ -248,7 +248,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     @JsxFunction
     public String format(final Object object) {
         final Date date = (Date) Context.jsToJava(object, Date.class);
-        return formatter_.format(date);
+        return formatter_.format(date, Context.getCurrentContext().getTimeZone().toZoneId());
     }
 
     /**
@@ -314,10 +314,11 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         /**
          * Formats a date according to the locale and formatting options of this {@code DateTimeFormat} object.
          * @param date the JavaScript object to convert
+         * @param cx the current context
          * @return the dated formated
          */
-        String format(final Date date) {
-            TemporalAccessor zonedDateTime = date.toInstant().atZone(ZoneId.systemDefault());
+        String format(final Date date, final ZoneId zoneId) {
+            TemporalAccessor zonedDateTime = date.toInstant().atZone(zoneId);
             if (chronology_ != null) {
                 zonedDateTime = chronology_.date(zonedDateTime);
             }
