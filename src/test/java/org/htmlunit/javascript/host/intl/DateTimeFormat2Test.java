@@ -219,7 +219,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
+    @Alerts("\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
                 + "\u0645\u064a\u0644\u0627\u062f\u064a \u0641\u064a 2:00:00 \u0635")
     @BuggyWebDriver(
             FF = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
