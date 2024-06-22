@@ -461,7 +461,7 @@ public enum BrowserVersionFeatures {
     /**
      * The default display style of multicol is 'block'.
      */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature(FF_ESR)
     MULTICOL_BLOCK,
 
     /** The protocol setter does not check for special protocols. */

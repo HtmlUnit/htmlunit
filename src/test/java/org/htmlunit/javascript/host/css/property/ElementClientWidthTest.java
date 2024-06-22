@@ -1049,7 +1049,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "-16",
             FF_ESR = "-16")
     public void multicol() throws Exception {
         loadPageVerifyTitle2(test("multicol"));
