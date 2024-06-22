@@ -2202,6 +2202,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code -moz-window-dragging}. */
         MOZ_WINDOW_DRAGGING__("-moz-window-dragging", "-moz-window-dragging", ff("default")),
 
+        /** The style property {@code navigation}. */
+        NAVIGATION("navigation", "navigation", chromeAndEdgeEmpty()),
+
         /** The style property {@code negative}. */
         NEGATIVE("negative", "negative", chromeAndEdgeEmpty()),
 
@@ -3141,6 +3144,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code translate}. */
         TRANSLATE("translate", "translate", chromeAndEdgeNone(), ffNone()),
+
+        /** The style property {@code types}. */
+        TYPES("types", "types", chromeAndEdgeEmpty()),
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",
