@@ -9,7 +9,7 @@
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Chrome/Edge 126, Firefox 127, Bugfixes">
             <action type="fix" dev="rbri">
-                DateTimeFormat.format now takes care of the current browser timezone.
+                DateTimeFormat.format now takes care of the current browser timezone and locale.
             </action>
             <action type="fix" dev="rbri">
                 Fix some NPE in HtmlSerializer's.

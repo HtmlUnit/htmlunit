@@ -150,10 +150,9 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Freitag, 20. Dezember 2013 n. Chr. um 04:00:00",
-            EDGE = "Freitag, 20. Dezember 2013 n. Chr. um 04:00:00",
-            FF = "Freitag, 20. Dezember 2013 n. Chr. um 04:00:00",
-            FF_ESR = "Freitag, 20. Dezember 2013 n. Chr. um 04:00:00")
+    @Alerts("Freitag, 20. Dezember 2013 n. Chr. um 02:00:00")
+    @BuggyWebDriver(FF = "Freitag, 20. Dezember 2013 n. Chr. um 08:00:00",
+                    FF_ESR = "Freitag, 20. Dezember 2013 n. Chr. um 08:00:00")
     @NotYetImplemented
     public void format_weekday_long_all() throws Exception {
         test("var options = { weekday: 'long', era: 'long', year: 'numeric', month: 'long', day: 'numeric',"
@@ -221,13 +220,14 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
-                + "\u0645\u064a\u0644\u0627\u062f\u064a \u0641\u064a 4:00:00 \u0635",
+                + "\u0645\u064a\u0644\u0627\u062f\u064a \u0641\u064a 2:00:00 \u0635")
+    @BuggyWebDriver(
             FF = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
-                + " \u0641\u064a \u0664:\u0660\u0660:\u0660\u0660 \u0635",
+                + " \u0641\u064a \u0668:\u0660\u0660:\u0660\u0660 \u0635",
             FF_ESR = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
-                + " \u0641\u064a \u0664:\u0660\u0660:\u0660\u0660 \u0635")
+                + " \u0641\u064a \u0668:\u0660\u0660:\u0660\u0660 \u0635")
     @NotYetImplemented
     public void format_weekday_long_all_ar() throws Exception {
         test("var options = { weekday: 'long', era: 'long', year: 'numeric', month: 'long', day: 'numeric',"
@@ -255,7 +255,8 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("4:00:00 am GMT+1")
+    @Alerts("2:00:00 am GMT-5")
+    @BuggyWebDriver(FF = "8:00:00 am GMT+1", FF_ESR = "8:00:00 am GMT+1")
     @NotYetImplemented
     public void format_detailed() throws Exception {
         test("options = {",
@@ -269,7 +270,8 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("12/20/2013, 04:00:00")
+    @Alerts("12/20/2013, 02:00:00")
+    @BuggyWebDriver(FF = "12/20/2013, 08:00:00", FF_ESR = "12/20/2013, 08:00:00")
     @NotYetImplemented
     public void format_detailed_24h() throws Exception {
         test("var options = {",
@@ -1315,9 +1317,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("12/20/2013")
-    @BuggyWebDriver(FF = "20.12.2013",
-            FF_ESR = "20.12.2013")
+    @Alerts("20.12.2013")
     public void format_no() throws Exception {
         test("new Intl.DateTimeFormat('no').format(date)");
     }
@@ -1326,9 +1326,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("12/20/2013")
-    @BuggyWebDriver(FF = "20.12.2013",
-            FF_ESR = "20.12.2013")
+    @Alerts("20.12.2013")
     public void format_no_no() throws Exception {
         test("new Intl.DateTimeFormat('no-NO').format(date)");
     }

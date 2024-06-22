@@ -70,7 +70,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final String yyyyDotBlankDot = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd.";
 
         final Map<String, String> commonFormats = new HashMap<>();
-        commonFormats.put("", mmSlash);
+        commonFormats.put("", ddDot);
         commonFormats.put("ar", "dd\u200F/MM\u200F/YYYY");
         commonFormats.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
         commonFormats.put("ban", mmSlash);
@@ -81,6 +81,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("da", ddDot);
         commonFormats.put("de", ddDot);
         commonFormats.put("el", ddSlash);
+        commonFormats.put("en", mmSlash);
         commonFormats.put("en-CA", yyyyDash);
         commonFormats.put("en-NZ", ddSlash);
         commonFormats.put("en-PA", ddSlash);
@@ -174,8 +175,8 @@ public class DateTimeFormat extends HtmlUnitScriptable {
             formats = FF_FORMATS_;
         }
 
-        String locale = "";
-        String pattern = null;
+        String locale = browserVersion.getBrowserLocale().toLanguageTag();
+        String pattern = getPattern(formats, locale);
 
         for (final String l : locales) {
             pattern = getPattern(formats, l);
@@ -187,6 +188,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         if (pattern == null) {
             pattern = formats.get("");
         }
+
         if (!locale.startsWith("ar")) {
             pattern = pattern.replace("\u200E", "");
         }
@@ -231,8 +233,9 @@ public class DateTimeFormat extends HtmlUnitScriptable {
             }
         }
         else {
-            locales = new String[] {""};
+            locales = new String[0];
         }
+
         final Window window = getWindow(ctorObj);
         final DateTimeFormat format = new DateTimeFormat(locales, window.getBrowserVersion());
         format.setParentScope(window);
