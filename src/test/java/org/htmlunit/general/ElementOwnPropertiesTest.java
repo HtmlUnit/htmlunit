@@ -6120,13 +6120,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "cols[GSCE],constructor(),onafterprint[GSCE],onbeforeprint[GSCE],onbeforeunload[GSCE],"
-                + "onblur[GSCE],onerror[GSCE],onfocus[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],onload(),"
+                + "onblur[GSCE],onerror[GSCE],onfocus[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],"
                 + "onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],"
                 + "onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],"
                 + "onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],"
                 + "rows[GSCE]",
             EDGE = "cols[GSCE],constructor(),onafterprint[GSCE],onbeforeprint[GSCE],onbeforeunload[GSCE],"
-                + "onblur[GSCE],onerror[GSCE],onfocus[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],onload(),"
+                + "onblur[GSCE],onerror[GSCE],onfocus[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],"
                 + "onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],"
                 + "onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],"
                 + "onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],"
@@ -6516,16 +6516,18 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "adAuctionHeaders[GSCE],align[GSCE],allow[GSCE],allowFullscreen[GSCE],allowPaymentRequest[GSCE],"
-                + "constructor(),contentDocument[GCE],contentWindow[GCE],credentialless[GSCE],csp[GSCE],"
-                + "featurePolicy[GCE],frameBorder[GSCE],getSVGDocument(),height[GSCE],loading[GSCE],longDesc[GSCE],"
-                + "marginHeight[GSCE],marginWidth[GSCE],name[GSCE],privateToken[GSCE],referrerPolicy[GSCE],"
-                + "sandbox[GSCE],scrolling[GSCE],sharedStorageWritable[GSCE],src[GSCE],srcdoc[GSCE],"
+                + "browsingTopics[GSCE],constructor(),contentDocument[GCE],contentWindow[GCE],credentialless[GSCE],"
+                + "csp[GSCE],featurePolicy[GCE],frameBorder[GSCE],getSVGDocument(),height[GSCE],loading[GSCE],"
+                + "longDesc[GSCE],marginHeight[GSCE],marginWidth[GSCE],name[GSCE],privateToken[GSCE],"
+                + "referrerPolicy[GSCE],sandbox[GSCE],scrolling[GSCE],sharedStorageWritable[GSCE],src[GSCE],"
+                + "srcdoc[GSCE],"
                 + "width[GSCE]",
             EDGE = "adAuctionHeaders[GSCE],align[GSCE],allow[GSCE],allowFullscreen[GSCE],allowPaymentRequest[GSCE],"
-                + "constructor(),contentDocument[GCE],contentWindow[GCE],credentialless[GSCE],csp[GSCE],"
-                + "featurePolicy[GCE],frameBorder[GSCE],getSVGDocument(),height[GSCE],loading[GSCE],longDesc[GSCE],"
-                + "marginHeight[GSCE],marginWidth[GSCE],name[GSCE],privateToken[GSCE],referrerPolicy[GSCE],"
-                + "sandbox[GSCE],scrolling[GSCE],sharedStorageWritable[GSCE],src[GSCE],srcdoc[GSCE],"
+                + "browsingTopics[GSCE],constructor(),contentDocument[GCE],contentWindow[GCE],credentialless[GSCE],"
+                + "csp[GSCE],featurePolicy[GCE],frameBorder[GSCE],getSVGDocument(),height[GSCE],loading[GSCE],"
+                + "longDesc[GSCE],marginHeight[GSCE],marginWidth[GSCE],name[GSCE],privateToken[GSCE],"
+                + "referrerPolicy[GSCE],sandbox[GSCE],scrolling[GSCE],sharedStorageWritable[GSCE],src[GSCE],"
+                + "srcdoc[GSCE],"
                 + "width[GSCE]",
             FF = "align[GSCE],allow[GSCE],allowFullscreen[GSCE],constructor(),contentDocument[GCE],"
                 + "contentWindow[GCE],frameBorder[GSCE],getSVGDocument(),height[GSCE],loading[GSCE],longDesc[GSCE],"
@@ -13783,17 +13785,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "cancelVideoFrameCallback(),constructor(),disablePictureInPicture[GSCE],getVideoPlaybackQuality(),"
                 + "height[GSCE],onenterpictureinpicture[GSCE],onleavepictureinpicture[GSCE],playsInline[GSCE],"
                 + "poster[GSCE],requestPictureInPicture(),requestVideoFrameCallback(),videoHeight[GCE],"
-                + "videoWidth[GCE],webkitDecodedFrameCount[GCE],webkitDisplayingFullscreen[GCE],"
-                + "webkitDroppedFrameCount[GCE],webkitEnterFullScreen(),webkitEnterFullscreen(),"
-                + "webkitExitFullScreen(),webkitExitFullscreen(),webkitSupportsFullscreen[GCE],"
+                + "videoWidth[GCE],webkitDecodedFrameCount[GCE],webkitDroppedFrameCount[GCE],"
                 + "width[GSCE]",
             EDGE = "cancelVideoFrameCallback(),constructor(),disablePictureInPicture[GSCE],getVideoPlaybackQuality(),"
                 + "height[GSCE],msGetVideoProcessingTypes(),msVideoProcessing[GSCE],onenterpictureinpicture[GSCE],"
                 + "onleavepictureinpicture[GSCE],playsInline[GSCE],poster[GSCE],requestPictureInPicture(),"
                 + "requestVideoFrameCallback(),videoHeight[GCE],videoWidth[GCE],webkitDecodedFrameCount[GCE],"
-                + "webkitDisplayingFullscreen[GCE],webkitDroppedFrameCount[GCE],webkitEnterFullScreen(),"
-                + "webkitEnterFullscreen(),webkitExitFullScreen(),webkitExitFullscreen(),"
-                + "webkitSupportsFullscreen[GCE],"
+                + "webkitDroppedFrameCount[GCE],"
                 + "width[GSCE]",
             FF = "constructor(),disablePictureInPicture[GSCE],getVideoPlaybackQuality(),height[GSCE],"
                 + "mozDecodedFrames[GCE],mozFrameDelay[GCE],mozHasAudio[GCE],mozPaintedFrames[GCE],"
@@ -14787,9 +14785,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "activeElement[GCE],adoptedStyleSheets[GSCE],adoptNode(),alinkColor[GSCE],all[GCE],anchors[GCE],"
-                + "append(),applets[GCE],bgColor[GSCE],body[GSCE],captureEvents(),caretRangeFromPoint(),"
-                + "characterSet[GCE],charset[GCE],childElementCount[GCE],children[GCE],clear(),close(),"
-                + "compatMode[GCE],constructor(),contentType[GCE],cookie[GSCE],createAttribute(),"
+                + "append(),applets[GCE],bgColor[GSCE],body[GSCE],browsingTopics(),captureEvents(),"
+                + "caretRangeFromPoint(),characterSet[GCE],charset[GCE],childElementCount[GCE],children[GCE],"
+                + "clear(),close(),compatMode[GCE],constructor(),contentType[GCE],cookie[GSCE],createAttribute(),"
                 + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createExpression(),createNodeIterator(),"
                 + "createNSResolver(),createProcessingInstruction(),createRange(),createTextNode(),"
@@ -14840,9 +14838,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "xmlStandalone[GSCE],"
                 + "xmlVersion[GSCE]",
             EDGE = "activeElement[GCE],adoptedStyleSheets[GSCE],adoptNode(),alinkColor[GSCE],all[GCE],anchors[GCE],"
-                + "append(),applets[GCE],bgColor[GSCE],body[GSCE],captureEvents(),caretRangeFromPoint(),"
-                + "characterSet[GCE],charset[GCE],childElementCount[GCE],children[GCE],clear(),close(),"
-                + "compatMode[GCE],constructor(),contentType[GCE],cookie[GSCE],createAttribute(),"
+                + "append(),applets[GCE],bgColor[GSCE],body[GSCE],browsingTopics(),captureEvents(),"
+                + "caretRangeFromPoint(),characterSet[GCE],charset[GCE],childElementCount[GCE],children[GCE],"
+                + "clear(),close(),compatMode[GCE],constructor(),contentType[GCE],cookie[GSCE],createAttribute(),"
                 + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createExpression(),createNodeIterator(),"
                 + "createNSResolver(),createProcessingInstruction(),createRange(),createTextNode(),"
