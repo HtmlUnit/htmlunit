@@ -2598,16 +2598,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "{\"enumerable\":false,\"configurable\":true}",
-                       "[object Event]", "{\"enumerable\":false,\"configurable\":true}"},
-            FF = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
-                  "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
-            FF_ESR = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
-                      "[object Event]", "{\"enumerable\":true,\"configurable\":true}"})
-    @HtmlUnitNYI(CHROME = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
-                           "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
-            EDGE = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
-                    "[object Event]", "{\"enumerable\":true,\"configurable\":true}"})
+    @Alerts({"undefined", "{\"enumerable\":true,\"configurable\":true}",
+             "[object Event]", "{\"enumerable\":true,\"configurable\":true}"})
     public void eventProperty() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
