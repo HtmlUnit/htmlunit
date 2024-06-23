@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	
+	<xsl:output method="xml"/>
+	<xsl:param name="user" select="'anonymous'"/>
+	
+	<xsl:template match="/">
+		<p id="user">User: <xsl:value-of select="$user"/></p>
+		<xsl:apply-templates/>
+		<hr />
+	</xsl:template>
+	
+	<xsl:template match="greeting">
+		<p><xsl:apply-templates/></p>
+	</xsl:template>
+	
+</xsl:stylesheet>

@@ -1,0 +1,58 @@
+/* JSDoc style sheet */
+
+/* Define colors, fonts and other style attributes here to override the defaults */
+
+/* Page background color */
+body {
+	background-color:#eeeeee;
+    color:#3B3C3D;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+pre{
+	padding:10px;
+	background-color:#fff;
+	border:1px solid #a7a7a7;
+}
+
+a:link, a:visited{
+    color:#004b9e;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+/* Table colors */
+.TableHeadingColor     { background-color: #b8cade } /* Dark mauve */
+.TableSubHeadingColor  { background-color: transparent } /* Light mauve */
+.TableRowColor         { } /* White */
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont   { font-size: 10pt;  }
+.FrameHeadingFont { font-size: 10pt;  }
+.FrameItemFont    { font-size: 10pt;  }
+
+/* Example of smaller, sans-serif font in frames */
+/* .FrameItemFont  { font-size: 10pt; font-family: Helvetica, Arial, sans-serif } */
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    { background-color:#b8cade;}/* Light mauve */
+.NavBarCell1Rev { background-color:#dce6ef;}/* Dark Blue */
+.NavBarFont1    {}
+.NavBarFont1Rev {}
+
+.NavBarCell2    {}
+.NavBarCell3    {}
+
+.jsdoc_ctime    {font-size: 9pt;
+                    text-align: right
+}
+
+/* Sourcecode view */
+.sourceview { background: #FFFFFF }
+.attrib { color: #DD7777 }
+.comment { color: #55AA55 }
+.reserved { color: #FF5555 }
+.literal { color: #5555FF }
+
