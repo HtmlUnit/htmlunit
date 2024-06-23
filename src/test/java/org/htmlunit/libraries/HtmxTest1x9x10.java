@@ -18,7 +18,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.javascript.preprocessor.HtmxOneNineTenScriptPreProcessor;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -34,12 +34,8 @@ public class HtmxTest1x9x10 extends HtmxTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "passes:679failures:1",
-            FF = "passes:679failures:0",
-            FF_ESR = "passes:679failures:0")
-    @HtmlUnitNYI(
-            CHROME = "passes:679failures:0",
-            EDGE = "passes:679failures:0")
+    @Alerts("passes:679failures:0")
+    @BuggyWebDriver(CHROME = "passes:679failures:1", EDGE = "passes:679failures:1")
     public void htmx() throws Exception {
         htmx("htmx-1.9.10");
     }

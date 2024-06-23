@@ -16,6 +16,7 @@ package org.htmlunit.libraries;
 
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,6 +33,7 @@ public class HtmxTest1x9x2 extends HtmxTest {
      */
     @Test
     @Alerts("passes:529failures:0")
+    @BuggyWebDriver(CHROME = "passes:529failures:1", EDGE = "passes:529failures:1")
     public void htmx() throws Exception {
         htmx("htmx-1.9.2");
     }
