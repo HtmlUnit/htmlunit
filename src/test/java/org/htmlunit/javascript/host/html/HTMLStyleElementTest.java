@@ -466,4 +466,88 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
         }
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"#id { color: red }", ":before { content: \"</> HtmlUnit\" }"})
+    public void innerHtml1() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <style>#id { color: red }</style>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var style = document.getElementsByTagName('style')[0];\n"
+            + "        log(style.innerHTML);\n"
+            + "        style.innerHTML = ':before { content: \"</> HtmlUnit\" }';\n"
+            + "        log(style.innerHTML);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"#id { color: red }", ":before { content: \"<span>Html</span>Unit\" }"})
+    public void innerHtmlTag() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <style>#id { color: red }</style>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var style = document.getElementsByTagName('style')[0];\n"
+            + "        log(style.innerHTML);\n"
+            + "        style.innerHTML = ':before { content: \"<span>Html</span>Unit\" }';\n"
+            + "        log(style.innerHTML);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", ":before { content: \"&lt;/> HtmlUnit\" }"})
+    public void innerHtmlEscaping() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <style></style>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var style = document.getElementsByTagName('style')[0];\n"
+            + "        log(style.innerHTML);\n"
+            + "        style.innerHTML = ':before { content: \"&lt;/> HtmlUnit\" }';\n"
+            + "        log(style.innerHTML);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
 }

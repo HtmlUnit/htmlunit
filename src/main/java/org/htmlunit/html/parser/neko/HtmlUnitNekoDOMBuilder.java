@@ -575,7 +575,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     @Override
     public void endDocument() throws SAXException {
         handleCharacters();
-        page_.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
+        if (locator_ != null) {
+            page_.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
+        }
     }
 
     /** {@inheritDoc} */

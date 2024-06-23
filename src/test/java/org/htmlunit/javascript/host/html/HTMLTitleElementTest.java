@@ -111,4 +111,62 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
 
         loadPageVerifyTextArea2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"Page Title", "<div>htmx rocks</div>", "<div>htmx rocks</div>"})
+    public void innerHtmlTag() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Page Title</title>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var title = document.getElementsByTagName('title')[0];\n"
+            + "        log(title.text);\n"
+            + "        title.innerHTML = '<div>htmx rocks</div>';\n"
+            + "        log(title.text);\n"
+            + "        log(window.document.title);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "</> htmx rocks!", "</> htmx rocks!"})
+    public void innerHtmlEscaping() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title></title>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var title = document.getElementsByTagName('title')[0];\n"
+            + "        log(title.text);\n"
+            + "        title.innerHTML = '&lt;/> htmx rocks!';\n"
+            + "        log(title.text);\n"
+            + "        log(window.document.title);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
 }

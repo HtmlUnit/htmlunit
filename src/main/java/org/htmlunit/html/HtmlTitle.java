@@ -81,15 +81,6 @@ public class HtmlTitle extends HtmlElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setInnerHtml(final String source) {
-        // title is different
-        setText(source);
-    }
-
-    /**
      * Returns the {@code text} attribute.
      * @return the {@code text} attribute
      */

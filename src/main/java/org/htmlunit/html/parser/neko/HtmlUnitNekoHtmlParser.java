@@ -134,10 +134,13 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             node = node.getParentNode();
         }
         if (ancestors.isEmpty() || !"html".equals(ancestors.get(0).getLocalpart())) {
-            ancestors.add(0, new QName(null, "html", null, null));
+            ancestors.add(new QName(null, "html", null, null));
+            ancestors.add(new QName(null, "body", null, null));
         }
-        if (ancestors.size() == 1 || !"body".equals(ancestors.get(1).getLocalpart())) {
-            ancestors.add(1, new QName(null, "body", null, null));
+        else if (ancestors.size() == 1
+                || (!"body".equals(ancestors.get(1).getLocalpart())
+                        && !"head".equals(ancestors.get(1).getLocalpart()))) {
+            ancestors.add(new QName(null, "body", null, null));
         }
 
         domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);

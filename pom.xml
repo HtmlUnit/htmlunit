@@ -27,7 +27,7 @@
 
         <htmlunitcssparser.version>4.2.0</htmlunitcssparser.version>
         <htmlunitcsp.version>4.2.0</htmlunitcsp.version>
-        <htmlunitneko.version>4.2.1</htmlunitneko.version>
+        <htmlunitneko.version>4.3.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>4.2.0</htmlunitxpath.version>
         <htmlunitcorejs.version>4.3.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>4.2.0</htmlunitwebsocketclient.version>
@@ -1439,7 +1439,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v125</artifactId>
+            <artifactId>selenium-devtools-v126</artifactId>
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>

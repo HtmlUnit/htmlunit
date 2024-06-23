@@ -15,7 +15,7 @@
                 Fix some NPE in HtmlSerializer's.
             </action>
             <action type="fix" dev="rbri">
-                Assigning innerHTML for a title node behaves like assigning text, no HTML parsing takes place.
+                Improved innerHTML content parsing for special tags like title, textarea, style, and script.
             </action>
             <action type="add" dev="rbri">
                 DocumentFragment append()/prepend()/replaceChildren() added.

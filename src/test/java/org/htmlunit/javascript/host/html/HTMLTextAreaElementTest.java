@@ -790,4 +790,91 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
 
         assertTitle(driver, getExpectedAlerts()[0]);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"HtmlUnit", "</> htmx rocks!"})
+    public void innerHtml() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Page Title</title>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var textarea = document.getElementsByTagName('textarea')[0];\n"
+            + "        log(textarea.value);\n"
+            + "        textarea.innerHTML = '</> htmx rocks!';\n"
+            + "        log(textarea.value);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>"
+            + "    <textarea>HtmlUnit</textarea>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"HtmlUnit", "<div>htmx rocks</div>"})
+    public void innerHtmlTag() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Page Title</title>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var textarea = document.getElementsByTagName('textarea')[0];\n"
+            + "        log(textarea.value);\n"
+            + "        textarea.innerHTML = '<div>htmx rocks</div>';\n"
+            + "        log(textarea.value);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea>HtmlUnit</textarea>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "</> htmx rocks!"})
+    public void innerHtmlEscaping() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Page Title</title>\n"
+            + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "      function test() {\n"
+            + "        var textarea = document.getElementsByTagName('textarea')[0];\n"
+            + "        log(textarea.value);\n"
+            + "        textarea.innerHTML = '&lt;/> htmx rocks!';\n"
+            + "        log(textarea.value);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea></textarea>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
 }
