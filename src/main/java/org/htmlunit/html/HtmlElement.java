@@ -143,6 +143,8 @@ public abstract class HtmlElement extends DomElement {
     protected static final String ATTRIBUTE_REQUIRED = "required";
     /** Constant 'checked'. */
     protected static final String ATTRIBUTE_CHECKED = "checked";
+    /** Constant 'hidden'. */
+    protected static final String ATTRIBUTE_HIDDEN = "hidden";
 
     /** The listeners which are to be notified of attribute changes. */
     private final List<HtmlAttributeChangeListener> attributeListeners_ = new ArrayList<>();
@@ -1211,7 +1213,34 @@ public abstract class HtmlElement extends DomElement {
      * @return true if the hidden attribute is set.
      */
     public boolean isHidden() {
-        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect("hidden");
+        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_HIDDEN);
+    }
+
+    /**
+     * Sets the {@code hidden} property.
+     * @param hidden the {@code hidden} property
+     */
+    public void setHidden(final String hidden) {
+        if ("false".equalsIgnoreCase(hidden)) {
+            removeAttribute(ATTRIBUTE_HIDDEN);
+        }
+
+        if (StringUtils.isNotEmpty(hidden)) {
+            setAttribute(ATTRIBUTE_HIDDEN, "");
+        }
+    }
+
+    /**
+     * Sets the {@code hidden} property.
+     * @param hidden the {@code hidden} property
+     */
+    public void setHidden(final boolean hidden) {
+        if (hidden) {
+            setAttribute("hidden", "");
+            return;
+        }
+
+        removeAttribute("hidden");
     }
 
     /**

@@ -5443,6 +5443,175 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
+                       "7 until-found/until-found", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"},
+            FF = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
+                  "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"},
+            FF_ESR = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
+                      "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"})
+    @HtmlUnitNYI(CHROME = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
+                           "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"},
+            EDGE = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
+                    "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"})
+    public void hiddenGet() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<p id='p1'>p1</p>\n"
+            + "<p id='p2' hidden>p2</p>\n"
+            + "<p id='p3' hidden=''>p3</p>\n"
+            + "<p id='p4' hidden='hidden'>p4</p>\n"
+            + "<p id='p5' hidden='true'>p5</p>\n"
+            + "<p id='p6' hidden='false'>p6</p>\n"
+            + "<p id='p7' hidden='until-found'>p7</p>\n"
+            + "<p id='p8' hidden='show'>p8</p>\n"
+
+            + "<p id='p9' hidden='Until-Found'>p9</p>\n"
+            + "<p id='p10' hidden='HIDDEN'>p10</p>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var p1 = document.getElementById('p1');\n"
+            + "var p2 = document.getElementById('p2');\n"
+            + "var p3 = document.getElementById('p3');\n"
+            + "var p4 = document.getElementById('p4');\n"
+            + "var p5 = document.getElementById('p5');\n"
+            + "var p6 = document.getElementById('p6');\n"
+            + "var p7 = document.getElementById('p7');\n"
+            + "var p8 = document.getElementById('p8');\n"
+            + "var p9 = document.getElementById('p9');\n"
+            + "var p10 = document.getElementById('p10');\n"
+
+            + "log('1 ' + p1.getAttribute('hidden') + '/' + p1.hidden);\n"
+            + "log('2 ' + p2.getAttribute('hidden') + '/' + p2.hidden);\n"
+            + "log('3 ' + p3.getAttribute('hidden') + '/' + p3.hidden);\n"
+            + "log('4 ' + p4.getAttribute('hidden') + '/' + p4.hidden);\n"
+            + "log('5 ' + p5.getAttribute('hidden') + '/' + p5.hidden);\n"
+            + "log('6 ' + p6.getAttribute('hidden') + '/' + p6.hidden);\n"
+            + "log('7 ' + p7.getAttribute('hidden') + '/' + p7.hidden);\n"
+            + "log('8 ' + p8.getAttribute('hidden') + '/' + p8.hidden);\n"
+            + "log('9 ' + p9.getAttribute('hidden') + '/' + p9.hidden);\n"
+            + "log('10 ' + p10.getAttribute('hidden') + '/' + p10.hidden);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
+                       "6 null/false", "7 /true", "8 /true",
+                       "9 null/false", "10 /true", "11 /true",
+                       "12 null/false", "13 until-found/until-found",
+                       "14 null/false", "15 until-found/until-found",
+                       "16 null/false", "17 /true"},
+            FF = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
+                  "6 null/false", "7 /true", "8 /true",
+                  "9 null/false", "10 /true", "11 /true",
+                  "12 null/false", "13 /true",
+                  "14 null/false", "15 /true",
+                  "16 null/false", "17 /true"},
+            FF_ESR = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
+                      "6 null/false", "7 /true", "8 /true",
+                      "9 null/false", "10 /true", "11 /true",
+                      "12 null/false", "13 /true",
+                      "14 null/false", "15 /true",
+                      "16 null/false", "17 /true"})
+    @HtmlUnitNYI(CHROME = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
+                           "6 null/false", "7 /true", "8 /true",
+                           "9 null/false", "10 /true", "11 /true",
+                           "12 null/false", "13 /true",
+                           "14 null/false", "15 /true",
+                           "16 null/false", "17 /true"},
+          EDGE = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
+                  "6 null/false", "7 /true", "8 /true",
+                  "9 null/false", "10 /true", "11 /true",
+                  "12 null/false", "13 /true",
+                  "14 null/false", "15 /true",
+                  "16 null/false", "17 /true"})
+    public void hiddenSet() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<p id='p1'>p1</p>\n"
+            + "<p id='p2'>p2</p>\n"
+            + "<p id='p3'>p3</p>\n"
+            + "<p id='p4'>p4</p>\n"
+            + "<p id='p5'>p5</p>\n"
+            + "<p id='p6'>p6</p>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function set(p, value) {\n"
+            + "  try {\n"
+            + "    p.hidden = value;\n"
+            + "  } catch(e) {\n"
+            + "    log('!');\n"
+            + "  }\n"
+            + "}\n"
+            + "var p1 = document.getElementById('p1');\n"
+            + "var p2 = document.getElementById('p2');\n"
+            + "var p3 = document.getElementById('p3');\n"
+            + "var p4 = document.getElementById('p4');\n"
+            + "var p5 = document.getElementById('p5');\n"
+            + "var p6 = document.getElementById('p6');\n"
+
+            + "log('1 ' + p1.getAttribute('hidden') + '/' + p1.hidden);\n"
+
+            + "set(p1, '');\n"
+            + "log('2 ' + p1.getAttribute('hidden') + '/' + p1.hidden);\n"
+
+            + "set(p1, 'hidden');\n"
+            + "log('3 ' + p1.getAttribute('hidden') + '/' + p1.hidden);\n"
+
+            + "set(p1, 'false');\n"
+            + "log('4 ' + p1.getAttribute('hidden') + '/' + p1.hidden);\n"
+
+            + "set(p1, false);\n"
+            + "log('5 ' + p1.getAttribute('hidden') + '/' + p1.hidden);\n"
+
+            // p2
+            + "log('6 ' + p2.getAttribute('hidden') + '/' + p2.hidden);\n"
+            + "set(p2, 'true');\n"
+            + "log('7 ' + p2.getAttribute('hidden') + '/' + p2.hidden);\n"
+
+            + "set(p2, 'show');\n"
+            + "log('8 ' + p2.getAttribute('hidden') + '/' + p2.hidden);\n"
+
+            // p3
+            + "log('9 ' + p3.getAttribute('hidden') + '/' + p3.hidden);\n"
+            + "set(p3, true);\n"
+            + "log('10 ' + p3.getAttribute('hidden') + '/' + p3.hidden);\n"
+
+            + "set(p3, 'show');\n"
+            + "log('11 ' + p3.getAttribute('hidden') + '/' + p3.hidden);\n"
+
+            // p4
+            + "log('12 ' + p4.getAttribute('hidden') + '/' + p4.hidden);\n"
+            + "set(p4, 'until-found');\n"
+            + "log('13 ' + p4.getAttribute('hidden') + '/' + p4.hidden);\n"
+
+            // p5
+            + "log('14 ' + p5.getAttribute('hidden') + '/' + p5.hidden);\n"
+            + "set(p5, 'Until-Found');\n"
+            + "log('15 ' + p5.getAttribute('hidden') + '/' + p5.hidden);\n"
+
+            // p6
+            + "log('16 ' + p6.getAttribute('hidden') + '/' + p6.hidden);\n"
+            + "set(p6, 'HIDDEN');\n"
+            + "log('17 ' + p6.getAttribute('hidden') + '/' + p6.hidden);\n"
+
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

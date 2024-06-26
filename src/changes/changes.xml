@@ -9,6 +9,13 @@
     <body>
         <release version="4.3.0" date="xxxx, 2024" description="Chrome/Edge 126, Firefox 127, Bugfixes">
             <action type="add" dev="rbri">
+                Improved implementation of the hidden attribute setter.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: another hack on the const handling (in most cases const no treated like let - this is not correct
+                but avoids the 'constant redefinition' parser error).
+            </action>
+            <action type="add" dev="rbri">
                 Sarissa 0.9.9.7 tests added.
             </action>
             <action type="fix" dev="rbri">

@@ -1607,13 +1607,12 @@ public class HTMLElement extends Element {
      * @param hidden the {@code hidden} value
      */
     @JsxSetter
-    public void setHidden(final boolean hidden) {
-        if (hidden) {
-            getDomNodeOrDie().setAttribute("hidden", "hidden");
+    public void setHidden(final Object hidden) {
+        if (hidden instanceof Boolean) {
+            getDomNodeOrDie().setHidden((Boolean) hidden);
+            return;
         }
-        else {
-            getDomNodeOrDie().removeAttribute("hidden");
-        }
+        getDomNodeOrDie().setHidden(JavaScriptEngine.toString(hidden));
     }
 
     /**
