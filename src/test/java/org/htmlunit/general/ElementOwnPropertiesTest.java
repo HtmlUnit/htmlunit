@@ -15001,13 +15001,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor()",
             FF = "constructor()",
             FF_ESR = "constructor()")
-    @HtmlUnitNYI(CHROME = "constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
+    @HtmlUnitNYI(CHROME = "constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
                 + "open(),write(),writeln()",
-            EDGE = "constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
+            EDGE = "constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
                 + "open(),write(),writeln()",
-            FF_ESR = "close(),constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
+            FF_ESR = "close(),constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
                 + "open(),write(),writeln()",
-            FF = "close(),constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
+            FF = "close(),constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
                 + "open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("", "document");

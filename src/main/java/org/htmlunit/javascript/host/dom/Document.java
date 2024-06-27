@@ -19,6 +19,7 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
+import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COOKIES_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -43,12 +44,14 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Callable;
@@ -83,6 +86,7 @@ import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.UnknownElementFactory;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.http.HttpUtils;
+import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -122,6 +126,7 @@ import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLFrameSetElement;
+import org.htmlunit.util.Cookie;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.CDATASection;
@@ -1048,9 +1053,44 @@ public class Document extends Node {
      * Returns the {@code cookie} property.
      * @return the {@code cookie} property
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter
     public String getCookie() {
-        return "";
+        final SgmlPage sgmlPage = getPage();
+
+        final StringBuilder builder = new StringBuilder();
+        final Set<Cookie> cookies = sgmlPage.getWebClient().getCookies(sgmlPage.getUrl());
+        for (final Cookie cookie : cookies) {
+            if (cookie.isHttpOnly()) {
+                continue;
+            }
+            if (builder.length() != 0) {
+                builder.append("; ");
+            }
+            if (!HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME.equals(cookie.getName())) {
+                builder.append(cookie.getName());
+                builder.append('=');
+            }
+            builder.append(cookie.getValue());
+        }
+
+        return builder.toString();
+    }
+
+    /**
+     * Adds a cookie, as long as cookies are enabled.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
+     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
+     */
+    @JsxSetter
+    public void setCookie(final String newCookie) {
+        final SgmlPage sgmlPage = getPage();
+        final WebClient client = sgmlPage.getWebClient();
+
+        if (StringUtils.isBlank(newCookie)
+                && client.getBrowserVersion().hasFeature(HTMLDOCUMENT_COOKIES_IGNORE_BLANK)) {
+            return;
+        }
+        client.addCookie(newCookie, sgmlPage.getUrl(), this);
     }
 
     /**

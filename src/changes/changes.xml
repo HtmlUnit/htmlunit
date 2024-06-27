@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="4.4.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#805">
+                Move the 'cookie' property from HTMLDocument to Document.
+            </action>
+        </release>
+
+
         <release version="4.3.0" date="June 27, 2024" description="Chrome/Edge 126, Firefox 127, Bugfixes">
             <action type="add" dev="rbri">
                 Improved implementation of the hidden attribute setter.

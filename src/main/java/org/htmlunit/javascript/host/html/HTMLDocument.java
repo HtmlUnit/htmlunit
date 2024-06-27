@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COOKIES_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -25,7 +24,6 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
@@ -48,7 +46,6 @@ import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlScript;
-import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
@@ -56,7 +53,6 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.dom.Attr;
@@ -64,7 +60,6 @@ import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.Selection;
 import org.htmlunit.javascript.host.event.Event;
-import org.htmlunit.util.Cookie;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -412,52 +407,6 @@ public class HTMLDocument extends Document {
         }
 
         return getLastHtmlElement((HtmlElement) lastChild);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter
-    public String getCookie() {
-        final HtmlPage page = getPage();
-
-        final URL url = page.getUrl();
-
-        final StringBuilder builder = new StringBuilder();
-        final Set<Cookie> cookies = page.getWebClient().getCookies(url);
-        for (final Cookie cookie : cookies) {
-            if (cookie.isHttpOnly()) {
-                continue;
-            }
-            if (builder.length() != 0) {
-                builder.append("; ");
-            }
-            if (!HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME.equals(cookie.getName())) {
-                builder.append(cookie.getName());
-                builder.append('=');
-            }
-            builder.append(cookie.getValue());
-        }
-
-        return builder.toString();
-    }
-
-    /**
-     * Adds a cookie, as long as cookies are enabled.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
-     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
-     */
-    @JsxSetter
-    public void setCookie(final String newCookie) {
-        final HtmlPage page = getPage();
-        final WebClient client = page.getWebClient();
-
-        if (StringUtils.isBlank(newCookie)
-                && client.getBrowserVersion().hasFeature(HTMLDOCUMENT_COOKIES_IGNORE_BLANK)) {
-            return;
-        }
-        client.addCookie(newCookie, getPage().getUrl(), this);
     }
 
     /**
