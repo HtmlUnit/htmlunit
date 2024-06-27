@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.3.0" date="xxxx, 2024" description="Chrome/Edge 126, Firefox 127, Bugfixes">
+        <release version="4.3.0" date="June 27, 2024" description="Chrome/Edge 126, Firefox 127, Bugfixes">
             <action type="add" dev="rbri">
                 Improved implementation of the hidden attribute setter.
             </action>

@@ -67,9 +67,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>June 05, 2024</date></dt>
+                    <dt>Latest release <date>June 27, 2024</date></dt>
                     <dd>
-                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/4.2.0">version 4.2.0</a></p>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/4.3.0">version 4.3.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -194,7 +194,7 @@
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.2.0</version>
+    <version>4.3.0</version>
 </dependency>]]></source>
             </p>
 
@@ -237,6 +237,7 @@
                     <li>MochiKit 1.4.2: Full support (see unit tests <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/MochiKitTest1x4x2.java">here</a>)</li>
                     <li>GWT 2.5.0: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/GWT250Test.java">here</a>)</li>
                     <li>Sarissa 0.9.9.3: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/Sarissa0993Test.java">here</a>)</li>
+                    <li>Sarissa 0.9.9.7: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/Sarissa0997Test.java">here</a>)</li>
                     <li>MooTools 1.2.1: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/MooTools121Test.java">here</a>)</li>
                     <li>Prototype 1.7.1 (1.6.0, 1.6.1): Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/Prototype171Test.java">here</a>)</li>
                     <li>Ext JS 2.2: Very good support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/ExtJS22Test.java">here</a>)</li>
