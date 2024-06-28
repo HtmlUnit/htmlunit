@@ -78,6 +78,7 @@ import org.htmlunit.html.HtmlDefinitionDescription;
 import org.htmlunit.html.HtmlDefinitionTerm;
 import org.htmlunit.html.HtmlDivision;
 import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlElement.DisplayStyle;
 import org.htmlunit.html.HtmlEmphasis;
 import org.htmlunit.html.HtmlFigure;
 import org.htmlunit.html.HtmlFigureCaption;
@@ -669,6 +670,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final DomElement domElem = getDomElement();
         if (!domElem.isAttachedToPage()) {
             return "";
+        }
+
+        if (domElem instanceof HtmlElement) {
+            if (((HtmlElement) domElem).isHidden()) {
+                return DisplayStyle.NONE.value();
+            }
         }
 
         // don't use defaultIfEmpty for performance

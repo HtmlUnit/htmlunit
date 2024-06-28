@@ -2956,4 +2956,48 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("none")
+    public void hidden() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<p id='p1' hidden>p1</p>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var p1 = document.getElementById('p1');\n"
+            + "var style = document.defaultView.getComputedStyle(p1, null);\n"
+            + "log(style.display);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("none")
+    public void insideHidden() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<p hidden>\n"
+            + "  <p id='p1' hidden>p1</p>\n"
+            + "</p>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var p1 = document.getElementById('p1');\n"
+            + "var style = document.defaultView.getComputedStyle(p1, null);\n"
+            + "log(style.display);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
