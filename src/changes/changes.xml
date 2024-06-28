@@ -8,7 +8,6 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Bugfixes">
-          .display
             <action type="fix" dev="rbri">
                 ComputedCSSStyleDeclaration.display takes care of the hidden attribute.
             </action>
