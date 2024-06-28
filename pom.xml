@@ -1172,6 +1172,9 @@
         <contributor>
             <name>Kanoko Yamamoto</name>
         </contributor>
+        <contributor>
+            <name>Marek Andreansky</name>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as depencency -->
