@@ -23,6 +23,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -59,8 +60,8 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
-import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.NativeConsole.Level;
+import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Slot;
@@ -147,6 +148,19 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     /** To be documented. */
     @JsxConstant({CHROME, EDGE})
     public static final int PERSISTENT = 1;
+
+    private static final Method getterLength;
+    private static final Method setterLength;
+    static {
+        try {
+            getterLength = Window.class.getDeclaredMethod("getLength");
+            setterLength = Window.class.getDeclaredMethod("setLength", Scriptable.class);
+        }
+        catch (NoSuchMethodException | SecurityException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private Scriptable lengthShadow_;
 
     private Document document_;
     private DocumentProxy documentProxy_;
@@ -721,6 +735,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         webWindow_ = webWindow;
         webWindow_.setScriptableObject(this);
 
+        defineProperty("length", null, getterLength, setterLength, ScriptableObject.READONLY);
+
         windowProxy_ = new WindowProxy(webWindow_);
 
         if (pageToEnclose instanceof XmlPage) {
@@ -884,12 +900,25 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the number of frames contained by this window
      */
     @JsxGetter
-    public int getLength() {
+    public Object getLength() {
+        if (lengthShadow_ != null) {
+            return lengthShadow_;
+        }
+
         final HTMLCollection frames = getFrames();
         if (frames != null) {
             return frames.getLength();
         }
         return 0;
+    }
+
+    /**
+     * Sets the {@code length} property. Setting this shadows the
+     * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
+     * @param lengthShadow the value to overwrite the defined property value
+     */
+    public void setLength(final Scriptable lengthShadow) {
+        lengthShadow_ = lengthShadow;
     }
 
     /**

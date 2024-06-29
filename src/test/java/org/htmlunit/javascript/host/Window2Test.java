@@ -2762,4 +2762,58 @@ public class Window2Test extends WebDriverTestCase {
 
         assertEquals(2, getMockWebConnection().getRequestCount() - requestCount);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("length[GSCE]")
+    public void lengthProperty() throws Exception {
+        final String html = "<html><head>\n"
+
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  let property = 'length';\n"
+            + "  let desc = Object.getOwnPropertyDescriptor(window, property);\n"
+            + "  property += '[';\n"
+            + "  if (desc.get != undefined) property += 'G';\n"
+            + "  if (desc.set != undefined) property += 'S';\n"
+            + "  if (desc.writable) property += 'W';\n"
+            + "  if (desc.configurable) property += 'C';\n"
+            + "  if (desc.enumerable) property += 'E';\n"
+            + "  property += ']'\n"
+            + "  log(property);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "two"})
+    public void lengthPropertyEdit() throws Exception {
+        final String html = "<html><head>\n"
+
+            + "<body>\n"
+            + "<iframe></iframe>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  log(window.length);\n"
+
+            + "  window.length = 'two';\n"
+            + "  log(window.length);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
 }
