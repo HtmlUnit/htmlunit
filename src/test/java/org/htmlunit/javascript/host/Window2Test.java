@@ -2797,7 +2797,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "two"})
+    @Alerts({"1", "two", "undefined"})
     public void lengthPropertyEdit() throws Exception {
         final String html = "<html><head>\n"
 
@@ -2809,6 +2809,9 @@ public class Window2Test extends WebDriverTestCase {
             + "  log(window.length);\n"
 
             + "  window.length = 'two';\n"
+            + "  log(window.length);\n"
+
+            + "  delete window.length;\n"
             + "  log(window.length);\n"
 
             + "</script>\n"

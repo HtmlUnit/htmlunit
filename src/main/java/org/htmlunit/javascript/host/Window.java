@@ -153,13 +153,14 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private static final Method setterLength;
     static {
         try {
-            getterLength = Window.class.getDeclaredMethod("getLength");
-            setterLength = Window.class.getDeclaredMethod("setLength", Scriptable.class);
+            getterLength = Window.class.getDeclaredMethod("jsGetLength");
+            setterLength = Window.class.getDeclaredMethod("jsSetLength", Scriptable.class);
         }
         catch (NoSuchMethodException | SecurityException e) {
             throw new RuntimeException(e);
         }
     }
+
     private Scriptable lengthShadow_;
 
     private Document document_;
@@ -901,6 +902,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Object getLength() {
+        return JavaScriptEngine.Undefined;
+    }
+
+    /**
+     * Gets the {@code length} property. Setting this shadows the
+     * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
+     * @return the shadow value if set otherwise the number of frames
+     */
+    public Object jsGetLength() {
         if (lengthShadow_ != null) {
             return lengthShadow_;
         }
@@ -917,7 +927,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
      * @param lengthShadow the value to overwrite the defined property value
      */
-    public void setLength(final Scriptable lengthShadow) {
+    public void jsSetLength(final Scriptable lengthShadow) {
         lengthShadow_ = lengthShadow;
     }
 
