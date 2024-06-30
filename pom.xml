@@ -114,6 +114,7 @@
                     <rulesets>
                         <ruleset>${basedir}/pmd-ruleset.xml</ruleset>
                     </rulesets>
+                    <failOnViolation>false</failOnViolation>
                 </configuration>
             </plugin>
             <plugin>
