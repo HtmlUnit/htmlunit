@@ -180,12 +180,12 @@ public class XmlSerializer {
         final Map<String, DomAttr> attributes = readAttributes(node);
 
         for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-            builder_.append(' ');
-            builder_.append(entry.getKey());
-            builder_.append("=\"");
+            builder_.append(' ')
+                .append(entry.getKey())
+                .append("=\"");
             final String value = entry.getValue().getNodeValue();
-            builder_.append(org.htmlunit.util.StringUtils.escapeXmlAttributeValue(value));
-            builder_.append('"');
+            builder_.append(org.htmlunit.util.StringUtils.escapeXmlAttributeValue(value))
+                .append('"');
         }
     }
 

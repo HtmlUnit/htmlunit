@@ -248,8 +248,7 @@ public final class HttpUtils {
             }
             result.append(encodedName);
             if (encodedValue != null) {
-                result.append('=');
-                result.append(encodedValue);
+                result.append('=').append(encodedValue);
             }
         }
         return result.toString();
@@ -277,8 +276,7 @@ public final class HttpUtils {
                 buf.append("%");
                 final char hex1 = Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, 16));
                 final char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, 16));
-                buf.append(hex1);
-                buf.append(hex2);
+                buf.append(hex1).append(hex2);
             }
         }
         return buf.toString();

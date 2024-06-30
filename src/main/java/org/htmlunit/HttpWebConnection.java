@@ -846,8 +846,7 @@ public class HttpWebConnection implements WebConnection {
 
         final int port = url.getPort();
         if (port > 0 && port != url.getDefaultPort()) {
-            host.append(':');
-            host.append(port);
+            host.append(':').append(port);
         }
 
         // make sure the headers are added in the right order

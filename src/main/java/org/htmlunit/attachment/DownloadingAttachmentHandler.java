@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Page;
@@ -97,12 +98,12 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
     private Path determineDestionationFile(final Page page, final String attachmentFilename) {
         String fileName = attachmentFilename;
 
-        if (fileName == null || fileName.trim().isEmpty()) {
+        if (StringUtils.isAllBlank(fileName)) {
             final String file = page.getWebResponse().getWebRequest().getUrl().getFile();
             fileName = file.substring(file.lastIndexOf('/') + 1);
         }
 
-        if (fileName.trim().isEmpty()) {
+        if (StringUtils.isAllBlank(fileName)) {
             fileName = "download";
         }
 

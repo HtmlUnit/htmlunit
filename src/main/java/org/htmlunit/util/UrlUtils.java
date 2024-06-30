@@ -645,15 +645,13 @@ public final class UrlUtils {
         final StringBuilder s = new StringBuilder(len);
         s.append(protocol).append(':');
         if (authority != null && !authority.isEmpty()) {
-            s.append("//");
-            s.append(authority);
+            s.append("//").append(authority);
         }
         if (path != null) {
             s.append(path);
         }
         if (query != null) {
-            s.append('?');
-            s.append(query);
+            s.append('?').append(query);
         }
         if (ref != null) {
             if (ref.isEmpty() || ref.charAt(0) != '#') {
@@ -1189,27 +1187,22 @@ public final class UrlUtils {
             final StringBuilder sb = new StringBuilder();
 
             if (scheme_ != null) {
-                sb.append(scheme_);
-                sb.append(':');
+                sb.append(scheme_).append(':');
             }
             if (location_ != null) {
-                sb.append("//");
-                sb.append(location_);
+                sb.append("//").append(location_);
             }
             if (path_ != null) {
                 sb.append(path_);
             }
             if (parameters_ != null) {
-                sb.append(';');
-                sb.append(parameters_);
+                sb.append(';').append(parameters_);
             }
             if (query_ != null) {
-                sb.append('?');
-                sb.append(query_);
+                sb.append('?').append(query_);
             }
             if (fragment_ != null) {
-                sb.append('#');
-                sb.append(fragment_);
+                sb.append('#').append(fragment_);
             }
             return sb.toString();
         }
@@ -1340,13 +1333,11 @@ public final class UrlUtils {
         final StringBuilder buffer = new StringBuilder();
         if (host != null) {
             if (scheme != null) {
-                buffer.append(scheme);
-                buffer.append("://");
+                buffer.append(scheme).append("://");
             }
             buffer.append(host);
             if (port > 0) {
-                buffer.append(':');
-                buffer.append(port);
+                buffer.append(':').append(port);
             }
         }
         if (path == null || path.isEmpty() || path.charAt(0) != '/') {
@@ -1356,8 +1347,7 @@ public final class UrlUtils {
             buffer.append(path);
         }
         if (query != null) {
-            buffer.append('?');
-            buffer.append(query);
+            buffer.append('?').append(query);
         }
         return new URI(buffer.toString());
     }

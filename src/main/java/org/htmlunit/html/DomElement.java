@@ -602,14 +602,13 @@ public class DomElement extends DomNamespaceNode implements Element {
             if (builder.length() != 0) {
                 builder.append(' ');
             }
-            builder.append(e.getName());
-            builder.append(": ");
-            builder.append(e.getValue());
+            builder.append(e.getName())
+                .append(": ")
+                .append(e.getValue());
 
             final String prio = e.getPriority();
             if (org.apache.commons.lang3.StringUtils.isNotBlank(prio)) {
-                builder.append(" !");
-                builder.append(prio);
+                builder.append(" !").append(prio);
             }
             builder.append(';');
         }
