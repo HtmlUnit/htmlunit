@@ -2425,29 +2425,6 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = {"[object Navigator]", "##test##"},
-                FF = {"[object Navigator]", "[object Navigator]"},
-                FF_ESR = {"[object Navigator]", "[object Navigator]"})
-    public void clientInformation() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    log(window.clientInformation);\n"
-            + "    window.clientInformation = '##test##';\n"
-            + "    log(window.clientInformation);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "</body></html>";
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -2984,6 +2961,73 @@ public class Window2Test extends WebDriverTestCase {
 
             + "  delete window.parent;\n"
             + "  log(window.parent);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"clientInformation[GSCE]", "undefined"},
+            FF = {"clientInformation[GCE]", "undefined"},
+            FF_ESR = {"clientInformation[GCE]", "undefined"})
+    public void clientInformationProperty() throws Exception {
+        final String html = "<html><head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  let property = 'clientInformation';\n"
+
+            + "  let desc = Object.getOwnPropertyDescriptor(window, property);\n"
+            + "  property += '[';\n"
+            + "  if (desc.get != undefined) property += 'G';\n"
+            + "  if (desc.set != undefined) property += 'S';\n"
+            + "  if (desc.writable) property += 'W';\n"
+            + "  if (desc.configurable) property += 'C';\n"
+            + "  if (desc.enumerable) property += 'E';\n"
+            + "  property += ']'\n"
+            + "  log(property);\n"
+
+            + "  delete window.clientInformation;\n"
+
+            + "  desc = Object.getOwnPropertyDescriptor(window, property);\n"
+            + "  log(desc);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Navigator]", "two", "undefined"},
+            FF = {"[object Navigator]", "[object Navigator]", "undefined"},
+            FF_ESR = {"[object Navigator]", "[object Navigator]", "undefined"})
+    @HtmlUnitNYI(CHROME = {"[object Navigator]", "two", "two"},
+            EDGE = {"[object Navigator]", "two", "two"},
+            FF = {"[object Navigator]", "[object Navigator]", "[object Navigator]"},
+            FF_ESR = {"[object Navigator]", "[object Navigator]", "[object Navigator]"})
+    public void clientInformationPropertyEdit() throws Exception {
+        final String html = "<html><head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  log(window.clientInformation);\n"
+
+            + "  window.clientInformation = 'two';\n"
+            + "  log(window.clientInformation);\n"
+
+            + "  delete window.clientInformation;\n"
+            + "  log(window.clientInformation);\n"
 
             + "</script>\n"
             + "</body></html>\n";
