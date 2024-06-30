@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class CustomElementRegistry extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public CustomElementRegistry() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

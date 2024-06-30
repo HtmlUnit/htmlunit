@@ -49,12 +49,6 @@ import org.htmlunit.util.MimeType;
 public class DOMParser extends HtmlUnitScriptable {
 
     /**
-     * The constructor.
-     */
-    public DOMParser() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

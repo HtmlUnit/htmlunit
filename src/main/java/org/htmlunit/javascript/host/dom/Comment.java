@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class Comment extends CharacterData {
 
     /**
-     * Creates an instance.
-     */
-    public Comment() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

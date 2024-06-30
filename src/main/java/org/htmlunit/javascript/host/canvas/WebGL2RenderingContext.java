@@ -2266,12 +2266,6 @@ public class WebGL2RenderingContext extends HtmlUnitScriptable {
     public static final long ZERO = 0L;
 
     /**
-     * Default constructor.
-     */
-    public WebGL2RenderingContext() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

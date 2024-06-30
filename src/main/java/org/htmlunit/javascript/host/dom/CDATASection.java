@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class CDATASection extends Text {
 
     /**
-     * Creates an instance.
-     */
-    public CDATASection() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

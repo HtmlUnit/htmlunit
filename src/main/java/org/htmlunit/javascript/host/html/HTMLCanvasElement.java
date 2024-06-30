@@ -38,12 +38,6 @@ public class HTMLCanvasElement extends HTMLElement {
     private CanvasRenderingContext2D context2d_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLCanvasElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

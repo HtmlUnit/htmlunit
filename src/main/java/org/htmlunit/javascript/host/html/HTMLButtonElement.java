@@ -39,12 +39,6 @@ public class HTMLButtonElement extends HTMLElement {
     private NodeList labels_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLButtonElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

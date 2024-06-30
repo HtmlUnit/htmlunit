@@ -275,12 +275,6 @@ public class Document extends Node {
     }
 
     /**
-     * Creates an instance.
-     */
-    public Document() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

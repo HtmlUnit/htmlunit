@@ -216,12 +216,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     /**
      * Creates an instance.
-     */
-    public Window() {
-    }
-
-    /**
-     * Creates an instance.
      *
      * @param cx the current context
      * @param scope the scope

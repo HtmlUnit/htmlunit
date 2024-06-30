@@ -40,12 +40,6 @@ public class GeolocationPositionError extends HtmlUnitScriptable {
     public static final int TIMEOUT = 3;
 
     /**
-     * Default constructor.
-     */
-    public GeolocationPositionError() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

@@ -35,12 +35,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 public class StyleMedia extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public StyleMedia() {
-    }
-
-    /**
      * Returns the {@code type} property.
      * @return the {@code type} property
      */

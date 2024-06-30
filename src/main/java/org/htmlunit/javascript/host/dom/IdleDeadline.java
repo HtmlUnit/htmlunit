@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class IdleDeadline extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public IdleDeadline() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

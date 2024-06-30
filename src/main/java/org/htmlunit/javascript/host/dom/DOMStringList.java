@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class DOMStringList extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public DOMStringList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

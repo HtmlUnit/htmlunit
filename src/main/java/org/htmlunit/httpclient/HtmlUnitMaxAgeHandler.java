@@ -28,10 +28,6 @@ import org.apache.http.util.Args;
  */
 final class HtmlUnitMaxAgeHandler extends BasicMaxAgeHandler {
 
-    HtmlUnitMaxAgeHandler() {
-        super();
-    }
-
     @Override
     public void parse(final SetCookie cookie, final String value)
             throws MalformedCookieException {

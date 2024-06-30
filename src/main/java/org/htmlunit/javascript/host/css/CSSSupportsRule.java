@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class CSSSupportsRule extends CSSConditionRule {
 
     /**
-     * Creates a new instance.
-     */
-    public CSSSupportsRule() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

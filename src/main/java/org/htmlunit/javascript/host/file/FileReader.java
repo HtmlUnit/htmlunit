@@ -69,12 +69,6 @@ public class FileReader extends EventTarget {
     private Object result_;
 
     /**
-     * Creates an instance.
-     */
-    public FileReader() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

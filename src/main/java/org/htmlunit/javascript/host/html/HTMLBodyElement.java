@@ -41,12 +41,6 @@ import org.htmlunit.util.StringUtils;
 public class HTMLBodyElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLBodyElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

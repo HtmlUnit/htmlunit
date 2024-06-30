@@ -34,12 +34,6 @@ public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolve
     private Node element_;
 
     /**
-     * Default constructor.
-     */
-    public XPathNSResolver() {
-    }
-
-    /**
      * Sets the element to start lookup from.
      * @param element {@link org.htmlunit.javascript.host.html.HTMLElement}
      * or {@link org.htmlunit.javascript.host.Element} to start lookup from

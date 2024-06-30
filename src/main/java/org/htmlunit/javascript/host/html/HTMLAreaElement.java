@@ -36,12 +36,6 @@ import org.htmlunit.javascript.host.dom.DOMTokenList;
 public class HTMLAreaElement extends HTMLElement {
 
     /**
-     * The constructor.
-     */
-    public HTMLAreaElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

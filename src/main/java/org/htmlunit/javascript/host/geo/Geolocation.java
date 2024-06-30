@@ -45,12 +45,6 @@ public class Geolocation extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    public Geolocation() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @JsxConstructor
     public void jsConstructor() {
         throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");

@@ -32,12 +32,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLBaseElement extends HTMLElement {
 
     /**
-     * The constructor.
-     */
-    public HTMLBaseElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

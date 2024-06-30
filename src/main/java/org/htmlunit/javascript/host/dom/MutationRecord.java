@@ -39,12 +39,6 @@ public class MutationRecord extends HtmlUnitScriptable {
     private Node previousSibling_;
     private Node nextSibling_;
     /**
-     * Creates an instance.
-     */
-    public MutationRecord() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

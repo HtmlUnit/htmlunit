@@ -204,13 +204,6 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     }
 
     /**
-     * Creates an instance.
-     */
-    public DefaultPageCreator() {
-        // Empty.
-    }
-
-    /**
      * Create a Page object for the specified web response.
      *
      * @param webResponse the response from the server

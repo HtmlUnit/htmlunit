@@ -27,12 +27,6 @@ import org.htmlunit.javascript.host.media.AudioNode;
 public class AudioScheduledSourceNode extends AudioNode {
 
     /**
-     * Creates a new instance.
-     */
-    public AudioScheduledSourceNode() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

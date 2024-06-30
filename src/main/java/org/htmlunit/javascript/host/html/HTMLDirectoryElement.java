@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLDirectoryElement extends HTMLListElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLDirectoryElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

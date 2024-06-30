@@ -32,12 +32,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLDialogElement extends HTMLElement {
 
     /**
-     * Creates a new instance.
-     */
-    public HTMLDialogElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

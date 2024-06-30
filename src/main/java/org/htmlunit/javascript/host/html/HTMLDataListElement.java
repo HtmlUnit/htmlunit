@@ -36,12 +36,6 @@ public class HTMLDataListElement extends HTMLElement {
     private HTMLCollection options_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLDataListElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

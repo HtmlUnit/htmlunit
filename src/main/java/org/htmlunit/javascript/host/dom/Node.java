@@ -141,13 +141,6 @@ public class Node extends EventTarget {
     private NodeList childNodes_;
 
     /**
-     * Creates an instance.
-     */
-    public Node() {
-        // Empty.
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

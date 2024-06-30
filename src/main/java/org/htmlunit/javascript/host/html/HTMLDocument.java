@@ -99,12 +99,6 @@ public class HTMLDocument extends Document {
     private boolean executionExternalPostponed_;
 
     /**
-     * The constructor.
-     */
-    public HTMLDocument() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

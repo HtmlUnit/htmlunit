@@ -44,12 +44,6 @@ import org.htmlunit.javascript.host.html.HTMLCollection;
 public class DocumentFragment extends Node {
 
     /**
-     * Creates an instance.
-     */
-    public DocumentFragment() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -34,12 +34,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLDetailsElement extends HTMLElement {
 
     /**
-     * Creates a new instance.
-     */
-    public HTMLDetailsElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class FileSystemFileEntry extends FileSystemEntry {
 
     /**
-     * Creates a new instance.
-     */
-    public FileSystemFileEntry() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

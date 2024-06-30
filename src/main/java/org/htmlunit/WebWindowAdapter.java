@@ -22,12 +22,6 @@ package org.htmlunit;
 public class WebWindowAdapter implements WebWindowListener {
 
     /**
-     * Creates an instance.
-     */
-    public WebWindowAdapter() {
-    }
-
-    /**
      * A web window has been opened.
      *
      * @param event the event

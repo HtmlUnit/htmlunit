@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class DataTransferItem extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public DataTransferItem() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

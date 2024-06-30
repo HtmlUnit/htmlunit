@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class CSSCounterStyleRule extends CSSRule {
 
     /**
-     * Creates a new instance.
-     */
-    public CSSCounterStyleRule() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

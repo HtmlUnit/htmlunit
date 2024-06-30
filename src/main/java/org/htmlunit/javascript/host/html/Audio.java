@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class Audio extends HTMLAudioElement {
 
     /**
-     * The constructor.
-     */
-    public Audio() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

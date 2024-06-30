@@ -36,12 +36,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLDivElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLDivElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

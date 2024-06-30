@@ -38,12 +38,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class Attr extends Node {
 
     /**
-     * Creates an instance.
-     */
-    public Attr() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

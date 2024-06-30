@@ -100,12 +100,6 @@ public class Element extends Node {
     private CSSStyleDeclaration style_;
 
     /**
-     * Default constructor.
-     */
-    public Element() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

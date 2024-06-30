@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLBRElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLBRElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

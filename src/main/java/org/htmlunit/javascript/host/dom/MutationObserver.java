@@ -58,12 +58,6 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
 
     /**
      * Creates an instance.
-     */
-    public MutationObserver() {
-    }
-
-    /**
-     * Creates an instance.
      * @param function the function to observe
      */
     @JsxConstructor

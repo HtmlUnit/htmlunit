@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class DOMPoint extends DOMPointReadOnly {
 
     /**
-     * Creates a new instance.
-     */
-    public DOMPoint() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

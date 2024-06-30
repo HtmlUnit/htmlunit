@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class DOMPointReadOnly extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public DOMPointReadOnly() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

@@ -30,12 +30,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class DOMRequest extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public DOMRequest() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

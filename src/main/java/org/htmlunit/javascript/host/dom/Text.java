@@ -34,12 +34,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 public class Text extends CharacterData {
 
     /**
-     * Creates an instance.
-     */
-    public Text() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

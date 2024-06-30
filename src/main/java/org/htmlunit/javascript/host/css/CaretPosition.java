@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class CaretPosition extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public CaretPosition() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

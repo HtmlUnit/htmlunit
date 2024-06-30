@@ -39,12 +39,6 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
 public class XPathEvaluator extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public XPathEvaluator() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

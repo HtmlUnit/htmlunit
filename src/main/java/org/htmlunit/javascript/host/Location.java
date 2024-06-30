@@ -147,12 +147,6 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    public Location() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @JsxConstructor
     public void jsConstructor() {
         final int attributes = ScriptableObject.PERMANENT | ScriptableObject.READONLY;

@@ -46,12 +46,6 @@ import org.htmlunit.xml.XmlPage;
 public class DOMImplementation extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public DOMImplementation() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

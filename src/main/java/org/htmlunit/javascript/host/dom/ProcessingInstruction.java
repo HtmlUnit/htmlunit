@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class ProcessingInstruction extends CharacterData {
 
     /**
-     * Creates an instance.
-     */
-    public ProcessingInstruction() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

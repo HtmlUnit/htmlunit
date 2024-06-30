@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLDataElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLDataElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

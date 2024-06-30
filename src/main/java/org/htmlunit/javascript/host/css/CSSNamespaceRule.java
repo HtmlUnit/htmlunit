@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class CSSNamespaceRule extends CSSRule {
 
     /**
-     * Default constructor.
-     */
-    public CSSNamespaceRule() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

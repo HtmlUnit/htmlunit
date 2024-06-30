@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class CSSKeyframeRule extends CSSRule {
 
     /**
-     * Default constructor.
-     */
-    public CSSKeyframeRule() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

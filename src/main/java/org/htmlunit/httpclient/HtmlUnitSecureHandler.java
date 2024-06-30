@@ -26,10 +26,6 @@ import org.apache.http.util.Args;
  */
 final class HtmlUnitSecureHandler extends BasicSecureHandler {
 
-    HtmlUnitSecureHandler() {
-        super();
-    }
-
     @Override
     public boolean match(final Cookie cookie, final CookieOrigin origin) {
         Args.notNull(cookie, "Cookie");

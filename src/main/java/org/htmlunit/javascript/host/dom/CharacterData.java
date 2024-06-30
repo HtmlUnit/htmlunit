@@ -39,12 +39,6 @@ import org.htmlunit.javascript.host.Element;
 public class CharacterData extends Node {
 
     /**
-     * Creates an instance.
-     */
-    public CharacterData() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

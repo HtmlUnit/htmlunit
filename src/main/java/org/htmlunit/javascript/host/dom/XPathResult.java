@@ -116,12 +116,6 @@ public class XPathResult extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    public XPathResult() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @JsxConstructor
     public void jsConstructor() {
         throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");

@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 public class DOMMatrix extends DOMMatrixReadOnly {
 
     /**
-     * Creates a new instance.
-     */
-    public DOMMatrix() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxStaticFunction;
 public class CSS extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public CSS() {
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

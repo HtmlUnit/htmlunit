@@ -45,12 +45,6 @@ public class Selection extends HtmlUnitScriptable {
     private String type_ = TYPE_NONE;
 
     /**
-     * Creates an instance.
-     */
-    public Selection() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

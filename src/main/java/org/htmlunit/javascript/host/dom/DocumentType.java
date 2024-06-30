@@ -39,12 +39,6 @@ public class DocumentType extends Node {
     /**
      * Creates an instance.
      */
-    public DocumentType() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

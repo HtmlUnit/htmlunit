@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLDListElement extends HTMLListElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLDListElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

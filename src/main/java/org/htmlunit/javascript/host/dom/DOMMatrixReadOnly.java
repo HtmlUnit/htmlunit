@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class DOMMatrixReadOnly extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public DOMMatrixReadOnly() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

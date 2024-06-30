@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class RadioNodeList extends NodeList {
 
     /**
-     * Creates an instance.
-     */
-    public RadioNodeList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

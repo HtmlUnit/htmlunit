@@ -64,12 +64,6 @@ public class HTMLAnchorElement extends HTMLElement {
                                         "no-referrer", HttpHeader.ORIGIN_LC, "unsafe-url");
 
     /**
-     * The constructor.
-     */
-    public HTMLAnchorElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override
