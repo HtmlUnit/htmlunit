@@ -9,7 +9,7 @@
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Bugfixes">
             <action type="add" dev="rbri" issue="#787">
-                Window.length is defined as [Replaceable]. HtmlUnit now mimics the browsers regarding this.
+                Window length/self/parent/frames are defined as [Replaceable]. HtmlUnit now mimics the browsers regarding this.
             </action>
             <action type="fix" dev="rbri">
                 ComputedCSSStyleDeclaration.display takes care of the hidden attribute.

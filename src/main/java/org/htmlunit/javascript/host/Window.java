@@ -151,10 +151,26 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     private static final Method getterLength;
     private static final Method setterLength;
+    private static final Method getterSelf;
+    private static final Method setterSelf;
+    private static final Method getterParent;
+    private static final Method setterParent;
+    private static final Method getterFrames;
+    private static final Method setterFrames;
+
     static {
         try {
             getterLength = Window.class.getDeclaredMethod("jsGetLength");
             setterLength = Window.class.getDeclaredMethod("jsSetLength", Scriptable.class);
+
+            getterSelf = Window.class.getDeclaredMethod("jsGetSelf");
+            setterSelf = Window.class.getDeclaredMethod("jsSetSelf", Scriptable.class);
+
+            getterParent = Window.class.getDeclaredMethod("jsGetParent");
+            setterParent = Window.class.getDeclaredMethod("jsSetParent", Scriptable.class);
+
+            getterFrames = Window.class.getDeclaredMethod("jsGetFrames");
+            setterFrames = Window.class.getDeclaredMethod("jsSetFrames", Scriptable.class);
         }
         catch (NoSuchMethodException | SecurityException e) {
             throw new RuntimeException(e);
@@ -162,6 +178,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     private Scriptable lengthShadow_;
+    private Scriptable selfShadow_;
+    private Scriptable parentShadow_;
+    private Scriptable framesShadow_;
 
     private Document document_;
     private DocumentProxy documentProxy_;
@@ -569,15 +588,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code self} property.
-     * @return this
-     */
-    @JsxGetter
-    public Window getSelf() {
-        return this;
-    }
-
-    /**
      * Returns the {@code localStorage} property.
      * @return the {@code localStorage} property
      */
@@ -737,6 +747,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         webWindow_.setScriptableObject(this);
 
         defineProperty("length", null, getterLength, setterLength, ScriptableObject.READONLY);
+        defineProperty("self", null, getterSelf, setterSelf, ScriptableObject.READONLY);
+        defineProperty("parent", null, getterParent, setterParent, ScriptableObject.READONLY);
+        defineProperty("frames", null, getterFrames, setterFrames, ScriptableObject.READONLY);
 
         windowProxy_ = new WindowProxy(webWindow_);
 
@@ -843,16 +856,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the value of the {@code parent} property.
-     * @return the value of the {@code parent} property
-     */
-    @JsxGetter
-    public ScriptableObject getParent() {
-        final WebWindow parent = getWebWindow().getParentWindow();
-        return parent.getScriptableObject();
-    }
-
-    /**
      * Returns the value of the {@code opener} property.
      * @return the value of the {@code opener}, or {@code null} for a top level window
      */
@@ -888,15 +891,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the value of the {@code frames} property.
-     * @return the value of the {@code frames} property
-     */
-    @JsxGetter(propertyName = "frames")
-    public Window getFrames_js() {
-        return this;
-    }
-
-    /**
      * Returns the number of frames contained by this window.
      * @return the number of frames contained by this window
      */
@@ -929,6 +923,100 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     public void jsSetLength(final Scriptable lengthShadow) {
         lengthShadow_ = lengthShadow;
+    }
+
+    /**
+     * Returns the {@code self} property.
+     * @return this
+     */
+    @JsxGetter
+    public Object getSelf() {
+        return JavaScriptEngine.Undefined;
+    }
+
+    /**
+     * Gets the {@code self} property. Setting this shadows the
+     * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
+     * @return the shadow value if set otherwise the number of frames
+     */
+    public Object jsGetSelf() {
+        if (selfShadow_ != null) {
+            return selfShadow_;
+        }
+
+        return this;
+    }
+
+    /**
+     * Sets the {@code self} property. Setting this shadows the
+     * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
+     * @param selfShadow the value to overwrite the defined property value
+     */
+    public void jsSetSelf(final Scriptable selfShadow) {
+        selfShadow_ = selfShadow;
+    }
+
+    /**
+     * Returns the value of the {@code parent} property.
+     * @return the value of the {@code parent} property
+     */
+    @JsxGetter
+    public Object getParent() {
+        return JavaScriptEngine.Undefined;
+    }
+
+    /**
+     * Gets the {@code parent} property. Setting this shadows the
+     * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
+     * @return the shadow value if set otherwise the number of frames
+     */
+    public Object jsGetParent() {
+        if (parentShadow_ != null) {
+            return parentShadow_;
+        }
+
+        final WebWindow parent = getWebWindow().getParentWindow();
+        return parent.getScriptableObject();
+    }
+
+    /**
+     * Sets the {@code parent} property. Setting this shadows the
+     * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
+     * @param parentShadow the value to overwrite the defined property value
+     */
+    public void jsSetParent(final Scriptable parentShadow) {
+        parentShadow_ = parentShadow;
+    }
+
+    /**
+     * Returns the value of the {@code frames} property.
+     * @return the value of the {@code frames} property
+     */
+    @JsxGetter(propertyName = "frames")
+    public Object getFrames_js() {
+        return JavaScriptEngine.Undefined;
+    }
+
+    /**
+     * Gets the {@code frames} property. Setting this shadows the
+     * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
+     * @return the shadow value if set otherwise the number of frames
+     */
+    public Object jsGetFrames() {
+        if (framesShadow_ != null) {
+            return framesShadow_;
+        }
+
+        return this;
+    }
+
+    /**
+     * Sets the {@code frames} property. Setting this shadows the
+     * defined value (see https://webidl.spec.whatwg.org/#Replaceable)
+     * @param framesShadow the value to overwrite the defined property value
+     */
+    public void jsSetFrames(final Scriptable framesShadow) {
+        framesShadow_ = framesShadow;
     }
 
     /**

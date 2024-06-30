@@ -2769,8 +2769,8 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts("length[GSCE]")
     public void lengthProperty() throws Exception {
-        final String html = "<html><head>\n"
-
+        final String html = "<html>\n"
+            + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2799,8 +2799,8 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "two", "undefined"})
     public void lengthPropertyEdit() throws Exception {
-        final String html = "<html><head>\n"
-
+        final String html = "<html>\n"
+            + "<head></head>\n"
             + "<body>\n"
             + "<iframe></iframe>"
             + "<script>\n"
@@ -2813,6 +2813,177 @@ public class Window2Test extends WebDriverTestCase {
 
             + "  delete window.length;\n"
             + "  log(window.length);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("self[GSCE]")
+    public void selfProperty() throws Exception {
+        final String html = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  let property = 'self';\n"
+            + "  let desc = Object.getOwnPropertyDescriptor(window, property);\n"
+            + "  property += '[';\n"
+            + "  if (desc.get != undefined) property += 'G';\n"
+            + "  if (desc.set != undefined) property += 'S';\n"
+            + "  if (desc.writable) property += 'W';\n"
+            + "  if (desc.configurable) property += 'C';\n"
+            + "  if (desc.enumerable) property += 'E';\n"
+            + "  property += ']'\n"
+            + "  log(property);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object Window]", "tester", "two", "undefined"})
+    public void selfPropertyEdit() throws Exception {
+        final String html = "<html><head>\n"
+            + "<title>tester</title>"
+            + "</head>\n"
+            + "<body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+
+            + "  log(window.self);\n"
+            + "  log(window.self.document.title);\n"
+
+            + "  window.self = 'two';\n"
+            + "  log(window.self);\n"
+
+            + "  delete window.self;\n"
+            + "  log(window.self);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("frames[GSCE]")
+    public void framesProperty() throws Exception {
+        final String html = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  let property = 'frames';\n"
+            + "  let desc = Object.getOwnPropertyDescriptor(window, property);\n"
+            + "  property += '[';\n"
+            + "  if (desc.get != undefined) property += 'G';\n"
+            + "  if (desc.set != undefined) property += 'S';\n"
+            + "  if (desc.writable) property += 'W';\n"
+            + "  if (desc.configurable) property += 'C';\n"
+            + "  if (desc.enumerable) property += 'E';\n"
+            + "  property += ']'\n"
+            + "  log(property);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object Window]", "tester", "1", "two", "undefined"})
+    public void framesPropertyEdit() throws Exception {
+        final String html = "<html><head>\n"
+            + "<title>tester</title>"
+            + "</head>\n"
+            + "<body>\n"
+            + "<iframe></iframe>"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+
+            + "  log(window.frames);\n"
+            + "  log(window.frames.document.title);\n"
+            + "  log(window.frames.length);\n"
+
+            + "  window.frames = 'two';\n"
+            + "  log(window.frames);\n"
+
+            + "  delete window.frames;\n"
+            + "  log(window.frames);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("parent[GSCE]")
+    public void parentProperty() throws Exception {
+        final String html = "<html><head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  let property = 'parent';\n"
+            + "  let desc = Object.getOwnPropertyDescriptor(window, property);\n"
+            + "  property += '[';\n"
+            + "  if (desc.get != undefined) property += 'G';\n"
+            + "  if (desc.set != undefined) property += 'S';\n"
+            + "  if (desc.writable) property += 'W';\n"
+            + "  if (desc.configurable) property += 'C';\n"
+            + "  if (desc.enumerable) property += 'E';\n"
+            + "  property += ']'\n"
+            + "  log(property);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object Window]", "two", "undefined"})
+    public void parentPropertyEdit() throws Exception {
+        final String html = "<html><head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  log(window.parent);\n"
+
+            + "  window.parent = 'two';\n"
+            + "  log(window.parent);\n"
+
+            + "  delete window.parent;\n"
+            + "  log(window.parent);\n"
 
             + "</script>\n"
             + "</body></html>\n";
