@@ -281,10 +281,6 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("window.length was set")
-    @HtmlUnitNYI(CHROME = "0",
-            EDGE = "0",
-            FF = "0",
-            FF_ESR = "0")
     public void set_ReadOnly_window_length() throws Exception {
         set_ReadOnly("window.length");
     }
