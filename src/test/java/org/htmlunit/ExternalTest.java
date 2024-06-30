@@ -338,20 +338,6 @@ public class ExternalTest {
             return true;
         }
 
-        // pmd 7 has problems parsing our code
-        if ("maven-pmd-plugin".equals(artifactId)
-                && ("3.22.0".equals(version)
-                        || "3.23.0".equals(version))) {
-            return true;
-        }
-        System.out.println(artifactId + " " + version);
-        if (artifactId.startsWith("pmd-")
-                && (version.startsWith("7.0.")
-                        || version.startsWith("7.1.")
-                        || version.startsWith("7.2."))) {
-            return true;
-        }
-
         // really old common versions
         if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
             return true;
