@@ -35,12 +35,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class FontFaceSet extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public FontFaceSet() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

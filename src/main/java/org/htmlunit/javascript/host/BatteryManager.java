@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class BatteryManager extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public BatteryManager() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

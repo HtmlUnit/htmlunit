@@ -48,12 +48,6 @@ public class History extends HtmlUnitScriptable {
     private String scrollRestoration_ = SCROLL_RESTAURATION_AUTO;
 
     /**
-     * Creates an instance.
-     */
-    public History() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

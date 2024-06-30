@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class GamepadButton extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public GamepadButton() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

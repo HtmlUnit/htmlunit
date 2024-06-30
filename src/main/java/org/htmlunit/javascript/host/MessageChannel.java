@@ -32,12 +32,6 @@ public class MessageChannel extends HtmlUnitScriptable {
     private MessagePort port2_;
 
     /**
-     * Default constructor.
-     */
-    public MessageChannel() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

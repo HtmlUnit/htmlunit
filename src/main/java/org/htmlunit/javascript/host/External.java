@@ -35,12 +35,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 public class External extends HtmlUnitScriptable {
 
     /**
-     * The constructor.
-     */
-    public External() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

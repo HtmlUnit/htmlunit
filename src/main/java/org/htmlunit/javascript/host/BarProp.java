@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class BarProp extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public BarProp() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor
