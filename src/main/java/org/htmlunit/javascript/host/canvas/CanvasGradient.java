@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 public class CanvasGradient extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public CanvasGradient() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

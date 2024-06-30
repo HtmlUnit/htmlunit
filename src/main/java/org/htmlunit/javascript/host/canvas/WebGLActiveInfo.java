@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLActiveInfo extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLActiveInfo() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

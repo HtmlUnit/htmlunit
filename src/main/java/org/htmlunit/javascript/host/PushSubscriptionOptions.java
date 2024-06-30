@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PushSubscriptionOptions extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public PushSubscriptionOptions() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

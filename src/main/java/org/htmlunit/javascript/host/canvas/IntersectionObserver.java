@@ -30,12 +30,6 @@ import org.htmlunit.javascript.host.Element;
 public class IntersectionObserver extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public IntersectionObserver() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

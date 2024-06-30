@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLBuffer extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLBuffer() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

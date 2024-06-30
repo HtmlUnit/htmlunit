@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLUniformLocation extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLUniformLocation() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

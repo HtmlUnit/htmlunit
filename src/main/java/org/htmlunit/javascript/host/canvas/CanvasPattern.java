@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class CanvasPattern extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public CanvasPattern() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

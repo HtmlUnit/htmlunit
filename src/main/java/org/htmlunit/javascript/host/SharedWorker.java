@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class SharedWorker extends EventTarget {
 
     /**
-     * Default constructor.
-     */
-    public SharedWorker() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

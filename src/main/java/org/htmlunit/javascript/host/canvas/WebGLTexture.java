@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLTexture extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLTexture() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

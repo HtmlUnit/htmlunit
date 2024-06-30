@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class PermissionStatus extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public PermissionStatus() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLSampler extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLSampler() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLProgram extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLProgram() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

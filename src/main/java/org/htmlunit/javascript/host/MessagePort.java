@@ -42,6 +42,12 @@ public class MessagePort extends EventTarget {
     private MessagePort port1_;
 
     /**
+     * Default constructor.
+     */
+    public MessagePort() {
+    }
+
+    /**
      * JavaScript constructor.
      */
     @Override

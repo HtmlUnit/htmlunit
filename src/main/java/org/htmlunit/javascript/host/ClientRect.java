@@ -36,6 +36,12 @@ public class ClientRect extends HtmlUnitScriptable {
     private int top_;
 
     /**
+     * Creates an instance.
+     */
+    public ClientRect() {
+    }
+
+    /**
      * JavaScript constructor.
      */
     @JsxConstructor

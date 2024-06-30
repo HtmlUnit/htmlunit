@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLTransformFeedback extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLTransformFeedback() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

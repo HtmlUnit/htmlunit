@@ -52,12 +52,6 @@ public class URL extends HtmlUnitScriptable {
 
     /**
      * Creates an instance.
-     */
-    public URL() {
-    }
-
-    /**
-     * Creates an instance.
      * @param url a string representing an absolute or relative URL.
      * If url is a relative URL, base is required, and will be used
      * as the base URL. If url is an absolute URL, a given base will be ignored.

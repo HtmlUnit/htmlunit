@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class Path2D extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public Path2D() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

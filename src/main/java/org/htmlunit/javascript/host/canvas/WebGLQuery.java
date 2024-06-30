@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLQuery extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLQuery() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

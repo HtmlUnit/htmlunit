@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.media.MediaStream;
 public class CanvasCaptureMediaStream extends MediaStream {
 
     /**
-     * Default constructor.
-     */
-    public CanvasCaptureMediaStream() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

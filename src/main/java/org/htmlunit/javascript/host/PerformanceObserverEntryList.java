@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PerformanceObserverEntryList extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public PerformanceObserverEntryList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

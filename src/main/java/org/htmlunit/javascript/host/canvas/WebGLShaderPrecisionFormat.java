@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLShaderPrecisionFormat extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLShaderPrecisionFormat() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

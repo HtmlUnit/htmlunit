@@ -27,12 +27,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class Animation extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public Animation() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

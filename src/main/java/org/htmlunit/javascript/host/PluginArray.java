@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 public class PluginArray extends SimpleArray {
 
     /**
-     * Creates an instance.
-     */
-    public PluginArray() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

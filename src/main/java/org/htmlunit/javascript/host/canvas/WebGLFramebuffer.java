@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLFramebuffer extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLFramebuffer() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

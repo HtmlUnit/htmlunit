@@ -37,6 +37,12 @@ public class MimeType extends HtmlUnitScriptable {
     private Plugin enabledPlugin_;
 
     /**
+     * Creates an instance.
+     */
+    public MimeType() {
+    }
+
+    /**
      * JavaScript constructor.
      */
     @JsxConstructor

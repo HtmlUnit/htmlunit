@@ -29,12 +29,6 @@ import org.htmlunit.javascript.host.event.Event;
 public class AnimationEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public AnimationEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

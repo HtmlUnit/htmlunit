@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLVertexArrayObject extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLVertexArrayObject() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

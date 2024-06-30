@@ -36,12 +36,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 public class TextEncoder extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public TextEncoder() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

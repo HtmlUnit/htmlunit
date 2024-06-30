@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class Touch extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public Touch() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

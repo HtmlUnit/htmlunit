@@ -32,12 +32,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class ScreenOrientation extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public ScreenOrientation() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

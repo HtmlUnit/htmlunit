@@ -34,12 +34,6 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    public SubtleCrypto() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @JsxConstructor
     public void jsConstructor() {
         throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");

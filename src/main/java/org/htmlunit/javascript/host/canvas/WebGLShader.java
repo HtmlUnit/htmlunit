@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLShader extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public WebGLShader() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor
