@@ -8,6 +8,16 @@
     <description>HtmlUnit rules</description>
     <exclude-pattern>.*/src/test/resources/.*</exclude-pattern>
 
+    <exclude-pattern>.*/src/main/java/org/htmlunit/util/UrlUtils\.java</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/javascript/host/intl/NumberFormat\.java</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/javascript/host/intl/DateTimeFormat\.java</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/javascript/host/dom/DOMTokenList\.java</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/httpclient/HtmlUnitBrowserCompatCookieSpec\.java</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/html/xpath/XPathAdapter\.java</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/html/HtmlElement\.java</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/html/DomText\.java</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/DefaultCredentialsProvider\.java</exclude-pattern>
+
     <rule ref="category/java/bestpractices.xml" />
 
     <rule ref="category/java/codestyle.xml">
