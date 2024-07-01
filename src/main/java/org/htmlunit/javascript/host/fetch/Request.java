@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class Request extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public Request() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

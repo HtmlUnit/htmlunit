@@ -933,12 +933,6 @@ public class WebGLRenderingContext extends HtmlUnitScriptable {
     public static final int BROWSER_DEFAULT_WEBGL = 0x9244;
 
     /**
-     * Default constructor.
-     */
-    public WebGLRenderingContext() {
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor

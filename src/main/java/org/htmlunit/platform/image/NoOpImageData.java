@@ -30,12 +30,6 @@ public class NoOpImageData implements ImageData {
     // private static final Log LOG = LogFactory.getLog(NoOpImageData.class);
 
     /**
-     * Ctor.
-     */
-    public NoOpImageData() {
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

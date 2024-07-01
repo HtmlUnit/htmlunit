@@ -47,12 +47,6 @@ public class V8BreakIterator extends HtmlUnitScriptable {
     private boolean typeAlwaysNone_;
 
     /**
-     * The default constructor.
-     */
-    public V8BreakIterator() {
-    }
-
-    /**
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope

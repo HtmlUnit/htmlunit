@@ -124,7 +124,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        final String type = getAttributeDirect(DomElement.TYPE_ATTRIBUTE);
+        final String type = getAttributeDirect(TYPE_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == type) {
             return "text";
         }
@@ -328,7 +328,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param src the {@code src} attribute
      */
     public void setSrcAttribute(final String src) {
-        setAttribute(HtmlElement.SRC_ATTRIBUTE, src);
+        setAttribute(SRC_ATTRIBUTE, src);
     }
 
     /**
@@ -878,7 +878,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     protected boolean isCustomValidityValid() {
         if (isCustomErrorValidityState()) {
-            final String type = getAttributeDirect(DomElement.TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
+            final String type = getAttributeDirect(TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
             if (!"button".equals(type)
                     && !"hidden".equals(type)
                     && !"reset".equals(type)
@@ -1024,7 +1024,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return whether this is a checkbox or a radio button
      */
     public boolean isCheckable() {
-        final String type = getAttributeDirect(DomElement.TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
+        final String type = getAttributeDirect(TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
         return "radio".equals(type) || "checkbox".equals(type);
     }
 
@@ -1032,7 +1032,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return false for type submit/resest/image/button otherwise true
      */
     public boolean isSubmitable() {
-        final String type = getAttributeDirect(DomElement.TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
+        final String type = getAttributeDirect(TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
         return !"submit".equals(type) && !"image".equals(type) && !"reset".equals(type) && !"button".equals(type);
     }
 
@@ -1183,8 +1183,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             // create a new one only if we have a new type
             if (ATTRIBUTE_NOT_DEFINED != currentType || !"text".equalsIgnoreCase(newType)) {
                 final HtmlInput newInput = (HtmlInput) webClient.getPageCreator().getHtmlParser()
-                        .getFactory(HtmlInput.TAG_NAME)
-                        .createElement(page, HtmlInput.TAG_NAME, attributes);
+                        .getFactory(TAG_NAME)
+                        .createElement(page, TAG_NAME, attributes);
 
                 newInput.adjustValueAfterTypeChange(this, browser);
 

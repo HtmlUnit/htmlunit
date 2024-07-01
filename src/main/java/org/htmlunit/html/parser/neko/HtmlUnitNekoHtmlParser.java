@@ -83,13 +83,6 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     }
 
     /**
-     * Ctor.
-     */
-    public HtmlUnitNekoHtmlParser() {
-        // Empty.
-    }
-
-    /**
      * Parses the HTML content from the given string into an object tree representation.
      *
      * @param parent the parent for the new nodes

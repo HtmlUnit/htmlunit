@@ -163,13 +163,6 @@ public class RegExpJsToJavaConverter {
     }
 
     /**
-     * Initiate the FSM.
-     */
-    public RegExpJsToJavaConverter() {
-        super();
-    }
-
-    /**
      * Run the state machine on a given input string.
      *
      * @param input

@@ -160,7 +160,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     private static List<NameValuePair> resolveParams(final Object params) {
         // if params is a sequence
-        if (params instanceof Scriptable && ScriptableObject.hasProperty((Scriptable) params, SymbolKey.ITERATOR)) {
+        if (params instanceof Scriptable && hasProperty((Scriptable) params, SymbolKey.ITERATOR)) {
 
             final Context cx = Context.getCurrentContext();
             final Scriptable paramsScriptable = (Scriptable) params;
@@ -172,7 +172,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
                     if (!(nameValue instanceof Scriptable)) {
                         throw JavaScriptEngine.typeError("The provided value cannot be converted to a sequence.");
                     }
-                    if (!ScriptableObject.hasProperty((Scriptable) nameValue, SymbolKey.ITERATOR)) {
+                    if (!hasProperty((Scriptable) nameValue, SymbolKey.ITERATOR)) {
                         throw JavaScriptEngine.typeError("The object must have a callable @@iterator property.");
                     }
 
@@ -180,12 +180,12 @@ public class URLSearchParams extends HtmlUnitScriptable {
 
                         final Iterator<Object> nameValueIterator = nameValueItr.iterator();
                         final Object name =
-                                nameValueIterator.hasNext() ? nameValueIterator.next() : Scriptable.NOT_FOUND;
+                                nameValueIterator.hasNext() ? nameValueIterator.next() : NOT_FOUND;
                         final Object value =
-                                nameValueIterator.hasNext() ? nameValueIterator.next() : Scriptable.NOT_FOUND;
+                                nameValueIterator.hasNext() ? nameValueIterator.next() : NOT_FOUND;
 
-                        if (name == Scriptable.NOT_FOUND
-                                || value == Scriptable.NOT_FOUND
+                        if (name == NOT_FOUND
+                                || value == NOT_FOUND
                                 || nameValueIterator.hasNext()) {
                             throw JavaScriptEngine.typeError("Sequence initializer must only contain pair elements.");
                         }

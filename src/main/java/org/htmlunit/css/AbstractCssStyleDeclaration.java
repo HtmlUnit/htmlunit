@@ -420,7 +420,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                     return "0% 0%";
                 }
                 if (isComputed()) {
-                    final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
+                    final String[] values = StringUtils.splitAtBlank(value);
                     switch (values[0]) {
                         case "left":
                             values[0] = "0%";
@@ -586,7 +586,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
             if (value == null) {
                 final String borderWidth = getStyleAttribute(Definition.BORDER_WIDTH, false);
                 if (!org.apache.commons.lang3.StringUtils.isEmpty(borderWidth)) {
-                    final String[] values = org.htmlunit.util.StringUtils.splitAtJavaWhitespace(borderWidth);
+                    final String[] values = StringUtils.splitAtJavaWhitespace(borderWidth);
                     int index = values.length;
                     if (borderSideWidth.name().contains("TOP")) {
                         index = 0;
@@ -1049,20 +1049,20 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the string of the color if found, null otherwise
      */
     private static String findColor(final String text) {
-        Color tmpColor = org.htmlunit.util.StringUtils.findColorRGB(text);
+        Color tmpColor = StringUtils.findColorRGB(text);
         if (tmpColor != null) {
-            return org.htmlunit.util.StringUtils.formatColor(tmpColor);
+            return StringUtils.formatColor(tmpColor);
         }
 
-        final String[] tokens = org.htmlunit.util.StringUtils.splitAtBlank(text);
+        final String[] tokens = StringUtils.splitAtBlank(text);
         for (final String token : tokens) {
             if (CssColors.isColorKeyword(token)) {
                 return token;
             }
 
-            tmpColor = org.htmlunit.util.StringUtils.asColorHexadecimal(token);
+            tmpColor = StringUtils.asColorHexadecimal(token);
             if (tmpColor != null) {
-                return org.htmlunit.util.StringUtils.formatColor(tmpColor);
+                return StringUtils.formatColor(tmpColor);
             }
         }
         return null;
@@ -1129,7 +1129,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the border style if found, null otherwise
      */
     private static String findBorderStyle(final String text) {
-        for (final String token : org.htmlunit.util.StringUtils.splitAtBlank(text)) {
+        for (final String token : StringUtils.splitAtBlank(text)) {
             if (isBorderStyle(token)) {
                 return token;
             }
@@ -1156,7 +1156,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the border width if found, null otherwise
      */
     private static String findBorderWidth(final String text) {
-        for (final String token : org.htmlunit.util.StringUtils.splitAtBlank(text)) {
+        for (final String token : StringUtils.splitAtBlank(text)) {
             if (isBorderWidth(token)) {
                 return token;
             }

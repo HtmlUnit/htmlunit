@@ -21,10 +21,13 @@
     <rule ref="category/java/bestpractices.xml" />
 
     <rule ref="category/java/codestyle.xml">
+        <exclude name="AtLeastOneConstructor"/>
         <exclude name="ClassNamingConventions"/>
         <exclude name="FieldNamingConventions"/>
         <exclude name="LongVariable"/>
         <exclude name="OnlyOneReturn"/>
+        <exclude name="ShortClassName"/>
+        <exclude name="ShortMethodName"/>
         <exclude name="ShortVariable"/>
     </rule>
 

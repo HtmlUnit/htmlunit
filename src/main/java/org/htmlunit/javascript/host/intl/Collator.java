@@ -34,12 +34,6 @@ import org.htmlunit.javascript.host.Window;
 public class Collator extends HtmlUnitScriptable {
 
     /**
-     * The default constructor.
-     */
-    public Collator() {
-    }
-
-    /**
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope

@@ -210,28 +210,28 @@ public class CSSRule extends HtmlUnitScriptable {
     @JsxGetter
     public int getType() {
         if (rule_ instanceof CSSCharsetRuleImpl) {
-            return CSSRule.CHARSET_RULE;
+            return CHARSET_RULE;
         }
         if (rule_ instanceof CSSFontFaceRuleImpl) {
-            return CSSRule.FONT_FACE_RULE;
+            return FONT_FACE_RULE;
         }
         if (rule_ instanceof CSSImportRuleImpl) {
-            return CSSRule.IMPORT_RULE;
+            return IMPORT_RULE;
         }
         if (rule_ instanceof CSSMediaRuleImpl) {
-            return CSSRule.MEDIA_RULE;
+            return MEDIA_RULE;
         }
         if (rule_ instanceof CSSPageRuleImpl) {
-            return CSSRule.PAGE_RULE;
+            return PAGE_RULE;
         }
         if (rule_ instanceof CSSStyleRuleImpl) {
-            return CSSRule.STYLE_RULE;
+            return STYLE_RULE;
         }
         if (rule_ instanceof CSSUnknownRuleImpl) {
-            return CSSRule.UNKNOWN_RULE;
+            return UNKNOWN_RULE;
         }
 
-        return CSSRule.UNKNOWN_RULE;
+        return UNKNOWN_RULE;
     }
 
     /**
@@ -271,7 +271,7 @@ public class CSSRule extends HtmlUnitScriptable {
     public CSSRule getParentRule() {
         final AbstractCSSRuleImpl parentRule = rule_.getParentRule();
         if (parentRule != null) {
-            return CSSRule.create(stylesheet_, parentRule);
+            return create(stylesheet_, parentRule);
         }
         return null;
     }
