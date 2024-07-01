@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class MediaEncryptedEvent extends Event {
 
     /**
-     * Creates an instance.
-     */
-    public MediaEncryptedEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

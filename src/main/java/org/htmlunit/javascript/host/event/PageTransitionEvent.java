@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PageTransitionEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public PageTransitionEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

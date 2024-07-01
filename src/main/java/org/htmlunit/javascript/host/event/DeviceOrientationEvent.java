@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class DeviceOrientationEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public DeviceOrientationEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

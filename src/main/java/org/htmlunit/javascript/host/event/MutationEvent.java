@@ -44,12 +44,6 @@ public class MutationEvent extends Event {
     public static final int REMOVAL = 3;
 
     /**
-     * Creates an instance.
-     */
-    public MutationEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

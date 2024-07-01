@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class FocusEvent extends UIEvent {
 
     /**
-     * Default constructor.
-     */
-    public FocusEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

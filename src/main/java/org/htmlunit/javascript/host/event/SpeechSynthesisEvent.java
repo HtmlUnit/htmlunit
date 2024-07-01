@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SpeechSynthesisEvent extends Event {
 
     /**
-     * Creates a new instance.
-     */
-    public SpeechSynthesisEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class TransitionEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public TransitionEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

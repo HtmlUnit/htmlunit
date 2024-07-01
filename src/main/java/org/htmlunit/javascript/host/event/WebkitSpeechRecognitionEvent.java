@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebkitSpeechRecognitionEvent extends Event {
 
     /**
-     * Creates an instance.
-     */
-    public WebkitSpeechRecognitionEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor(functionName = "SpeechRecognitionEvent")

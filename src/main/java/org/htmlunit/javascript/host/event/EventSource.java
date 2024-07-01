@@ -40,12 +40,6 @@ public class EventSource extends EventTarget {
     public static final int CLOSED = 2;
 
     /**
-     * Default constructor.
-     */
-    public EventSource() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

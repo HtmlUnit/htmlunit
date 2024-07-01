@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PromiseRejectionEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public PromiseRejectionEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

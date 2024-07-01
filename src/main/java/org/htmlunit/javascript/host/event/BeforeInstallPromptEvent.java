@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class BeforeInstallPromptEvent extends Event {
 
     /**
-     * Creates a new instance.
-     */
-    public BeforeInstallPromptEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

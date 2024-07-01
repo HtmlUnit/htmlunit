@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class TrackEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public TrackEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

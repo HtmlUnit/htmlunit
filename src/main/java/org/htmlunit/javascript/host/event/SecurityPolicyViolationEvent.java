@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SecurityPolicyViolationEvent extends Event {
 
     /**
-     * Creates an instance.
-     */
-    public SecurityPolicyViolationEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

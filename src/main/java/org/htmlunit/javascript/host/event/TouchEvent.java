@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class TouchEvent extends UIEvent {
 
     /**
-     * Default constructor.
-     */
-    public TouchEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

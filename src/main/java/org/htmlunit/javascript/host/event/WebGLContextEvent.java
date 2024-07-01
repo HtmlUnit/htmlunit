@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebGLContextEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public WebGLContextEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

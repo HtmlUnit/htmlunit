@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class DeviceMotionEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public DeviceMotionEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

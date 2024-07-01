@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class DragEvent extends MouseEvent {
 
     /**
-     * Default constructor.
-     */
-    public DragEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

@@ -39,12 +39,6 @@ public class WheelEvent extends MouseEvent {
     public static final int DOM_DELTA_PAGE = 2;
 
     /**
-     * Default constructor.
-     */
-    public WheelEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

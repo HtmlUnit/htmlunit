@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class MIDIMessageEvent extends Event {
 
     /**
-     * Creates an instance.
-     */
-    public MIDIMessageEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

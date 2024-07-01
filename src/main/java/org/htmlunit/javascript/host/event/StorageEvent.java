@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class StorageEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public StorageEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

@@ -39,12 +39,6 @@ public class BlobEvent extends Event {
     private Blob data_;
 
     /**
-     * Creates an instance.
-     */
-    public BlobEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

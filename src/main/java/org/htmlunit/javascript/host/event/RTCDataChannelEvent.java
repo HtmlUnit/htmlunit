@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class RTCDataChannelEvent extends Event {
 
     /**
-     * Creates a new instance.
-     */
-    public RTCDataChannelEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

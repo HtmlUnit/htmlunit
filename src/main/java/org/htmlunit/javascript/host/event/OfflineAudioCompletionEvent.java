@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class OfflineAudioCompletionEvent extends Event {
 
     /**
-     * Creates an instance.
-     */
-    public OfflineAudioCompletionEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

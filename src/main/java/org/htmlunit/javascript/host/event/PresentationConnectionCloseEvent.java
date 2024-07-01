@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PresentationConnectionCloseEvent extends Event {
 
     /**
-     * Creates an instance.
-     */
-    public PresentationConnectionCloseEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

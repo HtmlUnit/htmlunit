@@ -34,12 +34,6 @@ public class CustomEvent extends Event {
     private Object detail_;
 
     /**
-     * Default constructor.
-     */
-    public CustomEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

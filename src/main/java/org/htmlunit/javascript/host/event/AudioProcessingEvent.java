@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class AudioProcessingEvent extends Event {
 
     /**
-     * Creates an instance.
-     */
-    public AudioProcessingEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type

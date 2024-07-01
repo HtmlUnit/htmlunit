@@ -32,12 +32,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class TimeEvent extends Event {
 
     /**
-     * Default constructor.
-     */
-    public TimeEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      *
      * @param type the event type
