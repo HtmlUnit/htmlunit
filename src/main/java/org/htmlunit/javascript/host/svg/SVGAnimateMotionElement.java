@@ -31,12 +31,6 @@ public class SVGAnimateMotionElement extends SVGAnimationElement {
     /**
      * Creates an instance.
      */
-    public SVGAnimateMotionElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

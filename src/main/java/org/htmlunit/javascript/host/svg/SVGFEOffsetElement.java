@@ -30,12 +30,6 @@ public class SVGFEOffsetElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEOffsetElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

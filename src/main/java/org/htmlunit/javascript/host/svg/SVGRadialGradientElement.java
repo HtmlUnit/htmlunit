@@ -30,12 +30,6 @@ public class SVGRadialGradientElement extends SVGGradientElement {
     /**
      * Creates an instance.
      */
-    public SVGRadialGradientElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

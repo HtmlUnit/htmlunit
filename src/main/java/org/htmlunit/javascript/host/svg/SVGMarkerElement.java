@@ -62,12 +62,6 @@ public class SVGMarkerElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGMarkerElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

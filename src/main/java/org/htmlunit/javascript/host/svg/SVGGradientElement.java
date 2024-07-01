@@ -43,12 +43,6 @@ public class SVGGradientElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGGradientElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

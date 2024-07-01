@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class IDBDatabase extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public IDBDatabase() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

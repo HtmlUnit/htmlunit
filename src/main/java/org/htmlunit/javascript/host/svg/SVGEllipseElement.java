@@ -30,12 +30,6 @@ public class SVGEllipseElement extends SVGGeometryElement {
     /**
      * Creates an instance.
      */
-    public SVGEllipseElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

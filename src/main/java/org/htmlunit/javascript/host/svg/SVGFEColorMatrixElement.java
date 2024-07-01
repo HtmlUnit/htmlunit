@@ -47,12 +47,6 @@ public class SVGFEColorMatrixElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEColorMatrixElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

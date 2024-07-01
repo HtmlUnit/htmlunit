@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class IDBOpenDBRequest extends IDBRequest {
 
     /**
-     * Creates a new instance.
-     */
-    public IDBOpenDBRequest() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

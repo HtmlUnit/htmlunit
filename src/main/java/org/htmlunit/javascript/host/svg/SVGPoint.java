@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGPoint extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGPoint() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

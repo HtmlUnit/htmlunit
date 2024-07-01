@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGGraphicsElement extends SVGElement {
 
     /**
-     * Creates a new instance.
-     */
-    public SVGGraphicsElement() {
-    }
-
-    /**
      * Creates an instance.
      */
     @Override

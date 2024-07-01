@@ -30,12 +30,6 @@ public class SVGFilterElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFilterElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

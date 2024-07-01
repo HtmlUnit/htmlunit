@@ -30,12 +30,6 @@ public class SVGStopElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGStopElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

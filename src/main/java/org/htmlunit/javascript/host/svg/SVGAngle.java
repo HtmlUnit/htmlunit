@@ -49,12 +49,6 @@ public class SVGAngle extends HtmlUnitScriptable {
     public static final int SVG_ANGLETYPE_GRAD = 4;
 
     /**
-     * Creates an instance.
-     */
-    public SVGAngle() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGAnimatedString extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGAnimatedString() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

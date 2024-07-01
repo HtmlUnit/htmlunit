@@ -28,12 +28,6 @@ import org.htmlunit.svg.SvgTSpan;
 public class SVGTSpanElement extends SVGTextPositioningElement {
 
     /**
-     * Creates an instance.
-     */
-    public SVGTSpanElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class IDBCursorWithValue extends IDBCursor {
 
     /**
-     * Creates a new instance.
-     */
-    public IDBCursorWithValue() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

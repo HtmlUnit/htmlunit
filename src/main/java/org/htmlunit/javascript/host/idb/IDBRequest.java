@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class IDBRequest extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public IDBRequest() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

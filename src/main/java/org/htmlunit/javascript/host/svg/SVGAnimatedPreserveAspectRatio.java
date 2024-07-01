@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGAnimatedPreserveAspectRatio extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGAnimatedPreserveAspectRatio() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

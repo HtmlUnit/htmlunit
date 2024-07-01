@@ -30,12 +30,6 @@ public class SVGImageElement extends SVGGraphicsElement {
     /**
      * Creates an instance.
      */
-    public SVGImageElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

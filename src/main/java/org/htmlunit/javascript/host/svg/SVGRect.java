@@ -35,12 +35,6 @@ public class SVGRect extends HtmlUnitScriptable {
     private double height_;
 
     /**
-     * Creates an instance.
-     */
-    public SVGRect() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

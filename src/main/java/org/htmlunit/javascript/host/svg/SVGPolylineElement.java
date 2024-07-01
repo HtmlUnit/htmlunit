@@ -30,12 +30,6 @@ public class SVGPolylineElement extends SVGGeometryElement {
     /**
      * Creates an instance.
      */
-    public SVGPolylineElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

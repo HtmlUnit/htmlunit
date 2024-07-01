@@ -30,12 +30,6 @@ public class SVGSwitchElement extends SVGGraphicsElement {
     /**
      * Creates an instance.
      */
-    public SVGSwitchElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

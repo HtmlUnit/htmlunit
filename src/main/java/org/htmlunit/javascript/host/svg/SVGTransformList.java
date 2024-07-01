@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGTransformList extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGTransformList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

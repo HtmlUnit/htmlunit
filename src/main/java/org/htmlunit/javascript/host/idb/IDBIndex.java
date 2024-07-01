@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class IDBIndex extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public IDBIndex() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

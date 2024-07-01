@@ -30,12 +30,6 @@ public class SVGFESpecularLightingElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFESpecularLightingElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

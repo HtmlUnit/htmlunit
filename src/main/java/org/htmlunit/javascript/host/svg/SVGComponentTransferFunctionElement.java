@@ -49,12 +49,6 @@ public class SVGComponentTransferFunctionElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGComponentTransferFunctionElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

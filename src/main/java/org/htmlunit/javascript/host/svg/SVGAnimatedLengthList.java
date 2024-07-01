@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGAnimatedLengthList extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGAnimatedLengthList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

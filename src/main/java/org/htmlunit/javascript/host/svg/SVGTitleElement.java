@@ -30,12 +30,6 @@ public class SVGTitleElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGTitleElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

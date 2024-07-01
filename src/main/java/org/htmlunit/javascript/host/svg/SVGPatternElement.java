@@ -30,12 +30,6 @@ public class SVGPatternElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGPatternElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

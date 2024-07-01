@@ -30,12 +30,6 @@ public class SVGClipPathElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGClipPathElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

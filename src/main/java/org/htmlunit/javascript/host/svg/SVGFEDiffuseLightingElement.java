@@ -30,12 +30,6 @@ public class SVGFEDiffuseLightingElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEDiffuseLightingElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

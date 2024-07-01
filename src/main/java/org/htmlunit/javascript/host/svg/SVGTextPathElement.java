@@ -50,12 +50,6 @@ public class SVGTextPathElement extends SVGTextContentElement {
     /**
      * Creates an instance.
      */
-    public SVGTextPathElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

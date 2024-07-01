@@ -30,12 +30,6 @@ public class SVGLinearGradientElement extends SVGGradientElement {
     /**
      * Creates an instance.
      */
-    public SVGLinearGradientElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

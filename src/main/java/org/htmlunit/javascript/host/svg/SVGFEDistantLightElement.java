@@ -30,12 +30,6 @@ public class SVGFEDistantLightElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEDistantLightElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

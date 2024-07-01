@@ -30,12 +30,6 @@ public class SVGFEFloodElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEFloodElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

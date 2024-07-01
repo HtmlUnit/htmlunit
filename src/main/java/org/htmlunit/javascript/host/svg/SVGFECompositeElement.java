@@ -66,12 +66,6 @@ public class SVGFECompositeElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFECompositeElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

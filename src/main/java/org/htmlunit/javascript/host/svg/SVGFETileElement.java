@@ -30,12 +30,6 @@ public class SVGFETileElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFETileElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

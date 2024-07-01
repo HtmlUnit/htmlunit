@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGNumberList extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGNumberList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

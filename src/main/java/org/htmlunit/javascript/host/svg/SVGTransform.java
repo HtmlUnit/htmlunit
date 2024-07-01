@@ -51,12 +51,6 @@ public class SVGTransform extends HtmlUnitScriptable {
     public static final int SVG_TRANSFORM_SKEWY = 6;
 
     /**
-     * Creates an instance.
-     */
-    public SVGTransform() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

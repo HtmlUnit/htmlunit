@@ -29,12 +29,6 @@ public class SVGTextPositioningElement extends SVGTextContentElement {
     /**
      * Creates an instance.
      */
-    public SVGTextPositioningElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

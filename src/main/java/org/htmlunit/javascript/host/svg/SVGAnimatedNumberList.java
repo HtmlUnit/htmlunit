@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGAnimatedNumberList extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGAnimatedNumberList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

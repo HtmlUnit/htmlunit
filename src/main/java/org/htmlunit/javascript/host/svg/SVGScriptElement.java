@@ -30,12 +30,6 @@ public class SVGScriptElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGScriptElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

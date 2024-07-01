@@ -30,12 +30,6 @@ public class SVGAElement extends SVGGraphicsElement {
     /**
      * Creates an instance.
      */
-    public SVGAElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @JsxConstructor
     @Override
     public void jsConstructor() {

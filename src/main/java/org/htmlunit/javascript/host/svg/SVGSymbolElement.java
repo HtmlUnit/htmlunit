@@ -30,12 +30,6 @@ public class SVGSymbolElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGSymbolElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

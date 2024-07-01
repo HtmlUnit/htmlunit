@@ -44,12 +44,6 @@ public class SVGFEConvolveMatrixElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEConvolveMatrixElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

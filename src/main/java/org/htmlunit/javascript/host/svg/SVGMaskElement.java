@@ -41,12 +41,6 @@ public class SVGMaskElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGMaskElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

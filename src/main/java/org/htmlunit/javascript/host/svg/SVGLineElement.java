@@ -30,12 +30,6 @@ public class SVGLineElement extends SVGGeometryElement {
     /**
      * Creates an instance.
      */
-    public SVGLineElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

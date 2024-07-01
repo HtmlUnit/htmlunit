@@ -42,12 +42,6 @@ public class SVGSVGElement extends SVGGraphicsElement {
     /**
      * Creates an instance.
      */
-    public SVGSVGElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

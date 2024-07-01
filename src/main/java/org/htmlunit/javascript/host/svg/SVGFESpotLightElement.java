@@ -30,12 +30,6 @@ public class SVGFESpotLightElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFESpotLightElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

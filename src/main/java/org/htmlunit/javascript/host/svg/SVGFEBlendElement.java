@@ -83,12 +83,6 @@ public class SVGFEBlendElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEBlendElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

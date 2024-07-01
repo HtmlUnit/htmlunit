@@ -41,12 +41,6 @@ public class SVGFEMorphologyElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEMorphologyElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

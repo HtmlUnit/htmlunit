@@ -31,12 +31,6 @@ public class SVGMPathElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGMPathElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

@@ -41,12 +41,6 @@ public class SVGViewElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGViewElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

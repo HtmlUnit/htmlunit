@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGFEDropShadowElement extends SVGElement {
 
     /**
-     * Creates a new instance.
-     */
-    public SVGFEDropShadowElement() {
-    }
-
-    /**
      * Creates an instance.
      */
     @Override

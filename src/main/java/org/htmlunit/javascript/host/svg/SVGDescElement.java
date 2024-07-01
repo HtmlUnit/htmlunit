@@ -30,12 +30,6 @@ public class SVGDescElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGDescElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

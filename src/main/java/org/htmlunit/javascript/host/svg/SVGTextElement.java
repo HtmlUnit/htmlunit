@@ -28,12 +28,6 @@ import org.htmlunit.svg.SvgText;
 public class SVGTextElement extends SVGTextPositioningElement {
 
     /**
-     * Creates an instance.
-     */
-    public SVGTextElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

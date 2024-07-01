@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGStringList extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGStringList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

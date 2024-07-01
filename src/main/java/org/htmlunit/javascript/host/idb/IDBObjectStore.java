@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class IDBObjectStore extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public IDBObjectStore() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

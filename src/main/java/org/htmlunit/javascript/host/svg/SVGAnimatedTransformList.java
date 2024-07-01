@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class SVGAnimatedTransformList extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public SVGAnimatedTransformList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

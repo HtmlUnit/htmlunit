@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class IDBCursor extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public IDBCursor() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

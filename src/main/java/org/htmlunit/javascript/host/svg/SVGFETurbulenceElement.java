@@ -50,12 +50,6 @@ public class SVGFETurbulenceElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFETurbulenceElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

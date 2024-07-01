@@ -72,12 +72,6 @@ public class SVGPreserveAspectRatio extends HtmlUnitScriptable {
     public static final int SVG_PRESERVEASPECTRATIO_XMAXYMAX = 10;
 
     /**
-     * Creates an instance.
-     */
-    public SVGPreserveAspectRatio() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

@@ -30,12 +30,6 @@ public class SVGFEGaussianBlurElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEGaussianBlurElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

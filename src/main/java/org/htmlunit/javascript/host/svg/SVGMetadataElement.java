@@ -30,12 +30,6 @@ public class SVGMetadataElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGMetadataElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

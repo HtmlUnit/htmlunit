@@ -43,12 +43,6 @@ public class SVGElement extends Element {
     /**
      * Creates an instance.
      */
-    public SVGElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

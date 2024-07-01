@@ -30,12 +30,6 @@ public class SVGPolygonElement extends SVGGeometryElement {
     /**
      * Creates an instance.
      */
-    public SVGPolygonElement() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {
