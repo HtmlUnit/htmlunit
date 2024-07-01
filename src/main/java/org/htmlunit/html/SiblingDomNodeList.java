@@ -30,6 +30,7 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
     private final DomNode parent_;
 
     SiblingDomNodeList(final DomNode parent) {
+        super();
         parent_ = parent;
     }
 

@@ -39,6 +39,7 @@ public class ClientRect extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public ClientRect() {
+        super();
     }
 
     /**

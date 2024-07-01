@@ -43,6 +43,7 @@ public class CSSPageRule extends CSSRule {
      * Creates a new instance.
      */
     public CSSPageRule() {
+        super();
     }
 
     /**

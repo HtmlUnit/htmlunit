@@ -42,6 +42,7 @@ public class Crypto extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public Crypto() {
+        super();
     }
 
     /**

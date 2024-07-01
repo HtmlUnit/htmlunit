@@ -93,6 +93,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * Creates an instance.
      */
     public AbstractList() {
+        super();
     }
 
     /**

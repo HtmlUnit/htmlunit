@@ -40,6 +40,7 @@ public class BeforeUnloadEvent extends Event {
      * Creates a new event instance.
      */
     public BeforeUnloadEvent() {
+        super();
         setType("");
         returnValue_ = "";
     }

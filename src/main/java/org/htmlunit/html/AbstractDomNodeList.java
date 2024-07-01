@@ -46,6 +46,7 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
      * @param node the node to serve as root for the XPath expression
      */
     public AbstractDomNodeList(final DomNode node) {
+        super();
         if (node != null) {
             node_ = node;
             final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);

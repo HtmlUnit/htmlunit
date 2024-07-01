@@ -135,6 +135,7 @@ public class CSSRule extends HtmlUnitScriptable {
      * Creates a new instance.
      */
     public CSSRule() {
+        super();
         stylesheet_ = null;
         rule_ = null;
     }

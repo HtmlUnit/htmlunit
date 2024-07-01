@@ -40,6 +40,7 @@ public class CSSImportRule extends CSSRule {
      * Creates a new instance.
      */
     public CSSImportRule() {
+        super();
     }
 
     /**

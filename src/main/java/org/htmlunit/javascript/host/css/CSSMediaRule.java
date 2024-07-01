@@ -38,6 +38,7 @@ public class CSSMediaRule extends CSSConditionRule {
      * Creates a new instance.
      */
     public CSSMediaRule() {
+        super();
     }
 
     /**

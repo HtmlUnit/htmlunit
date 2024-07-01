@@ -46,6 +46,7 @@ import org.htmlunit.BrowserVersion;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class StyleAttributes implements Serializable {
     private static final Map<String, Definition> styles_ = new HashMap<>();
 

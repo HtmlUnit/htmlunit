@@ -54,6 +54,7 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     public WrappedCssStyleDeclaration(final CSSStyleDeclarationImpl cssStyleDeclarationImpl,
                 final BrowserVersion browserVersion) {
+        super();
         cssStyleDeclarationImpl_ = cssStyleDeclarationImpl;
         browserVersion_ = browserVersion;
     }

@@ -33,6 +33,7 @@ public class CSSFontFaceRule extends CSSRule {
      * Creates a new instance.
      */
     public CSSFontFaceRule() {
+        super();
     }
 
     /**

@@ -58,6 +58,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * Default constructor.
      */
     public CanvasRenderingContext2D() {
+        super();
     }
 
     /**

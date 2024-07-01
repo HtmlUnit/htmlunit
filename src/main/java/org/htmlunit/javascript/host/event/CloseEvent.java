@@ -37,6 +37,7 @@ public class CloseEvent extends Event {
      * Creates a new event instance.
      */
     public CloseEvent() {
+        super();
         setType(TYPE_CLOSE);
         reason_ = "";
     }

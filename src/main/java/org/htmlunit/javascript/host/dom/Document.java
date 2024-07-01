@@ -1061,8 +1061,7 @@ public class Document extends Node {
                 builder.append("; ");
             }
             if (!HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME.equals(cookie.getName())) {
-                builder.append(cookie.getName());
-                builder.append('=');
+                builder.append(cookie.getName()).append('=');
             }
             builder.append(cookie.getValue());
         }

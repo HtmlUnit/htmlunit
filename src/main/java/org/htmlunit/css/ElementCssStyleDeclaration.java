@@ -52,6 +52,7 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param domElement the dom element this is based on
      */
     public ElementCssStyleDeclaration(final DomElement domElement) {
+        super();
         if (domElement == null) {
             throw new IllegalStateException("domElement can't be null");
         }

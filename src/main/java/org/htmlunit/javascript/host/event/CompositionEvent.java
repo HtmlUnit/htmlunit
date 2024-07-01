@@ -35,6 +35,7 @@ public class CompositionEvent extends UIEvent {
      * Default constructor.
      */
     public CompositionEvent() {
+        super();
         data_ = "";
     }
 

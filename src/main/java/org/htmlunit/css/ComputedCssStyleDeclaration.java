@@ -228,6 +228,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     private ElementCssStyleDeclaration elementStyleDeclaration_;
 
     public ComputedCssStyleDeclaration(final ElementCssStyleDeclaration styleDeclaration) {
+        super();
         elementStyleDeclaration_ = styleDeclaration;
         getDomElement().setDefaults(this);
     }

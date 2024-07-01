@@ -32,6 +32,7 @@ public class CSSKeyframesRule extends CSSRule {
      * Default constructor.
      */
     public CSSKeyframesRule() {
+        super();
     }
 
     /**

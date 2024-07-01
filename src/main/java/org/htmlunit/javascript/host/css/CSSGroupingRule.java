@@ -47,6 +47,7 @@ public class CSSGroupingRule extends CSSRule {
      * Creates a new instance.
      */
     public CSSGroupingRule() {
+        super();
     }
 
     /**

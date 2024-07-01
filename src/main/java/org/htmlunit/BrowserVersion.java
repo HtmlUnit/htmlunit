@@ -62,6 +62,7 @@ import org.htmlunit.util.MimeType;
  * @author Frank Danek
  * @author Ronald Brill
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class BrowserVersion implements Serializable {
 
     /**

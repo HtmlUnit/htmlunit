@@ -192,6 +192,7 @@ public class Blob extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public Blob() {
+        super();
     }
 
     /**

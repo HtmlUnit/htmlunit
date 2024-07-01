@@ -48,6 +48,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Creates an instance.
      */
     public ComputedCSSStyleDeclaration() {
+        super();
     }
 
     /**

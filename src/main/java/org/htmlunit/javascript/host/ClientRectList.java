@@ -39,6 +39,7 @@ public class ClientRectList extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public ClientRectList() {
+        super();
         clientRects_ = new ArrayList<>();
     }
 

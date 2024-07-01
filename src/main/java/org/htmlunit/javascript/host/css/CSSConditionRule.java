@@ -34,6 +34,7 @@ public class CSSConditionRule extends CSSGroupingRule {
      * Creates a new instance.
      */
     public CSSConditionRule() {
+        super();
     }
 
     /**

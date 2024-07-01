@@ -377,7 +377,6 @@ public final class UrlUtils {
      * @return the given input string where every occurrence of <code>%</code> in
      * invalid escape sequences has been replace by <code>%25</code>
      */
-    @SuppressWarnings("PMD.UselessParentheses")
     private static String encodePercentSign(final byte[] input) {
         if (input == null) {
             return null;
@@ -718,7 +717,6 @@ public final class UrlUtils {
      * @param spec The specification to parse.
      * @return the parsed specification.
      */
-    @SuppressWarnings("PMD.UselessParentheses")
     private static Url parseUrl(String spec) {
         final Url url = new Url();
         int startIndex = 0;
@@ -925,7 +923,6 @@ public final class UrlUtils {
      * @param scheme the scheme string to check
      * @return true if valid
      */
-    @SuppressWarnings("PMD.UselessParentheses")
     public static boolean isValidScheme(final String scheme) {
         final int length = scheme.length();
         if (length < 1) {
@@ -1221,7 +1218,6 @@ public final class UrlUtils {
      * @param u2 a URL object
      * @return true if u1 and u2 refer to the same file
      */
-    @SuppressWarnings("PMD.UselessParentheses")
     public static boolean sameFile(final URL u1, final URL u2) {
         if (u1 == u2) {
             return true;

@@ -39,6 +39,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public AbstractRange() {
+        super();
     }
 
     /**

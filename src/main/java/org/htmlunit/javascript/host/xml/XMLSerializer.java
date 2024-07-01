@@ -204,8 +204,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
                 builder.append("></").append(nodeName).append('>');
             }
             else {
-                builder.append(optionalPrefix);
-                builder.append("/>");
+                builder.append(optionalPrefix).append("/>");
             }
         }
         else {
