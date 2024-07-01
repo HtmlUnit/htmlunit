@@ -31,12 +31,6 @@ public class OfflineAudioContext extends BaseAudioContext {
 
     /**
      * Creates an instance.
-     */
-    public OfflineAudioContext() {
-    }
-
-    /**
-     * Creates an instance.
      * @param optionsOrNumberOfChannels the input
      */
     @JsxConstructor

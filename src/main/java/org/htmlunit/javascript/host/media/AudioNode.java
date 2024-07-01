@@ -31,12 +31,6 @@ public class AudioNode extends EventTarget {
 
     /**
      * Creates an instance.
-     */
-    public AudioNode() {
-    }
-
-    /**
-     * Creates an instance.
      * @param baCtx the required audio context
      */
     @JsxConstructor

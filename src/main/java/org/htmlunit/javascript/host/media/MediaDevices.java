@@ -30,12 +30,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class MediaDevices extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public MediaDevices() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

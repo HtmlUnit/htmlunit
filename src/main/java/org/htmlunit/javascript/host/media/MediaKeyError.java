@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.event.Event;
 public class MediaKeyError extends Event {
 
     /**
-     * Creates an instance.
-     */
-    public MediaKeyError() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

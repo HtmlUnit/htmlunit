@@ -29,12 +29,6 @@ public class ChannelSplitterNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    public ChannelSplitterNode() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor(final Object baCtx) {

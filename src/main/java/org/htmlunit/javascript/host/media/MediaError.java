@@ -45,12 +45,6 @@ public class MediaError extends HtmlUnitScriptable {
     public static final int MEDIA_ERR_SRC_NOT_SUPPORTED = 4;
 
     /**
-     * Creates an instance.
-     */
-    public MediaError() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

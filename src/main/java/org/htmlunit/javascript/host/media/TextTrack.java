@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class TextTrack extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public TextTrack() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

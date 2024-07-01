@@ -32,12 +32,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class MediaStream extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public MediaStream() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

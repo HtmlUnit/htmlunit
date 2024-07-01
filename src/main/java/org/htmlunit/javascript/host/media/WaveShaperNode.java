@@ -29,12 +29,6 @@ public class WaveShaperNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    public WaveShaperNode() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor(final Object baCtx) {

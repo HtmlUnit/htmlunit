@@ -29,12 +29,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class MediaSource extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public MediaSource() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

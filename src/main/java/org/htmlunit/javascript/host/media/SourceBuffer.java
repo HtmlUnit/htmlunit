@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class SourceBuffer extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public SourceBuffer() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

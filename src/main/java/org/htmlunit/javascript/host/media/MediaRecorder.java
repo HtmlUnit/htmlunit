@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class MediaRecorder extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public MediaRecorder() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

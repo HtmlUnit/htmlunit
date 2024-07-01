@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class MediaStreamTrack extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public MediaStreamTrack() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

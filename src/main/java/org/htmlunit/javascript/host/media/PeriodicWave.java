@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PeriodicWave extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public PeriodicWave() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

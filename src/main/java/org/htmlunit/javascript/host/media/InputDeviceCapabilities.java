@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class InputDeviceCapabilities extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public InputDeviceCapabilities() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

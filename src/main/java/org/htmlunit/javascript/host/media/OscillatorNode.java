@@ -30,12 +30,6 @@ public class OscillatorNode extends AudioScheduledSourceNode {
     /**
      * Creates an instance.
      */
-    public OscillatorNode() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor(final Object baCtx) {

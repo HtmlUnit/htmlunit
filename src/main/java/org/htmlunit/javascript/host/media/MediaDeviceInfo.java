@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class MediaDeviceInfo extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public MediaDeviceInfo() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

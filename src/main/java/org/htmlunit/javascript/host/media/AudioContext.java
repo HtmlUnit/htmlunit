@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class AudioContext extends BaseAudioContext {
 
     /**
-     * Creates an instance.
-     */
-    public AudioContext() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -34,12 +34,6 @@ public class AudioParam extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
-    public AudioParam() {
-    }
-
-    /**
-     * Creates a new instance.
-     */
     @JsxConstructor
     public void jsConstructor() {
         value_ = getDefaultValue();

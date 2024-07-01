@@ -29,12 +29,6 @@ public class BiquadFilterNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    public BiquadFilterNode() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor(final Object baCtx) {

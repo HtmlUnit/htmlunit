@@ -30,12 +30,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class RemotePlayback extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public RemotePlayback() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

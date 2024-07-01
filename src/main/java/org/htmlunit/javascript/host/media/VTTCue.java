@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class VTTCue extends TextTrackCue {
 
     /**
-     * Creates a new instance.
-     */
-    public VTTCue() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

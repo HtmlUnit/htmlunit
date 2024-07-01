@@ -37,12 +37,6 @@ public class BaseAudioContext extends EventTarget {
     /**
      * Creates an instance.
      */
-    public BaseAudioContext() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor() {

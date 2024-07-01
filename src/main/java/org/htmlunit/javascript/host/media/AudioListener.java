@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class AudioListener extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public AudioListener() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

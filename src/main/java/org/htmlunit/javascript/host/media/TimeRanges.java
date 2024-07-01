@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class TimeRanges extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public TimeRanges() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

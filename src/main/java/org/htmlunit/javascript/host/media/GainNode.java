@@ -29,12 +29,6 @@ public class GainNode extends AudioNode {
 
     private AudioParam gain_;
 
-    /**
-     * Creates an instance.
-     */
-    public GainNode() {
-    }
-
     @Override
     @JsxConstructor
     public void jsConstructor(final Object baCtx) {

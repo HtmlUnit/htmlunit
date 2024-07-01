@@ -29,12 +29,6 @@ public class ConvolverNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    public ConvolverNode() {
-    }
-
-    /**
-     * Creates an instance.
-     */
     @Override
     @JsxConstructor
     public void jsConstructor(final Object baCtx) {
