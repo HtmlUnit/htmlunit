@@ -32,12 +32,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class RTCPeerConnection extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public RTCPeerConnection() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

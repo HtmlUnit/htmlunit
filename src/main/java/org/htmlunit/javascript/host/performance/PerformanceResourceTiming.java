@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PerformanceResourceTiming extends PerformanceEntry {
 
     /**
-     * Creates an instance.
-     */
-    public PerformanceResourceTiming() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

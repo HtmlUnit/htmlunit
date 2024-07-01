@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class SpeechSynthesisUtterance extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public SpeechSynthesisUtterance() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

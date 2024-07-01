@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class RTCIceCandidate extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public RTCIceCandidate() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

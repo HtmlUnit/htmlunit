@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class PresentationConnection extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public PresentationConnection() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

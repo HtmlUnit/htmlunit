@@ -33,12 +33,6 @@ public class Performance extends EventTarget {
     private PerformanceTiming timing_;
 
     /**
-     * Creates an instance.
-     */
-    public Performance() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

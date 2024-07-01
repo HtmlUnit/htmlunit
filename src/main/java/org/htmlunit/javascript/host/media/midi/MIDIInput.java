@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class MIDIInput extends MIDIPort {
 
     /**
-     * Creates a new instance.
-     */
-    public MIDIInput() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

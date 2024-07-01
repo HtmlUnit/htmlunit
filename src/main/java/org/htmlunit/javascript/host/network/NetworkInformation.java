@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class NetworkInformation extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public NetworkInformation() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

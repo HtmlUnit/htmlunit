@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class RTCCertificate extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public RTCCertificate() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

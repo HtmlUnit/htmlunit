@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PerformanceEntry extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public PerformanceEntry() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

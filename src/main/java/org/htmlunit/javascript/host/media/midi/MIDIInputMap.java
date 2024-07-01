@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class MIDIInputMap extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public MIDIInputMap() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

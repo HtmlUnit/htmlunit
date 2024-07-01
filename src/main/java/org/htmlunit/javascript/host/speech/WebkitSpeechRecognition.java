@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class WebkitSpeechRecognition extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public WebkitSpeechRecognition() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PaymentAddress extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public PaymentAddress() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

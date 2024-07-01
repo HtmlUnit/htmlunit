@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebkitSpeechGrammar extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public WebkitSpeechGrammar() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor(functionName = "SpeechGrammar")

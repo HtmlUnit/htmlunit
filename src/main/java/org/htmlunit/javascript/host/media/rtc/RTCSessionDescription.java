@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class RTCSessionDescription extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
-     */
-    public RTCSessionDescription() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

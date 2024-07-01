@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PerformanceNavigationTiming extends PerformanceResourceTiming {
 
     /**
-     * Creates an instance.
-     */
-    public PerformanceNavigationTiming() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

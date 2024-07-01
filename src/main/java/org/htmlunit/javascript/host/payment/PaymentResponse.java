@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class PaymentResponse extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public PaymentResponse() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

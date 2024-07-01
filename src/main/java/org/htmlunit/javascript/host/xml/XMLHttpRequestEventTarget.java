@@ -35,12 +35,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public XMLHttpRequestEventTarget() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

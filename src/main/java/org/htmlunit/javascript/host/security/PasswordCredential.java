@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PasswordCredential extends Credential {
 
     /**
-     * Default constructor.
-     */
-    public PasswordCredential() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

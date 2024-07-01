@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class ServiceWorkerContainer extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public ServiceWorkerContainer() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

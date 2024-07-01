@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PerformanceMark extends PerformanceEntry {
 
     /**
-     * Creates an instance.
-     */
-    public PerformanceMark() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

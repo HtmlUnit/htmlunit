@@ -87,12 +87,6 @@ public class XMLSerializer extends HtmlUnitScriptable {
     ));
 
     /**
-     * Default constructor.
-     */
-    public XMLSerializer() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

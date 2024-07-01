@@ -54,12 +54,6 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
     public static final int TYPE_RESERVED = 255;
 
     /**
-     * Creates an instance.
-     */
-    public PerformanceNavigation() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

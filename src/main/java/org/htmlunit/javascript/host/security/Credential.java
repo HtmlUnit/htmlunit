@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class Credential extends HtmlUnitScriptable {
 
     /**
-     * Default constructor.
-     */
-    public Credential() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

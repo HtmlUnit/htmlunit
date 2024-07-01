@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class PresentationAvailability extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public PresentationAvailability() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

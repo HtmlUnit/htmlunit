@@ -27,12 +27,6 @@ import org.htmlunit.javascript.host.event.SpeechSynthesisEvent;
 public class SpeechSynthesisErrorEvent extends SpeechSynthesisEvent {
 
     /**
-     * Creates a new instance.
-     */
-    public SpeechSynthesisErrorEvent() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

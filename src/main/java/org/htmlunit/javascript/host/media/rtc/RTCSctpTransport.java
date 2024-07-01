@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class RTCSctpTransport extends EventTarget {
 
     /**
-     * Default constructor.
-     */
-    public RTCSctpTransport() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

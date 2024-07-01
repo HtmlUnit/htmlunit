@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class MIDIAccess extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public MIDIAccess() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

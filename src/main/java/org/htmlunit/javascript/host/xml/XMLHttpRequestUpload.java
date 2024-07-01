@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class XMLHttpRequestUpload extends XMLHttpRequestEventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public XMLHttpRequestUpload() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

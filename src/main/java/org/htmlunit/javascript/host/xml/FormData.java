@@ -123,12 +123,6 @@ public class FormData extends HtmlUnitScriptable {
     }
 
     /**
-     * Default constructor.
-     */
-    public FormData() {
-    }
-
-    /**
      * Constructor.
      * @param formObj a form
      */

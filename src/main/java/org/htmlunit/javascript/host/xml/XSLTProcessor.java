@@ -66,12 +66,6 @@ public class XSLTProcessor extends HtmlUnitScriptable {
     private final Map<String, Object> parameters_ = new HashMap<>();
 
     /**
-     * Default constructor.
-     */
-    public XSLTProcessor() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

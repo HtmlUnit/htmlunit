@@ -31,12 +31,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class PresentationRequest extends EventTarget {
 
     /**
-     * Creates an instance.
-     */
-    public PresentationRequest() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

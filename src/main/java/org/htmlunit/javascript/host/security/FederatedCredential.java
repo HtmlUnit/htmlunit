@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class FederatedCredential extends Credential {
 
     /**
-     * Default constructor.
-     */
-    public FederatedCredential() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

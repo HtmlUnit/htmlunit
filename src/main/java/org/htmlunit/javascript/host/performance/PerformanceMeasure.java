@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class PerformanceMeasure extends PerformanceEntry {
 
     /**
-     * Creates an instance.
-     */
-    public PerformanceMeasure() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

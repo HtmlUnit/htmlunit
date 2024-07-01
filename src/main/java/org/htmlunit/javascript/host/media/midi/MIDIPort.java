@@ -28,12 +28,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
 public class MIDIPort extends EventTarget {
 
     /**
-     * Creates a new instance.
-     */
-    public MIDIPort() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override
