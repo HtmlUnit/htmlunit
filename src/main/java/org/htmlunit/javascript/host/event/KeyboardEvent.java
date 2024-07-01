@@ -910,14 +910,14 @@ public class KeyboardEvent extends UIEvent {
         }
 
         final int keyCode;
-        if (getType().equals(Event.TYPE_KEY_PRESS)) {
+        if (Event.TYPE_KEY_PRESS.equals(getType())) {
             keyCode = Integer.valueOf(character);
         }
         else {
             keyCode = Integer.valueOf(charToKeyCode(character));
         }
         setKeyCode(keyCode);
-        if (getType().equals(Event.TYPE_KEY_PRESS)) {
+        if (Event.TYPE_KEY_PRESS.equals(getType())) {
             charCode_ = character;
         }
         which_ = charCode_ == 0 ? keyCode : Integer.valueOf(charCode_);
@@ -944,7 +944,7 @@ public class KeyboardEvent extends UIEvent {
             throw new IllegalArgumentException("Please use the 'char' constructor instead of int");
         }
         setKeyCode(keyCode);
-        if (getType().equals(Event.TYPE_KEY_PRESS)) {
+        if (Event.TYPE_KEY_PRESS.equals(getType())) {
             which_ = 0;
         }
         else {

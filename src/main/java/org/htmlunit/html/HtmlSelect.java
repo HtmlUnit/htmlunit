@@ -510,16 +510,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         throw new ElementNotFoundException("option", VALUE_ATTRIBUTE, value);
     }
 
-    private HtmlOption getOptionByValueStrict(final String value) throws ElementNotFoundException {
-        WebAssert.notNull(VALUE_ATTRIBUTE, value);
-        for (final HtmlOption option : getOptions()) {
-            if (option.getAttributeDirect(VALUE_ATTRIBUTE).equals(value)) {
-                return option;
-            }
-        }
-        throw new ElementNotFoundException("option", VALUE_ATTRIBUTE, value);
-    }
-
     /**
      * Returns the {@link HtmlOption} object that has the specified text.
      *

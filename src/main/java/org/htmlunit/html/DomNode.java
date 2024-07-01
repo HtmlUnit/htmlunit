@@ -1619,9 +1619,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         while (toInform != null) {
             final List<DomChangeListener> listeners = toInform.safeGetDomListeners();
             if (listeners != null) {
-                // iterate by index and safe on an iterator copy
-                for (int i = 0; i < listeners.size(); i++) {
-                    listeners.get(i).nodeAdded(event);
+                for (final DomChangeListener domChangeListener : listeners) {
+                    domChangeListener.nodeAdded(event);
                 }
             }
             toInform = toInform.getParentNode();
@@ -1676,9 +1675,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
             final List<CharacterDataChangeListener> listeners = toInform.safeGetCharacterDataListeners();
             if (listeners != null) {
-                // iterate by index and safe on an iterator copy
-                for (int i = 0; i < listeners.size(); i++) {
-                    listeners.get(i).characterDataChanged(event);
+                for (final CharacterDataChangeListener changeListener : listeners) {
+                    changeListener.characterDataChanged(event);
                 }
             }
             toInform = toInform.getParentNode();
@@ -1698,9 +1696,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         while (toInform != null) {
             final List<DomChangeListener> listeners = toInform.safeGetDomListeners();
             if (listeners != null) {
-                // iterate by index and safe on an iterator copy
-                for (int i = 0; i < listeners.size(); i++) {
-                    listeners.get(i).nodeDeleted(event);
+                for (final DomChangeListener domChangeListener : listeners) {
+                    domChangeListener.nodeDeleted(event);
                 }
             }
             toInform = toInform.getParentNode();

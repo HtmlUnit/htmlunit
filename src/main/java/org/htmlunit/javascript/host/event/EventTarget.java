@@ -257,7 +257,7 @@ public class EventTarget extends HtmlUnitScriptable {
 
         ScriptResult result = null;
         final DomNode domNode = getDomNodeOrNull();
-        if (event.getType().equals(MouseEvent.TYPE_CLICK) && (domNode instanceof DomElement)) {
+        if (MouseEvent.TYPE_CLICK.equals(event.getType()) && (domNode instanceof DomElement)) {
             try {
                 ((DomElement) domNode).click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
             }

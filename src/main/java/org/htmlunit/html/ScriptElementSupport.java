@@ -160,7 +160,7 @@ public final class ScriptElementSupport {
         final ScriptElement scriptElement = (ScriptElement) element;
 
         final String src = scriptElement.getSrcAttribute();
-        if (src.equals(SLASH_SLASH_COLON)) {
+        if (SLASH_SLASH_COLON.equals(src)) {
             executeEvent(element, Event.TYPE_ERROR);
             return;
         }

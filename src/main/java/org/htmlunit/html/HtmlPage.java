@@ -1243,7 +1243,7 @@ public class HtmlPage extends SgmlPage {
         final WebWindow window = getEnclosingWindow();
         if (window.getScriptableObject() instanceof Window) {
             final Event event;
-            if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
+            if (Event.TYPE_BEFORE_UNLOAD.equals(eventType)) {
                 event = new BeforeUnloadEvent(this, eventType);
             }
             else {
