@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLTableCaptionElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableCaptionElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

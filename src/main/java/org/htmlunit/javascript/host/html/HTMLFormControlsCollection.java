@@ -27,12 +27,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLFormControlsCollection extends HTMLCollection {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLFormControlsCollection() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

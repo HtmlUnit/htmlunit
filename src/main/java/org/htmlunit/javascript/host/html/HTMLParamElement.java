@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 public class HTMLParamElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLParamElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

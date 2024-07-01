@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLTitleElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTitleElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

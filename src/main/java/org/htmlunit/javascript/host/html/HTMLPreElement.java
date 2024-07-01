@@ -34,12 +34,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLPreElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLPreElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

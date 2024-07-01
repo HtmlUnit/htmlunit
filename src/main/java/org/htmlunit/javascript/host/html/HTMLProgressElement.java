@@ -36,12 +36,6 @@ public class HTMLProgressElement extends HTMLElement {
     private NodeList labels_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLProgressElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

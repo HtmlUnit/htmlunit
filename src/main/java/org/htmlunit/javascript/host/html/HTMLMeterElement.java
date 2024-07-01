@@ -35,12 +35,6 @@ public class HTMLMeterElement extends HTMLElement {
     private NodeList labels_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLMeterElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLParagraphElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLParagraphElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

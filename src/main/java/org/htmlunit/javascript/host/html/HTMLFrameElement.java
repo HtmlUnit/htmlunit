@@ -38,12 +38,6 @@ import org.htmlunit.javascript.host.WindowProxy;
 public class HTMLFrameElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLFrameElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

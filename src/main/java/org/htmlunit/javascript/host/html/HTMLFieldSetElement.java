@@ -33,12 +33,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLFieldSetElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLFieldSetElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

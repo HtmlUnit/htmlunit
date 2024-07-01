@@ -43,12 +43,6 @@ import org.htmlunit.javascript.host.event.MouseEvent;
 public class HTMLTableCellElement extends HTMLTableComponent {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableCellElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

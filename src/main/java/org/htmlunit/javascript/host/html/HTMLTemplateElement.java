@@ -32,12 +32,6 @@ public class HTMLTemplateElement extends HTMLElement {
     private DocumentFragment content_;
 
     /**
-     * Creates a new instance.
-     */
-    public HTMLTemplateElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

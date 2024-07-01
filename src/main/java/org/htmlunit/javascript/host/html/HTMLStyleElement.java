@@ -36,12 +36,6 @@ public class HTMLStyleElement extends HTMLElement {
     private CSSStyleSheet sheet_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLStyleElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -36,12 +36,6 @@ import org.htmlunit.xml.XmlPage;
 public class HTMLUnknownElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLUnknownElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

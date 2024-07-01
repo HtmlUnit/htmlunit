@@ -50,12 +50,6 @@ public class HTMLSelectElement extends HTMLElement {
     private NodeList labels_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLSelectElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

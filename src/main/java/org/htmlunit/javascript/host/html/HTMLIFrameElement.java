@@ -43,12 +43,6 @@ public class HTMLIFrameElement extends HTMLElement {
     private boolean isAttachedToPageDuringOnload_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLIFrameElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

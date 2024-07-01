@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 public class ValidityState extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
-     */
-    public ValidityState() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

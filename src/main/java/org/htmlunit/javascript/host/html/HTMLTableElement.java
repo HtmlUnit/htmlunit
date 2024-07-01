@@ -49,12 +49,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLTableElement extends RowContainer {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

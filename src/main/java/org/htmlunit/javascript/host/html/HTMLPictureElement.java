@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLPictureElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLPictureElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

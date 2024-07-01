@@ -33,12 +33,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLTableColElement extends HTMLTableComponent {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableColElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

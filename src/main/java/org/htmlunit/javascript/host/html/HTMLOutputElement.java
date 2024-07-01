@@ -37,12 +37,6 @@ public class HTMLOutputElement extends HTMLElement {
     private NodeList labels_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLOutputElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

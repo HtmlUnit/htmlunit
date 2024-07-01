@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLFontElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLFontElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

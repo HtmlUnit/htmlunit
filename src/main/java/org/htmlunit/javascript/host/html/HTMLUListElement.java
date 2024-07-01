@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLUListElement extends HTMLListElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLUListElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

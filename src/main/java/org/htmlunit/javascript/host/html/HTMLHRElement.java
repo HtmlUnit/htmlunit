@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLHRElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLHRElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

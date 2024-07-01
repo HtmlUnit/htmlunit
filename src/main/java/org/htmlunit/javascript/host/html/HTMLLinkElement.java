@@ -47,12 +47,6 @@ public class HTMLLinkElement extends HTMLElement {
     private CSSStyleSheet sheet_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLLinkElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

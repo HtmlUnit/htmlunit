@@ -29,12 +29,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLSourceElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLSourceElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

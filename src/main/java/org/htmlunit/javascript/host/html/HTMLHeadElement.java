@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLHeadElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLHeadElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

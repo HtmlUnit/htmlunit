@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLMetaElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLMetaElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

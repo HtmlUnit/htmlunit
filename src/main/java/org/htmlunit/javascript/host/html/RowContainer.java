@@ -41,13 +41,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class RowContainer extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public RowContainer() {
-        // Empty.
-    }
-
-    /**
      * Returns the rows in the element.
      * @return the rows in the element
      */

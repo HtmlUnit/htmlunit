@@ -70,12 +70,6 @@ import org.htmlunit.util.MimeType;
 public class HTMLFormElement extends HTMLElement implements Function {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLFormElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

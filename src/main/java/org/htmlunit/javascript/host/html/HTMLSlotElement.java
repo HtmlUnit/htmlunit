@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLSlotElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLSlotElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

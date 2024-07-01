@@ -33,12 +33,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLLabelElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLLabelElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

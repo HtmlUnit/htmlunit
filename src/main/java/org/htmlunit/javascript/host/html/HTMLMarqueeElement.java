@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLMarqueeElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLMarqueeElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

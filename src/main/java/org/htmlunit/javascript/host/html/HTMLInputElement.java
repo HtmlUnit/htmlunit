@@ -61,12 +61,6 @@ public class HTMLInputElement extends HTMLElement {
     private NodeList labels_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLInputElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

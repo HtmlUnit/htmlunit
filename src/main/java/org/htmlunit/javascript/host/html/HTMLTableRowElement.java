@@ -44,12 +44,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLTableRowElement extends HTMLTableComponent {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableRowElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

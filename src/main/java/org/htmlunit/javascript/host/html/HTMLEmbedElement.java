@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLEmbedElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLEmbedElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

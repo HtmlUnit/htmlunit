@@ -40,12 +40,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLHeadingElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLHeadingElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

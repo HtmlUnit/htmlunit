@@ -36,12 +36,6 @@ import org.htmlunit.javascript.host.event.Event;
 public class HTMLFrameSetElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLFrameSetElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -32,12 +32,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLMenuElement extends HTMLListElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLMenuElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

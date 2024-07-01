@@ -32,12 +32,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLModElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLModElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

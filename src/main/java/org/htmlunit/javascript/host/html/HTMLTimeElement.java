@@ -30,12 +30,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLTimeElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTimeElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

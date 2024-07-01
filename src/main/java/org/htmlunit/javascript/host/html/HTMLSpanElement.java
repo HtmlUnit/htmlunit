@@ -36,12 +36,6 @@ public class HTMLSpanElement extends HTMLElement {
     private boolean endTagForbidden_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLSpanElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

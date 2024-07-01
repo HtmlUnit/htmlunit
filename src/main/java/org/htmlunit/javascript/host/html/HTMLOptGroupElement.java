@@ -32,12 +32,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLOptGroupElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLOptGroupElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

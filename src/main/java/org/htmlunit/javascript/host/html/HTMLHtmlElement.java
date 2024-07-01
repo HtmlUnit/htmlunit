@@ -32,12 +32,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLHtmlElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLHtmlElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

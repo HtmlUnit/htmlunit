@@ -83,12 +83,6 @@ public class HTMLMediaElement extends HTMLElement {
     public static final int NETWORK_NO_SOURCE = 3;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLMediaElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

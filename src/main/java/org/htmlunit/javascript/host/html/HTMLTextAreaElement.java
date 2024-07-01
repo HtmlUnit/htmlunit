@@ -42,12 +42,6 @@ public class HTMLTextAreaElement extends HTMLElement {
     private NodeList labels_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTextAreaElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

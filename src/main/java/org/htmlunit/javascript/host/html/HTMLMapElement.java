@@ -40,12 +40,6 @@ public class HTMLMapElement extends HTMLElement {
     private HTMLCollection areas_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLMapElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

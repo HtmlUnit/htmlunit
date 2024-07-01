@@ -47,12 +47,6 @@ public class HTMLTrackElement extends HTMLElement {
     public static final int ERROR = 3;
 
     /**
-     * Creates a new instance.
-     */
-    public HTMLTrackElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -208,12 +208,6 @@ public class HTMLElement extends Element {
     private boolean endTagForbidden_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLVideoElement extends HTMLMediaElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLVideoElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

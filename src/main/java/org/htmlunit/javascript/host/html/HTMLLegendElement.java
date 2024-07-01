@@ -31,12 +31,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLLegendElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLLegendElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

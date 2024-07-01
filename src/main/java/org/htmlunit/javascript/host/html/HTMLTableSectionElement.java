@@ -39,12 +39,6 @@ public class HTMLTableSectionElement extends RowContainer {
     private static final String VALIGN_DEFAULT_VALUE = "top";
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableSectionElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

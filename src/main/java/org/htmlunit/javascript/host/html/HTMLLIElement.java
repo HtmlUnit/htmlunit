@@ -28,12 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class HTMLLIElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLLIElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override

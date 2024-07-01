@@ -33,12 +33,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLQuoteElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLQuoteElement() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @Override
