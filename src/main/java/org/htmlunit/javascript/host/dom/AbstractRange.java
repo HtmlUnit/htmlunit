@@ -59,6 +59,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      */
     protected AbstractRange(final Node startContainer, final Node endContainer,
             final int startOffset, final int endOffset) {
+        super();
         startContainer_ = startContainer;
         endContainer_ = endContainer;
 

@@ -14,6 +14,8 @@
  */
 package org.htmlunit.util;
 
+import java.util.Locale;
+
 import org.htmlunit.cyberneko.util.FastHashMap;
 
 /**
@@ -78,7 +80,7 @@ public final class MimeType {
         // have uppercase ready too, keys() is safe for
         // concurrent modification
         for (final String k : lookupMap.keys()) {
-            lookupMap.put(k.toUpperCase(), true);
+            lookupMap.put(k.toUpperCase(Locale.ROOT), true);
         }
     }
 
@@ -133,7 +135,7 @@ public final class MimeType {
         // this is our fallback in case we have not found the usual casing
         // our target is ASCII, we can lowercase the normal way because
         // matching some languages with strange rules does not matter, cheaper!
-        final String mimeTypeLC = mimeType.toLowerCase();
+        final String mimeTypeLC = mimeType.toLowerCase(Locale.ROOT);
 
         return "application/javascript".equals(mimeTypeLC)
                 || "application/ecmascript".equals(mimeTypeLC)
@@ -169,7 +171,7 @@ public final class MimeType {
         // have uppercase ready too, keys() is safe for
         // concurrent modification
         for (final String k : map.keys()) {
-            map.put(k.toUpperCase(), map.get(k));
+            map.put(k.toUpperCase(Locale.ROOT), map.get(k));
         }
         return map;
     }
@@ -194,7 +196,7 @@ public final class MimeType {
         String value = type2extension.get(contentType);
         if (value == null) {
             // fallback
-            final String uppercased = contentType.toLowerCase();
+            final String uppercased = contentType.toLowerCase(Locale.ROOT);
             value = type2extension.get(uppercased);
         }
 

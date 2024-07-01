@@ -44,6 +44,7 @@ public class CSSStyleRule extends CSSRule {
      * Creates a new instance.
      */
     public CSSStyleRule() {
+        super();
     }
 
     /**

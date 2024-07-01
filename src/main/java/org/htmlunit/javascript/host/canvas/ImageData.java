@@ -110,6 +110,7 @@ public class ImageData extends HtmlUnitScriptable {
     }
 
     ImageData(final RenderingBackend context, final int x, final int y, final int width, final int height) {
+        super();
         if (context == null) {
             bytes_ = new byte[width * height * 4];
         }

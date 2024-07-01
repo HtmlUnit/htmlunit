@@ -124,6 +124,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public CSSStyleDeclaration() {
+        super();
     }
 
     /**
@@ -143,6 +144,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param styleDeclaration the style declaration to be based on
      */
     public CSSStyleDeclaration(final Element element, final AbstractCssStyleDeclaration styleDeclaration) {
+        super();
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
 
@@ -160,6 +162,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param styleDeclaration the style declaration to wrap
      */
     CSSStyleDeclaration(final CSSStyleSheet parentStyleSheet, final WrappedCssStyleDeclaration styleDeclaration) {
+        super();
         setParentScope(parentStyleSheet);
         setPrototype(getPrototype(getClass()));
 

@@ -55,6 +55,7 @@ public class NodeList extends AbstractList implements Callable {
      * Creates an instance.
      */
     public NodeList() {
+        super();
     }
 
     /**

@@ -121,8 +121,7 @@ public class DOMException extends HtmlUnitScriptable {
      * Default constructor used to build the prototype.
      */
     public DOMException() {
-        code_ = -1;
-        message_ = null;
+        this(null, -1);
     }
 
     /**
@@ -138,6 +137,7 @@ public class DOMException extends HtmlUnitScriptable {
      * @param errorCode the error code
      */
     public DOMException(final String message, final int errorCode) {
+        super();
         code_ = errorCode;
         message_ = message;
     }

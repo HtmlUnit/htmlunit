@@ -44,6 +44,7 @@
     </rule>
 
     <rule ref="category/java/errorprone.xml">
+        <exclude name="AvoidLiteralsInIfCondition"/>
         <exclude name="MissingSerialVersionUID"/>
     </rule>
 

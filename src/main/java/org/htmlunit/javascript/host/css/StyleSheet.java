@@ -47,6 +47,7 @@ public class StyleSheet extends HtmlUnitScriptable {
      * Default constructor.
      */
     public StyleSheet() {
+        super();
         ownerNode_ = null;
     }
 
@@ -58,6 +59,7 @@ public class StyleSheet extends HtmlUnitScriptable {
     }
 
     public StyleSheet(final HTMLElement ownerNode) {
+        super();
         ownerNode_ = ownerNode;
     }
 

@@ -31,6 +31,7 @@ class StaticDomNodeList extends AbstractList<DomNode> implements DomNodeList<Dom
     private final List<DomNode> elements_;
 
     StaticDomNodeList(final List<DomNode> elements) {
+        super();
         elements_ = elements;
     }
 

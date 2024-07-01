@@ -34,6 +34,7 @@ public class TextMetrics extends HtmlUnitScriptable {
      * Default constructor.
      */
     public TextMetrics() {
+        super();
         width_ = 0;
     }
 
@@ -45,6 +46,7 @@ public class TextMetrics extends HtmlUnitScriptable {
     }
 
     TextMetrics(final int width) {
+        super();
         width_ = width;
     }
 

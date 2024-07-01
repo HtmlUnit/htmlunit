@@ -40,6 +40,7 @@ public class MediaList extends HtmlUnitScriptable {
      * Creates a new instance.
      */
     public MediaList() {
+        super();
         cssMediaList_ = null;
     }
 
@@ -56,6 +57,7 @@ public class MediaList extends HtmlUnitScriptable {
      * @param cssMediaList the css media list that this host object exposes
      */
     public MediaList(final CSSStyleSheet parent, final CssMediaList cssMediaList) {
+        super();
         cssMediaList_ = cssMediaList;
         setParentScope(parent);
         setPrototype(getPrototype(getClass()));

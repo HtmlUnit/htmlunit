@@ -198,6 +198,7 @@ public class CSSRule extends HtmlUnitScriptable {
      * @param rule the wrapped rule
      */
     protected CSSRule(final CSSStyleSheet stylesheet, final AbstractCSSRuleImpl rule) {
+        super();
         stylesheet_ = stylesheet;
         rule_ = rule;
         setParentScope(stylesheet);

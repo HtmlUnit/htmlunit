@@ -65,6 +65,7 @@ public class StyleSheetList extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public StyleSheetList() {
+        super();
     }
 
     /**
@@ -80,6 +81,7 @@ public class StyleSheetList extends HtmlUnitScriptable {
      * @param document the owning document
      */
     public StyleSheetList(final Document document) {
+        super();
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
 

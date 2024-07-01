@@ -40,6 +40,7 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
     private final BrowserVersion browserVersion_;
 
     HtmlUnitDomainHandler(final BrowserVersion browserVersion) {
+        super();
         browserVersion_ = browserVersion;
     }
 

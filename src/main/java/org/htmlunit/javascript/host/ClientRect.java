@@ -58,6 +58,7 @@ public class ClientRect extends HtmlUnitScriptable {
      * @param top the top coordinate of the rectangle surrounding the object content
      */
     public ClientRect(final int bottom, final int left, final int right, final int top) {
+        this();
         bottom_ = bottom;
         left_ = left;
         right_ = right;

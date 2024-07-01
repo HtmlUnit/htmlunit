@@ -159,6 +159,7 @@ public class HttpWebConnection implements WebConnection {
      * @param webClient the WebClient that is using this connection
      */
     public HttpWebConnection(final WebClient webClient) {
+        super();
         webClient_ = webClient;
         htmlUnitCookieSpecProvider_ = new HtmlUnitCookieSpecProvider(webClient.getBrowserVersion());
         usedOptions_ = new WebClientOptions();

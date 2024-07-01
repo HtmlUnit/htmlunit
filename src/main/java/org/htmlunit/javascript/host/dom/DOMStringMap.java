@@ -39,6 +39,7 @@ public final class DOMStringMap extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public DOMStringMap() {
+        super();
     }
 
     /**
@@ -53,6 +54,7 @@ public final class DOMStringMap extends HtmlUnitScriptable {
      * @param node the node which contains the underlying string
      */
     public DOMStringMap(final Node node) {
+        super();
         setDomNode(node.getDomNodeOrDie(), false);
         setParentScope(node.getParentScope());
         setPrototype(getPrototype(getClass()));

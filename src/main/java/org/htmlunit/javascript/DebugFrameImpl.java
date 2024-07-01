@@ -63,6 +63,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      * @param functionOrScript the function or script to which this frame corresponds
      */
     public DebugFrameImpl(final DebuggableScript functionOrScript) {
+        super();
         functionOrScript_ = functionOrScript;
     }
 

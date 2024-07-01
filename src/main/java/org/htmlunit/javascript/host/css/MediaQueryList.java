@@ -38,6 +38,7 @@ public class MediaQueryList extends EventTarget {
      * Default constructor.
      */
     public MediaQueryList() {
+        super();
     }
 
     /**
@@ -55,6 +56,7 @@ public class MediaQueryList extends EventTarget {
      * @param mediaQueryString the media query string
      */
     public MediaQueryList(final String mediaQueryString) {
+        super();
         media_ = mediaQueryString;
     }
 
