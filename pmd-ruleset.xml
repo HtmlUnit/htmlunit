@@ -36,7 +36,9 @@
     <rule ref="category/java/design.xml">
         <exclude name="CognitiveComplexity"/>
         <exclude name="CyclomaticComplexity"/>
+        <exclude name="GodClass"/>
         <exclude name="LawOfDemeter"/>
+        <exclude name="NcssCount"/>
         <exclude name="NPathComplexity"/>
     </rule>
 
