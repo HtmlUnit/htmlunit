@@ -286,7 +286,7 @@ public class XPathResult extends HtmlUnitScriptable {
             }
         }
 
-        return result_.size() > 0;
+        return !result_.isEmpty();
     }
 
     /**
@@ -302,7 +302,7 @@ public class XPathResult extends HtmlUnitScriptable {
     }
 
     private String asString() {
-        if (result_.size() < 1) {
+        if (result_.isEmpty()) {
             return "";
         }
 

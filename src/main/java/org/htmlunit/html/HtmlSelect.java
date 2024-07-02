@@ -453,10 +453,10 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     @Override
     public String getDefaultValue() {
         final List<HtmlOption> options = getSelectedOptions();
-        if (options.size() > 0) {
-            return options.get(0).getValueAttribute();
+        if (options.isEmpty()) {
+            return "";
         }
-        return "";
+        return options.get(0).getValueAttribute();
     }
 
     /**

@@ -301,7 +301,7 @@ public final class HttpClientConverter {
     public static void addMatching(final Set<org.htmlunit.util.Cookie> cookies,
             final URL normalizedUrl, final BrowserVersion browserVersion,
             final Set<org.htmlunit.util.Cookie> matches) {
-        if (cookies.size() > 0) {
+        if (!cookies.isEmpty()) {
             final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(normalizedUrl);
             final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
             for (final org.htmlunit.util.Cookie cookie : cookies) {

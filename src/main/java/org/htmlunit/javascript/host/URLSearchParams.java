@@ -296,7 +296,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
         final List<NameValuePair> splitted = splitQuery();
         splitted.removeIf(entry -> entry.getName().equals(name));
 
-        if (splitted.size() == 0) {
+        if (splitted.isEmpty()) {
             try {
                 url_.setSearch((String) null);
             }
@@ -536,7 +536,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
         webRequest.setEncodingType(FormEncodingType.URL_ENCODED);
 
         final List<NameValuePair> splitted = splitQuery();
-        if (splitted.size() > 0) {
+        if (!splitted.isEmpty()) {
             final List<NameValuePair> params = new ArrayList<>();
             for (final NameValuePair entry : splitted) {
                 params.add(new NameValuePair(entry.getName(), entry.getValue()));

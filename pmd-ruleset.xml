@@ -31,6 +31,7 @@
         <exclude name="ShortClassName"/>
         <exclude name="ShortMethodName"/>
         <exclude name="ShortVariable"/>
+        <exclude name="UnnecessaryBoxing"/>
     </rule>
 
     <rule ref="category/java/design.xml">
