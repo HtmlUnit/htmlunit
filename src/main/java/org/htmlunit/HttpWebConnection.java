@@ -230,6 +230,7 @@ public class HttpWebConnection implements WebConnection {
      * @param httpMethod the httpMethod used (can be null)
      */
     protected void onResponseGenerated(final HttpUriRequest httpMethod) {
+        // nothing to do
     }
 
     /**

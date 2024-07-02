@@ -37,6 +37,7 @@ public class AboutURLConnection extends URLConnection {
      */
     @Override
     public void connect() {
+        // nothing to do
     }
 
 }

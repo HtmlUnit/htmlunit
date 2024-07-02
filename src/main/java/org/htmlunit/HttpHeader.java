@@ -156,5 +156,6 @@ public final class HttpHeader {
     public static final String CONTENT_SECURIRY_POLICY = "Content-Security-Policy";
 
     private HttpHeader() {
+        // util class
     }
 }

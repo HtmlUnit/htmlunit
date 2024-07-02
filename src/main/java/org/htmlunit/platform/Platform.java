@@ -180,5 +180,6 @@ public final class Platform {
     }
 
     private Platform() {
+        // util class
     }
 }

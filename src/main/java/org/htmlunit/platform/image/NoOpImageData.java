@@ -51,5 +51,6 @@ public class NoOpImageData implements ImageData {
      */
     @Override
     public void close() {
+        // nothing to do
     }
 }
