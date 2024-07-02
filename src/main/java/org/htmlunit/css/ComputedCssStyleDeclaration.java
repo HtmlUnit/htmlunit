@@ -1437,7 +1437,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final DomElement element = getDomElement();
 
         if (element instanceof HtmlImage) {
-            return setCachedHeight(((HtmlImage) element).getHeightOrDefault());
+            return updateCachedHeight(((HtmlImage) element).getHeightOrDefault());
         }
 
         final boolean isInline = INLINE.equals(getDisplay()) && !(element instanceof HtmlInlineFrame);
@@ -1445,11 +1445,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (isInline || super.getHeight().isEmpty()) {
             final int contentHeight = getContentHeight();
             if (contentHeight > 0) {
-                return setCachedHeight(contentHeight);
+                return updateCachedHeight(contentHeight);
             }
         }
 
-        return setCachedHeight(getEmptyHeight());
+        return updateCachedHeight(getEmptyHeight());
     }
 
     /**
@@ -1488,12 +1488,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         final DomElement element = getDomElement();
         if (!element.mayBeDisplayed()) {
-            return setCachedWidth(0);
+            return updateCachedWidth(0);
         }
 
         final String display = getDisplay();
         if (NONE.equals(display)) {
-            return setCachedWidth(0);
+            return updateCachedWidth(0);
         }
 
         final int width;
@@ -1583,7 +1583,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 });
         }
 
-        return setCachedWidth(width);
+        return updateCachedWidth(width);
     }
 
     /**
@@ -1640,19 +1640,19 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         final DomElement element = getDomElement();
         if (!element.mayBeDisplayed()) {
-            return setCachedHeight2(0);
+            return updateCachedHeight2(0);
         }
 
         final String display = getDisplay();
         if (NONE.equals(display)) {
-            return setCachedHeight2(0);
+            return updateCachedHeight2(0);
         }
 
         final WebWindow webWindow = element.getPage().getEnclosingWindow();
         final int windowHeight = webWindow.getInnerHeight();
 
         if (element instanceof HtmlBody) {
-            return setCachedHeight2(windowHeight);
+            return updateCachedHeight2(windowHeight);
         }
 
         final boolean isInline = INLINE.equals(display) && !(element instanceof HtmlInlineFrame);
@@ -1823,7 +1823,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             height = defaultHeight;
         }
 
-        return setCachedHeight2(height);
+        return updateCachedHeight2(height);
     }
 
     /**
@@ -1939,7 +1939,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int border = NONE.equals(getDisplay()) ? 0 : getBorderLeftValue() + getBorderRightValue();
-        return setCachedBorderHorizontal(border);
+        return updateCachedBorderHorizontal(border);
     }
 
     private int getBorderVertical() {
@@ -1949,7 +1949,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int border = NONE.equals(getDisplay()) ? 0 : getBorderTopValue() + getBorderBottomValue();
-        return setCachedBorderVertical(border);
+        return updateCachedBorderVertical(border);
     }
 
     /**
@@ -1991,7 +1991,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int padding = NONE.equals(getDisplay()) ? 0 : getPaddingLeftValue() + getPaddingRightValue();
-        return setCachedPaddingHorizontal(padding);
+        return updateCachedPaddingHorizontal(padding);
     }
 
     private int getPaddingVertical() {
@@ -2001,7 +2001,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int padding = NONE.equals(getDisplay()) ? 0 : getPaddingTopValue() + getPaddingBottomValue();
-        return setCachedPaddingVertical(padding);
+        return updateCachedPaddingVertical(padding);
     }
 
     /**
@@ -2049,7 +2049,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param width the new value
      * @return the param width
      */
-    public int setCachedWidth(final int width) {
+    public int updateCachedWidth(final int width) {
         width_ = Integer.valueOf(width);
         return width;
     }
@@ -2067,7 +2067,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param height the new value
      * @return the param height
      */
-    public int setCachedHeight(final int height) {
+    public int updateCachedHeight(final int height) {
         height_ = Integer.valueOf(height);
         return height;
     }
@@ -2085,7 +2085,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param height the new value
      * @return the param height2
      */
-    public int setCachedHeight2(final int height) {
+    public int updateCachedHeight2(final int height) {
         height2_ = Integer.valueOf(height);
         return height;
     }
@@ -2119,7 +2119,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param paddingHorizontal the new value
      * @return the param paddingHorizontal
      */
-    public int setCachedPaddingHorizontal(final int paddingHorizontal) {
+    public int updateCachedPaddingHorizontal(final int paddingHorizontal) {
         paddingHorizontal_ = Integer.valueOf(paddingHorizontal);
         return paddingHorizontal;
     }
@@ -2137,7 +2137,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param paddingVertical the new value
      * @return the param paddingVertical
      */
-    public int setCachedPaddingVertical(final int paddingVertical) {
+    public int updateCachedPaddingVertical(final int paddingVertical) {
         paddingVertical_ = Integer.valueOf(paddingVertical);
         return paddingVertical;
     }
@@ -2155,7 +2155,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param borderHorizontal the new value
      * @return the param borderHorizontal
      */
-    public int setCachedBorderHorizontal(final int borderHorizontal) {
+    public int updateCachedBorderHorizontal(final int borderHorizontal) {
         borderHorizontal_ = Integer.valueOf(borderHorizontal);
         return borderHorizontal;
     }
@@ -2173,7 +2173,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @param borderVertical the new value
      * @return the param borderVertical
      */
-    public int setCachedBorderVertical(final int borderVertical) {
+    public int updateCachedBorderVertical(final int borderVertical) {
         borderVertical_ = Integer.valueOf(borderVertical);
         return borderVertical;
     }

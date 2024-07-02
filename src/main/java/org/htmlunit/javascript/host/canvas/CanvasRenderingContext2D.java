@@ -523,16 +523,16 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     /**
      * Dummy placeholder.
      */
-    @JsxFunction
-    public void getLineDash() {
+    @JsxFunction(functionName = "getLineDash")
+    public void lineDash() {
         LOG.info("CanvasRenderingContext2D.getLineDash() not yet implemented");
     }
 
     /**
      * Dummy placeholder.
      */
-    @JsxFunction
-    public void getLineData() {
+    @JsxFunction(functionName = "getLineData")
+    public void lineData() {
         LOG.info("CanvasRenderingContext2D.getLineData() not yet implemented");
     }
 
