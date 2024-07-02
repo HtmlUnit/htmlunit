@@ -84,7 +84,7 @@ public final class ClassConfiguration {
             throw new IllegalStateException("Can not have two constructors for "
                     + jsConstructor_.getValue().getDeclaringClass().getName());
         }
-        jsConstructor_ = new AbstractMap.SimpleImmutableEntry(name, jsConstructor);
+        jsConstructor_ = new AbstractMap.SimpleImmutableEntry<>(name, jsConstructor);
     }
 
     void setJSConstructorAlias(final String alias) {

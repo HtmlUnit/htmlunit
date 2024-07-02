@@ -553,7 +553,7 @@ public class HTMLDocument extends Document {
         if ("null".equals(elementName)
                 || (elementName.isEmpty()
                     && getBrowserVersion().hasFeature(HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY))) {
-            return NodeList.staticNodeList(getWindow(), new ArrayList<DomNode>());
+            return NodeList.staticNodeList(getWindow(), new ArrayList<>());
         }
 
         final HtmlPage page = getPage();
