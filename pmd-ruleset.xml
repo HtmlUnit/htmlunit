@@ -34,6 +34,7 @@
         <exclude name="FieldNamingConventions"/>
         <exclude name="IdenticalCatchBranches"/>
         <exclude name="LongVariable"/>
+        <exclude name="MethodNamingConventions"/>
         <exclude name="OnlyOneReturn"/>
         <exclude name="ShortClassName"/>
         <exclude name="ShortMethodName"/>

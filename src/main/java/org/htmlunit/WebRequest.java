@@ -25,12 +25,11 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.http.auth.Credentials;
@@ -78,7 +77,7 @@ public class WebRequest implements Serializable {
     private Credentials urlCredentials_;
     private Credentials credentials_;
     private int timeout_;
-    private transient Set<HttpHint> httpHints_;
+    private transient EnumSet<HttpHint> httpHints_;
 
     private transient Charset charset_ = StandardCharsets.ISO_8859_1;
     // https://datatracker.ietf.org/doc/html/rfc6838#section-4.2.1
@@ -636,7 +635,7 @@ public class WebRequest implements Serializable {
 
     public void addHint(final HttpHint hint) {
         if (httpHints_ == null) {
-            httpHints_ = new HashSet<>();
+            httpHints_ = EnumSet.noneOf(HttpHint.class);
         }
         httpHints_.add(hint);
     }
