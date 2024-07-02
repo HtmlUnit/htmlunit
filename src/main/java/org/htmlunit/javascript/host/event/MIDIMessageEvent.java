@@ -31,5 +31,6 @@ public class MIDIMessageEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

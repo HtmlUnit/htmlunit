@@ -36,6 +36,7 @@ public final class UnknownElementFactory implements ElementFactory {
 
     /** Private singleton constructor. */
     private UnknownElementFactory() {
+        // util class
     }
 
     /**

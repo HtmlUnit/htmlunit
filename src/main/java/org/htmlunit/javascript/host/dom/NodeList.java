@@ -63,6 +63,7 @@ public class NodeList extends AbstractList implements Callable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

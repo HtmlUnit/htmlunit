@@ -47,6 +47,7 @@ public final class CssColors {
     }
 
     private CssColors() {
+        // util class
     }
 
     /**

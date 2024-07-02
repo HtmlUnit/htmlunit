@@ -253,6 +253,7 @@ public class CSSRule extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setCssText(final String cssText) {
+        // nothing to do
     }
 
     /**

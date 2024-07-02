@@ -31,5 +31,6 @@ public class MediaEncryptedEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

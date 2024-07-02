@@ -43,5 +43,6 @@ public class MouseScrollEvent extends MouseEvent {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

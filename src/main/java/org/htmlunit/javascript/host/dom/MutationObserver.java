@@ -162,6 +162,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      */
     @Override
     public void attributeAdded(final HtmlAttributeChangeEvent event) {
+        // nothing to do
     }
 
     /**
@@ -169,6 +170,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      */
     @Override
     public void attributeRemoved(final HtmlAttributeChangeEvent event) {
+        // nothing to do
     }
 
     /**

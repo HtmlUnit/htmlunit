@@ -28,6 +28,7 @@ public final class Html {
     public static final String SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 
     private Html() {
+        // util class
     }
 
 }

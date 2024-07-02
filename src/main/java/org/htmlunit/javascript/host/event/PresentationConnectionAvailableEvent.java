@@ -33,5 +33,6 @@ public class PresentationConnectionAvailableEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

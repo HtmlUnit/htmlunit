@@ -79,6 +79,7 @@ final class ComputedFont {
     }
 
     private ComputedFont() {
+        // util class
     }
 
 }

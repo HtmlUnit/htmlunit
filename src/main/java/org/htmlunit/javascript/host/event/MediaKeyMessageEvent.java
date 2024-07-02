@@ -31,5 +31,6 @@ public class MediaKeyMessageEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

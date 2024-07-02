@@ -32,5 +32,6 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

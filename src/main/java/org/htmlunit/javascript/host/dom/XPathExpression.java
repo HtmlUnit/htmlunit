@@ -56,6 +56,7 @@ public class XPathExpression extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     XPathExpression(final String expression, final PrefixResolver prefixResolver,

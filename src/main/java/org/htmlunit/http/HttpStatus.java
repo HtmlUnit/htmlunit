@@ -215,5 +215,6 @@ public final class HttpStatus {
     public static final int NETWORK_AUTHENTICATION_REQUIRED_511 = 511;
 
     private HttpStatus() {
+        // util class
     }
 }

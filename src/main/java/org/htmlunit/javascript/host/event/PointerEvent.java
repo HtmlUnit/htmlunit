@@ -53,6 +53,7 @@ public class PointerEvent extends MouseEvent {
      * Default constructor.
      */
     public PointerEvent() {
+        super();
     }
 
     /**

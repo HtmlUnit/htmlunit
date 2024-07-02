@@ -54,6 +54,7 @@ public final class ScriptElementSupport {
     private static final String SLASH_SLASH_COLON = "//:";
 
     private ScriptElementSupport() {
+        // util class
     }
 
     /**

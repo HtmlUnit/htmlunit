@@ -45,6 +45,7 @@ public class NodeIterator extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

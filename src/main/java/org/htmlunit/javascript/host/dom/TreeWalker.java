@@ -44,6 +44,7 @@ public class TreeWalker extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public TreeWalker() {
+        // nothing to do
     }
 
     /**

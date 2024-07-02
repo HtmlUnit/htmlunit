@@ -1492,6 +1492,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setParentRule(final CSSRule parentRule) {
+        // nothing to do
     }
 
     /**

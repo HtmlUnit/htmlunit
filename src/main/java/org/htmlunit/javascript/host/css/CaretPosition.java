@@ -35,5 +35,6 @@ public class CaretPosition extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

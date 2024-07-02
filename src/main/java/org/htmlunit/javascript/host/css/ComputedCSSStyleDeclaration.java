@@ -56,6 +56,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

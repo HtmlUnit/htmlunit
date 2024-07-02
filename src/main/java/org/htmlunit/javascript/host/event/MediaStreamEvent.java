@@ -31,5 +31,6 @@ public class MediaStreamEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

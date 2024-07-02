@@ -34,5 +34,6 @@ public class PresentationConnectionCloseEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

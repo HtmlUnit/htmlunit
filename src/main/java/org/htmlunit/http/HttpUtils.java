@@ -283,6 +283,7 @@ public final class HttpUtils {
     }
 
     private HttpUtils() {
+        // util class
     }
 
     /**

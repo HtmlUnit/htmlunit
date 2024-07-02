@@ -126,6 +126,7 @@ public final class HttpClientConverter {
     public static final int INTERNAL_SERVER_ERROR = org.apache.http.HttpStatus.SC_INTERNAL_SERVER_ERROR;
 
     private HttpClientConverter() {
+        // util class
     }
 
     /**

@@ -882,6 +882,7 @@ public class KeyboardEvent extends UIEvent {
      * Creates a new keyboard event instance.
      */
     public KeyboardEvent() {
+        // nothing to do
     }
 
     /**

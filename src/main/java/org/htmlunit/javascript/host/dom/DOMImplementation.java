@@ -50,6 +50,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

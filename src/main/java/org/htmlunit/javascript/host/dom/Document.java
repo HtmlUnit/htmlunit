@@ -861,6 +861,7 @@ public class Document extends Node {
      */
     @JsxFunction({CHROME, EDGE})
     public void close() throws IOException {
+        // nothing to do
     }
 
     /**
@@ -1825,6 +1826,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setTitle(final String title) {
+        // nothing to do
     }
 
     /**
@@ -1912,6 +1914,7 @@ public class Document extends Node {
      */
     @JsxFunction({FF, FF_ESR})
     public void releaseCapture() {
+        // nothing to do
     }
 
     /**

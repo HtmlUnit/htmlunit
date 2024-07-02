@@ -584,6 +584,7 @@ public class Event extends HtmlUnitScriptable {
      * Used to build the prototype.
      */
     public Event() {
+        // nothing to do
     }
 
     /**

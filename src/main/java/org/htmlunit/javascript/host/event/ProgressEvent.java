@@ -38,6 +38,7 @@ public class ProgressEvent extends Event {
      * Default constructor.
      */
     public ProgressEvent() {
+        // nothing to do
     }
 
     /**

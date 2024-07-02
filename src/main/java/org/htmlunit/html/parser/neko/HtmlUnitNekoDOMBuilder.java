@@ -653,6 +653,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     /** {@inheritDoc} */
     @Override
     public void startEntity(final String name) {
+        // nothing to do
     }
 
     /**

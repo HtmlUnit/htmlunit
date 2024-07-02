@@ -35,5 +35,6 @@ public class DOMError extends HtmlUnitScriptable {
      */
     @JsxConstructor({CHROME, EDGE})
     public void jsConstructor() {
+        // nothing to do
     }
 }

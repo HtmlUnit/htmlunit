@@ -38,11 +38,13 @@ public class MutationRecord extends HtmlUnitScriptable {
     private NodeList removedNodes_;
     private Node previousSibling_;
     private Node nextSibling_;
+
     /**
      * JavaScript constructor.
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

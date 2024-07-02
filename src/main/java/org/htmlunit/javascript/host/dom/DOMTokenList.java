@@ -44,16 +44,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
     private String attributeName_;
 
     /**
-     * Creates an instance.
-     */
-    public DOMTokenList() {
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**
