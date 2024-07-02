@@ -45,6 +45,7 @@ public class MessagePort extends EventTarget {
      * Default constructor.
      */
     public MessagePort() {
+        super();
     }
 
     /**

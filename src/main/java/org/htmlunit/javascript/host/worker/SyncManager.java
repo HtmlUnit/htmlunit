@@ -35,5 +35,6 @@ public class SyncManager extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

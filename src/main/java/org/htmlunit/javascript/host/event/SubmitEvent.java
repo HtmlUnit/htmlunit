@@ -36,6 +36,7 @@ public class SubmitEvent extends Event {
      * Default constructor.
      */
     public SubmitEvent() {
+        // nothing to do
     }
 
     /**

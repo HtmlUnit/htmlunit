@@ -59,6 +59,7 @@ public class HTMLCollection extends AbstractList implements Callable {
      * Creates an instance.
      */
     public HTMLCollection() {
+        super();
     }
 
     /**
@@ -66,6 +67,7 @@ public class HTMLCollection extends AbstractList implements Callable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

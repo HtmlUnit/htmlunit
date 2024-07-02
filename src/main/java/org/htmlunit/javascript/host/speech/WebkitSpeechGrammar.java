@@ -35,5 +35,6 @@ public class WebkitSpeechGrammar extends HtmlUnitScriptable {
      */
     @JsxConstructor(functionName = "SpeechGrammar")
     public void jsConstructor() {
+        // nothing to do
     }
 }

@@ -106,6 +106,7 @@ public class NumberFormat extends HtmlUnitScriptable {
      * Default constructor.
      */
     public NumberFormat() {
+        super();
     }
 
     private NumberFormat(final String[] locales, final BrowserVersion browserVersion) {

@@ -1463,6 +1463,7 @@ public class Element extends Node {
      */
     @JsxFunction({FF, FF_ESR})
     public void releaseCapture() {
+        // nothing to do
     }
 
     /**

@@ -34,5 +34,6 @@ public class WebkitSpeechRecognitionEvent extends Event {
      */
     @JsxConstructor(functionName = "SpeechRecognitionEvent")
     public void jsConstructor() {
+        // nothing to do
     }
 }

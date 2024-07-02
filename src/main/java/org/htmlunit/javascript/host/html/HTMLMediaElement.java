@@ -122,6 +122,7 @@ public class HTMLMediaElement extends HTMLElement {
      */
     @JsxFunction
     public void pause() {
+        // nothing to do
     }
 
     /**
@@ -131,6 +132,7 @@ public class HTMLMediaElement extends HTMLElement {
      */
     @JsxFunction
     public void load() {
+        // nothing to do
     }
 
     /**

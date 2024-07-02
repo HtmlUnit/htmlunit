@@ -35,5 +35,6 @@ public class InputDeviceCapabilities extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

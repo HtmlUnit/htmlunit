@@ -50,6 +50,7 @@ public class Screen extends EventTarget {
      * Creates an instance.
      */
     public Screen() {
+        super();
     }
 
     /**

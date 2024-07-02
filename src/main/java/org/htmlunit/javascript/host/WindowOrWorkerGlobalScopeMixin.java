@@ -47,6 +47,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
     private static final int MIN_TIMER_DELAY = 1;
 
     private WindowOrWorkerGlobalScopeMixin() {
+        super();
     }
 
     /**

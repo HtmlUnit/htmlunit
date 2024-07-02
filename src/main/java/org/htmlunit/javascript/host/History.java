@@ -52,6 +52,7 @@ public class History extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

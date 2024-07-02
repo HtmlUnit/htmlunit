@@ -121,6 +121,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * Constructs a new instance.
      */
     public URLSearchParams() {
+        super();
     }
 
     /**

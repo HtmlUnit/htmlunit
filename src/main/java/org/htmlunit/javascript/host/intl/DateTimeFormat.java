@@ -158,6 +158,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
      * Default constructor.
      */
     public DateTimeFormat() {
+        super();
     }
 
     private DateTimeFormat(final String[] locales, final BrowserVersion browserVersion) {

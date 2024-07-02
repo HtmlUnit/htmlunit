@@ -34,6 +34,7 @@ public class MimeTypeArray extends SimpleArray {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

@@ -99,6 +99,7 @@ public class File extends Blob {
      * Prototye ctor.
      */
     public File() {
+        super();
     }
 
     /**
@@ -173,6 +174,7 @@ public class File extends Blob {
      */
     @JsxFunction
     public void slice() {
+        // nothing to do
     }
 
     /**

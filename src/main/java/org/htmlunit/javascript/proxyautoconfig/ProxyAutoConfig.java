@@ -43,6 +43,7 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
     private static final String TIMEZONE_GMT = "GMT";
 
     private ProxyAutoConfig() {
+        super();
     }
 
     /**

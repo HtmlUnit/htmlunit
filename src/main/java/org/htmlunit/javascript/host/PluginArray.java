@@ -35,6 +35,7 @@ public class PluginArray extends SimpleArray {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

@@ -40,6 +40,7 @@ public class Plugin extends SimpleArray {
      * Creates an instance.
      */
     public Plugin() {
+        super();
     }
 
     /**
@@ -47,6 +48,7 @@ public class Plugin extends SimpleArray {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

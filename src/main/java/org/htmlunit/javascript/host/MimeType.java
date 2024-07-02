@@ -40,6 +40,7 @@ public class MimeType extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public MimeType() {
+        super();
     }
 
     /**
@@ -47,6 +48,7 @@ public class MimeType extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

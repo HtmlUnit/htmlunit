@@ -32,5 +32,6 @@ public class FontFace extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

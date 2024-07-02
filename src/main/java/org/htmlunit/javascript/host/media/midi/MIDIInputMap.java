@@ -32,5 +32,6 @@ public class MIDIInputMap extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

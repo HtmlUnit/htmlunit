@@ -36,6 +36,7 @@ public class FileList extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public FileList() {
+        super();
     }
 
     /**
@@ -43,6 +44,7 @@ public class FileList extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

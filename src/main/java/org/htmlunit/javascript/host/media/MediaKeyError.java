@@ -35,5 +35,6 @@ public class MediaKeyError extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

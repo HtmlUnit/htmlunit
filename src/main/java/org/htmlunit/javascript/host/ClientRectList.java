@@ -48,6 +48,7 @@ public class ClientRectList extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

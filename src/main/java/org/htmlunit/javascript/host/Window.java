@@ -2162,6 +2162,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @Override
     public void close() {
+        // nothing to do
     }
 
     /**

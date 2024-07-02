@@ -32,5 +32,6 @@ public class DataTransfer extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

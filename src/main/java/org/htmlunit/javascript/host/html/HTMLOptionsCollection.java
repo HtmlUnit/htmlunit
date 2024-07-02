@@ -52,6 +52,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public HTMLOptionsCollection() {
+        super();
     }
 
     /**
@@ -59,6 +60,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

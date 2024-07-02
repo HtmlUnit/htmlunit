@@ -50,5 +50,6 @@ public class AudioNode extends EventTarget {
      */
     @JsxFunction
     public void connect() {
+        // nothing to do
     }
 }

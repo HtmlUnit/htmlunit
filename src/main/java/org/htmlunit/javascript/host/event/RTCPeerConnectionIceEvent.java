@@ -31,5 +31,6 @@ public class RTCPeerConnectionIceEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

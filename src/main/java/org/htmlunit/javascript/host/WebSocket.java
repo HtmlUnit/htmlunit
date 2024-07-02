@@ -95,6 +95,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * Creates a new instance.
      */
     public WebSocket() {
+        super();
     }
 
     /**

@@ -46,6 +46,7 @@ public class SilentJavaScriptErrorListener implements JavaScriptErrorListener, S
 
     @Override
     public void loadScriptError(final HtmlPage page, final URL scriptUrl, final Exception exception) {
+        // nothing to do
     }
 
     @Override

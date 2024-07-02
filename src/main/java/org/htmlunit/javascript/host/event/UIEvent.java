@@ -59,6 +59,7 @@ public class UIEvent extends Event {
      * Creates a new UI event instance.
      */
     public UIEvent() {
+        // nothing to do
     }
 
     /**

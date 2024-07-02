@@ -27,6 +27,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 public final class ConsoleCustom {
 
     private ConsoleCustom() {
+        // nothing to do
     }
 
     /**

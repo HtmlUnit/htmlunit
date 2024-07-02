@@ -89,6 +89,7 @@ public class Geolocation extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void clearWatch(final int watchId) {
+        // nothing to do
     }
 
     void doGetPosition() {

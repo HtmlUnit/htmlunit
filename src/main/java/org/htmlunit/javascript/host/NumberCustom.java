@@ -33,6 +33,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
 public final class NumberCustom {
 
     private NumberCustom() {
+        super();
     }
 
     /**

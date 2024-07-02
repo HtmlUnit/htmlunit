@@ -34,5 +34,6 @@ public class FileSystemEntry extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 }

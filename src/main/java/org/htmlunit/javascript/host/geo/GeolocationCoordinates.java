@@ -37,6 +37,7 @@ public class GeolocationCoordinates extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public GeolocationCoordinates() {
+        // nothing to do
     }
 
     GeolocationCoordinates(final double latitude, final double longitude, final double accuracy) {
