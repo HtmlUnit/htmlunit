@@ -60,8 +60,8 @@ public abstract class HtmlTableCell extends HtmlElement {
             if (span < 1) {
                 return 1;
             }
-            if (span > 1000) {
-                return 1000;
+            if (span > 1_000) {
+                return 1_000;
             }
             return span;
         }
@@ -94,8 +94,8 @@ public abstract class HtmlTableCell extends HtmlElement {
                 }
             }
 
-            if (span > 65534) {
-                return 65534;
+            if (span > 65_534) {
+                return 65_534;
             }
             return span;
         }

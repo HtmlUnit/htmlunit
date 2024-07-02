@@ -67,6 +67,7 @@ public class AudioParam extends HtmlUnitScriptable {
      * @return the maxValue
      */
     @JsxGetter
+    @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals")
     public double getMaxValue() {
         return 3.4028234663852886e+38;
     }
@@ -75,6 +76,7 @@ public class AudioParam extends HtmlUnitScriptable {
      * @return the minValue
      */
     @JsxGetter
+    @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals")
     public double getMinValue() {
         return -3.4028234663852886e+38;
     }

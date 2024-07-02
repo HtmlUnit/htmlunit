@@ -59,7 +59,7 @@ public class Polygon2D implements Shape2D {
             return false;
         }
 
-        final double outsideX = boundingBox_.getLeft() - 0.0000001;
+        final double outsideX = boundingBox_.getLeft() - epsilon;
         final double outsideY = boundingBox_.getBottom();
 
         final Line2D testLine = new Line2D(outsideX, outsideY, x, y);

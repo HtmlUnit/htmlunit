@@ -203,6 +203,7 @@ public class PointerEvent extends MouseEvent {
      * @return the pointerType
      */
     @JsxGetter({CHROME, EDGE})
+    @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals")
     public double getAltitudeAngle() {
         return 1.5707963267948966;
     }
