@@ -42,7 +42,7 @@ public class DomCDataSection extends DomText implements CDATASection {
      */
     @Override
     public short getNodeType() {
-        return org.w3c.dom.Node.CDATA_SECTION_NODE;
+        return CDATA_SECTION_NODE;
     }
 
     /**

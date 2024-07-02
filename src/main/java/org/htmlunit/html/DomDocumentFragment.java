@@ -50,7 +50,7 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
      */
     @Override
     public short getNodeType() {
-        return org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
+        return DOCUMENT_FRAGMENT_NODE;
     }
 
     /**

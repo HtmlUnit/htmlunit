@@ -1594,8 +1594,8 @@ public class CssStyleSheet implements Serializable {
 
             CSSStyleSheetImpl.SelectorEntry entry = iter.next();
             while (null != entry) {
-                if (CssStyleSheet.selects(browserVersion, entry.getSelector(),
-                                            element, pseudoElement, fromQuerySelectorAll, false)) {
+                if (selects(browserVersion, entry.getSelector(),
+                            element, pseudoElement, fromQuerySelectorAll, false)) {
                     matchingRules.add(entry);
                 }
                 entry = iter.next();

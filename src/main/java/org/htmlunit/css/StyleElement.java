@@ -74,7 +74,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
      */
     public StyleElement(final String name, final String value, final String priority,
             final SelectorSpecificity specificity) {
-        this(name, value, priority, specificity, StyleElement.ElementIndex_.incrementAndGet());
+        this(name, value, priority, specificity, ElementIndex_.incrementAndGet());
     }
 
     /**
@@ -105,7 +105,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
      * @return true if priority is 'important'
      */
     public boolean isImportant() {
-        return StyleElement.PRIORITY_IMPORTANT.equals(getPriority());
+        return PRIORITY_IMPORTANT.equals(getPriority());
     }
 
     /**

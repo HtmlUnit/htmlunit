@@ -291,7 +291,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final LinkedHashMap<String, StyleElement> styleMap = new LinkedHashMap<>();
-        if (ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
+        if (ATTRIBUTE_NOT_DEFINED == styleAttribute || ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
             styleMap_ = styleMap;
             styleString_ = styleAttribute;
             return styleMap_;

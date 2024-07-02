@@ -156,7 +156,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         for (final HtmlElement htmlElement : htmlPage.getHtmlElementDescendants()) {
             if (htmlElement instanceof HtmlRadioButtonInput) {
                 final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) htmlElement;
-                if (name.equals(radioInput.getAttribute(DomElement.NAME_ATTRIBUTE))
+                if (name.equals(radioInput.getAttribute(NAME_ATTRIBUTE))
                         && radioInput.getEnclosingForm() == null) {
                     if (radioInput == this) {
                         setCheckedInternal(true);
@@ -296,7 +296,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         for (final HtmlElement htmlElement : getPage().getHtmlElementDescendants()) {
             if (htmlElement instanceof HtmlRadioButtonInput) {
                 final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) htmlElement;
-                if (name.equals(radioInput.getAttribute(DomElement.NAME_ATTRIBUTE))
+                if (name.equals(radioInput.getAttribute(NAME_ATTRIBUTE))
                         && radioInput.isChecked()) {
                     return false;
                 }

@@ -46,7 +46,7 @@ public class DomComment extends DomCharacterData implements Comment {
      */
     @Override
     public short getNodeType() {
-        return org.w3c.dom.Node.COMMENT_NODE;
+        return COMMENT_NODE;
     }
 
     /**

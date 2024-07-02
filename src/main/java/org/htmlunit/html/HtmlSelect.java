@@ -534,7 +534,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeDirect(DomElement.NAME_ATTRIBUTE);
+        return getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**
@@ -554,7 +554,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     public final int getSize() {
         int size = 0;
         final String sizeAttribute = getSizeAttribute();
-        if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && sizeAttribute != DomElement.ATTRIBUTE_VALUE_EMPTY) {
+        if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && ATTRIBUTE_VALUE_EMPTY != sizeAttribute) {
             try {
                 size = Integer.parseInt(sizeAttribute);
             }

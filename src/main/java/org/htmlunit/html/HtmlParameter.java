@@ -53,7 +53,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getIdAttribute() {
-        return getAttributeDirect(DomElement.ID_ATTRIBUTE);
+        return getAttributeDirect(ID_ATTRIBUTE);
     }
 
     /**
@@ -65,7 +65,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttributeDirect(DomElement.NAME_ATTRIBUTE);
+        return getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**

@@ -60,7 +60,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public short getNodeType() {
-        return org.w3c.dom.Node.ATTRIBUTE_NODE;
+        return ATTRIBUTE_NODE;
     }
 
     /**

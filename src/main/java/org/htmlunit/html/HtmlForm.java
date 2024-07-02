@@ -225,19 +225,19 @@ public class HtmlForm extends HtmlElement {
             }
 
             final String formaction = element.getAttributeDirect("formaction");
-            if (DomElement.ATTRIBUTE_NOT_DEFINED != formaction) {
+            if (ATTRIBUTE_NOT_DEFINED != formaction) {
                 setActionAttribute(formaction);
             }
             final String formmethod = element.getAttributeDirect("formmethod");
-            if (DomElement.ATTRIBUTE_NOT_DEFINED != formmethod) {
+            if (ATTRIBUTE_NOT_DEFINED != formmethod) {
                 setMethodAttribute(formmethod);
             }
             final String formtarget = element.getAttributeDirect("formtarget");
-            if (DomElement.ATTRIBUTE_NOT_DEFINED != formtarget) {
+            if (ATTRIBUTE_NOT_DEFINED != formtarget) {
                 setTargetAttribute(formtarget);
             }
             final String formenctype = element.getAttributeDirect("formenctype");
-            if (DomElement.ATTRIBUTE_NOT_DEFINED != formenctype) {
+            if (ATTRIBUTE_NOT_DEFINED != formenctype) {
                 setEnctypeAttribute(formenctype);
             }
         }
