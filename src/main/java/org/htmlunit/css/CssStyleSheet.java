@@ -726,6 +726,7 @@ public class CssStyleSheet implements Serializable {
         return false;
     }
 
+    @SuppressWarnings("PMD.UselessParentheses")
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final Condition condition, final DomElement element) {
         final String value = condition.getValue();
@@ -1384,6 +1385,7 @@ public class CssStyleSheet implements Serializable {
         return false;
     }
 
+    @SuppressWarnings("PMD.UselessParentheses")
     private static double pixelValue(final CSSValueImpl cssValue, final WebWindow webWindow) {
         if (cssValue == null) {
             if (LOG.isWarnEnabled()) {

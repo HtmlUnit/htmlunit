@@ -1225,7 +1225,8 @@ public class HttpWebConnection implements WebConnection {
                     && !request.containsHeader(CONN_DIRECTIVE)) {
                 request.addHeader(CONN_DIRECTIVE, CONN_KEEP_ALIVE);
             }
-            if ((route.getHopCount() == 2 && !route.isTunnelled())
+            if (route.getHopCount() == 2
+                    && !route.isTunnelled()
                     && !request.containsHeader(PROXY_CONN_DIRECTIVE)) {
                 request.addHeader(PROXY_CONN_DIRECTIVE, CONN_KEEP_ALIVE);
             }

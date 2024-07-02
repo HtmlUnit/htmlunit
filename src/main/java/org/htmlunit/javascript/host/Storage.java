@@ -95,7 +95,7 @@ public class Storage extends HtmlUnitScriptable {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        if (store_ == null || (RESERVED_NAMES_.contains(name))) {
+        if (store_ == null || RESERVED_NAMES_.contains(name)) {
             return super.get(name, start);
         }
         final Object value = getItem(name);

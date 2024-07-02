@@ -355,7 +355,7 @@ public final class HttpUtils {
 
         for (int i = pos; i < indexTo; i++) {
             final char current = buf.charAt(i);
-            if ((delimiters.get(current)) || isWhitespace(current)) {
+            if (delimiters.get(current) || isWhitespace(current)) {
                 break;
             }
             pos++;
