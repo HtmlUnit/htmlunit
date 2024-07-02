@@ -110,7 +110,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
         Path newPath = downloadFolder_.resolve(fileName);
         int count = 1;
         while (Files.exists(newPath, LinkOption.NOFOLLOW_LINKS)) {
-            String newFileName;
+            final String newFileName;
             final int pos = fileName.lastIndexOf('.');
             if (pos == -1) {
                 newFileName = fileName + "(" + count + ")";

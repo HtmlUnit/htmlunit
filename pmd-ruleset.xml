@@ -18,6 +18,13 @@
     <exclude-pattern>.*/src/main/java/org/htmlunit/html/DomText\.java</exclude-pattern>
     <exclude-pattern>.*/src/main/java/org/htmlunit/DefaultCredentialsProvider\.java</exclude-pattern>
 
+    <rule ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName">
+        <properties>
+            <property name="reportStaticMethods" value="false" />
+            <property name="reportStaticFields" value="false" />
+        </properties>
+    </rule>
+
     <rule ref="category/java/bestpractices.xml" />
 
     <rule ref="category/java/codestyle.xml">
