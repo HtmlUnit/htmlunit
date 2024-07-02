@@ -64,6 +64,13 @@ public class Range extends AbstractRange {
     public static final int END_TO_START = 3;
 
     /**
+     * Creates an instance.
+     */
+    public Range() {
+        super();
+    }
+
+    /**
      * JavaScript constructor.
      */
     @Override

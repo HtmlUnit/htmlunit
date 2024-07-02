@@ -43,5 +43,6 @@ public class AudioBufferSourceNode extends AudioScheduledSourceNode {
      */
     @JsxFunction
     public void start() {
+        // nothing to do
     }
 }
