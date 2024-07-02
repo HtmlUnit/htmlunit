@@ -350,23 +350,19 @@ public class CssStyleSheet implements Serializable {
             final CssStyleSheet sheet;
             final String contentType = response.getContentType();
             if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
-
-                final InputStream in = response.getContentAsStreamWithBomIfApplicable();
-                if (in == null) {
-                    if (LOG.isWarnEnabled()) {
-                        LOG.warn("Loading stylesheet for url '" + uri + "' returns empty responseData");
+                try (InputStream in = response.getContentAsStreamWithBomIfApplicable()) {
+                    if (in == null) {
+                        if (LOG.isWarnEnabled()) {
+                            LOG.warn("Loading stylesheet for url '" + uri + "' returns empty responseData");
+                        }
+                        return new CssStyleSheet(element, "", uri);
                     }
-                    return new CssStyleSheet(element, "", uri);
-                }
-                try {
+
                     final Charset cssEncoding2 = response.getContentCharset();
                     try (InputSource source = new InputSource(new InputStreamReader(in, cssEncoding2))) {
                         source.setURI(uri);
                         sheet = new CssStyleSheet(element, source, uri);
                     }
-                }
-                finally {
-                    in.close();
                 }
             }
             else {
