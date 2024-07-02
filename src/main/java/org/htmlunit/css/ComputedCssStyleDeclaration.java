@@ -151,6 +151,7 @@ import org.htmlunit.platform.Platform;
  * @author Alex Gorbatovsky
  * @author cd alexndr
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     /** The set of 'inheritable' definitions. */

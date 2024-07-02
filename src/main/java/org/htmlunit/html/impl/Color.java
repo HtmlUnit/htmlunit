@@ -35,10 +35,10 @@ public class Color {
             throw new IllegalArgumentException("Color red value '" + red + " outside of expected range");
         }
         if (green < 0 || green > 255) {
-            throw new IllegalArgumentException("Color red value '" + green + " outside of expected range");
+            throw new IllegalArgumentException("Color green value '" + green + " outside of expected range");
         }
         if (blue < 0 || blue > 255) {
-            throw new IllegalArgumentException("Color red value '" + blue + " outside of expected range");
+            throw new IllegalArgumentException("Color blue value '" + blue + " outside of expected range");
         }
         if (alpha < 0 || alpha > 255) {
             throw new IllegalArgumentException("Color red value '" + alpha + " outside of expected range");
