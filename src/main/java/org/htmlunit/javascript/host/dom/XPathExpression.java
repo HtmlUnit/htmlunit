@@ -97,14 +97,13 @@ public class XPathExpression extends HtmlUnitScriptable {
         }
 
         try {
-            final XPathExpression expression = (XPathExpression) thisObj;
-
             final Object contextNodeObj = args[0];
             if (!(contextNodeObj instanceof org.htmlunit.javascript.host.dom.Node)) {
                 throw JavaScriptEngine.reportRuntimeError("Illegal value for parameter 'context'");
             }
 
             final Node contextNode = ((org.htmlunit.javascript.host.dom.Node) contextNodeObj).getDomNodeOrDie();
+            final XPathExpression expression = (XPathExpression) thisObj;
 
             final XPathResult xPathResult;
             if (result instanceof XPathResult) {

@@ -38,6 +38,7 @@
         <exclude name="CouplingBetweenObjects"/>
         <exclude name="CyclomaticComplexity"/>
         <exclude name="ExcessiveImports"/>
+        <exclude name="ExcessivePublicCount"/>
         <exclude name="GodClass"/>
         <exclude name="LawOfDemeter"/>
         <exclude name="NcssCount"/>

@@ -1241,7 +1241,6 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final Event event;
-        final WebClient webClient = getPage().getWebClient();
         event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
                 MouseEvent.BUTTON_LEFT, 2);
 
@@ -1249,7 +1248,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (scriptResult == null) {
             return clickPage;
         }
-        return (P) webClient.getCurrentWindow().getEnclosedPage();
+        return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
     }
 
     /**

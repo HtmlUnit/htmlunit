@@ -265,8 +265,6 @@ public class HtmlForm extends HtmlElement {
      * @return the request
      */
     public WebRequest getWebRequest(final SubmittableElement submitElement) {
-        final HtmlPage htmlPage = (HtmlPage) getPage();
-        final List<NameValuePair> parameters = getParameterListForSubmit(submitElement);
         final HttpMethod method;
         final String methodAttribute = getMethodAttribute();
         if ("post".equalsIgnoreCase(methodAttribute)) {
@@ -279,7 +277,6 @@ public class HtmlForm extends HtmlElement {
             method = HttpMethod.GET;
         }
 
-        final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
         String actionUrl = getActionAttribute();
         String anchor = null;
         String queryFormFields = "";
@@ -290,6 +287,7 @@ public class HtmlForm extends HtmlElement {
             enc = StandardCharsets.UTF_8;
         }
 
+        final List<NameValuePair> parameters = getParameterListForSubmit(submitElement);
         if (HttpMethod.GET == method) {
             if (actionUrl.contains("#")) {
                 anchor = StringUtils.substringAfter(actionUrl, "#");
@@ -302,6 +300,7 @@ public class HtmlForm extends HtmlElement {
             parameters.clear(); // parameters have been added to query
         }
 
+        final HtmlPage htmlPage = (HtmlPage) getPage();
         URL url;
         try {
             if (actionUrl.isEmpty()) {
@@ -323,6 +322,7 @@ public class HtmlForm extends HtmlElement {
             throw new IllegalArgumentException("Not a valid url: " + actionUrl, e);
         }
 
+        final BrowserVersion browser = htmlPage.getWebClient().getBrowserVersion();
         final WebRequest request = new WebRequest(url, browser.getHtmlAcceptHeader(),
                                                         browser.getAcceptEncodingHeader());
         request.setHttpMethod(method);

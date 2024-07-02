@@ -393,7 +393,6 @@ public class HTMLAnchorElement extends HTMLElement {
     public String getPathname() {
         final BrowserVersion browser = getBrowserVersion();
         try {
-            final URL url = getUrl();
             if (browser.hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE)) {
                 final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
                 String href = anchor.getHrefAttribute();
@@ -414,7 +413,7 @@ public class HTMLAnchorElement extends HTMLElement {
                     return href.substring(2);
                 }
             }
-            return url.getPath();
+            return getUrl().getPath();
         }
         catch (final MalformedURLException e) {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();

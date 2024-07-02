@@ -127,7 +127,6 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the value of one of the two named style attributes
      */
     public String getStyleAttribute(final Definition definition1, final Definition definition2) {
-        final String value;
         final StyleElement element1 = getStyleElement(definition1.getAttributeName());
         final StyleElement element2 = getStyleElement(definition2.getAttributeName());
 
@@ -142,9 +141,8 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                 return element1.getValue();
             }
         }
-        value = element2.getValue();
 
-        final String[] values = StringUtils.splitAtJavaWhitespace(value);
+        final String[] values = StringUtils.splitAtJavaWhitespace(element2.getValue());
         if (definition1.name().contains("TOP")) {
             if (values.length > 0) {
                 return values[0];
