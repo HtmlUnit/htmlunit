@@ -35,7 +35,9 @@
 
     <rule ref="category/java/design.xml">
         <exclude name="CognitiveComplexity"/>
+        <exclude name="CouplingBetweenObjects"/>
         <exclude name="CyclomaticComplexity"/>
+        <exclude name="ExcessiveImports"/>
         <exclude name="GodClass"/>
         <exclude name="LawOfDemeter"/>
         <exclude name="NcssCount"/>

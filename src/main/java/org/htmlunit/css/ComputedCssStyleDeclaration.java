@@ -324,7 +324,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final DomElement domElement = getDomElement();
 
         if (!domElement.isAttachedToPage()) {
-            return ComputedCssStyleDeclaration.EMPTY_FINAL;
+            return EMPTY_FINAL;
         }
 
         final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
@@ -2263,7 +2263,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
             final boolean isPixel) {
         if (!getDomElement().isAttachedToPage()) {
-            return ComputedCssStyleDeclaration.EMPTY_FINAL;
+            return EMPTY_FINAL;
         }
         if (str == null || str.isEmpty()) {
             return definition.getDefaultComputedValue(getBrowserVersion());
@@ -2281,7 +2281,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     private String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
         if (!getDomElement().isAttachedToPage()) {
-            return ComputedCssStyleDeclaration.EMPTY_FINAL;
+            return EMPTY_FINAL;
         }
         if (str == null || str.isEmpty() || str.equals(defaultValue)) {
             return toReturnIfEmptyOrDefault;

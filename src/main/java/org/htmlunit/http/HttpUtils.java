@@ -273,7 +273,7 @@ public final class HttpUtils {
                 buf.append('+');
             }
             else {
-                buf.append("%");
+                buf.append('%');
                 final char hex1 = Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, 16));
                 final char hex2 = Character.toUpperCase(Character.forDigit(b & 0xF, 16));
                 buf.append(hex1).append(hex2);
