@@ -101,7 +101,7 @@ public final class HttpUtils {
     /**
      * Standard date formatters: {@link #FORMATTER_RFC1123}, {@link #FORMATTER_RFC1036}, {@link #FORMATTER_ASCTIME}.
      */
-    private static final DateTimeFormatter[] STANDARD_PATTERNS = new DateTimeFormatter[] {
+    private static final DateTimeFormatter[] STANDARD_PATTERNS = {
         FORMATTER_RFC1123,
         FORMATTER_RFC1036,
         FORMATTER_ASCTIME

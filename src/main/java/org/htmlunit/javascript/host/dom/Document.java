@@ -236,7 +236,7 @@ public class Document extends Node {
 
     static {
         // commands
-        String[] cmds = new String[] {
+        String[] cmds = {
             "BackColor", "BackgroundImageCache" /* Undocumented */,
             "Bold",
             "CreateLink", "Delete",

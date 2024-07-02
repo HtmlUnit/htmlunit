@@ -226,7 +226,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     private final SortedMap<String, StyleElement> localModifications_ = new TreeMap<>();
 
     /** The wrapped CSSStyleDeclaration */
-    private ElementCssStyleDeclaration elementStyleDeclaration_;
+    private final ElementCssStyleDeclaration elementStyleDeclaration_;
 
     public ComputedCssStyleDeclaration(final ElementCssStyleDeclaration styleDeclaration) {
         super();
@@ -276,7 +276,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
 
         // to make the fuzzer happy the recursion was removed
-        final ComputedCssStyleDeclaration[] queue = new ComputedCssStyleDeclaration[] {this};
+        final ComputedCssStyleDeclaration[] queue = {this};
         String value = null;
         while (queue[0] != null) {
             value = getStyleAttributeWorker(definition, getDefaultValueIfEmpty,
@@ -331,7 +331,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         // to make the fuzzer happy the recursion was removed
         final BrowserVersion browserVersion = domElement.getPage().getWebClient().getBrowserVersion();
-        final ComputedCssStyleDeclaration[] queue = new ComputedCssStyleDeclaration[] {this};
+        final ComputedCssStyleDeclaration[] queue = {this};
         String value = null;
         while (queue[0] != null) {
             value = getStyleAttributeWorker(definition, false,

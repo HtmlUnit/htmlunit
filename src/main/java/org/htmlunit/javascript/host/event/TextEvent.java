@@ -32,7 +32,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 @JsxClass({CHROME, EDGE})
 public class TextEvent extends UIEvent {
 
-    private Object data_;
+    private final Object data_;
 
     /**
      * Default constructor.

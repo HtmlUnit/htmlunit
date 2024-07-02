@@ -40,6 +40,7 @@
         <exclude name="LawOfDemeter"/>
         <exclude name="NcssCount"/>
         <exclude name="NPathComplexity"/>
+        <exclude name="TooManyMethods"/>
     </rule>
 
     <rule ref="category/java/documentation.xml">
