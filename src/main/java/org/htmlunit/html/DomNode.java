@@ -1827,7 +1827,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private static final class CheckErrorHandler implements CSSErrorHandler {
         private boolean errorDetected_;
 
-        private CheckErrorHandler() {
+        CheckErrorHandler() {
             errorDetected_ = false;
         }
 

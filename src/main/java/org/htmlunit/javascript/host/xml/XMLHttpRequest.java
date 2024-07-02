@@ -1349,7 +1349,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     private static final class NoPermittedHeaderException extends IOException {
-        private NoPermittedHeaderException(final String msg) {
+        NoPermittedHeaderException(final String msg) {
             super(msg);
         }
     }

@@ -447,7 +447,7 @@ public class HtmlTable extends HtmlElement {
         private final int posX_;
         private final int posY_;
 
-        private Position(final int x, final int y) {
+        Position(final int x, final int y) {
             posX_ = x;
             posY_ = y;
         }
