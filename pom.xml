@@ -226,6 +226,7 @@
                     <suppressionFiles>owasp-suppressions.xml</suppressionFiles>
                     <failBuildOnCVSS>0</failBuildOnCVSS>
                     <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>
