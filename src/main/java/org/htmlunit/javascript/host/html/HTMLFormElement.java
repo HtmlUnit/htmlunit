@@ -36,7 +36,6 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlImageInput;
-import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.SubmittableElement;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -145,10 +144,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxGetter
     public int getLength() {
-        final int all = getElements().getLength();
-        final int images = getHtmlForm().getElementsByAttribute(
-                            HtmlInput.TAG_NAME, DomElement.TYPE_ATTRIBUTE, "image").size();
-        return all - images;
+        return getElements().getLength();
     }
 
     /**

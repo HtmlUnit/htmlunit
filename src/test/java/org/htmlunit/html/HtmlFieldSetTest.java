@@ -114,6 +114,31 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"true", "false"})
+    public void disabled() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<form>\n"
+            + "  <fieldset id='fs1' disabled>\n"
+            + "    <input type'text' id='txt1' />\n"
+            + "  </fieldset>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var fs1 = document.getElementById('fs1');\n"
+            + "  var txt1 = document.getElementById('txt1');\n"
+            + "  log(fs1.disabled);\n"
+            + "  log(txt1.disabled);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"false", "false", "false", "false", "false"})
     public void willValidate() throws Exception {
         final String html =
@@ -196,6 +221,17 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
              "false"})
     public void validationRequired() throws Exception {
         validation("<fieldset id='e1' required/>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "false"})
+    public void validationDisabled() throws Exception {
+        validation("<fieldset id='e1' disabled/>\n", "");
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {

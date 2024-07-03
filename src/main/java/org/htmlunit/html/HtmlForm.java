@@ -85,7 +85,7 @@ public class HtmlForm extends HtmlElement {
     /** The "formnovalidate" attribute name. */
     public static final String ATTRIBUTE_FORMNOVALIDATE = "formnovalidate";
 
-    private static final HashSet<String> SUBMITTABLE_ELEMENT_NAMES = new HashSet<>(Arrays.asList(HtmlInput.TAG_NAME,
+    private static final HashSet<String> SUBMITTABLE_TAG_NAMES = new HashSet<>(Arrays.asList(HtmlInput.TAG_NAME,
         HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME));
 
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
@@ -464,7 +464,7 @@ public class HtmlForm extends HtmlElement {
 
     private static boolean isValidForSubmission(final HtmlElement element, final SubmittableElement submitElement) {
         final String tagName = element.getTagName();
-        if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName)) {
+        if (!SUBMITTABLE_TAG_NAMES.contains(tagName)) {
             return false;
         }
         if (element.hasAttribute(ATTRIBUTE_DISABLED)) {
@@ -566,7 +566,7 @@ public class HtmlForm extends HtmlElement {
 
         if (isAttachedToPage()) {
             for (final HtmlElement element : getPage().getDocumentElement().getHtmlElementDescendants()) {
-                if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())
+                if (includedInElementsCollection(element)
                         && element.getEnclosingForm() == this) {
                     elements.add(element);
                 }
@@ -574,13 +574,27 @@ public class HtmlForm extends HtmlElement {
         }
         else {
             for (final HtmlElement element : getHtmlElementDescendants()) {
-                if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())) {
+                if (includedInElementsCollection(element)) {
                     elements.add(element);
                 }
             }
         }
 
         return elements;
+    }
+
+    private static boolean includedInElementsCollection(final HtmlElement element) {
+        final String tagName = element.getTagName();
+        if (HtmlInput.TAG_NAME.equals(tagName)) {
+            return !"image".equals(((HtmlInput) element).getType());
+        }
+
+        return HtmlButton.TAG_NAME.equals(tagName)
+                || HtmlSelect.TAG_NAME.equals(tagName)
+                || HtmlTextArea.TAG_NAME.equals(tagName)
+                || HtmlIsIndex.TAG_NAME.equals(tagName)
+                || HtmlFieldSet.TAG_NAME.equals(tagName);
+
     }
 
     /**

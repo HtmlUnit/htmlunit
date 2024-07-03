@@ -768,6 +768,123 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Alerts({"2", "[object HTMLFieldSetElement]", "[object HTMLInputElement]"})
+    public void elementsFieldSet() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <fieldset id='fs'>\n"
+            + "    <legend>Legend</legend>\n"
+            + "    <input type='text' name='foo'/>\n"
+            + "  </fieldset>\n"
+            + "</form>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var oElements = document.myForm.elements;\n"
+            + "log(oElements.length);\n"
+            + "log(oElements[0]);\n"
+            + "log(oElements[1]);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Alerts({"1", "[object HTMLInputElement]/txt"})
+    public void elementsInputImage() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='text' name='foo' id='txt'/>\n"
+            + "  <input type='image' name='fooo' id='img'/>\n"
+            + "</form>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var oElements = document.myForm.elements;\n"
+            + "log(oElements.length);\n"
+            + "log(oElements[0] + '/' + oElements[0].id);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Alerts({"2", "[object HTMLFieldSetElement]", "[object HTMLInputElement]"})
+    public void elementsFieldSetEmpty() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <fieldset id='fs'>\n"
+            + "  </fieldset>\n"
+            + "  <input type='text' name='foo'/>\n"
+            + "</form>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var oElements = document.myForm.elements;\n"
+            + "log(oElements.length);\n"
+            + "log(oElements[0]);\n"
+            + "log(oElements[1]);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Alerts({"4", "[object HTMLFieldSetElement]/fs_outer",
+             "[object HTMLInputElement]/foo",
+             "[object HTMLFieldSetElement]/fs_inner",
+             "[object HTMLInputElement]/fooo"})
+    public void elementsFieldSetInsideFieldSet() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <fieldset id='fs_outer'>\n"
+            + "    <legend>Legend</legend>\n"
+            + "    <input type='text' name='foo' id='foo'/>\n"
+
+            + "    <fieldset id='fs_inner'>\n"
+            + "      <input type='text' name='fooo' id='fooo'/>\n"
+            + "    </fieldset>\n"
+            + "  </fieldset>\n"
+            + "</form>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var oElements = document.myForm.elements;\n"
+            + "log(oElements.length);\n"
+            + "log(oElements[0] + '/' + oElements[0].id);\n"
+            + "log(oElements[1] + '/' + oElements[1].id);\n"
+            + "log(oElements[2] + '/' + oElements[2].id);\n"
+            + "log(oElements[3] + '/' + oElements[3].id);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

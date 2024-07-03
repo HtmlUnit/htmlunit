@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                FieldSets are part of the Form.elements collection.
+            </action>
+            <action type="fix" dev="rbri">
+                Inputs of type image are not part of the Form.elements collection.
+            </action>
             <action type="add" dev="rbri" issue="#787">
                 Window length/self/parent/frames are defined as [Replaceable]. HtmlUnit now mimics the browsers regarding this.
             </action>
