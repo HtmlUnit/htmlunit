@@ -25,6 +25,13 @@
         </properties>
     </rule>
 
+    <!-- i think there is no need to guard error log statements -->
+    <rule ref="category/java/bestpractices.xml/GuardLogStatement">
+        <properties>
+            <property name="logLevels" value="trace,debug,info,warn,log,finest,finer,fine,info,warning" />
+        </properties>
+    </rule>
+
     <rule ref="category/java/bestpractices.xml" />
 
     <rule ref="category/java/codestyle.xml">
