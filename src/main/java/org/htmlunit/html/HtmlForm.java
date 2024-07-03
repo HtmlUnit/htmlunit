@@ -344,7 +344,7 @@ public class HtmlForm extends HtmlElement {
                         UrlUtils.getUrlWithProtocolAndAuthority(htmlPage.getUrl()).toExternalForm());
             }
             catch (final MalformedURLException e) {
-                if (LOG.isWarnEnabled()) {
+                if (LOG.isInfoEnabled()) {
                     LOG.info("Invalid origin url '" + htmlPage.getUrl() + "'");
                 }
             }
