@@ -1193,7 +1193,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
             || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")) {
 
             try {
-                Double.parseDouble(token.substring(0, token.length() - 1));
+                Double.parseDouble(token.substring(0, token.length() - 2));
                 return true;
             }
             catch (final NumberFormatException e) {
