@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.http.auth.Credentials;
@@ -77,7 +78,7 @@ public class WebRequest implements Serializable {
     private Credentials urlCredentials_;
     private Credentials credentials_;
     private int timeout_;
-    private transient EnumSet<HttpHint> httpHints_;
+    private transient Set<HttpHint> httpHints_;
 
     private transient Charset charset_ = StandardCharsets.ISO_8859_1;
     // https://datatracker.ietf.org/doc/html/rfc6838#section-4.2.1

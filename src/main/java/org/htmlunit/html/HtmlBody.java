@@ -168,6 +168,7 @@ public class HtmlBody extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public void setDefaults(final ComputedCssStyleDeclaration style) {
         style.setDefaultLocalStyleAttribute("margin-left", "8px");
         style.setDefaultLocalStyleAttribute("margin-right", "8px");

@@ -43,6 +43,7 @@
     </rule>
 
     <rule ref="category/java/design.xml">
+        <exclude name="AvoidDeeplyNestedIfStmts"/>
         <exclude name="CognitiveComplexity"/>
         <exclude name="CouplingBetweenObjects"/>
         <exclude name="CyclomaticComplexity"/>
@@ -68,6 +69,8 @@
     <rule ref="category/java/multithreading.xml" />
 
     <rule ref="category/java/performance.xml">
+        <!-- todo reenable this and check -->
+        <exclude name="AvoidInstantiatingObjectsInLoops"/>
     </rule>
 
     <rule ref="category/java/security.xml" />
