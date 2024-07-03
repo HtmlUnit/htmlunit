@@ -319,7 +319,9 @@ public class HtmlArea extends HtmlElement {
 
         }
         catch (final NumberFormatException e) {
-            LOG.warn("Invalid circle coords '" + Arrays.toString(coords) + "'", e);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Invalid circle coords '" + Arrays.toString(coords) + "'", e);
+            }
         }
 
         return new Circle2D(centerX, centerY, radius);

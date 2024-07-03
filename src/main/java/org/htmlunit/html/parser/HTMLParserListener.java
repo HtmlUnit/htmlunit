@@ -81,7 +81,9 @@ class SimpleHTMLParserListener implements HTMLParserListener {
     @Override
     public void warning(final String message, final URL url, final String html,
             final int line, final int column, final String key) {
-        LOG.warn(format(message, url, html, line, column));
+        if (LOG.isWarnEnabled()) {
+            LOG.warn(format(message, url, html, line, column));
+        }
     }
 
     private static String format(final String message, final URL url, final String html,
