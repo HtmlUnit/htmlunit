@@ -1177,25 +1177,31 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @param token the token to check
      * @return whether the token is a length or not
      */
-    static boolean isLength(String token) {
-        if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")
-            || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")
-            || token.endsWith("%")) {
-
-            if (token.endsWith("%")) {
-                token = token.substring(0, token.length() - 1);
-            }
-            else {
-                token = token.substring(0, token.length() - 2);
-            }
+    static boolean isLength(final String token) {
+        if (token.endsWith("%")) {
             try {
-                Double.parseDouble(token);
+                Double.parseDouble(token.substring(0, token.length() - 1));
                 return true;
             }
             catch (final NumberFormatException e) {
                 // Ignore.
             }
+            return false;
         }
+
+        if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")
+            || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")) {
+
+            try {
+                Double.parseDouble(token.substring(0, token.length() - 1));
+                return true;
+            }
+            catch (final NumberFormatException e) {
+                // Ignore.
+            }
+            return false;
+        }
+
         return false;
     }
 }
