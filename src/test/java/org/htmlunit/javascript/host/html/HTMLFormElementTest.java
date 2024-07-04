@@ -2313,14 +2313,90 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts({"[object HTMLInputElement]", "undefined",
              "[object HTMLInputElement]", "[object HTMLInputElement]",
              "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]"})
-    public void accessByNameAfterNameChange() throws Exception {
+    public void accessByNameAfterNameChangeInput() throws Exception {
+        accessByNameAfterNameChange("<input name='originalName'>");
+    }
+
+    /**
+     * When the name of a form field changes... it is still reachable through the original name!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "undefined"})
+    public void accessByNameAfterNameChangeInputImage() throws Exception {
+        accessByNameAfterNameChange("<input type='image' name='originalName'>");
+    }
+
+    /**
+     * When the name of a form field changes... it is still reachable through the original name!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLButtonElement]", "undefined",
+             "[object HTMLButtonElement]", "[object HTMLButtonElement]",
+             "[object HTMLButtonElement]", "[object HTMLButtonElement]", "[object HTMLButtonElement]"})
+    public void accessByNameAfterNameChangeButton() throws Exception {
+        accessByNameAfterNameChange("<button name='originalName'>btn</button>");
+    }
+
+    /**
+     * When the name of a form field changes... it is still reachable through the original name!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLOutputElement]", "undefined",
+             "[object HTMLOutputElement]", "[object HTMLOutputElement]",
+             "[object HTMLOutputElement]", "[object HTMLOutputElement]", "[object HTMLOutputElement]"})
+    public void accessByNameAfterNameChangeOutput() throws Exception {
+        accessByNameAfterNameChange("<output name='originalName'>4711</output>");
+    }
+
+    /**
+     * When the name of a form field changes... it is still reachable through the original name!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLTextAreaElement]", "undefined",
+             "[object HTMLTextAreaElement]", "[object HTMLTextAreaElement]",
+             "[object HTMLTextAreaElement]", "[object HTMLTextAreaElement]", "[object HTMLTextAreaElement]"})
+    public void accessByNameAfterNameChangeTextarea() throws Exception {
+        accessByNameAfterNameChange("<textarea name='originalName'>foo</textarea>");
+    }
+
+    /**
+     * When the name of a form field changes... it is still reachable through the original name!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLSelectElement]", "undefined",
+             "[object HTMLSelectElement]", "[object HTMLSelectElement]",
+             "[object HTMLSelectElement]", "[object HTMLSelectElement]", "[object HTMLSelectElement]"})
+    public void accessByNameAfterNameChangeSelect() throws Exception {
+        accessByNameAfterNameChange("<select name='originalName'><option>foo</option></select>");
+    }
+
+    /**
+     * When the name of a form field changes... it is still reachable through the original name!
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLFieldSetElement]", "undefined",
+             "[object HTMLFieldSetElement]", "[object HTMLFieldSetElement]",
+             "[object HTMLFieldSetElement]", "[object HTMLFieldSetElement]", "[object HTMLFieldSetElement]"})
+    public void accessByNameAfterNameChangeFieldSet() throws Exception {
+        accessByNameAfterNameChange("<fieldset name='originalName'><legend>Legend</legend></fieldset>");
+    }
+
+    private void accessByNameAfterNameChange(final String htmlElement) throws Exception {
         final String html
             = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function go() {\n"
-            + "  var field = document.simple_form.originalName;\n"
             + "  log(document.simple_form.originalName);\n"
             + "  log(document.simple_form.newName);\n"
+
+            + "  var field = document.simple_form.originalName;\n"
+            + "  if (field === undefined) return;\n"
 
             + "  field.name = 'newName';\n"
             + "  log(document.simple_form.originalName);\n"
@@ -2334,7 +2410,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='go()'>\n"
             + "<form name='simple_form'>\n"
-            + "  <input name='originalName'>\n"
+            + htmlElement + "\n"
             + "</form>\n"
             + "</body></html>";
 
