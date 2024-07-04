@@ -30,14 +30,14 @@
         <htmlunitneko.version>4.3.0</htmlunitneko.version>
         <htmlunitxpath.version>4.3.0</htmlunitxpath.version>
         <htmlunitcorejs.version>4.3.0</htmlunitcorejs.version>
-        <htmlunitwebsocketclient.version>4.3.0</htmlunitwebsocketclient.version>
+        <htmlunitwebsocketclient.version>4.4.0-SNAPSHOT</htmlunitwebsocketclient.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
 
         <htmlunitdriver.version>4.22.0</htmlunitdriver.version>
         <selenium.version>4.22.0</selenium.version>
 
-        <jetty.version>9.4.54.v20240208</jetty.version>
+        <jetty.version>9.4.55.v20240627</jetty.version>
         <log4j.version>2.23.1</log4j.version>
         <slf4j.version>2.0.13</slf4j.version>
 

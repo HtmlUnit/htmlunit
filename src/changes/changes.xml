@@ -8,6 +8,14 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Bugfixes">
+            <action type="update" dev="rbri">
+                websocket-client: jetty updated to 9.4.55.v20240627.
+            </action>
+            <action type="update" dev="rbri">
+                Method HtmlForm.getElements() is now deprecated; please use HtmlForm.getElements(Predicate<HtmlElement>)
+                or HtmlForm.getFromElements() instead. Please read the jdoc of the new methods, they return 
+                slightly different results.
+            </action>
             <action type="fix" dev="rbri">
                 FieldSets are part of the Form.elements collection.
             </action>
