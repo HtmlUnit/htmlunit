@@ -559,7 +559,7 @@ public class HtmlForm extends HtmlElement {
     /**
      * @return returns a list of all form controls contained in the &lt;form&gt; element or referenced by formId
      *         but ignoring elements that are contained in a nested form
-     * @deprecated as of version 4.4.0; use {@link #getSubmittableElements()}, {@link #getElementsJS()} instead
+     * @deprecated as of version 4.4.0; use {@link #getFormElements()}, {@link #getElementsJS()} instead
      */
     @Deprecated
     public List<HtmlElement> getElements() {
@@ -602,7 +602,7 @@ public class HtmlForm extends HtmlElement {
         return getElements(htmlElement -> {
             final String tagName = htmlElement.getTagName();
             if (HtmlInput.TAG_NAME.equals(tagName)) {
-                return !(htmlElement instanceof HtmlImage);
+                return !(htmlElement instanceof HtmlImageInput);
             }
 
             return HtmlButton.TAG_NAME.equals(tagName)
@@ -614,7 +614,11 @@ public class HtmlForm extends HtmlElement {
         });
     }
 
-    private List<HtmlElement> getElements(final Predicate<HtmlElement> filter) {
+    /**
+     * @param filter a predicate to filter the element
+     * @return all elements attached to this form and matching the filter predicate
+     */
+    public List<HtmlElement> getElements(final Predicate<HtmlElement> filter) {
         final List<HtmlElement> elements = new ArrayList<>();
 
         if (isAttachedToPage()) {

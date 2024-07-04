@@ -34,6 +34,7 @@ import org.htmlunit.html.FormFieldWithNameHistory;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
+import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.SubmittableElement;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -434,9 +435,21 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return elements;
         }
 
-        for (final HtmlElement element : form.getFormElements()) {
+        for (final HtmlElement element : form.getElementsJS()) {
             if (isAccessibleByIdOrName(element, name)) {
                 elements.add(element);
+            }
+        }
+
+        // If no form fields are found, browsers are able to find img elements by ID or name.
+        if (elements.isEmpty()) {
+            for (final DomNode node : form.getHtmlElementDescendants()) {
+                if (node instanceof HtmlImage) {
+                    final HtmlImage img = (HtmlImage) node;
+                    if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
+                        elements.add(img);
+                    }
+                }
             }
         }
 
@@ -449,9 +462,19 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return null;
         }
 
-        for (final HtmlElement node : form.getFormElements()) {
+        for (final HtmlElement node : form.getElementsJS()) {
             if (isAccessibleByIdOrName(node, name)) {
                 return node;
+            }
+        }
+
+        // If no form fields are found, browsers are able to find img elements by ID or name.
+        for (final DomNode node : form.getHtmlElementDescendants()) {
+            if (node instanceof HtmlImage) {
+                final HtmlImage img = (HtmlImage) node;
+                if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
+                    return img;
+                }
             }
         }
 
@@ -465,15 +488,18 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return {@code true} if this element matches the conditions
      */
     private boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
+        if (name.equals(element.getId())) {
+            return true;
+        }
+
+        if (name.equals(element.getAttributeDirect(DomElement.NAME_ATTRIBUTE))) {
+            return true;
+        }
+
         if (element instanceof FormFieldWithNameHistory) {
-            if (name.equals(element.getId())) {
-                return true;
-            }
             final FormFieldWithNameHistory elementWithNames = (FormFieldWithNameHistory) element;
+
             if (name.equals(elementWithNames.getOriginalName())) {
-                return true;
-            }
-            else if (name.equals(element.getAttributeDirect(DomElement.NAME_ATTRIBUTE))) {
                 return true;
             }
 
@@ -481,6 +507,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 return true;
             }
         }
+
         return false;
     }
 

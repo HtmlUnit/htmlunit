@@ -796,6 +796,29 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     * @throws Exception if the test fails
     */
     @Test
+    @Alerts("0")
+    public void elementsImage() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <img name='foo' id='txt'>\n"
+            + "</form>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var oElements = document.myForm.elements;\n"
+            + "log(oElements.length);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+    * @throws Exception if the test fails
+    */
+    @Test
     @Alerts({"1", "[object HTMLOutputElement]"})
     public void elementsOutput() throws Exception {
         final String html = "<html>\n"
@@ -1029,8 +1052,18 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         fieldNamedSubmit("<button type='submit' name='submit'>\n", "BUTTON");
         fieldNamedSubmit("<textarea name='submit'></textarea>\n", "TEXTAREA");
         fieldNamedSubmit("<select name='submit'></select>\n", "SELECT");
+
         fieldNamedSubmit("<input type='image' name='submit'>\n", "function");
         fieldNamedSubmit("<input type='IMAGE' name='submit'>\n", "function");
+        fieldNamedSubmit("<input type='IMAGE' name='submit'>\n", "function");
+
+        fieldNamedSubmit("<fieldset name='submit'><legend>Legend</legend></fieldset>\n", "FIELDSET");
+
+        fieldNamedSubmit("<object name='submit'></object>\n", "OBJECT");
+
+        fieldNamedSubmit("<output name='submit'></output>\n", "OUTPUT");
+
+        fieldNamedSubmit("<img name='submit'>\n", "IMG");
     }
 
     /**
