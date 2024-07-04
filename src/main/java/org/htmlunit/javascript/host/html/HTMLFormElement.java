@@ -34,8 +34,6 @@ import org.htmlunit.html.FormFieldWithNameHistory;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
-import org.htmlunit.html.HtmlImage;
-import org.htmlunit.html.HtmlImageInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.SubmittableElement;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -120,7 +118,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                     if (domNode == null) {
                         return new ArrayList<>();
                     }
-                    response.addAll(((HtmlForm) domNode).getElements());
+                    response.addAll(((HtmlForm) domNode).getElementsJS());
                     return response;
                 });
 
@@ -436,21 +434,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return elements;
         }
 
-        for (final HtmlElement element : form.getElements()) {
+        for (final HtmlElement element : form.getFormElements()) {
             if (isAccessibleByIdOrName(element, name)) {
                 elements.add(element);
-            }
-        }
-
-        // If no form fields are found, browsers are able to find img elements by ID or name.
-        if (elements.isEmpty()) {
-            for (final DomNode node : form.getHtmlElementDescendants()) {
-                if (node instanceof HtmlImage) {
-                    final HtmlImage img = (HtmlImage) node;
-                    if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
-                        elements.add(img);
-                    }
-                }
             }
         }
 
@@ -463,19 +449,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return null;
         }
 
-        for (final HtmlElement node : form.getElements()) {
+        for (final HtmlElement node : form.getFormElements()) {
             if (isAccessibleByIdOrName(node, name)) {
                 return node;
-            }
-        }
-
-        // If no form fields are found, browsers are able to find img elements by ID or name.
-        for (final DomNode node : form.getHtmlElementDescendants()) {
-            if (node instanceof HtmlImage) {
-                final HtmlImage img = (HtmlImage) node;
-                if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
-                    return img;
-                }
             }
         }
 
@@ -489,10 +465,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return {@code true} if this element matches the conditions
      */
     private boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
-        if (element instanceof FormFieldWithNameHistory && !(element instanceof HtmlImageInput)) {
-            if (element.getEnclosingForm() != getHtmlForm()) {
-                return false; // nested forms
-            }
+        if (element instanceof FormFieldWithNameHistory) {
             if (name.equals(element.getId())) {
                 return true;
             }

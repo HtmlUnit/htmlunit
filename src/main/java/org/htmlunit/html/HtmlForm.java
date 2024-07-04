@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -245,8 +246,8 @@ public class HtmlForm extends HtmlElement {
 
     private boolean areChildrenValid() {
         boolean valid = true;
-        for (final HtmlElement element : getElements()) {
-            if (element instanceof HtmlInput && !element.isValid()) {
+        for (final HtmlElement element : getElements(htmlElement -> htmlElement instanceof HtmlInput)) {
+            if (!element.isValid()) {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("Form validation failed; element '" + element + "' was not valid. Submit cancelled.");
                 }
@@ -434,7 +435,7 @@ public class HtmlForm extends HtmlElement {
      */
     @Override
     public boolean isValid() {
-        for (final HtmlElement element : getElements()) {
+        for (final HtmlElement element : getFormElements()) {
             if (!element.isValid()) {
                 return false;
             }
@@ -453,10 +454,8 @@ public class HtmlForm extends HtmlElement {
     Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
         final List<SubmittableElement> submittableElements = new ArrayList<>();
 
-        for (final HtmlElement element : getElements()) {
-            if (isSubmittable(element, submitElement)) {
-                submittableElements.add((SubmittableElement) element);
-            }
+        for (final HtmlElement element : getElements(htmlElement -> isSubmittable(htmlElement, submitElement))) {
+            submittableElements.add((SubmittableElement) element);
         }
 
         return submittableElements;
@@ -560,13 +559,67 @@ public class HtmlForm extends HtmlElement {
     /**
      * @return returns a list of all form controls contained in the &lt;form&gt; element or referenced by formId
      *         but ignoring elements that are contained in a nested form
+     * @deprecated as of version 4.4.0; use {@link #getSubmittableElements()}, {@link #getElementsJS()} instead
      */
+    @Deprecated
     public List<HtmlElement> getElements() {
+        return getElements(htmlElement -> SUBMITTABLE_TAG_NAMES.contains(htmlElement.getTagName()));
+    }
+
+    /**
+     * @return A List containing all form controls in the form.
+     * The form controls in the returned collection are in the same order
+     * in which they appear in the form by following a preorder,
+     * depth-first traversal of the tree. This is called tree order. Only the following elements are returned:
+     * button, fieldset, input, object, output, select, textarea.
+     */
+    public List<HtmlElement> getFormElements() {
+        return getElements(htmlElement -> {
+            final String tagName = htmlElement.getTagName();
+            return HtmlButton.TAG_NAME.equals(tagName)
+                    || HtmlFieldSet.TAG_NAME.equals(tagName)
+                    || HtmlInput.TAG_NAME.equals(tagName)
+                    || HtmlObject.TAG_NAME.equals(tagName)
+                    || HtmlOutput.TAG_NAME.equals(tagName)
+                    || HtmlSelect.TAG_NAME.equals(tagName)
+                    || HtmlTextArea.TAG_NAME.equals(tagName);
+        });
+    }
+
+    /**
+     * This is the backend for the getElements() javascript function of the form.
+     * see https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements
+     *
+     * @return A List containing all non-image controls in the form.
+     * The form controls in the returned collection are in the same order
+     * in which they appear in the form by following a preorder,
+     * depth-first traversal of the tree. This is called tree order. Only the following elements are returned:
+     * button, fieldset,
+     * input (with the exception that any whose type is "image" are omitted for historical reasons),
+     * object, output, select, textarea.
+     */
+    public List<HtmlElement> getElementsJS() {
+        return getElements(htmlElement -> {
+            final String tagName = htmlElement.getTagName();
+            if (HtmlInput.TAG_NAME.equals(tagName)) {
+                return !(htmlElement instanceof HtmlImage);
+            }
+
+            return HtmlButton.TAG_NAME.equals(tagName)
+                    || HtmlFieldSet.TAG_NAME.equals(tagName)
+                    || HtmlObject.TAG_NAME.equals(tagName)
+                    || HtmlOutput.TAG_NAME.equals(tagName)
+                    || HtmlSelect.TAG_NAME.equals(tagName)
+                    || HtmlTextArea.TAG_NAME.equals(tagName);
+        });
+    }
+
+    private List<HtmlElement> getElements(final Predicate<HtmlElement> filter) {
         final List<HtmlElement> elements = new ArrayList<>();
 
         if (isAttachedToPage()) {
             for (final HtmlElement element : getPage().getDocumentElement().getHtmlElementDescendants()) {
-                if (includedInElementsCollection(element)
+                if (filter.test(element)
                         && element.getEnclosingForm() == this) {
                     elements.add(element);
                 }
@@ -574,27 +627,13 @@ public class HtmlForm extends HtmlElement {
         }
         else {
             for (final HtmlElement element : getHtmlElementDescendants()) {
-                if (includedInElementsCollection(element)) {
+                if (filter.test(element)) {
                     elements.add(element);
                 }
             }
         }
 
         return elements;
-    }
-
-    private static boolean includedInElementsCollection(final HtmlElement element) {
-        final String tagName = element.getTagName();
-        if (HtmlInput.TAG_NAME.equals(tagName)) {
-            return !"image".equals(((HtmlInput) element).getType());
-        }
-
-        return HtmlButton.TAG_NAME.equals(tagName)
-                || HtmlSelect.TAG_NAME.equals(tagName)
-                || HtmlTextArea.TAG_NAME.equals(tagName)
-                || HtmlIsIndex.TAG_NAME.equals(tagName)
-                || HtmlFieldSet.TAG_NAME.equals(tagName);
-
     }
 
     /**
@@ -939,9 +978,8 @@ public class HtmlForm extends HtmlElement {
     public List<HtmlInput> getInputsByValue(final String value) {
         final List<HtmlInput> results = new ArrayList<>();
 
-        for (final HtmlElement element : getElements()) {
-            if (element instanceof HtmlInput
-                    && Objects.equals(((HtmlInput) element).getValue(), value)) {
+        for (final HtmlElement element : getElements(htmlElement -> htmlElement instanceof HtmlInput)) {
+            if (Objects.equals(((HtmlInput) element).getValue(), value)) {
                 results.add((HtmlInput) element);
             }
         }

@@ -771,6 +771,55 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     * @throws Exception if the test fails
     */
     @Test
+    @Alerts({"1", "[object HTMLInputElement]/txt"})
+    public void elementsInputImage() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='text' name='foo' id='txt'/>\n"
+            + "  <input type='image' name='fooo' id='img'/>\n"
+            + "</form>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var oElements = document.myForm.elements;\n"
+            + "log(oElements.length);\n"
+            + "log(oElements[0] + '/' + oElements[0].id);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Alerts({"1", "[object HTMLOutputElement]"})
+    public void elementsOutput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <output name='result'>60</output>\n"
+            + "</form>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var oElements = document.myForm.elements;\n"
+            + "log(oElements.length);\n"
+            + "log(oElements[0]);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+    * @throws Exception if the test fails
+    */
+    @Test
     @Alerts({"2", "[object HTMLFieldSetElement]", "[object HTMLInputElement]"})
     public void elementsFieldSet() throws Exception {
         final String html = "<html>\n"
@@ -788,31 +837,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "log(oElements.length);\n"
             + "log(oElements[0]);\n"
             + "log(oElements[1]);\n"
-            + "</script>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-    * @throws Exception if the test fails
-    */
-    @Test
-    @Alerts({"1", "[object HTMLInputElement]/txt"})
-    public void elementsInputImage() throws Exception {
-        final String html = "<html>\n"
-            + "<body>\n"
-            + "<form name='myForm'>\n"
-            + "  <input type='text' name='foo' id='txt'/>\n"
-            + "  <input type='image' name='fooo' id='img'/>\n"
-            + "</form>\n"
-
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "var oElements = document.myForm.elements;\n"
-            + "log(oElements.length);\n"
-            + "log(oElements[0] + '/' + oElements[0].id);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
