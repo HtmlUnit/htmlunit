@@ -1257,7 +1257,7 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.3.2</version>
+            <version>1.3.3</version>
         </dependency>
         <dependency>
             <groupId>commons-net</groupId>
@@ -1320,6 +1320,12 @@
             <artifactId>log4j-jcl</artifactId>
             <version>${log4j.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- make our test for rendering svg images on canvas run -->
