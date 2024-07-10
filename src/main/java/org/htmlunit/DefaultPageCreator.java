@@ -195,7 +195,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                         }
                     }
                 }
-                catch (final ArrayIndexOutOfBoundsException e) {
+                catch (final ArrayIndexOutOfBoundsException ignored) {
                     // ignore and try next
                 }
             }

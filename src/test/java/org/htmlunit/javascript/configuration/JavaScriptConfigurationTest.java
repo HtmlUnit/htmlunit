@@ -135,7 +135,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 try {
                     klass = Class.forName(className);
                 }
-                catch (final Throwable t) {
+                catch (final Throwable e) {
                     continue;
                 }
                 if ("org.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())

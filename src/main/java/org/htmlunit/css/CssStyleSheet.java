@@ -977,9 +977,9 @@ public class CssStyleSheet implements Serializable {
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null);
         }
-        catch (final Throwable t) {
+        catch (final Throwable ex) {
             if (LOG.isErrorEnabled()) {
-                LOG.error("Error parsing CSS from '" + toString(source) + "': " + t.getMessage(), t);
+                LOG.error("Error parsing CSS from '" + toString(source) + "': " + ex.getMessage(), ex);
             }
             ss = new CSSStyleSheetImpl();
         }

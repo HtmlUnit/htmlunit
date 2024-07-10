@@ -247,8 +247,7 @@ public final class WebAssert {
             final String msg = "The page contains a link with ID '" + id + "'.";
             throw new AssertionError(msg);
         }
-        catch (final ElementNotFoundException e) {
-            // Expected.
+        catch (final ElementNotFoundException expected) {
         }
     }
 

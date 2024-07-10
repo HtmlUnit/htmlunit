@@ -288,7 +288,7 @@ public class WebSocketTest extends WebDriverTestCase {
                         webSocket.session_.getRemote().sendString(data);
                     }
                 }
-                catch (final IOException x) {
+                catch (final IOException e) {
                     session_.close();
                 }
             }
@@ -421,7 +421,7 @@ public class WebSocketTest extends WebDriverTestCase {
                         webSocket.session_.getRemote().sendString(cookie);
                     }
                 }
-                catch (final IOException x) {
+                catch (final IOException e) {
                     session_.close();
                 }
             }

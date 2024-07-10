@@ -217,8 +217,8 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                 return new String(out.toByteArray(), cs);
             }
         }
-        catch (final RuntimeException re) {
-            throw re;
+        catch (final RuntimeException e) {
+            throw e;
         }
         catch (final Exception e) {
             throw JavaScriptEngine.reportRuntimeError("Exception: " + e);

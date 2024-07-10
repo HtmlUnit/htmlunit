@@ -195,7 +195,7 @@ public class HttpWebConnection implements WebConnection {
                     }
                 }
             }
-            catch (final SSLPeerUnverifiedException s) {
+            catch (final SSLPeerUnverifiedException ex) {
                 // Try to use only SSLv3 instead
                 if (webClient_.getOptions().isUseInsecureSSL()) {
                     HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext, true);
@@ -206,7 +206,7 @@ public class HttpWebConnection implements WebConnection {
                         }
                     }
                 }
-                throw s;
+                throw ex;
             }
             catch (final Error e) {
                 // in case a StackOverflowError occurs while the connection is leased, it won't get released.

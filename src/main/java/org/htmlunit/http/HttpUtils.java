@@ -132,7 +132,7 @@ public final class HttpUtils {
             try {
                 return new Date(Instant.from(dateFormatter.parse(v)).toEpochMilli());
             }
-            catch (final DateTimeParseException ignore) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }

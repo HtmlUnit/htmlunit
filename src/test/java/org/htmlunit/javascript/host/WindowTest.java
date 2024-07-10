@@ -230,7 +230,7 @@ public class WindowTest extends SimpleWebTestCase {
             assertEquals(secondFrame.getEnclosedWindow(), webClient.getWebWindowByName("secondFrame"));
             // Expected path
         }
-        catch (final WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException e) {
             fail("Expected secondFrame would be found before click.");
         }
         final HtmlAnchor anchor = secondPage.getHtmlElementById("link");
@@ -246,7 +246,7 @@ public class WindowTest extends SimpleWebTestCase {
             assertEquals(secondFrame.getEnclosedWindow(), webClient.getWebWindowByName("secondFrame"));
             // Expected path
         }
-        catch (final WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException e) {
             fail("Expected secondFrame would be found after click.");
         }
 
@@ -366,14 +366,14 @@ public class WindowTest extends SimpleWebTestCase {
             webClient.getWebWindowByName("secondFrame");
             fail("Did not expect secondFrame to still exist after click.");
         }
-        catch (final WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException e) {
             // Expected path
         }
         try {
             webClient.getWebWindowByName("thirdFrame");
             fail("Did not expect thirdFrame to still exist after click.");
         }
-        catch (final WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException e) {
             // Expected path
         }
     }
@@ -433,14 +433,14 @@ public class WindowTest extends SimpleWebTestCase {
             assertSame(namedWindow.getEnclosedPage(), fourthPage);
             // Expected path
         }
-        catch (final WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException e) {
             fail("Expected secondFrame would be found after click.");
         }
         try {
             webClient.getWebWindowByName("thirdFrame");
             fail("Did not expect thirdFrame to still exist after click.");
         }
-        catch (final WebWindowNotFoundException exception) {
+        catch (final WebWindowNotFoundException e) {
             // Expected path
         }
     }

@@ -1000,7 +1000,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         try {
             return Pattern.matches(javaPattern, value);
         }
-        catch (final Exception e) {
+        catch (final Exception ignored) {
             // ignore if regex invalid
         }
         return true;

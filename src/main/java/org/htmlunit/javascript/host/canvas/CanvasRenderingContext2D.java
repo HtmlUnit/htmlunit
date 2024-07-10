@@ -428,7 +428,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                             sx, sy, sWidthI, sHeightI, dxI, dyI, dWidthI, dHeightI);
                 }
             }
-            catch (final IOException ioe) {
+            catch (final IOException ex) {
                 LOG.info("There is no ImageReader available for you imgage with src '" + imageElem.getSrc() + "'"
                         + "Please have a look at https://www.htmlunit.org/images-howto.html "
                         + "for a possible solution.");
@@ -449,8 +449,8 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             }
             return DataURLConnection.DATA_PREFIX + type + ";base64," + getRenderingBackend().encodeToString(type);
         }
-        catch (final IOException ioe) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(ioe);
+        catch (final IOException ex) {
+            throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);
         }
     }
 

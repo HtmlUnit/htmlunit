@@ -58,12 +58,12 @@ class BrowserStatement extends Statement {
                 evaluateSolo();
                 break;
             }
-            catch (final Throwable t) {
+            catch (final Throwable ex) {
                 if (Boolean.parseBoolean(System.getProperty(WebDriverTestCase.AUTOFIX_))) {
-                    TestCaseCorrector.correct(method_, realBrowser_, browserVersion_, notYetImplemented_, t);
+                    TestCaseCorrector.correct(method_, realBrowser_, browserVersion_, notYetImplemented_, ex);
                 }
                 if (notYetImplemented_) {
-                    throw t;
+                    throw ex;
                 }
                 if (BrowserVersionClassRunner.maven_) {
                     System.out.println("Failed test "
@@ -71,7 +71,7 @@ class BrowserStatement extends Statement {
                             + (tries_ != 1 ? " #" + (i + 1) : ""));
                 }
                 if (i == tries_ - 1) {
-                    throw t;
+                    throw ex;
                 }
             }
         }

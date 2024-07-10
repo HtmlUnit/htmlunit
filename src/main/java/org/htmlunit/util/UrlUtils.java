@@ -1261,8 +1261,8 @@ public final class UrlUtils {
                 f1 = u1.toURI().normalize().toURL().getFile();
                 f2 = u2.toURI().normalize().toURL().getFile();
             }
-            catch (final RuntimeException re) {
-                throw re;
+            catch (final RuntimeException e) {
+                throw e;
             }
             catch (final Exception e) {
                 // ignore

@@ -71,14 +71,14 @@ public class FrameworkMethodWithParameters extends FrameworkMethod {
                 try {
                     field.set(target, parameters_.get(index));
                 }
-                catch (final IllegalArgumentException iare) {
+                catch (final IllegalArgumentException ex) {
                     throw new Exception(testClass_.getName()
                             + ": Trying to set " + field.getName()
                             + " with the value " + parameters_.get(index)
                             + " that is not the right type ("
                             + parameters_.get(index).getClass().getSimpleName()
                             + " instead of " + field.getType().getSimpleName()
-                            + ").", iare);
+                            + ").", ex);
                 }
             }
         }

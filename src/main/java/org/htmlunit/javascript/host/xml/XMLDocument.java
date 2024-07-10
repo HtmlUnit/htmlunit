@@ -116,7 +116,7 @@ public class XMLDocument extends Document {
                 final XmlPage page = createParserErrorXmlPage("Syntax Error", webWindow);
                 setDomNode(page);
             }
-            catch (final IOException eI) {
+            catch (final IOException ex) {
                 LOG.error("Could not handle ParserError", e);
             }
 

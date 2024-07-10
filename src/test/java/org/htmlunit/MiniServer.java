@@ -91,8 +91,8 @@ public class MiniServer extends Thread implements Closeable {
                     try {
                         Thread.sleep(200);
                     }
-                    catch (final InterruptedException ie) {
-                        LOG.error(ie.getMessage(), ie);
+                    catch (final InterruptedException ex) {
+                        LOG.error(ex.getMessage(), ex);
                     }
                 }
             }

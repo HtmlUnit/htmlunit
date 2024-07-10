@@ -534,7 +534,7 @@ public class WebRequest implements Serializable {
         try {
             setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(url).toExternalForm());
         }
-        catch (final MalformedURLException e) {
+        catch (final MalformedURLException ignored) {
             // bad luck us the whole url from the pager
         }
     }

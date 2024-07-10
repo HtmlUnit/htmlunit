@@ -65,7 +65,7 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
             }
             super.setValue(newValue);
         }
-        catch (final DateTimeParseException e) {
+        catch (final DateTimeParseException ignored) {
             // ignore
         }
     }
@@ -92,7 +92,7 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
                 final LocalDateTime minDate = LocalDateTime.parse(getMin(), FORMATTER_);
                 return minDate.isEqual(dateValue) || minDate.isBefore(dateValue);
             }
-            catch (final DateTimeParseException e) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }
@@ -113,7 +113,7 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
                 final LocalDateTime maxDate = LocalDateTime.parse(getMax(), FORMATTER_);
                 return maxDate.isEqual(dateValue) || maxDate.isAfter(dateValue);
             }
-            catch (final DateTimeParseException e) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }

@@ -47,9 +47,9 @@ public class RetryRule implements TestRule {
                         stmt.evaluate();
                         return;
                     }
-                    catch (final Throwable t) {
+                    catch (final Throwable e) {
                         if (retryCount_.get() == 0 || desc.getAnnotation(Retry.class) == null) {
-                            throw t;
+                            throw e;
                         }
                     }
                 }

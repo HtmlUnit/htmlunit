@@ -658,7 +658,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
                     ((FrameWindow) webWindow).setPageDenied(pageDenied);
                 }
-                catch (final IOException e) {
+                catch (final IOException ignored) {
                     // ignore
                 }
             }
@@ -1145,7 +1145,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     }
                     return frame;
                 }
-                catch (final ElementNotFoundException e) {
+                catch (final ElementNotFoundException expected) {
                     // Fall through
                 }
             }
@@ -1160,7 +1160,7 @@ public class WebClient implements Serializable, AutoCloseable {
         try {
             return getWebWindowByName(name);
         }
-        catch (final WebWindowNotFoundException e) {
+        catch (final WebWindowNotFoundException expected) {
             // Fall through - a new window will be created below
         }
         return null;
@@ -1462,7 +1462,7 @@ public class WebClient implements Serializable, AutoCloseable {
             try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(file.toPath()))) {
                 contentType = URLConnection.guessContentTypeFromStream(inputStream);
             }
-            catch (final IOException e) {
+            catch (final IOException ignored) {
                 // Ignore silently.
             }
         }
@@ -2338,9 +2338,9 @@ public class WebClient implements Serializable, AutoCloseable {
             try {
                 scriptEngine_.shutdown();
             }
-            catch (final ThreadDeath td) {
+            catch (final ThreadDeath ex) {
                 // make sure the following cleanup is performed to avoid resource leaks
-                toThrow = td;
+                toThrow = ex;
             }
             catch (final Exception e) {
                 LOG.error("Exception while shutdown the scriptEngine", e);

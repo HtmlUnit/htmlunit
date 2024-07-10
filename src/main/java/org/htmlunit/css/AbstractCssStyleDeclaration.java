@@ -382,7 +382,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                         return "url(\"" + domElement.getHtmlPageOrNull()
                             .getFullyQualifiedUrl(value) + "\")";
                     }
-                    catch (final Exception e) {
+                    catch (final Exception ignored) {
                         // ignore
                     }
                 }
@@ -879,8 +879,8 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
             }
             return Double.toString(value);
         }
-        catch (final NumberFormatException e) {
-            // ignore wrong value
+        catch (final NumberFormatException ignored) {
+            // ignore wrong values
         }
         return "";
     }
@@ -1183,8 +1183,8 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                 Double.parseDouble(token.substring(0, token.length() - 1));
                 return true;
             }
-            catch (final NumberFormatException e) {
-                // Ignore.
+            catch (final NumberFormatException ignored) {
+                // ignore wrong values
             }
             return false;
         }
@@ -1196,8 +1196,8 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
                 Double.parseDouble(token.substring(0, token.length() - 2));
                 return true;
             }
-            catch (final NumberFormatException e) {
-                // Ignore.
+            catch (final NumberFormatException ignored) {
+                // ignore wrong values
             }
             return false;
         }

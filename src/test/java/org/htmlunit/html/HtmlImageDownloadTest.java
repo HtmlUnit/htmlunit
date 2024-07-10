@@ -106,8 +106,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
             htmlImage.getImageData();
             fail("it was not an image!");
         }
-        catch (final IOException ioe) {
-            // Correct behavior
+        catch (final IOException expected) {
         }
     }
 

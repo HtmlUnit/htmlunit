@@ -200,14 +200,14 @@ public class XPathAdapter {
         try {
             xobj = mainExp_.execute(xpathContext);
         }
-        catch (final TransformerException te) {
-            te.setLocator(mainExp_);
+        catch (final TransformerException ex) {
+            ex.setLocator(mainExp_);
             final ErrorListener el = xpathContext.getErrorListener();
             if (null != el) {
-                el.error(te);
+                el.error(ex);
             }
             else {
-                throw te;
+                throw ex;
             }
         }
         catch (final Exception e) {

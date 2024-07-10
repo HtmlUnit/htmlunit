@@ -62,7 +62,7 @@ public final class Platform {
             HelperXerces_ = (XmlUtilsHelperAPI)
                     Class.forName("org.htmlunit.platform.util.XmlUtilsXercesHelper").newInstance();
         }
-        catch (final Exception | LinkageError e2) {
+        catch (final Exception | LinkageError e) {
             // ignore
         }
     }
@@ -163,16 +163,16 @@ public final class Platform {
                         "org.htmlunit.platform.image.ImageIOImageData");
             return (ImageData) ConstructorUtils.invokeConstructor(backendClass, inputStream);
         }
-        catch (final InvocationTargetException e) {
-            final Throwable targetEx = e.getTargetException();
+        catch (final InvocationTargetException ex) {
+            final Throwable targetEx = ex.getTargetException();
             if (targetEx instanceof IOException) {
-                throw (IOException) e.getTargetException();
+                throw (IOException) targetEx;
             }
 
             return new NoOpImageData();
         }
-        catch (final RuntimeException re) {
-            throw re;
+        catch (final RuntimeException ex) {
+            throw ex;
         }
         catch (final Throwable ex) {
             return new NoOpImageData();

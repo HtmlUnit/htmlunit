@@ -68,7 +68,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
             }
             super.setValue(newValue);
         }
-        catch (final DateTimeParseException e) {
+        catch (final DateTimeParseException ignored) {
             // ignore
         }
     }
@@ -95,7 +95,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
                 final YearMonth minDate = YearMonth.parse(getMin(), FORMATTER_);
                 return minDate.equals(dateValue) || minDate.isBefore(dateValue);
             }
-            catch (final DateTimeParseException e) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }
@@ -116,7 +116,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
                 final YearMonth maxDate = YearMonth.parse(getMax(), FORMATTER_);
                 return maxDate.equals(dateValue) || maxDate.isAfter(dateValue);
             }
-            catch (final DateTimeParseException e) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }

@@ -81,7 +81,7 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
             final TemporalAccessor time = INPUT_FORMATTER_.parse(raw);
             return OUTPUT_FORMATTER_.format(time);
         }
-        catch (final DateTimeParseException e) {
+        catch (final DateTimeParseException ignored) {
             // ignore
         }
         return "";

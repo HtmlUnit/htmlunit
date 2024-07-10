@@ -111,7 +111,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
 
             return raw.trim();
         }
-        catch (final ParseException e) {
+        catch (final ParseException ignored) {
             // ignore
         }
 
@@ -181,12 +181,12 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
                                 return false;
                             }
                         }
-                        catch (final NumberFormatException e) {
+                        catch (final NumberFormatException ignored) {
                             // ignore
                         }
                     }
                 }
-                catch (final NumberFormatException e) {
+                catch (final NumberFormatException ignored) {
                     // ignore
                 }
             }
@@ -197,7 +197,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
                         return false;
                     }
                 }
-                catch (final NumberFormatException e) {
+                catch (final NumberFormatException ignored) {
                     // ignore
                 }
             }
