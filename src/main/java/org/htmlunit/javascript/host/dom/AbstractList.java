@@ -497,7 +497,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
 
     @Override
     public void setArrayElement(final int index, final Object value) {
-        // ignored
+        // ignore
     }
 
     @Override
