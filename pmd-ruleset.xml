@@ -8,9 +8,6 @@
     <description>HtmlUnit rules</description>
     <exclude-pattern>.*/src/test/resources/.*</exclude-pattern>
 
-    <exclude-pattern>.*/src/main/java/org/htmlunit/httpclient/HtmlUnitBrowserCompatCookieSpec\.java</exclude-pattern>
-    <!-- exclude-pattern>.*/src/main/java/org/htmlunit/DefaultCredentialsProvider\.java</exclude-pattern -->
-
     <rule ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName">
         <properties>
             <property name="reportStaticMethods" value="false" />
@@ -25,7 +22,10 @@
         </properties>
     </rule>
 
-    <rule ref="category/java/bestpractices.xml" />
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="AccessorClassGeneration"/>
+        <exclude name="AccessorMethodGeneration"/>
+    </rule>
 
     <rule ref="category/java/codestyle.xml">
         <exclude name="AtLeastOneConstructor"/>
