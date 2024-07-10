@@ -2632,8 +2632,7 @@ public class HtmlPage extends SgmlPage {
      */
     public ComputedCssStyleDeclaration getStyleFromCache(final DomElement element,
             final String normalizedPseudo) {
-        final ComputedCssStyleDeclaration styleFromCache = getCssPropertiesCache().get(element, normalizedPseudo);
-        return styleFromCache;
+        return getCssPropertiesCache().get(element, normalizedPseudo);
     }
 
     /**

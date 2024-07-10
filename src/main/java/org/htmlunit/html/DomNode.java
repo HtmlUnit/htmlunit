@@ -1741,7 +1741,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return new StaticDomNodeList(elements);
         }
         catch (final IOException e) {
-            throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
+            throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage(), e);
         }
     }
 
@@ -1763,8 +1763,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
             final SelectorList selectorList = parser.parseSelectors(selectors);
             // in case of error parseSelectors returns null
-            if (errorHandler.errorDetected()) {
-                throw new CSSException("Invalid selectors: '" + selectors + "'");
+            if (errorHandler.error() != null) {
+                throw new CSSException("Invalid selectors: '" + selectors + "'", errorHandler.error());
             }
 
             if (selectorList != null) {
@@ -1825,14 +1825,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     private static final class CheckErrorHandler implements CSSErrorHandler {
-        private boolean errorDetected_;
+        private CSSParseException error_;
 
-        CheckErrorHandler() {
-            errorDetected_ = false;
-        }
-
-        boolean errorDetected() {
-            return errorDetected_;
+        CSSParseException error() {
+            return error_;
         }
 
         @Override
@@ -1842,12 +1838,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         @Override
         public void fatalError(final CSSParseException exception) throws CSSException {
-            errorDetected_ = true;
+            error_ = exception;
         }
 
         @Override
         public void error(final CSSParseException exception) throws CSSException {
-            errorDetected_ = true;
+            error_ = exception;
         }
     }
 
@@ -1918,7 +1914,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return null;
         }
         catch (final IOException e) {
-            throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage());
+            throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage(), e);
         }
     }
 }

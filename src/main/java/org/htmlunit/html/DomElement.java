@@ -1628,7 +1628,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             return false;
         }
         catch (final IOException e) {
-            throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage());
+            throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage(), e);
         }
     }
 
