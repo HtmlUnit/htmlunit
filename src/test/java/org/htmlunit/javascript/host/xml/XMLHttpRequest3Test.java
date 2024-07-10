@@ -108,15 +108,13 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "</html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new DisconnectedMockWebConnection();
         conn.setResponse(URL_FIRST, html);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(null));
     }
 
     /**
@@ -368,8 +366,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "</html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setDefaultResponse("");
@@ -377,7 +373,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(null));
     }
 
     /**
