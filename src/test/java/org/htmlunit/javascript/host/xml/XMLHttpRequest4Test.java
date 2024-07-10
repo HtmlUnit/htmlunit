@@ -14,8 +14,13 @@
  */
 package org.htmlunit.javascript.host.xml;
 
+import java.io.File;
+import java.net.URL;
+
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.junit.Test;
@@ -170,4 +175,39 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         loadPageWithAlerts(html, URL_FIRST, 1000);
     }
 
+    @Test
+    @Alerts("onreadystatechange [object Event]§readystatechange§1§"
+            + "onreadystatechange [object Event]§readystatechange§4§")
+    public void sendLocalFileAllowed() throws Exception {
+        // see org.htmlunit.javascript.host.xml.XMLHttpRequest5Test.sendLocalFile()
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/localxmlhttprequest/index.html");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        final WebClient client = getWebClient();
+        client.getOptions().setFileProtocolForXMLHttpRequestsAllowed(true);
+
+        final HtmlPage page = client.getPage(fileURL);
+
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
+    }
+
+    @Test
+    @Alerts("onreadystatechange [object Event]§readystatechange§1§"
+            + "onreadystatechange [object Event]§readystatechange§4§")
+    public void sendLocalSubFileAllowed() throws Exception {
+        // see org.htmlunit.javascript.host.xml.XMLHttpRequest5Test.sendLocalFile()
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/localxmlhttprequest/index_sub.html");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        final WebClient client = getWebClient();
+        client.getOptions().setFileProtocolForXMLHttpRequestsAllowed(true);
+
+        final HtmlPage page = client.getPage(fileURL);
+
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
+    }
 }

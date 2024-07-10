@@ -65,6 +65,9 @@ public class WebClientOptions implements Serializable {
 
     private boolean useInsecureSSL_; // default is secure SSL
     private String sslInsecureProtocol_;
+
+    private boolean fileProtocolForXMLHttpRequestsAllowed_;
+
     private int maxInMemory_ = 500 * 1024;
     private int historySizeLimit_ = 50;
     private int historyPageCacheLimit_ = Integer.MAX_VALUE;
@@ -959,5 +962,25 @@ public class WebClientOptions implements Serializable {
         public Double getSpeed() {
             return speed_;
         }
+    }
+
+    /**
+     * If set to {@code true}, the client will accept XMLHttpRequests to URL's
+     * using the 'file' protocol. Allowing this introduces security problems and is
+     * therefore not allowed by current browsers. But some browsers have special settings
+     * to open this door; therefore we have this option.
+     * @param fileProtocolForXMLHttpRequestsAllowed whether or not allow (local) file access
+     */
+    public void setFileProtocolForXMLHttpRequestsAllowed(final boolean fileProtocolForXMLHttpRequestsAllowed) {
+        fileProtocolForXMLHttpRequestsAllowed_ = fileProtocolForXMLHttpRequestsAllowed;
+    }
+
+    /**
+     * Indicates if the client will accept XMLHttpRequests to URL's
+     * using the 'file' protocol.
+     * @return {@code true} if access to local files is allowed.
+     */
+    public boolean isFileProtocolForXMLHttpRequestsAllowed() {
+        return fileProtocolForXMLHttpRequestsAllowed_;
     }
 }

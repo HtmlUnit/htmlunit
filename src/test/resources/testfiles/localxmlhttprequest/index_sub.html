@@ -1,0 +1,27 @@
+<html>
+<head><script>
+  function log(msg) { window.document.title += msg + '\u00a7'; }
+  function test() {
+    try {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(event) {
+                    log('onreadystatechange ' + event);
+                    log(event.type);
+                    log(xhr.readyState);
+                  };
+      xhr.onerror = function(event) {
+                    log('error ' + event);
+                    log(event.type);
+                    log(event.lengthComputable);
+                    log(event.loaded);
+                    log(event.total);
+                  };
+      xhr.open('GET', 'sub/subcontent.txt', false);
+      xhr.send('');
+  } catch (exception) { 
+    log(exception.name);
+  }
+}
+</script></head>
+<body onload='test()'>
+</body></html>

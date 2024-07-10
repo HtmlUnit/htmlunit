@@ -883,8 +883,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * The real send job.
      */
     void doSend() {
-        if ("file".equals(webRequest_.getUrl().getProtocol())) {
-            // accessing to local resource is forbidden for security reason
+        final WebClient wc = getWindow().getWebWindow().getWebClient();
+
+        // accessing to local resource is forbidden for security reason
+        if (!wc.getOptions().isFileProtocolForXMLHttpRequestsAllowed()
+                && "file".equals(webRequest_.getUrl().getProtocol())) {
 
             if (async_) {
                 setState(DONE);
@@ -900,7 +903,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        final WebClient wc = getWindow().getWebWindow().getWebClient();
         boolean preflighted = false;
         try {
             if (!isSameOrigin_ && isPreflight()) {
