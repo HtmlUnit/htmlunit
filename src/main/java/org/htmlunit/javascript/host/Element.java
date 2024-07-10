@@ -1241,8 +1241,8 @@ public class Element extends Node {
      */
     @JsxFunction
     public void scrollTo(final Scriptable x, final Scriptable y) {
-        int xOff = 0;
-        int yOff = 0;
+        int xOff;
+        int yOff;
         if (y != null) {
             xOff = JavaScriptEngine.toInt32(x);
             yOff = JavaScriptEngine.toInt32(y);

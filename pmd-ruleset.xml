@@ -53,6 +53,7 @@
         <exclude name="LawOfDemeter"/>
         <exclude name="NcssCount"/>
         <exclude name="NPathComplexity"/>
+        <exclude name="SimplifyBooleanReturns"/>
         <exclude name="TooManyMethods"/>
     </rule>
 

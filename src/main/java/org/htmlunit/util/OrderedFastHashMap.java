@@ -616,14 +616,12 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
 
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
-        final Set<Map.Entry<K, V>> set = new OrderedEntrySet<>(this);
-        return set;
+        return new OrderedEntrySet<>(this);
     }
 
     @Override
     public Set<K> keySet() {
-        final Set<K> set = new OrderedKeySet<>(this);
-        return set;
+        return new OrderedKeySet<>(this);
     }
 
     /**

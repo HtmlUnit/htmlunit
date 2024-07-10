@@ -175,7 +175,6 @@ public class HTMLImageElement extends HTMLElement {
     @JsxSetter
     public void setAlign(final String align) {
         getDomNodeOrDie().setAttribute("align", align);
-        return;
     }
 
     /**
