@@ -164,13 +164,11 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      */
     @JsxFunction
     public void deleteCell(final Object index) {
-        int position = -1;
-        if (!JavaScriptEngine.isUndefined(index)) {
-            position = (int) JavaScriptEngine.toNumber(index);
-        }
-        else {
+        if (JavaScriptEngine.isUndefined(index)) {
             throw JavaScriptEngine.reportRuntimeError("No enough arguments");
         }
+
+        int position = (int) JavaScriptEngine.toNumber(index);
 
         final HtmlTableRow htmlRow = (HtmlTableRow) getDomNodeOrDie();
 

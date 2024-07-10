@@ -127,11 +127,9 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
 
-        boolean changed = false;
         String value = getAttribValue();
         if (StringUtils.isEmpty(value)) {
             value = token;
-            changed = true;
         }
         else {
             value = String.join(" ", StringUtils.split(value, WHITESPACE_CHARS));
@@ -140,17 +138,13 @@ public class DOMTokenList extends HtmlUnitScriptable {
                     value = value + " ";
                 }
                 value = value + token;
-                changed = true;
             }
             else {
                 value = String.join(" ", StringUtils.split(value, WHITESPACE_CHARS));
-                changed = true;
             }
         }
 
-        if (changed) {
-            updateAttribute(value);
-        }
+        updateAttribute(value);
     }
 
     /**
