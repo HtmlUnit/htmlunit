@@ -43,7 +43,8 @@ public class AwtClipboardHandler implements ClipboardHandler {
             try {
                 result = (String) contents.getTransferData(DataFlavor.stringFlavor);
             }
-            catch (final UnsupportedFlavorException | IOException ex) {
+            catch (final UnsupportedFlavorException | IOException ignored) {
+                // TODO
             }
         }
         return result;

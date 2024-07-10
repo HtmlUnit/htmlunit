@@ -49,12 +49,12 @@ public final class ElementTestSource {
                     final Field field2 = c.getDeclaredField("TAG_NAME2");
                     namesMap.put(field2.get(null).toString(), c.getName());
                 }
-                catch (final Exception e) {
-                    //ignore
+                catch (final Exception ignored) {
+                    // ignore
                 }
             }
-            catch (final Exception e) {
-                //ignore
+            catch (final Exception ignored) {
+                // ignore
             }
         }
         for (final String tag : DefaultElementFactory.SUPPORTED_TAGS_) {

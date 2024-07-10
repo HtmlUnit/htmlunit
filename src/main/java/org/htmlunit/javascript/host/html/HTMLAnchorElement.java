@@ -516,7 +516,7 @@ public class HTMLAnchorElement extends HTMLElement {
                 url = UrlUtils.removeRedundantPort(url);
                 setUrl(url);
             }
-            catch (final MalformedURLException e) {
+            catch (final MalformedURLException ignored) {
                 // ignore
             }
 
@@ -536,7 +536,7 @@ public class HTMLAnchorElement extends HTMLElement {
             url = UrlUtils.removeRedundantPort(url);
             setUrl(url);
         }
-        catch (final MalformedURLException e) {
+        catch (final MalformedURLException ignored) {
             // ignore
         }
     }
@@ -704,7 +704,7 @@ public class HTMLAnchorElement extends HTMLElement {
             final URL url = ((HtmlPage) anchor.getPage()).getFullyQualifiedUrl(href);
             setUrl(UrlUtils.getUrlWithNewUserName(url, username));
         }
-        catch (final MalformedURLException e) {
+        catch (final MalformedURLException ignored) {
             // ignore
         }
     }
@@ -743,7 +743,7 @@ public class HTMLAnchorElement extends HTMLElement {
             final URL url = ((HtmlPage) anchor.getPage()).getFullyQualifiedUrl(href);
             setUrl(UrlUtils.getUrlWithNewUserPassword(url, password));
         }
-        catch (final MalformedURLException e) {
+        catch (final MalformedURLException ignored) {
             // ignore
         }
     }

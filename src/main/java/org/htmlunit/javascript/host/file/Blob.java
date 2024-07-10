@@ -180,7 +180,7 @@ public class Blob extends HtmlUnitScriptable {
             try {
                 return Long.parseLong(JavaScriptEngine.toString(optionsType));
             }
-            catch (final NumberFormatException e) {
+            catch (final NumberFormatException ignored) {
                 // fall back to default
             }
         }

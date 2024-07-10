@@ -1264,7 +1264,7 @@ public final class UrlUtils {
             catch (final RuntimeException e) {
                 throw e;
             }
-            catch (final Exception e) {
+            catch (final Exception ignored) {
                 // ignore
             }
         }
@@ -1297,7 +1297,7 @@ public final class UrlUtils {
                 try {
                     f = url.toURI().normalize().toURL().getFile();
                 }
-                catch (final Exception e) {
+                catch (final Exception ignored) {
                     // ignore
                 }
             }

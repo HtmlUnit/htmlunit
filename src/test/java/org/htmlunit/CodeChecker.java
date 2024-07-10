@@ -161,7 +161,7 @@ public class CodeChecker {
                 return true;
             }
             catch (final NoSuchMethodException e) {
-                //ignore
+                // ignore
             }
         }
         return false;

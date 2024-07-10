@@ -176,7 +176,7 @@ public class URL extends HtmlUnitScriptable {
 
             newHost = ipString.toString();
         }
-        catch (final Exception e) {
+        catch (final Exception expected) {
             // back to string
         }
 
@@ -187,7 +187,7 @@ public class URL extends HtmlUnitScriptable {
             try {
                 url_ = UrlUtils.getUrlWithNewHostAndPort(url_, newHost, Integer.parseInt(newPort));
             }
-            catch (final Exception e) {
+            catch (final Exception expected) {
                 // back to string
             }
         }
@@ -373,7 +373,7 @@ public class URL extends HtmlUnitScriptable {
                 url_ = UrlUtils.getUrlWithNewProtocol(url_, bareProtocol);
                 url_ = UrlUtils.removeRedundantPort(url_);
             }
-            catch (final MalformedURLException e) {
+            catch (final MalformedURLException ignored) {
                 // ignore
             }
 
@@ -392,7 +392,7 @@ public class URL extends HtmlUnitScriptable {
             url_ = UrlUtils.getUrlWithNewProtocol(url_, bareProtocol);
             url_ = UrlUtils.removeRedundantPort(url_);
         }
-        catch (final MalformedURLException e) {
+        catch (final MalformedURLException ignored) {
             // ignore
         }
     }

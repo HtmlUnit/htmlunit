@@ -207,8 +207,8 @@ public class JavaScriptJobManagerMinimalTest {
                 try {
                     Thread.sleep(500);
                 }
-                catch (final InterruptedException e) {
-                    // ignore, this is normal
+                catch (final InterruptedException expected) {
+                    // this is normal
                 }
             }
         };
@@ -299,8 +299,8 @@ public class JavaScriptJobManagerMinimalTest {
                 try {
                     Thread.sleep(30);
                 }
-                catch (final InterruptedException e) {
-                    // ignore, this is normal
+                catch (final InterruptedException expected) {
+                    // this is normal
                 }
             }
         };

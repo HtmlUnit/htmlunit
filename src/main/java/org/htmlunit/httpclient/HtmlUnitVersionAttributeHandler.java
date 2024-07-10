@@ -40,7 +40,7 @@ final class HtmlUnitVersionAttributeHandler extends AbstractCookieAttributeHandl
         try {
             version = Integer.parseInt(value);
         }
-        catch (final NumberFormatException e) {
+        catch (final NumberFormatException ignored) {
             // ignore invalid versions
         }
         cookie.setVersion(version);

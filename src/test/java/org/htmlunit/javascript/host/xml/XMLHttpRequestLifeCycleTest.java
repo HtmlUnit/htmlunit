@@ -269,8 +269,8 @@ public final class XMLHttpRequestLifeCycleTest {
                     Thread.sleep(500);
                     writer.write(RETURN_XML);
                 }
-                catch (final Exception e) {
-                    // ignored.
+                catch (final Exception ignored) {
+                    // ignore
                 }
             }
         }

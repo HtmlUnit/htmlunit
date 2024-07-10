@@ -177,7 +177,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             try (OutputStream fos = Files.newOutputStream(file.toPath())) {
                 length = IOUtils.copy(input, fos);
             }
-            catch (final EOFException e) {
+            catch (final EOFException ignored) {
                 // ignore
             }
         }

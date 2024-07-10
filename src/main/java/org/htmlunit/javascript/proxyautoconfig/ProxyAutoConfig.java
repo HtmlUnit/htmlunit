@@ -332,8 +332,8 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
                 cal.setTime(new SimpleDateFormat("MMM", Locale.ROOT).parse(s));
                 return cal.get(Calendar.MONTH);
             }
-            catch (final Exception e) {
-                //empty
+            catch (final Exception ignored) {
+                // empty
             }
         }
         return -1;

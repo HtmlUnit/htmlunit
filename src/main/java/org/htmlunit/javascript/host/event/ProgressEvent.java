@@ -69,7 +69,7 @@ public class ProgressEvent extends Event {
                 try {
                     loaded_ = Long.parseLong(loaded.toString());
                 }
-                catch (final NumberFormatException e) {
+                catch (final NumberFormatException ignored) {
                     // ignore
                 }
             }
@@ -85,7 +85,7 @@ public class ProgressEvent extends Event {
                 try {
                     total_ = Long.parseLong(details.get("total").toString());
                 }
-                catch (final NumberFormatException e) {
+                catch (final NumberFormatException ignored) {
                     // ignore
                 }
             }

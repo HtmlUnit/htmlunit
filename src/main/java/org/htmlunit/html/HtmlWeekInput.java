@@ -72,7 +72,7 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
             FORMATTER_.parse(newValue);
             super.setValue(newValue);
         }
-        catch (final DateTimeParseException e) {
+        catch (final DateTimeParseException ignored) {
             // ignore
         }
     }
@@ -100,7 +100,7 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
                 final LocalDate minDate = LocalDate.parse(getMin() + "-1", DateTimeFormatter.ISO_WEEK_DATE);
                 return minDate.isEqual(dateValue) || minDate.isBefore(dateValue);
             }
-            catch (final DateTimeParseException e) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }
@@ -122,7 +122,7 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
                 final LocalDate maxDate = LocalDate.parse(getMax() + "-1", DateTimeFormatter.ISO_WEEK_DATE);
                 return maxDate.isEqual(dateValue) || maxDate.isAfter(dateValue);
             }
-            catch (final DateTimeParseException e) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }

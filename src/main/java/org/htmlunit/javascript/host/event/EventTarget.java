@@ -204,7 +204,7 @@ public class EventTarget extends HtmlUnitScriptable {
                     try {
                         element.click(event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), false, true, true, true);
                     }
-                    catch (final IOException e) {
+                    catch (final IOException ignored) {
                         // ignore for now
                     }
                 }

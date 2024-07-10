@@ -141,7 +141,7 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                         try {
                             transformerFactory.setAttribute("indent-number", Integer.valueOf(2));
                         }
-                        catch (final IllegalArgumentException e) {
+                        catch (final IllegalArgumentException ignored) {
                             // ignore
                         }
                         final Transformer transformer = transformerFactory.newTransformer(xsltSource);
@@ -149,7 +149,7 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                         try {
                             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
                         }
-                        catch (final IllegalArgumentException e) {
+                        catch (final IllegalArgumentException ignored) {
                             // ignore
                         }
 

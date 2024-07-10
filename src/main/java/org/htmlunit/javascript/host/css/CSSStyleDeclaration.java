@@ -1792,7 +1792,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             final int i = Integer.parseInt(zIndex.toString());
             setStyleAttribute(Definition.Z_INDEX_.getAttributeName(), Integer.toString(i));
         }
-        catch (final NumberFormatException e) {
+        catch (final NumberFormatException ignored) {
             // ignore
         }
     }
@@ -1896,8 +1896,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 Double.parseDouble(token);
                 return true;
             }
-            catch (final NumberFormatException e) {
-                // Ignore.
+            catch (final NumberFormatException ignored) {
+                // ignore
             }
         }
         return false;
@@ -2013,8 +2013,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
             setStyleAttribute(name, valueString, important);
         }
-        catch (final Exception e) {
-            //ignore
+        catch (final Exception ignored) {
+            // ignore
         }
     }
 }

@@ -99,7 +99,7 @@ public abstract class BaseFrameElement extends HtmlElement {
                 temporaryPage.setReadyState(READY_STATE_LOADING);
             }
         }
-        catch (final FailingHttpStatusCodeException | IOException e) {
+        catch (final FailingHttpStatusCodeException | IOException ignored) {
             // should never occur
         }
         enclosedWindow_ = enclosedWindow;

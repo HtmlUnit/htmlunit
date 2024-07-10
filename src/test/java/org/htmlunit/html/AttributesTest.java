@@ -140,7 +140,7 @@ public class AttributesTest extends TestCase {
                 tag = (String) clazz.getField("TAG_NAME2").get(null);
                 supportedTags.remove(tag);
             }
-            catch (final NoSuchFieldException e) {
+            catch (final NoSuchFieldException ignored) {
                 // ignore
             }
         }

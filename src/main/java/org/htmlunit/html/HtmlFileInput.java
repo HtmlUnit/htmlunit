@@ -278,7 +278,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
             try {
                 f = new File(new URI(path));
             }
-            catch (final URISyntaxException e) {
+            catch (final URISyntaxException ignored) {
                 // nothing here
             }
         }

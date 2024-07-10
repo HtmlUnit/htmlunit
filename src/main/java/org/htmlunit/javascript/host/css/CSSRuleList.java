@@ -151,8 +151,8 @@ public class CSSRuleList extends HtmlUnitScriptable {
         try {
             return has(Integer.parseInt(name), start);
         }
-        catch (final Exception e) {
-            //ignore
+        catch (final Exception ignored) {
+            // ignore
         }
         return false;
     }

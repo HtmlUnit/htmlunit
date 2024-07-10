@@ -531,7 +531,7 @@ public class Document extends Node {
             }
             return jsElement;
         }
-        catch (final ElementNotFoundException e) {
+        catch (final ElementNotFoundException expected) {
             // Just fall through - result is already set to NOT_FOUND
         }
 
@@ -664,7 +664,7 @@ public class Document extends Node {
             }
             return jsElement;
         }
-        catch (final ElementNotFoundException e) {
+        catch (final ElementNotFoundException expected) {
             // Just fall through - result is already set to NOT_FOUND
         }
         return NOT_FOUND;

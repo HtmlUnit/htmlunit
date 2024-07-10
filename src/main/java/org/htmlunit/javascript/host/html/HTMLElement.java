@@ -362,8 +362,8 @@ public class HTMLElement extends Element {
                     final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
                     method.invoke(this, new EventHandler(getDomNodeOrDie(), name.substring(2), value));
                 }
-                catch (final NoSuchMethodException | IllegalAccessException e) {
-                    //silently ignore
+                catch (final NoSuchMethodException | IllegalAccessException ignored) {
+                    // silently ignore
                 }
                 catch (final InvocationTargetException e) {
                     throw new RuntimeException(e.getCause());
@@ -896,8 +896,8 @@ public class HTMLElement extends Element {
                 chOff = Float.toString(f);
             }
         }
-        catch (final NumberFormatException e) {
-            // Ignore.
+        catch (final NumberFormatException ignored) {
+            // ignore
         }
         getDomNodeOrDie().setAttribute("charOff", chOff);
     }

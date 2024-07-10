@@ -153,7 +153,7 @@ public class HTMLAllCollection extends HTMLCollection {
             try {
                 args[0] = Integer.parseInt(val);
             }
-            catch (final NumberFormatException e) {
+            catch (final NumberFormatException ignored) {
                 // ignore
             }
         }

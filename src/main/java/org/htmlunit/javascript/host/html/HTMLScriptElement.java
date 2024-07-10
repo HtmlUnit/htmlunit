@@ -67,7 +67,7 @@ public class HTMLScriptElement extends HTMLElement {
             final URL expandedSrc = ((HtmlPage) tmpScript.getPage()).getFullyQualifiedUrl(src);
             src = expandedSrc.toString();
         }
-        catch (final MalformedURLException e) {
+        catch (final MalformedURLException ignored) {
             // ignore
         }
         return src;

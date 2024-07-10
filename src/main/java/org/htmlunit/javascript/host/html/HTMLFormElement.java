@@ -157,7 +157,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         try {
             return ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
         }
-        catch (final MalformedURLException e) {
+        catch (final MalformedURLException ignored) {
             // nothing, return action attribute
         }
         return action;

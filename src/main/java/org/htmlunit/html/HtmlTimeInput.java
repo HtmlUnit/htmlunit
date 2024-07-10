@@ -109,7 +109,7 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
                 final LocalTime minTime = LocalTime.parse(getMin(), INPUT_FORMATTER_);
                 return minTime.equals(timeValue) || minTime.isBefore(timeValue);
             }
-            catch (final DateTimeParseException e) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }
@@ -130,7 +130,7 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
                 final LocalTime maxTime = LocalTime.parse(getMax(), INPUT_FORMATTER_);
                 return maxTime.equals(timeValue) || maxTime.isAfter(timeValue);
             }
-            catch (final DateTimeParseException e) {
+            catch (final DateTimeParseException ignored) {
                 // ignore
             }
         }

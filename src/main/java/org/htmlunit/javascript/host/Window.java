@@ -444,7 +444,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 final WebWindow webWindow = webClient.getWebWindowByName(windowName);
                 return getProxy(webWindow);
             }
-            catch (final WebWindowNotFoundException e) {
+            catch (final WebWindowNotFoundException ignored) {
                 // nothing
             }
         }
