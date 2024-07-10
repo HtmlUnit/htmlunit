@@ -9,7 +9,7 @@
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Bugfixes">
             <action type="add" dev="rbri" issue="#808">
-                Option 'fileProtocolForXMLHttpRequestsAllowed' to allow XMLHttpRequest for local files 
+                Option 'fileProtocolForXMLHttpRequestsAllowed' to allow XMLHttpRequest for local files
                 from the same directory and subdirectories.
             </action>
             <action type="fix" dev="rbri">
