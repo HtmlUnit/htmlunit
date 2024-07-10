@@ -144,6 +144,9 @@
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
+        <module name="CatchParameterName">
+            <property name="format" value="^(ex?|ignored|expected)$"/>
+        </module>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
         <module name="MethodName">
