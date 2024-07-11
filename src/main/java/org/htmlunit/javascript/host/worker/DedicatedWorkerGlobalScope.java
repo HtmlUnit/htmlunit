@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.worker;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.List;
 
@@ -28,17 +29,21 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.background.BasicJavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -61,9 +66,24 @@ import org.htmlunit.util.MimeType;
 public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrWorkerGlobalScope {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);
+
+    private static final Method getterName;
+    private static final Method setterName;
+
     private final Window owningWindow_;
     private final String origin_;
+    private String name_;
     private final Worker worker_;
+
+    static {
+        try {
+            getterName = DedicatedWorkerGlobalScope.class.getDeclaredMethod("jsGetName");
+            setterName = DedicatedWorkerGlobalScope.class.getDeclaredMethod("jsSetName", Scriptable.class);
+        }
+        catch (NoSuchMethodException | SecurityException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * For prototype instantiation.
@@ -72,7 +92,17 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         // prototype constructor
         owningWindow_ = null;
         origin_ = null;
+        name_ = null;
         worker_ = null;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        // nothing to do
     }
 
     /**
@@ -82,7 +112,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      * @throws Exception in case of problem
      */
     DedicatedWorkerGlobalScope(final Window owningWindow, final Context context, final WebClient webClient,
-            final Worker worker) throws Exception {
+            final String name, final Worker worker) throws Exception {
         context.initSafeStandardObjects(this);
 
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
@@ -97,12 +127,20 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         prototype.setPrototype(parentPrototype);
         setPrototype(prototype);
 
+        final FunctionObject functionObject =
+                new RecursiveFunctionObject(DedicatedWorkerGlobalScope.class.getName(),
+                        config.getJsConstructor().getValue(), this, browserVersion);
+        functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
+
         // TODO we have to do more configuration here
         JavaScriptEngine.configureRhino(webClient, browserVersion, this);
 
         owningWindow_ = owningWindow;
         final URL currentURL = owningWindow.getWebWindow().getEnclosedPage().getUrl();
         origin_ = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
+
+        name_ = name;
+        defineProperty("name", null, getterName, setterName, ScriptableObject.READONLY);
 
         worker_ = worker;
     }
@@ -132,6 +170,21 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     @JsxSetter
     public void setOnmessage(final Object onmessage) {
         setEventHandler(Event.TYPE_MESSAGE, onmessage);
+    }
+
+    /**
+     * @return the {@code name}
+     */
+    public String jsGetName() {
+        return name_;
+    }
+
+    /**
+     * Sets the {@code name}.
+     * @param name the new name
+     */
+    public void jsSetName(final Scriptable name) {
+        name_ = JavaScriptEngine.toString(name);
     }
 
     /**

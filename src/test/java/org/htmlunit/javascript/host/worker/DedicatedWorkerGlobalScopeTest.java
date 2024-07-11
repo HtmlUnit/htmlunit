@@ -221,4 +221,73 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Received: Bob [GSCE] [undefined]")
+    public void workerName() throws Exception {
+        final String html = "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js', { name: 'Bob'});\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    log('Received: ' + e.data);\n"
+            + "  };\n"
+            + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
+            + "} catch(e) { log('exception'); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "onmessage = function(e) {\n"
+                + "  let desc = Object.getOwnPropertyDescriptor(this, 'name');\n"
+                + "  property = name + ' [';\n"
+                + "  if (desc.get != undefined) property += 'G';\n"
+                + "  if (desc.set != undefined) property += 'S';\n"
+                + "  if (desc.writable) property += 'W';\n"
+                + "  if (desc.configurable) property += 'C';\n"
+                + "  if (desc.enumerable) property += 'E';\n"
+                + "  property += ']'\n"
+
+                + "  desc = Object.getOwnPropertyDescriptor(this.constructor.prototype, 'name');\n"
+                + "  property += ' [' + desc + ']';\n"
+
+                + "  postMessage(property);\n"
+                + "}\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Received: Bob the builder")
+    public void workerNameSet() throws Exception {
+        final String html = "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js', { name: 'Bob'});\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    log('Received: ' + e.data);\n"
+            + "  };\n"
+            + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
+            + "} catch(e) { log('exception'); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "onmessage = function(e) {\n"
+                + "  name = name + ' the builder';\n"
+                + "  postMessage(name);\n"
+                + "}\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }
