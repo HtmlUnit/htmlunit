@@ -102,6 +102,7 @@ public class KeyDataPair extends NameValuePair {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("PMD.UselessOverridingMethod")
     public boolean equals(final Object object) {
         // this is overwritten to make FindBugs happy
         // and to make it clear, that we really want to have
@@ -113,6 +114,7 @@ public class KeyDataPair extends NameValuePair {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("PMD.UselessOverridingMethod")
     public int hashCode() {
         // this is overwritten to make FindBugs happy
         // and to make it clear, that we really want to have
