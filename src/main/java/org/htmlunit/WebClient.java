@@ -1819,7 +1819,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         if (getBrowserVersion().hasFeature(HTTP_HEADER_PRIORITY)
                 && !wrs.isAdditionalHeader(HttpHeader.PRIORITY)) {
-            wrs.setAdditionalHeader(HttpHeader.PRIORITY, "u=1");
+            wrs.setAdditionalHeader(HttpHeader.PRIORITY, "u=0, i");
         }
 
         if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)

@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="4.4.0" date="xxxx, 2024" description="Bugfixes">
+        <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
+            <action type="add" dev="rbri">
+                Function Element.getHTML() added for FF.
+            </action>
+            <action type="update" dev="rbri">
+                Changed accept header for images and documents to be in sync with FF 128.
+            </action>
             <action type="add" dev="rbri" issue="#787">
                 DedicatedWorkerGlobalScope 'name' property added.
             </action>

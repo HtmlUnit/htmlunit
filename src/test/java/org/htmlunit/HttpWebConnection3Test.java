@@ -377,7 +377,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1",
-                  "Priority: u=1"},
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -436,7 +436,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1",
-                  "Priority: u=1"})
+                  "Priority: u=0, i"})
     public void formGet() throws Exception {
         String html = "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
@@ -542,7 +542,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1",
-                  "Priority: u=1",
+                  "Priority: u=0, i",
                   "",
                   "text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21"},
             FF_ESR = {"POST /foo HTTP/1.1",
@@ -620,7 +620,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1",
-                  "Priority: u=1",
+                  "Priority: u=0, i",
                   "Origin: http://localhost:§§PORT§§",
                   "Content-Length: 48",
                   "Content-Type: application/x-www-form-urlencoded",
@@ -735,7 +735,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1",
-                  "Priority: u=1"},
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /2.html HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -794,7 +794,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1",
-                  "Priority: u=1"})
+                  "Priority: u=0, i"})
     public void anchor() throws Exception {
         String html = "<html><body><a id='my' href='2.html'>Click me</a></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
@@ -878,7 +878,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Dest: document",
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
-                  "Priority: u=1"},
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /foo HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -936,7 +936,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1",
-                  "Priority: u=1"},
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /foo HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -1033,7 +1033,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Dest: document",
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
-                  "Priority: u=1"},
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /?newSearch HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -1091,7 +1091,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: navigate",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1",
-                  "Priority: u=1"},
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /?newSearch HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -1240,7 +1240,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: no-cors",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1", /* wrong */
-                  "Priority: u=1"},
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /script.js HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",
@@ -1389,7 +1389,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                   "Sec-Fetch-Mode: no-cors",
                   "Sec-Fetch-Site: same-origin",
                   "Sec-Fetch-User: ?1", /* wrong */
-                  "Priority: u=1"},
+                  "Priority: u=0, i"},
             FF_ESR = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "User-Agent: §§USER_AGENT§§",

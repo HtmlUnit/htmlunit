@@ -1679,7 +1679,6 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "34",
-            FF = "51",
             FF_ESR = "51")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",

@@ -681,15 +681,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "clientLeft,clientTop,clientWidth,closest(),currentCSSZoom,firstElementChild,getAnimations(),"
                 + "getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
-                + "getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,"
-                + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,"
-                + "localName,matches(),mozMatchesSelector(),mozRequestFullScreen(),namespaceURI,onfullscreenchange,"
-                + "onfullscreenerror,outerHTML,part,prefix,prepend(),querySelector(),querySelectorAll(),"
-                + "releaseCapture(),releasePointerCapture(),removeAttribute(),removeAttributeNode(),"
-                + "removeAttributeNS(),replaceChildren(),requestFullscreen(),requestPointerLock(),role,scroll(),"
-                + "scrollBy(),scrollHeight,scrollIntoView(),scrollLeft,scrollLeftMax,scrollTo(),scrollTop,"
-                + "scrollTopMax,scrollWidth,setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),"
-                + "setCapture(),setHTMLUnsafe(),setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),"
+                + "getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
+                + "hasPointerCapture(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),lastElementChild,localName,matches(),mozMatchesSelector(),"
+                + "mozRequestFullScreen(),namespaceURI,onfullscreenchange,onfullscreenerror,outerHTML,part,prefix,"
+                + "prepend(),querySelector(),querySelectorAll(),releaseCapture(),releasePointerCapture(),"
+                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
+                + "requestFullscreen(),requestPointerLock(),role,scroll(),scrollBy(),scrollHeight,scrollIntoView(),"
+                + "scrollLeft,scrollLeftMax,scrollTo(),scrollTop,scrollTopMax,scrollWidth,setAttribute(),"
+                + "setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setCapture(),setHTMLUnsafe(),"
+                + "setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),"
                 + "webkitMatchesSelector()",
             FF_ESR = "animate(),append(),attachShadow(),attributes,checkVisibility(),childElementCount,children,"
                 + "classList,className,clientHeight,clientLeft,clientTop,clientWidth,closest(),firstElementChild,"
@@ -756,7 +757,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
                 + "lastElementChild,localName,matches(),mozMatchesSelector(),namespaceURI,outerHTML,"
                 + "prefix,prepend(),"
@@ -831,15 +832,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "clientTop,clientWidth,closest(),currentCSSZoom,getAnimations(),getAttribute(),"
                 + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
-                + "getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,"
-                + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),localName,matches(),"
-                + "mozMatchesSelector(),mozRequestFullScreen(),namespaceURI,nextElementSibling,onfullscreenchange,"
-                + "onfullscreenerror,outerHTML,part,prefix,previousElementSibling,releaseCapture(),"
-                + "releasePointerCapture(),remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
-                + "replaceWith(),requestFullscreen(),requestPointerLock(),role,scroll(),scrollBy(),scrollHeight,"
-                + "scrollIntoView(),scrollLeft,scrollLeftMax,scrollTo(),scrollTop,scrollTopMax,scrollWidth,"
-                + "setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setCapture(),"
-                + "setHTMLUnsafe(),setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),"
+                + "getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
+                + "hasPointerCapture(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),localName,matches(),mozMatchesSelector(),mozRequestFullScreen(),"
+                + "namespaceURI,nextElementSibling,onfullscreenchange,onfullscreenerror,outerHTML,part,prefix,"
+                + "previousElementSibling,releaseCapture(),releasePointerCapture(),remove(),removeAttribute(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceWith(),requestFullscreen(),requestPointerLock(),"
+                + "role,scroll(),scrollBy(),scrollHeight,scrollIntoView(),scrollLeft,scrollLeftMax,scrollTo(),"
+                + "scrollTop,scrollTopMax,scrollWidth,setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
+                + "setAttributeNS(),setCapture(),setHTMLUnsafe(),setPointerCapture(),shadowRoot,slot,tagName,"
+                + "toggleAttribute(),"
                 + "webkitMatchesSelector()",
             FF_ESR = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),checkVisibility(),classList,"
                 + "className,clientHeight,clientLeft,clientTop,clientWidth,closest(),getAnimations(),getAttribute(),"
@@ -898,7 +900,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
                 + "closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),"
-                + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
+                + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),"
                 + "insertAdjacentHTML(),insertAdjacentText(),localName,matches(),mozMatchesSelector(),namespaceURI,"
                 + "nextElementSibling,outerHTML,prefix,previousElementSibling,releaseCapture(),remove(),"
@@ -1355,7 +1357,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "mozAudioCaptured,mozCaptureStream(),mozCaptureStreamUntilEnded(),mozFragmentEnd,mozGetMetadata(),"
                 + "muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "onwaitingforkey,pause(),paused,play(),playbackRate,played,preload,preservesPitch,readyState,"
-                + "seekable,seeking,seekToNextFrame(),setMediaKeys(),setSinkId(),sinkId,src,srcObject,textTracks,"
+                + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,textTracks,"
                 + "volume",
             FF_ESR = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
@@ -3184,8 +3186,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "mozCaptureStreamUntilEnded(),mozDecodedFrames,mozFragmentEnd,mozFrameDelay,mozGetMetadata(),"
                 + "mozHasAudio,mozPaintedFrames,mozParsedFrames,mozPresentedFrames,muted,NETWORK_EMPTY,NETWORK_IDLE,"
                 + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,onwaitingforkey,pause(),paused,play(),"
-                + "playbackRate,played,poster,preload,preservesPitch,readyState,seekable,seeking,seekToNextFrame(),"
-                + "setMediaKeys(),setSinkId(),sinkId,src,srcObject,textTracks,videoHeight,videoWidth,volume,"
+                + "playbackRate,played,poster,preload,preservesPitch,readyState,seekable,seeking,setMediaKeys(),"
+                + "setSinkId(),sinkId,src,srcObject,textTracks,videoHeight,videoWidth,volume,"
                 + "width",
             FF_ESR = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),getVideoPlaybackQuality(),"
@@ -3344,7 +3346,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "content,shadowRootClonable,shadowRootDelegatesFocus,shadowRootMode,shadowRootSerializable",
             EDGE = "content,shadowRootClonable,shadowRootDelegatesFocus,shadowRootMode,shadowRootSerializable",
-            FF = "content,shadowRootClonable,shadowRootDelegatesFocus,shadowRootMode",
+            FF = "content,shadowRootClonable,shadowRootDelegatesFocus,shadowRootMode,shadowRootSerializable",
             FF_ESR = "content")
     @HtmlUnitNYI(CHROME = "content",
             EDGE = "content",
@@ -8561,8 +8563,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "arrayBuffer(),size,slice(),stream(),text(),type",
             EDGE = "arrayBuffer(),size,slice(),stream(),text(),type",
-            FF = "arrayBuffer(),size,slice(),stream(),text(),type",
+            FF = "arrayBuffer(),bytes(),size,slice(),stream(),text(),type",
             FF_ESR = "arrayBuffer(),size,slice(),stream(),text(),type")
+    @HtmlUnitNYI(FF = "arrayBuffer(),size,slice(),stream(),text(),type")
     public void blob() throws Exception {
         testString("", "new Blob([1, 2], { type: \"text/html\" })");
     }
@@ -8852,5 +8855,59 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "upload,withCredentials")
     public void xmlHttpRequest() throws Exception {
         testString("", "new XMLHttpRequest()");
+    }
+
+    /**
+     * Test Request.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "arrayBuffer(),blob(),body,bodyUsed,cache,clone(),credentials,destination,formData(),headers,"
+                + "integrity,isHistoryNavigation,json(),keepalive,method,mode,redirect,referrer,referrerPolicy,"
+                + "signal,targetAddressSpace,text(),"
+                + "url",
+            EDGE = "arrayBuffer(),blob(),body,bodyUsed,cache,clone(),credentials,destination,formData(),headers,"
+                + "integrity,isHistoryNavigation,json(),keepalive,method,mode,redirect,referrer,referrerPolicy,"
+                + "signal,targetAddressSpace,text(),"
+                + "url",
+            FF = "arrayBuffer(),blob(),bodyUsed,bytes(),cache,clone(),credentials,destination,formData(),headers,"
+                + "integrity,json(),method,mode,redirect,referrer,referrerPolicy,signal,text(),"
+                + "url",
+            FF_ESR = "arrayBuffer(),blob(),bodyUsed,cache,clone(),credentials,destination,formData(),headers,integrity,"
+                + "json(),method,mode,redirect,referrer,referrerPolicy,signal,text(),"
+                + "url")
+    @HtmlUnitNYI(CHROME = "-",
+            EDGE = "-",
+            FF = "-",
+            FF_ESR = "-")
+    public void request() throws Exception {
+        testString("", "new Request('https://www.htmlunit.org')");
+    }
+
+    /**
+     * Test Response.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "arrayBuffer(),blob(),body,bodyUsed,clone(),formData(),headers,json(),ok,redirected,status,"
+                + "statusText,text(),type,"
+                + "url",
+            EDGE = "arrayBuffer(),blob(),body,bodyUsed,clone(),formData(),headers,json(),ok,redirected,status,"
+                + "statusText,text(),type,"
+                + "url",
+            FF = "arrayBuffer(),blob(),body,bodyUsed,bytes(),clone(),formData(),headers,json(),ok,redirected,"
+                + "status,statusText,text(),type,"
+                + "url",
+            FF_ESR = "arrayBuffer(),blob(),body,bodyUsed,clone(),formData(),headers,json(),ok,redirected,status,"
+                + "statusText,text(),type,"
+                + "url")
+    @HtmlUnitNYI(CHROME = "-",
+            EDGE = "-",
+            FF = "-",
+            FF_ESR = "-")
+    public void response() throws Exception {
+        testString("", "new Response()");
     }
 }

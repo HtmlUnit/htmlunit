@@ -841,7 +841,7 @@ public class Element extends Node {
      * The {@code getHTML} function.
      * @return the contents of this node as HTML
      */
-    @JsxFunction({CHROME, EDGE})
+    @JsxFunction({CHROME, EDGE, FF})
     public String getHTML() {
         // ignore the params because we have no shadow dom support so far
         return getInnerHTML();

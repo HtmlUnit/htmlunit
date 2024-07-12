@@ -577,12 +577,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "clientWidth[GCE],closest(),constructor(),currentCSSZoom[GCE],firstElementChild[GCE],"
                 + "getAnimations(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
-                + "hasPointerCapture(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
-                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),mozMatchesSelector(),"
-                + "mozRequestFullScreen(),namespaceURI[GCE],nextElementSibling[GCE],onfullscreenchange[GSCE],"
-                + "onfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
-                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releaseCapture(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),"
+                + "hasAttributes(),hasPointerCapture(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),"
+                + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),"
+                + "mozMatchesSelector(),mozRequestFullScreen(),namespaceURI[GCE],nextElementSibling[GCE],"
+                + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],"
+                + "prepend(),previousElementSibling[GCE],querySelector(),querySelectorAll(),releaseCapture(),"
                 + "releasePointerCapture(),remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "replaceChildren(),replaceWith(),requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),"
                 + "scrollBy(),scrollHeight[GCE],scrollIntoView(),scrollLeft[GSCE],scrollLeftMax[GCE],scrollTo(),"
@@ -642,7 +642,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "className[GSCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),"
                 + "constructor(),firstElementChild[GCE],getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),"
+                + "getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
                 + "id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
                 + "lastElementChild[GCE],localName[GCE],matches(),mozMatchesSelector(),namespaceURI[GCE],"
                 + "nextElementSibling[GCE],outerHTML[GSCE],prefix[GCE],prepend(),previousElementSibling[GCE],"
@@ -749,12 +750,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "clientWidth[GCE],closest(),constructor(),currentCSSZoom[GCE],firstElementChild[GCE],"
                 + "getAnimations(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
-                + "hasPointerCapture(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
-                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),mozMatchesSelector(),"
-                + "mozRequestFullScreen(),namespaceURI[GCE],nextElementSibling[GCE],onfullscreenchange[GSCE],"
-                + "onfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
-                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releaseCapture(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),"
+                + "hasAttributes(),hasPointerCapture(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),"
+                + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),"
+                + "mozMatchesSelector(),mozRequestFullScreen(),namespaceURI[GCE],nextElementSibling[GCE],"
+                + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],"
+                + "prepend(),previousElementSibling[GCE],querySelector(),querySelectorAll(),releaseCapture(),"
                 + "releasePointerCapture(),remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "replaceChildren(),replaceWith(),requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),"
                 + "scrollBy(),scrollHeight[GCE],scrollIntoView(),scrollLeft[GSCE],scrollLeftMax[GCE],scrollTo(),"
@@ -838,7 +839,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "className[GSCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),"
                 + "constructor(),firstElementChild[GCE],getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
                 + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],"
                 + "matches(),mozMatchesSelector(),namespaceURI[GCE],"
@@ -14186,7 +14187,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "shadowRootMode[GSCE],"
                 + "shadowRootSerializable[GSCE]",
             FF = "constructor(),content[GCE],shadowRootClonable[GSCE],shadowRootDelegatesFocus[GSCE],"
-                + "shadowRootMode[GSCE]",
+                + "shadowRootMode[GSCE],"
+                + "shadowRootSerializable[GSCE]",
             FF_ESR = "constructor(),content[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),content[GCE]",
             EDGE = "constructor(),content[GCE]",
@@ -17199,8 +17201,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
             EDGE = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
-            FF = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
+            FF = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
             FF_ESR = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]")
+    @HtmlUnitNYI(FF = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]")
     public void blob() throws Exception {
         testString("", "new Blob([1, 2], { type: \"text/html\" })");
     }
@@ -17443,5 +17446,63 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "upload[GCE],withCredentials[GSCE]")
     public void xmlHttpRequest() throws Exception {
         testString("", "new XMLHttpRequest()");
+    }
+
+    /**
+     * Test Request.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],cache[GCE],clone(),constructor(),credentials[GCE],"
+                + "destination[GCE],formData(),headers[GCE],integrity[GCE],isHistoryNavigation[GCE],json(),"
+                + "keepalive[GCE],method[GCE],mode[GCE],redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],"
+                + "targetAddressSpace[GCE],text(),"
+                + "url[GCE]",
+            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],cache[GCE],clone(),constructor(),credentials[GCE],"
+                + "destination[GCE],formData(),headers[GCE],integrity[GCE],isHistoryNavigation[GCE],json(),"
+                + "keepalive[GCE],method[GCE],mode[GCE],redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],"
+                + "targetAddressSpace[GCE],text(),"
+                + "url[GCE]",
+            FF = "arrayBuffer(),blob(),bodyUsed[GCE],bytes(),cache[GCE],clone(),constructor(),credentials[GCE],"
+                + "destination[GCE],formData(),headers[GCE],integrity[GCE],json(),method[GCE],mode[GCE],"
+                + "redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],text(),"
+                + "url[GCE]",
+            FF_ESR = "arrayBuffer(),blob(),bodyUsed[GCE],cache[GCE],clone(),constructor(),credentials[GCE],"
+                + "destination[GCE],formData(),headers[GCE],integrity[GCE],json(),method[GCE],mode[GCE],"
+                + "redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],text(),"
+                + "url[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void request() throws Exception {
+        testString("", "new Request('https://www.htmlunit.org')");
+    }
+
+    /**
+     * Test Response.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],clone(),constructor(),formData(),headers[GCE],"
+                + "json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
+                + "url[GCE]",
+            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],clone(),constructor(),formData(),headers[GCE],"
+                + "json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
+                + "url[GCE]",
+            FF = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),clone(),constructor(),formData(),"
+                + "headers[GCE],json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
+                + "url[GCE]",
+            FF_ESR = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],clone(),constructor(),formData(),headers[GCE],"
+                + "json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
+                + "url[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void response() throws Exception {
+        testString("", "new Response()");
     }
 }

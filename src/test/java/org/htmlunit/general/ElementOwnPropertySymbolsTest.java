@@ -3061,4 +3061,32 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void xmlHttpRequest() throws Exception {
         testString("", "new XMLHttpRequest()");
     }
+
+    /**
+     * Test Request.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Request]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Request]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Request]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Request]")
+    public void request() throws Exception {
+        testString("", "new Request('https://www.htmlunit.org')");
+    }
+
+    /**
+     * Test Response.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Response]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Response]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Response]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Response]")
+    public void response() throws Exception {
+        testString("", "new Response()");
+    }
 }
