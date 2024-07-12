@@ -25,6 +25,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.html.serializer.HtmlSerializerNormalizedText;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
+import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "option".
@@ -174,7 +175,20 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public final boolean isDisabled() {
-        return hasAttribute(ATTRIBUTE_DISABLED);
+        if (hasAttribute(ATTRIBUTE_DISABLED)) {
+            return true;
+        }
+
+        Node node = getParentNode();
+        while (node != null) {
+            if (node instanceof DisabledElement
+                    && ((DisabledElement) node).isDisabled()) {
+                return true;
+            }
+            node = node.getParentNode();
+        }
+
+        return false;
     }
 
     /**

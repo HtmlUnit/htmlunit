@@ -877,4 +877,36 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
 
         loadPageVerifyTextArea2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').willValidate);\n"
+                + "      log(document.getElementById('i2').willValidate);\n"
+                + "      log(document.getElementById('i3').willValidate);\n"
+                + "      log(document.getElementById('i4').willValidate);\n"
+                + "      log(document.getElementById('i5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <textarea id='i1'>button</textarea>"
+                + "    <textarea id='i2' disabled></textarea>"
+                + "    <textarea id='i3' hidden></textarea>"
+                + "    <textarea id='i4' readonly></textarea>"
+                + "    <textarea id='i5' style='display: none'></textarea>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

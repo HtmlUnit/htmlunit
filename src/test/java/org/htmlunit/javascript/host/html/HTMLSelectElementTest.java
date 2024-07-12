@@ -2779,4 +2779,38 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
+            FF = {"true", "false", "true", "true", "true"},
+            FF_ESR = {"true", "false", "true", "true", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').willValidate);\n"
+                + "      log(document.getElementById('i2').willValidate);\n"
+                + "      log(document.getElementById('i3').willValidate);\n"
+                + "      log(document.getElementById('i4').willValidate);\n"
+                + "      log(document.getElementById('i5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='i1'>button</select>"
+                + "    <select id='i2' disabled></select>"
+                + "    <select id='i3' hidden></select>"
+                + "    <select id='i4' readonly></select>"
+                + "    <select id='i5' style='display: none'></select>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -127,4 +127,68 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false", "false"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').willValidate);\n"
+                + "      log(document.getElementById('i2').willValidate);\n"
+                + "      log(document.getElementById('i3').willValidate);\n"
+                + "      log(document.getElementById('i4').willValidate);\n"
+                + "      log(document.getElementById('i5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <fieldset id='i1'>fs</fieldset>"
+                + "    <fieldset id='i2' disabled></fieldset>"
+                + "    <fieldset id='i3' hidden></fieldset>"
+                + "    <fieldset id='i4' readonly></fieldset>"
+                + "    <fieldset id='i5' style='display: none'></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "true", "true"})
+    public void willValidateChild() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').willValidate);\n"
+                + "      log(document.getElementById('i2').willValidate);\n"
+                + "      log(document.getElementById('i3').willValidate);\n"
+                + "      log(document.getElementById('i4').willValidate);\n"
+                + "      log(document.getElementById('i5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <fieldset><input id='i1'></fieldset>"
+                + "    <fieldset disabled><input id='i2'></fieldset>"
+                + "    <fieldset hidden><input id='i3'></fieldset>"
+                + "    <fieldset readonly><input id='i4'></fieldset>"
+                + "    <fieldset style='display: none'><input id='i5'></fieldset>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

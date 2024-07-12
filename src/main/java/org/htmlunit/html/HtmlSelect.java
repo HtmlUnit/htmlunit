@@ -588,7 +588,20 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public final boolean isDisabled() {
-        return hasAttribute(ATTRIBUTE_DISABLED);
+        if (hasAttribute(ATTRIBUTE_DISABLED)) {
+            return true;
+        }
+
+        Node node = getParentNode();
+        while (node != null) {
+            if (node instanceof DisabledElement
+                    && ((DisabledElement) node).isDisabled()) {
+                return true;
+            }
+            node = node.getParentNode();
+        }
+
+        return false;
     }
 
     /**

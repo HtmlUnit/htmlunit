@@ -17,6 +17,7 @@ package org.htmlunit.html;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "optgroup".
@@ -52,7 +53,20 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      */
     @Override
     public final boolean isDisabled() {
-        return hasAttribute(ATTRIBUTE_DISABLED);
+        if (hasAttribute(ATTRIBUTE_DISABLED)) {
+            return true;
+        }
+
+        Node node = getParentNode();
+        while (node != null) {
+            if (node instanceof DisabledElement
+                    && ((DisabledElement) node).isDisabled()) {
+                return true;
+            }
+            node = node.getParentNode();
+        }
+
+        return false;
     }
 
     /**

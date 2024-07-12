@@ -28,6 +28,7 @@ import org.htmlunit.html.impl.SelectableTextSelectionDelegate;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.util.NameValuePair;
+import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "textarea".
@@ -274,7 +275,20 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public final boolean isDisabled() {
-        return hasAttribute(ATTRIBUTE_DISABLED);
+        if (hasAttribute(ATTRIBUTE_DISABLED)) {
+            return true;
+        }
+
+        Node node = getParentNode();
+        while (node != null) {
+            if (node instanceof DisabledElement
+                    && ((DisabledElement) node).isDisabled()) {
+                return true;
+            }
+            node = node.getParentNode();
+        }
+
+        return false;
     }
 
     /**

@@ -200,7 +200,20 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public final boolean isDisabled() {
-        return hasAttribute(ATTRIBUTE_DISABLED);
+        if (hasAttribute(ATTRIBUTE_DISABLED)) {
+            return true;
+        }
+
+        DomNode node = getParentNode();
+        while (node != null) {
+            if (node instanceof DisabledElement
+                    && ((DisabledElement) node).isDisabled()) {
+                return true;
+            }
+            node = node.getParentNode();
+        }
+
+        return false;
     }
 
     /**

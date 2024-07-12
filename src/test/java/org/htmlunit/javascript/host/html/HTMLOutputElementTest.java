@@ -65,4 +65,36 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false", "false"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('i1').willValidate);\n"
+                + "      log(document.getElementById('i2').willValidate);\n"
+                + "      log(document.getElementById('i3').willValidate);\n"
+                + "      log(document.getElementById('i4').willValidate);\n"
+                + "      log(document.getElementById('i5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='i1'>button</output>"
+                + "    <output id='i2' disabled></output>"
+                + "    <output id='i3' hidden></output>"
+                + "    <output id='i4' readonly></output>"
+                + "    <output id='i5' style='display: none'></output>"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
