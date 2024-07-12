@@ -1228,6 +1228,45 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false"})
+    public void fromFormDisabled() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var formData = new FormData(document.getElementById('frm'));\n"
+
+            + "  try {\n"
+            + "    log(formData.has('n1'));\n"
+            + "    log(formData.has('n2'));\n"
+            + "    log(formData.has('n3'));\n"
+            + "    log(formData.has('n4'));\n"
+            + "  } catch (e) {\n"
+            + "    log('has: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='frm'>\n"
+            + "    <textarea id='i1' name='n1'>text</textarea>"
+            + "    <textarea id='i2' name='n2' disabled></textarea>"
+            + "    <fieldset><input id='i3' name='n3'></fieldset>"
+            + "    <fieldset disabled><input id='i4'  name='n4'></fieldset>"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Servlet for post().
      */
     public static class PostServlet extends HttpServlet {

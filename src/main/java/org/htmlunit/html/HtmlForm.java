@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.FORM_IGNORE_REL_NOREFERRER;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
-import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -466,7 +465,7 @@ public class HtmlForm extends HtmlElement {
         if (!SUBMITTABLE_TAG_NAMES.contains(tagName)) {
             return false;
         }
-        if (element.hasAttribute(ATTRIBUTE_DISABLED)) {
+        if (element.isDisabledElementAndDisabled()) {
             return false;
         }
         // clicked input type="image" is submitted even if it hasn't a name

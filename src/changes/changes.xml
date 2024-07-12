@@ -9,6 +9,10 @@
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
             <action type="fix" dev="rbri">
+                A FormData object constructed from a form only enumerates not disabled elements
+                by taking care of elements inside disabled fieldsets.
+            </action>
+            <action type="fix" dev="rbri">
                 DisabledElement.isDisabled() now checks also for the parent elements.
                 This fixes problems with elements inside a disabled fieldset.
             </action>
