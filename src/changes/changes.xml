@@ -8,6 +8,10 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
+            <action type="fix" dev="rbri">
+                DisabledElement.isDisabled() now checks also for the parent elements.
+                This fixes problems with elements inside a disabled fieldset.
+            </action>
             <action type="add" dev="rbri">
                 Function Element.getHTML() added for FF.
             </action>
