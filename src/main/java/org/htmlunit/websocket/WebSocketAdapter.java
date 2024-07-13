@@ -43,7 +43,7 @@ public interface WebSocketAdapter {
      * Sends the provided content.
      *
      * @param content the content to be sent
-     * @throws Exception in case of error
+     * @throws IOException in case of error
      */
     void send(Object content) throws IOException;
 

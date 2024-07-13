@@ -158,6 +158,11 @@ public class HTMLMediaElement extends HTMLElement {
         return getNodeNameCustomize();
     }
 
+    /**
+     * Separate method to be able to override this in subclasses.
+     *
+     * @return the node name
+     */
     protected String getNodeNameCustomize() {
         final HtmlMedia element = (HtmlMedia) getDomNodeOrNull();
         if (element == null) {

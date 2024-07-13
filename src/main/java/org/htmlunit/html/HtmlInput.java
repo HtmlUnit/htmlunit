@@ -709,6 +709,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         executeOnChangeHandlerIfAppropriate(this);
     }
 
+    /**
+     * @return returns the raw value
+     */
     protected Object getInternalValue() {
         return getRawValue();
     }

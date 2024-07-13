@@ -55,6 +55,9 @@ public class FormData extends HtmlUnitScriptable {
 
     private final List<NameValuePair> requestParameters_ = new ArrayList<>();
 
+    /**
+     * FormDate iterator support.
+     */
     public static final class FormDataIterator extends ES6Iterator {
         enum Type { KEYS, VALUES, BOTH }
 
@@ -63,10 +66,21 @@ public class FormData extends HtmlUnitScriptable {
         private final List<NameValuePair> nameValuePairList_;
         private int index_;
 
+        /**
+         * JS initializer.
+         *
+         * @param scope the scope
+         * @param className the class name
+         */
         public static void init(final ScriptableObject scope, final String className) {
             ES6Iterator.init(scope, false, new FormDataIterator(className), FORM_DATA_TAG);
         }
 
+        /**
+         * Ctor.
+         *
+         * @param className the class name
+         */
         public FormDataIterator(final String className) {
             type_ = Type.BOTH;
             index_ = 0;
@@ -74,6 +88,14 @@ public class FormData extends HtmlUnitScriptable {
             className_ = className;
         }
 
+        /**
+         * Ctor.
+         *
+         * @param scope the scope
+         * @param className the class name
+         * @param type the type
+         * @param nameValuePairList the list of name value pairs
+         */
         public FormDataIterator(final Scriptable scope, final String className, final Type type,
                 final List<NameValuePair> nameValuePairList) {
             super(scope, FORM_DATA_TAG);
