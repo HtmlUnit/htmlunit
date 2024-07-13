@@ -53,6 +53,13 @@ public interface XmlUtilsHelperAPI {
     int getIndex(NamedNodeMap namedNodeMap, Map<Integer, List<String>> attributesOrderMap,
             Node element, int requiredIndex);
 
+    /**
+     * Helper to get the value of an private field.
+     * @param <T> the expected value type
+     * @param object the object that holds the field
+     * @param fieldName the name of the field
+     * @return the value casted to T
+     */
     @SuppressWarnings("unchecked")
     default <T> T getPrivate(final Object object, final String fieldName) {
         try {
