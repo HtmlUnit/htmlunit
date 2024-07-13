@@ -260,51 +260,6 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         return false;
     }
 
-    protected String getStyleAttribute(final Definition name, final String value) {
-        final String[] values = StringUtils.splitAtJavaWhitespace(value);
-        if (name.name().contains("TOP")) {
-            if (values.length > 0) {
-                return values[0];
-            }
-            return "";
-        }
-        else if (name.name().contains("RIGHT")) {
-            if (values.length > 1) {
-                return values[1];
-            }
-            else if (values.length > 0) {
-                return values[0];
-            }
-            return "";
-        }
-        else if (name.name().contains("BOTTOM")) {
-            if (values.length > 2) {
-                return values[2];
-            }
-            else if (values.length > 0) {
-                return values[0];
-            }
-            return "";
-        }
-        else if (name.name().contains("LEFT")) {
-            if (values.length > 3) {
-                return values[3];
-            }
-            else if (values.length > 1) {
-                return values[1];
-            }
-            else if (values.length > 0) {
-                return values[0];
-            }
-            else {
-                return "";
-            }
-        }
-        else {
-            throw new IllegalStateException("Unsupported definition: " + name);
-        }
-    }
-
     /**
      * Gets the {@code backgroundAttachment} style attribute.
      * @return the style attribute

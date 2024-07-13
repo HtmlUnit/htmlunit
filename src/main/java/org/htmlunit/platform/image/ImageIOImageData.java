@@ -92,6 +92,7 @@ public class ImageIOImageData implements ImageData {
     }
 
     @Override
+    @SuppressWarnings("PMD.UnusedLocalVariable")
     public void close() throws IOException {
         if (imageReader_ != null) {
             try {

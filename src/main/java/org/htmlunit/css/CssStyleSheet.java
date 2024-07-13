@@ -1193,6 +1193,10 @@ public class CssStyleSheet implements Serializable {
         }
     }
 
+    /**
+     * @param importRule the {@link CSSImportRuleImpl} that imports the {@link CssStyleSheet}
+     * @return the {@link CssStyleSheet} imported by this rule
+     */
     public CssStyleSheet getImportedStyleSheet(final CSSImportRuleImpl importRule) {
         CssStyleSheet sheet = imports_.get(importRule);
         if (sheet == null) {

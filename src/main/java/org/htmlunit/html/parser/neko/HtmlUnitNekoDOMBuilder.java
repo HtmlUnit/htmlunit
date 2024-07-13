@@ -253,7 +253,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         }
         handleCharacters();
 
-        final String tagLower = org.htmlunit.util.StringUtils.toRootLowerCase(localName);
+        final String tagLower = StringUtils.toRootLowerCase(localName);
         if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
             // we have to push the current node on the stack to make sure
             // the endElement call is able to remove a node from the stack
@@ -461,7 +461,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     public void endElement(final String namespaceURI, final String localName, final String qName)
         throws SAXException {
 
-        final String tagLower = org.htmlunit.util.StringUtils.toRootLowerCase(localName);
+        final String tagLower = StringUtils.toRootLowerCase(localName);
 
         handleCharacters();
 

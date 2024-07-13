@@ -441,6 +441,10 @@ public final class BrowserVersion implements Serializable {
         initFeatures();
     }
 
+    /**
+     * @param other the {@link BrowserVersion} to compare with
+     * @return true if the nickname and the numeric version are the same
+     */
     public boolean isSameBrowser(final BrowserVersion other) {
         return Objects.equals(nickname_, other.nickname_) && browserVersionNumeric_ == other.browserVersionNumeric_;
     }

@@ -228,6 +228,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /** The wrapped CSSStyleDeclaration */
     private final ElementCssStyleDeclaration elementStyleDeclaration_;
 
+    /**
+     * Ctor.
+     * @param styleDeclaration the {@link ElementCssStyleDeclaration} this is based on
+     */
     public ComputedCssStyleDeclaration(final ElementCssStyleDeclaration styleDeclaration) {
         super();
         elementStyleDeclaration_ = styleDeclaration;
@@ -494,6 +498,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return elementStyleDeclaration_.getStyleMap();
     }
 
+    /**
+     * @return the {@link DomElement} the backing {@link ElementCssStyleDeclaration}
+     * is associated with
+     */
     public DomElement getDomElement() {
         return elementStyleDeclaration_.getDomElement();
     }

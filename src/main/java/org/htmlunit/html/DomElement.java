@@ -763,6 +763,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Returns the current number of element nodes that are children of this element.
      * @return the current number of element nodes that are children of this element.
      */
+    @SuppressWarnings("PMD.UnusedLocalVariable")
     public int getChildElementCount() {
         int counter = 0;
         for (final DomElement elem : getChildElements()) {
