@@ -1457,7 +1457,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("o-mouse over [option1]s-mouse over [option1]")
+    @Alerts({"s-mouse over [select1]", "o-mouse over [option1]", "s-mouse over [option1]"})
+    @BuggyWebDriver({"o-mouse over [option1]", "s-mouse over [option1]"})
     public void mouseOver() throws Exception {
         shutDownAll();
 
@@ -1465,8 +1466,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title></title>\n"
             + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function dumpEvent(event, pre) {\n"
             + "      var eTarget;\n"
             + "      if (event.target) {\n"
@@ -1484,7 +1485,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      } else {\n"
             + "        msg = msg + ' [' + eTarget.id + ']';\n"
             + "      }\n"
-            + "      document.title += msg;\n"
+            + "      log(msg);\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1495,6 +1496,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      <option value='option2' id='option2'>Option2</option>\n"
             + "    </select>\n"
             + "  </form>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -1502,14 +1504,15 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("option1")));
         actions.perform();
 
-        assertTitle(driver, getExpectedAlerts()[0]);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("o-mouse over [option1] s-mouse over [option1]")
+    @Alerts({"s-mouse over [select1]", "o-mouse over [option1]", "s-mouse over [option1]"})
+    @BuggyWebDriver({"o-mouse over [option1]", "s-mouse over [option1]"})
     public void mouseOverDisabledSelect() throws Exception {
         shutDownAll();
 
@@ -1518,6 +1521,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function dumpEvent(event, pre) {\n"
             + "      // target\n"
             + "      var eTarget;\n"
@@ -1536,7 +1540,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      } else {\n"
             + "        msg = msg + ' [' + eTarget.id + ']';\n"
             + "      }\n"
-            + "      document.title += ' ' + msg;\n"
+            + "      log(msg);\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1548,6 +1552,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      <option value='option2' id='option2'>Option2</option>\n"
             + "    </select>\n"
             + "  </form>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -1555,16 +1560,15 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("option1")));
         actions.perform();
 
-        assertTitle(driver, getExpectedAlerts()[0]);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "o-mouse over [option1] s-mouse over [option1]",
-            FF = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
-            FF_ESR = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
+    @Alerts({"s-mouse over [select1]", "o-mouse over [option1]", "s-mouse over [option1]"})
+    @BuggyWebDriver({"o-mouse over [option1]", "s-mouse over [option1]"})
     public void mouseOverDisabledOption() throws Exception {
         shutDownAll();
 
@@ -1572,8 +1576,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title></title>\n"
             + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function dumpEvent(event, pre) {\n"
             + "      // target\n"
             + "      var eTarget;\n"
@@ -1593,7 +1597,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "        msg = msg + ' [' + eTarget.id + ']';\n"
             + "      }\n"
             + "      if (msg.length == 0) { msg = '-' };\n"
-            + "      document.title += ' ' + msg;\n"
+            + "      log(msg);\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1605,6 +1609,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      <option value='option2' id='option2'>Option2</option>\n"
             + "    </select>\n"
             + "  </form>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -1612,6 +1617,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("option1")));
         actions.perform();
 
-        assertTitle(driver, getExpectedAlerts()[0]);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 }

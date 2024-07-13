@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
@@ -334,9 +332,10 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
-        if (hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION) && isDisabled()) {
-            getEnclosingSelect().mouseOver(shiftKey, ctrlKey, altKey, button);
-        }
+        // to move the mouse over the oution we will touch the select (border)
+        // depending on your mous speed and the browser this event is triggered or not
+        getEnclosingSelect().mouseOver(shiftKey, ctrlKey, altKey, button);
+
         return super.mouseOver(shiftKey, ctrlKey, altKey, button);
     }
 
@@ -372,5 +371,4 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
             parent.onAllChildrenAddedToPage(false);
         }
     }
-
 }

@@ -86,10 +86,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
-    /** FF triggers a mouseover event even if the option is disabled. */
-    @BrowserFeature({FF, FF_ESR})
-    EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION,
-
     /** <code>PopStateEvent</code> can not be created by calling document.createEvent('PopStateEvent'). */
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,

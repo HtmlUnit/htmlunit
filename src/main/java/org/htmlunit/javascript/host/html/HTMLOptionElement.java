@@ -32,7 +32,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
- * The JavaScript object that represents an option.
+ * The JavaScript object for {@link HtmlOption}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
