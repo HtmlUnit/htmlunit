@@ -713,6 +713,9 @@ public class HtmlSerializerNormalizedText {
             }
         }
 
+        /**
+         * Append a block separator.
+         */
         public void appendBlockSeparator() {
             switch (state_) {
                 case EMPTY:
@@ -758,17 +761,26 @@ public class HtmlSerializerNormalizedText {
             }
         }
 
+        /**
+         * Append a line separator.
+         */
         public void appendNewLine() {
             builder_.append(LINE_SEPARATOR);
             state_ = State.NEWLINE_AT_END;
             trimRightPos_ = builder_.length();
         }
 
+        /**
+         * Append a tab.
+         */
         public void appendTab() {
             builder_.append('\t');
             trimRightPos_ = builder_.length();
         }
 
+        /**
+         * Append a blank.
+         */
         private void appendBlank() {
             builder_.append(' ');
             trimRightPos_ = builder_.length();

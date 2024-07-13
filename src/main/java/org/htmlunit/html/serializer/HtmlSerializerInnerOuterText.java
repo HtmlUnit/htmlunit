@@ -345,6 +345,9 @@ public class HtmlSerializerInnerOuterText {
             trimRightPos_ = 0;
         }
 
+        /**
+         * Append a line separator.
+         */
         public void appendRequiredLineBreak() {
             if (state_ == State.EMPTY) {
                 return;

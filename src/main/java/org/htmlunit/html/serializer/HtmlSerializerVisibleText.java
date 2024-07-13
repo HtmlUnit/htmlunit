@@ -981,6 +981,7 @@ public class HtmlSerializerVisibleText {
 
         /**
          * Append a break.
+         *
          * @param mode the {@link Mode}
          */
         public void appendBreak(final Mode mode) {
@@ -995,12 +996,20 @@ public class HtmlSerializerVisibleText {
             trimRightPos_ = builder_.length();
         }
 
+        /**
+         * Append a blank.
+         */
         public void appendBlank() {
             builder_.append(' ');
             state_ = State.BLANK_AT_END;
             trimRightPos_ = builder_.length();
         }
 
+        /**
+         * Remove all trailing whitespace from the end.
+         *
+         * @param mode the {@link Mode}
+         */
         public void trimRight(final Mode mode) {
             if (mode == Mode.PRE) {
                 switch (state_) {
@@ -1023,18 +1032,30 @@ public class HtmlSerializerVisibleText {
             }
         }
 
+        /**
+         * @return true if some content was already added
+         */
         public boolean wasContentAdded() {
             return contentAdded_;
         }
 
+        /**
+         * Resets the contentAdded state to false.
+         */
         public void resetContentAdded() {
             contentAdded_ = false;
         }
 
+        /**
+         * Ignore the following html breaks in the content to be added.
+         */
         public void ignoreHtmlBreaks() {
             ignoreHtmlBreaks_ = true;
         }
 
+        /**
+         * Prozess the following html breaks in the content to be added.
+         */
         public void processHtmlBreaks() {
             ignoreHtmlBreaks_ = false;
         }
