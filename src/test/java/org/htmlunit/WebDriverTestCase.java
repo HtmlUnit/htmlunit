@@ -101,8 +101,8 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
-import org.openqa.selenium.remote.Browser;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.htmlunit.options.HtmlUnitDriverOptions;
+import org.openqa.selenium.htmlunit.options.HtmlUnitOption;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
 /**
@@ -558,28 +558,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         if (webDriver_ == null) {
+            final HtmlUnitDriverOptions driverOptions = new HtmlUnitDriverOptions(getBrowserVersion());
 
-            final BrowserVersion browserVersion = getBrowserVersion();
+            if (isWebClientCached()) {
+                driverOptions.setCapability(HtmlUnitOption.optHistorySizeLimit, 0);
+            }
 
-            final DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(Browser.HTMLUNIT.browserName());
-            capabilities.setVersion(getBrowserName(browserVersion));
-
-            webDriver_ = new HtmlUnitDriver(capabilities) {
-                @Override
-                protected WebClient newWebClient(final BrowserVersion version) {
-                    final WebClient webClient = super.newWebClient(browserVersion);
-                    if (isWebClientCached()) {
-                        webClient.getOptions().setHistorySizeLimit(0);
-                    }
-
-                    final Integer timeout = getWebClientTimeout();
-                    if (timeout != null) {
-                        webClient.getOptions().setTimeout(timeout.intValue());
-                    }
-                    return webClient;
-                }
-            };
+            if (getWebClientTimeout() != null) {
+                driverOptions.setCapability(HtmlUnitOption.optTimeout, getWebClientTimeout());
+            }
+            webDriver_ = new HtmlUnitDriver(driverOptions);
             webDriver_.setExecutor(EXECUTOR_POOL);
         }
         return webDriver_;
