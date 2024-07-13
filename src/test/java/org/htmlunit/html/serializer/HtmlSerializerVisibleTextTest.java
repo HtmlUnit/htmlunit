@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder;
-import org.htmlunit.html.serializer.HtmlSerializerVisibleText.Mode;
+import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
 import org.junit.Test;
 
 /**
