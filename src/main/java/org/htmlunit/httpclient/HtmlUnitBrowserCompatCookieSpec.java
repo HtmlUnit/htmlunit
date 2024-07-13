@@ -140,7 +140,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         }
 
         final String headername = header.getName();
-        if (!headername.equalsIgnoreCase(SM.SET_COOKIE)) {
+        if (!SM.SET_COOKIE.equalsIgnoreCase(headername)) {
             throw new MalformedCookieException("Unrecognized cookie header '" + header + "'");
         }
         final HeaderElement[] helems = header.getElements();

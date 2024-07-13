@@ -93,6 +93,7 @@ public class Blob extends HtmlUnitScriptable {
          * Ctor.
          */
         Backend() {
+            // to make it package protected
         }
 
         // TODO

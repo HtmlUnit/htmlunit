@@ -49,6 +49,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      * We need default constructors to build the prototype instance.
      */
     public NamedNodeMap() {
+        super();
         attributes_ = null;
     }
 
@@ -66,6 +67,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      * @param element the owning element
      */
     public NamedNodeMap(final DomElement element) {
+        super();
         setParentScope(element.getScriptableObject());
         setPrototype(getPrototype(getClass()));
 

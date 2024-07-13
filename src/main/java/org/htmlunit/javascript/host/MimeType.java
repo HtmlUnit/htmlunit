@@ -59,6 +59,7 @@ public class MimeType extends HtmlUnitScriptable {
      * @param plugin the associated plugin
      */
     public MimeType(final String type, final String description, final String suffixes, final Plugin plugin) {
+        super();
         type_ = type;
         description_ = description;
         suffixes_ = suffixes;
