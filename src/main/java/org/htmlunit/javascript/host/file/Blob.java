@@ -283,8 +283,14 @@ public class Blob extends HtmlUnitScriptable {
                             extractLastModifiedOrDefault(properties)));
     }
 
-    public Blob(final byte[] bits, final String contentType) {
-        setBackend(new InMemoryBackend(bits, null, contentType, -1));
+    /**
+     * Ctor.
+     *
+     * @param bytes the bytes
+     * @param contentType the content type
+     */
+    public Blob(final byte[] bytes, final String contentType) {
+        setBackend(new InMemoryBackend(bytes, null, contentType, -1));
     }
 
     /**

@@ -44,61 +44,121 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                 new DOMException("Operation is not supported", DOMException.NOT_SUPPORTED_ERR));
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise which will be fulfilled with the encrypted data (also known as "ciphertext")
+     */
     @JsxFunction
     public Object encrypt() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise which will be fulfilled with the decrypted data (also known as "plaintext")
+     */
     @JsxFunction
     public Object decrypt() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise which will be fulfilled with the signature
+     */
     @JsxFunction
     public Object sign() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise which will be fulfilled with a boolean value indicating whether the signature is valid
+     */
     @JsxFunction
     public Object verify() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise which will be fulfilled with the digest
+     */
     @JsxFunction
     public Object digest() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a new key (for symmetric algorithms) or key pair (for public-key algorithms)
+     */
     @JsxFunction
     public Object generateKey() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise which will be fulfilled with a CryptoKey object representing the new key
+     */
     @JsxFunction
     public Object deriveKey() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise which will be fulfilled with an ArrayBuffer containing the derived bits
+     */
     @JsxFunction
     public Object deriveBits() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a CryptoKey object that you can use in the Web Crypto API
+     */
     @JsxFunction
     public Object importKey() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return the key in an external, portable format
+     */
     @JsxFunction
     public Object exportKey() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise that fulfills with an ArrayBuffer containing the encrypted exported key
+     */
     @JsxFunction
     public Object wrapKey() {
         return notImplemented();
     }
 
+    /**
+     * Not yet implemented.
+     *
+     * @return a Promise that fulfills with the unwrapped key as a CryptoKey object
+     */
     @JsxFunction
     public Object unwrapKey() {
         return notImplemented();
