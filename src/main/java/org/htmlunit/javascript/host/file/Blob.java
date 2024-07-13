@@ -54,15 +54,44 @@ public class Blob extends HtmlUnitScriptable {
 
     private Backend backend_;
 
+    /**
+     * The backend used for saving the blob.
+     */
     protected abstract static class Backend implements Serializable {
+        /**
+         * @return the name
+         */
         abstract String getName();
+
+        /**
+         * @return the last modified timestamp as long
+         */
         abstract long getLastModified();
+
+        /**
+         * @return the size
+         */
         abstract long getSize();
+
+        /**
+         * @param browserVersion the {@link BrowserVersion}
+         * @return the type
+         */
         abstract String getType(BrowserVersion browserVersion);
+
+        /**
+         * @return the text
+         */
         abstract String getText() throws IOException;
 
+        /**
+         * @return the bytes
+         */
         abstract byte[] getBytes(int start, int end);
 
+        /**
+         * Ctor.
+         */
         Backend() {
         }
 
@@ -70,12 +99,24 @@ public class Blob extends HtmlUnitScriptable {
         abstract java.io.File getFile();
     }
 
+    /**
+     * Implementation of the {@link Backend} that stores the bytes in memory.
+     *
+     */
     protected static class InMemoryBackend extends Backend {
         private final String fileName_;
         private final String type_;
         private final long lastModified_;
         private final byte[] bytes_;
 
+        /**
+         * Ctor.
+         *
+         * @param bytes the bytes
+         * @param fileName the name
+         * @param type the type
+         * @param lastModified last modified
+         */
         protected InMemoryBackend(final byte[] bytes, final String fileName,
                 final String type, final long lastModified) {
             fileName_ = fileName;
@@ -84,6 +125,15 @@ public class Blob extends HtmlUnitScriptable {
             bytes_ = bytes;
         }
 
+        /**
+         * Factory method to create an {@link InMemoryBackend} from an {@link NativeArray}.
+         *
+         * @param fileBits the bytes as {@link NativeArray}
+         * @param fileName the name
+         * @param type the type
+         * @param lastModified last modified
+         * @return the new {@link InMemoryBackend}
+         */
         protected static InMemoryBackend create(final NativeArray fileBits, final String fileName,
                 final String type, final long lastModified) {
             if (fileBits == null) {
@@ -116,37 +166,58 @@ public class Blob extends HtmlUnitScriptable {
             return new InMemoryBackend(out.toByteArray(), fileName, type, lastModified);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public String getName() {
             return fileName_;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public long getLastModified() {
             return lastModified_;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public long getSize() {
             return bytes_.length;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public String getType(final BrowserVersion browserVersion) {
             return type_.toLowerCase(Locale.ROOT);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public String getText() throws IOException {
             return new String(bytes_, UTF_8);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public java.io.File getFile() {
             throw new UnsupportedOperationException(
                     "org.htmlunit.javascript.host.file.File.InMemoryBackend.getFile()");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public byte[] getBytes(final int start, final int end) {
             final byte[] result = new byte[end - start];
