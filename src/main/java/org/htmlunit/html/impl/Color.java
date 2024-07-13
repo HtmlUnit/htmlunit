@@ -26,10 +26,25 @@ public class Color {
     private final int blue_;
     private final int alpha_;
 
+    /**
+     * Ctor (using an alpha of 255).
+     *
+     * @param red the red part
+     * @param green the green part
+     * @param blue the blue part
+     */
     public Color(final int red, final int green, final int blue) {
         this(red, green, blue, 255);
     }
 
+    /**
+     * Ctor.
+     *
+     * @param red the red part
+     * @param green the green part
+     * @param blue the blue part
+     * @param alpha the alpha part
+     */
     public Color(final int red, final int green, final int blue, final int alpha) {
         if (red < 0 || red > 255) {
             throw new IllegalArgumentException("Color red value '" + red + " outside of expected range");
@@ -50,22 +65,37 @@ public class Color {
         alpha_ = alpha;
     }
 
+    /**
+     * @return the red part
+     */
     public int getRed() {
         return red_;
     }
 
+    /**
+     * @return the green part
+     */
     public int getGreen() {
         return green_;
     }
 
+    /**
+     * @return the blue part
+     */
     public int getBlue() {
         return blue_;
     }
 
+    /**
+     * @return the alpha part
+     */
     public int getAlpha() {
         return alpha_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -77,6 +107,9 @@ public class Color {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {

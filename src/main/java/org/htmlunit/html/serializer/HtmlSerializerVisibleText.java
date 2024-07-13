@@ -57,6 +57,7 @@ import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.HtmlUnorderedList;
 import org.htmlunit.html.TableRowGroup;
+import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
 
 /**
  * Special serializer to generate the output we need
@@ -740,35 +741,38 @@ public class HtmlSerializerVisibleText {
         return defaultMode;
     }
 
-    /** Mode. */
-    protected enum Mode {
-        /**
-         * The mode for the pre tag.
-         */
-        PRE,
-
-        /**
-         * Sequences of white space are collapsed. Newline characters
-         * in the source are handled the same as other white space.
-         * Lines are broken as necessary to fill line boxes.
-         */
-        WHITE_SPACE_NORMAL,
-
-        /**
-         * Sequences of white space are preserved. Lines are only broken
-         * at newline characters in the source and at <br> elements.
-         */
-        WHITE_SPACE_PRE,
-
-        /**
-         * Sequences of white space are collapsed. Lines are broken
-         * at newline characters, at <br>, and as necessary
-         * to fill line boxes.
-         */
-        WHITE_SPACE_PRE_LINE
-    }
-
+    /**
+     * Helper to compose the text for the serializer based on several modes.
+     */
     protected static class HtmlSerializerTextBuilder {
+        /** Mode. */
+        protected enum Mode {
+            /**
+             * The mode for the pre tag.
+             */
+            PRE,
+
+            /**
+             * Sequences of white space are collapsed. Newline characters
+             * in the source are handled the same as other white space.
+             * Lines are broken as necessary to fill line boxes.
+             */
+            WHITE_SPACE_NORMAL,
+
+            /**
+             * Sequences of white space are preserved. Lines are only broken
+             * at newline characters in the source and at <br> elements.
+             */
+            WHITE_SPACE_PRE,
+
+            /**
+             * Sequences of white space are collapsed. Lines are broken
+             * at newline characters, at <br>, and as necessary
+             * to fill line boxes.
+             */
+            WHITE_SPACE_PRE_LINE
+        }
+
         private enum State {
             DEFAULT,
             EMPTY,
@@ -785,13 +789,22 @@ public class HtmlSerializerVisibleText {
         private boolean contentAdded_;
         private boolean ignoreHtmlBreaks_;
 
+        /**
+         * Ctor.
+         */
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
             state_ = State.EMPTY;
             trimRightPos_ = 0;
         }
 
-        // see https://drafts.csswg.org/css-text-3/#white-space
+        /**
+         * Append the provided content.
+         * see https://drafts.csswg.org/css-text-3/#white-space
+         *
+         * @param content the content to add
+         * @param mode the {@link Mode}
+         */
         public void append(final String content, final Mode mode) {
             if (content == null) {
                 return;
@@ -918,6 +931,9 @@ public class HtmlSerializerVisibleText {
             }
         }
 
+        /**
+         * Append a block separator.
+         */
         public void appendBlockSeparator() {
             switch (state_) {
                 case EMPTY:
@@ -963,6 +979,10 @@ public class HtmlSerializerVisibleText {
             }
         }
 
+        /**
+         * Append a break.
+         * @param mode the {@link Mode}
+         */
         public void appendBreak(final Mode mode) {
             if (ignoreHtmlBreaks_) {
                 return;
@@ -1019,6 +1039,9 @@ public class HtmlSerializerVisibleText {
             ignoreHtmlBreaks_ = false;
         }
 
+        /**
+         * @return the constructed text.
+         */
         public String getText() {
             return builder_.substring(0, trimRightPos_);
         }

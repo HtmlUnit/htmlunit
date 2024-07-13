@@ -51,6 +51,11 @@ public class HtmlSerializerInnerOuterText {
 
     private final BrowserVersion browserVersion_;
 
+    /**
+     * Ctor.
+     *
+     * @param browserVersion the {@link BrowserVersion}
+     */
     public HtmlSerializerInnerOuterText(final BrowserVersion browserVersion) {
         super();
         browserVersion_ = browserVersion;
@@ -283,7 +288,11 @@ public class HtmlSerializerInnerOuterText {
         return defaultMode;
     }
 
+    /**
+     * Helper to compose the text for the serializer based on several modes.
+     */
     protected static class HtmlSerializerTextBuilder {
+
         /** Mode. */
         protected enum Mode {
             /**
@@ -327,6 +336,9 @@ public class HtmlSerializerInnerOuterText {
         private final StringBuilder builder_;
         private int trimRightPos_;
 
+        /**
+         * Ctor.
+         */
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
             state_ = State.EMPTY;
@@ -348,7 +360,13 @@ public class HtmlSerializerInnerOuterText {
             state_ = State.REQUIRED_LINE_BREAK_AT_END;
         }
 
-        // see https://drafts.csswg.org/css-text-3/#white-space
+        /**
+         * Append the provided content.
+         * see https://drafts.csswg.org/css-text-3/#white-space
+         *
+         * @param content the content to add
+         * @param mode the {@link Mode}
+         */
         public void append(final String content, final Mode mode) {
             if (content == null) {
                 return;
@@ -483,6 +501,9 @@ public class HtmlSerializerInnerOuterText {
             }
         }
 
+        /**
+         * @return the constructed text.
+         */
         public String getText() {
             return builder_.substring(0, trimRightPos_);
         }

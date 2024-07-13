@@ -574,7 +574,11 @@ public class HtmlSerializerNormalizedText {
         ignoreMaskedElements_ = ignore;
     }
 
+    /**
+     * Helper to compose the text for the serializer based on several modes.
+     */
     protected static class HtmlSerializerTextBuilder {
+
         /** Mode. */
         protected enum Mode {
             /** Collapse whitespace. */
@@ -604,12 +608,21 @@ public class HtmlSerializerNormalizedText {
         private final StringBuilder builder_;
         private int trimRightPos_;
 
+        /**
+         * Ctor.
+         */
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
             state_ = State.EMPTY;
             trimRightPos_ = builder_.length();
         }
 
+        /**
+         * Append the provided content.
+         *
+         * @param content the content to add
+         * @param mode the {@link Mode}
+         */
         public void append(final String content, final Mode mode) {
             if (content == null) {
                 return;
@@ -761,6 +774,9 @@ public class HtmlSerializerNormalizedText {
             trimRightPos_ = builder_.length();
         }
 
+        /**
+         * @return the constructed text.
+         */
         public String getText() {
             return builder_.substring(0, trimRightPos_);
         }

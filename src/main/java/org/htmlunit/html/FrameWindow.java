@@ -30,7 +30,15 @@ import org.htmlunit.WebWindowImpl;
 public class FrameWindow extends WebWindowImpl {
 
     /** The different deny states. */
-    public enum PageDenied { NONE, BY_X_FRAME_OPTIONS, BY_CONTENT_SECURIRY_POLICY }
+    public enum PageDenied {
+        /** NONE. */
+        NONE,
+
+        /** BY_X_FRAME_OPTIONS. */
+        BY_X_FRAME_OPTIONS,
+
+        /** BY_CONTENT_SECURIRY_POLICY. */
+        BY_CONTENT_SECURIRY_POLICY }
 
     private final BaseFrameElement frame_;
     private PageDenied pageDenied_;

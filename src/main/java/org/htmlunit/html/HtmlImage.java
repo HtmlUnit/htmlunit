@@ -603,6 +603,10 @@ public class HtmlImage extends HtmlElement {
         }
     }
 
+    /**
+     * @return the {@link ImageData} of this image
+     * @throws IOException in case of error
+     */
     public ImageData getImageData() throws IOException {
         readImageIfNeeded();
         return imageData_;
