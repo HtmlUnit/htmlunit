@@ -17,6 +17,9 @@ package org.htmlunit.javascript.host.html;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.net.URL;
+
+import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
@@ -202,7 +205,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("HelloHello")
+    @Alerts({"Hello", "HelloHello"})
     public void writeExternalScriptAfterClick() throws Exception {
         shutDownAll();
 
@@ -216,16 +219,15 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "<a href='?again'>a link</a>\n"
-            + "<div id='clickMe' onclick='alert(window.name)'>click me</div>\n"
             + "</body>\n"
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("window.foo = 'Hello'", MimeType.TEXT_JAVASCRIPT);
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.linkText("a link")).click();
-        driver.findElement(By.id("clickMe")).click();
+        verifyJsVariable(driver, "window.top.name", getExpectedAlerts()[0]);
 
-        verifyAlerts(driver, getExpectedAlerts());
+        driver.findElement(By.linkText("a link")).click();
+        verifyJsVariable(driver, "window.top.name", getExpectedAlerts()[1]);
     }
 
     /**
@@ -649,5 +651,37 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         assertTitle(driver, "parsed script executed");
         assertEquals("After", driver.findElement(By.tagName("body")).getText());
+    }
+
+    /**
+     * Verifies that scripts added to the document via document.write(...) don't execute until the current script
+     * finishes executing; bug found at <a href="http://code.google.com/apis/maps/">the Google Maps API site</a>.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void write_scriptExecutionPostponed() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d'></div>\n"
+            + "<script>function log(s) { document.getElementById('d').innerHTML += s + ' '; }</script>\n"
+            + "<script src='a.js'></script>\n"
+            + "<script>log(2);document.write('<scr'+'ipt src=\"b.js\"></scr'+'ipt>');log(3);</script>\n"
+            + "<script src='c.js'></script>\n"
+            + "<script>\n"
+            + "  log(6);document.write('<scr'+'ipt src=\"d.js\"></scr'+'ipt>');log(7);\n"
+            + "  log(8);document.write('<scr'+'ipt src=\"e.js\"></scr'+'ipt>');log(9);\n"
+            + "</script>\n"
+            + "<script src='f.js'></script>\n"
+            + "</body></html>";
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(new URL(URL_FIRST, "a.js"), "log(1)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "b.js"), "log(4)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "c.js"), "log(5)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "d.js"), "log(10)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "e.js"), "log(11)", MimeType.TEXT_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", MimeType.TEXT_JAVASCRIPT);
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals("1 2 3 4 5 6 7 8 9 10 11 12", driver.findElement(By.tagName("body")).getText());
     }
 }
