@@ -39,6 +39,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
     private Session outgoingSession_;
 
     public JettyWebSocketAdapter(final WebClient webClient) {
+        super();
         final WebClientOptions options = webClient.getOptions();
 
         if (webClient.getOptions().isUseInsecureSSL()) {

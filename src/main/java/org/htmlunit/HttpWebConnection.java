@@ -1238,29 +1238,48 @@ public class HttpWebConnection implements WebConnection {
      */
     private static final class SynchronizedAuthCache extends BasicAuthCache {
 
+        /**
+         * Ctor.
+         */
         SynchronizedAuthCache() {
+            super()
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public synchronized void put(final HttpHost host, final AuthScheme authScheme) {
             super.put(host, authScheme);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public synchronized AuthScheme get(final HttpHost host) {
             return super.get(host);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public synchronized void remove(final HttpHost host) {
             super.remove(host);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public synchronized void clear() {
             super.clear();
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public synchronized String toString() {
             return super.toString();

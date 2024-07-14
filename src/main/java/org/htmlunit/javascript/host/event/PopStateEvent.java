@@ -37,6 +37,7 @@ public class PopStateEvent extends Event {
      * Default constructor.
      */
     public PopStateEvent() {
+        super();
         setEventType("");
     }
 

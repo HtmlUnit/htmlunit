@@ -53,6 +53,7 @@ public class Storage extends HtmlUnitScriptable {
      * Public default constructor only for the prototype.
      */
     public Storage() {
+        super();
         store_ = null;
     }
 
@@ -70,6 +71,7 @@ public class Storage extends HtmlUnitScriptable {
      * @param store the storage itself
      */
     public Storage(final Window window, final Map<String, String> store) {
+        super();
         store_ = store;
         storeSize_ = 0L;
         setParentScope(window);

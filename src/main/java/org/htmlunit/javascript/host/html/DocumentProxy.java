@@ -37,6 +37,7 @@ public class DocumentProxy extends HtmlUnitScriptableProxy<Document> {
      * @param webWindow the window
      */
     public DocumentProxy(final WebWindow webWindow) {
+        super();
         webWindow_ = webWindow;
     }
 

@@ -120,6 +120,7 @@ public class Blob extends HtmlUnitScriptable {
          */
         protected InMemoryBackend(final byte[] bytes, final String fileName,
                 final String type, final long lastModified) {
+            super();
             fileName_ = fileName;
             type_ = type;
             lastModified_ = lastModified;
@@ -291,6 +292,7 @@ public class Blob extends HtmlUnitScriptable {
      * @param contentType the content type
      */
     public Blob(final byte[] bytes, final String contentType) {
+        super();
         setBackend(new InMemoryBackend(bytes, null, contentType, -1));
     }
 

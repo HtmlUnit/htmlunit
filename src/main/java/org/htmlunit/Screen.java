@@ -36,6 +36,7 @@ public class Screen implements Serializable {
      * @param webClient the client this belongs to
      */
     public Screen(final WebClient webClient) {
+        super();
         screenHeight_ = webClient.getOptions().getScreenHeight();
         screenWidth_ =  webClient.getOptions().getScreenWidth();
     }

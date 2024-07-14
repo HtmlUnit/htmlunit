@@ -49,6 +49,7 @@ public class File extends Blob {
         private final java.io.File file_;
 
         FileBackend(final String pathname) {
+            super();
             file_ = new java.io.File(pathname);
         }
 
@@ -123,6 +124,7 @@ public class File extends Blob {
     }
 
     File(final String pathname) {
+        super();
         setBackend(new FileBackend(pathname));
     }
 

@@ -45,11 +45,13 @@ public class Worker extends EventTarget {
      */
     public Worker() {
         // prototype constructor
+        super();
         workerScope_ = null;
     }
 
     private Worker(final Context cx, final Window owningWindow, final String url,
                        final Scriptable options) throws Exception {
+        super();
         setParentScope(owningWindow);
         setPrototype(getPrototype(getClass()));
 

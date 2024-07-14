@@ -42,6 +42,7 @@ public class HashChangeEvent extends Event {
      * Creates a new event instance.
      */
     public HashChangeEvent() {
+        super();
         setEventType("");
     }
 

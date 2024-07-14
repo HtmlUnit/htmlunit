@@ -41,6 +41,7 @@ public class EventHandler extends BaseFunction {
      * @param jsSnippet the JavaScript code
      */
     public EventHandler(final DomNode node, final String eventName, final String jsSnippet) {
+        super();
         node_ = node;
         eventName_ = eventName;
         jsSnippet_ = jsSnippet;

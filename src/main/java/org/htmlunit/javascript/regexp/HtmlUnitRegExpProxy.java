@@ -57,6 +57,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      * @param wrapped the original proxy
      */
     public HtmlUnitRegExpProxy(final RegExpProxy wrapped) {
+        super();
         wrapped_ = wrapped;
     }
 

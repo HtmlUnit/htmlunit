@@ -41,6 +41,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
      * Creates an instance.
      */
     public NicelyResynchronizingAjaxController() {
+        super();
         init();
     }
 

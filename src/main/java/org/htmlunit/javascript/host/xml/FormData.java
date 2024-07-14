@@ -82,6 +82,8 @@ public class FormData extends HtmlUnitScriptable {
          * @param className the class name
          */
         public FormDataIterator(final String className) {
+            super();
+
             type_ = Type.BOTH;
             index_ = 0;
             nameValuePairList_ = Collections.emptyList();

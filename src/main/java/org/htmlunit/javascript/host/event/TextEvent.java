@@ -38,6 +38,7 @@ public class TextEvent extends UIEvent {
      * Default constructor.
      */
     public TextEvent() {
+        super();
         data_ = JavaScriptEngine.Undefined;
     }
 

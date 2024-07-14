@@ -76,6 +76,8 @@ public class XMLDocument extends Document {
      * @param enclosingWindow the window
      */
     public XMLDocument(final WebWindow enclosingWindow) {
+        super();
+
         if (enclosingWindow != null) {
             try {
                 final XmlPage page = new XmlPage((WebResponse) null, enclosingWindow);

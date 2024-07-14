@@ -68,6 +68,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      * @param parentScope parent scope
      */
     public HTMLOptionsCollection(final HtmlUnitScriptable parentScope) {
+        super();
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
     }

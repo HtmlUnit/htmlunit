@@ -122,6 +122,7 @@ public class MouseEvent extends UIEvent {
      * Used to build the prototype.
      */
     public MouseEvent() {
+        super();
         screenX_ = Integer.valueOf(0);
         screenY_ = Integer.valueOf(0);
         setDetail(1);

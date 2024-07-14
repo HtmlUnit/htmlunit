@@ -43,6 +43,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public SVGMatrix() {
+        super();
+
         shearX_ = 0.0;
         shearY_ = 0.0;
         scaleX_ = 1.0;

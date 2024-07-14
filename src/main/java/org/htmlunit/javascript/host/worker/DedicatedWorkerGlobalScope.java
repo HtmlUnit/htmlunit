@@ -90,6 +90,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      */
     public DedicatedWorkerGlobalScope() {
         // prototype constructor
+        super();
         owningWindow_ = null;
         origin_ = null;
         name_ = null;
@@ -113,6 +114,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      */
     DedicatedWorkerGlobalScope(final Window owningWindow, final Context context, final WebClient webClient,
             final String name, final Worker worker) throws Exception {
+        super();
         context.initSafeStandardObjects(this);
 
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
@@ -382,6 +384,7 @@ class WorkerJob extends BasicJavaScriptJob {
     private final String description_;
 
     WorkerJob(final ContextFactory contextFactory, final ContextAction<Object> action, final String description) {
+        super();
         contextFactory_ = contextFactory;
         action_ = action;
         description_ = description;

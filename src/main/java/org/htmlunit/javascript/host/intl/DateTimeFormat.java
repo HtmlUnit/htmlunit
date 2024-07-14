@@ -162,6 +162,8 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     }
 
     private DateTimeFormat(final String[] locales, final BrowserVersion browserVersion) {
+        super();
+
         final Map<String, String> formats;
         if (browserVersion.isChrome()) {
             formats = CHROME_FORMATS_;

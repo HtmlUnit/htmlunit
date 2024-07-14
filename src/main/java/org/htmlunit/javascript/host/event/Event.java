@@ -538,6 +538,7 @@ public class Event extends HtmlUnitScriptable {
      * @param type the event type
      */
     public Event(final EventTarget target, final String type) {
+        super();
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
@@ -584,7 +585,7 @@ public class Event extends HtmlUnitScriptable {
      * Used to build the prototype.
      */
     public Event() {
-        // nothing to do
+        super();
     }
 
     /**

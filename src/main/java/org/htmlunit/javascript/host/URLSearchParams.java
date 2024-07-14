@@ -78,6 +78,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
         }
 
         public NativeParamsIterator(final String className) {
+            super();
             iterator_ = Collections.emptyIterator();
             type_ = Type.BOTH;
             className_ = className;
@@ -129,6 +130,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * @param url the base url
      */
     URLSearchParams(final URL url) {
+        super();
         url_ = url;
     }
 

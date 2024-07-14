@@ -38,7 +38,7 @@ public class HTMLAllCollection extends HTMLCollection {
      * Creates an instance.
      */
     public HTMLAllCollection() {
-        // nothing to do
+        super();
     }
 
     /**

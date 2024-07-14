@@ -91,6 +91,7 @@ public class NodeList extends AbstractList implements Callable {
      * @param parentScope the parent scope
      */
     NodeList(final ScriptableObject parentScope) {
+        super();
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
         setExternalArrayData(this);

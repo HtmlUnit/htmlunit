@@ -105,6 +105,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * @param window the top level window
      */
     private WebSocket(final String url, final Window window) {
+        super();
         try {
             final WebWindow webWindow = window.getWebWindow();
             containingPage_ = (HtmlPage) webWindow.getEnclosedPage();

@@ -39,6 +39,7 @@ public class InputEvent extends UIEvent {
      * Default constructor.
      */
     public InputEvent() {
+        super();
         data_ = "";
         inputType_ = "";
     }

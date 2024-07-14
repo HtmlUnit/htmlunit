@@ -160,6 +160,7 @@ public final class XmlUtils {
         private boolean wasBlank_ = true;
 
         TrackBlankContentAndSkipLeadingWhitespaceReader(final Reader characterStream) {
+            super();
             reader_ = characterStream;
         }
 

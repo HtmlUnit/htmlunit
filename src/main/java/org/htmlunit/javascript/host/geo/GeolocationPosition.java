@@ -35,10 +35,11 @@ public class GeolocationPosition extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public GeolocationPosition() {
-        // nothing to do
+        super();
     }
 
     GeolocationPosition(final GeolocationCoordinates coordinates) {
+        super();
         coordinates_ = coordinates;
     }
 

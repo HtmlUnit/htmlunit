@@ -110,6 +110,8 @@ public class NumberFormat extends HtmlUnitScriptable {
     }
 
     private NumberFormat(final String[] locales, final BrowserVersion browserVersion) {
+        super();
+
         final Map<String, String> formats;
         if (browserVersion.isChrome()) {
             formats = CHROME_FORMATS_;

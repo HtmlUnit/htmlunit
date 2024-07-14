@@ -52,13 +52,15 @@ public class Plugin extends SimpleArray {
     }
 
     /**
-     * C'tor initializing fields.
+     * Ctor initializing fields.
+     *
      * @param name the plugin name
      * @param description the plugin description
      * @param version the version
      * @param filename the plugin filename
      */
     public Plugin(final String name, final String description, final String version, final String filename) {
+        super();
         name_ = name;
         description_ = description;
         version_ = version;

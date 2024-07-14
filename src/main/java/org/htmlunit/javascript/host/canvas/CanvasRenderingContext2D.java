@@ -74,6 +74,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @param canvas the {@link HTMLCanvasElement}
      */
     public CanvasRenderingContext2D(final HTMLCanvasElement canvas) {
+        super();
         canvas_ = canvas;
         renderingBackend_ = null;
     }

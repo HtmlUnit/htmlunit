@@ -64,6 +64,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
      * @param attributeName the attribute name of the DomElement of the specified node
      */
     public DOMTokenList(final Node node, final String attributeName) {
+        super();
         setDomNode(node.getDomNodeOrDie(), false);
         setParentScope(node.getParentScope());
         setPrototype(getPrototype(getClass()));

@@ -44,7 +44,7 @@ public class TreeWalker extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public TreeWalker() {
-        // nothing to do
+        super();
     }
 
     /**
@@ -74,6 +74,7 @@ public class TreeWalker extends HtmlUnitScriptable {
                       final int whatToShow,
                       final org.w3c.dom.traversal.NodeFilter filter,
                       final boolean expandEntityReferences) throws DOMException {
+        super();
         if (root == null) {
             throw JavaScriptEngine.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                                    "root must not be null"));

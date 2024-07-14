@@ -47,6 +47,7 @@ public class XPathExpression extends HtmlUnitScriptable {
      * Default constructor.
      */
     public XPathExpression() {
+        super();
         xpath_ = null;
         prefixResolver_ = null;
     }
@@ -61,6 +62,7 @@ public class XPathExpression extends HtmlUnitScriptable {
 
     XPathExpression(final String expression, final PrefixResolver prefixResolver,
             final DomNode node) throws TransformerException {
+        super();
         PrefixResolver resolver = prefixResolver;
         if (resolver == null) {
             resolver = new HtmlUnitPrefixResolver(node);

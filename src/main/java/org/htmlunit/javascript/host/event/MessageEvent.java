@@ -52,6 +52,7 @@ public class MessageEvent extends Event {
      * Default constructor used to build the prototype.
      */
     public MessageEvent() {
+        super();
         setType(TYPE_MESSAGE);
         origin_ = "";
         lastEventId_ = "";

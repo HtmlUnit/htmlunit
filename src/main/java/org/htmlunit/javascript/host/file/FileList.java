@@ -52,6 +52,7 @@ public class FileList extends HtmlUnitScriptable {
      * @param array the array of files
      */
     public FileList(final java.io.File[] array) {
+        super();
         files_ = new File[array.length];
 
         for (int i = 0; i < array.length; i++) {

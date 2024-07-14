@@ -34,6 +34,7 @@ public class NiceRefreshHandler extends ImmediateRefreshHandler {
      * @param maxDelay the maximum refreshValue (in seconds) that should cause a refresh
      */
     public NiceRefreshHandler(final int maxDelay) {
+        super();
         if (maxDelay <= 0) {
             throw new IllegalArgumentException("Invalid maxDelay: " + maxDelay);
         }

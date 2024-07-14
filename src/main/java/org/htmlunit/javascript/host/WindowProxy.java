@@ -32,6 +32,7 @@ public class WindowProxy extends HtmlUnitScriptableProxy<Window> {
      * @param webWindow the window
      */
     public WindowProxy(final WebWindow webWindow) {
+        super();
         webWindow_ = webWindow;
     }
 
