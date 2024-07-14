@@ -97,6 +97,7 @@ public final class ScriptElementSupport {
             if (!hasNoSrcAttrib) {
                 description.append(" (").append(srcAttrib).append(')');
             }
+
             final PostponedAction action = new PostponedAction(element.getPage(), description.toString()) {
                 @Override
                 public void execute() {
@@ -133,6 +134,9 @@ public final class ScriptElementSupport {
             else {
                 try {
                     action.execute();
+                    if (engine != null) {
+                        engine.processPostponedActions();
+                    }
                 }
                 catch (final RuntimeException e) {
                     throw e;
