@@ -45,6 +45,7 @@
     <rule ref="category/java/design.xml">
         <exclude name="AvoidDeeplyNestedIfStmts"/>
         <exclude name="CognitiveComplexity"/>
+        <exclude name="CollapsibleIfStatements"/>
         <exclude name="CouplingBetweenObjects"/>
         <exclude name="CyclomaticComplexity"/>
         <exclude name="ExcessiveImports"/>

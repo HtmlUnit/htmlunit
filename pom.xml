@@ -97,7 +97,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.23.0</version>
+                <version>3.24.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>net.sourceforge.pmd</groupId>
@@ -202,6 +202,7 @@
                 <version>3.7.0</version>
                 <configuration>
                     <quiet>true</quiet>
+                    <show>protected</show>
                     <doclint>html,missing,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
@@ -681,6 +682,7 @@
                 <version>3.7.0</version>
                 <configuration>
                     <quiet>true</quiet>
+                    <show>protected</show>
                     <doclint>html,missing,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
