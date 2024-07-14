@@ -214,7 +214,11 @@ public class WebConsole implements ConsolePrinter, Serializable {
 
         private static final Log LOG = LogFactory.getLog(WebConsole.class);
 
+        /**
+         * Ctor.
+         */
         DefaultLogger() {
+            super();
         }
 
         @Override

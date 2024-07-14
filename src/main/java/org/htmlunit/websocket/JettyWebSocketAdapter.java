@@ -164,6 +164,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
          * Ctor.
          */
         JettyWebSocketAdapterImpl() {
+            super();
         }
 
         /**

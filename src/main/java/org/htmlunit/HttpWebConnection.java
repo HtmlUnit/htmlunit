@@ -1201,7 +1201,11 @@ public class HttpWebConnection implements WebConnection {
         private static final String CONN_DIRECTIVE = "Connection";
         private static final String CONN_KEEP_ALIVE = "keep-alive";
 
+        /**
+         * Ctor.
+         */
         RequestClientConnControl() {
+            super();
         }
 
         @Override
@@ -1242,7 +1246,7 @@ public class HttpWebConnection implements WebConnection {
          * Ctor.
          */
         SynchronizedAuthCache() {
-            super()
+            super();
         }
 
         /**

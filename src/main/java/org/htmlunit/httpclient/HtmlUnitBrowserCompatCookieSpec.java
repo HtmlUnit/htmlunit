@@ -281,7 +281,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         private static final BitSet TOKEN_DELIMS = TokenParser.INIT_BITSET('=', PARAM_DELIMITER);
         private static final BitSet VALUE_DELIMS = TokenParser.INIT_BITSET(PARAM_DELIMITER);
 
-        private final TokenParser tokenParser_ = TokenParser.INSTANCE;
+        private static final TokenParser tokenParser_ = TokenParser.INSTANCE;
 
         HeaderElement parseHeader(final CharArrayBuffer buffer, final ParserCursor cursor) throws ParseException {
             final NameValuePair nvp = parseNameValuePair(buffer, cursor);

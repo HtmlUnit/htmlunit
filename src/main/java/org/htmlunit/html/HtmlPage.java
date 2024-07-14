@@ -2724,7 +2724,11 @@ public class HtmlPage extends SgmlPage {
      */
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
 
+        /**
+         * Ctor.
+         */
         DomHtmlAttributeChangeListenerImpl() {
+            super();
         }
 
         /**
@@ -2797,7 +2801,11 @@ public class HtmlPage extends SgmlPage {
         private transient WeakHashMap<DomElement, Map<String, ComputedCssStyleDeclaration>>
                     computedStyles_ = new WeakHashMap<>();
 
+        /**
+         * Ctor.
+         */
         ComputedStylesCache() {
+            super();
         }
 
         public synchronized ComputedCssStyleDeclaration get(final DomElement element,

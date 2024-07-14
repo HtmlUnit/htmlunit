@@ -1157,6 +1157,7 @@ public final class UrlUtils {
          * Creates a <code>Url</code> object.
          */
         Url() {
+            super();
         }
 
         /**
