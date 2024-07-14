@@ -195,7 +195,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
             return (SgmlPage) super.clone();
         }
         catch (final CloneNotSupportedException e) {
-            throw new IllegalStateException("Clone not supported");
+            throw new IllegalStateException("Clone not supported", e);
         }
     }
 

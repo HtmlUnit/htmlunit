@@ -189,6 +189,7 @@ public class XPathAdapter {
      * @return the result of the XPath or null if callbacks are used
      * @throws TransformerException if the error condition is severe enough to halt processing
      */
+    @SuppressWarnings("PMD.PreserveStackTrace")
     XObject execute(final XPathContext xpathContext, final int contextNode,
         final PrefixResolver namespaceContext) throws TransformerException {
         xpathContext.pushNamespaceContext(namespaceContext);

@@ -40,7 +40,7 @@ final class HtmlUnitMaxAgeHandler extends BasicMaxAgeHandler {
             age = Integer.parseInt(value);
         }
         catch (final NumberFormatException e) {
-            throw new MalformedCookieException("Invalid 'max-age' attribute: " + value);
+            throw new MalformedCookieException("Invalid 'max-age' attribute: " + value, e);
         }
         cookie.setExpiryDate(new Date(System.currentTimeMillis() + age * 1000L));
     }

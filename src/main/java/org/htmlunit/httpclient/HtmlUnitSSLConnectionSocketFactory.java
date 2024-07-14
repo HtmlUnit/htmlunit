@@ -169,7 +169,10 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
                 underlying.connect(remoteAddress, connectTimeout);
             }
             catch (final SocketTimeoutException ex) {
-                throw new ConnectTimeoutException("Connect to " + socksProxy.toURI() + " timed out");
+                final ConnectTimeoutException cex =
+                        new ConnectTimeoutException("Connect to " + socksProxy.toURI() + " timed out");
+                cex.initCause(ex);
+                throw cex;
             }
 
             final Socket sslSocket = getSSLSocketFactory().createSocket(underlying, remoteAddress.getHostName(),

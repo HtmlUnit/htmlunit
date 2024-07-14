@@ -94,7 +94,7 @@ public final class WebAssert {
         }
         catch (final ElementNotFoundException e) {
             final String msg = "The page does not contain an element with ID '" + id + "'.";
-            throw new AssertionError(msg);
+            throw new AssertionError(msg, e);
         }
     }
 
@@ -178,7 +178,7 @@ public final class WebAssert {
         catch (final ElementNotFoundException e) {
             final String msg = "Unable to verify that the element with ID '" + id + "' contains the text '" + text
                             + "' because the specified element does not exist.";
-            throw new AssertionError(msg);
+            throw new AssertionError(msg, e);
         }
     }
 
@@ -230,7 +230,9 @@ public final class WebAssert {
         }
         catch (final ElementNotFoundException e) {
             final String msg = "The page does not contain a link with ID '" + id + "'.";
-            throw new AssertionError(msg);
+            final AssertionError aerr = new AssertionError(msg);
+            aerr.initCause(e);
+            throw aerr;
         }
     }
 
@@ -305,7 +307,7 @@ public final class WebAssert {
         }
         catch (final ElementNotFoundException e) {
             final String msg = "The page does not contain a form named '" + name + "'.";
-            throw new AssertionError(msg);
+            throw new AssertionError(msg, e);
         }
     }
 
