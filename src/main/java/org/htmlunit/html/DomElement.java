@@ -1096,9 +1096,11 @@ public class DomElement extends DomNamespaceNode implements Element {
             return (P) page;
         }
 
-        if (!page.getWebClient().isJavaScriptEnabled()) {
+        final WebClient webClient = page.getWebClient();
+        if (!webClient.isJavaScriptEnabled()) {
             doClickStateUpdate(shiftKey, ctrlKey);
-            page.getWebClient().loadDownloadedResponses();
+
+            webClient.loadDownloadedResponses();
             return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
         }
 
@@ -1113,7 +1115,6 @@ public class DomElement extends DomNamespaceNode implements Element {
             stateUpdated = true;
         }
 
-        final AbstractJavaScriptEngine<?> jsEngine = page.getWebClient().getJavaScriptEngine();
         final ScriptResult scriptResult = doClickFireClickEvent(event);
         final boolean eventIsAborted = event.isAborted(scriptResult);
 
@@ -1126,6 +1127,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             doClickFireChangeEvent();
         }
 
+        webClient.loadDownloadedResponses();
         return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
     }
 
