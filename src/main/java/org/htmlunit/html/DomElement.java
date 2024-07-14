@@ -1114,18 +1114,12 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final AbstractJavaScriptEngine<?> jsEngine = page.getWebClient().getJavaScriptEngine();
-        jsEngine.holdPosponedActions();
-        try {
-            final ScriptResult scriptResult = doClickFireClickEvent(event);
-            final boolean eventIsAborted = event.isAborted(scriptResult);
+        final ScriptResult scriptResult = doClickFireClickEvent(event);
+        final boolean eventIsAborted = event.isAborted(scriptResult);
 
-            final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
-            if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
-                changed = doClickStateUpdate(shiftKey, ctrlKey);
-            }
-        }
-        finally {
-            jsEngine.processPostponedActions();
+        final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
+        if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
+            changed = doClickStateUpdate(shiftKey, ctrlKey);
         }
 
         if (changed) {
