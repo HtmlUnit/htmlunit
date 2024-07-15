@@ -1,0 +1,23 @@
+{
+  "resources": {
+    "includes": [
+      // org.htmlunit.javascript.polyfill.Polyfill#getPolyfill (getResourceAsStream/getResource)
+      {
+        condition: {
+          typeReachable: "org.htmlunit.javascript.polyfill.Polyfill"
+        },
+        pattern: "org\\htmlunit\\javascript\\polyfill\\fetch\\fetch.umd.js"
+      },
+
+      // org.htmlunit.util.DebuggingWebConnection#createOverview (getResource)
+      {
+        "condition": {
+          "typeReachable": "org.htmlunit.util.DebuggingWebConnection"
+        },
+        "pattern": "org\\htmlunit\\util\\DebuggingWebConnection\\DebuggingWebConnection.index.html"
+      },
+    ]
+  },
+  "bundles": [
+  ]
+}
