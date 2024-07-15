@@ -9,7 +9,7 @@
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
             <action type="fix" dev="rbri">
-                When an element is clicked, the postponed actions are executed too early - only 
+                When an element is clicked, the postponed actions are executed too early - only
                 the processing of the downloaded pages may take place at this time.
             </action>
             <action type="fix" dev="rbri">
