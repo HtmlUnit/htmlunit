@@ -950,9 +950,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
-                if (!holdPostponedActions_
-                        // only if we are outer js
-                        && (javaScriptAlreadyRunning == null || !javaScriptAlreadyRunning)) {
+                if (!holdPostponedActions_) {
                     doProcessPostponedActions();
                 }
                 return response;
