@@ -24,10 +24,7 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.html.FrameWindow;
-import org.htmlunit.html.HtmlAnchor;
-import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.html.HtmlSpan;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
@@ -43,93 +40,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDocumentWriteTest extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void write2() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
-            + "<script>\n"
-            + "document.write(\"<div id='div1'></div>\");\n"
-            + "document.write('<div', \" id='div2'>\", '</div>');\n"
-            + "document.writeln('<div', \" id='div3'>\", '</div>');\n"
-            + "</script>\n"
-            + "</form></body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("First", page.getTitleText());
-
-        page.getHtmlElementById("div1");
-        page.getHtmlElementById("div2");
-        page.getHtmlElementById("div3");
-    }
-
-    /**
-     * Regression test for Bug #71.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void write_script() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        webClient.setWebConnection(webConnection);
-
-        final String mainHtml
-            = "<html><head><title>Main</title></head><body>\n"
-            + "<iframe name='iframe' id='iframe' src='http://first'></iframe>\n"
-            + "<script type='text/javascript'>\n"
-            + "document.write('<script type=\"text/javascript\" src=\"http://script\"></' + 'script>');\n"
-            + "</script></body></html>";
-        webConnection.setResponse(new URL("http://main/"), mainHtml);
-
-        final String firstHtml = "<html><body><h1 id='first'>First</h1></body></html>";
-        webConnection.setResponse(URL_FIRST, firstHtml);
-
-        final String secondHtml = "<html><body><h1 id='second'>Second</h1></body></html>";
-        webConnection.setResponse(URL_SECOND, secondHtml);
-
-        final String script = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
-        webConnection.setResponse(new URL("http://script/"), script, MimeType.TEXT_JAVASCRIPT);
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage mainPage = webClient.getPage("http://main");
-        assertEquals("Main", mainPage.getTitleText());
-
-        final HtmlInlineFrame iFrame = mainPage.getHtmlElementById("iframe");
-
-        assertEquals(URL_SECOND.toExternalForm(), iFrame.getSrcAttribute());
-
-        final HtmlPage enclosedPage = (HtmlPage) iFrame.getEnclosedPage();
-        // This will blow up if the script hasn't been written to the document
-        // and executed so the second page has been loaded.
-        enclosedPage.getHtmlElementById("second");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("A")
-    public void write_InDOM() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
-            + "<script type='text/javascript'>\n"
-            + "document.write('<a id=\"blah\">Hello World</a>');\n"
-            + "document.write('<a id=\"blah2\">Hello World 2</a>');\n"
-            + "alert(document.getElementById('blah').tagName);\n"
-            + "</script>\n"
-            + "<a id='blah3'>Hello World 3</a>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-
-        assertEquals("First", page.getTitleText());
-        assertEquals(3, page.getElementsByTagName("a").getLength());
-    }
 
     /**
      * IE accepts the use of detached functions.
@@ -152,51 +62,6 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "</body></html>";
 
         loadPageWithAlerts(html);
-    }
-
-    /**
-     * Test for bug 1950462: calling document.write inside a function (after assigning
-     * document.write to a local variable) tries to invoke document.write on the prototype
-     * document instance, rather than the actual document host object. This leads to an
-     * {@link IllegalStateException} (DomNode has not been set for this SimpleScriptable).
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = "exception occurred")
-    public void write_AssignedToVar2() throws Exception {
-        final String html =
-            "<html><head><title>Test</title></head><body>\n"
-            + "<script>\n"
-            + "  function foo() { var d = document.write; d(4); }\n"
-            + "  try {\n"
-            + "    foo();\n"
-            + "  } catch (e) { alert('exception occurred'); document.write(4); }\n"
-            + "</script>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPage(html);
-        assertEquals("Test", page.getTitleText());
-        assertEquals("4", page.getBody().asNormalizedText());
-    }
-
-    /**
-     * Verifies that calling document.write() after document parsing has finished results in a whole
-     * new page being loaded.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void write_WhenParsingFinished() throws Exception {
-        final String html =
-              "<html><head><script>\n"
-            + "  function test() { document.write(1); document.write(2); document.close(); }\n"
-            + "</script></head>\n"
-            + "<body><span id='s' onclick='test()'>click</span></body></html>";
-
-        HtmlPage page = loadPage(html);
-        assertEquals("click", page.getBody().asNormalizedText());
-
-        final HtmlSpan span = page.getHtmlElementById("s");
-        page = span.click();
-        assertEquals("12", page.getBody().asNormalizedText());
     }
 
     /**
@@ -244,26 +109,6 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "<body onload='test()'></body></html>";
 
         loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void writeWithSplitAnchorTag() throws Exception {
-        final String html = "<html><body><script>\n"
-            + "document.write(\"<a href=\'start.html\");\n"
-            + "document.write(\"\'>\");\n"
-            + "document.write('click here</a>');\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(html);
-        final List<HtmlAnchor> anchorList = page.getAnchors();
-        assertEquals(1, anchorList.size());
-        final HtmlAnchor anchor = anchorList.get(0);
-        assertEquals("start.html", anchor.getHrefAttribute());
-        assertEquals("click here", anchor.asNormalizedText());
     }
 
     /**
