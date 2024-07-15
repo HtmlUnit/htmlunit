@@ -1,1247 +1,1231 @@
 [
-  // org.htmlunit.BrowserVersion#initFeatures (getField)
   {
-    condition: {
-      typeReachable: "org.htmlunit.BrowserVersion",
+    "condition": {
+      "typeReachable": "org.htmlunit.BrowserVersion"
     },
-    name: "org.htmlunit.BrowserVersionFeatures",
-    allPublicFields: true
+    "name": "org.htmlunit.BrowserVersionFeatures",
+    "allPublicFields": true
   },
 
-  // org.htmlunit.svg.SvgElementFactory#<cinit> (getField)
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgAltGlyph",
-    fields: [{name: "TAG_NAME"}]
+    "name": "org.htmlunit.svg.SvgAltGlyph",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgAltGlyphDef",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgAltGlyphDef",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgAltGlyphItem",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgAltGlyphItem",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgAnchor",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgAnchor",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgAnimate",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgAnimate",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgAnimateColor",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgAnimateColor",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgAnimateMotion",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgAnimateMotion",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgAnimateTransform",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgAnimateTransform",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgCircle",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgCircle",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgClipPath",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgClipPath",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgColorProfile",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgColorProfile",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgCursor",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgCursor",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgDefs",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgDefs",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgDesc",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgDesc",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgEllipse",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgEllipse",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeBlend",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeBlend",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeColorMatrix",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeColorMatrix",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeComponentTransfer",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeComponentTransfer",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeComposite",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeComposite",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeConvolveMatrix",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeConvolveMatrix",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeDiffuseLighting",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeDiffuseLighting",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeDisplacementMap",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeDisplacementMap",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeDistantLight",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeDistantLight",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeFlood",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeFlood",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeFuncA",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeFuncA",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeFuncB",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeFuncB",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeFuncG",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeFuncG",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeFuncR",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeFuncR",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeGaussianBlur",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeGaussianBlur",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeImage",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeImage",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeMerge",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeMerge",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeMergeNode",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeMergeNode",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeMorphology",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeMorphology",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeOffset",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeOffset",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFePointLight",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFePointLight",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeSpecularLighting",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeSpecularLighting",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeSpotLight",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeSpotLight",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeTile",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeTile",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFeTurbulence",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFeTurbulence",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFilter",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFilter",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFont",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFont",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFontFace",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFontFace",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFontFaceFormat",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFontFaceFormat",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFontFaceName",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFontFaceName",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFontFaceSrc",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFontFaceSrc",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgFontFaceURI",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgFontFaceURI",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgForeignObject",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgForeignObject",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgGlyph",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgGlyph",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgGlyphRef",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgGlyphRef",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgGroup",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgGroup",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgHKern",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgHKern",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgImage",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgImage",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgLine",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgLine",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgLinearGradient",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgLinearGradient",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgMarker",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgMarker",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgMask",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgMask",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgMetadata",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgMetadata",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgMissingGlyph",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgMissingGlyph",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgMPath",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgMPath",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgPath",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgPath",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgPattern",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgPattern",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgPolygon",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgPolygon",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgPolyline",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgPolyline",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgRadialGradient",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgRadialGradient",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgRect",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgRect",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgScript",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgScript",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgSet",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgSet",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgStop",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgStop",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgStyle",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgStyle",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgSwitch",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgSwitch",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgSymbol",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgSymbol",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgText",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgText",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgTextPath",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgTextPath",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgTitle",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgTitle",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgTRef",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgTRef",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgTSpan",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgTSpan",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgUse",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgUse",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgView",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgView",
+    "fields": [{"name": "TAG_NAME"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.svg.SvgElementFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
     },
-    name: "org.htmlunit.svg.SvgVKern",
-    fields: [{name: "TAG_NAME"},]
+    "name": "org.htmlunit.svg.SvgVKern",
+    "fields": [{"name": "TAG_NAME"}]
   },
 
-  // org.htmlunit.javascript.host.html.HTMLElement#setAttribute (getMethod)
   {
-    name: "org.htmlunit.javascript.host.html.HTMLElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.Audio",
-    allPublicMethods: true
+    "name": "org.htmlunit.javascript.host.html.Audio",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLAnchorElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLAnchorElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLAreaElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLAreaElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLAudioElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLAudioElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLBaseElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLBaseElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLBGSoundElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLBGSoundElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLBodyElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLBodyElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLBRElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLBRElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLButtonElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLButtonElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLCanvasElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLCanvasElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLDataElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLDataElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLDataListElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLDataListElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLDetailsElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLDetailsElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLDialogElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLDialogElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLDirectoryElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLDirectoryElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLDivElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLDivElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLDListElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLDListElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLEmbedElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLEmbedElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLFieldSetElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLFieldSetElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLFontElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLFontElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLFormElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLFormElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLFrameElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLFrameElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLFrameSetElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLFrameSetElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLHeadElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLHeadElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLHeadingElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLHeadingElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLHRElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLHRElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLHtmlElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLHtmlElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLIFrameElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLIFrameElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLImageElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLImageElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLInputElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLInputElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLLabelElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLLabelElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLLegendElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLLegendElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLLIElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLLIElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLLinkElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLLinkElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLLinkElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLLinkElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLMapElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLMapElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLMarqueeElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLMarqueeElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLMediaElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLMediaElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLMenuElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLMenuElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLMetaElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLMetaElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLMeterElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLMeterElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLModElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLModElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLObjectElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLObjectElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLOListElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLOListElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLOptGroupElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLOptGroupElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLOptionElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLOptionElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLOutputElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLOutputElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLParagraphElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLParagraphElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLParamElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLParamElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLPictureElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLPictureElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLPreElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLPreElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLProgressElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLProgressElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLQuoteElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLQuoteElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLScriptElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLScriptElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLSelectElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLSelectElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLSlotElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLSlotElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLSourceElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLSourceElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLSpanElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLSpanElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLStyleElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLStyleElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTableCaptionElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTableCaptionElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTableCellElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTableCellElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTableColElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTableColElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTableComponent",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTableComponent",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTableElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTableElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTableRowElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTableRowElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTableSectionElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTableSectionElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTemplateElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTemplateElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTextAreaElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTextAreaElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTimeElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTimeElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTitleElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTitleElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLTitleElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLTitleElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLUListElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLUListElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLUnknownElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLUnknownElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLVideoElement",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.HTMLVideoElement",
+    "allPublicMethods": true
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.html.HTMLElement"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
     },
-    name: "org.htmlunit.javascript.host.html.RowContainer",
-    allPublicMethods: true,
+    "name": "org.htmlunit.javascript.host.html.RowContainer",
+    "allPublicMethods": true
   },
 
-  // org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory#setEmptyHostname (getDeclaredField)
   {
-    condition: {
-      typeReachable: "org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory"
     },
-    name: "org.apache.http.HttpHost",
-    fields: [{name: "hostname"},]
+    "name": "org.apache.http.HttpHost",
+    "fields": [{"name": "hostname"}]
   },
 
-  // org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory#getSSLSocketFactory (getDeclaredField)
   {
-    condition: {
-      typeReachable: "org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory"
+    "condition": {
+      "typeReachable": "org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory"
     },
-    name: "org.apache.http.conn.ssl.SSLConnectionSocketFactory",
-    fields: [{name: "socketfactory"},]
+    "name": "org.apache.http.conn.ssl.SSLConnectionSocketFactory",
+    "fields": [{"name": "socketfactory"}]
   },
 
-  // org.htmlunit.platform.XmlUtilsHelperAPI#getPrivate (getDeclaredField)
   {
-    // org.htmlunit.platform.util.XmlUtilsSunXercesHelper#getAttributesOrderMap
-    condition: {
-      typeReachable: "org.htmlunit.platform.util.XmlUtilsSunXercesHelper"
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.util.XmlUtilsSunXercesHelper"
     },
-    name: "com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl",
-    fields: [{name: "fNodeCount"}]
+    "name": "com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl",
+    "fields": [{"name": "fNodeCount"}]
   },
   {
-    // org.htmlunit.platform.util.XmlUtilsXercesHelper#getAttributesOrderMap
-    condition: {
-      typeReachable: "org.htmlunit.platform.util.XmlUtilsXercesHelper"
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.util.XmlUtilsXercesHelper"
     },
-    name: "org.apache.xerces.dom.DeferredDocumentImpl",
-    fields: [{name: "fNodeCount"}]
+    "name": "org.apache.xerces.dom.DeferredDocumentImpl",
+    "fields": [{"name": "fNodeCount"}]
   },
-
-  // org.htmlunit.javascript.JavaScriptEngine#init (getDeclaredMethod)
+  
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.JavaScriptEngine"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.JavaScriptEngine"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLImageElement",
-    methods: [{name: "jsConstructorImage"},]
+    "name": "org.htmlunit.javascript.host.html.HTMLImageElement",
+    "methods": [{"name": "jsConstructorImage"}]
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.JavaScriptEngine"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.JavaScriptEngine"
     },
-    name: "org.htmlunit.javascript.host.html.HTMLOptionElement",
-    methods: [{name: "jsConstructorOption", parameterTypes: ["java.lang.Object", "java.lang.String", "boolean", "boolean"]},]
+    "name": "org.htmlunit.javascript.host.html.HTMLOptionElement",
+    "methods": [{"name": "jsConstructorOption", "parameterTypes": ["java.lang.Object", "java.lang.String", "boolean", "boolean"]}]
   },
 
-  // org.htmlunit.javascript.host.Location#<cinit> (getDeclaredMethod)
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.Location"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.Location"
     },
-    name: "org.htmlunit.javascript.host.Location",
-    methods: [
-      {name: "assign", parameterTypes: ["java.lang.String"]},
-      {name: "reload", parameterTypes: ["boolean"]},
-      {name: "replace", parameterTypes: ["java.lang.String"]},
-      {name: "jsToString"},
-      {name: "getHash"},
-      {name: "setHash", parameterTypes: ["java.lang.String"]},
-      {name: "getHost"},
-      {name: "setHost", parameterTypes: ["java.lang.String"]},
-      {name: "getHostname"},
-      {name: "setHostname", parameterTypes: ["java.lang.String"]},
-      {name: "getHref"},
-      {name: "setHref", parameterTypes: ["java.lang.String"]},
-      {name: "getOrigin"},
-      {name: "getPathname"},
-      {name: "setPathname", parameterTypes: ["java.lang.String"]},
-      {name: "getPort"},
-      {name: "setPort", parameterTypes: ["java.lang.String"]},
-      {name: "getProtocol"},
-      {name: "setProtocol", parameterTypes: ["java.lang.String"]},
-      {name: "getSearch"},
-      {name: "setSearch", parameterTypes: ["java.lang.String"]},
+    "name": "org.htmlunit.javascript.host.Location",
+    "methods": [
+      {"name": "assign", "parameterTypes": ["java.lang.String"]},
+      {"name": "reload", "parameterTypes": ["boolean"]},
+      {"name": "replace", "parameterTypes": ["java.lang.String"]},
+      {"name": "jsToString"},
+      {"name": "getHash"},
+      {"name": "setHash", "parameterTypes": ["java.lang.String"]},
+      {"name": "getHost"},
+      {"name": "setHost", "parameterTypes": ["java.lang.String"]},
+      {"name": "getHostname"},
+      {"name": "setHostname", "parameterTypes": ["java.lang.String"]},
+      {"name": "getHref"},
+      {"name": "setHref", "parameterTypes": ["java.lang.String"]},
+      {"name": "getOrigin"},
+      {"name": "getPathname"},
+      {"name": "setPathname", "parameterTypes": ["java.lang.String"]},
+      {"name": "getPort"},
+      {"name": "setPort", "parameterTypes": ["java.lang.String"]},
+      {"name": "getProtocol"},
+      {"name": "setProtocol", "parameterTypes": ["java.lang.String"]},
+      {"name": "getSearch"},
+      {"name": "setSearch", "parameterTypes": ["java.lang.String"]}
     ]
   },
 
-  // org.htmlunit.javascript.host.Window#<cinit> (getDeclaredMethod)
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.Window"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.Window"
     },
-    name: "org.htmlunit.javascript.host.Window",
-    methods: [
-      {name: "jsGetLength"},
-      {name: "jsSetLength", parameterTypes: ["org.htmlunit.corejs.javascript.Scriptable"]},
-      {name: "jsGetSelf"},
-      {name: "jsSetSelf", parameterTypes: ["org.htmlunit.corejs.javascript.Scriptable"]},
-      {name: "jsGetParent"},
-      {name: "jsSetParent", parameterTypes: ["org.htmlunit.corejs.javascript.Scriptable"]},
-      {name: "jsGetFrames"},
-      {name: "jsSetFrames", parameterTypes: ["org.htmlunit.corejs.javascript.Scriptable"]},
+    "name": "org.htmlunit.javascript.host.Window",
+    "methods": [
+      {"name": "jsGetLength"},
+      {"name": "jsSetLength", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]},
+      {"name": "jsGetSelf"},
+      {"name": "jsSetSelf", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]},
+      {"name": "jsGetParent"},
+      {"name": "jsSetParent", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]},
+      {"name": "jsGetFrames"},
+      {"name": "jsSetFrames", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]}
     ]
   },
 
-  // org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope#<cinit> (getDeclaredMethod)
   {
-    condition: {
-      typeReachable: "org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope"
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope"
     },
-    name: "org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope",
-    methods: [
-      {name: "jsGetName"},
-      {name: "jsSetName", parameterTypes: ["org.htmlunit.corejs.javascript.Scriptable"]},
+    "name": "org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope",
+    "methods": [
+      {"name": "jsGetName"},
+      {"name": "jsSetName", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]}
     ]
   },
 
-  // org.htmlunit.platform.Platform#<cinit> (forName)
   {
-    condition: {
-      typeReachable: "org.htmlunit.platform.Platform"
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
     },
-    name: "org.htmlunit.platform.util.XmlUtilsSunXercesHelper"
+    "name": "org.htmlunit.platform.util.XmlUtilsSunXercesHelper"
   },
   {
-    condition: {
-      typeReachable: "org.htmlunit.platform.Platform"
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
     },
-    name: "org.htmlunit.platform.util.XmlUtilsXercesHelper"
-  },
-
-  // org.htmlunit.platform.Platform#getRenderingBackend (forName)
-  {
-    condition: {
-      typeReachable: "org.htmlunit.platform.Platform"
-    },
-    name: "org.htmlunit.platform.canvas.rendering.AwtRenderingBackend"
+    "name": "org.htmlunit.platform.util.XmlUtilsXercesHelper"
   },
 
-  // org.htmlunit.platform.Platform#getFontUtil (forName)
   {
-    condition: {
-      typeReachable: "org.htmlunit.platform.Platform"
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
     },
-    name: "org.htmlunit.platform.font.AwtFontUtil"
+    "name": "org.htmlunit.platform.canvas.rendering.AwtRenderingBackend"
   },
 
-  // org.htmlunit.platform.Platform#buildImageData (forName)
   {
-    condition: {
-      typeReachable: "org.htmlunit.platform.Platform"
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
     },
-    name: "org.htmlunit.platform.image.ImageIOImageData"
+    "name": "org.htmlunit.platform.font.AwtFontUtil"
   },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
+    },
+    "name": "org.htmlunit.platform.image.ImageIOImageData"
+  }
 ]
