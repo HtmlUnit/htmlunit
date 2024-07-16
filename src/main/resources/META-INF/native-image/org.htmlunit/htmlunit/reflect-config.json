@@ -5071,5 +5071,26 @@
     },
     "name": "org.htmlunit.javascript.host.xml.XSLTProcessor",
     "methods": [{"name": "<init>"}]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.HttpWebConnection"
+    },
+    "name": "org.apache.http.impl.client.HttpClientBuilder",
+    "fields": [
+      {"name": "publicSuffixMatcher"},
+      {"name": "sslSocketFactory"},
+      {"name": "defaultSocketConfig"},
+      {"name": "defaultConnectionConfig"},
+      {"name": "systemProperties"},
+      {"name": "maxConnTotal"},
+      {"name": "maxConnPerRoute"},
+      {"name": "hostnameVerifier"},
+      {"name": "sslContext"},
+      {"name": "dnsResolver"},
+      {"name": "connTimeToLive"},
+      {"name": "connTimeToLiveTimeUnit"}
+    ]
   }
 ]
