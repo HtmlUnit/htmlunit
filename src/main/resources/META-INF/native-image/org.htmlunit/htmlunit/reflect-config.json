@@ -1,0 +1,5138 @@
+[
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.BrowserVersion"
+    },
+    "name": "org.htmlunit.BrowserVersionFeatures",
+    "allPublicFields": true
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgAltGlyph",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgAltGlyphDef",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgAltGlyphItem",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgAnchor",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgAnimate",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgAnimateColor",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgAnimateMotion",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgAnimateTransform",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgCircle",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgClipPath",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgColorProfile",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgCursor",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgDefs",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgDesc",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgEllipse",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeBlend",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeColorMatrix",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeComponentTransfer",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeComposite",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeConvolveMatrix",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeDiffuseLighting",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeDisplacementMap",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeDistantLight",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeFlood",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeFuncA",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeFuncB",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeFuncG",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeFuncR",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeGaussianBlur",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeImage",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeMerge",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeMergeNode",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeMorphology",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeOffset",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFePointLight",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeSpecularLighting",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeSpotLight",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeTile",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFeTurbulence",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFilter",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFont",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFontFace",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFontFaceFormat",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFontFaceName",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFontFaceSrc",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgFontFaceURI",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgForeignObject",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgGlyph",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgGlyphRef",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgGroup",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgHKern",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgImage",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgLine",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgLinearGradient",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgMarker",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgMask",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgMetadata",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgMissingGlyph",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgMPath",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgPath",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgPattern",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgPolygon",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgPolyline",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgRadialGradient",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgRect",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgScript",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgSet",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgStop",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgStyle",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgSwitch",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgSymbol",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgText",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgTextPath",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgTitle",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgTRef",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgTSpan",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgUse",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgView",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.svg.SvgElementFactory"
+    },
+    "name": "org.htmlunit.svg.SvgVKern",
+    "fields": [{"name": "TAG_NAME"}],
+    "methods": [{"name": "<init>", "parameterTypes": ["java.lang.String", "java.lang.String", "org.htmlunit.SgmlPage", "java.util.Map"]}]
+  },
+
+  {
+    "name": "org.htmlunit.javascript.host.html.HTMLElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.Audio",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLAnchorElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLAreaElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLAudioElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLBaseElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLBGSoundElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLBodyElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLBRElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLButtonElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLCanvasElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDataElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDataListElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDetailsElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDialogElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDirectoryElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDivElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDListElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLEmbedElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFieldSetElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFontElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFormElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFrameElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFrameSetElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLHeadElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLHeadingElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLHRElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLHtmlElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLIFrameElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLImageElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLInputElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLabelElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLegendElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLIElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLinkElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLinkElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMapElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMarqueeElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMediaElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMenuElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMetaElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMeterElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLModElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLObjectElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOListElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOptGroupElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOptionElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOutputElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLParagraphElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLParamElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLPictureElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLPreElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLProgressElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLQuoteElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLScriptElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLSelectElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLSlotElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLSourceElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLSpanElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLStyleElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableCaptionElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableCellElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableColElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableComponent",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableRowElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableSectionElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTemplateElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTextAreaElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTimeElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTitleElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTitleElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLUListElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLUnknownElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLVideoElement",
+    "allPublicMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.html.HTMLElement"
+    },
+    "name": "org.htmlunit.javascript.host.html.RowContainer",
+    "allPublicMethods": true
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory"
+    },
+    "name": "org.apache.http.HttpHost",
+    "fields": [{"name": "hostname"}]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory"
+    },
+    "name": "org.apache.http.conn.ssl.SSLConnectionSocketFactory",
+    "fields": [{"name": "socketfactory"}]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.util.XmlUtilsSunXercesHelper"
+    },
+    "name": "com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl",
+    "fields": [{"name": "fNodeCount"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.util.XmlUtilsXercesHelper"
+    },
+    "name": "org.apache.xerces.dom.DeferredDocumentImpl",
+    "fields": [{"name": "fNodeCount"}]
+  },
+  
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.JavaScriptEngine"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLImageElement",
+    "methods": [{"name": "jsConstructorImage"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.JavaScriptEngine"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOptionElement",
+    "methods": [{"name": "jsConstructorOption", "parameterTypes": ["java.lang.Object", "java.lang.String", "boolean", "boolean"]}]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.Location"
+    },
+    "name": "org.htmlunit.javascript.host.Location",
+    "methods": [
+      {"name": "assign", "parameterTypes": ["java.lang.String"]},
+      {"name": "reload", "parameterTypes": ["boolean"]},
+      {"name": "replace", "parameterTypes": ["java.lang.String"]},
+      {"name": "jsToString"},
+      {"name": "getHash"},
+      {"name": "setHash", "parameterTypes": ["java.lang.String"]},
+      {"name": "getHost"},
+      {"name": "setHost", "parameterTypes": ["java.lang.String"]},
+      {"name": "getHostname"},
+      {"name": "setHostname", "parameterTypes": ["java.lang.String"]},
+      {"name": "getHref"},
+      {"name": "setHref", "parameterTypes": ["java.lang.String"]},
+      {"name": "getOrigin"},
+      {"name": "getPathname"},
+      {"name": "setPathname", "parameterTypes": ["java.lang.String"]},
+      {"name": "getPort"},
+      {"name": "setPort", "parameterTypes": ["java.lang.String"]},
+      {"name": "getProtocol"},
+      {"name": "setProtocol", "parameterTypes": ["java.lang.String"]},
+      {"name": "getSearch"},
+      {"name": "setSearch", "parameterTypes": ["java.lang.String"]}
+    ]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.Window"
+    },
+    "name": "org.htmlunit.javascript.host.Window",
+    "methods": [
+      {"name": "jsGetLength"},
+      {"name": "jsSetLength", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]},
+      {"name": "jsGetSelf"},
+      {"name": "jsSetSelf", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]},
+      {"name": "jsGetParent"},
+      {"name": "jsSetParent", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]},
+      {"name": "jsGetFrames"},
+      {"name": "jsSetFrames", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]}
+    ]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope"
+    },
+    "name": "org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope",
+    "methods": [
+      {"name": "jsGetName"},
+      {"name": "jsSetName", "parameterTypes": ["org.htmlunit.corejs.javascript.Scriptable"]}
+    ]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
+    },
+    "name": "org.htmlunit.platform.util.XmlUtilsSunXercesHelper",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
+    },
+    "name": "org.htmlunit.platform.util.XmlUtilsXercesHelper",
+    "methods": [{"name": "<init>"}]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
+    },
+    "name": "org.htmlunit.platform.canvas.rendering.AwtRenderingBackend"
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
+    },
+    "name": "org.htmlunit.platform.font.AwtFontUtil"
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.platform.Platform"
+    },
+    "name": "org.htmlunit.platform.image.ImageIOImageData"
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.Event",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.MouseEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.MutationEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.UIEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.KeyboardEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.MessageEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.CustomEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.CloseEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.CompositionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.DragEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.TextEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.BeforeUnloadEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.HashChangeEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.PointerEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.PopStateEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.ProgressEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.FocusEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.event.WheelEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.dom.Document"
+    },
+    "name": "org.htmlunit.javascript.host.animations.AnimationEvent",
+    "methods": [{"name": "<init>"}]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.HtmlUnitScriptable"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.HtmlUnitScriptable"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLUnknownElement",
+    "methods": [{"name": "<init>"}]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.ProxyAutoConfigJavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.proxyautoconfig.ProxyAutoConfig",
+    "methods": [{"name": "<init>"}]
+  },
+  
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.AbstractList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.AbstractRange",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.AnalyserNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.animations.Animation",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.animations.AnimationEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.arrays.Atomics",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.Attr",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.Audio",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.AudioBuffer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.AudioBufferSourceNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.AudioContext",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.AudioDestinationNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.AudioListener",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.AudioNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.AudioParam",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.AudioProcessingEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.AudioScheduledSourceNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.BarProp",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.BaseAudioContext",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.BatteryManager",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.BeforeInstallPromptEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.BeforeUnloadEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.BiquadFilterNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.Blob",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.BlobEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.BroadcastChannel",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Cache",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.CacheStorage",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.CanvasCaptureMediaStream",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.CanvasCaptureMediaStreamTrack",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.CanvasGradient",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.CanvasPattern",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CaretPosition",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.CDATASection",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.ChannelMergerNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.ChannelSplitterNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.CharacterData",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.ClientRect",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.ClientRectList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.ClipboardEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.CloseEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.Comment",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.CompositionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.ConstantSourceNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.ConvolverNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.security.Credential",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.security.CredentialsContainer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.crypto.Crypto",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.crypto.CryptoKey",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSS",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSConditionRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSCounterStyleRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSFontFaceRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSGroupingRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSImportRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSKeyframeRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSKeyframesRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSMediaRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSNamespaceRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSPageRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSRuleList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSStyleDeclaration",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSStyleRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSStyleSheet",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.CSSSupportsRule",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.CustomElementRegistry",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.CustomEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.DataTransfer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.DataTransferItem",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.DataTransferItemList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.DelayNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.DeviceMotionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.DeviceOrientationEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.Document",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DocumentFragment",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DocumentType",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMError",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMException",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMImplementation",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMMatrix",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMMatrixReadOnly",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMParser",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMPoint",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMPointReadOnly",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMRectReadOnly",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMRequest",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMStringList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMStringMap",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.DOMTokenList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.DragEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.DynamicsCompressorNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Element",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.ErrorEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.Event",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.EventSource",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.EventTarget",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.External",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.security.FederatedCredential",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.File",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.FileList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.FileReader",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.FileSystem",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.FileSystemDirectoryEntry",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.FileSystemDirectoryReader",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.FileSystemEntry",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.file.FileSystemFileEntry",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.FocusEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.FontFace",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.FontFaceSet",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.xml.FormData",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.GainNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Gamepad",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.GamepadButton",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.GamepadEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.geo.Geolocation",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.geo.GeolocationCoordinates",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.geo.GeolocationPosition",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.geo.GeolocationPositionError",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.HashChangeEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.fetch.Headers",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.History",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLAllCollection",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLAnchorElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLAreaElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLAudioElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLBaseElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLBGSoundElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLBodyElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLBRElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLButtonElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLCanvasElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLCollection",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDataElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDataListElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDetailsElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDialogElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDirectoryElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDivElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDListElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLDocument",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLEmbedElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFieldSetElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFontElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFormControlsCollection",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFormElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFrameElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLFrameSetElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLHeadElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLHeadingElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLHRElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLHtmlElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLIFrameElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLImageElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLInputElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLabelElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLegendElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLIElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLLinkElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLListElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMapElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMarqueeElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMediaElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMenuElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMetaElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLMeterElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLModElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLObjectElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOListElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOptGroupElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOptionElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOptionsCollection",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLOutputElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLParagraphElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLParamElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLPictureElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLPreElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLProgressElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLQuoteElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLScriptElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLSelectElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLSlotElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLSourceElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLSpanElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLStyleElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableCaptionElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableCellElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableColElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableComponent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableRowElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTableSectionElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTemplateElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTextAreaElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTimeElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTitleElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLTrackElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLUListElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLUnknownElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.HTMLVideoElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBCursor",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBCursorWithValue",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBDatabase",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBFactory",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBIndex",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBKeyRange",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBObjectStore",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBOpenDBRequest",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBRequest",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.idb.IDBTransaction",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.IDBVersionChangeEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.IdleDeadline",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.IIRFilterNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.ImageBitmap",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.ImageBitmapRenderingContext",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.ImageData",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.InputDeviceCapabilities",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.InputEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.IntersectionObserver",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.IntersectionObserverEntry",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.KeyboardEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.animations.KeyframeEffect",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Location",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaDeviceInfo",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaDevices",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaElementAudioSourceNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MediaEncryptedEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaError",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaKeyError",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MediaKeyMessageEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaKeys",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaKeySession",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaKeyStatusMap",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaKeySystemAccess",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.MediaList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.MediaQueryList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MediaQueryListEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaRecorder",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaSource",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaStream",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaStreamAudioDestinationNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaStreamAudioSourceNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MediaStreamEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.MediaStreamTrack",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MediaStreamTrackEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.MessageChannel",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MessageEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.MessagePort",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.midi.MIDIAccess",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MIDIConnectionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.midi.MIDIInput",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.midi.MIDIInputMap",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MIDIMessageEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.midi.MIDIOutput",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.midi.MIDIOutputMap",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.midi.MIDIPort",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.MimeType",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.MimeTypeArray",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MouseEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MouseScrollEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.MutationEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.MutationObserver",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.MutationRecord",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.NamedNodeMap",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Navigator",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.network.NetworkInformation",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.Node",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.NodeFilter",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.NodeIterator",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.NodeList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Notification",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.OfflineAudioCompletionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.OfflineAudioContext",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.OscillatorNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.PageTransitionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.PannerNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.security.PasswordCredential",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.Path2D",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.payment.PaymentAddress",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.payment.PaymentRequest",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.payment.PaymentResponse",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.performance.Performance",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.performance.PerformanceEntry",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.performance.PerformanceMark",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.performance.PerformanceMeasure",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.performance.PerformanceNavigation",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.performance.PerformanceNavigationTiming",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.PerformanceObserver",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.PerformanceObserverEntryList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.performance.PerformanceResourceTiming",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.performance.PerformanceTiming",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.PeriodicSyncManager",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.PeriodicWave",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Permissions",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.PermissionStatus",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Plugin",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.PluginArray",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.PointerEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.PopStateEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.presentation.Presentation",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.presentation.PresentationAvailability",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.presentation.PresentationConnection",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.PresentationConnectionAvailableEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.PresentationConnectionCloseEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.presentation.PresentationRequest",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.ProcessingInstruction",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.ProgressEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.PromiseRejectionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.PushManager",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.PushSubscription",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.PushSubscriptionOptions",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.RadioNodeList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.Range",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.ReadableStream",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.RemotePlayback",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.fetch.Request",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.fetch.Response",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.RowContainer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.rtc.RTCCertificate",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.RTCDataChannelEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.rtc.RTCIceCandidate",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.rtc.RTCPeerConnection",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.RTCPeerConnectionIceEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.rtc.RTCSctpTransport",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.rtc.RTCSessionDescription",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.rtc.RTCStatsReport",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Screen",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.ScreenOrientation",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.ScriptProcessorNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.Selection",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.worker.ServiceWorker",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.worker.ServiceWorkerContainer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.worker.ServiceWorkerRegistration",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.ShadowRoot",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.SharedWorker",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.SimpleArray",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.SourceBuffer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.SourceBufferList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.speech.SpeechSynthesis",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.SpeechSynthesisEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.speech.SpeechSynthesisUtterance",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.speech.SpeechSynthesisVoice",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.StereoPannerNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Storage",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.StorageEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.StorageManager",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.StyleMedia",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.StyleSheet",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.css.StyleSheetList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.SubmitEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.crypto.SubtleCrypto",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAngle",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedAngle",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedBoolean",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedEnumeration",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedInteger",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedLength",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedLengthList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedNumber",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedNumberList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedPreserveAspectRatio",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedRect",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedString",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimatedTransformList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimateElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimateMotionElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimateTransformElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGAnimationElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGCircleElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGClipPathElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGComponentTransferFunctionElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGDefsElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGDescElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGEllipseElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEBlendElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEColorMatrixElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEComponentTransferElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFECompositeElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEConvolveMatrixElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEDiffuseLightingElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEDisplacementMapElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEDistantLightElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEDropShadowElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEFloodElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEFuncAElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEFuncBElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEFuncGElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEFuncRElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEGaussianBlurElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEImageElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEMergeElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEMergeNodeElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEMorphologyElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEOffsetElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFEPointLightElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFESpecularLightingElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFESpotLightElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFETileElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFETurbulenceElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGFilterElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGForeignObjectElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGGElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGGeometryElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGGradientElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGGraphicsElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGImageElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGLength",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGLengthList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGLinearGradientElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGLineElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGMarkerElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGMaskElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGMatrix",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGMetadataElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGMPathElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGNumber",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGNumberList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGPathElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGPatternElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGPoint",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGPointList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGPolygonElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGPolylineElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGPreserveAspectRatio",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGRadialGradientElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGRect",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGRectElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGScriptElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGSetElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGStopElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGStringList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGStyleElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGSVGElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGSwitchElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGSymbolElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGTextContentElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGTextElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGTextPathElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGTextPositioningElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGTitleElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGTransform",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGTransformList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGTSpanElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGUnitTypes",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGUseElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.svg.SVGViewElement",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.worker.SyncManager",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.Text",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.TextDecoder",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.TextEncoder",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.TextEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.TextMetrics",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.TextTrack",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.TextTrackCue",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.TextTrackCueList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.TextTrackList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.TimeEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.TimeRanges",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Touch",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.TouchEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.TouchList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.TrackEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.TransitionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.TreeWalker",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.UIEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.URL",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.URLSearchParams",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.html.ValidityState",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.VideoPlaybackQuality",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.VTTCue",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.media.WaveShaperNode",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGL2RenderingContext",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLActiveInfo",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLBuffer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.WebGLContextEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLFramebuffer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLProgram",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLQuery",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLRenderbuffer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLRenderingContext",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLSampler",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLShader",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLShaderPrecisionFormat",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLSync",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLTexture",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLTransformFeedback",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLUniformLocation",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.canvas.WebGLVertexArrayObject",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.speech.WebkitSpeechGrammar",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.speech.WebkitSpeechGrammarList",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.speech.WebkitSpeechRecognition",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.WebkitSpeechRecognitionError",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.WebSocket",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.event.WheelEvent",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.Window",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.worker.Worker",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.xml.XMLDocument",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.xml.XMLHttpRequest",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.xml.XMLHttpRequestEventTarget",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.xml.XMLHttpRequestUpload",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.xml.XMLSerializer",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.XPathEvaluator",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.XPathEvaluator",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.XPathExpression",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.XPathNSResolver",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.dom.XPathResult",
+    "methods": [{"name": "<init>"}]
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.configuration.JavaScriptConfiguration"
+    },
+    "name": "org.htmlunit.javascript.host.xml.XSLTProcessor",
+    "methods": [{"name": "<init>"}]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.HttpWebConnection"
+    },
+    "name": "org.apache.http.impl.client.HttpClientBuilder",
+    "fields": [
+      {"name": "publicSuffixMatcher"},
+      {"name": "sslSocketFactory"},
+      {"name": "defaultSocketConfig"},
+      {"name": "defaultConnectionConfig"},
+      {"name": "systemProperties"},
+      {"name": "maxConnTotal"},
+      {"name": "maxConnPerRoute"},
+      {"name": "hostnameVerifier"},
+      {"name": "sslContext"},
+      {"name": "dnsResolver"},
+      {"name": "connTimeToLive"},
+      {"name": "connTimeToLiveTimeUnit"}
+    ]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.intl.Intl"
+    },
+    "name": "org.htmlunit.javascript.host.intl.Collator",
+    "methods": [{"name": "<init>"}],
+    "allDeclaredMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.intl.Intl"
+    },
+    "name": "org.htmlunit.javascript.host.intl.DateTimeFormat",
+    "methods": [{"name": "<init>"}],
+    "allDeclaredMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.intl.Intl"
+    },
+    "name": "org.htmlunit.javascript.host.intl.NumberFormat",
+    "methods": [{"name": "<init>"}],
+    "allDeclaredMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.intl.Intl"
+    },
+    "name": "org.htmlunit.javascript.host.intl.V8BreakIterator",
+    "methods": [{"name": "<init>"}],
+    "allDeclaredMethods": true
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope"
+    },
+    "name": "org.htmlunit.javascript.host.event.EventTarget",
+    "methods": [{"name": "<init>"}],
+    "allDeclaredMethods": true
+  }
+]

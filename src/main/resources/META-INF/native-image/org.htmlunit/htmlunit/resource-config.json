@@ -1,0 +1,21 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "condition": {
+          "typeReachable": "org.htmlunit.javascript.polyfill.Polyfill"
+        },
+        "pattern": "org\\\\htmlunit\\\\javascript\\\\polyfill\\\\fetch\\\\fetch.umd.js"
+      },
+
+      {
+        "condition": {
+          "typeReachable": "org.htmlunit.util.DebuggingWebConnection"
+        },
+        "pattern": "org\\\\htmlunit\\\\util\\\\DebuggingWebConnection\\\\DebuggingWebConnection.index.html"
+      }
+    ]
+  },
+  "bundles": [
+  ]
+}
