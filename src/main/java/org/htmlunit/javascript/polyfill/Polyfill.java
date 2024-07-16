@@ -52,6 +52,7 @@ public class Polyfill {
         poly.source_ = IOUtils.toString(poly.getClass().getResourceAsStream(resouceName), StandardCharsets.UTF_8);
         poly.url_ = poly.getClass().getResource(resouceName).toExternalForm();
 
+        CACHE.put(resouceName, poly);
         return poly;
     }
 
