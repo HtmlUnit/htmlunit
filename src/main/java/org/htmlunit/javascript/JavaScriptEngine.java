@@ -753,7 +753,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
             if (LOG.isInfoEnabled()) {
-                LOG.info("execute() called after the shutdown of the Javascript engine and therefore not processed");
+                LOG.info("callSecured() called after the shutdown of the Javascript engine and therefore not processed");
             }
 
             return null;
