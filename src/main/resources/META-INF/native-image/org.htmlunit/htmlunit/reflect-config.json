@@ -5092,5 +5092,42 @@
       {"name": "connTimeToLive"},
       {"name": "connTimeToLiveTimeUnit"}
     ]
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.intl.Intl"
+    },
+    "name": "org.htmlunit.javascript.host.intl.Collator",
+    "allDeclaredMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.intl.Intl"
+    },
+    "name": "org.htmlunit.javascript.host.intl.DateTimeFormat",
+    "allDeclaredMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.intl.Intl"
+    },
+    "name": "org.htmlunit.javascript.host.intl.NumberFormat",
+    "allDeclaredMethods": true
+  },
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.intl.Intl"
+    },
+    "name": "org.htmlunit.javascript.host.intl.V8BreakIterator",
+    "allDeclaredMethods": true
+  },
+
+  {
+    "condition": {
+      "typeReachable": "org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope"
+    },
+    "name": "org.htmlunit.javascript.host.event.EventTarget",
+    "allDeclaredMethods": true
   }
 ]
