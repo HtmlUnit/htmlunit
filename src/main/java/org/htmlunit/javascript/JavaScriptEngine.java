@@ -752,10 +752,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public final <T> T callSecured(final ContextAction<T> action, final HtmlPage page) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
-            // if (LOG.isDebugEnabled()) {
-            //     LOG.debug("callSecured() called after the shutdown of the Javascript engine and therefore not processed");
-            // }
-
             return null;
         }
 
@@ -798,10 +794,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
-            // if (LOG.isDebugEnabled()) {
-            //     LOG.debug("execute() called after the shutdown of the Javascript engine and therefore not processed");
-            // }
-
             return null;
         }
 
@@ -863,10 +855,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
-            // if (LOG.isDebugEnabled()) {
-            //     LOG.debug("callFunction() called after the shutdown of the Javascript engine and therefore not processed");
-            // }
-
             return null;
         }
 
@@ -1041,11 +1029,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final WebClient webClient = getWebClient();
         if (shutdownPending_ || webClient == null) {
             // shutdown was already called
-            // if (LOG.isDebugEnabled()) {
-            //     LOG.debug("handleJavaScriptException('" + scriptException.getMessage()
-            //         + "') called after the shutdown of the Javascript engine - exception ignored.");
-            // }
-
             return;
         }
 
@@ -1082,9 +1065,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final WebClient webClient = getWebClient();
         if (shutdownPending_ || webClient == null) {
             // shutdown was already called
-            // if (LOG.isDebugEnabled()) {
-            //     LOG.debug("Caught script timeout error after the shutdown of the Javascript engine - ignored.");
-            // }
             return;
         }
 
