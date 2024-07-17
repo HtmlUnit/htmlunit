@@ -8,6 +8,10 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
+            <action type="update" dev="rbri" issue="#818">
+                Logging of a notifications about calling js functionality while the WebClient and the JS Engine
+                are already going down is removed.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Improved position reporting in case of syntax errors.
             </action>

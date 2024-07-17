@@ -752,9 +752,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public final <T> T callSecured(final ContextAction<T> action, final HtmlPage page) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
-            if (LOG.isInfoEnabled()) {
-                LOG.info("callSecured() called after the shutdown of the Javascript engine and therefore not processed");
-            }
+            // if (LOG.isDebugEnabled()) {
+            //     LOG.debug("callSecured() called after the shutdown of the Javascript engine and therefore not processed");
+            // }
 
             return null;
         }
@@ -798,9 +798,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
-            if (LOG.isInfoEnabled()) {
-                LOG.info("execute() called after the shutdown of the Javascript engine and therefore not processed");
-            }
+            // if (LOG.isDebugEnabled()) {
+            //     LOG.debug("execute() called after the shutdown of the Javascript engine and therefore not processed");
+            // }
 
             return null;
         }
@@ -863,9 +863,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
-            if (LOG.isInfoEnabled()) {
-                LOG.info("callFunction() called after the shutdown of the Javascript engine and therefore not processed");
-            }
+            // if (LOG.isDebugEnabled()) {
+            //     LOG.debug("callFunction() called after the shutdown of the Javascript engine and therefore not processed");
+            // }
 
             return null;
         }
@@ -977,8 +977,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         holdPostponedActions_ = false;
 
         final WebClient webClient = getWebClient();
-        // shutdown was already called
         if (webClient == null) {
+            // shutdown was already called
             postponedActions_.set(null);
             return;
         }
@@ -1039,12 +1039,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     protected void handleJavaScriptException(final ScriptException scriptException, final boolean triggerOnError) {
         final WebClient webClient = getWebClient();
-        if (webClient == null) {
+        if (shutdownPending_ || webClient == null) {
             // shutdown was already called
-            if (LOG.isInfoEnabled()) {
-                LOG.info("handleJavaScriptException('" + scriptException.getMessage()
-                    + "') called after the shutdown of the Javascript engine - exception ignored.");
-            }
+            // if (LOG.isDebugEnabled()) {
+            //     LOG.debug("handleJavaScriptException('" + scriptException.getMessage()
+            //         + "') called after the shutdown of the Javascript engine - exception ignored.");
+            // }
 
             return;
         }
@@ -1080,11 +1080,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     protected void handleJavaScriptTimeoutError(final HtmlPage page, final TimeoutError e) {
         final WebClient webClient = getWebClient();
-        // shutdown was already called
-        if (webClient == null) {
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Caught script timeout error after the shutdown of the Javascript engine - ignored.");
-            }
+        if (shutdownPending_ || webClient == null) {
+            // shutdown was already called
+            // if (LOG.isDebugEnabled()) {
+            //     LOG.debug("Caught script timeout error after the shutdown of the Javascript engine - ignored.");
+            // }
             return;
         }
 
