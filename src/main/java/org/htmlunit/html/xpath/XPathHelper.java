@@ -63,7 +63,6 @@ public final class XPathHelper {
      * @param prefixResolver the prefix resolver to use for resolving namespace prefixes, or null
      * @return the list of objects found
      */
-    @SuppressWarnings("unchecked")
     public static <T> List<T> getByXPath(final DomNode contextNode, final String xpathExpr,
             final PrefixResolver prefixResolver) {
         if (xpathExpr == null) {

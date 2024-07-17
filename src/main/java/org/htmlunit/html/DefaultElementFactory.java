@@ -788,7 +788,7 @@ public class DefaultElementFactory implements ElementFactory {
         return attributeMap;
     }
 
-    private HtmlElement createInputElement(final String qualifiedName, final SgmlPage page,
+    private static HtmlElement createInputElement(final String qualifiedName, final SgmlPage page,
                                                 final Map<String, DomAttr> attributeMap) {
         String type = "";
         if (attributeMap != null) {

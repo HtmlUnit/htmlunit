@@ -487,7 +487,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param name the name used to address the element
      * @return {@code true} if this element matches the conditions
      */
-    private boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
+    private static boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
         if (name.equals(element.getId())) {
             return true;
         }

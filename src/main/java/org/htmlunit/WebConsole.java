@@ -201,7 +201,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
         }
     }
 
-    private String format(final Context cx, final Scriptable scope, final Object[] args) {
+    private static String format(final Context cx, final Scriptable scope, final Object[] args) {
         String msg = NativeConsole.format(cx, scope, args);
         msg = msg.replaceAll("\\r?\\n", "\n");
         return msg;
