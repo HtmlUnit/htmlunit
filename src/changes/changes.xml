@@ -8,6 +8,15 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Improved position reporting in case of syntax errors.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Improved support for continuations.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Computed properties support added.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.17.1.
             </action>
