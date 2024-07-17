@@ -24,6 +24,8 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.NativeArray;
@@ -42,10 +44,13 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  */
 @JsxClass
 public class File extends Blob {
+
     private static final DateTimeFormatter LAST_MODIFIED_DATE_FORMATTER
                             = DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z");
 
     private static class FileBackend extends Backend {
+        private static final Log LOG = LogFactory.getLog(FileBackend.class);
+
         private final java.io.File file_;
 
         FileBackend(final String pathname) {
@@ -90,7 +95,7 @@ public class File extends Blob {
                 System.arraycopy(FileUtils.readFileToByteArray(file_), start, result, 0, result.length);
             }
             catch (final IOException e) {
-                // TODO
+                LOG.error("FileBackend.getBytes failed", e);
             }
             return result;
         }

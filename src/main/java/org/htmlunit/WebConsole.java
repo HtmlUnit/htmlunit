@@ -212,7 +212,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
      */
     private static class DefaultLogger implements Logger, Serializable {
 
-        private static final Log LOG = LogFactory.getLog(WebConsole.class);
+        private static final Log LOG = LogFactory.getLog(DefaultLogger.class);
 
         /**
          * Ctor.

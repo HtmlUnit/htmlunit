@@ -72,13 +72,17 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             return doAction(cx, scope, thisObj, args, actionType);
         }
         catch (final RegExStickyNotSupportedException e) {
-            LOG.warn(e.getMessage(), e);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage(), e);
+            }
             return wrapped_.action(cx, scope, thisObj, args, actionType);
         }
         catch (final StackOverflowError e) {
             // TODO: We shouldn't have to catch this exception and fall back to Rhino's regex support!
             // See HtmlUnitRegExpProxyTest.stackOverflow()
-            LOG.warn(e.getMessage(), e);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn(e.getMessage(), e);
+            }
             return wrapped_.action(cx, scope, thisObj, args, actionType);
         }
     }
@@ -112,7 +116,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                                             reData.isGlobal() || RA_REPLACE_ALL == actionType);
                 }
                 catch (final PatternSyntaxException e) {
-                    LOG.warn(e.getMessage(), e);
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn(e.getMessage(), e);
+                    }
                 }
             }
         }

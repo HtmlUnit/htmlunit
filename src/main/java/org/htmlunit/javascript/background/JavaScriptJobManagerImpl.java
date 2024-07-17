@@ -179,6 +179,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     @Override
+    @SuppressWarnings("PMD.GuardLogStatement")
     public int waitForJobs(final long timeoutMillis) {
         final boolean debug = LOG.isDebugEnabled();
         if (debug) {
@@ -220,6 +221,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     @Override
+    @SuppressWarnings("PMD.GuardLogStatement")
     public int waitForJobsStartingBefore(final long delayMillis, final JavaScriptJobFilter filter) {
         final boolean debug = LOG.isDebugEnabled();
 
@@ -386,6 +388,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("PMD.GuardLogStatement")
     public boolean runSingleJob(final JavaScriptJob givenJob) {
         assert givenJob != null;
         final JavaScriptJob job = getEarliestJob();

@@ -49,6 +49,7 @@ public final class ProxyAutoConfigJavaScriptConfiguration extends AbstractJavaSc
      * @param browserVersion the {@link BrowserVersion}
      * @return the instance for the specified {@link BrowserVersion}
      */
+    @SuppressWarnings("PMD.SingletonClassReturningNewInstance")
     public static synchronized ProxyAutoConfigJavaScriptConfiguration getInstance(final BrowserVersion browserVersion) {
         if (browserVersion == null) {
             throw new IllegalArgumentException("BrowserVersion must be provided");
