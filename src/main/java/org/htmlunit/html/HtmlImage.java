@@ -283,7 +283,7 @@ public class HtmlImage extends HtmlElement {
                 }
                 catch (final IOException e) {
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("IOException while downloading image for '" + this + "' : " + e.getMessage());
+                        LOG.debug("IOException while downloading image for '" + this + "'", e);
                     }
                 }
             }

@@ -96,7 +96,7 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
         }
         catch (final ParseException e) {
             if (LOG.isWarnEnabled()) {
-                LOG.warn("Failed parsingJSON '" + jsonString + "' reason: " + e.getMessage());
+                LOG.warn("Failed parsingJSON '" + jsonString + "'", e);
             }
         }
         return null;

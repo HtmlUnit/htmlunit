@@ -498,15 +498,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             catch (final IOException e) {
                 if (LOG.isWarnEnabled()) {
-                    LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
-                            + e.getMessage());
+                    LOG.warn("Failed parsing XML document '" + webResponse_.getWebRequest().getUrl() + "'", e);
                 }
                 return null;
             }
         }
         if (LOG.isDebugEnabled()) {
-            LOG.debug("XMLHttpRequest.responseXML was called but the response is "
-                + webResponse_.getContentType());
+            LOG.debug("XMLHttpRequest.responseXML was called but the response is '"
+                + webResponse_.getContentType() + "'");
         }
         return null;
     }

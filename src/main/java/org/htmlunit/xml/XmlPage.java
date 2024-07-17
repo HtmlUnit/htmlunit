@@ -124,8 +124,7 @@ public class XmlPage extends SgmlPage {
             }
             catch (final SAXException e) {
                 if (LOG.isWarnEnabled()) {
-                    LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
-                            + ": " + e.getMessage());
+                    LOG.warn("Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
                 }
                 if (!ignoreSAXException) {
                     throw new IOException(e.getMessage());
@@ -135,11 +134,10 @@ public class XmlPage extends SgmlPage {
         catch (final ParserConfigurationException e) {
             if (LOG.isWarnEnabled()) {
                 if (null == webResponse) {
-                    LOG.warn("Failed parsing XML empty document: " + e.getMessage());
+                    LOG.warn("Failed parsing XML empty document: " + e.getMessage(), e);
                 }
                 else {
-                    LOG.warn("Failed parsing XML empty document " + webResponse.getWebRequest().getUrl()
-                        + ": " + e.getMessage());
+                    LOG.warn("Failed parsing XML empty document '" + webResponse.getWebRequest().getUrl() + "'", e);
                 }
             }
         }

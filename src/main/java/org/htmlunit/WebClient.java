@@ -2818,7 +2818,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         catch (final MalformedCookieException e) {
             if (LOG.isDebugEnabled()) {
-                LOG.warn("Adding cookie '" + cookieString + "' failed; reason: '" + e.getMessage() + "'.");
+                LOG.warn("Adding cookie '" + cookieString + "' failed.", e);
             }
             getIncorrectnessListener().notify("Adding cookie '" + cookieString
                         + "' failed; reason: '" + e.getMessage() + "'.", origin);

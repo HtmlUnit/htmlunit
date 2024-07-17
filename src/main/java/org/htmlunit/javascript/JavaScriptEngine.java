@@ -340,7 +340,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                                 final String newline = System.lineSeparator();
                                 LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
                                         + e.getMessage() + newline
-                                        + "prototype: " + prototype.getClassName());
+                                        + "prototype: " + prototype.getClassName(), e);
                             }
                         }
                     }
@@ -395,7 +395,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final String newline = System.lineSeparator();
                 LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
                         + e.getMessage() + newline
-                        + "prototype: " + proto.getClassName());
+                        + "prototype: " + proto.getClassName(), e);
             }
         }
         ScriptableObject.defineProperty(window, prop, function, ScriptableObject.DONTENUM);
@@ -472,7 +472,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final String newline = System.lineSeparator();
                 LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
                         + e.getMessage() + newline
-                        + "prototype: " + prototype.getClassName());
+                        + "prototype: " + prototype.getClassName(), e);
             }
         }
 
@@ -486,7 +486,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final String newline = System.lineSeparator();
                 LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
                         + e.getMessage() + newline
-                        + "prototype: " + prototype.getClassName());
+                        + "prototype: " + prototype.getClassName(), e);
             }
         }
 
