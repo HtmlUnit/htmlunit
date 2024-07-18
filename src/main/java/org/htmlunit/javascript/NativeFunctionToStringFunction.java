@@ -32,7 +32,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-public class NativeFunctionToStringFunction extends FunctionWrapper {
+public final class NativeFunctionToStringFunction {
 
     /**
      * Install the wrapper in place of the native toString function on Function's prototype.
@@ -56,22 +56,8 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
         }
     }
 
-    NativeFunctionToStringFunction(final Function wrapped) {
-        super(wrapped);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        final String s = (String) super.call(cx, scope, thisObj, args);
-
-        if (thisObj instanceof BaseFunction && s.contains("[native code]")) {
-            final String functionName = ((BaseFunction) thisObj).getFunctionName();
-            return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
-        }
-        return s.replace("function anonymous() {", "function anonymous() {\n");
+    private NativeFunctionToStringFunction() {
+        super();
     }
 
     static class NativeFunctionToStringFunctionChrome extends FunctionWrapper {
@@ -87,7 +73,7 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
         public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
 
-            if (thisObj instanceof BaseFunction && s.contains("[native code]")) {
+            if (thisObj instanceof BaseFunction && s.contains("[native code")) {
                 final String functionName = ((BaseFunction) thisObj).getFunctionName();
                 return "function " + functionName + "() { [native code] }";
             }
@@ -107,6 +93,11 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
         @Override
         public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
+
+            if (thisObj instanceof BaseFunction && s.contains("[native code")) {
+                final String functionName = ((BaseFunction) thisObj).getFunctionName();
+                return "function " + functionName + "() {\n    [native code]\n}";
+            }
             return s.replace("function anonymous() {", "function anonymous(\n) {\n");
         }
     }

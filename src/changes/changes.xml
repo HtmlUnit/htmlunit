@@ -8,6 +8,13 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Array.prototype.sort is now stable.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Function.prototype.toString/toSource now uses the source. This superceeds a fix
+                we made in version 3.0.0.
+            </action>
             <action type="update" dev="rbri" issue="#818">
                 Logging of a notifications about calling js functionality while the WebClient and the JS Engine
                 are already going down is removed.
