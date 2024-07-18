@@ -134,7 +134,7 @@ public class XmlPage extends SgmlPage {
         catch (final ParserConfigurationException e) {
             if (LOG.isWarnEnabled()) {
                 if (null == webResponse) {
-                    LOG.warn("Failed parsing XML empty document: " + e.getMessage(), e);
+                    LOG.warn("Failed parsing XML empty document:", e);
                 }
                 else {
                     LOG.warn("Failed parsing XML empty document '" + webResponse.getWebRequest().getUrl() + "'", e);
