@@ -56,9 +56,8 @@ public class HostClassNameTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      var clsName = '' + " + className + ";\n"
-            + "      clsName = clsName.replace('\\n    ', ' ');\n"
-            + "      clsName = clsName.replace(']\\n}', '] }');\n"
-            + "      clsName = clsName.replace('] }\\n', '] }');\n"
+            // normalize FF output
+            + "      clsName = clsName.replace('{\\n    [native code]\\n}', '{ [native code] }');\n"
             + "      log(clsName);\n"
             + "    } catch(e) {log('exception')}\n"
             + "  }\n"
