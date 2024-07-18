@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang3 to 3.15.0.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Array.prototype.sort is now stable.
             </action>
