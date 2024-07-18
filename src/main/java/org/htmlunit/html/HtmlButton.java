@@ -156,9 +156,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public void reset() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("reset() not implemented for this element");
-        }
+        LOG.debug("reset() not implemented for this element");
     }
 
     /**
@@ -168,9 +166,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public void setDefaultValue(final String defaultValue) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("setDefaultValue() not implemented for this element");
-        }
+        LOG.debug("setDefaultValue() not implemented for this element");
     }
 
     /**
@@ -180,9 +176,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public String getDefaultValue() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("getDefaultValue() not implemented for this element");
-        }
+        LOG.debug("getDefaultValue() not implemented for this element");
         return "";
     }
 

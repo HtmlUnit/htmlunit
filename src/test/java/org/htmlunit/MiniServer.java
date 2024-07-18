@@ -195,9 +195,7 @@ public class MiniServer extends Thread implements Closeable {
 
         final String requestedPath = request.substring(firstSpace + 1, secondSpace);
         if ("/favicon.ico".equals(requestedPath)) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Skipping /favicon.ico");
-            }
+            LOG.debug("Skipping /favicon.ico");
             return null;
         }
         try {

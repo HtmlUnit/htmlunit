@@ -235,17 +235,13 @@ public class HTMLDocument extends Document {
 
         // If open() was called; don't write to doc yet -- wait for call to close().
         if (!writeInCurrentDocument_) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("wrote content to buffer");
-            }
+            LOG.debug("wrote content to buffer");
             scheduleImplicitClose();
             return;
         }
         final String bufferedContent = writeBuilder_.toString();
         if (!canAlreadyBeParsed(bufferedContent)) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("write: not enough content to parse it now");
-            }
+            LOG.debug("write: not enough content to parse it now");
             return;
         }
 

@@ -75,9 +75,7 @@ public final class ScriptElementSupport {
         }
 
         if (!element.getPage().getWebClient().isJavaScriptEngineEnabled()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Script found but not executed because javascript engine is disabled");
-            }
+            LOG.debug("Script found but not executed because javascript engine is disabled");
             return;
         }
 

@@ -429,9 +429,7 @@ public class WebClient implements Serializable, AutoCloseable {
             if (page.isHtmlPage()) {
                 final HtmlPage htmlPage = (HtmlPage) page;
                 if (!htmlPage.isOnbeforeunloadAccepted()) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("The registered OnbeforeunloadHandler rejected to load a new page.");
-                    }
+                    LOG.debug("The registered OnbeforeunloadHandler rejected to load a new page.");
                     return (P) page;
                 }
             }

@@ -1222,18 +1222,14 @@ public class DomElement extends DomNamespaceNode implements Element {
         // call click event first
         P clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("dblClick() is ignored, as click() loaded a different page.");
-            }
+            LOG.debug("dblClick() is ignored, as click() loaded a different page.");
             return clickPage;
         }
 
         // call click event a second time
         clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("dblClick() is ignored, as click() loaded a different page.");
-            }
+            LOG.debug("dblClick() is ignored, as click() loaded a different page.");
             return clickPage;
         }
 
@@ -1407,17 +1403,13 @@ public class DomElement extends DomNamespaceNode implements Element {
     public Page rightClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final Page mouseDownPage = mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
         if (mouseDownPage != getPage()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("rightClick() is incomplete, as mouseDown() loaded a different page.");
-            }
+            LOG.debug("rightClick() is incomplete, as mouseDown() loaded a different page.");
             return mouseDownPage;
         }
 
         final Page mouseUpPage = mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
         if (mouseUpPage != getPage()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("rightClick() is incomplete, as mouseUp() loaded a different page.");
-            }
+            LOG.debug("rightClick() is incomplete, as mouseUp() loaded a different page.");
             return mouseUpPage;
         }
 

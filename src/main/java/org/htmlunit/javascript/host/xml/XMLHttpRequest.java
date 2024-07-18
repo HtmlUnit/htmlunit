@@ -457,9 +457,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             return content;
         }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");
-        }
+        LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");
         return "";
     }
 
@@ -470,10 +468,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxGetter
     public Object getResponseXML() {
         if (webResponse_ == null) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("XMLHttpRequest.responseXML returns null because there "
-                        + "in no web resonse so far (has send() been called?)");
-            }
+            LOG.debug("XMLHttpRequest.responseXML returns null because there "
+                    + "in no web resonse so far (has send() been called?)");
             return null;
         }
 
@@ -786,9 +782,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             };
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                     createJavascriptXMLHttpRequestJob(cf, action);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
-            }
+            LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
             jobID_ = ww.getJobManager().addJob(job, page);
 
             fireJavascriptEvent(Event.TYPE_LOAD_START);
@@ -965,9 +959,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             webResponse_ = wc.loadWebResponse(webRequest_);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Web response loaded successfully.");
-            }
+            LOG.debug("Web response loaded successfully.");
 
             boolean allowOriginResponse = true;
             if (!isSameOrigin_) {
@@ -1049,9 +1041,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
         }
         catch (final IOException e) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("IOException: returning a network error response.", e);
-            }
+            LOG.debug("IOException: returning a network error response.", e);
 
             if (async_) {
                 if (!preflighted

@@ -1349,9 +1349,7 @@ public class CssStyleSheet implements Serializable {
                     case "orientation":
                         final CSSValueImpl cssValue = property.getValue();
                         if (cssValue == null) {
-                            if (LOG.isWarnEnabled()) {
-                                LOG.warn("CSSValue is null not supported for feature 'orientation'");
-                            }
+                            LOG.warn("CSSValue is null not supported for feature 'orientation'");
                             return true;
                         }
 
@@ -1392,10 +1390,8 @@ public class CssStyleSheet implements Serializable {
     @SuppressWarnings("PMD.UselessParentheses")
     private static double pixelValue(final CSSValueImpl cssValue, final WebWindow webWindow) {
         if (cssValue == null) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'ex', 'ch', "
-                        + "'vw', 'vh', 'vmin', 'vmax', 'rem', 'mm', 'cm', 'Q', or 'pt' value.");
-            }
+            LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'ex', 'ch', "
+                    + "'vw', 'vh', 'vmin', 'vmax', 'rem', 'mm', 'cm', 'Q', or 'pt' value.");
             return -1;
         }
 
@@ -1460,9 +1456,7 @@ public class CssStyleSheet implements Serializable {
 
     private static double resolutionValue(final CSSValueImpl cssValue) {
         if (cssValue == null) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("CSSValue is null but has to be a 'dpi', 'dpcm', or 'dppx' value.");
-            }
+            LOG.warn("CSSValue is null but has to be a 'dpi', 'dpcm', or 'dppx' value.");
             return -1;
         }
 
