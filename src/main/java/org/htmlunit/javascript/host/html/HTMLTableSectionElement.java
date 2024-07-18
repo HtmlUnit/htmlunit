@@ -62,7 +62,7 @@ public class HTMLTableSectionElement extends RowContainer {
      */
     @JsxSetter
     public void setVAlign(final Object vAlign) {
-        setVAlign(vAlign, null);
+        setVAlign(vAlign, getValidVAlignValues());
     }
 
     /**

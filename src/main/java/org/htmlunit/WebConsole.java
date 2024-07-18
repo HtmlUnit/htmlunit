@@ -38,7 +38,9 @@ import org.htmlunit.corejs.javascript.Scriptable;
  */
 public class WebConsole implements ConsolePrinter, Serializable {
 
-    private Logger logger_ = new DefaultLogger();
+    private static final Log LOG = LogFactory.getLog(WebConsole.class);
+
+    private Logger logger_ = new DefaultLogger(LOG);
 
     /**
      * A simple logging interface abstracting logging APIs.
@@ -212,67 +214,64 @@ public class WebConsole implements ConsolePrinter, Serializable {
      */
     private static class DefaultLogger implements Logger, Serializable {
 
-        private static final Log LOG = LogFactory.getLog(DefaultLogger.class);
+        private final Log logger_;
 
         /**
          * Ctor.
          */
-        DefaultLogger() {
+        DefaultLogger(final Log logger) {
             super();
+            logger_ = logger;
         }
 
         @Override
         public boolean isTraceEnabled() {
-            return LOG.isTraceEnabled();
+            return logger_.isTraceEnabled();
         }
 
         @Override
         public void trace(final Object message) {
-            if (LOG.isTraceEnabled()) {
-                LOG.trace(message);
-            }
+            logger_.trace(message);
         }
 
         @Override
         public boolean isDebugEnabled() {
-            return LOG.isDebugEnabled();
+            return logger_.isDebugEnabled();
         }
 
         @Override
         public void debug(final Object message) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(message);
-            }
+            logger_.debug(message);
         }
 
         @Override
         public boolean isInfoEnabled() {
-            return LOG.isInfoEnabled();
+            return logger_.isInfoEnabled();
         }
 
         @Override
         public void info(final Object message) {
-            LOG.info(message);
+            logger_.info(message);
         }
 
         @Override
         public boolean isWarnEnabled() {
-            return LOG.isWarnEnabled();
+            return logger_.isWarnEnabled();
         }
 
         @Override
         public void warn(final Object message) {
-            LOG.warn(message);
+            logger_.warn(message);
         }
 
         @Override
         public boolean isErrorEnabled() {
-            return LOG.isErrorEnabled();
+            return logger_.isErrorEnabled();
         }
 
         @Override
         public void error(final Object message) {
-            LOG.error(message);
+            logger_.error(message);
         }
     }
 }
