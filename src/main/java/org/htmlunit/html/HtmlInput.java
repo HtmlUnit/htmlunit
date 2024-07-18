@@ -329,9 +329,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             }
             catch (final MalformedURLException e) {
                 // Log the error and fall through to the return values below.
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn(e.getMessage(), e);
-                }
+                LOG.warn(e);
             }
         }
         return src;

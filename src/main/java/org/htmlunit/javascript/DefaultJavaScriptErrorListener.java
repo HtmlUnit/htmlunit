@@ -38,9 +38,7 @@ public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, 
      */
     @Override
     public void scriptException(final HtmlPage page, final ScriptException scriptException) {
-        if (LOG.isErrorEnabled()) {
-            LOG.error("Error during JavaScript execution", scriptException);
-        }
+        LOG.error("Error during JavaScript execution", scriptException);
     }
 
     /**

@@ -279,9 +279,7 @@ public class Location extends HtmlUnitScriptable {
             return s;
         }
         catch (final MalformedURLException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error(e.getMessage(), e);
-            }
+            LOG.error(e);
             return page.getUrl().toExternalForm();
         }
     }
