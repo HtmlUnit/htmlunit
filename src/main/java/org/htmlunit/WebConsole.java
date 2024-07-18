@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
@@ -40,7 +42,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
 
     private static final Log LOG = LogFactory.getLog(WebConsole.class);
 
-    private Logger logger_ = new DefaultLogger(LOG);
+    private transient Logger logger_ = new DefaultLogger(LOG);
 
     /**
      * A simple logging interface abstracting logging APIs.
@@ -209,69 +211,74 @@ public class WebConsole implements ConsolePrinter, Serializable {
         return msg;
     }
 
+    private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        setLogger(new DefaultLogger(LOG));
+    }
+
     /**
      * This class is the default logger used by WebConsole.
      */
-    private static class DefaultLogger implements Logger, Serializable {
+    private static class DefaultLogger implements Logger {
 
-        private final Log logger_;
+        private final Log webConsoleLogger_;
 
         /**
          * Ctor.
          */
         DefaultLogger(final Log logger) {
             super();
-            logger_ = logger;
+            webConsoleLogger_ = logger;
         }
 
         @Override
         public boolean isTraceEnabled() {
-            return logger_.isTraceEnabled();
+            return webConsoleLogger_.isTraceEnabled();
         }
 
         @Override
         public void trace(final Object message) {
-            logger_.trace(message);
+            webConsoleLogger_.trace(message);
         }
 
         @Override
         public boolean isDebugEnabled() {
-            return logger_.isDebugEnabled();
+            return webConsoleLogger_.isDebugEnabled();
         }
 
         @Override
         public void debug(final Object message) {
-            logger_.debug(message);
+            webConsoleLogger_.debug(message);
         }
 
         @Override
         public boolean isInfoEnabled() {
-            return logger_.isInfoEnabled();
+            return webConsoleLogger_.isInfoEnabled();
         }
 
         @Override
         public void info(final Object message) {
-            logger_.info(message);
+            webConsoleLogger_.info(message);
         }
 
         @Override
         public boolean isWarnEnabled() {
-            return logger_.isWarnEnabled();
+            return webConsoleLogger_.isWarnEnabled();
         }
 
         @Override
         public void warn(final Object message) {
-            logger_.warn(message);
+            webConsoleLogger_.warn(message);
         }
 
         @Override
         public boolean isErrorEnabled() {
-            return logger_.isErrorEnabled();
+            return webConsoleLogger_.isErrorEnabled();
         }
 
         @Override
         public void error(final Object message) {
-            logger_.error(message);
+            webConsoleLogger_.error(message);
         }
     }
 }

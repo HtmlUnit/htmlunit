@@ -507,8 +507,13 @@ public class CodeStyleTest {
         final String logClassName = Log.class.getSimpleName();
         for (String line : lines) {
             line = line.trim();
-            if (line.contains(" " + logClassName + " ") && !line.contains(" LOG ") && !line.contains(" static ")
-                && !line.startsWith("//") && !line.contains("httpclient.wire")) {
+            if (line.contains(" " + logClassName + " ")
+                    && !line.contains(" LOG ")
+                    && !line.contains(" static ")
+                    && !line.startsWith("//")
+                    && !line.contains("webConsoleLogger_") // this one is there by design
+                    && !line.contains("(final Log logger)") // logger as parameter
+                    && !line.contains("httpclient.wire")) {
                 addFailure("Non-static logger in " + relativePath + ", line: " + (i + 1));
             }
             i++;
