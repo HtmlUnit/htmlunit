@@ -440,7 +440,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             final NetworkErrorWebResponse resp = (NetworkErrorWebResponse) webResponse_;
-            if (resp.getError() != null && resp.getError() instanceof NoPermittedHeaderException) {
+            if (resp.getError() instanceof NoPermittedHeaderException) {
                 return "";
             }
             return null;
