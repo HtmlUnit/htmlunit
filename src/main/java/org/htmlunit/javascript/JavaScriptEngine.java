@@ -236,30 +236,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             defineConstructor(window, window, new Window());
         }
 
-        // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(window, "Continuation", "StopIteration", "BigInt");
-        if (!browserVersion.hasFeature(JS_ITERATOR_VISIBLE_IN_WINDOW)) {
-            deleteProperties(window, "Iterator");
-        }
-
-        final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(window, "Error");
-        if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
-            errorObject.defineProperty("stackTraceLimit", 10, ScriptableObject.EMPTY);
-        }
-        else {
-            ScriptableObject.deleteProperty(errorObject, "stackTraceLimit");
-        }
-        if (!browserVersion.hasFeature(JS_ERROR_CAPTURE_STACK_TRACE)) {
-            ScriptableObject.deleteProperty(errorObject, "captureStackTrace");
-        }
-
         URLSearchParams.NativeParamsIterator.init(window, "URLSearchParams Iterator");
         FormData.FormDataIterator.init(window, "FormData Iterator");
-
-        final Intl intl = new Intl();
-        intl.setParentScope(window);
-        window.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
-        intl.defineProperties(browserVersion);
 
         // strange but this is the reality for browsers
         // because there will be still some sites using this for browser detection the property is
@@ -273,9 +251,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
 
-        final String windowClassName = Window.class.getName();
+        // setup the prototypes
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final boolean isWindow = windowClassName.equals(config.getHostClass().getName());
+            final boolean isWindow = windowConfig == config;
             if (isWindow) {
                 configureConstantsPropertiesAndFunctions(config, window);
 
@@ -300,6 +278,22 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
         }
 
+        // once all prototypes have been build, it's possible to configure the chains
+        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
+        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
+            final String name = entry.getKey();
+            final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
+            final Scriptable prototype = entry.getValue();
+            if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
+                prototype.setPrototype(parentPrototype);
+            }
+            else {
+                prototype.setPrototype(objectPrototype);
+            }
+        }
+
+        // setup constructors
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
@@ -355,24 +349,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         // special handling for image/option
         final Method imageCtor = HTMLImageElement.class.getDeclaredMethod("jsConstructorImage");
-        additionalCtor(window, prototypesPerJSName, imageCtor, "Image", "HTMLImageElement");
+        additionalCtor(window, prototypesPerJSName.get("HTMLImageElement"), imageCtor, "Image", "HTMLImageElement");
         final Method optionCtor = HTMLOptionElement.class.getDeclaredMethod("jsConstructorOption",
                 new Class[] {Object.class, String.class, boolean.class, boolean.class});
-        additionalCtor(window, prototypesPerJSName, optionCtor, "Option", "HTMLOptionElement");
+        additionalCtor(window, prototypesPerJSName.get("HTMLOptionElement"), optionCtor, "Option", "HTMLOptionElement");
 
-        // once all prototypes have been build, it's possible to configure the chains
-        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
-        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
-            final String name = entry.getKey();
-            final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
-            final Scriptable prototype = entry.getValue();
-            if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
-                prototype.setPrototype(parentPrototype);
-            }
-            else {
-                prototype.setPrototype(objectPrototype);
-            }
+        if (!webClient.getOptions().isWebSocketEnabled()) {
+            deleteProperties(window, "WebSocket");
         }
 
         window.setPrototypes(prototypes);
@@ -381,10 +364,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         applyPolyfills(webClient, browserVersion, context, window);
     }
 
-    private static void additionalCtor(final Window window, final Map<String, Scriptable> prototypesPerJSName,
+    private static void additionalCtor(final Window window, final Scriptable proto,
             final Method ctorMethod, final String prop, final String clazzName) throws Exception {
         final FunctionObject function = new FunctionObject(prop, ctorMethod, window);
-        final Scriptable proto = prototypesPerJSName.get(clazzName);
         final Object prototypeProperty = ScriptableObject.getProperty(window, clazzName);
         try {
             function.addAsConstructor(window, proto, ScriptableObject.DONTENUM);
@@ -437,9 +419,28 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
                 NumberCustom.class, ScriptableObject.DONTENUM);
 
-        if (!webClient.getOptions().isWebSocketEnabled()) {
-            deleteProperties(scriptable, "WebSocket");
+        // remove some objects, that Rhino defines in top scope but that we don't want
+        deleteProperties(scriptable, "Continuation", "StopIteration", "BigInt");
+        if (!browserVersion.hasFeature(JS_ITERATOR_VISIBLE_IN_WINDOW)) {
+            deleteProperties(scriptable, "Iterator");
         }
+
+        final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(scriptable, "Error");
+        if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
+            errorObject.defineProperty("stackTraceLimit", 10, ScriptableObject.EMPTY);
+        }
+        else {
+            ScriptableObject.deleteProperty(errorObject, "stackTraceLimit");
+        }
+        if (!browserVersion.hasFeature(JS_ERROR_CAPTURE_STACK_TRACE)) {
+            ScriptableObject.deleteProperty(errorObject, "captureStackTrace");
+        }
+
+        // add Intl
+        final Intl intl = new Intl();
+        intl.setParentScope(scriptable);
+        scriptable.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
+        intl.defineProperties(browserVersion);
     }
 
     /**
