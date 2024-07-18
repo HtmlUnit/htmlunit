@@ -56,6 +56,7 @@ public class Architecture2Test {
     @ArchTest
     public static void allHostTestShouldTestTheSameObjects(final JavaClasses classes) {
         compare(classes, "HostClassNameTest", "HostTypeOfTest");
+        compare(classes, "HostClassNameTest", "DedicatedWorkerGlobalScopeTypeOfTest");
     }
 
     private static void compare(final JavaClasses classes, final String oneName, final String anotherName) {
@@ -162,11 +163,4 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
         .should().callMethod(BrowserVersion.class, "isFirefoxESR", new Class[] {});
-
-    /**
-     * Do not use BrowserVersion.isIE().
-     */
-    @ArchTest
-    public static final ArchRule isIE = noClasses()
-        .should().callMethod(BrowserVersion.class, "isIE", new Class[] {});
 }

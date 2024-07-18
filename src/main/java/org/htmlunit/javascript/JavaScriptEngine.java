@@ -221,7 +221,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         final Window window = new Window();
         window.setClassName("Window");
+
         context.initSafeStandardObjects(window);
+        configureRhino(webClient, browserVersion, window);
 
         final ClassConfiguration windowConfig = jsConfig_.getClassConfiguration("Window");
         if (windowConfig.getJsConstructor() != null) {
@@ -372,8 +374,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 prototype.setPrototype(objectPrototype);
             }
         }
-
-        configureRhino(webClient, browserVersion, window);
 
         window.setPrototypes(prototypes);
         window.initialize(webWindow, page);

@@ -115,9 +115,12 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     DedicatedWorkerGlobalScope(final Window owningWindow, final Context context, final WebClient webClient,
             final String name, final Worker worker) throws Exception {
         super();
-        context.initSafeStandardObjects(this);
 
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
+
+        context.initSafeStandardObjects(this);
+        JavaScriptEngine.configureRhino(webClient, browserVersion, this);
+
         ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
                 (Class<? extends HtmlUnitScriptable>) DedicatedWorkerGlobalScope.class.getSuperclass(),
                 browserVersion);
@@ -135,7 +138,6 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
 
         // TODO we have to do more configuration here
-        JavaScriptEngine.configureRhino(webClient, browserVersion, this);
 
         owningWindow_ = owningWindow;
         final URL currentURL = owningWindow.getWebWindow().getEnclosedPage().getUrl();
