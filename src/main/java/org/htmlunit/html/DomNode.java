@@ -458,6 +458,24 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final List<Node> myAncestors = getAncestors();
         final List<Node> otherAncestors = ((DomNode) other).getAncestors();
 
+        if (!myAncestors.get(0).equals(otherAncestors.get(0))) {
+            // spec likes to have a consistent order
+            //
+            // If ... node1’s root is not node2’s root, then return the result of adding
+            // DOCUMENT_POSITION_DISCONNECTED, DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,
+            // and either DOCUMENT_POSITION_PRECEDING or DOCUMENT_POSITION_FOLLOWING,
+            // with the constraint that this is to be consistent...
+            if (this.hashCode() < other.hashCode()) {
+                return DOCUMENT_POSITION_DISCONNECTED
+                        | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
+                        | DOCUMENT_POSITION_PRECEDING;
+            }
+
+            return DOCUMENT_POSITION_DISCONNECTED
+                    | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
+                    | DOCUMENT_POSITION_FOLLOWING;
+        }
+
         final int max = Math.min(myAncestors.size(), otherAncestors.size());
 
         int i = 1;

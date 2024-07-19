@@ -8,6 +8,10 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
+            <action type="fix" dev="rbri">
+                DomNode.compareDocumentPosition now returns correct results if both nodes do not share the
+                same root (eg. different document fragments).
+            </action>
             <action type="update" dev="rbri">
                 Small sample for changing the browsers user agent addet to the docs.
             </action>

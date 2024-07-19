@@ -756,6 +756,34 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"false", "37", "35"})
+    public void compareDocumentPositionFragment() throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let range = document.createRange();\n"
+            + "    let documentFragment1 = range.createContextualFragment(\"<div id='d1'></div>\");\n"
+            + "    let div1 = documentFragment1.getElementById('d1');\n"
+            + "    let documentFragment2 = range.createContextualFragment(\"<div id='d2'></div>\");\n"
+            + "    let div2 = documentFragment2.getElementById('d2');\n"
+
+            + "    log(documentFragment1 === documentFragment2);\n"
+            + "    let cmp1 = div1.compareDocumentPosition(div2);\n"
+            + "    let cmp2 = div2.compareDocumentPosition(div1);\n"
+            // spec only likes to have a consistent order
+            + "    if (cmp1 > cmp2) { log(cmp1); log(cmp2); } else { log(cmp2); log(cmp1); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("bk")
     public void prefix() throws Exception {
         final String html = "<html><head><script>\n"
