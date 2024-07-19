@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpWebConnection;
 import org.htmlunit.MockWebConnection;
@@ -144,5 +145,19 @@ public class DetailsTest extends WebServerTestCase {
             // use the client as usual
             final HtmlPage page = webClient.getPage(url);
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void docuPageDetailsCustomizeHeaders() throws Exception {
+        final BrowserVersion browser =
+                new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
+                    .setAcceptLanguageHeader("de-CH")
+                    .build();
+
+
+        assertEquals("de-CH", browser.getAcceptLanguageHeader());
     }
 }

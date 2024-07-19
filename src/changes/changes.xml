@@ -9,6 +9,9 @@
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
             <action type="update" dev="rbri">
+                Small sample for changing the browsers user agent addet to the docs.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.15.0.
             </action>
             <action type="fix" dev="RhinoTeam">
@@ -75,7 +78,7 @@
                 websocket-client: jetty updated to 9.4.55.v20240627.
             </action>
             <action type="update" dev="rbri">
-                Method HtmlForm.getElements() is now deprecated; please use HtmlForm.getElements(Predicate<HtmlElement>)
+                Method HtmlForm.getElements() is now deprecated; please use HtmlForm.getElements(Predicate&lt;HtmlElement&gt;)
                 or HtmlForm.getFromElements() instead. Please read the jdoc of the new methods, they return
                 slightly different results.
             </action>

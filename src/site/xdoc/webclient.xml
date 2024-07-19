@@ -125,6 +125,26 @@ try (final WebClient webClient = new WebClient(germanFirefox)) {
                     <a href="apidocs/org/htmlunit/BrowserVersion.BrowserVersionBuilder.html">BrowserVersion.BrowserVersionBuilder API</a>.
                 </p>
             </subsection>
+            <subsection name="Change the browser user agent">
+                <p>
+                    Changing the user agent is similar to changing language/time zone (see above).<br/>
+                    You have to create a customised copy of the corresponding BrowserVersion using the 
+                    BrowserVersionBuilder. This adapted BrowserVersion can then be used to create a WebClient.
+                </p>
+                <source><![CDATA[
+final BrowserVersion.BrowserVersionBuilder builder = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX);
+
+builder.setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 14_5 like Mac OS X) "
+        + "AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/128.0 Mobile/15E148 Safari/605.1.15");
+
+final BrowserVersion iosFirefox = builder.build();
+try (WebClient webClient = new WebClient(iosFirefox)) {
+    ....]]></source>
+                <p>
+                    For more details please have a look at the 
+                    <a href="apidocs/org/htmlunit/BrowserVersion.BrowserVersionBuilder.html">BrowserVersion.BrowserVersionBuilder API</a>.
+                </p>
+            </subsection>
         </section>
 
         <section name="Using HtmlUnit behind a proxy">

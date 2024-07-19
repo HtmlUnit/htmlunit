@@ -12,10 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.doc;
 
 import static org.junit.Assert.assertEquals;
 
+import org.htmlunit.BrowserVersion;
 import org.junit.Test;
 
 /**
@@ -45,19 +46,5 @@ public class DocumentationTests {
         assertEquals(applicationName, browser.getApplicationName());
         assertEquals(applicationVersion, browser.getApplicationVersion());
         assertEquals(userAgent, browser.getUserAgent());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void docuPageDetailsCustomizeHeaders() throws Exception {
-        final BrowserVersion browser =
-                new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
-                    .setAcceptLanguageHeader("de-CH")
-                    .build();
-
-
-        assertEquals("de-CH", browser.getAcceptLanguageHeader());
     }
 }
