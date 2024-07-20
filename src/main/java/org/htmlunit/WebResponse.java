@@ -163,7 +163,7 @@ public class WebResponse implements Serializable {
         }
 
         final int index = contentType.indexOf(';');
-        if (index == -1) {
+        if (index == -1 || index == 0) {
             return null;
         }
         return EncodingSniffer.extractEncodingFromContentType(contentType);
