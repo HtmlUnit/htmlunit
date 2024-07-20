@@ -83,7 +83,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.dom.DOMParser;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.ProgressEvent;
 import org.htmlunit.javascript.host.file.Blob;
@@ -378,18 +377,20 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
         else if (RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
             if (webResponse_ != null) {
-                try {
+                final String contentType = webResponse_.getContentType();
+                if (contentType.isEmpty() || contentType.contains("xml")) {
                     final Charset encoding = webResponse_.getContentCharset();
                     final String content = webResponse_.getContentAsString(encoding);
                     if (content == null) {
                         return "";
                     }
-                    return DOMParser.parseFromString(this, content, webResponse_.getContentType());
+                    final XMLDocument document = new XMLDocument();
+                    document.setParentScope(getParentScope());
+                    document.setPrototype(ScriptableObject.getClassPrototype(getWindow(), document.getClassName()));
+                    document.loadXML(content);
+                    return document;
                 }
-                catch (final IOException e) {
-                    webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
-                    return null;
-                }
+                return null;
             }
         }
         else if (RESPONSE_TYPE_JSON.equals(responseType_)) {
