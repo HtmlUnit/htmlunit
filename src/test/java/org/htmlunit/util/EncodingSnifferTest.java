@@ -45,9 +45,22 @@ public class EncodingSnifferTest {
         header(null, null, null);
         header(null, "foo", "bar");
         header(null, HttpHeader.CONTENT_TYPE, "blah");
+
         header(null, HttpHeader.CONTENT_TYPE, "text/html;charset=blah");
         header(UTF_8, HttpHeader.CONTENT_TYPE, "text/html;charset=utf-8");
         header(UTF_8, HttpHeader.CONTENT_TYPE, "text/html;charset=utf-8;");
+
+        header(UTF_8, HttpHeader.CONTENT_TYPE, "text/xml;charset=UTF-8");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fromHttpHeadersNoContentType() throws Exception {
+        header(null, HttpHeader.CONTENT_TYPE, "charset=blah");
+        header(UTF_8, HttpHeader.CONTENT_TYPE, "charset=utf-8");
+        header(UTF_8, HttpHeader.CONTENT_TYPE, ";charset=utf-8;");
     }
 
     private static void header(final Charset expectedEncoding, final String headerName, final String headerValue) {
