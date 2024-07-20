@@ -13,7 +13,7 @@
                 as the property responseXML.
             </action>
             <action type="fix" dev="rbri">
-                The response encoding determination for XMLHttprequest fixed. If the content type header does not contain 
+                The response encoding determination for XMLHttprequest fixed. If the content type header does not contain
                 a content type (but a charset) then the charset info is ignored.
             </action>
             <action type="fix" dev="rbri">
