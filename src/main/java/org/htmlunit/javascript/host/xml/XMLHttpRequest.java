@@ -294,7 +294,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxGetter
     public Object getResponse() {
         if (RESPONSE_TYPE_DEFAULT.equals(responseType_) || RESPONSE_TYPE_TEXT.equals(responseType_)) {
-            return getResponseText();
+            if (webResponse_ != null) {
+                final Charset encoding = webResponse_.getContentCharset();
+                final String content = webResponse_.getContentAsString(encoding);
+                if (content == null) {
+                    return "";
+                }
+                return content;
+            }
         }
 
         if (state_ != DONE) {
@@ -373,9 +380,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (webResponse_ != null) {
                 try {
                     final Charset encoding = webResponse_.getContentCharset();
-                    if (encoding == null) {
-                        return "";
-                    }
                     final String content = webResponse_.getContentAsString(encoding);
                     if (content == null) {
                         return "";
@@ -391,9 +395,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         else if (RESPONSE_TYPE_JSON.equals(responseType_)) {
             if (webResponse_ != null) {
                 final Charset encoding = webResponse_.getContentCharset();
-                if (encoding == null) {
-                    return null;
-                }
                 final String content = webResponse_.getContentAsString(encoding);
                 if (content == null) {
                     return null;
@@ -448,15 +449,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         if (webResponse_ != null) {
             final Charset encoding = webResponse_.getContentCharset();
-            if (encoding == null) {
-                return "";
-            }
             final String content = webResponse_.getContentAsString(encoding);
             if (content == null) {
                 return "";
             }
             return content;
         }
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");
         }
