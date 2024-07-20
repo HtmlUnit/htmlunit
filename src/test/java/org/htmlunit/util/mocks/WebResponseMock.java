@@ -84,7 +84,12 @@ public class WebResponseMock extends WebResponse {
     @Override
     public String getResponseHeaderValue(final String headerName) {
         count("getResponseHeaderValue");
-        return headers_.get(headerName);
+        for (final Map.Entry<String, String> pair : headers_.entrySet()) {
+            if (pair.getKey().equalsIgnoreCase(headerName)) {
+                return pair.getValue();
+            }
+        }
+        return null;
     }
 
     @Override

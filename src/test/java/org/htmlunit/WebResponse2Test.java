@@ -16,8 +16,15 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.util.MimeType;
+import org.htmlunit.util.mocks.WebResponseMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -45,4 +52,23 @@ public class WebResponse2Test extends SimpleWebTestCase {
         assertEquals(html, page.getWebResponse().getContentAsString());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getHeaderContentCharset() {
+        testHeaderContentCharset(StandardCharsets.UTF_8, MimeType.TEXT_HTML + ";charset=utf-8");
+
+        testHeaderContentCharset(null, "  \t ;charset=utf-8");
+        testHeaderContentCharset(null, ";charset=utf-8");
+        testHeaderContentCharset(null, "charset=utf-8");
+    }
+
+    private static void testHeaderContentCharset(final Charset expected, final String contentTypeHeader) {
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(HttpHeader.CONTENT_TYPE, contentTypeHeader);
+
+        final WebResponseMock response = new WebResponseMock(null, headers);
+        assertEquals(expected, response.getHeaderContentCharset());
+    }
 }

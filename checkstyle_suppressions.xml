@@ -50,6 +50,7 @@
     <suppress checks="LineLength" files="XMLSerializer.java" lines="1-30"/>
     <suppress checks="LineLength" files="XMLSerializerTest.java"/>
     <suppress checks="LineLength" files="XSLProcessorTest.java"/>
+    <suppress checks="LineLength" files="XMLHttpRequestResponseTextEncodingTest.java"/>
 
     <suppress checks="MethodName" files="HtmlPageEncodingTest.java"/>
     <suppress checks="MethodName" files="CssStyleSheetEncodingTest.java"/>
@@ -59,6 +60,7 @@
     <suppress checks="MethodName" files="HostConstructorTest.java"/>
     <suppress checks="MethodName" files="HostParentOf.+Test.java"/>
     <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>
+    <suppress checks="MethodName" files="XMLHttpRequestResponseTextEncodingTest.java"/>
 
     <suppress checks="TypeName" files="webkit.*\.java$|moz.*\.java$"/>
     <suppress checks="TypeName" files="EXT_.*\.java$|OES_.*\.java$|WEBGL_.*\.java$|ANGLE_.*\.java$"/>
