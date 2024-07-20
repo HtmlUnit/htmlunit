@@ -83,6 +83,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.dom.DOMParser;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.ProgressEvent;
 import org.htmlunit.javascript.host.file.Blob;
@@ -389,6 +390,20 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     document.setPrototype(ScriptableObject.getClassPrototype(getWindow(), document.getClassName()));
                     document.loadXML(content);
                     return document;
+                }
+                if (contentType.contains("html")) {
+                    try {
+                        final Charset encoding = webResponse_.getContentCharset();
+                        final String content = webResponse_.getContentAsString(encoding);
+                        if (content == null) {
+                            return "";
+                        }
+                        return DOMParser.parseFromString(this, content, webResponse_.getContentType());
+                    }
+                    catch (final IOException e) {
+                        webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
+                        return null;
+                    }
                 }
                 return null;
             }

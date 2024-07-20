@@ -3065,7 +3065,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
-
     @Test
     @Alerts({"", "document", "[object HTMLDocument]"})
     public void responseResponseTypeDocumentHtml() throws Exception {
@@ -3106,6 +3105,50 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               + "<html>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_HTML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts({"", "document", "null"})
+    public void responseResponseTypeDocumentJs() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'document';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+                "<html>\n"
+              + "<body>Test</body>\n"
+              + "<html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_JAVASCRIPT);
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
