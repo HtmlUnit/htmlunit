@@ -3058,7 +3058,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 14, 14")
-    @NotYetImplemented
     public void selector__jQuery_unique() throws Exception {
         runTest("selector: jQuery.unique");
     }
