@@ -25,7 +25,6 @@ import java.util.List;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
-import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -203,17 +202,38 @@ public class XMLHttpRequestResponseTextEncodingTest extends WebDriverTestCase {
 
         String[] expected = getExpectedAlerts();
         if (expected == null || expected.length == 0) {
-            if (TestMimeType.EMPTY.equals(mimeTypeXml)) {
+            expected = new String[] {
+                "<?xml version=\"1.0\" "
+                    + xmlEnc
+                    + "?><htmlunit><c1>a</c1><c2>ä</c2><c3>?????</c3><c4>???</c4><c5>??</c5></htmlunit>"};
+
+            if (TestCharset.UTF8.equals(charsetXmlResponseHeader)) {
                 expected = new String[] {
                     "<?xml version=\"1.0\" "
                         + xmlEnc
-                        + "?><htmlunit><c1>a</c1><c2>�</c2><c3>?????</c3><c4>???</c4><c5>??</c5></htmlunit>"};
+                        + "?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>"};
             }
-            else {
-                expected = new String[] {
-                    "<?xml version=\"1.0\" "
-                        + xmlEnc
-                        + "?><htmlunit><c1>a</c1><c2>ä</c2><c3>?????</c3><c4>???</c4><c5>??</c5></htmlunit>"};
+            else if (TestMimeType.EMPTY.equals(mimeTypeXml)) {
+                if (TestCharset.GB2312.equals(charsetXmlResponseHeader)) {
+                    expected = new String[] {
+                        "<?xml version=\"1.0\" "
+                            + xmlEnc
+                            + "?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>"};
+                }
+                else if (null == charsetXmlResponseHeader || TestCharset.ISO88591.equals(charsetXmlResponseHeader)) {
+                    expected = new String[] {
+                        "<?xml version=\"1.0\" "
+                            + xmlEnc
+                            + "?><htmlunit><c1>a</c1><c2>�</c2><c3>?????</c3><c4>???</c4><c5>??</c5></htmlunit>"};
+                }
+            }
+            else if (TestMimeType.PLAIN.equals(mimeTypeXml) || TestMimeType.XML.equals(mimeTypeXml)) {
+                if (TestCharset.GB2312.equals(charsetXmlResponseHeader)) {
+                    expected = new String[] {
+                        "<?xml version=\"1.0\" "
+                            + xmlEnc
+                            + "?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>"};
+                }
             }
         }
 
@@ -224,437 +244,5 @@ public class XMLHttpRequestResponseTextEncodingTest extends WebDriverTestCase {
                 charsetHtmlResponseHeader == null ? null : charsetHtmlResponseHeader.getCharset());
 
         verifyTextArea2(driver, expected);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>")
-    public void __GB2312_EMPTY_GB2312() throws Exception {
-        responseText("", TestCharset.GB2312, TestMimeType.EMPTY, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __GB2312_EMPTY_UTF8() throws Exception {
-        responseText("", TestCharset.GB2312, TestMimeType.EMPTY, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __GB2312_PLAIN_GB2312() throws Exception {
-        responseText("", TestCharset.GB2312, TestMimeType.PLAIN, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __GB2312_PLAIN_UTF8() throws Exception {
-        responseText("", TestCharset.GB2312, TestMimeType.PLAIN, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __GB2312_XML_GB2312() throws Exception {
-        responseText("", TestCharset.GB2312, TestMimeType.XML, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __GB2312_XML_UTF8() throws Exception {
-        responseText("", TestCharset.GB2312, TestMimeType.XML, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>")
-    public void __ISO88591_EMPTY_GB2312() throws Exception {
-        responseText("", TestCharset.ISO88591, TestMimeType.EMPTY, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __ISO88591_EMPTY_UTF8() throws Exception {
-        responseText("", TestCharset.ISO88591, TestMimeType.EMPTY, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __ISO88591_PLAIN_GB2312() throws Exception {
-        responseText("", TestCharset.ISO88591, TestMimeType.PLAIN, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __ISO88591_PLAIN_UTF8() throws Exception {
-        responseText("", TestCharset.ISO88591, TestMimeType.PLAIN, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __ISO88591_XML_GB2312() throws Exception {
-        responseText("", TestCharset.ISO88591, TestMimeType.XML, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __ISO88591_XML_UTF8() throws Exception {
-        responseText("", TestCharset.ISO88591, TestMimeType.XML, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>")
-    public void __UTF8_EMPTY_GB2312() throws Exception {
-        responseText("", TestCharset.UTF8, TestMimeType.EMPTY, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __UTF8_EMPTY_UTF8() throws Exception {
-        responseText("", TestCharset.UTF8, TestMimeType.EMPTY, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __UTF8_PLAIN_GB2312() throws Exception {
-        responseText("", TestCharset.UTF8, TestMimeType.PLAIN, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __UTF8_PLAIN_UTF8() throws Exception {
-        responseText("", TestCharset.UTF8, TestMimeType.PLAIN, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __UTF8_XML_GB2312() throws Exception {
-        responseText("", TestCharset.UTF8, TestMimeType.XML, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void __UTF8_XML_UTF8() throws Exception {
-        responseText("", TestCharset.UTF8, TestMimeType.XML, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>")
-    public void ___EMPTY_GB2312() throws Exception {
-        responseText("", null, TestMimeType.EMPTY, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void ___EMPTY_UTF8() throws Exception {
-        responseText("", null, TestMimeType.EMPTY, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void ___PLAIN_GB2312() throws Exception {
-        responseText("", null, TestMimeType.PLAIN, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void ___PLAIN_UTF8() throws Exception {
-        responseText("", null, TestMimeType.PLAIN, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void ___XML_GB2312() throws Exception {
-        responseText("", null, TestMimeType.XML, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" ?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void ___XML_UTF8() throws Exception {
-        responseText("", null, TestMimeType.XML, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>")
-    public void _utf8_GB2312_EMPTY_GB2312() throws Exception {
-        responseText("utf8", TestCharset.GB2312, TestMimeType.EMPTY, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_GB2312_EMPTY_UTF8() throws Exception {
-        responseText("utf8", TestCharset.GB2312, TestMimeType.EMPTY, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_GB2312_PLAIN_GB2312() throws Exception {
-        responseText("utf8", TestCharset.GB2312, TestMimeType.PLAIN, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_GB2312_PLAIN_UTF8() throws Exception {
-        responseText("utf8", TestCharset.GB2312, TestMimeType.PLAIN, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_GB2312_XML_GB2312() throws Exception {
-        responseText("utf8", TestCharset.GB2312, TestMimeType.XML, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_GB2312_XML_UTF8() throws Exception {
-        responseText("utf8", TestCharset.GB2312, TestMimeType.XML, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>")
-    public void _utf8_ISO88591_EMPTY_GB2312() throws Exception {
-        responseText("utf8", TestCharset.ISO88591, TestMimeType.EMPTY, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_ISO88591_EMPTY_UTF8() throws Exception {
-        responseText("utf8", TestCharset.ISO88591, TestMimeType.EMPTY, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_ISO88591_PLAIN_GB2312() throws Exception {
-        responseText("utf8", TestCharset.ISO88591, TestMimeType.PLAIN, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_ISO88591_PLAIN_UTF8() throws Exception {
-        responseText("utf8", TestCharset.ISO88591, TestMimeType.PLAIN, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_ISO88591_XML_GB2312() throws Exception {
-        responseText("utf8", TestCharset.ISO88591, TestMimeType.XML, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_ISO88591_XML_UTF8() throws Exception {
-        responseText("utf8", TestCharset.ISO88591, TestMimeType.XML, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>")
-    public void _utf8_UTF8_EMPTY_GB2312() throws Exception {
-        responseText("utf8", TestCharset.UTF8, TestMimeType.EMPTY, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_UTF8_EMPTY_UTF8() throws Exception {
-        responseText("utf8", TestCharset.UTF8, TestMimeType.EMPTY, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_UTF8_PLAIN_GB2312() throws Exception {
-        responseText("utf8", TestCharset.UTF8, TestMimeType.PLAIN, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_UTF8_PLAIN_UTF8() throws Exception {
-        responseText("utf8", TestCharset.UTF8, TestMimeType.PLAIN, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_UTF8_XML_GB2312() throws Exception {
-        responseText("utf8", TestCharset.UTF8, TestMimeType.XML, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8_UTF8_XML_UTF8() throws Exception {
-        responseText("utf8", TestCharset.UTF8, TestMimeType.XML, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>�ާڧ�</c4><c5>����</c5></htmlunit>")
-    public void _utf8__EMPTY_GB2312() throws Exception {
-        responseText("utf8", null, TestMimeType.EMPTY, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8__EMPTY_UTF8() throws Exception {
-        responseText("utf8", null, TestMimeType.EMPTY, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8__PLAIN_GB2312() throws Exception {
-        responseText("utf8", null, TestMimeType.PLAIN, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8__PLAIN_UTF8() throws Exception {
-        responseText("utf8", null, TestMimeType.PLAIN, TestCharset.UTF8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>?</c2><c3>?????</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8__XML_GB2312() throws Exception {
-        responseText("utf8", null, TestMimeType.XML, TestCharset.GB2312);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("<?xml version=\"1.0\" encoding=\"utf-8\"?><htmlunit><c1>a</c1><c2>ä</c2><c3>أهلاً</c3><c4>мир</c4><c5>房间</c5></htmlunit>")
-    public void _utf8__XML_UTF8() throws Exception {
-        responseText("utf8", null, TestMimeType.XML, TestCharset.UTF8);
     }
 }
