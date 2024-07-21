@@ -1,0 +1,41 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+name: CheckStyle
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/checkstyle.yml'
+      - 'pom.xml'
+      - 'checkstyle.xml'
+      - 'checkstyle_suppressions.xml'
+      - 'src/main/java/**'
+      - 'src/test/java/**'
+
+permissions:
+  contents: read
+
+jobs:
+  CheckStyle:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+    - name: Set up JDK
+      uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4.2.1
+      with:
+        java-version: 21
+        distribution: 'temurin'
+        cache: maven
+    - uses: reviewdog/action-setup@3f401fe1d58fe77e10d665ab713057375e39b887 # v0.20.1
+      name: Set up reviewdog
+      with:
+        reviewdog_version: latest
+    - name: Run CheckStyle
+      run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true checkstyle:checkstyle
+    - name: Upload check results
+      env:
+        WORKDIR: ./
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cat target/checkstyle-result.xml | reviewdog -f=checkstyle -reporter=github-pr-check -filter-mode=added -fail-on-error
