@@ -18,10 +18,13 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
@@ -39,6 +42,10 @@ import org.openqa.selenium.WebDriver;
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class XMLHttpRequestResponseAsTextEncodingTest extends WebDriverTestCase {
+
+    private static final String BOM_UTF_16LE = "BOMUTF16LE";
+    private static final String BOM_UTF_16BE = "BOMUTF16BE";
+    private static final String BOM_UTF_8 = "BOMUTF8";
 
     private enum TestCharset {
         UTF8("UTF8", UTF_8),
@@ -101,15 +108,19 @@ public class XMLHttpRequestResponseAsTextEncodingTest extends WebDriverTestCase 
         final TestMimeType[] mimeTypeXmls = {TestMimeType.EMPTY, TestMimeType.XML, TestMimeType.PLAIN};
         final TestCharset[] charsetXmlResponseHeaders =
                 new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.GB2312};
+        final String[] boms = {null, BOM_UTF_8, BOM_UTF_16LE, BOM_UTF_16BE};
 
         for (final Object xmlEncodingHeader : xmlEncodingHeaders) {
             for (final Object charsetHtmlResponseHeader : charsetHtmlResponseHeaders) {
                 for (final Object mimeTypeXml : mimeTypeXmls) {
                     for (final Object charsetXmlResponseHeader : charsetXmlResponseHeaders) {
-                        list.add(new Object[] {xmlEncodingHeader,
-                                               charsetHtmlResponseHeader,
-                                               mimeTypeXml,
-                                               charsetXmlResponseHeader});
+                        for (final Object bom : boms) {
+                            list.add(new Object[] {xmlEncodingHeader,
+                                                   charsetHtmlResponseHeader,
+                                                   mimeTypeXml,
+                                                   charsetXmlResponseHeader,
+                                                   bom});
+                        }
                     }
                 }
             }
@@ -143,22 +154,29 @@ public class XMLHttpRequestResponseAsTextEncodingTest extends WebDriverTestCase 
     public TestCharset charsetXmlResponseHeader_;
 
     /**
+     * The charsetXmlResponseHeader.
+     */
+    @Parameter(4)
+    public String bom_;
+
+    /**
      * The default test.
      * @throws Exception if an error occurs
      */
     @Test
     @Default
     public void responseText() throws Exception {
-        responseText(xmlEncodingHeader_, charsetHtmlResponseHeader_, mimeTypeXml_, charsetXmlResponseHeader_);
+        responseText(xmlEncodingHeader_, charsetHtmlResponseHeader_, mimeTypeXml_, charsetXmlResponseHeader_, bom_);
     }
 
     private void responseText(
            final String xmlEncodingHeader,
             final TestCharset charsetHtmlResponseHeader,
             final TestMimeType mimeTypeXml,
-            final TestCharset charsetXmlResponseHeader) throws Exception {
-        responseText("GET", xmlEncodingHeader, charsetHtmlResponseHeader, mimeTypeXml, charsetXmlResponseHeader);
-        responseText("POST", xmlEncodingHeader, charsetHtmlResponseHeader, mimeTypeXml, charsetXmlResponseHeader);
+            final TestCharset charsetXmlResponseHeader,
+            final String bom) throws Exception {
+        responseText("GET", xmlEncodingHeader, charsetHtmlResponseHeader, mimeTypeXml, charsetXmlResponseHeader, bom);
+        responseText("POST", xmlEncodingHeader, charsetHtmlResponseHeader, mimeTypeXml, charsetXmlResponseHeader, bom);
     }
 
     private void responseText(
@@ -166,7 +184,8 @@ public class XMLHttpRequestResponseAsTextEncodingTest extends WebDriverTestCase 
             final String xmlEncodingHeader,
             final TestCharset charsetHtmlResponseHeader,
             final TestMimeType mimeTypeXml,
-            final TestCharset charsetXmlResponseHeader) throws Exception {
+            final TestCharset charsetXmlResponseHeader,
+            final String bom) throws Exception {
 
         String xmlEnc = xmlEncodingHeader;
         if ("utf8".equals(xmlEnc)) {
@@ -214,7 +233,7 @@ public class XMLHttpRequestResponseAsTextEncodingTest extends WebDriverTestCase 
                     + xmlEnc
                     + "?><htmlunit><c1>a</c1><c2>ä</c2><c3>?????</c3><c4>???</c4><c5>??</c5></htmlunit>"};
 
-            if (TestCharset.UTF8.equals(charsetXmlResponseHeader)) {
+            if (TestCharset.UTF8.equals(charsetXmlResponseHeader) || bom != null) {
                 expected = new String[] {
                     "<?xml version=\"1.0\" "
                         + xmlEnc
@@ -244,8 +263,25 @@ public class XMLHttpRequestResponseAsTextEncodingTest extends WebDriverTestCase 
             }
         }
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, mimeTypeXml.getMimeType(),
-                charsetXmlResponseHeader == null ? null : charsetXmlResponseHeader.getCharset());
+        if (BOM_UTF_8.equals(bom)) {
+            final byte[] xmlBytes =
+                    ArrayUtils.addAll(ByteOrderMark.UTF_8.getBytes(), xml.getBytes(StandardCharsets.UTF_8));
+            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
+        }
+        else if (BOM_UTF_16BE.equals(bom)) {
+            final byte[] xmlBytes =
+                    ArrayUtils.addAll(ByteOrderMark.UTF_16BE.getBytes(), xml.getBytes(StandardCharsets.UTF_16BE));
+            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
+        }
+        else if (BOM_UTF_16LE.equals(bom)) {
+            final byte[] xmlBytes =
+                    ArrayUtils.addAll(ByteOrderMark.UTF_16LE.getBytes(), xml.getBytes(StandardCharsets.UTF_16LE));
+            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
+        }
+        else {
+            getMockWebConnection().setResponse(URL_SECOND, xml, mimeTypeXml.getMimeType(),
+                    charsetXmlResponseHeader == null ? null : charsetXmlResponseHeader.getCharset());
+        }
 
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML,
                 charsetHtmlResponseHeader == null ? null : charsetHtmlResponseHeader.getCharset());
