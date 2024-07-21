@@ -84,6 +84,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.DOMParser;
+import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.ProgressEvent;
 import org.htmlunit.javascript.host.file.Blob;
@@ -93,6 +94,7 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebResponseWrapper;
 import org.htmlunit.util.XUserDefinedCharset;
+import org.htmlunit.xml.XmlPage;
 
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.
@@ -163,6 +165,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private int timeout_;
     private boolean aborted_;
     private String responseType_;
+
+    private Document responseXML_;
 
     /**
      * Creates a new instance.
@@ -376,23 +380,16 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
         }
         else if (RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
+            if (responseXML_ != null) {
+                return responseXML_;
+            }
+
             if (webResponse_ != null) {
                 String contentType = webResponse_.getContentType();
                 if (StringUtils.isEmpty(contentType)) {
                     contentType = MimeType.TEXT_XML;
                 }
-                try {
-                    final Charset encoding = webResponse_.getContentCharset();
-                    final String content = webResponse_.getContentAsString(encoding);
-                    if (content == null) {
-                        return "";
-                    }
-                    return DOMParser.parseFromString(this, content, contentType);
-                }
-                catch (final IOException e) {
-                    webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
-                    return null;
-                }
+                return buildResponseXML(contentType);
             }
         }
         else if (RESPONSE_TYPE_JSON.equals(responseType_)) {
@@ -414,6 +411,36 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         return "";
+    }
+
+    private Document buildResponseXML(final String contentType) {
+        try {
+            if (MimeType.TEXT_XML.equals(contentType)
+                    || MimeType.APPLICATION_XML.equals(contentType)
+                    || MimeType.APPLICATION_XHTML.equals(contentType)
+                    || "image/svg+xml".equals(contentType)) {
+                final XMLDocument document = new XMLDocument();
+                document.setParentScope(getParentScope());
+                document.setPrototype(getPrototype(XMLDocument.class));
+                final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow(), false);
+                if (!page.hasChildNodes()) {
+                    return null;
+                }
+                document.setDomNode(page);
+                responseXML_ = document;
+                return responseXML_;
+            }
+
+            if (MimeType.TEXT_HTML.equals(contentType)) {
+                responseXML_ = DOMParser.parseHtmlDocument(this, webResponse_, getWindow().getWebWindow());
+                return responseXML_;
+            }
+            return null;
+        }
+        catch (final IOException e) {
+            webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
+            return null;
+        }
     }
 
     /**
@@ -471,6 +498,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     @JsxGetter
     public Object getResponseXML() {
+        if (responseXML_ != null) {
+            return responseXML_;
+        }
+
         if (webResponse_ == null) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("XMLHttpRequest.responseXML returns null because there "
@@ -498,18 +529,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
         }
 
-        try {
-            final Charset encoding = webResponse_.getContentCharset();
-            final String content = webResponse_.getContentAsString(encoding);
-            if (content == null) {
-                return "";
-            }
-            return DOMParser.parseFromString(this, content, contentType);
-        }
-        catch (final IOException e) {
-            webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
-            return null;
-        }
+        return buildResponseXML(contentType);
     }
 
     /**
@@ -734,6 +754,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     @JsxFunction
     public void send(final Object content) {
+        responseXML_ = null;
+
         if (webRequest_ == null) {
             return;
         }

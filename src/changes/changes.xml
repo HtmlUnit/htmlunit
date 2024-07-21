@@ -9,7 +9,19 @@
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
             <action type="fix" dev="rbri">
-                XMLHttprequest 'responseXML' - if the responseType is set to 'document' and the request 
+                XMLHttprequest 'responseXML' and 'response' (responseType document) object are identical.
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttprequest 'responseXML' bom headers are overruling the content encoding.
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttprequest 'responseXML' reads the plain response without converting to a string internally.
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttprequest 'responseXML' some fixes for handling of empty content.
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttprequest 'responseXML' - if the responseType is set to 'document' and the request
                 was made asynchronously then support 'text/html' content type.
             </action>
             <action type="fix" dev="rbri">

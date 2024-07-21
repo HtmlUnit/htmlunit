@@ -413,43 +413,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    private void responseXML(final String resp, final String mimeType,
-                    final boolean async, final boolean document) throws Exception {
-        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var xhr = new XMLHttpRequest();\n";
-
-        if (document) {
-            html +=  "    xhr.responseType = 'document';";
-        }
-        if (async) {
-            html += "    xhr.onreadystatechange = () => {\n"
-                    + "      if (xhr.readyState === 4) {\n"
-                    + "        log(xhr.responseXML);\n"
-                    + "      }\n"
-                    + "    }\n"
-                    + "    xhr.open('GET', 'foo', true);\n"
-                    + "    xhr.send('');\n";
-        }
-        else {
-            html += "    xhr.open('GET', 'foo', false);\n"
-                    + "    xhr.send('');\n"
-                    + "    log(xhr.responseXML);\n";
-        }
-
-        html += "  }\n"
-                + "</script></head><body onload='test()'>\n"
-                + "</body></html>";
-
-        getMockWebConnection().setDefaultResponse(resp, mimeType);
-
-        final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
-    }
-
     /**
      * @throws Exception if the test fails
      */
@@ -472,7 +435,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object HTMLDocument]")
+    @Alerts({"[object HTMLDocument]", "[object HTMLHtmlElement]", "HTML", "§§URL§§foo"})
     public void responseXMLAsyncDocument_text_html() throws Exception {
         responseXML("<html></html>", MimeType.TEXT_HTML, true, true);
     }
@@ -481,7 +444,61 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts("null")
+    public void responseXML_text_html_empty() throws Exception {
+        responseXML("", MimeType.TEXT_HTML, false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXMLAsync_text_html_empty() throws Exception {
+        responseXML("", MimeType.TEXT_HTML, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDocument]", "[object HTMLHtmlElement]", "HTML", "§§URL§§foo"})
+    public void responseXMLAsyncDocument_text_html_empty() throws Exception {
+        responseXML("", MimeType.TEXT_HTML, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXML_text_html_blank() throws Exception {
+        responseXML("    ", MimeType.TEXT_HTML, false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXMLAsync_text_html_blank() throws Exception {
+        responseXML("    ", MimeType.TEXT_HTML, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDocument]", "[object HTMLHtmlElement]", "HTML", "§§URL§§foo"})
+    public void responseXMLAsyncDocument_text_html_blank() throws Exception {
+        responseXML("    ", MimeType.TEXT_HTML, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object XMLDocument]", "[object Element]", "note", "§§URL§§foo"})
     public void responseXML_text_xml() throws Exception {
         responseXML("<note/>", MimeType.TEXT_XML, false, false);
     }
@@ -490,7 +507,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object Element]", "note", "§§URL§§foo"})
     public void responseXMLAsync_text_xml() throws Exception {
         responseXML("<note/>", MimeType.TEXT_XML, true, false);
     }
@@ -499,7 +516,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object Element]", "note", "§§URL§§foo"})
     public void responseXMLAsyncDocument_text_xml() throws Exception {
         responseXML("<note/>", MimeType.TEXT_XML, true, true);
     }
@@ -508,7 +525,61 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts("null")
+    public void responseXML_text_xml_empty() throws Exception {
+        responseXML("", MimeType.TEXT_XML, false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXMLAsync_text_xml_empty() throws Exception {
+        responseXML("", MimeType.TEXT_XML, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXMLAsyncDocument_text_xml_empty() throws Exception {
+        responseXML("", MimeType.TEXT_XML, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXML_text_xml_blank() throws Exception {
+        responseXML("    ", MimeType.TEXT_XML, false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXMLAsync_text_xml_blank() throws Exception {
+        responseXML("    ", MimeType.TEXT_XML, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void responseXMLAsyncDocument_text_xml_blank() throws Exception {
+        responseXML("    ", MimeType.TEXT_XML, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object XMLDocument]", "[object Element]", "note", "§§URL§§foo"})
     public void responseXML_application_xml() throws Exception {
         responseXML("<note/>", MimeType.APPLICATION_XML, false, false);
     }
@@ -517,7 +588,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object Element]", "note", "§§URL§§foo"})
     public void responseXMLAsync_application_xml() throws Exception {
         responseXML("<note/>", MimeType.APPLICATION_XML, true, false);
     }
@@ -526,7 +597,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object Element]", "note", "§§URL§§foo"})
     public void responseXMLAsyncDocument_application_xml() throws Exception {
         responseXML("<note/>", MimeType.APPLICATION_XML, true, true);
     }
@@ -535,34 +606,38 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object Element]", "html", "§§URL§§foo"})
     public void responseXML_application_xhtmlXml() throws Exception {
-        responseXML("<note/>", MimeType.APPLICATION_XHTML, false, false);
+        responseXML("<html/>", MimeType.APPLICATION_XHTML, false, false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object Element]", "html", "§§URL§§foo"})
     public void responseXMLAsync_application_xhtmlXml() throws Exception {
-        responseXML("<note/>", MimeType.APPLICATION_XHTML, true, false);
+        responseXML("<html/>", MimeType.APPLICATION_XHTML, true, false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object Element]", "html", "§§URL§§foo"})
     public void responseXMLAsyncDocument_application_xhtmlXml() throws Exception {
-        responseXML("<note/>", MimeType.APPLICATION_XHTML, true, true);
+        responseXML("<html/>", MimeType.APPLICATION_XHTML, true, true);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object SVGSVGElement]", "svg", "§§URL§§foo"})
+    @HtmlUnitNYI(CHROME = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            EDGE = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            FF = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            FF_ESR = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"})
     public void responseXML_application_svgXml() throws Exception {
         responseXML("<svg xmlns=\"http://www.w3.org/2000/svg\"/>", "image/svg+xml", false, false);
     }
@@ -571,7 +646,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object SVGSVGElement]", "svg", "§§URL§§foo"})
+    @HtmlUnitNYI(CHROME = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            EDGE = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            FF = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            FF_ESR = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"})
     public void responseXMLAsync_application_svgXml() throws Exception {
         responseXML("<svg xmlns=\"http://www.w3.org/2000/svg\"/>", "image/svg+xml", true, false);
     }
@@ -580,9 +659,270 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts({"[object XMLDocument]", "[object SVGSVGElement]", "svg", "§§URL§§foo"})
+    @HtmlUnitNYI(CHROME = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            EDGE = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            FF = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            FF_ESR = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"})
     public void responseXMLAsyncDocument_application_svgXml() throws Exception {
         responseXML("<svg xmlns=\"http://www.w3.org/2000/svg\"/>", "image/svg+xml", true, true);
+    }
+
+    private void responseXML(final String resp, final String mimeType,
+                    final boolean async, final boolean document) throws Exception {
+        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n";
+
+        if (document) {
+            html +=  "    xhr.responseType = 'document';";
+        }
+        if (async) {
+            html += "    xhr.onreadystatechange = () => {\n"
+                    + "      if (xhr.readyState === 4) {\n"
+                    + "        let respXml = xhr.responseXML;\n"
+                    + "        log(respXml);\n"
+                    + "        if (respXml !== null) {\n"
+                    + "          log(respXml.documentElement);\n"
+                    + "          log(respXml.documentElement.tagName);\n"
+                    + "          log(respXml.documentElement.baseURI);\n"
+                    + "        }\n"
+                    + "      }\n"
+                    + "    }\n"
+                    + "    xhr.open('GET', 'foo', true);\n"
+                    + "    xhr.send('');\n";
+        }
+        else {
+            html += "    xhr.open('GET', 'foo', false);\n"
+                    + "    xhr.send('');\n"
+                    + "    let respXml = xhr.responseXML;\n"
+                    + "    log(respXml);\n"
+                    + "    if (respXml !== null) {\n"
+                    + "      log(respXml.documentElement);\n"
+                    + "      log(respXml.documentElement.tagName);\n"
+                    + "      log(respXml.documentElement.baseURI);\n"
+                    + "    }\n";
+        }
+
+        html += "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(resp, mimeType);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDocument]", "[object HTMLHtmlElement]", "HTML", "§§URL§§foo"})
+    public void response_text_html() throws Exception {
+        response("<html></html>", MimeType.TEXT_HTML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDocument]", "[object HTMLHtmlElement]", "HTML", "§§URL§§foo"})
+    public void response_text_html_empty() throws Exception {
+        response("", MimeType.TEXT_HTML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDocument]", "[object HTMLHtmlElement]", "HTML", "§§URL§§foo"})
+    public void response_text_html_blank() throws Exception {
+        response("    ", MimeType.TEXT_HTML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object XMLDocument]", "[object Element]", "note", "§§URL§§foo"})
+    public void response_text_xml() throws Exception {
+        response("<note/>", MimeType.TEXT_XML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void response_text_xml_empty() throws Exception {
+        response("", MimeType.TEXT_XML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void response_text_xml_blank() throws Exception {
+        response("    ", MimeType.TEXT_XML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object XMLDocument]", "[object Element]", "note", "§§URL§§foo"})
+    public void response_application_xml() throws Exception {
+        response("<note/>", MimeType.APPLICATION_XML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object XMLDocument]", "[object Element]", "html", "§§URL§§foo"})
+    public void responseAsyncDocument_application_xhtmlXml() throws Exception {
+        response("<html/>", MimeType.APPLICATION_XHTML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object XMLDocument]", "[object SVGSVGElement]", "svg", "§§URL§§foo"})
+    @HtmlUnitNYI(CHROME = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            EDGE = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            FF = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"},
+            FF_ESR = {"[object XMLDocument]", "[object SVGElement]", "svg", "§§URL§§foo"})
+    public void responseAsyncDocument_application_svgXml() throws Exception {
+        response("<svg xmlns=\"http://www.w3.org/2000/svg\"/>", "image/svg+xml");
+    }
+
+    private void response(final String resp, final String mimeType) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.responseType = 'document';"
+            + "    xhr.onreadystatechange = () => {\n"
+            + "      if (xhr.readyState === 4) {\n"
+            + "        let respXml = xhr.response;\n"
+            + "        log(respXml);\n"
+            + "        if (respXml !== null) {\n"
+            + "          log(respXml.documentElement);\n"
+            + "          log(respXml.documentElement.tagName);\n"
+            + "          log(respXml.documentElement.baseURI);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    }\n"
+            + "    xhr.open('GET', 'foo', true);\n"
+            + "    xhr.send('');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(resp, mimeType);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void responseXMLCalledTwoTimes() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  xhr.open('GET', 'foo', false);\n"
+            + "  xhr.send('');\n"
+            + "  let xml1 = xhr.responseXML;\n"
+            + "  let xml2 = xhr.responseXML;\n"
+            + "  log(xml1 === xml2);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void responseXMLAsyncCalledTwoTimes() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  xhr.onreadystatechange = () => {\n"
+            + "    if (xhr.readyState === 4) {\n"
+            + "      let xml1 = xhr.responseXML;\n"
+            + "      let xml2 = xhr.responseXML;\n"
+            + "      log(xml1 === xml2);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  xhr.open('GET', 'foo', true);\n"
+            + "  xhr.send('');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void responseXMLDocumentXMLAsync() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  xhr.responseType = 'document';"
+            + "  xhr.onreadystatechange = () => {\n"
+            + "    if (xhr.readyState === 4) {\n"
+            + "      let xml1 = xhr.responseXML;\n"
+            + "      let xml2 = xhr.response;\n"
+            + "      log(xml1 === xml2);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  xhr.open('GET', 'foo', true);\n"
+            + "  xhr.send('');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
     }
 
     /**
