@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.xml;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +21,6 @@ import java.util.List;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
-import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.util.MimeType;
@@ -41,57 +36,7 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
-public class XMLHttpRequestResponseAsXMLEncodingTest extends WebDriverTestCase {
-
-    private static final String BOM_UTF_16LE = "BOMUTF16LE";
-    private static final String BOM_UTF_16BE = "BOMUTF16BE";
-    private static final String BOM_UTF_8 = "BOMUTF8";
-
-    private enum TestCharset {
-        UTF8("UTF8", UTF_8),
-        ISO88591("ISO88591", ISO_8859_1),
-        GB2312("GB2312", Charset.forName("GB2312"));
-
-        private final String label_;
-        private final Charset charset_;
-
-        TestCharset(final String label, final Charset charset) {
-            label_ = label;
-            charset_ = charset;
-        }
-
-        @Override
-        public String toString() {
-            return label_;
-        }
-
-        public Charset getCharset() {
-            return charset_;
-        }
-    }
-
-    private enum TestMimeType {
-        EMPTY("EMPTY", ""),
-        XML("XML", MimeType.TEXT_XML),
-        PLAIN("PLAIN", MimeType.TEXT_PLAIN);
-
-        private final String label_;
-        private final String mimeType_;
-
-        TestMimeType(final String label, final String mimeType) {
-            label_ = label;
-            mimeType_ = mimeType;
-        }
-
-        @Override
-        public String toString() {
-            return label_;
-        }
-
-        public String getMimeType() {
-            return mimeType_;
-        }
-    }
+public class XMLHttpRequestResponseAsXMLEncodingTest extends AbstractXMLHttpRequestEncodingTest {
 
     /**
      * Returns the parameterized data.
