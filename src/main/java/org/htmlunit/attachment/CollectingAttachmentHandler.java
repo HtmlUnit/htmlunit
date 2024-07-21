@@ -14,6 +14,8 @@
  */
 package org.htmlunit.attachment;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ import org.htmlunit.WebAssert;
  */
 public class CollectingAttachmentHandler implements AttachmentHandler {
 
-    private final List<Attachment> collectedAttachments_;
+    private transient List<Attachment> collectedAttachments_;
 
     /**
      * Creates a new instance.
@@ -65,5 +67,10 @@ public class CollectingAttachmentHandler implements AttachmentHandler {
      */
     public List<Attachment> getCollectedAttachments() {
         return collectedAttachments_;
+    }
+
+    private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        collectedAttachments_ = new ArrayList<>();
     }
 }
