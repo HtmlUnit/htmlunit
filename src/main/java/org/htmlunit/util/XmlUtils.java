@@ -17,9 +17,11 @@ package org.htmlunit.util;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -128,27 +130,36 @@ public final class XmlUtils {
         }
 
         factory.setNamespaceAware(true);
-        final InputStreamReader reader = new InputStreamReader(
-                new BOMInputStream(webResponse.getContentAsStream()),
-                webResponse.getContentCharset());
 
-        // we have to do the blank input check and the parsing in one step
-        final TrackBlankContentAndSkipLeadingWhitespaceReader tracker
-                = new TrackBlankContentAndSkipLeadingWhitespaceReader(reader);
-
-        final InputSource source = new InputSource(tracker);
-        final DocumentBuilder builder = factory.newDocumentBuilder();
-        builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
-        builder.setEntityResolver((publicId, systemId) -> new InputSource(new StringReader("")));
-        try {
-            // this closes the input source/stream
-            return builder.parse(source);
-        }
-        catch (final SAXException e) {
-            if (tracker.wasBlank()) {
-                return factory.newDocumentBuilder().newDocument();
+        Charset charset = webResponse.getContentCharset();
+        try (InputStream is = webResponse.getContentAsStreamWithBomIfApplicable()) {
+            if (is instanceof BOMInputStream) {
+                final String bomCharsetName = ((BOMInputStream) is).getBOMCharsetName();
+                if (bomCharsetName != null) {
+                    charset = Charset.forName(bomCharsetName);
+                }
             }
-            throw e;
+
+            try (InputStreamReader reader = new InputStreamReader(is, charset)) {
+                // we have to do the blank input check and the parsing in one step
+                final TrackBlankContentAndSkipLeadingWhitespaceReader tracker
+                        = new TrackBlankContentAndSkipLeadingWhitespaceReader(reader);
+
+                final InputSource source = new InputSource(tracker);
+                final DocumentBuilder builder = factory.newDocumentBuilder();
+                builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
+                builder.setEntityResolver((publicId, systemId) -> new InputSource(new StringReader("")));
+                try {
+                    // this closes the input source/stream
+                    return builder.parse(source);
+                }
+                catch (final SAXException e) {
+                    if (tracker.wasBlank()) {
+                        return factory.newDocumentBuilder().newDocument();
+                    }
+                    throw e;
+                }
+            }
         }
     }
 
