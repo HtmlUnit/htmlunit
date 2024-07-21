@@ -48,7 +48,7 @@ import org.junit.Test;
  */
 public class CodeStyleTest {
 
-    private static final Pattern leadingWhitespace = Pattern.compile("^\\s+");
+    private static final Pattern LEADING_WHITESPACE = Pattern.compile("^\\s+");
     private List<String> failures_ = new ArrayList<>();
 
     /**
@@ -564,7 +564,7 @@ public class CodeStyleTest {
     }
 
     private static int getIndentation(final String line) {
-        final Matcher matcher = leadingWhitespace.matcher(line);
+        final Matcher matcher = LEADING_WHITESPACE.matcher(line);
         if (matcher.find()) {
             return matcher.end() - matcher.start();
         }
