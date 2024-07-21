@@ -52,7 +52,7 @@ public final class Platform {
     static {
         try {
             HelperSunXerces_ = (XmlUtilsHelperAPI)
-                    Class.forName("org.htmlunit.platform.util.XmlUtilsSunXercesHelper").newInstance();
+                    Class.forName("org.htmlunit.platform.util.XmlUtilsSunXercesHelper").getDeclaredConstructor().newInstance();
         }
         catch (final Exception | LinkageError ignored) {
             // ignore
@@ -60,7 +60,7 @@ public final class Platform {
 
         try {
             HelperXerces_ = (XmlUtilsHelperAPI)
-                    Class.forName("org.htmlunit.platform.util.XmlUtilsXercesHelper").newInstance();
+                    Class.forName("org.htmlunit.platform.util.XmlUtilsXercesHelper").getDeclaredConstructor().newInstance();
         }
         catch (final Exception | LinkageError ignored) {
             // ignore

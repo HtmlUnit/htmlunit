@@ -21,6 +21,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -264,7 +265,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final HtmlUnitScriptable prototype = configureClass(config, window, browserVersion);
                 if (config.isJsObject()) {
                     // Place object with prototype property in Window scope
-                    final HtmlUnitScriptable obj = config.getHostClass().newInstance();
+                    final HtmlUnitScriptable obj = config.getHostClass().getDeclaredConstructor().newInstance();
                     prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                     obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
                     obj.setParentScope(window);
@@ -306,7 +307,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         constructor = (ScriptableObject) ScriptableObject.getProperty(window, "constructor");
                     }
                     else {
-                        constructor = config.getHostClass().newInstance();
+                        constructor = config.getHostClass().getDeclaredConstructor().newInstance();
                         ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
                     }
                     defineConstructor(window, prototype, constructor);
@@ -527,12 +528,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @throws InstantiationException if the new class cannot be instantiated
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
+     * @throws SecurityException 
+     * @throws NoSuchMethodException 
+     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException 
      */
     public static HtmlUnitScriptable configureClass(final ClassConfiguration config, final Scriptable window,
             final BrowserVersion browserVersion)
-        throws InstantiationException, IllegalAccessException {
+        throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 
-        final HtmlUnitScriptable prototype = config.getHostClass().newInstance();
+        final HtmlUnitScriptable prototype = config.getHostClass().getDeclaredConstructor().newInstance();
         prototype.setParentScope(window);
         prototype.setClassName(config.getClassName());
 
