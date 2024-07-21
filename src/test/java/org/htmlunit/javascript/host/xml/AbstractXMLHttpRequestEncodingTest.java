@@ -18,7 +18,10 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.util.MimeType;
 
@@ -86,5 +89,29 @@ public abstract class AbstractXMLHttpRequestEncodingTest extends WebDriverTestCa
         public String getMimeType() {
             return mimeType_;
         }
+    }
+
+    protected void setupXmlResponse(final String xml, final String bom, final TestMimeType mimeTypeXml,
+            final TestCharset charsetXmlResponseHeader) {
+        if (BOM_UTF_8.equals(bom)) {
+            final byte[] xmlBytes =
+                    ArrayUtils.addAll(ByteOrderMark.UTF_8.getBytes(), xml.getBytes(StandardCharsets.UTF_8));
+            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
+            return;
+        }
+        if (BOM_UTF_16BE.equals(bom)) {
+            final byte[] xmlBytes =
+                    ArrayUtils.addAll(ByteOrderMark.UTF_16BE.getBytes(), xml.getBytes(StandardCharsets.UTF_16BE));
+            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
+            return;
+        }
+        if (BOM_UTF_16LE.equals(bom)) {
+            final byte[] xmlBytes =
+                    ArrayUtils.addAll(ByteOrderMark.UTF_16LE.getBytes(), xml.getBytes(StandardCharsets.UTF_16LE));
+            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
+            return;
+        }
+        getMockWebConnection().setResponse(URL_SECOND, xml, mimeTypeXml.getMimeType(),
+                charsetXmlResponseHeader == null ? null : charsetXmlResponseHeader.getCharset());
     }
 }

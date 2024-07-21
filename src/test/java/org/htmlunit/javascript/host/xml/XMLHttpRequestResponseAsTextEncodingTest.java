@@ -14,13 +14,10 @@
  */
 package org.htmlunit.javascript.host.xml;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.io.ByteOrderMark;
-import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.util.MimeType;
@@ -208,26 +205,7 @@ public class XMLHttpRequestResponseAsTextEncodingTest extends AbstractXMLHttpReq
             }
         }
 
-        if (BOM_UTF_8.equals(bom)) {
-            final byte[] xmlBytes =
-                    ArrayUtils.addAll(ByteOrderMark.UTF_8.getBytes(), xml.getBytes(StandardCharsets.UTF_8));
-            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
-        }
-        else if (BOM_UTF_16BE.equals(bom)) {
-            final byte[] xmlBytes =
-                    ArrayUtils.addAll(ByteOrderMark.UTF_16BE.getBytes(), xml.getBytes(StandardCharsets.UTF_16BE));
-            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
-        }
-        else if (BOM_UTF_16LE.equals(bom)) {
-            final byte[] xmlBytes =
-                    ArrayUtils.addAll(ByteOrderMark.UTF_16LE.getBytes(), xml.getBytes(StandardCharsets.UTF_16LE));
-            getMockWebConnection().setResponse(URL_SECOND, xmlBytes, 200, "OK", mimeTypeXml.getMimeType(), null);
-        }
-        else {
-            getMockWebConnection().setResponse(URL_SECOND, xml, mimeTypeXml.getMimeType(),
-                    charsetXmlResponseHeader == null ? null : charsetXmlResponseHeader.getCharset());
-        }
-
+        setupXmlResponse(xml, bom, mimeTypeXml, charsetXmlResponseHeader);
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML,
                 charsetHtmlResponseHeader == null ? null : charsetHtmlResponseHeader.getCharset());
 
