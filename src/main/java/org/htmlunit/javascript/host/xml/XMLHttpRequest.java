@@ -93,7 +93,6 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebResponseWrapper;
 import org.htmlunit.util.XUserDefinedCharset;
-import org.htmlunit.xml.XmlPage;
 
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.
@@ -378,34 +377,22 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
         else if (RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
             if (webResponse_ != null) {
-                final String contentType = webResponse_.getContentType();
-                if (contentType.isEmpty() || contentType.contains("xml")) {
+                String contentType = webResponse_.getContentType();
+                if (StringUtils.isEmpty(contentType)) {
+                    contentType = MimeType.TEXT_XML;
+                }
+                try {
                     final Charset encoding = webResponse_.getContentCharset();
                     final String content = webResponse_.getContentAsString(encoding);
                     if (content == null) {
                         return "";
                     }
-                    final XMLDocument document = new XMLDocument();
-                    document.setParentScope(getParentScope());
-                    document.setPrototype(ScriptableObject.getClassPrototype(getWindow(), document.getClassName()));
-                    document.loadXML(content);
-                    return document;
+                    return DOMParser.parseFromString(this, content, contentType);
                 }
-                if (contentType.contains("html")) {
-                    try {
-                        final Charset encoding = webResponse_.getContentCharset();
-                        final String content = webResponse_.getContentAsString(encoding);
-                        if (content == null) {
-                            return "";
-                        }
-                        return DOMParser.parseFromString(this, content, webResponse_.getContentType());
-                    }
-                    catch (final IOException e) {
-                        webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
-                        return null;
-                    }
+                catch (final IOException e) {
+                    webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
+                    return null;
                 }
-                return null;
             }
         }
         else if (RESPONSE_TYPE_JSON.equals(responseType_)) {
@@ -500,29 +487,29 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return null;
         }
 
-        final String contentType = webResponse_.getContentType();
-        if (contentType.isEmpty() || contentType.contains("xml")) {
-            final Window w = getWindow();
-            try {
-                final XmlPage page = new XmlPage(webResponse_, w.getWebWindow());
-                final XMLDocument document = new XMLDocument();
-                document.setPrototype(getPrototype(document.getClass()));
-                document.setParentScope(w);
-                document.setDomNode(page);
-                return document;
-            }
-            catch (final IOException e) {
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Failed parsing XML document '" + webResponse_.getWebRequest().getUrl() + "'", e);
-                }
+        String contentType = webResponse_.getContentType();
+        if (StringUtils.isEmpty(contentType)) {
+            contentType = MimeType.TEXT_XML;
+        }
+
+        if (MimeType.TEXT_HTML.equalsIgnoreCase(contentType)) {
+            if (!async_ || !RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
                 return null;
             }
         }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("XMLHttpRequest.responseXML was called but the response is '"
-                + webResponse_.getContentType() + "'");
+
+        try {
+            final Charset encoding = webResponse_.getContentCharset();
+            final String content = webResponse_.getContentAsString(encoding);
+            if (content == null) {
+                return "";
+            }
+            return DOMParser.parseFromString(this, content, contentType);
         }
-        return null;
+        catch (final IOException e) {
+            webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
+            return null;
+        }
     }
 
     /**

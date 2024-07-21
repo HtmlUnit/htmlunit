@@ -9,8 +9,12 @@
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Firefox 128, Bugfixes">
             <action type="fix" dev="rbri">
-                XMLHttprequest response property now handles the XMLDocument generation the same way
-                as the property responseXML.
+                XMLHttprequest 'responseXML' - if the responseType is set to 'document' and the request 
+                was made asynchronously then support 'text/html' content type.
+            </action>
+            <action type="fix" dev="rbri">
+                XMLHttprequest 'response'' property now handles the XMLDocument generation the same way
+                as the property 'responseXML'.
             </action>
             <action type="fix" dev="rbri">
                 The response encoding determination for XMLHttprequest fixed. If the content type header does not contain
