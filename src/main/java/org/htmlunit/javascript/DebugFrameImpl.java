@@ -142,22 +142,16 @@ public class DebugFrameImpl extends DebugFrameAdapter {
         if (LOG.isTraceEnabled()) {
             if (t instanceof JavaScriptException) {
                 final JavaScriptException e = (JavaScriptException) t;
-                if (LOG.isTraceEnabled()) {
-                    LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
-                        + " Exception thrown: " + JavaScriptEngine.toString(e.details()));
-                }
+                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
+                    + " Exception thrown: " + JavaScriptEngine.toString(e.details()));
             }
             else if (t instanceof EcmaError) {
                 final EcmaError e = (EcmaError) t;
-                if (LOG.isTraceEnabled()) {
-                    LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
-                        + " Exception thrown: " + JavaScriptEngine.toString(e.details()));
-                }
+                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
+                    + " Exception thrown: " + JavaScriptEngine.toString(e.details()));
             }
             else {
-                if (LOG.isTraceEnabled()) {
-                    LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
-                }
+                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
             }
         }
     }
