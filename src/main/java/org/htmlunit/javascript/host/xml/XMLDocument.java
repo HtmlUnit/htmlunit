@@ -152,7 +152,7 @@ public class XMLDocument extends Document {
                     = ((JavaScriptEngine) getWindow().getWebWindow().getWebClient()
                         .getJavaScriptEngine()).getJavaScriptClass(domNode.getClass());
                 try {
-                    scriptable = javaScriptClass.newInstance();
+                    scriptable = javaScriptClass.getDeclaredConstructor().newInstance();
                 }
                 catch (final Exception e) {
                     throw JavaScriptEngine.throwAsScriptRuntimeEx(e);

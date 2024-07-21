@@ -262,7 +262,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         }
         else {
             try {
-                scriptable = javaScriptClass.newInstance();
+                scriptable = javaScriptClass.getDeclaredConstructor().newInstance();
             }
             catch (final Exception e) {
                 throw JavaScriptEngine.throwAsScriptRuntimeEx(e);

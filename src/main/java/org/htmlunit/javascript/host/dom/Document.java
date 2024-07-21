@@ -29,6 +29,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -1137,13 +1138,13 @@ public class Document extends Node {
                 "Event Type is not supported: " + eventType));
         }
         try {
-            final Event event = clazz.newInstance();
+            final Event event = clazz.getDeclaredConstructor().newInstance();
             event.setParentScope(getWindow());
             event.setPrototype(getPrototype(clazz));
             event.eventCreated();
             return event;
         }
-        catch (final InstantiationException | IllegalAccessException e) {
+        catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
             throw JavaScriptEngine.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
                             + "' for event type of '" + eventType + "': " + e.getMessage());
         }
