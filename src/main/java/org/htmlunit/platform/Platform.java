@@ -52,16 +52,16 @@ public final class Platform {
 
     static {
         try {
-            HelperSunXerces_ = (XmlUtilsHelperAPI)
-                    Class.forName("org.htmlunit.platform.util.XmlUtilsSunXercesHelper").getDeclaredConstructor().newInstance();
+            HelperSunXerces_ = (XmlUtilsHelperAPI) Class.forName("org.htmlunit.platform.util.XmlUtilsSunXercesHelper")
+                                                    .getDeclaredConstructor().newInstance();
         }
         catch (final Exception | LinkageError ignored) {
             // ignore
         }
 
         try {
-            HelperXerces_ = (XmlUtilsHelperAPI)
-                    Class.forName("org.htmlunit.platform.util.XmlUtilsXercesHelper").getDeclaredConstructor().newInstance();
+            HelperXerces_ = (XmlUtilsHelperAPI) Class.forName("org.htmlunit.platform.util.XmlUtilsXercesHelper")
+                                                    .getDeclaredConstructor().newInstance();
         }
         catch (final Exception | LinkageError ignored) {
             // ignore

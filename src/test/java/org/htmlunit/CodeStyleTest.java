@@ -50,7 +50,8 @@ import org.junit.Test;
 public class CodeStyleTest {
 
     private static final Pattern LEADING_WHITESPACE = Pattern.compile("^\\s+");
-    private static final Pattern LOG_STATIC_STRING = Pattern.compile("^\\s*LOG\\.[a-z]+\\(\"[^\"]*\"(, [a-zA-Z_]+)?\\);");
+    private static final Pattern LOG_STATIC_STRING =
+                                    Pattern.compile("^\\s*LOG\\.[a-z]+\\(\"[^\"]*\"(, [a-zA-Z_]+)?\\);");
     private List<String> failures_ = new ArrayList<>();
 
     /**

@@ -32,7 +32,7 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class RangeTest extends WebDriverTestCase {
 
-    private static final String contentStart = "<html><head><title></title>\n"
+    private static final String CONTENT_START = "<html><head><title></title>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
@@ -49,7 +49,7 @@ public class RangeTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  var r = document.createRange();\n";
 
-    private static final String contentEnd = "\n}\n</script></head>\n"
+    private static final String CONTENT_END = "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
         + "<a id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
@@ -63,7 +63,7 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0"})
     public void emptyRange() throws Exception {
-        loadPageVerifyTitle2(contentStart + "alertRange(r);" + contentEnd);
+        loadPageVerifyTitle2(CONTENT_START + "alertRange(r);" + CONTENT_END);
     }
 
     /**
@@ -75,7 +75,7 @@ public class RangeTest extends WebDriverTestCase {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
 
-        loadPageVerifyTitle2(contentStart + script + contentEnd);
+        loadPageVerifyTitle2(CONTENT_START + script + CONTENT_END);
     }
 
     /**
@@ -87,7 +87,7 @@ public class RangeTest extends WebDriverTestCase {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
 
-        loadPageVerifyTitle2(contentStart + script + contentEnd);
+        loadPageVerifyTitle2(CONTENT_START + script + CONTENT_END);
     }
 
     /**

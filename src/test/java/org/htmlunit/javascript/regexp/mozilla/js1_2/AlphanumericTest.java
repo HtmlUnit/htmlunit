@@ -29,17 +29,17 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class AlphanumericTest extends WebDriverTestCase {
 
-    private static final String non_alphanumeric = "~`!@#$%^&*()-+={[}]|\\\\:;\\'<,>./?\\f\\n\\r\\t \"\\v";
-    private static final String alphanumeric     = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    private static final String NON_ALPHANUMERIC = "~`!@#$%^&*()-+={[}]|\\\\:;\\'<,>./?\\f\\n\\r\\t \"\\v";
+    private static final String ALPHANUMERIC     = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     /**
      * Be sure all alphanumerics are matched by \w.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(alphanumeric)
+    @Alerts(ALPHANUMERIC)
     public void test1() throws Exception {
-        test("'" + alphanumeric + "'.match(new RegExp('\\\\w+'))", false);
+        test("'" + ALPHANUMERIC + "'.match(new RegExp('\\\\w+'))", false);
     }
 
     /**
@@ -50,7 +50,7 @@ public class AlphanumericTest extends WebDriverTestCase {
     @Alerts("7E-60-21-40-23-24-25-5E-26-2A-28-29-2D-2B-3D-7B-5B-7D-5D-7C-5C-"
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-B-")
     public void test2() throws Exception {
-        test("'" + non_alphanumeric + "'.match(new RegExp('\\\\W+'))", true);
+        test("'" + NON_ALPHANUMERIC + "'.match(new RegExp('\\\\W+'))", true);
     }
 
     /**
@@ -60,7 +60,7 @@ public class AlphanumericTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void test3() throws Exception {
-        test("'" + non_alphanumeric + "'.match(new RegExp('\\\\w+'))", false);
+        test("'" + NON_ALPHANUMERIC + "'.match(new RegExp('\\\\w+'))", false);
     }
 
     /**
@@ -70,7 +70,7 @@ public class AlphanumericTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void test4() throws Exception {
-        test("'" + alphanumeric + "'.match(new RegExp('\\\\W+'))", false);
+        test("'" + ALPHANUMERIC + "'.match(new RegExp('\\\\W+'))", false);
     }
 
     /**
@@ -78,9 +78,9 @@ public class AlphanumericTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(alphanumeric)
+    @Alerts(ALPHANUMERIC)
     public void test5() throws Exception {
-        test("'" + non_alphanumeric + alphanumeric + "'.match(new RegExp('\\\\w+'))", false);
+        test("'" + NON_ALPHANUMERIC + ALPHANUMERIC + "'.match(new RegExp('\\\\w+'))", false);
     }
 
     /**
@@ -91,7 +91,7 @@ public class AlphanumericTest extends WebDriverTestCase {
     @Alerts("7E-60-21-40-23-24-25-5E-26-2A-28-29-2D-2B-3D-7B-5B-7D-5D-7C-5C-"
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-B-")
     public void test6() throws Exception {
-        test("'" + alphanumeric + non_alphanumeric + "'.match(new RegExp('\\\\W+'))", true);
+        test("'" + ALPHANUMERIC + NON_ALPHANUMERIC + "'.match(new RegExp('\\\\W+'))", true);
     }
 
     /**
@@ -99,9 +99,9 @@ public class AlphanumericTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(alphanumeric)
+    @Alerts(ALPHANUMERIC)
     public void test7() throws Exception {
-        test("'" + alphanumeric + non_alphanumeric + "'.match(/\\w+/)", false);
+        test("'" + ALPHANUMERIC + NON_ALPHANUMERIC + "'.match(/\\w+/)", false);
     }
 
     /**
@@ -112,7 +112,7 @@ public class AlphanumericTest extends WebDriverTestCase {
     @Alerts("7E-60-21-40-23-24-25-5E-26-2A-28-29-2D-2B-3D-7B-5B-7D-5D-7C-5C-"
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-B-")
     public void test8() throws Exception {
-        test("'" + alphanumeric + non_alphanumeric + "'.match(/\\W+/)", true);
+        test("'" + ALPHANUMERIC + NON_ALPHANUMERIC + "'.match(/\\W+/)", true);
     }
 
     /**
@@ -131,9 +131,9 @@ public class AlphanumericTest extends WebDriverTestCase {
      */
     @Test
     public void test10() throws Exception {
-        for (int i = 0; i < alphanumeric.length(); i++) {
-            setExpectedAlerts(String.valueOf(alphanumeric.charAt(i)));
-            test("'" + "#$" + alphanumeric.charAt(i) + "%^" + "'.match(new RegExp('\\\\w'))", false);
+        for (int i = 0; i < ALPHANUMERIC.length(); i++) {
+            setExpectedAlerts(String.valueOf(ALPHANUMERIC.charAt(i)));
+            test("'" + "#$" + ALPHANUMERIC.charAt(i) + "%^" + "'.match(new RegExp('\\\\w'))", false);
         }
     }
 
@@ -145,8 +145,8 @@ public class AlphanumericTest extends WebDriverTestCase {
     @Alerts("\n")
     public void test11() throws Exception {
         final String[] exp = getExpectedAlerts();
-        for (int i = 0; i < non_alphanumeric.length() - 1; i++) {
-            final char ch = non_alphanumeric.charAt(i);
+        for (int i = 0; i < NON_ALPHANUMERIC.length() - 1; i++) {
+            final char ch = NON_ALPHANUMERIC.charAt(i);
             String expected = String.valueOf(ch);
             String input = expected;
             switch (ch) {

@@ -248,7 +248,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
         if (result != null) {
             return result;
         }
-        return UnknownElementFactory.instance;
+        return UnknownElementFactory.INSTANCE;
     }
 
     /**
@@ -294,7 +294,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
                 return factory;
             }
         }
-        return UnknownElementFactory.instance;
+        return UnknownElementFactory.INSTANCE;
     }
 }
 

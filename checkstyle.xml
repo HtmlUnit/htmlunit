@@ -119,10 +119,6 @@
             <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT"/>
         </module>
 
-        <module name="ConstantName">
-            <property name="format" value="log|^[A-Z][A-Z0-9_]*$"/>
-        </module>
-
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocMethod">
@@ -160,6 +156,9 @@
         <module name="TypeName"/>
         <module name="MemberName">
             <property name="format" value="^[a-z][a-zA-Z0-9_]+_$"/>
+        </module>
+        <module name="ConstantName">
+            <property name="format" value="log|^[A-Z][A-Z0-9_]*$"/>
         </module>
 
         <!-- Checks for imports                               -->

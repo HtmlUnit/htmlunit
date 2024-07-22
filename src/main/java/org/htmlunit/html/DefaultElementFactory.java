@@ -752,7 +752,7 @@ public class DefaultElementFactory implements ElementFactory {
             final JavaScriptConfiguration config =
                     JavaScriptConfiguration.getInstance(page.getWebClient().getBrowserVersion());
             if (config.getDomJavaScriptMappingFor(element.getClass()) == null) {
-                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+                return UnknownElementFactory.INSTANCE.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         return element;

@@ -32,7 +32,7 @@ import org.xml.sax.Attributes;
 public final class UnknownElementFactory implements ElementFactory {
 
     /** The singleton instance. */
-    public static final UnknownElementFactory instance = new UnknownElementFactory();
+    public static final UnknownElementFactory INSTANCE = new UnknownElementFactory();
 
     /** Private singleton constructor. */
     private UnknownElementFactory() {

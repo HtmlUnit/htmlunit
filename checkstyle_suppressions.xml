@@ -64,6 +64,10 @@
 
     <suppress checks="TypeName" files="webkit.*\.java$|moz.*\.java$"/>
     <suppress checks="TypeName" files="EXT_.*\.java$|OES_.*\.java$|WEBGL_.*\.java$|ANGLE_.*\.java$"/>
+    
+    <suppress checks="ConstantName" files="WebGL2RenderingContext.java"/>
+    <suppress checks="ConstantName" files="ArchitectureTest.java"/>
+    <suppress checks="ConstantName" files="Architecture2Test.java"/>
 
     <!-- JUnit Rules require the rules field to have public visibility. -->
     <!-- See http://checkstyle.sourceforge.net/config_design.html#VisibilityModifier -->

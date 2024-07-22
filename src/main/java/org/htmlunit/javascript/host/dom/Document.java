@@ -652,7 +652,7 @@ public class Document extends Node {
                 ((HtmlUnknownElement) element).markAsCreatedByJavascript();
             }
             else if (element instanceof HtmlSvg) {
-                element = UnknownElementFactory.instance.createElementNS(page, "", "svg", null);
+                element = UnknownElementFactory.INSTANCE.createElementNS(page, "", "svg", null);
                 ((HtmlUnknownElement) element).markAsCreatedByJavascript();
             }
             final Object jsElement = getScriptableFor(element);
@@ -1145,7 +1145,8 @@ public class Document extends Node {
             event.eventCreated();
             return event;
         }
-        catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+        catch (final InstantiationException | IllegalAccessException
+                | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
             throw JavaScriptEngine.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
                             + "' for event type of '" + eventType + "': " + e.getMessage());
         }
