@@ -5,10 +5,9 @@ name: Java CI with Maven
 
 on:
   pull_request:
-    paths:
-      - '.github/workflows/maven.yml'
-      - 'src/main/java/**'
-      - 'src/tests/java/**'
+    paths-ignore:
+      - '.github/**'
+      - '!.github/workflows/maven.yml'
 
 permissions:
   contents: read
@@ -30,5 +29,23 @@ jobs:
         java-version: ${{ matrix.Java }}
         distribution: 'temurin'
         cache: maven
+    - uses: reviewdog/action-setup@3f401fe1d58fe77e10d665ab713057375e39b887 # v0.20.1
+      name: Set up reviewdog
+      with:
+        reviewdog_version: latest
     - name: Build with Maven
       run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true compile test-compile
+    - name: Run CodeStyleTest
+      if: ${{ matrix.Java == 21 }}
+      run: EXPORT_FAILURES=1 mvn --batch-mode --fail-never --show-version -Dgpg.skip -Djava.awt.headless=true -Dtest=org.htmlunit.CodeStyleTest test
+    - name: Upload check results
+      if: ${{ matrix.Java == 21 }}
+      env:
+        WORKDIR: ./
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        [ -s target/CodeStyle.txt ] && cat target/CodeStyle.txt | { reviewdog -efm="%f, line %l: %m" -name="CodeStyleTest::codeStyle" -reporter=github-pr-check -filter-mode=diff_context -fail-on-error || touch reporterror; }
+        [ -s target/Tests.txt ] && cat target/Tests.txt | { reviewdog -efm="%f, line %l: %m" -name="CodeStyleTest::tests" -reporter=github-pr-check -filter-mode=diff_context -fail-on-error || touch reporterror; }
+        [ -s target/XMLStyle.txt ] && cat target/XMLStyle.txt | { reviewdog -efm="%f, line %l: %m" -name="CodeStyleTest::xmlStyle" -reporter=github-pr-check -filter-mode=diff_context -fail-on-error || touch reporterror; }
+        [ -f reporterror ] && exit 1
+        exit 0
