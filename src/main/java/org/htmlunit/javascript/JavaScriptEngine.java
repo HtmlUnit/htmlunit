@@ -104,6 +104,8 @@ import org.htmlunit.javascript.polyfill.Polyfill;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Lai Quang Duong
+ * @author Sven Strickroth
+ *
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
@@ -528,10 +530,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @throws InstantiationException if the new class cannot be instantiated
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
-     * @throws SecurityException 
-     * @throws NoSuchMethodException 
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
+     * @throws SecurityException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalArgumentException
      */
     public static HtmlUnitScriptable configureClass(final ClassConfiguration config, final Scriptable window,
             final BrowserVersion browserVersion)

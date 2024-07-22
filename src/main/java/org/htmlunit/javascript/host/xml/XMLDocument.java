@@ -49,6 +49,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  * @author Chuck Dumont
  * @author Frank Danek
+ * @author Sven Strickroth
  */
 @JsxClass
 public class XMLDocument extends Document {

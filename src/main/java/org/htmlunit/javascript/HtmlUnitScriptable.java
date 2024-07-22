@@ -49,6 +49,7 @@ import org.htmlunit.javascript.host.html.HTMLUnknownElement;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
 

@@ -39,6 +39,7 @@ import org.w3c.dom.Node;
  * This is required to support at least the differences with android.
  *
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 public final class Platform {
 
