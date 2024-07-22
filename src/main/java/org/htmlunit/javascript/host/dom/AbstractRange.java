@@ -152,7 +152,7 @@ public class AbstractRange extends HtmlUnitScriptable {
     @JsxGetter
     public Object getStartContainer() {
         if (startContainer_ == null) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return startContainer_;
     }
@@ -164,7 +164,7 @@ public class AbstractRange extends HtmlUnitScriptable {
     @JsxGetter
     public Object getEndContainer() {
         if (endContainer_ == null) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return endContainer_;
     }

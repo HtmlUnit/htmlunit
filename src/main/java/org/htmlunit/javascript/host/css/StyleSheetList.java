@@ -137,7 +137,7 @@ public class StyleSheetList extends HtmlUnitScriptable {
     @JsxFunction
     public Object item(final int index) {
         if (nodes_ == null || index < 0 || index >= nodes_.getLength()) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
 
         final HTMLElement element = (HTMLElement) nodes_.item(Integer.valueOf(index));

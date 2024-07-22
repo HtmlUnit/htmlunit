@@ -1188,6 +1188,9 @@
         <contributor>
             <name>Marek Andreansky</name>
         </contributor>
+        <contributor>
+            <name>Sven Strickroth</name>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as depencency -->

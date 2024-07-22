@@ -146,7 +146,7 @@ public class HtmlPage extends SgmlPage {
 
     private static final Log LOG = LogFactory.getLog(HtmlPage.class);
 
-    private static final Comparator<DomElement> documentPositionComparator = new DocumentPositionComparator();
+    private static final Comparator<DomElement> DOCUMENT_POSITION_COMPERATOR = new DocumentPositionComparator();
 
     private HTMLParserDOMBuilder domBuilder_;
     private transient Charset originalCharset_;
@@ -155,7 +155,7 @@ public class HtmlPage extends SgmlPage {
     private Map<String, SortedSet<DomElement>> idMap_ = new ConcurrentHashMap<>();
     private Map<String, SortedSet<DomElement>> nameMap_ = new ConcurrentHashMap<>();
 
-    private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(documentPositionComparator);
+    private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(DOCUMENT_POSITION_COMPERATOR);
     private int parserCount_;
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
@@ -940,7 +940,7 @@ public class HtmlPage extends SgmlPage {
      */
     public ScriptResult executeJavaScript(String sourceCode, final String sourceName, final int startLine) {
         if (!getWebClient().isJavaScriptEnabled()) {
-            return new ScriptResult(JavaScriptEngine.Undefined);
+            return new ScriptResult(JavaScriptEngine.UNDEFINED);
         }
 
         if (StringUtils.startsWithIgnoreCase(sourceCode, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
@@ -1805,7 +1805,7 @@ public class HtmlPage extends SgmlPage {
         if (ATTRIBUTE_NOT_DEFINED != value) {
             SortedSet<DomElement> elements = map.get(value);
             if (elements == null) {
-                elements = new TreeSet<>(documentPositionComparator);
+                elements = new TreeSet<>(DOCUMENT_POSITION_COMPERATOR);
                 elements.add(element);
                 map.put(value, elements);
             }
@@ -1977,7 +1977,7 @@ public class HtmlPage extends SgmlPage {
             result.selectionRanges_ = new ArrayList<>(3);
             // the original one is synchronized so we should do that here too, shouldn't we?
             result.afterLoadActions_ = Collections.synchronizedList(new ArrayList<>());
-            result.frameElements_ = new TreeSet<>(documentPositionComparator);
+            result.frameElements_ = new TreeSet<>(DOCUMENT_POSITION_COMPERATOR);
             for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
                 result.appendChild(child.cloneNode(true));
             }

@@ -111,10 +111,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
     /** ScriptRuntime.emptyArgs. */
-    public static final Object[] emptyArgs = ScriptRuntime.emptyArgs;
+    public static final Object[] EMPTY_ARGS = ScriptRuntime.emptyArgs;
 
     /** org.htmlunit.corejs.javascript.Undefined.instance. */
-    public static final Object Undefined = org.htmlunit.corejs.javascript.Undefined.instance;
+    public static final Object UNDEFINED = org.htmlunit.corejs.javascript.Undefined.instance;
 
     private WebClient webClient_;
     private HtmlUnitContextFactory contextFactory_;

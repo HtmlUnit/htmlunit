@@ -56,7 +56,7 @@ public class MessageEvent extends Event {
         setType(TYPE_MESSAGE);
         origin_ = "";
         lastEventId_ = "";
-        data_ = JavaScriptEngine.Undefined;
+        data_ = JavaScriptEngine.UNDEFINED;
     }
 
     /**

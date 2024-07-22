@@ -48,11 +48,11 @@ import org.htmlunit.BrowserVersion;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class StyleAttributes implements Serializable {
-    private static final Map<String, Definition> styles_ = new HashMap<>();
+    private static final Map<String, Definition> STYLES = new HashMap<>();
 
     static {
         for (final Definition definition : Definition.values()) {
-            styles_.put(definition.getPropertyName(), definition);
+            STYLES.put(definition.getPropertyName(), definition);
         }
     }
 
@@ -71,7 +71,7 @@ public final class StyleAttributes implements Serializable {
             return null;
         }
 
-        final Definition definition = styles_.get(propertyName);
+        final Definition definition = STYLES.get(propertyName);
         if (definition == null) {
             return null;
         }
