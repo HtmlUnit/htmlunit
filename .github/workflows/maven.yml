@@ -33,6 +33,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true build
+      run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true compile
     - name: CodeStyleTest
       run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true -Dtest=org.htmlunit.CodeStyleTest test
