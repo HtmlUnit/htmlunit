@@ -32,7 +32,6 @@ import org.htmlunit.WebResponseData;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebConnectionWrapper;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -66,10 +65,10 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
     }
 
     private static final class OnlyLocalConnectionWrapper extends WebConnectionWrapper {
-        private static final WebResponseData responseData =
+        private static final WebResponseData RESPONSE_DATA =
                 new WebResponseData("not found".getBytes(StandardCharsets.US_ASCII),
                         HttpStatus.NOT_FOUND_404, HttpStatus.NOT_FOUND_404_MSG,
-                        new ArrayList<NameValuePair>());
+                        new ArrayList<>());
 
 
         private OnlyLocalConnectionWrapper(final WebClient webClient) {
@@ -85,7 +84,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
             }
 
 
-            return new WebResponse(responseData, request, 0);
+            return new WebResponse(RESPONSE_DATA, request, 0);
         }
     }
 

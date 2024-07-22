@@ -60,7 +60,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private final BrowserVersion browserVersion_;
     private final boolean realBrowser_;
-    static final boolean maven_ = System.getProperty("htmlunit.maven") != null;
+    static final boolean MAVEN = System.getProperty("htmlunit.maven") != null;
 
     /**
      * Constructs a new instance.
@@ -235,7 +235,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         if (realBrowser_) {
             browserString = "Real " + browserString;
         }
-        if (!maven_) {
+        if (!MAVEN) {
             return String.format("%s [%s]", method.getName(), browserString);
         }
         String className = method.getMethod().getDeclaringClass().getName();

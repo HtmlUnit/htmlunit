@@ -91,14 +91,14 @@ public class HTMLParser3Test extends WebServerTestCase {
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "test");
-        assertEquals(utf8Encoded, HeaderVsMetaTagContentTypeServlet.utf8String.equals(page.asNormalizedText()));
+        assertEquals(utf8Encoded, HeaderVsMetaTagContentTypeServlet.UTF8_STRING.equals(page.asNormalizedText()));
     }
 
     /**
      * Servlet for headerVsMetaTagContentType(boolean).
      */
     public static class HeaderVsMetaTagContentTypeServlet extends HttpServlet {
-        private static final String utf8String = "\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u0644";
+        private static final String UTF8_STRING = "\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u0644";
         private static Charset HEADER_ENCODING_;
         private static Charset META_TAG_ENCODING_;
 
@@ -121,7 +121,7 @@ public class HTMLParser3Test extends WebServerTestCase {
                 if (META_TAG_ENCODING_ != null) {
                     html += "<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=" + META_TAG_ENCODING_ + "'>";
                 }
-                html += "</head><body>" + utf8String + "</body></html>";
+                html += "</head><body>" + UTF8_STRING + "</body></html>";
                 writer.write(html);
             }
         }

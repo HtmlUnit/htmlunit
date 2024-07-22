@@ -135,7 +135,7 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
 
         final String methodName = method.getName();
 
-        if (!maven_) {
+        if (!MAVEN) {
             return String.format("%s [%s]", methodName, browserString);
         }
         String className = method.getMethod().getDeclaringClass().getName();

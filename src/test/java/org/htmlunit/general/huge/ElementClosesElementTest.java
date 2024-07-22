@@ -47,7 +47,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
 
     private static int ServerRestartCount_;
 
-    private static final List<String> parentZero = Arrays.asList("area", "base", "basefont", "bgsound", "br",
+    private static final List<String> PARENT_ZERO = Arrays.asList("area", "base", "basefont", "bgsound", "br",
             "command", "col", "colgroup",
             "embed", "frame", "frameset", "head", "hr", "iframe", "image", "img", "input", "keygen",
             "link", "meta", "noembed", "noframes", "noscript", "param", "plaintext",
@@ -55,15 +55,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             "table", "tbody", "template", "textarea", "tfoot", "thead", "title",
             "tr", "track", "wbr", "xmp");
 
-    private static final List<String> childZero = Arrays.asList("body", "caption", "col", "colgroup",
+    private static final List<String> CHILD_ZERO = Arrays.asList("body", "caption", "col", "colgroup",
             "frame", "frameset", "head", "html", "tbody", "td", "tfoot", "th", "thead", "tr");
 
-    private static final List<String> svgChildZero = Arrays.asList("b", "big", "blockquote", "body", "br",
+    private static final List<String> SVG_CHILD_ZERO = Arrays.asList("b", "big", "blockquote", "body", "br",
             "center", "code", "dd", "div", "dl", "dt", "em", "embed", "h1", "h2", "h3", "h4", "h5", "h6", "head",
             "hr", "i", "img", "li", "listing", "menu", "meta", "nobr", "ol", "p", "pre", "ruby", "s", "small",
             "span", "strike", "strong", "sub", "sup", "table", "tt", "u", "ul", "var");
 
-    private static final String resultScript = "  var e = document.getElementById('outer');\n"
+    private static final String RESULT_SCRIPT = "  var e = document.getElementById('outer');\n"
             + "  var res = '-';\n"
             + "  try {\n"
             + "    res = e == null ? e : e.children.length;\n"
@@ -171,10 +171,10 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             expected = getExpectedAlerts()[0];
         }
         else {
-            if (childZero.contains(child)) {
+            if (CHILD_ZERO.contains(child)) {
                 expected = "0";
             }
-            else if (parentZero.contains(parent)) {
+            else if (PARENT_ZERO.contains(parent)) {
                 expected = "0";
             }
             else if ("html".equals(parent)) {
@@ -183,7 +183,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
 
             if ("svg".equals(parent)) {
                 expected = "1";
-                if (svgChildZero.contains(child)) {
+                if (SVG_CHILD_ZERO.contains(child)) {
                     expected = "0";
                 }
             }
@@ -207,7 +207,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
 
         loadPage2(pageHtml);
 
-        final String result = (String) ((JavascriptExecutor) driver).executeScript(resultScript);
+        final String result = (String) ((JavascriptExecutor) driver).executeScript(RESULT_SCRIPT);
         assertEquals(expected, result);
     }
 

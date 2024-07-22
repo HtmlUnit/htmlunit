@@ -65,7 +65,7 @@ class BrowserStatement extends Statement {
                 if (notYetImplemented_) {
                     throw ex;
                 }
-                if (BrowserVersionClassRunner.maven_) {
+                if (BrowserVersionClassRunner.MAVEN) {
                     System.out.println("Failed test "
                             + method_.getDeclaringClass().getName() + '.' + method_.getName()
                             + (tries_ != 1 ? " #" + (i + 1) : ""));

@@ -40,7 +40,7 @@ import org.openqa.selenium.WebDriverException;
  */
 @RunWith(Enclosed.class)
 public class NoHttpResponseTest {
-    private static final String html
+    private static final String HTML
         = "<html><body><script>\n"
         + "  function fillField() {\n"
         + "    document.forms.loginform.textfield.value = 'new value';\n"
@@ -76,7 +76,7 @@ public class NoHttpResponseTest {
                 FF_ESR = "§§URL§§page2?textfield=")
         public void submit() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(URL_FIRST, html);
+            mockWebConnection.setResponse(URL_FIRST, HTML);
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
@@ -103,7 +103,7 @@ public class NoHttpResponseTest {
         @Alerts("right submit")
         public void callSubmitInButtonAndReturnTrue() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(URL_FIRST, html);
+            mockWebConnection.setResponse(URL_FIRST, HTML);
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
@@ -137,7 +137,7 @@ public class NoHttpResponseTest {
         @Test(expected = FailingHttpStatusCodeException.class)
         public void submit() throws Throwable {
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(URL_FIRST, html);
+            mockWebConnection.setResponse(URL_FIRST, HTML);
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
@@ -159,7 +159,7 @@ public class NoHttpResponseTest {
         @Test
         public void callSubmitInButtonAndReturnTrue() throws Throwable {
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(URL_FIRST, html);
+            mockWebConnection.setResponse(URL_FIRST, HTML);
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");

@@ -45,7 +45,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
         + "if (s != expected)\n"
         + "  throw 'Expected >' + expected + '< but got >' + s + '<';";
 
-    private static final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
+    private static final String SCRIPT_TEST_MATCH = "function arrayToString(_arr) {\n"
             + "  if (_arr == null) return null;\n"
             + "  var s = '[';\n"
             + "  for (var i = 0; i < _arr.length; i++)\n"
@@ -133,9 +133,9 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
         final Context cx = cf.enterContext();
         try {
             final ScriptableObject topScope = cx.initStandardObjects();
-            cx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
+            cx.evaluateString(topScope, SCRIPT_TEST_MATCH, "test script String.match", 0, null);
             try {
-                cx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
+                cx.evaluateString(topScope, SCRIPT_TEST_MATCH, "test script String.match", 0, null);
             }
             catch (final JavaScriptException e) {
                 assertTrue(e.getMessage().indexOf("Expected >") == 0);

@@ -707,7 +707,7 @@ public class WebClientTest extends SimpleWebTestCase {
     private static class CollectingPageCreator implements PageCreator {
         private final List<Page> collectedPages_;
 
-        private static final HTMLParser htmlParser_ = new HtmlUnitNekoHtmlParser();
+        private static final HTMLParser HTML_PARSER = new HtmlUnitNekoHtmlParser();
 
         /**
          * Creates an instance.
@@ -734,7 +734,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         @Override
         public HTMLParser getHtmlParser() {
-            return htmlParser_;
+            return HTML_PARSER;
         }
     }
 
