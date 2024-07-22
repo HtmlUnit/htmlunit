@@ -46,6 +46,8 @@ import org.htmlunit.javascript.host.event.Event;
  *
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Sven Strickroth
+ *
  * @see DebuggerImpl
  */
 public class DebugFrameImpl extends DebugFrameAdapter {
