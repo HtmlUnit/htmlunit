@@ -44,14 +44,14 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlImageDownloadTest extends WebServerTestCase {
-    private static final String base_file_path_ = "src/test/resources/org/htmlunit/html";
+    private static final String BASE_FILE_PATH = "src/test/resources/org/htmlunit/html";
 
     /**
      * Constructor.
      * @throws Exception if an exception occurs
      */
     public HtmlImageDownloadTest() throws Exception {
-        startWebServer(base_file_path_);
+        startWebServer(BASE_FILE_PATH);
     }
 
     /**

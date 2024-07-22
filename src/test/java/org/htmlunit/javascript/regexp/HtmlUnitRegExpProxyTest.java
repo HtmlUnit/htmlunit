@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
 
-    private static final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
+    private static final String SCRIPT_TEST_MATCH = "function arrayToString(_arr) {\n"
         + "  if (_arr == null) return null;\n"
         + "  var s = '[';\n"
         + "  for (var i = 0; i < _arr.length; i++)\n"
@@ -242,7 +242,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void match() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + scriptTestMatch_
+            + SCRIPT_TEST_MATCH
             + "</script></head><body>\n"
             + "</body></html>";
 

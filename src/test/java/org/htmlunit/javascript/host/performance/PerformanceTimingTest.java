@@ -31,7 +31,7 @@ import org.openqa.selenium.WebDriver;
  */
 @RunWith(BrowserRunner.class)
 public class PerformanceTimingTest extends WebDriverTestCase {
-    private static final long now = System.currentTimeMillis();
+    private static final long NOE = System.currentTimeMillis();
 
     /**
      * @throws Exception if the test fails
@@ -72,7 +72,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    log(performanceTiming.navigationStart > " + now + ");\n"
+                + "    log(performanceTiming.navigationStart > " + NOE + ");\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -175,7 +175,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.domainLookupStart;\n"
-                + "    log(start > " + now + ");\n"
+                + "    log(start > " + NOE + ");\n"
                 + "    log(performanceTiming.domainLookupEnd >= start);\n"
                 + "  }\n"
                 + "  test();\n"
@@ -202,7 +202,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.responseStart;\n"
-                + "    log(start > " + now + ");\n"
+                + "    log(start > " + NOE + ");\n"
                 + "    log(performanceTiming.responseEnd >= start);\n"
                 + "  }\n"
                 + "  test();\n"
@@ -229,7 +229,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.loadEventStart;\n"
-                + "    log(start > " + now + ");\n"
+                + "    log(start > " + NOE + ");\n"
                 + "    log(performanceTiming.loadEventEnd >= start);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -259,7 +259,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.connectStart;\n"
-                + "    log(start > " + now + ");\n"
+                + "    log(start > " + NOE + ");\n"
                 + "    log(performanceTiming.connectEnd >= start);\n"
                 + "  }\n"
                 + "  test();\n"
@@ -285,7 +285,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    log(performanceTiming.fetchStart > " + now + ");\n"
+                + "    log(performanceTiming.fetchStart > " + NOE + ");\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -311,7 +311,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.domContentLoadedEventStart;\n"
-                + "    log(start > " + now + ");\n"
+                + "    log(start > " + NOE + ");\n"
                 + "    log(performanceTiming.domContentLoadedEventEnd >= start);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -340,11 +340,11 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    log(performanceTiming.domLoading > " + now + ");\n"
-                + "    log(performanceTiming.domInteractive > " + now + ");\n"
-                + "    log(performanceTiming.domContentLoadedEventStart > " + now + ");\n"
-                + "    log(performanceTiming.domContentLoadedEventEnd > " + now + ");\n"
-                + "    log(performanceTiming.domComplete > " + now + ");\n"
+                + "    log(performanceTiming.domLoading > " + NOE + ");\n"
+                + "    log(performanceTiming.domInteractive > " + NOE + ");\n"
+                + "    log(performanceTiming.domContentLoadedEventStart > " + NOE + ");\n"
+                + "    log(performanceTiming.domContentLoadedEventEnd > " + NOE + ");\n"
+                + "    log(performanceTiming.domComplete > " + NOE + ");\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"

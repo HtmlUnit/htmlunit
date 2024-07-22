@@ -391,7 +391,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         servlets.put("/form_headers.html", FormHeaderServlet.class);
         startWebServer("./", null, servlets);
 
-        collectedHeaders_.clear();
+        COLLECTED_HEADERS.clear();
         XMLHttpRequest3Test.STATE_ = 0;
         final WebClient client = getWebClient();
 
@@ -406,24 +406,24 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         ((HtmlSubmitInput) elem).click();
 
         client.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
-        assertEquals(collectedHeaders_.toString(), 2, collectedHeaders_.size());
+        assertEquals(COLLECTED_HEADERS.toString(), 2, COLLECTED_HEADERS.size());
 
-        String headers = collectedHeaders_.get(0);
+        String headers = COLLECTED_HEADERS.get(0);
         if (!headers.startsWith("Form: ")) {
-            headers = collectedHeaders_.get(1);
+            headers = COLLECTED_HEADERS.get(1);
         }
         assertTrue(headers, headers.startsWith("Form: "));
         assertFalse(headers, headers.contains("Html-Unit=is great,;"));
 
-        headers = collectedHeaders_.get(0);
+        headers = COLLECTED_HEADERS.get(0);
         if (!headers.startsWith("Ajax: ")) {
-            headers = collectedHeaders_.get(1);
+            headers = COLLECTED_HEADERS.get(1);
         }
         assertTrue(headers, headers.startsWith("Ajax: "));
         assertTrue(headers, headers.contains("Html-Unit=is great,;"));
     }
 
-    static final List<String> collectedHeaders_ = Collections.synchronizedList(new ArrayList<String>());
+    static final List<String> COLLECTED_HEADERS = Collections.synchronizedList(new ArrayList<String>());
     static int STATE_ = 0;
 
     /**
@@ -485,7 +485,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
                 e.printStackTrace();
             }
 
-            collectedHeaders_.add("Ajax: " + header);
+            COLLECTED_HEADERS.add("Ajax: " + header);
             response.setContentType(MimeType.TEXT_PLAIN);
             final Writer writer = response.getWriter();
             writer.write(header);
@@ -518,7 +518,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
                     + "<p>Form: " + header + "</p<\n"
                     + "</body></html>";
 
-            collectedHeaders_.add("Form: " + header);
+            COLLECTED_HEADERS.add("Form: " + header);
             response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             writer.write(html);

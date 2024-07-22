@@ -35,12 +35,12 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
 
-    private static final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
-    private static final String begin_ = "<div>bla</div>";
-    private static final String end_ = "foo\n<span>bla2</span>";
-    private static final String text_ = begin_ + "<script>var a = 123;</script>" + end_;
-    private static final String expected_ = begin_ + end_;
-    private static final String src_ = "var re = new RegExp(str, 'img');\n"
+    private static final String STR = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
+    private static final String BEGIN = "<div>bla</div>";
+    private static final String END = "foo\n<span>bla2</span>";
+    private static final String TEXT = BEGIN + "<script>var a = 123;</script>" + END;
+    private static final String EXPECTED = BEGIN + END;
+    private static final String SRC = "var re = new RegExp(str, 'img');\n"
         + "var s = text.replace(re, '');\n"
         + "if (s != expected)\n"
         + "  throw 'Expected >' + expected + '< but got >' + s + '<';";
@@ -88,10 +88,10 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
         final ScriptableObject topScope = page.getEnclosingWindow().getScriptableObject();
-        topScope.put("str", topScope, str_);
-        topScope.put("text", topScope, text_);
-        topScope.put("expected", topScope, expected_);
-        page.executeJavaScript(src_);
+        topScope.put("str", topScope, STR);
+        topScope.put("text", topScope, TEXT);
+        topScope.put("expected", topScope, EXPECTED);
+        page.executeJavaScript(SRC);
     }
 
     /**
@@ -104,12 +104,12 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
         final Context ctx = cf.enterContext();
         try {
             final ScriptableObject topScope = ctx.initStandardObjects();
-            topScope.put("str", topScope, str_);
-            topScope.put("text", topScope, text_);
-            topScope.put("expected", topScope, expected_);
-            assertEquals(begin_ + end_, text_.replaceAll(str_, ""));
+            topScope.put("str", topScope, STR);
+            topScope.put("text", topScope, TEXT);
+            topScope.put("expected", topScope, EXPECTED);
+            assertEquals(BEGIN + END, TEXT.replaceAll(STR, ""));
             try {
-                ctx.evaluateString(topScope, src_, "test script", 0, null);
+                ctx.evaluateString(topScope, SRC, "test script", 0, null);
             }
             catch (final JavaScriptException e) {
                 assertTrue(e.getMessage().indexOf("Expected >") == 0);

@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class TreeWalkerTest extends WebDriverTestCase {
-    private static final String contentStart = "<html><head><title></title>\n"
+    private static final String CONTENT_START = "<html><head><title></title>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
@@ -44,7 +44,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  try {\n";
 
-    private static final String contentEnd = "\n  } catch(e) { log('exception') }\n"
+    private static final String CONTENT_END = "\n  } catch(e) { log('exception') }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -54,12 +54,12 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "</body></html>";
 
     private void test(final String script) throws Exception {
-        final String html = contentStart + script + contentEnd;
+        final String html = CONTENT_START + script + CONTENT_END;
 
         loadPageVerifyTitle2(html);
     }
 
-    private static final String contentStart2 = "<html><head><title></title>\n"
+    private static final String CONTENT_START2 = "<html><head><title></title>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
@@ -68,7 +68,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  try {\n";
 
-    private static final String contentEnd2 = "\n  } catch(e) { log('exception') }\n"
+    private static final String CONTENT_END2 = "\n  } catch(e) { log('exception') }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -79,7 +79,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "</body></html>";
 
     private void test2(final String script) throws Exception {
-        final String html = contentStart2 + script + contentEnd2;
+        final String html = CONTENT_START2 + script + CONTENT_END2;
 
         loadPageVerifyTitle2(html);
     }

@@ -41,7 +41,7 @@ import org.junit.runners.Parameterized.Parameters;
 @Ignore("Work in progress")
 public class HostConstructorTest extends WebDriverTestCase {
 
-    private static final HashSet<String> passing = new HashSet<>(Arrays.asList(
+    private static final HashSet<String> PASSING = new HashSet<>(Arrays.asList(
             "Animation",
             "Blob",
             "DOMParser",
@@ -102,7 +102,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     }
 
     private String getExpectedString(final String className) throws Exception {
-        if (passing.contains(className)) {
+        if (PASSING.contains(className)) {
             return "[object " + className_ + "]";
         }
 
