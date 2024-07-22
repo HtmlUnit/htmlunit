@@ -41,8 +41,6 @@ jobs:
         echo "2"
         ls -las target
         echo "3"
-        ls -las target/surefire-reports/**/*.xml
-        echo "4"
         cat target/checkstyle-result.xml \
              | /opt/reviewdog -f=checkstyle \
                   -reporter="${INPUT_REPORTER:-github-pr-check}" \
