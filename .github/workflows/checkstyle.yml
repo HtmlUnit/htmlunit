@@ -1,0 +1,39 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+name: CheckStyle
+
+on:
+  push:
+    paths-ignore:
+      - '.github/workflows/*.yml'
+      - '!.github/workflows/checkstyle.yml'
+  pull_request:
+    paths-ignore:
+      - '.github/workflows/*.yml'
+      - '!.github/workflows/checkstyle.yml'
+
+permissions:
+  contents: read
+
+Checkstyle:
+  name: Check code style
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    # In the checkout@v2, it doesn't support git submodule. Execute the commands manually.
+    - name: check code style
+      env:
+        WORKDIR: ./
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CHECKSTYLE_CONFIG: checkstyle.xml
+        REVIEWDOG_VERSION: v0.20.1
+      run: |
+        wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.22/checkstyle-8.22-all.jar > /opt/checkstyle.jar
+        wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /opt ${REVIEWDOG_VERSION}
+        java -jar /opt/checkstyle.jar "${WORKDIR}" -c "${CHECKSTYLE_CONFIG}"  -f xml \
+             | /opt/reviewdog -f=checkstyle \
+                  -reporter="${INPUT_REPORTER:-github-pr-check}" \
+                  -filter-mode="${INPUT_FILTER_MODE:-added}" \
+                  -fail-on-error="${INPUT_FAIL_ON_ERROR:-false}"
