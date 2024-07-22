@@ -56,6 +56,6 @@ public class External extends HtmlUnitScriptable {
      */
     @JsxFunction(functionName = "IsSearchProviderInstalled")
     public Object isSearchProviderInstalled() {
-        return JavaScriptEngine.Undefined;
+        return JavaScriptEngine.UNDEFINED;
     }
 }

@@ -22,7 +22,7 @@ package org.htmlunit.util.geometry;
 public interface Shape2D {
 
     /** Constant used for comparing doubles. */
-    double epsilon = 0.000_000_1;
+    double EPSILON = 0.000_000_1;
 
     /**
      * @param x point x value

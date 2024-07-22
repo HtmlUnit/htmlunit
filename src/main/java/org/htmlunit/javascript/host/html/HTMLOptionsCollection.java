@@ -92,11 +92,11 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         if (htmlSelect_ == null || index < 0) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
 
         if (index >= htmlSelect_.getOptionSize()) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
 
         return getScriptableFor(htmlSelect_.getOption(index));

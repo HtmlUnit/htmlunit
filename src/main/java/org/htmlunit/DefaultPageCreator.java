@@ -80,18 +80,18 @@ import org.htmlunit.xml.XmlPage;
  */
 public class DefaultPageCreator implements PageCreator, Serializable {
 
-    private static final byte[] markerUTF8_ = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
-    private static final byte[] markerUTF16BE_ = {(byte) 0xfe, (byte) 0xff};
-    private static final byte[] markerUTF16LE_ = {(byte) 0xff, (byte) 0xfe};
+    private static final byte[] MARKER_UTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
+    private static final byte[] MARKER_UTF16BE = {(byte) 0xfe, (byte) 0xff};
+    private static final byte[] MARKER_UTF16LE = {(byte) 0xff, (byte) 0xfe};
 
     /**
      * See <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05">
      * http://tools.ietf.org/html/draft-abarth-mime-sniff-05</a>
      */
-    private static final String[] htmlPatterns = {"!DOCTYPE HTML", "HTML", "HEAD", "SCRIPT",
+    private static final String[] HTML_PATTERNS = {"!DOCTYPE HTML", "HTML", "HEAD", "SCRIPT",
         "IFRAME", "H1", "DIV", "FONT", "TABLE", "A", "STYLE", "TITLE", "B", "BODY", "BR", "P", "!--" };
 
-    private static final HTMLParser htmlParser_ = new HtmlUnitNekoHtmlParser();
+    private static final HTMLParser HTML_PARSER = new HtmlUnitNekoHtmlParser();
 
     /**
      * The different supported page types.
@@ -169,8 +169,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
 
             // looks a bit strange but correct
             // if there is a bom header the browsers are handling this as text page
-            if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
-                    || startsWith(bytes, markerUTF16LE_)) {
+            if (startsWith(bytes, MARKER_UTF8) || startsWith(bytes, MARKER_UTF16BE)
+                    || startsWith(bytes, MARKER_UTF16LE)) {
                 return determinePageType(MimeType.TEXT_PLAIN);
             }
 
@@ -184,7 +184,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return determinePageType(MimeType.TEXT_XML);
             }
 
-            for (final String htmlPattern : htmlPatterns) {
+            for (final String htmlPattern : HTML_PATTERNS) {
                 try {
                     if ('<' == asAsciiString.charAt(0)) {
                         if (asAsciiString.startsWith(htmlPattern, 1)) {
@@ -242,7 +242,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     @Override
     public HTMLParser getHtmlParser() {
-        return htmlParser_;
+        return HTML_PARSER;
     }
 
     /**
@@ -297,7 +297,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         final HtmlPage page = new HtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        htmlParser_.parse(webResponse, page, false, false);
+        HTML_PARSER.parse(webResponse, page, false, false);
         return page;
     }
 
@@ -313,7 +313,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        htmlParser_.parse(webResponse, page, true, false);
+        HTML_PARSER.parse(webResponse, page, true, false);
         return page;
     }
 

@@ -281,7 +281,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         private static final BitSet TOKEN_DELIMS = TokenParser.INIT_BITSET('=', PARAM_DELIMITER);
         private static final BitSet VALUE_DELIMS = TokenParser.INIT_BITSET(PARAM_DELIMITER);
 
-        private static final TokenParser tokenParser_ = TokenParser.INSTANCE;
+        private static final TokenParser TOKEN_PARSER = TokenParser.INSTANCE;
 
         HeaderElement parseHeader(final CharArrayBuffer buffer, final ParserCursor cursor) throws ParseException {
             final NameValuePair nvp = parseNameValuePair(buffer, cursor);
@@ -296,7 +296,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         }
 
         private NameValuePair parseNameValuePair(final CharArrayBuffer buffer, final ParserCursor cursor) {
-            final String name = tokenParser_.parseToken(buffer, cursor, TOKEN_DELIMS);
+            final String name = TOKEN_PARSER.parseToken(buffer, cursor, TOKEN_DELIMS);
             if (cursor.atEnd()) {
                 return new BasicNameValuePair(name, null);
             }
@@ -307,7 +307,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 return new BasicNameValuePair(name, null);
             }
 
-            final String value = tokenParser_.parseToken(buffer, cursor, VALUE_DELIMS);
+            final String value = TOKEN_PARSER.parseToken(buffer, cursor, VALUE_DELIMS);
             if (!cursor.atEnd()) {
                 cursor.updatePos(cursor.getPos() + 1);
             }

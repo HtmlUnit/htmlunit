@@ -150,7 +150,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxGetter
     public Object getCode() {
         if (code_ == -1) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return code_;
     }
@@ -162,7 +162,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxGetter
     public Object getMessage() {
         if (message_ == null) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return message_;
     }
@@ -174,7 +174,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxGetter({FF, FF_ESR})
     public Object getLineNumber() {
         if (lineNumber_ == -1) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return lineNumber_;
     }
@@ -186,7 +186,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxGetter({FF, FF_ESR})
     public Object getFilename() {
         if (fileName_ == null) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return fileName_;
     }

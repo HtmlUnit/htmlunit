@@ -243,7 +243,7 @@ public class Range extends AbstractRange {
             ancestor = ancestor.getParent();
         }
 
-        return JavaScriptEngine.Undefined;
+        return JavaScriptEngine.UNDEFINED;
     }
 
     /**

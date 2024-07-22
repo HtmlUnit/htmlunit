@@ -52,7 +52,7 @@ public class Line2D implements Shape2D {
         endX_ = x2;
         endY_ = y2;
 
-        isVertical_ = Math.abs(startX_ - endX_) < epsilon;
+        isVertical_ = Math.abs(startX_ - endX_) < EPSILON;
         if (isVertical_) {
             slope_ = Double.NaN;
             yIntercept_ = Double.NaN;
@@ -84,7 +84,7 @@ public class Line2D implements Shape2D {
         }
 
         // parallel?
-        if (Math.abs(slope_ - line.slope_) < epsilon) {
+        if (Math.abs(slope_ - line.slope_) < EPSILON) {
             return null;
         }
 
@@ -101,13 +101,13 @@ public class Line2D implements Shape2D {
     @Override
     public boolean contains(final double x, final double y) {
         if (isVertical_) {
-            if (Math.abs(startX_ - x) > epsilon) {
+            if (Math.abs(startX_ - x) > EPSILON) {
                 return false;
             }
         }
         else {
             final double testY = slope_ * x + yIntercept_;
-            if (Math.abs(y - testY) > epsilon) {
+            if (Math.abs(y - testY) > EPSILON) {
                 return false;
             }
 
@@ -130,7 +130,7 @@ public class Line2D implements Shape2D {
      */
     @Override
     public boolean isEmpty() {
-        return Math.abs(startX_ - endX_) < epsilon && Math.abs(startY_ - endY_) < epsilon;
+        return Math.abs(startX_ - endX_) < EPSILON && Math.abs(startY_ - endY_) < EPSILON;
     }
 
     @Override

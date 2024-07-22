@@ -52,7 +52,7 @@ public class Circle2D implements Shape2D {
      */
     @Override
     public boolean isEmpty() {
-        return radius_ < epsilon;
+        return radius_ < EPSILON;
     }
 
     @Override

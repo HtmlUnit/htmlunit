@@ -102,7 +102,7 @@ public class Rectangle2D implements Shape2D {
      */
     @Override
     public boolean isEmpty() {
-        return Math.abs(top_ - bottom_) < epsilon || Math.abs(left_ - right_) < epsilon;
+        return Math.abs(top_ - bottom_) < EPSILON || Math.abs(left_ - right_) < EPSILON;
     }
 
     @Override

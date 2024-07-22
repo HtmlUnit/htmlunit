@@ -270,7 +270,7 @@ public class Node extends EventTarget {
             refChildObject = args[1];
         }
         else {
-            refChildObject = JavaScriptEngine.Undefined;
+            refChildObject = JavaScriptEngine.UNDEFINED;
         }
         Object insertedChild = null;
 

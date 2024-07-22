@@ -1172,13 +1172,13 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         if (index < 0) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
 
         final Map<String, StyleElement> style = getStyleMap();
         final int size = style.size();
         if (index >= size) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return style.keySet().toArray(new String[size])[index];
     }

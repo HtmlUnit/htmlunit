@@ -40,7 +40,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     public static final String PRIORITY_IMPORTANT = "important";
 
     /** The current style element index. */
-    private static final AtomicLong ElementIndex_ = new AtomicLong();
+    private static final AtomicLong ELEMENT_INDEX = new AtomicLong();
 
     private final String name_;
     private final String value_;
@@ -74,7 +74,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
      */
     public StyleElement(final String name, final String value, final String priority,
             final SelectorSpecificity specificity) {
-        this(name, value, priority, specificity, ElementIndex_.incrementAndGet());
+        this(name, value, priority, specificity, ELEMENT_INDEX.incrementAndGet());
     }
 
     /**

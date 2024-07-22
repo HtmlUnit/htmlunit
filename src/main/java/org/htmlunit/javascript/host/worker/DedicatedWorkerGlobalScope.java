@@ -67,8 +67,8 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);
 
-    private static final Method getterName;
-    private static final Method setterName;
+    private static final Method GETTER_NAME;
+    private static final Method SETTER_NAME;
 
     private final Window owningWindow_;
     private final String origin_;
@@ -77,8 +77,8 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
 
     static {
         try {
-            getterName = DedicatedWorkerGlobalScope.class.getDeclaredMethod("jsGetName");
-            setterName = DedicatedWorkerGlobalScope.class.getDeclaredMethod("jsSetName", Scriptable.class);
+            GETTER_NAME = DedicatedWorkerGlobalScope.class.getDeclaredMethod("jsGetName");
+            SETTER_NAME = DedicatedWorkerGlobalScope.class.getDeclaredMethod("jsSetName", Scriptable.class);
         }
         catch (NoSuchMethodException | SecurityException e) {
             throw new RuntimeException(e);
@@ -144,7 +144,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         origin_ = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
 
         name_ = name;
-        defineProperty("name", null, getterName, setterName, ScriptableObject.READONLY);
+        defineProperty("name", null, GETTER_NAME, SETTER_NAME, ScriptableObject.READONLY);
 
         worker_ = worker;
     }
@@ -221,7 +221,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     public void postMessage(final Object message) {
         final MessageEvent event = new MessageEvent();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
-                                    owningWindow_, JavaScriptEngine.Undefined);
+                                    owningWindow_, JavaScriptEngine.UNDEFINED);
         event.setParentScope(owningWindow_);
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
@@ -248,7 +248,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     void messagePosted(final Object message) {
         final MessageEvent event = new MessageEvent();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
-                                    owningWindow_, JavaScriptEngine.Undefined);
+                                    owningWindow_, JavaScriptEngine.UNDEFINED);
         event.setParentScope(owningWindow_);
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 

@@ -149,28 +149,28 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxConstant({CHROME, EDGE})
     public static final int PERSISTENT = 1;
 
-    private static final Method getterLength;
-    private static final Method setterLength;
-    private static final Method getterSelf;
-    private static final Method setterSelf;
-    private static final Method getterParent;
-    private static final Method setterParent;
-    private static final Method getterFrames;
-    private static final Method setterFrames;
+    private static final Method GETTER_LENGTH;
+    private static final Method SETTER_LENGTH;
+    private static final Method GETTER_SELF;
+    private static final Method SETTER_SELF;
+    private static final Method GETTER_PARENT;
+    private static final Method SETTER_PARENT;
+    private static final Method GETTER_FRAMES;
+    private static final Method SETTER_FRAMES;
 
     static {
         try {
-            getterLength = Window.class.getDeclaredMethod("jsGetLength");
-            setterLength = Window.class.getDeclaredMethod("jsSetLength", Scriptable.class);
+            GETTER_LENGTH = Window.class.getDeclaredMethod("jsGetLength");
+            SETTER_LENGTH = Window.class.getDeclaredMethod("jsSetLength", Scriptable.class);
 
-            getterSelf = Window.class.getDeclaredMethod("jsGetSelf");
-            setterSelf = Window.class.getDeclaredMethod("jsSetSelf", Scriptable.class);
+            GETTER_SELF = Window.class.getDeclaredMethod("jsGetSelf");
+            SETTER_SELF = Window.class.getDeclaredMethod("jsSetSelf", Scriptable.class);
 
-            getterParent = Window.class.getDeclaredMethod("jsGetParent");
-            setterParent = Window.class.getDeclaredMethod("jsSetParent", Scriptable.class);
+            GETTER_PARENT = Window.class.getDeclaredMethod("jsGetParent");
+            SETTER_PARENT = Window.class.getDeclaredMethod("jsSetParent", Scriptable.class);
 
-            getterFrames = Window.class.getDeclaredMethod("jsGetFrames");
-            setterFrames = Window.class.getDeclaredMethod("jsSetFrames", Scriptable.class);
+            GETTER_FRAMES = Window.class.getDeclaredMethod("jsGetFrames");
+            SETTER_FRAMES = Window.class.getDeclaredMethod("jsSetFrames", Scriptable.class);
         }
         catch (NoSuchMethodException | SecurityException e) {
             throw new RuntimeException(e);
@@ -367,7 +367,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter
     public Object getEvent() {
         if (currentEvent_ == null) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return currentEvent_;
     }
@@ -740,10 +740,10 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         webWindow_ = webWindow;
         webWindow_.setScriptableObject(this);
 
-        defineProperty("length", null, getterLength, setterLength, ScriptableObject.READONLY);
-        defineProperty("self", null, getterSelf, setterSelf, ScriptableObject.READONLY);
-        defineProperty("parent", null, getterParent, setterParent, ScriptableObject.READONLY);
-        defineProperty("frames", null, getterFrames, setterFrames, ScriptableObject.READONLY);
+        defineProperty("length", null, GETTER_LENGTH, SETTER_LENGTH, ScriptableObject.READONLY);
+        defineProperty("self", null, GETTER_SELF, SETTER_SELF, ScriptableObject.READONLY);
+        defineProperty("parent", null, GETTER_PARENT, SETTER_PARENT, ScriptableObject.READONLY);
+        defineProperty("frames", null, GETTER_FRAMES, SETTER_FRAMES, ScriptableObject.READONLY);
 
         windowProxy_ = new WindowProxy(webWindow_);
 
@@ -890,7 +890,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Object getLength() {
-        return JavaScriptEngine.Undefined;
+        return JavaScriptEngine.UNDEFINED;
     }
 
     /**
@@ -925,7 +925,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Object getSelf() {
-        return JavaScriptEngine.Undefined;
+        return JavaScriptEngine.UNDEFINED;
     }
 
     /**
@@ -956,7 +956,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Object getParent() {
-        return JavaScriptEngine.Undefined;
+        return JavaScriptEngine.UNDEFINED;
     }
 
     /**
@@ -988,7 +988,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter(propertyName = "frames")
     public Object getFrames_js() {
-        return JavaScriptEngine.Undefined;
+        return JavaScriptEngine.UNDEFINED;
     }
 
     /**
@@ -1484,12 +1484,12 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @Override
     public Object get(final int index, final Scriptable start) {
         if (index < 0 || getWebWindow() == null) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
 
         final HTMLCollection frames = getFrames();
         if (frames == null || index >= frames.getLength()) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return frames.item(Integer.valueOf(index));
     }
@@ -1975,7 +1975,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             targetOrigin = JavaScriptEngine.toString(args[1]);
         }
 
-        Object transfer = JavaScriptEngine.Undefined;
+        Object transfer = JavaScriptEngine.UNDEFINED;
         if (args.length > 2) {
             transfer = args[2];
         }

@@ -269,7 +269,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
     public Object get(final int index, final Scriptable start) {
         final Object value = item(index);
         if (value == null) {
-            return JavaScriptEngine.Undefined;
+            return JavaScriptEngine.UNDEFINED;
         }
         return value;
     }

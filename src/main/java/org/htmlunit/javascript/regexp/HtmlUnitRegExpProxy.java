@@ -165,7 +165,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 for (int i = 0; i <= matcher.groupCount(); i++) {
                     Object group = matcher.group(i);
                     if (group == null) {
-                        group = JavaScriptEngine.Undefined;
+                        group = JavaScriptEngine.UNDEFINED;
                     }
                     groups.add(group);
                 }

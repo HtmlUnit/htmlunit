@@ -102,10 +102,10 @@ public final class WindowOrWorkerGlobalScopeMixin {
             throw JavaScriptEngine.typeError("Function not provided");
         }
 
-        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : JavaScriptEngine.Undefined);
+        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : JavaScriptEngine.UNDEFINED);
         final Object[] params = (args.length > 2)
                 ? Arrays.copyOfRange(args, 2, args.length)
-                : JavaScriptEngine.emptyArgs;
+                : JavaScriptEngine.EMPTY_ARGS;
         return setTimeoutIntervalImpl((Window) thisObj, args[0], timeout, true, params);
     }
 
@@ -126,10 +126,10 @@ public final class WindowOrWorkerGlobalScopeMixin {
             throw JavaScriptEngine.typeError("Function not provided");
         }
 
-        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : JavaScriptEngine.Undefined);
+        final int timeout = JavaScriptEngine.toInt32((args.length > 1) ? args[1] : JavaScriptEngine.UNDEFINED);
         final Object[] params = (args.length > 2)
                 ? Arrays.copyOfRange(args, 2, args.length)
-                : JavaScriptEngine.emptyArgs;
+                : JavaScriptEngine.EMPTY_ARGS;
         return setTimeoutIntervalImpl((Window) thisObj, args[0], timeout, false, params);
     }
 

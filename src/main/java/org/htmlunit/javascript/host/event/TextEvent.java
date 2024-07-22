@@ -39,7 +39,7 @@ public class TextEvent extends UIEvent {
      */
     public TextEvent() {
         super();
-        data_ = JavaScriptEngine.Undefined;
+        data_ = JavaScriptEngine.UNDEFINED;
     }
 
     /**

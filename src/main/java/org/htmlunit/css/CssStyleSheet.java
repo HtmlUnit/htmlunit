@@ -158,7 +158,7 @@ public class CssStyleSheet implements Serializable {
     private final Map<CSSImportRuleImpl, CssStyleSheet> imports_ = new HashMap<>();
 
     /** cache parsed media strings */
-    private static final transient Map<String, MediaListImpl> media_ = new HashMap<>();
+    private static final transient Map<String, MediaListImpl> MEDIA = new HashMap<>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private final String uri_;
@@ -995,7 +995,7 @@ public class CssStyleSheet implements Serializable {
      * @return the media parsed from the specified input source
      */
     public static MediaListImpl parseMedia(final String mediaString, final WebClient webClient) {
-        MediaListImpl media = media_.get(mediaString);
+        MediaListImpl media = MEDIA.get(mediaString);
         if (media != null) {
             return media;
         }
@@ -1006,7 +1006,7 @@ public class CssStyleSheet implements Serializable {
             parser.setErrorHandler(webClient.getCssErrorHandler());
 
             media = new MediaListImpl(parser.parseMedia(mediaString));
-            media_.put(mediaString, media);
+            MEDIA.put(mediaString, media);
             return media;
         }
         catch (final Exception e) {
@@ -1016,7 +1016,7 @@ public class CssStyleSheet implements Serializable {
         }
 
         media = new MediaListImpl(null);
-        media_.put(mediaString, media);
+        MEDIA.put(mediaString, media);
         return media;
     }
 
@@ -1032,7 +1032,7 @@ public class CssStyleSheet implements Serializable {
      */
     @Deprecated
     public static MediaListImpl parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
-        MediaListImpl media = media_.get(mediaString);
+        MediaListImpl media = MEDIA.get(mediaString);
         if (media != null) {
             return media;
         }
@@ -1042,7 +1042,7 @@ public class CssStyleSheet implements Serializable {
             parser.setErrorHandler(errorHandler);
 
             media = new MediaListImpl(parser.parseMedia(mediaString));
-            media_.put(mediaString, media);
+            MEDIA.put(mediaString, media);
             return media;
         }
         catch (final Exception e) {
@@ -1052,7 +1052,7 @@ public class CssStyleSheet implements Serializable {
         }
 
         media = new MediaListImpl(null);
-        media_.put(mediaString, media);
+        MEDIA.put(mediaString, media);
         return media;
     }
 

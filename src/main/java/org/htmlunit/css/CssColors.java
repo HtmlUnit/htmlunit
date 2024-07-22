@@ -25,25 +25,25 @@ import java.util.Map;
  */
 public final class CssColors {
 
-    private static final Map<String, String> CSSColors_ = new HashMap<>();
+    private static final Map<String, String> CSS_COLORS = new HashMap<>();
 
     static {
-        CSSColors_.put("aqua", "rgb(0, 255, 255)");
-        CSSColors_.put("black", "rgb(0, 0, 0)");
-        CSSColors_.put("blue", "rgb(0, 0, 255)");
-        CSSColors_.put("fuchsia", "rgb(255, 0, 255)");
-        CSSColors_.put("gray", "rgb(128, 128, 128)");
-        CSSColors_.put("green", "rgb(0, 128, 0)");
-        CSSColors_.put("lime", "rgb(0, 255, 0)");
-        CSSColors_.put("maroon", "rgb(128, 0, 0)");
-        CSSColors_.put("navy", "rgb(0, 0, 128)");
-        CSSColors_.put("olive", "rgb(128, 128, 0)");
-        CSSColors_.put("purple", "rgb(128, 0, 128)");
-        CSSColors_.put("red", "rgb(255, 0, 0)");
-        CSSColors_.put("silver", "rgb(192, 192, 192)");
-        CSSColors_.put("teal", "rgb(0, 128, 128)");
-        CSSColors_.put("white", "rgb(255, 255, 255)");
-        CSSColors_.put("yellow", "rgb(255, 255, 0)");
+        CSS_COLORS.put("aqua", "rgb(0, 255, 255)");
+        CSS_COLORS.put("black", "rgb(0, 0, 0)");
+        CSS_COLORS.put("blue", "rgb(0, 0, 255)");
+        CSS_COLORS.put("fuchsia", "rgb(255, 0, 255)");
+        CSS_COLORS.put("gray", "rgb(128, 128, 128)");
+        CSS_COLORS.put("green", "rgb(0, 128, 0)");
+        CSS_COLORS.put("lime", "rgb(0, 255, 0)");
+        CSS_COLORS.put("maroon", "rgb(128, 0, 0)");
+        CSS_COLORS.put("navy", "rgb(0, 0, 128)");
+        CSS_COLORS.put("olive", "rgb(128, 128, 0)");
+        CSS_COLORS.put("purple", "rgb(128, 0, 128)");
+        CSS_COLORS.put("red", "rgb(255, 0, 0)");
+        CSS_COLORS.put("silver", "rgb(192, 192, 192)");
+        CSS_COLORS.put("teal", "rgb(0, 128, 128)");
+        CSS_COLORS.put("white", "rgb(255, 255, 255)");
+        CSS_COLORS.put("yellow", "rgb(255, 255, 0)");
     }
 
     private CssColors() {
@@ -56,7 +56,7 @@ public final class CssColors {
      * @return whether the token is a reserved color keyword or not
      */
     public static boolean isColorKeyword(final String token) {
-        return CSSColors_.containsKey(token.toLowerCase(Locale.ROOT));
+        return CSS_COLORS.containsKey(token.toLowerCase(Locale.ROOT));
     }
 
     /**
@@ -66,7 +66,7 @@ public final class CssColors {
      * in the form "rgb(x, y, z)" otherwise
      */
     public static String toRGBColor(final String color) {
-        final String rgbValue = CSSColors_.get(color.toLowerCase(Locale.ROOT));
+        final String rgbValue = CSS_COLORS.get(color.toLowerCase(Locale.ROOT));
         if (rgbValue != null) {
             return rgbValue;
         }
