@@ -45,6 +45,7 @@ import org.junit.Test;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 public class CodeStyleTest {
 
