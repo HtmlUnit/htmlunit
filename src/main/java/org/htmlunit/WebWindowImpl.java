@@ -49,6 +49,7 @@ import org.w3c.dom.Document;
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 public abstract class WebWindowImpl implements WebWindow {
 

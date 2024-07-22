@@ -30,6 +30,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
+ * @author Sven Strickroth
  */
 public class WaitingRefreshHandler implements RefreshHandler {
 

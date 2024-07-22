@@ -114,6 +114,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Guy Burton
  * @author Frank Danek
  * @author Carsten Steul
+ * @author Sven Strickroth
  */
 public class CssStyleSheet implements Serializable {
 

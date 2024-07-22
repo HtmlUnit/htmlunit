@@ -27,6 +27,7 @@ import org.htmlunit.util.UrlUtils;
  * @author David D. Kilzer
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 public class TopLevelWindow extends WebWindowImpl {
 

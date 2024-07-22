@@ -46,6 +46,7 @@ import org.w3c.dom.Node;
  * @author Dmitri Zoubkov
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Sven Strickroth
  */
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement,
                 LabelableElement, FormFieldWithNameHistory, ValidatableElement {

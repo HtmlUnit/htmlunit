@@ -27,6 +27,7 @@ import org.htmlunit.html.HtmlPage;
  *
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
 

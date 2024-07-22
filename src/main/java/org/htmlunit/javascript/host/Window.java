@@ -134,6 +134,8 @@ import org.htmlunit.xml.XmlPage;
  * @author Carsten Steul
  * @author Colin Alworth
  * @author Atsushi Nakagawa
+ * @author Sven Strickroth
+ *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass

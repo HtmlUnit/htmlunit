@@ -34,6 +34,7 @@ import org.htmlunit.javascript.host.dom.DOMTokenList;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 @JsxClass(domClass = HtmlLink.class)
 public class HTMLLinkElement extends HTMLElement {

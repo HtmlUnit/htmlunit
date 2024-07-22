@@ -109,6 +109,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Jake Cobb
  * @author Thorsten Wendelmuth
  * @author Lai Quang Duong
+ * @author Sven Strickroth
  *
  * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>

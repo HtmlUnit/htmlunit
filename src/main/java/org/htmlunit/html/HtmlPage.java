@@ -141,6 +141,7 @@ import org.w3c.dom.ProcessingInstruction;
  * @author Rural Hunter
  * @author Ronny Shapiro
  * @author Lai Quang Duong
+ * @author Sven Strickroth
  */
 public class HtmlPage extends SgmlPage {
 

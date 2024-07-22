@@ -43,6 +43,7 @@ import org.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 public class MiniServer extends Thread implements Closeable {
     private static final Log LOG = LogFactory.getLog(MiniServer.class);

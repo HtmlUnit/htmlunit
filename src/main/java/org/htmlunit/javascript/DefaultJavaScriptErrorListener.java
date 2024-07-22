@@ -28,6 +28,7 @@ import org.htmlunit.html.HtmlPage;
  * default logging.
  *
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, Serializable {
 

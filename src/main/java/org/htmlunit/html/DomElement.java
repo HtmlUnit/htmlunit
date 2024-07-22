@@ -73,6 +73,7 @@ import org.xml.sax.SAXException;
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Sven Strickroth
  */
 public class DomElement extends DomNamespaceNode implements Element {
 

@@ -80,6 +80,8 @@ import org.htmlunit.util.UrlUtils;
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Sven Strickroth
+ *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535862.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C DOM Level 1</a>

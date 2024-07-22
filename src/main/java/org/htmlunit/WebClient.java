@@ -145,6 +145,7 @@ import org.htmlunit.webstart.WebStartHandler;
  * @author Sergio Moreno
  * @author Lai Quang Duong
  * @author René Schwietzke
+ * @author Sven Strickroth
  */
 public class WebClient implements Serializable, AutoCloseable {
 

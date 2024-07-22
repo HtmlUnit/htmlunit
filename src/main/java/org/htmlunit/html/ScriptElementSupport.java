@@ -45,6 +45,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Ronny Shapiro
+ * @author Sven Strickroth
  */
 public final class ScriptElementSupport {
 
