@@ -34,14 +34,16 @@ jobs:
         CHECKSTYLE_CONFIG: checkstyle.xml
         REVIEWDOG_VERSION: v0.20.1
       run: |
-        wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.22/checkstyle-8.22-all.jar > /opt/checkstyle.jar
         wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /opt ${REVIEWDOG_VERSION}
         mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true checkstyle:checkstyle
+        echo "1"
         ls -las
+        echo "2"
         ls -las target
-        ls -las target/surefire-reports/
+        echo "3"
         ls -las target/surefire-reports/**/*.xml
-        java -jar /opt/checkstyle.jar "${WORKDIR}" -c "${CHECKSTYLE_CONFIG}"  -f xml \
+        echo "4"
+        cat target/checkstyle-result.xml \
              | /opt/reviewdog -f=checkstyle \
                   -reporter="${INPUT_REPORTER:-github-pr-check}" \
                   -filter-mode="${INPUT_FILTER_MODE:-added}" \
