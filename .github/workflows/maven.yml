@@ -22,7 +22,7 @@ jobs:
 
     strategy:
       matrix:
-        java: ['11']
+        java: ['8', '11', '17', '21']
 
     steps:
     - uses: actions/checkout@v4
@@ -33,4 +33,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true build
+    - name: CodeStyleTest
       run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true -Dtest=org.htmlunit.CodeStyleTest test
