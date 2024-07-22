@@ -16,13 +16,17 @@ on:
 permissions:
   contents: read
 
-Checkstyle:
-  name: Check code style
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    # In the checkout@v2, it doesn't support git submodule. Execute the commands manually.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK ${{ matrix.Java }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: 11
+        distribution: 'temurin'
+        cache: maven
     - name: check code style
       env:
         WORKDIR: ./
