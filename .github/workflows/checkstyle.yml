@@ -38,6 +38,7 @@ jobs:
         wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /opt ${REVIEWDOG_VERSION}
         mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true checkstyle:checkstyle
         ls -las
+        ls -las target
         ls -las target/surefire-reports/
         ls -las target/surefire-reports/**/*.xml
         java -jar /opt/checkstyle.jar "${WORKDIR}" -c "${CHECKSTYLE_CONFIG}"  -f xml \
