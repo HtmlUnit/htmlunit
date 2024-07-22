@@ -158,16 +158,12 @@ public class HTMLLinkElement extends HTMLElement {
             }
             catch (final RuntimeException e) {
                 // Got something unexpected; we can throw an exception in this case.
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("RuntimeException loading stylesheet", e);
-                }
+                LOG.error("RuntimeException loading stylesheet", e);
                 throw JavaScriptEngine.reportRuntimeError("Exception: " + e);
             }
             catch (final Exception e) {
                 // Got something unexpected; we can throw an exception in this case.
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Exception loading stylesheet", e);
-                }
+                LOG.error("Exception loading stylesheet", e);
                 throw JavaScriptEngine.reportRuntimeError("Exception: " + e);
             }
         }

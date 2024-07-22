@@ -219,9 +219,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * Destroy our children.
      */
     protected void destroyChildren() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("destroyChildren");
-        }
+        LOG.debug("destroyChildren");
         getJobManager().removeAllJobs();
 
         // try to deal with js thread adding a new window in between

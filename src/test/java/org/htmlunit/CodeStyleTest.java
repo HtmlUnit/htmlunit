@@ -50,6 +50,7 @@ import org.junit.Test;
 public class CodeStyleTest {
 
     private static final Pattern LEADING_WHITESPACE = Pattern.compile("^\\s+");
+    private static final Pattern LOG_STATIC_STRING = Pattern.compile("^\\s*LOG\\.[a-z]+\\(\"[^\"]*\"(, [a-zA-Z_]+)?\\);");
     private List<String> failures_ = new ArrayList<>();
 
     /**
@@ -538,10 +539,10 @@ public class CodeStyleTest {
         }
         int i = 0;
         for (final String line : lines) {
-            if (line.contains("LOG.trace(")) {
+            if (line.contains("LOG.trace(") && !LOG_STATIC_STRING.matcher(line).matches()) {
                 loggingEnabled(lines, i, "Trace", relativePath);
             }
-            else if (line.contains("LOG.debug(")) {
+            else if (line.contains("LOG.debug(") && !LOG_STATIC_STRING.matcher(line).matches()) {
                 loggingEnabled(lines, i, "Debug", relativePath);
             }
             i++;

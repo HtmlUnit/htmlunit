@@ -418,9 +418,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         final WebClient webClient = getWebWindow().getWebClient();
 
         if (webClient.getOptions().isPopupBlockerEnabled()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Ignoring window.open() invocation because popups are blocked.");
-            }
+            LOG.debug("Ignoring window.open() invocation because popups are blocked.");
             return null;
         }
 
@@ -1047,9 +1045,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public void blur() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("window.blur() not implemented");
-        }
+        LOG.debug("window.blur() not implemented");
     }
 
     /**
@@ -1083,9 +1079,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public void moveTo(final int x, final int y) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("window.moveTo() not implemented");
-        }
+        LOG.debug("window.moveTo() not implemented");
     }
 
     /**
@@ -1095,9 +1089,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public void moveBy(final int x, final int y) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("window.moveBy() not implemented");
-        }
+        LOG.debug("window.moveBy() not implemented");
     }
 
     /**
@@ -1107,9 +1099,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public void resizeBy(final int width, final int height) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("window.resizeBy() not implemented");
-        }
+        LOG.debug("window.resizeBy() not implemented");
     }
 
     /**
@@ -1119,9 +1109,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public void resizeTo(final int width, final int height) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("window.resizeTo() not implemented");
-        }
+        LOG.debug("window.resizeTo() not implemented");
     }
 
     /**
@@ -1673,17 +1661,13 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public void print() {
         final PrintHandler handler = getWebWindow().getWebClient().getPrintHandler();
         if (handler == null) {
-            if (LOG.isInfoEnabled()) {
-                LOG.info("No PrintHandler installed - window.print() ignored");
-            }
+            LOG.info("No PrintHandler installed - window.print() ignored");
             return;
         }
 
         final SgmlPage sgmlPage = getDocument().getPage();
         if (!(sgmlPage instanceof HtmlPage)) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Page is not an HtmlPage - window.print() ignored");
-            }
+            LOG.debug("Page is not an HtmlPage - window.print() ignored");
             return;
         }
 

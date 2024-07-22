@@ -1155,9 +1155,7 @@ public class HtmlPage extends SgmlPage {
     public void setTitleText(final String message) {
         HtmlTitle titleElement = getTitleElement();
         if (titleElement == null) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("No title element, creating one");
-            }
+            LOG.debug("No title element, creating one");
             final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
             if (head == null) {
                 // perhaps should we create head too?
@@ -1333,10 +1331,8 @@ public class HtmlPage extends SgmlPage {
             if (beforeUnloadEvent.isBeforeUnloadMessageSet()) {
                 final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
                 if (handler == null) {
-                    if (LOG.isWarnEnabled()) {
-                        LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
-                                + " but no onbeforeunload handler installed.");
-                    }
+                    LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
+                            + " but no onbeforeunload handler installed.");
                 }
                 else {
                     final String message = JavaScriptEngine.toString(beforeUnloadEvent.getReturnValue());
