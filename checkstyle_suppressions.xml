@@ -67,7 +67,7 @@
     
     <suppress checks="ConstantName" files="WebGL2RenderingContext.java"/>
     <suppress checks="ConstantName" files="ArchitectureTest.java"/>
-    <suppress checks="ConstantName" files="Architecture2Test.java"/>
+    <suppress checks="ConstantName" files="Notification.java" message="^Name 'maxActions' must match*" />
 
     <!-- JUnit Rules require the rules field to have public visibility. -->
     <!-- See http://checkstyle.sourceforge.net/config_design.html#VisibilityModifier -->
