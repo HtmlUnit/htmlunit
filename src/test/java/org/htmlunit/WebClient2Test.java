@@ -16,6 +16,9 @@ package org.htmlunit;
 
 import static org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -23,7 +26,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
@@ -39,6 +41,7 @@ import org.junit.runner.RunWith;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 @RunWith(BrowserRunner.class)
 public class WebClient2Test extends SimpleWebTestCase {
@@ -249,8 +252,9 @@ public class WebClient2Test extends SimpleWebTestCase {
               "toto", "foo", "/myPath", true, null);
 
         // Check that we are able to parse and set the expiration date correctly
-        final String dateString = "Mon, 21 Jul 2025 20:47:11 UTC";
-        final Date date = DateUtils.parseDate(dateString, "EEE, dd MMM yyyy HH:mm:ss z");
+        final ZonedDateTime inOneYear = ZonedDateTime.now().plusYears(1).truncatedTo(ChronoUnit.SECONDS);
+        final String dateString = DateTimeFormatter.RFC_1123_DATE_TIME.format(inOneYear);
+        final Date date = Date.from(inOneYear.toInstant());
         checkCookie("toto=foo; expires=" + dateString, "toto", "foo", "/", false, date);
     }
 
@@ -268,7 +272,13 @@ public class WebClient2Test extends SimpleWebTestCase {
         assertEquals(path, cookie.getPath());
         assertEquals(domain, cookie.getDomain());
         assertEquals(secure, cookie.isSecure());
-        assertEquals(date, cookie.getExpires());
+        // special handling for null case, because Date cannot be compared using assertEquals
+        if (date == null || cookie.getExpires() == null) {
+            assertEquals(date, cookie.getExpires());
+        }
+        else {
+            assertEquals(date.toInstant(), cookie.getExpires().toInstant());
+        }
     }
 
     /**
