@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
 <!DOCTYPE suppressions PUBLIC
-    "-//Puppy Crawl//DTD Suppressions 1.0//EN"
-    "https://checkstyle.org/dtds/suppressions_1_0.dtd">
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
 <suppressions>
     <suppress checks="[a-zA-Z0-9]*" files="[\\/]src[\\/]test[\\/]resources[\\/]"/>
@@ -65,9 +65,10 @@
     <suppress checks="TypeName" files="webkit.*\.java$|moz.*\.java$"/>
     <suppress checks="TypeName" files="EXT_.*\.java$|OES_.*\.java$|WEBGL_.*\.java$|ANGLE_.*\.java$"/>
     
-    <suppress checks="ConstantName" files="WebGL2RenderingContext.java"/>
+    <suppress checks="ConstantName" files="WebGL2RenderingContext.java" message="Name 'FLOAT_MAT\dx\d' must match" />
+    <suppress checks="ConstantName" files="Notification.java" message="Name 'maxActions' must match" />
     <suppress checks="ConstantName" files="ArchitectureTest.java"/>
-    <suppress checks="ConstantName" files="Notification.java" message="^Name 'maxActions' must match*" />
+    <suppress checks="ConstantName" files="Architecture2Test.java"/>
 
     <!-- JUnit Rules require the rules field to have public visibility. -->
     <!-- See http://checkstyle.sourceforge.net/config_design.html#VisibilityModifier -->
