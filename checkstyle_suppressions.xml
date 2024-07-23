@@ -64,7 +64,7 @@
 
     <suppress checks="TypeName" files="webkit.*\.java$|moz.*\.java$"/>
     <suppress checks="TypeName" files="EXT_.*\.java$|OES_.*\.java$|WEBGL_.*\.java$|ANGLE_.*\.java$"/>
-    
+
     <suppress checks="ConstantName" files="WebGL2RenderingContext.java" message="Name 'FLOAT_MAT\dx\d' must match" />
     <suppress checks="ConstantName" files="Notification.java" message="Name 'maxActions' must match" />
     <suppress checks="ConstantName" files="ArchitectureTest.java"/>
