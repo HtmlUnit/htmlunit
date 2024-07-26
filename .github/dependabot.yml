@@ -1,5 +1,17 @@
 version: 2
 updates:
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    # Workflow files stored in the default location of `.github/workflows`. (No need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
+    directory: "/"
+    # Allow dependabot to run on GitHub Actions
+    open-pull-requests-limit: 1
+    schedule:
+      interval: "weekly"
+      day: "saturday"
+      time: "12:00"
+
   - package-ecosystem: "maven"
     directory: "/"
     schedule:
@@ -7,5 +19,3 @@ updates:
     ignore:
       # ignore because it does not work with java 8
       - dependency-name: "org.apache.maven.plugins:maven-site-plugin"
-      - dependency-name: "com.puppycrawl.tools:checkstyle"
-        versions: ["10.x"]
