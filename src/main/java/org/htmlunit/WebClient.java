@@ -157,6 +157,37 @@ public class WebClient implements Serializable, AutoCloseable {
     private static final WebResponseData RESPONSE_DATA_NO_HTTP_RESPONSE = new WebResponseData(
             0, "No HTTP Response", Collections.emptyList());
 
+    /**
+     * These response headers are not copied from a 304 response to the cached
+     * response headers. This list is based on Chromium http_response_headers.cc
+     */
+    private static final String[] DISCARDING_304_RESPONSE_HEADER_NAMES = {
+        "connection",
+        "proxy-connection",
+        "keep-alive",
+        "www-authenticate",
+        "proxy-authenticate",
+        "proxy-authorization",
+        "te",
+        "trailer",
+        "transfer-encoding",
+        "upgrade",
+        "content-location",
+        "content-md5",
+        "etag",
+        "content-encoding",
+        "content-range",
+        "content-type",
+        "content-length",
+        "x-frame-options",
+        "x-xss-protection",
+    };
+
+    private static final String[] DISCARDING_304_HEADER_PREFIXES = {
+        "x-content-",
+        "x-webkit-"
+    };
+
     private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
@@ -1736,37 +1767,6 @@ public class WebClient implements Serializable, AutoCloseable {
         getCache().cacheIfPossible(webRequest, webResponse, null);
         return webResponse;
     }
-
-    /**
-     * These response headers are not copied from a 304 response to the cached
-     * response headers. This list is based on Chromium http_response_headers.cc
-     */
-    private static final String[] DISCARDING_304_RESPONSE_HEADER_NAMES = {
-        "connection",
-        "proxy-connection",
-        "keep-alive",
-        "www-authenticate",
-        "proxy-authenticate",
-        "proxy-authorization",
-        "te",
-        "trailer",
-        "transfer-encoding",
-        "upgrade",
-        "content-location",
-        "content-md5",
-        "etag",
-        "content-encoding",
-        "content-range",
-        "content-type",
-        "content-length",
-        "x-frame-options",
-        "x-xss-protection",
-    };
-
-    private static final String[] DISCARDING_304_HEADER_PREFIXES = {
-        "x-content-",
-        "x-webkit-"
-    };
 
     /**
      * Returns true if the value of the specified header in a 304 Not Modified response should be
