@@ -534,6 +534,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final ChromeOptions options = new ChromeOptions();
                 options.addArguments("--lang=" + locale);
                 options.addArguments("--remote-allow-origins=*");
+                options.addArguments("--disable-search-engine-choice-screen");
 
                 final ChromeDriver chrome = new ChromeDriver(service, options);
 
