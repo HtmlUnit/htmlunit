@@ -375,7 +375,7 @@ public class WebClient3Test extends WebDriverTestCase {
                 + "</body></html>\n";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, errorHtml, 404, "Not Found", MimeType.TEXT_HTML, new ArrayList<NameValuePair>());
+        conn.setResponse(URL_FIRST, errorHtml, 404, "Not Found", MimeType.TEXT_HTML, new ArrayList<>());
 
         loadPage2(URL_FIRST, StandardCharsets.UTF_8);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());

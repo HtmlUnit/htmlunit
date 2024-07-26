@@ -1412,7 +1412,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_SECOND, "foo", 404, "Not Found", MimeType.TEXT_HTML, new ArrayList<NameValuePair>());
+        conn.setResponse(URL_SECOND, "foo", 404, "Not Found", MimeType.TEXT_HTML, new ArrayList<>());
 
         loadPageVerifyTextArea2(html);
         assertEquals(URL_SECOND, conn.getLastWebRequest().getUrl());

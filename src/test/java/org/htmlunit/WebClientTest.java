@@ -1581,7 +1581,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void urlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX, "<html></html>", new ArrayList<>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%C3%A9%20d", wrs.getUrl());
     }
@@ -1594,7 +1594,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void urlEncoding2() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(BrowserVersion.BEST_SUPPORTED, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.BEST_SUPPORTED, "<html></html>", new ArrayList<>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%C3%A9%20d", wrs.getUrl());
     }
@@ -1606,7 +1606,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void plusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
-        final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage("<html></html>", new ArrayList<>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/search/my+category/", wrs.getUrl());
     }
@@ -1632,7 +1632,7 @@ public class WebClientTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, html);
 
         final String css = ".foo { color: green; }";
-        conn.setResponse(URL_SECOND, css, 200, "OK", MimeType.TEXT_CSS, new ArrayList<NameValuePair>());
+        conn.setResponse(URL_SECOND, css, 200, "OK", MimeType.TEXT_CSS, new ArrayList<>());
 
         final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));

@@ -1710,7 +1710,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final byte[] responseBytes = response.getBytes(UTF_8);
 
         getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", MimeType.TEXT_HTML,
-            new ArrayList<NameValuePair>());
+            new ArrayList<>());
         loadPageVerifyTitle2(html);
     }
 

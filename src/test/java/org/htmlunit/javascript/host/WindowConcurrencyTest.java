@@ -29,7 +29,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlDivision;
 import org.htmlunit.html.HtmlElement;
@@ -488,7 +487,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
 
             // Recreating what can occur with two threads requires
             // to know a bit about the style invalidation used in Window.DomHtmlAttributeChangeListenerImpl
-            final HtmlElement elt = new HtmlDivision("div", page1, new HashMap<String, DomAttr>()) {
+            final HtmlElement elt = new HtmlDivision("div", page1, new HashMap<>()) {
                 @Override
                 public DomNode getParentNode() {
                     // this gets called by CSS invalidation logic

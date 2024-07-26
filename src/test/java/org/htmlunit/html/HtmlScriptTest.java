@@ -28,7 +28,6 @@ import org.htmlunit.WebClient;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -223,8 +222,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, "var foo;", MimeType.TEXT_JAVASCRIPT);
         conn.setResponse(URL_THIRD, "varrrr foo;", MimeType.TEXT_JAVASCRIPT);
-        conn.setResponse(fourOhFour, "", 404, "Missing", MimeType.TEXT_JAVASCRIPT,
-                new ArrayList<NameValuePair>());
+        conn.setResponse(fourOhFour, "", 404, "Missing", MimeType.TEXT_JAVASCRIPT, new ArrayList<>());
         client.setWebConnection(conn);
         final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
