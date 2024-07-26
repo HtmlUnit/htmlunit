@@ -8,8 +8,11 @@
 
     <body>
         <release version="4.4.0" date="xxxx, 2024" description="Chrome/Edge 127, Firefox 128, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: Various missing methods in TypedArray added.
+            </action>
             <action type="fix" dev="rbri">
-                XMLHttprequest 'responseXML' and 'response' (responseType document) object are identical.
+                XMLHttprequest 'responseXML' and 'response' (responseType document) results are identical.
             </action>
             <action type="fix" dev="rbri">
                 XMLHttprequest 'responseXML' bom headers are overruling the content encoding.
