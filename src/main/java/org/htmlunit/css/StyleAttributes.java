@@ -1193,7 +1193,7 @@ public final class StyleAttributes implements Serializable {
         FONT_SIZE_("font-size", "font-size", ff("16px")),
 
         /** The style property {@code fontSizeAdjust}. */
-        FONT_SIZE_ADJUST("fontSizeAdjust", "font-size-adjust", ffNone()),
+        FONT_SIZE_ADJUST("fontSizeAdjust", "font-size-adjust", ffNone(), chromeAndEdgeNone()),
 
         /** The style property {@code font-size-adjust}. */
         FONT_SIZE_ADJUST_("font-size-adjust", "font-size-adjust", ffNone()),

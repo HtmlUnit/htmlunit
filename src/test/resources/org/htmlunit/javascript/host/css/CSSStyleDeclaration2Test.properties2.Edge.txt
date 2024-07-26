@@ -180,6 +180,7 @@ fontKerning
 fontOpticalSizing
 fontPalette
 fontSize
+fontSizeAdjust
 fontStretch
 fontStyle
 fontSynthesis

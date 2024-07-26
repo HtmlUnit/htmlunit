@@ -748,11 +748,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"},
-            FF = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"},
-            FF_ESR = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"})
-    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "undefined", ""},
-            EDGE = {"", "", "", "", "", "", "undefined", ""},
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "0.5", ""},
+            EDGE = {"", "", "", "", "", "", "0.5", ""},
             FF = {"", "", "", "", "", "", "0.5", ""},
             FF_ESR = {"", "", "", "", "", "", "0.5", ""})
     public void fontSizeAdjustBefore() throws Exception {
@@ -763,11 +761,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"},
-            FF = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"},
-            FF_ESR = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
-    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "undefined", ""},
-            EDGE = {"", "", "", "", "", "", "undefined", ""},
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "0.5", ""},
+            EDGE = {"", "", "", "", "", "", "0.5", ""},
             FF = {"", "", "", "", "", "", "0.5", ""},
             FF_ESR = {"", "", "", "", "", "", "0.5", ""})
     public void fontSizeAdjustAfter() throws Exception {
@@ -778,11 +774,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"},
-            FF = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"},
-            FF_ESR = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"})
-    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "undefined", "expanded"},
-            EDGE = {"", "", "", "", "", "", "undefined", "expanded"},
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "", "expanded"},
+            EDGE = {"", "", "", "", "", "", "", "expanded"},
             FF = {"", "", "", "", "", "", "", "expanded"},
             FF_ESR = {"", "", "", "", "", "", "", "expanded"})
     public void fontStretchBefore() throws Exception {
@@ -793,11 +787,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "expanded"},
-            FF = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"},
-            FF_ESR = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
-    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "undefined", "expanded"},
-            EDGE = {"", "", "", "", "", "", "undefined", "expanded"},
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "", "expanded"},
+            EDGE = {"", "", "", "", "", "", "", "expanded"},
             FF = {"", "", "", "", "", "", "", "expanded"},
             FF_ESR = {"", "", "", "", "", "", "", "expanded"})
     public void fontStretchAfter() throws Exception {
@@ -1057,11 +1049,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"},
-            FF = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"},
-            FF_ESR = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"})
-    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "undefined", ""},
-            EDGE = {"", "", "", "", "", "", "undefined", ""},
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "0.5", ""},
+            EDGE = {"", "", "", "", "", "", "0.5", ""},
             FF = {"", "", "", "", "", "", "0.5", ""},
             FF_ESR = {"", "", "", "", "", "", "0.5", ""})
     public void fontCssSizeAdjustBefore() throws Exception {
@@ -1072,11 +1062,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"},
-            FF = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"},
-            FF_ESR = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
-    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "undefined", ""},
-            EDGE = {"", "", "", "", "", "", "undefined", ""},
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "0.5", ""},
+            EDGE = {"", "", "", "", "", "", "0.5", ""},
             FF = {"", "", "", "", "", "", "0.5", ""},
             FF_ESR = {"", "", "", "", "", "", "0.5", ""})
     public void fontCssSizeAdjustAfter() throws Exception {
@@ -1087,11 +1075,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"},
-            FF = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"},
-            FF_ESR = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"})
-    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "undefined", "expanded"},
-            EDGE = {"", "", "", "", "", "", "undefined", "expanded"},
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "normal"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "", "expanded"},
+            EDGE = {"", "", "", "", "", "", "", "expanded"},
             FF = {"", "", "", "", "", "", "", "expanded"},
             FF_ESR = {"", "", "", "", "", "", "", "expanded"})
     public void fontCssStretchBefore() throws Exception {
@@ -1102,11 +1088,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "expanded"},
-            FF = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"},
-            FF_ESR = {"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
-    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "undefined", "expanded"},
-            EDGE = {"", "", "", "", "", "", "undefined", "expanded"},
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "", "", "", "expanded"},
+            EDGE = {"", "", "", "", "", "", "", "expanded"},
             FF = {"", "", "", "", "", "", "", "expanded"},
             FF_ESR = {"", "", "", "", "", "", "", "expanded"})
     public void fontCssStretchAfter() throws Exception {
@@ -1384,11 +1368,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "400", "14px", "normal", "sans-serif", "undefined", "100%"},
-            FF = {"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "100%"},
-            FF_ESR = {"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "100%"})
-    @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "undefined", "100%"},
-            EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "undefined", "100%"},
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "100%"})
+    @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "0.5", "100%"},
+            EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "0.5", "100%"},
             FF = {"normal", "normal", "400", "16px", "normal", "serif", "0.5", "100%"},
             FF_ESR = {"normal", "normal", "400", "16px", "normal", "serif", "0.5", "100%"})
     public void fontComputedSizeAdjustBefore() throws Exception {
@@ -1399,11 +1381,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "400", "14px", "normal", "sans-serif", "undefined", "100%"},
-            FF = {"normal", "normal", "400", "14px", "normal", "sans-serif", "0.5", "100%"},
-            FF_ESR = {"normal", "normal", "400", "14px", "normal", "sans-serif", "0.5", "100%"})
-    @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "undefined", "100%"},
-            EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "undefined", "100%"},
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "0.5", "100%"})
+    @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "0.5", "100%"},
+            EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "0.5", "100%"},
             FF = {"normal", "normal", "400", "16px", "normal", "serif", "0.5", "100%"},
             FF_ESR = {"normal", "normal", "400", "16px", "normal", "serif", "0.5", "100%"})
     public void fontComputedSizeAdjustAfter() throws Exception {
@@ -1414,11 +1394,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "400", "14px", "normal", "sans-serif", "undefined", "100%"},
-            FF = {"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "100%"},
-            FF_ESR = {"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "100%"})
-    @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "undefined", "expanded"},
-            EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "undefined", "expanded"},
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "100%"})
+    @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "none", "expanded"},
+            EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "none", "expanded"},
             FF = {"normal", "normal", "400", "16px", "normal", "serif", "none", "expanded"},
             FF_ESR = {"normal", "normal", "400", "16px", "normal", "serif", "none", "expanded"})
     public void fontComputedStretchBefore() throws Exception {
@@ -1429,11 +1407,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"normal", "normal", "400", "14px", "normal", "sans-serif", "undefined", "125%"},
-            FF = {"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "125%"},
-            FF_ESR = {"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "125%"})
-    @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "undefined", "expanded"},
-            EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "undefined", "expanded"},
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "125%"})
+    @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "none", "expanded"},
+            EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\"", "none", "expanded"},
             FF = {"normal", "normal", "400", "16px", "normal", "serif", "none", "expanded"},
             FF_ESR = {"normal", "normal", "400", "16px", "normal", "serif", "none", "expanded"})
     public void fontComputedStretchAfter() throws Exception {
