@@ -2516,7 +2516,7 @@ public final class StyleAttributes implements Serializable {
         POSITION("position", "position", chromeAndEdge("static"), ff("static")),
 
         /** The style property {@code positionAnchor}. */
-        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdge("implicit")),
+        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdgeAuto()),
 
         /** The style property {@code positionTry}. */
         POSITION_TRY("positionTry", "position-try", chromeAndEdgeNormal()),
@@ -3111,7 +3111,7 @@ public final class StyleAttributes implements Serializable {
         TRANSFORM_STYLE_("transform-style", "transform-style", ff("flat")),
 
         /** The style property {@code transition}. */
-        TRANSITION("transition", "transition", chromeAndEdge("all 0s ease 0s"),
+        TRANSITION("transition", "transition", chromeAndEdge("all"),
                 ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code transitionBehavior}. */
@@ -4077,7 +4077,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_TRANSFORM_STYLE__("-webkit-transform-style", "webkit-transform-style", ff("flat")),
 
         /** The style property {@code webkitTransition}. */
-        WEBKIT_TRANSITION("webkitTransition", "webkit-transition", chromeAndEdge("all 0s ease 0s"),
+        WEBKIT_TRANSITION("webkitTransition", "webkit-transition", chromeAndEdge("all"),
                 ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code WebkitTransition}. */
