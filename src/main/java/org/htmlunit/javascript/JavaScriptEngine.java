@@ -228,42 +228,25 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         context.initSafeStandardObjects(window);
         configureRhino(webClient, browserVersion, window);
 
-        final ClassConfiguration windowConfig = jsConfig_.getClassConfiguration("Window");
-        if (windowConfig.getJsConstructor() != null) {
-            final FunctionObject functionObject =
-                    new RecursiveFunctionObject("Window", windowConfig.getJsConstructor().getValue(), window, browserVersion);
-            ScriptableObject.defineProperty(window, "constructor", functionObject,
-                    ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
-        }
-        else {
-            defineConstructor(window, window, new Window());
-        }
-
-        URLSearchParams.NativeParamsIterator.init(window, "URLSearchParams Iterator");
-        FormData.FormDataIterator.init(window, "FormData Iterator");
-
-        // strange but this is the reality for browsers
-        // because there will be still some sites using this for browser detection the property is
-        // set to null
-        // https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browsers
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=1442035
-        if (browserVersion.hasFeature(JS_WINDOW_INSTALL_TRIGGER_NULL)) {
-            window.put("InstallTrigger", window, null);
-        }
-
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
 
+        final ClassConfiguration windowConfig = jsConfig_.getClassConfiguration("Window");
+        final FunctionObject functionObject =
+                new RecursiveFunctionObject("Window", windowConfig.getJsConstructor().getValue(), window, browserVersion);
+        ScriptableObject.defineProperty(window, "constructor", functionObject,
+                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+
+        configureConstantsPropertiesAndFunctions(windowConfig, window);
+
+        final HtmlUnitScriptable windowPrototype = configureClass(windowConfig, window, browserVersion);
+        window.setPrototype(windowPrototype);
+        prototypes.put(windowConfig.getHostClass(), windowPrototype);
+        prototypesPerJSName.put(windowConfig.getClassName(), windowPrototype);
+
         // setup the prototypes
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final boolean isWindow = windowConfig == config;
-            if (isWindow) {
-                configureConstantsPropertiesAndFunctions(config, window);
-
-                final HtmlUnitScriptable prototype = configureClass(config, window, browserVersion);
-                prototypesPerJSName.put(config.getClassName(), prototype);
-            }
-            else {
+            if (windowConfig != config) {
                 final HtmlUnitScriptable prototype = configureClass(config, window, browserVersion);
                 if (config.isJsObject()) {
                     // Place object with prototype property in Window scope
@@ -305,7 +288,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor == null) {
                     final ScriptableObject constructor;
-                    if ("Window".equals(jsClassName)) {
+                    if (windowConfig == config) {
                         constructor = (ScriptableObject) ScriptableObject.getProperty(window, "constructor");
                     }
                     else {
@@ -317,7 +300,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
                 else {
                     final BaseFunction function;
-                    if ("Window".equals(jsClassName)) {
+                    if (windowConfig == config) {
                         function = (BaseFunction) ScriptableObject.getProperty(window, "constructor");
                     }
                     else {
@@ -348,7 +331,18 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
             }
         }
-        window.setPrototype(prototypesPerJSName.get(Window.class.getSimpleName()));
+
+        URLSearchParams.NativeParamsIterator.init(window, "URLSearchParams Iterator");
+        FormData.FormDataIterator.init(window, "FormData Iterator");
+
+        // strange but this is the reality for browsers
+        // because there will be still some sites using this for browser detection the property is
+        // set to null
+        // https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browsers
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=1442035
+        if (browserVersion.hasFeature(JS_WINDOW_INSTALL_TRIGGER_NULL)) {
+            window.put("InstallTrigger", window, null);
+        }
 
         // special handling for image/option
         final Method imageCtor = HTMLImageElement.class.getDeclaredMethod("jsConstructorImage");
