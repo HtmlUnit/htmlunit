@@ -40,8 +40,8 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.background.BasicJavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJob;
+import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
-import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -121,12 +121,13 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         context.initSafeStandardObjects(this);
         JavaScriptEngine.configureRhino(webClient, browserVersion, this);
 
-        final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(browserVersion);
-        ClassConfiguration config =
-                jsConfig.getClassConfiguration(DedicatedWorkerGlobalScope.class.getSuperclass().getName());
+        ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
+                (Class<? extends HtmlUnitScriptable>) DedicatedWorkerGlobalScope.class.getSuperclass(),
+                browserVersion);
         final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, this);
 
-        config = jsConfig.getClassConfiguration(DedicatedWorkerGlobalScope.class.getName());
+        config = AbstractJavaScriptConfiguration.getClassConfiguration(
+                                DedicatedWorkerGlobalScope.class, browserVersion);
         final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
         prototype.setPrototype(parentPrototype);
         setPrototype(prototype);
