@@ -529,7 +529,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @throws IllegalArgumentException
      */
     public static HtmlUnitScriptable configureClass(final ClassConfiguration config, final Scriptable window)
-        throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+        throws Exception {
 
         final HtmlUnitScriptable prototype = config.getHostClass().getDeclaredConstructor().newInstance();
         prototype.setParentScope(window);
