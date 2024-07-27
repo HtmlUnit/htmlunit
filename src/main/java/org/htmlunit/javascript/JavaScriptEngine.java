@@ -239,7 +239,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         configureConstantsPropertiesAndFunctions(windowConfig, window);
 
-        final HtmlUnitScriptable windowPrototype = configureClass(windowConfig, window, browserVersion);
+        final HtmlUnitScriptable windowPrototype = configureClass(windowConfig, window);
         window.setPrototype(windowPrototype);
         prototypes.put(windowConfig.getHostClass(), windowPrototype);
         prototypesPerJSName.put(windowConfig.getClassName(), windowPrototype);
@@ -247,7 +247,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         // setup the prototypes
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             if (windowConfig != config) {
-                final HtmlUnitScriptable prototype = configureClass(config, window, browserVersion);
+                final HtmlUnitScriptable prototype = configureClass(config, window);
                 if (config.isJsObject()) {
                     // Place object with prototype property in Window scope
                     final HtmlUnitScriptable obj = config.getHostClass().getDeclaredConstructor().newInstance();
@@ -520,7 +520,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * Configures the specified class for access via JavaScript.
      * @param config the configuration settings for the class to be configured
      * @param window the scope within which to configure the class
-     * @param browserVersion the browser version
      * @throws InstantiationException if the new class cannot be instantiated
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
@@ -529,8 +528,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @throws InvocationTargetException
      * @throws IllegalArgumentException
      */
-    public static HtmlUnitScriptable configureClass(final ClassConfiguration config, final Scriptable window,
-            final BrowserVersion browserVersion)
+    public static HtmlUnitScriptable configureClass(final ClassConfiguration config, final Scriptable window)
         throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 
         final HtmlUnitScriptable prototype = config.getHostClass().getDeclaredConstructor().newInstance();

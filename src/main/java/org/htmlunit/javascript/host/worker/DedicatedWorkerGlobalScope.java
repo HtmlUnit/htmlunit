@@ -124,11 +124,11 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
                 (Class<? extends HtmlUnitScriptable>) DedicatedWorkerGlobalScope.class.getSuperclass(),
                 browserVersion);
-        final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, this, browserVersion);
+        final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, this);
 
         config = AbstractJavaScriptConfiguration.getClassConfiguration(
                                 DedicatedWorkerGlobalScope.class, browserVersion);
-        final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
+        final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
         prototype.setPrototype(parentPrototype);
         setPrototype(prototype);
 

@@ -48,7 +48,7 @@ public class Intl extends HtmlUnitScriptable {
     private void define(final Class<? extends HtmlUnitScriptable> c, final BrowserVersion browserVersion) {
         try {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
-            final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
+            final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
             final FunctionObject functionObject =
                     new RecursiveFunctionObject(config.getJsConstructor().getKey(),
                             config.getJsConstructor().getValue(), this, browserVersion);
