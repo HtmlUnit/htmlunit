@@ -23,9 +23,9 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
+import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * A FunctionObject that returns IDs of this object and all its parent classes.
@@ -103,8 +103,8 @@ public class RecursiveFunctionObject extends FunctionObject {
         Class<?> klass = getPrototypeProperty().getClass();
 
         while (value == NOT_FOUND && HtmlUnitScriptable.class.isAssignableFrom(klass)) {
-            final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                    klass.asSubclass(HtmlUnitScriptable.class), browserVersion_);
+            final ClassConfiguration config = JavaScriptConfiguration.getInstance(browserVersion_)
+                    .getClassConfiguration(klass.getName());
             if (config != null) {
                 final List<ConstantInfo> constants = config.getConstants();
                 if (constants != null) {

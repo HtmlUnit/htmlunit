@@ -22,8 +22,8 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.RecursiveFunctionObject;
-import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
+import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * A JavaScript object for {@code Intl}.
@@ -47,7 +47,8 @@ public class Intl extends HtmlUnitScriptable {
 
     private void define(final Class<? extends HtmlUnitScriptable> c, final BrowserVersion browserVersion) {
         try {
-            final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
+            final ClassConfiguration config = JavaScriptConfiguration.getInstance(browserVersion)
+                    .getClassConfiguration(c.getName());
             final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
             final FunctionObject functionObject =
                     new RecursiveFunctionObject(config.getJsConstructor().getKey(),
