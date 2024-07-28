@@ -1,4 +1,4 @@
-# HtmlUnit
+# HtmlUnit ![HtmlUnit Logo](https://github.com/HtmlUnit/htmlunit/blob/master/src/site/resources/images/htmlunit.png)
 
 Version 4.4.0 / July 28, 2024
 
