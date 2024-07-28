@@ -29,7 +29,7 @@
         <htmlunitcsp.version>4.4.0</htmlunitcsp.version>
         <htmlunitneko.version>4.4.0</htmlunitneko.version>
         <htmlunitxpath.version>4.4.0</htmlunitxpath.version>
-        <htmlunitcorejs.version>4.4.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitcorejs.version>4.4.0</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>4.4.0</htmlunitwebsocketclient.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
