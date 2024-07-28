@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.4.0" date="xxxx, 2024" description="Chrome/Edge 127, Firefox 128, Bugfixes">
+        <release version="4.4.0" date="July 28, 2024" description="Chrome/Edge 127, Firefox 128, core-js, XMLHttprequest, Bugfixes">
             <action type="add" dev="RhinoTeam">
                 core-js: Various missing methods in TypedArray added.
             </action>
