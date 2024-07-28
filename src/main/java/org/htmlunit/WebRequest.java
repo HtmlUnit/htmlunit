@@ -367,7 +367,11 @@ public class WebRequest implements Serializable {
                 return normalize(getRequestParameters());
             }
 
-            return normalize(HttpUtils.parseUrlQuery(getRequestBody(), getCharset()));
+            // getRequestParameters and getRequestBody are mutually exclusive
+            final List<NameValuePair> allParameters = new ArrayList<>();
+            allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+            allParameters.addAll(HttpUtils.parseUrlQuery(getRequestBody(), getCharset()));
+            return normalize(allParameters);
         }
 
         if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
@@ -379,7 +383,10 @@ public class WebRequest implements Serializable {
         }
 
         if (FormEncodingType.MULTIPART == getEncodingType()) {
-            return normalize(getRequestParameters());
+            final List<NameValuePair> allParameters = new ArrayList<>();
+            allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+            allParameters.addAll(getRequestParameters());
+            return normalize(allParameters);
         }
 
         // for instance a PUT or PATCH request
