@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,7 +70,7 @@ public class CodeStyleTest {
         }
 
         if (System.getenv("EXPORT_FAILURES") != null) {
-            Files.write(Path.of("target", title_ + ".txt"), failures_);
+            Files.write(Paths.get("target", title_ + ".txt"), failures_);
         }
 
         final int errorsNumber = failures_.size();
