@@ -4226,6 +4226,8 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function InternalError() { [native code] }",
             FF_ESR = "function InternalError() { [native code] }")
+    @HtmlUnitNYI(CHROME = "function InternalError() { [native code] }",
+            EDGE = "function InternalError() { [native code] }")
     public void internalError() throws Exception {
         test("InternalError");
     }

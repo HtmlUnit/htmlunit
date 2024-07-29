@@ -4223,6 +4223,8 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF = "function",
             FF_ESR = "function")
+    @HtmlUnitNYI(CHROME = "function",
+            EDGE = "function")
     public void internalError() throws Exception {
         test("InternalError");
     }

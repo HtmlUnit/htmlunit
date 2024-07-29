@@ -153,7 +153,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         // hack for the moment
         if (browserVersion.isChrome() || browserVersion.isEdge()) {
             delete("DOMRequest");
-            delete("InternalError");
+            // delete("InternalError");
             delete("FontFaceSet");
         }
         else if (browserVersion.isFirefox()) {
