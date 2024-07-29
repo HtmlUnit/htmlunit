@@ -17,7 +17,9 @@ package org.htmlunit.javascript.host.worker;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,13 +42,13 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.background.BasicJavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJob;
-import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
@@ -121,23 +123,62 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         context.initSafeStandardObjects(this);
         JavaScriptEngine.configureRhino(webClient, browserVersion, this);
 
-        ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                (Class<? extends HtmlUnitScriptable>) DedicatedWorkerGlobalScope.class.getSuperclass(),
-                browserVersion);
+        final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);
+
+        ClassConfiguration config = jsConfig.getClassConfiguration(
+                DedicatedWorkerGlobalScope.class.getSuperclass().getSimpleName());
         final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, this);
 
-        config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                                DedicatedWorkerGlobalScope.class, browserVersion);
+        config = jsConfig.getClassConfiguration(DedicatedWorkerGlobalScope.class.getSimpleName());
         final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
         prototype.setPrototype(parentPrototype);
         setPrototype(prototype);
 
+        final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
+        final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
+
+        prototypes.put(config.getHostClass(), prototype);
+        prototypesPerJSName.put(config.getClassName(), prototype);
+
         final FunctionObject functionObject =
-                new RecursiveFunctionObject(DedicatedWorkerGlobalScope.class.getName(),
+                new RecursiveFunctionObject(DedicatedWorkerGlobalScope.class.getSimpleName(),
                         config.getJsConstructor().getValue(), this, browserVersion);
         functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
 
-        // TODO we have to do more configuration here
+        JavaScriptEngine.configureScope(this, config, functionObject, jsConfig,
+                browserVersion, prototypes, prototypesPerJSName);
+        // remove some aliases
+        delete("webkitURL");
+        delete("WebKitCSSMatrix");
+        // hack for the moment
+        if (browserVersion.isChrome() || browserVersion.isEdge()) {
+            delete("DOMRequest");
+            delete("InternalError");
+            delete("FontFaceSet");
+        }
+        else if (browserVersion.isFirefox()) {
+            delete("MediaSource");
+            delete("NetworkInformation");
+            delete("PeriodicSyncManager");
+            delete("Permissions");
+            delete("PermissionStatus");
+            delete("PushManager");
+            delete("PushSubscription");
+            delete("PushSubscriptionOptions");
+            delete("SecurityPolicyViolationEvent");
+            delete("ServiceWorkerRegistration");
+            delete("SourceBuffer");
+            delete("SourceBufferList");
+            delete("SyncManager");
+
+            if (!browserVersion.isFirefoxESR()) {
+                delete("DOMRequest");
+            }
+        }
+
+        if (!webClient.getOptions().isWebSocketEnabled()) {
+            delete("WebSocket");
+        }
 
         owningWindow_ = owningWindow;
         final URL currentURL = owningWindow.getWebWindow().getEnclosedPage().getUrl();

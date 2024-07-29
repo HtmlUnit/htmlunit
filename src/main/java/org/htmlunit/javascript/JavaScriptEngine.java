@@ -67,6 +67,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptExecutor;
+import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import org.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
@@ -243,67 +244,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         prototypes.put(windowConfig.getHostClass(), windowPrototype);
         prototypesPerJSName.put(windowConfig.getClassName(), windowPrototype);
 
-        // setup the prototypes
-        for (final ClassConfiguration config : jsConfig_.getAll()) {
-            if (config != windowConfig) {
-                final HtmlUnitScriptable prototype = configureClass(config, jsWindowScope);
-                if (config.isJsObject()) {
-                    // Place object with prototype property in Window scope
-                    final HtmlUnitScriptable obj = config.getHostClass().getDeclaredConstructor().newInstance();
-                    prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
-                    obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
-                    obj.setParentScope(jsWindowScope);
-                    obj.setClassName(config.getClassName());
-                    ScriptableObject.defineProperty(jsWindowScope, obj.getClassName(), obj, ScriptableObject.DONTENUM);
-                    // this obj won't have prototype, constants need to be configured on it again
-                    configureConstants(config, obj);
-                }
-                prototypes.put(config.getHostClass(), prototype);
-                prototypesPerJSName.put(config.getClassName(), prototype);
-            }
-        }
-
-        // once all prototypes have been build, it's possible to configure the chains
-        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(jsWindowScope);
-        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
-            final String name = entry.getKey();
-            final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
-            final Scriptable prototype = entry.getValue();
-            if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
-                prototype.setPrototype(parentPrototype);
-            }
-            else {
-                prototype.setPrototype(objectPrototype);
-            }
-        }
-
-        // setup constructors
-        for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final String jsClassName = config.getClassName();
-            final Scriptable prototype = prototypesPerJSName.get(jsClassName);
-
-            if (config == windowConfig) {
-                addAsConstructorAndAlias(functionObject, jsWindowScope, prototype, config);
-                configureConstantsStaticPropertiesAndStaticFunctions(config, functionObject);
-                continue;
-            }
-
-            final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
-            if (prototype != null && config.isJsObject()) {
-                if (jsConstructor == null) {
-                    final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
-                    ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
-                    defineConstructor(jsWindowScope, prototype, constructor);
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
-                }
-                else {
-                    final FunctionObject function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsWindowScope, browserVersion);
-                    addAsConstructorAndAlias(function, jsWindowScope, prototype, config);
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, function);
-                }
-            }
-        }
+        configureScope(jsWindowScope, windowConfig, functionObject, jsConfig_, browserVersion, prototypes, prototypesPerJSName);
 
         URLSearchParams.NativeParamsIterator.init(jsWindowScope, "URLSearchParams Iterator");
         FormData.FormDataIterator.init(jsWindowScope, "FormData Iterator");
@@ -332,6 +273,87 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         jsWindowScope.initialize(webWindow, page);
 
         applyPolyfills(webClient, browserVersion, context, jsWindowScope);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param jsScope the js scope to set up
+     * @param scopeConfig the {@link ClassConfiguration} that is used for the scope
+     * @param scopeContructorFunctionObject the (already registered) ctor
+     * @param jsConfig the complete jsConfig
+     * @param browserVersion the {@link BrowserVersion}
+     * @param prototypes map of prototypes
+     * @param prototypesPerJSName map of prototypes with the class name as key
+     */
+    public static void configureScope(final HtmlUnitScriptable jsScope,
+            final ClassConfiguration scopeConfig,
+            final FunctionObject scopeContructorFunctionObject,
+            final AbstractJavaScriptConfiguration jsConfig,
+            final BrowserVersion browserVersion,
+            final Map<Class<? extends Scriptable>, Scriptable> prototypes,
+            final Map<String, Scriptable> prototypesPerJSName) throws Exception {
+        // setup the prototypes
+        for (final ClassConfiguration config : jsConfig.getAll()) {
+            if (config != scopeConfig) {
+                final HtmlUnitScriptable prototype = configureClass(config, jsScope);
+                if (config.isJsObject()) {
+                    // Place object with prototype property in Window scope
+                    final HtmlUnitScriptable obj = config.getHostClass().getDeclaredConstructor().newInstance();
+                    prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
+                    obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
+                    obj.setParentScope(jsScope);
+                    obj.setClassName(config.getClassName());
+                    ScriptableObject.defineProperty(jsScope, obj.getClassName(), obj, ScriptableObject.DONTENUM);
+                    // this obj won't have prototype, constants need to be configured on it again
+                    configureConstants(config, obj);
+                }
+                prototypes.put(config.getHostClass(), prototype);
+                prototypesPerJSName.put(config.getClassName(), prototype);
+            }
+        }
+
+        // once all prototypes have been build, it's possible to configure the chains
+        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(jsScope);
+        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
+            final String name = entry.getKey();
+            final ClassConfiguration config = jsConfig.getClassConfiguration(name);
+            final Scriptable prototype = entry.getValue();
+            if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
+                prototype.setPrototype(parentPrototype);
+            }
+            else {
+                prototype.setPrototype(objectPrototype);
+            }
+        }
+
+        // setup constructors
+        for (final ClassConfiguration config : jsConfig.getAll()) {
+            final String jsClassName = config.getClassName();
+            final Scriptable prototype = prototypesPerJSName.get(jsClassName);
+
+            if (config == scopeConfig) {
+                addAsConstructorAndAlias(scopeContructorFunctionObject, jsScope, prototype, config);
+                configureConstantsStaticPropertiesAndStaticFunctions(config, scopeContructorFunctionObject);
+                continue;
+            }
+
+            final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
+            if (prototype != null && config.isJsObject()) {
+                if (jsConstructor == null) {
+                    final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
+                    ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
+                    defineConstructor(jsScope, prototype, constructor);
+                    configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
+                }
+                else {
+                    final FunctionObject function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope, browserVersion);
+                    addAsConstructorAndAlias(function, jsScope, prototype, config);
+                    configureConstantsStaticPropertiesAndStaticFunctions(config, function);
+                }
+            }
+        }
     }
 
     private static void addAsConstructorAndAlias(final FunctionObject function,
@@ -451,7 +473,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
     }
 
-    private static void defineConstructor(final Window window,
+    private static void defineConstructor(final HtmlUnitScriptable window,
             final Scriptable prototype, final ScriptableObject constructor) {
         constructor.setParentScope(window);
         try {
