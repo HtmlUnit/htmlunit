@@ -285,6 +285,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
             if (config == windowConfig) {
                 addAsConstructorAndAlias(functionObject, jsWindowScope, prototype, config);
+                configureConstantsStaticPropertiesAndStaticFunctions(config, functionObject);
                 continue;
             }
 
@@ -299,6 +300,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 else {
                     final FunctionObject function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsWindowScope, browserVersion);
                     addAsConstructorAndAlias(function, jsWindowScope, prototype, config);
+                    configureConstantsStaticPropertiesAndStaticFunctions(config, function);
                 }
             }
         }
