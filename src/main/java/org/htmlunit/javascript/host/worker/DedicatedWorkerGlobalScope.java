@@ -72,10 +72,12 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     private static final Method GETTER_NAME;
     private static final Method SETTER_NAME;
 
+    private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
     private final Window owningWindow_;
     private final String origin_;
     private String name_;
     private final Worker worker_;
+    private WorkerLocation workerLocation_;
 
     static {
         try {
@@ -97,6 +99,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         origin_ = null;
         name_ = null;
         worker_ = null;
+        workerLocation_ = null;
     }
 
     /**
@@ -180,6 +183,8 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             delete("WebSocket");
         }
 
+        setPrototypes(prototypes);
+
         owningWindow_ = owningWindow;
         final URL currentURL = owningWindow.getWebWindow().getEnclosedPage().getUrl();
         origin_ = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
@@ -188,6 +193,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         defineProperty("name", null, GETTER_NAME, SETTER_NAME, ScriptableObject.READONLY);
 
         worker_ = worker;
+        workerLocation_ = null;
     }
 
     /**
@@ -215,6 +221,14 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     @JsxSetter
     public void setOnmessage(final Object onmessage) {
         setEventHandler(Event.TYPE_MESSAGE, onmessage);
+    }
+
+    /**
+     * @return returns the WorkerLocation associated with the worker
+     */
+    @JsxGetter
+    public WorkerLocation getLocation() {
+        return workerLocation_;
     }
 
     /**
@@ -353,6 +367,10 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         final HtmlPage page = (HtmlPage) owningWindow_.getDocument().getPage();
         final URL fullUrl = page.getFullyQualifiedUrl(url);
 
+        workerLocation_ = new WorkerLocation(fullUrl, origin_);
+        workerLocation_.setParentScope(this);
+        workerLocation_.setPrototype(getPrototype(workerLocation_.getClass()));
+
         final WebRequest webRequest = new WebRequest(fullUrl);
         final WebResponse response = webClient.loadWebResponse(webRequest);
         if (checkMimeType && !MimeType.isJavascriptMimeType(response.getContentType())) {
@@ -418,6 +436,24 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setInterval(context,
                 ((DedicatedWorkerGlobalScope) thisObj).owningWindow_, args, function);
+    }
+
+    /**
+     * Returns the prototype object corresponding to the specified HtmlUnit class inside the window scope.
+     * @param jsClass the class whose prototype is to be returned
+     * @return the prototype object corresponding to the specified class inside the specified scope
+     */
+    @Override
+    public Scriptable getPrototype(final Class<? extends HtmlUnitScriptable> jsClass) {
+        return prototypes_.get(jsClass);
+    }
+
+    /**
+     * Sets the prototypes for HtmlUnit host classes.
+     * @param map a Map of ({@link Class}, {@link Scriptable})
+     */
+    public void setPrototypes(final Map<Class<? extends Scriptable>, Scriptable> map) {
+        prototypes_ = map;
     }
 }
 

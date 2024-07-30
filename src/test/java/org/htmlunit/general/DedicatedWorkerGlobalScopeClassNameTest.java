@@ -9979,7 +9979,6 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function WorkerLocation() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception", FF_ESR = "exception")
     public void workerLocation() throws Exception {
         test("WorkerLocation");
     }
