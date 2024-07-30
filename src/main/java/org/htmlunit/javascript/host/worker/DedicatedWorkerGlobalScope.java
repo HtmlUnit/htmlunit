@@ -50,10 +50,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
 import org.htmlunit.javascript.host.event.Event;
-import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.util.MimeType;
 
@@ -65,7 +63,7 @@ import org.htmlunit.util.MimeType;
  * @author Rural Hunter
  */
 @JsxClass
-public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrWorkerGlobalScope {
+public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);
 
@@ -242,28 +240,6 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      */
     public void jsSetName(final Scriptable name) {
         name_ = JavaScriptEngine.toString(name);
-    }
-
-    /**
-     * Creates a base-64 encoded ASCII string from a string of binary data.
-     * @param stringToEncode string to encode
-     * @return the encoded string
-     */
-    @JsxFunction
-    @Override
-    public String btoa(final String stringToEncode) {
-        return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode);
-    }
-
-    /**
-     * Decodes a string of data which has been encoded using base-64 encoding.
-     * @param encodedData the encoded string
-     * @return the decoded value
-     */
-    @JsxFunction
-    @Override
-    public String atob(final String encodedData) {
-        return WindowOrWorkerGlobalScopeMixin.atob(encodedData);
     }
 
     /**

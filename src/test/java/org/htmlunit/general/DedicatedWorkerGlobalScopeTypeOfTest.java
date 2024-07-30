@@ -9966,7 +9966,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void workerGlobalScope() throws Exception {
         test("WorkerGlobalScope");
     }
