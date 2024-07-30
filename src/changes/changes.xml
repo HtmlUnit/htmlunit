@@ -7,6 +7,16 @@
     </properties>
 
     <body>
+        <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="add" dev="rbri" issue="#816">
+                WorkerNavigator and WorkerLocation implemented.
+            </action>
+            <action type="add" dev="rbri" issue="#816">
+                WebWorker context setup fixed, all API's now available.
+            </action>
+        </release>
+
+
         <release version="4.4.0" date="July 28, 2024" description="Chrome/Edge 127, Firefox 128, core-js, XMLHttprequest, Bugfixes">
             <action type="add" dev="RhinoTeam">
                 core-js: Various missing methods in TypedArray added.

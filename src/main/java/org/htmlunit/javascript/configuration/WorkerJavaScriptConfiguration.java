@@ -121,6 +121,7 @@ import org.htmlunit.javascript.host.worker.ServiceWorkerRegistration;
 import org.htmlunit.javascript.host.worker.SyncManager;
 import org.htmlunit.javascript.host.worker.Worker;
 import org.htmlunit.javascript.host.worker.WorkerLocation;
+import org.htmlunit.javascript.host.worker.WorkerNavigator;
 import org.htmlunit.javascript.host.xml.FormData;
 import org.htmlunit.javascript.host.xml.XMLHttpRequest;
 import org.htmlunit.javascript.host.xml.XMLHttpRequestEventTarget;
@@ -166,7 +167,7 @@ public final class WorkerJavaScriptConfiguration extends AbstractJavaScriptConfi
         WebGLRenderbuffer.class, WebGLRenderingContext.class,
         WebGLSampler.class, WebGLShader.class, WebGLShaderPrecisionFormat.class, WebGLSync.class, WebGLTexture.class,
         WebGLTransformFeedback.class, WebGLUniformLocation.class, WebGLVertexArrayObject.class, WebSocket.class,
-        Worker.class, WorkerLocation.class,
+        Worker.class, WorkerLocation.class, WorkerNavigator.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class
     };
 

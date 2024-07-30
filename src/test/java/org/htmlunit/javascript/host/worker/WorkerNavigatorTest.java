@@ -24,20 +24,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Unit tests for {@link WorkerLocation}.
+ * Unit tests for {@link WorkerNavigator}.
  *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class WorkerLocationTest extends WebDriverTestCase {
+public class WorkerNavigatorTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§worker.js#somehash")
-    public void location() throws Exception {
-        final String workerJs = "postMessage('' + location);\n";
+    @Alerts("[object\\sWorkerNavigator]")
+    public void navigator() throws Exception {
+        final String workerJs = "postMessage('' + navigator);\n";
 
         expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
@@ -49,7 +49,7 @@ public class WorkerLocationTest extends WebDriverTestCase {
     @Test
     @Alerts("object")
     public void typeOf() throws Exception {
-        final String workerJs = "postMessage(typeof location);\n";
+        final String workerJs = "postMessage(typeof navigator);\n";
         testJs(workerJs);
     }
 
@@ -57,9 +57,9 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§worker.js#somehash")
-    public void href() throws Exception {
-        final String workerJs = "postMessage(location.href);\n";
+    @Alerts("Mozilla")
+    public void appCodeName() throws Exception {
+        final String workerJs = "postMessage(navigator.appCodeName);\n";
 
         expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
@@ -69,9 +69,11 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("http:")
-    public void protocol() throws Exception {
-        final String workerJs = "postMessage(location.protocol);\n";
+    @Alerts("Netscape")
+    public void appName() throws Exception {
+        final String workerJs = "postMessage(navigator.appName);\n";
+
+        expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
     }
 
@@ -79,11 +81,16 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
-    public void host() throws Exception {
-        final String workerJs = "postMessage(location.host);\n";
+    @Alerts(CHROME = "5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/127.0.0.0\\sSafari/537.36",
+            EDGE = "5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/127.0.0.0\\sSafari/537.36\\sEdg/127.0.0.0",
+            FF = "5.0\\s(Windows)",
+            FF_ESR = "5.0\\s(Windows)")
+    public void appVersion() throws Exception {
+        final String workerJs = "postMessage(navigator.appVersion);\n";
 
-        expandExpectedAlertsVariables("localhost:" + PORT);
+        expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
     }
 
@@ -91,9 +98,13 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("localhost")
-    public void hostname() throws Exception {
-        final String workerJs = "postMessage(location.hostname);\n";
+    @Alerts(DEFAULT = {},
+            FF = "undefined",
+            FF_ESR = "undefined")
+    public void connection() throws Exception {
+        final String workerJs = "postMessage(navigator.connection);\n";
+
+        expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
     }
 
@@ -101,11 +112,11 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
-    public void origin() throws Exception {
-        final String workerJs = "postMessage(location.origin);\n";
+    @Alerts("en-US")
+    public void language() throws Exception {
+        final String workerJs = "postMessage(navigator.language);\n";
 
-        expandExpectedAlertsVariables("http://localhost:" + PORT);
+        expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
     }
 
@@ -113,11 +124,11 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
-    public void port() throws Exception {
-        final String workerJs = "postMessage(location.port);\n";
+    @Alerts("en-US,en")
+    public void languages() throws Exception {
+        final String workerJs = "postMessage(navigator.languages);\n";
 
-        expandExpectedAlertsVariables("" + PORT);
+        expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
     }
 
@@ -125,9 +136,11 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("/worker.js")
-    public void pathname() throws Exception {
-        final String workerJs = "postMessage(location.pathname);\n";
+    @Alerts("Win32")
+    public void platform() throws Exception {
+        final String workerJs = "postMessage(navigator.platform);\n";
+
+        expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
     }
 
@@ -135,9 +148,11 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
-    public void search() throws Exception {
-        final String workerJs = "postMessage(location.search);\n";
+    @Alerts("Gecko")
+    public void product() throws Exception {
+        final String workerJs = "postMessage(navigator.product);\n";
+
+        expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
     }
 
@@ -145,9 +160,16 @@ public class WorkerLocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("#somehash")
-    public void hash() throws Exception {
-        final String workerJs = "postMessage(location.hash);\n";
+    @Alerts(CHROME = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/127.0.0.0\\sSafari/537.36",
+            EDGE = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/127.0.0.0\\sSafari/537.36\\sEdg/127.0.0.0",
+            FF = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64;\\srv:128.0)\\sGecko/20100101\\sFirefox/128.0",
+            FF_ESR = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64;\\srv:109.0)\\sGecko/20100101\\sFirefox/115.0")
+    public void userAgent() throws Exception {
+        final String workerJs = "postMessage(navigator.userAgent);\n";
+
+        expandExpectedAlertsVariables(URL_FIRST);
         testJs(workerJs);
     }
 
@@ -159,7 +181,7 @@ public class WorkerLocationTest extends WebDriverTestCase {
     public void ctor() throws Exception {
         final String workerJs =
                 "try {\n"
-                + "  var l = new WorkerLocation();\n"
+                + "  var l = new WorkerNavigator();\n"
                 + "  postMessage(l);\n"
                 + "} catch(e) {\n"
                 + "  postMessage('exception');\n"

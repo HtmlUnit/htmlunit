@@ -78,6 +78,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     private String name_;
     private final Worker worker_;
     private WorkerLocation workerLocation_;
+    private WorkerNavigator workerNavigator_;
 
     static {
         try {
@@ -221,6 +222,14 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     }
 
     /**
+     * @return returns the WorkerNavigator associated with the worker
+     */
+    @JsxGetter
+    public WorkerNavigator getNavigator() {
+        return workerNavigator_;
+    }
+
+    /**
      * @return the {@code name}
      */
     public String jsGetName() {
@@ -359,6 +368,10 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         workerLocation_ = new WorkerLocation(fullUrl, origin_);
         workerLocation_.setParentScope(this);
         workerLocation_.setPrototype(getPrototype(workerLocation_.getClass()));
+
+        workerNavigator_ = new WorkerNavigator(webClient.getBrowserVersion());
+        workerNavigator_.setParentScope(this);
+        workerNavigator_.setPrototype(getPrototype(workerNavigator_.getClass()));
 
         final WebRequest webRequest = new WebRequest(fullUrl);
         final WebResponse response = webClient.loadWebResponse(webRequest);
