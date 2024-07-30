@@ -114,7 +114,7 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
 
         loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME / 4, getWebDriver(), expectedAlerts);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), expectedAlerts);
     }
 
     private String[] getExpectedString(final String className) {

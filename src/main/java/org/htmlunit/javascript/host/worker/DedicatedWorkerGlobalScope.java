@@ -153,16 +153,10 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         // remove some aliases
         delete("webkitURL");
         delete("WebKitCSSMatrix");
+
         // hack for the moment
-        if (browserVersion.isChrome() || browserVersion.isEdge()) {
-            delete("DOMRequest");
-            // delete("InternalError");
-            delete("FontFaceSet");
-        }
-        else if (browserVersion.isFirefox()) {
+        if (browserVersion.isFirefox()) {
             delete("MediaSource");
-            delete("NetworkInformation");
-            delete("PeriodicSyncManager");
             delete("Permissions");
             delete("PermissionStatus");
             delete("PushManager");
@@ -172,11 +166,6 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             delete("ServiceWorkerRegistration");
             delete("SourceBuffer");
             delete("SourceBufferList");
-            delete("SyncManager");
-
-            if (!browserVersion.isFirefoxESR()) {
-                delete("DOMRequest");
-            }
         }
 
         if (!webClient.getOptions().isWebSocketEnabled()) {

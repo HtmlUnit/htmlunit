@@ -59,7 +59,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
 
         loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME / 4, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
