@@ -25,6 +25,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.network.NetworkInformation;
 
@@ -49,6 +50,14 @@ public class WorkerNavigator extends HtmlUnitScriptable {
 
     WorkerNavigator(final BrowserVersion browserVersion) {
         browserVersion_ = browserVersion;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
     }
 
     /**
