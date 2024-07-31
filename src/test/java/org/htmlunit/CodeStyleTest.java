@@ -23,7 +23,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -49,6 +48,7 @@ import org.junit.Test;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Sven Strickroth
+ * @author Kristof Neirynck
  */
 public class CodeStyleTest {
 
