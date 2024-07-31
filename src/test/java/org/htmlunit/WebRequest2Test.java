@@ -15,6 +15,7 @@
 package org.htmlunit;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
@@ -96,8 +97,8 @@ public class WebRequest2Test extends WebServerTestCase {
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> data = new ArrayList<>();
 
-        final HttpMethod[] methods = {HttpMethod.OPTIONS, HttpMethod.GET, /* HttpMethod.HEAD,*/ HttpMethod.POST,
-                                      HttpMethod.PUT, HttpMethod.DELETE /* , HttpMethod.TRACE, HttpMethod.PATCH */};
+        final HttpMethod[] methods = {HttpMethod.OPTIONS, HttpMethod.GET, HttpMethod.HEAD, HttpMethod.POST,
+                                      HttpMethod.PUT, HttpMethod.DELETE, /*HttpMethod.TRACE,*/ HttpMethod.PATCH};
         final String[] queries = {"", "?a=b", "?a=b&c=d", "?a=", "?a", "?", "?a=b&a=d"};
         final FormEncodingType[] encodings =
             {FormEncodingType.URL_ENCODED, FormEncodingType.MULTIPART, FormEncodingType.TEXT_PLAIN};
@@ -197,6 +198,12 @@ public class WebRequest2Test extends WebServerTestCase {
 
         // calculate expectation from bounce servlet
         String expectedContent = ((TextPage) page).getContent();
+
+        if (HttpMethod.HEAD.equals(request.getHttpMethod())) {
+            assertEquals(0, expectedContent.length());
+            expectedContent = InspectServlet.PARAMETERS_;
+        }
+
         assertTrue(expectedContent.startsWith("Parameters: \n"));
         expectedContent = expectedContent.substring("Parameters: \n".length()).trim();
 
@@ -233,6 +240,20 @@ public class WebRequest2Test extends WebServerTestCase {
      */
     public static class InspectServlet extends HttpServlet {
 
+        /** Hack. */
+        public static String PARAMETERS_;
+
+        @Override
+        protected void service(final HttpServletRequest req, final HttpServletResponse resp)
+            throws ServletException, IOException {
+            if ("patch".equalsIgnoreCase(req.getMethod())) {
+                doPatch(req, resp);
+                return;
+            }
+
+            super.service(req, resp);
+        }
+
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
@@ -242,7 +263,8 @@ public class WebRequest2Test extends WebServerTestCase {
         @Override
         protected void doHead(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
-            bounce(req, resp);
+            // head does not deliver a body
+            bounceToStatic(req, resp);
         }
 
         @Override
@@ -275,17 +297,35 @@ public class WebRequest2Test extends WebServerTestCase {
             bounce(req, resp);
         }
 
+        protected void doPatch(final HttpServletRequest req, final HttpServletResponse resp)
+            throws ServletException, IOException {
+            bounce(req, resp);
+        }
+
         private static void bounce(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             try (Writer writer = resp.getWriter()) {
-                writer.write("Parameters: \n");
-                for (final String key : req.getParameterMap().keySet()) {
-                    final String val = req.getParameter(key);
-                    if (val == null) {
-                        writer.write("  '" + key + "': '-null-'\n");
-                    }
-                    else {
-                        writer.write("  '" + key + "': '" + val + "'\n");
-                    }
+                bounce(writer, req, resp);
+            }
+        }
+
+        private static void bounceToStatic(final HttpServletRequest req, final HttpServletResponse resp)
+                throws IOException {
+            try (StringWriter writer = new StringWriter()) {
+                bounce(writer, req, resp);
+                PARAMETERS_ = writer.toString();
+            }
+        }
+
+        private static void bounce(final Writer writer,
+                final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            writer.write("Parameters: \n");
+            for (final String key : req.getParameterMap().keySet()) {
+                final String val = req.getParameter(key);
+                if (val == null) {
+                    writer.write("  '" + key + "': '-null-'\n");
+                }
+                else {
+                    writer.write("  '" + key + "': '" + val + "'\n");
                 }
             }
         }

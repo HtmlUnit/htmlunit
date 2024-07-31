@@ -392,7 +392,7 @@ public class WebRequest implements Serializable {
         }
 
         if ((getEncodingType() == FormEncodingType.URL_ENCODED || getEncodingType() == FormEncodingType.TEXT_PLAIN)
-                && HttpMethod.PUT == getHttpMethod()) {
+                && (HttpMethod.PUT == getHttpMethod() || HttpMethod.PATCH == getHttpMethod())) {
             return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
         }
 
