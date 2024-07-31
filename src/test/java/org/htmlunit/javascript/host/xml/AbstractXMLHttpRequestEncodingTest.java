@@ -19,6 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
@@ -44,6 +45,8 @@ public abstract class AbstractXMLHttpRequestEncodingTest extends WebDriverTestCa
         UTF8("UTF8", UTF_8),
         /** iso 8859 1. */
         ISO88591("ISO88591", ISO_8859_1),
+        /** windows-1250. */
+        WINDOWS1250("WINDOWS1250", Charset.forName("windows-1250")),
         /** gb 2312. */
         GB2312("GB2312", Charset.forName("GB2312"));
 
@@ -113,5 +116,13 @@ public abstract class AbstractXMLHttpRequestEncodingTest extends WebDriverTestCa
         }
         getMockWebConnection().setResponse(URL_SECOND, xml, mimeTypeXml.getMimeType(),
                 charsetXmlResponseHeader == null ? null : charsetXmlResponseHeader.getCharset());
+    }
+
+    protected static String escape(final String str) {
+        final StringBuilder res = new StringBuilder();
+        for (final char c : str.toCharArray()) {
+            res.append("\\u").append(String.format("%04X", (int) c).toLowerCase(Locale.ROOT));
+        }
+        return res.toString();
     }
 }

@@ -50,7 +50,10 @@
     <suppress checks="LineLength" files="XMLSerializer.java" lines="1-30"/>
     <suppress checks="LineLength" files="XMLSerializerTest.java"/>
     <suppress checks="LineLength" files="XSLProcessorTest.java"/>
+    <suppress checks="LineLength" files="XMLHttpRequestResponseAsTextEncodingTest.java"/>
+    <suppress checks="LineLength" files="XMLHttpRequestResponseAsXMLEncodingTest.java"/>
     <suppress checks="LineLength" files="XMLHttpRequestResponseTextEncodingTest.java"/>
+    <suppress checks="LineLength" files="XMLHttpRequestResponseXMLEncodingTest.java"/>
 
     <suppress checks="MethodName" files="HtmlPageEncodingTest.java"/>
     <suppress checks="MethodName" files="CssStyleSheetEncodingTest.java"/>
