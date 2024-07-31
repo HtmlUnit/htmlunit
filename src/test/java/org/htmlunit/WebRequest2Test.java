@@ -18,8 +18,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,15 +30,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.htmlunit.junit.BrowserRunner;
+import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.junit.BrowserParameterizedRunner;
+import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link WebRequest#getParameters()}.
- * This method is used by Spring MVC test to shortcut the
+ * This method is used by Spring test to shortcut the
  * request processing (without involving a server). Therefore
  * we have to make sure this works as expected in all cases.
  *
@@ -46,8 +51,27 @@ import org.junit.runner.RunWith;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
+@RunWith(BrowserParameterizedRunner.class)
 public class WebRequest2Test extends WebServerTestCase {
+
+    public static class TestParameters {
+        private final String label_;
+        private final List<NameValuePair> pairs_;
+
+        TestParameters(final String label, final List<NameValuePair> pairs) {
+            label_ = label;
+            pairs_ = pairs;
+        }
+
+        @Override
+        public String toString() {
+            return label_;
+        }
+
+        public List<NameValuePair> getPairs() {
+            return pairs_;
+        }
+    }
 
     /**
      * Performs pre-test construction.
@@ -64,198 +88,144 @@ public class WebRequest2Test extends WebServerTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * Returns the parameterized data.
+     * @return the parameterized data
+     * @throws Exception if an error occurs
      */
-    @Test
-    public void getParametersNone() throws Exception {
-        final WebRequest request = new WebRequest(URL_FIRST);
+    @Parameters
+    public static Collection<Object[]> data() throws Exception {
+        final List<Object[]> data = new ArrayList<>();
 
-        final Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n", ((TextPage) page).getContent());
+        final HttpMethod[] methods = {HttpMethod.OPTIONS, HttpMethod.GET, /* HttpMethod.HEAD,*/ HttpMethod.POST,
+                                      HttpMethod.PUT, HttpMethod.DELETE /* , HttpMethod.TRACE, HttpMethod.PATCH */};
+        final String[] queries = {"", "?a=b", "?a=b&c=d", "?a=", "?a", "?", "?a=b&a=d"};
+        final FormEncodingType[] encodings =
+            {FormEncodingType.URL_ENCODED, FormEncodingType.MULTIPART, FormEncodingType.TEXT_PLAIN};
 
-        final List<NameValuePair> parameters = request.getParameters();
-        assertEquals(0, parameters.size());
+        List<NameValuePair> parameterPairs = new ArrayList<>();
+        final TestParameters emptyParameters = new TestParameters("empty", parameterPairs);
+
+        parameterPairs = new ArrayList<>();
+        parameterPairs.add(new NameValuePair("p1", "v1"));
+        final TestParameters oneParameter = new TestParameters("oneParameter", parameterPairs);
+
+        parameterPairs = new ArrayList<>();
+        parameterPairs.add(new NameValuePair("a", ""));
+        final TestParameters emptyValueParameter = new TestParameters("emptyValue", parameterPairs);
+
+        parameterPairs = new ArrayList<>();
+        parameterPairs.add(new NameValuePair("a", "b"));
+        final TestParameters sameAsInQueryParameter = new TestParameters("sameAsInQuery", parameterPairs);
+
+        final TestParameters[] parameters =
+            {null, emptyParameters, oneParameter, emptyValueParameter, sameAsInQueryParameter};
+
+        final String[] bodies = {"", "a=b", "a=b&c=d", "a=", "a", "a=b&a=d"};
+
+        for (final HttpMethod method : methods) {
+            for (final String query : queries) {
+                for (final FormEncodingType encoding : encodings) {
+                    for (final TestParameters parameter : parameters) {
+                        for (final String body : bodies) {
+                            data.add(new Object[] {method, query, encoding, parameter, body});
+                        }
+                    }
+                }
+            }
+        }
+
+        return data;
     }
 
     /**
-     * @throws Exception if the test fails
+     * The HttpMethod.
      */
-    @Test
-    public void getParametersOnePair() throws Exception {
-        final WebRequest request = new WebRequest(new URL(URL_FIRST, "?x=u"));
-        Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'x': 'u'\n", ((TextPage) page).getContent());
-
-        List<NameValuePair> parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("x", parameters.get(0).getName());
-        assertEquals("u", parameters.get(0).getValue());
-
-        final List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new NameValuePair("hello", "world"));
-        request.setRequestParameters(pairs);
-        page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'hello': 'world'\n", ((TextPage) page).getContent());
-
-        parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("hello", parameters.get(0).getName());
-        assertEquals("world", parameters.get(0).getValue());
-    }
+    @Parameter
+    public HttpMethod httpMethod_;
 
     /**
-     * @throws Exception if the test fails
+     * The query.
      */
-    @Test
-    public void getParametersOnePairKeyEquals() throws Exception {
-        final WebRequest request = new WebRequest(new URL(URL_FIRST, "?x="));
-        Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'x': ''\n", ((TextPage) page).getContent());
-
-        List<NameValuePair> parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("x", parameters.get(0).getName());
-        assertEquals("", parameters.get(0).getValue());
-
-        final List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new NameValuePair("hello", ""));
-        request.setRequestParameters(pairs);
-        page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'hello': ''\n", ((TextPage) page).getContent());
-
-        parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("hello", parameters.get(0).getName());
-        assertEquals("", parameters.get(0).getValue());
-    }
+    @Parameter(1)
+    public String query_;
 
     /**
-     * @throws Exception if the test fails
+     * The FormEncodingType.
      */
-    @Test
-    public void getParametersOnePairKeyOnly() throws Exception {
-        final WebRequest request = new WebRequest(new URL(URL_FIRST, "?x"));
-        Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'x': ''\n", ((TextPage) page).getContent());
-
-        List<NameValuePair> parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("x", parameters.get(0).getName());
-        assertEquals("", parameters.get(0).getValue());
-
-        final List<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new NameValuePair("hello", null));
-        request.setRequestParameters(pairs);
-        page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'hello': ''\n", ((TextPage) page).getContent());
-
-        parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("hello", parameters.get(0).getName());
-        assertEquals("", parameters.get(0).getValue());
-    }
+    @Parameter(2)
+    public FormEncodingType encoding_;
 
     /**
-     * @throws Exception if the test fails
+     * The FormEncodingType.
+     */
+    @Parameter(3)
+    public TestParameters parameter_;
+
+    /**
+     * The body.
+     */
+    @Parameter(4)
+    public String body_;
+
+    /**
+     * The default test.
+     * @throws Exception if an error occurs
      */
     @Test
-    public void getParametersFromQueryAndUrlEncodedBodyPost() throws Exception {
-        final URL url = new URL(URL_FIRST, "?a=b");
+    @Default
+    public void test() throws Exception {
+        final URL url = new URL(URL_FIRST, query_);
         final WebRequest request = new WebRequest(url);
-        request.setHttpMethod(HttpMethod.POST);
-        request.setEncodingType(FormEncodingType.URL_ENCODED);
-        request.setRequestBody("c=d");
+        request.setHttpMethod(httpMethod_);
+        request.setEncodingType(encoding_);
+
+        if (parameter_ != null) {
+            request.setRequestParameters(parameter_.getPairs());
+        }
+
+        if (body_ != null) {
+            try {
+                request.setRequestBody(body_);
+            }
+            catch (final RuntimeException e) {
+                // ignore
+            }
+        }
 
         final Page page = getWebClient().getPage(request);
         assertTrue(page instanceof TextPage);
 
-        assertEquals("Parameters: \n  'a': 'b'\n  'c': 'd'\n", ((TextPage) page).getContent());
+        // calculate expectation from bounce servlet
+        String expectedContent = ((TextPage) page).getContent();
+        assertTrue(expectedContent.startsWith("Parameters: \n"));
+        expectedContent = expectedContent.substring("Parameters: \n".length()).trim();
+
+        final List<NameValuePair> expectedParameters = new ArrayList<>();
+        if (!StringUtils.isAllBlank(expectedContent)) {
+            for (final String line : expectedContent.split("\n")) {
+                final String[] parts = line.split(":");
+                assertEquals(2, parts.length);
+
+                String name = parts[0].trim();
+                name = StringUtils.strip(name, "'");
+                String value = parts[1].trim();
+                value = StringUtils.strip(value, "'");
+
+                final NameValuePair pair = new NameValuePair(name, value);
+                expectedParameters.add(pair);
+            }
+        }
 
         final List<NameValuePair> parameters = request.getParameters();
-        assertEquals(2, parameters.size());
-        assertEquals("a", parameters.get(0).getName());
-        assertEquals("b", parameters.get(0).getValue());
-        assertEquals("c", parameters.get(1).getName());
-        assertEquals("d", parameters.get(1).getValue());
-    }
+        assertEquals(expectedParameters.size(), parameters.size());
 
-    @Test
-    public void getParametersFromQueryAndUrlEncodedBodyPostWhenEncodingTypeIsMultipart() throws Exception {
-        final URL url = new URL(URL_FIRST, "?a=b");
-        final WebRequest request = new WebRequest(url);
-        request.setHttpMethod(HttpMethod.POST);
-        request.setEncodingType(FormEncodingType.MULTIPART);
-        request.setRequestParameters(Collections.singletonList(new NameValuePair("c", "d")));
+        final Iterator<NameValuePair> expectedIter = expectedParameters.iterator();
+        for (final NameValuePair nameValuePair : parameters) {
+            final NameValuePair expectedNameValuePair = expectedIter.next();
 
-        final Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'a': 'b'\n", ((TextPage) page).getContent());
-
-        final List<NameValuePair> parameters = request.getParameters();
-        assertEquals(2, parameters.size());
-        assertEquals("a", parameters.get(0).getName());
-        assertEquals("b", parameters.get(0).getValue());
-        assertEquals("c", parameters.get(1).getName());
-        assertEquals("d", parameters.get(1).getValue());
-    }
-
-    @Test
-    public void getParametersUrlEncodedPostNoBody() throws Exception {
-        final URL url = new URL(URL_FIRST, "?a=b");
-        final WebRequest request = new WebRequest(url);
-        request.setHttpMethod(HttpMethod.POST);
-        request.setEncodingType(FormEncodingType.URL_ENCODED);
-
-        final Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'a': 'b'\n", ((TextPage) page).getContent());
-
-        final List<NameValuePair> parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("a", parameters.get(0).getName());
-        assertEquals("b", parameters.get(0).getValue());
-    }
-
-    @Test
-    public void getParametersTextEncodedPostNoBody() throws Exception {
-        final URL url = new URL(URL_FIRST, "?a=b");
-        final WebRequest request = new WebRequest(url);
-        request.setHttpMethod(HttpMethod.POST);
-        request.setEncodingType(FormEncodingType.TEXT_PLAIN);
-
-        final Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'a': 'b'\n", ((TextPage) page).getContent());
-
-        final List<NameValuePair> parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("a", parameters.get(0).getName());
-        assertEquals("b", parameters.get(0).getValue());
-    }
-
-    @Test
-    public void getParametersTextEncodedPostBody() throws Exception {
-        final URL url = new URL(URL_FIRST, "?a=b");
-        final WebRequest request = new WebRequest(url);
-        request.setHttpMethod(HttpMethod.POST);
-        request.setEncodingType(FormEncodingType.TEXT_PLAIN);
-        request.setRequestBody("c=d");
-
-        final Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
-        assertEquals("Parameters: \n  'a': 'b'\n", ((TextPage) page).getContent());
-
-        final List<NameValuePair> parameters = request.getParameters();
-        assertEquals(1, parameters.size());
-        assertEquals("a", parameters.get(0).getName());
-        assertEquals("b", parameters.get(0).getValue());
+            assertEquals(expectedNameValuePair.getName(), nameValuePair.getName());
+            assertEquals(expectedNameValuePair.getValue(), nameValuePair.getValue());
+        }
     }
 
     /**

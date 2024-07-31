@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -378,21 +379,28 @@ public class WebRequest implements Serializable {
             return normalize(allParameters);
         }
 
-        if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
+        if (getEncodingType() == FormEncodingType.TEXT_PLAIN && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
                 final List<NameValuePair> allParameters = new ArrayList<>();
                 allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
-                allParameters.addAll(getRequestParameters());
+                // the servlet api ignores the parameters
+                // allParameters.addAll(getRequestParameters());
                 return normalize(allParameters);
             }
 
             return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
         }
 
+        if ((getEncodingType() == FormEncodingType.URL_ENCODED || getEncodingType() == FormEncodingType.TEXT_PLAIN)
+                && HttpMethod.PUT == getHttpMethod()) {
+            return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+        }
+
         if (FormEncodingType.MULTIPART == getEncodingType()) {
             final List<NameValuePair> allParameters = new ArrayList<>();
             allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
-            allParameters.addAll(getRequestParameters());
+            // the servlet api ignores the parameters
+            // allParameters.addAll(getRequestParameters());
             return normalize(allParameters);
         }
 
@@ -405,9 +413,14 @@ public class WebRequest implements Serializable {
             return pairs;
         }
 
+        final Set<String> keys = new HashSet<>();
+
         final List<NameValuePair> resultingPairs = new ArrayList<>();
         for (final NameValuePair pair : pairs) {
-            resultingPairs.add(pair.normalized());
+            if (!keys.contains(pair.getName())) {
+                resultingPairs.add(pair.normalized());
+                keys.add(pair.getName());
+            }
         }
 
         return resultingPairs;
