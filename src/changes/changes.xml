@@ -10,8 +10,8 @@
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
             <action type="update" dev="rbri" issue="#836">
                 WebRequest.getParameters() updated to deliver the same results as the servlet API
-                will report if this request reaches a servlet. This implies several changes: For url-encoded and 
-                plain text encoded post requests, the query parameters are part of the result. 
+                will report if this request reaches a servlet. This implies several changes: For url-encoded and
+                plain text encoded post requests, the query parameters are part of the result.
                 For multipart requests only the query parameters forming the result. Additionally only
                 the first occurence of a key is part of the result.
             </action>
