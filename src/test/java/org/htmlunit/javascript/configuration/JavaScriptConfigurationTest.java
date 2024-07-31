@@ -140,10 +140,13 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 }
                 if ("org.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())
 
+                        // Worker
+                        || "WorkerGlobalScope".equals(klass.getSimpleName())
                         || "DedicatedWorkerGlobalScope".equals(klass.getSimpleName())
                         || "WorkerLocation".equals(klass.getSimpleName())
                         || "WorkerNavigator".equals(klass.getSimpleName())
 
+                        // ProxyConfig
                         || "ProxyAutoConfig".equals(klass.getSimpleName())) {
                     continue;
                 }
