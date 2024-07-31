@@ -18,19 +18,10 @@ import static org.htmlunit.WebTestCase.URL_FIRST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.File;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import org.apache.http.auth.BasicUserPrincipal;
 import org.apache.http.auth.Credentials;
-import org.htmlunit.http.HttpUtils;
-import org.htmlunit.util.KeyDataPair;
-import org.htmlunit.util.NameValuePair;
-import org.htmlunit.util.UrlUtils;
 import org.junit.Test;
 
 /**

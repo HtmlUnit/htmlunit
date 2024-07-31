@@ -185,7 +185,7 @@ public class XMLHttpRequestResponseAsXMLEncodingTest extends AbstractXMLHttpRequ
 
         String[] expected = getExpectedAlerts();
         if (expected == null || expected.length == 0) {
-            expected = new String[] {"\\u0061","\\u0160\\u0161\\u00e4\\u00a9", "\\u003f\\u003f\\u003f\\u003f\\u003f", "\\u003f\\u003f\\u003f", "\\u003f\\u003f"};
+            expected = new String[] {"\\u0061", "\\u0160\\u0161\\u00e4\\u00a9", "\\u003f\\u003f\\u003f\\u003f\\u003f", "\\u003f\\u003f\\u003f", "\\u003f\\u003f"};
 
             if (TestMimeType.PLAIN.equals(mimeTypeXml)) {
                 expected = new String[] {"null"};
@@ -215,7 +215,7 @@ public class XMLHttpRequestResponseAsXMLEncodingTest extends AbstractXMLHttpRequ
                     expected = new String[] {"\\u0061", "\\u003f\\u003f\\u003f\\u003f", "\\u003f\\u003f\\u003f\\u003f\\u003f", "\\u043c\\u0438\\u0440", "\\u623f\\u95f4"};
                 }
                 else if (TestCharset.WINDOWS1250.equals(charsetXmlResponseHeader)) {
-                    expected = new String[] {"\\u0061", "\\u003f\\u003f\\u00e4\\u00a9", "\\u003f\\u003f\\u003f\\u003f\\u003f","\\u003f\\u003f\\u003f", "\\u003f\\u003f"};
+                    expected = new String[] {"\\u0061", "\\u003f\\u003f\\u00e4\\u00a9", "\\u003f\\u003f\\u003f\\u003f\\u003f", "\\u003f\\u003f\\u003f", "\\u003f\\u003f"};
                 }
             }
         }
