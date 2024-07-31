@@ -42,6 +42,7 @@ import org.junit.Test;
  * @author Ronald Brill
  * @author Joerg Werner
  * @author Michael Lueck
+ * @author Kristof Neirynck
  */
 public class WebRequestTest {
 

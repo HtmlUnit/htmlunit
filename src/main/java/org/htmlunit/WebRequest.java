@@ -52,6 +52,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Joerg Werner
  * @author Michael Lueck
  * @author Lai Quang Duong
+ * @author Kristof Neirynck
  */
 public class WebRequest implements Serializable {
 
@@ -364,7 +365,10 @@ public class WebRequest implements Serializable {
 
         if (getEncodingType() == FormEncodingType.URL_ENCODED && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
-                return normalize(getRequestParameters());
+                final List<NameValuePair> allParameters = new ArrayList<>();
+                allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+                allParameters.addAll(getRequestParameters());
+                return normalize(allParameters);
             }
 
             // getRequestParameters and getRequestBody are mutually exclusive
@@ -376,10 +380,13 @@ public class WebRequest implements Serializable {
 
         if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
-                return normalize(getRequestParameters());
+                final List<NameValuePair> allParameters = new ArrayList<>();
+                allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+                allParameters.addAll(getRequestParameters());
+                return normalize(allParameters);
             }
 
-            return Collections.emptyList();
+            return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
         }
 
         if (FormEncodingType.MULTIPART == getEncodingType()) {
