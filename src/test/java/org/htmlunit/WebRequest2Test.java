@@ -31,16 +31,37 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.NameValuePair;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Tests for {@link WebRequest}.
+ * Tests for {@link WebRequest#getParameters()}.
+ * This method is used by Spring MVC test to shortcut the
+ * request processing (without involving a server). Therefore
+ * we have to make sure this works as expected in all cases.
+ *
+ * see https://github.com/spring-projects/spring-framework/issues/28240
+ * see https://github.com/HtmlUnit/htmlunit/pull/836
  *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebRequest2Test extends WebServerTestCase {
+
+    /**
+     * Performs pre-test construction.
+     * @throws Exception if an error occurs
+     */
+    @Before
+    public void setup() throws Exception {
+        // we have to stop all servers running already to free the port
+        WebDriverTestCase.stopWebServers();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/", InspectServlet.class);
+        startWebServer("./", null, servlets);
+    }
 
     /**
      * @throws Exception if the test fails
@@ -49,13 +70,7 @@ public class WebRequest2Test extends WebServerTestCase {
     public void getParametersNone() throws Exception {
         final WebRequest request = new WebRequest(URL_FIRST);
 
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
-        final WebClient client = getWebClient();
-
-        final Page page = client.getPage(request);
+        final Page page = getWebClient().getPage(request);
         assertTrue(page instanceof TextPage);
         assertEquals("Parameters: \n", ((TextPage) page).getContent());
 
@@ -68,14 +83,8 @@ public class WebRequest2Test extends WebServerTestCase {
      */
     @Test
     public void getParametersOnePair() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
-        final WebClient client = getWebClient();
-
         final WebRequest request = new WebRequest(new URL(URL_FIRST, "?x=u"));
-        Page page = client.getPage(request);
+        Page page = getWebClient().getPage(request);
         assertTrue(page instanceof TextPage);
         assertEquals("Parameters: \n  'x': 'u'\n", ((TextPage) page).getContent());
 
@@ -87,7 +96,7 @@ public class WebRequest2Test extends WebServerTestCase {
         final List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new NameValuePair("hello", "world"));
         request.setRequestParameters(pairs);
-        page = client.getPage(request);
+        page = getWebClient().getPage(request);
         assertTrue(page instanceof TextPage);
         assertEquals("Parameters: \n  'hello': 'world'\n", ((TextPage) page).getContent());
 
@@ -102,14 +111,8 @@ public class WebRequest2Test extends WebServerTestCase {
      */
     @Test
     public void getParametersOnePairKeyEquals() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
-        final WebClient client = getWebClient();
-
         final WebRequest request = new WebRequest(new URL(URL_FIRST, "?x="));
-        Page page = client.getPage(request);
+        Page page = getWebClient().getPage(request);
         assertTrue(page instanceof TextPage);
         assertEquals("Parameters: \n  'x': ''\n", ((TextPage) page).getContent());
 
@@ -121,7 +124,7 @@ public class WebRequest2Test extends WebServerTestCase {
         final List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new NameValuePair("hello", ""));
         request.setRequestParameters(pairs);
-        page = client.getPage(request);
+        page = getWebClient().getPage(request);
         assertTrue(page instanceof TextPage);
         assertEquals("Parameters: \n  'hello': ''\n", ((TextPage) page).getContent());
 
@@ -136,14 +139,8 @@ public class WebRequest2Test extends WebServerTestCase {
      */
     @Test
     public void getParametersOnePairKeyOnly() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
-        final WebClient client = getWebClient();
-
         final WebRequest request = new WebRequest(new URL(URL_FIRST, "?x"));
-        Page page = client.getPage(request);
+        Page page = getWebClient().getPage(request);
         assertTrue(page instanceof TextPage);
         assertEquals("Parameters: \n  'x': ''\n", ((TextPage) page).getContent());
 
@@ -155,7 +152,7 @@ public class WebRequest2Test extends WebServerTestCase {
         final List<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new NameValuePair("hello", null));
         request.setRequestParameters(pairs);
-        page = client.getPage(request);
+        page = getWebClient().getPage(request);
         assertTrue(page instanceof TextPage);
         assertEquals("Parameters: \n  'hello': ''\n", ((TextPage) page).getContent());
 
@@ -170,10 +167,6 @@ public class WebRequest2Test extends WebServerTestCase {
      */
     @Test
     public void getParametersFromQueryAndUrlEncodedBodyPost() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
         final URL url = new URL(URL_FIRST, "?a=b");
         final WebRequest request = new WebRequest(url);
         request.setHttpMethod(HttpMethod.POST);
@@ -195,10 +188,6 @@ public class WebRequest2Test extends WebServerTestCase {
 
     @Test
     public void getParametersFromQueryAndUrlEncodedBodyPostWhenEncodingTypeIsMultipart() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
         final URL url = new URL(URL_FIRST, "?a=b");
         final WebRequest request = new WebRequest(url);
         request.setHttpMethod(HttpMethod.POST);
@@ -219,10 +208,6 @@ public class WebRequest2Test extends WebServerTestCase {
 
     @Test
     public void getParametersUrlEncodedPostNoBody() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
         final URL url = new URL(URL_FIRST, "?a=b");
         final WebRequest request = new WebRequest(url);
         request.setHttpMethod(HttpMethod.POST);
@@ -240,10 +225,6 @@ public class WebRequest2Test extends WebServerTestCase {
 
     @Test
     public void getParametersTextEncodedPostNoBody() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
         final URL url = new URL(URL_FIRST, "?a=b");
         final WebRequest request = new WebRequest(url);
         request.setHttpMethod(HttpMethod.POST);
@@ -261,10 +242,6 @@ public class WebRequest2Test extends WebServerTestCase {
 
     @Test
     public void getParametersTextEncodedPostBody() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
-
         final URL url = new URL(URL_FIRST, "?a=b");
         final WebRequest request = new WebRequest(url);
         request.setHttpMethod(HttpMethod.POST);
