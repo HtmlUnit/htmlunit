@@ -32,7 +32,7 @@ public class HTMLFormControlsCollectionTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"false", "false", "0", "true", "1", "null"}) //FIXME: should be "true", "true", "2", "true", "1", "null"
+    @Alerts({"true", "true", "2", "true", "1", "null"})
     public void namedItem() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
