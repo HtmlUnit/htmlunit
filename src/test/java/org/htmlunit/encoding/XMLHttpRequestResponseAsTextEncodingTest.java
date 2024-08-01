@@ -12,12 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.xml;
+package org.htmlunit.encoding;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.htmlunit.javascript.host.xml.XMLHttpRequest;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.util.MimeType;

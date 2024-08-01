@@ -12,12 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.xml;
+package org.htmlunit.encoding;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.htmlunit.javascript.host.xml.XMLHttpRequest;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.util.MimeType;
@@ -33,7 +34,7 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
-public class XMLHttpRequestResponseXMLEncodingTest extends AbstractXMLHttpRequestEncodingTest {
+public class XMLHttpRequestResponseAsXMLEncodingTest extends AbstractXMLHttpRequestEncodingTest {
 
     /**
      * Returns the parameterized data.
@@ -151,16 +152,21 @@ public class XMLHttpRequestResponseXMLEncodingTest extends AbstractXMLHttpReques
 
             + "      function test() {\n"
             + "        var request = new XMLHttpRequest();\n"
-            + "        request.open('" + httpMethod + "', '" + URL_SECOND + "', false);\n"
-            + "        request.send('');\n"
-            + "        let xml = request.responseXML;\n"
-            + "        if (xml== null) { log('null'); return; }\n"
+            + "        request.responseType = 'document';\n"
+            + "        request.onreadystatechange = () => {\n"
+            + "          if (request.readyState === 4) {\n"
+            + "            let xml = request.response;\n"
+            + "            if (xml == null) { log('null'); return; }\n"
+            + "            log(unicodeEscape(xml.getElementsByTagName('c1')[0].childNodes[0].nodeValue));\n"
+            + "            log(unicodeEscape(xml.getElementsByTagName('c2')[0].childNodes[0].nodeValue));\n"
+            + "            log(unicodeEscape(xml.getElementsByTagName('c3')[0].childNodes[0].nodeValue));\n"
+            + "            log(unicodeEscape(xml.getElementsByTagName('c4')[0].childNodes[0].nodeValue));\n"
+            + "            log(unicodeEscape(xml.getElementsByTagName('c5')[0].childNodes[0].nodeValue));\n"
+            + "          }\n"
+            + "        }\n"
 
-            + "        log(unicodeEscape(xml.getElementsByTagName('c1')[0].childNodes[0].nodeValue));\n"
-            + "        log(unicodeEscape(xml.getElementsByTagName('c2')[0].childNodes[0].nodeValue));\n"
-            + "        log(unicodeEscape(xml.getElementsByTagName('c3')[0].childNodes[0].nodeValue));\n"
-            + "        log(unicodeEscape(xml.getElementsByTagName('c4')[0].childNodes[0].nodeValue));\n"
-            + "        log(unicodeEscape(xml.getElementsByTagName('c5')[0].childNodes[0].nodeValue));\n"
+            + "        request.open('" + httpMethod + "', '" + URL_SECOND + "', true);\n"
+            + "        request.send('');\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

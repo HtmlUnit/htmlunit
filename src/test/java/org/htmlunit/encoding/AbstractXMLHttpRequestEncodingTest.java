@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.xml;
+package org.htmlunit.encoding;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -24,6 +24,7 @@ import java.util.Locale;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.javascript.host.xml.XMLHttpRequest;
 import org.htmlunit.util.MimeType;
 
 /**
