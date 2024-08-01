@@ -158,6 +158,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                 + "    h3 { color: blue;  }\n"
                 + "  </style>\n"
 
+                + "  <form name='myForm', id='myFormId'>"
+                + "    <input type='radio' name='first'/><input type='radio' name='first'/>"
+                + "  </form>"
+
                 + LOG_TEXTAREA
                 + "</body></html>";
 
@@ -3088,5 +3092,37 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Response]")
     public void response() throws Exception {
         testString("", "new Response()");
+    }
+
+    /**
+     * Test RadioNodeList.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [RadioNodeList]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [RadioNodeList]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [RadioNodeList]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [RadioNodeList]")
+    public void radioNodeList() throws Exception {
+        testString("", "document.myForm.first");
+    }
+
+    /**
+     * Test HTMLFormControlsCollection.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],"
+                    + "Symbol(Symbol.toStringTag) [C] [HTMLFormControlsCollection]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],"
+                    + "Symbol(Symbol.toStringTag) [C] [HTMLFormControlsCollection]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],"
+                    + "Symbol(Symbol.toStringTag) [C] [HTMLFormControlsCollection]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],"
+                    + "Symbol(Symbol.toStringTag) [C] [HTMLFormControlsCollection]")
+    public void htmlFormControlsCollection() throws Exception {
+        testString("", "document.myForm.elements");
     }
 }

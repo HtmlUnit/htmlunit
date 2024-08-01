@@ -33,6 +33,7 @@
 
     <module name="LineLength">
         <property name="max" value="120"/>
+        <property name="ignorePattern" value="^(package|import| *\* *[^ ]+).*"/>
     </module>
 
     <!-- Prevent two spaces after @xxxx -->

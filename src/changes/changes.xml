@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="add" dev="Lai Quang Duong">
+                HTMLFormControlsCollection namedItem() implemented.
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                RadioNodeList getter and setter for value attribute implemented.
+            </action>
             <action type="update" dev="rbri" issue="#836">
                 WebRequest.getParameters() updated to deliver the same results as the servlet API
                 will report if this request reaches a servlet. This implies several changes: For url-encoded and

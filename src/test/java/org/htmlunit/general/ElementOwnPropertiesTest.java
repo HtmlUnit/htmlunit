@@ -156,6 +156,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "    h3 { color: blue;  }\n"
                 + "  </style>\n"
 
+                + "  <form name='myForm', id='myFormId'>"
+                + "    <input type='radio' name='first'/><input type='radio' name='first'/>"
+                + "  </form>"
+
                 + LOG_TEXTAREA
                 + "</body></html>";
 
@@ -17504,5 +17508,33 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor()")
     public void response() throws Exception {
         testString("", "new Response()");
+    }
+
+    /**
+     * Test RadioNodeList.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),value[GSCE]",
+            EDGE = "constructor(),value[GSCE]",
+            FF = "constructor(),value[GSCE]",
+            FF_ESR = "constructor(),value[GSCE]")
+    public void radioNodeList() throws Exception {
+        testString("", "document.myForm.first");
+    }
+
+    /**
+     * Test HTMLFormControlsCollection.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),namedItem()",
+            EDGE = "constructor(),namedItem()",
+            FF = "constructor(),namedItem()",
+            FF_ESR = "constructor(),namedItem()")
+    public void htmlFormControlsCollection() throws Exception {
+        testString("", "document.myForm.elements");
     }
 }

@@ -155,6 +155,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "    h3 { color: blue;  }\n"
                 + "  </style>\n"
 
+                + "  <form name='myForm', id='myFormId'>"
+                + "    <input type='radio' name='first'/><input type='radio' name='first'/>"
+                + "  </form>"
+
                 + LOG_TEXTAREA
                 + "</body></html>";
 
@@ -6023,10 +6027,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "item(),length,namedItem()",
-            EDGE = "item(),length,namedItem()",
-            FF = "item(),length,namedItem()",
-            FF_ESR = "item(),length,namedItem()")
+    @Alerts(CHROME = "0,item(),length,namedItem()",
+            EDGE = "0,item(),length,namedItem()",
+            FF = "0,item(),length,namedItem()",
+            FF_ESR = "0,item(),length,namedItem()")
     public void htmlCollectionDocumentForms() throws Exception {
         testString("", "document.forms");
     }
@@ -8909,5 +8913,37 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "-")
     public void response() throws Exception {
         testString("", "new Response()");
+    }
+
+    /**
+     * Test RadioNodeList.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "0,1,entries(),forEach(),item(),keys(),length,value,values()",
+            EDGE = "0,1,entries(),forEach(),item(),keys(),length,value,values()",
+            FF = "0,1,entries(),forEach(),item(),keys(),length,value,values()",
+            FF_ESR = "0,1,entries(),forEach(),item(),keys(),length,value,values()")
+    public void radioNodeList() throws Exception {
+        testString("", "document.myForm.first");
+    }
+
+    /**
+     * Test HTMLFormControlsCollection.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "0,1,first,item(),length,namedItem()",
+            EDGE = "0,1,first,item(),length,namedItem()",
+            FF = "0,1,first,item(),length,namedItem()",
+            FF_ESR = "0,1,first,item(),length,namedItem()")
+    @HtmlUnitNYI(CHROME = "0,1,item(),length,namedItem()",
+            EDGE = "0,1,item(),length,namedItem()",
+            FF = "0,1,item(),length,namedItem()",
+            FF_ESR = "0,1,item(),length,namedItem()")
+    public void htmlFormControlsCollection() throws Exception {
+        testString("", "document.myForm.elements");
     }
 }
