@@ -85,7 +85,7 @@ public class Worker extends EventTarget {
 
         final String url = JavaScriptEngine.toString(args[0]);
         Scriptable options = null;
-        if (args.length > 1) {
+        if (args.length > 1 && args[1] instanceof Scriptable) {
             options = (Scriptable) args[1];
         }
         return new Worker(cx, getWindow(ctorObj), url, options);

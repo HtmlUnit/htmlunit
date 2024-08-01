@@ -290,4 +290,60 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Received: working")
+    public void workerOptionsUndefined() throws Exception {
+        final String html = "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js', undefined);\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    log('Received: ' + e.data);\n"
+            + "  };\n"
+            + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
+            + "} catch(e) { log('exception'); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "onmessage = function(e) {\n"
+                + "  postMessage('working');\n"
+                + "}\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Received: working")
+    public void workerOptionsNull() throws Exception {
+        final String html = "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js', null);\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    log('Received: ' + e.data);\n"
+            + "  };\n"
+            + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
+            + "} catch(e) { log('exception'); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "onmessage = function(e) {\n"
+                + "  postMessage('working');\n"
+                + "}\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }
