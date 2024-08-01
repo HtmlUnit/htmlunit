@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
  * Tests for {@link RadioNodeList}.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class RadioNodeListTest extends WebDriverTestCase {
@@ -105,6 +106,28 @@ public class RadioNodeListTest extends WebDriverTestCase {
                 + "    document.form.first.value = 'on';\n"
                 + "    log(document.form.first[1].value);\n"
                 + "    log(document.form.first[1].checked);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + FORM_HTML
+                + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"first", "first", "first", "first"})
+    public void iterable() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    for (let e of form.first) {\n"
+                + "      log(e.name)\n"
+                + "    }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"

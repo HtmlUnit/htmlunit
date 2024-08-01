@@ -14,11 +14,14 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.dom.RadioNodeList;
 
 import java.util.ArrayList;
@@ -110,5 +113,11 @@ public class HTMLFormControlsCollection extends HTMLCollection {
         final RadioNodeList nodeList = new RadioNodeList(getDomNodeOrDie(), elements);
         nodeList.setElementsSupplier(getElementSupplier());
         return nodeList;
+    }
+
+    @JsxSymbol
+    @Override
+    public Scriptable iterator() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 }

@@ -14,12 +14,15 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlRadioButtonInput;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 
 import java.util.List;
 
@@ -117,5 +120,10 @@ public class RadioNodeList extends NodeList {
                 }
             }
         }
+    }
+
+    @JsxSymbol
+    public Scriptable iterator() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 }

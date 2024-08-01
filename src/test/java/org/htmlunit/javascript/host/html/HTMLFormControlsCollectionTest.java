@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
  * Tests for {@link HTMLFormControlsCollection}.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLFormControlsCollectionTest extends WebDriverTestCase {
@@ -48,6 +49,35 @@ public class HTMLFormControlsCollectionTest extends WebDriverTestCase {
                 + "    log(elements.namedItem('second').value);\n"
                 + "\n"
                 + "    log(elements.namedItem('third'));\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form name='form'>\n"
+                + "<input type='text' name='first' value='0'/>\n"
+                + "<input type='radio' name='first'/>\n"
+                + "<input type='radio' name='first' value='2' checked/>\n"
+                + "<input type='radio' name='first' value='3'/>\n"
+                + "\n"
+                + "<input type='radio' name='second' value='1'/>\n"
+                + "</form>"
+                + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"first", "first", "first", "first", "second"})
+    public void iterable() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    for (let e of document.form.elements) {\n"
+                + "      log(e.name)\n"
+                + "    }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
