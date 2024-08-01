@@ -49,7 +49,7 @@ public class RadioNodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"false", "false", "false"}) // FIXME: should be "true", "true", "true"
+    @Alerts({"true", "true", "true"})
     public void instanceOf() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -71,7 +71,7 @@ public class RadioNodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"undefined", "1", "1", "undefined", "undefined"}) //FIXME: should be "2", "1", "1", "", "on"
+    @Alerts({"2", "1", "1", "", "on"})
     public void getValue() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -95,7 +95,7 @@ public class RadioNodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"undefined", "on", "false"}) // FIXME: should be "2", "on", "true"
+    @Alerts({"2", "on", "true"})
     public void setValue() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

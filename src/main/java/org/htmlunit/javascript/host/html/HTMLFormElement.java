@@ -46,6 +46,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
+import org.htmlunit.javascript.host.dom.RadioNodeList;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.MimeType;
 
@@ -61,6 +62,7 @@ import org.htmlunit.util.MimeType;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
@@ -382,9 +384,11 @@ public class HTMLFormElement extends HTMLElement implements Function {
         }
         final List<DomNode> nodes = new ArrayList<>(elements);
 
-        final HTMLCollection coll = new HTMLCollection(getHtmlForm(), nodes);
-        coll.setElementsSupplier((Supplier<List<DomNode>> & Serializable) () -> new ArrayList<>(findElements(name)));
-        return coll;
+        final RadioNodeList nodeList = new RadioNodeList(getHtmlForm(), nodes);
+        nodeList.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> new ArrayList<>(findElements(name)));
+        return nodeList;
     }
 
     /**
