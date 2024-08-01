@@ -103,10 +103,11 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this property
      */
     @JsxGetter
-    public HTMLCollection getElements() {
+    public HTMLFormControlsCollection getElements() {
         final HtmlForm htmlForm = getHtmlForm();
 
-        final HTMLCollection elements = new HTMLCollection(htmlForm, false) {
+        final HTMLFormControlsCollection elements = new HTMLFormControlsCollection(htmlForm,
+                false) {
             @Override
             protected Object getWithPreemption(final String name) {
                 return HTMLFormElement.this.getWithPreemption(name);
