@@ -20,8 +20,8 @@ import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +40,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Tests for {@link WebRequest#getParameters()}.
@@ -226,12 +228,20 @@ public class WebRequest2Test extends WebServerTestCase {
         final List<NameValuePair> parameters = request.getParameters();
         assertEquals(expectedParameters.size(), parameters.size());
 
-        final Iterator<NameValuePair> expectedIter = expectedParameters.iterator();
-        for (final NameValuePair nameValuePair : parameters) {
-            final NameValuePair expectedNameValuePair = expectedIter.next();
+        final List<String> expectedNames = expectedParameters.stream().map(NameValuePair::getName).distinct().collect(toList());
+        final List<String> names = parameters.stream().map(NameValuePair::getName).distinct().collect(toList());
+        assertEquals("Parameter names should match", expectedNames, names);
 
-            assertEquals(expectedNameValuePair.getName(), nameValuePair.getName());
-            assertEquals(expectedNameValuePair.getValue(), nameValuePair.getValue());
+        for (final String name : expectedNames) {
+            final List<String> expectedValues = expectedParameters.stream()
+                    .filter(pair -> name.equals(pair.getName()))
+                    .map(NameValuePair::getValue)
+                    .collect(toList());
+            final List<String> values = parameters.stream()
+                    .filter(pair -> name.equals(pair.getName()))
+                    .map(NameValuePair::getValue)
+                    .collect(toList());
+            assertEquals("Parameter values for parameter with name '" + name + "' should match", expectedValues, values);
         }
     }
 
@@ -319,13 +329,15 @@ public class WebRequest2Test extends WebServerTestCase {
         private static void bounce(final Writer writer,
                 final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             writer.write("Parameters: \n");
-            for (final String key : req.getParameterMap().keySet()) {
-                final String val = req.getParameter(key);
-                if (val == null) {
-                    writer.write("  '" + key + "': '-null-'\n");
-                }
-                else {
-                    writer.write("  '" + key + "': '" + val + "'\n");
+            for (final String name : Collections.list(req.getParameterNames())) {
+                final String[] values = req.getParameterValues(name);
+                if (values == null) {
+                    // highly unlikely
+                    writer.write("  '" + name + "': '-null-'\n");
+                } else {
+                    for (String value : values) {
+                        writer.write("  '" + name + "': '" + value + "'\n");
+                    }
                 }
             }
         }
