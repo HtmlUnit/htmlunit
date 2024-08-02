@@ -21,9 +21,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -51,6 +51,7 @@ import org.junit.runners.Parameterized.Parameters;
  * see https://github.com/HtmlUnit/htmlunit/pull/836
  *
  * @author Ronald Brill
+ * @author Kristof Neirynck
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class WebRequest2Test extends WebServerTestCase {
@@ -118,8 +119,19 @@ public class WebRequest2Test extends WebServerTestCase {
         parameterPairs.add(new NameValuePair("a", "b"));
         final TestParameters sameAsInQueryParameter = new TestParameters("sameAsInQuery", parameterPairs);
 
+        parameterPairs = new ArrayList<>();
+        parameterPairs.add(new NameValuePair("a", "other"));
+        final TestParameters sameKeyAsInQueryParameter = new TestParameters("sameKeyAsInQuery", parameterPairs);
+
+        parameterPairs = new ArrayList<>();
+        parameterPairs.add(new NameValuePair("same", "value1"));
+        parameterPairs.add(new NameValuePair("same", "value2"));
+        final TestParameters sameKeyDifferentValuesParameter
+                = new TestParameters("sameKeyDifferentValues", parameterPairs);
+
         final TestParameters[] parameters =
-            {null, emptyParameters, oneParameter, emptyValueParameter, sameAsInQueryParameter};
+            {null, emptyParameters, oneParameter, emptyValueParameter, sameAsInQueryParameter,
+                sameKeyAsInQueryParameter, sameKeyDifferentValuesParameter};
 
         final String[] bodies = {"", "a=b", "a=b&c=d", "a=", "a", "a=b&a=d"};
 
@@ -215,23 +227,46 @@ public class WebRequest2Test extends WebServerTestCase {
 
                 String name = parts[0].trim();
                 name = StringUtils.strip(name, "'");
-                String value = parts[1].trim();
-                value = StringUtils.strip(value, "'");
 
-                final NameValuePair pair = new NameValuePair(name, value);
-                expectedParameters.add(pair);
+                String values = parts[1].trim();
+                values = StringUtils.strip(values, "[]");
+
+                for (String value : values.split(",")) {
+                    value = value.trim();
+                    value = StringUtils.strip(value, "'");
+
+                    final NameValuePair pair = new NameValuePair(name, value);
+                    expectedParameters.add(pair);
+                }
             }
         }
 
+        final List<String> expectedNames = expectedParameters.stream()
+                                                .map(NameValuePair::getName)
+                                                .distinct()
+                                                .collect(Collectors.toList());
+
         final List<NameValuePair> parameters = request.getParameters();
-        assertEquals(expectedParameters.size(), parameters.size());
+        final List<String> parameterNames = parameters.stream()
+                                                .map(NameValuePair::getName)
+                                                .distinct()
+                                                .collect(Collectors.toList());
 
-        final Iterator<NameValuePair> expectedIter = expectedParameters.iterator();
-        for (final NameValuePair nameValuePair : parameters) {
-            final NameValuePair expectedNameValuePair = expectedIter.next();
+        assertEquals("Parameter names should match", expectedNames, parameterNames);
 
-            assertEquals(expectedNameValuePair.getName(), nameValuePair.getName());
-            assertEquals(expectedNameValuePair.getValue(), nameValuePair.getValue());
+        // we can't compare directly because the servlet api collects by name
+        // this checks for the same values in the same order
+        for (final String name : expectedNames) {
+            final List<String> expectedValues = expectedParameters.stream()
+                                                    .filter(pair -> name.equals(pair.getName()))
+                                                    .map(NameValuePair::getValue)
+                                                    .collect(Collectors.toList());
+            final List<String> values = parameters.stream()
+                                                    .filter(pair -> name.equals(pair.getName()))
+                                                    .map(NameValuePair::getValue)
+                                                    .collect(Collectors.toList());
+            assertEquals("Parameter values for parameter with name '" + name + "' should match",
+                    expectedValues, values);
         }
     }
 
@@ -319,13 +354,27 @@ public class WebRequest2Test extends WebServerTestCase {
         private static void bounce(final Writer writer,
                 final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             writer.write("Parameters: \n");
-            for (final String key : req.getParameterMap().keySet()) {
-                final String val = req.getParameter(key);
-                if (val == null) {
-                    writer.write("  '" + key + "': '-null-'\n");
+            // use only getParameterMap() here because we like to have the same behavior
+            for (final Map.Entry<String, String[]> entry : req.getParameterMap().entrySet()) {
+                if (entry.getValue() == null) {
+                    writer.write("  '" + entry.getKey() + "': [null]\n");
+                }
+                else if (entry.getValue().length == 0) {
+                    writer.write("  '" + entry.getKey() + "': []\n");
                 }
                 else {
-                    writer.write("  '" + key + "': '" + val + "'\n");
+                    writer.write("  '" + entry.getKey() + "': [");
+                    boolean first = true;
+                    for (final String val : entry.getValue()) {
+                        if (first) {
+                            writer.write("'" + val + "'");
+                            first = false;
+                        }
+                        else {
+                            writer.write(", '" + val + "'");
+                        }
+                    }
+                    writer.write("]\n");
                 }
             }
         }

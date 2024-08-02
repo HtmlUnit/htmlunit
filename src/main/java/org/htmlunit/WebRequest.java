@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -344,9 +343,14 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Retrieves the request parameters in use. Similar to the servlet api this will
-     * work depending on the request type and check the url parameters and
-     * the body. The value is also normalized - null is converted to an empty string.
+     * Retrieves the request parameters used. Similar to the servlet api function
+     * getParameterMap() this works depending on the request type and collects the
+     * url parameters and the body stuff.
+     * The value is also normalized - null is converted to an empty string.
+     * In contrast to the servlet api this creates a separate KeyValuePair for every
+     * parameter. This means that pairs with the same name can be part of the list. The
+     * servlet api will return a string[] as value for the key in this case.
+     *
      * @return the request parameters to use
      */
     public List<NameValuePair> getParameters() {
@@ -413,14 +417,9 @@ public class WebRequest implements Serializable {
             return pairs;
         }
 
-        final Set<String> keys = new HashSet<>();
-
         final List<NameValuePair> resultingPairs = new ArrayList<>();
         for (final NameValuePair pair : pairs) {
-            if (!keys.contains(pair.getName())) {
-                resultingPairs.add(pair.normalized());
-                keys.add(pair.getName());
-            }
+            resultingPairs.add(pair.normalized());
         }
 
         return resultingPairs;
