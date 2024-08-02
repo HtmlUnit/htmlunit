@@ -413,14 +413,9 @@ public class WebRequest implements Serializable {
             return pairs;
         }
 
-        final Set<String> keys = new HashSet<>();
-
         final List<NameValuePair> resultingPairs = new ArrayList<>();
         for (final NameValuePair pair : pairs) {
-            if (!keys.contains(pair.getName())) {
-                resultingPairs.add(pair.normalized());
-                keys.add(pair.getName());
-            }
+            resultingPairs.add(pair.normalized());
         }
 
         return resultingPairs;
