@@ -201,6 +201,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private Object opener_;
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
     private Crypto crypto_;
+    private Scriptable performance_;
 
     private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
 
@@ -2046,15 +2047,33 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code performance} property.
-     * @return the {@code performance} property
+     * The performance attribute is defined as replacable
+     * (https://w3c.github.io/hr-time/#the-performance-attribute) but not implemented
+     * as that.
+     * @return the value of the {@code performance} property
      */
     @JsxGetter
-    public Performance getPerformance() {
-        final Performance performance = new Performance();
-        performance.setParentScope(this);
-        performance.setPrototype(getPrototype(performance.getClass()));
-        return performance;
+    public Scriptable getPerformance() {
+        if (performance_ == null) {
+            final Performance performance = new Performance();
+            performance.setParentScope(this);
+            performance.setPrototype(getPrototype(performance.getClass()));
+            performance_ = performance;
+        }
+        return performance_;
+    }
+
+    /**
+     * The performance attribute is defined as replacable
+     * (https://w3c.github.io/hr-time/#the-performance-attribute) but not implemented
+     * as that.
+     *
+     * Sets the {@code performance} property.
+     * @param performance the value to overwrite the defined property value
+     */
+    @JsxSetter
+    public void setPerformance(final Scriptable performance) {
+        performance_ = performance;
     }
 
     /**

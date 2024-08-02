@@ -34,6 +34,31 @@ public class PerformanceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
+    public void same() throws Exception {
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    let perf = window.performance;\n"
+                + "    log(window.performance == perf);\n"
+                + "  }\n"
+                + "  test();\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body></body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void now() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_

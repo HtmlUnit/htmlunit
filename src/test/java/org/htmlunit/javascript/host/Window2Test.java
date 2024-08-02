@@ -3034,4 +3034,68 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"performance[GSCE]", "undefined"})
+    public void performanceProperty() throws Exception {
+        final String html = "<html><head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  let property = 'performance';\n"
+
+            + "  let desc = Object.getOwnPropertyDescriptor(window, property);\n"
+            + "  property += '[';\n"
+            + "  if (desc.get != undefined) property += 'G';\n"
+            + "  if (desc.set != undefined) property += 'S';\n"
+            + "  if (desc.writable) property += 'W';\n"
+            + "  if (desc.configurable) property += 'C';\n"
+            + "  if (desc.enumerable) property += 'E';\n"
+            + "  property += ']'\n"
+            + "  log(property);\n"
+
+            + "  delete window.performance;\n"
+
+            + "  desc = Object.getOwnPropertyDescriptor(window, property);\n"
+            + "  log(desc);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object Performance]", "two", "undefined"})
+    @HtmlUnitNYI(CHROME = {"[object Performance]", "two", "two"},
+            EDGE = {"[object Performance]", "two", "two"},
+            FF = {"[object Performance]", "two", "two"},
+            FF_ESR = {"[object Performance]", "two", "two"})
+    public void performancePropertyEdit() throws Exception {
+        final String html = "<html><head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  log(window.performance);\n"
+
+            + "  window.performance = 'two';\n"
+            + "  log(window.performance);\n"
+
+            + "  delete window.performance;\n"
+            + "  log(window.performance);\n"
+
+            + "</script>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
 }
+
