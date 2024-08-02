@@ -235,7 +235,7 @@ public class HtmlLink extends HtmlElement {
         final WebRequest request = new WebRequest(url, browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
         // use the page encoding even if this is a GET requests
         request.setCharset(page.getCharset());
-        request.setRefererlHeader(page.getUrl());
+        request.setRefererHeader(page.getUrl());
 
         return request;
     }

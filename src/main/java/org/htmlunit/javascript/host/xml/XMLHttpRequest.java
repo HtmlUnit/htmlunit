@@ -677,7 +677,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             request.setCharset(UTF_8);
             // https://xhr.spec.whatwg.org/#response-body
             request.setDefaultResponseContentCharset(UTF_8);
-            request.setRefererlHeader(containingPage.getUrl());
+            request.setRefererHeader(containingPage.getUrl());
 
             try {
                 request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));

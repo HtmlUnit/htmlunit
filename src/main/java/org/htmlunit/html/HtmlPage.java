@@ -1064,7 +1064,7 @@ public class HtmlPage extends SgmlPage {
         request.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "no-cors");
         request.setAdditionalHeader(HttpHeader.SEC_FETCH_DEST, "script");
 
-        request.setRefererlHeader(referringRequest.getUrl());
+        request.setRefererHeader(referringRequest.getUrl());
         request.setCharset(scriptCharset);
 
         // use info from script tag or fall back to utf-8

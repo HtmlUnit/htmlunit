@@ -680,7 +680,7 @@ public class HtmlImage extends HtmlElement {
                     final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
-                    request.setRefererlHeader(page.getUrl());
+                    request.setRefererHeader(page.getUrl());
                     imageWebResponse_ = webClient.loadWebResponse(request);
                 }
             }

@@ -117,7 +117,7 @@ public class WebRequest implements Serializable {
     public WebRequest(final URL url, final Charset charset, final URL refererUrl) {
         setUrl(url);
         setCharset(charset);
-        setRefererlHeader(refererUrl);
+        setRefererHeader(refererUrl);
     }
 
     /**
@@ -553,7 +553,7 @@ public class WebRequest implements Serializable {
      * Sets the referer HTTP header - only if the provided url is valid.
      * @param url the url for the referer HTTP header
      */
-    public void setRefererlHeader(final URL url) {
+    public void setRefererHeader(final URL url) {
         if (url == null || !url.getProtocol().startsWith("http")) {
             return;
         }
@@ -564,6 +564,17 @@ public class WebRequest implements Serializable {
         catch (final MalformedURLException ignored) {
             // bad luck us the whole url from the pager
         }
+    }
+
+    /**
+     * Sets the referer HTTP header - only if the provided url is valid.
+     * @param url the url for the referer HTTP header
+     *
+     * @deprecated as of version 4.5.0; use {@link #setRefererHeader(URL)} instead
+     */
+    @Deprecated
+    public void setRefererlHeader(final URL url) {
+        setRefererHeader(url);
     }
 
     /**

@@ -335,7 +335,7 @@ public class HtmlForm extends HtmlElement {
         // forms are ignoring the rel='noreferrer'
         if (browser.hasFeature(FORM_IGNORE_REL_NOREFERRER)
                 || !relContainsNoreferrer()) {
-            request.setRefererlHeader(htmlPage.getUrl());
+            request.setRefererHeader(htmlPage.getUrl());
         }
 
         if (HttpMethod.POST == method) {

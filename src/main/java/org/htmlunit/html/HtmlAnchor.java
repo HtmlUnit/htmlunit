@@ -174,7 +174,7 @@ public class HtmlAnchor extends HtmlElement {
         webRequest.setCharset(page.getCharset());
 
         if (!relContainsNoreferrer()) {
-            webRequest.setRefererlHeader(page.getUrl());
+            webRequest.setRefererHeader(page.getUrl());
         }
 
         if (LOG.isDebugEnabled()) {

@@ -1094,7 +1094,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
                 final Page openerPage = opener.getEnclosedPage();
                 if (openerPage != null && openerPage.getUrl() != null) {
-                    request.setRefererlHeader(openerPage.getUrl());
+                    request.setRefererHeader(openerPage.getUrl());
                 }
                 getPage(window, request);
             }
@@ -1220,7 +1220,7 @@ public class WebClient implements Serializable, AutoCloseable {
         request.setCharset(UTF_8);
 
         if (openerPage != null) {
-            request.setRefererlHeader(openerPage.getUrl());
+            request.setRefererHeader(openerPage.getUrl());
         }
 
         getPage(window, request);

@@ -225,7 +225,7 @@ public class Location extends HtmlUnitScriptable {
         // update request url with location.href in case hash was changed
         request.setUrl(new URL(getHref()));
         if (webWindow.getWebClient().getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
-            request.setRefererlHeader(htmlPage.getUrl());
+            request.setRefererHeader(htmlPage.getUrl());
         }
 
         webWindow.getWebClient().download(webWindow, "", request, false, false, null, "JS location.reload");
@@ -311,7 +311,7 @@ public class Location extends HtmlUnitScriptable {
 
             final WebRequest request = new WebRequest(url,
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
-            request.setRefererlHeader(page.getUrl());
+            request.setRefererHeader(page.getUrl());
 
             webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, null, "JS set location");
@@ -574,7 +574,7 @@ public class Location extends HtmlUnitScriptable {
 
         final WebRequest webRequest = new WebRequest(url,
                 browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
-        webRequest.setRefererlHeader(getUrl());
+        webRequest.setRefererHeader(getUrl());
 
         webWindow.getWebClient().getPage(webWindow, webRequest);
     }
