@@ -43,6 +43,8 @@ import org.htmlunit.javascript.host.TextEncoder;
 import org.htmlunit.javascript.host.URL;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.WebSocket;
+import org.htmlunit.javascript.host.abort.AbortController;
+import org.htmlunit.javascript.host.abort.AbortSignal;
 import org.htmlunit.javascript.host.arrays.Atomics;
 import org.htmlunit.javascript.host.canvas.CanvasGradient;
 import org.htmlunit.javascript.host.canvas.CanvasPattern;
@@ -137,7 +139,7 @@ public final class WorkerJavaScriptConfiguration extends AbstractJavaScriptConfi
 
     @SuppressWarnings("unchecked")
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
-        Atomics.class,
+        AbortController.class, AbortSignal.class, Atomics.class,
         Blob.class, BroadcastChannel.class,
         Cache.class, CacheStorage.class, CanvasGradient.class, CanvasPattern.class,
         ClientRect.class, CloseEvent.class,

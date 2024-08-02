@@ -8946,4 +8946,36 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void htmlFormControlsCollection() throws Exception {
         testString("", "document.myForm.elements");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortController}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "abort(),signal",
+            EDGE = "abort(),signal",
+            FF = "abort(),signal",
+            FF_ESR = "abort(),signal")
+    public void abortController() throws Exception {
+        testString("", "new AbortController()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortSignal}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()",
+            EDGE = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()",
+            FF = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()",
+            FF_ESR = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()")
+    @HtmlUnitNYI(CHROME = "-",
+            EDGE = "-",
+            FF = "-",
+            FF_ESR = "-")
+    public void abortSignal() throws Exception {
+        testString("", "new AbortController().signal");
+    }
 }

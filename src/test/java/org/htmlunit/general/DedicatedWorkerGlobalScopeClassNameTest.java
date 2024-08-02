@@ -10121,4 +10121,26 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortController}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function AbortController() { [native code] }")
+    public void abortController() throws Exception {
+        test("AbortController");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortSignal}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function AbortSignal() { [native code] }")
+    public void abortSignal() throws Exception {
+        test("AbortSignal");
+    }
 }

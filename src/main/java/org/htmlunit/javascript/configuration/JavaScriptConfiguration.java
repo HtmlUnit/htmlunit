@@ -67,6 +67,8 @@ import org.htmlunit.javascript.host.URL;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.WebSocket;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.abort.AbortController;
+import org.htmlunit.javascript.host.abort.AbortSignal;
 import org.htmlunit.javascript.host.animations.Animation;
 import org.htmlunit.javascript.host.animations.AnimationEvent;
 import org.htmlunit.javascript.host.animations.KeyframeEffect;
@@ -547,6 +549,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     @SuppressWarnings("unchecked")
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
+        AbortController.class, AbortSignal.class,
         AbstractList.class, AbstractRange.class, AnalyserNode.class,
         Animation.class, AnimationEvent.class, Atomics.class,
         Attr.class, Audio.class, AudioBuffer.class,

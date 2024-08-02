@@ -17537,4 +17537,36 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void htmlFormControlsCollection() throws Exception {
         testString("", "document.myForm.elements");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortController}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "abort(),constructor(),signal[GCE]",
+            EDGE = "abort(),constructor(),signal[GCE]",
+            FF = "abort(),constructor(),signal[GCE]",
+            FF_ESR = "abort(),constructor(),signal[GCE]")
+    public void abortController() throws Exception {
+        testString("", "new AbortController()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortSignal}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "aborted[GCE],constructor(),onabort[GSCE],reason[GCE],throwIfAborted()",
+            EDGE = "aborted[GCE],constructor(),onabort[GSCE],reason[GCE],throwIfAborted()",
+            FF = "aborted[GCE],constructor(),onabort[GSCE],reason[GCE],throwIfAborted()",
+            FF_ESR = "aborted[GCE],constructor(),onabort[GSCE],reason[GCE],throwIfAborted()")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void abortSignal() throws Exception {
+        testString("", "new AbortController().signal");
+    }
 }

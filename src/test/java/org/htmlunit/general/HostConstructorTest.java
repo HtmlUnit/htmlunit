@@ -519,4 +519,26 @@ public class HostConstructorTest extends WebDriverTestCase {
     public void _XSLTProcessor() throws Exception {
         test("XSLTProcessor");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortController}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object AbortController]")
+    public void abortController() throws Exception {
+        test("AbortController");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortSignal}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object AbortSignal]")
+    public void abortSignal() throws Exception {
+        test("AbortSignal");
+    }
 }

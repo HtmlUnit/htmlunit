@@ -3125,4 +3125,32 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void htmlFormControlsCollection() throws Exception {
         testString("", "document.myForm.elements");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortController}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [AbortController]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [AbortController]",
+            FF = "Symbol(Symbol.toStringTag) [C] [AbortController]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [AbortController]")
+    public void abortController() throws Exception {
+        testString("", "new AbortController()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortSignal}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [AbortSignal]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [AbortSignal]",
+            FF = "Symbol(Symbol.toStringTag) [C] [AbortSignal]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [AbortSignal]")
+    public void abortSignal() throws Exception {
+        testString("", "new AbortController().signal");
+    }
 }
