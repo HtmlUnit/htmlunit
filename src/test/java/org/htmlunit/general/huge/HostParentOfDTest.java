@@ -2481,6 +2481,15 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _EventTarget_AbortSignal() throws Exception {
+        test("EventTarget", "AbortSignal");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _EventTarget_AnalyserNode() throws Exception {
         test("EventTarget", "AnalyserNode");
     }

@@ -52,6 +52,24 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _AbortController_AbortController() throws Exception {
+        test("AbortController", "AbortController");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _AbortSignal_AbortSignal() throws Exception {
+        test("AbortSignal", "AbortSignal");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _AbstractRange_AbstractRange() throws Exception {
         test("AbstractRange", "AbstractRange");
     }
