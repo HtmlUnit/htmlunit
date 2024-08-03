@@ -54,7 +54,7 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final Set<String> strings = TestCaseTest.getAllClassNames();
+        final Set<String> strings = TestCaseTest.getAllConfiguredJsClassNames();
         for (final String host : strings) {
             if (!"Audio".equals(host)) {
                 list.add(new Object[] {host});

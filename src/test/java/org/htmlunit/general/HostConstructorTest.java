@@ -61,7 +61,7 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final Set<String> strings = TestCaseTest.getAllClassNames();
+        final Set<String> strings = TestCaseTest.getAllConfiguredJsClassNames();
         for (final String className : strings) {
             list.add(new Object[] {className});
         }

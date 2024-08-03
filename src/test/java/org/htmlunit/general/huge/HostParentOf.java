@@ -47,7 +47,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     protected static Collection<Object[]> data(final Predicate<String> predicate)  throws Exception {
-        final Set<String> jsClassNames = TestCaseTest.getAllConstructorNames();
+        final Set<String> jsClassNames = TestCaseTest.getAllConfiguredJsConstructorNames();
 
         final List<Object[]> list = new ArrayList<>(jsClassNames.size() * jsClassNames.size() / 10);
         for (final String parent : jsClassNames) {
