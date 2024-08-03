@@ -343,20 +343,25 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Retrieves the request parameters used. Similar to the servlet api function
+     * <p>Retrieves the request parameters used. Similar to the servlet api function
      * getParameterMap() this works depending on the request type and collects the
-     * url parameters and the body stuff.
-     * The value is also normalized - null is converted to an empty string.
-     * In contrast to the servlet api this creates a separate KeyValuePair for every
+     * url parameters and the body stuff.<br>
+     * The value is also normalized - null is converted to an empty string.</p>
+     * <p>In contrast to the servlet api this creates a separate KeyValuePair for every
      * parameter. This means that pairs with the same name can be part of the list. The
-     * servlet api will return a string[] as value for the key in this case.
+     * servlet api will return a string[] as value for the key in this case.<br>
+     * Additionally this method includes also the uploaded files for multipart post
+     * requests.</p>
      *
      * @return the request parameters to use
      */
     public List<NameValuePair> getParameters() {
         // developer note:
-        // this has to be in sync with
-        // org.htmlunit.HttpWebConnection.makeHttpMethod(WebRequest, HttpClientBuilder)
+        // this has to be in sync with org.htmlunit.HttpWebConnection.makeHttpMethod(WebRequest, HttpClientBuilder)
+
+        // developer note:
+        // the spring org.springframework.test.web.servlet.htmlunitHtmlUnitRequestBuilder uses
+        // this method and is sensitive to all the details of the current implementation.
 
         if (HttpMethod.POST != getHttpMethod() && HttpMethod.PUT != getHttpMethod()
                 && HttpMethod.PATCH != getHttpMethod()) {
@@ -402,9 +407,11 @@ public class WebRequest implements Serializable {
 
         if (FormEncodingType.MULTIPART == getEncodingType()) {
             final List<NameValuePair> allParameters = new ArrayList<>();
+
+            // the servlet api ignores these parameters but to make spring happy we include them
+            allParameters.addAll(getRequestParameters());
+
             allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
-            // the servlet api ignores the parameters
-            // allParameters.addAll(getRequestParameters());
             return normalize(allParameters);
         }
 
