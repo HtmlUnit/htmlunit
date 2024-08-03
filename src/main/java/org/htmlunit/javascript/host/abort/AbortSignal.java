@@ -14,9 +14,9 @@
  */
 package org.htmlunit.javascript.host.abort;
 
-import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for AbortSignal.
@@ -24,13 +24,14 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass
-public class AbortSignal extends HtmlUnitScriptable {
+public class AbortSignal extends EventTarget {
 
     /**
      * JavaScript constructor.
      */
+    @Override
     @JsxConstructor
     public void jsConstructor() {
-        // nothing to do
+        super.jsConstructor();
     }
 }

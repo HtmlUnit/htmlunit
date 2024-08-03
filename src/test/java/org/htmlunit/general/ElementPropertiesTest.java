@@ -8971,10 +8971,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()",
             FF = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()",
             FF_ESR = "aborted,addEventListener(),dispatchEvent(),onabort,reason,removeEventListener(),throwIfAborted()")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF = "-",
-            FF_ESR = "-")
+    @HtmlUnitNYI(CHROME = "addEventListener(),dispatchEvent(),removeEventListener()",
+            EDGE = "addEventListener(),dispatchEvent(),removeEventListener()",
+            FF = "addEventListener(),dispatchEvent(),removeEventListener()",
+            FF_ESR = "addEventListener(),dispatchEvent(),removeEventListener()")
     public void abortSignal() throws Exception {
         testString("", "new AbortController().signal");
     }
