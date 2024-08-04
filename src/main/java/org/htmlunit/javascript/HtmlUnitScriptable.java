@@ -18,7 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 
 import java.io.IOException;
-import java.util.Deque;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.function.FailableSupplier;
@@ -345,18 +344,16 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     }
 
     /**
-     * Gets the scriptable used at starting scope for the execution of current script.
-     * @return the scope as defined in {@link JavaScriptEngine#callFunction}
-     * or {@link JavaScriptEngine#execute}.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @return the window that is set as the top call scope
      */
-    protected Scriptable getStartingScope() {
-        @SuppressWarnings("unchecked")
-        final Deque<Scriptable> stack =
-                (Deque<Scriptable>) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
-        if (null == stack) {
-            return null;
+    protected static Window getWindowFromTopCallScope() throws RuntimeException {
+        final Scriptable top = JavaScriptEngine.getTopCallScope();
+        if (top instanceof Window) {
+            return (Window) top;
         }
-        return stack.peek();
+        throw new RuntimeException("Unable to find window in scope");
     }
 
     /**

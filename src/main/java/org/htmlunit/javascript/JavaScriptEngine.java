@@ -25,9 +25,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,14 +128,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     /** The JavaScriptExecutor corresponding to all windows of this Web client */
     private transient JavaScriptExecutor javaScriptExecutor_;
-
-    /**
-     * Key used to place the scope in which the execution of some JavaScript code
-     * started as thread local attribute in current context.
-     * <p>This is needed to resolve some relative locations relatively to the page
-     * in which the script is executed and not to the page which location is changed.
-     */
-    public static final String KEY_STARTING_SCOPE = "startingScope";
 
     /**
      * Key used to place the {@link HtmlPage} for which the JavaScript code is executed
@@ -927,30 +917,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             javaScriptRunning_.set(Boolean.TRUE);
 
             try {
-                // KEY_STARTING_SCOPE maintains a stack of scopes
-                @SuppressWarnings("unchecked")
-                Deque<Scriptable> stack = (Deque<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
-                if (null == stack) {
-                    stack = new ArrayDeque<>();
-                    cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
-                }
-
                 final Object response;
-                stack.push(scope_);
-                try {
-                    cx.putThreadLocal(KEY_STARTING_PAGE, page_);
-                    synchronized (page_) { // 2 scripts can't be executed in parallel for one page
-                        if (page_ != page_.getEnclosingWindow().getEnclosedPage()) {
-                            return null; // page has been unloaded
-                        }
-                        response = doRun(cx);
+                cx.putThreadLocal(KEY_STARTING_PAGE, page_);
+                synchronized (page_) { // 2 scripts can't be executed in parallel for one page
+                    if (page_ != page_.getEnclosingWindow().getEnclosedPage()) {
+                        return null; // page has been unloaded
                     }
+                    response = doRun(cx);
+                }
 
-                    cx.processMicrotasks();
-                }
-                finally {
-                    stack.pop();
-                }
+                cx.processMicrotasks();
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
@@ -1392,6 +1368,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static boolean isNaN(final Object obj) {
         return ScriptRuntime.isNaN(obj);
+    }
+
+    /**
+     * @return the top call scope
+     */
+    public static Scriptable getTopCallScope() {
+        return ScriptRuntime.getTopCallScope(Context.getCurrentContext());
     }
 
     /**
