@@ -438,7 +438,9 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts("on-load")
     public void replaceOnload() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "function doTest() {\n"
             + "  location.replace('" + URL_SECOND + "');\n"
             + "}\n"
@@ -447,11 +449,13 @@ public class Location2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String secondContent = "<html><head><title>Second</title></head>\n"
-                + "<body onload='alert(\"on-load\")'></body></html>";
+                + "<body onload='window.top.name += \"on-load\" + \"\\u00a7\";'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        final WebDriver driver = loadPageWithAlerts2(html);
 
+        final WebDriver driver = loadPage2(html);
+
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
         assertTitle(driver, "Second");
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
@@ -507,6 +511,7 @@ public class Location2Test extends WebDriverTestCase {
     public void assignOnload() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function test() {\n"
             + "    location.assign('" + URL_SECOND + "');\n"
             + "  }\n"
@@ -515,11 +520,13 @@ public class Location2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String secondContent = "<html><head><title>Second</title></head>\n"
-                + "<body onload='alert(\"on-load\");'></body></html>";
+                + "<body onload='window.top.name += \"on-load\" + \"\\u00a7\";'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        final WebDriver driver = loadPageWithAlerts2(firstContent);
 
+        final WebDriver driver = loadPage2(firstContent);
+
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
         assertTitle(driver, "Second");
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
@@ -553,6 +560,7 @@ public class Location2Test extends WebDriverTestCase {
     public void assingByEqualsOnload() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function test() {\n"
             + "    location  = '" + URL_SECOND + "';\n"
             + "  }\n"
@@ -561,11 +569,13 @@ public class Location2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String secondContent = "<html><head><title>Second</title></head>\n"
-                + "<body onload='alert(\"on-load\");'></body></html>";
+                + "<body onload='window.top.name += \"on-load\" + \"\\u00a7\";'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        final WebDriver driver = loadPageWithAlerts2(firstContent);
 
+        final WebDriver driver = loadPage2(firstContent);
+
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
         assertTitle(driver, "Second");
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
@@ -930,44 +940,38 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§ORIGIN§§")
+    @Alerts("§§URL§§")
     public void origin() throws Exception {
         final String html =
                 "<html><body><script>\n"
-                + "  alert(window.location.origin);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(window.location.origin);\n"
                 + "</script></body></html>";
 
-        final String[] expectedAlerts = getExpectedAlerts();
         final URL url = URL_FIRST;
         final String origin = url.getProtocol() + "://" + url.getHost() + ':' + url.getPort();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            expectedAlerts[i] = expectedAlerts[i].replaceAll("§§ORIGIN§§", origin);
-        }
+        expandExpectedAlertsVariables(origin);
 
-        final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, expectedAlerts);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§ORIGIN§§")
+    @Alerts("§§URL§§")
     public void documentOrigin() throws Exception {
         final String html =
                 "<html><body><script>\n"
-                + "  alert(document.location.origin);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.location.origin);\n"
                 + "</script></body></html>";
 
-        final String[] expectedAlerts = getExpectedAlerts();
         final URL url = URL_FIRST;
         final String origin = url.getProtocol() + "://" + url.getHost() + ':' + url.getPort();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            expectedAlerts[i] = expectedAlerts[i].replaceAll("§§ORIGIN§§", origin);
-        }
+        expandExpectedAlertsVariables(origin);
 
-        final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, expectedAlerts);
+        loadPageVerifyTitle2(html);
     }
 
     /**
