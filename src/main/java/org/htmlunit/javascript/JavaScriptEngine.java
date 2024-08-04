@@ -722,7 +722,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
         }
 
-        final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, owningPage) {
+        final HtmlUnitContextAction action = new HtmlUnitContextAction(owningPage) {
             @Override
             public Object doRun(final Context cx) {
                 return cx.compileString(sourceCode, sourceName, startLine, null);
@@ -803,7 +803,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             return null;
         }
 
-        final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, page) {
+        final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
             public Object doRun(final Context cx) {
                 return script.exec(cx, scope);
@@ -864,7 +864,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             return null;
         }
 
-        final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, page) {
+        final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
             public Object doRun(final Context cx) {
                 if (ScriptRuntime.hasTopCall(cx)) {
@@ -903,11 +903,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * "guarantees proper association of Context instances with the current thread and is faster".
      */
     private abstract class HtmlUnitContextAction implements ContextAction<Object> {
-        private final Scriptable scope_;
         private final HtmlPage page_;
 
-        HtmlUnitContextAction(final Scriptable scope, final HtmlPage page) {
-            scope_ = scope;
+        HtmlUnitContextAction(final HtmlPage page) {
             page_ = page;
         }
 
