@@ -408,10 +408,11 @@ public class WebRequest implements Serializable {
         if (FormEncodingType.MULTIPART == getEncodingType()) {
             final List<NameValuePair> allParameters = new ArrayList<>();
 
+            allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+
             // the servlet api ignores these parameters but to make spring happy we include them
             allParameters.addAll(getRequestParameters());
 
-            allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
             return normalize(allParameters);
         }
 

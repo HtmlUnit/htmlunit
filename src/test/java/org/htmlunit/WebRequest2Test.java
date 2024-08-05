@@ -361,24 +361,6 @@ public class WebRequest2Test extends WebServerTestCase {
                 final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             writer.write("Parameters: \n");
 
-            // different from the servlet api spring also uses the file upload information
-            try {
-                // if (ServletFileUpload.isMultipartContent(req)) {
-                // ignore the post request check
-                if (FileUploadBase.isMultipartContent(new ServletRequestContext(req))) {
-                    final DiskFileItemFactory factory = new DiskFileItemFactory();
-
-                    final ServletFileUpload upload = new ServletFileUpload(factory);
-                    final List<FileItem> items = upload.parseRequest(req);
-                    for (final FileItem fileItem : items) {
-                        writer.write("  '" + fileItem.getFieldName() + "': '" + fileItem.getString() + "'\n");
-                    }
-                }
-            }
-            catch (final FileUploadException e) {
-                throw new IOException(e);
-            }
-
             // use only getParameterMap() here because we like to have the same behavior
             for (final Map.Entry<String, String[]> entry : req.getParameterMap().entrySet()) {
                 if (entry.getValue() == null) {
@@ -401,6 +383,24 @@ public class WebRequest2Test extends WebServerTestCase {
                     }
                     writer.write("]\n");
                 }
+            }
+
+            // different from the servlet api spring also uses the file upload information
+            try {
+                // if (ServletFileUpload.isMultipartContent(req)) {
+                // ignore the post request check
+                if (FileUploadBase.isMultipartContent(new ServletRequestContext(req))) {
+                    final DiskFileItemFactory factory = new DiskFileItemFactory();
+
+                    final ServletFileUpload upload = new ServletFileUpload(factory);
+                    final List<FileItem> items = upload.parseRequest(req);
+                    for (final FileItem fileItem : items) {
+                        writer.write("  '" + fileItem.getFieldName() + "': '" + fileItem.getString() + "'\n");
+                    }
+                }
+            }
+            catch (final FileUploadException e) {
+                throw new IOException(e);
             }
         }
     }
