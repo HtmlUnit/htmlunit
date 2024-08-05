@@ -53,6 +53,7 @@ public class MiniServer extends Thread implements Closeable {
     private final AtomicBoolean started_ = new AtomicBoolean(false);
     private final MockWebConnection mockWebConnection_;
     private volatile ServerSocket serverSocket_;
+    private String lastRequest_;
 
     private static final Set<URL> DROP_REQUESTS = new HashSet<>();
     private static final Set<URL> DROP_GET_REQUESTS = new HashSet<>();
@@ -201,12 +202,17 @@ public class MiniServer extends Thread implements Closeable {
         }
         try {
             final URL url = new URL("http://localhost:" + port_ + requestedPath);
+            lastRequest_ = request;
             return new WebRequest(url, submitMethod);
         }
         catch (final MalformedURLException e) {
             LOG.error(e);
             return null;
         }
+    }
+
+    public String getLastRequest() {
+        return lastRequest_;
     }
 
     /**

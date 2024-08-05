@@ -806,7 +806,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (content != null
             && (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
-                    || HttpMethod.PATCH == webRequest_.getHttpMethod())
+                    || HttpMethod.PATCH == webRequest_.getHttpMethod()
+                    || HttpMethod.DELETE == webRequest_.getHttpMethod()
+                    || HttpMethod.OPTIONS == webRequest_.getHttpMethod())
             && !JavaScriptEngine.isUndefined(content)) {
 
             final boolean setEncodingType = webRequest_.getAdditionalHeader(HttpHeader.CONTENT_TYPE) == null;

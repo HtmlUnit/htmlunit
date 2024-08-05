@@ -60,10 +60,8 @@ import org.apache.http.client.AuthCache;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
-import org.apache.http.client.methods.HttpOptions;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -302,8 +300,12 @@ public class HttpWebConnection implements WebConnection {
 
             final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
-            if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
-                final HttpPost postMethod = (HttpPost) method;
+            if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED
+                    && (method instanceof HttpPost
+                            || method instanceof HttpPatch
+                            || method instanceof HttpPut
+                            || method instanceof org.htmlunit.httpclient.HttpDelete
+                            || method instanceof org.htmlunit.httpclient.HttpOptions)) {
                 if (webRequest.getRequestBody() == null) {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
                     final String query = HttpUtils.toQueryFormFields(pairs, charset);
@@ -318,17 +320,21 @@ public class HttpWebConnection implements WebConnection {
                         urlEncodedEntity = new StringEntity(query, charset);
                         urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
                     }
-                    postMethod.setEntity(urlEncodedEntity);
+                    method.setEntity(urlEncodedEntity);
                 }
                 else {
                     final String body = StringUtils.defaultString(webRequest.getRequestBody());
                     final StringEntity urlEncodedEntity = new StringEntity(body, charset);
                     urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
-                    postMethod.setEntity(urlEncodedEntity);
+                    method.setEntity(urlEncodedEntity);
                 }
             }
-            else if (webRequest.getEncodingType() == FormEncodingType.TEXT_PLAIN && method instanceof HttpPost) {
-                final HttpPost postMethod = (HttpPost) method;
+            else if (webRequest.getEncodingType() == FormEncodingType.TEXT_PLAIN
+                    && (method instanceof HttpPost
+                            || method instanceof HttpPatch
+                            || method instanceof HttpPut
+                            || method instanceof org.htmlunit.httpclient.HttpDelete
+                            || method instanceof org.htmlunit.httpclient.HttpOptions)) {
                 if (webRequest.getRequestBody() == null) {
                     final StringBuilder body = new StringBuilder();
                     for (final NameValuePair pair : webRequest.getRequestParameters()) {
@@ -339,13 +345,13 @@ public class HttpWebConnection implements WebConnection {
                     }
                     final StringEntity bodyEntity = new StringEntity(body.toString(), charset);
                     bodyEntity.setContentType(MimeType.TEXT_PLAIN);
-                    postMethod.setEntity(bodyEntity);
+                    method.setEntity(bodyEntity);
                 }
                 else {
                     final String body = StringUtils.defaultString(webRequest.getRequestBody());
                     final StringEntity bodyEntity =
                             new StringEntity(body, ContentType.create(MimeType.TEXT_PLAIN, charset));
-                    postMethod.setEntity(bodyEntity);
+                    method.setEntity(bodyEntity);
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
@@ -364,7 +370,7 @@ public class HttpWebConnection implements WebConnection {
                 }
                 method.setEntity(builder.build());
             }
-            else { // for instance a PUT or PATCH request
+            else { // for instance a PATCH request
                 final String body = webRequest.getRequestBody();
                 if (body != null) {
                     method.setEntity(new StringEntity(body, charset));
@@ -507,11 +513,11 @@ public class HttpWebConnection implements WebConnection {
                 break;
 
             case DELETE:
-                method = new HttpDelete(uri);
+                method = new org.htmlunit.httpclient.HttpDelete(uri);
                 break;
 
             case OPTIONS:
-                method = new HttpOptions(uri);
+                method = new org.htmlunit.httpclient.HttpOptions(uri);
                 break;
 
             case HEAD:

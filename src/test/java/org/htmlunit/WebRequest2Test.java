@@ -198,24 +198,25 @@ public class WebRequest2Test extends WebServerTestCase {
         request.setHttpMethod(httpMethod_);
         request.setEncodingType(encoding_);
 
-        if (parameter_ != null) {
-            request.setRequestParameters(parameter_.getPairs());
+        if (body_ == null) {
+            if (parameter_ != null) {
+                request.setRequestParameters(parameter_.getPairs());
+            }
         }
-
-        if (body_ != null) {
-            try {
+        else {
+            if (httpMethod_ == HttpMethod.POST
+                    || httpMethod_ == HttpMethod.PUT
+                    || httpMethod_ == HttpMethod.PATCH
+                    || httpMethod_ == HttpMethod.DELETE
+                    || httpMethod_ == HttpMethod.OPTIONS) {
                 request.setRequestBody(body_);
             }
-            catch (final RuntimeException e) {
-                // ignore
-            }
         }
 
-        final Page page = getWebClient().getPage(request);
-        assertTrue(page instanceof TextPage);
+        final WebResponse response = getWebClient().getWebConnection().getResponse(request);
 
         // calculate expectation from bounce servlet
-        String expectedContent = ((TextPage) page).getContent();
+        String expectedContent = response.getContentAsString();
 
         if (HttpMethod.HEAD.equals(request.getHttpMethod())) {
             assertEquals(0, expectedContent.length());

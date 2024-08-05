@@ -366,14 +366,22 @@ public class WebRequest implements Serializable {
         if (HttpMethod.POST != getHttpMethod() && HttpMethod.PUT != getHttpMethod()
                 && HttpMethod.PATCH != getHttpMethod()) {
 
+            final List<NameValuePair> allParameters = new ArrayList<>();
+            allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+
+            // a bit strange but in case of GET, TRACE, DELETE, OPTIONS and HEAD
+            // HttpWebConnection.makeHttpMethod() moves the parameters up to the query
+            // to reflect this we have to take the parameters into account even if this
+            // looks wrong for GET requests
             if (!getRequestParameters().isEmpty()) {
                 return normalize(getRequestParameters());
             }
 
-            return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+            return normalize(allParameters);
         }
 
-        if (getEncodingType() == FormEncodingType.URL_ENCODED && HttpMethod.POST == getHttpMethod()) {
+        if (getEncodingType() == FormEncodingType.URL_ENCODED
+                && (HttpMethod.POST == getHttpMethod() || HttpMethod.PUT == getHttpMethod())) {
             if (getRequestBody() == null) {
                 final List<NameValuePair> allParameters = new ArrayList<>();
                 allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
@@ -388,7 +396,8 @@ public class WebRequest implements Serializable {
             return normalize(allParameters);
         }
 
-        if (getEncodingType() == FormEncodingType.TEXT_PLAIN && HttpMethod.POST == getHttpMethod()) {
+        if (getEncodingType() == FormEncodingType.TEXT_PLAIN
+                && (HttpMethod.POST == getHttpMethod() || HttpMethod.PUT == getHttpMethod())) {
             if (getRequestBody() == null) {
                 final List<NameValuePair> allParameters = new ArrayList<>();
                 allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
@@ -401,7 +410,7 @@ public class WebRequest implements Serializable {
         }
 
         if ((getEncodingType() == FormEncodingType.URL_ENCODED || getEncodingType() == FormEncodingType.TEXT_PLAIN)
-                && (HttpMethod.PUT == getHttpMethod() || HttpMethod.PATCH == getHttpMethod())) {
+                && HttpMethod.PATCH == getHttpMethod()) {
             return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
         }
 
@@ -487,8 +496,12 @@ public class WebRequest implements Serializable {
                        + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
         }
-        if (httpMethod_ != HttpMethod.POST && httpMethod_ != HttpMethod.PUT && httpMethod_ != HttpMethod.PATCH) {
-            final String msg = "The request body may only be set for POST, PUT or PATCH requests!";
+        if (httpMethod_ != HttpMethod.POST
+                && httpMethod_ != HttpMethod.PUT
+                && httpMethod_ != HttpMethod.PATCH
+                && httpMethod_ != HttpMethod.DELETE
+                && httpMethod_ != HttpMethod.OPTIONS) {
+            final String msg = "The request body may only be set for POST, PUT, PATCH, DELETE or OPTIONS requests!";
             throw new RuntimeException(msg);
         }
         requestBody_ = requestBody;
