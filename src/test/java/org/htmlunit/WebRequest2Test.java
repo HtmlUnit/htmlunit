@@ -139,7 +139,7 @@ public class WebRequest2Test extends WebServerTestCase {
             {null, emptyParameters, oneParameter, emptyValueParameter, sameAsInQueryParameter,
                 sameKeyAsInQueryParameter, sameKeyDifferentValuesParameter};
 
-        final String[] bodies = {"", "a=b", "a=b&c=d", "a=", "a", "a=b&a=d"};
+        final String[] bodies = {"null", "", "a=b", "a=b&c=d", "a=", "a", "a=b&a=d"};
 
         for (final HttpMethod method : methods) {
             for (final String query : queries) {
@@ -198,7 +198,7 @@ public class WebRequest2Test extends WebServerTestCase {
         request.setHttpMethod(httpMethod_);
         request.setEncodingType(encoding_);
 
-        if (body_ == null) {
+        if ("null".equals(body_)) {
             if (parameter_ != null) {
                 request.setRequestParameters(parameter_.getPairs());
             }

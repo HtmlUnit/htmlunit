@@ -113,7 +113,8 @@ public final class XMLHttpRequestSentContentTest extends WebDriverTestCase {
                 + "    body.append('x', 'body');\n"
                 + "    xhr.send(body);\n"
                 + "  }\n"
-                + "</script></head><body onload='test()'></body></html>";
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
 
         final MockWebConnection mockWebConnection = getMockWebConnection();
         mockWebConnection.setResponse(WebTestCase.URL_FIRST, html);

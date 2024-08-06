@@ -293,19 +293,20 @@ public class HttpWebConnection implements WebConnection {
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest);
 
-        // POST, PUT and PATCH
-        if (httpMethod instanceof HttpEntityEnclosingRequest) {
-            // developer note:
-            // this has to be in sync with org.htmlunit.WebRequest.getRequestParameters()
+        // developer note:
+        // this has to be in sync with org.htmlunit.WebRequest.getRequestParameters()
+
+        // POST, PUT, PATCH, DELETE, OPTIONS
+        if ((httpMethod instanceof HttpEntityEnclosingRequest)
+                && (httpMethod instanceof HttpPost
+                        || httpMethod instanceof HttpPut
+                        || httpMethod instanceof HttpPatch
+                        || httpMethod instanceof org.htmlunit.httpclient.HttpDelete
+                        || httpMethod instanceof org.htmlunit.httpclient.HttpOptions)) {
 
             final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
-            if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED
-                    && (method instanceof HttpPost
-                            || method instanceof HttpPatch
-                            || method instanceof HttpPut
-                            || method instanceof org.htmlunit.httpclient.HttpDelete
-                            || method instanceof org.htmlunit.httpclient.HttpOptions)) {
+            if (FormEncodingType.URL_ENCODED == webRequest.getEncodingType()) {
                 if (webRequest.getRequestBody() == null) {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
                     final String query = HttpUtils.toQueryFormFields(pairs, charset);
@@ -329,12 +330,7 @@ public class HttpWebConnection implements WebConnection {
                     method.setEntity(urlEncodedEntity);
                 }
             }
-            else if (webRequest.getEncodingType() == FormEncodingType.TEXT_PLAIN
-                    && (method instanceof HttpPost
-                            || method instanceof HttpPatch
-                            || method instanceof HttpPut
-                            || method instanceof org.htmlunit.httpclient.HttpDelete
-                            || method instanceof org.htmlunit.httpclient.HttpOptions)) {
+            else if (FormEncodingType.TEXT_PLAIN == webRequest.getEncodingType()) {
                 if (webRequest.getRequestBody() == null) {
                     final StringBuilder body = new StringBuilder();
                     for (final NameValuePair pair : webRequest.getRequestParameters()) {
@@ -370,7 +366,8 @@ public class HttpWebConnection implements WebConnection {
                 }
                 method.setEntity(builder.build());
             }
-            else { // for instance a PATCH request
+            else {
+                // for instance a PATCH request
                 final String body = webRequest.getRequestBody();
                 if (body != null) {
                     method.setEntity(new StringEntity(body, charset));
@@ -378,9 +375,9 @@ public class HttpWebConnection implements WebConnection {
             }
         }
         else {
-            // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
-            if (!webRequest.getRequestParameters().isEmpty()) {
-                final List<NameValuePair> pairs = webRequest.getRequestParameters();
+            // GET, TRACE, HEAD
+            final List<NameValuePair> pairs = webRequest.getRequestParameters();
+            if (!pairs.isEmpty()) {
                 final String query = HttpUtils.toQueryFormFields(pairs, charset);
                 uri = UrlUtils.toURI(url, query);
                 httpMethod.setURI(uri);

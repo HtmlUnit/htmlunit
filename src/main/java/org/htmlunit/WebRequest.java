@@ -363,70 +363,84 @@ public class WebRequest implements Serializable {
         // the spring org.springframework.test.web.servlet.htmlunitHtmlUnitRequestBuilder uses
         // this method and is sensitive to all the details of the current implementation.
 
-        if (HttpMethod.POST != getHttpMethod() && HttpMethod.PUT != getHttpMethod()
-                && HttpMethod.PATCH != getHttpMethod()) {
+        // POST, PUT, PATCH, DELETE, OPTIONS
+        final HttpMethod httpMethod = getHttpMethod();
+        if (httpMethod == HttpMethod.POST
+                        || httpMethod == HttpMethod.PUT
+                        || httpMethod == HttpMethod.PATCH
+                        || httpMethod == HttpMethod.DELETE
+                        || httpMethod == HttpMethod.OPTIONS) {
 
-            final List<NameValuePair> allParameters = new ArrayList<>();
-            allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+            if (FormEncodingType.URL_ENCODED == getEncodingType()) {
+                if (getRequestBody() == null) {
+                    final List<NameValuePair> allParameters = new ArrayList<>();
+                    allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
 
-            // a bit strange but in case of GET, TRACE, DELETE, OPTIONS and HEAD
-            // HttpWebConnection.makeHttpMethod() moves the parameters up to the query
-            // to reflect this we have to take the parameters into account even if this
-            // looks wrong for GET requests
-            if (!getRequestParameters().isEmpty()) {
-                return normalize(getRequestParameters());
-            }
+                    // for PATCH/DELETE/OPTIONS request browsers are sending the body
+                    // but the servlet API does not get it
+                    if (httpMethod != HttpMethod.PATCH
+                            && httpMethod != HttpMethod.DELETE
+                            && httpMethod != HttpMethod.OPTIONS) {
+                        allParameters.addAll(getRequestParameters());
+                    }
 
-            return normalize(allParameters);
-        }
+                    return normalize(allParameters);
+                }
 
-        if (getEncodingType() == FormEncodingType.URL_ENCODED
-                && (HttpMethod.POST == getHttpMethod() || HttpMethod.PUT == getHttpMethod())) {
-            if (getRequestBody() == null) {
+                // getRequestParameters and getRequestBody are mutually exclusive
                 final List<NameValuePair> allParameters = new ArrayList<>();
                 allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+
+                // for PATCH/DELETE/OPTIONS request browsers are sending the body
+                // but the servlet API does not get it
+                if (httpMethod != HttpMethod.PATCH
+                        && httpMethod != HttpMethod.DELETE
+                        && httpMethod != HttpMethod.OPTIONS) {
+                    allParameters.addAll(HttpUtils.parseUrlQuery(getRequestBody(), getCharset()));
+                }
+
+                return normalize(allParameters);
+            }
+
+            if (FormEncodingType.TEXT_PLAIN == getEncodingType()) {
+                if (getRequestBody() == null) {
+                    final List<NameValuePair> allParameters = new ArrayList<>();
+                    allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+
+                    // the servlet api ignores the parameters
+                    // allParameters.addAll(getRequestParameters());
+
+                    return normalize(allParameters);
+                }
+
+                return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+            }
+
+            if (FormEncodingType.MULTIPART == getEncodingType()) {
+                final List<NameValuePair> allParameters = new ArrayList<>();
+
+                allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+
+                // the servlet api ignores these parameters but to make spring happy we include them
                 allParameters.addAll(getRequestParameters());
+
                 return normalize(allParameters);
             }
 
-            // getRequestParameters and getRequestBody are mutually exclusive
-            final List<NameValuePair> allParameters = new ArrayList<>();
-            allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
-            allParameters.addAll(HttpUtils.parseUrlQuery(getRequestBody(), getCharset()));
-            return normalize(allParameters);
+            return Collections.emptyList();
         }
 
-        if (getEncodingType() == FormEncodingType.TEXT_PLAIN
-                && (HttpMethod.POST == getHttpMethod() || HttpMethod.PUT == getHttpMethod())) {
-            if (getRequestBody() == null) {
-                final List<NameValuePair> allParameters = new ArrayList<>();
-                allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
-                // the servlet api ignores the parameters
-                // allParameters.addAll(getRequestParameters());
-                return normalize(allParameters);
-            }
+        // GET, TRACE, HEAD
 
-            return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+        // a bit strange but
+        // HttpWebConnection.makeHttpMethod() moves the parameters up to the query
+        // to reflect this we have to take the parameters into account even if this
+        // looks wrong for GET requests
+        if (!getRequestParameters().isEmpty()) {
+            return normalize(getRequestParameters());
         }
 
-        if ((getEncodingType() == FormEncodingType.URL_ENCODED || getEncodingType() == FormEncodingType.TEXT_PLAIN)
-                && HttpMethod.PATCH == getHttpMethod()) {
-            return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
-        }
-
-        if (FormEncodingType.MULTIPART == getEncodingType()) {
-            final List<NameValuePair> allParameters = new ArrayList<>();
-
-            allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
-
-            // the servlet api ignores these parameters but to make spring happy we include them
-            allParameters.addAll(getRequestParameters());
-
-            return normalize(allParameters);
-        }
-
-        // for instance a PUT or PATCH request
-        return Collections.emptyList();
+        return normalize(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
     }
 
     private static List<NameValuePair> normalize(final List<NameValuePair> pairs) {
