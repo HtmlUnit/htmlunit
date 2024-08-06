@@ -16,6 +16,13 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.junit.Test;
 
 /**
@@ -23,6 +30,7 @@ import org.junit.Test;
  *
  * @author Marc Guillemot
  * @author Carsten Steul
+ * @author Ronald Brill
  */
 public class StringWebResponseTest extends SimpleWebTestCase {
 
@@ -32,6 +40,12 @@ public class StringWebResponseTest extends SimpleWebTestCase {
     @Test
     public void charset() {
         final StringWebResponse webResponse = new StringWebResponse("hello", UTF_8, URL_FIRST);
+        assertSame(UTF_8, webResponse.getContentCharset());
+    }
+
+    @Test
+    public void charsetImplicit() {
+        final StringWebResponse webResponse = new StringWebResponse("hello", URL_FIRST);
         assertSame(UTF_8, webResponse.getContentCharset());
     }
 
@@ -47,5 +61,44 @@ public class StringWebResponseTest extends SimpleWebTestCase {
 
         assertSame(UTF_8, webResponse.getContentCharset());
         assertEquals(content, webResponse.getContentAsString());
+    }
+
+    @Test
+    public void charsetInContentImplicit() {
+        final String content = "<html><head>\n"
+                + "<meta http-equiv='Content-Type' content='text/html; charset=windows-1250' />\n"
+                + "</head><body>\u010C\u00CDSLO</body></html>";
+        final StringWebResponse webResponse = new StringWebResponse(content, URL_FIRST);
+
+        assertSame(UTF_8, webResponse.getContentCharset());
+        assertEquals(content, webResponse.getContentAsString());
+    }
+
+    /**
+     * @throws IOException
+     */
+    @Test
+    public void inputStream() throws IOException {
+        final String content = "<html><head>\n"
+                + "<meta http-equiv='Content-Type' content='text/html; charset=windows-1250' />\n"
+                + "</head><body>\u010C\u00CDSLO</body></html>";
+        final StringWebResponse webResponse = new StringWebResponse(content, URL_FIRST);
+
+        Charset charset = webResponse.getContentCharset();
+        try (InputStream is = webResponse.getContentAsStreamWithBomIfApplicable()) {
+            if (is instanceof BOMInputStream) {
+                final String bomCharsetName = ((BOMInputStream) is).getBOMCharsetName();
+                if (bomCharsetName != null) {
+                    charset = Charset.forName(bomCharsetName);
+                }
+            }
+
+            try (InputStreamReader reader = new InputStreamReader(is, charset)) {
+                final String read = IOUtils.toString(reader);
+
+                assertSame(UTF_8, charset);
+                assertEquals(content, read);
+            }
+        }
     }
 }
