@@ -434,6 +434,7 @@ public class WebRequest implements Serializable {
 
         // a bit strange but
         // HttpWebConnection.makeHttpMethod() moves the parameters up to the query
+        // (in fact replaces the query with the parameters)
         // to reflect this we have to take the parameters into account even if this
         // looks wrong for GET requests
         if (!getRequestParameters().isEmpty()) {
