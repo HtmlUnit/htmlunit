@@ -373,8 +373,8 @@ public class WebRequest implements Serializable {
 
             if (FormEncodingType.URL_ENCODED == getEncodingType()) {
                 if (getRequestBody() == null) {
-                    final List<NameValuePair> allParameters = new ArrayList<>();
-                    allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+                    final List<NameValuePair> allParameters =
+                            new ArrayList<>(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
 
                     // for PATCH/DELETE/OPTIONS request browsers are sending the body
                     // but the servlet API does not get it
@@ -388,8 +388,8 @@ public class WebRequest implements Serializable {
                 }
 
                 // getRequestParameters and getRequestBody are mutually exclusive
-                final List<NameValuePair> allParameters = new ArrayList<>();
-                allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+                final List<NameValuePair> allParameters =
+                        new ArrayList<>(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
 
                 // for PATCH/DELETE/OPTIONS request browsers are sending the body
                 // but the servlet API does not get it
@@ -404,8 +404,8 @@ public class WebRequest implements Serializable {
 
             if (FormEncodingType.TEXT_PLAIN == getEncodingType()) {
                 if (getRequestBody() == null) {
-                    final List<NameValuePair> allParameters = new ArrayList<>();
-                    allParameters.addAll(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
+                    final List<NameValuePair> allParameters =
+                            new ArrayList<>(HttpUtils.parseUrlQuery(getUrl().getQuery(), getCharset()));
 
                     // the servlet api ignores the parameters
                     // allParameters.addAll(getRequestParameters());

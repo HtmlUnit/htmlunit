@@ -57,7 +57,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
         downloadFolder_ = downloadFolder;
         if (Files.notExists(downloadFolder)) {
             throw new IOException("The provided download folder '"
-                        + downloadFolder.toString() + "' does not exist");
+                        + downloadFolder + "' does not exist");
         }
         if (!Files.isWritable(downloadFolder)) {
             throw new IOException("Can't write to the download folder '"

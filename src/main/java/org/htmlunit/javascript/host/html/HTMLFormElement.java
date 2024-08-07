@@ -117,12 +117,11 @@ public class HTMLFormElement extends HTMLElement implements Function {
         elements.setElementsSupplier(
                 (Supplier<List<DomNode>> & Serializable)
                 () -> {
-                    final List<DomNode> response = new ArrayList<>();
                     final DomNode domNode = getDomNodeOrNull();
                     if (domNode == null) {
                         return new ArrayList<>();
                     }
-                    response.addAll(((HtmlForm) domNode).getElementsJS());
+                    final List<DomNode> response = new ArrayList<>(((HtmlForm) domNode).getElementsJS());
                     return response;
                 });
 

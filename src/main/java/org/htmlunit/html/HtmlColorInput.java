@@ -93,9 +93,6 @@ public class HtmlColorInput extends HtmlInput implements LabelableElement {
                         Integer.valueOf(value.substring(5, 7), 16));
                 valid = true;
             }
-            catch (final NumberFormatException ignored) {
-                // ignore
-            }
             catch (final IllegalArgumentException ignored) {
                 // ignore
             }
