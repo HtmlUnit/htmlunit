@@ -42,7 +42,7 @@ public class ErrorOutputChecker implements MethodRule {
             Pattern.compile(".*Logging initialized .* to org.eclipse.jetty.util.log.StdErrLog.*\r?\n"),
 
             // slf4j
-            Pattern.compile("SLF4J: .*\r?\n"),
+            Pattern.compile("SLF4J\\(I\\): .*\r?\n"),
 
             // Quercus
             Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),
