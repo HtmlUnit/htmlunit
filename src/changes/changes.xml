@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="fix" dev="rbri">
+                One no loger required thread local variable removed.
+            </action>
             <action type="update" dev="rbri">
                 Method WebRequest.setRefererlHeader(URL) is deprecated; please use Method WebRequest.setRefererHeader(URL) instead.
             </action>
@@ -39,7 +42,8 @@
                 WebRequest.getParameters() updated to deliver the same results as the servlet API
                 will report if this request reaches a servlet. This implies several changes: For url-encoded and
                 plain text encoded post requests, the query parameters are part of the result.
-                For multipart requests only the query parameters forming the result.
+                For multipart requests only the query parameters forming the result. Please check also the
+                javadoc of the method for more details.
             </action>
             <action type="add" dev="rbri" issue="#816">
                 WorkerNavigator and WorkerLocation implemented.
