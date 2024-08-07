@@ -668,13 +668,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final HtmlPage containingPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
 
         try {
+            final URL pageUrl = containingPage.getUrl();
             final URL fullUrl = containingPage.getFullyQualifiedUrl(url);
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
             request.setCharset(UTF_8);
             // https://xhr.spec.whatwg.org/#response-body
             request.setDefaultResponseContentCharset(UTF_8);
-            request.setRefererHeader(containingPage.getUrl());
+            request.setRefererHeader(pageUrl);
 
             try {
                 request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
@@ -686,16 +687,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 return;
             }
 
-            final URL pageRequestUrl = containingPage.getUrl();
-            isSameOrigin_ = isSameOrigin(pageRequestUrl, fullUrl);
+            isSameOrigin_ = isSameOrigin(pageUrl, fullUrl);
             final boolean alwaysAddOrigin = HttpMethod.GET != request.getHttpMethod()
                                             && HttpMethod.PATCH != request.getHttpMethod()
                                             && HttpMethod.HEAD != request.getHttpMethod();
             if (alwaysAddOrigin || !isSameOrigin_) {
-                final StringBuilder origin = new StringBuilder().append(pageRequestUrl.getProtocol()).append("://")
-                        .append(pageRequestUrl.getHost());
-                if (pageRequestUrl.getPort() != -1) {
-                    origin.append(':').append(pageRequestUrl.getPort());
+                final StringBuilder origin = new StringBuilder().append(pageUrl.getProtocol()).append("://")
+                        .append(pageUrl.getHost());
+                if (pageUrl.getPort() != -1) {
+                    origin.append(':').append(pageUrl.getPort());
                 }
                 request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
             }
