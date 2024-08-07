@@ -772,8 +772,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns a string representation as XML document from this element and all it's children (recursively).
-     * The charset used is the current page encoding.<br>
+     * Returns a string representation as XML document from this element and all it's children (recursively).<br>
+     * The charset used in the xml header is the current page encoding; but the result is still a string.
+     * You have to make sure to use the correct (in fact the same) encoding if you write this to a file.<br>
      * This serializes the current state of the DomTree - this implies that the content of noscript tags
      * usually serialized as string because the content is converted during parsing (if js was enabled at that time).
      * @return the XML string
