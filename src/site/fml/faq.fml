@@ -359,8 +359,14 @@ INFO: Redirect requested but followRedirects is disabled</source>
                     As a result the instrumented bytecode exceeds the JVM limits and is no longer loadable.
                 </p>
                 <p>
-                    For your tests try to exclude the CssParser (and maybe HtmlUnit itself also) from Jacoco instrumentation.
+                    For your tests try to exclude the CssParser (and maybe HtmlUnit itself also) from JaCoCo instrumentation.
                     Usually you like to check the code coverage of your classes and not for HtmlUnit oder the CssParser.
+                </p>
+                <p>
+                    The method to exclude from instrumentation depends on your build tool, there are different ways to do this
+                    for maven and gradle. Please check the documentation at <a href="https://github.com/jacoco/jacoco">JaCoCo at GitHub</a>
+                    for more details. There are also several answers available on StackOverflow hot to do this. And please make
+                    sure you really exclude from instrumentation and not only from reporting.
                 </p>
             </answer>
         </faq>
