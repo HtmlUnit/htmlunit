@@ -43,7 +43,7 @@ class LabelsNodeList extends NodeList {
     }
 
     /**
-     * This is overridden instead of {@link #computeElements()} in order to prevent caching at all.
+     * This is overridden in order to prevent caching at all.
      * <p>
      * {@inheritDoc}
      */

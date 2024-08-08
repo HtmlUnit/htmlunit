@@ -320,7 +320,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         /**
          * Formats a date according to the locale and formatting options of this {@code DateTimeFormat} object.
          * @param date the JavaScript object to convert
-         * @param cx the current context
+         * @param zoneId the current time zone id
          * @return the dated formated
          */
         String format(final Date date, final ZoneId zoneId) {

@@ -40,7 +40,7 @@ abstract class BrowserConfiguration {
 
     abstract boolean matches(BrowserVersion browserVersion);
 
-    public boolean isIteratable() {
+    public boolean isIterable() {
         return true;
     }
 
@@ -128,7 +128,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean isIteratable() {
+        public boolean isIterable() {
             return false;
         }
     }
@@ -201,7 +201,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean isIteratable() {
+        public boolean isIterable() {
             return false;
         }
     }

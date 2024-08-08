@@ -132,14 +132,6 @@ public class HtmlSubmitInput extends HtmlInput implements LabelableElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean propagateClickStateUpdateToParent() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isRequiredSupported() {
         return false;
     }

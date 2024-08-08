@@ -38,20 +38,4 @@ public class HtmlSearchInput extends HtmlTextInput {
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isPatternSupported() {
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isMinMaxLengthSupported() {
-        return true;
-    }
 }

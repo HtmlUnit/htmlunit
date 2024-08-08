@@ -230,9 +230,7 @@ public final class WebAssert {
         }
         catch (final ElementNotFoundException e) {
             final String msg = "The page does not contain a link with ID '" + id + "'.";
-            final AssertionError aerr = new AssertionError(msg);
-            aerr.initCause(e);
-            throw aerr;
+            throw new AssertionError(msg, e);
         }
     }
 

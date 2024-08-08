@@ -73,8 +73,7 @@ public class XPathAdapter {
         final String expression = preProcessXPath(exprString, caseSensitive);
         parser.initXPath(compiler, expression, prefixResolver);
 
-        final Expression expr = compiler.compile(0);
-        mainExp_ = expr;
+        mainExp_ = compiler.compile(0);
     }
 
     /**

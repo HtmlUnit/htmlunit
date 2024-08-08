@@ -1055,11 +1055,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     @Override
-    public boolean hasBadInputValidityState() {
-        return false;
-    }
-
-    @Override
     public boolean isCustomErrorValidityState() {
         return !StringUtils.isEmpty(customValidity_);
     }
@@ -1067,16 +1062,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     public boolean hasPatternMismatchValidityState() {
         return !isPatternValid();
-    }
-
-    @Override
-    public boolean isStepMismatchValidityState() {
-        return false;
-    }
-
-    @Override
-    public boolean isTooLongValidityState() {
-        return false;
     }
 
     @Override
@@ -1089,21 +1074,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         }
 
         return getValue().length() < getMinLength();
-    }
-
-    @Override
-    public boolean hasTypeMismatchValidityState() {
-        return false;
-    }
-
-    @Override
-    public boolean hasRangeOverflowValidityState() {
-        return false;
-    }
-
-    @Override
-    public boolean hasRangeUnderflowValidityState() {
-        return false;
     }
 
     @Override

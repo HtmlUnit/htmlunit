@@ -763,7 +763,7 @@ public final class EncodingSniffer {
 
     /**
      * Parses and returns the charset declaration at the start of a css file if any, otherwise returns {@code null}.
-     * @param is the input stream to parse
+     * @param bytes the input bytes to sniff the encoding from
      * @return the charset declaration at the start of a css file if any, otherwise returns {@code null}.
      *
      * <p>e.g. <pre>@charset "UTF-8"</pre>

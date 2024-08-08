@@ -4222,14 +4222,14 @@ public final class StyleAttributes implements Serializable {
             browserConfigurations_ = browserConfigurations;
         }
 
-        boolean isAvailable(final BrowserVersion browserVersion, final boolean onlyIfIteratable) {
+        boolean isAvailable(final BrowserVersion browserVersion, final boolean onlyIfIterable) {
             if (browserConfigurations_ == null) {
                 return true; // defined for all browsers
             }
 
             final BrowserConfiguration config
                 = BrowserConfiguration.getMatchingConfiguration(browserVersion, browserConfigurations_);
-            return config != null && (!onlyIfIteratable || config.isIteratable());
+            return config != null && (!onlyIfIterable || config.isIterable());
         }
 
         /**

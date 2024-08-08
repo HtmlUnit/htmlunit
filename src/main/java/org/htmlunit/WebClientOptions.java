@@ -171,7 +171,7 @@ public class WebClientOptions implements Serializable {
      */
     public void setSSLClientCertificateKeyStore(final KeyStore keyStore, final char[] keyStorePassword) {
         sslClientCertificateStore_ = keyStore;
-        sslClientCertificatePassword_ = keyStorePassword == null ? null : keyStorePassword;
+        sslClientCertificatePassword_ = keyStorePassword;
     }
 
     /**

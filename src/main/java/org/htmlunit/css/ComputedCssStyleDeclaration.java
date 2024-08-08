@@ -134,8 +134,6 @@ import org.htmlunit.html.HtmlUnderlined;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
-import org.htmlunit.javascript.host.Element;
-import org.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.platform.Platform;
 
@@ -1723,7 +1721,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 || element instanceof HtmlVariable
 
                 || element instanceof HtmlDivision
-                || element instanceof HtmlUnknownElement
                 || element instanceof HtmlData
                 || element instanceof HtmlTime
                 || element instanceof HtmlOutput
@@ -2299,11 +2296,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     /**
      * Returns the specified length value as a pixel length value.
-     * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)}
-     * if you need percentage support).
+     * This method does <b>NOT</b> handle percentages correctly;
+     * use {@link CssPixelValueConverter#pixelValue(DomElement, CssValue)} if you need percentage support).
      * @param value the length value to convert to a pixel length value
      * @return the specified length value as a pixel length value
-     * @see #pixelString(Element, CSSStyleDeclaration.CssValue)
+     * @see CssPixelValueConverter#pixelString(DomElement, CssValue)
      */
     private static String pixelString(final String value) {
         if (EMPTY_FINAL == value || value.endsWith("px")) {

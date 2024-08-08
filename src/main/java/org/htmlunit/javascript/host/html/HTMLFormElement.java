@@ -121,8 +121,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                     if (domNode == null) {
                         return new ArrayList<>();
                     }
-                    final List<DomNode> response = new ArrayList<>(((HtmlForm) domNode).getElementsJS());
-                    return response;
+                    return new ArrayList<>(((HtmlForm) domNode).getElementsJS());
                 });
 
         elements.setEffectOnCacheFunction(

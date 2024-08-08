@@ -80,32 +80,32 @@ public class Attachment {
     /**
      * Returns the attachment's filename, as suggested by the <code>Content-Disposition</code>
      * header, or {@code null} if no filename was suggested.
-     * @param contentDispositonHeader the <code>Content-Disposition</code> header
+     * @param contentDispositionHeader the <code>Content-Disposition</code> header
      *
      * @return the attachment's suggested filename, or {@code null} if none was suggested
      */
-    public static String getSuggestedFilename(final String contentDispositonHeader) {
-        if (contentDispositonHeader == null) {
+    public static String getSuggestedFilename(final String contentDispositionHeader) {
+        if (contentDispositionHeader == null) {
             return null;
         }
 
-        int start = contentDispositonHeader.indexOf("filename=");
+        int start = contentDispositionHeader.indexOf("filename=");
         if (start == -1) {
             return null;
         }
         start += "filename=".length();
-        if (start >= contentDispositonHeader.length()) {
+        if (start >= contentDispositionHeader.length()) {
             return null;
         }
 
-        int end = contentDispositonHeader.indexOf(';', start);
+        int end = contentDispositionHeader.indexOf(';', start);
         if (end == -1) {
-            end = contentDispositonHeader.length();
+            end = contentDispositionHeader.length();
         }
-        if (contentDispositonHeader.charAt(start) == '"' && contentDispositonHeader.charAt(end - 1) == '"') {
+        if (contentDispositionHeader.charAt(start) == '"' && contentDispositionHeader.charAt(end - 1) == '"') {
             start++;
             end--;
         }
-        return contentDispositonHeader.substring(start, end);
+        return contentDispositionHeader.substring(start, end);
     }
 }
