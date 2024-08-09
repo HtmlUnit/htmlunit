@@ -8,6 +8,11 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="fix" dev="rbri" issue="#844">
+                FF implements a special handling for the return value of the compareFn function
+                used to custom sort arrays. If the result is a boolean the value false will not
+                be converted to 0 - it will be converted to -1.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.16.0.
             </action>
