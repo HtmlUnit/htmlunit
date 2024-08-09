@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 
 import java.io.Serializable;
@@ -346,8 +347,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return true;
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
                 return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
-            case Context.FEATURE_HTMLUNIT_MEMBERBOX_NEWLINE:
-                return false;
+            case Context.FEATURE_HTMLUNIT_ARRAY_SORT_COMPERATOR_ACCEPTS_BOOL:
+                return browserVersion_.hasFeature(JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

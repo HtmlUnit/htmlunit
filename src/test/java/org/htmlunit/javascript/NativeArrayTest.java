@@ -62,6 +62,56 @@ public class NativeArrayTest extends WebDriverTestCase {
     }
 
     /**
+     * Test for sort algorithm used (when sort is called with callback).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1,5,2,1,9",
+            FF = "1,1,2,5,9",
+            FF_ESR = "1,1,2,5,9")
+    public void sortBoolComperator() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function compare(x, y) {\n"
+            + "  return x >= y;\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "  var t = ['1', '5', '2', '1', '9'];\n"
+            + "  t.sort(compare);\n"
+            + "  log(t);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test for sort algorithm used (when sort is called with callback).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1,1,2,5,9")
+    public void sortBool2IntComperator() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function compare(x, y) {\n"
+            + "  return (x >= y) === true ? 1 : -1;\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "  var t = ['1', '5', '2', '1', '9'];\n"
+            + "  t.sort(compare);\n"
+            + "  log(t);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test for the methods with the same expectations for all browsers.
      * @throws Exception if the test fails
      */
