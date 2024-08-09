@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Error with yield in ComputedPropertyName fixed.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Support ctor for regex that takes an existing regex and a different set of flags.
+            </action>
             <action type="fix" dev="rbri" issue="#844">
                 FF implements a special handling for the return value of the compareFn function
                 used to custom sort arrays. If the result is a boolean the value false will not
