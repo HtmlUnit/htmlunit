@@ -95,8 +95,8 @@ You can start here:
 * [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
 * [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
 * [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
-* [How to test Jakarta Faces with HTMLUnit and Arquillian][11]
-
+* [How to test Jakarta Faces with HtmlUnit and Arquillian][11]
+* [WebScraping.AI HtmlUnit FAQ][13]: 
 ## Contributing
 Pull Requests and all other Community Contributions are essential for open source software.
 Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
@@ -208,3 +208,4 @@ Please try to keep your pull requests small (don't bundle unrelated changes) and
 [11]: http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian
 [12]: https://github.com/HtmlUnit/htmlunit/releases
 [13]: https://fosstodon.org/@HtmlUnit
+[14]: https://webscraping.ai/faq/htmlunit
