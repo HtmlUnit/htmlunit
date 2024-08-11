@@ -123,20 +123,6 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
     SCRIPT compile(HtmlPage owningPage, Scriptable scope, String sourceCode, String sourceName, int startLine);
 
     /**
-     * Compiles the specified JavaScript code in the context of a given HTML page.
-     *
-     * @param page the page that the code will execute within
-     * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name that will be displayed on error conditions
-     * @param startLine the line at which the script source starts
-     * @return the result of executing the specified code
-     *
-     * @deprecated as of version 3.12.0; use {@link #compile(HtmlPage, Scriptable, String, String, int)} instead
-     */
-    @Deprecated
-    SCRIPT compile(HtmlPage page, String sourceCode, String sourceName, int startLine);
-
-    /**
      * Executes the specified JavaScript code in the context of a given page.
      *
      * @param page the page that the code will execute within
@@ -150,18 +136,6 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
      * Executes the specified JavaScript code in the context of a given page.
      *
      * @param page the page that the code will execute within
-     * @param script the script to execute
-     * @return the result of executing the specified code
-     *
-     * @deprecated as of version 3.12.0; use {@link #execute(HtmlPage, Scriptable, Object)} instead
-     */
-    @Deprecated
-    Object execute(HtmlPage page, SCRIPT script);
-
-    /**
-     * Executes the specified JavaScript code in the context of a given page.
-     *
-     * @param page the page that the code will execute within
      * @param scope the scope in which to execute
      * @param sourceCode the JavaScript code to execute
      * @param sourceName the name that will be displayed on error conditions
@@ -170,23 +144,6 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
      */
     Object execute(HtmlPage page,
                            Scriptable scope,
-                           String sourceCode,
-                           String sourceName,
-                           int startLine);
-
-    /**
-     * Executes the specified JavaScript code in the context of a given page.
-     *
-     * @param page the page that the code will execute within
-     * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name that will be displayed on error conditions
-     * @param startLine the line at which the script source starts
-     * @return the result of executing the specified code
-     *
-     * @deprecated as of version 3.12.0; use {@link #execute(HtmlPage, Scriptable, String, String, int)} instead
-     */
-    @Deprecated
-    Object execute(HtmlPage page,
                            String sourceCode,
                            String sourceName,
                            int startLine);

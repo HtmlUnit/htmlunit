@@ -72,7 +72,6 @@ import org.htmlunit.cssparser.parser.condition.AttributeCondition;
 import org.htmlunit.cssparser.parser.condition.Condition;
 import org.htmlunit.cssparser.parser.condition.Condition.ConditionType;
 import org.htmlunit.cssparser.parser.condition.NotPseudoClassCondition;
-import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.htmlunit.cssparser.parser.media.MediaQuery;
 import org.htmlunit.cssparser.parser.selector.ChildSelector;
 import org.htmlunit.cssparser.parser.selector.DescendantSelector;
@@ -1005,42 +1004,6 @@ public class CssStyleSheet implements Serializable {
         try (PooledCSS3Parser pooledParser = webClient.getCSS3Parser()) {
             final CSSOMParser parser = new CSSOMParser(pooledParser);
             parser.setErrorHandler(webClient.getCssErrorHandler());
-
-            media = new MediaListImpl(parser.parseMedia(mediaString));
-            MEDIA.put(mediaString, media);
-            return media;
-        }
-        catch (final Exception e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
-            }
-        }
-
-        media = new MediaListImpl(null);
-        MEDIA.put(mediaString, media);
-        return media;
-    }
-
-    /**
-     * Parses the given media string. If anything at all goes wrong, this
-     * method returns an empty MediaList list.
-     *
-     * @param mediaString the source from which to retrieve the media to be parsed
-     * @param errorHandler the {@link CSSErrorHandler} to be used
-     * @return the media parsed from the specified input source
-     *
-     * @deprecated as of version 3.8.0; use {@link #parseMedia(String, WebClient)} instead
-     */
-    @Deprecated
-    public static MediaListImpl parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
-        MediaListImpl media = MEDIA.get(mediaString);
-        if (media != null) {
-            return media;
-        }
-
-        try {
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-            parser.setErrorHandler(errorHandler);
 
             media = new MediaListImpl(parser.parseMedia(mediaString));
             MEDIA.put(mediaString, media);

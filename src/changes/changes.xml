@@ -8,6 +8,29 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="remove" dev="rbri">
+                Deprecated method CssStyleSheet.parseMedia(CSSErrorHandler, String) removed.
+                Deprecated method CSSStyleSheet.validateSelectors(SelectorList, int, DomNode) removed.
+                Deprecated method HtmlFileInput.setValueAttribute(String) removed.
+                Deprecated ctor HtmlUnitUsernamePasswordCredentials.HtmlUnitUsernamePasswordCredentials(String, String) removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated methods compile(HtmlPage, String, String, int), execute(HtmlPage, SCRIPT), and
+                execute(HtmlPage, String, String, int) removed from AbstractJavaScriptEngine.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated methods setSSLClientCertificate(URL, String, String), and
+                setSSLClientCertificate(InputStream, String, String) removed from WebClientOptions.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated methods addCredentials(String, String), .addCredentials(String, String, String, int, String),
+                addNTLMCredentials(String, String, String, int, String, String), and
+                addSocksCredentials(String, String, String, int) removed from DefaultCredentialsProvider.
+            </action>
+            <action type="update" dev="rbri">
+                Method CSSStyleSheet.validateSelectors(SelectorList, int, DomNode) is deprecated; please use method
+                CSSStyleSheet.validateSelectors(SelectorList, DomNode) instead.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Error with yield in ComputedPropertyName fixed.
             </action>

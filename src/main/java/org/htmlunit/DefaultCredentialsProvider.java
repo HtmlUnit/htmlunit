@@ -93,47 +93,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * authentication may receive the specified username and password.
      * @param username the username for the new credentials
      * @param password the password for the new credentials
-     *
-     * @deprecated as of version 3.4.0; use addCredentials(String, char[]) instead
-     */
-    @Deprecated
-    public void addCredentials(final String username, final String password) {
-        addCredentials(username, password, ANY_HOST, ANY_PORT, ANY_REALM);
-    }
-
-    /**
-     * Adds credentials for the specified username/password for any host/port/realm combination.
-     * The credentials may be for any authentication scheme, including NTLM, digest and basic
-     * HTTP authentication. If you are using sensitive username/password information, please do
-     * NOT use this method. If you add credentials using this method, any server that requires
-     * authentication may receive the specified username and password.
-     * @param username the username for the new credentials
-     * @param password the password for the new credentials
      */
     public void addCredentials(final String username, final char[] password) {
         addCredentials(username, password, ANY_HOST, ANY_PORT, ANY_REALM);
-    }
-
-    /**
-     * Adds credentials for the specified username/password on the specified host/port for the
-     * specified realm. The credentials may be for any authentication scheme, including NTLM,
-     * digest and basic HTTP authentication.
-     * @param username the username for the new credentials
-     * @param password the password for the new credentials
-     * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
-     * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param realm the realm to which to the new credentials apply ({@code null} if applicable to any realm)
-     *
-     * @deprecated as of version 3.4.0;
-     * use DefaultCredentialsProvider.addCredentials(String, char[], String, int, String) instead
-     */
-    @Deprecated
-    public void addCredentials(final String username, final String password, final String host,
-            final int port, final String realm) {
-        final AuthScope authscope = new AuthScope(host, port, realm, ANY_SCHEME);
-        final HtmlUnitUsernamePasswordCredentials credentials =
-                    new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
-        setCredentials(authscope, credentials);
     }
 
     /**
@@ -164,55 +126,12 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param workstation The workstation the authentication request is originating from.
      *        Essentially, the computer name for this machine.
      * @param domain the domain to authenticate within
-     *
-     * @deprecated as of version 3.4.0;
-     * use DefaultCredentialsProvider.addNTLMCredentials(String, char[], String, int, String, String) instead
-     */
-    @Deprecated
-    public void addNTLMCredentials(final String username, final String password, final String host,
-            final int port, final String workstation, final String domain) {
-        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final NTCredentials credentials = new NTCredentials(username, password, workstation, domain);
-        setCredentials(authscope, credentials);
-    }
-
-    /**
-     * Adds NTLM credentials for the specified username/password on the specified host/port.
-     * @param username the username for the new credentials; should not include the domain to authenticate with;
-     *        for example: <code>"user"</code> is correct whereas <code>"DOMAIN\\user"</code> is not
-     * @param password the password for the new credentials
-     * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
-     * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param workstation The workstation the authentication request is originating from.
-     *        Essentially, the computer name for this machine.
-     * @param domain the domain to authenticate within
      */
     public void addNTLMCredentials(final String username, final char[] password, final String host,
             final int port, final String workstation, final String domain) {
         final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
         final NTCredentials credentials = new NTCredentials(username, String.valueOf(password), workstation, domain);
         setCredentials(authscope, credentials);
-    }
-
-    /**
-     * Adds Socks credentials for the specified username/password on the specified host/port.
-     * @param username the username for the new credentials
-     * @param password the password for the new credentials
-     * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
-     * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     *
-     * @deprecated as of version 3.4.0;
-     * use DefaultCredentialsProvider.addSocksCredentials(String, char[], String, int) instead
-     */
-    @Deprecated
-    public void addSocksCredentials(final String username, final String password, final String host,
-            final int port) {
-        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final HtmlUnitUsernamePasswordCredentials credentials =
-                    new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
-        setCredentials(authscope, credentials);
-
-        initSocksAuthenticatorIfNeeded(this);
     }
 
     /**

@@ -26,17 +26,13 @@ import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
 import org.htmlunit.cssparser.dom.CSSRuleListImpl;
-import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.InputSource;
-import org.htmlunit.cssparser.parser.selector.SelectorList;
-import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.w3c.dom.DOMException;
 
@@ -311,23 +307,6 @@ public class CSSStyleSheet extends StyleSheet {
     @Override
     public String getUri() {
         return getCssStyleSheet().getUri();
-    }
-
-    /**
-     * Validates the list of selectors.
-     * @param selectorList the selectors
-     * @param documentMode see {@link Document#getDocumentMode()}
-     * @param domNode the dom node the query should work on
-     * @throws CSSException if a selector is invalid
-     *
-     * @deprecated as of version 3.7.0; use
-     *   {@link CssStyleSheet#validateSelectors(org.htmlunit.cssparser.parser.selector.SelectorList, DomNode)}
-     *   instead
-     */
-    @Deprecated
-    public static void validateSelectors(final SelectorList selectorList, final int documentMode,
-                final DomNode domNode) throws CSSException {
-        CssStyleSheet.validateSelectors(selectorList, domNode);
     }
 
     private void initCssRules() {
