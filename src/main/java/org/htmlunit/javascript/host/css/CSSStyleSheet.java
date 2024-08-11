@@ -321,13 +321,13 @@ public class CSSStyleSheet extends StyleSheet {
      * @throws CSSException if a selector is invalid
      *
      * @deprecated as of version 3.7.0; use
-     *   {@link CssStyleSheet#validateSelectors(org.htmlunit.cssparser.parser.selector.SelectorList, int, DomNode)}
+     *   {@link CssStyleSheet#validateSelectors(org.htmlunit.cssparser.parser.selector.SelectorList, DomNode)}
      *   instead
      */
     @Deprecated
     public static void validateSelectors(final SelectorList selectorList, final int documentMode,
                 final DomNode domNode) throws CSSException {
-        CssStyleSheet.validateSelectors(selectorList, documentMode, domNode);
+        CssStyleSheet.validateSelectors(selectorList, domNode);
     }
 
     private void initCssRules() {

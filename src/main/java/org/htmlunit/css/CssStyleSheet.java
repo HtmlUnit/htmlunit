@@ -1087,11 +1087,28 @@ public class CssStyleSheet implements Serializable {
      * @param documentMode see {@link Document#getDocumentMode()}
      * @param domNode the dom node the query should work on
      * @throws CSSException if a selector is invalid
+     *
+     * @deprecated as of version 4.5.0; use {@link #validateSelectors(SelectorList, DomNode)} instead
      */
+    @Deprecated
     public static void validateSelectors(final SelectorList selectorList, final int documentMode,
                 final DomNode domNode) throws CSSException {
         for (final Selector selector : selectorList) {
-            if (!isValidSelector(selector, documentMode, domNode)) {
+            if (!isValidSelector(selector, domNode)) {
+                throw new CSSException("Invalid selector: " + selector, null);
+            }
+        }
+    }
+
+    /**
+     * Validates the list of selectors.
+     * @param selectorList the selectors
+     * @param domNode the dom node the query should work on
+     * @throws CSSException if a selector is invalid
+     */
+    public static void validateSelectors(final SelectorList selectorList, final DomNode domNode) throws CSSException {
+        for (final Selector selector : selectorList) {
+            if (!isValidSelector(selector, domNode)) {
                 throw new CSSException("Invalid selector: " + selector, null);
             }
         }
@@ -1100,13 +1117,13 @@ public class CssStyleSheet implements Serializable {
     /**
      * @param documentMode see {@link Document#getDocumentMode()}
      */
-    private static boolean isValidSelector(final Selector selector, final int documentMode, final DomNode domNode) {
+    private static boolean isValidSelector(final Selector selector, final DomNode domNode) {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
                 final List<Condition> conditions = ((ElementSelector) selector).getConditions();
                 if (conditions != null) {
                     for (final Condition condition : conditions) {
-                        if (!isValidCondition(condition, documentMode, domNode)) {
+                        if (!isValidCondition(condition, domNode)) {
                             return false;
                         }
                     }
@@ -1114,20 +1131,20 @@ public class CssStyleSheet implements Serializable {
                 return true;
             case DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
-                return isValidSelector(ds.getAncestorSelector(), documentMode, domNode)
-                        && isValidSelector(ds.getSimpleSelector(), documentMode, domNode);
+                return isValidSelector(ds.getAncestorSelector(), domNode)
+                        && isValidSelector(ds.getSimpleSelector(), domNode);
             case CHILD_SELECTOR:
                 final ChildSelector cs = (ChildSelector) selector;
-                return isValidSelector(cs.getAncestorSelector(), documentMode, domNode)
-                        && isValidSelector(cs.getSimpleSelector(), documentMode, domNode);
+                return isValidSelector(cs.getAncestorSelector(), domNode)
+                        && isValidSelector(cs.getSimpleSelector(), domNode);
             case DIRECT_ADJACENT_SELECTOR:
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
-                return isValidSelector(das.getSelector(), documentMode, domNode)
-                        && isValidSelector(das.getSimpleSelector(), documentMode, domNode);
+                return isValidSelector(das.getSelector(), domNode)
+                        && isValidSelector(das.getSimpleSelector(), domNode);
             case GENERAL_ADJACENT_SELECTOR:
                 final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
-                return isValidSelector(gas.getSelector(), documentMode, domNode)
-                        && isValidSelector(gas.getSimpleSelector(), documentMode, domNode);
+                return isValidSelector(gas.getSelector(), domNode)
+                        && isValidSelector(gas.getSimpleSelector(), domNode);
             default:
                 if (LOG.isWarnEnabled()) {
                     LOG.warn("Unhandled CSS selector type '"
@@ -1140,7 +1157,7 @@ public class CssStyleSheet implements Serializable {
     /**
      * @param documentMode see {@link Document#getDocumentMode()}
      */
-    private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
+    private static boolean isValidCondition(final Condition condition, final DomNode domNode) {
         switch (condition.getConditionType()) {
             case ATTRIBUTE_CONDITION:
             case ID_CONDITION:
@@ -1156,7 +1173,7 @@ public class CssStyleSheet implements Serializable {
                 final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
                 final SelectorList selectorList = notPseudoCondition.getSelectors();
                 for (final Selector selector : selectorList) {
-                    if (!isValidSelector(selector, documentMode, domNode)) {
+                    if (!isValidSelector(selector, domNode)) {
                         return false;
                     }
                 }
@@ -1168,9 +1185,6 @@ public class CssStyleSheet implements Serializable {
                         return false;
                     }
                     value = value.substring(0, value.indexOf('(') + 1) + ')';
-                }
-                if (documentMode < 9) {
-                    return CSS2_PSEUDO_CLASSES.contains(value);
                 }
 
                 if ("nth-child()".equals(value)) {

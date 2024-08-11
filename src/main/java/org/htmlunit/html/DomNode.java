@@ -1789,7 +1789,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
 
             if (selectorList != null) {
-                CssStyleSheet.validateSelectors(selectorList, 9, this);
+                CssStyleSheet.validateSelectors(selectorList, this);
 
             }
             return selectorList;
