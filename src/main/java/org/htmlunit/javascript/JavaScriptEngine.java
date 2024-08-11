@@ -738,16 +738,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    @Deprecated
-    public Script compile(final HtmlPage owningPage, final String sourceCode,
-            final String sourceName, final int startLine) {
-        return compile(owningPage, owningPage.getEnclosingWindow().getScriptableObject(), sourceCode, sourceName, startLine);
-    }
-
-    /**
      * Forwards this to the {@link HtmlUnitContextFactory} but with checking shutdown handling.
      *
      * @param <T> return type of the action
@@ -785,18 +775,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * {@inheritDoc}
      */
     @Override
-    @Deprecated
-    public Object execute(final HtmlPage page,
-                           final String sourceCode,
-                           final String sourceName,
-                           final int startLine) {
-        return execute(page, page.getEnclosingWindow().getScriptableObject(), sourceCode, sourceName, startLine);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
@@ -816,15 +794,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         };
 
         return getContextFactory().callSecured(action, page);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @Deprecated
-    public Object execute(final HtmlPage page, final Script script) {
-        return execute(page, page.getEnclosingWindow().getScriptableObject(), script);
     }
 
     /**
