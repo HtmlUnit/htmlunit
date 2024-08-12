@@ -18,10 +18,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.WebClient;
+import org.htmlunit.corejs.javascript.ContextAction;
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -260,6 +264,32 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         return null;
+    }
+
+    /**
+     * Calls the {@code callback} given in parameter once for each value in the list.
+     * @param callback function to execute for each element
+     */
+    @JsxFunction
+    public void forEach(final Object callback) {
+        final String value = getAttribValue();
+        if (StringUtils.isEmpty(value)) {
+            return;
+        }
+
+        final WebClient client = getWindow().getWebWindow().getWebClient();
+        final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
+
+        final ContextAction<Object> contextAction = cx -> {
+            final Function function = (Function) callback;
+            final Scriptable scope = getParentScope();
+            final String[] values = StringUtils.split(value, WHITESPACE_CHARS);
+            for (int i = 0; i < values.length; i++) {
+                function.call(cx, scope, this, new Object[] {values[i], i, this});
+            }
+            return null;
+        };
+        cf.call(contextAction);
     }
 
     /**

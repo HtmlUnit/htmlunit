@@ -182,6 +182,28 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"a", "b", "c", "d", "\u000B", "e", "f", "g"})
+    public void forEach() throws Exception {
+        final String html
+                = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.getElementById('d1').classList;\n"
+                + "  list.forEach((i) => {\n"
+                + "    log(i);\n"
+                + "  });\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"a b", "2", "null", "undefined"})
     public void itemNegative() throws Exception {
         item("a b", -1);
