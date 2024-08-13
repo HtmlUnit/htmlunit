@@ -205,6 +205,28 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"a#0#true", "b#1#true"})
+    public void forEachAllParams() throws Exception {
+        final String html
+                = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.getElementById('d1').classList;\n"
+                + "  list.forEach((val, idx, listObj) => {\n"
+                + "    log(val + '#' + idx + '#' + (listObj === list));\n"
+                + "  });\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class=' a b  '></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"exception", "exception"})
     public void forEachWrongParam() throws Exception {
         final String html
