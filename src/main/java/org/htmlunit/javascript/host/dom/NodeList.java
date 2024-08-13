@@ -147,6 +147,11 @@ public class NodeList extends AbstractList implements Callable {
      */
     @JsxFunction
     public void forEach(final Object callback) {
+        if (!(callback instanceof Function)) {
+            throw JavaScriptEngine.typeError(
+                    "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
+        }
+
         final List<DomNode> nodes = getElements();
 
         final WebClient client = getWindow().getWebWindow().getWebClient();

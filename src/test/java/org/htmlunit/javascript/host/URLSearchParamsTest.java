@@ -923,6 +923,33 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"exception", "exception"})
+    public void forEachWrongParam() throws Exception {
+        final String html
+                = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  if (self.URLSearchParams) {\n"
+                + "    var param = new URLSearchParams('key1=val1&key2=val2&key3=val3');\n"
+                + "    try {\n"
+                + "      param.forEach();\n"
+                + "    } catch(e) { log('exception'); }\n"
+                + "    try {\n"
+                + "      param.forEach('wrong');\n"
+                + "    } catch(e) { log('exception'); }\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

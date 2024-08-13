@@ -39,6 +39,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marek Gawlicki
+ * @author Markus Winter
  */
 @JsxClass
 public class DOMTokenList extends HtmlUnitScriptable {
@@ -272,6 +273,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void forEach(final Object callback) {
+        if (!(callback instanceof Function)) {
+            throw JavaScriptEngine.typeError(
+                    "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
+        }
+
         final String value = getAttribValue();
         if (StringUtils.isEmpty(value)) {
             return;
