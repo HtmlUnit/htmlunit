@@ -17588,10 +17588,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],remove(),replace(),"
                 + "supports(),toggle(),toString(),value[GSCE],"
                 + "values()")
-    @HtmlUnitNYI(CHROME = "add(),constructor(),contains(),forEach(),item(),length[GCE],remove(),toggle(),values()",
-            EDGE = "add(),constructor(),contains(),forEach(),item(),length[GCE],remove(),toggle(),values()",
-            FF = "add(),constructor(),contains(),forEach(),item(),length[GCE],remove(),toggle(),values()",
-            FF_ESR = "add(),constructor(),contains(),forEach(),item(),length[GCE],remove(),toggle(),values()")
+    @HtmlUnitNYI(CHROME = "add(),constructor(),contains(),forEach(),item(),keys(),length[GCE],remove(),toggle(),"
+                + "values()",
+            EDGE = "add(),constructor(),contains(),forEach(),item(),keys(),length[GCE],remove(),toggle(),values()",
+            FF = "add(),constructor(),contains(),forEach(),item(),keys(),length[GCE],remove(),toggle(),values()",
+            FF_ESR = "add(),constructor(),contains(),forEach(),item(),keys(),length[GCE],remove(),toggle(),values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
     }

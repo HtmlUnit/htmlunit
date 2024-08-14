@@ -1059,4 +1059,208 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"value", "done", "number", "0"})
+    public void keys() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (!list.keys) {\n"
+            + "      log('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    var i = list.keys().next();\n"
+            + "    for (var x in i) {\n"
+            + "      log(x);\n"
+            + "    }\n"
+            + "    var v = i.value;\n"
+            + "    log(typeof v);\n"
+            + "    log(v);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a b g'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
+    public void keysPropertyDescriptor() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+
+            + "    log('keys' in list);\n"
+            + "    log(Object.getOwnPropertyDescriptor(list, 'keys'));\n"
+
+            + "    var desc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(list), 'keys');\n"
+            + "    if (desc === undefined) { log('no keys'); return; }\n"
+            + "    log(typeof desc.value);\n"
+            + "    log(desc.get);\n"
+            + "    log(desc.set);\n"
+            + "    log(desc.writable);\n"
+            + "    log(desc.enumerable);\n"
+            + "    log(desc.configurable);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a b g'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "1", "2"})
+    public void keysForOf() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (!list.keys) {\n"
+            + "      log('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    for (var i of list.keys()) {\n"
+            + "      log(i);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a b g'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0,1,2", ""})
+    public void objectKeys() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    log(Object.keys(list));\n"
+
+            + "    var list = document.getElementById('b1').classList;\n"
+            + "    log(Object.keys(list));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()' id='b1'>\n"
+            + "  <div id='d1' class=' a b g'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"value", "done", "string", "a"})
+    public void values() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (!list.values) {\n"
+            + "      log('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    var i = list.values().next();\n"
+            + "    for (var x in i) {\n"
+            + "      log(x);\n"
+            + "    }\n"
+            + "    var v = i.value;\n"
+            + "    log(typeof v);\n"
+            + "    log(v);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a b g'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
+    public void valuesPropertyDescriptor() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+
+            + "    log('values' in list);\n"
+            + "    log(Object.getOwnPropertyDescriptor(list, 'values'));\n"
+
+            + "    var desc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(list), 'values');\n"
+            + "    if (desc === undefined) { log('no values'); return; }\n"
+            + "    log(typeof desc.value);\n"
+            + "    log(desc.get);\n"
+            + "    log(desc.set);\n"
+            + "    log(desc.writable);\n"
+            + "    log(desc.enumerable);\n"
+            + "    log(desc.configurable);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a b g'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"a", "b", "g"})
+    public void valuesForOf() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (!list.values) {\n"
+            + "      log('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    for (var i of list.values()) {\n"
+            + "      log(i);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a b g'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
 }

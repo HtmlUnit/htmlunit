@@ -273,6 +273,37 @@ public class DOMTokenList extends HtmlUnitScriptable {
      * @return a NativeArrayIterator
      */
     @JsxFunction
+    public Scriptable keys() {
+        return JavaScriptEngine.newArrayIteratorTypeKeys(getParentScope(), this);
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public Object[] getIds() {
+        final Object[] normalIds = super.getIds();
+
+        final String value = getAttribValue();
+        if (StringUtils.isEmpty(value)) {
+            return normalIds;
+        }
+
+        final String[] values = StringUtils.split(value, WHITESPACE_CHARS);
+        final Object[] ids = new Object[values.length + normalIds.length];
+        for (int i = 0; i < values.length; i++) {
+            ids[i] = i;
+        }
+        System.arraycopy(normalIds, 0, ids, values.length, normalIds.length);
+
+        return ids;
+    }
+
+    /**
+     * Returns an Iterator allowing to go through all keys contained in this object.
+     * @return a NativeArrayIterator
+     */
+    @JsxFunction
     @JsxSymbol(symbolName = "iterator")
     public Scriptable values() {
         return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
