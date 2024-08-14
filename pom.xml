@@ -35,11 +35,11 @@
         <httpcomponents.version>4.5.14</httpcomponents.version>
 
         <htmlunitdriver.version>4.24.0-SNAPSHOT</htmlunitdriver.version>
-        <selenium.version>4.23.0</selenium.version>
+        <selenium.version>4.23.1</selenium.version>
 
         <jetty.version>9.4.55.v20240627</jetty.version>
         <log4j.version>2.23.1</log4j.version>
-        <slf4j.version>2.0.15</slf4j.version>
+        <slf4j.version>2.0.16</slf4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>10.17.0</checkstyle.version>
@@ -219,7 +219,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.2.5</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
