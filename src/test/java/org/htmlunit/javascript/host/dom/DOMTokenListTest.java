@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.junit.Test;
@@ -243,6 +244,39 @@ public class DOMTokenListTest extends WebDriverTestCase {
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "  <div id='d1' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"true", "a", "b", "g"})
+    public void iterator() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var list = document.getElementById('d1').classList;\n"
+
+                + "    if (typeof Symbol != 'undefined') {\n"
+                + "      log(list[Symbol.iterator] === list.values);\n"
+                + "    }\n"
+
+                + "    if (!list.forEach) {\n"
+                + "      log('no for..of');\n"
+                + "      return;\n"
+                + "    }\n"
+
+                + "    for (var i of list) {\n"
+                + "      log(i);\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='d1' class=' a b g'></div>\n"
                 + "</body></html>";
 
         loadPageVerifyTitle2(html);

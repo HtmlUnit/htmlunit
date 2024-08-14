@@ -3153,4 +3153,18 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void abortSignal() throws Exception {
         testString("", "new AbortController().signal");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMTokenList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DOMTokenList]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DOMTokenList]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DOMTokenList]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DOMTokenList]")
+    public void domTokenList() throws Exception {
+        testString("", "document.body.classList");
+    }
 }
