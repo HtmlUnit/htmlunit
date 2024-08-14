@@ -17577,25 +17577,21 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],remove(),replace(),"
-                + "supports(),toggle(),toString(),value[GSCE],"
-                + "values()",
+                + "supports(),toggle(),toString(),value[GSCE],values()",
             EDGE = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],remove(),replace(),"
-                + "supports(),toggle(),toString(),value[GSCE],"
-                + "values()",
+                + "supports(),toggle(),toString(),value[GSCE],values()",
             FF = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],remove(),replace(),"
-                + "supports(),toggle(),toString(),value[GSCE],"
-                + "values()",
+                + "supports(),toggle(),toString(),value[GSCE],values()",
             FF_ESR = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],remove(),replace(),"
-                + "supports(),toggle(),toString(),value[GSCE],"
-                + "values()")
+                + "supports(),toggle(),toString(),value[GSCE],values()")
     @HtmlUnitNYI(CHROME = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),toggle(),values()",
+                + "remove(),replace(),toggle(),value[GSCE],values()",
             EDGE = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),toggle(),values()",
+                + "remove(),replace(),toggle(),value[GSCE],values()",
             FF = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),toggle(),values()",
+                + "remove(),replace(),toggle(),value[GSCE],values()",
             FF_ESR = "add(),constructor(),contains(),entries(),forEach(),item(),keys(),length[GCE],"
-                + "remove(),toggle(),values()")
+                + "remove(),replace(),toggle(),value[GSCE],values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
     }

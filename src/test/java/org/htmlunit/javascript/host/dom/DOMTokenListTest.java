@@ -368,10 +368,10 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
-    @HtmlUnitNYI(CHROME = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
-            EDGE = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
-            FF = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
-            FF_ESR = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values")
+    @HtmlUnitNYI(CHROME = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
+            EDGE = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
+            FF = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
+            FF_ESR = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values")
     public void forIn() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
                 + "<script>\n"
@@ -400,10 +400,10 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
-    @HtmlUnitNYI(CHROME = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
-            EDGE = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
-            FF = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
-            FF_ESR = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values")
+    @HtmlUnitNYI(CHROME = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
+            EDGE = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
+            FF = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
+            FF_ESR = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values")
     public void forInEmptyList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
                 + "<script>\n"
@@ -1565,6 +1565,63 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <div id='d1' class=' a b g'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("\\sa\\sb\\sa\\s\\s\\s\\sa\\sg\\s\\s")
+    public void getValue() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (!list.values) {\n"
+            + "      log('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    log(list.value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a b a    a g  '></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"\\sa\\sb\\sa\\s\\s\\s\\sa\\sg\\s\\s", "x\\sy", "z\\sz\\s\\s\\s\\s\\sx\\sz\\s\\s"})
+    public void setValue() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (!list.values) {\n"
+            + "      log('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    log(list.value);\n"
+
+            + "    list.value = 'x y';\n"
+            + "    log(list.value);\n"
+
+            + "    list.value = 'z z     x z  ';\n"
+            + "    log(list.value);\n"
+
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a b a    a g  '></div>\n"
             + "</body></html>\n";
 
         loadPageVerifyTitle2(html);

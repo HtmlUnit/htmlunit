@@ -8986,21 +8986,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),replace(),supports(),toggle(),"
-                + "toString(),value,"
-                + "values()",
+                + "toString(),value,values()",
             EDGE = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),replace(),supports(),toggle(),"
-                + "toString(),value,"
-                + "values()",
+                + "toString(),value,values()",
             FF = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),replace(),supports(),toggle(),"
-                + "toString(),value,"
-                + "values()",
+                + "toString(),value,values()",
             FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),replace(),supports(),toggle(),"
-                + "toString(),value,"
-                + "values()")
-    @HtmlUnitNYI(CHROME = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),toggle(),values()",
-            EDGE = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),toggle(),values()",
-            FF = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),toggle(),values()",
-            FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),toggle(),values()")
+                + "toString(),value,values()")
+    @HtmlUnitNYI(CHROME = "add(),contains(),entries(),forEach(),item(),keys(),length,"
+                + "remove(),replace(),toggle(),value,values()",
+            EDGE = "add(),contains(),entries(),forEach(),item(),keys(),length,"
+                + "remove(),replace(),toggle(),value,values()",
+            FF = "add(),contains(),entries(),forEach(),item(),keys(),length,"
+                + "remove(),replace(),toggle(),value,values()",
+            FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),"
+                + "replace(),toggle(),value,values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
     }

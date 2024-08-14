@@ -32,6 +32,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 
 /**
@@ -78,20 +79,10 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the length property.
-     * @return the length
+     * @return the value
      */
     @JsxGetter
-    public int getLength() {
-        final String value = getAttribValue();
-        if (StringUtils.isBlank(value)) {
-            return 0;
-        }
-
-        return split(value).size();
-    }
-
-    private String getAttribValue() {
+    public String getValue() {
         final DomNode node = getDomNodeOrNull();
         if (node != null) {
             final DomAttr attr = (DomAttr) node.getAttributes().getNamedItem(attributeName_);
@@ -103,6 +94,31 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     /**
+     * @param value the new value
+     */
+    @JsxSetter
+    public void setValue(final String value) {
+        final DomNode node = getDomNodeOrNull();
+        if (node != null) {
+            updateAttribute(value);
+        }
+    }
+
+    /**
+     * Returns the length property.
+     * @return the length
+     */
+    @JsxGetter
+    public int getLength() {
+        final String value = getValue();
+        if (StringUtils.isBlank(value)) {
+            return 0;
+        }
+
+        return split(value).size();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -111,7 +127,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             return (String) super.getDefaultValue(hint);
         }
 
-        final String value = getAttribValue();
+        final String value = getValue();
         if (value != null) {
             return String.join(" ", StringUtils.split(value, WHITESPACE_CHARS));
         }
@@ -131,7 +147,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
 
-        final List<String> parts = split(getAttribValue());
+        final List<String> parts = split(getValue());
         if (!parts.contains(token)) {
             parts.add(token);
         }
@@ -152,7 +168,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
 
-        final List<String> parts = split(getAttribValue());
+        final List<String> parts = split(getValue());
         parts.remove(token);
         updateAttribute(String.join(" ", parts));
     }
@@ -180,7 +196,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("newToken contains whitespace");
         }
 
-        final List<String> parts = split(getAttribValue());
+        final List<String> parts = split(getValue());
         final int pos = parts.indexOf(oldToken);
         while (pos == -1) {
             return false;
@@ -224,7 +240,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
 
-        final List<String> parts = split(getAttribValue());
+        final List<String> parts = split(getValue());
         return parts.contains(token);
     }
 
@@ -239,12 +255,12 @@ public class DOMTokenList extends HtmlUnitScriptable {
             return null;
         }
 
-        final String value = getAttribValue();
+        final String value = getValue();
         if (StringUtils.isEmpty(value)) {
             return null;
         }
 
-        final List<String> parts = split(getAttribValue());
+        final List<String> parts = split(value);
         if (index < parts.size()) {
             return parts.get(index);
         }
@@ -268,12 +284,12 @@ public class DOMTokenList extends HtmlUnitScriptable {
     public Object[] getIds() {
         final Object[] normalIds = super.getIds();
 
-        final String value = getAttribValue();
+        final String value = getValue();
         if (StringUtils.isEmpty(value)) {
             return normalIds;
         }
 
-        final List<String> parts = split(getAttribValue());
+        final List<String> parts = split(getValue());
         final Object[] ids = new Object[parts.size() + normalIds.length];
         for (int i = 0; i < parts.size(); i++) {
             ids[i] = i;
@@ -313,7 +329,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 
-        final String value = getAttribValue();
+        final String value = getValue();
         if (StringUtils.isEmpty(value)) {
             return;
         }
@@ -324,7 +340,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
         final ContextAction<Object> contextAction = cx -> {
             final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
-            final List<String> parts = split(getAttribValue());
+            final List<String> parts = split(value);
             for (int i = 0; i < parts.size(); i++) {
                 function.call(cx, scope, this, new Object[] {parts.get(i), i, this});
             }
