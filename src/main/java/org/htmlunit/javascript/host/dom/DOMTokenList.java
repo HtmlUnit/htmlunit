@@ -14,8 +14,8 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebClient;
@@ -88,10 +88,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             return 0;
         }
 
-        final String[] parts = StringUtils.split(value, WHITESPACE_CHARS);
-        final HashSet<String> elements = new HashSet<>(parts.length);
-        elements.addAll(Arrays.asList(parts));
-        return elements.size();
+        return split(value).size();
     }
 
     private String getAttribValue() {
@@ -134,24 +131,12 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
 
-        String value = getAttribValue();
-        if (StringUtils.isEmpty(value)) {
-            value = token;
+        final List<String> parts = split(getAttribValue());
+        if (!parts.contains(token)) {
+            parts.add(token);
         }
-        else {
-            value = String.join(" ", StringUtils.split(value, WHITESPACE_CHARS));
-            if (position(value, token) < 0) {
-                if (value.length() != 0 && !isWhitespace(value.charAt(value.length() - 1))) {
-                    value = value + " ";
-                }
-                value = value + token;
-            }
-            else {
-                value = String.join(" ", StringUtils.split(value, WHITESPACE_CHARS));
-            }
-        }
+        updateAttribute(String.join(" ", parts));
 
-        updateAttribute(value);
     }
 
     /**
@@ -167,39 +152,43 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
 
-        final String oldValue = getAttribValue();
-        if (oldValue == null) {
-            return;
+        final List<String> parts = split(getAttribValue());
+        parts.remove(token);
+        updateAttribute(String.join(" ", parts));
+    }
+
+    /**
+     * Replaces an existing token with a new token. If the first token doesn't exist, replace()
+     * returns false immediately, without adding the new token to the token list.
+     * @param oldToken a string representing the token you want to replace
+     * @param newToken a string representing the token you want to replace oldToken with
+     * @return true if oldToken was successfully replaced, or false if not
+     */
+    @JsxFunction
+    public boolean replace(final String oldToken, final String newToken) {
+        if (StringUtils.isEmpty(oldToken)) {
+            throw JavaScriptEngine.reportRuntimeError("Empty oldToken not allowed");
+        }
+        if (StringUtils.containsAny(oldToken, WHITESPACE_CHARS)) {
+            throw JavaScriptEngine.reportRuntimeError("oldToken contains whitespace");
         }
 
-        String value = String.join(" ", StringUtils.split(oldValue, WHITESPACE_CHARS));
-        int pos = position(value, token);
-        while (pos != -1) {
-            int from = pos;
-            int to = pos + token.length();
-
-            while (from > 0 && isWhitespace(value.charAt(from - 1))) {
-                from = from - 1;
-            }
-            while (to < value.length() - 1 && isWhitespace(value.charAt(to))) {
-                to = to + 1;
-            }
-
-            final StringBuilder result = new StringBuilder();
-            if (from > 0) {
-                result.append(value, 0, from);
-                if (to < value.length()) {
-                    result.append(' ');
-                }
-            }
-            result.append(value, to, value.length());
-            value = result.toString();
-
-            pos = position(value, token);
+        if (StringUtils.isEmpty(newToken)) {
+            throw JavaScriptEngine.reportRuntimeError("Empty newToken not allowed");
+        }
+        if (StringUtils.containsAny(newToken, WHITESPACE_CHARS)) {
+            throw JavaScriptEngine.reportRuntimeError("newToken contains whitespace");
         }
 
-        value = String.join(" ", StringUtils.split(value, WHITESPACE_CHARS));
-        updateAttribute(value);
+        final List<String> parts = split(getAttribValue());
+        final int pos = parts.indexOf(oldToken);
+        while (pos == -1) {
+            return false;
+        }
+
+        parts.set(pos, newToken);
+        updateAttribute(String.join(" ", parts));
+        return true;
     }
 
     /**
@@ -235,13 +224,8 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
 
-        String value = getAttribValue();
-        if (StringUtils.isEmpty(value)) {
-            return false;
-        }
-
-        value = String.join(" ", StringUtils.split(value, WHITESPACE_CHARS));
-        return position(value, token) > -1;
+        final List<String> parts = split(getAttribValue());
+        return parts.contains(token);
     }
 
     /**
@@ -260,9 +244,9 @@ public class DOMTokenList extends HtmlUnitScriptable {
             return null;
         }
 
-        final String[] values = StringUtils.split(value, WHITESPACE_CHARS);
-        if (index < values.length) {
-            return values[index];
+        final List<String> parts = split(getAttribValue());
+        if (index < parts.size()) {
+            return parts.get(index);
         }
 
         return null;
@@ -289,12 +273,12 @@ public class DOMTokenList extends HtmlUnitScriptable {
             return normalIds;
         }
 
-        final String[] values = StringUtils.split(value, WHITESPACE_CHARS);
-        final Object[] ids = new Object[values.length + normalIds.length];
-        for (int i = 0; i < values.length; i++) {
+        final List<String> parts = split(getAttribValue());
+        final Object[] ids = new Object[parts.size() + normalIds.length];
+        for (int i = 0; i < parts.size(); i++) {
             ids[i] = i;
         }
-        System.arraycopy(normalIds, 0, ids, values.length, normalIds.length);
+        System.arraycopy(normalIds, 0, ids, parts.size(), normalIds.length);
 
         return ids;
     }
@@ -340,9 +324,9 @@ public class DOMTokenList extends HtmlUnitScriptable {
         final ContextAction<Object> contextAction = cx -> {
             final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
-            final String[] values = StringUtils.split(value, WHITESPACE_CHARS);
-            for (int i = 0; i < values.length; i++) {
-                function.call(cx, scope, this, new Object[] {values[i], i, this});
+            final List<String> parts = split(getAttribValue());
+            for (int i = 0; i < parts.size(); i++) {
+                function.call(cx, scope, this, new Object[] {parts.get(i), i, this});
             }
             return null;
         };
@@ -371,26 +355,20 @@ public class DOMTokenList extends HtmlUnitScriptable {
         domNode.setAttributeNode(attr);
     }
 
-    private static int position(final String value, final String token) {
-        final int pos = value.indexOf(token);
-        if (pos < 0) {
-            return -1;
+    private static List<String> split(final String value) {
+        if (StringUtils.isEmpty(value)) {
+            return new ArrayList<>();
         }
 
-        // whitespace before
-        if (pos != 0 && !isWhitespace(value.charAt(pos - 1))) {
-            return -1;
-        }
+        final String[] parts = StringUtils.split(value, WHITESPACE_CHARS);
 
-        // whitespace after
-        final int end = pos + token.length();
-        if (end != value.length() && !isWhitespace(value.charAt(end))) {
-            return -1;
+        // usually a short list, no index needed
+        final List<String> result = new ArrayList<>();
+        for (final String part : parts) {
+            if (!result.contains(part)) {
+                result.add(part);
+            }
         }
-        return pos;
-    }
-
-    private static boolean isWhitespace(final int ch) {
-        return WHITESPACE_CHARS.indexOf(ch) > -1;
+        return result;
     }
 }

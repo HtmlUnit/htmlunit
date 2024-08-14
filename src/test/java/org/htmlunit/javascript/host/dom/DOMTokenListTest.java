@@ -207,6 +207,28 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"a", "b", "c"})
+    public void forEachDuplicates() throws Exception {
+        final String html
+                = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.getElementById('d1').classList;\n"
+                + "  list.forEach((i) => {\n"
+                + "    log(i);\n"
+                + "  });\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class=' a b a c'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"a#0#true", "b#1#true"})
     public void forEachAllParams() throws Exception {
         final String html
@@ -346,10 +368,10 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
-    @HtmlUnitNYI(CHROME = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,toggle,values",
-            EDGE = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,toggle,values",
-            FF = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,toggle,values",
-            FF_ESR = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,toggle,values")
+    @HtmlUnitNYI(CHROME = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
+            EDGE = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
+            FF = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
+            FF_ESR = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values")
     public void forIn() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
                 + "<script>\n"
@@ -378,10 +400,10 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
-    @HtmlUnitNYI(CHROME = "add,contains,entries,forEach,item,keys,length,remove,toggle,values",
-            EDGE = "add,contains,entries,forEach,item,keys,length,remove,toggle,values",
-            FF = "add,contains,entries,forEach,item,keys,length,remove,toggle,values",
-            FF_ESR = "add,contains,entries,forEach,item,keys,length,remove,toggle,values")
+    @HtmlUnitNYI(CHROME = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
+            EDGE = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
+            FF = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values",
+            FF_ESR = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,values")
     public void forInEmptyList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
                 + "<script>\n"
@@ -804,6 +826,15 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"b\\sa\\sb", "2", "3", "b\\sa\\sc", "class\\schanged\\sold:\\sb\\sa\\sb"})
+    public void addNormalizes() throws Exception {
+        add("b a b", "c");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"a\\sb\\sa", "2", "exception", "2", "a\\sb\\sa"})
     public void addElementWithBlank() throws Exception {
         add("a b a", "a b");
@@ -1050,6 +1081,16 @@ public class DOMTokenListTest extends WebDriverTestCase {
         remove("a \t c \n d  e", "c");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sc\\sa\\sc", "2", "1", "a",
+             "class\\schanged\\sold:\\sa\\sc\\sa\\sc"})
+    public void removeNormalizes() throws Exception {
+        remove("a c a c", "c");
+    }
+
     private void remove(final String in, final String toRemove) throws Exception {
         final String html
             = "<html><head>\n"
@@ -1073,6 +1114,115 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    log(list.length);\n"
             + "    try {\n"
             + "      list.remove('" + toRemove + "');\n"
+            + "    } catch(e) { log('exception');}\n"
+            + "    log(list.length);\n"
+            + "    log(elem.className);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d1' class='" + in + "'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a", "1", "exception", "1", "a"})
+    public void replaceEmptyOldToken() throws Exception {
+        replace("a", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    public void replaceOldTokenContainingWhiteSpace() throws Exception {
+        replace("a b", " a x", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a", "1", "exception", "1", "a"})
+    public void replaceEmptyNewToken() throws Exception {
+        replace("a", "abc", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    public void replaceNewTokenContainingWhiteSpace() throws Exception {
+        replace("a b", "abc", " a x");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb", "2", "true", "2", "a\\sax", "class\\schanged\\sold:\\sa\\sb"})
+    public void replace() throws Exception {
+        replace("a b", "b", "ax");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb\\sc\\sb\\su", "4", "true", "4", "a\\sax\\sc\\su",
+             "class\\schanged\\sold:\\sa\\sb\\sc\\sb\\su"})
+    public void replaceOnce() throws Exception {
+        replace("a b c b u", "b", "ax");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb", "2", "false", "2", "a\\sb"})
+    public void replaceNotFound() throws Exception {
+        replace("a b", "ab", "ax");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "0", "false", "0", ""})
+    public void replaceInEmpty() throws Exception {
+        replace("", "ab", "ax");
+    }
+
+    private void replace(final String in, final String oldToken, final String newToken) throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('d1');\n"
+
+            + "    var config = { attributes: true, attributeOldValue: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.attributeName + ' changed old: ' + mutation.oldValue);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(elem, config);"
+
+            + "    var list = elem.classList;\n"
+            + "    if (!list) { log('no list'); return; }\n"
+
+            + "    log(elem.className);\n"
+            + "    log(list.length);\n"
+            + "    try {\n"
+            + "      var res = list.replace('" + oldToken + "', '" + newToken + "');\n"
+            + "      log(res);\n"
             + "    } catch(e) { log('exception');}\n"
             + "    log(list.length);\n"
             + "    log(elem.className);\n"
