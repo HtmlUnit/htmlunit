@@ -310,6 +310,15 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns an Iterator allowing to go through all key/value pairs contained in this object.
+     * @return a NativeArrayIterator
+     */
+    @JsxFunction
+    public Scriptable entries() {
+        return JavaScriptEngine.newArrayIteratorTypeEntries(getParentScope(), this);
+    }
+
+    /**
      * Calls the {@code callback} given in parameter once for each value in the list.
      * @param callback function to execute for each element
      */

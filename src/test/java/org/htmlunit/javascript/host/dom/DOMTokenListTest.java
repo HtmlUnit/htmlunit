@@ -18,6 +18,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -244,6 +245,161 @@ public class DOMTokenListTest extends WebDriverTestCase {
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "  <div id='d1' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"value", "done", "object", "0", "a"})
+    public void entries() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (!list.entries) {\n"
+            + "      log('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    var i = list.entries().next();\n"
+            + "    for (var x in i) {\n"
+            + "      log(x);\n"
+            + "    }\n"
+            + "    var v = i.value;\n"
+            + "    log(typeof v);\n"
+            + "    log(v[0]);\n"
+            + "    log(v[1]);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a x'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
+    public void entriesPropertyDescriptor() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+
+            + "    log('entries' in list);\n"
+            + "    log(Object.getOwnPropertyDescriptor(list, 'entries'));\n"
+
+            + "    var desc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(list), 'entries');\n"
+            + "    if (desc === undefined) { log('no entries'); return; }\n"
+            + "    log(typeof desc.value);\n"
+            + "    log(desc.get);\n"
+            + "    log(desc.set);\n"
+            + "    log(desc.writable);\n"
+            + "    log(desc.enumerable);\n"
+            + "    log(desc.configurable);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a x'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0,a", "1,x"})
+    public void entriesForOf() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (!list.entries) {\n"
+            + "      log('not defined');\n"
+            + "      return;\n"
+            + "    }\n"
+            + "    for (var i of list.entries()) {\n"
+            + "      log(i);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='d1' class=' a x'></div>\n"
+            + "</body></html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
+    @HtmlUnitNYI(CHROME = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,toggle,values",
+            EDGE = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,toggle,values",
+            FF = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,toggle,values",
+            FF_ESR = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,toggle,values")
+    public void forIn() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var all = [];\n"
+                + "    for (var i in document.getElementById('d1').classList) {\n"
+                + "      all.push(i);\n"
+                + "    }\n"
+                + "    all.sort(sortFunction);\n"
+                + "    log(all);\n"
+                + "  }\n"
+                + "  function sortFunction(s1, s2) {\n"
+                + "    return s1.toLowerCase() > s2.toLowerCase() ? 1 : -1;\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='d1' class=' a b g'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("add,contains,entries,forEach,item,keys,length,remove,replace,supports,toggle,toString,value,values")
+    @HtmlUnitNYI(CHROME = "add,contains,entries,forEach,item,keys,length,remove,toggle,values",
+            EDGE = "add,contains,entries,forEach,item,keys,length,remove,toggle,values",
+            FF = "add,contains,entries,forEach,item,keys,length,remove,toggle,values",
+            FF_ESR = "add,contains,entries,forEach,item,keys,length,remove,toggle,values")
+    public void forInEmptyList() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var all = [];\n"
+                + "    for (var i in document.getElementById('d1').classList) {\n"
+                + "      all.push(i);\n"
+                + "    }\n"
+                + "    all.sort(sortFunction);\n"
+                + "    log(all);\n"
+                + "  }\n"
+                + "  function sortFunction(s1, s2) {\n"
+                + "    return s1.toLowerCase() > s2.toLowerCase() ? 1 : -1;\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='d1'></div>\n"
                 + "</body></html>";
 
         loadPageVerifyTitle2(html);

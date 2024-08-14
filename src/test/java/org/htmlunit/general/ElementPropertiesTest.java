@@ -8997,10 +8997,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),replace(),supports(),toggle(),"
                 + "toString(),value,"
                 + "values()")
-    @HtmlUnitNYI(CHROME = "add(),contains(),forEach(),item(),keys(),length,remove(),toggle(),values()",
-            EDGE = "add(),contains(),forEach(),item(),keys(),length,remove(),toggle(),values()",
-            FF = "add(),contains(),forEach(),item(),keys(),length,remove(),toggle(),values()",
-            FF_ESR = "add(),contains(),forEach(),item(),keys(),length,remove(),toggle(),values()")
+    @HtmlUnitNYI(CHROME = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),toggle(),values()",
+            EDGE = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),toggle(),values()",
+            FF = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),toggle(),values()",
+            FF_ESR = "add(),contains(),entries(),forEach(),item(),keys(),length,remove(),toggle(),values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
     }
