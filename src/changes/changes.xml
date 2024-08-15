@@ -15,6 +15,9 @@
             <action type="add" dev="RhinoTeam">
                 core-js: Symbol.unscopables for arrays implemented.
             </action>
+            <action type="fix" dev="rbri">
+                DOMTokenList toggle() method got some fixes.
+            </action>
             <action type="add" dev="rbri">
                 DOMTokenList value property added.
             </action>

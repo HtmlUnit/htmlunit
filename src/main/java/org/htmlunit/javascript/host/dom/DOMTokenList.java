@@ -167,7 +167,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
 
-        final List<String> parts = split(getValue());
+        final String value = getValue();
+        if (value == null) {
+            return;
+        }
+        final List<String> parts = split(value);
         parts.remove(token);
         updateAttribute(String.join(" ", parts));
     }
@@ -195,7 +199,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("newToken contains whitespace");
         }
 
-        final List<String> parts = split(getValue());
+        final String value = getValue();
+        if (value == null) {
+            return false;
+        }
+        final List<String> parts = split(value);
         final int pos = parts.indexOf(oldToken);
         while (pos == -1) {
             return false;
@@ -213,11 +221,22 @@ public class DOMTokenList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean toggle(final String token) {
-        if (contains(token)) {
-            remove(token);
+        if (StringUtils.isEmpty(token)) {
+            throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
+        }
+        if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
+            throw JavaScriptEngine.reportRuntimeError("token contains whitespace");
+        }
+
+        final List<String> parts = split(getValue());
+        if (parts.contains(token)) {
+            parts.remove(token);
+            updateAttribute(String.join(" ", parts));
             return false;
         }
-        add(token);
+
+        parts.add(token);
+        updateAttribute(String.join(" ", parts));
         return true;
     }
 
@@ -236,7 +255,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
         }
         if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
-            throw JavaScriptEngine.reportRuntimeError("Empty input not allowed");
+            throw JavaScriptEngine.reportRuntimeError("token contains whitespace");
         }
 
         final List<String> parts = split(getValue());
