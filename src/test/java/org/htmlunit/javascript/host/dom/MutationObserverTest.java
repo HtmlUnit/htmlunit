@@ -333,7 +333,6 @@ public class MutationObserverTest extends WebDriverTestCase {
         verifyTitle2(driver, expected);
     }
 
-
     /**
      * Test case for issue #1811.
      * @throws Exception if the test fails

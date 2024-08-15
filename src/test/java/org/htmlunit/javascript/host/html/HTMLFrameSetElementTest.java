@@ -72,17 +72,19 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
         final String frameContent =
             "<html><head><title>TopFrame</title>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "function doTest() {\n"
-            + "  alert(parent.document.getElementById('fs').rows);\n"
+            + "  log(parent.document.getElementById('fs').rows);\n"
             + "  parent.document.getElementById('fs').rows = '*,*';\n"
-            + "  alert(parent.document.getElementById('fs').rows);\n"
+            + "  log(parent.document.getElementById('fs').rows);\n"
             + "}</script>\n"
             + "</head>\n"
             + "<body onload='doTest()'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, frameContent);
 
-        loadPageWithAlerts2(framesetContent);
+        loadPage2(framesetContent);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
