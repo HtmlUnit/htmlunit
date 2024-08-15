@@ -444,48 +444,37 @@ public class HttpWebConnection implements WebConnection {
         }
 
         final ContentType contentType = ContentType.create(mimeType);
-        final File file = pairWithFile.getFile();
 
-        if (pairWithFile.getData() != null) {
-            final String filename;
-            if (file == null) {
+        final File file = pairWithFile.getFile();
+        if (file != null) {
+            String filename = pairWithFile.getFileName();
+            if (filename == null) {
+                filename = pairWithFile.getFile().getName();
+            }
+            builder.addBinaryBody(pairWithFile.getName(), file, contentType, filename);
+            return;
+        }
+
+        final byte[] data = pairWithFile.getData();
+        if (data != null) {
+            String filename = pairWithFile.getFileName();
+            if (filename == null) {
                 filename = pairWithFile.getValue();
             }
-            else if (pairWithFile.getFileName() == null) {
-                filename = file.getName();
-            }
-            else {
-                filename = pairWithFile.getFileName();
-            }
 
-            builder.addBinaryBody(pairWithFile.getName(), new ByteArrayInputStream(pairWithFile.getData()),
+            builder.addBinaryBody(pairWithFile.getName(), new ByteArrayInputStream(data),
                     contentType, filename);
             return;
         }
 
-        if (file == null) {
-            builder.addPart(pairWithFile.getName(),
-                    // Overridden in order not to have a chunked response.
-                    new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
-                    @Override
-                    public long getContentLength() {
-                        return 0;
-                    }
-                });
-            return;
-        }
-
-        final String filename;
-        if (pairWithFile.getFile() == null) {
-            filename = pairWithFile.getValue();
-        }
-        else if (pairWithFile.getFileName() == null) {
-            filename = pairWithFile.getFile().getName();
-        }
-        else {
-            filename = pairWithFile.getFileName();
-        }
-        builder.addBinaryBody(pairWithFile.getName(), pairWithFile.getFile(), contentType, filename);
+        builder.addPart(pairWithFile.getName(),
+                // Overridden in order not to have a chunked response.
+                new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
+                @Override
+                public long getContentLength() {
+                    return 0;
+                }
+            });
     }
 
     /**
