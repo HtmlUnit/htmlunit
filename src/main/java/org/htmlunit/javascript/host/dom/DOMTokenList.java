@@ -152,7 +152,6 @@ public class DOMTokenList extends HtmlUnitScriptable {
             parts.add(token);
         }
         updateAttribute(String.join(" ", parts));
-
     }
 
     /**
