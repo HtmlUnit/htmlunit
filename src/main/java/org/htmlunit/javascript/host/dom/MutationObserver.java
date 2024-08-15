@@ -162,7 +162,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      */
     @Override
     public void attributeAdded(final HtmlAttributeChangeEvent event) {
-        // nothing to do
+        attributeChanged(event, "MutationObserver.attributeAdded", false);
     }
 
     /**
@@ -170,7 +170,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      */
     @Override
     public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-        // nothing to do
+        attributeChanged(event, "MutationObserver.attributeRemoved", true);
     }
 
     /**
@@ -178,6 +178,11 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
      */
     @Override
     public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+        attributeChanged(event, "MutationObserver.attributeReplaced", true);
+    }
+
+    private void attributeChanged(final HtmlAttributeChangeEvent event, final String actionTitle,
+                        final boolean includeOldValue) {
         final HtmlElement target = event.getHtmlElement();
         if (subtree_ || target == node_.getDomNodeOrDie()) {
             final String attributeName = event.getName();
@@ -190,7 +195,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
                 mutationRecord.setAttributeName(attributeName);
                 mutationRecord.setType("attributes");
                 mutationRecord.setTarget(target.getScriptableObject());
-                if (attributeOldValue_) {
+                if (includeOldValue && attributeOldValue_) {
                     mutationRecord.setOldValue(event.getValue());
                 }
 
@@ -198,7 +203,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
                 final HtmlPage owningPage = (HtmlPage) window.getDocument().getPage();
                 final JavaScriptEngine jsEngine =
                         (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
-                jsEngine.addPostponedAction(new PostponedAction(owningPage, "MutationObserver.attributeReplaced") {
+                jsEngine.addPostponedAction(new PostponedAction(owningPage, actionTitle) {
                     @Override
                     public void execute() {
                         final Scriptable array = JavaScriptEngine.newArray(scope, new Object[] {mutationRecord});

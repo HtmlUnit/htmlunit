@@ -234,7 +234,7 @@ public abstract class HtmlElement extends DomElement {
      */
     protected static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
             final HtmlElement element, final String oldAttributeValue, final boolean notifyMutationObservers) {
-        final List<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
+        final List<HtmlAttributeChangeListener> listeners = new ArrayList<>(element.attributeListeners_);
         if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
             synchronized (listeners) {
                 for (final HtmlAttributeChangeListener listener : listeners) {

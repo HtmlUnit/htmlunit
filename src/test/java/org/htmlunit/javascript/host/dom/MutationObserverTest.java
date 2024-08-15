@@ -333,6 +333,63 @@ public class MutationObserverTest extends WebDriverTestCase {
         verifyTitle2(driver, expected);
     }
 
+
+    /**
+     * Test case for issue #1811.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"heho", "attributes", "value", "null", "x", "abc", "0", "0",
+             "heho", "attributes", "value", "null", "null", "abc", "0", "0"})
+    public void attributeValueAddRemove() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var config = { attributes: true, childList: true, characterData: true, subtree: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.type);\n"
+            + "        log(mutation.attributeName);\n"
+            + "        log(mutation.oldValue);\n"
+            + "        log(mutation.target.getAttribute(\"value\"));\n"
+            + "        log(mutation.target.value);\n"
+            + "        log(mutation.addedNodes.length);\n"
+            + "        log(mutation.removedNodes.length);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(document.getElementById('tester'), config);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='tester'>\n"
+            + "  <button id='doAlert' onclick='log(\"heho\");'>DoAlert</button>\n"
+            + "  <button id='doIt' "
+                        + "onclick='document.getElementById(\"tester\").setAttribute(\"value\", \"x\")'>"
+                        + "DoIt</button>\n"
+            + "  <button id='doItAgain' "
+                        + " onclick='document.getElementById(\"tester\").removeAttribute(\"value\")'>"
+                        + "DoItAgain</button>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("tester")).sendKeys("abc");
+        verifyTitle2(driver, new String[] {});
+
+        driver.findElement(By.id("doAlert")).click();
+        verifyTitle2(driver, new String[] {"heho"});
+
+        final String[] expected = getExpectedAlerts();
+        driver.findElement(By.id("doIt")).click();
+        verifyTitle2(driver, Arrays.copyOfRange(expected, 0, 8));
+
+        driver.findElement(By.id("doAlert")).click();
+        verifyTitle2(driver, Arrays.copyOfRange(expected, 0, 9));
+
+        driver.findElement(By.id("doItAgain")).click();
+        verifyTitle2(driver, expected);
+    }
+
     /**
      * @throws Exception if an error occurs
      */
