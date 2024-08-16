@@ -9,7 +9,10 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
             <action type="fix" dev="rbri">
-                Fix FormData.append() handling of Blob's.
+                Fix FormData.append()/set() handling of in memory File's.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix FormData.append()/set() handling of Blob's.
             </action>
             <action type="fix" dev="rbri">
                 MutationObserver now fires also when attributes added/removed.

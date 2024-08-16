@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.xml;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -37,8 +36,6 @@ import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.file.File;
 import org.htmlunit.javascript.host.html.HTMLFormElement;
-import org.htmlunit.util.KeyDataPair;
-import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 
 /**
@@ -168,35 +165,19 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void append(final String name, final Object value, final Object filename) {
-        if (value instanceof File) {
-            final File file = (File) value;
-            String fileName = null;
-            if (filename instanceof String) {
-                fileName = (String) filename;
-            }
-            String contentType = file.getType();
-            if (StringUtils.isEmpty(contentType)) {
-                contentType = MimeType.APPLICATION_OCTET_STREAM;
-            }
-            requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, contentType, (Charset) null));
-        }
-        else if (value instanceof Blob) {
+        if (value instanceof Blob) {
             final Blob blob = (Blob) value;
             String fileName = "blob";
+            if (value instanceof File) {
+                fileName = null;
+            }
             if (filename instanceof String) {
                 fileName = (String) filename;
             }
-            String contentType = blob.getType();
-            if (StringUtils.isEmpty(contentType)) {
-                contentType = MimeType.APPLICATION_OCTET_STREAM;
-            }
-            final KeyDataPair data = new KeyDataPair(name, null, fileName, contentType, (Charset) null);
-            data.setData(blob.getBytes());
-            requestParameters_.add(data);
+            requestParameters_.add(blob.getKeyDataPair(name, fileName));
+            return;
         }
-        else {
-            requestParameters_.add(new NameValuePair(name, JavaScriptEngine.toString(value)));
-        }
+        requestParameters_.add(new NameValuePair(name, JavaScriptEngine.toString(value)));
     }
 
     /**
@@ -301,14 +282,16 @@ public class FormData extends HtmlUnitScriptable {
             pos = requestParameters_.size();
         }
 
-        if (value instanceof File) {
-            final File file = (File) value;
-            String fileName = null;
+        if (value instanceof Blob) {
+            final Blob blob = (Blob) value;
+            String fileName = "blob";
+            if (value instanceof File) {
+                fileName = null;
+            }
             if (filename instanceof String) {
                 fileName = (String) filename;
             }
-            requestParameters_.add(pos,
-                    new KeyDataPair(name, file.getFile(), fileName, file.getType(), (Charset) null));
+            requestParameters_.add(pos, blob.getKeyDataPair(name, fileName));
         }
         else {
             requestParameters_.add(pos, new NameValuePair(name, JavaScriptEngine.toString(value)));
