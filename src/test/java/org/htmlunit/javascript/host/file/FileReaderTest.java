@@ -120,6 +120,34 @@ public class FileReaderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("data:application/octet-stream;base64,SHRtbFVuaXRpcyBncmVhdA==")
+    public void readAsDataURL_inMemoryFile() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    let file = new File(['Html', 'Unit', 'is great'], 'htMluniT.txt');\n"
+            + "    var reader = new FileReader();\n"
+            + "    reader.onload = function() {\n"
+            + "      var dataURL = reader.result;\n"
+            + "      log(dataURL);\n"
+            + "    };\n"
+            + "    reader.readAsDataURL(file);\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:application/octet-stream;base64,SHRtbFVuaXRpcyBncmVhdA==")
     public void readAsDataURL_blob() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

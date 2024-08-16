@@ -15,11 +15,9 @@
 package org.htmlunit.javascript.host.file;
 
 import java.io.IOException;
-import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
-import java.nio.file.Files;
 import java.util.Locale;
 
 import org.apache.commons.codec.binary.Base64;
@@ -115,22 +113,6 @@ public class FileReader extends EventTarget {
             contentType = MimeType.APPLICATION_OCTET_STREAM;
         }
 
-        if (object instanceof File) {
-            final java.io.File file = ((File) object).getFile();
-            if (value.isEmpty()) {
-                contentType = URLConnection.guessContentTypeFromName(file.getName());
-            }
-            else {
-                contentType = Files.probeContentType(file.toPath());
-                // this is a bit weak, on linux we get different results
-                // e.g. 'application/octet-stream' for a file with random bits
-                // instead of null on windows
-            }
-        }
-
-        if (contentType == null) {
-            contentType = MimeType.APPLICATION_OCTET_STREAM;
-        }
         result_ += contentType + ";base64," + value;
         readyState_ = DONE;
 
