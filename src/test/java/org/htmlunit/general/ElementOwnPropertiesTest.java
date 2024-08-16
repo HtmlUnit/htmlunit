@@ -17598,7 +17598,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.html.DataTransfer}.
+     * Test {@link org.htmlunit.javascript.host.draganddrop.DataTransfer}.
      *
      * @throws Exception if an error occurs
      */
@@ -17622,7 +17622,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.html.DataTransferItemList}.
+     * Test {@link org.htmlunit.javascript.host.draganddrop.DataTransferItemList}.
      *
      * @throws Exception if an error occurs
      */

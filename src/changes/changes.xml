@@ -9,6 +9,10 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
             <action type="add" dev="rbri">
+                Package org.htmlunit.javascript.host.draganddrop added. DataTransfer, DataTransferItem,
+                and DataTransferItemList moved into this package.
+            </action>
+            <action type="add" dev="rbri">
                 FileList is now iterable.
             </action>
             <action type="update" dev="RhinoTeam">

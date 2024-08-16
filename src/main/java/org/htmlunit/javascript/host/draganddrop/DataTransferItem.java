@@ -12,20 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.file;
+package org.htmlunit.javascript.host.draganddrop;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code DataTransferItemList}.
+ * A JavaScript object for {@code DataTransferItem}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @JsxClass
-public class DataTransferItemList extends HtmlUnitScriptable {
+public class DataTransferItem extends HtmlUnitScriptable {
 
     /**
      * JavaScript constructor.

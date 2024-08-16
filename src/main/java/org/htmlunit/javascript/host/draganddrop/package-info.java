@@ -12,26 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.html;
-
-import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code DataTransfer}.
- *
- * @author Ahmed Ashour
- * @author Ronald Brill
+ * Implementations of the various JavaScript objects from the HTML Drag and Drop API.
  */
-@JsxClass
-public class DataTransfer extends HtmlUnitScriptable {
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-        // nothing to do
-    }
-}
+package org.htmlunit.javascript.host.draganddrop;

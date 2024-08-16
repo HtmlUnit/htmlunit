@@ -12,20 +12,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.file;
+package org.htmlunit.javascript.host.draganddrop;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code DataTransferItem}.
+ * A JavaScript object for {@code DataTransferItemList}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @JsxClass
-public class DataTransferItem extends HtmlUnitScriptable {
+public class DataTransferItemList extends HtmlUnitScriptable {
+
+    private DataTransferItem[] items_;
+
+    /**
+     * Creates an instance.
+     */
+    public DataTransferItemList() {
+        super();
+    }
 
     /**
      * JavaScript constructor.
@@ -33,5 +43,23 @@ public class DataTransferItem extends HtmlUnitScriptable {
     @JsxConstructor
     public void jsConstructor() {
         // nothing to do
+    }
+
+    /**
+     * Creates a new instance.
+     * @param array the array of files
+     */
+    public DataTransferItemList(final DataTransferItem[] array) {
+        super();
+        items_ = array;
+    }
+
+    /**
+     * Returns the {@code length} property.
+     * @return the {@code length} property
+     */
+    @JsxGetter
+    public int getLength() {
+        return items_.length;
     }
 }
