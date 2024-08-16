@@ -82,4 +82,53 @@ public class FileListTest extends WebDriverTestCase {
             FileUtils.deleteQuietly(tstFile);
         }
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"1", "[object File]"})
+    public void iterator() throws Exception {
+        final String html
+                = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  if (document.testForm.fileupload.files) {\n"
+                + "    var files = document.testForm.fileupload.files;\n"
+                + "    log(files.length);\n"
+
+                + "    for (var i of files) {\n"
+                + "      log(i);\n"
+                + "    }\n"
+                + "  }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <form name='testForm'>\n"
+                + "    <input type='file' id='fileupload' name='fileupload'>\n"
+                + "  </form>\n"
+                + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        try {
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", ISO_8859_1);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+            verifyTitle2(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
 }

@@ -16,10 +16,12 @@ package org.htmlunit.javascript.host.file;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 
 /**
  * A JavaScript object for {@code FileList}.
@@ -99,5 +101,15 @@ public class FileList extends HtmlUnitScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         return item(index);
+    }
+
+    /**
+     * Returns an Iterator allowing to go through all keys contained in this object.
+     * @return a NativeArrayIterator
+     */
+    @JsxFunction
+    @JsxSymbol(symbolName = "iterator")
+    public Scriptable values() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 }
