@@ -8,6 +8,13 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: Obsolete classes ObjToIntMap and UintMap removed; depending on context, classes replaced
+                with either HashMap or sometimes HashSet.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Support for Array/TypedArray findLast() and findLastIndex() added.
+            </action>
             <action type="fix" dev="rbri">
                 Fix FileReader handling of in memory File's.
             </action>
