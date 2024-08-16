@@ -157,7 +157,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "  </style>\n"
 
                 + "  <form name='myForm', id='myFormId'>"
-                + "    <input type='radio' name='first'/><input type='radio' name='first'/>"
+                + "    <input type='radio' name='first' /><input type='radio' name='first'/>"
+                + "    <input id='fileItem' type='file' />"
                 + "  </form>"
 
                 + LOG_TEXTAREA
@@ -17594,5 +17595,71 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "remove(),replace(),toggle(),value[GSCE],values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.html.DataTransfer}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "clearData(),constructor(),dropEffect[GSCE],effectAllowed[GSCE],files[GCE],"
+                + "getData(),items[GCE],setData(),setDragImage(),types[GCE]",
+            EDGE = "clearData(),constructor(),dropEffect[GSCE],effectAllowed[GSCE],files[GCE],"
+                + "getData(),items[GCE],setData(),setDragImage(),types[GCE]",
+            FF = "addElement(),clearData(),constructor(),dropEffect[GSCE],effectAllowed[GSCE],files[GCE],"
+                + "getData(),items[GCE],mozCursor[GSCE],mozSourceNode[GCE],mozUserCancelled[GCE],"
+                + "setData(),setDragImage(),types[GCE]",
+            FF_ESR = "addElement(),clearData(),constructor(),dropEffect[GSCE],effectAllowed[GSCE],files[GCE],"
+                + "getData(),items[GCE],mozCursor[GSCE],mozSourceNode[GCE],mozUserCancelled[GCE],"
+                + "setData(),setDragImage(),types[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void dataTransfer() throws Exception {
+        testString("", "new DataTransfer()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.html.DataTransferItemList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "add(),clear(),constructor(),length[GCE],remove()",
+            EDGE = "add(),clear(),constructor(),length[GCE],remove()",
+            FF = "add(),clear(),constructor(),length[GCE],remove()",
+            FF_ESR = "add(),clear(),constructor(),length[GCE],remove()")
+    public void dataTransferItemList() throws Exception {
+        testString("", "new DataTransfer().items");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.file.FileList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length[GCE]",
+            EDGE = "constructor(),item(),length[GCE]",
+            FF = "constructor(),item(),length[GCE]",
+            FF_ESR = "constructor(),item(),length[GCE]")
+    public void fileList() throws Exception {
+        testString("", "new DataTransfer().files");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.file.FileList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length[GCE]",
+            EDGE = "constructor(),item(),length[GCE]",
+            FF = "constructor(),item(),length[GCE]",
+            FF_ESR = "constructor(),item(),length[GCE]")
+    public void fileList2() throws Exception {
+        testString("", "document.getElementById('fileItem').files");
     }
 }

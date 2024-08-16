@@ -160,6 +160,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
 
                 + "  <form name='myForm', id='myFormId'>"
                 + "    <input type='radio' name='first'/><input type='radio' name='first'/>"
+                + "    <input id='fileItem' type='file' />"
                 + "  </form>"
 
                 + LOG_TEXTAREA
@@ -3166,5 +3167,61 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DOMTokenList]")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.html.DataTransfer}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DataTransfer]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DataTransfer]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DataTransfer]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DataTransfer]")
+    public void dataTransfer() throws Exception {
+        testString("", "new DataTransfer()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.html.DataTransferItemList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DataTransferItemList]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DataTransferItemList]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DataTransferItemList]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [DataTransferItemList]")
+    public void dataTransferItemList() throws Exception {
+        testString("", "new DataTransfer().items");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.file.FileList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FileList]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FileList]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FileList]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FileList]")
+    public void fileList() throws Exception {
+        testString("", "new DataTransfer().files");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.file.FileList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FileList]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FileList]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FileList]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FileList]")
+    public void fileList2() throws Exception {
+        testString("", "document.getElementById('fileItem').files");
     }
 }

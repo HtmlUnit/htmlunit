@@ -157,6 +157,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
 
                 + "  <form name='myForm', id='myFormId'>"
                 + "    <input type='radio' name='first'/><input type='radio' name='first'/>"
+                + "    <input id='fileItem' type='file' />"
                 + "  </form>"
 
                 + LOG_TEXTAREA
@@ -9003,5 +9004,67 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "replace(),toggle(),value,values()")
     public void domTokenList() throws Exception {
         testString("", "document.body.classList");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.html.DataTransfer}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "clearData(),dropEffect,effectAllowed,files,getData(),items,setData(),setDragImage(),types",
+            EDGE = "clearData(),dropEffect,effectAllowed,files,getData(),items,setData(),setDragImage(),types",
+            FF = "addElement(),clearData(),dropEffect,effectAllowed,files,getData(),items,"
+                + "mozCursor,mozSourceNode,mozUserCancelled,setData(),setDragImage(),types",
+            FF_ESR = "addElement(),clearData(),dropEffect,effectAllowed,files,getData(),items,"
+                + "mozCursor,mozSourceNode,mozUserCancelled,setData(),setDragImage(),types")
+    @HtmlUnitNYI(CHROME = "-",
+            EDGE = "-",
+            FF = "-",
+            FF_ESR = "-")
+    public void dataTransfer() throws Exception {
+        testString("", "new DataTransfer()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.html.DataTransferItemList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "add(),clear(),length,remove()",
+            EDGE = "add(),clear(),length,remove()",
+            FF = "add(),clear(),length,remove()",
+            FF_ESR = "add(),clear(),length,remove()")
+    public void dataTransferItemList() throws Exception {
+        testString("", "new DataTransfer().items");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.file.FileList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "item(),length",
+            EDGE = "item(),length",
+            FF = "item(),length",
+            FF_ESR = "item(),length")
+    public void fileList() throws Exception {
+        testString("", "new DataTransfer().files");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.file.FileList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "item(),length",
+            EDGE = "item(),length",
+            FF = "item(),length",
+            FF_ESR = "item(),length")
+    public void fileList2() throws Exception {
+        testString("", "document.getElementById('fileItem').files");
     }
 }
