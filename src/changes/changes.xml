@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="fix" dev="rbri">
+                Some missing index verification added in FileList.
+            </action>
             <action type="add" dev="rbri">
                 Initial incomplete implementation of file handling for DataTransfer.
             </action>

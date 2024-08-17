@@ -149,11 +149,9 @@ public class DataTransferItemList extends HtmlUnitScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         if (this == start) {
-            if (index < 0 || index >= items_.size()) {
-                return JavaScriptEngine.UNDEFINED;
+            if (index >= 0 && index < items_.size()) {
+                return items_.get(index);
             }
-
-            return items_.get(index);
         }
         return super.get(index, start);
     }

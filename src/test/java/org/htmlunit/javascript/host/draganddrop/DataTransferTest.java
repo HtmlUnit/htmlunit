@@ -74,6 +74,60 @@ public class DataTransferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"0", "0", "true"})
+    public void filesStringAdded() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let dt = new DataTransfer();\n"
+            + "    let f1 = dt.files;\n"
+            + "    log(f1.length);\n"
+
+            + "    let i1 = dt.items.add('HtmlUnit', 'text/html');\n"
+            + "    log(dt.files.length);\n"
+
+            + "    log(f1 === dt.files);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "1", "true", "true"})
+    public void filesFileAdded() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let dt = new DataTransfer();\n"
+            + "    let f1 = dt.files;\n"
+            + "    log(f1.length);\n"
+
+            + "    let file = new File(['Html', 'Unit'], 'htMluniT.txt');\n"
+            + "    let i1 = dt.items.add(file);\n"
+            + "    log(dt.files.length);\n"
+
+            + "    log(f1 === dt.files);\n"
+            + "    log(file === dt.files[0]);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void filesRequestTwoTimes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

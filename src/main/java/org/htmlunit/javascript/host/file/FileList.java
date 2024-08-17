@@ -92,7 +92,10 @@ public class FileList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public File item(final int index) {
-        return files_[index];
+        if (index >= 0 && index < files_.length) {
+            return files_[index];
+        }
+        return null;
     }
 
     /**
@@ -100,7 +103,12 @@ public class FileList extends HtmlUnitScriptable {
      */
     @Override
     public Object get(final int index, final Scriptable start) {
-        return item(index);
+        if (this == start) {
+            if (index >= 0 && index < files_.length) {
+                return files_[index];
+            }
+        }
+        return super.get(index, start);
     }
 
     /**
