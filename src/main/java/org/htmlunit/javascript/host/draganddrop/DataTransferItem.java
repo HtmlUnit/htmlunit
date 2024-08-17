@@ -105,7 +105,7 @@ public class DataTransferItem extends HtmlUnitScriptable {
                     "getAsString callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 
-        if (kind_ == KIND_FILE) {
+        if (isFile()) {
             return;
         }
 
@@ -129,10 +129,17 @@ public class DataTransferItem extends HtmlUnitScriptable {
      */
     @JsxFunction
     public File getAsFile() {
-        if (kind_ == KIND_STRING) {
+        if (!isFile()) {
             return null;
         }
 
         return (File) data_;
+    }
+
+    /**
+     * @return true if this is a file
+     */
+    public boolean isFile() {
+        return kind_ == KIND_FILE;
     }
 }

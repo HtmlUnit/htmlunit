@@ -27,6 +27,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.file.File;
+import org.htmlunit.javascript.host.file.FileList;
 
 /**
  * A JavaScript object for {@code DataTransferItemList}.
@@ -38,6 +39,7 @@ import org.htmlunit.javascript.host.file.File;
 public class DataTransferItemList extends HtmlUnitScriptable {
 
     private ArrayList<DataTransferItem> items_;
+    private FileList fileList_;
 
     /**
      * Creates an instance.
@@ -92,6 +94,7 @@ public class DataTransferItemList extends HtmlUnitScriptable {
                     itemList.items_ = new ArrayList<>();
                 }
                 itemList.items_.add(item);
+                itemList.updateFileList();
 
                 return item;
             }
@@ -125,6 +128,9 @@ public class DataTransferItemList extends HtmlUnitScriptable {
     public void clear() {
         if (items_ != null) {
             items_.clear();
+            if (fileList_ != null) {
+                fileList_.updateFiles(new ArrayList<>());
+            }
         }
     }
 
@@ -139,6 +145,7 @@ public class DataTransferItemList extends HtmlUnitScriptable {
         if (items_ != null) {
             if (index >= 0 && index < items_.size()) {
                 items_.remove(index);
+                updateFileList();
             }
         }
     }
@@ -163,5 +170,36 @@ public class DataTransferItemList extends HtmlUnitScriptable {
     @JsxSymbol(symbolName = "iterator")
     public Scriptable values() {
         return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * Maintains the file list for the parent DataTrasnfer object.
+     * @return the {@code files} property
+     */
+    public FileList getFiles() {
+        if (fileList_ == null) {
+            final FileList list = new FileList(new java.io.File[0]);
+            list.setParentScope(getParentScope());
+            list.setPrototype(getPrototype(list.getClass()));
+            fileList_ = list;
+
+            if (items_ != null) {
+                updateFileList();
+            }
+        }
+        return fileList_;
+    }
+
+    private void updateFileList() {
+        if (fileList_ != null) {
+            final ArrayList<File> files = new ArrayList<>();
+            for (final DataTransferItem item : items_) {
+                if (item.isFile()) {
+                    files.add(item.getAsFile());
+                }
+            }
+            fileList_.updateFiles(files);
+        }
     }
 }

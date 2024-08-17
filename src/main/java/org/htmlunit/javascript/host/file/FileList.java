@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host.file;
 
+import java.util.ArrayList;
+
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -32,7 +34,7 @@ import org.htmlunit.javascript.configuration.JsxSymbol;
 @JsxClass
 public class FileList extends HtmlUnitScriptable {
 
-    private File[] files_;
+    private ArrayList<File> files_;
 
     /**
      * Creates an instance.
@@ -55,11 +57,20 @@ public class FileList extends HtmlUnitScriptable {
      */
     public FileList(final java.io.File[] array) {
         super();
-        files_ = new File[array.length];
+        files_ = new ArrayList<>();
 
         for (int i = 0; i < array.length; i++) {
-            files_[i] = new File(array[i].getAbsolutePath());
+            files_.add(new File(array[i].getAbsolutePath()));
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * Update the backing file array.
+     * @param files the new files list
+     */
+    public void updateFiles(final ArrayList<File> files) {
+        files_ = files;
     }
 
     /**
@@ -82,7 +93,7 @@ public class FileList extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        return files_.length;
+        return files_.size();
     }
 
     /**
@@ -92,8 +103,8 @@ public class FileList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public File item(final int index) {
-        if (index >= 0 && index < files_.length) {
-            return files_[index];
+        if (index >= 0 && index < files_.size()) {
+            return files_.get(index);
         }
         return null;
     }
@@ -104,8 +115,8 @@ public class FileList extends HtmlUnitScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         if (this == start) {
-            if (index >= 0 && index < files_.length) {
-                return files_[index];
+            if (index >= 0 && index < files_.size()) {
+                return files_.get(index);
             }
         }
         return super.get(index, start);

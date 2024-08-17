@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.draganddrop;
 
-import java.io.File;
-
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -31,7 +29,6 @@ import org.htmlunit.javascript.host.file.FileList;
 @JsxClass
 public class DataTransfer extends HtmlUnitScriptable {
 
-    private FileList files_;
     private DataTransferItemList items_;
 
     /**
@@ -53,21 +50,15 @@ public class DataTransfer extends HtmlUnitScriptable {
      * @return the {@code files} property
      */
     @JsxGetter
-    public Object getFiles() {
-        if (files_ == null) {
-            final FileList list = new FileList(new File[0]);
-            list.setParentScope(getParentScope());
-            list.setPrototype(getPrototype(list.getClass()));
-            files_ = list;
-        }
-        return files_;
+    public FileList getFiles() {
+        return getItems().getFiles();
     }
 
     /**
      * @return the {@code items} property
      */
     @JsxGetter
-    public Object getItems() {
+    public DataTransferItemList getItems() {
         if (items_ == null) {
             final DataTransferItemList list = new DataTransferItemList();
             list.setParentScope(getParentScope());

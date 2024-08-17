@@ -18,6 +18,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -74,7 +75,7 @@ public class DataTransferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "0", "true"})
+    @Alerts({"0", "0", "0", "true"})
     public void filesStringAdded() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -86,6 +87,7 @@ public class DataTransferTest extends WebDriverTestCase {
 
             + "    let i1 = dt.items.add('HtmlUnit', 'text/html');\n"
             + "    log(dt.files.length);\n"
+            + "    log(f1.length);\n"
 
             + "    log(f1 === dt.files);\n"
             + "  }\n"
@@ -100,7 +102,7 @@ public class DataTransferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "1", "true", "true"})
+    @Alerts({"0", "1", "1", "true", "true"})
     public void filesFileAdded() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -113,6 +115,7 @@ public class DataTransferTest extends WebDriverTestCase {
             + "    let file = new File(['Html', 'Unit'], 'htMluniT.txt');\n"
             + "    let i1 = dt.items.add(file);\n"
             + "    log(dt.files.length);\n"
+            + "    log(f1.length);\n"
 
             + "    log(f1 === dt.files);\n"
             + "    log(file === dt.files[0]);\n"
@@ -173,6 +176,7 @@ public class DataTransferTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true", EDGE = "true")
     public void itemsRequestTwoTimes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
