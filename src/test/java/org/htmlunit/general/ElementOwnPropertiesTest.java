@@ -17613,10 +17613,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "addElement(),clearData(),constructor(),dropEffect[GSCE],effectAllowed[GSCE],files[GCE],"
                 + "getData(),items[GCE],mozCursor[GSCE],mozSourceNode[GCE],mozUserCancelled[GCE],"
                 + "setData(),setDragImage(),types[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF = "constructor()",
-            FF_ESR = "constructor()")
+    @HtmlUnitNYI(CHROME = "constructor(),files[GCE],items[GCE]",
+            EDGE = "constructor(),files[GCE],items[GCE]",
+            FF = "constructor(),files[GCE],items[GCE]",
+            FF_ESR = "constructor(),files[GCE],items[GCE]")
     public void dataTransfer() throws Exception {
         testString("", "new DataTransfer()");
     }

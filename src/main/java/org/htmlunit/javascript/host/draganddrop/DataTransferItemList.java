@@ -25,6 +25,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.file.File;
 
 /**
@@ -140,5 +141,29 @@ public class DataTransferItemList extends HtmlUnitScriptable {
                 items_.remove(index);
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        if (this == start) {
+            if (index < 0 || index >= items_.size()) {
+                return JavaScriptEngine.UNDEFINED;
+            }
+
+            return items_.get(index);
+        }
+        return super.get(index, start);
+    }
+
+    /**
+     * Returns an Iterator allowing to go through all keys contained in this object.
+     * @return a NativeArrayIterator
+     */
+    @JsxSymbol(symbolName = "iterator")
+    public Scriptable values() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 }

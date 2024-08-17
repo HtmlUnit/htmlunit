@@ -8936,14 +8936,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "0,1,first,item(),length,namedItem()",
-            EDGE = "0,1,first,item(),length,namedItem()",
-            FF = "0,1,first,item(),length,namedItem()",
-            FF_ESR = "0,1,first,item(),length,namedItem()")
-    @HtmlUnitNYI(CHROME = "0,1,item(),length,namedItem()",
-            EDGE = "0,1,item(),length,namedItem()",
-            FF = "0,1,item(),length,namedItem()",
-            FF_ESR = "0,1,item(),length,namedItem()")
+    @Alerts(CHROME = "0,1,2,fileItem,first,item(),length,namedItem()",
+            EDGE = "0,1,2,fileItem,first,item(),length,namedItem()",
+            FF = "0,1,2,item(),length,namedItem()",
+            FF_ESR = "0,1,2,item(),length,namedItem()")
+    @HtmlUnitNYI(CHROME = "0,1,2,item(),length,namedItem()",
+            EDGE = "0,1,2,item(),length,namedItem()")
     public void htmlFormControlsCollection() throws Exception {
         testString("", "document.myForm.elements");
     }
@@ -9018,10 +9016,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "mozCursor,mozSourceNode,mozUserCancelled,setData(),setDragImage(),types",
             FF_ESR = "addElement(),clearData(),dropEffect,effectAllowed,files,getData(),items,"
                 + "mozCursor,mozSourceNode,mozUserCancelled,setData(),setDragImage(),types")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF = "-",
-            FF_ESR = "-")
+    @HtmlUnitNYI(CHROME = "files,items",
+            EDGE = "files,items",
+            FF = "files,items",
+            FF_ESR = "files,items")
     public void dataTransfer() throws Exception {
         testString("", "new DataTransfer()");
     }

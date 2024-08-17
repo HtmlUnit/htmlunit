@@ -165,4 +165,81 @@ public class DataTransferItemListTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"2", "[object DataTransferItem]", "[object DataTransferItem]"})
+    public void indexed() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let dt = new DataTransfer();\n"
+            + "    let items = dt.items;\n"
+            + "    items.add('HtmlUnit', 'text/html');\n"
+            + "    items.add('1234', 'text/plain');\n"
+            + "    log(items.length);\n"
+            + "    log(items[0]);\n"
+            + "    log(items[1]);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"2", "undefined", "undefined"})
+    public void indexedWrong() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let dt = new DataTransfer();\n"
+            + "    let items = dt.items;\n"
+            + "    items.add('HtmlUnit', 'text/html');\n"
+            + "    items.add('1234', 'text/plain');\n"
+            + "    log(items.length);\n"
+            + "    log(items[-1]);\n"
+            + "    log(items[2]);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"2", "[object DataTransferItem]", "[object DataTransferItem]"})
+    public void iterator() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let dt = new DataTransfer();\n"
+            + "    let items = dt.items;\n"
+            + "    items.add('HtmlUnit', 'text/html');\n"
+            + "    items.add('1234', 'text/plain');\n"
+            + "    log(items.length);\n"
+
+            + "    for (var i of items) {\n"
+            + "      log(i);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
