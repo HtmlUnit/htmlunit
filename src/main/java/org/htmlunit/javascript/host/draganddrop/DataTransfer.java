@@ -35,6 +35,13 @@ public class DataTransfer extends HtmlUnitScriptable {
     private DataTransferItemList items_;
 
     /**
+     * Ctor.
+     */
+    public DataTransfer() {
+        super();
+    }
+
+    /**
      * JavaScript constructor.
      */
     @JsxConstructor
@@ -57,12 +64,12 @@ public class DataTransfer extends HtmlUnitScriptable {
     }
 
     /**
-     * @return the {@code files} property
+     * @return the {@code items} property
      */
     @JsxGetter
     public Object getItems() {
         if (items_ == null) {
-            final DataTransferItemList list = new DataTransferItemList(new DataTransferItem[0]);
+            final DataTransferItemList list = new DataTransferItemList();
             list.setParentScope(getParentScope());
             list.setPrototype(getPrototype(list.getClass()));
             items_ = list;
