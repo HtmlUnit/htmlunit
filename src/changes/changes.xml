@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Ensure that generator functions always pass parameters properly.
+            </action>
             <action type="fix" dev="rbri">
                 Some missing index verification added in FileList.
             </action>
