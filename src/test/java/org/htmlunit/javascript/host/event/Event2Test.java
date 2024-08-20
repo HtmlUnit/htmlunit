@@ -14,15 +14,12 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -44,14 +41,23 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event] change b:true c:false [select] [-]"
-                + " [object MouseEvent] click b:true c:true [select] [1]",
+                + " [object PointerEvent] click b:true c:true [select] [1]",
+            FF = "[object Event] change b:true c:false [select] [-]"
+                + " [object PointerEvent] click b:true c:true [clickMe] [1]",
             FF_ESR = "[object Event] change b:true c:false [select] [-]"
                 + " [object MouseEvent] click b:true c:true [clickMe] [1]")
-    @BuggyWebDriver(FF = "[object Event] change b:true c:true [select] [-]"
+    @BuggyWebDriver(CHROME = "[object Event] change b:true c:false [select] [-]"
+                + " [object MouseEvent] click b:true c:true [select] [1]",
+            EDGE = "[object Event] change b:true c:false [select] [-]"
+                + " [object MouseEvent] click b:true c:true [select] [1]",
+            FF = "[object Event] change b:true c:true [select] [-]"
                 + " [object Event] click b:true c:true [select] [-]",
             FF_ESR = "[object Event] change b:true c:true [select] [-]"
                 + " [object Event] click b:true c:true [select] [-]")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "[object Event] change b:true c:false [select] [-]"
+                + " [object PointerEvent] click b:true c:true [clickMe] [1]",
+            EDGE = "[object Event] change b:true c:false [select] [-]"
+                + " [object PointerEvent] click b:true c:true [clickMe] [1]")
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";
         final String secondSnippet = ">\n"
