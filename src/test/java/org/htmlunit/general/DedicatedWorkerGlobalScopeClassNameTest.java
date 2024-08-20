@@ -1150,6 +1150,17 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test CSSPageDescriptors.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void cssPageDescriptors() throws Exception {
+        test("CSSPageDescriptors");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
