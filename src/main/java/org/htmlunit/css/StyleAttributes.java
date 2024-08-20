@@ -3115,7 +3115,10 @@ public final class StyleAttributes implements Serializable {
                 ffEsr("all 0s ease 0s"), ffLatest("all")),
 
         /** The style property {@code transitionBehavior}. */
-        TRANSITION_BEHAVIOR("transitionBehavior", "transition-behavior", chromeAndEdgeNormal()),
+        TRANSITION_BEHAVIOR("transitionBehavior", "transition-behavior", chromeAndEdgeNormal(), ffLatest("normal")),
+
+        /** The style property {@code transitionBehavior}. */
+        TRANSITION_BEHAVIOR_("transition-behavior", "transition-behavior", ffLatest("normal")),
 
         /** The style property {@code transitionDelay}. */
         TRANSITION_DELAY("transitionDelay", "transition-delay", ff("0s"), chromeAndEdge("0s")),
@@ -3708,7 +3711,15 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitFontFeatureSettings}. */
         WEBKIT_FONT_FEATURE_SETTINGS("webkitFontFeatureSettings", "webkit-font-feature-settings",
-                chromeAndEdgeNormal()),
+                chromeAndEdgeNormal(), ffLatest("normal")),
+
+        /** The style property {@code WebkitFontFeatureSettings}. */
+        WEBKIT_FONT_FEATURE_SETTINGS_("WebkitFontFeatureSettings", "webkit-font-feature-settings",
+                ffLatest("normal")),
+
+        /** The style property {@code webkitFontFeatureSettings}. */
+        WEBKIT_FONT_FEATURE_SETTINGS__("-webkit-font-feature-settings", "webkit-font-feature-settings",
+                ffLatest("normal")),
 
         /** The style property {@code webkitFontSmoothing}. */
         WEBKIT_FONT_SMOOTHING("webkitFontSmoothing", "webkit-font-smoothing", chromeAndEdgeAuto()),
