@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="4.5.0" date="xxxx, 2024" description="WebWorker, Bugfixes">
+        <release version="4.5.0" date="xxxx, 2024" description="Firefox 129, WebWorker, Bugfixes">
+            <action type="update" dev="rbri">
+                TextEvent is available Firefox also.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Ensure that generator functions always pass parameters properly.
             </action>

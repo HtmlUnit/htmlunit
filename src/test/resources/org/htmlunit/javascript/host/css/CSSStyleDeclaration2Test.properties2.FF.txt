@@ -82,6 +82,7 @@ WebkitFlexFlow
 WebkitFlexGrow
 WebkitFlexShrink
 WebkitFlexWrap
+WebkitFontFeatureSettings
 WebkitJustifyContent
 WebkitLineClamp
 WebkitMask
@@ -523,6 +524,7 @@ transformBox
 transformOrigin
 transformStyle
 transition
+transitionBehavior
 transitionDelay
 transitionDuration
 transitionProperty
@@ -573,6 +575,7 @@ webkitFlexFlow
 webkitFlexGrow
 webkitFlexShrink
 webkitFlexWrap
+webkitFontFeatureSettings
 webkitJustifyContent
 webkitLineClamp
 webkitMask

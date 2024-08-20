@@ -2363,7 +2363,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
-            FF = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]")
     public void textEvent() throws Exception {
         testString("", "document.createEvent('TextEvent')");
