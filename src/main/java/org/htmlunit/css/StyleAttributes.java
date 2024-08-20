@@ -3117,7 +3117,7 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code transitionBehavior}. */
         TRANSITION_BEHAVIOR("transitionBehavior", "transition-behavior", chromeAndEdgeNormal(), ffLatest("normal")),
 
-        /** The style property {@code transitionBehavior}. */
+        /** The style property {@code transition-behavior}. */
         TRANSITION_BEHAVIOR_("transition-behavior", "transition-behavior", ffLatest("normal")),
 
         /** The style property {@code transitionDelay}. */
@@ -3717,7 +3717,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_FONT_FEATURE_SETTINGS_("WebkitFontFeatureSettings", "webkit-font-feature-settings",
                 ffLatest("normal")),
 
-        /** The style property {@code webkitFontFeatureSettings}. */
+        /** The style property {@code -webkit-font-feature-settings}. */
         WEBKIT_FONT_FEATURE_SETTINGS__("-webkit-font-feature-settings", "webkit-font-feature-settings",
                 ffLatest("normal")),
 
