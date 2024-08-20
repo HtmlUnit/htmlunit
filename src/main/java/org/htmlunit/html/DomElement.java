@@ -1442,10 +1442,12 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)) {
             final BrowserVersion browserVersion = webClient.getBrowserVersion();
             if (browserVersion.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
-            }
-            else if (browserVersion.hasFeature(EVENT_CONTEXT_MENU_HAS_DETAIL_1)) {
-                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
+                if (browserVersion.hasFeature(EVENT_CONTEXT_MENU_HAS_DETAIL_1)) {
+                    event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
+                }
+                else {
+                    event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
+                }
             }
             else {
                 event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 2);
