@@ -9,6 +9,9 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Firefox 129, WebWorker, Bugfixes">
             <action type="update" dev="rbri">
+                Click action now uses the PointerEvent instead of the MouseEvent in Firefox.
+            </action>
+            <action type="update" dev="rbri">
                 TextEvent is available Firefox also.
             </action>
             <action type="fix" dev="RhinoTeam">

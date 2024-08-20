@@ -545,7 +545,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "4", "[object CSSPageRule]",
                        "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
-            FF = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
+            FF = {"[object CSSPageDescriptors]", "[object CSSPageDescriptors]", "4", "[object CSSPageRule]",
                   "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
                       "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"})
@@ -591,11 +591,10 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""},
-            FF = {"[object CSS2Properties]", "[object CSS2Properties]", "0", "[object CSSPageRule]", ""},
+            FF = {"[object CSSPageDescriptors]", "[object CSSPageDescriptors]", "0", "[object CSSPageRule]", ""},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "0", "[object CSSPageRule]", ""})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""})
-    // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
     public void styleEmpty() throws Exception {
         final String html
             = "<html><body>\n"
