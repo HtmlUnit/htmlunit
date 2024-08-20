@@ -245,9 +245,8 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "true",
+            FF_ESR = "false")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"

@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.event;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -29,7 +30,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE})
+@JsxClass({CHROME, EDGE, FF})
 public class TextEvent extends UIEvent {
 
     private final Object data_;
@@ -49,7 +50,7 @@ public class TextEvent extends UIEvent {
      * @param details the event details (optional)
      */
     @Override
-    @JsxConstructor({CHROME, EDGE})
+    @JsxConstructor
     public void jsConstructor(final String type, final ScriptableObject details) {
         throw JavaScriptEngine.typeError("TextEvent ctor is not available");
     }
@@ -58,7 +59,7 @@ public class TextEvent extends UIEvent {
      * Retrieves the data contained.
      * @return the data contained
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter
     public Object getData() {
         return data_;
     }

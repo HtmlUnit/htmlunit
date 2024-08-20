@@ -1166,6 +1166,19 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link CSSPageDescriptors}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    @HtmlUnitNYI(FF = "undefined")
+    public void cssPageDescriptors() throws Exception {
+        test("CSSPageDescriptors");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -8887,9 +8900,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
+    @Alerts(DEFAULT = "function",
+            FF_ESR = "undefined")
     public void textEvent() throws Exception {
         test("TextEvent");
     }

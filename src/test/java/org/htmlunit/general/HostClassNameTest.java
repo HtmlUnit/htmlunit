@@ -1191,6 +1191,19 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link CSSPageDescriptors}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function CSSPageDescriptors() { [native code] }")
+    @HtmlUnitNYI(FF = "exception")
+    public void cssPageDescriptors() throws Exception {
+        test("CSSPageDescriptors");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -8913,7 +8926,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function TextEvent() { [native code] }",
-            FF = "exception",
             FF_ESR = "exception")
     public void textEvent() throws Exception {
         test("TextEvent");
