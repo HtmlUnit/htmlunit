@@ -36,6 +36,7 @@
 
         <htmlunitdriver.version>4.24.0-SNAPSHOT</htmlunitdriver.version>
         <selenium.version>4.23.1</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v127</selenium.devtools.artifactId>
 
         <jetty.version>9.4.55.v20240627</jetty.version>
         <log4j.version>2.23.1</log4j.version>
@@ -1470,7 +1471,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v126</artifactId>
+            <artifactId>${selenium.devtools.artifactId}</artifactId>
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
