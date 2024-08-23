@@ -8,6 +8,21 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Firefox 129, WebWorker, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: 'cause' property added to NativeError and some toString() improvements.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: New methods toReversed, toSorted, toSpliced, and with added to Array and TypedArray.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Make sure to use only the RegExpProxy interface instead of some hardcoded instanceof
+                call. This opens the door to integrate a much more standard complient regexp suppor.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: When doing math, try to do integer arithmetic when the arguments passed
+                are Integer objects, rather than always falling back to floating-point math. 
+                This speeds up some benchmarks that rely heavily on integer arithmetic.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-logging to 1.3.4
             </action>
