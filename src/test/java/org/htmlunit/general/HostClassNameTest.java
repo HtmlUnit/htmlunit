@@ -862,9 +862,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function CaretPosition() { [native code] }",
-            FF_ESR = "function CaretPosition() { [native code] }")
+    @Alerts("function CaretPosition() { [native code] }")
     public void caretPosition() throws Exception {
         test("CaretPosition");
     }

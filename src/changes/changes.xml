@@ -9,6 +9,9 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
             <action type="add" dev="RhinoTeam">
+                CaretPosition is now available in all supported browsers.
+            </action>
+            <action type="add" dev="RhinoTeam">
                 core-js: 'cause' property added to NativeError and some toString() improvements.
             </action>
             <action type="add" dev="RhinoTeam">

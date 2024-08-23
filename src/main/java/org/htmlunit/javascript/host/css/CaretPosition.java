@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -27,7 +24,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({FF, FF_ESR})
+@JsxClass
 public class CaretPosition extends HtmlUnitScriptable {
 
     /**
