@@ -54,11 +54,11 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "127.0.6533";
+    static String CHROME_DRIVER_ = "128.0.6613";
     static String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static String EDGE_DRIVER_ = "127.0.2651";
+    static String EDGE_DRIVER_ = "128.0.2739";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -95,7 +95,9 @@ public class ExternalTest {
             if (line.trim().equals("<properties>")) {
                 processProperties(lines, i + 1, properties);
             }
-            if (line.contains("artifactId") && !line.contains(">htmlunit<")) {
+            if (line.contains("artifactId")
+                    && !line.contains(">htmlunit<")
+                    && !line.contains(">selenium-devtools-v127<")) {
                 final String artifactId = getValue(line);
                 final String groupId = getValue(lines.get(i - 1));
                 if (!lines.get(i + 1).contains("</exclusion>")) {
