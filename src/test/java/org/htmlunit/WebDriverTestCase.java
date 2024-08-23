@@ -508,6 +508,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 options.addArguments("--lang=" + locale);
                 options.addArguments("--remote-allow-origins=*");
 
+                // seems to be not required for edge
+                // options.addArguments("--disable-search-engine-choice-screen");
+                // see https://www.selenium.dev/blog/2024/chrome-browser-woes/
+                // options.addArguments("--disable-features=OptimizationGuideModelDownloading,"
+                //         + "OptimizationHintsFetching,OptimizationTargetPrediction,OptimizationHints");
+
                 final EdgeDriver edge = new EdgeDriver(service, options);
 
                 final DevTools devTools = edge.getDevTools();
@@ -535,6 +541,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 options.addArguments("--lang=" + locale);
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-search-engine-choice-screen");
+                // see https://www.selenium.dev/blog/2024/chrome-browser-woes/
+                options.addArguments("--disable-features=OptimizationGuideModelDownloading,"
+                        + "OptimizationHintsFetching,OptimizationTargetPrediction,OptimizationHints");
 
                 final ChromeDriver chrome = new ChromeDriver(service, options);
 
