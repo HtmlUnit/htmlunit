@@ -2519,10 +2519,10 @@ public final class StyleAttributes implements Serializable {
         POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdgeAuto()),
 
         /** The style property {@code positionTry}. */
-        POSITION_TRY("positionTry", "position-try", chromeAndEdgeNormal()),
+        POSITION_TRY("positionTry", "position-try", chromeAndEdgeNone()),
 
-        /** The style property {@code positionTryOptions}. */
-        POSITION_TRY_OPTIONS("positionTryOptions", "position-try-options", chromeAndEdgeNone()),
+        /** The style property {@code positionTryFallbacks}. */
+        POSITION_TRY_FALLBACKS("positionTryFallbacks", "position-try-fallbacks", chromeAndEdgeNone()),
 
         /** The style property {@code positionTryOrder}. */
         POSITION_TRY_ORDER("positionTryOrder", "position-try-order", chromeAndEdgeNormal()),
@@ -2564,7 +2564,7 @@ public final class StyleAttributes implements Serializable {
         ROW_GAP_("row-gap", "row-gap", ffNormal()),
 
         /** The style property {@code rubyAlign}. */
-        RUBY_ALIGN("rubyAlign", "ruby-align", ff("space-around")),
+        RUBY_ALIGN("rubyAlign", "ruby-align", chromeAndEdge("space-around"), ff("space-around")),
 
         /** The style property {@code ruby-align}. */
         RUBY_ALIGN_("ruby-align", "ruby-align", ff("space-around")),
