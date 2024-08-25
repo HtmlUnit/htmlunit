@@ -25,8 +25,6 @@ import static org.htmlunit.css.CssStyleSheet.RELATIVE;
 import static org.htmlunit.css.CssStyleSheet.STATIC;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1520,7 +1518,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Gets the {@code rubyAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({FF, FF_ESR})
+    @JsxGetter
     public String getRubyAlign() {
         if (styleDeclaration_ == null) {
             return null; // prototype
@@ -1532,7 +1530,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * Sets the {@code rubyAlign} style attribute.
      * @param rubyAlign the new attribute
      */
-    @JsxSetter({FF, FF_ESR})
+    @JsxSetter
     public void setRubyAlign(final String rubyAlign) {
         setStyleAttribute(Definition.RUBY_ALIGN.getAttributeName(), rubyAlign);
     }
