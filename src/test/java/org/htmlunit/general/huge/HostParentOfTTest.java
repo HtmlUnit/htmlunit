@@ -87,7 +87,6 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false",
             FF_ESR = "false")
     public void _TextEvent_TextEvent() throws Exception {
         test("TextEvent", "TextEvent");
@@ -342,7 +341,6 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false",
             FF_ESR = "false")
     public void _UIEvent_TextEvent() throws Exception {
         test("UIEvent", "TextEvent");

@@ -2363,7 +2363,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false",
             FF_ESR = "false")
     public void _Event_TextEvent() throws Exception {
         test("Event", "TextEvent");
