@@ -16337,7 +16337,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "marginLeft[GSCE],marginRight[GSCE],marginTop[GSCE],maxHeight[GSCE],maxWidth[GSCE],"
                 + "minHeight[GSCE],minWidth[GSCE],opacity[GSCE],orphans[GSCE],outline[GSCE],outlineWidth[GSCE],"
                 + "padding[GSCE],paddingBottom[GSCE],paddingLeft[GSCE],paddingRight[GSCE],paddingTop[GSCE],"
-                + "parentRule[GSCE],position[GSCE],removeProperty(),right[GSCE],setProperty(),size[GSCE],"
+                + "parentRule[GSCE],position[GSCE],removeProperty(),right[GSCE],rubyAlign[GSCE],"
+                + "setProperty(),size[GSCE],"
                 + "textIndent[GSCE],top[GSCE],verticalAlign[GSCE],widows[GSCE],width[GSCE],wordSpacing[GSCE],"
                 + "zIndex[GSCE]",
             EDGE = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],"
@@ -16351,7 +16352,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "marginLeft[GSCE],marginRight[GSCE],marginTop[GSCE],maxHeight[GSCE],maxWidth[GSCE],"
                 + "minHeight[GSCE],minWidth[GSCE],opacity[GSCE],orphans[GSCE],outline[GSCE],outlineWidth[GSCE],"
                 + "padding[GSCE],paddingBottom[GSCE],paddingLeft[GSCE],paddingRight[GSCE],paddingTop[GSCE],"
-                + "parentRule[GSCE],position[GSCE],removeProperty(),right[GSCE],setProperty(),size[GSCE],"
+                + "parentRule[GSCE],position[GSCE],removeProperty(),right[GSCE],rubyAlign[GSCE],"
+                + "setProperty(),size[GSCE],"
                 + "textIndent[GSCE],top[GSCE],verticalAlign[GSCE],widows[GSCE],width[GSCE],wordSpacing[GSCE],"
                 + "zIndex[GSCE]",
             FF_ESR = "constructor()",
@@ -16968,7 +16970,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "marginLeft[GSCE],marginRight[GSCE],marginTop[GSCE],maxHeight[GSCE],maxWidth[GSCE],"
                 + "minHeight[GSCE],minWidth[GSCE],opacity[GSCE],orphans[GSCE],outline[GSCE],outlineWidth[GSCE],"
                 + "padding[GSCE],paddingBottom[GSCE],paddingLeft[GSCE],paddingRight[GSCE],paddingTop[GSCE],"
-                + "parentRule[GSCE],position[GSCE],removeProperty(),right[GSCE],setProperty(),size[GSCE],"
+                + "parentRule[GSCE],position[GSCE],removeProperty(),right[GSCE],rubyAlign[GSCE],"
+                + "setProperty(),size[GSCE],"
                 + "textIndent[GSCE],top[GSCE],verticalAlign[GSCE],widows[GSCE],width[GSCE],wordSpacing[GSCE],"
                 + "zIndex[GSCE]",
             EDGE = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],"
@@ -16982,7 +16985,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "marginLeft[GSCE],marginRight[GSCE],marginTop[GSCE],maxHeight[GSCE],maxWidth[GSCE],"
                 + "minHeight[GSCE],minWidth[GSCE],opacity[GSCE],orphans[GSCE],outline[GSCE],outlineWidth[GSCE],"
                 + "padding[GSCE],paddingBottom[GSCE],paddingLeft[GSCE],paddingRight[GSCE],paddingTop[GSCE],"
-                + "parentRule[GSCE],position[GSCE],removeProperty(),right[GSCE],setProperty(),size[GSCE],"
+                + "parentRule[GSCE],position[GSCE],removeProperty(),right[GSCE],rubyAlign[GSCE],"
+                + "setProperty(),size[GSCE],"
                 + "textIndent[GSCE],top[GSCE],verticalAlign[GSCE],widows[GSCE],width[GSCE],wordSpacing[GSCE],"
                 + "zIndex[GSCE]",
             FF_ESR = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],backgroundPosition[GSCE],"
