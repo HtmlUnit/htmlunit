@@ -673,7 +673,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("HtmlUnit")
+    @Alerts({"HtmlUnit", "mlU"})
     public void decode() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -686,6 +686,10 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "      var dec = new TextDecoder('utf-8');\n"
             + "      var decoded = dec.decode(encoded);\n"
             + "      log(decoded);\n"
+
+            + "      var arrayBuffer = encoded.buffer;\n"
+            + "      var typedArray = new Uint8Array(arrayBuffer, 2, 3);\n"
+            + "      log(dec.decode(typedArray));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
