@@ -27,6 +27,8 @@ import java.security.cert.CertificateException;
 
 import org.apache.commons.io.FileUtils;
 
+import javax.net.ssl.SSLContext;
+
 /**
  * Represents options of a {@link WebClient}.
  *
@@ -65,6 +67,7 @@ public class WebClientOptions implements Serializable {
 
     private boolean useInsecureSSL_; // default is secure SSL
     private String sslInsecureProtocol_;
+    private SSLContext sslContext_;
 
     private boolean fileProtocolForXMLHttpRequestsAllowed_;
 
@@ -513,6 +516,23 @@ public class WebClientOptions implements Serializable {
      */
     public String getSSLInsecureProtocol() {
         return sslInsecureProtocol_;
+    }
+
+    /**
+     * Sets the SSL Context, used only when {@link #setUseInsecureSSL(boolean)} is set to {@code true}.
+     * @param sslContext the SSL Context for insecure SSL connections,
+     *      {@code null} to use for default value
+     */
+    public void setSSLContext(final SSLContext sslContext) {
+        sslContext_ = sslContext;
+    }
+
+    /**
+     * Gets the SSL Context, to be used only when {@link #setUseInsecureSSL(boolean)} is set to {@code true}.
+     * @return the SSL Context for insecure SSL connections
+     */
+    public SSLContext getSSLContext() {
+        return sslContext_;
     }
 
     /**

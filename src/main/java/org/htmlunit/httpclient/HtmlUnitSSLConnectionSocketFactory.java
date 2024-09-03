@@ -100,13 +100,17 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
                         sslClientProtocols, sslClientCipherSuites);
             }
 
-            // we need insecure SSL + SOCKS awareness
-            String protocol = options.getSSLInsecureProtocol();
-            if (protocol == null) {
-                protocol = "SSL";
+            SSLContext sslContext = options.getSSLContext();
+            if (sslContext == null) {
+                // we need insecure SSL + SOCKS awareness
+                String protocol = options.getSSLInsecureProtocol();
+                if (protocol == null) {
+                    protocol = "SSL";
+                }
+
+                sslContext = SSLContext.getInstance(protocol);
+                sslContext.init(getKeyManagers(options), new X509ExtendedTrustManager[]{new InsecureTrustManager()}, null);
             }
-            final SSLContext sslContext = SSLContext.getInstance(protocol);
-            sslContext.init(getKeyManagers(options), new X509ExtendedTrustManager[] {new InsecureTrustManager()}, null);
 
             return new HtmlUnitSSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE,
                                             useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
