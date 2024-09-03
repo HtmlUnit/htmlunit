@@ -94,7 +94,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void memoryLeak() throws Exception {
-        final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
+        final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').get();
 
         long count = 0;
         while (count++ < 3000) {

@@ -381,7 +381,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void saveShouldStripLongFileNames() throws Exception {
-        final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
+        final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').get();
         final String longName = generator.generate(500) + ".html";
         final String html = "<html><body><iframe src='" + longName + "'></iframe></body></html>";
 
