@@ -38,7 +38,7 @@
         <selenium.version>4.23.1</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v127</selenium.devtools.artifactId>
 
-        <jetty.version>9.4.55.v20240627</jetty.version>
+        <jetty.version>9.4.56.v20240826</jetty.version>
         <log4j.version>2.23.1</log4j.version>
         <slf4j.version>2.0.16</slf4j.version>
 
