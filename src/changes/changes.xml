@@ -9,6 +9,9 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
             <action type="update" dev="rbri">
+                websocket-client: jetty updated to 9.4.56.v20240826.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.17.0.
             </action>
             <action type="add" dev="RhinoTeam">
