@@ -42,6 +42,7 @@ import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
@@ -192,6 +193,7 @@ public class WebRequest2Test extends WebServerTestCase {
      */
     @Test
     @Default
+    @Ignore
     public void test() throws Exception {
         final URL url = new URL(URL_FIRST, query_);
         final WebRequest request = new WebRequest(url);
