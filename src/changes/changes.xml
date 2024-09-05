@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: Support for logical assigment operators '||=' and '&&=' added.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Stacktrace line number fixed.
+            </action>
             <action type="update" dev="rbri">
                 websocket-client: jetty updated to 9.4.56.v20240826.
             </action>
