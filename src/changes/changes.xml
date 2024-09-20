@@ -8,11 +8,14 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.17.0.
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: Support for Promise.any added.
             </action>
             <action type="add" dev="RhinoTeam">
-                core-js: Support for nullish coalescing operators '??' added.
+                core-js: Support for nullish coalescing operator '??' added.
             </action>
             <action type="add" dev="RhinoTeam">
                 core-js: Support for logical assigment operators '||=' and '&amp;&amp;=' added.

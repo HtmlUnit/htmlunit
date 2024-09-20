@@ -39,7 +39,7 @@
         <selenium.devtools.artifactId>selenium-devtools-v127</selenium.devtools.artifactId>
 
         <jetty.version>9.4.56.v20240826</jetty.version>
-        <log4j.version>2.23.1</log4j.version>
+        <log4j.version>2.24.0</log4j.version>
         <slf4j.version>2.0.16</slf4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
@@ -83,7 +83,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.8.6.2</version>
+                <version>4.8.6.3</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
@@ -220,7 +220,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.2.6</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
@@ -1273,7 +1273,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.16.1</version>
+            <version>2.17.0</version>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
