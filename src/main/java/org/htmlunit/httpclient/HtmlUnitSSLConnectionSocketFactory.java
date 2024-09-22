@@ -20,11 +20,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.security.GeneralSecurityException;
-import java.security.KeyManagementException;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
@@ -92,12 +88,13 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
 
             if (!useInsecureSSL) {
                 final KeyStore keyStore = options.getSSLClientCertificateStore();
+                final char[] keyStorePassword = keyStore == null ? null : options.getSSLClientCertificatePassword();
                 final KeyStore trustStore = options.getSSLTrustStore();
 
-                return new HtmlUnitSSLConnectionSocketFactory(keyStore,
-                        keyStore == null ? null : options.getSSLClientCertificatePassword(),
-                        trustStore, useInsecureSSL,
-                        sslClientProtocols, sslClientCipherSuites);
+                final SSLContext sslContext = SSLContexts.custom()
+                        .loadKeyMaterial(keyStore, keyStorePassword).loadTrustMaterial(trustStore, null).build();
+                return new HtmlUnitSSLConnectionSocketFactory(sslContext, new DefaultHostnameVerifier(),
+                        useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
             }
 
             // we need insecure SSL + SOCKS awareness
@@ -120,17 +117,6 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
             final HostnameVerifier hostnameVerifier, final boolean useInsecureSSL,
             final String[] supportedProtocols, final String[] supportedCipherSuites) {
         super(sslContext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
-        useInsecureSSL_ = useInsecureSSL;
-    }
-
-    private HtmlUnitSSLConnectionSocketFactory(final KeyStore keystore, final char[] keystorePassword,
-            final KeyStore truststore, final boolean useInsecureSSL,
-            final String[] supportedProtocols, final String[] supportedCipherSuites)
-        throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
-        super(SSLContexts.custom()
-                .loadKeyMaterial(keystore, keystorePassword).loadTrustMaterial(truststore, null).build(),
-                supportedProtocols, supportedCipherSuites,
-                new DefaultHostnameVerifier());
         useInsecureSSL_ = useInsecureSSL;
     }
 
