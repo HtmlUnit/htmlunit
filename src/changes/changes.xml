@@ -8,6 +8,19 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
+            <action type="remove" dev="rbri">
+                Class org.htmlunit.javascript.preprocessor.HtmxOneNineTenScriptPreProcessor removed.
+                This class is no longer required because default parameter support was added to core-js.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Support for default parameters added.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: String.isWellFormed() and String.toWellFormed() added.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Support surrogate chars in JSON.stringify().
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.17.0.
             </action>

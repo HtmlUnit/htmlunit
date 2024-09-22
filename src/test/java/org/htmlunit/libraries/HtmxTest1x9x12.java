@@ -14,8 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import org.htmlunit.WebClient;
-import org.htmlunit.javascript.preprocessor.HtmxOneNineTenScriptPreProcessor;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
@@ -38,12 +36,5 @@ public class HtmxTest1x9x12 extends HtmxTest {
     @BuggyWebDriver(CHROME = "passes:707failures:1", EDGE = "passes:707failures:1")
     public void htmx() throws Exception {
         htmx("htmx-1.9.12");
-    }
-
-    @Override
-    protected void setupWebClient(final WebClient webClient) {
-        super.setupWebClient(webClient);
-
-        webClient.setScriptPreProcessor(new HtmxOneNineTenScriptPreProcessor());
     }
 }
