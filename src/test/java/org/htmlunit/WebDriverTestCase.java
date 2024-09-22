@@ -592,14 +592,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final FirefoxOptions options = new FirefoxOptions();
         options.setBinary(binary);
 
-        final String tz = getBrowserVersion().getSystemTimezone().getID();
-
         String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
         locale = locale + "," + getBrowserVersion().getBrowserLocale().getLanguage();
 
         final FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("intl.accept_languages", locale);
         // no idea so far how to set this
+        // final String tz = getBrowserVersion().getSystemTimezone().getID();
         // profile.setPreference("intl.tz", tz);
         options.setProfile(profile);
 
@@ -630,7 +629,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         LAST_TEST_UsesMockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
-            final Server server = buildServer(PORT);
+            final Server server = new Server(PORT);
 
             final WebAppContext context = new WebAppContext();
             context.setContextPath("/");
@@ -666,7 +665,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         MockWebConnectionServlet.MockConnection_ = mockConnection;
 
         if (STATIC_SERVER2_ == null && needThreeConnections()) {
-            final Server server2 = buildServer(PORT2);
+            final Server server2 = new Server(PORT2);
             final WebAppContext context2 = new WebAppContext();
             context2.setContextPath("/");
             context2.setResourceBase("./");
@@ -677,7 +676,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
             STATIC_SERVER2_ = server2;
 
-            final Server server3 = buildServer(PORT3);
+            final Server server3 = new Server(PORT3);
             final WebAppContext context3 = new WebAppContext();
             context3.setContextPath("/");
             context3.setResourceBase("./");
@@ -957,7 +956,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         return loadPage2(url, serverCharset);
     }
-
 
     /**
      * Load the page from the url.
@@ -1570,26 +1568,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
     }
 
-    // limit resource usage
-    private static Server buildServer(final int port) {
-        return new Server(port);
-
-        //    https://github.com/HtmlUnit/htmlunit/issues/462
-        //    https://github.com/eclipse/jetty.project/issues/2503
-        //    the value for the QueuedThreadPool are validated,
-        //    let's make another try with the defaults
-        //
-        //    final QueuedThreadPool threadPool = new QueuedThreadPool(5, 2);
-        //
-        //    final Server server = new Server(threadPool);
-        //
-        //    final ServerConnector connector = new ServerConnector(server);
-        //    connector.setPort(port);
-        //    server.setConnectors(new Connector[] {connector});
-        //
-        //    return server;
-    }
-
     /**
      * Release resources but DON'T close the browser if we are running with a real browser.
      * Note that HtmlUnitDriver is not cached by default, but that can be configured by {@link #isWebClientCached()}.
@@ -1672,6 +1650,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                         // in the remaining window, load a blank page
                         driver.get("about:blank");
+                    }
+                    catch (final NoSuchSessionException e) {
+                        LOG.error("Error browser session no longer available.", e);
+                        WEB_DRIVERS_REAL_BROWSERS.remove(getBrowserVersion());
+                        WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT.remove(getBrowserVersion());
+                        return;
                     }
                     catch (final WebDriverException e) {
                         shutDownRealBrowsers();
