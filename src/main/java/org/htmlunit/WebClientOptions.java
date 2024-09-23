@@ -25,6 +25,8 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 
+import javax.net.ssl.SSLContext;
+
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -57,14 +59,15 @@ public class WebClientOptions implements Serializable {
     private String[] sslClientProtocols_;
     private String[] sslClientCipherSuites_;
 
+    private transient SSLContext sslContext_;
+    private boolean useInsecureSSL_; // default is secure SSL
+    private String sslInsecureProtocol_;
+
     private boolean doNotTrackEnabled_;
     private String homePage_ = "https://www.htmlunit.org/";
     private ProxyConfig proxyConfig_;
     private int timeout_ = 90_000; // like Firefox 16 default's value for network.http.connection-timeout
     private long connectionTimeToLive_ = -1; // HttpClient default
-
-    private boolean useInsecureSSL_; // default is secure SSL
-    private String sslInsecureProtocol_;
 
     private boolean fileProtocolForXMLHttpRequestsAllowed_;
 
@@ -86,6 +89,26 @@ public class WebClientOptions implements Serializable {
     private int webSocketMaxBinaryMessageBufferSize_ = -1;
 
     private boolean isFetchPolyfillEnabled_;
+
+    /**
+     * Sets the SSLContext; if this is set it is used and some other settings are ignored
+     * (protocol, keyStore, keyStorePassword, trustStore, sslClientCertificateStore, sslClientCertificatePassword).
+     * <p>This property is transient (because SSLContext is not serializable)
+     * @param sslContext the SSLContext, {@code null} to use for default value
+     */
+    public void setSSLContext(final SSLContext sslContext) {
+        sslContext_ = sslContext;
+    }
+
+    /**
+     * Gets the SSLContext; if this is set this is used and some other settings are ignored
+     * (protocol, keyStore, keyStorePassword, trustStore, sslClientCertificateStore, sslClientCertificatePassword).
+     * <p>This property is transient (because SSLContext is not serializable)
+     * @return the SSLContext
+     */
+    public SSLContext getSSLContext() {
+        return sslContext_;
+    }
 
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of

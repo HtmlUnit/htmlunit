@@ -84,29 +84,35 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
             final String[] sslClientProtocols = options.getSSLClientProtocols();
             final String[] sslClientCipherSuites = options.getSSLClientCipherSuites();
 
+            SSLContext sslContext = options.getSSLContext();
             final boolean useInsecureSSL = options.isUseInsecureSSL();
 
-            if (!useInsecureSSL) {
-                final KeyStore keyStore = options.getSSLClientCertificateStore();
-                final char[] keyStorePassword = keyStore == null ? null : options.getSSLClientCertificatePassword();
-                final KeyStore trustStore = options.getSSLTrustStore();
+            if (useInsecureSSL) {
+                // we need insecure SSL + SOCKS awareness
+                String protocol = options.getSSLInsecureProtocol();
+                if (protocol == null) {
+                    protocol = "SSL";
+                }
+                if (sslContext == null) {
+                    sslContext = SSLContext.getInstance(protocol);
+                }
+                sslContext.init(getKeyManagers(options),
+                                    new X509ExtendedTrustManager[] {new InsecureTrustManager()}, null);
 
-                final SSLContext sslContext = SSLContexts.custom()
+                return new HtmlUnitSSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE,
+                                true, sslClientProtocols, sslClientCipherSuites);
+            }
+
+            final KeyStore keyStore = options.getSSLClientCertificateStore();
+            final char[] keyStorePassword = keyStore == null ? null : options.getSSLClientCertificatePassword();
+            final KeyStore trustStore = options.getSSLTrustStore();
+
+            if (sslContext == null) {
+                sslContext = SSLContexts.custom()
                         .loadKeyMaterial(keyStore, keyStorePassword).loadTrustMaterial(trustStore, null).build();
-                return new HtmlUnitSSLConnectionSocketFactory(sslContext, new DefaultHostnameVerifier(),
-                        useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
             }
-
-            // we need insecure SSL + SOCKS awareness
-            String protocol = options.getSSLInsecureProtocol();
-            if (protocol == null) {
-                protocol = "SSL";
-            }
-            final SSLContext sslContext = SSLContext.getInstance(protocol);
-            sslContext.init(getKeyManagers(options), new X509ExtendedTrustManager[] {new InsecureTrustManager()}, null);
-
-            return new HtmlUnitSSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE,
-                                            useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
+            return new HtmlUnitSSLConnectionSocketFactory(sslContext, new DefaultHostnameVerifier(),
+                            false, sslClientProtocols, sslClientCipherSuites);
         }
         catch (final GeneralSecurityException e) {
             throw new RuntimeException(e);
@@ -207,6 +213,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
         if (options.getSSLClientCertificateStore() == null) {
             return null;
         }
+
         try {
             final KeyStore keyStore = options.getSSLClientCertificateStore();
             final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(
