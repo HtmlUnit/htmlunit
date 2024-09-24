@@ -95,9 +95,9 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
                 }
                 if (sslContext == null) {
                     sslContext = SSLContext.getInstance(protocol);
+                    sslContext.init(getKeyManagers(options),
+                            new X509ExtendedTrustManager[] {new InsecureTrustManager()}, null);
                 }
-                sslContext.init(getKeyManagers(options),
-                                    new X509ExtendedTrustManager[] {new InsecureTrustManager()}, null);
 
                 return new HtmlUnitSSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE,
                                 true, sslClientProtocols, sslClientCipherSuites);
