@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
+            <action type="add" dev="rbri" issuse="#684">
+                New (transient) configuration option SSLContext added.
+            </action>
             <action type="remove" dev="rbri">
                 Class org.htmlunit.javascript.preprocessor.HtmxOneNineTenScriptPreProcessor removed.
                 This class is no longer required because default parameter support was added to core-js.
