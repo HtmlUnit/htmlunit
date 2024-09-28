@@ -8,6 +8,18 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: optional chaining operator '?.' support added.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Some byte code generation fixes for Android.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Symbol.prototype.description support added.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: some minor fixes for the Reflect/Proxy support.
+            </action>
             <action type="add" dev="rbri" issuse="#684">
                 New (transient) configuration option SSLContext added.
             </action>
