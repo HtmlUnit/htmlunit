@@ -99,6 +99,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /** The name of the "element" property. Used when watching property change events. */
     public static final String PROPERTY_ELEMENT = "element";
 
+    private static final NamedNodeMap EMPTY_NAMED_NODE_MAP = new ReadOnlyEmptyNamedNodeMapImpl();
+
     /** The owning page of this node. */
     private SgmlPage page_;
 
@@ -662,7 +664,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     @Override
     public NamedNodeMap getAttributes() {
-        return NamedAttrNodeMapImpl.EMPTY_MAP;
+        return EMPTY_NAMED_NODE_MAP;
     }
 
     /**
@@ -1936,6 +1938,79 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         catch (final IOException e) {
             throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * An unmodifiable empty {@link NamedNodeMap} implementation.
+     */
+    private static final class ReadOnlyEmptyNamedNodeMapImpl implements NamedNodeMap, Serializable {
+        private ReadOnlyEmptyNamedNodeMapImpl() {
+            super();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int getLength() {
+            return 0;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public DomAttr getNamedItem(final String name) {
+            return null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Node getNamedItemNS(final String namespaceURI, final String localName) {
+            return null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Node item(final int index) {
+            return null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Node removeNamedItem(final String name) throws DOMException {
+            return null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Node removeNamedItemNS(final String namespaceURI, final String localName) {
+            return null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public DomAttr setNamedItem(final Node node) {
+            throw new UnsupportedOperationException("ReadOnlyEmptyNamedAttrNodeMapImpl.setNamedItem");
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Node setNamedItemNS(final Node node) throws DOMException {
+            throw new UnsupportedOperationException("ReadOnlyEmptyNamedAttrNodeMapImpl.setNamedItemNS");
         }
     }
 }
