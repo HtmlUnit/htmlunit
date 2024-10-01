@@ -1688,7 +1688,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
         caseSensitive_ = caseSensitive;
 
         // we expect a special map here, if we don't get it... we have to create us one
-        if (!caseSensitive && attributes instanceof OrderedFastHashMapWithLowercaseKeys) {
+        if (attributes instanceof OrderedFastHashMapWithLowercaseKeys) {
             // no need to rework the map at all, we are case sensitive, so
             // we keep all attributes and we got the right map from outside too
             map_ = (OrderedFastHashMap) attributes;
