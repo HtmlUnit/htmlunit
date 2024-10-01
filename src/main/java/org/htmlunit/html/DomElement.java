@@ -51,6 +51,7 @@ import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 import org.htmlunit.cyberneko.util.FastHashMap;
+import org.htmlunit.html.DefaultElementFactory.OrderedFastHashMapWithLowercaseKeys;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
@@ -1687,7 +1688,12 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
         caseSensitive_ = caseSensitive;
 
         // we expect a special map here, if we don't get it... we have to create us one
-        if (caseSensitive && attributes instanceof OrderedFastHashMap) {
+        if (!caseSensitive && attributes instanceof OrderedFastHashMapWithLowercaseKeys) {
+            // no need to rework the map at all, we are case sensitive, so
+            // we keep all attributes and we got the right map from outside too
+            map_ = (OrderedFastHashMap) attributes;
+        }
+        else if (caseSensitive && attributes instanceof OrderedFastHashMap) {
             // no need to rework the map at all, we are case sensitive, so
             // we keep all attributes and we got the right map from outside too
             map_ = (OrderedFastHashMap) attributes;

@@ -767,7 +767,7 @@ public class DefaultElementFactory implements ElementFactory {
      */
     static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
         final int length = attributes == null ? 0 : attributes.getLength();
-        final Map<String, DomAttr> attributeMap = new OrderedFastHashMap<>(length);
+        final Map<String, DomAttr> attributeMap = new OrderedFastHashMapWithLowercaseKeys<>(length);
 
         for (int i = 0; i < length; i++) {
             final String qName = attributes.getQName(i);
@@ -786,6 +786,12 @@ public class DefaultElementFactory implements ElementFactory {
         }
 
         return attributeMap;
+    }
+
+    static final class OrderedFastHashMapWithLowercaseKeys<K, V> extends OrderedFastHashMap<K, V> {
+        OrderedFastHashMapWithLowercaseKeys(final int size) {
+            super(size);
+        }
     }
 
     private static HtmlElement createInputElement(final String qualifiedName, final SgmlPage page,
