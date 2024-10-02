@@ -56,6 +56,10 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         return loadPage(html, null);
     }
 
+    public final HtmlPage loadPageOnlyParse(final String html) throws Exception {
+        return loadPage(html, null);
+    }
+
     /**
      * User the default browser version to load a page with the specified HTML
      * and collect alerts into the list.
