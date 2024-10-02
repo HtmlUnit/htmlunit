@@ -1,10 +1,7 @@
 package org.htmlunit.benchmarks;
 
-import java.util.concurrent.TimeUnit;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -53,6 +50,16 @@ public class HtmlUnitBenchmark extends SimpleWebTestCase {
                       <span style="font-weight: 700; font-family: &apos;Public Sans&apos;; display: initial;" no_space_b="true" no_space_e="true">
                        Project manager
                       </span>
+                        <span style="font-weight: 700; font-family: &apos;Public Sans&apos;; display: initial;" no_space_b="true" no_space_e="true">
+                       Project manager
+                      </span>
+                        <span style="font-weight: 700; font-family: &apos;Public Sans&apos;; display: initial;" no_space_b="true" no_space_e="true">
+                       Project manager
+                      </span>  <span style="font-weight: 700; font-family: &apos;Public Sans&apos;; display: initial;" no_space_b="true" no_space_e="true">
+                       Project manager
+                      </span>
+            
+            
                           </h4>
                         </div>
                         <div class="u_1799381409 dmNewParagraph ql-disabled" data-dmtmpl="true" data-element-type="paragraph" id="1799381409" duda_id="1799381409" style="transition: none 0s ease 0s; text-align: left; display: block;" data-uialign="left" data-version="5">
@@ -323,6 +330,35 @@ public class HtmlUnitBenchmark extends SimpleWebTestCase {
                        Project manager, East Company
                       </span>
                           </h4>
+                         <div class="u_1530189599 dmNewParagraph" data-dmtmpl="true" data-element-type="paragraph" data-version="5" id="153019989599" duda_id="15930189599" style="transition: none 0s ease 0s; text-align: left;" data-uialign="left">
+                          <h4 localization_key="templates.custom.KaEpVr7.20">
+                      <span style="display: unset; color: rgb(254, 244, 245); font-family: &apos;Public Sans&apos;; font-weight: 600;" no_space_b="true" no_space_e="true">
+                       Project manager, East Company
+                      </span>
+                          </h4>
+                           <h4 localization_key="templates.custom.KaEpVr7.20">
+                      <span style="display: unset; color: rgb(254, 244, 245); font-family: &apos;Public Sans&apos;; font-weight: 600;" no_space_b="true" no_space_e="true">
+                       Project manager, East Company
+                      </span>
+                          </h4>
+                           <h4 localization_key="templates.custom.KaEpVr7.20">
+                      <span style="display: unset; color: rgb(254, 244, 245); font-family: &apos;Public Sans&apos;; font-weight: 600;" no_space_b="true" no_space_e="true">
+                       Project manager, East Company
+                      </span>
+                          </h4>
+                           <h4 localization_key="templates.custom.KaEpVr7.20">
+                      <span style="display: unset; color: rgb(254, 244, 245); font-family: &apos;Public Sans&apos;; font-weight: 600;" no_space_b="true" no_space_e="true">
+                       Project manager, East Company
+                      </span>
+                          </h4>
+                           <h4 localization_key="templates.custom.KaEpVr7.20">
+                      <span style="display: unset; color: rgb(254, 244, 245); font-family: &apos;Public Sans&apos;; font-weight: 600;" no_space_b="true" no_space_e="true">
+                       Project manager, East Company
+                      </span>
+                          </h4>
+                        </div>
+            
+            
                         </div>
                       </div>
                       <div class="dmRespCol empty-column large-6 medium-6 small-12" id="1441629520" duda_id="1441629520">
@@ -380,6 +416,92 @@ public class HtmlUnitBenchmark extends SimpleWebTestCase {
                         MBA in International Studies and Economics
                        </span>
                       </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>   <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>   <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+            
+            
+            
                           </p>
                         </div>
                         <div class="u_1671421179 dmNewParagraph" data-dmtmpl="true" data-element-type="paragraph" data-version="5" id="1671421179" duda_id="1671421179" style="transition: opacity 1s ease-in-out 0s;" data-uialign="right">
@@ -496,6 +618,27 @@ public class HtmlUnitBenchmark extends SimpleWebTestCase {
                           </h4>
                         </div>
                       </div>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+                         <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>   <span class="" style="display: unset; color: rgb(254, 244, 245);" no_space_b="true" no_space_e="true">
+                       <span style="display: unset; color: rgb(254, 244, 245);" no_space_b="true">
+                        MBA in International Studies and Economics
+                       </span>
+                      </span>
+            
+            
                       <div class="u_1889391922 dmRespCol empty-column large-3 medium-3 small-6" id="1889391922" duda_id="1889391922">
                         <div class="u_1999146337 dmNewParagraph" data-dmtmpl="true" data-element-type="paragraph" data-version="5" id="1999146337" duda_id="1999146337" style="transition: none 0s ease 0s; text-align: left; display: block;" data-uialign="left">
                           <h4>
@@ -625,7 +768,7 @@ public class HtmlUnitBenchmark extends SimpleWebTestCase {
 
         setBrowserVersion(BrowserVersion.CHROME);
 
-        HtmlPage pageFromString = loadPage( html);
+        HtmlPage pageFromString = loadPage(html);
 
         assert !pageFromString.querySelector("h1").asNormalizedText().contains("Stella");
     }
