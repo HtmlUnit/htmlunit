@@ -9,6 +9,9 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
             <action type="add" dev="RhinoTeam">
+                core-js: Support the standard "toStringTag" symbol when converting objects to strings.
+            </action>
+            <action type="add" dev="RhinoTeam">
                 core-js: optional chaining operator '?.' support added.
             </action>
             <action type="add" dev="RhinoTeam">
