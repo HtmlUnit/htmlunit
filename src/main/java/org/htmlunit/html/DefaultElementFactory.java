@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +24,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.cyberneko.xerces.util.XMLAttributesImpl;
+import org.htmlunit.cyberneko.xerces.xni.QName;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import org.htmlunit.util.OrderedFastHashMap;
 import org.xml.sax.Attributes;
@@ -766,8 +769,35 @@ public class DefaultElementFactory implements ElementFactory {
      * @return the map of attribute values for {@link HtmlElement}s
      */
     static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
-        final int length = attributes == null ? 0 : attributes.getLength();
+        if (attributes == null) {
+            return new OrderedFastHashMap<>(0);
+        }
+
+        final int length = attributes.getLength();
         final Map<String, DomAttr> attributeMap = new OrderedFastHashMap<>(length);
+
+        // small performance optimization if we know the attributes we can avoid some index lookups
+        if (attributes instanceof XMLAttributesImpl) {
+            final ArrayList<XMLAttributesImpl.Attribute> attribs = ((XMLAttributesImpl) attributes).getAttributes();
+            for (final XMLAttributesImpl.Attribute attribute : attribs) {
+                final QName qName = attribute.getQName();
+                final String name = qName.getRawname();
+
+                // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
+                if (!attributeMap.containsKey(name)) {
+                    String namespaceURI = qName.getUri();
+
+                    if (namespaceURI != null && namespaceURI.isEmpty()) {
+                        namespaceURI = null;
+                    }
+
+                    final DomAttr newAttr = new DomAttr(page, namespaceURI, name, attribute.getValue(), true);
+                    attributeMap.put(name, newAttr);
+                }
+            }
+
+            return attributeMap;
+        }
 
         for (int i = 0; i < length; i++) {
             final String qName = attributes.getQName(i);
