@@ -8,6 +8,21 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 128, Firefox 129, WebWorker, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: code cleanup; remove the unused javascript/optimizer package.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: bunch of code optimizations.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: remove '__exception__' property from global context.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: improve ScriptRuntime.toPrimitive() and use it at many places.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: optimize initializion of error objects.
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: Support the standard "toStringTag" symbol when converting objects to strings.
             </action>
