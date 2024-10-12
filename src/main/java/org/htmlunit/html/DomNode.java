@@ -1059,7 +1059,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             onAddedToDocumentFragment();
         }
 
-        fireNodeAdded(new DomChangeEvent(this, domNode));
+        fireNodeAdded(this, domNode);
     }
 
     /**
@@ -1177,10 +1177,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         if (exParent != null) {
-            final DomChangeEvent event = new DomChangeEvent(exParent, this);
-            fireNodeDeleted(event);
+            fireNodeDeleted(exParent, this);
             // ask ex-parent to fire event (because we don't have parent now)
-            exParent.fireNodeDeleted(event);
+            exParent.fireNodeDeleted(exParent, this);
         }
     }
 
@@ -1635,15 +1634,22 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * <p>Note that this method recursively calls this node's parent's {@link #fireNodeAdded(DomChangeEvent)}.</p>
      *
-     * @param event the DomChangeEvent to be propagated
+     * @param parentNode the parent of the node that was changed
+     * @param addedNode the node that has been added
      */
-    protected void fireNodeAdded(final DomChangeEvent event) {
+    protected void fireNodeAdded(final DomNode parentNode, final DomNode addedNode) {
+        DomChangeEvent event = null;
+
         DomNode toInform = this;
         while (toInform != null) {
             if (toInform.domListeners_ != null) {
                 final List<DomChangeListener> listeners;
                 synchronized (toInform) {
                     listeners = new ArrayList<>(toInform.domListeners_);
+                }
+
+                if (event == null) {
+                    event = new DomChangeEvent(parentNode, addedNode);
                 }
                 for (final DomChangeListener domChangeListener : listeners) {
                     domChangeListener.nodeAdded(event);
@@ -1694,15 +1700,22 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * <p>Note that this method recursively calls this node's parent's {@link #fireCharacterDataChanged}.</p>
      *
-     * @param event the CharacterDataChangeEvent to be propagated
+     * @param characterData the character data which is changed
+     * @param oldValue the old value
      */
-    protected void fireCharacterDataChanged(final CharacterDataChangeEvent event) {
+    protected void fireCharacterDataChanged(final DomCharacterData characterData, final String oldValue) {
+        CharacterDataChangeEvent event = null;
+
         DomNode toInform = this;
         while (toInform != null) {
             if (toInform.characterDataListeners_ != null) {
                 final List<CharacterDataChangeListener> listeners;
                 synchronized (toInform) {
                     listeners = new ArrayList<>(toInform.characterDataListeners_);
+                }
+
+                if (event == null) {
+                    event = new CharacterDataChangeEvent(characterData, oldValue);
                 }
                 for (final CharacterDataChangeListener domChangeListener : listeners) {
                     domChangeListener.characterDataChanged(event);
@@ -1719,15 +1732,22 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * <p>Note that this method recursively calls this node's parent's {@link #fireNodeDeleted(DomChangeEvent)}.</p>
      *
-     * @param event the DomChangeEvent to be propagated
+     * @param parentNode the parent of the node that was changed
+     * @param deletedNode the node that has been deleted
      */
-    protected void fireNodeDeleted(final DomChangeEvent event) {
+    protected void fireNodeDeleted(final DomNode parentNode, final DomNode deletedNode) {
+        DomChangeEvent event = null;
+
         DomNode toInform = this;
         while (toInform != null) {
             if (toInform.domListeners_ != null) {
                 final List<DomChangeListener> listeners;
                 synchronized (toInform) {
                     listeners = new ArrayList<>(toInform.domListeners_);
+                }
+
+                if (event == null) {
+                    event = new DomChangeEvent(parentNode, deletedNode);
                 }
                 for (final DomChangeListener domChangeListener : listeners) {
                     domChangeListener.nodeDeleted(event);
