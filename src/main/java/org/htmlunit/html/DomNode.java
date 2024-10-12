@@ -1640,12 +1640,16 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected void fireNodeAdded(final DomChangeEvent event) {
         DomNode toInform = this;
         while (toInform != null) {
-            final List<DomChangeListener> listeners = toInform.safeGetDomListeners();
-            if (listeners != null) {
+            if (toInform.domListeners_ != null) {
+                final List<DomChangeListener> listeners;
+                synchronized (toInform) {
+                    listeners = new ArrayList<>(toInform.domListeners_);
+                }
                 for (final DomChangeListener domChangeListener : listeners) {
                     domChangeListener.nodeAdded(event);
                 }
             }
+
             toInform = toInform.getParentNode();
         }
     }
@@ -1695,13 +1699,16 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected void fireCharacterDataChanged(final CharacterDataChangeEvent event) {
         DomNode toInform = this;
         while (toInform != null) {
-
-            final List<CharacterDataChangeListener> listeners = toInform.safeGetCharacterDataListeners();
-            if (listeners != null) {
-                for (final CharacterDataChangeListener changeListener : listeners) {
-                    changeListener.characterDataChanged(event);
+            if (toInform.characterDataListeners_ != null) {
+                final List<CharacterDataChangeListener> listeners;
+                synchronized (toInform) {
+                    listeners = new ArrayList<>(toInform.characterDataListeners_);
+                }
+                for (final CharacterDataChangeListener domChangeListener : listeners) {
+                    domChangeListener.characterDataChanged(event);
                 }
             }
+
             toInform = toInform.getParentNode();
         }
     }
@@ -1717,25 +1724,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected void fireNodeDeleted(final DomChangeEvent event) {
         DomNode toInform = this;
         while (toInform != null) {
-            final List<DomChangeListener> listeners = toInform.safeGetDomListeners();
-            if (listeners != null) {
+            if (toInform.domListeners_ != null) {
+                final List<DomChangeListener> listeners;
+                synchronized (toInform) {
+                    listeners = new ArrayList<>(toInform.domListeners_);
+                }
                 for (final DomChangeListener domChangeListener : listeners) {
                     domChangeListener.nodeDeleted(event);
                 }
             }
+
             toInform = toInform.getParentNode();
-        }
-    }
-
-    private List<DomChangeListener> safeGetDomListeners() {
-        synchronized (this) {
-            return domListeners_ == null ? null : new ArrayList<>(domListeners_);
-        }
-    }
-
-    private List<CharacterDataChangeListener> safeGetCharacterDataListeners() {
-        synchronized (this) {
-            return characterDataListeners_ == null ? null : new ArrayList<>(characterDataListeners_);
         }
     }
 
