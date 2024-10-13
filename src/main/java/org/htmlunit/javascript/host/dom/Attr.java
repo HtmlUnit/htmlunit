@@ -154,7 +154,7 @@ public class Attr extends Node {
      */
     @Override
     @JsxGetter
-    public Object getPrefix() {
+    public String getPrefix() {
         return super.getPrefix();
     }
 
@@ -163,7 +163,7 @@ public class Attr extends Node {
      */
     @Override
     @JsxGetter
-    public Object getLocalName() {
+    public String getLocalName() {
         return super.getLocalName();
     }
 
@@ -172,7 +172,7 @@ public class Attr extends Node {
      */
     @Override
     @JsxGetter
-    public Object getNamespaceURI() {
+    public String getNamespaceURI() {
         return super.getNamespaceURI();
     }
 

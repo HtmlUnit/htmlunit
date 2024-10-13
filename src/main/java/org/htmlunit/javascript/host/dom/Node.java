@@ -812,7 +812,7 @@ public class Node extends EventTarget {
      * Returns the namespace prefix.
      * @return the namespace prefix
      */
-    public Object getPrefix() {
+    public String getPrefix() {
         return getDomNodeOrDie().getPrefix();
     }
 
@@ -820,7 +820,7 @@ public class Node extends EventTarget {
      * Returns the local name of this attribute.
      * @return the local name of this attribute
      */
-    public Object getLocalName() {
+    public String getLocalName() {
         return getDomNodeOrDie().getLocalName();
     }
 
@@ -828,7 +828,7 @@ public class Node extends EventTarget {
      * Returns the URI that identifies an XML namespace.
      * @return the URI that identifies an XML namespace
      */
-    public Object getNamespaceURI() {
+    public String getNamespaceURI() {
         return getDomNodeOrDie().getNamespaceURI();
     }
 

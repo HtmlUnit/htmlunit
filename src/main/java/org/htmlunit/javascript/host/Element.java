@@ -279,7 +279,7 @@ public class Element extends Node {
      * @return a live NodeList of found elements in the order they appear in the tree
      */
     @JsxFunction
-    public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
+    public HTMLCollection getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final HTMLCollection elements = new HTMLCollection(getDomNodeOrDie(), false);
         elements.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
@@ -538,7 +538,7 @@ public class Element extends Node {
      * @return the class name
      */
     @JsxGetter(propertyName = "className")
-    public Object getClassName_js() {
+    public String getClassName_js() {
         return getDomNodeOrDie().getAttributeDirect("class");
     }
 
@@ -1293,7 +1293,7 @@ public class Element extends Node {
      */
     @Override
     @JsxGetter
-    public Object getPrefix() {
+    public String getPrefix() {
         return super.getPrefix();
     }
 
@@ -1302,7 +1302,7 @@ public class Element extends Node {
      */
     @Override
     @JsxGetter
-    public Object getLocalName() {
+    public String getLocalName() {
         return super.getLocalName();
     }
 
@@ -1311,7 +1311,7 @@ public class Element extends Node {
      */
     @Override
     @JsxGetter
-    public Object getNamespaceURI() {
+    public String getNamespaceURI() {
         return super.getNamespaceURI();
     }
 

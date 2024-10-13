@@ -12,7 +12,10 @@
                 INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
             </action>
             <action type="fix" dev="rbri">
-                Javascript Cssstyledeclaration#item() now returns a string.
+                Javascript return type of some methods changed from Objedt to String.
+            </action>
+            <action type="fix" dev="rbri">
+                Javascript Cssstyledeclaration#item() now returns a String.
             </action>
             <action type="update" dev="RhinoTeam">
                 core-js: code cleanup; remove the unused javascript/optimizer package.
