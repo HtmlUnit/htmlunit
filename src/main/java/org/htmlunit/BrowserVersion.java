@@ -94,10 +94,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
 
     /** Latest Edge. */
-    public static final BrowserVersion EDGE = new BrowserVersion(128, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(129, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(128, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(129, "Chrome");
 
     /**
      * Array with all supported browsers.
