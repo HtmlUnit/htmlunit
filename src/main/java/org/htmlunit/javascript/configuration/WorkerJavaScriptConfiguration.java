@@ -77,7 +77,6 @@ import org.htmlunit.javascript.host.dom.DOMMatrixReadOnly;
 import org.htmlunit.javascript.host.dom.DOMPoint;
 import org.htmlunit.javascript.host.dom.DOMPointReadOnly;
 import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
-import org.htmlunit.javascript.host.dom.DOMRequest;
 import org.htmlunit.javascript.host.dom.DOMStringList;
 import org.htmlunit.javascript.host.event.CloseEvent;
 import org.htmlunit.javascript.host.event.CustomEvent;
@@ -145,7 +144,7 @@ public final class WorkerJavaScriptConfiguration extends AbstractJavaScriptConfi
         ClientRect.class, CloseEvent.class,
         Crypto.class, CryptoKey.class, CustomEvent.class,
         DedicatedWorkerGlobalScope.class, DOMException.class, DOMMatrix.class, DOMMatrixReadOnly.class,
-        DOMPoint.class, DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class, DOMStringList.class,
+        DOMPoint.class, DOMPointReadOnly.class, DOMRectReadOnly.class, DOMStringList.class,
         ErrorEvent.class, Event.class, EventSource.class, EventTarget.class,
         File.class, FileList.class, FileReader.class,
         FontFace.class, FontFaceSet.class, FormData.class,

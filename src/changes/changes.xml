@@ -11,6 +11,9 @@
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
             </action>
+            <action type="update" dev="rbri">
+                JS class Domrequest removed (was only used by FF_ESR).
+            </action>
             <action type="add" dev="rbri">
                 PointerEvent properties altitudeAngle and azimuthAngle supported in FF.
             </action>

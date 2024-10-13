@@ -143,7 +143,6 @@ import org.htmlunit.javascript.host.dom.DOMParser;
 import org.htmlunit.javascript.host.dom.DOMPoint;
 import org.htmlunit.javascript.host.dom.DOMPointReadOnly;
 import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
-import org.htmlunit.javascript.host.dom.DOMRequest;
 import org.htmlunit.javascript.host.dom.DOMStringList;
 import org.htmlunit.javascript.host.dom.DOMStringMap;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
@@ -577,7 +576,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DeviceMotionEvent.class, DeviceOrientationEvent.class,
         Document.class, DocumentFragment.class, DocumentType.class, DOMError.class, DOMException.class,
         DOMImplementation.class, DOMMatrix.class, DOMMatrixReadOnly.class, DOMParser.class, DOMPoint.class,
-        DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class,
+        DOMPointReadOnly.class, DOMRectReadOnly.class,
         DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
         DragEvent.class, DynamicsCompressorNode.class,
         Element.class, ErrorEvent.class, Event.class, EventSource.class,
