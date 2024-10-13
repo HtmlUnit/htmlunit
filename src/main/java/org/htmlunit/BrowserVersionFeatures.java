@@ -478,11 +478,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     XHR_LOAD_ALWAYS_AFTER_DONE,
 
-    /** XMLHttpRequest triggers an additional progress event if a network error
-     * was thrown in async mode. */
-    @BrowserFeature(FF_ESR)
-    XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC,
-
     /** If state unsent the response text is empty even if the response type is wrong. */
     @BrowserFeature({FF, FF_ESR})
     XHR_RESPONSE_TEXT_EMPTY_UNSENT,

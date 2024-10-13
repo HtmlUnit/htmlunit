@@ -18,7 +18,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static org.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
-import static org.htmlunit.BrowserVersionFeatures.XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC;
 import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TEXT_EMPTY_UNSENT;
 import static org.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
 
@@ -67,7 +66,6 @@ import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
-import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -907,10 +905,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        boolean preflighted = false;
         try {
             if (!isSameOrigin_ && isPreflight()) {
-                preflighted = true;
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // preflight request shouldn't have cookies
@@ -1053,14 +1049,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
         catch (final IOException e) {
             LOG.debug("IOException: returning a network error response.", e);
-
-            if (async_) {
-                if (!preflighted
-                        && HttpClientConverter.isNoHttpResponseException(e)
-                        && browserVersion.hasFeature(XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC)) {
-                    fireJavascriptEvent(Event.TYPE_PROGRESS);
-                }
-            }
 
             webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
             if (async_) {
