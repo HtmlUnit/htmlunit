@@ -612,7 +612,8 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"de", "de,de-DE,de,en-GB,en-US,en"},
+    @Alerts(DEFAULT = {"de-DE", "de-DE,de,en-US,en"},
+            EDGE = {"de", "de,de-DE,en,en-GB,en-US"},
             FF = {"de-DE", "de-DE,de"},
             FF_ESR = {"de-DE", "de-DE,de"})
     @HtmlUnitNYI(CHROME = {"de-DE", "de-DE,de"},
