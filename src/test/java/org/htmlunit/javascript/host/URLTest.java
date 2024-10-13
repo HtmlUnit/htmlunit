@@ -619,26 +619,16 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"https:",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "ex-unknown"},
-            FF_ESR = {"https:",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"})
+    @Alerts({"https:",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "ex-unknown"})
     public void protocol() throws Exception {
         final String html =
                 "<html>\n"
@@ -700,24 +690,15 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"https:",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "ex-unknown"},
-            FF_ESR = {"https:",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"})
+    @Alerts({"https:",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "ex-unknown"})
     public void protocol2() throws Exception {
         final String html =
                 "<html>\n"
@@ -775,24 +756,15 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"https:",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "ex-unknown"},
-            FF_ESR = {"https:",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"})
+    @Alerts({"https:",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "ex-unknown"})
     public void protocol3() throws Exception {
         final String html =
                 "<html>\n"
@@ -870,7 +842,7 @@ public class URLTest extends WebDriverTestCase {
                       "http:", "http://mydomain.com/svn/Repos/",
                       "https:", "https://mydomain.com/svn/Repos/",
                       "ftp:", "ftp://mydomain.com/svn/Repos/",
-                      "ftps:", "ftps://mydomain.com/svn/Repos/",
+                      "ftp:", "ftp://mydomain.com/svn/Repos/",
                       "ws:", "ws://mydomain.com/svn/Repos/",
                       "wss:", "wss://mydomain.com/svn/Repos/",
                       "file:", "file:///svn/Repos/"})
@@ -887,7 +859,7 @@ public class URLTest extends WebDriverTestCase {
                       "http:", "http://mydomain.com/svn/Repos/",
                       "https:", "https://mydomain.com/svn/Repos/",
                       "ftp:", "ftp://mydomain.com/svn/Repos/",
-                      "ftps:", "ftps://mydomain.com/svn/Repos/",
+                      "ftp:", "ftp://mydomain.com/svn/Repos/",
                       "ws:", "ws://mydomain.com/svn/Repos/",
                       "wss:", "wss://mydomain.com/svn/Repos/",
                       "file:", "file://mydomain.com/svn/Repos/"})

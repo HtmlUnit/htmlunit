@@ -464,10 +464,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF_ESR)
     MULTICOL_BLOCK,
 
-    /** The protocol setter does not check for special protocols. */
-    @BrowserFeature(FF_ESR)
-    URL_IGNORE_SPECIAL,
-
     /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
     @BrowserFeature({FF, FF_ESR})
     XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF,

@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
-import static org.htmlunit.BrowserVersionFeatures.URL_IGNORE_SPECIAL;
 
 import java.net.MalformedURLException;
 import java.util.List;
@@ -363,24 +362,7 @@ public class URL extends HtmlUnitScriptable {
             return;
         }
 
-        String bareProtocol = StringUtils.substringBefore(protocol, ":");
-        if (getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)) {
-            if (!UrlUtils.isValidScheme(bareProtocol)) {
-                return;
-            }
-
-            try {
-                url_ = UrlUtils.getUrlWithNewProtocol(url_, bareProtocol);
-                url_ = UrlUtils.removeRedundantPort(url_);
-            }
-            catch (final MalformedURLException ignored) {
-                // ignore
-            }
-
-            return;
-        }
-
-        bareProtocol = bareProtocol.trim();
+        final String bareProtocol = StringUtils.substringBefore(protocol, ":").trim();
         if (!UrlUtils.isValidScheme(bareProtocol)) {
             return;
         }

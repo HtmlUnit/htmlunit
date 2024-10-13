@@ -1048,8 +1048,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "-16")
+    @Alerts("0")
     public void multicol() throws Exception {
         loadPageVerifyTitle2(test("multicol"));
     }
@@ -1768,7 +1767,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "13",
-            FF = "10",
+            FF = "14",
             FF_ESR = "10")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
@@ -1822,7 +1821,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "13",
-            FF = "10",
+            FF = "14",
             FF_ESR = "10")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));

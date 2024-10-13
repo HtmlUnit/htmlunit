@@ -1067,8 +1067,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "-16")
+    @Alerts("0")
     public void multicol() throws Exception {
         test("multicol");
     }
