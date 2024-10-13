@@ -234,6 +234,7 @@ insetBlockStart
 insetInline
 insetInlineEnd
 insetInlineStart
+interpolateSize
 isolation
 justifyContent
 justifyItems
@@ -343,6 +344,7 @@ placeSelf
 pointerEvents
 position
 positionAnchor
+positionArea
 positionTry
 positionTryFallbacks
 positionTryOrder

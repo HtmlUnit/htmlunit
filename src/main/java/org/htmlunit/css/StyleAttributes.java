@@ -1465,7 +1465,7 @@ public final class StyleAttributes implements Serializable {
         INITIAL_VALUE("initialValue", "initial-value", chromeAndEdgeEmpty()),
 
         /** The style property {@code inlineSize}. */
-        INLINE_SIZE("inlineSize", "inline-size", ff("1244px"), chrome("1240px"), edge("1192px")),
+        INLINE_SIZE("inlineSize", "inline-size", ff("1244px"), chrome("1240px"), edge("1232px")),
 
         /** The style property {@code inline-size}. */
         INLINE_SIZE_("inline-size", "inline-size", ff("1244px")),
@@ -1511,6 +1511,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code inset-inline-start}. */
         INSET_INLINE_START_("inset-inline-start", "inset-inline-start", ff("auto")),
+
+        /** The style property {@code interpolateSize}. */
+        INTERPOLATE_SIZE("interpolateSize", "interpolate-size", chromeAndEdge("numeric-only")),
 
         /** The style property {@code isolation}. */
         ISOLATION("isolation", "isolation", ff("auto"), chromeAndEdgeAuto()),
@@ -2482,7 +2485,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ffEsr("622px 172.5px"), ffLatest("622px 164px"), chrome("620px 162px"), edge("596px 162px")),
+                ffEsr("622px 172.5px"), ffLatest("622px 164px"), chrome("620px 162px"), edge("616px 162px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin",
@@ -2517,6 +2520,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code positionAnchor}. */
         POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdgeAuto()),
+
+        /** The style property {@code positionArea}. */
+        POSITION_AREA("positionArea", "position-area", chromeAndEdgeNone()),
 
         /** The style property {@code positionTry}. */
         POSITION_TRY("positionTry", "position-try", chromeAndEdgeNone()),
@@ -3098,7 +3104,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ffEsr("622px 172.5px"), ffLatest("622px 164px"), chrome("620px 162px"), edge("596px 162px")),
+                ffEsr("622px 172.5px"), ffLatest("622px 164px"), chrome("620px 162px"), edge("616px 162px")),
 
         /** The style property {@code transform-origin}. */
         TRANSFORM_ORIGIN_("transform-origin", "transform-origin",
@@ -3755,7 +3761,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chromeAndEdge("324px")),
 
         /** The style property {@code webkitLogicalWidth}. */
-        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chrome("1240px"), edge("1192px")),
+        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chrome("1240px"), edge("1232px")),
 
         /** The style property {@code webkitMarginAfter}. */
         WEBKIT_MARGIN_AFTER("webkitMarginAfter", "webkit-margin-after", chromeAndEdge("0px")),
@@ -3925,7 +3931,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin",
-                ffEsr("622px 172.5px"), ffLatest("622px 164px"), chrome("620px 162px"), edge("596px 162px")),
+                ffEsr("622px 172.5px"), ffLatest("622px 164px"), chrome("620px 162px"), edge("616px 162px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin",
@@ -4059,7 +4065,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin",
-                ffEsr("622px 172.5px"), ffLatest("622px 164px"), chrome("620px 162px"), edge("596px 162px")),
+                ffEsr("622px 172.5px"), ffLatest("622px 164px"), chrome("620px 162px"), edge("616px 162px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin",
