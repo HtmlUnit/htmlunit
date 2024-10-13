@@ -7,12 +7,12 @@
     </properties>
 
     <body>
-        <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 129, Firefox 129, WebWorker, Bugfixes">
+        <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 129, Firefox 131, FirefoxESR 128, WebWorker, Bugfixes">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
             </action>
             <action type="fix" dev="rbri">
-                Javascript return type of some methods changed from Objedt to String.
+                Javascript return type of some methods changed from Object to String.
             </action>
             <action type="fix" dev="rbri">
                 Javascript Cssstyledeclaration#item() now returns a String.
