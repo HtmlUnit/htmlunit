@@ -115,7 +115,8 @@ public final class BrowserVersion implements Serializable {
     /* Register plugins for the browser versions. */
     static {
         FIREFOX_ESR.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_ESR.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/"
+        FIREFOX_ESR.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
+                                    + FIREFOX_ESR.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
                                     + FIREFOX_ESR.getBrowserVersionNumeric() + ".0";
         FIREFOX_ESR.buildId_ = "20181001000000";
         FIREFOX_ESR.productSub_ = "20100101";
