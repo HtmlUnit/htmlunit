@@ -263,7 +263,7 @@ public class Blob extends HtmlUnitScriptable {
         }
 
         final Object optionsType = properties.get(OPTIONS_LASTMODIFIED, properties);
-        if (optionsType != null && properties != Scriptable.NOT_FOUND
+        if (optionsType != null && optionsType != Scriptable.NOT_FOUND
                 && !JavaScriptEngine.isUndefined(optionsType)) {
             try {
                 return Long.parseLong(JavaScriptEngine.toString(optionsType));
