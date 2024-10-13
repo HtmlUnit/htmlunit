@@ -61,7 +61,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@page { margin: 1cm; }",
-            FF = "@page  { margin: 1cm; }")
+            FF_ESR = "@page  { margin: 1cm; }")
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -89,7 +89,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@page { }",
-            FF = "@page  { }")
+            FF_ESR = "@page  { }")
     public void cssTextEmpty() throws Exception {
         final String html
             = "<html><body>\n"
@@ -117,7 +117,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@page { margin-left: 4cm; margin-right: 3cm; }",
-            FF = "@page  { margin-left: 4cm; margin-right: 3cm; }")
+            FF_ESR = "@page  { margin-left: 4cm; margin-right: 3cm; }")
     public void cssTextMultipleRules() throws Exception {
         final String html
             = "<html><body>\n"
@@ -145,7 +145,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@page { margin: 1cm; }",
-            FF = "@page  { margin: 1cm; }")
+            FF_ESR = "@page  { margin: 1cm; }")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -316,9 +316,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = ":first",
-            FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = ":first")
+    @Alerts(":first")
     public void selectorText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -347,9 +345,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = ":first",
-            FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = ":first")
+    @Alerts(":first")
     public void selectorTextCaseInsensitive() throws Exception {
         final String html
             = "<html><body>\n"
@@ -378,9 +374,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {":first", ":left"},
-            FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = {":first", ":left"})
+    @Alerts({":first", ":left"})
     public void selectorTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -411,9 +405,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {":first", "null"},
-            FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = {":first", "null"})
+    @Alerts({":first", "null"})
     public void selectorTextSetNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -444,9 +436,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {":first", ""},
-            FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = {":first", ""})
+    @Alerts({":first", ""})
     public void selectorTextSetEmpty() throws Exception {
         final String html
             = "<html><body>\n"
@@ -477,9 +467,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {":first", ":first"},
-            FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = {":first", ":first"})
+    @Alerts({":first", ":first"})
     public void selectorTextSetInvalid() throws Exception {
         final String html
             = "<html><body>\n"
@@ -510,9 +498,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {":first", ":left"},
-            FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = {":first", ":left"})
+    @Alerts({":first", ":left"})
     public void selectorTextSetCaseInsensitive() throws Exception {
         final String html
             = "<html><body>\n"

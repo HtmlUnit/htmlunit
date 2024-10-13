@@ -47,7 +47,7 @@ public enum BrowserVersionFeatures {
     CSS_BACKGROUND_RGBA,
 
     /** {@code CSSFontFaceRule.cssText} uses one more blank. */
-    @BrowserFeature(FF)
+    @BrowserFeature(FF_ESR)
     CSS_CSSTEXT_FF_STYLE,
 
     /** Is display style 'block'. */
