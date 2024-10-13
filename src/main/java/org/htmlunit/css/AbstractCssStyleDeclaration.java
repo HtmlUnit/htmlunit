@@ -214,11 +214,10 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     public abstract int getLength();
 
     /**
-     * Returns the item in the given index.
      * @param index the index
-     * @return the item in the given index
+     * @return the name of the CSS property at the specified index
      */
-    public abstract Object item(int index);
+    public abstract String item(int index);
 
     /**
      * Returns the CSSRule that is the parent of this style block or <code>null</code> if this CSSStyleDeclaration is

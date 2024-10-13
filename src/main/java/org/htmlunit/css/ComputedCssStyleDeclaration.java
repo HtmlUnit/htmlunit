@@ -433,7 +433,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public Object item(final int index) {
+    public String item(final int index) {
         return elementStyleDeclaration_.item(index);
     }
 

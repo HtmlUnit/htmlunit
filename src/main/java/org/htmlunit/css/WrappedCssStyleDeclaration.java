@@ -131,8 +131,8 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public Object item(final int index) {
-        return cssStyleDeclarationImpl_.getProperties().get(index);
+    public String item(final int index) {
+        return cssStyleDeclarationImpl_.getProperties().get(index).toString();
     }
 
     /**

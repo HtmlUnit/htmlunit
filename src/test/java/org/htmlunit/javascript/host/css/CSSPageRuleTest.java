@@ -544,19 +544,31 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "4", "[object CSSPageRule]",
-                       "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
+                       "margin: 1cm;",
+                       "string margin-top",
+                       "string margin-right",
+                       "string margin-bottom",
+                       "string margin-left"},
             FF = {"[object CSSPageDescriptors]", "[object CSSPageDescriptors]", "4", "[object CSSPageRule]",
-                  "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
+                  "margin: 1cm;",
+                  "string margin-top",
+                  "string margin-right",
+                  "string margin-bottom",
+                  "string margin-left"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
-                      "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"})
+                      "margin: 1cm;",
+                      "string margin-top",
+                      "string margin-right",
+                      "string margin-bottom",
+                      "string margin-left"})
     @HtmlUnitNYI(CHROME = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
-                           "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
+                           "1", "[object CSSPageRule]", "margin: 1cm;", "string margin: 1cm"},
             EDGE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
-                    "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
+                    "1", "[object CSSPageRule]", "margin: 1cm;", "string margin: 1cm"},
             FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
-                  "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
+                  "1", "[object CSSPageRule]", "margin: 1cm;", "string margin: 1cm"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
-                      "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"})
+                      "1", "[object CSSPageRule]", "margin: 1cm;", "string margin: 1cm"})
     // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
     public void style() throws Exception {
         final String html
@@ -577,7 +589,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "  log(style.parentRule);\n"
             + "  log(style.cssText);\n"
             + "  for (var i = 0; i < style.length; i++) {\n"
-            + "    log(style.item(i));\n"
+            + "    log(typeof style.item(i) + ' ' + style.item(i));\n"
             + "  }\n"
             + "</script>\n"
 

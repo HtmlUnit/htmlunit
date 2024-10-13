@@ -901,15 +901,15 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the item in the given index.
      * @param index the index
-     * @return the item in the given index
+     * @return a CSS property name from a CSSStyleDeclaration by index.
      */
     @JsxFunction
-    public Object item(final int index) {
+    public String item(final int index) {
         if (styleDeclaration_ == null) {
             return null; // prototype
         }
+
         return styleDeclaration_.item(index);
     }
 
