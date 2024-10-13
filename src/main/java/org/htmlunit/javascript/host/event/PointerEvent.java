@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.event;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
@@ -203,7 +204,7 @@ public class PointerEvent extends MouseEvent {
     /**
      * @return the pointerType
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF})
     @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals")
     public double getAltitudeAngle() {
         return 1.5707963267948966;
@@ -212,7 +213,7 @@ public class PointerEvent extends MouseEvent {
     /**
      * @return the pointerType
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF})
     public double getAzimuthAngle() {
         return 0d;
     }

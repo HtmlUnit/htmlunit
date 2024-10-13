@@ -11,6 +11,9 @@
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
             </action>
+            <action type="add" dev="rbri">
+                PointerEvent properties altitudeAngle and azimuthAngle supported in FF.
+            </action>
             <action type="fix" dev="rbri">
                 Javascript return type of some methods changed from Object to String.
             </action>

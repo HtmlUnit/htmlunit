@@ -59,8 +59,6 @@ public class PointerEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object PointerEvent]", "click", "false", "false", "false",
                        "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0"},
-            FF = {"[object PointerEvent]", "click", "false", "false", "false",
-                  "0", "1", "1", "0", "0", "0", "", "false", "undefined", "undefined"},
             FF_ESR = {"[object PointerEvent]", "click", "false", "false", "false",
                       "0", "1", "1", "0", "0", "0", "", "false", "undefined", "undefined"})
     public void create_ctor() throws Exception {
@@ -86,8 +84,6 @@ public class PointerEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object PointerEvent]", "click", "true", "false", "false",
                        "2", "1", "1", "0", "0", "0", "mouse", "false", "1.5707963267948966", "0"},
-            FF = {"[object PointerEvent]", "click", "true", "false", "false",
-                  "2", "1", "1", "0", "0", "0", "mouse", "false", "undefined", "undefined"},
             FF_ESR = {"[object PointerEvent]", "click", "true", "false", "false",
                       "2", "1", "1", "0", "0", "0", "mouse", "false", "undefined", "undefined"})
     public void create_ctorWithDetails() throws Exception {
