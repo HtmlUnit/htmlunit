@@ -1960,8 +1960,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF_ESR = "function DOMRequest() { [native code] }")
+    @Alerts("exception")
     public void domRequest() throws Exception {
         test("DOMRequest");
     }
@@ -4389,9 +4388,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function Iterator() { [native code] }",
-            EDGE = "function Iterator() { [native code] }")
+    @Alerts(DEFAULT = "function Iterator() { [native code] }",
+            FF_ESR = "exception")
     public void iterator() throws Exception {
         test("Iterator");
     }

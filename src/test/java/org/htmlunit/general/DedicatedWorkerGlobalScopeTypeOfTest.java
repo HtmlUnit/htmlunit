@@ -4317,9 +4317,8 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
+    @Alerts(DEFAULT = "function",
+            FF_ESR = "undefined")
     public void iterator() throws Exception {
         test("Iterator");
     }
