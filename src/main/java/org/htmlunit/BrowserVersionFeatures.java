@@ -110,10 +110,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     HTMLBASEFONT_END_TAG_FORBIDDEN,
 
-    /** If type submit/reset the form update is triggered even if disabled. */
-    @BrowserFeature(FF_ESR)
-    HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE,
-
     /** willValidate does not check the readonly property. */
     @BrowserFeature({FF, FF_ESR})
     HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY,

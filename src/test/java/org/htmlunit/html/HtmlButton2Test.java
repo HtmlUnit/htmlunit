@@ -796,8 +796,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            FF_ESR = "2")
+    @Alerts("1")
     public void onclickDisablesSubmit() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -826,8 +825,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"foo", "foonewValue", "foonewValue"},
-            FF_ESR = {"foo", "foonewValue", "foo"})
+    @Alerts({"foo", "foonewValue", "foonewValue"})
     public void onclickDisablesReset() throws Exception {
         final String html = "<html><head>\n"
             + "  <script type='text/javascript'>\n"
