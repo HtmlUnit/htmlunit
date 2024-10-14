@@ -416,10 +416,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_TABLE_SPAN_SET_ZERO_IF_INVALID,
 
-    /** WebSocket constructor accepts undefined/null. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    JS_WEBSOCKET_CTOR_ACCEPTS_UNDEFINED,
-
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
@@ -457,12 +453,6 @@ public enum BrowserVersionFeatures {
     /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
     @BrowserFeature({FF, FF_ESR})
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
-
-    /**
-     * The default display style of multicol is 'block'.
-     */
-    @BrowserFeature(FF_ESR)
-    MULTICOL_BLOCK,
 
     /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
     @BrowserFeature({FF, FF_ESR})

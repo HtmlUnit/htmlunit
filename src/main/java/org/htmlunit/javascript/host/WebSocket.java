@@ -14,15 +14,12 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_WEBSOCKET_CTOR_ACCEPTS_UNDEFINED;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Page;
@@ -231,34 +228,20 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         final Window win = getWindow(ctorObj);
-        if (win.getWebWindow().getWebClient().getBrowserVersion().hasFeature(JS_WEBSOCKET_CTOR_ACCEPTS_UNDEFINED)) {
-            String urlString = JavaScriptEngine.toString(args[0]);
-            try {
-                final Page page = win.getWebWindow().getEnclosedPage();
-                if (page instanceof HtmlPage) {
-                    URL url = ((HtmlPage) page).getFullyQualifiedUrl(urlString);
-                    url = UrlUtils.getUrlWithNewProtocol(url, "ws");
-                    urlString = url.toExternalForm();
-                }
+        String urlString = JavaScriptEngine.toString(args[0]);
+        try {
+            final Page page = win.getWebWindow().getEnclosedPage();
+            if (page instanceof HtmlPage) {
+                URL url = ((HtmlPage) page).getFullyQualifiedUrl(urlString);
+                url = UrlUtils.getUrlWithNewProtocol(url, "ws");
+                urlString = url.toExternalForm();
             }
-            catch (final MalformedURLException e) {
-                throw JavaScriptEngine.reportRuntimeError(
-                        "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.");
-            }
-            return new WebSocket(urlString, win);
         }
-
-        if (JavaScriptEngine.isUndefined(args[0])) {
-            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter is undefined.");
+        catch (final MalformedURLException e) {
+            throw JavaScriptEngine.reportRuntimeError(
+                    "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.");
         }
-        if (!(args[0] instanceof String)) {
-            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter must be a String.");
-        }
-        final String url = (String) args[0];
-        if (StringUtils.isBlank(url)) {
-            throw JavaScriptEngine.reportRuntimeError("WebSocket Error: 'url' parameter must be not empty.");
-        }
-        return new WebSocket(url, getWindow(ctorObj));
+        return new WebSocket(urlString, win);
     }
 
     /**

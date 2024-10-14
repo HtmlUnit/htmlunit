@@ -116,15 +116,17 @@ public class WebSocketTest extends WebDriverTestCase {
                        "ws://localhost:22222/", "ws://localhost:22222/", "exception invalid"},
             FF = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
                   "exception empty", "ws://localhost:22222/", "exception invalid"},
-            FF_ESR = {"exception no param", "exception undefined", "exception null",
-                      "exception empty", "exception blank", "exception invalid"})
+            FF_ESR = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
+                      "exception empty", "ws://localhost:22222/", "exception invalid"})
     @HtmlUnitNYI(
             CHROME = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
                       "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"},
             EDGE = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
                     "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"},
             FF = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
-                  "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"})
+                  "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"},
+            FF_ESR = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
+                      "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"})
     public void initialWithoutUrl() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
