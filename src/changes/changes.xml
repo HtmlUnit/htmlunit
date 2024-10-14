@@ -9,6 +9,10 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 129, Firefox 131, FirefoxESR 128, WebWorker, Bugfixes">
             <action type="update" dev="rbri">
+                Location.query property always returns an empty string if the location has the about protocol and
+                the browser is FF/FF_ESR.
+            </action>
+            <action type="update" dev="rbri">
                 Property window.clientInformation is settable in FF too.
             </action>
             <action type="update" dev="rbri">

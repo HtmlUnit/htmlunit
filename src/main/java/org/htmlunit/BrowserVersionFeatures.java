@@ -106,10 +106,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE,
 
-    /** If the frame src has 'about:' scheme always use 'about:blank' as source. */
-    @BrowserFeature({FF, FF_ESR})
-    FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME,
-
     /** Should org.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR})
     HTMLBASEFONT_END_TAG_FORBIDDEN,
@@ -359,6 +355,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that window.Iterator is supported. */
     @BrowserFeature({CHROME, EDGE})
     JS_ITERATOR_VISIBLE_IN_WINDOW,
+
+    /** For the 'about' protocol the location always returns an empty query. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL,
 
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})

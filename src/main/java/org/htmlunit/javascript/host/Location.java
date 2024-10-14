@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL;
 import static org.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 
 import java.io.IOException;
@@ -330,8 +331,15 @@ public class Location extends HtmlUnitScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     public String getSearch() {
-        final String search = getUrl().getQuery();
-        if (search == null) {
+        final URL url = getUrl();
+        final String search = url.getQuery();
+        if (StringUtils.isEmpty(search)) {
+            return "";
+        }
+
+        if (StringUtils.startsWithIgnoreCase(url.getProtocol(), UrlUtils.ABOUT)
+                && window_.getWebWindow().getWebClient().getBrowserVersion()
+                                .hasFeature(JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL)) {
             return "";
         }
         return "?" + search;

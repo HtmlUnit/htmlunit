@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,7 +21,6 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.FailingHttpStatusCodeException;
@@ -118,10 +115,6 @@ public abstract class BaseFrameElement extends HtmlElement {
     public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
         if (source.isEmpty()) {
-            source = UrlUtils.ABOUT_BLANK;
-        }
-        else if (StringUtils.startsWithIgnoreCase(source, UrlUtils.ABOUT_SCHEME)
-                && hasFeature(FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME)) {
             source = UrlUtils.ABOUT_BLANK;
         }
 
