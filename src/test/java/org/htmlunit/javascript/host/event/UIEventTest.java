@@ -168,7 +168,7 @@ public class UIEventTest extends WebDriverTestCase {
             FF = {"[object Event]", "undefined", "[object PointerEvent]", "1",
                   "[object MouseEvent]", "2", "[object PointerEvent]", "1"},
             FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
-                      "[object MouseEvent]", "2", "[object MouseEvent]", "2"})
+                      "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
     public void detail() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -217,7 +217,7 @@ public class UIEventTest extends WebDriverTestCase {
             FF = {"[object Event]", "undefined", "[object PointerEvent]", "1",
                   "[object MouseEvent]", "2", "[object PointerEvent]", "1"},
             FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
-                      "[object MouseEvent]", "2", "[object MouseEvent]", "2"})
+                      "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
     public void detailInputText() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -267,7 +267,7 @@ public class UIEventTest extends WebDriverTestCase {
             FF = {"[object Event]", "undefined", "[object PointerEvent]", "1",
                   "[object MouseEvent]", "2", "[object PointerEvent]", "1"},
             FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
-                      "[object MouseEvent]", "2", "[object MouseEvent]", "2"})
+                      "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
     public void detailInputRadio() throws Exception {
         final String html =
               "<html><head><script>\n"

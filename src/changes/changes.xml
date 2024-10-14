@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
             </action>
             <action type="add" dev="rbri">
+                FF_ESR right clicking for the context menu triggers a mouse event with a detail of 1 instead of 2.
+            </action>
+            <action type="add" dev="rbri">
                 HtmlDetailElement 'name' property added for FF.
             </action>
             <action type="update" dev="rbri">

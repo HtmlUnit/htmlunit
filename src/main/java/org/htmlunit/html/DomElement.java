@@ -1450,7 +1450,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 }
             }
             else {
-                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 2);
+                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
             }
         }
         else if (MouseEvent.TYPE_DBL_CLICK.equals(eventType)) {
