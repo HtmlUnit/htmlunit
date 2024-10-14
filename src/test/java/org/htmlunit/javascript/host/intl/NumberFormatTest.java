@@ -34,8 +34,7 @@ public class NumberFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"zh-CN", "latn", "standard", "auto", "decimal", "1", "0", "3", "auto"},
-            FF_ESR = {"zh-CN", "latn", "standard", "auto", "decimal", "1", "0", "3", "true"})
+    @Alerts({"zh-CN", "latn", "standard", "auto", "decimal", "1", "0", "3", "auto"})
     @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                            "undefined", "undefined"},
             EDGE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
