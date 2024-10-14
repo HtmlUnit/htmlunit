@@ -1932,8 +1932,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
+    @Alerts("undefined")
     public void domRequest() throws Exception {
         test("DOMRequest");
     }
@@ -4357,9 +4356,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
+    @Alerts(DEFAULT = "function",
+            FF_ESR = "undefined")
     public void iterator() throws Exception {
         test("Iterator");
     }

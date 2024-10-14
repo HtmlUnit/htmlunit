@@ -1400,10 +1400,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http:", "axdeg:", "axdeg://§§URL§§/foo.html#O"},
-            CHROME = {"http:", "http:", "http://§§URL§§/foo.html#O"},
-            EDGE = {"http:", "http:", "http://§§URL§§/foo.html#O"},
-            FF = {"http:", "http:", "http://§§URL§§/foo.html#O"})
+    @Alerts({"http:", "http:", "http://§§URL§§/foo.html#O"})
     public void readWriteProtocolUnknown() throws Exception {
         final String html =
               "<html>\n"
