@@ -1555,9 +1555,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "a", "", "b", ""},
-            CHROME = {"", "a", "a", "b", "b"},
-            EDGE = {"", "a", "a", "b", "b"})
+    @Alerts(DEFAULT = {"", "a", "a", "b", "b"},
+            FF_ESR = {"", "a", "", "b", ""})
     public void cookie_write2() throws Exception {
         final String html =
               "<html>\n"

@@ -119,7 +119,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
 
     /** Calling cookies setter with blank string does not reset the cookies. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     HTMLDOCUMENT_COOKIES_IGNORE_BLANK,
 
     /**
