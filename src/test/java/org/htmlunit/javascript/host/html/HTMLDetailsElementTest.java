@@ -133,9 +133,8 @@ public class HTMLDetailsElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "null", "", "null", "abc", "null", "abc", "blah", "abc", "null"},
-            CHROME = {"", "null", "", "", "abc", "abc", "blah", "blah", "", "null"},
-            EDGE = {"", "null", "", "", "abc", "abc", "blah", "blah", "", "null"})
+    @Alerts(DEFAULT = {"", "null", "", "", "abc", "abc", "blah", "blah", "", "null"},
+            FF_ESR = {"undefined", "null", "", "null", "abc", "null", "abc", "blah", "abc", "null"})
     public void name() throws Exception {
         final String html =
             "<html>\n"
