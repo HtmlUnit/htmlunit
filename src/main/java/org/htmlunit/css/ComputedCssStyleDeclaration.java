@@ -17,8 +17,10 @@ package org.htmlunit.css;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_18;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_10;
+import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_14;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
+import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_14;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.AUTO;
 import static org.htmlunit.css.CssStyleSheet.BLOCK;
@@ -1561,6 +1563,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 if (browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_10)) {
                     width = 10;
                 }
+                else if (browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_14)) {
+                    width = 14;
+                }
                 else {
                     width = 13;
                 }
@@ -1731,8 +1736,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
         else if (element.getFirstChild() == null) {
             if (element instanceof HtmlRadioButtonInput || element instanceof HtmlCheckBoxInput) {
-                if (webWindow.getWebClient().getBrowserVersion().hasFeature(JS_CLIENTHEIGHT_RADIO_CHECKBOX_10)) {
+                final BrowserVersion browser = webWindow.getWebClient().getBrowserVersion();
+                if (browser.hasFeature(JS_CLIENTHEIGHT_RADIO_CHECKBOX_10)) {
                     defaultHeight = 10;
+                }
+                else if (browser.hasFeature(JS_CLIENTHEIGHT_RADIO_CHECKBOX_14)) {
+                    defaultHeight = 14;
                 }
                 else {
                     defaultHeight = 13;
