@@ -9,6 +9,9 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 129, Firefox 131, FirefoxESR 128, WebWorker, Bugfixes">
             <action type="update" dev="rbri">
+                Property window.clientInformation is settable in FF too.
+            </action>
+            <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
             </action>
             <action type="update" dev="rbri">

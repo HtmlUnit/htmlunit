@@ -568,7 +568,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     /**
      * @param clientInformation the new value
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF})
     public void setClientInformation(final Object clientInformation) {
         clientInformation_ = clientInformation;
     }

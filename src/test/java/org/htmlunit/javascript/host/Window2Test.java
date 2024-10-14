@@ -796,7 +796,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "true", "147", "true", "true", "16"},
-            EDGE = {"true", "true", "136", "true", "true", "64"},
+            EDGE = {"true", "true", "136", "true", "true", "24"},
             FF = {"true", "true", "91", "true", "true", "12"},
             FF_ESR = {"true", "true", "91", "true", "true", "12"})
     public void heightsAndWidths() throws Exception {
@@ -898,7 +898,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"621", "1256", "604", "1239"},
-            EDGE = {"632", "1208", "617", "1193"},
+            EDGE = {"632", "1248", "617", "1233"},
             FF = {"677", "1260", "660", "1243"},
             FF_ESR = {"677", "1260", "660", "1243"})
     @NotYetImplemented
@@ -2973,7 +2973,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"clientInformation[GSCE]", "undefined"},
-            FF = {"clientInformation[GCE]", "undefined"},
             FF_ESR = {"clientInformation[GCE]", "undefined"})
     public void clientInformationProperty() throws Exception {
         final String html = "<html><head>\n"
@@ -3009,11 +3008,10 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Navigator]", "two", "undefined"},
-            FF = {"[object Navigator]", "[object Navigator]", "undefined"},
             FF_ESR = {"[object Navigator]", "[object Navigator]", "undefined"})
     @HtmlUnitNYI(CHROME = {"[object Navigator]", "two", "two"},
             EDGE = {"[object Navigator]", "two", "two"},
-            FF = {"[object Navigator]", "[object Navigator]", "[object Navigator]"},
+            FF = {"[object Navigator]", "two", "two"},
             FF_ESR = {"[object Navigator]", "[object Navigator]", "[object Navigator]"})
     public void clientInformationPropertyEdit() throws Exception {
         final String html = "<html><head>\n"
