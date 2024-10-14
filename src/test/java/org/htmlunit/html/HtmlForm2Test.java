@@ -398,7 +398,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
                     + "image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,"
                     + "image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8",
-            FF_ESR = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8")
+            FF_ESR = "text/html,application/xhtml+xml,application/xml;q=0.9,"
+                    + "image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8")
     public void acceptHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -444,11 +445,11 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "gzip, deflate, br, zstd",
-            FF_ESR = "gzip, deflate, br")
+    @Alerts("gzip, deflate, br, zstd")
     @HtmlUnitNYI(CHROME = "gzip, deflate, br",
             EDGE = "gzip, deflate, br",
-            FF = "gzip, deflate, br")
+            FF = "gzip, deflate, br",
+            FF_ESR = "gzip, deflate, br")
     public void acceptEncodingHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
