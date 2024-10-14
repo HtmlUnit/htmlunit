@@ -156,10 +156,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
-    /** When clicking a {@code checkbox} or {@code radio} input the surrounding anchor is not clicked. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
-
     /** HTMLInputElement image type is not supported. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY,

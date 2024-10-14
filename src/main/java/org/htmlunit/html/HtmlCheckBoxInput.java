@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
-
 import java.io.IOException;
 import java.util.Map;
 
@@ -208,8 +206,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
      */
     @Override
     protected boolean propagateClickStateUpdateToParent() {
-        return !hasFeature(HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR)
-                && super.propagateClickStateUpdateToParent();
+        return false;
     }
 
     @Override
