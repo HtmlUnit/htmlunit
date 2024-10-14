@@ -126,14 +126,15 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.ACCEPT_ENCODING,
-            HttpHeader.REFERER,
             HttpHeader.CONNECTION,
+            HttpHeader.REFERER,
             HttpHeader.COOKIE,
             HttpHeader.UPGRADE_INSECURE_REQUESTS,
             HttpHeader.SEC_FETCH_DEST,
             HttpHeader.SEC_FETCH_MODE,
             HttpHeader.SEC_FETCH_SITE,
-            HttpHeader.SEC_FETCH_USER};
+            HttpHeader.SEC_FETCH_USER,
+            HttpHeader.PRIORITY};
         FIREFOX_ESR.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8";
         FIREFOX_ESR.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX_ESR.xmlHttpRequestAcceptHeader_ = "*/*";

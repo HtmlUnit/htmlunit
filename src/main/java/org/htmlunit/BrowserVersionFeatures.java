@@ -201,7 +201,7 @@ public enum BrowserVersionFeatures {
     HTTP_HEADER_CH_UA,
 
     /** Browser sends Priority headers. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     HTTP_HEADER_PRIORITY,
 
     /** The anchor hostname setter ignores blank url's. */
