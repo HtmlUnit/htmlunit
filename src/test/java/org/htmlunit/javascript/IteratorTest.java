@@ -32,9 +32,8 @@ public class IteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined"},
-            CHROME = {"function", "function"},
-            EDGE = {"function", "function"})
+    @Alerts(DEFAULT = {"function", "function"},
+            FF_ESR = {"undefined", "undefined"})
     public void windowIterator() throws Exception {
         final String html
             = "<html>\n"

@@ -353,7 +353,7 @@ public enum BrowserVersionFeatures {
     JS_INTL_V8_BREAK_ITERATOR,
 
     /** Indicates that window.Iterator is supported. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_ITERATOR_VISIBLE_IN_WINDOW,
 
     /** For the 'about' protocol the location always returns an empty query. */
