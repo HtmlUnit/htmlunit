@@ -1059,7 +1059,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             onAddedToDocumentFragment();
         }
 
-        if (getPage().domChangeListenerDefined()) {
+        if (getPage().isDomChangeListenerDefined()) {
             fireNodeAdded(this, domNode);
         }
     }
@@ -1178,7 +1178,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             parent_ = null;
         }
 
-        if (exParent != null && getPage().domChangeListenerDefined()) {
+        if (exParent != null && getPage().isDomChangeListenerDefined()) {
             fireNodeDeleted(exParent, this);
             // ask ex-parent to fire event (because we don't have parent now)
             exParent.fireNodeDeleted(exParent, this);
@@ -1681,6 +1681,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 characterDataListeners_ = new ArrayList<>();
             }
             characterDataListeners_.add(listener);
+            getPage().characterDataChangeListenerAdded();
         }
     }
 
@@ -1696,7 +1697,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         synchronized (this) {
             if (characterDataListeners_ != null) {
-                characterDataListeners_.remove(listener);
+                if (characterDataListeners_.remove(listener)) {
+                    getPage().characterDataChangeListenerAdded();
+                }
             }
         }
     }

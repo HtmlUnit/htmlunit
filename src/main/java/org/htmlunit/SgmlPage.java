@@ -57,6 +57,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     private boolean printing_;
 
     private AtomicInteger domChangeListenerCount_ = new AtomicInteger(0);
+    private AtomicInteger characterDataChangeListenerCount_ = new AtomicInteger(0);
 
     public void domChangeListenerAdded() {
         domChangeListenerCount_.incrementAndGet();
@@ -66,8 +67,20 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
         domChangeListenerCount_.decrementAndGet();
     }
 
-    public boolean domChangeListenerDefined() {
+    public boolean isDomChangeListenerDefined() {
         return domChangeListenerCount_.get() > 0;
+    }
+
+    public void characterDataChangeListenerAdded() {
+        characterDataChangeListenerCount_.incrementAndGet();
+    }
+
+    public void characterDataChangeListenerRemoved() {
+        characterDataChangeListenerCount_.decrementAndGet();
+    }
+
+    public boolean isCharacterDataChangeListenerDefined() {
+        return characterDataChangeListenerCount_.get() > 0;
     }
 
     /**
