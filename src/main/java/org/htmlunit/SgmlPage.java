@@ -19,6 +19,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.htmlunit.html.AbstractDomNodeList;
 import org.htmlunit.html.DomAttr;
@@ -54,6 +55,20 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
     private boolean printing_;
+
+    private AtomicInteger domChangeListenerCount_ = new AtomicInteger(0);
+
+    public void domChangeListenerAdded() {
+        domChangeListenerCount_.incrementAndGet();
+    }
+
+    public void domChangeListenerRemoved() {
+        domChangeListenerCount_.decrementAndGet();
+    }
+
+    public boolean domChangeListenerDefined() {
+        return domChangeListenerCount_.get() > 0;
+    }
 
     /**
      * Creates an instance of SgmlPage.

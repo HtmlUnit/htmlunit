@@ -1117,4 +1117,31 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "8"})
+    public void childNodesDynamicUpdateDuringParsing() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
+                + "<body id='id1'>\n"
+                + "<script>\n"
+                + "  var childNodes = document.getElementById('id1').childNodes;\n"
+                + "  log(childNodes.length);\n"
+                + "</script>\n"
+                + "<h1>My First Heading</h1>\n"
+                + "<p>My first paragraph.</p>\n"
+                + "<script>\n"
+                + "  log(childNodes.length);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
