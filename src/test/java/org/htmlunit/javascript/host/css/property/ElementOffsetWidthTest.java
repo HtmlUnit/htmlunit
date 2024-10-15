@@ -1793,8 +1793,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "13",
             FF = "14",
             FF_ESR = "14")
-    @HtmlUnitNYI(FF = "10",
-            FF_ESR = "10")
+    @HtmlUnitNYI(FF_ESR = "10")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1853,8 +1852,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "13",
             FF = "14",
             FF_ESR = "14")
-    @HtmlUnitNYI(FF = "10",
-            FF_ESR = "10")
+    @HtmlUnitNYI(FF_ESR = "10")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
