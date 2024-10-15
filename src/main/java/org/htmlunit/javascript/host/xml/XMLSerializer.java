@@ -47,7 +47,6 @@ public class XMLSerializer extends HtmlUnitScriptable {
     private static final Set<String> NON_EMPTY_TAGS = new HashSet<>(Arrays.asList(
             HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
             HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlAudio.TAG_NAME,
-            HtmlBackgroundSound.TAG_NAME,
             HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME, HtmlBlink.TAG_NAME,
             HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
             HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,

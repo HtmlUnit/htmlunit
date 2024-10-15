@@ -237,10 +237,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_AUDIO_PROCESSING_EVENT_CTOR,
 
-    /** HTMLBGSoundElement reported as HTMLUnknownElement. */
-    @BrowserFeature({FF, FF_ESR})
-    JS_BGSOUND_AS_UNKNOWN,
-
     /** toDataURL for canvas returns the CHROME version of the PNG. */
     @BrowserFeature({CHROME, EDGE})
     JS_CANVAS_DATA_URL_CHROME_PNG,

@@ -62,7 +62,7 @@ public class DefaultElementFactory implements ElementFactory {
         KEYGEN_, HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
         HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlArea.TAG_NAME,
         HtmlArticle.TAG_NAME, HtmlAside.TAG_NAME, HtmlAudio.TAG_NAME,
-        HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
+        HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
         HtmlBidirectionalIsolation.TAG_NAME, HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME,
         HtmlBlink.TAG_NAME, HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
         HtmlBreak.TAG_NAME, HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,
@@ -195,10 +195,6 @@ public class DefaultElementFactory implements ElementFactory {
 
             case HtmlAudio.TAG_NAME:
                 element = new HtmlAudio(qualifiedName, page, attributeMap);
-                break;
-
-            case HtmlBackgroundSound.TAG_NAME:
-                element = new HtmlBackgroundSound(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlBase.TAG_NAME:

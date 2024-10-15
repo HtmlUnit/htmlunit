@@ -8,6 +8,10 @@
 
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 129, Firefox 131, FirefoxESR 128, WebWorker, Bugfixes">
+            <action type="update" dev="rbri">
+                Special handling of the bgsound tag in FF removed. BGSound is now handled as unknown tag in all browsers.
+                Looks like this was a leftover from the IE days.
+            </action>
             <action type="fix" dev="rbri">
                 Function initHashChangeEvent() is no longer available in FF_ESR.
             </action>

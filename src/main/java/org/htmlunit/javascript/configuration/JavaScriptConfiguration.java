@@ -247,7 +247,6 @@ import org.htmlunit.javascript.host.html.HTMLAllCollection;
 import org.htmlunit.javascript.host.html.HTMLAnchorElement;
 import org.htmlunit.javascript.host.html.HTMLAreaElement;
 import org.htmlunit.javascript.host.html.HTMLAudioElement;
-import org.htmlunit.javascript.host.html.HTMLBGSoundElement;
 import org.htmlunit.javascript.host.html.HTMLBRElement;
 import org.htmlunit.javascript.host.html.HTMLBaseElement;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
@@ -590,7 +589,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Geolocation.class, GeolocationCoordinates.class, GeolocationPosition.class, GeolocationPositionError.class,
         HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class, HTMLAnchorElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
-        HTMLBaseElement.class, HTMLBGSoundElement.class,
+        HTMLBaseElement.class,
         HTMLBodyElement.class, HTMLBRElement.class, HTMLButtonElement.class,
         HTMLCanvasElement.class, HTMLCollection.class,
         HTMLDataElement.class, HTMLDataListElement.class,
