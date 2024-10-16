@@ -455,7 +455,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     @JsxFunction
     @JsxSymbol(symbolName = "iterator")
-    public Object entries() {
+    public ES6Iterator entries() {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),
@@ -469,7 +469,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
-    public Object keys() {
+    public ES6Iterator keys() {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),
@@ -483,7 +483,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
-    public Object values() {
+    public ES6Iterator values() {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),
