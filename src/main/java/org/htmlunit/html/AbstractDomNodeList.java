@@ -77,10 +77,6 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
      * @return the nodes in this node list
      */
     private List<E> getNodes() {
-        if (cachedElements_ != null) {
-            return cachedElements_;
-        }
-
         // a bit of a hack but i like to avoid synchronization
         // see https://github.com/HtmlUnit/htmlunit/issues/882
         //
@@ -88,9 +84,12 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
         // set to null after the assignment and before the return
         // but this is a race condition at all and depending on the
         // thread state the same overall result might happen also with sync
-        final List<E> providedElements = provideElements();
-        cachedElements_ = providedElements;
-        return providedElements;
+        List<E> shortLivedCache = cachedElements_;
+        if (cachedElements_ == null) {
+            shortLivedCache = provideElements();
+            cachedElements_ = shortLivedCache;
+        }
+        return shortLivedCache;
     }
 
     /**
