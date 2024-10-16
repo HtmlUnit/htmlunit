@@ -56,10 +56,6 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
 
         final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
         node_.addDomChangeListener(listener);
-        if (node_ instanceof HtmlElement) {
-            ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
-            cachedElements_ = null;
-        }
     }
 
     /**
@@ -132,8 +128,7 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
     /**
      * DOM change listener which clears the node cache when necessary.
      */
-    private static final class DomHtmlAttributeChangeListenerImpl
-                                    implements DomChangeListener, HtmlAttributeChangeListener {
+    private static final class DomHtmlAttributeChangeListenerImpl implements DomChangeListener {
 
         private final transient WeakReference<AbstractDomNodeList<?>> nodeList_;
 
@@ -156,30 +151,6 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
          */
         @Override
         public void nodeDeleted(final DomChangeEvent event) {
-            clearCache();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            clearCache();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            clearCache();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             clearCache();
         }
 
