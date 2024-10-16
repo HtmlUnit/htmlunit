@@ -213,7 +213,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     @JsxGetter({CHROME, EDGE})
-    public Object getOnload() {
+    public Function getOnload() {
         return super.getOnload();
     }
 
@@ -240,7 +240,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     @JsxGetter({CHROME, EDGE})
-    public Object getOnblur() {
+    public Function getOnblur() {
         return super.getOnblur();
     }
 
@@ -258,7 +258,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     @JsxGetter({CHROME, EDGE})
-    public Object getOnfocus() {
+    public Function getOnfocus() {
         return super.getOnfocus();
     }
 
@@ -276,7 +276,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     @JsxGetter({CHROME, EDGE})
-    public Object getOnerror() {
+    public Function getOnerror() {
         return super.getOnerror();
     }
 

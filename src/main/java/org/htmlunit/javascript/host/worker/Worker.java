@@ -123,7 +123,7 @@ public class Worker extends EventTarget {
      * @return the handler
      */
     @JsxGetter
-    public Object getOnmessage() {
+    public Function getOnmessage() {
         return getEventListenersContainer().getEventHandler(Event.TYPE_MESSAGE);
     }
 }

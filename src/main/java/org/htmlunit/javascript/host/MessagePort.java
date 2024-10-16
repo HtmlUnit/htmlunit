@@ -18,6 +18,7 @@ import java.net.URL;
 
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.PostponedAction;
@@ -71,7 +72,7 @@ public class MessagePort extends EventTarget {
      * @return the value of the window's {@code onmessage} property
      */
     @JsxGetter
-    public Object getOnmessage() {
+    public Function getOnmessage() {
         return getHandlerForJavaScript(Event.TYPE_MESSAGE);
     }
 
@@ -84,7 +85,7 @@ public class MessagePort extends EventTarget {
         setHandlerForJavaScript(Event.TYPE_MESSAGE, onmessage);
     }
 
-    private Object getHandlerForJavaScript(final String eventName) {
+    private Function getHandlerForJavaScript(final String eventName) {
         return getEventListenersContainer().getEventHandler(eventName);
     }
 

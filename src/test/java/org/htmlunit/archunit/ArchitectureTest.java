@@ -24,6 +24,7 @@ import java.lang.reflect.Executable;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxClasses;
 import org.htmlunit.javascript.configuration.JsxConstant;
@@ -34,6 +35,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.junit.runner.RunWith;
 
 import com.tngtech.archunit.base.DescribedPredicate;
+import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.core.domain.JavaModifier;
 import com.tngtech.archunit.core.importer.ImportOption;
@@ -120,6 +122,16 @@ public class ArchitectureTest {
             .andShould().haveModifier(JavaModifier.FINAL);
 
     /**
+     * Every JsxConstant should be a string, int, or long.
+     */
+    @ArchTest
+    public static final ArchRule jsxConstantType = fields()
+            .that().areAnnotatedWith(JsxConstant.class)
+            .should().haveRawType(String.class)
+            .orShould().haveRawType("int")
+            .orShould().haveRawType("long");
+
+    /**
      * JsxGetter/Setter/Functions are always in the javascript package.
      */
     @ArchTest
@@ -144,25 +156,230 @@ public class ArchitectureTest {
             .should().beDeclaredInClassesThat().areAnnotatedWith(JsxClass.class)
             .orShould().beDeclaredInClassesThat().areAnnotatedWith(JsxClasses.class);
 
-    /**
-     * JsxConstants should not defined as short.
-     */
-    @ArchTest
-    public static final ArchRule jsxConstantReturnType = fields()
-            .that().areAnnotatedWith(JsxConstant.class)
-            .should().notHaveRawType("short")
-            .andShould().notHaveRawType("float");
+    private static final DescribedPredicate<? super JavaClass> isAssignableToScriptable =
+            new DescribedPredicate<JavaClass>("@is not assignable to Scriptable") {
+                @Override
+                public boolean test(final JavaClass javaClass) {
+                    return javaClass.isAssignableTo(Scriptable.class);
+                }
+            };
 
     /**
-     * JsxGetter/Setter/Functions should not return a short.
+     * JsxGetter should only return Scriptable's.
      */
     @ArchTest
-    public static final ArchRule jsxAnnotationReturnType = methods()
-            .that().areAnnotatedWith(JsxGetter.class)
-                    .or().areAnnotatedWith(JsxSetter.class)
-                    .or().areAnnotatedWith(JsxFunction.class)
-            .should().notHaveRawReturnType("short")
-            .andShould().notHaveRawReturnType("float");
+    public static final ArchRule jsxGetterReturnType = methods()
+            .that()
+                .areAnnotatedWith(JsxGetter.class)
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.History.getState()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.MimeType.getEnabledPlugin()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Navigator.getDoNotTrack()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Navigator.getMimeTypes()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Navigator.getPlugins()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.URL.getOrigin()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getClientInformation()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getControllers()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getEvent()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getFrames_js()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getIsSecureContext()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getLength()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getOffscreenBuffering()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getOpener()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getParent()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getSelf()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.getTop()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D.getFillStyle()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D.getGlobalAlpha()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D.getLineWidth()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D.getStrokeStyle()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.css.CSSStyleDeclaration.getZIndex()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.AbstractRange.getEndContainer()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.AbstractRange.getStartContainer()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.CharacterData.getData()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.DOMException.getCode()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.DOMException.getFilename()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.DOMException.getLineNumber()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.DOMException.getMessage()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getActiveElement()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getAnchors()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getApplets()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getDefaultView()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getEmbeds()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getForms()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getHead()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getImages()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getLinks()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getPlugins()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getScripts()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Node.getParentNode()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.NodeIterator.getFilter()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Range.getCommonAncestorContainer()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.TreeWalker.getFilter()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.XPathResult.getNumberValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.draganddrop.DataTransferItem.getKind()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.draganddrop.DataTransferItem.getType()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.BeforeUnloadEvent.getReturnValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.CustomEvent.getDetail()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.Event.getComposed()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.Event.getReturnValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.Event.getSrcElement()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.Event.getTarget()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.HashChangeEvent.getNewURL()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.HashChangeEvent.getOldURL()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.InputEvent.getData()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.InputEvent.getInputType()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.MessageEvent.getData()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.MessageEvent.getPorts()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.PointerEvent.getAltitudeAngle()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.PointerEvent.getAzimuthAngle()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.PointerEvent.getPressure()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.PopStateEvent.getState()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.ProgressEvent.getLoaded()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.TextEvent.getData()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.event.UIEvent.getView()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.file.FileReader.getResult()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.geo.GeolocationCoordinates.getAccuracy()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.geo.GeolocationCoordinates.getLatitude()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.geo.GeolocationCoordinates.getLongitude()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLButtonElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLDataListElement.getOptions()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLElement.getOffsetParent_js()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLInputElement.getFiles()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLInputElement.getSelectionEnd()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLInputElement.getSelectionStart()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMeterElement.getHigh()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMeterElement.getLow()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMeterElement.getMax()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMeterElement.getMin()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMeterElement.getOptimum()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMeterElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLPreElement.getWidth_js()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLProgressElement.getMax()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLProgressElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableElement.getCaption()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableElement.getTBodies()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableElement.getTFoot()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableElement.getTHead()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableRowElement.getCells()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTextAreaElement.getMaxLength()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTextAreaElement.getMinLength()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTitleElement.getText()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.RowContainer.getRows()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.media.AudioParam.getDefaultValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.media.AudioParam.getMaxValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.media.AudioParam.getMinValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.media.AudioParam.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.network.NetworkInformation.getDownlink()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGMatrix.getA()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGMatrix.getB()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGMatrix.getC()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGMatrix.getD()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGMatrix.getE()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGMatrix.getF()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGRect.getHeight()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGRect.getWidth()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGRect.getX()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGRect.getY()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.getSelf()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XMLHttpRequest.getResponse()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XMLHttpRequest.getResponseXML()")
+
+            .should().haveRawReturnType(String.class)
+            .orShould().haveRawReturnType("int")
+            .orShould().haveRawReturnType("long")
+            .orShould().haveRawReturnType("boolean")
+            .orShould().haveRawReturnType(isAssignableToScriptable);
+
+    /**
+     * JsxFunctions should only return Scriptable's.
+     */
+    @ArchTest
+    public static final ArchRule jsxFunctionReturnType = methods()
+            .that()
+                .areAnnotatedWith(JsxFunction.class)
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Element.insertAdjacentElement(java.lang.String, java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.External.isSearchProviderInstalled()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.FontFaceSet.load(java.lang.String, java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.SimpleArray.item(int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.SimpleArray.namedItem(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Storage.getItem(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.URLSearchParams.entries()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.URLSearchParams.keys()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.URLSearchParams.values()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.setInterval(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.Scriptable, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.setTimeout(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.Scriptable, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.canvas.IntersectionObserver.takeRecords()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.decrypt()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.deriveBits()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.deriveKey()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.digest()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.encrypt()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.exportKey()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.generateKey()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.importKey()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.sign()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.unwrapKey()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.verify()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.crypto.SubtleCrypto.wrapKey()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.css.CSSRuleList.item(int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.css.StyleSheetList.item(int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.DOMTokenList.item(int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.adoptNode(org.htmlunit.javascript.host.dom.Node)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.createCDATASection(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.createComment(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.createDocumentFragment()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.createElement(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.createElementNS(java.lang.String, java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.createProcessingInstruction(java.lang.String, java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.createTextNode(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.createTreeWalker(org.htmlunit.javascript.host.dom.Node, double, org.htmlunit.corejs.javascript.Scriptable, boolean)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.elementFromPoint(int, int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Document.getElementsByTagNameNS(java.lang.Object, java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Node.appendChild(java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Node.cloneNode(boolean)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Node.getRootNode()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Node.insertBefore(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.Scriptable, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Node.removeChild(java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Node.replaceChild(java.lang.Object, java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.NodeList.item(java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Range.cloneRange()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Range.compareBoundaryPoints(int, org.htmlunit.javascript.host.dom.Range)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.Text.splitText(int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.file.Blob.arrayBuffer()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.file.Blob.text()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLCanvasElement.getContext(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLCollection.item(java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLCollection.namedItem(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLDocument.open(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLFormControlsCollection.namedItem(java.lang.String)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMediaElement.play()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLOptionsCollection.item(int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLSelectElement.item(int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableElement.createCaption()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableElement.createTBody()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableElement.createTFoot()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableElement.createTHead()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTableRowElement.insertCell(java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.RowContainer.insertRow(java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.intl.V8BreakIterator.resolvedOptions()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.media.BaseAudioContext.decodeAudioData(org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer, org.htmlunit.corejs.javascript.Function, org.htmlunit.corejs.javascript.Function)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.media.MediaDevices.getUserMedia()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.performance.Performance.now()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.performance.PerformanceNavigation.toJSON()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGPathElement.getTotalLength()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.svg.SVGTextContentElement.getComputedTextLength()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.setInterval(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.Scriptable, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.setTimeout(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.Scriptable, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.FormData.keys()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.FormData.values()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XSLTProcessor.getParameter(java.lang.String, java.lang.String)")
+
+            .should().haveRawReturnType(String.class)
+            .orShould().haveRawReturnType("int")
+            .orShould().haveRawReturnType("long")
+            .orShould().haveRawReturnType("boolean")
+            .orShould().haveRawReturnType("void")
+            .orShould().haveRawReturnType(isAssignableToScriptable);
 
     /**
      * JsxConstructor should not used for constructors.

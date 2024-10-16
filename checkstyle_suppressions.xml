@@ -15,6 +15,7 @@
     <suppress checks="JavadocPackage" files=".*Test.java|StandardsMode.java|StandardsMode.java|ElementTestSource.java|BrowserStatement.java|Patch.java|BrowserVersionClassRunnerWithParameters.java|ToRunWithRealBrowsers.java|PatchedHtmlUnitKeyboard.java|CanvasRenderingContext2D2Test2.java"/>
     <suppress checks="JavadocMethod" files="HtmlDomTreeWalker.java" />
 
+    <suppress checks="LineLength" files="ArchitectureTest.java"/>
     <suppress checks="LineLength" files="BrowserVersion.java"/>
     <suppress checks="LineLength" files="JavaScriptEngine.java"/>
     <suppress checks="LineLength" files="EncodingSniffer.java"/>

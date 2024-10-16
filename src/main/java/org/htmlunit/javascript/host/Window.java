@@ -1233,7 +1233,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code onload} property
      */
     @JsxGetter
-    public Object getOnload() {
+    public Function getOnload() {
         return getEventHandler(Event.TYPE_LOAD);
     }
 
@@ -1260,7 +1260,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code onblur} property
      */
     @JsxGetter
-    public Object getOnblur() {
+    public Function getOnblur() {
         return getEventHandler(Event.TYPE_BLUR);
     }
 
@@ -1269,7 +1269,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code onclick} property
      */
     @JsxGetter
-    public Object getOnclick() {
+    public Function getOnclick() {
         return getEventHandler(MouseEvent.TYPE_CLICK);
     }
 
@@ -1287,7 +1287,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code ondblclick} property
      */
     @JsxGetter
-    public Object getOndblclick() {
+    public Function getOndblclick() {
         return getEventHandler(MouseEvent.TYPE_DBL_CLICK);
     }
 
@@ -1305,7 +1305,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code onhashchange} property
      */
     @JsxGetter
-    public Object getOnhashchange() {
+    public Function getOnhashchange() {
         return getEventHandler(Event.TYPE_HASH_CHANGE);
     }
 
@@ -1341,7 +1341,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the value of the window's {@code onbeforeunload} property
      */
     @JsxGetter
-    public Object getOnbeforeunload() {
+    public Function getOnbeforeunload() {
         return getEventHandler(Event.TYPE_BEFORE_UNLOAD);
     }
 
@@ -1359,7 +1359,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the value of the window's {@code onerror} property
      */
     @JsxGetter
-    public Object getOnerror() {
+    public Function getOnerror() {
         return getEventHandler(Event.TYPE_ERROR);
     }
 
@@ -1377,7 +1377,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the value of the window's {@code onmessage} property
      */
     @JsxGetter
-    public Object getOnmessage() {
+    public Function getOnmessage() {
         return getEventHandler(Event.TYPE_MESSAGE);
     }
 
@@ -1907,7 +1907,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the handler
      */
     @JsxGetter
-    public Object getOnchange() {
+    public Function getOnchange() {
         return getEventHandler(Event.TYPE_CHANGE);
     }
 
@@ -1925,7 +1925,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the handler
      */
     @JsxGetter
-    public Object getOnsubmit() {
+    public Function getOnsubmit() {
         return getEventHandler(Event.TYPE_SUBMIT);
     }
 

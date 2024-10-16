@@ -1200,7 +1200,7 @@ public class HTMLElement extends Element {
      * @return the {@code onsubmit} event handler for this element
      */
     @JsxGetter
-    public Object getOnsubmit() {
+    public Function getOnsubmit() {
         return getEventHandler(Event.TYPE_SUBMIT);
     }
 
@@ -1313,7 +1313,7 @@ public class HTMLElement extends Element {
      * @return the {@code onclick} event handler for this element
      */
     @JsxGetter
-    public Object getOnclick() {
+    public Function getOnclick() {
         return getEventHandler(MouseEvent.TYPE_CLICK);
     }
 
@@ -1331,7 +1331,7 @@ public class HTMLElement extends Element {
      * @return the {@code ondblclick} event handler for this element
      */
     @JsxGetter
-    public Object getOndblclick() {
+    public Function getOndblclick() {
         return getEventHandler(MouseEvent.TYPE_DBL_CLICK);
     }
 
@@ -1349,7 +1349,7 @@ public class HTMLElement extends Element {
      * @return the {@code onblur} event handler for this element
      */
     @JsxGetter
-    public Object getOnblur() {
+    public Function getOnblur() {
         return getEventHandler(Event.TYPE_BLUR);
     }
 
@@ -1367,7 +1367,7 @@ public class HTMLElement extends Element {
      * @return the {@code onfocus} event handler for this element
      */
     @JsxGetter
-    public Object getOnfocus() {
+    public Function getOnfocus() {
         return getEventHandler(Event.TYPE_FOCUS);
     }
 
@@ -1385,7 +1385,7 @@ public class HTMLElement extends Element {
      * @return the {@code onkeydown} event handler for this element
      */
     @JsxGetter
-    public Object getOnkeydown() {
+    public Function getOnkeydown() {
         return getEventHandler(Event.TYPE_KEY_DOWN);
     }
 
@@ -1403,7 +1403,7 @@ public class HTMLElement extends Element {
      * @return the {@code onkeypress} event handler for this element
      */
     @JsxGetter
-    public Object getOnkeypress() {
+    public Function getOnkeypress() {
         return getEventHandler(Event.TYPE_KEY_PRESS);
     }
 
@@ -1421,7 +1421,7 @@ public class HTMLElement extends Element {
      * @return the {@code onkeyup} event handler for this element
      */
     @JsxGetter
-    public Object getOnkeyup() {
+    public Function getOnkeyup() {
         return getEventHandler(Event.TYPE_KEY_UP);
     }
 
@@ -1439,7 +1439,7 @@ public class HTMLElement extends Element {
      * @return the {@code onmousedown} event handler for this element
      */
     @JsxGetter
-    public Object getOnmousedown() {
+    public Function getOnmousedown() {
         return getEventHandler(MouseEvent.TYPE_MOUSE_DOWN);
     }
 
@@ -1457,7 +1457,7 @@ public class HTMLElement extends Element {
      * @return the {@code onmousemove} event handler for this element
      */
     @JsxGetter
-    public Object getOnmousemove() {
+    public Function getOnmousemove() {
         return getEventHandler(MouseEvent.TYPE_MOUSE_MOVE);
     }
 
@@ -1475,7 +1475,7 @@ public class HTMLElement extends Element {
      * @return the {@code onmouseout} event handler for this element
      */
     @JsxGetter
-    public Object getOnmouseout() {
+    public Function getOnmouseout() {
         return getEventHandler(MouseEvent.TYPE_MOUSE_OUT);
     }
 
@@ -1493,7 +1493,7 @@ public class HTMLElement extends Element {
      * @return the {@code onmouseover} event handler for this element
      */
     @JsxGetter
-    public Object getOnmouseover() {
+    public Function getOnmouseover() {
         return getEventHandler(MouseEvent.TYPE_MOUSE_OVER);
     }
 
@@ -1511,7 +1511,7 @@ public class HTMLElement extends Element {
      * @return the {@code onmouseup} event handler for this element
      */
     @JsxGetter
-    public Object getOnmouseup() {
+    public Function getOnmouseup() {
         return getEventHandler(MouseEvent.TYPE_MOUSE_UP);
     }
 
@@ -1529,7 +1529,7 @@ public class HTMLElement extends Element {
      * @return the {@code oncontextmenu} event handler for this element
      */
     @JsxGetter
-    public Object getOncontextmenu() {
+    public Function getOncontextmenu() {
         return getEventHandler(MouseEvent.TYPE_CONTEXT_MENU);
     }
 
@@ -1565,7 +1565,7 @@ public class HTMLElement extends Element {
      * @return the {@code onerror} event handler for this element
      */
     @JsxGetter
-    public Object getOnerror() {
+    public Function getOnerror() {
         return getEventHandler(Event.TYPE_ERROR);
     }
 
@@ -1956,7 +1956,7 @@ public class HTMLElement extends Element {
      * @return the {@code onload} event handler for this element
      */
     @JsxGetter
-    public Object getOnload() {
+    public Function getOnload() {
         if (this instanceof HTMLBodyElement) {
             return getWindow().getEventHandler(Event.TYPE_LOAD);
         }
