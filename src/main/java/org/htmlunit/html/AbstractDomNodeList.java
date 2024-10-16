@@ -47,13 +47,13 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
      */
     public AbstractDomNodeList(final DomNode node) {
         super();
+        node_ = node;
+
         if (node == null) {
-            node_ = null;
             cachedElements_ = Collections.EMPTY_LIST;
             return;
         }
 
-        node_ = node;
         final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
         node_.addDomChangeListener(listener);
         if (node_ instanceof HtmlElement) {
@@ -81,10 +81,20 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
      * @return the nodes in this node list
      */
     private List<E> getNodes() {
-        if (cachedElements_ == null) {
-            cachedElements_ = provideElements();
+        if (cachedElements_ != null) {
+            return cachedElements_;
         }
-        return cachedElements_;
+
+        // a bit of a hack but i like to avoid synchronization
+        // see https://github.com/HtmlUnit/htmlunit/issues/882
+        //
+        // there is a small chance that the cachedElements_ are
+        // set to null after the assignment and before the return
+        // but this is a race condition at all and depending on the
+        // thread state the same overall result might happen also with sync
+        final List<E> providedElements = provideElements();
+        cachedElements_ = providedElements;
+        return providedElements;
     }
 
     /**

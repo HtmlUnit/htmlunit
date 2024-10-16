@@ -12,6 +12,10 @@
                 Special handling of the bgsound tag in FF removed. BGSound is now handled as unknown tag in all browsers.
                 Looks like this was a leftover from the IE days.
             </action>
+            <action type="fix" dev="rbri" issue="#882">
+                AbstractDomNodeList access might throw a NPE due to a race condition in the DomHtmlAttributeChangeListenerImpl
+                clearing of cachedElements processing.
+            </action>
             <action type="fix" dev="rbri">
                 Function initHashChangeEvent() is no longer available in FF_ESR.
             </action>
