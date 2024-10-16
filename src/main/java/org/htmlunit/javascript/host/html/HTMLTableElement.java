@@ -26,6 +26,7 @@ import org.htmlunit.html.HtmlTableBody;
 import org.htmlunit.html.HtmlTableFooter;
 import org.htmlunit.html.HtmlTableHeader;
 import org.htmlunit.html.HtmlTableRow;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -63,7 +64,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's caption element
      */
     @JsxGetter
-    public Object getCaption() {
+    public HtmlUnitScriptable getCaption() {
         final List<HtmlElement> captions = getDomNodeOrDie().getElementsByTagName("caption");
         if (captions.isEmpty()) {
             return null;
@@ -94,7 +95,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's tfoot element
      */
     @JsxGetter
-    public Object getTFoot() {
+    public HtmlUnitScriptable getTFoot() {
         final List<HtmlElement> tfoots = getDomNodeOrDie().getElementsByTagName("tfoot");
         if (tfoots.isEmpty()) {
             return null;
@@ -126,7 +127,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's thead element
      */
     @JsxGetter
-    public Object getTHead() {
+    public HtmlUnitScriptable getTHead() {
         final List<HtmlElement> theads = getDomNodeOrDie().getElementsByTagName("thead");
         if (theads.isEmpty()) {
             return null;
@@ -157,7 +158,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the tbody's in the table
      */
     @JsxGetter
-    public Object getTBodies() {
+    public HtmlUnitScriptable getTBodies() {
         final HtmlTable table = (HtmlTable) getDomNodeOrDie();
         final HTMLCollection bodies = new HTMLCollection(table, false);
         bodies.setElementsSupplier((Supplier<List<DomNode>> & Serializable) () -> new ArrayList<>(table.getBodies()));

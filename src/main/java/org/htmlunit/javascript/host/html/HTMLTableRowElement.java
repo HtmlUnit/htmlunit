@@ -96,7 +96,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @return the cells in the row
      */
     @JsxGetter
-    public Object getCells() {
+    public HTMLCollection getCells() {
         final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
 
         final HTMLCollection cells = new HTMLCollection(row, false);

@@ -1076,11 +1076,11 @@ public class HTMLElement extends Element {
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
     @JsxGetter(propertyName = "offsetParent")
-    public Object getOffsetParent_js() {
+    public HtmlUnitScriptable getOffsetParent_js() {
         return getOffsetParentInternal(getBrowserVersion().hasFeature(JS_OFFSET_PARENT_NULL_IF_FIXED));
     }
 
-    private Object getOffsetParentInternal(final boolean returnNullIfFixed) {
+    private HtmlUnitScriptable getOffsetParentInternal(final boolean returnNullIfFixed) {
         DomNode currentElement = getDomNodeOrDie();
 
         if (currentElement.getParentNode() == null) {

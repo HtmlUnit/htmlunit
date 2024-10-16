@@ -45,7 +45,7 @@ public class RowContainer extends HTMLElement {
      * @return the rows in the element
      */
     @JsxGetter
-    public Object getRows() {
+    public HTMLCollection getRows() {
         final HTMLCollection rows = new HTMLCollection(getDomNodeOrDie(), false);
         rows.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)

@@ -44,7 +44,7 @@ public class HTMLTitleElement extends HTMLElement {
      * @return the {@code text} attribute
      */
     @JsxGetter
-    public Object getText() {
+    public String getText() {
         final HtmlTitle htmlTitle = (HtmlTitle) getDomNodeOrDie();
         return htmlTitle.getText();
     }

@@ -47,7 +47,7 @@ public class HTMLPreElement extends HTMLElement {
      * @return the {@code width} property
      */
     @JsxGetter(propertyName = "width")
-    public Object getWidth_js() {
+    public Integer getWidth_js() {
         final String value = getDomNodeOrDie().getAttributeDirect("width");
         final Integer intValue = HTMLCanvasElement.getValue(value);
         if (intValue != null) {

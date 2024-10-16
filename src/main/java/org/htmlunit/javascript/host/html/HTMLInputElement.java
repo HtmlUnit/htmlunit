@@ -215,7 +215,7 @@ public class HTMLInputElement extends HTMLElement {
      * @return the selection start
      */
     @JsxGetter
-    public Object getSelectionStart() {
+    public Integer getSelectionStart() {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
             if ("number".equalsIgnoreCase(getType())) {
@@ -256,7 +256,7 @@ public class HTMLInputElement extends HTMLElement {
      * @return the selection end
      */
     @JsxGetter
-    public Object getSelectionEnd() {
+    public Integer getSelectionEnd() {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
             if ("number".equalsIgnoreCase(getType())) {
@@ -622,7 +622,7 @@ public class HTMLInputElement extends HTMLElement {
      * @return the {@code files} property
      */
     @JsxGetter
-    public Object getFiles() {
+    public FileList getFiles() {
         final HtmlInput htmlInput = getDomNodeOrDie();
         if (htmlInput instanceof HtmlFileInput) {
             final FileList list = new FileList(((HtmlFileInput) htmlInput).getFiles());

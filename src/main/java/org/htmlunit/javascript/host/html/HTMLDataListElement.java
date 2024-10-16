@@ -49,7 +49,7 @@ public class HTMLDataListElement extends HTMLElement {
      * @return the {@code options} attribute
      */
     @JsxGetter
-    public Object getOptions() {
+    public HTMLCollection getOptions() {
         if (options_ == null) {
             options_ = new HTMLCollection(getDomNodeOrDie(), false);
             options_.setIsMatchingPredicate(

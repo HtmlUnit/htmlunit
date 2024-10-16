@@ -777,7 +777,7 @@ public class Document extends Node {
      * @return the value of this property
      */
     @JsxGetter
-    public Object getAnchors() {
+    public HTMLCollection getAnchors() {
         final HTMLCollection anchors = new HTMLCollection(getDomNodeOrDie(), true);
 
         anchors.setIsMatchingPredicate(
@@ -812,7 +812,7 @@ public class Document extends Node {
      * @return the value of this property
      */
     @JsxGetter
-    public Object getApplets() {
+    public HTMLCollection getApplets() {
         return new HTMLCollection(getDomNodeOrDie(), false);
     }
 
@@ -1658,7 +1658,7 @@ public class Document extends Node {
      * @return the value of the {@code forms} property
      */
     @JsxGetter
-    public Object getForms() {
+    public HTMLCollection getForms() {
         final HTMLCollection forms = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             public Object call(final Context cx, final Scriptable scope,
@@ -1678,7 +1678,7 @@ public class Document extends Node {
      * @return the value of the {@code embeds} property
      */
     @JsxGetter
-    public Object getEmbeds() {
+    public HTMLCollection getEmbeds() {
         final HTMLCollection embeds = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             public Object call(final Context cx, final Scriptable scope,
@@ -1696,7 +1696,7 @@ public class Document extends Node {
      * @return the value of the {@code embeds} property
      */
     @JsxGetter
-    public Object getImages() {
+    public HTMLCollection getImages() {
         final HTMLCollection images = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             public Object call(final Context cx, final Scriptable scope,
@@ -1714,7 +1714,7 @@ public class Document extends Node {
      * @return the value of the {@code scripts} property
      */
     @JsxGetter
-    public Object getScripts() {
+    public HTMLCollection getScripts() {
         final HTMLCollection scripts = new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             public Object call(final Context cx, final Scriptable scope,
@@ -1747,7 +1747,7 @@ public class Document extends Node {
      * @return the value of the {@code plugins} property
      */
     @JsxGetter
-    public Object getPlugins() {
+    public HTMLCollection getPlugins() {
         return getEmbeds();
     }
 
@@ -1757,7 +1757,7 @@ public class Document extends Node {
      * @return the value of this property
      */
     @JsxGetter
-    public Object getLinks() {
+    public HTMLCollection getLinks() {
         final HTMLCollection links = new HTMLCollection(getDomNodeOrDie(), true);
 
         links.setEffectOnCacheFunction(
