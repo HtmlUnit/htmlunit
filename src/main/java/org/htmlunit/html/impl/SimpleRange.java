@@ -16,6 +16,7 @@ package org.htmlunit.html.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -555,10 +556,9 @@ public class SimpleRange implements Serializable {
      * @return a list with all nodes contained in this range
      */
     public List<DomNode> containedNodes() {
-        final List<DomNode> nodes = new ArrayList<>();
         final DomNode ancestor = getCommonAncestorContainer();
         if (ancestor == null) {
-            return nodes;
+            return Collections.EMPTY_LIST;
         }
 
         final DomNode start;
@@ -594,6 +594,7 @@ public class SimpleRange implements Serializable {
 
         boolean foundStart = false;
         boolean started = false;
+        final List<DomNode> nodes = new ArrayList<>();
         for (final DomNode n : ancestor.getDescendants()) {
             if (n == end) {
                 break;

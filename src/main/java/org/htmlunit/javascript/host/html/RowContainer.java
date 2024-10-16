@@ -69,7 +69,7 @@ public class RowContainer extends HTMLElement {
      */
     @JsxFunction
     public void deleteRow(int rowIndex) {
-        final HTMLCollection rows = (HTMLCollection) getRows();
+        final HTMLCollection rows = getRows();
         final int rowCount = rows.getLength();
         if (rowIndex == -1) {
             rowIndex = rowCount - 1;
@@ -96,7 +96,7 @@ public class RowContainer extends HTMLElement {
         if (!JavaScriptEngine.isUndefined(index)) {
             rowIndex = (int) JavaScriptEngine.toNumber(index);
         }
-        final HTMLCollection rows = (HTMLCollection) getRows();
+        final HTMLCollection rows = getRows();
         final int rowCount = rows.getLength();
         final int r;
         if (rowIndex == -1 || rowIndex == rowCount) {
@@ -120,7 +120,7 @@ public class RowContainer extends HTMLElement {
      * @return the inserted row
      */
     public Object insertRow(final int index) {
-        final HTMLCollection rows = (HTMLCollection) getRows();
+        final HTMLCollection rows = getRows();
         final int rowCount = rows.getLength();
         final DomElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
         if (rowCount == 0) {
