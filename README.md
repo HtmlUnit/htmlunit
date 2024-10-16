@@ -11,6 +11,10 @@ Version 4.4.0 / July 28, 2024
 
 [htmlunit.org][4]
 
+### News
+
+**[Developer Blog][15]**
+
 [HtmlUnit@mastodon][13] | [HtmlUnit@Twitter][3]
 
 [HtmlUnit Kanban Board][6]
@@ -209,3 +213,4 @@ Please try to keep your pull requests small (don't bundle unrelated changes) and
 [12]: https://github.com/HtmlUnit/htmlunit/releases
 [13]: https://fosstodon.org/@HtmlUnit
 [14]: https://webscraping.ai/faq/htmlunit
+[15]: https://htmlunit.github.io/htmlunit-blog/
