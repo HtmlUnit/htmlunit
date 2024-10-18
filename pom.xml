@@ -30,7 +30,7 @@
         <htmlunitneko.version>4.5.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>4.5.0-SNAPSHOT</htmlunitxpath.version>
         <htmlunitcorejs.version>4.5.0-SNAPSHOT</htmlunitcorejs.version>
-        <htmlunitwebsocketclient.version>4.5.0-SNAPSHOT</htmlunitwebsocketclient.version>
+        <htmlunitwebsocketclient.version>4.5.0</htmlunitwebsocketclient.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
 
