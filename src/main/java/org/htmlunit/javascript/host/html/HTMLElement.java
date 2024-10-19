@@ -227,7 +227,6 @@ public class HTMLElement extends Element {
         final String name = domNode.getLocalName();
         if ("wbr".equalsIgnoreCase(name)
                 || "basefont".equalsIgnoreCase(name)
-                || "keygen".equalsIgnoreCase(name)
                 || "track".equalsIgnoreCase(name)) {
             endTagForbidden_ = true;
         }

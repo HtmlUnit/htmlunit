@@ -145,7 +145,6 @@ public class AttributesTest extends TestCase {
             }
         }
 
-        supportedTags.remove("keygen");
         supportedTags.remove("input");
 
         if (!supportedTags.isEmpty()) {

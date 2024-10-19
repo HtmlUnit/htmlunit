@@ -9,12 +9,21 @@
     <body>
         <release version="4.5.0" date="xxxx, 2024" description="Chrome/Edge 129, Firefox 131, FirefoxESR 128, WebWorker, Bugfixes">
             <action type="update" dev="rbri">
-                Special handling of the bgsound tag in FF removed. BGSound is now handled as unknown tag in all browsers.
-                Looks like this was a leftover from the IE days.
+                INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
+            </action>
+            <action type="fix" dev="rbri">
+                Next round to remove the 'keygen' tag support.
+            </action>
+            <action type="update" dev="rbri">
+                Small performance and memory optimization for the creation of our DOM tree.
             </action>
             <action type="fix" dev="rbri" issue="#882">
                 AbstractDomNodeList access might throw a NPE due to a race condition in the DomHtmlAttributeChangeListenerImpl
                 clearing of cachedElements processing.
+            </action>
+            <action type="update" dev="rbri">
+                Special handling of the bgsound tag in FF removed. BGSound is now handled as unknown tag in all browsers.
+                Looks like this was a leftover from the IE days.
             </action>
             <action type="fix" dev="rbri">
                 Function initHashChangeEvent() is no longer available in FF_ESR.
@@ -25,9 +34,6 @@
             </action>
             <action type="update" dev="rbri">
                 Property window.clientInformation is settable in FF too.
-            </action>
-            <action type="update" dev="rbri">
-                INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
             </action>
             <action type="update" dev="rbri">
                 The WebSocket ctor in FF_ESR now accepts also undefined/null.

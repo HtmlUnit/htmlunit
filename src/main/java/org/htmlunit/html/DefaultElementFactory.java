@@ -60,13 +60,11 @@ public class DefaultElementFactory implements ElementFactory {
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(DefaultElementFactory.class);
 
-    private static final String KEYGEN_ = "keygen";
-
     /**
      * You can generate your own test cases by looking into ElementTestSource.generateTestForHtmlElements.
      */
     public static final List<String> SUPPORTED_TAGS_ = Collections.unmodifiableList(Arrays.asList(
-        KEYGEN_, HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
+        HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
         HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlArea.TAG_NAME,
         HtmlArticle.TAG_NAME, HtmlAside.TAG_NAME, HtmlAudio.TAG_NAME,
         HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
@@ -168,10 +166,6 @@ public class DefaultElementFactory implements ElementFactory {
 
         boolean doBrowserCompatibilityCheck = checkBrowserCompatibility;
         switch (tagName) {
-            case KEYGEN_:
-                element = new HtmlUnknownElement(page, qualifiedName, attributeMap);
-                break;
-
             case HtmlAbbreviated.TAG_NAME:
                 element = new HtmlAbbreviated(qualifiedName, page, attributeMap);
                 break;
