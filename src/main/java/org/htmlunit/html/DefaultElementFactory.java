@@ -50,6 +50,13 @@ import org.xml.sax.Attributes;
  */
 public class DefaultElementFactory implements ElementFactory {
 
+    // for performance optimization
+    static final class OrderedFastHashMapWithLowercaseKeys<K, V> extends OrderedFastHashMap<K, V> {
+        OrderedFastHashMapWithLowercaseKeys(final int size) {
+            super(size);
+        }
+    }
+
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(DefaultElementFactory.class);
 
@@ -770,7 +777,8 @@ public class DefaultElementFactory implements ElementFactory {
         }
 
         final int length = attributes.getLength();
-        final Map<String, DomAttr> attributeMap = new OrderedFastHashMap<>(length);
+        // final Map<String, DomAttr> attributeMap = new OrderedFastHashMap<>(length);
+        final Map<String, DomAttr> attributeMap = new OrderedFastHashMapWithLowercaseKeys<>(length);
 
         // small performance optimization if we know the attributes we can avoid some index lookups
         if (attributes instanceof XMLAttributesImpl) {
