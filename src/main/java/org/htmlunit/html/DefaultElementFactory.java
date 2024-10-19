@@ -767,11 +767,10 @@ public class DefaultElementFactory implements ElementFactory {
      */
     static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
         if (attributes == null) {
-            return new OrderedFastHashMap<>(0);
+            return new OrderedFastHashMapWithLowercaseKeys<>(0);
         }
 
         final int length = attributes.getLength();
-        // final Map<String, DomAttr> attributeMap = new OrderedFastHashMap<>(length);
         final Map<String, DomAttr> attributeMap = new OrderedFastHashMapWithLowercaseKeys<>(length);
 
         // small performance optimization if we know the attributes we can avoid some index lookups
@@ -781,16 +780,19 @@ public class DefaultElementFactory implements ElementFactory {
                 final QName qName = attribute.getQName();
                 final String name = qName.getRawname();
 
+                String namespaceURI = qName.getUri();
+                if (namespaceURI != null && namespaceURI.isEmpty()) {
+                    namespaceURI = null;
+                }
+
+                DomAttr attr = new DomAttr(page, namespaceURI, name, attribute.getValue(), true);
+                attr = attributeMap.put(name, attr);
+
                 // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
-                if (!attributeMap.containsKey(name)) {
-                    String namespaceURI = qName.getUri();
-
-                    if (namespaceURI != null && namespaceURI.isEmpty()) {
-                        namespaceURI = null;
-                    }
-
-                    final DomAttr newAttr = new DomAttr(page, namespaceURI, name, attribute.getValue(), true);
-                    attributeMap.put(name, newAttr);
+                // for performance reasons we do not check for the existence of the key first
+                // because this is the unusual case
+                if (attr != null) {
+                    attributeMap.put(name, attr);
                 }
             }
 
@@ -800,16 +802,20 @@ public class DefaultElementFactory implements ElementFactory {
         for (int i = 0; i < length; i++) {
             final String qName = attributes.getQName(i);
 
+            String namespaceURI = attributes.getURI(i);
+
+            if (namespaceURI != null && namespaceURI.isEmpty()) {
+                namespaceURI = null;
+            }
+
+            DomAttr attr = new DomAttr(page, namespaceURI, qName, attributes.getValue(i), true);
+            attr = attributeMap.put(qName, attr);
+
             // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
-            if (!attributeMap.containsKey(qName)) {
-                String namespaceURI = attributes.getURI(i);
-
-                if (namespaceURI != null && namespaceURI.isEmpty()) {
-                    namespaceURI = null;
-                }
-
-                final DomAttr newAttr = new DomAttr(page, namespaceURI, qName, attributes.getValue(i), true);
-                attributeMap.put(qName, newAttr);
+            // for performance reasons we do not check for the existence of the key first
+            // because this is the unusual case
+            if (attr != null) {
+                attributeMap.put(qName, attr);
             }
         }
 
