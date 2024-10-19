@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
-
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -69,9 +67,6 @@ public class HtmlRp extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
-            return DisplayStyle.INLINE;
-        }
         if (wasCreatedByJavascript()) {
             if (getParentNode() == null) {
                 return DisplayStyle.EMPTY;
