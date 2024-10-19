@@ -11,8 +11,17 @@
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
             </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: Classes HtmlBlink, HtmlCommand, HtmlIsIndex, HtmlMenuItem, HtmlMultiColumn, and HtmlNextId removed.
+            </action>
             <action type="fix" dev="rbri">
                 Next round to remove the 'keygen' tag support.
+            </action>
+            <action type="fix" dev="rbri">
+                Bunch of fixes for the various ruby supprt tags.
+            </action>
+            <action type="update" dev="rbri">
+                Cleanup of the DefaultElementFactory to simplify the code and improve the performance.
             </action>
             <action type="update" dev="rbri">
                 Small performance and memory optimization for the creation of our DOM tree.

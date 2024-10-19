@@ -63,7 +63,7 @@ public enum BrowserVersionFeatures {
     CSS_RP_DISPLAY_NONE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature(FF_ESR)
+    @BrowserFeature({FF, FF_ESR})
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The context menu MouseEvent has a detail of 1. */
@@ -183,6 +183,10 @@ public enum BrowserVersionFeatures {
     /** HTML parser supports the 'command' tag. */
     @BrowserFeature({CHROME, EDGE})
     HTML_COMMAND_TAG,
+
+    /** HTML parser supports the 'layer' tag. */
+    @BrowserFeature({CHROME, EDGE})
+    HTML_LAYER_TAG,
 
     /** Additionally support dates in format "d/M/yyyy". */
     @BrowserFeature({FF, FF_ESR})

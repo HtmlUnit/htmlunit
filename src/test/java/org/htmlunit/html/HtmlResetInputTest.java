@@ -68,10 +68,6 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         page.<HtmlTextInput>getHtmlElementById("textfield1").setValue("Flintstone");
         page.<HtmlHiddenInput>getHtmlElementById("hidden1").setValue("Flintstone");
         page.<HtmlPasswordInput>getHtmlElementById("password1").setValue("Flintstone");
-        HtmlElement elem = page.getHtmlElementById("isindex1");
-        if (elem instanceof HtmlIsIndex) {
-            ((HtmlIsIndex) elem).setValue("Flintstone");
-        }
 
         // Check to make sure they did get changed
         assertEquals("bar", form.getCheckedRadioButton("radioButton").getValueAttribute());
@@ -84,10 +80,6 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         assertEquals("Flintstone", page.<HtmlTextInput>getHtmlElementById("textfield1").getValue());
         assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
         assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValue());
-        elem = page.getHtmlElementById("isindex1");
-        if (elem instanceof HtmlIsIndex) {
-            assertEquals("Flintstone", ((HtmlIsIndex) elem).getValue());
-        }
 
         final HtmlPage secondPage = resetInput.click();
         assertSame(page, secondPage);
@@ -109,10 +101,6 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
 
         assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValueAttribute());
         assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValue());
-        elem = page.getHtmlElementById("isindex1");
-        if (elem instanceof HtmlIsIndex) {
-            assertEquals("", ((HtmlIsIndex) elem).getValue());
-        }
     }
 
     /**

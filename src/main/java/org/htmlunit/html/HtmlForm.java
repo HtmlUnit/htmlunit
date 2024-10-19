@@ -86,7 +86,7 @@ public class HtmlForm extends HtmlElement {
     public static final String ATTRIBUTE_FORMNOVALIDATE = "formnovalidate";
 
     private static final HashSet<String> SUBMITTABLE_TAG_NAMES = new HashSet<>(Arrays.asList(HtmlInput.TAG_NAME,
-        HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME));
+        HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME));
 
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 
@@ -473,11 +473,11 @@ public class HtmlForm extends HtmlElement {
             return true;
         }
 
-        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && !element.hasAttribute(NAME_ATTRIBUTE)) {
+        if (!element.hasAttribute(NAME_ATTRIBUTE)) {
             return false;
         }
 
-        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && "".equals(element.getAttributeDirect(NAME_ATTRIBUTE))) {
+        if ("".equals(element.getAttributeDirect(NAME_ATTRIBUTE))) {
             return false;
         }
 

@@ -586,7 +586,7 @@ public class HtmlPage extends SgmlPage {
             tagName = org.htmlunit.util.StringUtils.toRootLowerCase(tagName);
         }
         return getWebClient().getPageCreator().getHtmlParser().getFactory(tagName)
-                    .createElementNS(this, null, tagName, null, true);
+                    .createElementNS(this, null, tagName, null);
     }
 
     /**
@@ -596,7 +596,7 @@ public class HtmlPage extends SgmlPage {
     public DomElement createElementNS(final String namespaceURI, final String qualifiedName) {
         return getWebClient().getPageCreator().getHtmlParser()
                 .getElementFactory(this, namespaceURI, qualifiedName, false, true)
-                .createElementNS(this, namespaceURI, qualifiedName, null, true);
+                .createElementNS(this, namespaceURI, qualifiedName, null);
     }
 
     /**

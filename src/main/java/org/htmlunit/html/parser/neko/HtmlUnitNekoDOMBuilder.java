@@ -293,7 +293,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         if (factory == HtmlUnitNekoHtmlParser.SVG_FACTORY) {
             namespaceURI = Html.SVG_NAMESPACE;
         }
-        final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts, true);
+        final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
         newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
         // parse can't replace everything as it does not buffer elements while parsing

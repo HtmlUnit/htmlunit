@@ -1667,8 +1667,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Symbol(Symbol.toStringTag) [C] [HTMLElement]")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void rb() throws Exception {
         test("rb");
     }
@@ -1691,8 +1689,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Symbol(Symbol.toStringTag) [C] [HTMLElement]")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void rp() throws Exception {
         test("rp");
     }
@@ -1704,8 +1700,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Symbol(Symbol.toStringTag) [C] [HTMLElement]")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void rt() throws Exception {
         test("rt");
     }
@@ -1717,8 +1711,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Symbol(Symbol.toStringTag) [C] [HTMLElement]")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void rtc() throws Exception {
         test("rtc");
     }
@@ -1730,8 +1722,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Symbol(Symbol.toStringTag) [C] [HTMLElement]")
-    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HTMLUnknownElement]")
     public void ruby() throws Exception {
         test("ruby");
     }
