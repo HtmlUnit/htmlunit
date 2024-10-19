@@ -21,7 +21,7 @@
                 Bunch of fixes for the various ruby supprt tags.
             </action>
             <action type="update" dev="rbri">
-                Cleanup of the DefaultElementFactory to simplify the code and improve the performance.
+                Cleanup of the ElementFactory/DefaultElementFactory to simplify the code and improve the performance.
             </action>
             <action type="update" dev="rbri">
                 Small performance and memory optimization for the creation of our DOM tree.
