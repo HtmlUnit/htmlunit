@@ -44,16 +44,14 @@ public final class UnknownElementFactory implements ElementFactory {
      */
     @Override
     public HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes) {
-        String namespace = null;
         if (page != null && page.isHtmlPage() && tagName.indexOf(':') != -1) {
             final HtmlPage htmlPage = (HtmlPage) page;
             final String prefix = tagName.substring(0, tagName.indexOf(':'));
-            final Map<String, String> namespaces = htmlPage.getNamespaces();
-            if (namespaces.containsKey(prefix)) {
-                namespace = namespaces.get(prefix);
-            }
+            final String namespace = htmlPage.getNamespaces().get(prefix);
+            return createElementNS(page, namespace, tagName, attributes);
         }
-        return createElementNS(page, namespace, tagName, attributes);
+
+        return createElementNS(page, null, tagName, attributes);
     }
 
     /**
