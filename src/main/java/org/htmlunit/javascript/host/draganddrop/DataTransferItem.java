@@ -110,7 +110,7 @@ public class DataTransferItem extends HtmlUnitScriptable {
         }
 
         final Callable fun = (Callable) callback;
-        final Object[] args = new Object[] {data_};
+        final Object[] args = {data_};
 
         final WebWindow webWindow = getWindow().getWebWindow();
         final PostponedAction action = new PostponedAction(webWindow.getEnclosedPage(), "getAsString callback") {

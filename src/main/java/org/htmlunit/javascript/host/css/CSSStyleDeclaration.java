@@ -1178,7 +1178,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         if (index >= size) {
             return JavaScriptEngine.UNDEFINED;
         }
-        return style.keySet().toArray(new String[size])[index];
+        return style.keySet().toArray(new String[0])[index];
     }
 
     /**
