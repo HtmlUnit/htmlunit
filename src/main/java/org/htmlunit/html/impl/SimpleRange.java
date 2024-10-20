@@ -277,7 +277,7 @@ public class SimpleRange implements Serializable {
      * Moves the contents of a Range from the containing document or document
      * fragment to a new DocumentFragment.
      * @return DocumentFragment containing the extracted contents
-     * @throws DOMException
+     * @throws DOMException in case of error
      */
     public DomDocumentFragment extractContents() throws DOMException {
         final DomDocumentFragment fragment = cloneContents();
@@ -292,7 +292,7 @@ public class SimpleRange implements Serializable {
     /**
      * @return true if startContainer equals endContainer and
      * startOffset equals endOffset
-     * @throws DOMException
+     * @throws DOMException in case of error
      */
     public boolean isCollapsed() throws DOMException {
         return startContainer_ == endContainer_ && startOffset_ == endOffset_;
@@ -301,7 +301,7 @@ public class SimpleRange implements Serializable {
     /**
      * @return the deepest common ancestor container of this range's two
      * boundary-points.
-     * @throws DOMException
+     * @throws DOMException in case of error
      */
     public DomNode getCommonAncestorContainer() throws DOMException {
         if (startContainer_ != null && endContainer_ != null) {

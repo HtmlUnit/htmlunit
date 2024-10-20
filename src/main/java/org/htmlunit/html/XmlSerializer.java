@@ -270,6 +270,7 @@ public class XmlSerializer {
     /**
      * @param link the link to get the attributes from
      * @return the attribute map
+     * @throws IOException in case of error
      */
     protected Map<String, DomAttr> getAttributesFor(final HtmlLink link) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(link, "href");

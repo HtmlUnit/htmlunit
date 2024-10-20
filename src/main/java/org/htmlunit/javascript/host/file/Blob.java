@@ -84,10 +84,13 @@ public class Blob extends HtmlUnitScriptable {
 
         /**
          * @return the text
+         * @throws IOException in case of error
          */
         abstract String getText() throws IOException;
 
         /**
+         * @param start the start position
+         * @param end the end position
          * @return the bytes
          */
         abstract byte[] getBytes(int start, int end);

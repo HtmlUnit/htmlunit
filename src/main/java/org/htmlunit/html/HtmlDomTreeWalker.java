@@ -108,7 +108,7 @@ public class HtmlDomTreeWalker {
     /**
      * @see org.w3c.dom.traversal.TreeWalker#setCurrentNode(Node)
      * @param currentNode the current node
-     * @throws DOMException
+     * @throws DOMException if the current node provides is null
      */
     public void setCurrentNode(final Node currentNode) throws DOMException {
         if (currentNode == null) {

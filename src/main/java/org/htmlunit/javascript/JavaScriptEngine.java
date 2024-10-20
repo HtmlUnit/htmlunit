@@ -275,6 +275,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param browserVersion the {@link BrowserVersion}
      * @param prototypes map of prototypes
      * @param prototypesPerJSName map of prototypes with the class name as key
+     * @throws Exception in case of error
      */
     public static void configureScope(final HtmlUnitScriptable jsScope,
             final ClassConfiguration scopeConfig,
@@ -529,10 +530,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @throws InstantiationException if the new class cannot be instantiated
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
+     * @throws Exception in case of errors
      */
     public static HtmlUnitScriptable configureClass(final ClassConfiguration config, final Scriptable window)
         throws Exception {
