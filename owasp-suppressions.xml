@@ -4,4 +4,7 @@
         <packageUrl regex="true">^pkg:maven/xerces/xercesImpl@.*$</packageUrl>
         <cve>CVE-2017-10355</cve>
     </suppress>
+    <suppress>
+        <cve>CVE-2024-6763</cve>
+    </suppress>
 </suppressions>
