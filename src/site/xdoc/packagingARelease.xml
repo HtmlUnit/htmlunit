@@ -112,7 +112,7 @@ mvn clean deploy -Dmaven.test.skip=true
                     </li>
                     <li>Deploy the release to Sonatype OSS Maven repository.
                         <source>mvn deploy -Dmaven.test.skip=true</source>
-                        and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories" target="_blank">Sonatype OSS staging repository</a>
+                        and then go to <a href="https://s01.oss.sonatype.org/index.html#stagingRepositories" target="_blank">Sonatype OSS staging repository</a>
                         to close and release the artifacts.
                     </li>
                     <li>Create the version on Github
