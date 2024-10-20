@@ -47,15 +47,14 @@ public abstract class DomNamespaceNode extends DomNode {
         super(page);
         WebAssert.notNull("qualifiedName", qualifiedName);
         qualifiedName_ = qualifiedName;
+        namespaceURI_ = namespaceURI;
 
-        if (qualifiedName.indexOf(':') == -1) {
-            namespaceURI_ = namespaceURI;
+        final int colonPosition = qualifiedName_.indexOf(':');
+        if (colonPosition == -1) {
             localName_ = qualifiedName_;
             prefix_ = null;
         }
         else {
-            namespaceURI_ = namespaceURI;
-            final int colonPosition = qualifiedName_.indexOf(':');
             localName_ = qualifiedName_.substring(colonPosition + 1);
             prefix_ = qualifiedName_.substring(0, colonPosition);
         }
