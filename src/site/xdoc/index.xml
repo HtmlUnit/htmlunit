@@ -67,9 +67,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>July 28, 2024</date></dt>
+                    <dt>Latest release <date>October 20, 2024</date></dt>
                     <dd>
-                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/4.4.0">version 4.4.0</a></p>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/4.5.0">version 4.5.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -185,7 +185,7 @@
             <p>
                 Place <a href="dependencies.html">all the required jars</a> in your classpath.
                 All of these can be found in the lib directory of the HtmlUnit installation
-                (<a href="https://github.com/HtmlUnit/htmlunit/releases" target="blank">htmlunit-3.xx.x-bin.zip</a>
+                (<a href="https://github.com/HtmlUnit/htmlunit/releases" target="blank">htmlunit-4.xx.x-bin.zip</a>
                 contains everything you need including all required dependencies).
             </p>
             <p>
@@ -194,7 +194,7 @@
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.4.0</version>
+    <version>4.5.0</version>
 </dependency>]]></source>
             </p>
 
