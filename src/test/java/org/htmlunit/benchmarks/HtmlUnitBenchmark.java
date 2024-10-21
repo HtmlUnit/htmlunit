@@ -2,6 +2,7 @@ package org.htmlunit.benchmarks;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -759,7 +760,7 @@ public class HtmlUnitBenchmark extends SimpleWebTestCase {
             """;
 
     @Benchmark
-    @Fork(2)
+    @Fork(1)
     @Warmup(iterations = 3)
     @Timeout(time = 1000)
     @Measurement(iterations = 4)
@@ -767,8 +768,15 @@ public class HtmlUnitBenchmark extends SimpleWebTestCase {
     public void JMH() throws Exception {
 
         setBrowserVersion(BrowserVersion.CHROME);
-
-        HtmlPage pageFromString = loadPage(html);
+        WebClient webClient = new WebClient(BrowserVersion.getDefault(), false, null, -1);
+        webClient.getOptions().setJavaScriptEnabled(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        webClient.getOptions().setCssEnabled(false);
+        webClient.getOptions().setHistoryPageCacheLimit(0);
+        webClient.getOptions().setHistorySizeLimit(0);
+        webClient.getOptions().setWebSocketEnabled(false);
+        webClient.setFrameContentHandler(baseFrameElement -> false);
+        HtmlPage pageFromString = loadPage(webClient, html, null, URL_FIRST);
 
         assert !pageFromString.querySelector("h1").asNormalizedText().contains("Stella");
     }
