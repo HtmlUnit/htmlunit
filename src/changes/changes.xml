@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="4.6.0" date="xxxx, 2024" description="Chrome/Edge 130, Bugfixes">
+            <action type="fix" dev="rbri">
+                NPE in AttachmentHandler.isAttachment(WebResponse) fixed.
+            </action>
+        </release>
+
+
         <release version="4.5.0" date="October 20, 2024" description="Chrome/Edge 129, Firefox 131, FirefoxESR 128, WebWorker, Javascript, Bugfixes">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Return type of AbstractCssStyleDeclaration.item(int) has changed from Object to String.
