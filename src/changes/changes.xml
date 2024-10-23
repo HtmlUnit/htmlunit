@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.6.0" date="xxxx, 2024" description="Chrome/Edge 130, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: many fixes for default values in destructuring assignments
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: many fixes for optional chain and nullish coalesce
+            </action>
             <action type="fix" dev="rbri">
                 NPE in AttachmentHandler.isAttachment(WebResponse) fixed.
             </action>
