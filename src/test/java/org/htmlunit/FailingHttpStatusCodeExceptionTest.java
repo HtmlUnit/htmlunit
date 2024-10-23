@@ -17,14 +17,12 @@ package org.htmlunit;
 import static org.junit.Assert.fail;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,9 +40,8 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
      */
     @Test
     public void constructorWithWebResponse() throws Exception {
-        final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData webResponseData = new WebResponseData(ArrayUtils.EMPTY_BYTE_ARRAY,
-                HttpStatus.NOT_FOUND_404, HttpStatus.NOT_FOUND_404_MSG, emptyList);
+                HttpStatus.NOT_FOUND_404, HttpStatus.NOT_FOUND_404_MSG, Collections.emptyList());
         final WebResponse webResponse = new WebResponse(webResponseData, URL_FIRST, HttpMethod.GET, 10);
         final FailingHttpStatusCodeException e = new FailingHttpStatusCodeException(webResponse);
 

@@ -19,7 +19,6 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 
 import java.io.InputStream;
 import java.util.Collections;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
@@ -28,7 +27,6 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -123,8 +121,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     private void drawImage(final String png, final String canvasSetup, final String drawJS) throws Exception {
         try (InputStream is = getClass().getResourceAsStream(png)) {
             final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_PNG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_PNG, Collections.emptyList());
             getMockWebConnection().setDefaultResponse("Test");
         }
 
@@ -231,8 +229,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void drawImage_invalidImage() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("invalid.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_PNG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_PNG, Collections.emptyList());
             getMockWebConnection().setDefaultResponse("Test");
         }
 

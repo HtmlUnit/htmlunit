@@ -960,8 +960,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", MimeType.TEXT_HTML, emptyList);
+        webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", MimeType.TEXT_HTML, Collections.emptyList());
         webClient.setWebConnection(webConnection);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
         webClient.getOptions().setPrintContentOnFailingStatusCode(false);

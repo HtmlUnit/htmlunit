@@ -20,7 +20,6 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
@@ -29,7 +28,6 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -410,8 +408,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok",
+                    MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
         final String html
@@ -452,8 +450,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "abcd/img.gif");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok",
+                    MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
         final String html
@@ -490,8 +488,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok",
+                    MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
         final String html
@@ -528,8 +526,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok",
+                    MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
         final String html
@@ -566,8 +564,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok",
+                    MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
         final String html
@@ -629,8 +627,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "abcd/img.gif");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok",
+                    MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
         final String html

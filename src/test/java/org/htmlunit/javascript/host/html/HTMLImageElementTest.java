@@ -35,7 +35,6 @@ import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -483,8 +482,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(fis);
 
             final MockWebConnection webConnection = getMockWebConnection();
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         loadPageVerifyTitle2(html);
@@ -523,8 +521,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
             final byte[] directBytes = IOUtils.toByteArray(fis);
             final MockWebConnection webConnection = getMockWebConnection();
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         loadPageVerifyTitle2(html);
@@ -565,8 +562,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (FileInputStream fis = new FileInputStream(new File(url.toURI()))) {
             final byte[] directBytes = IOUtils.toByteArray(fis);
             final MockWebConnection webConnection = getMockWebConnection();
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+            webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         loadPageVerifyTitle2(html);
@@ -616,8 +612,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             final URL urlImage = new URL(URL_SECOND, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
             getMockWebConnection().setDefaultResponse("Test");
         }
 
@@ -666,9 +661,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             final URL urlImage = new URL(URL_SECOND, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-            getMockWebConnection().setResponse(URL_SECOND, "Test", 200, "OK", MimeType.TEXT_HTML, emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
+            getMockWebConnection().setResponse(URL_SECOND, "Test", 200, "OK",
+                    MimeType.TEXT_HTML, Collections.emptyList());
             getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         }
 
@@ -709,8 +704,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             final URL urlImage = new URL(URL_SECOND, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "", Collections.emptyList());
             getMockWebConnection().setDefaultResponse("Test");
         }
 
@@ -746,8 +740,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             final URL urlImage = new URL(URL_SECOND, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "text/html", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "text/html", Collections.emptyList());
             getMockWebConnection().setDefaultResponse("Test");
         }
 
@@ -877,8 +870,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -909,8 +901,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -942,8 +933,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -981,11 +971,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
 
             urlImage = new URL(URL_FIRST, "img2.jpg");
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -1024,11 +1013,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
 
             urlImage = new URL(URL_FIRST, "img2.jpg");
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -1064,11 +1052,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
 
             urlImage = new URL(URL_FIRST, "img2.jpg");
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -1110,11 +1097,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
             URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
 
             urlImage = new URL(URL_FIRST, "img2.jpg");
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         final String html
@@ -1233,8 +1219,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
         final String html = "<html>\n"
@@ -1269,9 +1255,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
-            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
+            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -1299,8 +1286,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -1327,9 +1314,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
-            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
+            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -1363,9 +1351,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
-            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
+            getMockWebConnection().setResponse(URL_THIRD, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
         final String html
@@ -1427,8 +1416,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -1457,8 +1446,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
         final String html = "<html><body>\n"
@@ -1494,8 +1483,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
         final String html =

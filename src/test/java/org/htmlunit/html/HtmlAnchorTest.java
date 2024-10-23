@@ -179,8 +179,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().
                 getResourceAsStream("testfiles/not_supported_type.jpg")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
         final String html =

@@ -15,7 +15,6 @@
 package org.htmlunit.util;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.htmlunit.HttpMethod;
 import org.htmlunit.SimpleWebTestCase;
@@ -38,9 +37,8 @@ public class WebConnectionWrapperTest extends SimpleWebTestCase {
      */
     @Test
     public void wrapper() throws Exception {
-        final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData data = new WebResponseData(new byte[]{},
-                HttpStatus.OK_200, HttpStatus.OK_200_MSG, emptyList);
+                HttpStatus.OK_200, HttpStatus.OK_200_MSG, Collections.emptyList());
         final WebResponse response = new WebResponse(data, URL_FIRST, HttpMethod.GET, 0);
         final WebRequest wrs = new WebRequest(URL_FIRST);
 
