@@ -18,9 +18,9 @@
     <suppress checks="AvoidDuplicateLiterals" files="DOMImplementation.java"/>
     <suppress checks="AvoidDuplicateLiterals" files="DomNode.java"/>
     <suppress checks="AvoidDuplicateLiterals" files="DOMTokenList.java"/>
-    <suppress checks="AvoidDuplicateLiterals" files="Element.java"/> 
-    <suppress checks="AvoidDuplicateLiterals" files="HTMLAnchorElement.java"/> 
-    <suppress checks="AvoidDuplicateLiterals" files="HTMLEmbedElement.java"/> 
+    <suppress checks="AvoidDuplicateLiterals" files="Element.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="HTMLAnchorElement.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="HTMLEmbedElement.java"/>
     <suppress checks="AvoidDuplicateLiterals" files="HTMLHRElement.java"/>
 
     <suppress checks="Header" files=".+.properties"/>
