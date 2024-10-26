@@ -579,6 +579,17 @@ public class Node extends EventTarget {
     }
 
     /**
+     * @param namespace string containing the namespace to look the prefix up
+     * @return a string containing the prefix for a given namespace URI,
+     * if present, and null if not. When multiple prefixes are possible,
+     * the first prefix is returned.
+     */
+    @JsxFunction
+    public String lookupPrefix(final String namespace) {
+        return null;
+    }
+
+    /**
      * Returns the child nodes of the current element.
      * @return the child nodes of the current element
      */

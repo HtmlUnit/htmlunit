@@ -24,6 +24,8 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1516,5 +1518,139 @@ public class NodeTest extends WebDriverTestCase {
         verifyWindowName2(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
         Thread.sleep(200);
         assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null", "null", "null", "null", "null", "null"})
+    public void lookupPrefix() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <div id='tester'>abcd</div>\n"
+            + "<script>\n"
+            + "  var e = document.getElementById('tester');\n"
+
+            + "  log(e.lookupPrefix('http://www.w3.org/1999/xhtml'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/2000/svg'));\n"
+            + "  log(e.lookupPrefix('https://www.w3.org/1999/xlink'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/XML/1998/namespace'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/TR/html4/'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/1998/Math/MathML'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/2000/xmlns/'));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null", "null", "null", "null", "null", "null"})
+    public void lookupPrefixXhtml() throws Exception {
+        final String html
+            = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "  \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <div id='tester'>abcd</div>\n"
+            + "<script>\n"
+            + "  var e = document.getElementById('tester');\n"
+
+            + "  log(e.lookupPrefix('http://www.w3.org/1999/xhtml'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/2000/svg'));\n"
+            + "  log(e.lookupPrefix('https://www.w3.org/1999/xlink'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/XML/1998/namespace'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/TR/html4/'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/1998/Math/MathML'));\n"
+            + "  log(e.lookupPrefix('http://www.w3.org/2000/xmlns/'));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"c", "null", "x", "null", "null", "null", "null", "null", "null", "null"})
+    @HtmlUnitNYI(
+            CHROME = {"null", "null", "null", "null", "null", "null", "null", "null", "null", "null"},
+            EDGE = {"null", "null", "null", "null", "null", "null", "null", "null", "null", "null"},
+            FF = {"null", "null", "null", "null", "null", "null", "null", "null", "null", "null"},
+            FF_ESR = {"null", "null", "null", "null", "null", "null", "null", "null", "null", "null"})
+    public void lookupPrefixXml() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function tester(xml) {\n"
+            + "    var xmlDoc = xml.responseXML;\n"
+            + "    var x = xmlDoc.getElementsByTagName('book')[0];\n"
+            + "    var y = xmlDoc.getElementsByTagName('book')[1];\n"
+
+            + "    log(x.lookupPrefix('https://www.w3schools.com/children/'));\n"
+            + "    log(y.lookupPrefix('https://www.w3schools.com/children/'));\n"
+            + "    log(y.lookupPrefix('https://www.w3schools.com/xml/'));\n"
+
+            + "    log(x.lookupPrefix('http://www.w3.org/1999/xhtml'));\n"
+            + "    log(x.lookupPrefix('http://www.w3.org/2000/svg'));\n"
+            + "    log(x.lookupPrefix('https://www.w3.org/1999/xlink'));\n"
+            + "    log(x.lookupPrefix('http://www.w3.org/XML/1998/namespace'));\n"
+            + "    log(x.lookupPrefix('http://www.w3.org/TR/html4/'));\n"
+            + "    log(x.lookupPrefix('http://www.w3.org/1998/Math/MathML'));\n"
+            + "    log(x.lookupPrefix('http://www.w3.org/2000/xmlns/'));\n"
+
+            + "  }"
+
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  xhr.onreadystatechange = function() {\n"
+            + "    if (this.readyState == 4 && this.status == 200) {\n"
+            + "       tester(this);\n"
+            + "    }\n"
+            + "  };\n"
+            + "  xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "  xhr.send();\n"
+            + "</script>\n"
+            + "</body></html>\n";
+
+        final String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<bookstore>\n"
+                + "<book xmlns:c=\"https://www.w3schools.com/children/\" category=\"children\">\n"
+                + "<c:title c:lang=\"en\">Harry Potter</c:title>\n"
+                + "<c:author>J K. Rowling</c:author>\n"
+                + "<c:year>2005</c:year>\n"
+                + "<c:price>29.99</c:price>\n"
+                + "</book>\n"
+                + "<book xmlns:x=\"https://www.w3schools.com/xml/\" category=\"web\">\n"
+                + "<x:title x:lang=\"en\">Learning XML</x:title>\n"
+                + "<x:author>Erik T. Ray</x:author>\n"
+                + "<x:year>2003</x:year>\n"
+                + "<x:price>39.95</x:price>\n"
+                + "</book>\n"
+                + "</bookstore>";
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.APPLICATION_XML);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 }

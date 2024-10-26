@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.6.0" date="xxxx, 2024" description="Chrome/Edge 130, Bugfixes">
+            <action type="add" dev="rbri">
+                Simple implementation of Node.lookupPrefix(String) added.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: many fixes for default values in destructuring assignments
             </action>
