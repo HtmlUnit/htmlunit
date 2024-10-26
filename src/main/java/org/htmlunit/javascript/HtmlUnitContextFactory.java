@@ -249,9 +249,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setTimeZone(browserVersion_.getSystemTimezone());
 
         // make sure no java classes are usable from js
-        cx.setClassShutter(fullClassName -> {
-            return false;
-        });
+        cx.setClassShutter(fullClassName -> false);
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
         cx.setOptimizationLevel(-1);
