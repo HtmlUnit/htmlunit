@@ -1059,7 +1059,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             onAddedToDocumentFragment();
         }
 
-        fireNodeAdded(this, domNode);
+        if (page_ == null || page_.isDomChangeListenerInUse()) {
+            fireNodeAdded(this, domNode);
+        }
     }
 
     /**
@@ -1167,16 +1169,16 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     private void fireRemoval(final DomNode exParent) {
-        final HtmlPage htmlPage = getHtmlPageOrNull();
-        if (htmlPage != null) {
+        final SgmlPage page = getPage();
+        if (page != null && page instanceof HtmlPage) {
             // some actions executed on removal need an intact parent relationship (e.g. for the
             // DocumentPositionComparator) so we have to restore it temporarily
             parent_ = exParent;
-            htmlPage.notifyNodeRemoved(this);
+            ((HtmlPage) page).notifyNodeRemoved(this);
             parent_ = null;
         }
 
-        if (exParent != null) {
+        if (exParent != null && (page == null || page.isDomChangeListenerInUse())) {
             fireNodeDeleted(exParent, this);
             // ask ex-parent to fire event (because we don't have parent now)
             exParent.fireNodeDeleted(exParent, this);
@@ -1608,6 +1610,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 domListeners_ = new ArrayList<>();
             }
             domListeners_.add(listener);
+            if (page_ != null) {
+                page_.domChangeListenerAdded();
+            }
         }
     }
 
@@ -1675,6 +1680,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 characterDataListeners_ = new ArrayList<>();
             }
             characterDataListeners_.add(listener);
+            if (page_ != null) {
+                page_.characterDataChangeListenerAdded();
+            }
         }
     }
 

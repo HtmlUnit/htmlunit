@@ -54,6 +54,8 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
     private boolean printing_;
+    private boolean domChangeListenerInUse_;
+    private boolean characterDataChangeListenerInUse_;
 
     /**
      * Creates an instance of SgmlPage.
@@ -415,5 +417,33 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     public void setPrinting(final boolean printing) {
         printing_ = printing;
         clearComputedStyles();
+    }
+
+    /**
+     * Informs about the use of a domChangeListener.
+     */
+    public void domChangeListenerAdded() {
+        domChangeListenerInUse_ = true;
+    }
+
+    /**
+     * @return true if at least one domChangeListener was registered.
+     */
+    public boolean isDomChangeListenerInUse() {
+        return domChangeListenerInUse_;
+    }
+
+    /**
+     * Informs about the use of a characterDataChangeListener.
+     */
+    public void characterDataChangeListenerAdded() {
+        characterDataChangeListenerInUse_ = true;
+    }
+
+    /**
+     * @return true if at least one characterDataChangeListener was registered.
+     */
+    public boolean isCharacterDataChangeListenerInUse() {
+        return characterDataChangeListenerInUse_;
     }
 }

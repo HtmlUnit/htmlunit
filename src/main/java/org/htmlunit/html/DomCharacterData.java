@@ -60,7 +60,11 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     public void setData(final String data) {
         final String oldData = data_;
         data_ = data;
-        fireCharacterDataChanged(this, oldData);
+
+        final SgmlPage page = getPage();
+        if (page == null || page.isCharacterDataChangeListenerInUse()) {
+            fireCharacterDataChanged(this, oldData);
+        }
     }
 
     /**
