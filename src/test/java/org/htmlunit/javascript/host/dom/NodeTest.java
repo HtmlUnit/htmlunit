@@ -1625,7 +1625,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.onreadystatechange = function() {\n"
             + "    if (this.readyState == 4 && this.status == 200) {\n"
-            + "       tester(this);\n"
+            + "      tester(this);\n"
             + "    }\n"
             + "  };\n"
             + "  xhr.open('GET', '" + URL_SECOND + "', true);\n"
