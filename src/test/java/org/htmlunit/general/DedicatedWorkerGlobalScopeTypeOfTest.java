@@ -6543,7 +6543,9 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "function",
+            FF = "undefined",
+            FF_ESR = "undefined")
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }

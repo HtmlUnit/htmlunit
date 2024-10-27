@@ -248,7 +248,9 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "false",
+            FF = "true",
+            FF_ESR = "true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"
@@ -271,7 +273,9 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]"})
+    @Alerts(DEFAULT = {"DOM2: exception", "DOM3: exception"},
+            FF = {"DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]"},
+            FF_ESR = {"DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

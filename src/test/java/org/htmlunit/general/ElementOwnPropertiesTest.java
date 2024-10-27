@@ -15911,12 +15911,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor(),initMutationEvent(),MODIFICATION[E],"
-                + "newValue[GCE],prevValue[GCE],relatedNode[GCE],"
-                + "REMOVAL[E]",
-            EDGE = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor(),initMutationEvent(),MODIFICATION[E],"
-                + "newValue[GCE],prevValue[GCE],relatedNode[GCE],"
-                + "REMOVAL[E]",
+    @Alerts(CHROME = "exception",
+            EDGE = "exception",
             FF = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor(),initMutationEvent(),MODIFICATION[E],"
                 + "newValue[GCE],prevValue[GCE],relatedNode[GCE],"
                 + "REMOVAL[E]",

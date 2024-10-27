@@ -2589,7 +2589,9 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [MutationEvent]")
+    @Alerts(DEFAULT = "exception",
+            FF = "Symbol(Symbol.toStringTag) [C] [MutationEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MutationEvent]")
     public void mutationEvent() throws Exception {
         testString("", "document.createEvent('MutationEvent')");
     }

@@ -5431,7 +5431,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("function")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function",
+            FF_ESR = "function")
     public void mutationEvent() throws Exception {
         test("MutationEvent");
     }

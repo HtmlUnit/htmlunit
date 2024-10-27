@@ -6546,7 +6546,9 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "function RTCDataChannel() { [native code] }",
+            FF = "exception",
+            FF_ESR = "exception")
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }
