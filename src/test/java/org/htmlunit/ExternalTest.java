@@ -54,11 +54,11 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "129.0.6668";
+    static String CHROME_DRIVER_ = "130.0.6723";
     static String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static String EDGE_DRIVER_ = "129.0.2792";
+    static String EDGE_DRIVER_ = "130.0.2849";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -334,9 +334,15 @@ public class ExternalTest {
             return true;
         }
 
-        // version 3.11.x seem to requires JDK11
+        // version > 3.12.0 does not work with out site.xml and also not with a refactored one
         if ("maven-site-plugin".equals(artifactId)
-                && (version.startsWith("3.11.") || version.startsWith("3.12."))) {
+                && (version.startsWith("3.12.1") || version.startsWith("3.20.") || version.startsWith("3.21."))) {
+            return true;
+        }
+
+        // 11.x requires java11
+        if ("org.owasp".equals(artifactId)
+                && version.startsWith("11.")) {
             return true;
         }
 
