@@ -1038,9 +1038,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final boolean wasAlreadyAttached = domNode.isAttachedToPage();
         domNode.attachedToPage_ = isAttachedToPage();
 
+        final SgmlPage page = getPage();
         if (domNode.attachedToPage_) {
             // trigger events
-            final Page page = getPage();
             if (null != page && page.isHtmlPage()) {
                 ((HtmlPage) page).notifyNodeAdded(domNode);
             }
@@ -1059,7 +1059,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             onAddedToDocumentFragment();
         }
 
-        if (page_ == null || page_.isDomChangeListenerInUse()) {
+
+        if (page == null || page.isDomChangeListenerInUse()) {
             fireNodeAdded(this, domNode);
         }
     }
@@ -1610,8 +1611,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 domListeners_ = new ArrayList<>();
             }
             domListeners_.add(listener);
-            if (page_ != null) {
-                page_.domChangeListenerAdded();
+
+            final SgmlPage page = getPage();
+            if (page != null) {
+                page.domChangeListenerAdded();
             }
         }
     }
@@ -1680,8 +1683,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 characterDataListeners_ = new ArrayList<>();
             }
             characterDataListeners_.add(listener);
-            if (page_ != null) {
-                page_.characterDataChangeListenerAdded();
+
+            final SgmlPage page = getPage();
+            if (page != null) {
+                page.characterDataChangeListenerAdded();
             }
         }
     }
