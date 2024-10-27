@@ -341,7 +341,7 @@ public class ExternalTest {
         }
 
         // 11.x requires java11
-        if ("org.owasp".equals(artifactId)
+        if ("org.owasp".equals(groupId)
                 && version.startsWith("11.")) {
             return true;
         }
