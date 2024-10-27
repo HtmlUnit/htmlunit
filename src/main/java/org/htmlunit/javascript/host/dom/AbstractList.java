@@ -72,7 +72,9 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
 
     private Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction_ =
             (Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable) event -> EffectOnCache.RESET;
+
     private Predicate<DomNode> isMatchingPredicate_ = (Predicate<DomNode> & Serializable) domNode -> false;
+
     private Supplier<List<DomNode>> elementsSupplier_ =
             (Supplier<List<DomNode>> & Serializable)
                 () -> {
