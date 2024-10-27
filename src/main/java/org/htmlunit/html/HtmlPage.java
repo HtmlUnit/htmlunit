@@ -1465,14 +1465,19 @@ public class HtmlPage extends SgmlPage {
             return;
         }
         final DomElement doc = getDocumentElement();
-        final List<HtmlElement> elements = new ArrayList<>(doc.getElementsByTagName("script"));
-        for (final HtmlElement e : elements) {
-            if (e instanceof HtmlScript) {
-                final HtmlScript script = (HtmlScript) e;
+        final List<HtmlScript> scripts = new ArrayList<>();
+
+        // don't call getElementsByTagName() here because it creates a live collection
+        for (final HtmlElement elem : doc.getHtmlElementDescendants()) {
+            if ("script".equals(elem.getLocalName()) && (elem instanceof HtmlScript)) {
+                final HtmlScript script = (HtmlScript) elem;
                 if (script.isDeferred() && ATTRIBUTE_NOT_DEFINED != script.getSrcAttribute()) {
-                    ScriptElementSupport.executeScriptIfNeeded(script, true, true);
+                    scripts.add(script);
                 }
             }
+        }
+        for (final HtmlScript script : scripts) {
+            ScriptElementSupport.executeScriptIfNeeded(script, true, true);
         }
     }
 
@@ -1872,7 +1877,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     private void calculateBase() {
-        final List<HtmlElement> baseElements = getDocumentElement().getElementsByTagName("base");
+        final List<HtmlElement> baseElements = getDocumentElement().getStaticElementsByTagName("base");
 
         base_ = null;
         for (final HtmlElement baseElement : baseElements) {
@@ -1930,7 +1935,7 @@ public class HtmlPage extends SgmlPage {
             return Collections.emptyList(); // weird case, for instance if document.documentElement has been removed
         }
         final String nameLC = httpEquiv.toLowerCase(Locale.ROOT);
-        final List<HtmlMeta> tags = getDocumentElement().getElementsByTagNameImpl("meta");
+        final List<HtmlMeta> tags = getDocumentElement().getStaticElementsByTagName("meta");
         final List<HtmlMeta> foundTags = new ArrayList<>();
         for (final HtmlMeta htmlMeta : tags) {
             if (nameLC.equals(htmlMeta.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {

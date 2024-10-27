@@ -926,7 +926,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public final HtmlElement appendChildIfNoneExists(final String tagName) {
         final HtmlElement child;
-        final List<HtmlElement> children = getElementsByTagName(tagName);
+        final List<HtmlElement> children = getStaticElementsByTagName(tagName);
         if (children.isEmpty()) {
             // Add a new child and return it.
             child = (HtmlElement) ((HtmlPage) getPage()).createElement(tagName);
@@ -946,7 +946,7 @@ public abstract class HtmlElement extends DomElement {
      * @param i the index of the child to remove
      */
     public final void removeChild(final String tagName, final int i) {
-        final List<HtmlElement> children = getElementsByTagName(tagName);
+        final List<HtmlElement> children = getStaticElementsByTagName(tagName);
         if (i >= 0 && i < children.size()) {
             children.get(i).remove();
         }

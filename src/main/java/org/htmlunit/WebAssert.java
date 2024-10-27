@@ -414,7 +414,7 @@ public final class WebAssert {
             Arrays.asList("a", "area", "button", "input", "object", "select", "textarea");
 
         for (final String tag : tags) {
-            for (final HtmlElement element : page.getDocumentElement().getElementsByTagName(tag)) {
+            for (final HtmlElement element : page.getDocumentElement().getStaticElementsByTagName(tag)) {
                 final Short tabIndex = element.getTabIndex();
                 if (tabIndex == null || HtmlElement.TAB_INDEX_OUT_OF_BOUNDS.equals(tabIndex)) {
                     final String s = element.getAttributeDirect("tabindex");

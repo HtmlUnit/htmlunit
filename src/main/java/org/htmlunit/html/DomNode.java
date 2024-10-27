@@ -1059,7 +1059,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             onAddedToDocumentFragment();
         }
 
-
         if (page == null || page.isDomChangeListenerInUse()) {
             fireNodeAdded(this, domNode);
         }

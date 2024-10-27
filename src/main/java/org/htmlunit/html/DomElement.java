@@ -648,6 +648,23 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param <E> the specific HtmlElement type
+     * @param tagName The name of the tag to match on
+     * @return A list of matching elements; this is not a live list
+     */
+    public <E extends HtmlElement> List<E> getStaticElementsByTagName(final String tagName) {
+        final List<E> res = new ArrayList<>();
+        for (final HtmlElement elem : getHtmlElementDescendants()) {
+            if (elem.getLocalName().equalsIgnoreCase(tagName)) {
+                res.add((E) elem);
+            }
+        }
+        return res;
+    }
+
+    /**
      * {@inheritDoc}
      * Not yet implemented.
      */
