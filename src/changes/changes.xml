@@ -9,7 +9,7 @@
     <body>
         <release version="4.6.0" date="xxxx, 2024" description="Chrome/Edge 130, Bugfixes">
             <action type="add" dev="RhinoTeam">
-                Like real browsers work a bit more optimized as long as no Characterdatachangelistener/DomChangeListener
+                Like real browsers work a bit more optimized as long as no CharacterDataChangeListener/DomChangeListener
                 is registered. In this case we can avoid some dom tree traversal.
             </action>
             <action type="add" dev="RhinoTeam">
