@@ -279,11 +279,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection301_MovedPermanently_GetMethod() throws Exception {
-        final int statusCode = 301;
-        final HttpMethod initialRequestMethod = HttpMethod.GET;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(301, HttpMethod.GET, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -337,7 +333,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection301_MovedPermanently_PostMethod() throws Exception {
-        doTestRedirection(301, HttpMethod.POST, HttpMethod.GET);
+        doTestRedirection(301, HttpMethod.POST, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -360,7 +356,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection302_MovedTemporarily_PostMethod() throws Exception {
-        doTestRedirection(302, HttpMethod.POST, HttpMethod.GET);
+        doTestRedirection(302, HttpMethod.POST, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -377,11 +373,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection302_MovedTemporarily_GetMethod() throws Exception {
-        final int statusCode = 302;
-        final HttpMethod initialRequestMethod = HttpMethod.GET;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(302, HttpMethod.GET, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -399,11 +391,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection303_SeeOther_GetMethod() throws Exception {
-        final int statusCode = 303;
-        final HttpMethod initialRequestMethod = HttpMethod.GET;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(303, HttpMethod.GET, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -412,7 +400,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection303_SeeOther_PostMethod() throws Exception {
-        doTestRedirection(303, HttpMethod.POST, HttpMethod.GET);
+        doTestRedirection(303, HttpMethod.POST, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -429,11 +417,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection307_TemporaryRedirect_GetMethod() throws Exception {
-        final int statusCode = 307;
-        final HttpMethod initialRequestMethod = HttpMethod.GET;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(307, HttpMethod.GET, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -442,30 +426,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection307_TemporaryRedirect_PostMethod() throws Exception {
-        final int statusCode = 307;
-        final HttpMethod initialRequestMethod = HttpMethod.POST;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.POST;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
-    }
-
-    /**
-     * Basic logic for all the redirection tests.
-     *
-     * @param statusCode the code to return from the initial request
-     * @param initialRequestMethod the initial request
-     * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
-     * If a redirect is not expected to happen then this must be null
-     * @throws Exception if the test fails
-     */
-    private void doTestRedirection(
-            final int statusCode,
-            final HttpMethod initialRequestMethod,
-            final HttpMethod expectedRedirectedRequestMethod)
-        throws Exception {
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod,
-                URL_SECOND.toExternalForm());
+        doTestRedirection(307, HttpMethod.POST, HttpMethod.POST, URL_SECOND.toExternalForm());
     }
 
     /**
