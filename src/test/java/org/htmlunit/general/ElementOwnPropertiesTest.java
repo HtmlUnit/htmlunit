@@ -15919,9 +15919,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor(),initMutationEvent(),MODIFICATION[E],"
                 + "newValue[GCE],prevValue[GCE],relatedNode[GCE],"
                 + "REMOVAL[E]")
-    @HtmlUnitNYI(CHROME = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]",
-            EDGE = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]",
-            FF_ESR = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]",
+    @HtmlUnitNYI(FF_ESR = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]",
             FF = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]")
     public void mutationEvent() throws Exception {
         testString("", "document.createEvent('MutationEvent')");

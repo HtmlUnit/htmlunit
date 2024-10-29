@@ -91,6 +91,10 @@ public enum BrowserVersionFeatures {
     EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
     /** Supports event type 'TextEvent'. */
+    @BrowserFeature({FF, FF_ESR})
+    EVENT_TYPE_MUTATIONEVENT,
+
+    /** Supports event type 'TextEvent'. */
     @BrowserFeature({CHROME, EDGE, FF})
     EVENT_TYPE_TEXTEVENT,
 

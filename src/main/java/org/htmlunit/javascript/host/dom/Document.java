@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.dom;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
+import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MUTATIONEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COOKIES_IGNORE_BLANK;
@@ -1107,6 +1108,10 @@ public class Document extends Node {
             clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
             if (CloseEvent.class == clazz
                     && getBrowserVersion().hasFeature(EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
+                clazz = null;
+            }
+            else if (MutationEvent.class == clazz
+                    && !getBrowserVersion().hasFeature(EVENT_TYPE_MUTATIONEVENT)) {
                 clazz = null;
             }
             else if (TextEvent.class == clazz
