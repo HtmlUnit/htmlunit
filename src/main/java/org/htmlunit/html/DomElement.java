@@ -1069,13 +1069,15 @@ public class DomElement extends DomNamespaceNode implements Element {
                         event.disableProcessLabelAfterBubbling();
                     }
                 }
-                return click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
+                click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
             }
             finally {
                 if (webClient.isJavaScriptEnabled()) {
                     jsEngine.processPostponedActions();
                 }
             }
+
+            return (P) webClient.getCurrentWindow().getEnclosedPage();
         }
     }
 
