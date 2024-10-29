@@ -766,7 +766,7 @@ public final class StyleAttributes implements Serializable {
         BOTTOM("bottom", "bottom", chromeAndEdgeAuto(), ff("")),
 
         /** The style property {@code boxDecorationBreak}. */
-        BOX_DECORATION_BREAK("boxDecorationBreak", "box-decoration-break", ff("slice")),
+        BOX_DECORATION_BREAK("boxDecorationBreak", "box-decoration-break", ff("slice"), chromeAndEdge("slice")),
 
         /** The style property {@code box-decoration-break}. */
         BOX_DECORATION_BREAK_("box-decoration-break", "box-decoration-break", ff("slice")),
@@ -2984,13 +2984,13 @@ public final class StyleAttributes implements Serializable {
         TEXT_WRAP_("text-wrap", "text-wrap", ff("wrap")),
 
         /** The style property {@code textWrapMode}. */
-        TEXT_WRAP_MODE("textWrapMode", "text-wrap-mode", ff("wrap")),
+        TEXT_WRAP_MODE("textWrapMode", "text-wrap-mode", ff("wrap"), chromeAndEdge("wrap")),
 
         /** The style property {@code text-wrap-mode}. */
         TEXT_WRAP_MODE_("text-wrap-mode", "text-wrap-mode", ff("wrap")),
 
         /** The style property {@code textWrapStyle}. */
-        TEXT_WRAP_STYLE("textWrapStyle", "text-wrap-style", ff("auto")),
+        TEXT_WRAP_STYLE("textWrapStyle", "text-wrap-style", ff("auto"), chromeAndEdgeAuto()),
 
         /** The style property {@code text-wrap-style}. */
         TEXT_WRAP_STYLE_("text-wrap-style", "text-wrap-style", ff("auto")),

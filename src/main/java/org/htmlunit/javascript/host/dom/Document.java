@@ -1110,24 +1110,25 @@ public class Document extends Node {
                     && getBrowserVersion().hasFeature(EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
                 clazz = null;
             }
-            else if (MutationEvent.class == clazz
-                    && !getBrowserVersion().hasFeature(EVENT_TYPE_MUTATIONEVENT)) {
-                clazz = null;
-            }
             else if (TextEvent.class == clazz
                     && !getBrowserVersion().hasFeature(EVENT_TYPE_TEXTEVENT)) {
                 clazz = CompositionEvent.class;
             }
         }
-        if (clazz == null
+
+        if (MutationEvent.class == clazz
+                && !getBrowserVersion().hasFeature(EVENT_TYPE_MUTATIONEVENT)) {
+            clazz = null;
+        }
+        else if (clazz == null
                 && ("Events".equals(eventType)
-                || "HashChangeEvent".equals(eventType)
-                || "BeforeUnloadEvent".equals(eventType)
-                || "PopStateEvent".equals(eventType)
-                || "FocusEvent".equals(eventType)
-                || "WheelEvent".equals(eventType)
-                        && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT)
-                || "AnimationEvent".equals(eventType))) {
+                    || "HashChangeEvent".equals(eventType)
+                    || "BeforeUnloadEvent".equals(eventType)
+                    || "PopStateEvent".equals(eventType)
+                    || "FocusEvent".equals(eventType)
+                    || "WheelEvent".equals(eventType)
+                            && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT)
+                    || "AnimationEvent".equals(eventType))) {
             clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
 
             if (PopStateEvent.class == clazz
@@ -1139,10 +1140,12 @@ public class Document extends Node {
                 clazz = null;
             }
         }
+
         if (clazz == null) {
             throw JavaScriptEngine.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                 "Event Type is not supported: " + eventType));
         }
+
         try {
             final Event event = clazz.getDeclaredConstructor().newInstance();
             event.setParentScope(getWindow());
