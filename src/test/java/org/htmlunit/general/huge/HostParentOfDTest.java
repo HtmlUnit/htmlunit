@@ -2213,7 +2213,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "false",
+            FF = "true",
+            FF_ESR = "true")
     public void _Event_MutationEvent() throws Exception {
         test("Event", "MutationEvent");
     }
