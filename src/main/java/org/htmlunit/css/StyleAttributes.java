@@ -24,6 +24,7 @@ import static org.htmlunit.css.BrowserConfiguration.chromeAndEdgeNormal;
 import static org.htmlunit.css.BrowserConfiguration.chromeAndEdgeNotIterable;
 import static org.htmlunit.css.BrowserConfiguration.edge;
 import static org.htmlunit.css.BrowserConfiguration.ff;
+import static org.htmlunit.css.BrowserConfiguration.ffEsr;
 import static org.htmlunit.css.BrowserConfiguration.ffLatest;
 import static org.htmlunit.css.BrowserConfiguration.ffNone;
 import static org.htmlunit.css.BrowserConfiguration.ffNormal;
@@ -2106,10 +2107,10 @@ public final class StyleAttributes implements Serializable {
         MOZ_USER_INPUT__("-moz-user-input", "-moz-user-input", ff("auto")),
 
         /** The style property {@code MozUserModify}. */
-        MOZ_USER_MODIFY("MozUserModify", "-moz-user-modify", ff("read-only")),
+        MOZ_USER_MODIFY("MozUserModify", "-moz-user-modify", ffEsr("read-only")),
 
         /** The style property {@code -moz-user-modify}. */
-        MOZ_USER_MODIFY__("-moz-user-modify", "-moz-user-modify", ff("read-only")),
+        MOZ_USER_MODIFY__("-moz-user-modify", "-moz-user-modify", ffEsr("read-only")),
 
         /** The style property {@code MozUserSelect}. */
         MOZ_USER_SELECT("MozUserSelect", "-moz-user-select", ff("auto")),
@@ -2901,11 +2902,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code textEmphasisPosition}. */
         TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", chromeAndEdge("over"),
-                ff("over")),
+                ffEsr("over"), ffLatest("auto")),
 
         /** The style property {@code text-emphasis-position}. */
         TEXT_EMPHASIS_POSITION_("text-emphasis-position", "text-emphasis-position",
-                ff("over")),
+                ffEsr("over"), ffLatest("auto")),
 
         /** The style property {@code textEmphasisStyle}. */
         TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", chromeAndEdgeNone(), ffNone()),
