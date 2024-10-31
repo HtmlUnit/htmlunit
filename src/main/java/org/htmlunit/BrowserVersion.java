@@ -86,7 +86,7 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(131, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(132, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 128;
 
@@ -170,7 +170,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.SEC_FETCH_SITE,
             HttpHeader.SEC_FETCH_USER,
             HttpHeader.PRIORITY};
-        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8";
+        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX.imgAcceptHeader_ = "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5";
