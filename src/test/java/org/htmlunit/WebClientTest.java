@@ -45,6 +45,7 @@ import org.htmlunit.html.HtmlButtonInput;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
 import org.htmlunit.http.HttpStatus;
@@ -2473,6 +2474,67 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals(1, webClient.getTopLevelWindows().size());
         assertNotNull(webClient.getCurrentWindow());
         assertEquals("js", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void loginFlowClickSubmitRedirect() throws Exception {
+        final String startPage =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><title>Start page</title>"
+                + "<form action='submit.html' method='post'>"
+                + "  <input type='submit' name='mysubmit' id='mySubmit'>"
+                + "</form>"
+                + "<a href='submit.html' id='myAnchor'>Tester</a>\n"
+                + "</body></html>";
+
+        int reqCount = getMockWebConnection().getRequestCount();
+
+        final String submitPage =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><title>Submit page</title>"
+                + "<body onload='document.forms[0].submit()'>"
+                + "</body>"
+                + "<form action='redirect.html' method='post'>"
+                + "</form>"
+                + "</html>";
+        final URL urlSubmitPage = new URL(URL_FIRST, "submit.html");
+        getMockWebConnection().setResponse(urlSubmitPage, submitPage);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", "/landing.html"));
+        final URL urlRedirectPage = new URL(URL_FIRST, "redirect.html");
+        getMockWebConnection().setResponse(urlRedirectPage, "", 302, "Found", null, headers);
+
+        final String landingPage =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><title>Landing page</title>"
+                + "<body></html>";
+        final URL urlLandingPage = new URL(URL_FIRST, "landing.html");
+        getMockWebConnection().setResponse(urlLandingPage, landingPage);
+
+        // test by clicking the submit button
+        HtmlPage page = loadPage(startPage);
+        assertEquals("Start page", page.getTitleText());
+
+        HtmlPage resultPage = page.getElementById("mySubmit").click();
+        assertEquals("Landing page", resultPage.getTitleText());
+
+        assertEquals(reqCount + 4, getMockWebConnection().getRequestCount());
+        assertEquals(urlLandingPage.toExternalForm(), getMockWebConnection().getLastWebRequest().getUrl().toString());
+
+        // test by clicking the anchor
+        reqCount = getMockWebConnection().getRequestCount();
+        page = loadPage(startPage);
+        assertEquals("Start page", page.getTitleText());
+
+        resultPage = page.getElementById("myAnchor").click();
+        assertEquals("Landing page", resultPage.getTitleText());
+
+        assertEquals(reqCount + 4, getMockWebConnection().getRequestCount());
+        assertEquals(urlLandingPage.toExternalForm(), getMockWebConnection().getLastWebRequest().getUrl().toString());
     }
 
     /**

@@ -7,7 +7,11 @@
     </properties>
 
     <body>
-        <release version="4.6.0" date="xxxx, 2024" description="Chrome/Edge 130, Bugfixes">
+        <release version="4.6.0" date="xxxx, 2024" description="Chrome/Edge 130, Firefox 132, Bugfixes">
+            <action type="fix" dev="rbri" issue="#837">
+                DomElement.click() now returns the correct page if the page contans a js based form auto submit.
+                This was a regression from version 4.4.0.
+            </action>
             <action type="add" dev="RhinoTeam">
                 Nullish assignment operator '??=' implemented.
             </action>
