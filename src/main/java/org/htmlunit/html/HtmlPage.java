@@ -383,17 +383,14 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the <code>body</code> element (or <code>frameset</code> element),
-     * or {@code null} if it does not yet exist.
-     * @return the <code>body</code> element (or <code>frameset</code> element),
-     * or {@code null} if it does not yet exist
+     * @return the <code>body</code> element, or {@code null} if it does not yet exist
      */
-    public HtmlElement getBody() {
+    public HtmlBody getBody() {
         final DomElement doc = getDocumentElement();
         if (doc != null) {
             for (final DomNode node : doc.getChildren()) {
-                if (node instanceof HtmlBody || node instanceof HtmlFrameSet) {
-                    return (HtmlElement) node;
+                if (node instanceof HtmlBody) {
+                    return (HtmlBody) node;
                 }
             }
         }
