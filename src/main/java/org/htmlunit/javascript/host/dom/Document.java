@@ -73,7 +73,6 @@ import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlArea;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
-import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlEmbed;
 import org.htmlunit.html.HtmlForm;
