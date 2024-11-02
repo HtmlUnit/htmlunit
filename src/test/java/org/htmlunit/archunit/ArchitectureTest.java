@@ -255,6 +255,15 @@ public class ArchitectureTest {
             .orShould().haveRawReturnType(isAssignableToScriptable);
 
     /**
+     * JsxGetter should only return Scriptable's.
+     */
+    @ArchTest
+    public static final ArchRule jsxSetterReturnType = methods()
+            .that()
+                .areAnnotatedWith(JsxSetter.class)
+            .should().haveRawReturnType("void");
+
+    /**
      * JsxFunctions should only return Scriptable's.
      */
     @ArchTest
