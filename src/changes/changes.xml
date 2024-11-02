@@ -8,6 +8,10 @@
 
     <body>
         <release version="4.6.0" date="xxxx, 2024" description="Chrome/Edge 130, Firefox 132, Bugfixes">
+            <action type="fix" dev="rbri">
+                No longer use getElementsByTagName() in cases we do not need the live update capabilites of the result.
+                This reduces the internal workload and should make some cases faster.
+            </action>
             <action type="fix" dev="rbri" issue="#837">
                 DomElement.click() now returns the correct page if the page contans a js based form auto submit.
                 This was a regression from version 4.4.0.
@@ -15,7 +19,7 @@
             <action type="add" dev="RhinoTeam">
                 Nullish assignment operator '??=' implemented.
             </action>
-            <action type="add" dev="RhinoTeam">
+            <action type="add" dev="rbri">
                 Like real browsers work a bit more optimized as long as no CharacterDataChangeListener/DomChangeListener
                 is registered. In this case we can avoid some dom tree traversal.
             </action>
