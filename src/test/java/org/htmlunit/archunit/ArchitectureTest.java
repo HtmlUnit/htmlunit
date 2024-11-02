@@ -160,7 +160,20 @@ public class ArchitectureTest {
             new DescribedPredicate<JavaClass>("@is not assignable to Scriptable") {
                 @Override
                 public boolean test(final JavaClass javaClass) {
-                    return javaClass.isAssignableTo(Scriptable.class);
+                    // we have to build a more complex implemenation because
+                    // javaClass.isAssignableTo(Scriptable.class);
+                    // checks also all superclasses
+                    // Therefore we have to switch back to the real java class.
+                    try {
+                        if (javaClass.isPrimitive()) {
+                            return false;
+                        }
+
+                        return Scriptable.class.isAssignableFrom(Class.forName(javaClass.getFullName()));
+                    }
+                    catch (final ClassNotFoundException e) {
+                        throw new RuntimeException(e.getMessage(), e);
+                    }
                 }
             };
 
