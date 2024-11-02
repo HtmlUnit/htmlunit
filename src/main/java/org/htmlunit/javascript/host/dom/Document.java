@@ -73,9 +73,11 @@ import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlArea;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
+import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlEmbed;
 import org.htmlunit.html.HtmlForm;
+import org.htmlunit.html.HtmlFrameSet;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlRb;
@@ -825,9 +827,20 @@ public class Document extends Node {
     public HTMLElement getBody() {
         final Page page = getPage();
         if (page instanceof HtmlPage) {
-            final HtmlElement body = ((HtmlPage) page).getBody();
+            final HtmlPage htmlPage = (HtmlPage) page;
+            final HtmlElement body = htmlPage.getBody();
             if (body != null) {
                 return body.getScriptableObject();
+            }
+
+            // strange but this returns the frameset element
+            final DomElement doc = htmlPage.getDocumentElement();
+            if (doc != null) {
+                for (final DomNode node : doc.getChildren()) {
+                    if (node instanceof HtmlFrameSet) {
+                        return (HTMLElement) node.getScriptableObject();
+                    }
+                }
             }
         }
         return null;
