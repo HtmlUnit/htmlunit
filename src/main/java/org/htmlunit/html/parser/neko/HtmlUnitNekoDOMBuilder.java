@@ -279,8 +279,12 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         // If we're adding a body element, keep track of any temporary synthetic ones
         // that we may have had to create earlier (for document.write(), for example).
         HtmlBody oldBody = null;
-        if ("body".equals(qName) && page_.getBody() instanceof HtmlBody) {
-            oldBody = (HtmlBody) page_.getBody();
+        final boolean isBodyTag = "body".equals(tagLower);
+        if (isBodyTag) {
+            final HtmlBody body = page_.getBody();
+            if (body != null) {
+                oldBody = body;
+            }
         }
 
         // Add the new node.
@@ -328,7 +332,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             oldBody.quietlyRemoveAndMoveChildrenTo(newElement);
         }
 
-        if (!insideSvg_ && "body".equals(tagLower)) {
+        if (!insideSvg_ && isBodyTag) {
             body_ = (HtmlElement) newElement;
         }
         else if (createdByJavascript_
@@ -531,10 +535,12 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         // Use the normal behavior: append a text node for the accumulated text.
         final String textValue = characters_.toString();
-        final DomText textNode = new DomText(page_, textValue);
         characters_.clear();
 
-        if (org.apache.commons.lang3.StringUtils.isNotBlank(textValue)) {
+        if (org.apache.commons.lang3.StringUtils.isBlank(textValue)) {
+            appendChild(currentNode_, new DomText(page_, textValue));
+        }
+        else {
             // malformed HTML: </td>some text</tr> => text comes before the table
             if (currentNode_ instanceof HtmlTableRow) {
                 final HtmlTableRow row = (HtmlTableRow) currentNode_;
@@ -545,7 +551,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                         domText.setTextContent(domText.getWholeText() + textValue);
                     }
                     else {
-                        enclosingTable.insertBefore(textNode);
+                        enclosingTable.insertBefore(new DomText(page_, textValue));
                     }
                 }
             }
@@ -556,18 +562,15 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                     domText.setTextContent(domText.getWholeText() + textValue);
                 }
                 else {
-                    enclosingTable.insertBefore(textNode);
+                    enclosingTable.insertBefore(new DomText(page_, textValue));
                 }
             }
             else if (currentNode_ instanceof HtmlImage) {
-                currentNode_.getParentNode().appendChild(textNode);
+                currentNode_.getParentNode().appendChild(new DomText(page_, textValue));
             }
             else {
-                appendChild(currentNode_, textNode);
+                appendChild(currentNode_, new DomText(page_, textValue));
             }
-        }
-        else {
-            appendChild(currentNode_, textNode);
         }
     }
 
@@ -755,10 +758,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         finally {
             page_.setDOMBuilder(oldBuilder);
         }
-    }
-
-    HtmlElement getBody() {
-        return body_;
     }
 
     private static boolean isSynthesized(final Augmentations augs) {
