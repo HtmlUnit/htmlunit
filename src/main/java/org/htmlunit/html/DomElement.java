@@ -656,7 +656,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public <E extends HtmlElement> List<E> getStaticElementsByTagName(final String tagName) {
         final List<E> res = new ArrayList<>();
-        for (final HtmlElement elem : getHtmlElementDescendants()) {
+        for (final Iterator<HtmlElement> iterator
+                = this.new DescendantElementsIterator<>(HtmlElement.class);
+                iterator.hasNext();) {
+            final HtmlElement elem = iterator.next();
             if (elem.getLocalName().equalsIgnoreCase(tagName)) {
                 res.add((E) elem);
             }
