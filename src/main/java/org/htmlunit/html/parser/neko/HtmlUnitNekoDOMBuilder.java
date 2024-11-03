@@ -32,7 +32,6 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.cyberneko.HTMLConfiguration;
 import org.htmlunit.cyberneko.HTMLElements;
-import org.htmlunit.cyberneko.HTMLEventInfo;
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancingListener;
 import org.htmlunit.cyberneko.xerces.parsers.AbstractSAXParser;
@@ -236,7 +235,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     public void startElement(final QName element, final XMLAttributes attributes, final Augmentations augs)
         throws XNIException {
         // augs might change so we store only the interesting part
-        lastTagWasSynthesized_ = isSynthesized(augs);
+        lastTagWasSynthesized_ = augs.isSynthesized();
         super.startElement(element, attributes, augs);
     }
 
@@ -454,7 +453,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     public void endElement(final QName element, final Augmentations augs)
         throws XNIException {
         // augs might change so we store only the interesting part
-        lastTagWasSynthesized_ = isSynthesized(augs);
+        lastTagWasSynthesized_ = augs.isSynthesized();
         super.endElement(element, augs);
     }
 
@@ -758,10 +757,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         finally {
             page_.setDOMBuilder(oldBuilder);
         }
-    }
-
-    private static boolean isSynthesized(final Augmentations augs) {
-        return augs instanceof HTMLEventInfo && ((HTMLEventInfo) augs).isSynthesized();
     }
 
     private static void appendChild(final DomNode parent, final DomNode child) {
