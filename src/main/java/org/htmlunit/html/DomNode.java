@@ -1227,8 +1227,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             throw new RuntimeException("Cannot perform quiet move on nodes from different pages.");
         }
         for (final DomNode child : getChildren()) {
-            child.basicRemove();
-            destination.basicAppend(child);
+            if (child != destination) {
+                child.basicRemove();
+                destination.basicAppend(child);
+            }
         }
         basicRemove();
     }
