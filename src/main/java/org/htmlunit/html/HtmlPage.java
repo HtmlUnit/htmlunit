@@ -1809,8 +1809,14 @@ public class HtmlPage extends SgmlPage {
             }
         }
         if (recurse) {
-            for (final DomElement child : element.getChildElements()) {
-                addElement(map, child, attribute, true);
+            // poor man's approach - we don't use getChildElements()
+            // to avoid a bunch of object constructions
+            DomNode nextChild = element.getFirstChild();
+            while (nextChild != null) {
+                if (nextChild instanceof DomElement) {
+                    addElement(map, (DomElement) nextChild, attribute, true);
+                }
+                nextChild = nextChild.getNextSibling();
             }
         }
     }
