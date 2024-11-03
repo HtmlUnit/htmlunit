@@ -1784,14 +1784,6 @@ public class HtmlPage extends SgmlPage {
     /**
      * Adds an element to the ID and name maps, if necessary.
      * @param element the element to be added to the ID and name maps
-     */
-    void addMappedElement(final DomElement element) {
-        addMappedElement(element, false);
-    }
-
-    /**
-     * Adds an element to the ID and name maps, if necessary.
-     * @param element the element to be added to the ID and name maps
      * @param recurse indicates if children must be added too
      */
     void addMappedElement(final DomElement element, final boolean recurse) {
@@ -1821,14 +1813,6 @@ public class HtmlPage extends SgmlPage {
                 addElement(map, child, attribute, true);
             }
         }
-    }
-
-    /**
-     * Removes an element from the ID and name maps, if necessary.
-     * @param element the element to be removed from the ID and name maps
-     */
-    void removeMappedElement(final HtmlElement element) {
-        removeMappedElement(element, false, false);
     }
 
     /**

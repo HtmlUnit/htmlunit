@@ -204,7 +204,7 @@ public abstract class HtmlElement extends DomElement {
                     && HtmlPage.isMappedElement(htmlPage, qualifiedName);
         if (mappedElement) {
             // cast is save here because isMappedElement checks for HtmlPage
-            htmlPage.removeMappedElement(this);
+            htmlPage.removeMappedElement(this, false, false);
         }
 
         final HtmlAttributeChangeEvent event;
@@ -262,7 +262,7 @@ public abstract class HtmlElement extends DomElement {
     private void fireAttributeChangeImpl(final HtmlAttributeChangeEvent event,
             final HtmlPage htmlPage, final boolean mappedElement, final String oldAttributeValue) {
         if (mappedElement) {
-            htmlPage.addMappedElement(this);
+            htmlPage.addMappedElement(this, false);
         }
 
         if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
@@ -292,8 +292,7 @@ public abstract class HtmlElement extends DomElement {
         final boolean mappedElement = isAttachedToPage()
                     && HtmlPage.isMappedElement(htmlPage, qualifiedName);
         if (mappedElement) {
-            // cast is save here because isMappedElement checks for HtmlPage
-            htmlPage.removeMappedElement(this);
+            htmlPage.removeMappedElement(this, false, false);
         }
 
         final HtmlAttributeChangeEvent event;
@@ -325,13 +324,13 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null) {
-            htmlPage.removeMappedElement(this);
+            htmlPage.removeMappedElement(this, false, false);
         }
 
         super.removeAttribute(attributeName);
 
         if (htmlPage != null) {
-            htmlPage.addMappedElement(this);
+            htmlPage.addMappedElement(this, false);
 
             final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
             fireHtmlAttributeRemoved(event);
