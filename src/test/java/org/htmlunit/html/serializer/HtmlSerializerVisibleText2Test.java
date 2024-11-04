@@ -1764,6 +1764,18 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
                 + "</details>");
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("beforeafter")
+    public void getVisibleTextCdata() throws Exception {
+        getVisibleTextFormated("<div id='tester'>"
+                + "before<![CDATA[inside]]>after"
+                + "</div>");
+    }
+
     private void getVisibleTextFormated(final String htmlTesterSnipped) throws Exception {
         final String htmlContent
             = "<html>\n"

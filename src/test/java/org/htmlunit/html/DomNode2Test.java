@@ -140,4 +140,28 @@ public class DomNode2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(content);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("beforeafter")
+    public void textContentCdata() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      log(document.getElementById('tester').textContent);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='tester'>before<![CDATA[inside]]>after</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
 }
