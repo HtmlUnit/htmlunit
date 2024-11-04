@@ -96,16 +96,16 @@ public class XHtmlPage2Test extends WebDriverTestCase {
              "beforeinsideafter"})
     @HtmlUnitNYI(CHROME = {"before<!--[CDATA[inside]]-->after",
                            "<div id=\"tester\">before<!--[CDATA[inside]]-->after</div>",
-                           "beforeinsideafter"},
+                           "beforeafter"},
             EDGE = {"before<!--[CDATA[inside]]-->after",
                     "<div id=\"tester\">before<!--[CDATA[inside]]-->after</div>",
-                    "beforeinsideafter"},
+                    "beforeafter"},
             FF = {"before<!--[CDATA[inside]]-->after",
                   "<div id=\"tester\">before<!--[CDATA[inside]]-->after</div>",
-                  "beforeinsideafter"},
+                  "beforeafter"},
             FF_ESR = {"before<!--[CDATA[inside]]-->after",
                       "<div id=\"tester\">before<!--[CDATA[inside]]-->after</div>",
-                      "beforeinsideafter"})
+                      "beforeafter"})
     public void cdata() throws Exception {
         final String html
             = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
