@@ -55,13 +55,11 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         if (value.endsWith(".")) {
             return;
         }
-        String domain = value;
-        domain = domain.toLowerCase(Locale.ROOT);
+        String domain = value.toLowerCase(Locale.ROOT);
 
         final int dotIndex = domain.indexOf('.');
         if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)
                 && dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
-            domain = domain.toLowerCase(Locale.ROOT);
             domain = domain.substring(1);
         }
         if (dotIndex > 0) {
