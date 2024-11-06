@@ -7,7 +7,36 @@
     </properties>
 
     <body>
-        <release version="4.6.0" date="xxxx, 2024" description="Chrome/Edge 130, Firefox 132, Bugfixes">
+        <release version="4.6.0" date="November 06, 2024" description="Chrome/Edge 130, Firefox 132, Bugfixes">
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: HtmlPage.getBody() no longer returns an HtmlFrameSet.
+            </action>
+            <action type="fix" dev="rbri">
+                disable early cdata closing for xhtml pages
+            </action>
+            <action type="add" dev="rbri">
+                neko: feature 'http://cyberneko.org/html/features/scanner/cdata-early-closing' to disable early
+                closing of cdata sections added
+            </action>
+            <action type="update" dev="rbri">
+                neko: interface HTMLEventInfo merged into Augmentations
+            </action>
+            <action type="add" dev="rbri">
+                neko: feature 'http://cyberneko.org/html/features/scanner/allow-selfclosing-script' to allow
+                parsing of self closing script tags added
+            </action>
+            <action type="fix" dev="rbri">
+                neko: wrong default for NamespaceBinder 'http://cyberneko.org/html/properties/names/elems' property
+            </action>
+            <action type="update" dev="rbri">
+                neko: code improvements for string handling
+            </action>
+            <action type="update" dev="rbri">
+                Bunch of minor changes to reduce object creation and improve performance during DOM creation.
+            </action>
+            <action type="fix" dev="rbri">
+                The DOMTree might include cycles in some border cases; fixed.
+            </action>
             <action type="fix" dev="rbri">
                 No longer use getElementsByTagName() in cases we do not need the live update capabilites of the result.
                 This reduces the internal workload and should make some cases faster.
