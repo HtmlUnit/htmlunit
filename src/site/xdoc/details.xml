@@ -287,6 +287,33 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             ]]></source>
                 </p>
             </subsection>
+
+            <subsection name="Blocking loading of frame content" id="framecontenthandler">
+                <p>
+                    By setting the FrameContentHandler of the WebClient, you can implement
+                    your own rules to decide whether the content of a frame should be loaded or not.
+                </p>
+                <p>
+            <source><![CDATA[
+    try (WebClient webClient = new WebClient()) {
+        // use our own FrameContentHandler
+        webClient.setFrameContentHandler(new FrameContentHandler() {
+
+            @Override
+            public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
+                final String src = baseFrameElement.getSrcAttribute();
+                // don't load the content from google
+                return !src.contains("google");
+            }
+
+        });
+
+        // use the client as usual
+        final HtmlPage page = webClient.getPage(url);
+    }
+            ]]></source>
+                </p>
+            </subsection>
         </section>
 
         <section name="Multithreading/Threads Pooling" id="multithreading">

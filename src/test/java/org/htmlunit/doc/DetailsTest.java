@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.FrameContentHandler;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpWebConnection;
 import org.htmlunit.MockWebConnection;
@@ -31,6 +32,7 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
 import org.htmlunit.WebServerTestCase;
+import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.MimeType;
@@ -140,6 +142,31 @@ public class DetailsTest extends WebServerTestCase {
                                 + "' content length: " + contentLenght);
                     return blocked;
                 }
+            });
+
+            // use the client as usual
+            final HtmlPage page = webClient.getPage(url);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentBlockingFrames() throws Exception {
+        final URL url = new URL("https://www.htmlunit.org/");
+
+        try (WebClient webClient = new WebClient()) {
+            // use our own FrameContentHandler
+            webClient.setFrameContentHandler(new FrameContentHandler() {
+
+                @Override
+                public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
+                    final String src = baseFrameElement.getSrcAttribute();
+                    // don't load the content from google
+                    return !src.contains("google");
+                }
+
             });
 
             // use the client as usual

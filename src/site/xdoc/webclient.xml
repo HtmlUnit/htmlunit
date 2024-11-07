@@ -287,6 +287,8 @@ public void homePage_proxy() throws Exception {
             <subsection name="FrameContentHandler">
             <p>
                 A handler to make a decision to load the frame content or not.
+                See <a href="details.html#framecontenthandler">Blocking loading of frame content</a>
+                for a sample.
             </p>
             </subsection>
 
