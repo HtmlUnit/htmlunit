@@ -59,6 +59,18 @@ public final class StringUtils {
     }
 
     /**
+     * Returns true if the param is not null and empty. This is different from
+     * {@link org.apache.commons.lang3.StringUtils#isEmpty(CharSequence)} because
+     * this returns false if the provided string is null.
+     *
+     * @param s the string to check
+     * @return true if the param is not null and empty
+     */
+    public static boolean isEmptyString(final CharSequence s) {
+        return s != null && s.length() == 0;
+    }
+
+    /**
      * Escapes the characters '&lt;', '&gt;' and '&amp;' into their XML entity equivalents. Note that
      * sometimes we have to use this method instead of
      * {@link org.apache.commons.lang3.StringEscapeUtils#escapeXml(String)} or

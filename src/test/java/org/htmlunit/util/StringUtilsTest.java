@@ -31,6 +31,20 @@ public class StringUtilsTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void isEmptyString() throws Exception {
+        assertFalse(StringUtils.isEmptyString(null));
+        assertTrue(StringUtils.isEmptyString(""));
+        assertFalse(StringUtils.isEmptyString(" "));
+        assertFalse(StringUtils.isEmptyString("\t"));
+        assertFalse(StringUtils.isEmptyString("\r"));
+        assertFalse(StringUtils.isEmptyString("\n"));
+        assertFalse(StringUtils.isEmptyString("string"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void asColorHexadecimal() throws Exception {
         assertNull(StringUtils.asColorHexadecimal(null));
         assertNull(StringUtils.asColorHexadecimal(""));
