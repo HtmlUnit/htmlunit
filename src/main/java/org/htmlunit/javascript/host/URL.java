@@ -398,7 +398,7 @@ public class URL extends HtmlUnitScriptable {
         }
 
         String query;
-        if (search == null || "?".equals(search) || "".equals(search)) {
+        if (search == null || "?".equals(search) || org.htmlunit.util.StringUtils.isEmptyString(search)) {
             query = null;
         }
         else {

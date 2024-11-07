@@ -77,7 +77,7 @@ public class HtmlMedia extends HtmlElement {
      */
     public String getSrc() {
         final String src = getSrcAttribute();
-        if ("".equals(src)) {
+        if (org.htmlunit.util.StringUtils.isEmptyString(src)) {
             return src;
         }
         try {

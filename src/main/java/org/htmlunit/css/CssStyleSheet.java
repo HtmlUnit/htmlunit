@@ -559,33 +559,33 @@ public class CssStyleSheet implements Serializable {
                 final AttributeCondition prefixAttributeCondition = (AttributeCondition) condition;
                 final String prefixValue = prefixAttributeCondition.getValue();
                 if (prefixAttributeCondition.isCaseInSensitive()) {
-                    return !"".equals(prefixValue)
+                    return !org.htmlunit.util.StringUtils.isEmptyString(prefixValue)
                             && StringUtils.startsWithIgnoreCase(
                                     element.getAttribute(prefixAttributeCondition.getLocalName()), prefixValue);
                 }
-                return !"".equals(prefixValue)
+                return !org.htmlunit.util.StringUtils.isEmptyString(prefixValue)
                         && element.getAttribute(prefixAttributeCondition.getLocalName()).startsWith(prefixValue);
 
             case SUFFIX_ATTRIBUTE_CONDITION:
                 final AttributeCondition suffixAttributeCondition = (AttributeCondition) condition;
                 final String suffixValue = suffixAttributeCondition.getValue();
                 if (suffixAttributeCondition.isCaseInSensitive()) {
-                    return !"".equals(suffixValue)
+                    return !org.htmlunit.util.StringUtils.isEmptyString(suffixValue)
                             && StringUtils.endsWithIgnoreCase(
                                     element.getAttribute(suffixAttributeCondition.getLocalName()), suffixValue);
                 }
-                return !"".equals(suffixValue)
+                return !org.htmlunit.util.StringUtils.isEmptyString(suffixValue)
                         && element.getAttribute(suffixAttributeCondition.getLocalName()).endsWith(suffixValue);
 
             case SUBSTRING_ATTRIBUTE_CONDITION:
                 final AttributeCondition substringAttributeCondition = (AttributeCondition) condition;
                 final String substringValue = substringAttributeCondition.getValue();
                 if (substringAttributeCondition.isCaseInSensitive()) {
-                    return !"".equals(substringValue)
+                    return !org.htmlunit.util.StringUtils.isEmptyString(substringValue)
                             && StringUtils.containsIgnoreCase(
                                     element.getAttribute(substringAttributeCondition.getLocalName()), substringValue);
                 }
-                return !"".equals(substringValue)
+                return !org.htmlunit.util.StringUtils.isEmptyString(substringValue)
                         && element.getAttribute(substringAttributeCondition.getLocalName()).contains(substringValue);
 
             case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:

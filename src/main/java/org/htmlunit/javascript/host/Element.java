@@ -880,7 +880,7 @@ public class Element extends Node {
         }
 
         String html = null;
-        if (value != null && !"".equals(value)) {
+        if (value != null && !StringUtils.isEmptyString(value)) {
             html = JavaScriptEngine.toString(value);
         }
 

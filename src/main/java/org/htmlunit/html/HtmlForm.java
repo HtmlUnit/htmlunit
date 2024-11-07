@@ -477,7 +477,7 @@ public class HtmlForm extends HtmlElement {
             return false;
         }
 
-        if ("".equals(element.getAttributeDirect(NAME_ATTRIBUTE))) {
+        if (org.htmlunit.util.StringUtils.isEmptyString(element.getAttributeDirect(NAME_ATTRIBUTE))) {
             return false;
         }
 

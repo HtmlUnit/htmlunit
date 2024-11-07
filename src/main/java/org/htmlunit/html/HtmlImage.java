@@ -347,7 +347,7 @@ public class HtmlImage extends HtmlElement {
      */
     public String getSrc() {
         final String src = getSrcAttribute();
-        if ("".equals(src)) {
+        if (org.htmlunit.util.StringUtils.isEmptyString(src)) {
             return src;
         }
         try {
@@ -669,7 +669,7 @@ public class HtmlImage extends HtmlElement {
             // HTMLIMAGE_BLANK_SRC_AS_EMPTY
             final String src = getSrcAttribute();
 
-            if (!"".equals(src)) {
+            if (!org.htmlunit.util.StringUtils.isEmptyString(src)) {
                 final HtmlPage page = (HtmlPage) getPage();
                 final WebClient webClient = page.getWebClient();
                 final BrowserVersion browser = webClient.getBrowserVersion();
