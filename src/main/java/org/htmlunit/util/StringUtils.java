@@ -71,6 +71,15 @@ public final class StringUtils {
     }
 
     /**
+     * @param expected the char that we expect
+     * @param s the string to check
+     * @return true if the provided string has only one char and this matches the expectation
+     */
+    public static boolean equalsChar(final char expected, final CharSequence s) {
+        return s != null && s.length() == 1 && expected == s.charAt(0);
+    }
+
+    /**
      * Escapes the characters '&lt;', '&gt;' and '&amp;' into their XML entity equivalents. Note that
      * sometimes we have to use this method instead of
      * {@link org.apache.commons.lang3.StringEscapeUtils#escapeXml(String)} or

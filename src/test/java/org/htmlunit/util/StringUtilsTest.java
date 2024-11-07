@@ -45,6 +45,20 @@ public class StringUtilsTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void equalsChar() throws Exception {
+        assertFalse(StringUtils.equalsChar('#', null));
+        assertFalse(StringUtils.equalsChar('#', ""));
+        assertFalse(StringUtils.equalsChar('#', " "));
+        assertTrue(StringUtils.equalsChar('#', "#"));
+        assertFalse(StringUtils.equalsChar('#', "##"));
+        assertFalse(StringUtils.equalsChar('#', " #"));
+        assertFalse(StringUtils.equalsChar('#', "# "));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void asColorHexadecimal() throws Exception {
         assertNull(StringUtils.asColorHexadecimal(null));
         assertNull(StringUtils.asColorHexadecimal(""));
