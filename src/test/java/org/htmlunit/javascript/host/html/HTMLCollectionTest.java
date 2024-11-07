@@ -1022,7 +1022,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     }
 
     /**
-     * see {@link HTMLAllCollectionTest#looselyEqualToUndefined}.
+     * See {@link HTMLAllCollectionTest#looselyEqualToUndefined}.
      *
      * @throws Exception if the test fails
      */
@@ -1045,7 +1045,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     }
 
     /**
-     * see {@link HTMLAllCollectionTest#looselyEqualToNull()}.
+     * See {@link HTMLAllCollectionTest#looselyEqualToNull()}.
      *
      * @throws Exception if the test fails
      */
@@ -1068,7 +1068,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     }
 
     /**
-     * see {@link HTMLAllCollectionTest#falsyInBooleanContexts()}.
+     * See {@link HTMLAllCollectionTest#falsyInBooleanContexts()}.
      *
      * @throws Exception if the test fails
      */

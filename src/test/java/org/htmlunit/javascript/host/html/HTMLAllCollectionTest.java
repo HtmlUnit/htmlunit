@@ -599,7 +599,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     }
 
     /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     * See https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
      *
      * @throws Exception if the test fails
      */
@@ -622,7 +622,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     }
 
     /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     * See https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
      *
      * @throws Exception if the test fails
      */
@@ -645,7 +645,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     }
 
     /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     * See https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
      *
      * @throws Exception if the test fails
      */
@@ -675,7 +675,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     }
 
     /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     * See https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
      *
      * @throws Exception if the test fails
      */
