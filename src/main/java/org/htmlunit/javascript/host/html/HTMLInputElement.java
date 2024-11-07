@@ -479,7 +479,8 @@ public class HTMLInputElement extends HTMLElement {
         if (htmlInput instanceof HtmlNumberInput) {
             final String valueAttr = htmlInput.getValue();
             if (!valueAttr.isEmpty()) {
-                if ("-".equals(valueAttr) || "+".equals(valueAttr)) {
+                if (org.htmlunit.util.StringUtils.equalsChar('-', valueAttr)
+                        || org.htmlunit.util.StringUtils.equalsChar('+', valueAttr)) {
                     return "";
                 }
 

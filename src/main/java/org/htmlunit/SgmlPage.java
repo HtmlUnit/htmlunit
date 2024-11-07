@@ -30,6 +30,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomNodeIterator;
 import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.DomText;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -275,7 +276,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
                 final boolean caseSensitive = hasCaseSensitiveTagNames();
                 for (final DomElement elem : getDomElementDescendants()) {
                     final String localName = elem.getLocalName();
-                    if ("*".equals(tagName) || localName.equals(tagName)
+                    if (StringUtils.equalsChar('*', tagName) || localName.equals(tagName)
                             || (!caseSensitive && localName.equalsIgnoreCase(tagName))) {
                         res.add(elem);
                     }
@@ -306,8 +307,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
                 for (final DomElement elem : getDomElementDescendants()) {
                     final String locName = elem.getLocalName();
 
-                    if (("*".equals(namespaceURI) || comparator.compare(namespaceURI, elem.getNamespaceURI()) == 0)
-                            && ("*".equals(locName) || comparator.compare(locName, elem.getLocalName()) == 0)) {
+                    if ((StringUtils.equalsChar('*', namespaceURI)
+                                    || comparator.compare(namespaceURI, elem.getNamespaceURI()) == 0)
+                            && (StringUtils.equalsChar('*', locName)
+                                    || comparator.compare(locName, elem.getLocalName()) == 0)) {
                         res.add(elem);
                     }
                 }

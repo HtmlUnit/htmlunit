@@ -262,7 +262,9 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setSearch(final String search) throws Exception {
         final String query;
-        if (search == null || "?".equals(search) || org.htmlunit.util.StringUtils.isEmptyString(search)) {
+        if (search == null
+                || org.htmlunit.util.StringUtils.isEmptyString(search)
+                || org.htmlunit.util.StringUtils.equalsChar('?', search)) {
             query = null;
         }
         else if (search.charAt(0) == '?') {

@@ -707,7 +707,7 @@ public class Document extends Node {
     public HTMLCollection getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false);
 
-        if ("*".equals(tagName)) {
+        if (org.htmlunit.util.StringUtils.equalsChar('*', tagName)) {
             collection.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> true);
         }
         else {

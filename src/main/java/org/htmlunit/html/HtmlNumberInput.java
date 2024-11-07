@@ -100,7 +100,8 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return "";
         }
 
-        if ("-".equals(raw) || "+".equals(raw)) {
+        if (org.htmlunit.util.StringUtils.equalsChar('-', raw)
+                || org.htmlunit.util.StringUtils.equalsChar('+', raw)) {
             return raw;
         }
 
@@ -140,7 +141,8 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             rawValue = rawValue.replaceAll("\\s", "");
         }
         if (!rawValue.isEmpty()) {
-            if ("-".equals(rawValue) || "+".equals(rawValue)) {
+            if (org.htmlunit.util.StringUtils.equalsChar('-', rawValue)
+                    || org.htmlunit.util.StringUtils.equalsChar('+', rawValue)) {
                 return false;
             }
 

@@ -475,7 +475,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             if (stack_.size() == initialSize_) {
                 // a <p> inside a <p> is valid for innerHTML processing
                 // see HTMLParser2Test for more cases
-                snippetStartNodeOverwritten_ = !"p".equals(tagLower);
+                snippetStartNodeOverwritten_ = !StringUtils.equalsChar('p', tagLower);
                 return;
             }
         }

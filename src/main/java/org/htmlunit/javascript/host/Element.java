@@ -237,7 +237,7 @@ public class Element extends Node {
 
         final DomNode node = getDomNodeOrDie();
         collection = new HTMLCollection(node, false);
-        if ("*".equals(tagName)) {
+        if (StringUtils.equalsChar('*', tagName)) {
             collection.setIsMatchingPredicate((Predicate<DomNode> & Serializable) nodeToMatch -> true);
         }
         else {
@@ -1040,7 +1040,7 @@ public class Element extends Node {
         else {
             if (node instanceof HtmlElement) {
                 final HtmlElement element = (HtmlElement) node;
-                if ("p".equals(element.getTagName())) {
+                if (StringUtils.equalsChar('p', element.getTagName())) {
                     int i = builder.length() - 1;
                     while (i >= 0 && Character.isWhitespace(builder.charAt(i))) {
                         i--;

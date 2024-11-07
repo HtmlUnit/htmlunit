@@ -1975,9 +1975,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         final Page page = webWindow.getEnclosedPage();
         final URL senderURL = page.getUrl();
 
-        if (!"*".equals(targetOrigin)) {
+        if (!org.htmlunit.util.StringUtils.equalsChar('*', targetOrigin)) {
             final URL targetURL;
-            if ("/".equals(targetOrigin)) {
+            if (org.htmlunit.util.StringUtils.equalsChar('/', targetOrigin)) {
                 targetURL = senderURL;
             }
             else {

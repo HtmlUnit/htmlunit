@@ -935,7 +935,7 @@ public class CssStyleSheet implements Serializable {
         int denominator = 0;
         if (nIndex != -1) {
             String value = nth.substring(0, nIndex).trim();
-            if ("-".equals(value)) {
+            if (org.htmlunit.util.StringUtils.equalsChar('-', value)) {
                 denominator = -1;
             }
             else {
