@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="4.7.0" date="November xx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#896">
+                document.all == undefined and document.all == null now returns true.
+            </action>
+        </release>
+
         <release version="4.6.0" date="November 06, 2024" description="Chrome/Edge 130, Firefox 132, Bugfixes">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: HtmlPage.getBody() no longer returns an HtmlFrameSet.

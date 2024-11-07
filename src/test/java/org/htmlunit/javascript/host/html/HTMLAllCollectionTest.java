@@ -597,4 +597,100 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void looselyEqualToUndefined() throws Exception {
+        final String html = ""
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(undefined === document.all);\n"
+            + "  log(undefined == document.all);\n"
+            + "  log(document.all === undefined);\n"
+            + "  log(document.all == undefined);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void looselyEqualToNull() throws Exception {
+        final String html = ""
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(null === document.all);\n"
+            + "  log(null == document.all);\n"
+            + "  log(document.all === null);\n"
+            + "  log(document.all == null);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"7", "1", "3", "[object HTMLAllCollection]", "5"})
+    public void falsyInBooleanContexts() throws Exception {
+        final String html = ""
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  x = 11;\n"
+            + "  if(document.all) { x = 1 } else { x = 7 }"
+            + "  log(x);\n"
+
+            + "  if(!document.all) { x = 1 } else { x = 7 }"
+            + "  log(x);\n"
+
+            + "  log(document.all ? 4 : 3);\n"
+
+            + "  log(document.all ?? 'htmlunit');\n"
+            + "  log(document.all?.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void typeof() throws Exception {
+        final String html = ""
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof document.all);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

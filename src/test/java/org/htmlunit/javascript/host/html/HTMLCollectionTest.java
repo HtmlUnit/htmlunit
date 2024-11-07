@@ -1020,4 +1020,80 @@ public class HTMLCollectionTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * see {@link HTMLAllCollectionTest#looselyEqualToUndefined}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false"})
+    public void looselyEqualToUndefined() throws Exception {
+        final String html = ""
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(undefined === document.children);\n"
+            + "  log(undefined == document.children);\n"
+            + "  log(document.children === undefined);\n"
+            + "  log(document.children == undefined);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * see {@link HTMLAllCollectionTest#looselyEqualToNull()}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false"})
+    public void looselyEqualToNull() throws Exception {
+        final String html = ""
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(null === document.children);\n"
+            + "  log(null == document.children);\n"
+            + "  log(document.children === null);\n"
+            + "  log(document.children == null);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * see {@link HTMLAllCollectionTest#falsyInBooleanContexts()}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "7", "4", "[object HTMLCollection]", "1"})
+    public void falsyInBooleanContexts() throws Exception {
+        final String html = ""
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  x = 11;\n"
+            + "  if(document.children) { x = 1 } else { x = 7 }"
+            + "  log(x);\n"
+
+            + "  if(!document.children) { x = 1 } else { x = 7 }"
+            + "  log(x);\n"
+
+            + "  log(document.children ? 4 : 3);\n"
+
+            + "  log(document.children ?? 'htmlunit');\n"
+            + "  log(document.children?.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
