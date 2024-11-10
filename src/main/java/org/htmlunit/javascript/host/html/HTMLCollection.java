@@ -223,7 +223,7 @@ public class HTMLCollection extends AbstractList implements Callable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public Object namedItem(final String name) {
+    public Scriptable namedItem(final String name) {
         final List<DomNode> elements = getElements();
         final BrowserVersion browserVersion = getBrowserVersion();
         if (browserVersion.hasFeature(HTMLCOLLECTION_NAMED_ITEM_ID_FIRST)) {

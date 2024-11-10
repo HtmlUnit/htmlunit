@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.media;
 
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -96,7 +97,7 @@ public class BaseAudioContext extends EventTarget {
      * @return the promise or null
      */
     @JsxFunction
-    public Object decodeAudioData(final NativeArrayBuffer buffer, final Function success, final Function error) {
+    public NativePromise decodeAudioData(final NativeArrayBuffer buffer, final Function success, final Function error) {
         final Window window = getWindow();
         final HtmlPage owningPage = (HtmlPage) window.getDocument().getPage();
         final JavaScriptEngine jsEngine =

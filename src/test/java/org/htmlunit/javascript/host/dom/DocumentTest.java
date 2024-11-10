@@ -570,6 +570,31 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", ""})
+    public void documentCreateElementUnknown() throws Exception {
+        final String html
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function doTest() {\n"
+            + "        var elem = document.createElement('not known');\n"
+            + "        log(elem);\n"
+            + "        log(typeof elem);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Ensures that <tt>document.createElementNS()</tt> works correctly.
      * @throws Exception if the test fails
      */

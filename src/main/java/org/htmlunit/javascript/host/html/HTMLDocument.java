@@ -417,7 +417,7 @@ public class HTMLDocument extends Document {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536652.aspx">MSDN documentation</a>
      */
     @JsxFunction
-    public Object open(final Object url, final Object name, final Object features,
+    public HTMLDocument open(final Object url, final Object name, final Object features,
             final Object replace) {
         // Any open() invocations are ignored during the parsing stage, because write() and
         // writeln() invocations will directly append content to the current insertion point.

@@ -81,7 +81,7 @@ public class HTMLFormControlsCollection extends HTMLCollection {
      */
     @Override
     @JsxFunction
-    public Object namedItem(final String name) {
+    public Scriptable namedItem(final String name) {
         if (name.isEmpty()) {
             return null;
         }

@@ -102,7 +102,7 @@ public class HTMLAllCollection extends HTMLCollection {
      * {@inheritDoc}
      */
     @Override
-    public final Object namedItem(final String name) {
+    public final Scriptable namedItem(final String name) {
         final List<DomNode> elements = getElements();
 
         // See if there is an element in the element array with the specified id.

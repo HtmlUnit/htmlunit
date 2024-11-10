@@ -69,7 +69,7 @@ public class IntersectionObserver extends HtmlUnitScriptable {
      * @return the records
      */
     @JsxFunction
-    public Object takeRecords() {
+    public HtmlUnitScriptable takeRecords() {
         return null;
     }
 }
