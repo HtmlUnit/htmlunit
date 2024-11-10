@@ -688,7 +688,8 @@ public class Element extends Node {
     @JsxFunction
     public Object insertAdjacentElement(final String where, final Object insertedElement) {
         if (insertedElement instanceof Node) {
-            final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
+            final Node insertedElementNode = (Node) insertedElement;
+            final DomNode childNode = insertedElementNode.getDomNodeOrDie();
             final Object[] values = getInsertAdjacentLocation(where);
             final DomNode node = (DomNode) values[0];
             final boolean append = ((Boolean) values[1]).booleanValue();
@@ -699,7 +700,7 @@ public class Element extends Node {
             else {
                 node.insertBefore(childNode);
             }
-            return insertedElement;
+            return insertedElementNode;
         }
         throw JavaScriptEngine.reportRuntimeError("Passed object is not an element: " + insertedElement);
     }

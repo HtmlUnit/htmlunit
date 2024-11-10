@@ -213,7 +213,7 @@ public class DocumentFragment extends Node {
      * {@inheritDoc}
      */
     @Override
-    public Object getRootNode() {
+    public Node getRootNode() {
         return this;
     }
 }

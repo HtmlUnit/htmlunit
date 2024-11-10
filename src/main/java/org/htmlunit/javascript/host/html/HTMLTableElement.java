@@ -33,6 +33,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.Node;
 
 /**
  * The JavaScript object {@code HTMLTableElement}.
@@ -375,8 +376,8 @@ public class HTMLTableElement extends RowContainer {
      * {@inheritDoc}
      */
     @Override
-    public Object appendChild(final Object childObject) {
-        final Object appendedChild = super.appendChild(childObject);
+    public Node appendChild(final Object childObject) {
+        final Node appendedChild = super.appendChild(childObject);
         getDomNodeOrDie().getPage().clearComputedStyles(getDomNodeOrDie());
         return appendedChild;
     }

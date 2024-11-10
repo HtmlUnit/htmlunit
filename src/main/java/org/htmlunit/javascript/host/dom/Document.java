@@ -429,7 +429,7 @@ public class Document extends Node {
      * @return a newly created document fragment
      */
     @JsxFunction
-    public Object createDocumentFragment() {
+    public HtmlUnitScriptable createDocumentFragment() {
         final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDocumentFragment();
         final DocumentFragment node = new DocumentFragment();
         node.setParentScope(getParentScope());
@@ -479,7 +479,7 @@ public class Document extends Node {
      * @return the adopted node that can be used in the current document
      */
     @JsxFunction
-    public Object adoptNode(final Node externalNode) {
+    public HtmlUnitScriptable adoptNode(final Node externalNode) {
         externalNode.remove();
         return importNode(externalNode, true);
     }
@@ -548,7 +548,7 @@ public class Document extends Node {
      * @return the new Comment
      */
     @JsxFunction
-    public Object createComment(final String comment) {
+    public HtmlUnitScriptable createComment(final String comment) {
         final DomNode domNode = new DomComment(getDomNodeOrDie().getPage(), comment);
         return getScriptableFor(domNode);
     }
@@ -1662,7 +1662,7 @@ public class Document extends Node {
 
     /**
      * Returns the element for the specified x coordinate and the specified y coordinate.
-     * The current implementation always returns the &lt;body&gt; element.
+     * The current implementation always returns null element.
      *
      * @param x the x offset, in pixels
      * @param y the y offset, in pixels
@@ -3508,7 +3508,7 @@ public class Document extends Node {
      * @return the new ProcessingInstruction
      */
     @JsxFunction
-    public Object createProcessingInstruction(final String target, final String data) {
+    public HtmlUnitScriptable createProcessingInstruction(final String target, final String data) {
         final ProcessingInstruction node = getPage().createProcessingInstruction(target, data);
         return getScriptableFor(node);
     }
@@ -3519,7 +3519,7 @@ public class Document extends Node {
      * @return the new CDATASection
      */
     @JsxFunction
-    public Object createCDATASection(final String data) {
+    public HtmlUnitScriptable createCDATASection(final String data) {
         final CDATASection node = getPage().createCDATASection(data);
         return getScriptableFor(node);
     }

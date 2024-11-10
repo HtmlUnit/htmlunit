@@ -30,6 +30,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.Node;
 
 /**
  * The JavaScript object that represents an {@code HTMLScriptElement}.
@@ -137,15 +138,15 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the newly added child node
      */
     @Override
-    public Object appendChild(final Object childObject) {
+    public Node appendChild(final Object childObject) {
         final HtmlElement tmpScript = getDomNodeOrDie();
         final boolean wasEmpty = tmpScript.getFirstChild() == null;
-        final Object result = super.appendChild(childObject);
+        final Node node = super.appendChild(childObject);
 
         if (wasEmpty) {
             ScriptElementSupport.executeScriptIfNeeded(tmpScript, false, false);
         }
-        return result;
+        return node;
     }
 
     /**

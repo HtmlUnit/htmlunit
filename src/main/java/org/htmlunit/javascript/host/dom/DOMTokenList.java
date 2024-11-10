@@ -268,7 +268,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
      * @return the item
      */
     @JsxFunction
-    public Object item(final int index) {
+    public String item(final int index) {
         if (index < 0) {
             return null;
         }

@@ -57,6 +57,7 @@ import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.Document;
+import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.Selection;
 import org.htmlunit.javascript.host.event.Event;
@@ -499,7 +500,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    public Object appendChild(final Object childObject) {
+    public Node appendChild(final Object childObject) {
         throw JavaScriptEngine.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
     }
 

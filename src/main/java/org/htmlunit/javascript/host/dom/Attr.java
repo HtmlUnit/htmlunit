@@ -181,7 +181,7 @@ public class Attr extends Node {
      * @return the document
      */
     @Override
-    public Object getRootNode() {
+    public Node getRootNode() {
         return this;
     }
 }

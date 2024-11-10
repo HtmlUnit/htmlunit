@@ -28,6 +28,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
+import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.NodeList;
 
 /**
@@ -110,20 +111,20 @@ public class HTMLSelectElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public Object appendChild(final Object childObject) {
-        final Object object = super.appendChild(childObject);
+    public Node appendChild(final Object childObject) {
+        final Node node = super.appendChild(childObject);
         getDomNodeOrDie().ensureSelectedIndex();
-        return object;
+        return node;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Object insertBeforeImpl(final Object[] args) {
-        final Object object = super.insertBeforeImpl(args);
+    public Node insertBeforeImpl(final Object[] args) {
+        final Node node = super.insertBeforeImpl(args);
         getDomNodeOrDie().ensureSelectedIndex();
-        return object;
+        return node;
     }
 
     /**
