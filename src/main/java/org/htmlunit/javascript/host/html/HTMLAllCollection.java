@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -179,7 +178,7 @@ public class HTMLAllCollection extends HTMLCollection {
      */
     @Override
     protected Object equivalentValues(final Object value) {
-        if (value == null || Undefined.isUndefined(value)) {
+        if (value == null || JavaScriptEngine.isUndefined(value)) {
             return Boolean.TRUE;
         }
 
