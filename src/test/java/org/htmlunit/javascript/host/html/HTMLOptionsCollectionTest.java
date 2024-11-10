@@ -1124,4 +1124,62 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "undefined", "[object HTMLOptionElement]", "undefined", "undefined"})
+    public void index() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var opts = document.form1.select.options;\n"
+            + "  log(opts.length);\n"
+            + "  log(opts[-1]);\n"
+            + "  log(opts[0]);\n"
+            + "  log(opts[1]);\n"
+            + "  log(opts[42]);\n"
+            + "}</script></head>\n"
+
+            + "<body onload='test()'>\n"
+            + "  <form name='form1'>\n"
+            + "    <select name='select'>\n"
+            + "      <option>One</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "null", "[object HTMLOptionElement]", "null", "null"})
+    public void item() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var opts = document.form1.select.options;\n"
+            + "  log(opts.length);\n"
+            + "  log(opts.item(-1));\n"
+            + "  log(opts.item(0));\n"
+            + "  log(opts.item(1));\n"
+            + "  log(opts.item(42));\n"
+            + "}</script></head>\n"
+
+            + "<body onload='test()'>\n"
+            + "  <form name='form1'>\n"
+            + "    <select name='select'>\n"
+            + "      <option>One</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -132,7 +132,11 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        return get(index, null);
+        final Object item = get(index, this);
+        if (JavaScriptEngine.UNDEFINED == item) {
+            return null;
+        }
+        return item;
     }
 
     /**
