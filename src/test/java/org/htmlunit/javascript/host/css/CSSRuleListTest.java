@@ -175,6 +175,50 @@ public class CSSRuleListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object CSSStyleRule]")
+    public void index() throws Exception {
+        final String html = "<html><head>\n"
+                + "<style>\n"
+                + "  BODY { font-size: 1234px; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var rules = document.styleSheets[0].cssRules;\n"
+                + "    log(rules[0]);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("undefined")
+    public void indexNotFound() throws Exception {
+        final String html = "<html><head>\n"
+                + "<style>\n"
+                + "  BODY { font-size: 1234px; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var rules = document.styleSheets[0].cssRules;\n"
+                + "    log(rules[17]);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("[object CSSStyleRule]")
     public void item() throws Exception {
         final String html = "<html><head>\n"
                 + "<style>\n"
@@ -185,6 +229,28 @@ public class CSSRuleListTest extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var rules = document.styleSheets[0].cssRules;\n"
                 + "    log(rules.item(0));\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("null")
+    public void itemNotFound() throws Exception {
+        final String html = "<html><head>\n"
+                + "<style>\n"
+                + "  BODY { font-size: 1234px; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var rules = document.styleSheets[0].cssRules;\n"
+                + "    log(rules.item(17));\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"

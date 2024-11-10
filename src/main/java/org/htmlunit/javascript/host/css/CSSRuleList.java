@@ -106,7 +106,11 @@ public class CSSRuleList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        return get(index, this);
+        final Object item = get(index, this);
+        if (NOT_FOUND == item) {
+            return null;
+        }
+        return item;
     }
 
     /**
