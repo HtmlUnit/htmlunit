@@ -30,6 +30,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.LambdaConstructor;
 import org.htmlunit.corejs.javascript.LambdaFunction;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
@@ -419,24 +420,24 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         }
     }
 
-    protected Object setupPromise(final FailableSupplier<Object, IOException> resolver) {
+    protected NativePromise setupPromise(final FailableSupplier<Object, IOException> resolver) {
         final Scriptable scope = ScriptableObject.getTopLevelScope(this);
         final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
 
         try {
             final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
-            return resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
+            return (NativePromise) resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
         }
         catch (final IOException e) {
             final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
-            return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {e.getMessage()});
+            return (NativePromise) reject.call(Context.getCurrentContext(), this, ctor, new Object[] {e.getMessage()});
         }
     }
 
-    protected Object setupRejectedPromise(final Supplier<Object> resolver) {
+    protected NativePromise setupRejectedPromise(final Supplier<Object> resolver) {
         final Scriptable scope = ScriptableObject.getTopLevelScope(this);
         final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
         final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
-        return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
+        return (NativePromise) reject.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
     }
 }

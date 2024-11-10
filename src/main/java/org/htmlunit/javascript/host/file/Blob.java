@@ -27,6 +27,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.NativeArray;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -337,7 +338,7 @@ public class Blob extends HtmlUnitScriptable {
      * data in binary form.
      */
     @JsxFunction
-    public Object arrayBuffer() {
+    public NativePromise arrayBuffer() {
         return setupPromise(() -> {
             final byte[] bytes = getBytes();
             final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
@@ -397,7 +398,7 @@ public class Blob extends HtmlUnitScriptable {
      * contents of the blob, interpreted as UTF-8.
      */
     @JsxFunction
-    public Object text() {
+    public NativePromise text() {
         return setupPromise(() -> getBackend().getText());
     }
 
