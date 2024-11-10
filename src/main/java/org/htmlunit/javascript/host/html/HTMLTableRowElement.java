@@ -24,6 +24,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTable;
 import org.htmlunit.html.HtmlTableRow;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -134,7 +135,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @return the newly-created cell
      */
     @JsxFunction
-    public Object insertCell(final Object index) {
+    public HtmlUnitScriptable insertCell(final Object index) {
         int position = -1;
         if (!JavaScriptEngine.isUndefined(index)) {
             position = (int) JavaScriptEngine.toNumber(index);

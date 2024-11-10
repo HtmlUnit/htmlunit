@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.html.DomText;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -48,7 +49,7 @@ public class Text extends CharacterData {
      * @return the Text node that was split from this node
      */
     @JsxFunction
-    public Object splitText(final int offset) {
+    public HtmlUnitScriptable splitText(final int offset) {
         final DomText domText = (DomText) getDomNodeOrDie();
         return getScriptableFor(domText.splitText(offset));
     }

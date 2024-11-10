@@ -173,7 +173,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object createCaption() {
+    public HtmlUnitScriptable createCaption() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("caption"));
     }
 
@@ -185,7 +185,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object createTFoot() {
+    public HtmlUnitScriptable createTFoot() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("tfoot"));
     }
 
@@ -197,7 +197,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object createTBody() {
+    public HtmlUnitScriptable createTBody() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("tbody"));
     }
 
@@ -209,7 +209,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object createTHead() {
+    public HtmlUnitScriptable createTHead() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("thead"));
     }
 

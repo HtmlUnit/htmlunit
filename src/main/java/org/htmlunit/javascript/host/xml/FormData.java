@@ -349,7 +349,7 @@ public class FormData extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
-    public Object keys() {
+    public FormDataIterator keys() {
         return new FormDataIterator(getParentScope(),
                 "FormData Iterator", FormDataIterator.Type.KEYS, requestParameters_);
     }
@@ -361,7 +361,7 @@ public class FormData extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
-    public Object values() {
+    public FormDataIterator values() {
         return new FormDataIterator(getParentScope(),
                 "FormData Iterator", FormDataIterator.Type.VALUES, requestParameters_);
     }

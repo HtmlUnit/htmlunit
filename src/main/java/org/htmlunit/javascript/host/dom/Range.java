@@ -292,7 +292,7 @@ public class Range extends AbstractRange {
      * equal to, or after the corresponding boundary-point of sourceRange.
      */
     @JsxFunction
-    public Object compareBoundaryPoints(final int how, final Range sourceRange) {
+    public int compareBoundaryPoints(final int how, final Range sourceRange) {
         final Node nodeForThis;
         final int offsetForThis;
         final int containingMoficator;
@@ -320,23 +320,24 @@ public class Range extends AbstractRange {
 
         if (nodeForThis == nodeForOther) {
             if (offsetForThis < offsetForOther) {
-                return Integer.valueOf(-1);
+                return -1;
             }
             else if (offsetForThis > offsetForOther) {
-                return Integer.valueOf(1);
+                return 1;
             }
-            return Integer.valueOf(0);
+            return 0;
         }
 
         final byte nodeComparision = (byte) nodeForThis.compareDocumentPosition(nodeForOther);
         if ((nodeComparision & Node.DOCUMENT_POSITION_CONTAINED_BY) != 0) {
-            return Integer.valueOf(-1 * containingMoficator);
+            return -1 * containingMoficator;
         }
         else if ((nodeComparision & Node.DOCUMENT_POSITION_PRECEDING) != 0) {
-            return Integer.valueOf(-1);
+            return -1;
         }
-        // TODO: handle other cases!
-        return Integer.valueOf(1);
+
+        // TODO: handle other cases
+        return 1;
     }
 
     /**
@@ -400,7 +401,7 @@ public class Range extends AbstractRange {
      * @return a clone of the range
      */
     @JsxFunction
-    public Object cloneRange() {
+    public Range cloneRange() {
         try {
             return new Range(getSimpleRange().cloneRange());
         }
