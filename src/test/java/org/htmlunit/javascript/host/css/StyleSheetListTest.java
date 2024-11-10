@@ -308,6 +308,70 @@ public class StyleSheetListTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "undefined", "[object CSSStyleSheet]", "undefined", "undefined"})
+    public void index() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var sheets = document.styleSheets;\n"
+            + "        log(sheets.length);\n"
+            + "        log(sheets[-1]);\n"
+            + "        log(sheets[0]);\n"
+            + "        log(sheets[1]);\n"
+            + "        log(sheets[42]);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>abc</body>\n"
+            + "</html>";
+
+        final String css = "div {color:red}";
+        getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "null", "[object CSSStyleSheet]", "null", "null"})
+    public void item() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var sheets = document.styleSheets;\n"
+            + "        log(sheets.length);\n"
+            + "        log(sheets.item(-1));\n"
+            + "        log(sheets.item(0));\n"
+            + "        log(sheets.item(1));\n"
+            + "        log(sheets.item(42));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>abc</body>\n"
+            + "</html>";
+
+        final String css = "div {color:red}";
+        getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
+
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * @throws Exception if an error occurs
      */
