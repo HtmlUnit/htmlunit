@@ -164,7 +164,7 @@ import org.w3c.dom.ProcessingInstruction;
 public class Document extends Node {
 
     private static final Log LOG = LogFactory.getLog(Document.class);
-    private static final Pattern TAG_NAME_PATTERN = Pattern.compile("[a-zA-z1-6:]+");
+    private static final Pattern TAG_NAME_PATTERN = Pattern.compile("[a-zA-z][a-zA-z1-6:]*");
     // all as lowercase for performance
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
