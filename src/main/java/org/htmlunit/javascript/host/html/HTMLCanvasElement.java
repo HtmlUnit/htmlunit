@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.JS_CANVAS_DATA_URL_CHROME_PNG;
 
 import org.htmlunit.html.HtmlCanvas;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -110,7 +111,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * or null if the given context ID is not supported
      */
     @JsxFunction
-    public Object getContext(final String contextId) {
+    public HtmlUnitScriptable getContext(final String contextId) {
         if ("2d".equals(contextId)) {
             if (context2d_ == null) {
                 final CanvasRenderingContext2D context = new CanvasRenderingContext2D(this);

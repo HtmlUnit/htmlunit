@@ -12,6 +12,9 @@
                 Javadoc fixed for Document.elementFromPoint().
             </action>
             <action type="fix" dev="rbri">
+                HTMLOptionsCollection.item() should return null if the provided index is not available.
+            </action>
+            <action type="fix" dev="rbri">
                 CssRuleList.item() should return null if the provided index is not available.
             </action>
             <action type="add" dev="rbri" issue="#665">

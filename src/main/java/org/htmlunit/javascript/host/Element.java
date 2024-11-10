@@ -686,7 +686,7 @@ public class Element extends Node {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
      */
     @JsxFunction
-    public Object insertAdjacentElement(final String where, final Object insertedElement) {
+    public Node insertAdjacentElement(final String where, final Object insertedElement) {
         if (insertedElement instanceof Node) {
             final Node insertedElementNode = (Node) insertedElement;
             final DomNode childNode = insertedElementNode.getDomNodeOrDie();

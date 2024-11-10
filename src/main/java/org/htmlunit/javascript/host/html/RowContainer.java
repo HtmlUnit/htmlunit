@@ -91,7 +91,7 @@ public class RowContainer extends HTMLElement {
      * @return the newly-created row
      */
     @JsxFunction
-    public Object insertRow(final Object index) {
+    public HtmlUnitScriptable insertRow(final Object index) {
         int rowIndex = -1;
         if (!JavaScriptEngine.isUndefined(index)) {
             rowIndex = (int) JavaScriptEngine.toNumber(index);
@@ -119,7 +119,7 @@ public class RowContainer extends HTMLElement {
      * @param index the index where the row should be inserted (0 &lt;= index &lt;= nbRows)
      * @return the inserted row
      */
-    public Object insertRow(final int index) {
+    public HtmlUnitScriptable insertRow(final int index) {
         final HTMLCollection rows = getRows();
         final int rowCount = rows.getLength();
         final DomElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
