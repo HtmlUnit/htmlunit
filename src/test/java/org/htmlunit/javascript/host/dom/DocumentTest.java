@@ -573,7 +573,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", ""})
+    @Alerts({"[object HTMLUnknownElement]", "exception", "exception",
+             "exception", "exception", "[object HTMLUnknownElement]",
+             "[object HTMLUnknownElement]", "exception"})
     public void documentCreateElementUnknown() throws Exception {
         final String html
             = "<html>\n"
@@ -581,9 +583,61 @@ public class DocumentTest extends WebDriverTestCase {
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
-            + "        var elem = document.createElement('not known');\n"
-            + "        log(elem);\n"
-            + "        log(typeof elem);\n"
+            + "        try {"
+            + "          var elem = document.createElement('anchor');\n"
+            + "          log(elem);\n"
+            + "        } catch(ex) {\n"
+            + "          log('exception');\n"
+            + "        }\n"
+
+            + "        try {"
+            + "          var elem = document.createElement('not known');\n"
+            + "          log(elem);\n"
+            + "        } catch(ex) {\n"
+            + "          log('exception');\n"
+            + "        }\n"
+
+            + "        try {"
+            + "          var elem = document.createElement('<div');\n"
+            + "          log(elem);\n"
+            + "        } catch(ex) {\n"
+            + "          log('exception');\n"
+            + "        }\n"
+
+            + "        try {"
+            + "          var elem = document.createElement('div>');\n"
+            + "          log(elem);\n"
+            + "        } catch(ex) {\n"
+            + "          log('exception');\n"
+            + "        }\n"
+
+            + "        try {"
+            + "          var elem = document.createElement('<div>');\n"
+            + "          log(elem);\n"
+            + "        } catch(ex) {\n"
+            + "          log('exception');\n"
+            + "        }\n"
+
+            + "        try {"
+            + "          var elem = document.createElement(undefined);\n"
+            + "          log(elem);\n"
+            + "        } catch(ex) {\n"
+            + "          log('exception');\n"
+            + "        }\n"
+
+            + "        try {"
+            + "          var elem = document.createElement(null);\n"
+            + "          log(elem);\n"
+            + "        } catch(ex) {\n"
+            + "          log('exception');\n"
+            + "        }\n"
+
+            + "        try {"
+            + "          var elem = document.createElement(42);\n"
+            + "          log(elem);\n"
+            + "        } catch(ex) {\n"
+            + "          log('exception');\n"
+            + "        }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

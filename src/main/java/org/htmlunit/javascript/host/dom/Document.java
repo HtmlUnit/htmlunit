@@ -165,7 +165,7 @@ import org.w3c.dom.ProcessingInstruction;
 public class Document extends Node {
 
     private static final Log LOG = LogFactory.getLog(Document.class);
-    private static final Pattern TAG_NAME_PATTERN = Pattern.compile("\\w+");
+    private static final Pattern TAG_NAME_PATTERN = Pattern.compile("[a-zA-z:]+");
     // all as lowercase for performance
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
@@ -611,67 +611,58 @@ public class Document extends Node {
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     @JsxFunction
-    public Object createElement(String tagName) {
-        try {
-            if (tagName.contains("<") || tagName.contains(">")) {
+    public HtmlUnitScriptable createElement(final Object tagName) {
+        if (tagName == null || JavaScriptEngine.isUndefined(tagName)) {
+            final org.w3c.dom.Node element = getPage().createElement("unknown");
+            ((HtmlUnknownElement) element).markAsCreatedByJavascript();
+            return getScriptableFor(element);
+        }
+
+        final String tagNameString = JavaScriptEngine.toString(tagName);
+        if (tagNameString.length() > 0) {
+            final Matcher matcher = TAG_NAME_PATTERN.matcher(tagNameString);
+            if (!matcher.matches()) {
                 if (LOG.isInfoEnabled()) {
-                    LOG.info("createElement: Provided string '"
-                                + tagName + "' contains an invalid character; '<' and '>' are not allowed");
+                    LOG.info("createElement: Provided string '" + tagNameString + "' contains an invalid character");
                 }
                 throw JavaScriptEngine.reportRuntimeError("String contains an invalid character");
             }
-            else if (tagName.length() > 0 && tagName.charAt(0) == '<' && tagName.endsWith(">")) {
-                tagName = tagName.substring(1, tagName.length() - 1);
-
-                final Matcher matcher = TAG_NAME_PATTERN.matcher(tagName);
-                if (!matcher.matches()) {
-                    if (LOG.isInfoEnabled()) {
-                        LOG.info("createElement: Provided string '" + tagName + "' contains an invalid character");
-                    }
-                    throw JavaScriptEngine.reportRuntimeError("String contains an invalid character");
-                }
-            }
-
-            final SgmlPage page = getPage();
-            org.w3c.dom.Node element = page.createElement(tagName);
-
-            if (element instanceof HtmlImage) {
-                ((HtmlImage) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlRb) {
-                ((HtmlRb) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlRp) {
-                ((HtmlRp) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlRt) {
-                ((HtmlRt) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlRtc) {
-                ((HtmlRtc) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlUnknownElement) {
-                ((HtmlUnknownElement) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlSvg) {
-                element = UnknownElementFactory.INSTANCE.createElementNS(page, "", "svg", null);
-                ((HtmlUnknownElement) element).markAsCreatedByJavascript();
-            }
-            final Object jsElement = getScriptableFor(element);
-
-            if (jsElement == NOT_FOUND) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("createElement(" + tagName
-                        + ") cannot return a result as there isn't a JavaScript object for the element "
-                        + element.getClass().getName());
-                }
-            }
-            return jsElement;
         }
-        catch (final ElementNotFoundException expected) {
-            // Just fall through - result is already set to NOT_FOUND
+
+        org.w3c.dom.Node element = getPage().createElement(tagNameString);
+
+        if (element instanceof HtmlImage) {
+            ((HtmlImage) element).markAsCreatedByJavascript();
         }
-        return NOT_FOUND;
+        else if (element instanceof HtmlRb) {
+            ((HtmlRb) element).markAsCreatedByJavascript();
+        }
+        else if (element instanceof HtmlRp) {
+            ((HtmlRp) element).markAsCreatedByJavascript();
+        }
+        else if (element instanceof HtmlRt) {
+            ((HtmlRt) element).markAsCreatedByJavascript();
+        }
+        else if (element instanceof HtmlRtc) {
+            ((HtmlRtc) element).markAsCreatedByJavascript();
+        }
+        else if (element instanceof HtmlUnknownElement) {
+            ((HtmlUnknownElement) element).markAsCreatedByJavascript();
+        }
+        else if (element instanceof HtmlSvg) {
+            element = UnknownElementFactory.INSTANCE.createElementNS(getPage(), "", "svg", null);
+            ((HtmlUnknownElement) element).markAsCreatedByJavascript();
+        }
+        final HtmlUnitScriptable jsElement = getScriptableFor(element);
+
+        if (jsElement == NOT_FOUND) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("createElement(" + tagName
+                    + ") cannot return a result as there isn't a JavaScript object for the element "
+                    + element.getClass().getName());
+            }
+        }
+        return jsElement;
     }
 
     /**
