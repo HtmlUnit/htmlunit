@@ -49,7 +49,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
@@ -521,25 +520,9 @@ public class Document extends Node {
      * @return the new text node or NOT_FOUND if there is an error
      */
     @JsxFunction
-    public Object createTextNode(final String newData) {
-        try {
-            final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
-            final HtmlUnitScriptable jsElement = makeScriptableFor(domNode);
-
-            if (jsElement == NOT_FOUND) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("createTextNode(" + newData
-                            + ") cannot return a result as there isn't a JavaScript object for the DOM node "
-                            + domNode.getClass().getName());
-                }
-            }
-            return jsElement;
-        }
-        catch (final ElementNotFoundException expected) {
-            // Just fall through - result is already set to NOT_FOUND
-        }
-
-        return NOT_FOUND;
+    public HtmlUnitScriptable createTextNode(final String newData) {
+        final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
+        return makeScriptableFor(domNode);
     }
 
     /**
@@ -673,7 +656,7 @@ public class Document extends Node {
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     @JsxFunction
-    public Object createElementNS(final String namespaceURI, final String qualifiedName) {
+    public HtmlUnitScriptable createElementNS(final String namespaceURI, final String qualifiedName) {
         if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
             throw JavaScriptEngine.reportRuntimeError("XUL not available");
         }
@@ -718,7 +701,7 @@ public class Document extends Node {
      * @return a live NodeList of found elements in the order they appear in the tree
      */
     @JsxFunction
-    public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
+    public HTMLCollection getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final HTMLCollection elements = new HTMLCollection(getDomNodeOrDie(), false);
         elements.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
@@ -1225,7 +1208,7 @@ public class Document extends Node {
      * @return a new TreeWalker
      */
     @JsxFunction
-    public Object createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
+    public TreeWalker createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
             boolean expandEntityReferences) throws DOMException {
 
         // seems that Rhino doesn't like long as parameter type
@@ -1660,7 +1643,7 @@ public class Document extends Node {
      * @return the element for the specified x coordinate and the specified y coordinate
      */
     @JsxFunction
-    public Object elementFromPoint(final int x, final int y) {
+    public HtmlUnitScriptable elementFromPoint(final int x, final int y) {
         return null;
     }
 

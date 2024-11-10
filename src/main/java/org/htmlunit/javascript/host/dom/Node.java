@@ -352,7 +352,7 @@ public class Node extends EventTarget {
      * @return the removed child node
      */
     @JsxFunction
-    public Object removeChild(final Object childObject) {
+    public Node removeChild(final Object childObject) {
         if (!(childObject instanceof Node)) {
             return null;
         }
