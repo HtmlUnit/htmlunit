@@ -70,6 +70,7 @@ public class ArchitectureTest {
         .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.NoOpFontUtil")
 
         .and().doNotHaveFullyQualifiedName("org.htmlunit.csp.Utils")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.cyberneko.util.StringUtils")
 
         .and().resideOutsideOfPackage("org.htmlunit.jetty.util..")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.api.util.QuoteUtil")
