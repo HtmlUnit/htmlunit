@@ -52,7 +52,7 @@ public class CharacterData extends Node {
      * @return the String of data
      */
     @JsxGetter
-    public Object getData() {
+    public String getData() {
         return getDomCharacterDataOrDie().getData();
     }
 
