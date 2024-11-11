@@ -18,7 +18,6 @@ import static org.htmlunit.junit.BrowserVersionClassRunner.NO_ALERTS_DEFINED;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,26 +51,14 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 @RunWith(BrowserRunner.class)
 public abstract class JQueryTestBase extends WebDriverTestCase {
 
-    private static Method MethodGetWebClient_;
-
-    static {
-        try {
-            MethodGetWebClient_ = HtmlUnitDriver.class.getDeclaredMethod("getWebClient");
-            MethodGetWebClient_.setAccessible(true);
-        }
-        catch (final Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static final class OnlyLocalConnectionWrapper extends WebConnectionWrapper {
+    protected static final class OnlyLocalConnectionWrapper extends WebConnectionWrapper {
         private static final WebResponseData RESPONSE_DATA =
                 new WebResponseData("not found".getBytes(StandardCharsets.US_ASCII),
                         HttpStatus.NOT_FOUND_404, HttpStatus.NOT_FOUND_404_MSG,
                         new ArrayList<>());
 
 
-        private OnlyLocalConnectionWrapper(final WebClient webClient) {
+        protected OnlyLocalConnectionWrapper(final WebClient webClient) {
             super(webClient);
         }
 
@@ -114,8 +101,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
             final WebDriver webDriver = getWebDriver();
 
             if (webDriver instanceof HtmlUnitDriver) {
-                final WebClient webClient = (WebClient) MethodGetWebClient_.invoke(webDriver);
-
+                final WebClient webClient = ((HtmlUnitDriver) webDriver).getWebClient();
                 new OnlyLocalConnectionWrapper(webClient);
             }
 
