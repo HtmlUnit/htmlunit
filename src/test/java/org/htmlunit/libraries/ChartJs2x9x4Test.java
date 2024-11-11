@@ -33,7 +33,7 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class ChartJsTest extends WebDriverTestCase {
+public class ChartJs2x9x4Test extends WebDriverTestCase {
 
     /** The server. */
     protected static Server SERVER_;
