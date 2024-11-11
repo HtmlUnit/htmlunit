@@ -242,6 +242,12 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.event.UIEvent.getView()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.file.FileReader.getResult()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLButtonElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLDataElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLInputElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMeterElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLProgressElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLSelectElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLTextAreaElement.getValue()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.getSelf()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XMLHttpRequest.getResponse()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XMLHttpRequest.getResponseXML()")
@@ -256,7 +262,7 @@ public class ArchitectureTest {
             .orShould().haveRawReturnType(isAssignableToScriptable);
 
     /**
-     * JsxGetter should only return Scriptable's.
+     * JsxSetter should only return void.
      */
     @ArchTest
     public static final ArchRule jsxSetterReturnType = methods()
