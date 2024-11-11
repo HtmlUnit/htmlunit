@@ -778,7 +778,7 @@ public class Node extends EventTarget {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
-    public Object getAttributes() {
+    public NamedNodeMap getAttributes() {
         return null;
     }
 
