@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
  * Tests for {@link HTMLProgressElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLProgressElementTest extends WebDriverTestCase {
@@ -60,6 +61,29 @@ public class HTMLProgressElementTest extends WebDriverTestCase {
             + "  <progress id='e3'>e 3</progress><br>\n"
             + "  <label id='l4' for='e4'> what about</label>\n"
             + "  <label> this<progress id='e4'>e 4</progress></label><br>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "number"})
+    public void value() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var e1 = document.getElementById('e1');\n"
+            + "      log(e1.value);\n"
+            + "      log(typeof e1.value);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <progress id='e1'>e 1</progress>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
