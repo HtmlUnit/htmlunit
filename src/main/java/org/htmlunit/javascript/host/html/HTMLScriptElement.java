@@ -25,6 +25,7 @@ import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlScript;
+import org.htmlunit.html.ScriptElement;
 import org.htmlunit.html.ScriptElementSupport;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -110,7 +111,7 @@ public class HTMLScriptElement extends HTMLElement {
         final DomNode textChild = new DomText(htmlElement.getPage(), text);
         htmlElement.appendChild(textChild);
 
-        ScriptElementSupport.executeScriptIfNeeded(htmlElement, false, false);
+        ScriptElementSupport.executeScriptIfNeeded((ScriptElement) htmlElement, false, false);
     }
 
     /**
@@ -144,7 +145,7 @@ public class HTMLScriptElement extends HTMLElement {
         final Node node = super.appendChild(childObject);
 
         if (wasEmpty) {
-            ScriptElementSupport.executeScriptIfNeeded(tmpScript, false, false);
+            ScriptElementSupport.executeScriptIfNeeded((ScriptElement) tmpScript, false, false);
         }
         return node;
     }

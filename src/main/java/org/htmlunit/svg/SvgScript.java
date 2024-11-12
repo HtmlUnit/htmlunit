@@ -64,10 +64,22 @@ public class SvgScript extends SvgElement implements ScriptElement {
     }
 
     /**
+     * Returns the value of the attribute {@code src}. Refer to the
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code src}
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getSrcAttribute() {
+        return getSrcAttributeNormalized();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
-    public final String getSrcAttribute() {
+    public final String getScriptSource() {
         return getSrcAttributeNormalized();
     }
 
@@ -90,10 +102,22 @@ public class SvgScript extends SvgElement implements ScriptElement {
     }
 
     /**
+     * Returns the value of the attribute {@code charset}. Refer to the
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code charset}
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getCharsetAttribute() {
+        return getAttributeDirect("charset");
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
-    public final String getCharsetAttribute() {
+    public final String getScriptCharset() {
         return getAttributeDirect("charset");
     }
 
