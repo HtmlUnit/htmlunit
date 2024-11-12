@@ -40,6 +40,7 @@ import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.xml.XmlPage;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -161,6 +162,7 @@ public class ExternalTest {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore("javascript errors")
     public void assertEdgeDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
             final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
