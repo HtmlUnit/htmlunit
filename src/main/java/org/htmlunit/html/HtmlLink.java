@@ -17,10 +17,8 @@ package org.htmlunit.html;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -34,6 +32,7 @@ import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLLinkElement;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
@@ -344,10 +343,9 @@ public class HtmlLink extends HtmlElement {
      * @return true if the rel attribute is 'stylesheet'
      */
     public boolean isStyleSheetLink() {
-        String rel = getRelAttribute();
+        final String rel = getRelAttribute();
         if (rel != null) {
-            rel = rel.toLowerCase(Locale.ROOT);
-            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "stylesheet");
+            return ArrayUtils.containsIgnoreCase(StringUtils.splitAtBlank(rel), "stylesheet");
         }
         return false;
     }
@@ -356,10 +354,9 @@ public class HtmlLink extends HtmlElement {
      * @return true if the rel attribute is 'modulepreload'
      */
     public boolean isModulePreloadLink() {
-        String rel = getRelAttribute();
+        final String rel = getRelAttribute();
         if (rel != null) {
-            rel = rel.toLowerCase(Locale.ROOT);
-            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "modulepreload");
+            return ArrayUtils.containsIgnoreCase(StringUtils.splitAtBlank(rel), "modulepreload");
         }
         return false;
     }
