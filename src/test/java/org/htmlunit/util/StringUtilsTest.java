@@ -15,6 +15,7 @@
 package org.htmlunit.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.Assert.assertThrows;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.impl.Color;
@@ -53,6 +54,28 @@ public class StringUtilsTest extends SimpleWebTestCase {
         assertFalse(StringUtils.equalsChar('#', "##"));
         assertFalse(StringUtils.equalsChar('#', " #"));
         assertFalse(StringUtils.equalsChar('#', "# "));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void startsWithIgnoreCase() throws Exception {
+        assertTrue(StringUtils.startsWithIgnoreCase("abcd", "ab"));
+        assertTrue(StringUtils.startsWithIgnoreCase("abcd", "abcd"));
+        assertTrue(StringUtils.startsWithIgnoreCase("abcd", "AB"));
+        assertTrue(StringUtils.startsWithIgnoreCase("Abcd", "abCd"));
+
+        assertFalse(StringUtils.startsWithIgnoreCase("AB", "x"));
+        assertFalse(StringUtils.startsWithIgnoreCase("AB", "xxzOO"));
+        assertFalse(StringUtils.startsWithIgnoreCase("", "x"));
+        assertFalse(StringUtils.startsWithIgnoreCase("abcd", "bc"));
+
+        assertFalse(StringUtils.startsWithIgnoreCase(null, "x"));
+
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("AB", null));
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("AB", ""));
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("", ""));
     }
 
     /**

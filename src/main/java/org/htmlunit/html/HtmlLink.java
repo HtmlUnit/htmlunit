@@ -274,55 +274,57 @@ public class HtmlLink extends HtmlElement {
             LOG.debug("Link node added: " + asXml());
         }
 
-        if (!isStyleSheetLink()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Link type '" + getRelAttribute() + "' not supported ("
-                            + asXml().replaceAll("[\\r\\n]", "") + ").");
+        final boolean isStyleSheetLink = isStyleSheetLink();
+
+        if (isStyleSheetLink) {
+            final WebClient webClient = getPage().getWebClient();
+            if (!webClient.getOptions().isCssEnabled()) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Stylesheet Link found but ignored because css support is disabled ("
+                                + asXml().replaceAll("[\\r\\n]", "") + ").");
+                }
+                return;
+            }
+
+            if (!webClient.isJavaScriptEngineEnabled()) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Stylesheet Link found but ignored because javascript engine is disabled ("
+                                + asXml().replaceAll("[\\r\\n]", "") + ").");
+                }
+                return;
+            }
+
+            final PostponedAction action = new PostponedAction(getPage(), "Loading of link " + this) {
+                @Override
+                public void execute() {
+                    final HTMLLinkElement linkElem = HtmlLink.this.getScriptableObject();
+                    // force loading, caching inside the link
+                    linkElem.getSheet();
+                }
+            };
+
+            final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
+            if (postponed) {
+                engine.addPostponedAction(action);
+            }
+            else {
+                try {
+                    action.execute();
+                }
+                catch (final RuntimeException e) {
+                    throw e;
+                }
+                catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             return;
         }
 
-        final WebClient webClient = getPage().getWebClient();
-        if (!webClient.getOptions().isCssEnabled()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Stylesheet Link found but ignored because css support is disabled ("
-                            + asXml().replaceAll("[\\r\\n]", "") + ").");
-            }
-            return;
-        }
-
-        if (!webClient.isJavaScriptEngineEnabled()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Stylesheet Link found but ignored because javascript engine is disabled ("
-                            + asXml().replaceAll("[\\r\\n]", "") + ").");
-            }
-            return;
-        }
-
-        final PostponedAction action = new PostponedAction(getPage(), "Loading of link " + this) {
-            @Override
-            public void execute() {
-                final HTMLLinkElement linkElem = HtmlLink.this.getScriptableObject();
-                // force loading, caching inside the link
-                linkElem.getSheet();
-            }
-        };
-
-        final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
-        if (postponed) {
-            engine.addPostponedAction(action);
-        }
-        else {
-            try {
-                action.execute();
-            }
-            catch (final RuntimeException e) {
-                throw e;
-            }
-            catch (final Exception e) {
-                throw new RuntimeException(e);
-            }
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Link type '" + getRelAttribute() + "' not supported ("
+                        + asXml().replaceAll("[\\r\\n]", "") + ").");
         }
     }
 
@@ -346,6 +348,18 @@ public class HtmlLink extends HtmlElement {
         if (rel != null) {
             rel = rel.toLowerCase(Locale.ROOT);
             return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "stylesheet");
+        }
+        return false;
+    }
+
+    /**
+     * @return true if the rel attribute is 'modulepreload'
+     */
+    public boolean isModulePreloadLink() {
+        String rel = getRelAttribute();
+        if (rel != null) {
+            rel = rel.toLowerCase(Locale.ROOT);
+            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "modulepreload");
         }
         return false;
     }

@@ -15,7 +15,6 @@
 package org.htmlunit;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import org.htmlunit.util.MimeType;
 
@@ -59,13 +58,11 @@ public final class FormEncodingType implements Serializable {
      * @return the constant corresponding to the specified name, {@link #URL_ENCODED} if none match.
      */
     public static FormEncodingType getInstance(final String name) {
-        final String lowerCaseName = name.toLowerCase(Locale.ROOT);
-
-        if (MULTIPART.getName().equals(lowerCaseName)) {
+        if (MULTIPART.getName().equalsIgnoreCase(name)) {
             return MULTIPART;
         }
 
-        if (TEXT_PLAIN.getName().equals(lowerCaseName)) {
+        if (TEXT_PLAIN.getName().equalsIgnoreCase(name)) {
             return TEXT_PLAIN;
         }
 

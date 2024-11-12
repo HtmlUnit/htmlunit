@@ -15,12 +15,12 @@
 package org.htmlunit.attachment;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 
 /**
  * <p>A handler for attachments, which represent pages received from the server which contain
@@ -89,8 +89,8 @@ public interface AttachmentHandler extends Serializable {
             // They treat it as if the Content-Disposition header was set to attachment, and propose a "Save As" dialog.
             final String contentType = response.getResponseHeaderValue(HttpHeader.CONTENT_TYPE);
             return contentType != null
-                    && MimeType.APPLICATION_OCTET_STREAM.equals(contentType.toLowerCase(Locale.ROOT));
+                    && MimeType.APPLICATION_OCTET_STREAM.equalsIgnoreCase(contentType);
         }
-        return disp.toLowerCase(Locale.ROOT).startsWith("attachment");
+        return StringUtils.startsWithIgnoreCase(disp, "attachment");
     }
 }

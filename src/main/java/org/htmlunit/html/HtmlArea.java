@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -219,23 +218,23 @@ public class HtmlArea extends HtmlElement {
      * @return {@code true} if the point is contained in this area
      */
     boolean containsPoint(final int x, final int y) {
-        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), SHAPE_RECT).toLowerCase(Locale.ROOT);
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), SHAPE_RECT);
 
-        if ("default".equals(shape) && getCoordsAttribute() != null) {
+        if ("default".equalsIgnoreCase(shape) && getCoordsAttribute() != null) {
             return true;
         }
 
-        if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_RECT.equalsIgnoreCase(shape) && getCoordsAttribute() != null) {
             final Shape2D rectangle = parseRect();
             return rectangle.contains(x, y);
         }
 
-        if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_CIRCLE.equalsIgnoreCase(shape) && getCoordsAttribute() != null) {
             final Shape2D circle = parseCircle();
             return circle.contains(x, y);
         }
 
-        if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_POLY.equalsIgnoreCase(shape) && getCoordsAttribute() != null) {
             final Shape2D path = parsePoly();
             return path.contains(x, y);
         }
@@ -362,23 +361,23 @@ public class HtmlArea extends HtmlElement {
     }
 
     private boolean isEmpty() {
-        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), SHAPE_RECT).toLowerCase(Locale.ROOT);
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), SHAPE_RECT);
 
-        if ("default".equals(shape) && getCoordsAttribute() != null) {
+        if ("default".equalsIgnoreCase(shape) && getCoordsAttribute() != null) {
             return false;
         }
 
-        if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_RECT.equalsIgnoreCase(shape) && getCoordsAttribute() != null) {
             final Shape2D rectangle = parseRect();
             return rectangle.isEmpty();
         }
 
-        if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_CIRCLE.equalsIgnoreCase(shape) && getCoordsAttribute() != null) {
             final Shape2D circle = parseCircle();
             return circle.isEmpty();
         }
 
-        if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_POLY.equalsIgnoreCase(shape) && getCoordsAttribute() != null) {
             final Shape2D path = parsePoly();
             return path.isEmpty();
         }

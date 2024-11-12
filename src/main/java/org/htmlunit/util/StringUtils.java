@@ -80,6 +80,26 @@ public final class StringUtils {
     }
 
     /**
+     * @param s the string to check
+     * @param expectedStart the string that we expect at the beginning
+     * @return true if the provided string has only one char and this matches the expectation
+     */
+    public static boolean startsWithIgnoreCase(final String s, final String expectedStart) {
+        if (expectedStart == null || expectedStart.length() == 0) {
+            throw new IllegalArgumentException("Expected start string can't be null or empty");
+        }
+
+        if (s == null) {
+            return false;
+        }
+        if (s == expectedStart) {
+            return true;
+        }
+
+        return s.regionMatches(true, 0, expectedStart, 0, expectedStart.length());
+    }
+
+    /**
      * Escapes the characters '&lt;', '&gt;' and '&amp;' into their XML entity equivalents. Note that
      * sometimes we have to use this method instead of
      * {@link org.apache.commons.lang3.StringEscapeUtils#escapeXml(String)} or
