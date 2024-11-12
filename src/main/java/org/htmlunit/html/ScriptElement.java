@@ -18,6 +18,7 @@ package org.htmlunit.html;
  * An element which can handle scripts.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public interface ScriptElement {
 
@@ -40,24 +41,14 @@ public interface ScriptElement {
     void setExecuted(boolean executed);
 
     /**
-     * Returns the value of the attribute {@code src}. Refer to the
-     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return the value of the attribute {@code src}
-     * or an empty string if that attribute isn't defined.
+     * @return the script source url
      */
-    String getSrcAttribute();
+    String getScriptSource();
 
     /**
-     * Returns the value of the attribute {@code charset}. Refer to the
-     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return the value of the attribute {@code charset}
-     * or an empty string if that attribute isn't defined.
+     * @return the charset used for the script encoding
      */
-    String getCharsetAttribute();
+    String getScriptCharset();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
