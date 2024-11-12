@@ -65,9 +65,6 @@ public class ExternalTest {
     static String GECKO_DRIVER_ = "0.35.0";
     static String GECKO_DRIVER_URL_ = "https://github.com/mozilla/geckodriver/releases/latest";
 
-    /** IE driver. */
-    static String IE_DRIVER_ = "3.150.1.0";
-
     /**
      * Tests the current environment matches the expected setup.
      * @throws Exception if an error occurs
