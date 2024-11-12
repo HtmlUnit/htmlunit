@@ -1925,11 +1925,10 @@ public class HtmlPage extends SgmlPage {
         if (getDocumentElement() == null) {
             return Collections.emptyList(); // weird case, for instance if document.documentElement has been removed
         }
-        final String nameLC = httpEquiv.toLowerCase(Locale.ROOT);
         final List<HtmlMeta> tags = getDocumentElement().getStaticElementsByTagName("meta");
         final List<HtmlMeta> foundTags = new ArrayList<>();
         for (final HtmlMeta htmlMeta : tags) {
-            if (nameLC.equals(htmlMeta.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {
+            if (httpEquiv.equalsIgnoreCase(htmlMeta.getHttpEquivAttribute())) {
                 foundTags.add(htmlMeta);
             }
         }
