@@ -82,11 +82,10 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         final int dotIndex = domain.indexOf('.');
         if (dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
             final String host = origin.getHost();
-            domain = domain.toLowerCase(Locale.ROOT);
             if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)) {
                 domain = domain.substring(1);
             }
-            return host.equals(domain);
+            return host.equalsIgnoreCase(domain);
         }
 
         if (dotIndex == -1
