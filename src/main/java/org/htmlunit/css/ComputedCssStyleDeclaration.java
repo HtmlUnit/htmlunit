@@ -1155,9 +1155,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public Object getZIndex() {
-        final Object response = super.getZIndex();
-        if (response.toString().isEmpty()) {
+    public String getZIndex() {
+        final String response = super.getZIndex();
+        if (response.isEmpty()) {
             return AUTO;
         }
         return response;

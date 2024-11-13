@@ -1755,7 +1755,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the style attribute
      */
     @JsxGetter
-    public Object getZIndex() {
+    public String getZIndex() {
         if (styleDeclaration_ == null) {
             return null; // prototype
         }

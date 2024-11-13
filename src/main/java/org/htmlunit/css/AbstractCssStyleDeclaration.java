@@ -969,7 +969,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * Gets the {@code zIndex} style attribute.
      * @return the style attribute
      */
-    public Object getZIndex() {
+    public String getZIndex() {
         final String value = getStyleAttribute(Definition.Z_INDEX_, true);
         try {
             Integer.parseInt(value);

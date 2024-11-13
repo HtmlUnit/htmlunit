@@ -113,7 +113,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @return the {@code fillStyle} property
      */
     @JsxGetter
-    public Object getFillStyle() {
+    public HtmlUnitScriptable getFillStyle() {
         LOG.info("CanvasRenderingContext2D.getFillStyle() not yet implemented");
         return null;
     }
@@ -132,7 +132,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @return the {@code strokeStyle} property
      */
     @JsxGetter
-    public Object getStrokeStyle() {
+    public HtmlUnitScriptable getStrokeStyle() {
         LOG.info("CanvasRenderingContext2D.getStrokeStyle() not yet implemented");
         return null;
     }

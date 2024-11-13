@@ -516,7 +516,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public Object getZIndex() {
+    public String getZIndex() {
         return getCssStyleDeclaration().getZIndex();
     }
 
