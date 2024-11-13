@@ -701,7 +701,7 @@ public class WebRequest implements Serializable {
         }
         final String defaultResponseContentCharset = (String) ois.readObject();
         if (defaultResponseContentCharset != null) {
-            defaultResponseContentCharset_ = Charset.forName(charsetName);
+            defaultResponseContentCharset_ = Charset.forName(defaultResponseContentCharset);
         }
     }
 }
