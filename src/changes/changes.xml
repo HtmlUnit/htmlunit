@@ -9,7 +9,7 @@
     <body>
         <release version="4.7.0" date="November xx, 2024" description="Bugfixes">
             <action type="add" dev="rbri" issue="#898">
-                WebRequest custom serialization misses the handling of defaultResponseContentCharset_.
+                WebRequest custom serialization misses the handling of defaultResponseContentCharset.
             </action>
             <action type="add" dev="Marek Andreansky">
                 Class SilentIncorrectnessListener added.
