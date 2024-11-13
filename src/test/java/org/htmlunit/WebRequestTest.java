@@ -19,7 +19,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.http.auth.BasicUserPrincipal;
 import org.apache.http.auth.Credentials;
 import org.junit.Test;
@@ -326,5 +328,22 @@ public class WebRequestTest {
         request.setRequestBody("x=u");
 
         assertEquals(0, request.getRequestParameters().size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization() throws Exception {
+        final WebRequest request = new WebRequest(URL_FIRST);
+        request.setCharset(StandardCharsets.UTF_8);
+        request.setDefaultResponseContentCharset(StandardCharsets.US_ASCII);
+
+        final byte[] bytes = SerializationUtils.serialize(request);
+        final WebRequest deserialized = (WebRequest) SerializationUtils.deserialize(bytes);
+
+        assertEquals(URL_FIRST, deserialized.getUrl());
+        assertEquals(StandardCharsets.UTF_8, deserialized.getCharset());
+        assertEquals(StandardCharsets.US_ASCII, deserialized.getDefaultResponseContentCharset());
     }
 }
