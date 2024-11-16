@@ -653,9 +653,11 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
-             "/", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "`",
+             "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
              "{", "|", "}", "~"})
     public void documentCreateElementValidTagNames() throws Exception {
+        expandExpectedAlertsVariables("\\\\");
+
         final String html
             = "<html>\n"
             + "  <head>\n"
@@ -687,9 +689,11 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts({"", "!", "\"", "#", "$", "%", "&", "'", "(", ")",
              "*", "+", ",", "-", ".", "/",
              "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-             ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "`",
+             ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
              "{", "|", "}", "~"})
     public void documentCreateElementValidTagNamesFirstChar() throws Exception {
+        expandExpectedAlertsVariables("\\\\");
+
         final String html
             = "<html>\n"
             + "  <head>\n"
