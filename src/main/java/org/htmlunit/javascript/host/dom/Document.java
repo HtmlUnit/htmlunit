@@ -43,8 +43,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -164,8 +162,7 @@ import org.w3c.dom.ProcessingInstruction;
 public class Document extends Node {
 
     private static final Log LOG = LogFactory.getLog(Document.class);
-    private static final Pattern TAG_NAME_PATTERN = Pattern.compile("[a-zA-z][a-zA-z1-6:]*");
-    // all as lowercase for performance
+
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
@@ -601,14 +598,39 @@ public class Document extends Node {
             return getScriptableFor(element);
         }
 
+        // https://dom.spec.whatwg.org/#dom-document-createelement
+        // NameStartChar ::= ":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D]
+        //                       | [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF]
+        //                       | [#x3001-#xD7FF] | [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
+        // NameChar      ::= NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
+        // Name          ::= NameStartChar (NameChar)*
+
+        // but i have no idea what the browsers are doing
+        // the following code is a wild guess that might be good enough for the moment
         final String tagNameString = JavaScriptEngine.toString(tagName);
         if (tagNameString.length() > 0) {
-            final Matcher matcher = TAG_NAME_PATTERN.matcher(tagNameString);
-            if (!matcher.matches()) {
+            final int firstChar = tagNameString.charAt(0);
+            if (!(isLetter(firstChar)
+                    || ':' == firstChar
+                    || '_' == firstChar)) {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("createElement: Provided string '" + tagNameString + "' contains an invalid character");
                 }
                 throw JavaScriptEngine.reportRuntimeError("String contains an invalid character");
+            }
+            for (int i = 1; i < tagNameString.length(); i++) {
+                final int c = tagNameString.charAt(i);
+                if (!(Character.isLetterOrDigit(c)
+                        || ':' == c
+                        || '_' == c
+                        || '-' == c
+                        || '.' == c)) {
+                    if (LOG.isInfoEnabled()) {
+                        LOG.info("createElement: Provided string '"
+                                    + tagNameString + "' contains an invalid character");
+                    }
+                    throw JavaScriptEngine.reportRuntimeError("String contains an invalid character");
+                }
             }
         }
 
@@ -646,6 +668,15 @@ public class Document extends Node {
             }
         }
         return jsElement;
+    }
+
+    // our version of the Character.isLetter() without MODIFIER_LETTER
+    private static boolean isLetter(final int codePoint) {
+        return ((((1 << Character.UPPERCASE_LETTER)
+                    | (1 << Character.LOWERCASE_LETTER)
+                    | (1 << Character.TITLECASE_LETTER)
+                    | (1 << Character.OTHER_LETTER)
+                ) >> Character.getType(codePoint)) & 1) != 0;
     }
 
     /**
