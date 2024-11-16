@@ -14,7 +14,7 @@
  */
 package org.htmlunit;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -139,7 +139,7 @@ public class CodeStyleTest {
         for (final File file : files) {
             final String relativePath = file.getAbsolutePath().substring(new File(".").getAbsolutePath().length() - 1);
             if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+                final List<String> lines = FileUtils.readLines(file, UTF_8);
                 openingCurlyBracket(lines, relativePath);
                 year(lines, relativePath);
                 javaDocFirstLine(lines, relativePath);
@@ -290,7 +290,7 @@ public class CodeStyleTest {
                 }
                 else {
                     if (file.getName().endsWith(".xml")) {
-                        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+                        final List<String> lines = FileUtils.readLines(file, UTF_8);
                         final String relativePath = file.getAbsolutePath().substring(
                                 new File(".").getAbsolutePath().length() - 1);
                         mixedIndentation(lines, relativePath);
@@ -345,7 +345,7 @@ public class CodeStyleTest {
      * Checks the year in {@code LICENSE.txt}.
      */
     private void licenseYear() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), ISO_8859_1);
+        final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), UTF_8);
         boolean check = false;
         final String copyright = "Copyright (c) 2002-" + LocalDate.now().getYear();
         for (final String line : lines) {
@@ -367,7 +367,7 @@ public class CodeStyleTest {
     private void versionYear() throws IOException {
         final List<String> lines =
                 FileUtils.readLines(new File("src/main/java/org/htmlunit/Version.java"),
-                        ISO_8859_1);
+                        UTF_8);
         for (final String line : lines) {
             if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
                 return;
@@ -380,7 +380,7 @@ public class CodeStyleTest {
      * Verifies no &lt;parent&gt; tag in {@code pom.xml}.
      */
     private void parentInPom() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
+        final List<String> lines = FileUtils.readLines(new File("pom.xml"), UTF_8);
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).contains("<parent>")) {
                 addFailure("pom.xml", i + 1, "'pom.xml' should not have <parent> tag");
@@ -927,7 +927,7 @@ public class CodeStyleTest {
                                             && method.getAnnotation(Test.class) == null
                                             && method.getReturnType() == Void.TYPE
                                             && method.getParameterTypes().length == 0) {
-                                        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+                                        final List<String> lines = FileUtils.readLines(file, UTF_8);
                                         int line = -1;
                                         for (int i = 0; i < lines.size(); ++i) {
                                             if (lines.get(i).contains("public void " + method.getName() + "()")) {
