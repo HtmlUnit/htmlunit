@@ -38,15 +38,15 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.junit.BrowserParameterizedRunner;
+//import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+//import org.junit.Before;
+//import org.junit.Ignore;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.junit.runners.Parameterized.Parameter;
+//import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link WebRequest#getParameters()}.
@@ -60,7 +60,7 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Ronald Brill
  * @author Kristof Neirynck
  */
-@RunWith(BrowserParameterizedRunner.class)
+//@RunWith(BrowserParameterizedRunner.class)
 public class WebRequest2Test extends WebServerTestCase {
 
     public static class TestParameters {
@@ -86,7 +86,7 @@ public class WebRequest2Test extends WebServerTestCase {
      * Performs pre-test construction.
      * @throws Exception if an error occurs
      */
-    @Before
+//    @Before
     public void setup() throws Exception {
         // we have to stop all servers running already to free the port
         WebDriverTestCase.stopWebServers();
@@ -101,7 +101,7 @@ public class WebRequest2Test extends WebServerTestCase {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
+//    @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> data = new ArrayList<>();
 
@@ -160,40 +160,40 @@ public class WebRequest2Test extends WebServerTestCase {
     /**
      * The HttpMethod.
      */
-    @Parameter
+//    @Parameter
     public HttpMethod httpMethod_;
 
     /**
      * The query.
      */
-    @Parameter(1)
+//    @Parameter(1)
     public String query_;
 
     /**
      * The FormEncodingType.
      */
-    @Parameter(2)
+//    @Parameter(2)
     public FormEncodingType encoding_;
 
     /**
      * The FormEncodingType.
      */
-    @Parameter(3)
+//    @Parameter(3)
     public TestParameters parameter_;
 
     /**
      * The body.
      */
-    @Parameter(4)
+//    @Parameter(4)
     public String body_;
 
     /**
      * The default test.
      * @throws Exception if an error occurs
      */
-    @Test
+//    @Test
     @Default
-    @Ignore
+//    @Ignore
     public void test() throws Exception {
         final URL url = new URL(URL_FIRST, query_);
         final WebRequest request = new WebRequest(url);
