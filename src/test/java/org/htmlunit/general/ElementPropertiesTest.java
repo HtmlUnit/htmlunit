@@ -6185,7 +6185,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,"
                 + "72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,87,88,89,9,90,91,92,93,94,95,96,97,98,99,"
                 + "accentColor,additiveSymbols,alignContent,alignItems,alignmentBaseline,alignSelf,all,anchorName,"
-                + "animation,animationComposition,animationDelay,animationDirection,animationDuration,"
+                + "anchorScope,animation,animationComposition,animationDelay,animationDirection,animationDuration,"
                 + "animationFillMode,animationIterationCount,animationName,animationPlayState,animationRange,"
                 + "animationRangeEnd,animationRangeStart,animationTimeline,animationTimingFunction,appearance,"
                 + "appRegion,ascentOverride,aspectRatio,backdropFilter,backfaceVisibility,background,"
@@ -6216,13 +6216,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "floodOpacity,font,fontDisplay,fontFamily,fontFeatureSettings,fontKerning,fontOpticalSizing,"
                 + "fontPalette,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontSynthesis,fontSynthesisSmallCaps,"
                 + "fontSynthesisStyle,fontSynthesisWeight,fontVariant,fontVariantAlternates,fontVariantCaps,"
-                + "fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
-                + "fontVariationSettings,fontWeight,forcedColorAdjust,gap,getPropertyPriority(),getPropertyValue(),"
-                + "grid,gridArea,gridAutoColumns,gridAutoFlow,gridAutoRows,gridColumn,gridColumnEnd,gridColumnGap,"
-                + "gridColumnStart,gridGap,gridRow,gridRowEnd,gridRowGap,gridRowStart,gridTemplate,"
-                + "gridTemplateAreas,gridTemplateColumns,gridTemplateRows,height,hyphenateCharacter,"
+                + "fontVariantEastAsian,fontVariantEmoji,fontVariantLigatures,fontVariantNumeric,"
+                + "fontVariantPosition,fontVariationSettings,fontWeight,forcedColorAdjust,gap,getPropertyPriority(),"
+                + "getPropertyValue(),grid,gridArea,gridAutoColumns,gridAutoFlow,gridAutoRows,gridColumn,"
+                + "gridColumnEnd,gridColumnGap,gridColumnStart,gridGap,gridRow,gridRowEnd,gridRowGap,gridRowStart,"
+                + "gridTemplate,gridTemplateAreas,gridTemplateColumns,gridTemplateRows,height,hyphenateCharacter,"
                 + "hyphenateLimitChars,hyphens,imageOrientation,imageRendering,inherits,initialLetter,initialValue,"
-                + "inlineSize,inset,insetArea,insetBlock,insetBlockEnd,insetBlockStart,insetInline,insetInlineEnd,"
+                + "inlineSize,inset,insetBlock,insetBlockEnd,insetBlockStart,insetInline,insetInlineEnd,"
                 + "insetInlineStart,interpolateSize,isolation,item(),justifyContent,justifyItems,justifySelf,left,"
                 + "length,letterSpacing,lightingColor,lineBreak,lineGapOverride,lineHeight,listStyle,listStyleImage,"
                 + "listStylePosition,listStyleType,margin,marginBlock,marginBlockEnd,marginBlockStart,marginBottom,"
@@ -6314,7 +6314,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,"
                 + "72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,87,88,89,9,90,91,92,93,94,95,96,97,98,99,"
                 + "accentColor,additiveSymbols,alignContent,alignItems,alignmentBaseline,alignSelf,all,anchorName,"
-                + "animation,animationComposition,animationDelay,animationDirection,animationDuration,"
+                + "anchorScope,animation,animationComposition,animationDelay,animationDirection,animationDuration,"
                 + "animationFillMode,animationIterationCount,animationName,animationPlayState,animationRange,"
                 + "animationRangeEnd,animationRangeStart,animationTimeline,animationTimingFunction,appearance,"
                 + "appRegion,ascentOverride,aspectRatio,backdropFilter,backfaceVisibility,background,"
@@ -6345,13 +6345,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "floodOpacity,font,fontDisplay,fontFamily,fontFeatureSettings,fontKerning,fontOpticalSizing,"
                 + "fontPalette,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontSynthesis,fontSynthesisSmallCaps,"
                 + "fontSynthesisStyle,fontSynthesisWeight,fontVariant,fontVariantAlternates,fontVariantCaps,"
-                + "fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
-                + "fontVariationSettings,fontWeight,forcedColorAdjust,gap,getPropertyPriority(),getPropertyValue(),"
-                + "grid,gridArea,gridAutoColumns,gridAutoFlow,gridAutoRows,gridColumn,gridColumnEnd,gridColumnGap,"
-                + "gridColumnStart,gridGap,gridRow,gridRowEnd,gridRowGap,gridRowStart,gridTemplate,"
-                + "gridTemplateAreas,gridTemplateColumns,gridTemplateRows,height,hyphenateCharacter,"
+                + "fontVariantEastAsian,fontVariantEmoji,fontVariantLigatures,fontVariantNumeric,"
+                + "fontVariantPosition,fontVariationSettings,fontWeight,forcedColorAdjust,gap,getPropertyPriority(),"
+                + "getPropertyValue(),grid,gridArea,gridAutoColumns,gridAutoFlow,gridAutoRows,gridColumn,"
+                + "gridColumnEnd,gridColumnGap,gridColumnStart,gridGap,gridRow,gridRowEnd,gridRowGap,gridRowStart,"
+                + "gridTemplate,gridTemplateAreas,gridTemplateColumns,gridTemplateRows,height,hyphenateCharacter,"
                 + "hyphenateLimitChars,hyphens,imageOrientation,imageRendering,inherits,initialLetter,initialValue,"
-                + "inlineSize,inset,insetArea,insetBlock,insetBlockEnd,insetBlockStart,insetInline,insetInlineEnd,"
+                + "inlineSize,inset,insetBlock,insetBlockEnd,insetBlockStart,insetInline,insetInlineEnd,"
                 + "insetInlineStart,interpolateSize,isolation,item(),justifyContent,justifyItems,justifySelf,left,"
                 + "length,letterSpacing,lightingColor,lineBreak,lineGapOverride,lineHeight,listStyle,listStyleImage,"
                 + "listStylePosition,listStyleType,margin,marginBlock,marginBlockEnd,marginBlockStart,marginBottom,"
@@ -6876,7 +6876,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "writing-mode,writingMode,x,y,z-index,zIndex,"
                 + "zoom")
     @HtmlUnitNYI(CHROME = "accentColor,additiveSymbols,alignContent,alignItems,alignmentBaseline,"
-                + "alignSelf,all,anchorName,animation,animationComposition,"
+                + "alignSelf,all,anchorName,anchorScope,animation,animationComposition,"
                 + "animationDelay,animationDirection,animationDuration,animationFillMode,animationIterationCount,"
                 + "animationName,animationPlayState,"
                 + "animationRange,animationRangeEnd,animationRangeStart,animationTimeline,"
@@ -6914,14 +6914,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "fontOpticalSizing,fontPalette,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontSynthesis,"
                 + "fontSynthesisSmallCaps,fontSynthesisStyle,fontSynthesisWeight,"
                 + "fontVariant,fontVariantAlternates,fontVariantCaps,"
-                + "fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
+                + "fontVariantEastAsian,fontVariantEmoji,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
                 + "fontVariationSettings,fontWeight,"
                 + "forcedColorAdjust,gap,getPropertyPriority(),getPropertyValue(),grid,gridArea,gridAutoColumns,"
                 + "gridAutoFlow,gridAutoRows,gridColumn,gridColumnEnd,gridColumnGap,gridColumnStart,gridGap,gridRow,"
                 + "gridRowEnd,gridRowGap,gridRowStart,gridTemplate,gridTemplateAreas,gridTemplateColumns,"
                 + "gridTemplateRows,height,hyphenateCharacter,hyphenateLimitChars,hyphens,"
                 + "imageOrientation,imageRendering,inherits,initialLetter,initialValue,inlineSize,"
-                + "inset,insetArea,insetBlock,insetBlockEnd,insetBlockStart,"
+                + "inset,insetBlock,insetBlockEnd,insetBlockStart,"
                 + "insetInline,insetInlineEnd,insetInlineStart,interpolateSize,"
                 + "isolation,item(),justifyContent,justifyItems,justifySelf,left,length,letterSpacing,lightingColor,"
                 + "lineBreak,lineGapOverride,lineHeight,listStyle,listStyleImage,listStylePosition,listStyleType,"
@@ -7007,7 +7007,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "wordWrap,writingMode,x,y,zIndex,"
                 + "zoom",
             EDGE = "accentColor,additiveSymbols,alignContent,alignItems,alignmentBaseline,alignSelf,"
-                + "all,anchorName,animation,animationComposition,"
+                + "all,anchorName,anchorScope,animation,animationComposition,"
                 + "animationDelay,animationDirection,animationDuration,animationFillMode,animationIterationCount,"
                 + "animationName,animationPlayState,"
                 + "animationRange,animationRangeEnd,animationRangeStart,animationTimeline,"
@@ -7044,14 +7044,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "fontOpticalSizing,fontPalette,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontSynthesis,"
                 + "fontSynthesisSmallCaps,fontSynthesisStyle,fontSynthesisWeight,"
                 + "fontVariant,fontVariantAlternates,fontVariantCaps,"
-                + "fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
+                + "fontVariantEastAsian,fontVariantEmoji,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
                 + "fontVariationSettings,fontWeight,"
                 + "forcedColorAdjust,gap,getPropertyPriority(),getPropertyValue(),grid,gridArea,gridAutoColumns,"
                 + "gridAutoFlow,gridAutoRows,gridColumn,gridColumnEnd,gridColumnGap,gridColumnStart,gridGap,gridRow,"
                 + "gridRowEnd,gridRowGap,gridRowStart,gridTemplate,gridTemplateAreas,gridTemplateColumns,"
                 + "gridTemplateRows,height,hyphenateCharacter,hyphenateLimitChars,hyphens,"
                 + "imageOrientation,imageRendering,inherits,initialLetter,initialValue,inlineSize,"
-                + "inset,insetArea,insetBlock,insetBlockEnd,insetBlockStart,"
+                + "inset,insetBlock,insetBlockEnd,insetBlockStart,"
                 + "insetInline,insetInlineEnd,insetInlineStart,interpolateSize,"
                 + "isolation,item(),justifyContent,justifyItems,justifySelf,left,length,letterSpacing,lightingColor,"
                 + "lineBreak,lineGapOverride,lineHeight,listStyle,listStyleImage,listStylePosition,listStyleType,"
@@ -7614,7 +7614,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "accentColor,additiveSymbols,alignContent,alignItems,alignmentBaseline,alignSelf,all,anchorName,"
-                + "animation,animationComposition,animationDelay,animationDirection,animationDuration,"
+                + "anchorScope,animation,animationComposition,animationDelay,animationDirection,animationDuration,"
                 + "animationFillMode,animationIterationCount,animationName,animationPlayState,animationRange,"
                 + "animationRangeEnd,animationRangeStart,animationTimeline,animationTimingFunction,appearance,"
                 + "appRegion,ascentOverride,aspectRatio,backdropFilter,backfaceVisibility,background,"
@@ -7645,13 +7645,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "floodOpacity,font,fontDisplay,fontFamily,fontFeatureSettings,fontKerning,fontOpticalSizing,"
                 + "fontPalette,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontSynthesis,fontSynthesisSmallCaps,"
                 + "fontSynthesisStyle,fontSynthesisWeight,fontVariant,fontVariantAlternates,fontVariantCaps,"
-                + "fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
-                + "fontVariationSettings,fontWeight,forcedColorAdjust,gap,getPropertyPriority(),getPropertyValue(),"
-                + "grid,gridArea,gridAutoColumns,gridAutoFlow,gridAutoRows,gridColumn,gridColumnEnd,gridColumnGap,"
-                + "gridColumnStart,gridGap,gridRow,gridRowEnd,gridRowGap,gridRowStart,gridTemplate,"
-                + "gridTemplateAreas,gridTemplateColumns,gridTemplateRows,height,hyphenateCharacter,"
+                + "fontVariantEastAsian,fontVariantEmoji,fontVariantLigatures,fontVariantNumeric,"
+                + "fontVariantPosition,fontVariationSettings,fontWeight,forcedColorAdjust,gap,getPropertyPriority(),"
+                + "getPropertyValue(),grid,gridArea,gridAutoColumns,gridAutoFlow,gridAutoRows,gridColumn,"
+                + "gridColumnEnd,gridColumnGap,gridColumnStart,gridGap,gridRow,gridRowEnd,gridRowGap,gridRowStart,"
+                + "gridTemplate,gridTemplateAreas,gridTemplateColumns,gridTemplateRows,height,hyphenateCharacter,"
                 + "hyphenateLimitChars,hyphens,imageOrientation,imageRendering,inherits,initialLetter,initialValue,"
-                + "inlineSize,inset,insetArea,insetBlock,insetBlockEnd,insetBlockStart,insetInline,insetInlineEnd,"
+                + "inlineSize,inset,insetBlock,insetBlockEnd,insetBlockStart,insetInline,insetInlineEnd,"
                 + "insetInlineStart,interpolateSize,isolation,item(),justifyContent,justifyItems,justifySelf,left,"
                 + "length,letterSpacing,lightingColor,lineBreak,lineGapOverride,lineHeight,listStyle,listStyleImage,"
                 + "listStylePosition,listStyleType,margin,marginBlock,marginBlockEnd,marginBlockStart,marginBottom,"
@@ -7728,7 +7728,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "wordBreak,wordSpacing,wordWrap,writingMode,x,y,zIndex,"
                 + "zoom",
             EDGE = "accentColor,additiveSymbols,alignContent,alignItems,alignmentBaseline,alignSelf,all,anchorName,"
-                + "animation,animationComposition,animationDelay,animationDirection,animationDuration,"
+                + "anchorScope,animation,animationComposition,animationDelay,animationDirection,animationDuration,"
                 + "animationFillMode,animationIterationCount,animationName,animationPlayState,animationRange,"
                 + "animationRangeEnd,animationRangeStart,animationTimeline,animationTimingFunction,appearance,"
                 + "appRegion,ascentOverride,aspectRatio,backdropFilter,backfaceVisibility,background,"
@@ -7759,13 +7759,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "floodOpacity,font,fontDisplay,fontFamily,fontFeatureSettings,fontKerning,fontOpticalSizing,"
                 + "fontPalette,fontSize,fontSizeAdjust,fontStretch,fontStyle,fontSynthesis,fontSynthesisSmallCaps,"
                 + "fontSynthesisStyle,fontSynthesisWeight,fontVariant,fontVariantAlternates,fontVariantCaps,"
-                + "fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
-                + "fontVariationSettings,fontWeight,forcedColorAdjust,gap,getPropertyPriority(),getPropertyValue(),"
-                + "grid,gridArea,gridAutoColumns,gridAutoFlow,gridAutoRows,gridColumn,gridColumnEnd,gridColumnGap,"
-                + "gridColumnStart,gridGap,gridRow,gridRowEnd,gridRowGap,gridRowStart,gridTemplate,"
-                + "gridTemplateAreas,gridTemplateColumns,gridTemplateRows,height,hyphenateCharacter,"
+                + "fontVariantEastAsian,fontVariantEmoji,fontVariantLigatures,fontVariantNumeric,"
+                + "fontVariantPosition,fontVariationSettings,fontWeight,forcedColorAdjust,gap,getPropertyPriority(),"
+                + "getPropertyValue(),grid,gridArea,gridAutoColumns,gridAutoFlow,gridAutoRows,gridColumn,"
+                + "gridColumnEnd,gridColumnGap,gridColumnStart,gridGap,gridRow,gridRowEnd,gridRowGap,gridRowStart,"
+                + "gridTemplate,gridTemplateAreas,gridTemplateColumns,gridTemplateRows,height,hyphenateCharacter,"
                 + "hyphenateLimitChars,hyphens,imageOrientation,imageRendering,inherits,initialLetter,initialValue,"
-                + "inlineSize,inset,insetArea,insetBlock,insetBlockEnd,insetBlockStart,insetInline,insetInlineEnd,"
+                + "inlineSize,inset,insetBlock,insetBlockEnd,insetBlockStart,insetInline,insetInlineEnd,"
                 + "insetInlineStart,interpolateSize,isolation,item(),justifyContent,justifyItems,justifySelf,left,"
                 + "length,letterSpacing,lightingColor,lineBreak,lineGapOverride,lineHeight,listStyle,listStyleImage,"
                 + "listStylePosition,listStyleType,margin,marginBlock,marginBlockEnd,marginBlockStart,marginBottom,"
@@ -8732,12 +8732,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
-                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
-                + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,"
+                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,"
+                + "SUPPORTS_RULE,"
                 + "type",
             EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
-                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
-                + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,"
+                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,"
+                + "SUPPORTS_RULE,"
                 + "type",
             FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
                 + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
@@ -8749,11 +8751,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "type")
     @HtmlUnitNYI(
             CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,"
-                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
+                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,MEDIA_RULE,"
                 + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,"
                 + "type",
             EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,"
-                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,"
+                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,MEDIA_RULE,"
                 + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,"
                 + "type",
             FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,"
@@ -8774,7 +8776,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("CHARSET_RULE,conditionText,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),"
+    @Alerts(CHROME = "CHARSET_RULE,conditionText,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),"
+                + "FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,"
+                + "KEYFRAMES_RULE,MARGIN_RULE,"
+                + "media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,"
+                + "STYLE_RULE,SUPPORTS_RULE,type",
+            EDGE = "CHARSET_RULE,conditionText,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),"
+                + "FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,"
+                + "KEYFRAMES_RULE,MARGIN_RULE,"
+                + "media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,"
+                + "STYLE_RULE,SUPPORTS_RULE,type",
+            FF = "CHARSET_RULE,conditionText,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),"
+                + "FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,"
+                + "KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,"
+                + "STYLE_RULE,SUPPORTS_RULE,type",
+            FF_ESR = "CHARSET_RULE,conditionText,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),"
                 + "FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,"
                 + "KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,"
                 + "STYLE_RULE,SUPPORTS_RULE,type")
@@ -8788,14 +8804,27 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
+    @Alerts(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "parentRule,parentStyleSheet,style,STYLE_RULE,SUPPORTS_RULE,type",
+            EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "parentRule,parentStyleSheet,style,STYLE_RULE,SUPPORTS_RULE,type",
+            FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "parentRule,parentStyleSheet,style,STYLE_RULE,SUPPORTS_RULE,type",
+            FF_ESR = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
                 + "parentRule,parentStyleSheet,style,STYLE_RULE,SUPPORTS_RULE,type")
     @HtmlUnitNYI(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
-                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,STYLE_RULE,SUPPORTS_RULE,type",
             EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
-                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,STYLE_RULE,SUPPORTS_RULE,type",
             FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
@@ -8813,14 +8842,23 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+    @Alerts(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,layerName,MARGIN_RULE,media,MEDIA_RULE,NAMESPACE_RULE,"
+                + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,supportsText,type",
+            EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,layerName,MARGIN_RULE,media,MEDIA_RULE,NAMESPACE_RULE,"
+                + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,supportsText,type",
+            FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,layerName,media,MEDIA_RULE,NAMESPACE_RULE,"
+                + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,supportsText,type",
+            FF_ESR = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,layerName,media,MEDIA_RULE,NAMESPACE_RULE,"
                 + "PAGE_RULE,parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,supportsText,type")
     @HtmlUnitNYI(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
-                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
                 + "parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,type",
             EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
-                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
                 + "parentRule,parentStyleSheet,STYLE_RULE,styleSheet,SUPPORTS_RULE,type",
             FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,href,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,media,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,"
@@ -8838,10 +8876,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
-                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,"
-                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,"
-                + "style,STYLE_RULE,styleMap,SUPPORTS_RULE,type",
+    @Alerts(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
+                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,"
+                + "styleMap,SUPPORTS_RULE,"
+                + "type",
+            EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
+                + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,"
+                + "styleMap,SUPPORTS_RULE,"
+                + "type",
             FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssRules,cssText,deleteRule(),FONT_FACE_RULE,"
                 + "FONT_FEATURE_VALUES_RULE,IMPORT_RULE,insertRule(),KEYFRAME_RULE,KEYFRAMES_RULE,"
                 + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,"
@@ -8851,10 +8895,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NAMESPACE_RULE,PAGE_RULE,parentRule,parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,"
                 + "type")
     @HtmlUnitNYI(CHROME = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
-                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type",
             EDGE = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
-                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
+                + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MARGIN_RULE,"
+                + "MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
                 + "parentStyleSheet,selectorText,style,STYLE_RULE,SUPPORTS_RULE,type",
             FF = "CHARSET_RULE,COUNTER_STYLE_RULE,cssText,FONT_FACE_RULE,FONT_FEATURE_VALUES_RULE,"
                 + "IMPORT_RULE,KEYFRAME_RULE,KEYFRAMES_RULE,MEDIA_RULE,NAMESPACE_RULE,PAGE_RULE,parentRule,"
@@ -8938,13 +8984,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "arrayBuffer(),blob(),body,bodyUsed,cache,clone(),credentials,destination,formData(),headers,"
-                + "integrity,isHistoryNavigation,json(),keepalive,method,mode,redirect,referrer,referrerPolicy,"
-                + "signal,targetAddressSpace,text(),"
+    @Alerts(CHROME = "arrayBuffer(),blob(),body,bodyUsed,cache,clone(),credentials,destination,duplex,formData(),"
+                + "headers,integrity,isHistoryNavigation,json(),keepalive,method,mode,redirect,referrer,"
+                + "referrerPolicy,signal,targetAddressSpace,text(),"
                 + "url",
-            EDGE = "arrayBuffer(),blob(),body,bodyUsed,cache,clone(),credentials,destination,formData(),headers,"
-                + "integrity,isHistoryNavigation,json(),keepalive,method,mode,redirect,referrer,referrerPolicy,"
-                + "signal,targetAddressSpace,text(),"
+            EDGE = "arrayBuffer(),blob(),body,bodyUsed,cache,clone(),credentials,destination,duplex,formData(),"
+                + "headers,integrity,isHistoryNavigation,json(),keepalive,method,mode,redirect,referrer,"
+                + "referrerPolicy,signal,targetAddressSpace,text(),"
                 + "url",
             FF = "arrayBuffer(),blob(),bodyUsed,bytes(),cache,clone(),credentials,destination,formData(),headers,"
                 + "integrity,json(),method,mode,redirect,referrer,referrerPolicy,signal,text(),"
