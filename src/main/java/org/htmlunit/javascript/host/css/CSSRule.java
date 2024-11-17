@@ -14,6 +14,9 @@
  */
 package org.htmlunit.javascript.host.css;
 
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
@@ -97,6 +100,12 @@ public class CSSRule extends HtmlUnitScriptable {
      */
     @JsxConstant
     public static final int KEYFRAME_RULE             = 8;
+
+    /**
+     * The rule is a {@code CSSMerginRule}.
+     */
+    @JsxConstant({CHROME, EDGE})
+    public static final int MARGIN_RULE               = 9;
 
     /**
      * The rule is a {@code CSSNamespaceRule}.
