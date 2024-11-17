@@ -107,7 +107,9 @@ public class HTMLParser6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("<option id=\"myOption\">op1</option><option value=\"da\">Dansk</option>")
+    @Alerts(DEFAULT = "<option id=\"myOption\">op1</option><select><option value=\"da\">Dansk</option></select>",
+            FF = "<option id=\"myOption\">op1</option><option value=\"da\">Dansk</option>",
+            FF_ESR = "<option id=\"myOption\">op1</option><option value=\"da\">Dansk</option>")
     public void fragmentParserHtmlInsideOption() throws Exception {
         final String fragment = "<select><option value=\"da\">Dansk</option></select>";
         final String html = "<html><head>\n"

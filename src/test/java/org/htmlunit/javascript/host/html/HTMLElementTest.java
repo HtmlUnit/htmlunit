@@ -840,9 +840,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<b>inner HTML</b>",
-            FF = "getInnerHTML() not available",
-            FF_ESR = "getInnerHTML() not available")
+    @Alerts("getInnerHTML() not available")
     public void getGetInnerHTML() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -5368,7 +5366,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("<select id=\"myId\"><option>Two</option></select>")
+    @Alerts(DEFAULT = "<select id=\"myId\"><select id=\"myId2\"><option>Two</option></select></select>",
+            FF = "<select id=\"myId\"><option>Two</option></select>",
+            FF_ESR = "<select id=\"myId\"><option>Two</option></select>")
     public void innerHTML() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

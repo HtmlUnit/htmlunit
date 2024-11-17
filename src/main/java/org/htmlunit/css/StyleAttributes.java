@@ -136,7 +136,10 @@ public final class StyleAttributes implements Serializable {
         ALL("all", "all", chromeAndEdgeAndFirefox("")),
 
         /** The style property {@code anchorName}. */
-        ANCHOR_NAME("anchorName", "anchor.name", chromeAndEdgeNone()),
+        ANCHOR_NAME("anchorName", "anchor-name", chromeAndEdgeNone()),
+
+        /** The style property {@code anchorScope}. */
+        ANCHOR_SCOPE("anchorScope", "anchor-scope", chromeAndEdgeNone()),
 
         /** The style property {@code animation}. */
         ANIMATION("animation", "animation", chromeAndEdge("none 0s ease 0s 1 normal none running"),
@@ -1259,6 +1262,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code font-variant-east-asian}. */
         FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ffNormal()),
 
+        /** The style property {@code fontVariantEmoji}. */
+        FONT_VARIANT_EMOKJI("fontVariantEmoji", "font-variant-emoji", chromeAndEdgeNormal()),
+
         /** The style property {@code fontVariantLigatures}. */
         FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ffNormal(), chromeAndEdgeNormal()),
 
@@ -1462,9 +1468,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code inset}. */
         INSET("inset", "inset", chromeAndEdgeAuto(), ff("auto")),
-
-        /** The style property {@code insetArea}. */
-        INSET_AREA("insetArea", "inset-area", chromeAndEdgeNone()),
 
         /** The style property {@code insetBlock}. */
         INSET_BLOCK("insetBlock", "inset-block", chromeAndEdgeAuto(), ff("auto")),
