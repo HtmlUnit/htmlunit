@@ -1080,12 +1080,8 @@ public class Element extends Node {
     @JsxFunction
     public void removeAttributeNode(final Attr attribute) {
         final String name = attribute.getName();
-        final Object namespaceUri = attribute.getNamespaceURI();
-        if (namespaceUri instanceof String) {
-            removeAttributeNS((String) namespaceUri, name);
-            return;
-        }
-        removeAttributeNS(null, name);
+        final String namespaceUri = attribute.getNamespaceURI();
+        removeAttributeNS(namespaceUri, name);
     }
 
     /**

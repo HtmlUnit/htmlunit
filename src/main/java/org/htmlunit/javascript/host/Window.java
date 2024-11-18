@@ -1395,9 +1395,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @param e the error that needs to be reported
      */
     public void triggerOnError(final ScriptException e) {
-        final Object o = getOnerror();
-        if (o instanceof Function) {
-            final Function f = (Function) o;
+        final Function f = getOnerror();
+        if (f != null) {
             String msg = e.getMessage();
             final String url = e.getPage().getUrl().toExternalForm();
 
