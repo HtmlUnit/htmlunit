@@ -24,6 +24,7 @@
 
     <rule ref="category/java/bestpractices.xml">
         <exclude name="AccessorMethodGeneration"/>
+        <exclude name="UseVarargs"/>
     </rule>
 
     <rule ref="category/java/codestyle.xml">
