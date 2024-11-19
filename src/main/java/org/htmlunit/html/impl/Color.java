@@ -20,6 +20,7 @@ package org.htmlunit.html.impl;
  *
  * @author Ronald Brill
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class Color {
     private final int red_;
     private final int green_;
