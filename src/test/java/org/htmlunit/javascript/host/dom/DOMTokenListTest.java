@@ -728,7 +728,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
     public void addEmpty() throws Exception {
-        add("a b", "");
+        add("a b", "''");
     }
 
     /**
@@ -737,7 +737,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
     public void addBlank() throws Exception {
-        add("a b", " ");
+        add("a b", "' '");
     }
 
     /**
@@ -746,7 +746,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
     public void addTab() throws Exception {
-        add("a b", "\t");
+        add("a b", "'\t'");
     }
 
     /**
@@ -755,7 +755,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
     public void addCr() throws Exception {
-        add("a b", "\\r");
+        add("a b", "'\\r'");
     }
 
     /**
@@ -764,7 +764,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
     public void addNl() throws Exception {
-        add("a b", "\\n");
+        add("a b", "'\\n'");
     }
 
     /**
@@ -773,7 +773,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "3", "a\\sb\\s\u000B", "class\\schanged\\sold:\\sa\\sb"})
     public void addVt() throws Exception {
-        add("a b", "\u000B");
+        add("a b", "'\u000B'");
     }
 
     /**
@@ -782,7 +782,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "0", "1", "a", "class\\schanged\\sold:\\s"})
     public void addToEmpty() throws Exception {
-        add("", "a");
+        add("", "'a'");
     }
 
     /**
@@ -791,7 +791,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"\\s\\t\\s\\n\\s\\s", "0", "1", "a", "class\\schanged\\sold:\\s\\s\\t\\s\\n\\s\\s"})
     public void addToWhitespace() throws Exception {
-        add(" \t \r  ", "a");
+        add(" \t \r  ", "'a'");
     }
 
     /**
@@ -800,7 +800,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\s\\s", "1", "2", "a\\sb", "class\\schanged\\sold:\\sa\\s\\s"})
     public void addToWhitespaceAtEnd() throws Exception {
-        add("a  ", "b");
+        add("a  ", "'b'");
     }
 
     /**
@@ -809,7 +809,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "3", "a\\sb\\sc", "class\\schanged\\sold:\\sa\\sb"})
     public void addNotExisting() throws Exception {
-        add("a b", "c");
+        add("a b", "'c'");
     }
 
     /**
@@ -818,7 +818,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "2", "a\\sb", "class\\schanged\\sold:\\sa\\sb"})
     public void addExisting() throws Exception {
-        add("a b", "a");
+        add("a b", "'a'");
     }
 
     /**
@@ -827,7 +827,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"b\\sa", "2", "2", "b\\sa", "class\\schanged\\sold:\\sb\\sa"})
     public void addExisting2() throws Exception {
-        add("b a", "a");
+        add("b a", "'a'");
     }
 
     /**
@@ -836,7 +836,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"b\\sa\\sb", "2", "3", "b\\sa\\sc", "class\\schanged\\sold:\\sb\\sa\\sb"})
     public void addNormalizes() throws Exception {
-        add("b a b", "c");
+        add("b a b", "'c'");
     }
 
     /**
@@ -845,7 +845,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb\\sa", "2", "exception", "2", "a\\sb\\sa"})
     public void addElementWithBlank() throws Exception {
-        add("a b a", "a b");
+        add("a b a", "'a b'");
     }
 
     /**
@@ -854,7 +854,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb\\sa\\tb", "2", "exception", "2", "a\\sb\\sa\\tb"})
     public void addElementWithTab() throws Exception {
-        add("a b a\tb", "a\tb");
+        add("a b a\tb", "'a\tb'");
     }
 
     /**
@@ -864,7 +864,70 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "4", "a\\sc\\sd\\se",
              "class\\schanged\\sold:\\sa\\s\\t\\sc\\s\\n\\sd\\s\\se"})
     public void addToWhitespaceExisting() throws Exception {
-        add("a \t c \n d  e", "c");
+        add("a \t c \n d  e", "'c'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\se", "2", "4", "a\\se\\sc\\sb", "class\\schanged\\sold:\\sa\\se"})
+    public void addTwoValues() throws Exception {
+        add("a e", "'c', 'b'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\se", "2", "3", "a\\se\\sc", "class\\schanged\\sold:\\sa\\se"})
+    public void addTwoValuesExisting() throws Exception {
+        add("a e", "'c', 'e'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\se", "2", "4", "a\\se\\sc\\s7", "class\\schanged\\sold:\\sa\\se"})
+    public void addTwoValuesNumber() throws Exception {
+        add("a e", "'c', 7");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\se", "2", "4", "a\\se\\strue\\sfalse", "class\\schanged\\sold:\\sa\\se"})
+    public void addTwoValuesBoolean() throws Exception {
+        add("a e", "true, false");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\se", "2", "exception", "2", "a\\se"})
+    public void addTwoValuesObject() throws Exception {
+        add("a e", "'c', { color: 'blue' }");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\se", "2", "4", "a\\se\\sc\\sundefined", "class\\schanged\\sold:\\sa\\se"})
+    public void addTwoValuesUndefined() throws Exception {
+        add("a e", "'c', undefined");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\se", "2", "4", "a\\se\\sc\\snull", "class\\schanged\\sold:\\sa\\se"})
+    public void addTwoValuesNull() throws Exception {
+        add("a e", "'c', null");
     }
 
     private void add(final String in, final String toAdd) throws Exception {
@@ -889,7 +952,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    log(elem.className);\n"
             + "    log(list.length);\n"
             + "    try {\n"
-            + "      list.add('" + toAdd + "');\n"
+            + "      list.add(" + toAdd + ");\n"
             + "    } catch(e) { log('exception');}\n"
             + "    log(list.length);\n"
             + "    log(elem.className);\n"
@@ -968,7 +1031,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeEmpty() throws Exception {
-        remove("a b", "");
+        remove("a b", "''");
     }
 
     /**
@@ -977,7 +1040,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeBlank() throws Exception {
-        remove("a b", " ");
+        remove("a b", "' '");
     }
 
     /**
@@ -986,7 +1049,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeTab() throws Exception {
-        remove("a b", "\t");
+        remove("a b", "'\t'");
     }
 
     /**
@@ -995,7 +1058,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeCr() throws Exception {
-        remove("a b", "\\r");
+        remove("a b", "'\\r'");
     }
 
     /**
@@ -1004,7 +1067,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "exception", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeNl() throws Exception {
-        remove("a b", "\\n");
+        remove("a b", "'\\n'");
     }
 
     /**
@@ -1013,7 +1076,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>", "class\\schanged\\sold:\\sa\\sb"})
     public void removeVt() throws Exception {
-        remove("a b", "\u000B");
+        remove("a b", "'\u000B'");
     }
 
     /**
@@ -1022,7 +1085,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "0", "0", "", "<div\\sid=\"d1\"\\sclass=\"\"></div>", "class\\schanged\\sold:\\s"})
     public void removeFromEmpty() throws Exception {
-        remove("", "a");
+        remove("", "'a'");
     }
 
     /**
@@ -1033,7 +1096,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
              "<div\\sid=\"d1\"\\sclass=\"\"></div>",
              "class\\schanged\\sold:\\s\\s\\t\\s\\n\\s\\s"})
     public void removeFromWhitespace() throws Exception {
-        remove(" \t \r  ", "a");
+        remove(" \t \r  ", "'a'");
     }
 
     /**
@@ -1042,7 +1105,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb", "2", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>", "class\\schanged\\sold:\\sa\\sb"})
     public void removeNotExisting() throws Exception {
-        remove("a b", "c");
+        remove("a b", "'c'");
     }
 
     /**
@@ -1051,7 +1114,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb\\sa", "2", "1", "b", "<div\\sid=\"d1\"\\sclass=\"b\"></div>", "class\\schanged\\sold:\\sa\\sb\\sa"})
     public void removeDuplicated() throws Exception {
-        remove("a b a", "a");
+        remove("a b a", "'a'");
     }
 
     /**
@@ -1060,7 +1123,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a\\sb\\sa", "2", "exception", "2", "a\\sb\\sa", "<div\\sid=\"d1\"\\sclass=\"a\\sb\\sa\"></div>"})
     public void removeElementWithBlank() throws Exception {
-        remove("a b a", "a b");
+        remove("a b a", "'a b'");
     }
 
     /**
@@ -1070,7 +1133,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"a\\sb\\sa\\tb", "2", "exception", "2", "a\\sb\\sa\\tb",
              "<div\\sid=\"d1\"\\sclass=\"a\\sb\\sa\\tb\"></div>"})
     public void removeElementWithTab() throws Exception {
-        remove("a b a\tb", "a\tb");
+        remove("a b a\tb", "'a\tb'");
     }
 
     /**
@@ -1079,7 +1142,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a", "1", "0", "", "<div\\sid=\"d1\"\\sclass=\"\"></div>", "class\\schanged\\sold:\\sa"})
     public void removeLast() throws Exception {
-        remove("a", "a");
+        remove("a", "'a'");
     }
 
     /**
@@ -1090,7 +1153,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
              "<div\\sid=\"d1\"\\sclass=\"a\\sd\\se\"></div>",
              "class\\schanged\\sold:\\sa\\s\\t\\sc\\s\\n\\sd\\s\\se"})
     public void removeWhitespace() throws Exception {
-        remove("a \t c \n d  e", "c");
+        remove("a \t c \n d  e", "'c'");
     }
 
     /**
@@ -1101,7 +1164,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
              "<div\\sid=\"d1\"\\sclass=\"a\"></div>",
              "class\\schanged\\sold:\\sa\\sc\\sa\\sc"})
     public void removeNormalizes() throws Exception {
-        remove("a c a c", "c");
+        remove("a c a c", "'c'");
     }
 
     /**
@@ -1112,7 +1175,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
              "<div\\sid=\"d1\"\\sclass=\"\"></div>",
              "class\\schanged\\sold:\\sc"})
     public void removeAll() throws Exception {
-        remove("c", "c");
+        remove("c", "'c'");
     }
 
     /**
@@ -1123,7 +1186,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
              "<div\\sid=\"d1\"\\sclass=\"\"></div>",
              "class\\schanged\\sold:\\s"})
     public void removeAllFromEmpty() throws Exception {
-        remove("", "c");
+        remove("", "'c'");
     }
 
     /**
@@ -1133,7 +1196,72 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"", "0", "0", "",
              "<div\\sid=\"d1\"></div>"})
     public void removeAllNotDefined() throws Exception {
-        remove(null, "c");
+        remove(null, "'c'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb", "2", "1", "a",
+             "<div\\sid=\"d1\"\\sclass=\"a\"></div>",
+             "class\\schanged\\sold:\\sa\\sb"})
+    public void removeTwo() throws Exception {
+        remove("a b", "'b', 'd'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb\\s7", "3", "1", "a",
+             "<div\\sid=\"d1\"\\sclass=\"a\"></div>",
+             "class\\schanged\\sold:\\sa\\sb\\s7"})
+    public void removeTwoNumber() throws Exception {
+        remove("a b 7", "'b', 7");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb\\strue", "3", "2", "a\\sb",
+             "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>",
+             "class\\schanged\\sold:\\sa\\sb\\strue"})
+    public void removeTwoBoolean() throws Exception {
+        remove("a b true", "true, false");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb\\sundefined", "3", "1", "a",
+             "<div\\sid=\"d1\"\\sclass=\"a\"></div>",
+             "class\\schanged\\sold:\\sa\\sb\\sundefined"})
+    public void removeTwoUndefined() throws Exception {
+        remove("a b undefined", "'b', undefined");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\snull\\s7", "3", "2", "a\\s7",
+             "<div\\sid=\"d1\"\\sclass=\"a\\s7\"></div>",
+             "class\\schanged\\sold:\\sa\\snull\\s7"})
+    public void removeTwoNull() throws Exception {
+        remove("a null 7", "'b', null");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a\\sb\\s7", "3", "exception", "3", "a\\sb\\s7",
+             "<div\\sid=\"d1\"\\sclass=\"a\\sb\\s7\"></div>"})
+    public void removeTwoObject() throws Exception {
+        remove("a b 7", "'b', { color: 'red' }");
     }
 
     private void remove(final String in, final String toRemove) throws Exception {
@@ -1158,7 +1286,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    log(elem.className);\n"
             + "    log(list.length);\n"
             + "    try {\n"
-            + "      list.remove('" + toRemove + "');\n"
+            + "      list.remove(" + toRemove + ");\n"
             + "    } catch(e) { log('exception');}\n"
             + "    log(list.length);\n"
             + "    log(elem.className);\n"

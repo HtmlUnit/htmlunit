@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.7.0" date="November xx, 2024" description="Bugfixes, Chrome/Edge 131">
+            <action type="add" dev="rbri">
+                DOMTokenList add()/remove() are able to handle an arbitrary amount of tokens.
+            </action>
             <action type="remove" dev="rbri">
                 Element.getInnerHTML() is gone in Chrome/Edge.
             </action>
