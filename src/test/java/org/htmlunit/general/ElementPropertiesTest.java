@@ -9181,4 +9181,60 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void fileList2() throws Exception {
         testString("", "document.getElementById('fileItem').files");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.PluginArray}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "0,1,2,3,4,item(),length,namedItem(),refresh()",
+            EDGE = "0,1,2,3,4,item(),length,namedItem(),refresh()",
+            FF = "0,1,2,3,4,item(),length,namedItem(),refresh()",
+            FF_ESR = "0,1,2,3,4,item(),length,namedItem(),refresh()")
+    public void pluginArray() throws Exception {
+        testString("", "navigator.plugins");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.Plugin}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "0,1,description,filename,item(),length,name,namedItem()",
+            EDGE = "0,1,description,filename,item(),length,name,namedItem()",
+            FF = "0,1,description,filename,item(),length,name,namedItem()",
+            FF_ESR = "0,1,description,filename,item(),length,name,namedItem()")
+    public void plugin() throws Exception {
+        testString("", "navigator.plugins[0]");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.MimeTypeArray}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "0,1,item(),length,namedItem()",
+            EDGE = "0,1,item(),length,namedItem()",
+            FF = "0,1,item(),length,namedItem()",
+            FF_ESR = "0,1,item(),length,namedItem()")
+    public void mimeTypeArray() throws Exception {
+        testString("", "navigator.mimeTypes");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.MimeType}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "description,enabledPlugin,suffixes,type",
+            EDGE = "description,enabledPlugin,suffixes,type",
+            FF = "description,enabledPlugin,suffixes,type",
+            FF_ESR = "description,enabledPlugin,suffixes,type")
+    public void mimeType() throws Exception {
+        testString("", "navigator.mimeTypes[0]");
+    }
 }

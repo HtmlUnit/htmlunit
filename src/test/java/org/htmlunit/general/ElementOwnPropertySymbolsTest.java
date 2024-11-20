@@ -3215,4 +3215,60 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void fileList2() throws Exception {
         testString("", "document.getElementById('fileItem').files");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.PluginArray}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [PluginArray]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [PluginArray]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [PluginArray]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [PluginArray]")
+    public void pluginArray() throws Exception {
+        testString("", "navigator.plugins");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.Plugin}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [Plugin]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [Plugin]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [Plugin]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [Plugin]")
+    public void plugin() throws Exception {
+        testString("", "navigator.plugins[0]");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.MimeTypeArray}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeTypeArray]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeTypeArray]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeTypeArray]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeTypeArray]")
+    public void mimeTypeArray() throws Exception {
+        testString("", "navigator.mimeTypes");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.MimeType}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeType]",
+            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeType]",
+            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeType]",
+            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeType]")
+    public void mimeType() throws Exception {
+        testString("", "navigator.mimeTypes[0]");
+    }
 }

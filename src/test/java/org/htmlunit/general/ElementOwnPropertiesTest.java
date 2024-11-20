@@ -18070,4 +18070,60 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void fileList2() throws Exception {
         testString("", "document.getElementById('fileItem').files");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.PluginArray}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem(),refresh()",
+            EDGE = "constructor(),item(),length[GCE],namedItem(),refresh()",
+            FF = "constructor(),item(),length[GCE],namedItem(),refresh()",
+            FF_ESR = "constructor(),item(),length[GCE],namedItem(),refresh()")
+    public void pluginArray() throws Exception {
+        testString("", "navigator.plugins");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.Plugin}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),description[GCE],filename[GCE],item(),length[GCE],name[GCE],namedItem()",
+            EDGE = "constructor(),description[GCE],filename[GCE],item(),length[GCE],name[GCE],namedItem()",
+            FF = "constructor(),description[GCE],filename[GCE],item(),length[GCE],name[GCE],namedItem()",
+            FF_ESR = "constructor(),description[GCE],filename[GCE],item(),length[GCE],name[GCE],namedItem()")
+    public void plugin() throws Exception {
+        testString("", "navigator.plugins[0]");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.MimeTypeArray}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length[GCE],namedItem()",
+            EDGE = "constructor(),item(),length[GCE],namedItem()",
+            FF = "constructor(),item(),length[GCE],namedItem()",
+            FF_ESR = "constructor(),item(),length[GCE],namedItem()")
+    public void mimeTypeArray() throws Exception {
+        testString("", "navigator.mimeTypes");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.MimeType}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),description[GCE],enabledPlugin[GCE],suffixes[GCE],type[GCE]",
+            EDGE = "constructor(),description[GCE],enabledPlugin[GCE],suffixes[GCE],type[GCE]",
+            FF = "constructor(),description[GCE],enabledPlugin[GCE],suffixes[GCE],type[GCE]",
+            FF_ESR = "constructor(),description[GCE],enabledPlugin[GCE],suffixes[GCE],type[GCE]")
+    public void mimeType() throws Exception {
+        testString("", "navigator.mimeTypes[0]");
+    }
 }
