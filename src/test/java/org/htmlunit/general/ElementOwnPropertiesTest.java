@@ -18126,4 +18126,86 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void mimeType() throws Exception {
         testString("", "navigator.mimeTypes[0]");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.Navigator}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "adAuctionComponents(),appCodeName[GCE],appName[GCE],appVersion[GCE],bluetooth[GCE],"
+                + "canLoadAdAuctionFencedFrame(),canShare(),clearAppBadge(),clearOriginJoinedAdInterestGroups(),"
+                + "clipboard[GCE],connection[GCE],constructor(),cookieEnabled[GCE],createAuctionNonce(),"
+                + "credentials[GCE],deprecatedReplaceInURN(),deprecatedRunAdAuctionEnforcesKAnonymity[GCE],"
+                + "deprecatedURNToURL(),deviceMemory[GCE],doNotTrack[GCE],geolocation[GCE],getBattery(),"
+                + "getGamepads(),getInstalledRelatedApps(),getUserMedia(),gpu[GCE],hardwareConcurrency[GCE],"
+                + "hid[GCE],ink[GCE],javaEnabled(),joinAdInterestGroup(),keyboard[GCE],language[GCE],languages[GCE],"
+                + "leaveAdInterestGroup(),locks[GCE],login[GCE],managed[GCE],maxTouchPoints[GCE],"
+                + "mediaCapabilities[GCE],mediaDevices[GCE],mediaSession[GCE],mimeTypes[GCE],onLine[GCE],"
+                + "pdfViewerEnabled[GCE],permissions[GCE],platform[GCE],plugins[GCE],presentation[GCE],product[GCE],"
+                + "productSub[GCE],protectedAudience[GCE],registerProtocolHandler(),requestMediaKeySystemAccess(),"
+                + "requestMIDIAccess(),runAdAuction(),scheduling[GCE],sendBeacon(),serial[GCE],serviceWorker[GCE],"
+                + "setAppBadge(),share(),storage[GCE],storageBuckets[GCE],unregisterProtocolHandler(),"
+                + "updateAdInterestGroups(),usb[GCE],userActivation[GCE],userAgent[GCE],userAgentData[GCE],"
+                + "vendor[GCE],vendorSub[GCE],vibrate(),virtualKeyboard[GCE],wakeLock[GCE],webdriver[GCE],"
+                + "webkitGetUserMedia(),webkitPersistentStorage[GCE],webkitTemporaryStorage[GCE],"
+                + "windowControlsOverlay[GCE],"
+                + "xr[GCE]",
+            EDGE = "adAuctionComponents(),appCodeName[GCE],appName[GCE],appVersion[GCE],bluetooth[GCE],"
+                + "canLoadAdAuctionFencedFrame(),canShare(),clearAppBadge(),clearOriginJoinedAdInterestGroups(),"
+                + "clipboard[GCE],connection[GCE],constructor(),cookieEnabled[GCE],createAuctionNonce(),"
+                + "credentials[GCE],deprecatedReplaceInURN(),deprecatedRunAdAuctionEnforcesKAnonymity[GCE],"
+                + "deprecatedURNToURL(),deviceMemory[GCE],doNotTrack[GCE],geolocation[GCE],getBattery(),"
+                + "getGamepads(),getInstalledRelatedApps(),getUserMedia(),gpu[GCE],hardwareConcurrency[GCE],"
+                + "hid[GCE],ink[GCE],javaEnabled(),joinAdInterestGroup(),keyboard[GCE],language[GCE],languages[GCE],"
+                + "leaveAdInterestGroup(),locks[GCE],login[GCE],managed[GCE],maxTouchPoints[GCE],"
+                + "mediaCapabilities[GCE],mediaDevices[GCE],mediaSession[GCE],mimeTypes[GCE],onLine[GCE],"
+                + "pdfViewerEnabled[GCE],permissions[GCE],platform[GCE],plugins[GCE],presentation[GCE],product[GCE],"
+                + "productSub[GCE],protectedAudience[GCE],registerProtocolHandler(),requestMediaKeySystemAccess(),"
+                + "requestMIDIAccess(),runAdAuction(),scheduling[GCE],sendBeacon(),serial[GCE],serviceWorker[GCE],"
+                + "setAppBadge(),share(),storage[GCE],storageBuckets[GCE],unregisterProtocolHandler(),"
+                + "updateAdInterestGroups(),usb[GCE],userActivation[GCE],userAgent[GCE],userAgentData[GCE],"
+                + "vendor[GCE],vendorSub[GCE],vibrate(),virtualKeyboard[GCE],wakeLock[GCE],webdriver[GCE],"
+                + "webkitGetUserMedia(),webkitPersistentStorage[GCE],webkitTemporaryStorage[GCE],"
+                + "windowControlsOverlay[GCE],"
+                + "xr[GCE]",
+            FF = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],clipboard[GCE],constructor(),"
+                + "cookieEnabled[GCE],credentials[GCE],doNotTrack[GCE],geolocation[GCE],getAutoplayPolicy(),"
+                + "getGamepads(),globalPrivacyControl[GCE],hardwareConcurrency[GCE],javaEnabled(),language[GCE],"
+                + "languages[GCE],locks[GCE],maxTouchPoints[GCE],mediaCapabilities[GCE],mediaDevices[GCE],"
+                + "mediaSession[GCE],mimeTypes[GCE],mozGetUserMedia(),onLine[GCE],oscpu[GCE],pdfViewerEnabled[GCE],"
+                + "permissions[GCE],platform[GCE],plugins[GCE],product[GCE],productSub[GCE],"
+                + "registerProtocolHandler(),requestMediaKeySystemAccess(),requestMIDIAccess(),sendBeacon(),"
+                + "serviceWorker[GCE],storage[GCE],taintEnabled(),userActivation[GCE],userAgent[GCE],vendor[GCE],"
+                + "vendorSub[GCE],wakeLock[GCE],"
+                + "webdriver[GCE]",
+            FF_ESR = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],clipboard[GCE],constructor(),"
+                + "cookieEnabled[GCE],credentials[GCE],doNotTrack[GCE],geolocation[GCE],getAutoplayPolicy(),"
+                + "getGamepads(),globalPrivacyControl[GCE],hardwareConcurrency[GCE],javaEnabled(),language[GCE],"
+                + "languages[GCE],locks[GCE],maxTouchPoints[GCE],mediaCapabilities[GCE],mediaDevices[GCE],"
+                + "mediaSession[GCE],mimeTypes[GCE],mozGetUserMedia(),onLine[GCE],oscpu[GCE],pdfViewerEnabled[GCE],"
+                + "permissions[GCE],platform[GCE],plugins[GCE],product[GCE],productSub[GCE],"
+                + "registerProtocolHandler(),requestMediaKeySystemAccess(),requestMIDIAccess(),sendBeacon(),"
+                + "serviceWorker[GCE],storage[GCE],taintEnabled(),userActivation[GCE],userAgent[GCE],vendor[GCE],"
+                + "vendorSub[GCE],vibrate(),wakeLock[GCE],"
+                + "webdriver[GCE]")
+    @HtmlUnitNYI(CHROME = "appCodeName[GCE],appName[GCE],appVersion[GCE],connection[GCE],constructor(),"
+                + "cookieEnabled[GCE],doNotTrack[GCE],geolocation[GCE],javaEnabled(),language[GCE],languages[GCE],"
+                + "mediaDevices[GCE],mimeTypes[GCE],onLine[GCE],pdfViewerEnabled[GCE],platform[GCE],plugins[GCE],"
+                + "product[GCE],productSub[GCE],userAgent[GCE],vendor[GCE],vendorSub[GCE]",
+            EDGE = "appCodeName[GCE],appName[GCE],appVersion[GCE],connection[GCE],constructor(),"
+                + "cookieEnabled[GCE],doNotTrack[GCE],geolocation[GCE],javaEnabled(),language[GCE],languages[GCE],"
+                + "mediaDevices[GCE],mimeTypes[GCE],onLine[GCE],pdfViewerEnabled[GCE],platform[GCE],plugins[GCE],"
+                + "product[GCE],productSub[GCE],userAgent[GCE],vendor[GCE],vendorSub[GCE]",
+            FF = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],constructor(),cookieEnabled[GCE],"
+                + "doNotTrack[GCE],geolocation[GCE],javaEnabled(),language[GCE],languages[GCE],mediaDevices[GCE],"
+                + "mimeTypes[GCE],onLine[GCE],oscpu[GCE],pdfViewerEnabled[GCE],platform[GCE],plugins[GCE],"
+                + "product[GCE],productSub[GCE],taintEnabled(),userAgent[GCE],vendor[GCE],vendorSub[GCE]",
+            FF_ESR = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],constructor(),cookieEnabled[GCE],"
+                + "doNotTrack[GCE],geolocation[GCE],javaEnabled(),language[GCE],languages[GCE],mediaDevices[GCE],"
+                + "mimeTypes[GCE],onLine[GCE],oscpu[GCE],pdfViewerEnabled[GCE],platform[GCE],plugins[GCE],"
+                + "product[GCE],productSub[GCE],taintEnabled(),userAgent[GCE],vendor[GCE],vendorSub[GCE]")
+    public void navigator() throws Exception {
+        testString("", "navigator");
+    }
 }

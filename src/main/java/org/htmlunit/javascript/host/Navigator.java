@@ -298,6 +298,15 @@ public class Navigator extends HtmlUnitScriptable {
     }
 
     /**
+     * @return true whether the browser supports inline display
+     * of PDF files when navigating to them
+     */
+    @JsxGetter
+    public boolean getPdfViewerEnabled() {
+        return true;
+    }
+
+    /**
      * Returns the {@code buildID} property.
      * @return the {@code buildID} property
      */

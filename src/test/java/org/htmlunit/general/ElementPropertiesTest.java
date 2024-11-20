@@ -9249,4 +9249,72 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void mimeType() throws Exception {
         testString("", "navigator.mimeTypes[0]");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.Navigator}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "adAuctionComponents(),appCodeName,appName,appVersion,bluetooth,canLoadAdAuctionFencedFrame(),"
+                + "canShare(),clearAppBadge(),clearOriginJoinedAdInterestGroups(),clipboard,connection,"
+                + "cookieEnabled,createAuctionNonce(),credentials,deprecatedReplaceInURN(),"
+                + "deprecatedRunAdAuctionEnforcesKAnonymity,deprecatedURNToURL(),deviceMemory,doNotTrack,"
+                + "geolocation,getBattery(),getGamepads(),getInstalledRelatedApps(),getUserMedia(),gpu,"
+                + "hardwareConcurrency,hid,ink,javaEnabled(),joinAdInterestGroup(),keyboard,language,languages,"
+                + "leaveAdInterestGroup(),locks,login,managed,maxTouchPoints,mediaCapabilities,mediaDevices,"
+                + "mediaSession,mimeTypes,onLine,pdfViewerEnabled,permissions,platform,plugins,presentation,product,"
+                + "productSub,protectedAudience,registerProtocolHandler(),requestMediaKeySystemAccess(),"
+                + "requestMIDIAccess(),runAdAuction(),scheduling,sendBeacon(),serial,serviceWorker,setAppBadge(),"
+                + "share(),storage,storageBuckets,unregisterProtocolHandler(),updateAdInterestGroups(),usb,"
+                + "userActivation,userAgent,userAgentData,vendor,vendorSub,vibrate(),virtualKeyboard,wakeLock,"
+                + "webdriver,webkitGetUserMedia(),webkitPersistentStorage,webkitTemporaryStorage,"
+                + "windowControlsOverlay,"
+                + "xr",
+            EDGE = "adAuctionComponents(),appCodeName,appName,appVersion,bluetooth,canLoadAdAuctionFencedFrame(),"
+                + "canShare(),clearAppBadge(),clearOriginJoinedAdInterestGroups(),clipboard,connection,"
+                + "cookieEnabled,createAuctionNonce(),credentials,deprecatedReplaceInURN(),"
+                + "deprecatedRunAdAuctionEnforcesKAnonymity,deprecatedURNToURL(),deviceMemory,doNotTrack,"
+                + "geolocation,getBattery(),getGamepads(),getInstalledRelatedApps(),getUserMedia(),gpu,"
+                + "hardwareConcurrency,hid,ink,javaEnabled(),joinAdInterestGroup(),keyboard,language,languages,"
+                + "leaveAdInterestGroup(),locks,login,managed,maxTouchPoints,mediaCapabilities,mediaDevices,"
+                + "mediaSession,mimeTypes,onLine,pdfViewerEnabled,permissions,platform,plugins,presentation,product,"
+                + "productSub,protectedAudience,registerProtocolHandler(),requestMediaKeySystemAccess(),"
+                + "requestMIDIAccess(),runAdAuction(),scheduling,sendBeacon(),serial,serviceWorker,setAppBadge(),"
+                + "share(),storage,storageBuckets,unregisterProtocolHandler(),updateAdInterestGroups(),usb,"
+                + "userActivation,userAgent,userAgentData,vendor,vendorSub,vibrate(),virtualKeyboard,wakeLock,"
+                + "webdriver,webkitGetUserMedia(),webkitPersistentStorage,webkitTemporaryStorage,"
+                + "windowControlsOverlay,"
+                + "xr",
+            FF = "appCodeName,appName,appVersion,buildID,clipboard,cookieEnabled,credentials,doNotTrack,"
+                + "geolocation,getAutoplayPolicy(),getGamepads(),globalPrivacyControl,hardwareConcurrency,"
+                + "javaEnabled(),language,languages,locks,maxTouchPoints,mediaCapabilities,mediaDevices,"
+                + "mediaSession,mimeTypes,mozGetUserMedia(),onLine,oscpu,pdfViewerEnabled,permissions,platform,"
+                + "plugins,product,productSub,registerProtocolHandler(),requestMediaKeySystemAccess(),"
+                + "requestMIDIAccess(),sendBeacon(),serviceWorker,storage,taintEnabled(),userActivation,userAgent,"
+                + "vendor,vendorSub,wakeLock,"
+                + "webdriver",
+            FF_ESR = "appCodeName,appName,appVersion,buildID,clipboard,cookieEnabled,credentials,doNotTrack,"
+                + "geolocation,getAutoplayPolicy(),getGamepads(),globalPrivacyControl,hardwareConcurrency,"
+                + "javaEnabled(),language,languages,locks,maxTouchPoints,mediaCapabilities,mediaDevices,"
+                + "mediaSession,mimeTypes,mozGetUserMedia(),onLine,oscpu,pdfViewerEnabled,permissions,platform,"
+                + "plugins,product,productSub,registerProtocolHandler(),requestMediaKeySystemAccess(),"
+                + "requestMIDIAccess(),sendBeacon(),serviceWorker,storage,taintEnabled(),userActivation,userAgent,"
+                + "vendor,vendorSub,vibrate(),wakeLock,"
+                + "webdriver")
+    @HtmlUnitNYI(CHROME = "appCodeName,appName,appVersion,connection,cookieEnabled,doNotTrack,geolocation,"
+                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,"
+                + "plugins,product,productSub,userAgent,vendor,vendorSub",
+            EDGE = "appCodeName,appName,appVersion,connection,cookieEnabled,doNotTrack,geolocation,"
+                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,"
+                + "plugins,product,productSub,userAgent,vendor,vendorSub",
+            FF = "appCodeName,appName,appVersion,connection,cookieEnabled,doNotTrack,geolocation,"
+                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,"
+                + "plugins,product,productSub,userAgent,vendor,vendorSub",
+            FF_ESR = "appCodeName,appName,appVersion,connection,cookieEnabled,doNotTrack,geolocation,"
+                + "javaEnabled(),language,languages,mediaDevices,mimeTypes,onLine,pdfViewerEnabled,platform,"
+                + "plugins,product,productSub,userAgent,vendor,vendorSub")
+    public void navigator() throws Exception {
+        testString("", "navigator");
+    }
 }
