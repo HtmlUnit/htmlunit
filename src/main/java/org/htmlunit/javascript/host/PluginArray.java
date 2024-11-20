@@ -74,6 +74,18 @@ public class PluginArray extends HtmlUnitScriptable {
     }
 
     /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public boolean has(final String name, final Scriptable start) {
+        if (NOT_FOUND != getWithPreemption(name)) {
+            return true;
+        }
+
+        return super.has(name, start);
+    }
+
+    /**
      * Returns the element at the specified index, or {@code null} if the index is invalid.
      * {@inheritDoc}
      */

@@ -57,6 +57,24 @@ public class MimeTypeTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void in() throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log('application/pdf' in navigator.mimeTypes);\n"
+            + "  log('pdf' in navigator.mimeTypes);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Tests default configuration of Pdf plugin.
      * @throws Exception if the test fails
      */

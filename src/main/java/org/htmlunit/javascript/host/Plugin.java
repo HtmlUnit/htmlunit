@@ -101,14 +101,14 @@ public class Plugin extends HtmlUnitScriptable {
      * {@inheritDoc}
      */
     @Override
-    public final MimeType get(final int index, final Scriptable start) {
+    public final Object get(final int index, final Scriptable start) {
         final Plugin plugin = (Plugin) start;
         final List<MimeType> elements = plugin.elements_;
 
         if (index >= 0 && index < elements.size()) {
             return elements.get(index);
         }
-        return null;
+        return NOT_FOUND;
     }
 
     /**
