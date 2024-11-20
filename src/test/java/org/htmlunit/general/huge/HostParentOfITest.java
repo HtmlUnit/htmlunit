@@ -372,14 +372,4 @@ public class HostParentOfITest extends HostParentOf {
     public void _Location_Location() throws Exception {
         test("Location", "Location");
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _RTCStatsReport_RTCStatsReport() throws Exception {
-        test("RTCStatsReport", "RTCStatsReport");
-    }
-
 }
