@@ -9192,6 +9192,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "0,1,2,3,4,item(),length,namedItem(),refresh()",
             FF = "0,1,2,3,4,item(),length,namedItem(),refresh()",
             FF_ESR = "0,1,2,3,4,item(),length,namedItem(),refresh()")
+    @HtmlUnitNYI(CHROME = "item(),length,namedItem(),refresh()",
+            EDGE = "item(),length,namedItem(),refresh()",
+            FF = "item(),length,namedItem(),refresh()",
+            FF_ESR = "item(),length,namedItem(),refresh()")
     public void pluginArray() throws Exception {
         testString("", "navigator.plugins");
     }
@@ -9206,6 +9210,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "0,1,description,filename,item(),length,name,namedItem()",
             FF = "0,1,description,filename,item(),length,name,namedItem()",
             FF_ESR = "0,1,description,filename,item(),length,name,namedItem()")
+    @HtmlUnitNYI(CHROME = "description,filename,item(),length,name,namedItem()",
+            EDGE = "description,filename,item(),length,name,namedItem()",
+            FF = "description,filename,item(),length,name,namedItem()",
+            FF_ESR = "description,filename,item(),length,name,namedItem()")
     public void plugin() throws Exception {
         testString("", "navigator.plugins[0]");
     }
@@ -9220,6 +9228,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "0,1,item(),length,namedItem()",
             FF = "0,1,item(),length,namedItem()",
             FF_ESR = "0,1,item(),length,namedItem()")
+    @HtmlUnitNYI(CHROME = "item(),length,namedItem()",
+            EDGE = "item(),length,namedItem()",
+            FF = "item(),length,namedItem()",
+            FF_ESR = "item(),length,namedItem()")
     public void mimeTypeArray() throws Exception {
         testString("", "navigator.mimeTypes");
     }

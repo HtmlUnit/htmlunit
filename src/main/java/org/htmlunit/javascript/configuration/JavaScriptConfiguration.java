@@ -56,7 +56,6 @@ import org.htmlunit.javascript.host.ReadableStream;
 import org.htmlunit.javascript.host.Screen;
 import org.htmlunit.javascript.host.ScreenOrientation;
 import org.htmlunit.javascript.host.SharedWorker;
-import org.htmlunit.javascript.host.SimpleArray;
 import org.htmlunit.javascript.host.Storage;
 import org.htmlunit.javascript.host.StorageManager;
 import org.htmlunit.javascript.host.TextDecoder;
@@ -659,7 +658,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Screen.class, ScreenOrientation.class, ScriptProcessorNode.class,
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class,
-        ShadowRoot.class, SharedWorker.class, SimpleArray.class, SourceBuffer.class, SourceBufferList.class,
+        ShadowRoot.class, SharedWorker.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
         SpeechSynthesisUtterance.class, SpeechSynthesisVoice.class,
         StereoPannerNode.class, Storage.class, StorageEvent.class, StorageManager.class,

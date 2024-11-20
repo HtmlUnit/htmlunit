@@ -51,12 +51,6 @@ public class BrowserVersionTest {
     public void testClone() {
         final BrowserVersion ff = BrowserVersion.FIREFOX;
 
-        final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 32.0 r0", "32.0.0.445", "Flash.ocx");
-        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
-                "Shockwave Flash", "swf"));
-        ff.getPlugins().add(flash);
-
         final BrowserVersion clone = new BrowserVersion.BrowserVersionBuilder(ff).build();
 
         // Nickname is used as key for dictionaries storing browser setups
@@ -64,11 +58,6 @@ public class BrowserVersionTest {
 
         assertFalse(ff == clone);
         assertFalse(ff.equals(clone));
-
-        assertFalse(clone.getPlugins().isEmpty());
-        clone.getPlugins().clear();
-        assertTrue(clone.getPlugins().isEmpty());
-        assertFalse(ff.getPlugins().isEmpty());
     }
 
     /**

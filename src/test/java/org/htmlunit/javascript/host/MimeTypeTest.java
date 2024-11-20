@@ -14,11 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.htmlunit.PluginConfiguration;
-import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.junit.Test;
@@ -31,32 +27,85 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class MimeTypeTest extends SimpleWebTestCase {
+public class MimeTypeTest extends WebDriverTestCase {
 
     /**
-     * Tests default configuration of Flash plugin for Firefox.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object MimeType]", "swf", "Shockwave Flash", "true", "true"},
-            CHROME = "undefined")
-    public void flashMimeType() throws Exception {
+    @Alerts({"2", "pdf", "Portable Document Format", "application/pdf",
+             "pdf", "Portable Document Format", "text/pdf"})
+    public void mimeType() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];\n"
-            + "  alert(mimeTypeFlash);\n"
-            + "  if (mimeTypeFlash) {\n"
-            + "    alert(mimeTypeFlash.suffixes);\n"
-            + "    var pluginFlash = mimeTypeFlash.enabledPlugin;\n"
-            + "    alert(pluginFlash.name);\n"
-            + "    alert(pluginFlash == navigator.plugins[pluginFlash.name]);\n"
-            + "    alert(pluginFlash == navigator.plugins.namedItem(pluginFlash.name));\n"
+            + "  var mimeTypes = navigator.mimeTypes;\n"
+            + "  log(mimeTypes.length);\n"
+
+            + "  log(mimeTypes.item(0).suffixes);\n"
+            + "  log(mimeTypes.item(0).description);\n"
+            + "  log(mimeTypes.item(0).type);\n"
+
+            + "  log(mimeTypes.item(1).suffixes);\n"
+            + "  log(mimeTypes.item(1).description);\n"
+            + "  log(mimeTypes.item(1).type);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests default configuration of Pdf plugin.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object MimeType]", "pdf", "PDF Viewer", "true", "true"})
+    public void pdfMimeType() throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var mimeTypePdf = navigator.mimeTypes['application/pdf'];\n"
+            + "  log(mimeTypePdf);\n"
+            + "  if (mimeTypePdf) {\n"
+            + "    log(mimeTypePdf.suffixes);\n"
+            + "    var pluginPdf = mimeTypePdf.enabledPlugin;\n"
+            + "    log(pluginPdf.name);\n"
+            + "    log(pluginPdf == navigator.plugins[pluginPdf.name]);\n"
+            + "    log(pluginPdf == navigator.plugins.namedItem(pluginPdf.name));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        loadPage(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests default configuration of Pdf plugin.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object MimeType]", "pdf", "PDF Viewer", "true", "true"})
+    public void textPdfMimeType() throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var mimeTypePdf = navigator.mimeTypes['text/pdf'];\n"
+            + "  log(mimeTypePdf);\n"
+            + "  if (mimeTypePdf) {\n"
+            + "    log(mimeTypePdf.suffixes);\n"
+            + "    var pluginPdf = mimeTypePdf.enabledPlugin;\n"
+            + "    log(pluginPdf.name);\n"
+            + "    log(pluginPdf == navigator.plugins[pluginPdf.name]);\n"
+            + "    log(pluginPdf == navigator.plugins.namedItem(pluginPdf.name));\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -64,25 +113,40 @@ public class MimeTypeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "undefined", "null"})
-    public void removeFlashMimeType() throws Exception {
+    @Alerts("undefined")
+    public void flashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];\n"
-            + "  alert(mimeTypeFlash);\n"
-            + "  alert(navigator.plugins['Shockwave Flash']);\n"
-            + "  alert(navigator.plugins.namedItem('Shockwave Flash'));\n"
+            + "  log(mimeTypeFlash);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        final Set<PluginConfiguration> plugins = new HashSet<>(getBrowserVersion().getPlugins());
-        getBrowserVersion().getPlugins().clear();
-        try {
-            loadPage(html);
-        }
-        finally {
-            getBrowserVersion().getPlugins().addAll(plugins);
-        }
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "application/pdf", "text/pdf"})
+    public void iterator() throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var mimeTypes = navigator.mimeTypes;\n"
+            + "  log(mimeTypes.length);\n"
+
+            + "  let iter = mimeTypes[Symbol.iterator]();\n"
+            + "  for (const mime of iter) {\n"
+            + "    log(mime.type);\n"
+            + "  }"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

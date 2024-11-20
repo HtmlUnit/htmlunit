@@ -9,6 +9,16 @@
     <body>
         <release version="4.7.0" date="November xx, 2024" description="Bugfixes, Chrome/Edge 131">
             <action type="update" dev="rbri">
+                Implementation of Plugin/PluginArray/MimeType/MimeTypeArray rewritten. The navigator properties
+                plugins and mimeTypes returning static results in all browsers.
+            </action>
+            <action type="remove" dev="rbri">
+                Class PluginConfiguration removed, the config is static for all browsers.
+            </action>
+            <action type="update" dev="rbri">
+                A bit more code cleanup - flash is finally gone.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.18.0.
             </action>
             <action type="add" dev="rbri">

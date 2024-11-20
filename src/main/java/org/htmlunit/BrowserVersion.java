@@ -19,7 +19,6 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -112,7 +111,6 @@ public final class BrowserVersion implements Serializable {
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = BEST_SUPPORTED;
 
-    /* Register plugins for the browser versions. */
     static {
         FIREFOX_ESR.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_ESR.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
@@ -401,7 +399,6 @@ public final class BrowserVersion implements Serializable {
     private String platform_ = PLATFORM_WIN32;
     private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
-    private final Set<PluginConfiguration> plugins_;
     private final Set<BrowserVersionFeatures> features_;
     private String acceptEncodingHeader_;
     private String acceptLanguageHeader_;
@@ -436,7 +433,6 @@ public final class BrowserVersion implements Serializable {
         secClientHintUserAgentHeader_ = "";
         secClientHintUserAgentPlatformHeader_ = "\"Windows\"";
 
-        plugins_ = new HashSet<>();
         features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
         uploadMimeTypes_ = new HashMap<>();
 
@@ -733,15 +729,6 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
-     * Returns the available plugins. This makes only sense for Firefox as only this
-     * browser makes this kind of information available via JavaScript.
-     * @return the available plugins
-     */
-    public Set<PluginConfiguration> getPlugins() {
-        return plugins_;
-    }
-
-    /**
      * Indicates if this instance has the given feature. Used for HtmlUnit internal processing.
      * @param property the property name
      * @return {@code false} if this browser doesn't have this feature
@@ -871,10 +858,6 @@ public final class BrowserVersion implements Serializable {
                 .setSecClientHintUserAgentPlatformHeader(version.getSecClientHintUserAgentPlatformHeader())
                 .setHeaderNamesOrdered(version.getHeaderNamesOrdered())
                 .setFontHeights(version.fontHeights_);
-
-            for (final PluginConfiguration pluginConf : version.getPlugins()) {
-                workPiece_.plugins_.add(pluginConf.clone());
-            }
 
             workPiece_.features_.addAll(version.features_);
             workPiece_.uploadMimeTypes_.putAll(version.uploadMimeTypes_);

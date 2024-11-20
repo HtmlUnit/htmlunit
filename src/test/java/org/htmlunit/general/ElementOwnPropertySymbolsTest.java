@@ -3264,10 +3264,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeType]",
-            EDGE = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeType]",
-            FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeType]",
-            FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [MimeType]")
+    @Alerts(CHROME = ",Symbol(Symbol.toStringTag) [C] [MimeType]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [MimeType]",
+            FF = "Symbol(Symbol.toStringTag) [C] [MimeType]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MimeType]")
     public void mimeType() throws Exception {
         testString("", "navigator.mimeTypes[0]");
     }

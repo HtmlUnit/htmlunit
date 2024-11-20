@@ -14,12 +14,17 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 
 /**
  * A JavaScript object for {@code Plugin}.
@@ -30,11 +35,12 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
 @JsxClass
-public class Plugin extends SimpleArray {
+public class Plugin extends HtmlUnitScriptable {
     private String description_;
     private String filename_;
     private String name_;
-    private String version_;
+
+    private final List<MimeType> elements_ = new ArrayList<>();
 
     /**
      * Creates an instance.
@@ -56,25 +62,85 @@ public class Plugin extends SimpleArray {
      *
      * @param name the plugin name
      * @param description the plugin description
-     * @param version the version
      * @param filename the plugin filename
      */
-    public Plugin(final String name, final String description, final String version, final String filename) {
+    public Plugin(final String name, final String description, final String filename) {
         super();
         name_ = name;
         description_ = description;
-        version_ = version;
         filename_ = filename;
     }
 
     /**
-     * Gets the name of the mime type.
-     * @param element a {@link MimeType}
-     * @return the name
+     * Returns the item at the given index.
+     * @param index the index
+     * @return the item at the given position
+     */
+    @JsxFunction
+    public MimeType item(final int index) {
+        if (index >= 0 && index < elements_.size()) {
+            return elements_.get(index);
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
-    protected String getItemName(final Object element) {
-        return ((MimeType) element).getType();
+    protected Object getWithPreemption(final String name) {
+        final MimeType response = namedItem(name);
+        if (response != null) {
+            return response;
+        }
+        return NOT_FOUND;
+    }
+
+    /**
+     * Returns the element at the specified index, or {@code null} if the index is invalid.
+     * {@inheritDoc}
+     */
+    @Override
+    public final MimeType get(final int index, final Scriptable start) {
+        final Plugin plugin = (Plugin) start;
+        final List<MimeType> elements = plugin.elements_;
+
+        if (index >= 0 && index < elements.size()) {
+            return elements.get(index);
+        }
+        return null;
+    }
+
+    /**
+     * Returns the item at the given index.
+     * @param name the item name
+     * @return the item with the given name
+     */
+    @JsxFunction
+    public MimeType namedItem(final String name) {
+        for (final MimeType element : elements_) {
+            if (name.equals(element.getType())) {
+                return element;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the array size.
+     * @return the number elements
+     */
+    @JsxGetter
+    public int getLength() {
+        return elements_.size();
+    }
+
+    /**
+     * Adds an element.
+     * @param element the element to add
+     */
+    void add(final MimeType element) {
+        elements_.add(element);
     }
 
     /**
@@ -104,12 +170,8 @@ public class Plugin extends SimpleArray {
         return name_;
     }
 
-    /**
-     * Gets the plugin's version.
-     * @return the name
-     */
-    @JsxGetter({FF, FF_ESR})
-    public String getVersion() {
-        return version_;
+    @JsxSymbol
+    public Scriptable iterator() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 }
