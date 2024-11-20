@@ -17,6 +17,7 @@ package org.htmlunit.html.parser;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -110,6 +111,8 @@ public class HTMLParser6Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "<option id=\"myOption\">op1</option><select><option value=\"da\">Dansk</option></select>",
             FF = "<option id=\"myOption\">op1</option><option value=\"da\">Dansk</option>",
             FF_ESR = "<option id=\"myOption\">op1</option><option value=\"da\">Dansk</option>")
+    @HtmlUnitNYI(CHROME = "<option id=\"myOption\">op1</option><option value=\"da\">Dansk</option>",
+            EDGE = "<option id=\"myOption\">op1</option><option value=\"da\">Dansk</option>")
     public void fragmentParserHtmlInsideOption() throws Exception {
         final String fragment = "<select><option value=\"da\">Dansk</option></select>";
         final String html = "<html><head>\n"
