@@ -1745,11 +1745,13 @@ public class HtmlPage extends SgmlPage {
                 frameElements_.add((BaseFrameElement) node);
             }
 
-            for (final Iterator<HtmlElement> iterator = node.new DescendantHtmlElementsIterator();
-                    iterator.hasNext();) {
-                final HtmlElement child = iterator.next();
-                if (child instanceof BaseFrameElement) {
-                    frameElements_.add((BaseFrameElement) child);
+            if (node.getFirstChild() != null) {
+                for (final Iterator<HtmlElement> iterator = node.new DescendantHtmlElementsIterator();
+                        iterator.hasNext();) {
+                    final HtmlElement child = iterator.next();
+                    if (child instanceof BaseFrameElement) {
+                        frameElements_.add((BaseFrameElement) child);
+                    }
                 }
             }
 

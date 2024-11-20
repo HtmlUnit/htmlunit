@@ -1047,10 +1047,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
             // a node that is already "complete" (ie not being parsed) and not yet attached
             if (!domNode.isBodyParsed() && !wasAlreadyAttached) {
-                for (final Iterator<DomNode> iterator = domNode.new DescendantDomNodesIterator(); iterator.hasNext();) {
-                    final DomNode child = iterator.next();
-                    child.attachedToPage_ = true;
-                    child.onAllChildrenAddedToPage(true);
+                if (domNode.getFirstChild() != null) {
+                    for (final Iterator<DomNode> iterator =
+                            domNode.new DescendantDomNodesIterator(); iterator.hasNext();) {
+                        final DomNode child = iterator.next();
+                        child.attachedToPage_ = true;
+                        child.onAllChildrenAddedToPage(true);
+                    }
                 }
                 domNode.onAllChildrenAddedToPage(true);
             }
