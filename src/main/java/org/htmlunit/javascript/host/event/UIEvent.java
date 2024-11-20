@@ -131,12 +131,12 @@ public class UIEvent extends Event {
      * @return the view from which the event was generated
      */
     @JsxGetter
-    public Object getView() {
+    public Window getView() {
         if (view_ == NO_VIEW) {
             return null;
         }
         if (view_ != null) {
-            return view_;
+            return (Window) view_;
         }
         return getWindow();
     }

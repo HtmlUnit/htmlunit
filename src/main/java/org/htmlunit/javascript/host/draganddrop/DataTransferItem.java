@@ -81,7 +81,7 @@ public class DataTransferItem extends HtmlUnitScriptable {
      * @return the {@code type} property
      */
     @JsxGetter
-    public Object getKind() {
+    public String getKind() {
         return kind_;
     }
 
@@ -89,7 +89,7 @@ public class DataTransferItem extends HtmlUnitScriptable {
      * @return the {@code type} property
      */
     @JsxGetter
-    public Object getType() {
+    public String getType() {
         return type_;
     }
 
