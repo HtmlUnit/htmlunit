@@ -22,7 +22,7 @@ import java.util.List;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.html.DomNode.DescendantElementsIterator;
+import org.htmlunit.html.DomNode.DescendantHtmlElementsIterator;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
@@ -466,7 +466,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "<span id='III'><span id='III.1'><span id='III.1.a'/></span></span>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
-        final DescendantElementsIterator<HtmlElement> iterator = (DescendantElementsIterator<HtmlElement>)
+        final DescendantHtmlElementsIterator iterator = (DescendantHtmlElementsIterator)
             page.getDocumentElement().getHtmlElementDescendants().iterator();
         assertEquals("", iterator.nextNode().getId());
         assertEquals("0", iterator.nextNode().getId());
@@ -495,7 +495,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals("abacad", page.asNormalizedText().replaceAll("\\s", ""));
-        final DescendantElementsIterator<HtmlElement> iterator = (DescendantElementsIterator<HtmlElement>)
+        final DescendantHtmlElementsIterator iterator = (DescendantHtmlElementsIterator)
             page.getDocumentElement().getHtmlElementDescendants().iterator();
         assertEquals("", iterator.nextNode().getId());
         assertEquals("body", iterator.nextNode().getId());

@@ -1047,9 +1047,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
             // a node that is already "complete" (ie not being parsed) and not yet attached
             if (!domNode.isBodyParsed() && !wasAlreadyAttached) {
-                for (final Iterator<DomNode> iterator
-                        = domNode.new DescendantElementsIterator<>(DomNode.class);
-                        iterator.hasNext();) {
+                for (final Iterator<DomNode> iterator = domNode.new DescendantDomNodesIterator(); iterator.hasNext();) {
                     final DomNode child = iterator.next();
                     child.attachedToPage_ = true;
                     child.onAllChildrenAddedToPage(true);
@@ -1359,7 +1357,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return an {@link Iterable} that will recursively iterate over all of this node's descendants
      */
     public final Iterable<DomNode> getDescendants() {
-        return () -> new DescendantElementsIterator<>(DomNode.class);
+        return () -> new DescendantDomNodesIterator();
     }
 
     /**
@@ -1371,7 +1369,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getDomElementDescendants()
      */
     public final Iterable<HtmlElement> getHtmlElementDescendants() {
-        return () -> new DescendantElementsIterator<>(HtmlElement.class);
+        return () -> new DescendantHtmlElementsIterator();
     }
 
     /**
@@ -1383,13 +1381,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getHtmlElementDescendants()
      */
     public final Iterable<DomElement> getDomElementDescendants() {
-        return () -> new DescendantElementsIterator<>(DomElement.class);
+        return () -> new DescendantDomElementsIterator();
     }
 
     /**
      * Iterates over all descendants of a specific type, in document order.
      * @param <T> the type of nodes over which to iterate
+     *
+     * @deprecated as of version 4.7.0; use {@link DescendantDomNodesIterator},
+     * {@link DescendantDomElementsIterator}, or {@link DescendantHtmlElementsIterator} instead.
      */
+    @Deprecated
     protected class DescendantElementsIterator<T extends DomNode> implements Iterator<T> {
 
         private DomNode currentNode_;
@@ -1483,6 +1485,309 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
          */
         protected boolean isAccepted(final DomNode node) {
             return type_.isAssignableFrom(node.getClass());
+        }
+
+        private DomNode getNextDomSibling(final DomNode element) {
+            DomNode node = element.getNextSibling();
+            while (node != null && !isAccepted(node)) {
+                node = node.getNextSibling();
+            }
+            return node;
+        }
+    }
+
+    /**
+     * Iterates over all descendants DomNodes, in document order.
+     */
+    protected final class DescendantDomNodesIterator implements Iterator<DomNode> {
+        private DomNode currentNode_;
+        private DomNode nextNode_;
+
+        /**
+         * Creates a new instance which iterates over the specified node type.
+         */
+        public DescendantDomNodesIterator() {
+            nextNode_ = getFirstChildElement(DomNode.this);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public boolean hasNext() {
+            return nextNode_ != null;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public DomNode next() {
+            return nextNode();
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public void remove() {
+            if (currentNode_ == null) {
+                throw new IllegalStateException("Unable to remove current node, because there is no current node.");
+            }
+            final DomNode current = currentNode_;
+            while (nextNode_ != null && current.isAncestorOf(nextNode_)) {
+                next();
+            }
+            current.remove();
+        }
+
+        /** @return the next node, if there is one */
+        @SuppressWarnings("unchecked")
+        public DomNode nextNode() {
+            currentNode_ = nextNode_;
+
+            DomNode next = getFirstChildElement(nextNode_);
+            if (next == null) {
+                next = getNextDomSibling(nextNode_);
+            }
+            if (next == null) {
+                next = getNextElementUpwards(nextNode_);
+            }
+            nextNode_ = next;
+
+            return currentNode_;
+        }
+
+        private DomNode getNextElementUpwards(final DomNode startingNode) {
+            if (startingNode == DomNode.this) {
+                return null;
+            }
+
+            DomNode parent = startingNode.getParentNode();
+            while (parent != null && parent != DomNode.this) {
+                DomNode next = parent.getNextSibling();
+                while (next != null && !isAccepted(next)) {
+                    next = next.getNextSibling();
+                }
+                if (next != null) {
+                    return next;
+                }
+                parent = parent.getParentNode();
+            }
+            return null;
+        }
+
+        private DomNode getFirstChildElement(final DomNode parent) {
+            DomNode node = parent.getFirstChild();
+            while (node != null && !isAccepted(node)) {
+                node = node.getNextSibling();
+            }
+            return node;
+        }
+
+        /**
+         * Indicates if the node is accepted. If not it won't be explored at all.
+         * @param node the node to test
+         * @return {@code true} if accepted
+         */
+        private boolean isAccepted(final DomNode node) {
+            return DomNode.class.isAssignableFrom(node.getClass());
+        }
+
+        private DomNode getNextDomSibling(final DomNode element) {
+            DomNode node = element.getNextSibling();
+            while (node != null && !isAccepted(node)) {
+                node = node.getNextSibling();
+            }
+            return node;
+        }
+    }
+
+    /**
+     * Iterates over all descendants DomTypes, in document order.
+     */
+    protected final class DescendantDomElementsIterator implements Iterator<DomElement> {
+        private DomNode currentNode_;
+        private DomNode nextNode_;
+
+        /**
+         * Creates a new instance which iterates over the specified node type.
+         */
+        public DescendantDomElementsIterator() {
+            nextNode_ = getFirstChildElement(DomNode.this);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public boolean hasNext() {
+            return nextNode_ != null;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public DomElement next() {
+            return nextNode();
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public void remove() {
+            if (currentNode_ == null) {
+                throw new IllegalStateException("Unable to remove current node, because there is no current node.");
+            }
+            final DomNode current = currentNode_;
+            while (nextNode_ != null && current.isAncestorOf(nextNode_)) {
+                next();
+            }
+            current.remove();
+        }
+
+        /** @return the next node, if there is one */
+        @SuppressWarnings("unchecked")
+        public DomElement nextNode() {
+            currentNode_ = nextNode_;
+
+            DomNode next = getFirstChildElement(nextNode_);
+            if (next == null) {
+                next = getNextDomSibling(nextNode_);
+            }
+            if (next == null) {
+                next = getNextElementUpwards(nextNode_);
+            }
+            nextNode_ = next;
+
+            return (DomElement) currentNode_;
+        }
+
+        private DomNode getNextElementUpwards(final DomNode startingNode) {
+            if (startingNode == DomNode.this) {
+                return null;
+            }
+
+            DomNode parent = startingNode.getParentNode();
+            while (parent != null && parent != DomNode.this) {
+                DomNode next = parent.getNextSibling();
+                while (next != null && !isAccepted(next)) {
+                    next = next.getNextSibling();
+                }
+                if (next != null) {
+                    return next;
+                }
+                parent = parent.getParentNode();
+            }
+            return null;
+        }
+
+        private DomNode getFirstChildElement(final DomNode parent) {
+            DomNode node = parent.getFirstChild();
+            while (node != null && !isAccepted(node)) {
+                node = node.getNextSibling();
+            }
+            return node;
+        }
+
+        /**
+         * Indicates if the node is accepted. If not it won't be explored at all.
+         * @param node the node to test
+         * @return {@code true} if accepted
+         */
+        private boolean isAccepted(final DomNode node) {
+            return DomElement.class.isAssignableFrom(node.getClass());
+        }
+
+        private DomNode getNextDomSibling(final DomNode element) {
+            DomNode node = element.getNextSibling();
+            while (node != null && !isAccepted(node)) {
+                node = node.getNextSibling();
+            }
+            return node;
+        }
+    }
+
+    /**
+     * Iterates over all descendants HtmlElements, in document order.
+     */
+    protected final class DescendantHtmlElementsIterator implements Iterator<HtmlElement> {
+        private DomNode currentNode_;
+        private DomNode nextNode_;
+
+        /**
+         * Creates a new instance which iterates over the specified node type.
+         */
+        public DescendantHtmlElementsIterator() {
+            nextNode_ = getFirstChildElement(DomNode.this);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public boolean hasNext() {
+            return nextNode_ != null;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public HtmlElement next() {
+            return nextNode();
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public void remove() {
+            if (currentNode_ == null) {
+                throw new IllegalStateException("Unable to remove current node, because there is no current node.");
+            }
+            final DomNode current = currentNode_;
+            while (nextNode_ != null && current.isAncestorOf(nextNode_)) {
+                next();
+            }
+            current.remove();
+        }
+
+        /** @return the next node, if there is one */
+        @SuppressWarnings("unchecked")
+        public HtmlElement nextNode() {
+            currentNode_ = nextNode_;
+
+            DomNode next = getFirstChildElement(nextNode_);
+            if (next == null) {
+                next = getNextDomSibling(nextNode_);
+            }
+            if (next == null) {
+                next = getNextElementUpwards(nextNode_);
+            }
+            nextNode_ = next;
+
+            return (HtmlElement) currentNode_;
+        }
+
+        private DomNode getNextElementUpwards(final DomNode startingNode) {
+            if (startingNode == DomNode.this) {
+                return null;
+            }
+
+            DomNode parent = startingNode.getParentNode();
+            while (parent != null && parent != DomNode.this) {
+                DomNode next = parent.getNextSibling();
+                while (next != null && !isAccepted(next)) {
+                    next = next.getNextSibling();
+                }
+                if (next != null) {
+                    return next;
+                }
+                parent = parent.getParentNode();
+            }
+            return null;
+        }
+
+        private DomNode getFirstChildElement(final DomNode parent) {
+            DomNode node = parent.getFirstChild();
+            while (node != null && !isAccepted(node)) {
+                node = node.getNextSibling();
+            }
+            return node;
+        }
+
+        /**
+         * Indicates if the node is accepted. If not it won't be explored at all.
+         * @param node the node to test
+         * @return {@code true} if accepted
+         */
+        private boolean isAccepted(final DomNode node) {
+            return HtmlElement.class.isAssignableFrom(node.getClass());
         }
 
         private DomNode getNextDomSibling(final DomNode element) {
