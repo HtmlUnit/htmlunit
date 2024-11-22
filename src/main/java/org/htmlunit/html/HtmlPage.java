@@ -40,8 +40,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -153,8 +151,8 @@ public class HtmlPage extends SgmlPage {
     private transient Charset originalCharset_;
     private final Object lock_ = new SerializableLock(); // used for synchronization
 
-    private Map<String, SortedSet<DomElement>> idMap_ = new ConcurrentHashMap<>();
-    private Map<String, SortedSet<DomElement>> nameMap_ = new ConcurrentHashMap<>();
+    private Map<String, MappedElementIndexEntry> idMap_ = new ConcurrentHashMap<>();
+    private Map<String, MappedElementIndexEntry> nameMap_ = new ConcurrentHashMap<>();
 
     private List<BaseFrameElement> frameElements_ = new ArrayList<>();
     private int parserCount_;
@@ -629,7 +627,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public DomElement getElementById(final String elementId) {
         if (elementId != null) {
-            final SortedSet<DomElement> elements = idMap_.get(elementId);
+            final MappedElementIndexEntry elements = idMap_.get(elementId);
             if (elements != null) {
                 return elements.first();
             }
@@ -1665,9 +1663,9 @@ public class HtmlPage extends SgmlPage {
      */
     public List<DomElement> getElementsById(final String elementId) {
         if (elementId != null) {
-            final SortedSet<DomElement> elements = idMap_.get(elementId);
+            final MappedElementIndexEntry elements = idMap_.get(elementId);
             if (elements != null) {
-                return new ArrayList<>(elements);
+                return new ArrayList<>(elements.elements());
             }
         }
         return Collections.emptyList();
@@ -1685,7 +1683,7 @@ public class HtmlPage extends SgmlPage {
     @SuppressWarnings("unchecked")
     public <E extends DomElement> E getElementByName(final String name) throws ElementNotFoundException {
         if (name != null) {
-            final SortedSet<DomElement> elements = nameMap_.get(name);
+            final MappedElementIndexEntry elements = nameMap_.get(name);
             if (elements != null) {
                 return (E) elements.first();
             }
@@ -1703,9 +1701,9 @@ public class HtmlPage extends SgmlPage {
      */
     public List<DomElement> getElementsByName(final String name) {
         if (name != null) {
-            final SortedSet<DomElement> elements = nameMap_.get(name);
+            final MappedElementIndexEntry elements = nameMap_.get(name);
             if (elements != null) {
-                return new ArrayList<>(elements);
+                return new ArrayList<>(elements.elements());
             }
         }
         return Collections.emptyList();
@@ -1722,14 +1720,14 @@ public class HtmlPage extends SgmlPage {
         if (idAndOrName == null) {
             return Collections.emptyList();
         }
-        final Collection<DomElement> list1 = idMap_.get(idAndOrName);
-        final Collection<DomElement> list2 = nameMap_.get(idAndOrName);
+        final MappedElementIndexEntry list1 = idMap_.get(idAndOrName);
+        final MappedElementIndexEntry list2 = nameMap_.get(idAndOrName);
         final List<DomElement> list = new ArrayList<>();
         if (list1 != null) {
-            list.addAll(list1);
+            list.addAll(list1.elements());
         }
         if (list2 != null) {
-            for (final DomElement elt : list2) {
+            for (final DomElement elt : list2.elements()) {
                 if (!list.contains(elt)) {
                     list.add(elt);
                 }
@@ -1804,14 +1802,14 @@ public class HtmlPage extends SgmlPage {
         }
     }
 
-    private void addElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
+    private void addElement(final Map<String, MappedElementIndexEntry> map, final DomElement element,
             final String attribute, final boolean recurse) {
         final String value = element.getAttribute(attribute);
 
         if (ATTRIBUTE_NOT_DEFINED != value) {
-            SortedSet<DomElement> elements = map.get(value);
+            MappedElementIndexEntry elements = map.get(value);
             if (elements == null) {
-                elements = new TreeSet<>(DOCUMENT_POSITION_COMPERATOR);
+                elements = new MappedElementIndexEntry();
                 elements.add(element);
                 map.put(value, elements);
             }
@@ -1845,14 +1843,13 @@ public class HtmlPage extends SgmlPage {
         }
     }
 
-    private void removeElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
+    private void removeElement(final Map<String, MappedElementIndexEntry> map, final DomElement element,
             final String attribute, final boolean recurse) {
         final String value = element.getAttribute(attribute);
 
         if (ATTRIBUTE_NOT_DEFINED != value) {
-            final SortedSet<DomElement> elements = map.remove(value);
-            if (elements != null && (elements.size() != 1 || !elements.contains(element))) {
-                elements.remove(element);
+            final MappedElementIndexEntry elements = map.remove(value);
+            if (elements != null && elements.remove(element)) {
                 map.put(value, elements);
             }
         }
@@ -2877,6 +2874,56 @@ public class HtmlPage extends SgmlPage {
         private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
             in.defaultReadObject();
             computedStyles_ = new WeakHashMap<>();
+        }
+    }
+
+    private static final class MappedElementIndexEntry {
+        private ArrayList<DomElement> elements_;
+        private boolean sorted_;
+
+        MappedElementIndexEntry() {
+            // we do not expect to many elements having the same id/name
+            elements_ = new ArrayList<>(2);
+            sorted_ = false;
+        }
+
+        void add(final DomElement element) {
+            elements_.add(element);
+            sorted_ = false;
+        }
+
+        DomElement first() {
+            if (elements_.size() == 0) {
+                return null;
+            }
+
+            if (sorted_) {
+                return elements_.get(0);
+            }
+
+            Collections.sort(elements_, DOCUMENT_POSITION_COMPERATOR);
+            sorted_ = true;
+
+            return elements_.get(0);
+        }
+
+        List<DomElement> elements() {
+            if (sorted_ || elements_.size() == 0) {
+                return elements_;
+            }
+
+            Collections.sort(elements_, DOCUMENT_POSITION_COMPERATOR);
+            sorted_ = true;
+
+            return elements_;
+        }
+
+        boolean remove(final DomElement element) {
+            if (elements_.size() == 0) {
+                return false;
+            }
+
+            return elements_.remove(element);
         }
     }
 }
