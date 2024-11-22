@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,8 +32,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -598,9 +597,15 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param styleMap the styles
      */
     public void writeStyleToElement(final Map<String, StyleElement> styleMap) {
+        if (styleMap.isEmpty()) {
+            setAttribute("style", "");
+            return;
+        }
+
         final StringBuilder builder = new StringBuilder();
-        final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
-        for (final StyleElement e : sortedValues) {
+        final List<StyleElement> styleElements = new ArrayList<>(styleMap.values());
+        Collections.sort(styleElements);
+        for (final StyleElement e : styleElements) {
             if (builder.length() != 0) {
                 builder.append(' ');
             }
@@ -614,8 +619,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
             builder.append(';');
         }
-        final String value = builder.toString();
-        setAttribute("style", value);
+        setAttribute("style", builder.toString());
     }
 
     /**
