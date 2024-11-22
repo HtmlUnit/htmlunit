@@ -1743,7 +1743,12 @@ public class HtmlPage extends SgmlPage {
      */
     void notifyNodeAdded(final DomNode node) {
         if (node instanceof DomElement) {
-            addMappedElement((DomElement) node, true);
+            final DomElement element = (DomElement) node;
+
+            if (ATTRIBUTE_NOT_DEFINED != element.getAttribute(DomElement.NAME_ATTRIBUTE)
+                    || ATTRIBUTE_NOT_DEFINED != element.getAttribute(DomElement.ID_ATTRIBUTE)) {
+                addMappedElement((DomElement) node, true);
+            }
 
             if (node instanceof BaseFrameElement) {
                 frameElements_.add((BaseFrameElement) node);
@@ -1849,8 +1854,11 @@ public class HtmlPage extends SgmlPage {
 
         if (ATTRIBUTE_NOT_DEFINED != value) {
             final MappedElementIndexEntry elements = map.remove(value);
-            if (elements != null && elements.remove(element)) {
-                map.put(value, elements);
+            if (elements != null) {
+                elements.remove(element);
+                if (!elements.elements_.isEmpty()) {
+                    map.put(value, elements);
+                }
             }
         }
         if (recurse) {
@@ -1858,17 +1866,6 @@ public class HtmlPage extends SgmlPage {
                 removeElement(map, child, attribute, true);
             }
         }
-    }
-
-    /**
-     * Indicates if the attribute name indicates that the owning element is mapped.
-     * @param document the owning document
-     * @param attributeName the name of the attribute to consider
-     * @return {@code true} if the owning element should be mapped in its owning page
-     */
-    static boolean isMappedElement(final Document document, final String attributeName) {
-        return document instanceof HtmlPage
-            && (DomElement.NAME_ATTRIBUTE.equals(attributeName) || DomElement.ID_ATTRIBUTE.equals(attributeName));
     }
 
     private void calculateBase() {

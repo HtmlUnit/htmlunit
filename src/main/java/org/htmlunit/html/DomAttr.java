@@ -174,13 +174,6 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public void setTextContent(final String textContent) {
-        final boolean mappedElement = HtmlPage.isMappedElement(getOwnerDocument(), getName());
-        if (mappedElement) {
-            ((HtmlPage) getPage()).removeMappedElement(getOwnerElement(), false, false);
-        }
         setValue(textContent);
-        if (mappedElement) {
-            ((HtmlPage) getPage()).addMappedElement(getOwnerElement(), false);
-        }
     }
 }
