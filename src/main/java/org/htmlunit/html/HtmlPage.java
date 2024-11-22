@@ -2877,7 +2877,7 @@ public class HtmlPage extends SgmlPage {
         }
     }
 
-    private static final class MappedElementIndexEntry {
+    private static final class MappedElementIndexEntry implements Serializable {
         private ArrayList<DomElement> elements_;
         private boolean sorted_;
 
