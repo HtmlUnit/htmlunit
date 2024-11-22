@@ -156,7 +156,7 @@ public class HtmlPage extends SgmlPage {
     private Map<String, SortedSet<DomElement>> idMap_ = new ConcurrentHashMap<>();
     private Map<String, SortedSet<DomElement>> nameMap_ = new ConcurrentHashMap<>();
 
-    private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(DOCUMENT_POSITION_COMPERATOR);
+    private List<BaseFrameElement> frameElements_ = new ArrayList<>();
     private int parserCount_;
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
@@ -297,9 +297,9 @@ public class HtmlPage extends SgmlPage {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         }
 
-        for (final FrameWindow frameWindow : getFrames()) {
-            if (frameWindow.getFrameElement() instanceof HtmlFrame) {
-                final Page page = frameWindow.getEnclosedPage();
+        for (final BaseFrameElement frameElement : frameElements_) {
+            if (frameElement instanceof HtmlFrame) {
+                final Page page = frameElement.getEnclosedWindow().getEnclosedPage();
                 if (page != null && page.isHtmlPage()) {
                     ((HtmlPage) page).executeEventHandlersIfNeeded(Event.TYPE_LOAD);
                 }
@@ -1482,7 +1482,8 @@ public class HtmlPage extends SgmlPage {
      * Deregister frames that are no longer in use.
      */
     public void deregisterFramesIfNeeded() {
-        for (final WebWindow window : getFrames()) {
+        for (final BaseFrameElement frameElement : frameElements_) {
+            final WebWindow window = frameElement.getEnclosedWindow();
             getWebClient().deregisterWebWindow(window);
             final Page page = window.getEnclosedPage();
             if (page != null && page.isHtmlPage()) {
@@ -1494,12 +1495,16 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns a list containing all the frames (from frame and iframe tags) in this page.
+     * Returns a list containing all the frames (from frame and iframe tags) in this page
+     * in document order.
      * @return a list of {@link FrameWindow}
      */
     public List<FrameWindow> getFrames() {
-        final List<FrameWindow> list = new ArrayList<>(frameElements_.size());
-        for (final BaseFrameElement frameElement : frameElements_) {
+        final List<BaseFrameElement> frameElements = new ArrayList<>(frameElements_);
+        Collections.sort(frameElements, DOCUMENT_POSITION_COMPERATOR);
+
+        final List<FrameWindow> list = new ArrayList<>(frameElements.size());
+        for (final BaseFrameElement frameElement : frameElements) {
             list.add(frameElement.getEnclosedWindow());
         }
         return list;
@@ -1512,9 +1517,10 @@ public class HtmlPage extends SgmlPage {
      * @exception ElementNotFoundException If no frame exist in this page with the specified name.
      */
     public FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
-        for (final FrameWindow frame : getFrames()) {
-            if (frame.getName().equals(name)) {
-                return frame;
+        for (final BaseFrameElement frameElement : frameElements_) {
+            final FrameWindow fw = frameElement.getEnclosedWindow();
+            if (fw.getName().equals(name)) {
+                return fw;
             }
         }
 
@@ -1890,15 +1896,14 @@ public class HtmlPage extends SgmlPage {
      *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to {@code true}
      */
     void loadFrames() throws FailingHttpStatusCodeException {
-        for (final FrameWindow w : getFrames()) {
-            final BaseFrameElement frame = w.getFrameElement();
+        for (final BaseFrameElement frameElement : frameElements_) {
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
-            if (frame.getEnclosedWindow() != null
-                    && UrlUtils.URL_ABOUT_BLANK == frame.getEnclosedPage().getUrl()
-                    && !frame.isContentLoaded()) {
-                frame.loadInnerPage();
+            if (frameElement.getEnclosedWindow() != null
+                    && UrlUtils.URL_ABOUT_BLANK == frameElement.getEnclosedPage().getUrl()
+                    && !frameElement.isContentLoaded()) {
+                frameElement.loadInnerPage();
             }
         }
     }
@@ -1974,7 +1979,7 @@ public class HtmlPage extends SgmlPage {
             result.selectionRanges_ = new ArrayList<>(3);
             // the original one is synchronized so we should do that here too, shouldn't we?
             result.afterLoadActions_ = Collections.synchronizedList(new ArrayList<>());
-            result.frameElements_ = new TreeSet<>(DOCUMENT_POSITION_COMPERATOR);
+            result.frameElements_ = new ArrayList<>();
             for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
                 result.appendChild(child.cloneNode(true));
             }
