@@ -730,11 +730,16 @@ public class DefaultElementFactory implements ElementFactory {
      * @return the map of attribute values for {@link HtmlElement}s
      */
     static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
+        // it is ok to return null here, the element ctor's are able to deal with that
         if (attributes == null) {
-            return new OrderedFastHashMapWithLowercaseKeys<>(0);
+            return null;
         }
 
         final int length = attributes.getLength();
+        if (length == 0) {
+            return null;
+        }
+
         final Map<String, DomAttr> attributeMap = new OrderedFastHashMapWithLowercaseKeys<>(length);
 
         // small performance optimization if we know the attributes we can avoid some index lookups

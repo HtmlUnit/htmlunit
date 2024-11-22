@@ -128,7 +128,10 @@ public class DomElement extends DomNamespaceNode implements Element {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
 
-        if (attributes != null) {
+        if (attributes == null) {
+            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
+        }
+        else {
             attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive(), attributes);
 
             for (final DomAttr entry : attributes.values()) {
@@ -143,9 +146,6 @@ public class DomElement extends DomNamespaceNode implements Element {
                     namespaces_.put(attrNamespaceURI, prefix);
                 }
             }
-        }
-        else {
-            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
         }
     }
 
