@@ -1137,11 +1137,16 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsById() throws Exception {
-        final String html = "<html><body><div id='a'>foo</div><div id='b'/><div id='b'/></body></html>";
+        final String html = "<html><body>"
+                + "<div id='a'>foo</div>"
+                + "<div id='b'/><div id='b'/>"
+                + "<div id='c'><div id='c'/></div>"
+                + "</body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals(1, page.getElementsById("a").size());
         assertEquals(2, page.getElementsById("b").size());
-        assertEquals(0, page.getElementsById("c").size());
+        assertEquals(2, page.getElementsById("c").size());
+        assertEquals(0, page.getElementsById("d").size());
 
         final DomElement a = page.getElementsById("a").get(0);
         a.remove();
@@ -1149,6 +1154,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final DomElement b1 = page.getElementsById("b").get(0);
         b1.appendChild(a);
+
         assertEquals(1, page.getElementsById("a").size());
     }
 
