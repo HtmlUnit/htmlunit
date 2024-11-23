@@ -637,4 +637,54 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Tests getElementById() of child element after appendChild(), removeChild(), then appendChild()
+     * of the parent element.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLTableRowElement]")
+    public void getElementById_AfterAppendRemoveAppendChild() throws Exception {
+        final String content = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var table = document.createElement('table');\n"
+            + "    var tr = document.createElement('tr');\n"
+            + "    tr.id = 'myTR';\n"
+            + "    table.appendChild(tr);\n"
+            + "    document.body.appendChild(table);\n"
+            + "    document.body.removeChild(table);\n"
+            + "    document.body.appendChild(table);\n"
+            + "    log(document.getElementById('myTR'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void getElementById_AfterAppendingToNewlyCreatedElement() throws Exception {
+        final String content = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var table = document.createElement('table');\n"
+            + "    var tr = document.createElement('tr');\n"
+            + "    tr.id = 'myTR';\n"
+            + "    table.appendChild(tr);\n"
+            + "    log(document.getElementById('myTR'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(content);
+    }
 }

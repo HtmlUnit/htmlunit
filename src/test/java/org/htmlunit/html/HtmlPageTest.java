@@ -1749,52 +1749,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Tests getElementById() of child element after appendChild(), removeChild(), then appendChild()
-     * of the parent element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getElementById_AfterAppendRemoveAppendChild() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var table = document.createElement('table');\n"
-            + "    var tr = document.createElement('tr');\n"
-            + "    tr.id = 'myTR';\n"
-            + "    table.appendChild(tr);\n"
-            + "    document.body.appendChild(table);\n"
-            + "    document.body.removeChild(table);\n"
-            + "    document.body.appendChild(table);\n"
-            + "    alert(document.getElementById('myTR'));\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(content, collectedAlerts);
-        assertFalse("null".equals(collectedAlerts.get(0)));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getElementById_AfterAppendingToNewlyCreatedElement() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var table = document.createElement('table');\n"
-            + "    var tr = document.createElement('tr');\n"
-            + "    tr.id = 'myTR';\n"
-            + "    table.appendChild(tr);\n"
-            + "    alert(document.getElementById('myTR'));\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(content, collectedAlerts);
-        assertTrue("null".equals(collectedAlerts.get(0)));
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1905,7 +1859,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</table></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        page.asNormalizedText();
+        assertEquals("test\na", page.asNormalizedText());
     }
 
     /**
