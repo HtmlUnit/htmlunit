@@ -505,6 +505,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
 
                 final EdgeOptions options = new EdgeOptions();
+                // BiDi
+                options.setCapability("webSocketUrl", true);
+
                 options.addArguments("--lang=" + locale);
                 options.addArguments("--remote-allow-origins=*");
 
@@ -538,6 +541,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
 
                 final ChromeOptions options = new ChromeOptions();
+                // BiDi
+                options.setCapability("webSocketUrl", true);
+
                 options.addArguments("--lang=" + locale);
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-search-engine-choice-screen");
@@ -590,6 +596,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 .build();
 
         final FirefoxOptions options = new FirefoxOptions();
+        // BiDi
+        options.setCapability("webSocketUrl", true);
+
         options.setBinary(binary);
 
         String locale = getBrowserVersion().getBrowserLocale().toLanguageTag();
@@ -1168,7 +1177,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     protected final String getJsVariableValue(final WebDriver driver, final String varName) throws Exception {
-
         final String script = "return String(" + varName + ")";
         final String result = (String) ((JavascriptExecutor) driver).executeScript(script);
 
