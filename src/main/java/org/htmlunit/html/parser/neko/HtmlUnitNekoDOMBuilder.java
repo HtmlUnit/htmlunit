@@ -433,6 +433,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     }
 
     private static boolean isTableChild(final String nodeName) {
+        if (nodeName == null || nodeName.length() < 5) {
+            return false;
+        }
+
         return "thead".equals(nodeName)
                 || "tbody".equals(nodeName)
                 || "tfoot".equals(nodeName)
