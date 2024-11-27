@@ -1874,6 +1874,14 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code -moz-appearance}. */
         MOZ_APPEARANCE__("-moz-appearance", "-moz-appearance", ffNone()),
 
+        /** The style property {@code MozBackfaceVisibility}. */
+        MOZ_BACKFACE_VISIBILITY("MozBackfaceVisibility", "-moz-backface-visibility",
+                ffLatest("visible")),
+
+        /** The style property {@code -moz-backface-visibility}. */
+        MOZ_BACKFACE_VISIBILITY__("-moz-backface-visibility", "-moz-backface-visibility",
+                ffLatest("visible")),
+
         /** The style property {@code MozBorderBottomColors}. */
         MOZ_BORDER_BOTTOM_COLORS("MozBorderBottomColors", "-moz-border-bottom-colors",
                 ffNotIterable("none")),
@@ -2069,6 +2077,18 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code -moz-padding-start}. */
         MOZ_PADDING_START__("-moz-padding-start", "-moz-padding-start", ff("0px")),
 
+        /** The style property {@code MozPerspectiveOrigin}. */
+        MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin", "-moz-perspective-origin", ffLatest("622px 164px")),
+
+        /** The style property {@code -moz-perspective-origin}. */
+        MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin", "-moz-perspective-origin", ffLatest("622px 164px")),
+
+        /** The style property {@code MozPerspective}. */
+        MOZ_PERSPECTIVE("MozPerspective", "-moz-perspective", ffLatest("none")),
+
+        /** The style property {@code -moz-perspective}. */
+        MOZ_PERSPECTIVE__("-moz-perspective", "-moz-perspective", ffLatest("none")),
+
         /** The style property {@code MozTabSize}. */
         MOZ_TAB_SIZE("MozTabSize", "-moz-tab-size", ff("8")),
 
@@ -2102,6 +2122,12 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code -moz-transform-origin}. */
         MOZ_TRANSFORM_ORIGIN__("-moz-transform-origin", "-moz-transform-origin", ff("622px 164px")),
+
+        /** The style property {@code MozTransformStyle}. */
+        MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style", ffLatest("flat")),
+
+        /** The style property {@code -moz-transform-style}. */
+        MOZ_TRANSFORM_STYLE__("-moz-transform-style", "-moz-transform-style", ffLatest("flat")),
 
         /** The style property {@code MozUserInput}. */
         MOZ_USER_INPUT("MozUserInput", "-moz-user-input", ff("auto")),
