@@ -8,6 +8,7 @@ MozAnimationName
 MozAnimationPlayState
 MozAnimationTimingFunction
 MozAppearance
+MozBackfaceVisibility
 MozBorderEnd
 MozBorderEndColor
 MozBorderEndStyle
@@ -34,10 +35,13 @@ MozMarginStart
 MozOrient
 MozPaddingEnd
 MozPaddingStart
+MozPerspective
+MozPerspectiveOrigin
 MozTabSize
 MozTextSizeAdjust
 MozTransform
 MozTransformOrigin
+MozTransformStyle
 MozUserInput
 MozUserSelect
 MozWindowDragging
