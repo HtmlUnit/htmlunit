@@ -49,10 +49,19 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
+import org.htmlunit.javascript.host.PermissionStatus;
+import org.htmlunit.javascript.host.Permissions;
+import org.htmlunit.javascript.host.PushManager;
+import org.htmlunit.javascript.host.PushSubscription;
+import org.htmlunit.javascript.host.PushSubscriptionOptions;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MessageEvent;
+import org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
+import org.htmlunit.javascript.host.media.MediaSource;
+import org.htmlunit.javascript.host.media.SourceBuffer;
+import org.htmlunit.javascript.host.media.SourceBufferList;
 import org.htmlunit.util.MimeType;
 
 /**
@@ -155,16 +164,19 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
         // hack for the moment
         if (browserVersion.isFirefox()) {
-            delete("MediaSource");
-            delete("Permissions");
-            delete("PermissionStatus");
-            delete("PushManager");
-            delete("PushSubscription");
-            delete("PushSubscriptionOptions");
-            delete("SecurityPolicyViolationEvent");
-            delete("ServiceWorkerRegistration");
-            delete("SourceBuffer");
-            delete("SourceBufferList");
+            delete(MediaSource.class.getSimpleName());
+            delete(SecurityPolicyViolationEvent.class.getSimpleName());
+            delete(SourceBuffer.class.getSimpleName());
+            delete(SourceBufferList.class.getSimpleName());
+        }
+
+        if (browserVersion.isFirefoxESR()) {
+            delete(Permissions.class.getSimpleName());
+            delete(PermissionStatus.class.getSimpleName());
+            delete(PushManager.class.getSimpleName());
+            delete(PushSubscription.class.getSimpleName());
+            delete(PushSubscriptionOptions.class.getSimpleName());
+            delete(ServiceWorkerRegistration.class.getSimpleName());
         }
 
         if (!webClient.getOptions().isWebSocketEnabled()) {

@@ -23,6 +23,7 @@ import org.htmlunit.javascript.host.css.CSSStyleSheet;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6046,7 +6047,6 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Permissions() { [native code] }",
-            FF = "exception",
             FF_ESR = "exception")
     public void permissions() throws Exception {
         test("Permissions");
@@ -6066,7 +6066,6 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function PermissionStatus() { [native code] }",
-            FF = "exception",
             FF_ESR = "exception")
     public void permissionStatus() throws Exception {
         test("PermissionStatus");
@@ -6348,7 +6347,6 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function PushManager() { [native code] }",
-            FF = "exception",
             FF_ESR = "exception")
     public void pushManager() throws Exception {
         test("PushManager");
@@ -6377,7 +6375,6 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function PushSubscription() { [native code] }",
-            FF = "exception",
             FF_ESR = "exception")
     public void pushSubscription() throws Exception {
         test("PushSubscription");
@@ -6388,7 +6385,6 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function PushSubscriptionOptions() { [native code] }",
-            FF = "exception",
             FF_ESR = "exception")
     public void pushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions");
@@ -6717,7 +6713,9 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF = "function ServiceWorker() { [native code] }")
+    @HtmlUnitNYI(FF = "exception")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
     }
@@ -6726,7 +6724,9 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF = "function ServiceWorkerContainer() { [native code] }")
+    @HtmlUnitNYI(FF = "exception")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
     }
@@ -6754,7 +6754,6 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function ServiceWorkerRegistration() { [native code] }",
-            FF = "exception",
             FF_ESR = "exception")
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");

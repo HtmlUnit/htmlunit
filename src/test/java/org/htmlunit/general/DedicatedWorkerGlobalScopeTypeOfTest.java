@@ -6043,7 +6043,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF = "undefined",
             FF_ESR = "undefined")
     public void permissions() throws Exception {
         test("Permissions");
@@ -6063,7 +6062,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF = "undefined",
             FF_ESR = "undefined")
     public void permissionStatus() throws Exception {
         test("PermissionStatus");
@@ -6345,7 +6343,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF = "undefined",
             FF_ESR = "undefined")
     public void pushManager() throws Exception {
         test("PushManager");
@@ -6374,7 +6371,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF = "undefined",
             FF_ESR = "undefined")
     public void pushSubscription() throws Exception {
         test("PushSubscription");
@@ -6385,7 +6381,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF = "undefined",
             FF_ESR = "undefined")
     public void pushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions");
@@ -6714,7 +6709,8 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
     }
@@ -6723,7 +6719,8 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
     }
@@ -6751,7 +6748,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF = "undefined",
             FF_ESR = "undefined")
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");
