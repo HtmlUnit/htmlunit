@@ -8,6 +8,15 @@
 
     <body>
         <release version="4.7.0" date="November xx, 2024" description="Bugfixes, Chrome/Edge 131">
+            <action type="add" dev="RhinoTeam">
+                core-js: String.prototype.matchAll, Symbol.matchAll, and RegExp.prototype[Symbol.matchAll] added.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: BOM header detection fixed
+            </action>
+            <action type="update" dev="rbri">
+                neko: bunch of micro optimizations
+            </action>
             <action type="add" dev="rbri">
                 Property navigator pdfViewerEnabled added.
             </action>

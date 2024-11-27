@@ -1175,4 +1175,37 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         Thread.sleep(DEFAULT_WAIT_TIME);
         verifyTitle2(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "aa", "0", "aabbc", "false", "bb", "2", "aabbc", "true", "undefined"})
+    public void matchAll() throws Exception {
+        final String html = "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "const s = 'aabbc';\n"
+            + "const re = /([a-z])\\1/g;\n"
+            + "const matches = s.matchAll(re);\n"
+
+            + "var match = matches.next();\n"
+            + "log(match.done);\n"
+            + "log(match.value[0]);\n"
+            + "log(match.value.index);\n"
+            + "log(match.value.input);\n"
+
+            + "match = matches.next();\n"
+            + "log(match.done);\n"
+            + "log(match.value[0]);\n"
+            + "log(match.value.index);\n"
+            + "log(match.value.input);\n"
+
+            + "match = matches.next();\n"
+            + "log(match.done);\n"
+            + "log(match.value);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
