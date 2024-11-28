@@ -163,6 +163,8 @@ public class Architecture2Test {
         .that()
             .doNotHaveFullyQualifiedName("org.htmlunit.BrowserVersion")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope")
+
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
         .should().callMethod(BrowserVersion.class, "isFirefoxESR", new Class[] {});

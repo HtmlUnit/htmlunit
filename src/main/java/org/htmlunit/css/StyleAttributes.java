@@ -2077,17 +2077,17 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code -moz-padding-start}. */
         MOZ_PADDING_START__("-moz-padding-start", "-moz-padding-start", ff("0px")),
 
-        /** The style property {@code MozPerspectiveOrigin}. */
-        MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin", "-moz-perspective-origin", ffLatest("622px 164px")),
-
-        /** The style property {@code -moz-perspective-origin}. */
-        MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin", "-moz-perspective-origin", ffLatest("622px 164px")),
-
         /** The style property {@code MozPerspective}. */
         MOZ_PERSPECTIVE("MozPerspective", "-moz-perspective", ffLatest("none")),
 
         /** The style property {@code -moz-perspective}. */
         MOZ_PERSPECTIVE__("-moz-perspective", "-moz-perspective", ffLatest("none")),
+
+        /** The style property {@code MozPerspectiveOrigin}. */
+        MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin", "-moz-perspective-origin", ffLatest("622px 164px")),
+
+        /** The style property {@code -moz-perspective-origin}. */
+        MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin", "-moz-perspective-origin", ffLatest("622px 164px")),
 
         /** The style property {@code MozTabSize}. */
         MOZ_TAB_SIZE("MozTabSize", "-moz-tab-size", ff("8")),

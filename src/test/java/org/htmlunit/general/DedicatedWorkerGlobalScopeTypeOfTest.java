@@ -6711,6 +6711,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
+    @HtmlUnitNYI(FF = "undefined")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
     }
@@ -6721,6 +6722,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
+    @HtmlUnitNYI(FF = "undefined")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
     }
