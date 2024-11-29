@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.7.0" date="November xx, 2024" description="Bugfixes, Chrome/Edge 131, Firefox 133">
+        <release version="4.7.0" date="November 29, 2024" description="Chrome/Edge 131, Firefox 133, String.matchAll, Bugfixes">
             <action type="add" dev="RhinoTeam">
                 core-js: String.prototype.matchAll, Symbol.matchAll, and RegExp.prototype[Symbol.matchAll] added.
             </action>
