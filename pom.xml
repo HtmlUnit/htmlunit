@@ -25,12 +25,12 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitcssparser.version>4.6.0</htmlunitcssparser.version>
-        <htmlunitcsp.version>4.6.0</htmlunitcsp.version>
+        <htmlunitcssparser.version>4.7.0</htmlunitcssparser.version>
+        <htmlunitcsp.version>4.7.0</htmlunitcsp.version>
         <htmlunitneko.version>4.7.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitxpath.version>4.6.0</htmlunitxpath.version>
+        <htmlunitxpath.version>4.7.0</htmlunitxpath.version>
         <htmlunitcorejs.version>4.7.0-SNAPSHOT</htmlunitcorejs.version>
-        <htmlunitwebsocketclient.version>4.6.0</htmlunitwebsocketclient.version>
+        <htmlunitwebsocketclient.version>4.7.0</htmlunitwebsocketclient.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
 
@@ -233,6 +233,7 @@
                     <suppressionFiles>owasp-suppressions.xml</suppressionFiles>
                     <failBuildOnCVSS>0</failBuildOnCVSS>
                     <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <nvdDatafeedUrl>https://mirror.cveb.in/nvd/json/cve/1.1/nvdcve-1.1-{0}.json.gz</nvdDatafeedUrl>
                 </configuration>
                 <executions>
                     <execution>
