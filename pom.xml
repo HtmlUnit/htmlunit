@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.7.0</version>
+    <version>4.8.0-SNAPSHOT</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -29,7 +29,7 @@
         <htmlunitcsp.version>4.7.0</htmlunitcsp.version>
         <htmlunitneko.version>4.7.0</htmlunitneko.version>
         <htmlunitxpath.version>4.7.0</htmlunitxpath.version>
-        <htmlunitcorejs.version>4.7.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>4.8.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>4.7.0</htmlunitwebsocketclient.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
@@ -269,7 +269,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>6.0.0</version>
+                <version>5.1.9</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
