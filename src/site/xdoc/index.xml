@@ -46,18 +46,34 @@
                 <a href="https://github.com/SeleniumHQ/selenium">WebDriver</a>,
                 <a href="https://arquillian.org/arquillian-extension-drone">Arquillian Drone</a>,
                 <a href="https://serenity-bdd.info">Serenity BDD</a>,
+                <a href="https://github.com/FluentLenium/FluentLenium">FluentLenium</a>,
                 <a href="https://www.wetator.org/">WETATOR</a>,
-                <a href="https://github.com/jenkinsci/jenkins-test-harness">jenkins-test-harness</a>,
                 <a href="https://github.com/sbabcoc/Selenium-Foundation">Selenium Foundation</a>,
-                <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit">Spring Testing</a>, ...
+                <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit">Spring Testing</a>
                 <a href="https://jwebunit.github.io/jwebunit/">JWebUnit</a>,
-                <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>,
+                <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>, ...
+            </p>
+            <p>
+                HtmlUnit is used by many projects for automated web testing
+                <a href="https://github.com/jenkinsci/jenkins-test-harness">jenkins-test-harness</a>,
+                <a href="https://shiro.apache.org/">Apache Shiro</a>,
+                <a href="https://struts.apache.org/">Apache Struts</a>,
+                <a href="https://quarkus.io/">Quarkus</a>,
+                <a href="https://www.togglz.org/">Togglz</a>,
+                <a href="https://dataverse.org/">Dataverse</a>,
+                <a href="https://github.com/JanssenProject/jans">Janssen Project</a>,
+                <a href="https://github.com/apache/tomee">Apache TomEE</a>,
+                <a href="https://maven.apache.org/surefire/">Apache Maven Surefire</a>,
+                <a href="http://tntim96.github.io/JSCover/">JSCover</a>,
+                <a href="https://jackrabbit.apache.org/jcr/index.html">Apache Jackrabbit</a>,
+                <a href="https://github.com/openxava/openxava">OpenXava</a>
+                <a href="https://github.com/codehaus-cargo/cargo">Cargo</a>, ...
             </p>
             <p>
                 HtmlUnit was originally written by
                 <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a> of
                 <a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
-                and is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2 license</a>.  
+                and is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2 license</a>.
                 Since then, it has received many contributions from <a href="team.html">
                 other developers</a>, and would not be where it is today without their
                 assistance.

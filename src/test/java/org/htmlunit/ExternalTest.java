@@ -333,7 +333,7 @@ public class ExternalTest {
             return true;
         }
 
-        // version > 3.12.0 does not work with out site.xml and also not with a refactored one
+        // version > 3.12.0 does not work with our site.xml and also not with a refactored one
         if ("maven-site-plugin".equals(artifactId)
                 && (version.startsWith("3.12.1") || version.startsWith("3.20.") || version.startsWith("3.21."))) {
             return true;

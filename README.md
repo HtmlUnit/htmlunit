@@ -93,6 +93,34 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 * Support for basic and NTLM authentication
 * Excellent JavaScript support
 
+HtmlUnit is used as the underlying "browser" by different Open Source tools like
+> * [WebDriver](https://github.com/SeleniumHQ/selenium)
+> * [Arquillian Drone](https://arquillian.org/arquillian-extension-drone)
+> * [Serenity BDD](https://serenity-bdd.info)
+> * [FluentLenium](https://github.com/FluentLenium/FluentLenium)
+> * [WETATOR](https://www.wetator.org/)
+> * [Selenium Foundation](https://github.com/sbabcoc/Selenium-Foundation)
+> * [Spring Testing](https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit)
+> * [JWebUnit](https://jwebunit.github.io/jwebunit/)
+> * [JSFUnit](http://www.jboss.org/jsfunit/)
+> * ...
+
+HtmlUnit is used by many projects for automated web testing
+> * [jenkins-test-harness](https://github.com/jenkinsci/jenkins-test-harness)
+> * [Apache Shiro](https://shiro.apache.org/)
+> * [Apache Struts](https://struts.apache.org/)
+> * [Quarkus](https://quarkus.io/)
+> * [Togglz](https://www.togglz.org/)
+> * [Dataverse](https://dataverse.org/)
+> * [Janssen Project](https://github.com/JanssenProject/jans)
+> * [Apache TomEE](https://github.com/apache/tomee)
+> * [Apache Maven Surefire](https://maven.apache.org/surefire/)
+> * [JSCover](http://tntim96.github.io/JSCover/)
+> * [Apache Jackrabbit](https://jackrabbit.apache.org/jcr/index.html)
+> * [OpenXava](https://github.com/openxava/openxava)
+> * [Cargo](https://github.com/codehaus-cargo/cargo)
+> * ...
+
 ## Getting Started
 You can start here:
 * [Getting Started][7]
