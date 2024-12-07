@@ -687,4 +687,24 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageVerifyTitle2(content);
     }
+
+    /**
+     * When looking for the refresh meta tag don't get confused by stuff with a namespace.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("works")
+    public void metaWithNamespace() throws Exception {
+        final String content =
+                "<html>\n"
+                + "<head>\n"
+                + "  <title>works\u00a7</title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <overheidrg:meta xmlns:overheidrg='http://standaarden.overheid.nl/cvdr/terms/'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(content);
+    }
 }

@@ -663,7 +663,10 @@ public class DomElement extends DomNamespaceNode implements Element {
         for (final Iterator<HtmlElement> iterator = this.new DescendantHtmlElementsIterator(); iterator.hasNext();) {
             final HtmlElement elem = iterator.next();
             if (elem.getLocalName().equalsIgnoreCase(tagName)) {
-                res.add((E) elem);
+                final String prefix = elem.getPrefix();
+                if (prefix == null || prefix.isEmpty()) {
+                    res.add((E) elem);
+                }
             }
         }
         return res;
