@@ -357,7 +357,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
     private static boolean isSupported(final SupportedBrowser[] browsers, final SupportedBrowser expectedBrowser) {
         for (final SupportedBrowser browser : browsers) {
-            if (isCompatible(browser, expectedBrowser)) {
+            if (browser == expectedBrowser) {
                 return true;
             }
         }
@@ -369,7 +369,10 @@ public abstract class AbstractJavaScriptConfiguration {
      * @param browser1 the first {@link SupportedBrowser}
      * @param browser2 the second {@link SupportedBrowser}
      * @return whether the two {@link SupportedBrowser} are compatible or not
+     *
+     * @deprecated as of version 4.8.0; will be removed without replacement
      */
+    @Deprecated
     public static boolean isCompatible(final SupportedBrowser browser1, final SupportedBrowser browser2) {
         return browser1 == browser2;
     }

@@ -26,7 +26,6 @@ import java.util.Set;
 import java.util.TimeZone;
 
 import org.apache.commons.io.FilenameUtils;
-import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.configuration.SupportedBrowser;
 import org.htmlunit.util.MimeType;
@@ -64,26 +63,6 @@ import org.htmlunit.util.MimeType;
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class BrowserVersion implements Serializable {
 
-    /**
-     * Application name the Netscape navigator series of browsers.
-     */
-    private static final String NETSCAPE = "Netscape";
-
-    /**
-     * United States English language identifier.
-     */
-    private static final String LANGUAGE_ENGLISH_US = "en-US";
-
-    /**
-     * United States.
-     */
-    private static final String TIMEZONE_NEW_YORK = "America/New_York";
-
-    /**
-     * The WIN32 platform.
-     */
-    private static final String PLATFORM_WIN32 = "Win32";
-
     /** Latest Firefox. */
     public static final BrowserVersion FIREFOX = new BrowserVersion(133, "FF");
 
@@ -117,6 +96,7 @@ public final class BrowserVersion implements Serializable {
                                     + FIREFOX_ESR.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
                                     + FIREFOX_ESR.getBrowserVersionNumeric() + ".0";
         FIREFOX_ESR.buildId_ = "20181001000000";
+        FIREFOX_ESR.vendor_ = "";
         FIREFOX_ESR.productSub_ = "20100101";
         FIREFOX_ESR.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -152,6 +132,7 @@ public final class BrowserVersion implements Serializable {
                                             + FIREFOX.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
                                             + FIREFOX.getBrowserVersionNumeric() + ".0";
         FIREFOX.buildId_ = "20181001000000";
+        FIREFOX.vendor_ = "";
         FIREFOX.productSub_ = "20100101";
         FIREFOX.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -188,7 +169,6 @@ public final class BrowserVersion implements Serializable {
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
                                         + CHROME.getBrowserVersionNumeric() + ".0.0.0 Safari/537.36";
 
-        CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
         CHROME.productSub_ = "20030107";
         CHROME.headerNamesOrdered_ = new String[] {
@@ -234,7 +214,6 @@ public final class BrowserVersion implements Serializable {
                                         + EDGE.getBrowserVersionNumeric() + ".0.0.0 Safari/537.36 Edg/"
                                         + EDGE.getBrowserVersionNumeric() + ".0.0.0";
 
-        EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
         EDGE.productSub_ = "20030107";
         EDGE.headerNamesOrdered_ = new String[] {
@@ -387,17 +366,17 @@ public final class BrowserVersion implements Serializable {
     private final int browserVersionNumeric_;
     private final String nickname_;
 
-    private String applicationCodeName_ = "Mozilla";
-    private String applicationMinorVersion_ = "0";
+    private String applicationCodeName_;
+    private String applicationMinorVersion_;
     private String applicationName_;
     private String applicationVersion_;
     private String buildId_;
     private String productSub_;
-    private String vendor_ = "";
-    private Locale browserLocale_ = Locale.forLanguageTag(LANGUAGE_ENGLISH_US);
-    private boolean onLine_ = true;
-    private String platform_ = PLATFORM_WIN32;
-    private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
+    private String vendor_;
+    private Locale browserLocale_;
+    private boolean onLine_;
+    private String platform_;
+    private TimeZone systemTimezone_;
     private String userAgent_;
     private final Set<BrowserVersionFeatures> features_;
     private String acceptEncodingHeader_;
@@ -423,7 +402,15 @@ public final class BrowserVersion implements Serializable {
         browserVersionNumeric_ = browserVersionNumeric;
         nickname_ = nickname;
 
-        applicationName_ = NETSCAPE;
+        applicationCodeName_ = "Mozilla";
+        applicationMinorVersion_ = "0";
+        applicationName_ = "Netscape";
+        onLine_ = true;
+        platform_ = "Win32";
+
+        browserLocale_ = Locale.forLanguageTag("en-US");
+        systemTimezone_ = TimeZone.getTimeZone("America/New_York");
+
         acceptEncodingHeader_ = "gzip, deflate, br";
         htmlAcceptHeader_ = "*/*";
         imgAcceptHeader_ = "*/*";
@@ -468,7 +455,7 @@ public final class BrowserVersion implements Serializable {
                 final BrowserFeature browserFeature = field.getAnnotation(BrowserFeature.class);
                 if (browserFeature != null) {
                     for (final SupportedBrowser browser : browserFeature.value()) {
-                        if (AbstractJavaScriptConfiguration.isCompatible(expectedBrowser, browser)) {
+                        if (expectedBrowser == browser) {
                             features_.add(features);
                         }
                     }
