@@ -1870,7 +1870,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the value of {@code netscape} property.
      * @return the value of {@code netscape} property
      */
     @JsxGetter({FF, FF_ESR})

@@ -195,14 +195,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.11.1</version>
+                <version>3.11.2</version>
                 <configuration>
                     <quiet>true</quiet>
                     <show>protected</show>
                     <doclint>html,missing,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
-                    <excludePackageNames>netscape:netscape.*:org.htmlunit.platform.util</excludePackageNames>
+                    <excludePackageNames>org.htmlunit.platform.util</excludePackageNames>
                 </configuration>
                 <executions>
                     <execution>
@@ -678,14 +678,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.11.1</version>
+                <version>3.11.2</version>
                 <configuration>
                     <quiet>true</quiet>
                     <show>protected</show>
                     <doclint>html,missing,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
-                    <excludePackageNames>netscape:netscape.*:org.htmlunit.platform.util</excludePackageNames>
+                    <excludePackageNames>org.htmlunit.platform.util</excludePackageNames>
                 </configuration>
                 <reportSets>
                     <reportSet>

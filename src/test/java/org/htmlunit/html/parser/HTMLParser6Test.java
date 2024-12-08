@@ -132,7 +132,7 @@ public class HTMLParser6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<div id=\"myTest\"></div><div a<b=\"7\">xy</div> ")
+    @Alerts("<div id=\"myTest\"></div><div a<b=\"7\">xy</div> ")
     public void fragmentParserLtInAttributeName() throws Exception {
         final String fragment = "<div a<b=7>xy</div>";
         final String html = "<html><head>\n"
@@ -157,7 +157,7 @@ public class HTMLParser6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<div id=\"myTest\"></div><div <ab=\"7\">xy</div> ")
+    @Alerts("<div id=\"myTest\"></div><div <ab=\"7\">xy</div> ")
     public void fragmentParserLtFirstInAttributeName() throws Exception {
         final String fragment = "<div <ab=7>xy</div>";
         final String html = "<html><head>\n"
@@ -182,7 +182,7 @@ public class HTMLParser6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<div id=\"myTest\"></div><div 7=\"ab\">xy</div> ")
+    @Alerts("<div id=\"myTest\"></div><div 7=\"ab\">xy</div> ")
     public void fragmentParserNumericAttributeName() throws Exception {
         final String fragment = "<div 7=\"ab\">xy</div>";
         final String html = "<html><head>\n"
