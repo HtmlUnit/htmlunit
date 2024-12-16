@@ -302,7 +302,6 @@ INFO: Redirect requested but followRedirects is disabled</source>
                     or implement your own CSSErrorHandler.
                 </p>
             <source><![CDATA[
-
         try (WebClient webClient = new WebClient(browserVersion)) {
             webClient.setCssErrorHandler(new SilentCssErrorHandler());
             ....
@@ -336,11 +335,23 @@ INFO: Redirect requested but followRedirects is disabled</source>
             </question>
             <answer>
                 <p>
-                    Make sure (a) that you are using the latest version of HtmlUnit, and
-                    (b) that you are calling WebClient.close()
-                    (or use <a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try-with-resources</a>)
-                    when you are finished with your WebClient instance.
+                    Make sure
+                    <ol>
+                      <li>that you are using the latest version of HtmlUnit, and
+                      <li>that you are calling WebClient.close() (or use <a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try-with-resources</a>) when you are finished with your WebClient instance.
+                    <ol>
                 </p>
+                <p>
+                    Like real browsers HtmlUnit maintains a history for every window to be able to support the back() action. If you don't need this
+                    you can disable the history by
+                </p>
+                <source><![CDATA[
+        try (WebClient webClient = new WebClient(browserVersion)) {
+            webClient.getOptions().setHistoryPageCacheLimit(0);
+            webClient.getOptions().setHistorySizeLimit(0);
+            ....
+        }
+              ]]></source>
             </answer>
         </faq>
 
