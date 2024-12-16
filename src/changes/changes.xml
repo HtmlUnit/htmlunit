@@ -8,6 +8,18 @@
 
     <body>
         <release version="4.8.0" date="December xx, 2024" description="Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: Allow symbol keys in getter/setter in object literal syntax like 'var o = { get [aSymbol]: value }'.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Support for generator methods in object literals like 'o = {*g() {...}}' added.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Implement the super operator - which can actually be used outside of classes and will do something that intuitively is "refer to the prototype".
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix tokenEnd and cursor for string, template, xml literals and multiline comments when using multibyte characters.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-text to 1.13.0.
             </action>

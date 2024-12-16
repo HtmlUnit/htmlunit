@@ -18,12 +18,14 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ARRAY_SORT_ACCEPTS_INCONSIS
 import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 
 import java.io.Serializable;
+import java.util.function.Consumer;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ScriptException;
 import org.htmlunit.ScriptPreProcessor;
 import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.Callable;
+import org.htmlunit.corejs.javascript.CompilerEnvirons;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
@@ -156,7 +158,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
         @Override
         protected Script compileString(String source, final Evaluator compiler,
                 final ErrorReporter compilationErrorReporter, final String sourceName,
-                final int lineno, final Object securityDomain) {
+                final int lineno, final Object securityDomain,
+                final Consumer<CompilerEnvirons> compilerEnvironsProcessor) {
 
             // this method gets called by Context.compileString and by ScriptRuntime.evalSpecial
             // which is used for window.eval. We have to take care in which case we are.
@@ -192,7 +195,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             source = preProcess(page, source, sourceName, lineno, null);
 
             return super.compileString(source, compiler, compilationErrorReporter,
-                    sourceName, lineno, securityDomain);
+                    sourceName, lineno, securityDomain, compilerEnvironsProcessor);
         }
 
         @Override
