@@ -1350,7 +1350,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static String uncompressJavaScript(final String scriptSource, final String scriptName) {
         final ContextFactory factory = new ContextFactory();
         final ContextAction<Object> action = cx -> {
-            cx.setOptimizationLevel(-1);
+            cx.setInterpretedMode(true);
             final Script script = cx.compileString(scriptSource, scriptName, 0, null);
             return cx.decompileScript(script, 4);
         };

@@ -255,7 +255,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setClassShutter(fullClassName -> false);
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
-        cx.setOptimizationLevel(-1);
+        cx.setInterpretedMode(true);
 
         // Set threshold on how often we want to receive the callbacks
         cx.setInstructionObserverThreshold(INSTRUCTION_COUNT_THRESHOLD);
