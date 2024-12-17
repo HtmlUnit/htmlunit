@@ -168,4 +168,12 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
         .should().callMethod(BrowserVersion.class, "isFirefoxESR", new Class[] {});
+
+
+    /**
+     * Do not use hamcrest.
+     */
+    @ArchTest
+    public static final ArchRule hamcrest = noClasses()
+        .should().dependOnClassesThat().resideInAPackage("org.hamcrest..");
 }
