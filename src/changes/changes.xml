@@ -21,6 +21,9 @@
                 core-js: Fix tokenEnd and cursor for string, template, xml literals and multiline comments when using multibyte characters.
             </action>
             <action type="update" dev="rbri">
+                FAQ updated with some info about page history.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-text to 1.13.0.
             </action>
             <action type="add" dev="RhinoTeam">
