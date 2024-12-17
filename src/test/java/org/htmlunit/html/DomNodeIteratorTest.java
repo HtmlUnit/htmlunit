@@ -14,15 +14,13 @@
  */
 package org.htmlunit.html;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
 
@@ -56,7 +54,8 @@ public final class DomNodeIteratorTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             final NodeIterator iterator = page.createNodeIterator(page.getDocumentElement(), NodeFilter.SHOW_ALL, null,
                     true);
-            assertThat(iterator.nextNode(), instanceOf(HtmlHtml.class));
+            final Node node = iterator.nextNode();
+            assertTrue(node.getClass().getName(), node instanceof HtmlHtml);
         }
     }
 }
