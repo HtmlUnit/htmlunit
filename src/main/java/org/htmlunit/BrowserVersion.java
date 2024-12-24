@@ -585,7 +585,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Returns the browser locale.
-     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
+     * Default value is ENGLISH_US if not explicitly configured.
      * @return the system locale
      */
     public Locale getBrowserLocale() {
@@ -594,7 +594,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Returns the browser application language, for example "en-us".
-     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
+     * Default value is ENGLISH_US if not explicitly configured.
      * @return the browser application language
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533542.aspx">MSDN documentation</a>
      */
@@ -614,7 +614,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Returns the platform on which the application is running, for example "Win32".
-     * Default value is {@link #PLATFORM_WIN32} if not explicitly configured.
+     * Default value is 'Win32' if not explicitly configured.
      * @return the platform on which the application is running
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534340.aspx">MSDN documentation</a>
      */
