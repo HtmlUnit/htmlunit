@@ -8,6 +8,8 @@
 
     <body>
         <release version="4.8.0" date="December xx, 2024" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: fix border checks for typedarray set-method (see https://github.com/HtmlUnit/htmlunit-core-js/issues/27)
             <action type="add" dev="RhinoTeam">
                 core-js: Allow symbol keys in getter/setter in object literal syntax like 'var o = { get [aSymbol]: value }'.
             </action>
@@ -22,6 +24,9 @@
             </action>
             <action type="update" dev="rbri">
                 FAQ updated with some info about page history.
+            </action>
+            <action type="fix" dev="rbri" issue="#905">
+                DomElement#getStaticElementsByTagName() has to check for prefix.
             </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-text to 1.13.0.
