@@ -295,7 +295,7 @@ public class HtmlPage extends SgmlPage {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         }
 
-        for (final BaseFrameElement frameElement : frameElements_) {
+        for (final BaseFrameElement frameElement : new ArrayList<>(frameElements_)) {
             if (frameElement instanceof HtmlFrame) {
                 final Page page = frameElement.getEnclosedWindow().getEnclosedPage();
                 if (page != null && page.isHtmlPage()) {
@@ -1896,7 +1896,7 @@ public class HtmlPage extends SgmlPage {
      *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to {@code true}
      */
     void loadFrames() throws FailingHttpStatusCodeException {
-        for (final BaseFrameElement frameElement : frameElements_) {
+        for (final BaseFrameElement frameElement : new ArrayList<>(frameElements_)) {
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")

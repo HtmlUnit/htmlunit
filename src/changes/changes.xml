@@ -9,7 +9,20 @@
     <body>
         <release version="4.8.0" date="December xx, 2024" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Avoid ConcurrentModificationExceptions in frame processing.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: handle stack frames in the correct order.
+            </action>
+            <action type="add" dev="rbri">
+                cssparser: support hwb(), lab(), lch(), oklab(), and oklch() color definitions.
+            </action>
+            <action type="add" dev="rbri">
+                cssparser: add support for 'none' in modern color definitions.
+            </action>
+            <action type="fix" dev="rbri">
                 core-js: fix border checks for typedarray set-method (see https://github.com/HtmlUnit/htmlunit-core-js/issues/27)
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: Allow symbol keys in getter/setter in object literal syntax like 'var o = { get [aSymbol]: value }'.
             </action>
