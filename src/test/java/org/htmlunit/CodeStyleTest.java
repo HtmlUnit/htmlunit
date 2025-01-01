@@ -353,7 +353,7 @@ public class CodeStyleTest {
         for (final String line : lines) {
             if (line.contains("<property name=\"header\"")) {
                 if (!line.contains(copyright)) {
-                    addFailure("checkstyle.xml", 0, "Incorrect year in LICENSE.txt");
+                    addFailure("checkstyle.xml", 0, "Incorrect year in checkstyle.xml");
                 }
                 check = true;
             }

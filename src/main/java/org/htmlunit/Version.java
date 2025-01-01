@@ -79,6 +79,6 @@ public final class Version {
      * @return the copyright notice
      */
     public static String getCopyright() {
-        return "Copyright (c) 2002-2024 Gargoyle Software Inc. All rights reserved.";
+        return "Copyright (c) 2002-2025 Gargoyle Software Inc. All rights reserved.";
     }
 }
