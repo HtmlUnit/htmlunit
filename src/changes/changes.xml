@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="4.8.0" date="December xx, 2024" description="Bugfixes">
+        <release version="4.8.0" date="January xx, 2025" description="Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: Extract function calling out of the interpreter loop for performance.
+            </action>
             <action type="fix" dev="rbri">
                 Avoid ConcurrentModificationExceptions in frame processing.
             </action>
