@@ -26,9 +26,9 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <htmlunitcssparser.version>4.8.0-SNAPSHOT</htmlunitcssparser.version>
-        <htmlunitcsp.version>4.7.0</htmlunitcsp.version>
+        <htmlunitcsp.version>4.8.0-SNAPSHOT</htmlunitcsp.version>
         <htmlunitneko.version>4.7.0</htmlunitneko.version>
-        <htmlunitxpath.version>4.7.0</htmlunitxpath.version>
+        <htmlunitxpath.version>4.8.0-SNAPSHOT</htmlunitxpath.version>
         <htmlunitcorejs.version>4.8.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>4.7.0</htmlunitwebsocketclient.version>
 
@@ -1205,10 +1205,6 @@
             <version>${httpcomponents.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
@@ -1266,16 +1262,6 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.3.4</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
-            <version>3.11.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.17.1</version>
         </dependency>
         <dependency>
             <groupId>org.brotli</groupId>

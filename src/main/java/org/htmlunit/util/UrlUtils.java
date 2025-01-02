@@ -17,6 +17,7 @@ package org.htmlunit.util;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -29,8 +30,6 @@ import java.util.BitSet;
 import java.util.Locale;
 import java.util.Objects;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.net.URLCodec;
 import org.htmlunit.WebAssert;
 import org.htmlunit.protocol.AnyHandler;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -347,10 +346,10 @@ public final class UrlUtils {
     public static String decode(final String escaped) {
         try {
             final byte[] bytes = escaped.getBytes(US_ASCII);
-            final byte[] bytes2 = URLCodec.decodeUrl(bytes);
+            final byte[] bytes2 = decodeUrl(bytes);
             return new String(bytes2, UTF_8);
         }
-        catch (final DecoderException e) {
+        catch (final IllegalArgumentException e) {
             // Should never happen.
             throw new RuntimeException(e);
         }
@@ -366,7 +365,7 @@ public final class UrlUtils {
      */
     private static String encode(final String unescaped, final BitSet allowed, final Charset charset) {
         final byte[] bytes = unescaped.getBytes(charset);
-        final byte[] bytes2 = URLCodec.encodeUrl(allowed, bytes);
+        final byte[] bytes2 = encodeUrl(allowed, bytes);
         return encodePercentSign(bytes2);
     }
 
@@ -1380,4 +1379,92 @@ public final class UrlUtils {
         return url;
     }
 
+    // adapted from apache commons codec
+    public static byte[] decodeDataUrl(final byte[] bytes) throws IllegalArgumentException  {
+        if (bytes == null) {
+            return null;
+        }
+        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        for (int i = 0; i < bytes.length; i++) {
+            final int b = bytes[i];
+            if (b == '%') {
+                try {
+                    final int u = digit16(bytes[++i]);
+                    final int l = digit16(bytes[++i]);
+                    buffer.write((char) ((u << 4) + l));
+                }
+                catch (final ArrayIndexOutOfBoundsException e) {
+                    throw new IllegalArgumentException("Invalid URL encoding: ", e);
+                }
+            }
+            else {
+                buffer.write(b);
+            }
+        }
+        return buffer.toByteArray();
+    }
+
+    public static final byte[] decodeUrl(final byte[] bytes) throws IllegalArgumentException {
+        if (bytes == null) {
+            return null;
+        }
+        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        for (int i = 0; i < bytes.length; i++) {
+            final int b = bytes[i];
+            if (b == '+') {
+                buffer.write(' ');
+            } else if (b == '%') {
+                try {
+                    final int u = digit16(bytes[++i]);
+                    final int l = digit16(bytes[++i]);
+                    buffer.write((char) ((u << 4) + l));
+                } catch (final ArrayIndexOutOfBoundsException e) {
+                    throw new IllegalArgumentException("Invalid URL encoding: ", e);
+                }
+            } else {
+                buffer.write(b);
+            }
+        }
+        return buffer.toByteArray();
+    }
+
+    private static int digit16(final byte b) throws IllegalArgumentException  {
+        final int i = Character.digit((char) b, 16);
+        if (i == -1) {
+            throw new IllegalArgumentException("Invalid URL encoding: not a valid digit (radix 16): " + b);
+        }
+        return i;
+    }
+
+    // adapted from apache commons codec
+    public static final byte[] encodeUrl(BitSet urlsafe, final byte[] bytes) {
+        if (bytes == null) {
+            return null;
+        }
+
+        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        for (final byte c : bytes) {
+            int b = c;
+            if (b < 0) {
+                b = 256 + b;
+            }
+            if (urlsafe.get(b)) {
+                if (b == ' ') {
+                    b = '+';
+                }
+                buffer.write(b);
+            } else {
+                buffer.write('%');
+                final char hex1 = hexDigit(b >> 4);
+                final char hex2 = hexDigit(b);
+                buffer.write(hex1);
+                buffer.write(hex2);
+            }
+        }
+        return buffer.toByteArray();
+    }
+
+    private static char hexDigit(final int b) {
+        return Character.toUpperCase(Character.forDigit(b & 0xF, 16));
+    }
 }

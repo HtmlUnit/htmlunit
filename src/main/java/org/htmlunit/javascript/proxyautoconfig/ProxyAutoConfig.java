@@ -21,11 +21,11 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.net.util.SubnetUtils;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.util.SubnetUtils;
 
 /**
  * Provides an implementation of Proxy Auto-Config (PAC).
@@ -107,7 +107,7 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
         }
 
         final SubnetUtils subnetUtils = new SubnetUtils(pattern, mask);
-        return subnetUtils.getInfo().isInRange(dnsResolve);
+        return subnetUtils.isInRange(dnsResolve);
     }
 
     /**

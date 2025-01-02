@@ -17,7 +17,6 @@ package org.htmlunit.protocol.data;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static org.htmlunit.protocol.data.DataURLConnection.DATA_PREFIX;
 
-import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -27,6 +26,7 @@ import java.util.Base64;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * Helper to work with data URLs.
@@ -90,7 +90,7 @@ public class DataUrlDecoder {
 
         try {
             byte[] data = url.substring(comma + 1).getBytes(charset);
-            data = decodeUrl(data);
+            data = UrlUtils.decodeDataUrl(data);
             if (base64) {
                 data = Base64.getDecoder().decode(data);
             }
@@ -163,38 +163,5 @@ public class DataUrlDecoder {
      */
     public String getDataAsString() throws UnsupportedEncodingException {
         return new String(content_, charset_);
-    }
-
-    // adapted from apache commons codec
-    private static byte[] decodeUrl(final byte[] bytes) throws IllegalArgumentException  {
-        if (bytes == null) {
-            return null;
-        }
-        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        for (int i = 0; i < bytes.length; i++) {
-            final int b = bytes[i];
-            if (b == '%') {
-                try {
-                    final int u = digit16(bytes[++i]);
-                    final int l = digit16(bytes[++i]);
-                    buffer.write((char) ((u << 4) + l));
-                }
-                catch (final ArrayIndexOutOfBoundsException e) {
-                    throw new IllegalArgumentException("Invalid URL encoding: ", e);
-                }
-            }
-            else {
-                buffer.write(b);
-            }
-        }
-        return buffer.toByteArray();
-    }
-
-    private static int digit16(final byte b) throws IllegalArgumentException  {
-        final int i = Character.digit((char) b, 16);
-        if (i == -1) {
-            throw new IllegalArgumentException("Invalid URL encoding: not a valid digit (radix 16): " + b);
-        }
-        return i;
     }
 }
