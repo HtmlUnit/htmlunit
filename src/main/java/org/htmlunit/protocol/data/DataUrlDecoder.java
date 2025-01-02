@@ -23,9 +23,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.Base64;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.util.MimeType;
 
@@ -93,11 +92,11 @@ public class DataUrlDecoder {
             byte[] data = url.substring(comma + 1).getBytes(charset);
             data = decodeUrl(data);
             if (base64) {
-                data = Base64.decodeBase64(data);
+                data = Base64.getDecoder().decode(data);
             }
             return new DataUrlDecoder(data, mediaType, charset);
         }
-        catch (final DecoderException e) {
+        catch (final IllegalArgumentException e) {
             final UnsupportedEncodingException ex =
                     new UnsupportedEncodingException("Invalid data url: '" + url + "' (data decoding failed)");
             ex.initCause(e);
@@ -167,7 +166,7 @@ public class DataUrlDecoder {
     }
 
     // adapted from apache commons codec
-    private static byte[] decodeUrl(final byte[] bytes) throws DecoderException {
+    private static byte[] decodeUrl(final byte[] bytes) throws IllegalArgumentException  {
         if (bytes == null) {
             return null;
         }
@@ -181,7 +180,7 @@ public class DataUrlDecoder {
                     buffer.write((char) ((u << 4) + l));
                 }
                 catch (final ArrayIndexOutOfBoundsException e) {
-                    throw new DecoderException("Invalid URL encoding: ", e);
+                    throw new IllegalArgumentException("Invalid URL encoding: ", e);
                 }
             }
             else {
@@ -191,10 +190,10 @@ public class DataUrlDecoder {
         return buffer.toByteArray();
     }
 
-    private static int digit16(final byte b) throws DecoderException {
+    private static int digit16(final byte b) throws IllegalArgumentException  {
         final int i = Character.digit((char) b, 16);
         if (i == -1) {
-            throw new DecoderException("Invalid URL encoding: not a valid digit (radix 16): " + b);
+            throw new IllegalArgumentException("Invalid URL encoding: not a valid digit (radix 16): " + b);
         }
         return i;
     }

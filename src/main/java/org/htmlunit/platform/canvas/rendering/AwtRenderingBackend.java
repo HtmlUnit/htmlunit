@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.platform.image.ImageIOImageData;
@@ -537,7 +537,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             ImageIO.write(image_, imageType, bos);
 
             final byte[] imageBytes = bos.toByteArray();
-            return new String(Base64.encodeBase64(imageBytes), StandardCharsets.US_ASCII);
+            return new String(Base64.getEncoder().encode(imageBytes), StandardCharsets.US_ASCII);
         }
     }
 

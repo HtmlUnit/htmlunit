@@ -16,8 +16,8 @@ package org.htmlunit.javascript.host;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 
-import org.apache.commons.codec.binary.Base64;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
@@ -63,7 +63,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             }
         }
         final byte[] bytes = encodedData.getBytes(StandardCharsets.ISO_8859_1);
-        return new String(Base64.decodeBase64(bytes), StandardCharsets.ISO_8859_1);
+        return new String(Base64.getDecoder().decode(bytes), StandardCharsets.ISO_8859_1);
     }
 
     /**
@@ -79,7 +79,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             }
         }
         final byte[] bytes = stringToEncode.getBytes(StandardCharsets.ISO_8859_1);
-        return new String(Base64.encodeBase64(bytes), StandardCharsets.UTF_8);
+        return new String(Base64.getEncoder().encode(bytes), StandardCharsets.UTF_8);
     }
 
     /**
