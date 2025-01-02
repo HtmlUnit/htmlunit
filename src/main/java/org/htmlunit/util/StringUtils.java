@@ -112,7 +112,7 @@ public final class StringUtils {
 
     /**
      * Escape the string to be used as xml 1.0 content be replacing the
-     * characters '&quot;', '&amp;', '&apos;', '&lt;', and '&gt;' into their XML entity equivalents.
+     * characters '&quot;', '&amp;', '&#39;', '&lt;', and '&gt;' into their XML entity equivalents.
      * @param text the attribute value
      * @return the escaped value
      */
