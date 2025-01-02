@@ -15,9 +15,12 @@
 package org.htmlunit.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertThrows;
 
-import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.impl.Color;
 import org.junit.Test;
 
@@ -26,7 +29,7 @@ import org.junit.Test;
  *
  * @author Ronald Brill
  */
-public class StringUtilsTest extends SimpleWebTestCase {
+public class StringUtilsTest {
 
     /**
      * @throws Exception if the test fails
@@ -198,5 +201,127 @@ public class StringUtilsTest extends SimpleWebTestCase {
         result = StringUtils.toByteArray("htmlunit", UTF_8);
         assertEquals(8, result.length);
         assertEquals(104, result[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeXmlAttributeValue() throws Exception {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 1024; i++) {
+            sb.append((char) i);
+        }
+
+        final StringBuilder expected = new StringBuilder("\t\n\r");
+        for (int i = 32; i < 1024; i++) {
+            if (i == '&') {
+                expected.append("&amp;");
+            }
+            else if (i == '<') {
+                expected.append("&lt;");
+            }
+            else if (i == '"') {
+                expected.append("&quot;");
+            }
+            else {
+                expected.append((char) i);
+            }
+        }
+
+        assertEquals(expected.toString(), StringUtils.escapeXmlAttributeValue(sb.toString()));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeXmlAttributeValueBorderCases() throws Exception {
+        assertEquals(null, StringUtils.escapeXmlAttributeValue(null));
+        assertEquals("", StringUtils.escapeXmlAttributeValue(""));
+
+        // [#x20-#xD7FF]
+        assertEquals("", StringUtils.escapeXmlAttributeValue("\u001f"));
+        assertEquals("\u0020", StringUtils.escapeXmlAttributeValue("\u0020"));
+        assertEquals("\u0021", StringUtils.escapeXmlAttributeValue("\u0021"));
+
+        assertEquals("\uD7FE", StringUtils.escapeXmlAttributeValue("\uD7FE"));
+        assertEquals("\uD7FF", StringUtils.escapeXmlAttributeValue("\uD7FF"));
+        assertEquals("", StringUtils.escapeXmlAttributeValue("\uD800"));
+
+        // [#xE000-#xFFFD]
+        assertEquals("", StringUtils.escapeXmlAttributeValue("\uDFFF"));
+        assertEquals("\uE000", StringUtils.escapeXmlAttributeValue("\uE000"));
+        assertEquals("\uE001", StringUtils.escapeXmlAttributeValue("\uE001"));
+
+        assertEquals("\uFFFC", StringUtils.escapeXmlAttributeValue("\uFFFC"));
+        assertEquals("\uFFFD", StringUtils.escapeXmlAttributeValue("\uFFFD"));
+        assertEquals("", StringUtils.escapeXmlAttributeValue("\uFFFE"));
+
+        // [#x10000-#x10FFFF]
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeXml() throws Exception {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 1024; i++) {
+            sb.append((char) i);
+        }
+
+        final StringBuilder expected = new StringBuilder("\t\n\r");
+        for (int i = 32; i < 1024; i++) {
+            if (i == '&') {
+                expected.append("&amp;");
+            }
+            else if (i == '<') {
+                expected.append("&lt;");
+            }
+            else if (i == '>') {
+                expected.append("&gt;");
+            }
+            else if (i == '\'') {
+                expected.append("&apos;");
+            }
+            else if (i == '"') {
+                expected.append("&quot;");
+            }
+            else {
+                expected.append((char) i);
+            }
+        }
+
+        assertEquals(expected.toString(), StringUtils.escapeXml(sb.toString()));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeXmlBorderCases() throws Exception {
+        assertEquals(null, StringUtils.escapeXml(null));
+        assertEquals("", StringUtils.escapeXml(""));
+
+        // [#x20-#xD7FF]
+        assertEquals("", StringUtils.escapeXml("\u001f"));
+        assertEquals("\u0020", StringUtils.escapeXml("\u0020"));
+        assertEquals("\u0021", StringUtils.escapeXml("\u0021"));
+
+        assertEquals("\uD7FE", StringUtils.escapeXml("\uD7FE"));
+        assertEquals("\uD7FF", StringUtils.escapeXml("\uD7FF"));
+        assertEquals("", StringUtils.escapeXml("\uD800"));
+
+        // [#xE000-#xFFFD]
+        assertEquals("", StringUtils.escapeXml("\uDFFF"));
+        assertEquals("\uE000", StringUtils.escapeXml("\uE000"));
+        assertEquals("\uE001", StringUtils.escapeXml("\uE001"));
+
+        assertEquals("\uFFFC", StringUtils.escapeXml("\uFFFC"));
+        assertEquals("\uFFFD", StringUtils.escapeXml("\uFFFD"));
+        assertEquals("", StringUtils.escapeXml("\uFFFE"));
+
+        // [#x10000-#x10FFFF]
     }
 }
