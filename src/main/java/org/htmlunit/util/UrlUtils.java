@@ -1404,7 +1404,7 @@ public final class UrlUtils {
         return buffer.toByteArray();
     }
 
-    public static final byte[] decodeUrl(final byte[] bytes) throws IllegalArgumentException {
+    public static byte[] decodeUrl(final byte[] bytes) throws IllegalArgumentException {
         if (bytes == null) {
             return null;
         }
@@ -1413,15 +1413,18 @@ public final class UrlUtils {
             final int b = bytes[i];
             if (b == '+') {
                 buffer.write(' ');
-            } else if (b == '%') {
+            }
+            else if (b == '%') {
                 try {
                     final int u = digit16(bytes[++i]);
                     final int l = digit16(bytes[++i]);
                     buffer.write((char) ((u << 4) + l));
-                } catch (final ArrayIndexOutOfBoundsException e) {
+                }
+                catch (final ArrayIndexOutOfBoundsException e) {
                     throw new IllegalArgumentException("Invalid URL encoding: ", e);
                 }
-            } else {
+            }
+            else {
                 buffer.write(b);
             }
         }
@@ -1437,7 +1440,7 @@ public final class UrlUtils {
     }
 
     // adapted from apache commons codec
-    public static final byte[] encodeUrl(BitSet urlsafe, final byte[] bytes) {
+    public static byte[] encodeUrl(final BitSet urlsafe, final byte[] bytes) {
         if (bytes == null) {
             return null;
         }
@@ -1453,7 +1456,8 @@ public final class UrlUtils {
                     b = '+';
                 }
                 buffer.write(b);
-            } else {
+            }
+            else {
                 buffer.write('%');
                 final char hex1 = hexDigit(b >> 4);
                 final char hex2 = hexDigit(b);

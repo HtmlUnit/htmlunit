@@ -24,6 +24,7 @@ import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.UrlUtils;
 
