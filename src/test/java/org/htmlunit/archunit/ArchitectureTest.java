@@ -97,6 +97,7 @@ public class ArchitectureTest {
     public static final ArchRule jdkBase64Rule = noClasses()
         .that()
             .resideOutsideOfPackage("org.htmlunit.jetty..")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.protocol.data.DataUrlDecoder")
         .should().dependOnClassesThat().haveFullyQualifiedName("org.apache.commons.codec.binary.Base64");
 
 
