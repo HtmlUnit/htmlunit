@@ -9,6 +9,9 @@
     <body>
         <release version="4.8.0" date="January xx, 2025" description="Bugfixes">
             <action type="update" dev="rbri">
+                Upgrade commons-codec to 1.17.2.
+            </action>
+            <action type="update" dev="rbri">
                 Apache commons-net is no longer a runtime dependency.
             </action>
             <action type="update" dev="rbri">
