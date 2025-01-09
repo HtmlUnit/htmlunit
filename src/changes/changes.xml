@@ -9,6 +9,15 @@
     <body>
         <release version="4.8.0" date="January xx, 2025" description="Bugfixes">
             <action type="update" dev="rbri">
+                websocket-client: jetty updated to 9.4.57.v20241219.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: add an empty slot map (singleton) for cases where no slots exist; this should reduce the memory needed a bit
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: methods cannot be used as constructor fixed
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.17.2.
             </action>
             <action type="update" dev="rbri">
