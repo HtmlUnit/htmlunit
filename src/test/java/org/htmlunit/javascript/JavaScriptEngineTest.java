@@ -1182,6 +1182,44 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 + "</body></html>";
 
         try (WebClient webClient = getWebClient()) {
+            // there is no way to kill a thread in later JDK's
+            // to make the test running we need a final timeout for js stuff
+            webClient.setJavaScriptTimeout(DEFAULT_WAIT_TIME * 20);
+
+            final List<String> collectedAlerts = new ArrayList<>();
+            webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+            loadPage(html);
+            Thread.sleep(100);
+            assertEquals(getExpectedAlerts(), collectedAlerts);
+
+        }
+        Thread.sleep(400);
+        assertTrue(getJavaScriptThreads().isEmpty());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Retry
+    @Alerts("starting")
+    public void shutdownShouldKillJavaScriptTimeout() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>Test page</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert('starting');\n"
+                + "    while(true) { Math.sin(3.14) * Math.sin(3.14);}\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='setTimeout(test, 50);'>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = getWebClient()) {
+            webClient.setJavaScriptTimeout(DEFAULT_WAIT_TIME);
+
             final List<String> collectedAlerts = new ArrayList<>();
             webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
