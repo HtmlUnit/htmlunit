@@ -27,7 +27,7 @@
 
         <htmlunitcssparser.version>4.8.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitcsp.version>4.8.0-SNAPSHOT</htmlunitcsp.version>
-        <htmlunitneko.version>4.7.0</htmlunitneko.version>
+        <htmlunitneko.version>4.8.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>4.8.0-SNAPSHOT</htmlunitxpath.version>
         <htmlunitcorejs.version>4.8.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>4.8.0-SNAPSHOT</htmlunitwebsocketclient.version>
