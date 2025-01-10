@@ -1151,4 +1151,15 @@ public class CookieManager4Test extends WebDriverTestCase {
             assertEquals("unknown", mgr.getCookie("c5").getSameSite());
         }
     }
+
+    @Override
+    protected final WebDriver getWebDriver() {
+        final WebDriver driver = super.getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            // set timeout to fail fast when the url not mapped
+            ((HtmlUnitDriver) driver).getWebClient().getOptions().setTimeout(1000);
+        }
+
+        return driver;
+    }
 }

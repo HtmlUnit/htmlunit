@@ -493,7 +493,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * Returns the WebClient instance for the current test with the current {@link BrowserVersion}.
      * @return a WebClient with the current {@link BrowserVersion}
      */
-    protected final WebClient getWebClient() {
+    protected WebClient getWebClient() {
         if (webClient_ == null) {
             webClient_ = new WebClient(getBrowserVersion());
             webClient_.setAlertHandler(alertHandler_);
