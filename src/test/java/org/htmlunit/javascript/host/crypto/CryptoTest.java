@@ -102,7 +102,6 @@ public class CryptoTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final String title = driver.getTitle();
 
-        System.out.println(title);
         assertTrue(title, title.matches(getExpectedAlerts()[0]));
     }
 
