@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.8.0" date="January xx, 2025" description="Bugfixes">
+        <release version="4.8.0" date="January 12, 2025" description="Bugfixes, css colors, less dependencies, improved javascript support">
             <action type="add" dev="rbri">
                 cssparser: support plain color definitions with var/calc.
             </action>

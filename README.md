@@ -1,6 +1,6 @@
 # ![HtmlUnit Logo](https://github.com/HtmlUnit/htmlunit/blob/master/src/site/resources/images/htmlunit.png)
 
-Version 4.7.0 / November 29, 2024
+Version 4.8.0 / January 12, 2025
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -15,9 +15,7 @@ Version 4.7.0 / November 29, 2024
 
 **[Developer Blog](https://htmlunit.github.io/htmlunit-blog/)**
 
-[HtmlUnit@mastodon][13] | [HtmlUnit@Twitter][3]
-
-[HtmlUnit Kanban Board][6]
+[HtmlUnit@mastodon](https://fosstodon.org/@HtmlUnit) | [HtmlUnit@bsky](https://bsky.app/profile/htmlunit.bsky.social) | [HtmlUnit@Twitter](https://twitter.com/HtmlUnit)
 
 > **Check out HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)**,
 such as:
@@ -53,7 +51,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.7.0</version>
+    <version>4.8.0</version>
 </dependency>
 ```
 
@@ -62,7 +60,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.7.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.8.0'
 ```
 
 ## Vulnerabilities
@@ -164,7 +162,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>org.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>4.8.0-SNAPSHOT</version>
+          <version>4.9.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -183,7 +181,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.8.0-SNAPSHOT'
+    implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.9.0-SNAPSHOT'
   // ...
 }
 ```
@@ -229,15 +227,12 @@ Please try to keep your pull requests small (don't bundle unrelated changes) and
 
 [1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/4.1.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/view/HtmlUnit/ "HtmlUnit CI"
-[3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://www.htmlunit.org "https://www.htmlunit.org"
 [5]: https://www.openhub.net/p/HtmlUnit "https://www.openhub.net/p/HtmlUnit"
-[6]: https://github.com/HtmlUnit/htmlunit/projects/1 "https://github.com/HtmlUnit/htmlunit/projects/1"
 [7]: https://www.htmlunit.org/gettingStarted.html
 [8]: https://www.scrapingbee.com/java-webscraping-book/
 [9]: https://www.innoq.com/en/blog/webscraping/
 [10]: https://www.webscrapingapi.com/java-web-scraping/
 [11]: http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian
 [12]: https://github.com/HtmlUnit/htmlunit/releases
-[13]: https://fosstodon.org/@HtmlUnit
-[14]: https://webscraping.ai/faq/htmlunit
+[13]: https://webscraping.ai/faq/htmlunit
