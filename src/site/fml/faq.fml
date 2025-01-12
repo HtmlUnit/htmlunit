@@ -337,9 +337,9 @@ INFO: Redirect requested but followRedirects is disabled</source>
                 <p>
                     Make sure
                     <ol>
-                      <li>that you are using the latest version of HtmlUnit, and
-                      <li>that you are calling WebClient.close() (or use <a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try-with-resources</a>) when you are finished with your WebClient instance.
-                    <ol>
+                      <li>that you are using the latest version of HtmlUnit, and</li>
+                      <li>that you are calling WebClient.close() (or use <a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try-with-resources</a>) when you are finished with your WebClient instance.</li>
+                    </ol>
                 </p>
                 <p>
                     Like real browsers HtmlUnit maintains a history for every window to be able to support the back() action. If you don't need this
