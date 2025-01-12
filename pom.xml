@@ -25,11 +25,11 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitcssparser.version>4.8.0-SNAPSHOT</htmlunitcssparser.version>
+        <htmlunitcssparser.version>4.8.0</htmlunitcssparser.version>
         <htmlunitcsp.version>4.8.0</htmlunitcsp.version>
         <htmlunitneko.version>4.8.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitxpath.version>4.8.0</htmlunitxpath.version>
-        <htmlunitcorejs.version>4.8.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitcorejs.version>4.8.0</htmlunitcorejs.version>
         <htmlunitwebsocketclient.version>4.8.0</htmlunitwebsocketclient.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>

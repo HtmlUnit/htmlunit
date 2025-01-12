@@ -17,9 +17,6 @@
             <action type="add" dev="rbri">
                 cssparser: support relative color definitions.
             </action>
-            <action type="add" dev="rbri">
-                cssparser: support 'none' in color definitions.
-            </action>
             <action type="update" dev="rbri">
                 websocket-client: jetty updated to 9.4.57.v20241219.
             </action>
