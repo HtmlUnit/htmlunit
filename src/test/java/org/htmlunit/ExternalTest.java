@@ -339,9 +339,9 @@ public class ExternalTest {
             return true;
         }
 
-        // 11.x requires java11
+        // >= 11.x requires java11
         if ("org.owasp".equals(groupId)
-                && version.startsWith("11.")) {
+                && (version.startsWith("11.") || version.startsWith("12."))) {
             return true;
         }
 
