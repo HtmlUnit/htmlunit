@@ -423,7 +423,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 NumberCustom.class, ScriptableObject.DONTENUM);
 
         // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(scope, "Continuation", "StopIteration", "BigInt");
+        deleteProperties(scope, "Continuation", "StopIteration");
         if (!browserVersion.hasFeature(JS_ITERATOR_VISIBLE_IN_WINDOW)) {
             deleteProperties(scope, "Iterator");
         }

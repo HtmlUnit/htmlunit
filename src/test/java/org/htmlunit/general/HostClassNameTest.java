@@ -526,6 +526,15 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("function BigInt() { [native code] }")
+    public void bigInt() throws Exception {
+        test("BigInt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("function BiquadFilterNode() { [native code] }")
     public void biquadFilterNode() throws Exception {
         test("BiquadFilterNode");

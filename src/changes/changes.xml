@@ -7,12 +7,19 @@
     </properties>
 
     <body>
-        <release version="4.9.0" date="February xx, 2025" description="Bugfixes">
-            <action type="fix" dev="RhinoTeam">
-                core-js: Symbol.hasInstance for Function.prototype implemented
+        <release version="4.9.0" date="February xx, 2025" description="Bugfixes, BigInt">
+            <action type="fix" dev="rbri">
+                core-js: junit-vintage-engine was NOT marked as 'test' dependency, therefore we had junit
+                as part of our depenencies/lib/diestribution (regression from 4.8.0)
             </action>
             <action type="add" dev="rbri">
-                core-js: Context#emptyArgs is deprecated
+                BigInt support added.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Symbol.hasInstance for Function.prototype implemented.
+            </action>
+            <action type="add" dev="rbri">
+                core-js: Context#emptyArgs is deprecated.
             </action>
         </release>
 
