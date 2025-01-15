@@ -7,6 +7,15 @@
     </properties>
 
     <body>
+        <release version="4.9.0" date="February xx, 2025" description="Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Symbol.hasInstance for Function.prototype implemented
+            </action>
+            <action type="add" dev="rbri">
+                core-js: Context#emptyArgs is deprecated
+            </action>
+        </release>
+
         <release version="4.8.0" date="January 12, 2025" description="Bugfixes, css colors, less dependencies, improved javascript support">
             <action type="add" dev="rbri">
                 cssparser: support plain color definitions with var/calc.
