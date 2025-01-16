@@ -58,6 +58,7 @@ public class NotYetImplementedTest {
                 else {
                     if (fileName.endsWith(".java")
                             && !"SimpleWebTestCase.java".equals(fileName)
+                            && !"AnnotationUtilsTest.java".equals(fileName)
                             && !"NotYetImplementedTest.java".equals(fileName)
                             && !"CodeStyleTest.java".equals(fileName)) {
                         final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
