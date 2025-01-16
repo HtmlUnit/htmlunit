@@ -1195,9 +1195,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
-            EDGE = "18",
-            FF = "0",
-            FF_ESR = "0")
+            EDGE = "18")
     public void noscript() throws Exception {
         loadPageVerifyTitle2(test("noscript"));
     }

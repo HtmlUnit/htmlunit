@@ -14,6 +14,7 @@
  */
 package org.htmlunit.archunit;
 
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 import java.util.HashSet;
@@ -21,14 +22,20 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.junit.annotation.AnnotationUtils;
 import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
+import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchUnitRunner;
+import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.lang.ConditionEvents;
+import com.tngtech.archunit.lang.SimpleConditionEvent;
 
 /**
  * Architecture tests for our test cases.
@@ -176,4 +183,26 @@ public class Architecture2Test {
     @ArchTest
     public static final ArchRule hamcrest = noClasses()
         .should().dependOnClassesThat().resideInAPackage("org.hamcrest..");
+
+    private static final ArchCondition<JavaMethod> haveConsistentTestAnnotations =
+            new ArchCondition<JavaMethod>("have consistent HtmlUnit test annotations") {
+                @Override
+                public void check(final JavaMethod method, final ConditionEvents events) {
+                    try {
+                        AnnotationUtils.assertAlerts(method.reflect());
+                    }
+                    catch (final AssertionError e) {
+                        events.add(SimpleConditionEvent.violated(method, e.getMessage()));
+                    }
+                }
+            };
+
+    /**
+     * Validate test annotations.
+     */
+    @ArchTest
+    public static final ArchRule jsxGetterAnnotationStartsWithGet = methods()
+            .that().areAnnotatedWith(Test.class)
+            .and().areNotDeclaredIn("org.htmlunit.junit.annotation.AnnotationUtilsTest")
+            .should(haveConsistentTestAnnotations);
 }

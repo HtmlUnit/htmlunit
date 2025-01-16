@@ -16,7 +16,6 @@ package org.htmlunit.junit;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.annotation.AnnotationUtils;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
@@ -69,7 +68,6 @@ class BrowserStatement extends Statement {
                 }
             }
         }
-        AnnotationUtils.assertAlerts(method_.getMethod());
     }
 
     public void evaluateSolo() throws Throwable {
