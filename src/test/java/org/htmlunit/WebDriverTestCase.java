@@ -614,16 +614,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return new FirefoxDriver(service, options);
     }
 
-    private static String getBrowserName(final BrowserVersion browserVersion) {
-        if (browserVersion == BrowserVersion.FIREFOX) {
-            return browserVersion.getNickname() + '-' + browserVersion.getBrowserVersionNumeric();
-        }
-        if (browserVersion == BrowserVersion.FIREFOX_ESR) {
-            return browserVersion.getNickname() + '-' + browserVersion.getBrowserVersionNumeric();
-        }
-        return browserVersion.getNickname();
-    }
-
     /**
      * Starts the web server delivering response from the provided connection.
      * @param mockConnection the sources for responses
@@ -1152,14 +1142,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final WebElement textArea = driver.findElement(By.id("myLog"));
 
         if (expectedAlerts.length == 0) {
-            assertEquals("", textArea.getAttribute("value"));
+            assertEquals("", textArea.getDomProperty("value"));
             return driver;
         }
 
         if (!useRealBrowser()
                 && expectedAlerts.length == 1
                 && expectedAlerts[0].startsWith("data:image/png;base64,")) {
-            String value = textArea.getAttribute("value");
+            String value = textArea.getDomProperty("value");
             if (value.endsWith("\u00A7")) {
                 value = value.substring(0, value.length() - 1);
             }
@@ -1171,7 +1161,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         for (int i = 0; i < expectedAlerts.length; i++) {
             expected.append(expectedAlerts[i]).append('\u00A7');
         }
-        verify(() -> textArea.getAttribute("value"), expected.toString());
+        verify(() -> textArea.getDomProperty("value"), expected.toString());
 
         return driver;
     }
