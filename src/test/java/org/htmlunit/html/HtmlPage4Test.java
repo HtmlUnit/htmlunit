@@ -31,7 +31,7 @@ import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.ServletContentWrapper;
 import org.junit.Test;

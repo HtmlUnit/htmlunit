@@ -26,14 +26,14 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.annotations.StandardsMode;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.AlertsStandards;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.htmlunit.junit.BrowserRunner.OS;
-import org.htmlunit.junit.BrowserRunner.TestedBrowser;
-import org.htmlunit.junit.BrowserRunner.Tries;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.AlertsStandards;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.OS;
+import org.htmlunit.junit.annotation.TestedBrowser;
+import org.htmlunit.junit.annotation.Tries;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
@@ -46,7 +46,7 @@ import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 
 /**
- * The runner for test methods that run with a specific browser ({@link BrowserRunner.TestedBrowser}).
+ * The runner for test methods that run with a specific browser ({@link TestedBrowser}).
  *
  * @author Ahmed Ashour
  * @author Frank Danek

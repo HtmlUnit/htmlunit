@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Tries;
+import org.htmlunit.junit.annotation.Tries;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

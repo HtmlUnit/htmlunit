@@ -20,9 +20,9 @@ import java.util.Arrays;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.AlertsStandards;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.AlertsStandards;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 

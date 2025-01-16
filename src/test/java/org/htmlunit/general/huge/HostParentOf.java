@@ -24,7 +24,7 @@ import org.htmlunit.TestCaseTest;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;

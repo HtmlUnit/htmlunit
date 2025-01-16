@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.Cookie;
 import org.junit.Test;
 import org.junit.runner.RunWith;

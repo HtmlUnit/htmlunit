@@ -21,8 +21,8 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;

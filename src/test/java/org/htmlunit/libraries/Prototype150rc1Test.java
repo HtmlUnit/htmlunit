@@ -18,7 +18,7 @@ import java.util.List;
 
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;

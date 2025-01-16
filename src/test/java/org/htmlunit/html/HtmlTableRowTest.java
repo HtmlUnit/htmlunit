@@ -18,7 +18,7 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

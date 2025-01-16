@@ -50,7 +50,7 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.Cookie;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;

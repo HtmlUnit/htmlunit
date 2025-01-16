@@ -17,8 +17,8 @@ package org.htmlunit.general;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.annotations.StandardsMode;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.AlertsStandards;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.AlertsStandards;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
