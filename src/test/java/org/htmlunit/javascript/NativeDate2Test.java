@@ -545,7 +545,7 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("17:23:00 GMT-0500 (GMT-05:00)")
+    @Alerts("17:23:00 GMT-0500 (Eastern Standard Time)")
     @BuggyWebDriver(FF = "23:23:00 GMT+0100 (Central European Standard Time)",
             FF_ESR = "23:23:00 GMT+0100 (Central European Standard Time)")
     @HtmlUnitNYI(CHROME = "17:23:00 GMT-0500 (-05:00)",

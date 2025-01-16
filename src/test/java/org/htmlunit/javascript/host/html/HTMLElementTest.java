@@ -5366,11 +5366,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<select id=\"myId\"><select id=\"myId2\"><option>Two</option></select></select>",
-            FF = "<select id=\"myId\"><option>Two</option></select>",
-            FF_ESR = "<select id=\"myId\"><option>Two</option></select>")
-    @HtmlUnitNYI(CHROME = "<select id=\"myId\"><option>Two</option></select>",
-            EDGE = "<select id=\"myId\"><option>Two</option></select>")
+    @Alerts("<select id=\"myId\"><option>Two</option></select>")
     public void innerHTML() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

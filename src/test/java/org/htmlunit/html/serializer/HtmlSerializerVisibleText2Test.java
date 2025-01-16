@@ -799,9 +799,9 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "       A B C D EF G H\nI\n      Second\n    ",
-            EDGE = "       A B C D EF G H\nI\n      Second\n    ")
+    @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
+            FF = "A B C D EF G H I\nSecond",
+            FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
             EDGE = "A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelect() throws Exception {
@@ -813,11 +813,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
-            FF = "A B C D EF G H I\nSecond",
-            FF_ESR = "A B C D EF G H I\nSecond")
-    @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
-            EDGE = "A B C D EF G H I\nSecond")
+    @Alerts("A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
         getVisibleTextWhiteSpaceSelect("normal");
     }
@@ -827,11 +823,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
-            FF = "A B C D EF G H I\nSecond",
-            FF_ESR = "A B C D EF G H I\nSecond")
-    @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
-            EDGE = "A B C D EF G H I\nSecond")
+    @Alerts("A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("nowrap");
     }
@@ -841,7 +833,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "       A B C D EF G H\nI\n      Second\n    ",
+    @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
@@ -857,7 +849,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "       A B C D EF G H\nI\n      Second\n    ",
+    @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
@@ -873,9 +865,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
-            FF = "A B C D EF G H I\nSecond",
-            FF_ESR = "A B C D EF G H I\nSecond")
+    @Alerts("A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "A B C D \nEF\nG \n H I\n Second",
             EDGE = "A B C D \nEF\nG \n H I\n Second",
             FF = "A B C D \nEF\nG \n H I\n Second",

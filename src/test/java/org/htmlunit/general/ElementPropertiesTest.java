@@ -8990,11 +8990,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "arrayBuffer(),blob(),body,bodyUsed,cache,clone(),credentials,destination,duplex,formData(),"
+    @Alerts(CHROME = "arrayBuffer(),blob(),body,bodyUsed,bytes(),"
+                + "cache,clone(),credentials,destination,duplex,formData(),"
                 + "headers,integrity,isHistoryNavigation,json(),keepalive,method,mode,redirect,referrer,"
                 + "referrerPolicy,signal,targetAddressSpace,text(),"
                 + "url",
-            EDGE = "arrayBuffer(),blob(),body,bodyUsed,cache,clone(),credentials,destination,duplex,formData(),"
+            EDGE = "arrayBuffer(),blob(),body,bodyUsed,bytes(),"
+                + "cache,clone(),credentials,destination,duplex,formData(),"
                 + "headers,integrity,isHistoryNavigation,json(),keepalive,method,mode,redirect,referrer,"
                 + "referrerPolicy,signal,targetAddressSpace,text(),"
                 + "url",
@@ -9018,10 +9020,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "arrayBuffer(),blob(),body,bodyUsed,clone(),formData(),headers,json(),ok,redirected,status,"
+    @Alerts(CHROME = "arrayBuffer(),blob(),body,bodyUsed,bytes(),"
+                + "clone(),formData(),headers,json(),ok,redirected,status,"
                 + "statusText,text(),type,"
                 + "url",
-            EDGE = "arrayBuffer(),blob(),body,bodyUsed,clone(),formData(),headers,json(),ok,redirected,status,"
+            EDGE = "arrayBuffer(),blob(),body,bodyUsed,bytes(),"
+                + "clone(),formData(),headers,json(),ok,redirected,status,"
                 + "statusText,text(),type,"
                 + "url",
             FF = "arrayBuffer(),blob(),body,bodyUsed,bytes(),clone(),formData(),headers,json(),ok,redirected,"
@@ -9265,8 +9269,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "adAuctionComponents(),appCodeName,appName,appVersion,bluetooth,canLoadAdAuctionFencedFrame(),"
                 + "canShare(),clearAppBadge(),clearOriginJoinedAdInterestGroups(),clipboard,connection,"
                 + "cookieEnabled,createAuctionNonce(),credentials,deprecatedReplaceInURN(),"
-                + "deprecatedRunAdAuctionEnforcesKAnonymity,deprecatedURNToURL(),deviceMemory,doNotTrack,"
-                + "geolocation,getBattery(),getGamepads(),getInstalledRelatedApps(),getUserMedia(),gpu,"
+                + "deprecatedRunAdAuctionEnforcesKAnonymity,deprecatedURNToURL(),deviceMemory,devicePosture,"
+                + "doNotTrack,"
+                + "geolocation,getBattery(),getGamepads(),getInstalledRelatedApps(),getInterestGroupAdAuctionData(),"
+                + "getUserMedia(),gpu,"
                 + "hardwareConcurrency,hid,ink,javaEnabled(),joinAdInterestGroup(),keyboard,language,languages,"
                 + "leaveAdInterestGroup(),locks,login,managed,maxTouchPoints,mediaCapabilities,mediaDevices,"
                 + "mediaSession,mimeTypes,onLine,pdfViewerEnabled,permissions,platform,plugins,presentation,product,"
@@ -9280,8 +9286,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "adAuctionComponents(),appCodeName,appName,appVersion,bluetooth,canLoadAdAuctionFencedFrame(),"
                 + "canShare(),clearAppBadge(),clearOriginJoinedAdInterestGroups(),clipboard,connection,"
                 + "cookieEnabled,createAuctionNonce(),credentials,deprecatedReplaceInURN(),"
-                + "deprecatedRunAdAuctionEnforcesKAnonymity,deprecatedURNToURL(),deviceMemory,doNotTrack,"
-                + "geolocation,getBattery(),getGamepads(),getInstalledRelatedApps(),getUserMedia(),gpu,"
+                + "deprecatedRunAdAuctionEnforcesKAnonymity,deprecatedURNToURL(),deviceMemory,devicePosture,"
+                + "doNotTrack,"
+                + "geolocation,getBattery(),getGamepads(),getInstalledRelatedApps(),getInterestGroupAdAuctionData(),"
+                + "getUserMedia(),gpu,"
                 + "hardwareConcurrency,hid,ink,javaEnabled(),joinAdInterestGroup(),keyboard,language,languages,"
                 + "leaveAdInterestGroup(),locks,login,managed,maxTouchPoints,mediaCapabilities,mediaDevices,"
                 + "mediaSession,mimeTypes,onLine,pdfViewerEnabled,permissions,platform,plugins,presentation,product,"

@@ -695,10 +695,10 @@ public final class StyleAttributes implements Serializable {
         BORDER_RIGHT_WIDTH_("border-right-width", "border-right-width", ff("0px")),
 
         /** The style property {@code borderSpacing}. */
-        BORDER_SPACING("borderSpacing", "border-spacing", chromeAndEdge("0px 0px"), ff("0px 0px")),
+        BORDER_SPACING("borderSpacing", "border-spacing", chromeAndEdge("0px 0px"), ffEsr("0px 0px"), ffLatest("0px")),
 
         /** The style property {@code border-spacing}. */
-        BORDER_SPACING_("border-spacing", "border-spacing", ff("0px 0px")),
+        BORDER_SPACING_("border-spacing", "border-spacing", ffEsr("0px 0px"), ffLatest("0px")),
 
         /** The style property {@code borderStartEndRadius}. */
         BORDER_START_END_RADIUS("borderStartEndRadius", "border-start-end-radius", chromeAndEdge("0px"), ff("0px")),

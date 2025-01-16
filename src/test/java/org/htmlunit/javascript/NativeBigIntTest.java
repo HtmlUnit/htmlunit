@@ -17,7 +17,6 @@ package org.htmlunit.javascript;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,7 +32,7 @@ public class NativeBigIntTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"bigint", "bigint"})
+    @Alerts({"bigint", "bigint"})
     public void typeof() throws Exception {
         final String html
             = "<html>"

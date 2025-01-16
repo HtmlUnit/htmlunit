@@ -17871,12 +17871,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],cache[GCE],clone(),constructor(),credentials[GCE],"
+    @Alerts(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),"
+                + "cache[GCE],clone(),constructor(),credentials[GCE],"
                 + "destination[GCE],duplex[GCE],formData(),headers[GCE],integrity[GCE],isHistoryNavigation[GCE],json(),"
                 + "keepalive[GCE],method[GCE],mode[GCE],redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],"
                 + "targetAddressSpace[GCE],text(),"
                 + "url[GCE]",
-            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],cache[GCE],clone(),constructor(),credentials[GCE],"
+            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),"
+                + "cache[GCE],clone(),constructor(),credentials[GCE],"
                 + "destination[GCE],duplex[GCE],formData(),headers[GCE],integrity[GCE],isHistoryNavigation[GCE],json(),"
                 + "keepalive[GCE],method[GCE],mode[GCE],redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],"
                 + "targetAddressSpace[GCE],text(),"
@@ -17903,10 +17905,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],clone(),constructor(),formData(),headers[GCE],"
+    @Alerts(CHROME = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),"
+                + "clone(),constructor(),formData(),headers[GCE],"
                 + "json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
                 + "url[GCE]",
-            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],clone(),constructor(),formData(),headers[GCE],"
+            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),"
+                + "clone(),constructor(),formData(),headers[GCE],"
                 + "json(),ok[GCE],redirected[GCE],status[GCE],statusText[GCE],text(),type[GCE],"
                 + "url[GCE]",
             FF = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),clone(),constructor(),formData(),"
@@ -18141,8 +18145,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "canLoadAdAuctionFencedFrame(),canShare(),clearAppBadge(),clearOriginJoinedAdInterestGroups(),"
                 + "clipboard[GCE],connection[GCE],constructor(),cookieEnabled[GCE],createAuctionNonce(),"
                 + "credentials[GCE],deprecatedReplaceInURN(),deprecatedRunAdAuctionEnforcesKAnonymity[GCE],"
-                + "deprecatedURNToURL(),deviceMemory[GCE],doNotTrack[GCE],geolocation[GCE],getBattery(),"
-                + "getGamepads(),getInstalledRelatedApps(),getUserMedia(),gpu[GCE],hardwareConcurrency[GCE],"
+                + "deprecatedURNToURL(),deviceMemory[GCE],devicePosture[GCE],"
+                + "doNotTrack[GCE],geolocation[GCE],getBattery(),"
+                + "getGamepads(),getInstalledRelatedApps(),getInterestGroupAdAuctionData(),"
+                + "getUserMedia(),gpu[GCE],hardwareConcurrency[GCE],"
                 + "hid[GCE],ink[GCE],javaEnabled(),joinAdInterestGroup(),keyboard[GCE],language[GCE],languages[GCE],"
                 + "leaveAdInterestGroup(),locks[GCE],login[GCE],managed[GCE],maxTouchPoints[GCE],"
                 + "mediaCapabilities[GCE],mediaDevices[GCE],mediaSession[GCE],mimeTypes[GCE],onLine[GCE],"
@@ -18159,8 +18165,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "canLoadAdAuctionFencedFrame(),canShare(),clearAppBadge(),clearOriginJoinedAdInterestGroups(),"
                 + "clipboard[GCE],connection[GCE],constructor(),cookieEnabled[GCE],createAuctionNonce(),"
                 + "credentials[GCE],deprecatedReplaceInURN(),deprecatedRunAdAuctionEnforcesKAnonymity[GCE],"
-                + "deprecatedURNToURL(),deviceMemory[GCE],doNotTrack[GCE],geolocation[GCE],getBattery(),"
-                + "getGamepads(),getInstalledRelatedApps(),getUserMedia(),gpu[GCE],hardwareConcurrency[GCE],"
+                + "deprecatedURNToURL(),deviceMemory[GCE],devicePosture[GCE],"
+                + "doNotTrack[GCE],geolocation[GCE],getBattery(),"
+                + "getGamepads(),getInstalledRelatedApps(),getInterestGroupAdAuctionData(),"
+                + "getUserMedia(),gpu[GCE],hardwareConcurrency[GCE],"
                 + "hid[GCE],ink[GCE],javaEnabled(),joinAdInterestGroup(),keyboard[GCE],language[GCE],languages[GCE],"
                 + "leaveAdInterestGroup(),locks[GCE],login[GCE],managed[GCE],maxTouchPoints[GCE],"
                 + "mediaCapabilities[GCE],mediaDevices[GCE],mediaSession[GCE],mimeTypes[GCE],onLine[GCE],"

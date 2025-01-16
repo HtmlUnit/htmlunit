@@ -19,6 +19,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -157,7 +158,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                        "success",
                        "success",
                        "wordSpacing 42% - 42em"},
-            FF = {"success", "letterSpacing 42% - 42em",
+            FF = {"success", "success",
                   "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
                   "success",
                   "success",
@@ -167,6 +168,11 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                       "success",
                       "success",
                       "success"})
+    @HtmlUnitNYI(FF = {"success", "letterSpacing 42% - 42em",
+                       "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
+                       "success",
+                       "success",
+                       "success"})
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");

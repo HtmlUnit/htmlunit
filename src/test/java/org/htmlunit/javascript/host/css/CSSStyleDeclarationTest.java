@@ -2699,8 +2699,12 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
+            FF = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @HtmlUnitNYI(FF = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLetterSpacingProperty() throws Exception {
         setLengthProperty("letter-spacing", "letterSpacing");
     }
@@ -2709,8 +2713,12 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-             "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
+            FF = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+                  "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @HtmlUnitNYI(FF = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
+                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLetterSpacing() throws Exception {
         setLength("letter-spacing", "letterSpacing");
     }
