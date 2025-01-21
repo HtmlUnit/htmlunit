@@ -108,7 +108,13 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public void setValue(final String value) {
-        value_ = value;
+        if (value != null
+                && value.isEmpty()) {
+            value_ = DomElement.ATTRIBUTE_VALUE_EMPTY;
+        }
+        else {
+            value_ = value;
+        }
         specified_ = true;
     }
 
