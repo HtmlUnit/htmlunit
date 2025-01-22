@@ -164,6 +164,7 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
 
         final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
         final File downloadFolder = new File(tmpFolder, "downloading-attachment-test");
+        FileUtils.deleteDirectory(downloadFolder);
 
         try {
             FileUtils.forceMkdir(downloadFolder);

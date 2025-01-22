@@ -1087,18 +1087,28 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     protected final WebDriver verifyTitle2(final long maxWaitTime, final WebDriver driver,
             final String... expectedAlerts) throws Exception {
+
+        final StringBuilder expected = new StringBuilder();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expected.append(expectedAlerts[i]).append('\u00A7');
+        }
+        final String expectedTitle = expected.toString();
+
         final long maxWait = System.currentTimeMillis() + maxWaitTime;
 
         while (System.currentTimeMillis() < maxWait) {
             try {
-                return verifyTitle2(driver, expectedAlerts);
+                final String title = driver.getTitle();
+                assertEquals(expectedTitle, title);
+                return driver;
             }
             catch (final AssertionError e) {
                 // ignore and wait
             }
         }
 
-        return verifyTitle2(driver, expectedAlerts);
+        assertEquals(expectedTitle, driver.getTitle());
+        return driver;
     }
 
     protected final WebDriver verifyTitle2(final WebDriver driver,
