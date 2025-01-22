@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.9.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 134, BigInt, Bugfixes">
+        <release version="4.9.0" date="January 22, 2025" description="Chrome/Edge 132, Firefox 134, BigInt, Bugfixes">
             <action type="fix" dev="rbri">
                 WebClientOptions SSLTrustStore is transient.
             </action>
