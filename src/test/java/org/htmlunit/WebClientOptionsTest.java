@@ -17,6 +17,7 @@ package org.htmlunit;
 import javax.net.ssl.SSLContext;
 
 import org.apache.commons.lang3.SerializationUtils;
+import org.htmlunit.WebClientOptions.Geolocation;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,6 +49,9 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         assertEquals(original.isThrowExceptionOnScriptError(), deserialized.isThrowExceptionOnScriptError());
         assertEquals(original.isPopupBlockerEnabled(), deserialized.isPopupBlockerEnabled());
         assertEquals(original.isRedirectEnabled(), deserialized.isRedirectEnabled());
+
+        assertEquals(original.isGeolocationEnabled(), deserialized.isGeolocationEnabled());
+        assertEquals(original.getGeolocation(), deserialized.getGeolocation());
     }
 
     /**
@@ -65,6 +69,9 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         original.setPopupBlockerEnabled(true);
         original.setRedirectEnabled(false);
 
+        original.setGeolocationEnabled(true);
+        original.setGeolocation(new WebClientOptions.Geolocation(1d, 2d, 3d, 4d, 5d, 6d, 7d));
+
         final byte[] bytes = SerializationUtils.serialize(original);
         final WebClientOptions deserialized = (WebClientOptions) SerializationUtils.deserialize(bytes);
 
@@ -77,6 +84,16 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         assertEquals(original.isThrowExceptionOnScriptError(), deserialized.isThrowExceptionOnScriptError());
         assertEquals(original.isPopupBlockerEnabled(), deserialized.isPopupBlockerEnabled());
         assertEquals(original.isRedirectEnabled(), deserialized.isRedirectEnabled());
+
+        assertEquals(original.isGeolocationEnabled(), deserialized.isGeolocationEnabled());
+        assertEquals(original.getGeolocation().getAccuracy(), deserialized.getGeolocation().getAccuracy());
+        assertEquals(original.getGeolocation().getLatitude(), deserialized.getGeolocation().getLatitude());
+        assertEquals(original.getGeolocation().getLongitude(), deserialized.getGeolocation().getLongitude());
+        assertEquals(original.getGeolocation().getAltitude(), deserialized.getGeolocation().getAltitude());
+        assertEquals(original.getGeolocation().getAltitudeAccuracy(),
+                deserialized.getGeolocation().getAltitudeAccuracy());
+        assertEquals(original.getGeolocation().getHeading(), deserialized.getGeolocation().getHeading());
+        assertEquals(original.getGeolocation().getSpeed(), deserialized.getGeolocation().getSpeed());
     }
 
     /**
