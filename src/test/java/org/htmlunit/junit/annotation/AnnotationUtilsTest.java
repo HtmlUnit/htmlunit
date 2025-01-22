@@ -232,7 +232,7 @@ public class AnnotationUtilsTest {
     }
 
     private void testFail(final String expectedMsg, final String methodName) throws Exception {
-        final Method method = getClass().getMethod(methodName, null);
+        final Method method = getClass().getMethod(methodName, (Class[]) null);
 
         try {
             AnnotationUtils.assertAlerts(method);
