@@ -9,6 +9,12 @@
     <body>
         <release version="4.9.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 134, BigInt, Bugfixes">
             <action type="fix" dev="rbri">
+                WebClientOptions.Geolocation is serializable now
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlDomTreeWalker is serializable now
+            </action>
+            <action type="fix" dev="rbri">
                 core-js: junit-vintage-engine was NOT marked as 'test' dependency, therefore we had junit
                 as part of our depenencies/lib/diestribution (regression from 4.8.0)
             </action>

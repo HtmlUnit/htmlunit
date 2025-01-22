@@ -17,7 +17,6 @@ package org.htmlunit;
 import javax.net.ssl.SSLContext;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.htmlunit.WebClientOptions.Geolocation;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
