@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import java.io.Serializable;
+
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
@@ -30,7 +32,7 @@ import org.w3c.dom.traversal.NodeFilter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public class HtmlDomTreeWalker {
+public class HtmlDomTreeWalker implements Serializable {
 
     private final DomNode root_;
     private DomNode currentNode_;
