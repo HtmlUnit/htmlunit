@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import java.security.KeyStore;
+
 import javax.net.ssl.SSLContext;
 
 import org.apache.commons.lang3.SerializationUtils;
@@ -107,5 +109,21 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         final WebClientOptions deserialized = (WebClientOptions) SerializationUtils.deserialize(bytes);
 
         assertNull(deserialized.getSSLContext());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serializationSSLTrustStore() throws Exception {
+        final WebClientOptions original = new WebClientOptions();
+
+        final KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+        original.setSSLTrustStore(keyStore);
+
+        final byte[] bytes = SerializationUtils.serialize(original);
+        final WebClientOptions deserialized = (WebClientOptions) SerializationUtils.deserialize(bytes);
+
+        assertNull(deserialized.getSSLTrustStore());
     }
 }

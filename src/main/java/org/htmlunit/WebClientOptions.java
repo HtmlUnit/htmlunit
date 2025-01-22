@@ -55,7 +55,7 @@ public class WebClientOptions implements Serializable {
 
     private KeyStore sslClientCertificateStore_;
     private char[] sslClientCertificatePassword_;
-    private KeyStore sslTrustStore_;
+    private transient KeyStore sslTrustStore_;
     private String[] sslClientProtocols_;
     private String[] sslClientCipherSuites_;
 
@@ -541,6 +541,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Sets the SSL server certificate trust store. All server certificates will be validated against
      * this trust store.
+     * <p>This property is transient (because KeyStore is not serializable)
      * <p>
      * The needed parameters are used to construct a {@link java.security.KeyStore}.
      *
@@ -564,6 +565,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the SSL TrustStore.
+     * <p>This property is transient (because KeyStore is not serializable)
      * @return the SSL TrustStore for insecure SSL connections
      */
     public KeyStore getSSLTrustStore() {
