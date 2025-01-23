@@ -99,6 +99,7 @@ HtmlUnit is used as the underlying "browser" by different Open Source tools like
  * [WETATOR](https://www.wetator.org/)
  * [Selenium Foundation](https://github.com/sbabcoc/Selenium-Foundation)
  * [Spring Testing](https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit)
+ * [Selenide](https://selenide.org/)
  * [JWebUnit](https://jwebunit.github.io/jwebunit/)
  * [JSFUnit](http://www.jboss.org/jsfunit/)
  * ...
