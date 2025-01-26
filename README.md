@@ -128,9 +128,12 @@ You can start here:
 * [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
 * [How to test Jakarta Faces with HtmlUnit and Arquillian][11]
 * [WebScraping.AI HtmlUnit FAQ][13]: 
+
 ## Contributing
 Pull Requests and all other Community Contributions are essential for open source software.
 Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
+
+Please try to keep your pull requests small (don't bundle unrelated changes) and try to include test cases.
 
 ## Last CI build
 The latest builds are available from our
@@ -214,10 +217,6 @@ check dependencies for known security problems
 mvn dependency-check:check
 ```
 
-### Contributing
-
-I welcome contributions, especially in the form of pull requests.
-Please try to keep your pull requests small (don't bundle unrelated changes) and try to include test cases.
 
 ## Some insights
 [HtmlUnit at openhub][5]
