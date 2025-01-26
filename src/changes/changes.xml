@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="4.10.0" date="February xx, 2025" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                WebClientOptions sslClientCertificateStore is transient.
+            </action>
+        </release>
+
+
         <release version="4.9.0" date="January 22, 2025" description="Chrome/Edge 132, Firefox 134, BigInt, Bugfixes">
             <action type="fix" dev="rbri">
                 WebClientOptions SSLTrustStore is transient.
@@ -31,6 +38,7 @@
                 core-js: Context#emptyArgs is deprecated.
             </action>
         </release>
+
 
         <release version="4.8.0" date="January 12, 2025" description="Bugfixes, css colors, less dependencies, improved javascript support">
             <action type="add" dev="rbri">

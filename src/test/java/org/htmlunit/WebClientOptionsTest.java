@@ -20,6 +20,7 @@ import javax.net.ssl.SSLContext;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.junit.BrowserRunner;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -125,5 +126,22 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         final WebClientOptions deserialized = (WebClientOptions) SerializationUtils.deserialize(bytes);
 
         assertNull(deserialized.getSSLTrustStore());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void sslClientCertificateStore() throws Exception {
+        final WebClientOptions original = new WebClientOptions();
+
+        final KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+        original.setSSLClientCertificateKeyStore(keyStore, "secret".toCharArray());
+
+        final byte[] bytes = SerializationUtils.serialize(original);
+        final WebClientOptions deserialized = (WebClientOptions) SerializationUtils.deserialize(bytes);
+
+        assertNull(deserialized.getSSLClientCertificateStore());
+        Assert.assertArrayEquals("secret".toCharArray(), deserialized.getSSLClientCertificatePassword());
     }
 }

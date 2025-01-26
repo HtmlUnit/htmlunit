@@ -53,7 +53,7 @@ public class WebClientOptions implements Serializable {
     private boolean isRedirectEnabled_ = true;
     private File tempFileDirectory_;
 
-    private KeyStore sslClientCertificateStore_;
+    private transient KeyStore sslClientCertificateStore_;
     private char[] sslClientCertificatePassword_;
     private transient KeyStore sslTrustStore_;
     private String[] sslClientProtocols_;
@@ -188,6 +188,7 @@ public class WebClientOptions implements Serializable {
      * In some cases the impl seems to pick old certificates from the {@link KeyStore}. To avoid
      * that, wrap your {@link KeyStore} inside your own {@link KeyStore} impl and filter out outdated
      * certificates.
+     * <p>This property is transient (because KeyStore is not serializable)
      *
      * @param keyStore {@link KeyStore} to use
      * @param keyStorePassword the keystore password
@@ -205,6 +206,7 @@ public class WebClientOptions implements Serializable {
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
+     * <p>This property is transient (because KeyStore is not serializable)
      *
      * @param keyStoreUrl the URL which locates the certificate {@link KeyStore}
      * @param keyStorePassword the certificate {@link KeyStore} password
@@ -253,6 +255,8 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the SSLClientCertificateStore.
+     * <p>This property is transient (because KeyStore is not serializable)
+     *
      * @return the KeyStore for use on SSL connections
      */
     public KeyStore getSSLClientCertificateStore() {
@@ -542,8 +546,7 @@ public class WebClientOptions implements Serializable {
      * Sets the SSL server certificate trust store. All server certificates will be validated against
      * this trust store.
      * <p>This property is transient (because KeyStore is not serializable)
-     * <p>
-     * The needed parameters are used to construct a {@link java.security.KeyStore}.
+     * <p>The needed parameters are used to construct a {@link java.security.KeyStore}.
      *
      * @param sslTrustStoreUrl the URL which locates the trust store
      * @param sslTrustStorePassword the trust store password
