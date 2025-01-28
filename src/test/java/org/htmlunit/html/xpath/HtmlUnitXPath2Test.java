@@ -31,6 +31,14 @@ import org.junit.runner.RunWith;
 public class HtmlUnitXPath2Test extends WebDriverTestCase {
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isWebClientCached() {
+        return true;
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -258,6 +266,51 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("false")
+    public void startsWith() throws Exception {
+        compareBooleanValue("starts-with(\"haystack\", \"needle\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void startsWithFound() throws Exception {
+        compareBooleanValue("starts-with(\"haystack\", \"hay\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void startsWithWhole() throws Exception {
+        compareBooleanValue("starts-with(\"haystack\", \"haystack\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void startsWithEmpty() throws Exception {
+        compareBooleanValue("starts-with(\"haystack\", \"\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void startsWithEmptyEmpty() throws Exception {
+        compareBooleanValue("starts-with(\"\", \"\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("'tml'")
     public void substring() throws Exception {
         compareStringValue("substring(\"HtmlUnit\", 2, 3)");
@@ -319,9 +372,27 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("error")
+    @Alerts("SyntaxError")
     public void lowerCaseNotSupported() throws Exception {
-        compare("//*[lower-case(@id) = \"a\"]");
+        compareError("//*[lower-case(@id) = \"a\"]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError")
+    public void upperCaseNotSupported() throws Exception {
+        compareError("//*[upper-case(@id) = \"A\"]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError")
+    public void endsWithNotSupported() throws Exception {
+        compareError("ends-with(\"haystack\", \"haystack\")");
     }
 
     private void compare(final String xpath) throws Exception {
@@ -338,7 +409,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node.id;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -394,6 +465,25 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "    <p id='a' x='1' y='7'></p>\n"
             + "    <p id='b' y='13'></p>\n"
             + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    private void compareError(final String xpath) throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var expr = '" + xpath + "';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    log('error expected');\n"
+            + "  } catch (e) {log(e.name)}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(content);
