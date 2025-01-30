@@ -35,7 +35,7 @@
         <httpcomponents.version>4.5.14</httpcomponents.version>
 
         <htmlunitdriver.version>4.28.0</htmlunitdriver.version>
-        <selenium.version>4.28.0</selenium.version>
+        <selenium.version>4.28.1</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v132</selenium.devtools.artifactId>
 
         <jetty.version>9.4.57.v20241219</jetty.version>
