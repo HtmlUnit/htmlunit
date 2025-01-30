@@ -34,16 +34,16 @@
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
 
-        <htmlunitdriver.version>4.27.0</htmlunitdriver.version>
-        <selenium.version>4.27.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v131</selenium.devtools.artifactId>
+        <htmlunitdriver.version>4.28.0</htmlunitdriver.version>
+        <selenium.version>4.28.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v132</selenium.devtools.artifactId>
 
         <jetty.version>9.4.57.v20241219</jetty.version>
         <log4j.version>2.24.3</log4j.version>
         <slf4j.version>2.0.16</slf4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>10.21.1</checkstyle.version>
+        <checkstyle.version>10.21.2</checkstyle.version>
         <spotbugs.version>4.9.0</spotbugs.version>
         <pmd.version>7.9.0</pmd.version>
         <junit.version>4.13.2</junit.version>
