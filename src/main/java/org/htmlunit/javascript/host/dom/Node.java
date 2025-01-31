@@ -277,8 +277,10 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                throw JavaScriptEngine.constructError("ReferenceError",
-                        "Node cannot be inserted at the specified point in the hierarchy");
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+                            DOMException.HIERARCHY_REQUEST_ERR));
             }
 
             final DomNode newChildNode = newChild.getDomNodeOrDie();
@@ -318,7 +320,10 @@ public class Node extends EventTarget {
                 domNode.insertBefore(newChildNode, refChildNode);
             }
             catch (final org.w3c.dom.DOMException e) {
-                throw JavaScriptEngine.constructError("ReferenceError", e.getMessage());
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new org.htmlunit.javascript.host.dom.DOMException(e.getMessage(),
+                                org.htmlunit.javascript.host.dom.DOMException.NOT_FOUND_ERR));
             }
             return newChild;
         }
@@ -362,9 +367,12 @@ public class Node extends EventTarget {
         final DomNode childDomNode = childObjectNode.getDomNodeOrDie();
 
         if (!getDomNodeOrDie().isAncestorOf(childDomNode)) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(
-                    new Exception("NotFoundError: Failed to execute 'removeChild' on '"
-                        + this + "': The node to be removed is not a child of this node."));
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            "Failed to execute 'removeChild' on '"
+                                    + this + "': The node to be removed is not a child of this node.",
+                            org.htmlunit.javascript.host.dom.DOMException.NOT_FOUND_ERR));
         }
         // Remove the child from the parent node
         childDomNode.remove();
@@ -406,8 +414,11 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                throw JavaScriptEngine.reportRuntimeError(
-                        "Node cannot be inserted at the specified point in the hierarchy");
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new org.htmlunit.javascript.host.dom.DOMException(
+                                "Node cannot be inserted at the specified point in the hierarchy",
+                                org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR));
             }
 
             // Get XML nodes for the DOM nodes passed in
@@ -728,7 +739,7 @@ public class Node extends EventTarget {
     @JsxFunction
     public int compareDocumentPosition(final Object node) {
         if (!(node instanceof Node)) {
-            throw JavaScriptEngine.reportRuntimeError("Could not convert JavaScript argument arg 0");
+            throw JavaScriptEngine.typeError("Could not convert JavaScript argument arg 0");
         }
         return getDomNodeOrDie().compareDocumentPosition(((Node) node).getDomNodeOrDie());
     }
