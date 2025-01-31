@@ -616,7 +616,11 @@ public class Document extends Node {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("createElement: Provided string '" + tagNameString + "' contains an invalid character");
                 }
-                throw JavaScriptEngine.reportRuntimeError("String contains an invalid character");
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new org.htmlunit.javascript.host.dom.DOMException(
+                                "createElement: Provided string '" + tagNameString + "' contains an invalid character",
+                                org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR));
             }
             for (int i = 1; i < tagNameString.length(); i++) {
                 final int c = tagNameString.charAt(i);
@@ -629,7 +633,12 @@ public class Document extends Node {
                         LOG.info("createElement: Provided string '"
                                     + tagNameString + "' contains an invalid character");
                     }
-                    throw JavaScriptEngine.reportRuntimeError("String contains an invalid character");
+                    throw JavaScriptEngine.asJavaScriptException(
+                            getWindow(),
+                            new org.htmlunit.javascript.host.dom.DOMException(
+                                    "createElement: Provided string '" + tagNameString
+                                    + "' contains an invalid character",
+                                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR));
                 }
             }
         }

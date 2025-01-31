@@ -573,9 +573,11 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object HTMLUnknownElement]", "exception", "exception",
-             "exception", "exception", "[object HTMLUnknownElement]",
-             "[object HTMLUnknownElement]", "exception"})
+    @Alerts({"[object HTMLUnknownElement]",
+             "InvalidCharacterError", "InvalidCharacterError",
+             "InvalidCharacterError", "InvalidCharacterError",
+             "[object HTMLUnknownElement]",
+             "[object HTMLUnknownElement]", "InvalidCharacterError"})
     public void documentCreateElementUnknown() throws Exception {
         final String html
             = "<html>\n"
@@ -586,58 +588,42 @@ public class DocumentTest extends WebDriverTestCase {
             + "        try {"
             + "          var elem = document.createElement('anchor');\n"
             + "          log(elem);\n"
-            + "        } catch(ex) {\n"
-            + "          log('exception');\n"
-            + "        }\n"
+            + "        } catch(e) {log(e.name);}\n"
 
             + "        try {"
             + "          var elem = document.createElement('not known');\n"
             + "          log(elem);\n"
-            + "        } catch(ex) {\n"
-            + "          log('exception');\n"
-            + "        }\n"
+            + "        } catch(e) {log(e.name);}\n"
 
             + "        try {"
             + "          var elem = document.createElement('<div');\n"
             + "          log(elem);\n"
-            + "        } catch(ex) {\n"
-            + "          log('exception');\n"
-            + "        }\n"
+            + "        } catch(e) {log(e.name);}\n"
 
             + "        try {"
             + "          var elem = document.createElement('div>');\n"
             + "          log(elem);\n"
-            + "        } catch(ex) {\n"
-            + "          log('exception');\n"
-            + "        }\n"
+            + "        } catch(e) {log(e.name);}\n"
 
             + "        try {"
             + "          var elem = document.createElement('<div>');\n"
             + "          log(elem);\n"
-            + "        } catch(ex) {\n"
-            + "          log('exception');\n"
-            + "        }\n"
+            + "        } catch(e) {log(e.name);}\n"
 
             + "        try {"
             + "          var elem = document.createElement(undefined);\n"
             + "          log(elem);\n"
-            + "        } catch(ex) {\n"
-            + "          log('exception');\n"
-            + "        }\n"
+            + "        } catch(e) {log(e.name);}\n"
 
             + "        try {"
             + "          var elem = document.createElement(null);\n"
             + "          log(elem);\n"
-            + "        } catch(ex) {\n"
-            + "          log('exception');\n"
-            + "        }\n"
+            + "        } catch(e) {log(e.name);}\n"
 
             + "        try {"
             + "          var elem = document.createElement(42);\n"
             + "          log(elem);\n"
-            + "        } catch(ex) {\n"
-            + "          log('exception');\n"
-            + "        }\n"
+            + "        } catch(e) {log(e.name);}\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1183,7 +1169,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "exception"})
+    @Alerts({"1", "HierarchyRequestError"})
     public void appendChildAtDocumentLevel() throws Exception {
         final String html =
               "<html>\n"
@@ -1200,9 +1186,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "        log(document.childNodes[0].tagName);\n"
             + "        log(document.childNodes[1].tagName);\n"
             + "        log(document.getElementsByTagName('div').length);\n"
-            + "      } catch(ex) {\n"
-            + "        log('exception');\n"
-            + "      }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -2044,7 +2028,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void all_tags() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2062,7 +2046,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "    log(document.all.tags('input').item(1).name);\n"
             + "    // Make sure tags() returns an empty element array if there are no matches.\n"
             + "    log(document.all.tags('xxx').length);\n"
-            + "  } catch (e) { log('exception') }\n"
+            + "  } catch (e) { log(e.name) }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<input type='text' name='a' value='1'>\n"
@@ -2578,7 +2562,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void createStyleSheet() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2587,10 +2571,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  var s = document.createStyleSheet('foo.css', 1);\n"
             + "  log(s);\n"
-            + "}\n"
-            + "catch(ex) {\n"
-            + "  log('exception');\n"
-            + "}\n"
+            + "} catch(e) {log(e.name);}\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -2653,7 +2634,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NotSupportedError")
     public void createEvent_Bogus() throws Exception {
         createEvent("Bogus");
     }
@@ -2670,7 +2651,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "  log(e);\n"
             + "  log(e.cancelable);\n"
             + "}\n"
-            + "catch (e) { log('exception') }\n"
+            + "catch (e) { log(e.name) }\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -2697,7 +2678,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
             + "          log(event.target);\n"
             + "          document.getElementById('d').dispatchEvent(event);\n"
-            + "        } catch (e) { log('exception') }\n"
+            + "        } catch (e) { log(e.name) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -2724,7 +2705,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "          event.initMouseEvent('click', true, true, window,\n"
             + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
             + "          document.getElementById('d').dispatchEvent(event);\n"
-            + "        } catch (e) { log('exception') }\n"
+            + "        } catch (e) { log(e.name) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -2752,7 +2733,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "          event.initMouseEvent('click', true, true, window,\n"
             + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
             + "          document.getElementById('d').dispatchEvent(event);\n"
-            + "        } catch (e) { log('exception') }\n"
+            + "        } catch (e) { log(e.name) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -2809,7 +2790,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void createEventObject_IE() throws Exception {
         final String html =
               "<html><head>\n"
@@ -2820,9 +2801,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "  log(e != null);\n"
             + "  log(typeof e);\n"
             + "  log(e);\n"
-            + "} catch(ex) {\n"
-            + "  log('exception');\n"
-            + "}\n"
+            + "} catch(e) {log(e.name);}\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -3714,10 +3693,10 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"about:blank", "about:blank", "undefined", "null", "null"})
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "InternalError",
+            EDGE = "InternalError",
+            FF = "InternalError",
+            FF_ESR = "InternalError")
     public void newDoc() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -3733,7 +3712,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "        log(doc.origin);\n"
             + "        log(doc.firstElementChild);\n"
             + "        log(doc.defaultView);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

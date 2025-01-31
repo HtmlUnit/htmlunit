@@ -462,7 +462,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "    script.appendChild(document.createTextNode('log(\"2\");'));\n"
             + "    script.text = 'log(\"3\");';\n"
             + "    document.body.appendChild(script);\n"
-            + "  } catch (e) {log('exception');}\n"
+            + "  } catch (e) {log(e.name);}\n"
             + "</script>\n"
             + "</body></html>";
 

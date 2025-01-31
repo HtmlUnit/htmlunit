@@ -52,7 +52,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
             + "    var d = document.createElement('div');\n"
             + "    frag.appendChild(d);\n"
             + "    log(window.getComputedStyle(d, null));\n"
-            + "  } catch (e) { log('exception'); }\n"
+            + "  } catch (e) { log(e.name); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

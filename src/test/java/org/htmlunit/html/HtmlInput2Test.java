@@ -42,7 +42,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"null", "error", "handler", "null", "error"})
+    @Alerts({"null", "TypeError", "handler", "null", "TypeError"})
     public void onchangeDirectCall() throws Exception {
         final String html =
             "<html><head>\n"
@@ -55,7 +55,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             + "      log(elem.onchange);\n"
             + "      elem.onchange();\n"
             + "      log('onchange called');\n"
-            + "    } catch (e) {log('error')}\n"
+            + "    } catch (e) {log(e.name)}\n"
 
             + "    elem.onchange = handler;\n"
             + "    elem.onchange();\n"
@@ -65,7 +65,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             + "      log(elem.onchange);\n"
             + "      elem.onchange();\n"
             + "      log('onchange called');\n"
-            + "    } catch (e) {log('error')}\n"
+            + "    } catch (e) {log(e.name)}\n"
 
             + "  }\n"
             + "</script>\n"
