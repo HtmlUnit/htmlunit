@@ -149,7 +149,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
             return xPathExpression;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.constructError("SyntaxError",
+            throw JavaScriptEngine.syntaxError(
                     "Failed to compile xpath '" + args[0] + "' (" + e.getMessage() + ")");
         }
     }

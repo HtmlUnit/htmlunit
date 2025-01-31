@@ -969,7 +969,7 @@ public class Document extends Node {
             return null;
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.constructError("SyntaxError",
+            throw JavaScriptEngine.syntaxError(
                     "An invalid or illegal selector was specified (selector: '"
                             + selectors + "' error: " + e.getMessage() + ").");
         }
@@ -988,7 +988,7 @@ public class Document extends Node {
             return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+            throw JavaScriptEngine.syntaxError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }
@@ -1160,7 +1160,7 @@ public class Document extends Node {
 
         if (clazz == null) {
             throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
+                    this,
                     new org.htmlunit.javascript.host.dom.DOMException(
                             "Event Type '" + eventType + "' is not supported.",
                             org.htmlunit.javascript.host.dom.DOMException.NOT_SUPPORTED_ERR));

@@ -189,7 +189,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void nth_child_no_argument() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
@@ -197,7 +197,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('li:nth-child()'));\n"
-            + "  } catch (e) {log('exception')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

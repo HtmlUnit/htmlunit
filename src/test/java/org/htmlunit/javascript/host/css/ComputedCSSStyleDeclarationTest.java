@@ -125,7 +125,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    if(typeof s1 == 'string')\n"
             + "      array.push(i + '=' + s1 + ':' + s2);\n"
             + "  }\n"
-            + "} catch (e) { array[array.length] = 'exception'; }\n"
+            + "} catch (e) { array[array.length] = e.name; }\n"
             + "array.sort();\n"
             + "document.getElementById('myTextarea').value = array.join('\\n');\n"
             + "</script></body></html>";
@@ -162,7 +162,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    if(typeof s1 == 'string')\n"
             + "      array.push(i + '=' + s1 + ':' + s2);\n"
             + "  }\n"
-            + "} catch (e) { array[array.length] = 'exception'; }\n"
+            + "} catch (e) { array[array.length] = e.name; }\n"
             + "array.sort();\n"
             + "document.getElementById('myTextarea').value = array.join('\\n');\n"
             + "</script></body></html>";
@@ -1624,7 +1624,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    var s = window.getComputedStyle(d, null);\n"
             + "    log(s.getPropertyValue('test'));\n"
             + "    log(s.getPropertyValue('color'));\n"
-            + "  } catch (e) { log('exception'); }\n"
+            + "  } catch (e) { log(e.name); }\n"
             + "}\n"
             + "</script>\n"
             + "<style>#div1 { test: red }</style>\n"

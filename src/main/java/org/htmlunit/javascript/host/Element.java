@@ -1522,7 +1522,7 @@ public class Element extends Node {
             return domNode != null && ((DomElement) domNode).matches(selectorString);
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.constructError("SyntaxError",
+            throw JavaScriptEngine.syntaxError(
                     "An invalid or illegal selector was specified (selector: '"
                     + selectorString + "' error: " + e.getMessage() + ").");
         }
@@ -1578,7 +1578,7 @@ public class Element extends Node {
             return elem.getScriptableObject();
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.constructError("SyntaxError",
+            throw JavaScriptEngine.syntaxError(
                     "An invalid or illegal selector was specified (selector: '"
                     + selectorString + "' error: " + e.getMessage() + ").");
         }
