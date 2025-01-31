@@ -42,6 +42,60 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"4", "null"})
+    public void xPathNull() throws Exception {
+        final String content = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var node = '';"
+            + "    var expr = null;\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    node = result.iterateNext();\n"
+            + "    log(result.resultType);\n"
+            + "    log(node);\n"
+            + "  } catch (e) {log(e.name)}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"4", "null"})
+    public void xPathUndefined() throws Exception {
+        final String content = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var node = '';"
+            + "    var expr = undefined;\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    node = result.iterateNext();\n"
+            + "    log(result.resultType);\n"
+            + "    log(node);\n"
+            + "  } catch (e) {log(e.name)}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"})
     public void optionText() throws Exception {
         final String content = "<html><head>\n"
@@ -55,7 +109,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "    for (var i = 0; i < value.length; i++) {\n"
             + "      log(value.charCodeAt(i));\n"
             + "    }\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -84,7 +138,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -114,7 +168,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node.id;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -433,7 +487,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "    var expr = '" + xpath + "';\n"
             + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
             + "    log(\"'\" + result.stringValue + \"'\");\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -457,7 +511,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "    var expr = '" + xpath + "';\n"
             + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
             + "    log(result.booleanValue);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

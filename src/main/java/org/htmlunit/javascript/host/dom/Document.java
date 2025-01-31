@@ -580,7 +580,7 @@ public class Document extends Node {
             return xPathResult;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.reportRuntimeError("Failed to execute 'evaluate': " + e.getMessage());
+            throw JavaScriptEngine.syntaxError("Failed to execute 'evaluate': " + e.getMessage());
         }
     }
 

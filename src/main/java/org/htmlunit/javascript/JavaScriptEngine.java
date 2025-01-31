@@ -1156,6 +1156,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param message the error message to report
      * @return EcmaError
      */
+    public static EcmaError syntaxError(final String message) {
+        return ScriptRuntime.syntaxError(message);
+    }
+
+    /**
+     * Report a runtime error using the error reporter for the current thread.
+     *
+     * @param message the error message to report
+     * @return EcmaError
+     */
     public static EcmaError typeError(final String message) {
         return ScriptRuntime.typeError(message);
     }
