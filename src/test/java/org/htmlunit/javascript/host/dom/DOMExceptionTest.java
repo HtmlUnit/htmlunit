@@ -173,9 +173,9 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "      let ex = new DOMException('test', 'urlMismatchERRoR');"
-            + "      log(ex.code);\n"
-            + "      log(ex.name);\n"
+            + "    let ex = new DOMException('test', 'urlMismatchERRoR');"
+            + "    log(ex.code);\n"
+            + "    log(ex.name);\n"
             + "  } catch(e) { log(e.name);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
@@ -193,9 +193,9 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "      let ex = new DOMException('test');"
-            + "      log(ex.code);\n"
-            + "      log(ex.name);\n"
+            + "    let ex = new DOMException('test');"
+            + "    log(ex.code);\n"
+            + "    log(ex.name);\n"
             + "  } catch(e) { log(e.name);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
@@ -213,9 +213,9 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "      let ex = new DOMException('test', null);"
-            + "      log(ex.code);\n"
-            + "      log(ex.name);\n"
+            + "    let ex = new DOMException('test', null);"
+            + "    log(ex.code);\n"
+            + "    log(ex.name);\n"
             + "  } catch(e) { log(e.name);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
@@ -233,9 +233,9 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "      let ex = new DOMException('test', undefined);"
-            + "      log(ex.code);\n"
-            + "      log(ex.name);\n"
+            + "    let ex = new DOMException('test', undefined);"
+            + "    log(ex.code);\n"
+            + "    log(ex.name);\n"
             + "  } catch(e) { log(e.name);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
@@ -253,9 +253,9 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "      let ex = new DOMException('test', 'unKnown');"
-            + "      log(ex.code);\n"
-            + "      log(ex.name);\n"
+            + "    let ex = new DOMException('test', 'unKnown');"
+            + "    log(ex.code);\n"
+            + "    log(ex.name);\n"
             + "  } catch(e) { log(e.name);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
@@ -273,9 +273,9 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "      let ex = new DOMException('test', 7);"
-            + "      log(ex.code);\n"
-            + "      log(ex.name);\n"
+            + "    let ex = new DOMException('test', 7);"
+            + "    log(ex.code);\n"
+            + "    log(ex.name);\n"
             + "  } catch(e) { log(e.name);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
