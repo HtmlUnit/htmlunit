@@ -91,12 +91,20 @@ public class CharacterData extends Node {
     @JsxFunction
     public void deleteData(final int offset, final int count) {
         if (offset < 0) {
-            throw JavaScriptEngine.reportRuntimeError("Provided offset: " + offset + " is less than zero.");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            "Provided offset: " + offset + " is less than zero.",
+                            org.htmlunit.javascript.host.dom.DOMException.INDEX_SIZE_ERR));
         }
 
         final DomCharacterData domCharacterData = getDomCharacterDataOrDie();
         if (offset > domCharacterData.getLength()) {
-            throw JavaScriptEngine.reportRuntimeError("Provided offset: " + offset + " is greater than length.");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            "Provided offset: " + offset + " is greater than length.",
+                            org.htmlunit.javascript.host.dom.DOMException.INDEX_SIZE_ERR));
         }
 
         domCharacterData.deleteData(offset, count);
