@@ -1212,9 +1212,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         exception.setPrototype(window.getPrototype(exception.getClass()));
 
         final EcmaError helper = ScriptRuntime.syntaxError("helper");
-        exception.setLocation(helper.lineSource(), helper.lineNumber());
+        final String fileName = helper.sourceName().replaceFirst("script in (.*) from .*", "$1");
+        exception.setLocation(fileName, helper.lineNumber());
 
-        return new JavaScriptException(exception, helper.lineSource(), helper.lineNumber());
+        return new JavaScriptException(exception, fileName, helper.lineNumber());
     }
 
     /**

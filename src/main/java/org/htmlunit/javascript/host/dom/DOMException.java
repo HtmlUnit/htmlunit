@@ -150,10 +150,8 @@ public class DOMException extends HtmlUnitScriptable {
         "NoModificationAllowedError",
         "NotFoundError",
         "NotSupportedError",
-        null,
-        "InvalidStateError",
         "InUseAttributeError",
-        null,
+        "InvalidStateError",
         "SyntaxError",
         "InvalidModificationError",
         "NamespaceError",
@@ -169,9 +167,9 @@ public class DOMException extends HtmlUnitScriptable {
         "InvalidNodeTypeError",
         "DataCloneError"});
 
-    private final int code_;
-    private final String name_;
-    private final String message_;
+    private int code_;
+    private String name_;
+    private String message_;
     private int lineNumber_;
     private String fileName_;
 
@@ -179,27 +177,27 @@ public class DOMException extends HtmlUnitScriptable {
      * Default constructor used to build the prototype.
      */
     public DOMException() {
-        this(null, null);
     }
 
     /**
      * JavaScript constructor.
+     * @param message a description of the exception. If not present, the empty string '' is used
+     * @param error If the specified name is a standard error name,
+     * then getting the code property of the DOMException object will return the
+     * code number corresponding to the specified name.
+     * If not present, the string 'Error' is used.
      */
     @JsxConstructor
-    public void jsConstructor() {
-        // nothing to do
-    }
-
-    /**
-     * Constructor.
-     * @param message the exception message
-     * @param error the error code (text)
-     */
-    public DOMException(final String message, final Object error) {
-        super();
+    public void jsConstructor(final String message, final Object error) {
         message_ = message;
 
         if (error == null) {
+            code_ = 0;
+            name_ = null;
+            return;
+        }
+
+        if (JavaScriptEngine.isUndefined(error)) {
             code_ = 0;
             name_ = "Error";
             return;
@@ -209,11 +207,22 @@ public class DOMException extends HtmlUnitScriptable {
 
         final int idx = COMMON_ERROR_NAMES.indexOf(name_);
         if (idx != -1) {
-            code_ = idx;
+            code_ = idx + 1;
             return;
         }
 
         code_ = 0;
+    }
+
+    /**
+     * Constructor.
+     * @param message the exception message
+     * @param error the error code (on of the constants from the class)
+     */
+    public DOMException(final String message, final int error) {
+        message_ = message;
+        code_ = error;
+        name_ = COMMON_ERROR_NAMES.get(error);
     }
 
     /**
