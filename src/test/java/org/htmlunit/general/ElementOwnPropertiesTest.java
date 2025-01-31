@@ -88,10 +88,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "    try{\n"
                  + "      " + preparation + "\n"
                 + "      process(" + string + ");\n"
-                + "    } catch (e) {\n"
-                + "      log('exception');\n"
-                + "      return;"
-                + "    }\n"
+                + "    } catch (e) {log(e.name); return;}\n"
                 + "  }\n"
                 + "\n"
                 + "  /*\n"
@@ -888,10 +885,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void currentStyle() throws Exception {
         testString("", "document.body.currentStyle");
     }
@@ -14972,10 +14969,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @Alerts(CHROME = "NotSupportedError",
+            EDGE = "NotSupportedError",
+            FF = "NotSupportedError",
+            FF_ESR = "NotSupportedError")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
     }
@@ -14992,8 +14989,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),deltaMode[GCE],deltaX[GCE],deltaY[GCE],deltaZ[GCE],DOM_DELTA_LINE[E],"
                 + "DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E],wheelDelta[GCE],wheelDeltaX[GCE],"
                 + "wheelDeltaY[GCE]",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "NotSupportedError",
+            FF_ESR = "NotSupportedError")
     @HtmlUnitNYI(CHROME = "constructor(),DOM_DELTA_LINE[E],DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E]",
             EDGE = "constructor(),DOM_DELTA_LINE[E],DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E]")
     public void wheelEvent() throws Exception {
@@ -15110,10 +15107,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @Alerts(CHROME = "NotSupportedError",
+            EDGE = "NotSupportedError",
+            FF = "NotSupportedError",
+            FF_ESR = "NotSupportedError")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -15124,7 +15121,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NotSupportedError")
     public void svgZoomEvent() throws Exception {
         testString("", "document.createEvent('SVGZoomEvent')");
     }
@@ -15159,8 +15156,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "altKey[GCE],changedTouches[GCE],constructor(),ctrlKey[GCE],metaKey[GCE],shiftKey[GCE],"
                 + "targetTouches[GCE],"
                 + "touches[GCE]",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()")
     public void touchEvent2() throws Exception {
@@ -15839,8 +15836,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "altKey[GCE],changedTouches[GCE],constructor(),ctrlKey[GCE],metaKey[GCE],shiftKey[GCE],"
                 + "targetTouches[GCE],"
                 + "touches[GCE]",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()")
     public void touchEvent() throws Exception {
@@ -15913,8 +15910,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
+    @Alerts(CHROME = "NotSupportedError",
+            EDGE = "NotSupportedError",
             FF = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor(),initMutationEvent(),MODIFICATION[E],"
                 + "newValue[GCE],prevValue[GCE],relatedNode[GCE],"
                 + "REMOVAL[E]",
@@ -15933,7 +15930,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NotSupportedError")
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
     }
@@ -17695,8 +17692,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "constructor(),disconnect(),observe(),takeRecords()",
             EDGE = "constructor(),disconnect(),observe(),takeRecords()",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void webKitMutationObserver() throws Exception {
         testString("", "new WebKitMutationObserver(function(m) {})");
     }
@@ -18219,5 +18216,45 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "product[GCE],productSub[GCE],taintEnabled(),userAgent[GCE],vendor[GCE],vendorSub[GCE]")
     public void navigator() throws Exception {
         testString("", "navigator");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMException}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "ABORT_ERR[E],code[GCE],constructor(),DATA_CLONE_ERR[E],DOMSTRING_SIZE_ERR[E],"
+                + "HIERARCHY_REQUEST_ERR[E],INDEX_SIZE_ERR[E],INUSE_ATTRIBUTE_ERR[E],INVALID_ACCESS_ERR[E],"
+                + "INVALID_CHARACTER_ERR[E],INVALID_MODIFICATION_ERR[E],INVALID_NODE_TYPE_ERR[E],"
+                + "INVALID_STATE_ERR[E],message[GCE],name[GCE],NAMESPACE_ERR[E],NETWORK_ERR[E],"
+                + "NO_DATA_ALLOWED_ERR[E],NO_MODIFICATION_ALLOWED_ERR[E],NOT_FOUND_ERR[E],NOT_SUPPORTED_ERR[E],"
+                + "QUOTA_EXCEEDED_ERR[E],SECURITY_ERR[E],SYNTAX_ERR[E],TIMEOUT_ERR[E],TYPE_MISMATCH_ERR[E],"
+                + "URL_MISMATCH_ERR[E],VALIDATION_ERR[E],WRONG_DOCUMENT_ERR[E]",
+            EDGE = "ABORT_ERR[E],code[GCE],constructor(),DATA_CLONE_ERR[E],DOMSTRING_SIZE_ERR[E],"
+                + "HIERARCHY_REQUEST_ERR[E],INDEX_SIZE_ERR[E],INUSE_ATTRIBUTE_ERR[E],INVALID_ACCESS_ERR[E],"
+                + "INVALID_CHARACTER_ERR[E],INVALID_MODIFICATION_ERR[E],INVALID_NODE_TYPE_ERR[E],"
+                + "INVALID_STATE_ERR[E],message[GCE],name[GCE],NAMESPACE_ERR[E],NETWORK_ERR[E],"
+                + "NO_DATA_ALLOWED_ERR[E],NO_MODIFICATION_ALLOWED_ERR[E],NOT_FOUND_ERR[E],NOT_SUPPORTED_ERR[E],"
+                + "QUOTA_EXCEEDED_ERR[E],SECURITY_ERR[E],SYNTAX_ERR[E],TIMEOUT_ERR[E],TYPE_MISMATCH_ERR[E],"
+                + "URL_MISMATCH_ERR[E],VALIDATION_ERR[E],WRONG_DOCUMENT_ERR[E]",
+            FF = "ABORT_ERR[E],code[GCE],columnNumber[GCE],constructor(),data[GCE],DATA_CLONE_ERR[E],"
+                + "DOMSTRING_SIZE_ERR[E],filename[GCE],HIERARCHY_REQUEST_ERR[E],INDEX_SIZE_ERR[E],"
+                + "INUSE_ATTRIBUTE_ERR[E],INVALID_ACCESS_ERR[E],INVALID_CHARACTER_ERR[E],INVALID_MODIFICATION_ERR[E],"
+                + "INVALID_NODE_TYPE_ERR[E],INVALID_STATE_ERR[E],lineNumber[GCE],message[GCE],name[GCE],"
+                + "NAMESPACE_ERR[E],NETWORK_ERR[E],NO_DATA_ALLOWED_ERR[E],NO_MODIFICATION_ALLOWED_ERR[E],"
+                + "NOT_FOUND_ERR[E],NOT_SUPPORTED_ERR[E],QUOTA_EXCEEDED_ERR[E],result[GCE],SECURITY_ERR[E],"
+                + "stack[GSCE],SYNTAX_ERR[E],TIMEOUT_ERR[E],TYPE_MISMATCH_ERR[E],URL_MISMATCH_ERR[E],"
+                + "VALIDATION_ERR[E],WRONG_DOCUMENT_ERR[E]",
+            FF_ESR = "ABORT_ERR[E],code[GCE],columnNumber[GCE],constructor(),data[GCE],DATA_CLONE_ERR[E],"
+                + "DOMSTRING_SIZE_ERR[E],filename[GCE],HIERARCHY_REQUEST_ERR[E],INDEX_SIZE_ERR[E],"
+                + "INUSE_ATTRIBUTE_ERR[E],INVALID_ACCESS_ERR[E],INVALID_CHARACTER_ERR[E],INVALID_MODIFICATION_ERR[E],"
+                + "INVALID_NODE_TYPE_ERR[E],INVALID_STATE_ERR[E],lineNumber[GCE],message[GCE],name[GCE],"
+                + "NAMESPACE_ERR[E],NETWORK_ERR[E],NO_DATA_ALLOWED_ERR[E],NO_MODIFICATION_ALLOWED_ERR[E],"
+                + "NOT_FOUND_ERR[E],NOT_SUPPORTED_ERR[E],QUOTA_EXCEEDED_ERR[E],result[GCE],SECURITY_ERR[E],"
+                + "stack[GSCE],SYNTAX_ERR[E],TIMEOUT_ERR[E],TYPE_MISMATCH_ERR[E],URL_MISMATCH_ERR[E],"
+                + "VALIDATION_ERR[E],WRONG_DOCUMENT_ERR[E]")
+    public void domException() throws Exception {
+        testString("", "new DOMException('message', 'name')");
     }
 }

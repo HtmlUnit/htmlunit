@@ -88,10 +88,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "    try{\n"
                 + "      " + preparation + "\n"
                 + "      process(" + string + ");\n"
-                + "    } catch (e) {\n"
-                + "      log('exception');\n"
-                + "      return;"
-                + "    }\n"
+                + "    } catch (e) {log(e.name);return;}\n"
                 + "  }\n"
                 + "\n"
                 + "  /*\n"
@@ -1038,7 +1035,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "cancelIdleCallback(),captureEvents(),cdc_adoQpoasnfa76pfcZLmcfl_Array(),"
                 + "cdc_adoQpoasnfa76pfcZLmcfl_JSON,cdc_adoQpoasnfa76pfcZLmcfl_Object(),"
                 + "cdc_adoQpoasnfa76pfcZLmcfl_Promise(),cdc_adoQpoasnfa76pfcZLmcfl_Proxy(),"
-                + "cdc_adoQpoasnfa76pfcZLmcfl_Symbol(),chrome,clearInterval(),clearTimeout(),clientInformation,"
+                + "cdc_adoQpoasnfa76pfcZLmcfl_Symbol(),cdc_adoQpoasnfa76pfcZLmcfl_Window(),"
+                + "chrome,clearInterval(),clearTimeout(),clientInformation,"
                 + "close(),closed,confirm(),cookieStore,createImageBitmap(),credentialless,crossOriginIsolated,"
                 + "crypto,customElements,devicePixelRatio,dispatchEvent(),document,documentPictureInPicture,event,"
                 + "external,fence,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),getScreenDetails(),"
@@ -3821,10 +3819,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @Alerts(CHROME = "NotSupportedError",
+            EDGE = "NotSupportedError",
+            FF = "NotSupportedError",
+            FF_ESR = "NotSupportedError")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent'), document.createEvent('MouseEvent')");
     }
@@ -3839,8 +3837,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "DOM_DELTA_PIXEL,wheelDelta,wheelDeltaX,wheelDeltaY",
             EDGE = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,"
                 + "DOM_DELTA_PIXEL,wheelDelta,wheelDeltaX,wheelDeltaY",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "NotSupportedError",
+            FF_ESR = "NotSupportedError")
     @HtmlUnitNYI(CHROME = "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL",
             EDGE = "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL")
     public void wheelEvent() throws Exception {
@@ -4084,10 +4082,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @Alerts(CHROME = "NotSupportedError",
+            EDGE = "NotSupportedError",
+            FF = "NotSupportedError",
+            FF_ESR = "NotSupportedError")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -4098,7 +4096,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NotSupportedError")
     public void svgZoomEvent() throws Exception {
         testString("", "document.createEvent('SVGZoomEvent')");
     }
@@ -4172,8 +4170,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
                 + "type,view,"
                 + "which",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
@@ -4206,8 +4204,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
                 + "type,view,"
                 + "which",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
                 + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
                 + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
@@ -5910,8 +5908,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "exception",
-            EDGE = "exception",
+    @Alerts(CHROME = "NotSupportedError",
+            EDGE = "NotSupportedError",
             FF = "ADDITION,ALT_MASK,AT_TARGET,attrChange,attrName,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,initEvent(),initMutationEvent(),isTrusted,META_MASK,MODIFICATION,newValue,"
@@ -5940,7 +5938,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NotSupportedError")
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
     }
@@ -8709,8 +8707,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "disconnect(),observe(),takeRecords()",
             EDGE = "disconnect(),observe(),takeRecords()",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void webKitMutationObserver() throws Exception {
         testString("", "new WebKitMutationObserver(function(m) {})");
     }
@@ -9330,5 +9328,41 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "platform,plugins,product,productSub,taintEnabled(),userAgent,vendor,vendorSub")
     public void navigator() throws Exception {
         testString("", "navigator");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMException}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "ABORT_ERR,code,DATA_CLONE_ERR,DOMSTRING_SIZE_ERR,HIERARCHY_REQUEST_ERR,INDEX_SIZE_ERR,"
+                + "INUSE_ATTRIBUTE_ERR,INVALID_ACCESS_ERR,INVALID_CHARACTER_ERR,INVALID_MODIFICATION_ERR,"
+                + "INVALID_NODE_TYPE_ERR,INVALID_STATE_ERR,message,name,NAMESPACE_ERR,NETWORK_ERR,"
+                + "NO_DATA_ALLOWED_ERR,NO_MODIFICATION_ALLOWED_ERR,NOT_FOUND_ERR,NOT_SUPPORTED_ERR,"
+                + "QUOTA_EXCEEDED_ERR,SECURITY_ERR,SYNTAX_ERR,TIMEOUT_ERR,TYPE_MISMATCH_ERR,URL_MISMATCH_ERR,"
+                + "VALIDATION_ERR,WRONG_DOCUMENT_ERR",
+            EDGE = "ABORT_ERR,code,DATA_CLONE_ERR,DOMSTRING_SIZE_ERR,HIERARCHY_REQUEST_ERR,INDEX_SIZE_ERR,"
+                + "INUSE_ATTRIBUTE_ERR,INVALID_ACCESS_ERR,INVALID_CHARACTER_ERR,INVALID_MODIFICATION_ERR,"
+                + "INVALID_NODE_TYPE_ERR,INVALID_STATE_ERR,message,name,NAMESPACE_ERR,NETWORK_ERR,"
+                + "NO_DATA_ALLOWED_ERR,NO_MODIFICATION_ALLOWED_ERR,NOT_FOUND_ERR,NOT_SUPPORTED_ERR,"
+                + "QUOTA_EXCEEDED_ERR,SECURITY_ERR,SYNTAX_ERR,TIMEOUT_ERR,TYPE_MISMATCH_ERR,URL_MISMATCH_ERR,"
+                + "VALIDATION_ERR,WRONG_DOCUMENT_ERR",
+            FF = "ABORT_ERR,code,columnNumber,data,DATA_CLONE_ERR,DOMSTRING_SIZE_ERR,filename,"
+                + "HIERARCHY_REQUEST_ERR,INDEX_SIZE_ERR,INUSE_ATTRIBUTE_ERR,INVALID_ACCESS_ERR,"
+                + "INVALID_CHARACTER_ERR,INVALID_MODIFICATION_ERR,INVALID_NODE_TYPE_ERR,INVALID_STATE_ERR,"
+                + "lineNumber,message,name,NAMESPACE_ERR,NETWORK_ERR,NO_DATA_ALLOWED_ERR,"
+                + "NO_MODIFICATION_ALLOWED_ERR,NOT_FOUND_ERR,NOT_SUPPORTED_ERR,QUOTA_EXCEEDED_ERR,result,"
+                + "SECURITY_ERR,stack,SYNTAX_ERR,TIMEOUT_ERR,TYPE_MISMATCH_ERR,URL_MISMATCH_ERR,VALIDATION_ERR,"
+                + "WRONG_DOCUMENT_ERR",
+            FF_ESR = "ABORT_ERR,code,columnNumber,data,DATA_CLONE_ERR,DOMSTRING_SIZE_ERR,filename,"
+                + "HIERARCHY_REQUEST_ERR,INDEX_SIZE_ERR,INUSE_ATTRIBUTE_ERR,INVALID_ACCESS_ERR,"
+                + "INVALID_CHARACTER_ERR,INVALID_MODIFICATION_ERR,INVALID_NODE_TYPE_ERR,INVALID_STATE_ERR,"
+                + "lineNumber,message,name,NAMESPACE_ERR,NETWORK_ERR,NO_DATA_ALLOWED_ERR,"
+                + "NO_MODIFICATION_ALLOWED_ERR,NOT_FOUND_ERR,NOT_SUPPORTED_ERR,QUOTA_EXCEEDED_ERR,result,"
+                + "SECURITY_ERR,stack,SYNTAX_ERR,TIMEOUT_ERR,TYPE_MISMATCH_ERR,URL_MISMATCH_ERR,VALIDATION_ERR,"
+                + "WRONG_DOCUMENT_ERR")
+    public void domException() throws Exception {
+        testString("", "new DOMException('message', 'name')");
     }
 }

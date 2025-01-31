@@ -46,7 +46,6 @@ import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.Interpreter;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
@@ -1212,24 +1211,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         exception.setParentScope(window);
         exception.setPrototype(window.getPrototype(exception.getClass()));
 
-        // get current line and file name
-        // this method can only be used in interpreted mode. If one day we choose to use compiled mode,
-        // then we'll have to find an other way here.
-        final String fileName;
-        final int lineNumber;
-        if (Context.getCurrentContext().getOptimizationLevel() == -1) {
-            final int[] linep = new int[1];
-            final String sourceName = new Interpreter().getSourcePositionFromStack(Context.getCurrentContext(), linep);
-            fileName = sourceName.replaceFirst("script in (.*) from .*", "$1");
-            lineNumber = linep[0];
-        }
-        else {
-            throw new Error("HtmlUnit not ready to run in compiled mode");
-        }
+        final EcmaError helper = ScriptRuntime.syntaxError("helper");
+        exception.setLocation(helper.lineSource(), helper.lineNumber());
 
-        exception.setLocation(fileName, lineNumber);
-
-        return new JavaScriptException(exception, fileName, lineNumber);
+        return new JavaScriptException(exception, helper.lineSource(), helper.lineNumber());
     }
 
     /**
