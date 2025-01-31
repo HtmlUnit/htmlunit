@@ -222,7 +222,7 @@ public class DOMException extends HtmlUnitScriptable {
     public DOMException(final String message, final int error) {
         message_ = message;
         code_ = error;
-        name_ = COMMON_ERROR_NAMES.get(error);
+        name_ = COMMON_ERROR_NAMES.get(error - 1);
     }
 
     /**

@@ -2394,10 +2394,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Document],"
                     + "Symbol(Symbol.unscopables) [C] [{\"fullscreen\":true,\"prepend\":true,"
                     + "\"append\":true,\"replaceChildren\":true}]")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "InternalError",
+            EDGE = "InternalError",
+            FF = "InternalError",
+            FF_ESR = "InternalError")
     public void document() throws Exception {
         testString("", "new Document()");
     }
@@ -2620,10 +2620,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [SourceBufferList]")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void sourceBufferList() throws Exception {
         testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
     }

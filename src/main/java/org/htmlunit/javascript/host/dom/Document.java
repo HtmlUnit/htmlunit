@@ -1159,8 +1159,11 @@ public class Document extends Node {
         }
 
         if (clazz == null) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
-                "Event Type is not supported: " + eventType));
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            "Event Type '" + eventType + "' is not supported.",
+                            org.htmlunit.javascript.host.dom.DOMException.NOT_SUPPORTED_ERR));
         }
 
         try {

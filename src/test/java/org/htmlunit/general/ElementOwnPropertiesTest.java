@@ -15391,10 +15391,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scrollingElement[GCE],selectedStyleSheetSet[GSCE],styleSheets[GCE],styleSheetSets[GCE],"
                 + "timeline[GCE],title[GSCE],URL[GCE],visibilityState[GCE],vlinkColor[GSCE],write(),"
                 + "writeln()")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF_ESR = "exception",
-            FF = "exception")
+    @HtmlUnitNYI(CHROME = "InternalError",
+            EDGE = "InternalError",
+            FF_ESR = "InternalError",
+            FF = "InternalError")
     public void document() throws Exception {
         testString("", "new Document()");
     }
@@ -15961,10 +15961,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),length[GCE],onaddsourcebuffer[GSCE],onremovesourcebuffer[GSCE]",
             FF = "constructor(),length[GCE],onaddsourcebuffer[GSCE],onremovesourcebuffer[GSCE]",
             FF_ESR = "constructor(),length[GCE],onaddsourcebuffer[GSCE],onremovesourcebuffer[GSCE]")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void sourceBufferList() throws Exception {
         testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
     }
@@ -18254,6 +18254,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "NOT_FOUND_ERR[E],NOT_SUPPORTED_ERR[E],QUOTA_EXCEEDED_ERR[E],result[GCE],SECURITY_ERR[E],"
                 + "stack[GSCE],SYNTAX_ERR[E],TIMEOUT_ERR[E],TYPE_MISMATCH_ERR[E],URL_MISMATCH_ERR[E],"
                 + "VALIDATION_ERR[E],WRONG_DOCUMENT_ERR[E]")
+    @HtmlUnitNYI(FF = "ABORT_ERR[E],code[GCE],constructor(),DATA_CLONE_ERR[E],DOMSTRING_SIZE_ERR[E],filename[GCE],"
+                + "HIERARCHY_REQUEST_ERR[E],INDEX_SIZE_ERR[E],INUSE_ATTRIBUTE_ERR[E],INVALID_ACCESS_ERR[E],"
+                + "INVALID_CHARACTER_ERR[E],INVALID_MODIFICATION_ERR[E],INVALID_NODE_TYPE_ERR[E],"
+                + "INVALID_STATE_ERR[E],lineNumber[GCE],message[GCE],name[GCE],NAMESPACE_ERR[E],NETWORK_ERR[E],"
+                + "NO_DATA_ALLOWED_ERR[E],NO_MODIFICATION_ALLOWED_ERR[E],NOT_FOUND_ERR[E],NOT_SUPPORTED_ERR[E],"
+                + "QUOTA_EXCEEDED_ERR[E],SECURITY_ERR[E],SYNTAX_ERR[E],TIMEOUT_ERR[E],TYPE_MISMATCH_ERR[E],"
+                + "URL_MISMATCH_ERR[E],VALIDATION_ERR[E],WRONG_DOCUMENT_ERR[E]",
+            FF_ESR = "ABORT_ERR[E],code[GCE],constructor(),DATA_CLONE_ERR[E],DOMSTRING_SIZE_ERR[E],filename[GCE],"
+                + "HIERARCHY_REQUEST_ERR[E],INDEX_SIZE_ERR[E],INUSE_ATTRIBUTE_ERR[E],INVALID_ACCESS_ERR[E],"
+                + "INVALID_CHARACTER_ERR[E],INVALID_MODIFICATION_ERR[E],INVALID_NODE_TYPE_ERR[E],"
+                + "INVALID_STATE_ERR[E],lineNumber[GCE],message[GCE],name[GCE],NAMESPACE_ERR[E],NETWORK_ERR[E],"
+                + "NO_DATA_ALLOWED_ERR[E],NO_MODIFICATION_ALLOWED_ERR[E],NOT_FOUND_ERR[E],NOT_SUPPORTED_ERR[E],"
+                + "QUOTA_EXCEEDED_ERR[E],SECURITY_ERR[E],SYNTAX_ERR[E],TIMEOUT_ERR[E],TYPE_MISMATCH_ERR[E],"
+                + "URL_MISMATCH_ERR[E],VALIDATION_ERR[E],WRONG_DOCUMENT_ERR[E]")
     public void domException() throws Exception {
         testString("", "new DOMException('message', 'name')");
     }

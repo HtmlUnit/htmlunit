@@ -4434,10 +4434,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "requestStorageAccess(),rootElement,scripts,scrollingElement,selectedStyleSheetSet,styleSheets,"
                 + "styleSheetSets,TEXT_NODE,textContent,timeline,title,URL,visibilityState,vlinkColor,write(),"
                 + "writeln()")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF_ESR = "exception",
-            FF = "exception")
+    @HtmlUnitNYI(CHROME = "InternalError",
+            EDGE = "InternalError",
+            FF_ESR = "InternalError",
+            FF = "InternalError")
     public void document() throws Exception {
         testString("", "new Document()");
     }
@@ -9362,6 +9362,20 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NO_MODIFICATION_ALLOWED_ERR,NOT_FOUND_ERR,NOT_SUPPORTED_ERR,QUOTA_EXCEEDED_ERR,result,"
                 + "SECURITY_ERR,stack,SYNTAX_ERR,TIMEOUT_ERR,TYPE_MISMATCH_ERR,URL_MISMATCH_ERR,VALIDATION_ERR,"
                 + "WRONG_DOCUMENT_ERR")
+    @HtmlUnitNYI(FF = "ABORT_ERR,code,DATA_CLONE_ERR,DOMSTRING_SIZE_ERR,filename,HIERARCHY_REQUEST_ERR,"
+                + "INDEX_SIZE_ERR,INUSE_ATTRIBUTE_ERR,INVALID_ACCESS_ERR,INVALID_CHARACTER_ERR,"
+                + "INVALID_MODIFICATION_ERR,"
+                + "INVALID_NODE_TYPE_ERR,INVALID_STATE_ERR,lineNumber,message,name,NAMESPACE_ERR,NETWORK_ERR,"
+                + "NO_DATA_ALLOWED_ERR,NO_MODIFICATION_ALLOWED_ERR,NOT_FOUND_ERR,NOT_SUPPORTED_ERR,"
+                + "QUOTA_EXCEEDED_ERR,SECURITY_ERR,SYNTAX_ERR,TIMEOUT_ERR,TYPE_MISMATCH_ERR,URL_MISMATCH_ERR,"
+                + "VALIDATION_ERR,WRONG_DOCUMENT_ERR",
+            FF_ESR = "ABORT_ERR,code,DATA_CLONE_ERR,DOMSTRING_SIZE_ERR,filename,HIERARCHY_REQUEST_ERR,"
+                + "INDEX_SIZE_ERR,INUSE_ATTRIBUTE_ERR,INVALID_ACCESS_ERR,INVALID_CHARACTER_ERR,"
+                + "INVALID_MODIFICATION_ERR,"
+                + "INVALID_NODE_TYPE_ERR,INVALID_STATE_ERR,lineNumber,message,name,NAMESPACE_ERR,NETWORK_ERR,"
+                + "NO_DATA_ALLOWED_ERR,NO_MODIFICATION_ALLOWED_ERR,NOT_FOUND_ERR,NOT_SUPPORTED_ERR,"
+                + "QUOTA_EXCEEDED_ERR,SECURITY_ERR,SYNTAX_ERR,TIMEOUT_ERR,TYPE_MISMATCH_ERR,URL_MISMATCH_ERR,"
+                + "VALIDATION_ERR,WRONG_DOCUMENT_ERR")
     public void domException() throws Exception {
         testString("", "new DOMException('message', 'name')");
     }
