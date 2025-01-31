@@ -215,7 +215,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  log('rendering...');\n"
             + "  context.drawImage(img, 0, 0, 10, 10);\n"
             + "  log('...done');\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -247,7 +247,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  log('rendering...');\n"
             + "  context.drawImage(img, 0, 0, 10, 10);\n"
             + "  log('...done');\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);

@@ -123,7 +123,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"error", "error", "error"})
+    @Alerts({"TypeError", "TypeError", "TypeError"})
     public void asFunction() throws Exception {
         final String html
             = "<html><head>\n"
@@ -131,9 +131,9 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var f1 = document.forms[0];\n"
-            + "  try { log(f1('textfieldid').id) } catch (e) { log('error') }\n"
-            + "  try { log(f1('textfieldname').name) } catch (e) { log('error') }\n"
-            + "  try { log(f1(0).id) } catch (e) { log('error') }\n"
+            + "  try { log(f1('textfieldid').id) } catch (e) { log(e.name) }\n"
+            + "  try { log(f1('textfieldname').name) } catch (e) { log(e.name) }\n"
+            + "  try { log(f1(0).id) } catch (e) { log(e.name) }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<p>hello world</p>\n"
@@ -159,10 +159,10 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    var f1 = document.forms(0);\n"
-            + "    try { log(f1('textfieldid').id) } catch (e) { log('error') }\n"
-            + "    try { log(f1('textfieldname').name) } catch (e) { log('error') }\n"
-            + "    try { log(f1(0).id) } catch (e) { log('error') }\n"
-            + "  } catch (e) { log('TypeError') }\n"
+            + "    try { log(f1('textfieldid').id) } catch (e) { log(e.name) }\n"
+            + "    try { log(f1('textfieldname').name) } catch (e) { log(e.name) }\n"
+            + "    try { log(f1(0).id) } catch (e) { log(e.name) }\n"
+            + "  } catch (e) { log(e.name) }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<p>hello world</p>\n"

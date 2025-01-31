@@ -533,7 +533,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        throw JavaScriptEngine.reportRuntimeError("Not a function.");
+        throw JavaScriptEngine.typeError("Not a function.");
     }
 
     /**
@@ -541,7 +541,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @Override
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        throw JavaScriptEngine.reportRuntimeError("Not a function.");
+        throw JavaScriptEngine.typeError("Not a function.");
     }
 
     @Override
