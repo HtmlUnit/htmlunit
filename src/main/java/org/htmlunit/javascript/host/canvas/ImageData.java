@@ -25,6 +25,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend;
 
 /**
@@ -61,7 +62,7 @@ public class ImageData extends HtmlUnitScriptable {
     public static ImageData jsConstructor(final Context cx, final Scriptable scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         if (args.length < 2) {
-            throw JavaScriptEngine.reportRuntimeError("ImageData ctor - too less arguments");
+            throw JavaScriptEngine.typeError("ImageData ctor - too less arguments");
         }
 
         NativeUint8ClampedArray data = null;
@@ -70,7 +71,11 @@ public class ImageData extends HtmlUnitScriptable {
         if (args[0] instanceof NativeUint8ClampedArray) {
             data = (NativeUint8ClampedArray) args[0];
             if (data.getArrayLength() % 4 != 0) {
-                throw JavaScriptEngine.reportRuntimeError("ImageData ctor - data length mod 4 not zero");
+                throw JavaScriptEngine.asJavaScriptException(
+                        (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
+                        new DOMException(
+                                "ImageData ctor - data length mod 4 not zero",
+                                DOMException.INVALID_STATE_ERR));
             }
 
             width = (int) JavaScriptEngine.toInteger(args[1]);
@@ -78,7 +83,11 @@ public class ImageData extends HtmlUnitScriptable {
                 height = data.getArrayLength() / 4 / width;
 
                 if (data.getArrayLength() != 4 * width * height) {
-                    throw JavaScriptEngine.reportRuntimeError("ImageData ctor - width not correct");
+                    throw JavaScriptEngine.asJavaScriptException(
+                            (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
+                            new DOMException(
+                                    "ImageData ctor - width not correct",
+                                    DOMException.INDEX_SIZE_ERR));
                 }
             }
             else {
@@ -86,7 +95,11 @@ public class ImageData extends HtmlUnitScriptable {
             }
 
             if (data.getArrayLength() != 4 * width * height) {
-                throw JavaScriptEngine.reportRuntimeError("ImageData ctor - width/height not correct");
+                throw JavaScriptEngine.asJavaScriptException(
+                        (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
+                        new DOMException(
+                                "ImageData ctor - width/height not correct",
+                                DOMException.INDEX_SIZE_ERR));
             }
         }
         else {
@@ -95,10 +108,18 @@ public class ImageData extends HtmlUnitScriptable {
         }
 
         if (width < 0) {
-            throw JavaScriptEngine.reportRuntimeError("ImageData ctor - width negative");
+            throw JavaScriptEngine.asJavaScriptException(
+                    (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
+                    new DOMException(
+                            "ImageData ctor - width negative",
+                            DOMException.INDEX_SIZE_ERR));
         }
         if (height < 0) {
-            throw JavaScriptEngine.reportRuntimeError("ImageData ctor - height negative");
+            throw JavaScriptEngine.asJavaScriptException(
+                    (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
+                    new DOMException(
+                            "ImageData ctor - height negative",
+                            DOMException.INDEX_SIZE_ERR));
         }
 
         final ImageData result = new ImageData(null, 0, 0, width, height);

@@ -122,7 +122,8 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"exception", "exception", "exception", "exception", "exception", "exception", "exception"})
+    @Alerts({"TypeError", "IndexSizeError", "IndexSizeError", "IndexSizeError",
+             "IndexSizeError", "InvalidStateError", "IndexSizeError"})
     public void ctorArrayInvalid() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -131,34 +132,34 @@ public class ImageDataTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    var imageData = new ImageData();\n"
-            + "  } catch (e) { log('exception');}\n"
+            + "  } catch (e) { log(e.name);}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(-2, 1);\n"
-            + "  } catch (e) { log('exception');}\n"
+            + "  } catch (e) { log(e.name);}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(2, -1);\n"
-            + "  } catch (e) { log('exception');}\n"
+            + "  } catch (e) { log(e.name);}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(-2, -1);\n"
-            + "  } catch (e) { log('exception');}\n"
+            + "  } catch (e) { log(e.name);}\n"
 
             + "  var arr = new Uint8ClampedArray(8);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 3);\n"
-            + "  } catch (e) { log('exception');}\n"
+            + "  } catch (e) { log(e.name);}\n"
 
             + "  arr = new Uint8ClampedArray(11);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 2);\n"
-            + "  } catch (e) { log('exception');}\n"
+            + "  } catch (e) { log(e.name);}\n"
 
             + "  arr = new Uint8ClampedArray(8);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 2, 2);\n"
-            + "  } catch (e) { log('exception');}\n"
+            + "  } catch (e) { log(e.name);}\n"
 
             + "}\n"
             + "</script>\n"
