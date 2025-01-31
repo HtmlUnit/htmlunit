@@ -546,28 +546,28 @@ public class Document extends Node {
     @JsxFunction
     public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
-        try {
-            XPathResult xPathResult = null;
-            if (result instanceof XPathResult) {
-                xPathResult = (XPathResult) result;
+        XPathResult xPathResult = null;
+        if (result instanceof XPathResult) {
+            xPathResult = (XPathResult) result;
 
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_EVALUATE_RECREATES_RESULT)) {
-                    xPathResult = new XPathResult();
-                    xPathResult.setParentScope(getParentScope());
-                    xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
-                }
-            }
-            else if (result == null
-                    || JavaScriptEngine.isUndefined(result)
-                    || result instanceof ScriptableObject) {
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_EVALUATE_RECREATES_RESULT)) {
                 xPathResult = new XPathResult();
                 xPathResult.setParentScope(getParentScope());
                 xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
             }
-            else {
-                throw JavaScriptEngine.typeError("Argument 5 of Document.evaluate has to be an XPathResult or null.");
-            }
+        }
+        else if (result == null
+                || JavaScriptEngine.isUndefined(result)
+                || result instanceof ScriptableObject) {
+            xPathResult = new XPathResult();
+            xPathResult.setParentScope(getParentScope());
+            xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
+        }
+        else {
+            throw JavaScriptEngine.typeError("Argument 5 of Document.evaluate has to be an XPathResult or null.");
+        }
 
+        try {
             PrefixResolver prefixResolver = null;
             if (resolver instanceof NativeFunction) {
                 prefixResolver = new NativeFunctionPrefixResolver(

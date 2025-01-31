@@ -561,7 +561,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node.id;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -591,7 +591,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node.id;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -606,7 +606,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("error")
+    @Alerts("TypeError")
     public void stringResult() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -621,7 +621,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node.id;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -651,7 +651,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node.id;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -696,7 +696,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "    }\n"
 
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -722,7 +722,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "    var res = '';\n"
             + "    var result = document.evaluate('//div', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE);\n"
             + "    log(result.singleNodeValue.id);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log(e.name)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
