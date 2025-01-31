@@ -116,6 +116,7 @@ HtmlUnit is used by many projects for automated web testing
  * [Apache Maven Surefire](https://maven.apache.org/surefire/)
  * [JSCover](http://tntim96.github.io/JSCover/)
  * [Apache Jackrabbit](https://jackrabbit.apache.org/jcr/index.html)
+ * [JakartaEE TCK](https://github.com/jakartaee/platform-tck)
  * [OpenXava](https://github.com/openxava/openxava)
  * [Cargo](https://github.com/codehaus-cargo/cargo)
  * ...
