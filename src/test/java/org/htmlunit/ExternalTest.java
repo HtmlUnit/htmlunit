@@ -95,7 +95,7 @@ public class ExternalTest {
             }
             if (line.contains("artifactId")
                     && !line.contains(">htmlunit<")
-                    && !line.contains(">selenium-devtools-v131<")) {
+                    && !line.contains(">selenium-devtools-v")) {
                 final String artifactId = getValue(line);
                 final String groupId = getValue(lines.get(i - 1));
                 if (!lines.get(i + 1).contains("</exclusion>")) {
