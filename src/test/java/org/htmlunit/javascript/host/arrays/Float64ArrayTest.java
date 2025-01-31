@@ -47,9 +47,7 @@ public class Float64ArrayTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      log(array2[i]);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -180,9 +178,7 @@ public class Float64ArrayTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var array = new Float64Array(null);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

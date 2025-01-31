@@ -48,9 +48,7 @@ public class Uint8ArrayTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      log(array2[i]);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -181,9 +179,7 @@ public class Uint8ArrayTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var array = new Uint8Array(null);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -211,9 +207,7 @@ public class Uint8ArrayTest extends WebDriverTestCase {
             + "    });\n"
             + "    log(array);\n"
             + "    log(array[Symbol]);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -235,9 +229,7 @@ public class Uint8ArrayTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var array = new Uint8Array();\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

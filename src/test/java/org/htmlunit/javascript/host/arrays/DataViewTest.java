@@ -48,9 +48,7 @@ public class DataViewTest extends WebDriverTestCase {
             + "    x.setFloat32(1, Math.PI);\n"
             + "    log(x.getInt8(0));\n"
             + "    log(x.getFloat32(1));\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -82,9 +80,7 @@ public class DataViewTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      log(array2[i]);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -110,9 +106,7 @@ public class DataViewTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      log(array2[i]);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -124,7 +118,7 @@ public class DataViewTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -133,9 +127,7 @@ public class DataViewTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    new DataView(null);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

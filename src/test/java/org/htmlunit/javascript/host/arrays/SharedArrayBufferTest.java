@@ -245,9 +245,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
             + "    for(var i = 0; i < y.length; i++) {\n"
             + "      log(y[i]);\n"
             + "    }\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {log(e.name);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
