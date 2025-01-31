@@ -368,21 +368,21 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 "innerA", "DIV:null", "1", "#text:X", "false", "true"})
     @HtmlUnitNYI(
             CHROME = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
-                      "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                      "2", "innerDiv", "A:null", "1", "#text:W", "TypeError",
                       "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                      "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"},
+                      "innerA", "BODY:null", "1", "#text:X", "false", "true", "TypeError"},
             EDGE = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
-                    "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                    "2", "innerDiv", "A:null", "1", "#text:W", "TypeError",
                     "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                    "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"},
+                    "innerA", "BODY:null", "1", "#text:X", "false", "true", "TypeError"},
             FF = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
-                  "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                  "2", "innerDiv", "A:null", "1", "#text:W", "TypeError",
                   "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                  "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"},
+                  "innerA", "BODY:null", "1", "#text:X", "false", "true", "TypeError"},
             FF_ESR = {"4", "#text:\\n\\s\\s", "A:null", "A:null", "#text:YZ\\n\\n",
-                      "2", "innerDiv", "A:null", "1", "#text:W", "exception",
+                      "2", "innerDiv", "A:null", "1", "#text:W", "TypeError",
                       "outerA", "BODY:null", "2", "#text:V", "true", "false",
-                      "innerA", "BODY:null", "1", "#text:X", "false", "true", "exception"})
+                      "innerA", "BODY:null", "1", "#text:X", "false", "true", "TypeError"})
     // Input:
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>
     // CHROME and IE generate:
@@ -406,7 +406,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(document.body.childNodes[2]);\n"
             + "      dump(document.body.childNodes[3]);\n"
             + "      log(document.getElementsByTagName('a').length);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
 
             + "    try {\n"
             + "      log(innerDiv.id);\n"
@@ -415,7 +415,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(innerDiv.childNodes[0]);\n"
             + "      dump(innerDiv.childNodes[1]);\n"
             + "      dump(innerDiv.childNodes[2]);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
 
             + "    try {\n"
             + "      log(anchors[0].id);\n"
@@ -424,7 +424,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(anchors[0].childNodes[0]);\n"
             + "      log(anchors[0] == outerA);\n"
             + "      log(anchors[0] == innerA);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
 
             + "    try {\n"
             + "      log(anchors[1].id);\n"
@@ -433,7 +433,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(anchors[1].childNodes[0]);\n"
             + "      log(anchors[1] == outerA);\n"
             + "      log(anchors[1] == innerA);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
 
             + "    try {\n"
             + "      log(anchors[2].id);\n"
@@ -442,7 +442,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(anchors[2].childNodes[0]);\n"
             + "      log(anchors[2] == outerA);\n"
             + "      log(anchors[2] == innerA);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + "  function dump(e) {\n"
             + "    log(e.nodeName + ':' + e.nodeValue);\n"
