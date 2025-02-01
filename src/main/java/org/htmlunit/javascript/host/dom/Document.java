@@ -698,7 +698,7 @@ public class Document extends Node {
     @JsxFunction
     public HtmlUnitScriptable createElementNS(final String namespaceURI, final String qualifiedName) {
         if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
-            throw JavaScriptEngine.reportRuntimeError("XUL not available");
+            throw JavaScriptEngine.typeError("XUL not available");
         }
 
         final org.w3c.dom.Element element;
