@@ -79,7 +79,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "  log(res.length);\n"
             + "  log(res === array);\n"
             + "}\n"
-            + "catch(e) { log('exception'); }\n"
+            + "catch(e) { log(e.name); }\n"
             + "</script></head></html>";
 
         loadPageVerifyTitle2(html);
@@ -96,7 +96,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "try {\n"
             + "  log(window.crypto.randomUUID());\n"
             + "}\n"
-            + "catch(e) { log('exception'); }\n"
+            + "catch(e) { log(e.name); }\n"
             + "</script></head></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -109,7 +109,7 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("QuotaExceededError")
     public void getRandomValuesQuotaExceeded() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -117,7 +117,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "  var array = new Uint32Array(16385);\n"
             + "  window.crypto.getRandomValues(array);\n"
             + "}\n"
-            + "catch(e) { log('exception'); }\n"
+            + "catch(e) { log(e.name); }\n"
             + "</script></head></html>";
 
         loadPageVerifyTitle2(html);
@@ -134,7 +134,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "try {\n"
             + "  log(window.crypto.subtle);\n"
             + "}\n"
-            + "catch(e) { log('exception'); }\n"
+            + "catch(e) { log(e.name); }\n"
             + "</script></head></html>";
 
         loadPageVerifyTitle2(html);
