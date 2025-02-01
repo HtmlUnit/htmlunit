@@ -27,6 +27,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 
 /**
  * Superclass for all row-containing JavaScript host classes, including tables,
@@ -107,8 +108,12 @@ public class RowContainer extends HTMLElement {
         }
 
         if (r < 0 || r > rowCount) {
-            throw JavaScriptEngine.reportRuntimeError("Index or size is negative or greater than the allowed amount "
-                    + "(index: " + rowIndex + ", " + rowCount + " rows)");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "Index or size is negative or greater than the allowed amount "
+                                    + "(index: " + rowIndex + ", " + rowCount + " rows)",
+                            DOMException.INDEX_SIZE_ERR));
         }
 
         return insertRow(r);

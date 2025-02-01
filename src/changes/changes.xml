@@ -9,6 +9,42 @@
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Bugfixes">
             <action type="fix" dev="rbri">
+                HTMLTableElement/HTMLTableRowElement several fixes to throw the correct error.
+            </action>
+            <action type="fix" dev="rbri">
+                Element.querySelectorAll()/querySelector() throws a SyntaxError.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLOptionsCollection.add() throws a NotFoundError.
+            </action>
+            <action type="fix" dev="rbri">
+                Accessing a HTMLDocument without a js peer throws a TypeError.
+            </action>
+            <action type="fix" dev="rbri">
+                Document.createElementNS() throws a TypeError.
+            </action>
+            <action type="fix" dev="rbri">
+                Document.createElementNS() throws a TypeError.
+            </action>
+            <action type="fix" dev="rbri">
+                Selection.getRangeAt() throws an IndexSizeError.
+            </action>
+            <action type="fix" dev="rbri">
+                Node.replaceChild()/removeChild()/insertBefore() several fixes to throw the correct error.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLDocument.appendChild() throws HierarchyRequstError.
+            </action>
+            <action type="fix" dev="rbri">
+                Document.createElement() throws InvalidCharacterError.
+            </action>
+            <action type="fix" dev="rbri">
+                ImageData.ctor() various fixes to throw the correct error in different situations.
+            </action>
+            <action type="fix" dev="rbri">
+                CharacterData.deleteData() throws an IndexSizeError.
+            </action>
+            <action type="fix" dev="rbri">
                 Document.querySelectorAll() throws a SyntaxError if the selector is invalid.
             </action>
             <action type="fix" dev="rbri">

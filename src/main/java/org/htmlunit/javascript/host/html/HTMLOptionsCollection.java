@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.ElementFactory;
@@ -31,6 +30,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
+import org.htmlunit.javascript.host.dom.DOMException;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -257,7 +257,12 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
         else if (beforeOptionObject instanceof HTMLOptionElement) {
             beforeOption = (HtmlOption) ((HTMLOptionElement) beforeOptionObject).getDomNodeOrDie();
             if (beforeOption.getParentNode() != htmlSelect_) {
-                throw new EvaluatorException("Unknown option.");
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new DOMException(
+                                "Unknown option.",
+                                DOMException.NOT_FOUND_ERR));
+
             }
         }
 

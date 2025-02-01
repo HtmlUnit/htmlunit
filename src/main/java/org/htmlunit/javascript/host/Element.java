@@ -508,7 +508,7 @@ public class Element extends Node {
             return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+            throw JavaScriptEngine.syntaxError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }
@@ -528,7 +528,7 @@ public class Element extends Node {
             return null;
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+            throw JavaScriptEngine.syntaxError("An invalid or illegal selector was specified (selector: '"
                     + selectors + "' error: " + e.getMessage() + ").");
         }
     }
@@ -929,7 +929,11 @@ public class Element extends Node {
         final DomNode parent = domNode.getParentNode();
         if (null == parent) {
             if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROWS_FOR_DETACHED)) {
-                throw JavaScriptEngine.reportRuntimeError("outerHTML is readonly for detached nodes");
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new org.htmlunit.javascript.host.dom.DOMException(
+                                "outerHTML is readonly for detached nodes",
+                                org.htmlunit.javascript.host.dom.DOMException.NO_MODIFICATION_ALLOWED_ERR));
             }
             return;
         }

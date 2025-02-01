@@ -31,6 +31,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 
 /**
  * The JavaScript object {@code HTMLTableRowElement}.
@@ -153,7 +154,11 @@ public class HTMLTableRowElement extends HTMLTableComponent {
             }
             return getScriptableFor(newCell);
         }
-        throw JavaScriptEngine.reportRuntimeError("Index or size is negative or greater than the allowed amount");
+        throw JavaScriptEngine.asJavaScriptException(
+                getWindow(),
+                new DOMException(
+                        "Index or size is negative or greater than the allowed amount",
+                        DOMException.INDEX_SIZE_ERR));
     }
 
     /**
@@ -166,7 +171,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     @JsxFunction
     public void deleteCell(final Object index) {
         if (JavaScriptEngine.isUndefined(index)) {
-            throw JavaScriptEngine.reportRuntimeError("No enough arguments");
+            throw JavaScriptEngine.typeError("No enough arguments");
         }
 
         int position = (int) JavaScriptEngine.toNumber(index);
@@ -178,7 +183,11 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         }
         final boolean indexValid = position >= -1 && position <= htmlRow.getCells().size();
         if (!indexValid) {
-            throw JavaScriptEngine.reportRuntimeError("Index or size is negative or greater than the allowed amount");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "Index or size is negative or greater than the allowed amount",
+                            DOMException.INDEX_SIZE_ERR));
         }
 
         htmlRow.getCell(position).remove();

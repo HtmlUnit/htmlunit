@@ -80,7 +80,7 @@ public class HTMLTableElement extends RowContainer {
     @JsxSetter
     public void setCaption(final Object o) {
         if (!(o instanceof HTMLTableCaptionElement)) {
-            throw JavaScriptEngine.reportRuntimeError("Not a caption");
+            throw JavaScriptEngine.typeError("Not a caption");
         }
 
         // remove old caption (if any)
@@ -112,7 +112,7 @@ public class HTMLTableElement extends RowContainer {
     public void setTFoot(final Object o) {
         if (!(o instanceof HTMLTableSectionElement
             && "TFOOT".equals(((HTMLTableSectionElement) o).getTagName()))) {
-            throw JavaScriptEngine.reportRuntimeError("Not a tFoot");
+            throw JavaScriptEngine.typeError("Not a tFoot");
         }
 
         // remove old caption (if any)
@@ -144,7 +144,7 @@ public class HTMLTableElement extends RowContainer {
     public void setTHead(final Object o) {
         if (!(o instanceof HTMLTableSectionElement
             && "THEAD".equals(((HTMLTableSectionElement) o).getTagName()))) {
-            throw JavaScriptEngine.reportRuntimeError("Not a tHead");
+            throw JavaScriptEngine.typeError("Not a tHead");
         }
 
         // remove old caption (if any)
