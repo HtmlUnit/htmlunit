@@ -555,7 +555,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "  log(options[55]);\n"
             + "  try {\n"
             + "    log(options[-55]);\n"
-            + "  } catch (e) { log('exception'); }\n"
+            + "  } catch (e) { log(e.name); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -815,7 +815,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object HTMLOptionsCollection]", "0", "exception", "0"})
+    @Alerts({"[object HTMLOptionsCollection]", "0", "TypeError", "0"})
     public void without_new() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -827,7 +827,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "  log(s.length);\n"
             + "  try {\n"
             + "    s.options[0] = Option('one', 'two');\n"
-            + "  } catch (e) { log('exception') }\n"
+            + "  } catch (e) { log(e.name) }\n"
             + "  log(s.length);\n"
             + "}\n"
             + "</script></head>\n"

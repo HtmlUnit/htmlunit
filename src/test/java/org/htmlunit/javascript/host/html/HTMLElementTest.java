@@ -997,7 +997,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void setInnerHTMLDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -1008,7 +1008,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    outernode.innerHTML = newnode;\n"
             + "    try {\n"
             + "      tester();\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('declared');\n"
@@ -1500,8 +1500,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
-            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
+            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError"})
     public void setOuterHTMLDetachedElementNull() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1515,7 +1515,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = null;\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {log('exception'); }\n"
+                + "    } catch(e) {log(e.name); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1533,8 +1533,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
-            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
+            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError"})
     public void setOuterHTMLDetachedElementUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1548,7 +1548,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = undefined;\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {log('exception'); }\n"
+                + "    } catch(e) {log(e.name); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1581,7 +1581,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = '';\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {log('exception'); }\n"
+                + "    } catch(e) {log(e.name); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1599,8 +1599,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
-            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
+            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError"})
     public void setOuterHTMLDetachedElementBlank() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1614,7 +1614,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = '';\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {log('exception'); }\n"
+                + "    } catch(e) {log(e.name); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1632,8 +1632,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                        "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
-            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"})
+            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError"})
     public void setOuterHTMLDetachedElement() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1647,7 +1647,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = '<p>test</p>';\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {log('exception'); }\n"
+                + "    } catch(e) {log(e.name); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1706,7 +1706,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void setOuterHTMLDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -1717,7 +1717,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    oldnode.outerHTML = newnode;\n"
             + "    try {\n"
             + "      tester();\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('declared');\n"
@@ -1734,7 +1734,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"body.cpuClass = undefined", "exception"})
+    @Alerts({"body.cpuClass = undefined", "TypeError"})
     public void addBehaviorDefaultClientCaps() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1746,7 +1746,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  var id2 = body.addBehavior('#default#clientCaps');\n"
             + "  body.removeBehavior(id);\n"
             + "  log('body.cpuClass = ' + body.cpuClass);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -1757,7 +1757,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"body.isHomePage = undefined", "!addBehavior", "!removeBehavior", "exception"})
+    @Alerts({"body.isHomePage = undefined", "!addBehavior", "!removeBehavior", "TypeError"})
     public void removeBehavior() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1772,7 +1772,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  log('body.isHomePage = ' + body.isHomePage('not the home page'));\n"
             + "  body.removeBehavior(id);\n"
             + "  log('body.isHomePage = ' + body.isHomePage);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -1826,7 +1826,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "TypeError"})
     public void childrenFunctionAccess() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'><br/><div>\n"
@@ -1836,7 +1836,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  var oDiv = document.getElementById('myDiv');\n"
             + "  log(oDiv.children.length);\n"
             + "  log(oDiv.children(0).tagName);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -2205,8 +2205,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"null", "body", "exception", "body", "body", "body",
-                       "f1", "body", "h1", "i1", "td", "exception", "td", "body", "body"},
+    @Alerts(DEFAULT = {"null", "body", "TypeError", "body", "body", "body",
+                       "f1", "body", "h1", "i1", "td", "TypeError", "td", "body", "body"},
             FF = {"null", "body", "body", "body", "body", "body",
                   "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"},
             FF_ESR = {"null", "body", "body", "body", "body", "body",
@@ -2239,7 +2239,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      function alertOffsetParentId(id) {\n"
             + "        try {\n"
             + "          log(document.getElementById(id).offsetParent.id);\n"
-            + "        } catch (e) { log('exception'); }\n"
+            + "        } catch (e) { log(e.name); }\n"
             + "      }\n"
             + "      function test() {\n"
             + "        log(document.getElementById('body').offsetParent);  // null (FF) null (IE)\n"
@@ -2565,7 +2565,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      log(pos);\n"
             + "      log(pos.left);\n"
             + "      log(pos.top);\n"
-            + "    } catch (e) { log('exception');}\n"
+            + "    } catch (e) { log(e.name);}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2744,7 +2744,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void setExpression() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2752,7 +2752,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var div1 = document.getElementById('div1');\n"
             + "      div1.setExpression('title','id');\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
@@ -3208,7 +3208,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  log(div2.contains(text));\n"
             + "  log(div3.contains(text));\n"
             + "  log(text.contains(div3));\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'>\n"
@@ -3368,7 +3368,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "exception"})
+    @Alerts({"TypeError", "TypeError"})
     public void doScroll() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3379,7 +3379,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    document.documentElement.doScroll('left');\n"
             + "    log('success');\n"
             + "  } catch (e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "}\n"
             + "test();\n"
@@ -4548,7 +4548,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void insertAdjacentHTMLDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4559,7 +4559,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "'<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>');\n"
             + "    try {\n"
             + "      tester();\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('declared');\n"
@@ -4831,8 +4831,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "setCapture available"},
-            CHROME = "exception",
-            EDGE = "exception")
+            CHROME = "TypeError",
+            EDGE = "TypeError")
     public void setCapture() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -4845,7 +4845,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      log(div.setCapture(true));\n"
             + "      log(div.setCapture(false));\n"
             + "      log('setCapture available');\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -4861,8 +4861,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "releaseCapture available"},
-            CHROME = "exception",
-            EDGE = "exception")
+            CHROME = "TypeError",
+            EDGE = "TypeError")
     public void releaseCapture() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -4873,7 +4873,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(div.releaseCapture());\n"
             + "      log('releaseCapture available');\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

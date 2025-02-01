@@ -134,7 +134,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 //            + "    log(document.getElementsByClassName().length);\n" // exception in FF3
             + "    log(document.getElementsByClassName(null).length);\n"
             + "  }\n"
-            + "  catch (e) { log('exception') }\n"
+            + "  catch (e) { log(e.name) }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div class='foo' id='div1'><span class='c2'>hello</span>\n"
@@ -340,7 +340,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  var elt = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
             + "  log(elt);\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -370,7 +370,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "TypeError",
+            FF = "NS_ERROR_NOT_AVAILABLE",
+            FF_ESR = "NS_ERROR_NOT_AVAILABLE")
+    @HtmlUnitNYI(FF = "TypeError",
+            FF_ESR = "TypeError")
     public void createDocumentNS_xul() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -383,7 +387,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  document.body.appendChild(inner);\n"
             + "  log(document.body.lastChild.value);\n"
             + "}\n"
-            + "catch (e) { log('exception'); }\n"
+            + "catch (e) { log(e.name); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -456,7 +460,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    var theSpan = document.getElementById('s1');\n"
             + "    document.body.replaceChild(importedScript, theSpan);\n"
             + "    log('replaced');\n"
-            + "  } catch (e) { log('exception') }\n"
+            + "  } catch (e) { log(e.name) }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <span id='s1'></span>\n"
@@ -491,7 +495,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    var theSpan = document.getElementById('s1');\n"
             + "    document.body.replaceChild(importedDiv, theSpan);\n"
             + "    log('replaced');\n"
-            + "  } catch (e) { log('exception') }\n"
+            + "  } catch (e) { log(e.name) }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <span id='s1'></span>\n"
@@ -531,7 +535,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"undefined", "exception"})
+    @Alerts({"undefined", "TypeError"})
     public void namespaces() throws Exception {
         final String html =
               "<body><script>\n"
@@ -550,7 +554,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  log(ns['f'].urn);\n"
             + "  log(ns == document.namespaces);\n"
             + "}\n"
-            + "catch(e) { log('exception') }\n"
+            + "catch(e) { log(e.name) }\n"
             + "</script></body>";
 
         loadPageVerifyTitle2(html);
@@ -561,16 +565,21 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts({"TypeError", "TypeError"})
     public void documentMethodsWithoutDocument() throws Exception {
         final String html
             = "<div id='d' name='d'>d</div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  var i = document.getElementById; log(i('d').id);\n"
-            + "  var n = document.getElementsByName; log(n('d').length);\n"
-            + "} catch(e) { log('exception') }\n"
+            + "  var i = document.getElementById;\n"
+            + "  log(i('d').id);\n"
+            + "} catch(e) { log(e.name) }\n"
+
+            + "try {\n"
+            + "  var n = document.getElementsByName;\n"
+            + "  log(n('d').length);\n"
+            + "} catch(e) { log(e.name) }\n"
             + "</script>";
         loadPageVerifyTitle2(html);
     }
@@ -664,7 +673,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "exception"},
+    @Alerts(DEFAULT = {"0", "IndexSizeError"},
             FF = {"1", "[object HTMLBodyElement]"},
             FF_ESR = {"1", "[object HTMLBodyElement]"})
     public void designMode_selectionRange_empty() throws Exception {
@@ -677,7 +686,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "exception"},
+    @Alerts(DEFAULT = {"0", "IndexSizeError"},
             FF = {"1", "[object Text]"},
             FF_ESR = {"1", "[object Text]"})
     public void designMode_selectionRange_text() throws Exception {
@@ -695,7 +704,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    var s = window.getSelection();\n"
             + "    log(s.rangeCount);\n"
             + "    log(s.getRangeAt(0).startContainer);\n"
-            + "  } catch(e) {log('exception'); }\n"
+            + "  } catch(e) {log(e.name); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>" // no \n here!
@@ -1174,7 +1183,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void getBoxObjectFor() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1186,7 +1195,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    log(a === document.getBoxObjectFor(e));\n"
             + "    log(a.screenX > 0);\n"
             + "    log(a.screenY > 0);\n"
-            + "  } catch (e) { log('exception') }\n"
+            + "  } catch (e) { log(e.name) }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='log'></div>\n"
@@ -1266,7 +1275,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      else\n"
             + "        cmdsNotSupported[cmdsNotSupported.length] = cmd;\n"
             + "    }\n"
-            + "  } catch (e) { log('exception'); }\n"
+            + "  } catch (e) { log(e.name); }\n"
             + "  log(nbSupported + ' commands supported');\n"
             + "  if (nbSupported != 0 && cmdsNotSupported.length > 0)\n"
             + "    log('not supported: ' + cmdsNotSupported.join(', '));\n"
@@ -1330,7 +1339,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void querySelectorAll_badSelector() throws Exception {
         for (final String selector : JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelectorAll_badSelector(selector);
@@ -1343,7 +1352,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  document.querySelectorAll('" + selector + "');\n"
             + "  log('working');\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -1353,7 +1362,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void querySelector_badSelector() throws Exception {
         for (final String selector : JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelector_badSelector(selector);
@@ -1366,7 +1375,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  document.querySelector('" + selector + "');\n"
             + "  log('working: " + selector + "');\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -1630,7 +1639,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidCharacterError")
     public void createElement_notOnlyTagName() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -1639,7 +1648,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  var t = document.createElement('<input name=x>');\n"
             + "  log(t.tagName);\n"
             + "} catch(e) {\n"
-            + "  log('exception');\n"
+            + "  log(e.name);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -2292,7 +2301,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(document.setCapture);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2308,8 +2317,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "releaseCapture available"},
-            CHROME = "exception",
-            EDGE = "exception")
+            CHROME = "TypeError",
+            EDGE = "TypeError")
     public void releaseCapture() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -2319,7 +2328,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document.releaseCapture());\n"
             + "      log('releaseCapture available');\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2347,7 +2356,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document);\n"
             + "      log(HTMLDocument);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2696,7 +2705,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void embeds() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2705,7 +2714,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(document.embeds(0));\n"
-            + "    } catch(e) {log('exception'); }\n"
+            + "    } catch(e) {log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2720,7 +2729,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1", "exception"})
+    @Alerts({"1", "TypeError"})
     public void plugins() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2730,7 +2739,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document.plugins.length);\n"
             + "      log(document.plugins(0));\n"
-            + "    } catch(e) {log('exception'); }\n"
+            + "    } catch(e) {log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2745,7 +2754,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void images() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2754,7 +2763,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(document.images(0));\n"
-            + "    } catch(e) {log('exception'); }\n"
+            + "    } catch(e) {log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2822,7 +2831,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      newBody.id = 'newBody';\n"
             + "      document.body = newBody;\n"
             + "      log(document.body.id);\n"
-            + "    } catch(e) {log('exception'); }\n"
+            + "    } catch(e) {log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2836,7 +2845,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"myBody", "exception"})
+    @Alerts({"myBody", "HierarchyRequestError"})
     public void setBodyDiv() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2850,7 +2859,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      newDiv.id = 'newDiv';\n"
             + "      document.body = newDiv;\n"
             + "      log(document.body.id);\n"
-            + "    } catch(e) {log('exception'); }\n"
+            + "    } catch(e) {log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2864,7 +2873,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"myBody", "exception"})
+    @Alerts({"myBody", "TypeError"})
     public void setBodyString() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2877,7 +2886,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      var newBody = '<body id=\"newBody\" onload=\"test()\"></body>';\n"
             + "      document.body = newBody;\n"
             + "      log(document.body.id);\n"
-            + "    } catch(e) {log('exception'); }\n"
+            + "    } catch(e) {log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2905,7 +2914,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      newBody.id = 'newFrameset';\n"
             + "      document.body = newBody;\n"
             + "      log(document.body.id);\n"
-            + "    } catch(e) {log('exception'); }\n"
+            + "    } catch(e) {log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

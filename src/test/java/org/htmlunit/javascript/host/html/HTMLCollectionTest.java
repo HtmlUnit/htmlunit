@@ -77,7 +77,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "exception"})
+    @Alerts({"4", "HierarchyRequestError"})
     public void getElements() throws Exception {
         final String html
             = "<html><head>\n"
@@ -88,7 +88,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "  try {\n"
             + "    document.appendChild(document.createElement('div'));\n"
             + "    log(document.all.length);\n"
-            + "  } catch (e) { log('exception') }\n"
+            + "  } catch (e) { log(e.name) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -186,7 +186,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"null", "null", "undefined", "exception"})
+    @Alerts({"null", "null", "undefined", "TypeError"})
     public void outOfBoundAccess() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -198,7 +198,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    log(col[1]);\n"
             + "    try {\n"
             + "      log(col(1));\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -362,7 +362,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "      for (f of document.forms) {\n"
             + "        log(f.name);\n"
             + "      }\n"
-            + "    } catch(e) { log('exception') }\n"
+            + "    } catch(e) { log(e.name) }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -400,7 +400,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "      for (f of document.forms) {\n"
             + "        log(f.name);\n"
             + "      }\n"
-            + "    } catch(e) { log('exception') }\n"
+            + "    } catch(e) { log(e.name) }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -438,7 +438,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "      for (f of document.forms) {\n"
             + "        log(f.name);\n"
             + "      }\n"
-            + "    } catch(e) { log('exception') }\n"
+            + "    } catch(e) { log(e.name) }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -565,7 +565,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var col = document.getElementsByTagName('button');\n"
             + "      report(col.item(" + name + "));\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -682,7 +682,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var col = document.getElementsByTagName('button');\n"
             + "      report(col[" + name + "]);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -697,7 +697,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_Unknown() throws Exception {
         functionIndex("'foo'");
     }
@@ -706,7 +706,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_ById() throws Exception {
         functionIndex("'b2'");
     }
@@ -715,7 +715,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_ByName() throws Exception {
         functionIndex("'button2'");
     }
@@ -724,7 +724,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_NegativIndex() throws Exception {
         functionIndex("-1");
     }
@@ -733,7 +733,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_ZeroIndex() throws Exception {
         functionIndex("0");
     }
@@ -742,7 +742,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_ValidIndex() throws Exception {
         functionIndex("1");
     }
@@ -751,7 +751,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_DoubleIndex() throws Exception {
         functionIndex("1.1");
     }
@@ -760,7 +760,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_InvalidIndex() throws Exception {
         functionIndex("2");
     }
@@ -769,7 +769,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void functionIndex_IndexAsString() throws Exception {
         functionIndex("'2'");
     }
@@ -799,7 +799,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var col = document.getElementsByTagName('button');\n"
             + "      report(col(" + name + "));\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"

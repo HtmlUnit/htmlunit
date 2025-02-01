@@ -147,7 +147,7 @@ public class HTMLMediaElementTest extends WebDriverTestCase {
             + "try {\n"
             + "  var video = document.createElement('video');"
             + "  log(video.canPlayType('" + type + "'));\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 

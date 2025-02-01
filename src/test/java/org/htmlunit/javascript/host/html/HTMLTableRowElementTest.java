@@ -57,7 +57,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "td1", "3", "td2", "td4", "2", "td3", "exception", "exception"})
+    @Alerts({"4", "td1", "3", "td2", "td4", "2", "td3", "IndexSizeError", "IndexSizeError"})
     public void deleteCell() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -73,8 +73,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "    tr.deleteCell(-1);\n"
             + "    log(tr.cells.length);\n"
             + "    log(tr.cells[tr.cells.length-1].id);\n"
-            + "    try { tr.deleteCell(25); } catch(e) { log('exception'); }\n"
-            + "    try { tr.deleteCell(-2); } catch(e) { log('exception'); }\n"
+            + "    try { tr.deleteCell(25); } catch(e) { log(e.name); }\n"
+            + "    try { tr.deleteCell(-2); } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -95,7 +95,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "exception", "4"})
+    @Alerts({"4", "TypeError", "4"})
     public void deleteCell_noArg() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -103,7 +103,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var tr = document.getElementById('myId');\n"
             + "    log(tr.cells.length);\n"
-            + "    try { tr.deleteCell(); } catch(e) { log('exception'); }\n"
+            + "    try { tr.deleteCell(); } catch(e) { log(e.name); }\n"
             + "    log(tr.cells.length);\n"
             + "  }\n"
             + "</script>\n"
@@ -426,7 +426,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "      var newCell = row.insertCell(" + cellIndex + ");\n"
             + "      log(row.cells.length);\n"
             + "      log(newCell.cellIndex);\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch (e) { log(e.name); }\n"
             + "  </script>\n"
             + "</body></html>";
 
@@ -446,7 +446,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "IndexSizeError"})
     public void insertCell_MinusTwo() throws Exception {
         insertCell("-2");
     }
@@ -491,7 +491,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "IndexSizeError"})
     public void insertCell_Three() throws Exception {
         insertCell("3");
     }

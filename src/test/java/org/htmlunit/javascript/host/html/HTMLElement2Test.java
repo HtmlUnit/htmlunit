@@ -1568,7 +1568,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void querySelectorAll_badSelector() throws Exception {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelectorAll_badSelector(selector);
@@ -1588,7 +1588,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "try {\n"
             + "  document.getElementById('it').querySelectorAll('" + selector + "');\n"
             + "  log('working: " + selector + "');\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -1598,7 +1598,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void querySelector_badSelector() throws Exception {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelector_badSelector(selector);
@@ -1611,7 +1611,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "try {\n"
             + "  document.getElementById('it').querySelector('" + selector + "');\n"
             + "  log('working " + selector + "');\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

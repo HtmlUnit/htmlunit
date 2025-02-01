@@ -75,7 +75,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             + "          base.size = 42;\n"
             + "          log(base.size);\n"
             + "        } catch(e) {\n"
-            + "          log('exception');\n"
+            + "          log(e.name);\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -105,7 +105,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             + "          base.face = 'helvetica';\n"
             + "          log(base.face);\n"
             + "        } catch(e) {\n"
-            + "          log('exception');\n"
+            + "          log(e.name);\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -135,7 +135,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             + "          base.color = 'blue';\n"
             + "          log(base.color);\n"
             + "        } catch(e) {\n"
-            + "          log('exception');\n"
+            + "          log(e.name);\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -150,7 +150,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object HTMLElement]", "exception"})
+    @Alerts({"[object HTMLElement]", "ReferenceError"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -161,7 +161,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(elem);\n"
             + "      log(HTMLBaseFontElement);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

@@ -72,7 +72,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void attachEvent() throws Exception {
         final String html =
             "<html>\n"
@@ -85,7 +85,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             + "      function test() {\n"
             + "        try {\n"
             + "          document.body.attachEvent('onclick', handler);\n"
-            + "        } catch(e) { log('exception'); }\n"
+            + "        } catch(e) { log(e.name); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -315,7 +315,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             + "      for (var i in HTMLBodyElement)\n"
             + "        str += i + ', ';\n"
             + "      log(str);\n"
-            + "    } catch (e) { log('exception')}\n"
+            + "    } catch (e) { log(e.name)}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

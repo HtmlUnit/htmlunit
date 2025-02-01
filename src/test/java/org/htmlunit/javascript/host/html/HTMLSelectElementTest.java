@@ -251,10 +251,10 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "      s.selectedIndex = 2;\n"
             + "      log(s.selectedIndex);\n"
 
-            + "      try { s.selectedIndex = 25; } catch (e) { log('exception') }\n"
+            + "      try { s.selectedIndex = 25; } catch (e) { log(e.name) }\n"
             + "      log(s.selectedIndex);\n"
 
-            + "      try { s.selectedIndex = -14; } catch (e) { log('exception') }\n"
+            + "      try { s.selectedIndex = -14; } catch (e) { log(e.name) }\n"
             + "      log(s.selectedIndex);\n"
             + "    }\n"
             + "  </script>\n"
@@ -536,7 +536,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "      var options = document.form1.select1;\n"
             + "      try {\n"
             + "        options.add(new Option('Four','value4'), null);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "      log(options.length);\n"
             + "      var index = options.length - 1;\n"
             + "      log(options[index].text);\n"
@@ -581,7 +581,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "        oSelect.add(new Option('Three b', 'value3b'), 3);\n"
             + "        log(oSelect[3].text);\n"
             + "        log(oSelect[3].value);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -618,7 +618,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "        oSelect.add(new Option('test', 'testValue'), null);\n"
             + "        log(oSelect[oSelect.length-1].text);\n"
             + "        log(oSelect[oSelect.length-1].value);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -834,7 +834,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "exception"})
+    @Alerts({"0", "NotFoundError"})
     public void addOptionMethodNewOptionEmptySelect() throws Exception {
         addOptionMethod(", new Option('foo', '123')", true, false);
     }
@@ -843,7 +843,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "exception"})
+    @Alerts({"0", "NotFoundError"})
     public void addOptionMethodNewOptionEmptySelectMulti() throws Exception {
         addOptionMethod(", new Option('foo', '123')", true, true);
     }
@@ -870,7 +870,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "exception"})
+    @Alerts({"3", "NotFoundError"})
     public void addOptionMethodNewOption() throws Exception {
         addOptionMethod(", new Option('foo', '123')", false, false);
     }
@@ -879,7 +879,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "exception"})
+    @Alerts({"3", "NotFoundError"})
     public void addOptionMethodNewOptionMulti() throws Exception {
         addOptionMethod(", new Option('foo', '123')", false, true);
     }
@@ -975,7 +975,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
             + "          log(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
             + "        }\n"
-            + "      } catch (e) { log('exception'); }\n"
+            + "      } catch (e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1017,7 +1017,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "        var opt = new Option('foo', '123');\n"
             + "        oSelect.add(opt, -1);\n"
             + "        log(oSelect.length);\n"
-            + "      } catch (e) { log('exception'); }\n"
+            + "      } catch (e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1372,7 +1372,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
             + "          log(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
             + "        }\n"
-            + "      } catch (e) { log('exception'); }\n"
+            + "      } catch (e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1477,7 +1477,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "    log(options.length);\n"
             + "    log(options[1].text);\n"
             + "    log(options[1].value);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "}</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -1666,7 +1666,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void optionsDelegateToSelect() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1684,7 +1684,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "\n"
             + "    s.options.selectedIndex = 1;\n"
             + "    doAlerts(s);\n"
-            + "  } catch (e) { log('exception'); }\n"
+            + "  } catch (e) { log(e.name); }\n"
             + "}\n"
             + "function doAlerts(s) {\n"
             + "  log(s.childNodes.length + '-' + s.options.childNodes.length);\n"
@@ -2190,7 +2190,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "    var s = document.getElementById('mySelect');\n"
             + "    log(s.item(0).text);\n"
             + "    log(s.item(300));\n"
-            + "    try { log(s.item(-5)); } catch(e) { log('exception'); }\n"
+            + "    try { log(s.item(-5)); } catch(e) { log(e.name); }\n"
             + "  </script>\n"
             + "</body></html>";
 

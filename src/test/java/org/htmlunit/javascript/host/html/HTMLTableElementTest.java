@@ -38,7 +38,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"caption1", "caption2", "null", "caption3", "exception",
+    @Alerts({"caption1", "caption2", "null", "caption3", "TypeError",
              "[object HTMLTableCaptionElement]", "caption3", "caption4"})
     public void tableCaptions() throws Exception {
         final String html
@@ -63,13 +63,13 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "    newCaption.innerHTML = 'caption3';\n"
             + "    log(table.caption.innerHTML);\n"
 
-            + "    try { table.caption = 123; } catch(e) { log('exception') }\n"
+            + "    try { table.caption = 123; } catch(e) { log(e.name) }\n"
             + "    log(table.caption);\n"
             + "    if (table.caption) { log(table.caption.innerHTML) }\n"
 
             + "    var caption4 = document.createElement('caption');\n"
             + "    caption4.innerHTML = 'caption4';\n"
-            + "    try { table.caption = caption4; } catch(e) { log('exception') }\n"
+            + "    try { table.caption = caption4; } catch(e) { log(e.name) }\n"
             + "    log(table.caption.innerHTML);\n"
             + "  </script>\n"
             + "</body></html>";
@@ -81,7 +81,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"thead1", "thead2", "null", "thead3", "exception",
+    @Alerts({"thead1", "thead2", "null", "thead3", "TypeError",
              "[object HTMLTableSectionElement]", "thead3", "thead4"})
     public void tableHeaders() throws Exception {
         final String html
@@ -108,13 +108,13 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "    newTHead.id = 'thead3';\n"
             + "    log(table.tHead.id);\n"
 
-            + "    try { table.tHead = 123; } catch(e) { log('exception') }\n"
+            + "    try { table.tHead = 123; } catch(e) { log(e.name) }\n"
             + "    log(table.tHead);\n"
             + "    if (table.tHead) { log(table.tHead.id) }\n"
 
             + "    var tHead4 = document.createElement('tHead');\n"
             + "    tHead4.id = 'thead4';\n"
-            + "    try { table.tHead = tHead4; } catch(e) { log('exception') }\n"
+            + "    try { table.tHead = tHead4; } catch(e) { log(e.name) }\n"
             + "    log(table.tHead.id);\n"
             + "  </script>\n"
             + "</body></html>";
@@ -284,7 +284,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"tfoot1", "tfoot2", "null", "tfoot3", "exception",
+    @Alerts({"tfoot1", "tfoot2", "null", "tfoot3", "TypeError",
              "[object HTMLTableSectionElement]", "tfoot3", "tfoot4"})
     public void tableFooters() throws Exception {
         final String html
@@ -311,13 +311,13 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "    newTFoot.id = 'tfoot3';\n"
             + "    log(table.tFoot.id);\n"
 
-            + "    try { table.tFoot = 123; } catch(e) { log('exception') }\n"
+            + "    try { table.tFoot = 123; } catch(e) { log(e.name) }\n"
             + "    log(table.tFoot);\n"
             + "    if (table.tFoot) { log(table.tFoot.id) }\n"
 
             + "    var tFoot4 = document.createElement('tFoot');\n"
             + "    tFoot4.id = 'tfoot4';\n"
-            + "    try { table.tFoot = tFoot4; } catch(e) { log('exception') }\n"
+            + "    try { table.tFoot = tFoot4; } catch(e) { log(e.name) }\n"
             + "    log(table.tFoot.id);\n"
             + "  </script>\n"
             + "</body></html>";
@@ -367,7 +367,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "      var newRow = table.insertRow(" + rowIndex + ");\n"
             + "      log(table.rows.length);\n"
             + "      log(newRow.rowIndex);\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch (e) { log(e.name); }\n"
             + "  </script>\n"
             + "</body></html>";
 
@@ -387,7 +387,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "IndexSizeError"})
     public void insertRow_MinusTwo() throws Exception {
         insertRow("-2");
     }
@@ -432,7 +432,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "IndexSizeError"})
     public void insertRow_Three() throws Exception {
         insertRow("3");
     }
@@ -901,7 +901,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "hello", "unknown", "exception", "", "test"})
+    @Alerts({"", "hello", "unknown", "ReferenceError", "", "test"})
     public void summary() throws Exception {
         final String html
             = "<html><body>\n"
@@ -919,7 +919,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  node.summary = 'unknown';\n"
             + "  log(node.summary);\n"
 
-            + "  try { node.summary = unknown; } catch(e) { log('exception') }\n"
+            + "  try { node.summary = unknown; } catch(e) { log(e.name) }\n"
 
             + "  var node = document.getElementById('tab2');\n"
             + "  log(node.summary);\n"

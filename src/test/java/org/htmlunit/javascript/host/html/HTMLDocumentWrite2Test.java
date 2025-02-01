@@ -421,7 +421,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "  var t = document.createTextNode(\"document.write('in inline script'); document.title = 'done';\");\n"
             + "  s.appendChild(t);\n"
             + "  document.body.appendChild(s);\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script></div></body></html>";
 
         final WebDriver driver = loadPage2(html);

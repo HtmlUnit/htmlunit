@@ -112,7 +112,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
             + "  for (var i = 0; i < l2.relList.length; i++) {\n"
             + "    log(l2.relList[i]);\n"
             + "  }\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
 
             + "</script></body></html>";
 
@@ -150,7 +150,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -179,7 +179,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -216,7 +216,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -253,7 +253,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
