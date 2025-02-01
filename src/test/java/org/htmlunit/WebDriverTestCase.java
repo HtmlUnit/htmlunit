@@ -506,7 +506,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                 final EdgeOptions options = new EdgeOptions();
                 // BiDi
-                options.setCapability("webSocketUrl", true);
+                // options.setCapability("webSocketUrl", true);
 
                 options.addArguments("--lang=" + locale);
                 options.addArguments("--remote-allow-origins=*");
@@ -542,7 +542,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                 final ChromeOptions options = new ChromeOptions();
                 // BiDi
-                options.setCapability("webSocketUrl", true);
+                // options.setCapability("webSocketUrl", true);
 
                 options.addArguments("--lang=" + locale);
                 options.addArguments("--remote-allow-origins=*");
@@ -597,7 +597,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final FirefoxOptions options = new FirefoxOptions();
         // BiDi
-        options.setCapability("webSocketUrl", true);
+        // options.setCapability("webSocketUrl", true);
 
         options.setBinary(binary);
 
