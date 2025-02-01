@@ -71,7 +71,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    ctx.closePath();\n"
             + "    ctx.rotate(1.234);\n"
             + "    log('done');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -112,7 +112,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "        log(methods[i]);\n"
             + "    }\n"
             + "    log(nbMethods + ' methods');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -772,7 +772,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"exception", "0", "true", "true"})
+    @Alerts({"TypeError", "0", "true", "true"})
     public void measureText() throws Exception {
         final String html =
             "<html>\n"
@@ -785,7 +785,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "          ctx = canvas.getContext('2d');\n"
             + "          try {\n"
             + "            log(ctx.measureText());\n"
-            + "          } catch(e) { log('exception'); }\n"
+            + "          } catch(e) { log(e.name); }\n"
 
             + "          var metrics = ctx.measureText('');\n"
             + "          log(metrics.width);\n"
@@ -936,7 +936,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = null;\n"
             + "    log(ctx.globalAlpha);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -970,7 +970,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = undefined;\n"
             + "    log(ctx.globalAlpha);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"

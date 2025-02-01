@@ -563,8 +563,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public TextMetrics measureText(final Object text) {
         if (text == null || JavaScriptEngine.isUndefined(text)) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(
-                    new RuntimeException("Missing argument for CanvasRenderingContext2D.measureText()."));
+            throw JavaScriptEngine.typeError("Missing argument for CanvasRenderingContext2D.measureText().");
         }
 
         final String textValue = JavaScriptEngine.toString(text);
