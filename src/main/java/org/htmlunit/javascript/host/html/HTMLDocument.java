@@ -119,7 +119,7 @@ public class HTMLDocument extends Document {
             return super.getDomNodeOrDie();
         }
         catch (final IllegalStateException e) {
-            throw JavaScriptEngine.reportRuntimeError("No node attached to this object");
+            throw JavaScriptEngine.typeError("No node attached to this object");
         }
     }
 
