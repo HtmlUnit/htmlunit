@@ -179,7 +179,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"exception", "-Hello world-Hello world-0", "-Hello world-Hello world-0"})
+    @Alerts({"InvalidStateError", "-Hello world-Hello world-0", "-Hello world-Hello world-0"})
     public void setValueOnChange() throws Exception {
         final String html =
               "<html>\n"
@@ -190,14 +190,14 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.value = 'HtmlUnit';\n"
-              + "    } catch(e) { log('exception'); }\n"
+              + "    } catch(e) { log(e.name); }\n"
               + "    log(input.value + '-' + input.defaultValue "
                           + "+ '-' + input.getAttribute('value') "
                           + "+ '-' + input.files.length);\n"
 
               + "    try{\n"
               + "      input.value = '';\n"
-              + "    } catch(e) { log('exception'); }\n"
+              + "    } catch(e) { log(e.name); }\n"
               + "    log(input.value + '-' + input.defaultValue "
                           + "+ '-' + input.getAttribute('value') "
                           + "+ '-' + input.files.length);\n"
@@ -234,14 +234,14 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.defaultValue = 'HtmlUnit';\n"
-              + "    } catch(e) { log('exception'); }\n"
+              + "    } catch(e) { log(e.name); }\n"
               + "    log(input.value + '-' + input.defaultValue "
                           + "+ '-' + input.getAttribute('value') "
                           + "+ '-' + input.files.length);\n"
 
               + "    try{\n"
               + "      input.defaultValue = '';\n"
-              + "    } catch(e) { log('exception'); }\n"
+              + "    } catch(e) { log(e.name); }\n"
               + "    log(input.value + '-' + input.defaultValue "
                           + "+ '-' + input.getAttribute('value') "
                           + "+ '-' + input.files.length);\n"
@@ -336,7 +336,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"-initial-initial", "-initial-initial",
-             "exception", "-initial-initial", "-initial-initial",
+             "InvalidStateError", "-initial-initial", "-initial-initial",
              "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head>\n"
@@ -351,7 +351,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
@@ -379,7 +379,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"-initial-initial", "-initial-initial",
-             "exception", "-initial-initial", "-initial-initial",
+             "InvalidStateError", "-initial-initial", "-initial-initial",
              "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head>\n"
@@ -394,7 +394,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
@@ -421,7 +421,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"-initial-initial", "-default-default",
-             "exception", "-default-default", "-attribValue-attribValue",
+             "InvalidStateError", "-default-default", "-attribValue-attribValue",
              "-newDefault-newDefault"})
     public void value() throws Exception {
         final String html = "<html><head>\n"
@@ -436,7 +436,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.setAttribute('value', 'attribValue');\n"
@@ -506,7 +506,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "    } catch(e) { log('ex end'); }\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -519,9 +519,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "exception value", "null,null",
-             "exception", "null,null",
-             "exception", "null,null"})
+    @Alerts({"null,null", "InvalidStateError", "null,null",
+             "InvalidStateError", "null,null",
+             "InvalidStateError", "null,null"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -530,9 +530,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "exception value", "null,null",
-             "exception", "null,null",
-             "exception", "null,null"})
+    @Alerts({"null,null", "InvalidStateError", "null,null",
+             "InvalidStateError", "null,null",
+             "InvalidStateError", "null,null"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -541,9 +541,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "exception value", "null,null",
-             "exception", "null,null",
-             "exception", "null,null"})
+    @Alerts({"null,null", "InvalidStateError", "null,null",
+             "InvalidStateError", "null,null",
+             "InvalidStateError", "null,null"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -558,28 +558,28 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
 
             + "  try{\n"
             + "    input.value = '12345678900';\n"
-            + "  } catch(e) { log('exception value'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
 
             + "  try {\n"
             + "    input.selectionStart = " + selectionStart + ";\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
 
             + "  try {\n"
             + "    input.selectionEnd = " + selectionEnd + ";\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -591,7 +591,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "exception"})
+    @Alerts({"null,null", "InvalidStateError"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -617,7 +617,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    input.value = 'a';\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

@@ -1379,7 +1379,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "  function getSelection(element) {\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1393,8 +1393,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "null,null", "exception",
-             "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "InvalidStateError",
+             "null,null", "InvalidStateError", "null,null"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -1403,8 +1403,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "null,null", "exception",
-             "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "InvalidStateError",
+             "null,null", "InvalidStateError", "null,null"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -1413,8 +1413,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "null,null", "exception",
-             "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "InvalidStateError",
+             "null,null", "InvalidStateError", "null,null"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -1429,26 +1429,26 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
 
             + "  input.value = '12345678900';\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
 
             + "  try {\n"
             + "    input.selectionStart = " + selectionStart + ";\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
 
             + "  try {\n"
             + "    input.selectionEnd = " + selectionEnd + ";\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -1460,7 +1460,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "exception"})
+    @Alerts({"null,null", "InvalidStateError"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -1486,7 +1486,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
             + "    input.value = '7';\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

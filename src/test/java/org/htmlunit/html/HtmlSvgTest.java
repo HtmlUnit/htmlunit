@@ -112,7 +112,7 @@ public class HtmlSvgTest extends WebDriverTestCase {
             + "  var svg =  document.getElementById('myId');\n"
             + "  try {\n"
             + "    log(svg.getScreenCTM());\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 

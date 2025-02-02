@@ -91,7 +91,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "  log('created');\n"
             + "  element.parentNode.replaceChild(fragment, element);\n"
             + "  log('replaced');\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

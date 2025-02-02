@@ -35,7 +35,7 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"exception", "0"})
+    @Alerts({"HierarchyRequestError", "0"})
     public void appendChild_recursive() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -44,7 +44,7 @@ public class DomNode2Test extends WebDriverTestCase {
                 + "  var e = document.createElement('div');\n"
                 + "  try {\n"
                 + "    log(e.appendChild(e) === e);\n"
-                + "  } catch(e) {log('exception');}\n"
+                + "  } catch(e) {log(e.name);}\n"
                 + "  log(e.childNodes.length);\n"
                 + "}\n"
                 + "</script>\n"
@@ -60,7 +60,7 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"true", "exception", "1", "0"})
+    @Alerts({"true", "HierarchyRequestError", "1", "0"})
     public void appendChild_recursive_parent() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -71,7 +71,7 @@ public class DomNode2Test extends WebDriverTestCase {
                 + "  try {\n"
                 + "    log(e1.appendChild(e2) === e2);\n"
                 + "    log(e2.appendChild(e1) === e1);\n"
-                + "  } catch(e) {log('exception');}\n"
+                + "  } catch(e) {log(e.name);}\n"
                 + "  log(e1.childNodes.length);\n"
                 + "  log(e2.childNodes.length);\n"
                 + "}\n"
