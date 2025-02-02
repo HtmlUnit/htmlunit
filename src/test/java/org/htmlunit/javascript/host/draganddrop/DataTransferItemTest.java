@@ -84,7 +84,7 @@ public class DataTransferItemTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"file", "", "file", "text/html", "exception"})
+    @Alerts({"file", "", "file", "text/html", "TypeError"})
     public void file() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -103,7 +103,7 @@ public class DataTransferItemTest extends WebDriverTestCase {
 
             + "    try {"
             + "      dt.items.add(undefined);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
