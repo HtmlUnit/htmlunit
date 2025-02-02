@@ -76,7 +76,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      processor.importStylesheet(xslDoc);\n"
             + "      var newDocument = processor.transformToDocument(xmlDoc);\n"
             + "      log(new XMLSerializer().serializeToString(newDocument.documentElement));\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
 
             + "</script></head><body onload='test()'>\n"
@@ -143,7 +143,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      processor.importStylesheet(xslDoc);\n"
             + "      var newFragment = processor.transformToFragment(xmlDoc, document);\n"
             + "      log(new XMLSerializer().serializeToString(newFragment));\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
 
             + "</script></head><body onload='test()'>\n"
@@ -178,7 +178,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      } else {\n"
             + "        log('XSLTProcessor not available');\n"
             + "      }\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -201,7 +201,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      log(typeof XSLTProcessor);\n"
             + "      log(XSLTProcessor);\n"
             + "      log(new XSLTProcessor());\n"
-            + "    } catch (e) {log('exception')}\n"
+            + "    } catch (e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -248,10 +248,10 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"preparation done", "null"},
-            FF = {"preparation done", "exception"},
-            FF_ESR = {"preparation done", "exception"})
-    @HtmlUnitNYI(CHROME = {"preparation done", "exception"},
-            EDGE = {"preparation done", "exception"})
+            FF = {"preparation done", "exception "},
+            FF_ESR = {"preparation done", "exception "})
+    @HtmlUnitNYI(CHROME = {"preparation done", "exception "},
+            EDGE = {"preparation done", "exception "})
     public void testSecurity() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -274,7 +274,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      log('preparation done');\n"
             + "      var newDocument = processor.transformToDocument(xmlDoc);\n"
             + "      log(newDocument);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log('exception ' + e.name); }\n"
             + "  }\n"
             + "</script></head>"
             + "<body onload='test()'>\n"

@@ -217,7 +217,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void text() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -226,7 +226,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    try {\n"
             + "      new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    } catch (e) {\n"
-            + "      log('exception');\n"
+            + "      log(e.name);\n"
             + "      return;\n"
             + "    }\n"
             + "    var xmldoc = new ActiveXObject('Microsoft.XMLDOM');\n"

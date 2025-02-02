@@ -73,7 +73,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "                    log(event.total > 0);\n"
                 + "                  };\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception'); }\n"
+                + "  } catch(e) { log(e.name); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -200,7 +200,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NetworkError")
     public void simplePut() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -216,7 +216,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    log(xhr.readyState);\n"
                 + "    log(xhr.status);\n"
                 + "    log(xhr.responseXML.firstChild.firstChild.nodeValue);\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { log(e.name) }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -277,7 +277,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"exception", "4", "0", ""})
+    @Alerts({"NetworkError", "4", "0", ""})
     public void noAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin(null);
     }
@@ -294,7 +294,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
                 + "    xhr.open('GET', url, false);\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { log(e.name) }\n"
                 + "  log(xhr.readyState);\n"
                 + "  log(xhr.status);\n"
                 + "  log(xhr.responseText);\n"
@@ -316,7 +316,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"exception", "4", "0", ""})
+    @Alerts({"NetworkError", "4", "0", ""})
     public void nonMatchingAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin("http://www.sourceforge.net");
     }
@@ -535,7 +535,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"exception", "4", "0"})
+    @Alerts({"NetworkError", "4", "0"})
     // unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
@@ -550,7 +550,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.open('GET', url, false);\n"
                 + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { log(e.name) }\n"
                 + "  log(xhr.readyState);\n"
                 + "  log(xhr.status);\n"
                 + "}\n"
@@ -588,7 +588,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.setRequestHeader('X-PING', 'ping');\n"
                 + "    xhr.setRequestHeader('X-PONG', 'pong');\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { log(e.name) }\n"
                 + "  log(xhr.readyState);\n"
                 + "  log(xhr.status);\n"
                 + "  log(xhr.responseXML.firstChild.childNodes[3].tagName);\n"
@@ -856,7 +856,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.withCredentials = true;\n"
                 + "    xhr.onreadystatechange = onReadyStateChange;\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { log(e.name) }\n"
                 + "  log(xhr.readyState);\n"
                 + "  try {\n"
                 + "    log(xhr.status);\n"

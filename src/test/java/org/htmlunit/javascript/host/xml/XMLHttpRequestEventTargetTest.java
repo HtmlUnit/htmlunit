@@ -56,7 +56,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void ctor() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -65,7 +65,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
                 + "  try {\n"
                 + "    var xhr = new XMLHttpRequestEventTarget();\n"
                 + "    log(xhr);\n"
-                + "  } catch(e) { log('exception'); }\n"
+                + "  } catch(e) { log(e.name); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
