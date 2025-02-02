@@ -69,12 +69,12 @@ public class DOMParser extends HtmlUnitScriptable {
         try {
             final Document document = parseFromString(this, str, type);
             if (document == null) {
-                throw JavaScriptEngine.reportRuntimeError("Invalid 'type' parameter: " + type);
+                throw JavaScriptEngine.typeError("Invalid 'type' parameter: " + type);
             }
             return document;
         }
         catch (final IOException e) {
-            throw JavaScriptEngine.reportRuntimeError("Parsing failed" + e.getMessage());
+            throw JavaScriptEngine.syntaxError("Parsing failed" + e.getMessage());
         }
     }
 
@@ -93,7 +93,7 @@ public class DOMParser extends HtmlUnitScriptable {
     public static Document parseFromString(final HtmlUnitScriptable scriptable, final String str, final Object type)
                 throws IOException {
         if (type == null || JavaScriptEngine.isUndefined(type)) {
-            throw JavaScriptEngine.reportRuntimeError("Missing 'type' parameter");
+            throw JavaScriptEngine.typeError("Missing 'type' parameter");
         }
 
         if (MimeType.TEXT_XML.equals(type)
