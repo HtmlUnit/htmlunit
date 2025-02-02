@@ -51,7 +51,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent('storage');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -64,7 +64,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object StorageEvent]", "undefined", "false", "false", "false"},
                 EDGE = {"[object StorageEvent]", "undefined", "false", "false", "false"},
                 FF = {"[object StorageEvent]", "undefined", "false", "false", "false"},
@@ -77,7 +77,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,7 +99,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,7 +121,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -134,7 +134,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -143,7 +143,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,7 +165,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -194,7 +194,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "        'url': 'aUrl'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -217,7 +217,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "      var event = new StorageEvent('storage', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -230,7 +230,7 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object StorageEvent]", "storage", "false", "false", "false"},
                 EDGE = {"[object StorageEvent]", "storage", "false", "false", "false"},
                 FF = {"[object StorageEvent]", "storage", "false", "false", "false"},
@@ -245,7 +245,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "        'storageArea': 'wrong'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

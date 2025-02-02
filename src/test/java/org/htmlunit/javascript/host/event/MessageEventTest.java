@@ -61,7 +61,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new MessageEvent('type-message');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch (e) { log(e.name); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -89,7 +89,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "        'source': window\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch (e) { log(e.name); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -124,7 +124,7 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void initMessageEventPortsNull() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
@@ -140,7 +140,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "  try {\n"
             + "    e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, null);\n"
             + "    dump(e);\n"
-            + "  } catch (e) { log('exception'); }\n"
+            + "  } catch (e) { log(e.name); }\n"
             + "} else {\n"
             + "  log('no initMessageEvent');\n"
             + "}\n"
@@ -171,7 +171,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "  try {\n"
             + "    e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, undefined);\n"
             + "    dump(e);\n"
-            + "  } catch (e) { log('exception'); }\n"
+            + "  } catch (e) { log(e.name); }\n"
             + "} else {\n"
             + "  log('no initMessageEvent');\n"
             + "}\n"

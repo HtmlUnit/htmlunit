@@ -55,7 +55,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CompositionEvent('composition');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -68,7 +68,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object CompositionEvent]", "undefined", "false", "false", "false", "false", ""},
             EDGE = {"[object CompositionEvent]", "undefined", "false", "false", "false", "false", ""},
             FF = {"[object CompositionEvent]", "undefined", "false", "false", "false", "false", ""},
@@ -81,7 +81,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CompositionEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -103,7 +103,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CompositionEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -125,7 +125,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CompositionEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -138,7 +138,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -147,7 +147,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CompositionEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -169,7 +169,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CompositionEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -193,7 +193,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -216,7 +216,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "      var event = new CompositionEvent('composition', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -240,7 +240,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

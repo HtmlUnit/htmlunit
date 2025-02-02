@@ -52,7 +52,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new SubmitEvent('submit');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -65,7 +65,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object SubmitEvent]", "undefined", "false", "false", "false", "null"},
                 EDGE = {"[object SubmitEvent]", "undefined", "false", "false", "false", "null"},
                 FF = {"[object SubmitEvent]", "undefined", "false", "false", "false", "null"},
@@ -78,7 +78,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new SubmitEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -100,7 +100,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new SubmitEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -122,7 +122,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new SubmitEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -135,7 +135,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -144,7 +144,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new SubmitEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -166,7 +166,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new SubmitEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -195,7 +195,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "        'url': 'aUrl'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -218,7 +218,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "      var event = new SubmitEvent('submit', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -231,7 +231,7 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"},
                 EDGE = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"},
                 FF = {"[object SubmitEvent]", "submit", "false", "false", "false", "null"},
@@ -246,7 +246,7 @@ public class SubmitEventTest extends WebDriverTestCase {
             + "        'submitter': 'wrong'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

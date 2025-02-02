@@ -68,7 +68,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('type');\n"
                 + "      dump(event);\n"
-                + "    } catch (e) { log('exception') }\n"
+                + "    } catch (e) { log(e.name) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"
@@ -81,7 +81,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
                            ",,0,false,false,false,false,false,false,0,0"},
             EDGE = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
@@ -98,7 +98,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new KeyboardEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,7 +121,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new KeyboardEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -144,7 +144,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new KeyboardEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -157,7 +157,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -166,7 +166,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new KeyboardEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -189,7 +189,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new KeyboardEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -219,7 +219,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                              + "ctrlKey: true, shiftKey: true, altKey: true, metaKey: true,"
                              + "repeat: true, isComposing: true, charCode: 456, which: 789 });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -243,7 +243,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "      var event = new KeyboardEvent('keyboard', "
                              + "{ key: null, code: undefined, ctrlKey: true, charCode: 456 });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -267,7 +267,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "      var event = new KeyboardEvent('keyboard', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -290,7 +290,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new KeyboardEvent('keyboard', null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -313,7 +313,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new KeyboardEvent('keyboard', undefined);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -338,7 +338,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -372,7 +372,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "0-0", "undefined-undefined"})
+    @Alerts({"NotSupportedError", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -380,15 +380,15 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var keyEvent = document.createEvent('KeyEvents');\n"
             + "      log(keyEvent.keyCode + '-' + keyEvent.charCode);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "    try {\n"
             + "      var keyEvent = document.createEvent('KeyboardEvent');\n"
             + "      log(keyEvent.keyCode + '-' + keyEvent.charCode);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "    try {\n"
             + "      var mouseEvent = document.createEvent('MouseEvents');\n"
             + "      log(mouseEvent.keyCode + '-' + mouseEvent.charCode);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -399,7 +399,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "exception"})
+    @Alerts({"NotSupportedError", "TypeError"})
     public void initKeyEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -418,7 +418,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "      keyEvent = document.createEvent('KeyEvents');\n"
             + "      keyEvent.initKeyEvent('keyup', false, false, null, false, false, false, false, 32, 32);\n"
             + "      dumpEvent(keyEvent);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "    try {\n"
             + "      var keyEvent = document.createEvent('KeyboardEvent');\n"
             + "      keyEvent.initKeyEvent('keydown', true, true, null, true, true, true, true, 65, 65);\n"
@@ -426,7 +426,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "      keyEvent = document.createEvent('KeyboardEvent');\n"
             + "      keyEvent.initKeyEvent('keyup', false, false, null, false, false, false, false, 32, 32);\n"
             + "      dumpEvent(keyEvent);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -437,13 +437,13 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception",
+    @Alerts(DEFAULT = {"NotSupportedError",
                        "keydown, true, true, , 0, true, true, true, true, 0, 0",
                        "keyup, false, false, , 7, false, false, false, false, 0, 0"},
-            FF = {"exception",
+            FF = {"NotSupportedError",
                   "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
                   "keyup, false, false, , 7, false, false, false, false, 0, 0"},
-            FF_ESR = {"exception",
+            FF_ESR = {"NotSupportedError",
                       "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
                       "keyup, false, false, , 7, false, false, false, false, 0, 0"})
     @HtmlUnitNYI(CHROME = {"exception",
@@ -470,7 +470,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "      keyEvent = document.createEvent('KeyEvents');\n"
             + "      keyEvent.initKeyboardEvent('keyup', false, false, null, '', 7, false, false, false, false);\n"
             + "      dumpEvent(keyEvent);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "    try {\n"
             + "      var keyEvent = document.createEvent('KeyboardEvent');\n"
             + "      keyEvent.initKeyboardEvent('keydown', true, true, null, 'Fn', 0, true, true, true, true);\n"
@@ -478,7 +478,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "      keyEvent = document.createEvent('KeyboardEvent');\n"
             + "      keyEvent.initKeyboardEvent('keyup', false, false, null, '', 7, false, false, false, false);\n"
             + "      dumpEvent(keyEvent);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

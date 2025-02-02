@@ -53,7 +53,7 @@ public class FocusEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new FocusEvent('focus');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -66,7 +66,7 @@ public class FocusEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object FocusEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object FocusEvent]", "undefined", "false", "false", "false"},
             FF = {"[object FocusEvent]", "undefined", "false", "false", "false"},
@@ -79,7 +79,7 @@ public class FocusEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new FocusEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -101,7 +101,7 @@ public class FocusEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new FocusEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -123,7 +123,7 @@ public class FocusEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new FocusEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -136,7 +136,7 @@ public class FocusEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -145,7 +145,7 @@ public class FocusEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new FocusEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -167,7 +167,7 @@ public class FocusEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new FocusEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -191,7 +191,7 @@ public class FocusEventTest extends WebDriverTestCase {
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -214,7 +214,7 @@ public class FocusEventTest extends WebDriverTestCase {
             + "      var event = new FocusEvent('focus', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -238,7 +238,7 @@ public class FocusEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

@@ -53,7 +53,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CustomEvent('my');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -66,7 +66,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object CustomEvent]", "undefined", "false", "false", "false", "null"},
                 EDGE = {"[object CustomEvent]", "undefined", "false", "false", "false", "null"},
                 FF = {"[object CustomEvent]", "undefined", "false", "false", "false", "null"},
@@ -79,7 +79,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CustomEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -101,7 +101,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CustomEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -123,7 +123,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CustomEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -136,7 +136,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -145,7 +145,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CustomEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -167,7 +167,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CustomEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -191,7 +191,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "        'detail': 'abcd'"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -212,7 +212,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var e = document.createEvent('CustomEvent');\n"
             + "      log(typeof e.initCustomEvent);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

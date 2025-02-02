@@ -44,7 +44,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -52,7 +52,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -65,8 +65,8 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object AudioProcessingEvent]", "audioprocessing", "false", "false", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     // audioCtx.createBuffer is missing
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception")
@@ -85,7 +85,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "        'playbackTime': 4,\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + DUMP_EVENT_FUNCTION
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -98,7 +98,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void create_ctorMissingDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -107,7 +107,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + DUMP_EVENT_FUNCTION
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -120,7 +120,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NotSupportedError")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -129,7 +129,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('AudioProcessingEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch (e) { log(e.name); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

@@ -56,7 +56,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceMotionEvent('motion');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -69,7 +69,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
             FF = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
@@ -82,7 +82,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceMotionEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -104,7 +104,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceMotionEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -126,7 +126,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceMotionEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -139,7 +139,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -148,7 +148,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceMotionEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -170,7 +170,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceMotionEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -194,7 +194,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -217,7 +217,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "      var event = new DeviceMotionEvent('motion', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -241,7 +241,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

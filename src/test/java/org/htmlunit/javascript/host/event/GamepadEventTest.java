@@ -53,7 +53,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new GamepadEvent('gamepad');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -66,7 +66,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object GamepadEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object GamepadEvent]", "undefined", "false", "false", "false"},
             FF = {"[object GamepadEvent]", "undefined", "false", "false", "false"},
@@ -79,7 +79,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new GamepadEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -101,7 +101,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new GamepadEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -123,7 +123,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new GamepadEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -136,7 +136,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -145,7 +145,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new GamepadEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -167,7 +167,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new GamepadEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -191,7 +191,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -214,7 +214,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "      var event = new GamepadEvent('gamepad', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -238,7 +238,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

@@ -58,7 +58,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CloseEvent('type-close');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -85,7 +85,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "        'wasClean': true\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,8 +99,8 @@ public class CloseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CloseEvent]", "", "false", "false", "false", "0", "", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "NotSupportedError",
+            FF_ESR = "NotSupportedError")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -109,7 +109,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('CloseEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -123,8 +123,8 @@ public class CloseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no initCloseEvent",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "NotSupportedError",
+            FF_ESR = "NotSupportedError")
     public void initCloseEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -136,7 +136,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "        event.initCloseEvent('close', true, false, true, 42, 'time to close');\n"
             + "        dump(event);\n"
             + "      } else { log('no initCloseEvent'); }\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

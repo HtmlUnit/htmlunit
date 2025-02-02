@@ -43,8 +43,8 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "before", "false", "false", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -53,7 +53,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent('before');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -66,7 +66,9 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = {"[object BeforeInstallPromptEvent]", "undefined", "false", "false", "false"},
                 EDGE = {"[object BeforeInstallPromptEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
@@ -77,7 +79,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -91,8 +93,8 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "42", "false", "false", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -101,7 +103,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -115,8 +117,8 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "null", "false", "false", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -125,7 +127,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -138,7 +140,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -147,7 +149,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -161,8 +163,8 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "HtmlUnitEvent", "false", "false", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -171,7 +173,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -185,8 +187,8 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "click", "false", "false", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -196,7 +198,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "      var event = new BeforeInstallPromptEvent('click', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

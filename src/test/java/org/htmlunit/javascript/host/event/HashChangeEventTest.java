@@ -60,7 +60,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new HashChangeEvent('hashchange');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -86,7 +86,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "        'newURL': '" + URL_FIRST + "#1'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -109,7 +109,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('HashChangeEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -153,7 +153,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -164,7 +164,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "      event.initHashChangeEvent('hashchange', true, false, '" + URL_FIRST + "', '"
             + URL_FIRST + "#1');\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onhashchange = dump;\n"
@@ -189,7 +189,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('Event');\n"
             + "      event.initEvent('hashchange', true, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onhashchange = dump;\n"
