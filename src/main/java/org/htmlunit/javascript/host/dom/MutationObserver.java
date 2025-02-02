@@ -74,10 +74,10 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
     @JsxFunction
     public void observe(final Node node, final NativeObject options) {
         if (node == null) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException("Node is undefined"));
+            throw JavaScriptEngine.typeError("Node is undefined");
         }
         if (options == null) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException("Options is undefined"));
+            throw JavaScriptEngine.typeError("Options is undefined");
         }
 
         node_ = node;
@@ -91,8 +91,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
         final boolean childList = Boolean.TRUE.equals(options.get("childList"));
 
         if (!attaributes_ && !childList && !characterData_) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException(
-                        "One of childList, attributes, od characterData must be set"));
+            throw JavaScriptEngine.typeError("One of childList, attributes, od characterData must be set");
         }
 
         if (attaributes_ && node_.getDomNodeOrDie() instanceof HtmlElement) {
