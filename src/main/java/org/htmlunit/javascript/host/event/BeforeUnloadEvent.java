@@ -50,7 +50,7 @@ public class BeforeUnloadEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
+        throw JavaScriptEngine.typeError("Illegal Constructor");
     }
 
     /**

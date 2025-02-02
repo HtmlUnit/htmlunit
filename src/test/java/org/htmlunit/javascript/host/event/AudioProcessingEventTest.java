@@ -68,8 +68,8 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             FF = "TypeError",
             FF_ESR = "TypeError")
     // audioCtx.createBuffer is missing
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "TypeError",
+            EDGE = "TypeError")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
