@@ -43,7 +43,7 @@ public class GeolocationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void ctor() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -51,7 +51,7 @@ public class GeolocationTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      new Geolocation();\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -71,7 +71,7 @@ public class GeolocationTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(navigator.geolocation);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -104,7 +104,7 @@ public class GeolocationTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      navigator.geolocation.getCurrentPosition(success, error);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
