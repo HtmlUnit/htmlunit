@@ -164,7 +164,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.cssText = '@page { margin: 2cm; }';\n"
             + "    log(rule.cssText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -219,7 +219,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.parentRule = rule;\n"
             + "    log(rule.parentRule);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -274,7 +274,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.parentStyleSheet = null;\n"
             + "    log(rule.parentStyleSheet);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -303,7 +303,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "  try {"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -332,7 +332,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "  try {"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -361,7 +361,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "  try {"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -392,7 +392,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.selectorText = ':left';\n"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -423,7 +423,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.selectorText = null;\n"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -454,7 +454,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.selectorText = '';\n"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -485,7 +485,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.selectorText = ':grey';\n"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -516,7 +516,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.selectorText = ':LeFt';\n"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 

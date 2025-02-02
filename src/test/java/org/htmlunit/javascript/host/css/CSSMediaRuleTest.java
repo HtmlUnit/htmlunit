@@ -197,7 +197,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "    rule.cssText = '@media screen { span { color: rgb(0, 0, 0); }}';\n"
             + "    log(rule.cssText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -280,7 +280,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "    rule.parentRule = rule;\n"
             + "    log(rule.parentRule);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -335,7 +335,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "    rule.parentStyleSheet = null;\n"
             + "    log(rule.parentStyleSheet);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -540,7 +540,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -553,7 +553,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void insertRuleNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -570,7 +570,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule(null);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -583,7 +583,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void insertRuleEmpty() throws Exception {
         final String html
             = "<html><body>\n"
@@ -600,7 +600,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('');\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -613,7 +613,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void insertRuleInvalid() throws Exception {
         final String html
             = "<html><body>\n"
@@ -630,7 +630,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('%ab');\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -667,7 +667,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -680,7 +680,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void insertRuleNullWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -697,7 +697,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule(null, 1);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -710,7 +710,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "exception"})
+    @Alerts({"1", "SyntaxError"})
     public void insertRuleEmptyWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -733,7 +733,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -746,7 +746,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError")
     public void insertRuleInvalidWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -763,7 +763,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('%ab', 1);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -850,7 +850,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "exception"})
+    @Alerts({"1", "IndexSizeError"})
     public void insertRuleWithIndexNegative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -868,7 +868,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('span { color:#000000; }', 2);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -881,7 +881,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "exception"})
+    @Alerts({"1", "IndexSizeError"})
     public void insertRuleWithIndexGreaterThanLength() throws Exception {
         final String html
             = "<html><body>\n"
@@ -899,7 +899,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('span { color:#000000; }', 2);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -934,7 +934,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).cssText);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -969,7 +969,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).cssText);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -1004,7 +1004,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).cssText);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -1017,7 +1017,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "IndexSizeError"})
     public void deleteRuleNegative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1035,7 +1035,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.deleteRule(-1);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -1048,7 +1048,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "IndexSizeError"})
     public void deleteRuleGreaterThanLength() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1066,7 +1066,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.deleteRule(2);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 

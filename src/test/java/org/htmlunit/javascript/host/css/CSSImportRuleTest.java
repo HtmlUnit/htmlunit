@@ -114,7 +114,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "    rule.cssText = '@import \"imp2.css\";';\n"
             + "    log(rule.cssText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -175,7 +175,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "    rule.parentRule = rule;\n"
             + "    log(rule.parentRule);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -236,7 +236,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "    rule.parentStyleSheet = null;\n"
             + "    log(rule.parentStyleSheet);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "</script>\n"
 
