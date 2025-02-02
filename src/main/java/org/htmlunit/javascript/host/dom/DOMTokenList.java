@@ -155,11 +155,14 @@ public class DOMTokenList extends HtmlUnitScriptable {
                 final String token = JavaScriptEngine.toString(arg);
 
                 if (StringUtils.isEmpty(token)) {
-                    throw JavaScriptEngine.reportRuntimeError("DOMTokenList: add() does not support empty tokens");
+                    throw JavaScriptEngine.syntaxError("DOMTokenList: add() does not support empty tokens");
                 }
                 if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
-                    throw JavaScriptEngine.reportRuntimeError(
-                            "DOMTokenList: add() does not support whitespace chars in tokens");
+                    throw JavaScriptEngine.asJavaScriptException(
+                            (HtmlUnitScriptable) getTopLevelScope(thisObj),
+                            new DOMException(
+                                    "DOMTokenList: add() does not support whitespace chars in tokens",
+                                    DOMException.INVALID_CHARACTER_ERR));
                 }
 
                 if (!parts.contains(token)) {
@@ -196,11 +199,14 @@ public class DOMTokenList extends HtmlUnitScriptable {
                 final String token = JavaScriptEngine.toString(arg);
 
                 if (StringUtils.isEmpty(token)) {
-                    throw JavaScriptEngine.reportRuntimeError("DOMTokenList: remove() does not support empty tokens");
+                    throw JavaScriptEngine.syntaxError("DOMTokenList: remove() does not support empty tokens");
                 }
                 if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
-                    throw JavaScriptEngine.reportRuntimeError(
-                            "DOMTokenList: remove() does not support whitespace chars in tokens");
+                    throw JavaScriptEngine.asJavaScriptException(
+                            (HtmlUnitScriptable) getTopLevelScope(thisObj),
+                            new DOMException(
+                                    "DOMTokenList: remove() does not support whitespace chars in tokens",
+                                    DOMException.INVALID_CHARACTER_ERR));
                 }
 
                 parts.remove(token);
@@ -219,17 +225,25 @@ public class DOMTokenList extends HtmlUnitScriptable {
     @JsxFunction
     public boolean replace(final String oldToken, final String newToken) {
         if (StringUtils.isEmpty(oldToken)) {
-            throw JavaScriptEngine.reportRuntimeError("Empty oldToken not allowed");
+            throw JavaScriptEngine.syntaxError("Empty oldToken not allowed");
         }
         if (StringUtils.containsAny(oldToken, WHITESPACE_CHARS)) {
-            throw JavaScriptEngine.reportRuntimeError("oldToken contains whitespace");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "DOMTokenList: replace() oldToken contains whitespace",
+                            DOMException.INVALID_CHARACTER_ERR));
         }
 
         if (StringUtils.isEmpty(newToken)) {
-            throw JavaScriptEngine.reportRuntimeError("Empty newToken not allowed");
+            throw JavaScriptEngine.syntaxError("Empty newToken not allowed");
         }
         if (StringUtils.containsAny(newToken, WHITESPACE_CHARS)) {
-            throw JavaScriptEngine.reportRuntimeError("newToken contains whitespace");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "DOMTokenList: replace() newToken contains whitespace",
+                            DOMException.INVALID_CHARACTER_ERR));
         }
 
         final String value = getValue();
@@ -255,11 +269,14 @@ public class DOMTokenList extends HtmlUnitScriptable {
     @JsxFunction
     public boolean toggle(final String token) {
         if (StringUtils.isEmpty(token)) {
-            throw JavaScriptEngine.reportRuntimeError("DOMTokenList: toggle() does not support empty tokens");
+            throw JavaScriptEngine.syntaxError("DOMTokenList: toggle() does not support empty tokens");
         }
         if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
-            throw JavaScriptEngine.reportRuntimeError(
-                    "DOMTokenList: toggle() does not support whitespace chars in tokens");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "DOMTokenList: toggle() does not support whitespace chars in tokens",
+                            DOMException.INVALID_CHARACTER_ERR));
         }
 
         final List<String> parts = split(getValue());

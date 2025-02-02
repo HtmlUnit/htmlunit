@@ -9,7 +9,10 @@
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Bugfixes">
             <action type="fix" dev="rbri">
-                CSSGroupingRule several fixes to throw the correct error.
+                DOMTokenList - several fixes to throw the correct error.
+            </action>
+            <action type="fix" dev="rbri">
+                CSSGroupingRule - several fixes to throw the correct error.
             </action>
             <action type="fix" dev="rbri">
                 HTMLInputElement value/selectionStart/selectionEnd properties throws the correct error (InvalidStateError).

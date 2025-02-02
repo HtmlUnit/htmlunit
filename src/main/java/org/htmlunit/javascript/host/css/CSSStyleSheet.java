@@ -276,7 +276,11 @@ public class CSSStyleSheet extends StyleSheet {
                 refreshCssRules();
             }
             catch (final DOMException ex) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new org.htmlunit.javascript.host.dom.DOMException(
+                                ex.getMessage(),
+                                ex.code));
             }
         }
         return -1;
