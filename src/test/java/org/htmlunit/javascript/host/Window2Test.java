@@ -57,7 +57,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object Window]", "exception", "undefined", "undefined", "hello", "hello", "world", "world"})
+    @Alerts({"[object Window]", "ReferenceError", "undefined", "undefined", "hello", "hello", "world", "world"})
     public void thisIsWindow() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -66,7 +66,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  log(this);\n"
             + "  try {\n"
             + "    log(abc);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) {log(e.name)}\n"
             + "  log(this.abc);\n"
             + "  log(this.def);\n"
             + "  this.abc = 'hello';\n"
@@ -185,7 +185,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "exception"})
+    @Alerts({"InvalidCharacterError", "InvalidCharacterError"})
     public void atobUnicode() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -193,10 +193,10 @@ public class Window2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    window.btoa('I \\u2661 Unicode!');\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) {log(e.name)}\n"
             + "  try {\n"
             + "    window.atob('I \\u2661 Unicode!');\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) {log(e.name)}\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -344,7 +344,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void execScript2() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -352,7 +352,7 @@ public class Window2Test extends WebDriverTestCase {
             + "    try {\n"
             + "      window.execScript('log(1);');\n"
             + "    }\n"
-            + "    catch(e) { log('exception') }\n"
+            + "    catch(e) { log(e.name) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -364,14 +364,14 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void execScript_returnValue() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(window.execScript('1') === undefined);\n"
             + "}\n"
-            + "catch(e) { log('exception') }\n"
+            + "catch(e) { log(e.name) }\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -746,7 +746,7 @@ public class Window2Test extends WebDriverTestCase {
             + "    _win.opener = value;\n"
             + "    log(_win.opener + ' (' + (_win.opener === value) + ')');\n"
             + "  }\n"
-            + "  catch(e) { log('exception') }\n"
+            + "  catch(e) { log(e.name) }\n"
             + "}\n"
             + "function trySetOpener(_win) {\n"
             + "  var originalValue = _win.opener;\n"
@@ -776,14 +776,14 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"exception", "exception", "exception", "exception"})
+    @Alerts({"ReferenceError", "ReferenceError", "ReferenceError", "ReferenceError"})
     public void IEScriptEngineXxx() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "try { log(ScriptEngine()); } catch(e) { log('exception') }\n"
-            + "try { log(ScriptEngineMajorVersion()); } catch(e) { log('exception') }\n"
-            + "try { log(ScriptEngineMinorVersion()); } catch(e) { log('exception') }\n"
-            + "try { log(typeof ScriptEngineBuildVersion()); } catch(e) { log('exception') }\n"
+            + "try { log(ScriptEngine()); } catch(e) { log(e.name) }\n"
+            + "try { log(ScriptEngineMajorVersion()); } catch(e) { log(e.name) }\n"
+            + "try { log(ScriptEngineMinorVersion()); } catch(e) { log(e.name) }\n"
+            + "try { log(typeof ScriptEngineBuildVersion()); } catch(e) { log(e.name) }\n"
             + "</script></head>\n"
             + "<body>\n"
             + "</body></html>";
@@ -1122,7 +1122,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "exception", "Success"})
+    @Alerts({"ReferenceError", "ReferenceError", "Success"})
     public void eval() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1132,13 +1132,13 @@ public class Window2Test extends WebDriverTestCase {
             + "  x.a = 'Success';\n"
             + "  try {\n"
             + "    log(window['eval']('x.a'));\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) {log(e.name)}\n"
             + "  try {\n"
             + "    log(window.eval('x.a'));\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) {log(e.name)}\n"
             + "  try {\n"
             + "    log(eval('x.a'));\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) {log(e.name)}\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -2351,7 +2351,7 @@ public class Window2Test extends WebDriverTestCase {
             + "      var divs = document.querySelectorAll('div');\n"
             + "      var a = Array.from.call(window, divs);\n"
             + "      log(a.length);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2415,7 +2415,7 @@ public class Window2Test extends WebDriverTestCase {
             + "      for (var p = this.__proto__; p != null; p = p.__proto__) {\n"
             + "        log(p);\n"
             + "      }\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

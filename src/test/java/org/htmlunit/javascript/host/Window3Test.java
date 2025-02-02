@@ -484,7 +484,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "TypeError",
             FF = {},
             FF_ESR = {})
     public void scrollByLines() throws Exception {
@@ -494,7 +494,7 @@ public class Window3Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  window.scrollByLines(2);\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -505,7 +505,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "TypeError",
             FF = {},
             FF_ESR = {})
     public void scrollByPages() throws Exception {
@@ -515,7 +515,7 @@ public class Window3Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  window.scrollByPages(2);\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -1010,7 +1010,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void execScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1029,7 +1029,7 @@ public class Window3Test extends WebDriverTestCase {
             + "      } catch (e) {\n"
             + "        log('exception2: ' + e.message.substr(0, 20)); // msg now contains info on error location\n"
             + "      }\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch (e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1123,7 +1123,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "true", "exception", "onload"})
+    @Alerts({"true", "true", "TypeError", "onload"})
     public void attachOnLoadEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1141,7 +1141,7 @@ public class Window3Test extends WebDriverTestCase {
             + "    window.attachEvent('onload', test2);\n"
             + "    window.attachEvent('onload', test3);\n"
             + "    window.detachEvent('onload', test3);\n"
-            + "  } catch (e) { log('exception'); }\n"
+            + "  } catch (e) { log(e.name); }\n"
             + "</script></head>\n"
             + "<body onload='log(\"onload\")'></body></html>";
 
@@ -1152,7 +1152,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void detachEventInAttachEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1165,7 +1165,7 @@ public class Window3Test extends WebDriverTestCase {
             + "}\n"
             + "try {\n"
             + "  window.attachEvent('onload', test);\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -1719,7 +1719,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void getComputedStyle() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -1728,7 +1728,7 @@ public class Window3Test extends WebDriverTestCase {
             + "    try {\n"
             + "      getComputedStyle(void 0);\n"
             + "      log('no exception');\n"
-            + "    } catch (e) {log('exception')}\n"
+            + "    } catch (e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

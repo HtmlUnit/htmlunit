@@ -183,22 +183,22 @@ public class WebSocketTest extends WebDriverTestCase {
             + "    try {\n"
             + "      ws.binaryType = 'abc';\n"
             + "      log(ws.binaryType);\n"
-            + "    } catch(e) { log('exception') }\n"
+            + "    } catch(e) { log(e.name) }\n"
 
             + "    try {\n"
             + "      ws.binaryType = 'arraybuffer';\n"
             + "      log(ws.binaryType);\n"
-            + "    } catch(e) { log('exception') }\n"
+            + "    } catch(e) { log(e.name) }\n"
 
             + "    try {\n"
             + "      ws.binaryType = 'blob';\n"
             + "      log(ws.binaryType);\n"
-            + "    } catch(e) { log('exception') }\n"
+            + "    } catch(e) { log(e.name) }\n"
 
             + "    try {\n"
             + "      ws.binaryType = '';\n"
             + "      log(ws.binaryType);\n"
-            + "    } catch(e) { log('exception') }\n"
+            + "    } catch(e) { log(e.name) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

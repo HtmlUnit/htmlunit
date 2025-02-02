@@ -56,7 +56,7 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void constructorSetParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -67,7 +67,7 @@ public class WeakMapTest extends WebDriverTestCase {
             + "    var myMap = new WeakMap(new Set('test'));\n"
             + "    log(myMap.has('test'));\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -94,7 +94,7 @@ public class WeakMapTest extends WebDriverTestCase {
             + "    var myMap = new WeakMap(testMap);\n"
             + "    log(myMap.has(foo));\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -134,7 +134,7 @@ public class WeakMapTest extends WebDriverTestCase {
             + "      var myMap = new WeakMap(myIterable);\n"
             + "      log(myMap.has(foo));\n"
             + "    } catch(e) {\n"
-            + "      log('exception');\n"
+            + "      log(e.name);\n"
             + "    }\n"
             + "  }"
             + "}\n"
@@ -169,7 +169,7 @@ public class WeakMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void setNonObject() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -180,7 +180,7 @@ public class WeakMapTest extends WebDriverTestCase {
             + "      var myMap = new WeakMap(kvArray);\n"
             + "      try {\n"
             + "        myMap.set(1, 2);\n"
-            + "      } catch(e) {log('exception')}\n"
+            + "      } catch(e) {log(e.name)}\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

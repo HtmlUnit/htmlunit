@@ -926,7 +926,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "exception"})
+    @Alerts({"TypeError", "TypeError"})
     public void forEachWrongParam() throws Exception {
         final String html
                 = "<html><head><script>\n"
@@ -936,10 +936,10 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                 + "    var param = new URLSearchParams('key1=val1&key2=val2&key3=val3');\n"
                 + "    try {\n"
                 + "      param.forEach();\n"
-                + "    } catch(e) { log('exception'); }\n"
+                + "    } catch(e) { log(e.name); }\n"
                 + "    try {\n"
                 + "      param.forEach('wrong');\n"
-                + "    } catch(e) { log('exception'); }\n"
+                + "    } catch(e) { log(e.name); }\n"
                 + "  }\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
