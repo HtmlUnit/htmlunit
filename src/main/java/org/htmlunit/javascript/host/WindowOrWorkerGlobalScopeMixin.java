@@ -21,10 +21,10 @@ import java.util.Base64;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
@@ -53,13 +53,18 @@ public final class WindowOrWorkerGlobalScopeMixin {
     /**
      * Decodes a string of data which has been encoded using base-64 encoding.
      * @param encodedData the encoded string
+     * @param scriptable the HtmlUnitScriptable scope
      * @return the decoded value
      */
-    public static String atob(final String encodedData) {
+    public static String atob(final String encodedData, final HtmlUnitScriptable scriptable) {
         final int l = encodedData.length();
         for (int i = 0; i < l; i++) {
             if (encodedData.charAt(i) > 255) {
-                throw new EvaluatorException("Function atob supports only latin1 characters");
+                throw JavaScriptEngine.asJavaScriptException(
+                        scriptable,
+                        new org.htmlunit.javascript.host.dom.DOMException(
+                                "Function atob supports only latin1 characters",
+                                org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR));
             }
         }
         final byte[] bytes = encodedData.getBytes(StandardCharsets.ISO_8859_1);
@@ -69,13 +74,18 @@ public final class WindowOrWorkerGlobalScopeMixin {
     /**
      * Creates a base-64 encoded ASCII string from a string of binary data.
      * @param stringToEncode string to encode
+     * @param scriptable the HtmlUnitScriptable scope
      * @return the encoded string
      */
-    public static String btoa(final String stringToEncode) {
+    public static String btoa(final String stringToEncode, final HtmlUnitScriptable scriptable) {
         final int l = stringToEncode.length();
         for (int i = 0; i < l; i++) {
             if (stringToEncode.charAt(i) > 255) {
-                throw new EvaluatorException("Function btoa supports only latin1 characters");
+                throw JavaScriptEngine.asJavaScriptException(
+                        scriptable,
+                        new org.htmlunit.javascript.host.dom.DOMException(
+                                "Function btoa supports only latin1 characters",
+                                org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR));
             }
         }
         final byte[] bytes = stringToEncode.getBytes(StandardCharsets.ISO_8859_1);

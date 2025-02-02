@@ -290,7 +290,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxFunction
     @Override
     public String btoa(final String stringToEncode) {
-        return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode);
+        return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode, this);
     }
 
     /**
@@ -301,7 +301,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxFunction
     @Override
     public String atob(final String encodedData) {
-        return WindowOrWorkerGlobalScopeMixin.atob(encodedData);
+        return WindowOrWorkerGlobalScopeMixin.atob(encodedData, this);
     }
 
     /**
