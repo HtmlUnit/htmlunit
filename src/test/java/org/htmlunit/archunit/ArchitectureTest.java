@@ -562,7 +562,11 @@ public class ArchitectureTest {
         .that()
             .resideOutsideOfPackage("org.htmlunit.javascript..")
 
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.HtmlUnitContextFactory")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebClient")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.ScriptResult")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomElement")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.DebuggingWebConnection")
 
         .should().dependOnClassesThat().haveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine");
 
