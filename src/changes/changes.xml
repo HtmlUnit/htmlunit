@@ -9,6 +9,9 @@
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Bugfixes">
             <action type="fix" dev="rbri">
+                DomNode.appendChild() throws a HierarchyRequstError.
+            </action>
+            <action type="fix" dev="rbri">
                 AbstractRange.ctor() throws a TypeError.
             </action>
             <action type="fix" dev="rbri">

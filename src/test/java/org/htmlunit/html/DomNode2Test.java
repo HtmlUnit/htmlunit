@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
  *
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DomNode2Test extends WebDriverTestCase {

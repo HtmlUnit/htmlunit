@@ -48,7 +48,6 @@ import org.htmlunit.html.serializer.HtmlSerializerNormalizedText;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText;
 import org.htmlunit.html.xpath.XPathHelper;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.DOMException;
@@ -908,11 +907,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     @Override
     public DomNode appendChild(final Node node) {
         if (node == this) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
+            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Can not add not to itself " + this);
         }
         final DomNode domNode = (DomNode) node;
         if (domNode.isAncestorOf(this)) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(new Exception("Can not add (grand)parent to itself " + this));
+            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Can not add (grand)parent to itself " + this);
         }
 
         if (domNode instanceof DomDocumentFragment) {

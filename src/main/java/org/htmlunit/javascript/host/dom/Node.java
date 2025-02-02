@@ -210,7 +210,14 @@ public class Node extends EventTarget {
             final DomNode parentNode = getDomNodeOrDie();
 
             // Append the child to the parent node
-            parentNode.appendChild(childDomNode);
+            try {
+                parentNode.appendChild(childDomNode);
+            }
+            catch (final org.w3c.dom.DOMException e) {
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new DOMException(e.getMessage(), e.code));
+            }
 
             initInlineFrameIfNeeded(childDomNode);
             for (final HtmlElement htmlElement : childDomNode.getHtmlElementDescendants()) {
