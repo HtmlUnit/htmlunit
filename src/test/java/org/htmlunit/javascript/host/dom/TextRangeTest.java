@@ -35,7 +35,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void text() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -51,7 +51,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "        log(f.value);\n"
             + "        r.duplicate().text = 'bli bli';\n"
             + "        log(f.value);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -67,7 +67,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void parentElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -76,7 +76,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      try {\n"
             + "        log(document.body.createTextRange().parentElement().tagName);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -91,7 +91,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void collapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -106,7 +106,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "        log(r.text);\n"
             + "        r.collapse();\n"
             + "        log(r.text);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -123,7 +123,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void select() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -133,7 +133,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "      try {\n"
             + "        var r = document.selection.createRange();\n"
             + "        r.select();\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -149,7 +149,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void moveEnd() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -166,7 +166,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "        log(r.text);\n"
             + "        r.moveStart('character');\n"
             + "        log(r.text);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -182,7 +182,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void moveOutOfBounds_input() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -202,7 +202,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "        log(r.moveEnd('character', 100));\n"
             + "        log(r.moveStart('character', -100));\n"
             + "        log(r.text);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -218,7 +218,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void inRange() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -233,7 +233,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "        r1.collapse();\n"
             + "        log(r1.inRange(r2));\n"
             + "        log(r2.inRange(r1));\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -251,7 +251,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void inRange2() throws Exception {
         final String html = "<html><body>\n"
             + "<form name='f'><input name='q' value=''></form>\n"
@@ -261,7 +261,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "    var range = document.f.q.createTextRange();\n"
             + "    var selectionRange = document.selection.createRange();\n"
             + "    log(range.inRange(selectionRange));\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -272,7 +272,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void moveToElementText() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
@@ -283,7 +283,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "      var r = document.selection.createRange();\n"
             + "      r.moveToElementText(document.getElementById('s3'));\n"
             + "      log(r.parentElement().id + ' ' + r.text + ' ' + r.htmlText);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
@@ -295,7 +295,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void setEndRange() throws Exception {
         final String html = "<html><body>\n"
             + "<form name='f'><input name='q' value='hello world'></form>\n"
@@ -311,7 +311,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "    var r3 = range1.duplicate();\n"
             + "    r3.setEndPoint('EndToEnd', range2);\n"
             + "    log(r3.text);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -321,7 +321,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void createRangeParentElement() throws Exception {
         final String html =
             "<html><body>\n"
@@ -331,7 +331,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "    s = document.selection.createRange();\n"
             + "    p = s.parentElement();\n"
             + "    log(p.tagName);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -342,7 +342,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void createRangeHtmlText() throws Exception {
         final String html =
             "<html><body>\n"
@@ -352,7 +352,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "    s = document.selection.createRange();\n"
             + "    t = s.htmlText;\n"
             + "    log(t);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -363,7 +363,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void moveToBookmark() throws Exception {
         final String html =
             "<html><body>\n"
@@ -373,7 +373,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "    var rng = document.body.createTextRange();\n"
             + "    rng.moveToBookmark(rng.getBookmark());\n"
             + "    log('ok');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 

@@ -158,7 +158,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void namespacesWithNodeInArray() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -182,7 +182,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "        var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
                                      + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
             + "        log(result.stringValue);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    } else {\n"
             + "      log('window.XPathEvaluator undefined');\n"
             + "    }\n"

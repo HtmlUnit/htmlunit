@@ -137,7 +137,7 @@ public class RangeTest extends WebDriverTestCase {
             + "try {\n"
             + "  test('d');\n"
             + "  test('t');\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch (e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 

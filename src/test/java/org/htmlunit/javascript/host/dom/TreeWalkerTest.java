@@ -44,7 +44,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  try {\n";
 
-    private static final String CONTENT_END = "\n  } catch(e) { log('exception') }\n"
+    private static final String CONTENT_END = "\n  } catch(e) { log(e.name) }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -68,7 +68,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  try {\n";
 
-    private static final String CONTENT_END2 = "\n  } catch(e) { log('exception') }\n"
+    private static final String CONTENT_END2 = "\n  } catch(e) { log(e.name) }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -320,11 +320,11 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void nullRoot() throws Exception {
         final String script = "try {\n"
             + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, null, true);\n"
-            + "} catch(e) { log('exception'); }\n";
+            + "} catch(e) { log(e.name); }\n";
 
         test2(script);
     }
@@ -384,11 +384,11 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void emptyFilter() throws Exception {
         final String script = "try {\n"
             + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, {}, true);\n"
-            + "} catch(e) { log('exception'); }\n";
+            + "} catch(e) { log(e.name); }\n";
 
         test2(script);
     }

@@ -40,7 +40,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void observeNullNode() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -50,7 +50,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {});\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -64,7 +64,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void observeNullInit() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -75,7 +75,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "  try {\n"
             + "    observer.observe(div);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -89,7 +89,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void observeEmptyInit() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -100,7 +100,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {});\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -114,7 +114,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "childList", "attributes", "characterData"})
+    @Alerts({"TypeError", "childList", "attributes", "characterData"})
     public void observeRequiredMissingInit() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -125,19 +125,19 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {subtree: true});\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "  try {\n"
             + "    observer.observe(div, {childList: true});\n"
             + "    log('childList');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "  try {\n"
             + "    observer.observe(div, {attributes: true});\n"
             + "    log('attributes');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "  try {\n"
             + "    observer.observe(div, {characterData: true});\n"
             + "    log('characterData');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

@@ -46,7 +46,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidCharacterError")
     public void createElementWithAngleBrackets() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -68,7 +68,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidCharacterError")
     public void createElementWithHtml() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

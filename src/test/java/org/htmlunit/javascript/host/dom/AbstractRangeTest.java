@@ -52,7 +52,7 @@ public class AbstractRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void ctor() throws Exception {
         final String html
             = "<html><head><script>\n"

@@ -278,7 +278,7 @@ public class NodeListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "exception"})
+    @Alerts({"TypeError", "TypeError"})
     public void forEachWrongParam() throws Exception {
         final String html
                 = "<html><head><script>\n"
@@ -287,10 +287,10 @@ public class NodeListTest extends WebDriverTestCase {
                 + "  var nodeList = document.querySelectorAll('*');\n"
                 + "  try {\n"
                 + "    nodeList.forEach();\n"
-                + "  } catch(e) { log('exception'); }\n"
+                + "  } catch(e) { log(e.name); }\n"
                 + "  try {\n"
                 + "    nodeList.forEach('wrong');\n"
-                + "  } catch(e) { log('exception'); }\n"
+                + "  } catch(e) { log(e.name); }\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "  <div id='d1' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
