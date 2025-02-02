@@ -1201,7 +1201,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("RangeError")
     public void format_no_no_ny() throws Exception {
         test("new Intl.NumberFormat('no-NO-NY').format(number)");
     }
