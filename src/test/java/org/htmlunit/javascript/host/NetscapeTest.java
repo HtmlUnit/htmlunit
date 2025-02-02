@@ -35,7 +35,7 @@ public class NetscapeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "exception"},
+    @Alerts(DEFAULT = {"undefined", "undefined", "TypeError"},
             FF = {"[object Object]", "undefined", "[object Object]", "undefined"},
             FF_ESR = {"[object Object]", "undefined", "[object Object]", "undefined"})
     public void netscape() throws Exception {
@@ -47,7 +47,7 @@ public class NetscapeTest extends WebDriverTestCase {
             + "  log(window.Netscape);\n"
             + "  log(window.netscape.security);\n"
             + "  log(window.netscape.security.PrivilegeManager);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -58,7 +58,7 @@ public class NetscapeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "TypeError",
             FF = {"true", "false", "true"},
             FF_ESR = {"true", "false", "true"})
     @HtmlUnitNYI(FF = {"undefined", "true", "true"},
@@ -72,7 +72,7 @@ public class NetscapeTest extends WebDriverTestCase {
             + "  log(d1.writable);\n"
             + "  log(d1.enumerable);\n"
             + "  log(d1.configurable);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

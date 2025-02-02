@@ -41,7 +41,7 @@ public class NotificationTest extends WebDriverTestCase {
             + "try {\n"
             + "  log(typeof window.Notification);\n"
             + "  log('Notification' in window);\n"
-            + "} catch(e) { log('exception');}\n"
+            + "} catch(e) { log(e.name);}\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -57,7 +57,7 @@ public class NotificationTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(Notification.permission);\n"
-            + "} catch(e) { log('exception');}\n"
+            + "} catch(e) { log(e.name);}\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -73,7 +73,7 @@ public class NotificationTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  new Notification('Hello here');\n"
-            + "} catch(e) { log('exception');}\n"
+            + "} catch(e) { log(e.name);}\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -89,7 +89,7 @@ public class NotificationTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(typeof Notification.requestPermission);\n"
-            + "} catch(e) { log('exception');}\n"
+            + "} catch(e) { log(e.name);}\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

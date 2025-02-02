@@ -110,7 +110,7 @@ public class ExternalTest extends WebDriverTestCase {
             + "      try {\n"
             + "        var res = window.external.IsSearchProviderInstalled('http://htmlunit.sourceforge.net');\n"
             + "        log('IsSearchProviderInstalled: ' + res);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { log(e.name); }\n"
             + "    } else {\n"
             + "      log('no IsSearchProviderInstalled');\n"
             + "    }\n"

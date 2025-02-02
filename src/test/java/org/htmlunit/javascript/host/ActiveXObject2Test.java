@@ -62,7 +62,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void xmlDocument() throws Exception {
         final String html = "<html>\n"
             + " <head>\n"
@@ -72,7 +72,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
             + "    try {\n"
             + "      var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
             + "      log(typeof doc);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log(e.name); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -98,7 +98,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
             + "      } else {\n"
             + "        log('ActiveXObject undefined');\n"
             + "      }\n"
-            + "    } catch(e) {log('exception');}\n"
+            + "    } catch(e) {log(e.name);}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

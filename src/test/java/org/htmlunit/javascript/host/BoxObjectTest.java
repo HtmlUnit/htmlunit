@@ -34,7 +34,7 @@ public class BoxObjectTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void elementAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -55,7 +55,7 @@ public class BoxObjectTest extends WebDriverTestCase {
             + "          log(box.lastChild == spanB);\n"
             + "          log(box.previousSibling == spanFoo);\n"
             + "          log(box.nextSibling == spanBar);\n"
-            + "        } catch (e) {log('exception')}\n"
+            + "        } catch (e) {log(e.name)}\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -69,7 +69,7 @@ public class BoxObjectTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void positionAndSizeAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -85,7 +85,7 @@ public class BoxObjectTest extends WebDriverTestCase {
             + "          log(box.x + '-' + box.y);\n"
             + "          log(box.screenX + '-' + box.screenY);\n"
             + "          log(box.width + '-' + box.height);\n"
-            + "        } catch (e) {log('exception')}\n"
+            + "        } catch (e) {log(e.name)}\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"

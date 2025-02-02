@@ -270,8 +270,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "exception",
-            EDGE = "exception")
+            CHROME = "TypeError",
+            EDGE = "TypeError")
     public void taintEnabled() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -280,7 +280,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      log(window.navigator.taintEnabled());\n"
-                + "    } catch(e) { log('exception'); }\n"
+                + "    } catch(e) { log(e.name); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"

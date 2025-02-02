@@ -224,7 +224,7 @@ public class MapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void constructorInt32Array() throws Exception {
         final String html
             = "<html><head>\n"
@@ -236,7 +236,7 @@ public class MapTest extends WebDriverTestCase {
             + "    var myMap = new Map(array);\n"
             + "    log(myMap.size);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -249,7 +249,7 @@ public class MapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void constructorStringParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -260,7 +260,7 @@ public class MapTest extends WebDriverTestCase {
             + "    var myMap = new Map('test');\n"
             + "    log(myMap.size);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -273,7 +273,7 @@ public class MapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void constructorSetParam() throws Exception {
         final String html
             = "<html><head>\n"
@@ -284,7 +284,7 @@ public class MapTest extends WebDriverTestCase {
             + "    var myMap = new Map(new Set('test'));\n"
             + "    log(myMap.size);\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log(e.name);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -347,7 +347,7 @@ public class MapTest extends WebDriverTestCase {
             + "    var myMap = new Map(myIterable);\n"
             + "    log(myMap.size);\n"
             + "    myMap.forEach(logElement);\n"
-            + "  }catch(e) { log('exception'); }"
+            + "  }catch(e) { log(e.name); }"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

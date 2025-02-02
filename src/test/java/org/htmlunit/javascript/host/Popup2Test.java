@@ -36,7 +36,7 @@ public class Popup2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void popup() throws Exception {
         final String html = "<html><head></title><body>\n"
             + "<script>\n"
@@ -47,7 +47,7 @@ public class Popup2Test extends WebDriverTestCase {
             + "    oPopupBody.innerHTML = 'bla bla';\n"
             + "    oPopup.show(100, 100, 200, 50, document.body);\n"
             + "    log('done');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -60,7 +60,7 @@ public class Popup2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void popupBodyStyle() throws Exception {
         final String html = "<html><head><body>\n"
             + "<script language='javascript'>\n"
@@ -70,7 +70,7 @@ public class Popup2Test extends WebDriverTestCase {
             + "    popupBody = popup.document.body;\n"
             + "    popupBody.style.backgroundColor = '#7f7fff';\n"
             + "    log('done');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 
