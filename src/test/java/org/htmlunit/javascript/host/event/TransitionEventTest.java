@@ -51,7 +51,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent('transition');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -64,7 +64,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object TransitionEvent]", "undefined", "false", "false", "false"},
                 EDGE = {"[object TransitionEvent]", "undefined", "false", "false", "false"},
                 FF = {"[object TransitionEvent]", "undefined", "false", "false", "false"},
@@ -77,7 +77,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,7 +99,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,7 +121,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -134,7 +134,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -143,7 +143,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,7 +165,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -192,7 +192,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "        'pseudoElement': 'aPseudoElementName'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -215,7 +215,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "      var event = new TransitionEvent('transition', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -228,7 +228,7 @@ public class TransitionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object TransitionEvent]", "transition", "false", "false", "false"},
                 EDGE = {"[object TransitionEvent]", "transition", "false", "false", "false"},
                 FF = {"[object TransitionEvent]", "transition", "false", "false", "false"},
@@ -243,7 +243,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "        'elapsedTime': 'ten'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

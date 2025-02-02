@@ -51,7 +51,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent('track');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -64,7 +64,7 @@ public class TrackEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object TrackEvent]", "undefined", "false", "false", "false"},
                 EDGE = {"[object TrackEvent]", "undefined", "false", "false", "false"},
                 FF = {"[object TrackEvent]", "undefined", "false", "false", "false"},
@@ -77,7 +77,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,7 +99,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,7 +121,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -134,7 +134,7 @@ public class TrackEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -143,7 +143,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,7 +165,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -190,7 +190,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "        'track ': null\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -213,7 +213,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "      var event = new TrackEvent('track', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -226,7 +226,7 @@ public class TrackEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object TrackEvent]", "track", "false", "false", "false"},
                 EDGE = {"[object TrackEvent]", "track", "false", "false", "false"},
                 FF = {"[object TrackEvent]", "track", "false", "false", "false"},
@@ -241,7 +241,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "        'track': 'ten'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch (e) { log(e.name) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

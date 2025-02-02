@@ -42,7 +42,7 @@ public class WebGLContextEventTest extends WebDriverTestCase {
             + "      log(WebGLContextEvent.CAPTURING_PHASE);\n"
             + "      log(WebGLContextEvent.AT_TARGET);\n"
             + "      log(WebGLContextEvent.BUBBLING_PHASE);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
