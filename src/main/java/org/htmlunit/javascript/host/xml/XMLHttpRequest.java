@@ -78,6 +78,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.DOMParser;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
@@ -278,8 +279,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 || RESPONSE_TYPE_TEXT.equals(responseType)) {
 
             if (state_ == OPENED && !async_) {
-                throw JavaScriptEngine.reportRuntimeError(
-                        "InvalidAccessError: synchronous XMLHttpRequests do not support responseType");
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new DOMException(
+                                "synchronous XMLHttpRequests do not support responseType",
+                                DOMException.INVALID_ACCESS_ERR));
             }
 
             responseType_ = responseType;
@@ -450,10 +454,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         if (!RESPONSE_TYPE_DEFAULT.equals(responseType_) && !RESPONSE_TYPE_TEXT.equals(responseType_)) {
-            throw JavaScriptEngine.reportRuntimeError(
-                    "InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': "
-                    + "The value is only accessible if the object's 'responseType' is '' or 'text' "
-                    + "(was '" + getResponseType() + "').");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': "
+                                    + "The value is only accessible if the object's 'responseType' is '' or 'text' "
+                                    + "(was '" + getResponseType() + "').",
+                            DOMException.INVALID_STATE_ERR));
         }
 
         if (state_ == UNSENT || state_ == OPENED) {
@@ -953,8 +960,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
-                    throw JavaScriptEngine.throwAsScriptRuntimeEx(
-                            new RuntimeException("No permitted \"Access-Control-Allow-Origin\" header."));
+                    throw JavaScriptEngine.networkError("No permitted \"Access-Control-Allow-Origin\" header.");
                 }
             }
 
@@ -1075,7 +1081,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     fireJavascriptEvent(Event.TYPE_LOAD_END);
                 }
 
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+                throw JavaScriptEngine.networkError(e.getMessage());
             }
         }
     }
@@ -1202,7 +1208,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public void overrideMimeType(final String mimeType) {
         if (state_ != UNSENT && state_ != OPENED) {
-            throw JavaScriptEngine.reportRuntimeError("Property 'overrideMimeType' not writable after sent.");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "Property 'overrideMimeType' not writable after sent.",
+                            DOMException.INVALID_STATE_ERR));
         }
         overriddenMimeType_ = mimeType;
     }
