@@ -47,7 +47,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -75,7 +75,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.onmessage = function(e) {\n"
@@ -103,7 +103,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.addEventListener('message', (e) => {\n"
@@ -130,7 +130,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.setTimeout(function() {\n"
@@ -156,7 +156,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "var id = self.setInterval(function() {\n"
@@ -180,7 +180,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('func='+self.addEventListener);";
@@ -208,7 +208,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -237,7 +237,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -277,7 +277,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -306,7 +306,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -334,7 +334,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"

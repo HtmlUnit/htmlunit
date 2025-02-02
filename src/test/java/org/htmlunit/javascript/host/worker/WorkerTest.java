@@ -47,7 +47,7 @@ public class WorkerTest extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received:' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('worker loaded');\n";
@@ -72,7 +72,7 @@ public class WorkerTest extends WebDriverTestCase {
             + "  myWorker.addEventListener('message', (e) => {\n"
             + "    log('Received:' + e.data);\n"
             + "  });\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('worker loaded');\n";
@@ -97,7 +97,7 @@ public class WorkerTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -405,7 +405,7 @@ public class WorkerTest extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log(e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
@@ -430,7 +430,7 @@ public class WorkerTest extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received:' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('worker loaded');\n";
