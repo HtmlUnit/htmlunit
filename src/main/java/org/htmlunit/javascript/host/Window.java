@@ -1983,10 +1983,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                     targetURL = new URL(targetOrigin);
                 }
                 catch (final Exception e) {
-                    throw JavaScriptEngine.throwAsScriptRuntimeEx(
-                            new Exception(
-                                    "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
-                                            + targetOrigin + "' was specified (reason: " + e.getMessage() + "."));
+                    throw JavaScriptEngine.syntaxError(
+                            "Failed to execute 'postMessage' on 'Window': Invalid target origin '"
+                                    + targetOrigin + "' was specified (reason: " + e.getMessage() + ".");
                 }
             }
 
