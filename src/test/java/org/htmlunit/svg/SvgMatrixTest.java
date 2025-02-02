@@ -80,7 +80,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  m.e = 6;\n"
             + "  m.f = 7;\n"
             + "  alertFields(m);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -114,7 +114,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  log(typeof m.skewX);\n"
             + "  log(typeof m.skewY);\n"
             + "  log(typeof m.translate);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -152,7 +152,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidStateError")
     public void inverseNotPossible() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><body>\n"
@@ -178,7 +178,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
                 + "  m.f = 6;\n"
                 + "  m = m.inverse();\n"
                 + "  alertFields(m);\n"
-                + "} catch(e) { log('exception'); }\n"
+                + "} catch(e) { log(e.name); }\n"
                 + "</script>\n"
                 + "</body></html>";
 
@@ -226,7 +226,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidAccessError")
     public void rotateFromVectorZeroX() throws Exception {
         transformTest("rotateFromVector(0, 74)");
     }
@@ -235,7 +235,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidAccessError")
     public void rotateFromVectorZeroY() throws Exception {
         transformTest("rotateFromVector(17, 0)");
     }
@@ -244,7 +244,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidAccessError")
     public void rotateFromVectorZeroXY() throws Exception {
         transformTest("rotateFromVector(0, 0)");
     }
@@ -332,7 +332,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  r = m." + transforamtion + ";\n"
             + "  log(m === r);\n"
             + "  alertFields(r);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log(e.name); }\n"
             + "</script>\n"
             + "</body></html>";
 

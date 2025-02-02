@@ -90,7 +90,7 @@ public class XmlPage2Test extends WebDriverTestCase {
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    try {\n"
             + "      log(doc.createElementNS('myNS', 'ppp:eee'));\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
