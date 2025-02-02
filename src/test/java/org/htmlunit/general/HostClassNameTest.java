@@ -59,7 +59,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             // normalize FF output
             + "      clsName = clsName.replace('{\\n    [native code]\\n}', '{ [native code] }');\n"
             + "      log(clsName);\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -73,7 +73,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void abstractList() throws Exception {
         test("AbstractList");
     }
@@ -91,7 +91,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void abstractWorker() throws Exception {
         test("AbstractWorker");
     }
@@ -102,7 +102,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void activeXObject() throws Exception {
         test("ActiveXObject");
     }
@@ -111,7 +111,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ambientLightSensor() throws Exception {
         test("AmbientLightSensor");
     }
@@ -120,7 +120,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ambientLightSensorReading() throws Exception {
         test("AmbientLightSensorReading");
     }
@@ -140,7 +140,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void angle_instanced_arrays() throws Exception {
         test("ANGLE_instanced_arrays");
     }
@@ -158,7 +158,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void animationEffectReadOnly() throws Exception {
         test("AnimationEffectReadOnly");
     }
@@ -167,7 +167,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void animationEffectTiming() throws Exception {
         test("AnimationEffectTiming");
     }
@@ -176,7 +176,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void animationEffectTimingProperties() throws Exception {
         test("AnimationEffectTimingProperties");
     }
@@ -185,7 +185,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void animationEffectTimingReadOnly() throws Exception {
         test("AnimationEffectTimingReadOnly");
     }
@@ -206,7 +206,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function AnimationPlaybackEvent() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception", FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError", FF = "ReferenceError", FF_ESR = "ReferenceError")
     public void animationPlaybackEvent() throws Exception {
         test("AnimationPlaybackEvent");
     }
@@ -215,7 +215,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void animationPlayer() throws Exception {
         test("AnimationPlayer");
     }
@@ -225,7 +225,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function AnimationTimeline() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception", FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError", FF = "ReferenceError", FF_ESR = "ReferenceError")
     public void animationTimeline() throws Exception {
         test("AnimationTimeline");
     }
@@ -234,7 +234,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void appBannerPromptResult() throws Exception {
         test("AppBannerPromptResult");
     }
@@ -245,7 +245,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void applicationCache() throws Exception {
         test("ApplicationCache");
     }
@@ -254,7 +254,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void applicationCacheErrorEvent() throws Exception {
         test("ApplicationCacheErrorEvent");
     }
@@ -263,7 +263,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void apps_mgmt() throws Exception {
         test("Apps.mgmt");
     }
@@ -305,7 +305,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void arrayBufferView() throws Exception {
         test("ArrayBufferView");
     }
@@ -316,7 +316,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void arrayBufferViewBase() throws Exception {
         test("ArrayBufferViewBase");
     }
@@ -325,7 +325,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void asyncFunction() throws Exception {
         test("AsyncFunction");
     }
@@ -383,7 +383,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void audioChannelManager() throws Exception {
         test("AudioChannelManager");
     }
@@ -457,7 +457,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void autocompleteErrorEvent() throws Exception {
         test("AutocompleteErrorEvent");
     }
@@ -484,7 +484,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function BatteryManager() { [native code] }",
             EDGE = "function BatteryManager() { [native code] }")
     public void batteryManager() throws Exception {
@@ -495,7 +495,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void beforeInstallPrompt() throws Exception {
         test("BeforeInstallPrompt");
     }
@@ -504,7 +504,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function BeforeInstallPromptEvent() { [native code] }",
             EDGE = "function BeforeInstallPromptEvent() { [native code] }")
     public void beforeInstallPromptEvent() throws Exception {
@@ -553,7 +553,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void blobBuilder() throws Exception {
         test("BlobBuilder");
     }
@@ -571,10 +571,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function Bluetooth() { [native code] }",
             EDGE = "function Bluetooth() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void bluetooth() throws Exception {
         test("Bluetooth");
     }
@@ -583,7 +583,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void bluetoothAdapter() throws Exception {
         test("BluetoothAdapter");
     }
@@ -592,7 +592,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void bluetoothAdvertisingData() throws Exception {
         test("BluetoothAdvertisingData");
     }
@@ -601,10 +601,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function BluetoothCharacteristicProperties() { [native code] }",
             EDGE = "function BluetoothCharacteristicProperties() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void bluetoothCharacteristicProperties() throws Exception {
         test("BluetoothCharacteristicProperties");
     }
@@ -613,10 +613,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function BluetoothDevice() { [native code] }",
             EDGE = "function BluetoothDevice() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void bluetoothDevice() throws Exception {
         test("BluetoothDevice");
     }
@@ -625,7 +625,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void bluetoothDeviceEvent() throws Exception {
         test("BluetoothDeviceEvent");
     }
@@ -634,7 +634,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void bluetoothGATTRemoteServer() throws Exception {
         test("BluetoothGATTRemoteServer");
     }
@@ -643,7 +643,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void bluetoothGATTService() throws Exception {
         test("BluetoothGATTService");
     }
@@ -652,7 +652,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void bluetoothManager() throws Exception {
         test("BluetoothManager");
     }
@@ -661,10 +661,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function BluetoothRemoteGATTCharacteristic() { [native code] }",
             EDGE = "function BluetoothRemoteGATTCharacteristic() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void bluetoothRemoteGATTCharacteristic() throws Exception {
         test("BluetoothRemoteGATTCharacteristic");
     }
@@ -673,10 +673,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function BluetoothRemoteGATTServer() { [native code] }",
             EDGE = "function BluetoothRemoteGATTServer() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void bluetoothRemoteGATTServer() throws Exception {
         test("BluetoothRemoteGATTServer");
     }
@@ -685,7 +685,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void bluetoothStatusChangedEvent() throws Exception {
         test("BluetoothStatusChangedEvent");
     }
@@ -694,7 +694,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void body() throws Exception {
         test("Body");
     }
@@ -703,7 +703,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void boxObject() throws Exception {
         test("BoxObject");
     }
@@ -721,7 +721,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void budgetService() throws Exception {
         test("BudgetService");
     }
@@ -730,7 +730,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void budgetState() throws Exception {
         test("BudgetState");
     }
@@ -739,7 +739,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void bufferSource() throws Exception {
         test("BufferSource");
     }
@@ -748,7 +748,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void byteString() throws Exception {
         test("ByteString");
     }
@@ -775,7 +775,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void callEvent() throws Exception {
         test("CallEvent");
     }
@@ -784,7 +784,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cameraCapabilities() throws Exception {
         test("CameraCapabilities");
     }
@@ -793,7 +793,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cameraControl() throws Exception {
         test("CameraControl");
     }
@@ -802,7 +802,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cameraManager() throws Exception {
         test("CameraManager");
     }
@@ -811,7 +811,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function CanvasCaptureMediaStream() { [native code] }",
             FF_ESR = "function CanvasCaptureMediaStream() { [native code] }")
     public void canvasCaptureMediaStream() throws Exception {
@@ -822,7 +822,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function CanvasCaptureMediaStreamTrack() { [native code] }",
             EDGE = "function CanvasCaptureMediaStreamTrack() { [native code] }")
     public void canvasCaptureMediaStreamTrack() throws Exception {
@@ -842,7 +842,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void canvasImageSource() throws Exception {
         test("CanvasImageSource");
     }
@@ -924,7 +924,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void characterDataImpl() throws Exception {
         test("CharacterDataImpl");
     }
@@ -933,7 +933,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void childNode() throws Exception {
         test("ChildNode");
     }
@@ -942,7 +942,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void chromeWorker() throws Exception {
         test("ChromeWorker");
     }
@@ -951,7 +951,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void client() throws Exception {
         test("Client");
     }
@@ -962,7 +962,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void clientRect() throws Exception {
         test("ClientRect");
     }
@@ -973,7 +973,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void clientRectList() throws Exception {
         test("ClientRectList");
     }
@@ -982,7 +982,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void clients() throws Exception {
         test("Clients");
     }
@@ -991,7 +991,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void clipboardData() throws Exception {
         test("ClipboardData");
     }
@@ -1040,7 +1040,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void computedCSSStyleDeclaration() throws Exception {
         test("ComputedCSSStyleDeclaration");
     }
@@ -1049,7 +1049,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void connection() throws Exception {
         test(HttpHeader.CONNECTION);
     }
@@ -1060,7 +1060,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void console() throws Exception {
         test("Console");
     }
@@ -1078,7 +1078,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void constrainBoolean() throws Exception {
         test("ConstrainBoolean");
     }
@@ -1087,7 +1087,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void constrainDOMString() throws Exception {
         test("ConstrainDOMString");
     }
@@ -1096,7 +1096,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void constrainDouble() throws Exception {
         test("ConstrainDouble");
     }
@@ -1105,7 +1105,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void constrainLong() throws Exception {
         test("ConstrainLong");
     }
@@ -1114,7 +1114,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void contactManager() throws Exception {
         test("ContactManager");
     }
@@ -1134,7 +1134,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void coordinates() throws Exception {
         test("Coordinates");
     }
@@ -1190,7 +1190,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function CSS2Properties() { [native code] }",
             FF_ESR = "function CSS2Properties() { [native code] }")
     public void css2Properties() throws Exception {
@@ -1203,9 +1203,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function CSSPageDescriptors() { [native code] }")
-    @HtmlUnitNYI(FF = "exception")
+    @HtmlUnitNYI(FF = "ReferenceError")
     public void cssPageDescriptors() throws Exception {
         test("CSSPageDescriptors");
     }
@@ -1214,7 +1214,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }
@@ -1290,7 +1290,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cssMatrix() throws Exception {
         test("CSSMatrix");
     }
@@ -1332,7 +1332,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cssPrimitiveValue() throws Exception {
         test("CSSPrimitiveValue");
     }
@@ -1406,7 +1406,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cssUnknownRule() throws Exception {
         test("CSSUnknownRule");
     }
@@ -1417,7 +1417,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cssValue() throws Exception {
         test("CSSValue");
     }
@@ -1426,7 +1426,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cssValueList() throws Exception {
         test("CSSValueList");
     }
@@ -1435,7 +1435,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void cssViewportRule() throws Exception {
         test("CSSViewportRule");
     }
@@ -1462,7 +1462,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void dataStore() throws Exception {
         test("DataStore");
     }
@@ -1471,7 +1471,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void dataStoreChangeEvent() throws Exception {
         test("DataStoreChangeEvent");
     }
@@ -1480,7 +1480,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void dataStoreCursor() throws Exception {
         test("DataStoreCursor");
     }
@@ -1489,7 +1489,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void dataStoreTask() throws Exception {
         test("DataStoreTask");
     }
@@ -1563,7 +1563,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void dedicatedWorkerGlobalScope() throws Exception {
         test("DedicatedWorkerGlobalScope");
     }
@@ -1581,7 +1581,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void deviceAcceleration() throws Exception {
         test("DeviceAcceleration");
     }
@@ -1590,7 +1590,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void deviceLightEvent() throws Exception {
         test("DeviceLightEvent");
     }
@@ -1617,7 +1617,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void deviceProximityEvent() throws Exception {
         test("DeviceProximityEvent");
     }
@@ -1626,7 +1626,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void deviceRotationRate() throws Exception {
         test("DeviceRotationRate");
     }
@@ -1635,7 +1635,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void deviceStorage() throws Exception {
         test("DeviceStorage");
     }
@@ -1644,7 +1644,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void deviceStorageChangeEvent() throws Exception {
         test("DeviceStorageChangeEvent");
     }
@@ -1653,7 +1653,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void directoryEntry() throws Exception {
         test("DirectoryEntry");
     }
@@ -1662,7 +1662,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void directoryEntrySync() throws Exception {
         test("DirectoryEntrySync");
     }
@@ -1671,7 +1671,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void directoryReader() throws Exception {
         test("DirectoryReader");
     }
@@ -1680,7 +1680,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void directoryReaderSync() throws Exception {
         test("DirectoryReaderSync");
     }
@@ -1711,7 +1711,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void documentOrShadowRoot() throws Exception {
         test("DocumentOrShadowRoot");
     }
@@ -1721,7 +1721,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function DocumentTimeline() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception", FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError", FF = "ReferenceError", FF_ESR = "ReferenceError")
     public void documentTimeline() throws Exception {
         test("DocumentTimeline");
     }
@@ -1730,7 +1730,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void documentTouch() throws Exception {
         test("DocumentTouch");
     }
@@ -1750,7 +1750,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domApplication() throws Exception {
         test("DOMApplication");
     }
@@ -1759,7 +1759,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domApplicationsManager() throws Exception {
         test("DOMApplicationsManager");
     }
@@ -1768,7 +1768,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domApplicationsRegistry() throws Exception {
         test("DOMApplicationsRegistry");
     }
@@ -1777,7 +1777,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domConfiguration() throws Exception {
         test("DOMConfiguration");
     }
@@ -1788,7 +1788,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domCursor() throws Exception {
         test("DOMCursor");
     }
@@ -1798,8 +1798,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function DOMError() { [native code] }",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void domError() throws Exception {
         test("DOMError");
     }
@@ -1808,7 +1808,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domErrorHandler() throws Exception {
         test("DOMErrorHandler");
     }
@@ -1828,7 +1828,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domHighResTimeStamp() throws Exception {
         test("DOMHighResTimeStamp");
     }
@@ -1848,7 +1848,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domImplementationList() throws Exception {
         test("DOMImplementationList");
     }
@@ -1857,7 +1857,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domImplementationRegistry() throws Exception {
         test("DOMImplementationRegistry");
     }
@@ -1866,7 +1866,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domImplementationSource() throws Exception {
         test("DOMImplementationSource");
     }
@@ -1875,7 +1875,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domLocator() throws Exception {
         test("DOMLocator");
     }
@@ -1902,7 +1902,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domObject() throws Exception {
         test("DOMObject");
     }
@@ -1969,7 +1969,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domRequest() throws Exception {
         test("DOMRequest");
     }
@@ -1978,7 +1978,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domSettableTokenList() throws Exception {
         test("DOMSettableTokenList");
     }
@@ -1987,7 +1987,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domString() throws Exception {
         test("DOMString");
     }
@@ -2016,7 +2016,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domTimeStamp() throws Exception {
         test("DOMTimeStamp");
     }
@@ -2036,7 +2036,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void domUserData() throws Exception {
         test("DOMUserData");
     }
@@ -2045,7 +2045,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void doubleRange() throws Exception {
         test("DoubleRange");
     }
@@ -2083,7 +2083,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void elementTraversal() throws Exception {
         test("ElementTraversal");
     }
@@ -2110,7 +2110,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void entity() throws Exception {
         test("Entity");
     }
@@ -2119,7 +2119,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void entityReference() throws Exception {
         test("EntityReference");
     }
@@ -2128,7 +2128,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void entry() throws Exception {
         test("Entry");
     }
@@ -2137,7 +2137,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void entrySync() throws Exception {
         test("EntrySync");
     }
@@ -2148,7 +2148,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void enumerator() throws Exception {
         test("Enumerator");
     }
@@ -2213,7 +2213,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void eventListener() throws Exception {
         test("EventListener");
     }
@@ -2222,7 +2222,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void eventNode() throws Exception {
         test("EventNode");
     }
@@ -2249,7 +2249,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ext_blend_minmax() throws Exception {
         test("EXT_blend_minmax");
     }
@@ -2258,7 +2258,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ext_color_buffer_float() throws Exception {
         test("EXT_color_buffer_float");
     }
@@ -2267,7 +2267,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ext_color_buffer_half_float() throws Exception {
         test("EXT_color_buffer_half_float");
     }
@@ -2276,7 +2276,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ext_disjoint_timer_query() throws Exception {
         test("EXT_disjoint_timer_query");
     }
@@ -2285,7 +2285,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ext_frag_depth() throws Exception {
         test("EXT_frag_depth");
     }
@@ -2294,7 +2294,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ext_shader_texture_lod() throws Exception {
         test("EXT_shader_texture_lod");
     }
@@ -2303,7 +2303,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ext_sRGB() throws Exception {
         test("EXT_sRGB");
     }
@@ -2312,7 +2312,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void ext_texture_filter_anisotropic() throws Exception {
         test("EXT_texture_filter_anisotropic");
     }
@@ -2321,7 +2321,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void extendableEvent() throws Exception {
         test("ExtendableEvent");
     }
@@ -2330,7 +2330,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void extendableMessageEvent() throws Exception {
         test("ExtendableMessageEvent");
     }
@@ -2341,7 +2341,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function External() { [native code] }",
             EDGE = "function External() { [native code] }")
     public void external() throws Exception {
@@ -2352,7 +2352,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function FederatedCredential() { [native code] }",
             EDGE = "function FederatedCredential() { [native code] }")
     public void federatedCredential() throws Exception {
@@ -2363,7 +2363,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fetchEvent() throws Exception {
         test("FetchEvent");
     }
@@ -2381,7 +2381,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileEntry() throws Exception {
         test("FileEntry");
     }
@@ -2390,7 +2390,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileEntrySync() throws Exception {
         test("FileEntrySync");
     }
@@ -2399,7 +2399,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileError() throws Exception {
         test("FileError");
     }
@@ -2408,7 +2408,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileException() throws Exception {
         test("FileException");
     }
@@ -2417,7 +2417,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileHandle() throws Exception {
         test("FileHandle");
     }
@@ -2444,7 +2444,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileReaderSync() throws Exception {
         test("FileReaderSync");
     }
@@ -2453,7 +2453,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileRequest() throws Exception {
         test("FileRequest");
     }
@@ -2462,7 +2462,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function FileSystem() { [native code] }",
             FF_ESR = "function FileSystem() { [native code] }")
     public void fileSystem() throws Exception {
@@ -2473,7 +2473,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function FileSystemDirectoryEntry() { [native code] }",
             FF_ESR = "function FileSystemDirectoryEntry() { [native code] }")
     public void fileSystemDirectoryEntry() throws Exception {
@@ -2484,7 +2484,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function FileSystemDirectoryReader() { [native code] }",
             FF_ESR = "function FileSystemDirectoryReader() { [native code] }")
     public void fileSystemDirectoryReader() throws Exception {
@@ -2495,7 +2495,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function FileSystemEntry() { [native code] }",
             FF_ESR = "function FileSystemEntry() { [native code] }")
     public void fileSystemEntry() throws Exception {
@@ -2506,7 +2506,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function FileSystemFileEntry() { [native code] }",
             FF_ESR = "function FileSystemFileEntry() { [native code] }")
     public void fileSystemFileEntry() throws Exception {
@@ -2517,7 +2517,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileSystemFlags() throws Exception {
         test("FileSystemFlags");
     }
@@ -2526,7 +2526,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fileSystemSync() throws Exception {
         test("FileSystemSync");
     }
@@ -2557,7 +2557,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void fMRadio() throws Exception {
         test("FMRadio");
     }
@@ -2584,7 +2584,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function FontFaceSet() { [native code] }",
             FF_ESR = "function FontFaceSet() { [native code] }")
     public void fontFaceSet() throws Exception {
@@ -2595,7 +2595,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void formChild() throws Exception {
         test("FormChild");
     }
@@ -2615,7 +2615,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void formField() throws Exception {
         test("FormField");
     }
@@ -2671,7 +2671,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void generator() throws Exception {
         test("Generator");
     }
@@ -2680,7 +2680,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void generatorFunction() throws Exception {
         test("GeneratorFunction");
     }
@@ -2733,7 +2733,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void gestureEvent() throws Exception {
         test("GestureEvent");
     }
@@ -2742,7 +2742,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void globalEventHandlers() throws Exception {
         test("GlobalEventHandlers");
     }
@@ -2751,7 +2751,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void globalFetch() throws Exception {
         test("GlobalFetch");
     }
@@ -2791,7 +2791,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void hMDVRDevice() throws Exception {
         test("HMDVRDevice");
     }
@@ -2824,7 +2824,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlAppletElement() throws Exception {
         test("HTMLAppletElement");
     }
@@ -2868,7 +2868,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlBaseFontElement() throws Exception {
         test("HTMLBaseFontElement");
     }
@@ -2879,7 +2879,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlBGSoundElement() throws Exception {
         test("HTMLBGSoundElement");
     }
@@ -2890,7 +2890,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlBlockElement() throws Exception {
         test("HTMLBlockElement");
     }
@@ -2901,7 +2901,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlBlockQuoteElement() throws Exception {
         test("HTMLBlockQuoteElement");
     }
@@ -2967,7 +2967,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlCommentElement() throws Exception {
         test("HTMLCommentElement");
     }
@@ -2976,7 +2976,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlContentElement() throws Exception {
         test("HTMLContentElement");
     }
@@ -3007,7 +3007,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlDDElement() throws Exception {
         test("HTMLDDElement");
     }
@@ -3018,7 +3018,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlDefinitionDescriptionElement() throws Exception {
         test("HTMLDefinitionDescriptionElement");
     }
@@ -3029,7 +3029,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlDefinitionTermElement() throws Exception {
         test("HTMLDefinitionTermElement");
     }
@@ -3106,7 +3106,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlDTElement() throws Exception {
         test("HTMLDTElement");
     }
@@ -3203,7 +3203,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlGenericElement() throws Exception {
         test("HTMLGenericElement");
     }
@@ -3256,7 +3256,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlHyperlinkElementUtils() throws Exception {
         test("HTMLHyperlinkElementUtils");
     }
@@ -3289,7 +3289,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlInlineQuotationElement() throws Exception {
         test("HTMLInlineQuotationElement");
     }
@@ -3311,7 +3311,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlIsIndexElement() throws Exception {
         test("HTMLIsIndexElement");
     }
@@ -3320,7 +3320,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlKeygenElement() throws Exception {
         test("HTMLKeygenElement");
     }
@@ -3375,7 +3375,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlListElement() throws Exception {
         test("HTMLListElement");
     }
@@ -3428,7 +3428,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlMenuItemElement() throws Exception {
         test("HTMLMenuItemElement");
     }
@@ -3472,7 +3472,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlNextIdElement() throws Exception {
         test("HTMLNextIdElement");
     }
@@ -3481,7 +3481,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlNoShowElement() throws Exception {
         test("HTMLNoShowElement");
     }
@@ -3580,7 +3580,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlPhraseElement() throws Exception {
         test("HTMLPhraseElement");
     }
@@ -3655,7 +3655,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlShadowElement() throws Exception {
         test("HTMLShadowElement");
     }
@@ -3741,7 +3741,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlTableComponent() throws Exception {
         test("HTMLTableComponent");
     }
@@ -3752,7 +3752,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlTableDataCellElement() throws Exception {
         test("HTMLTableDataCellElement");
     }
@@ -3774,7 +3774,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlTableHeaderCellElement() throws Exception {
         test("HTMLTableHeaderCellElement");
     }
@@ -3825,7 +3825,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlTextElement() throws Exception {
         test("HTMLTextElement");
     }
@@ -3900,7 +3900,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void htmlWBRElement() throws Exception {
         test("HTMLWBRElement");
     }
@@ -3918,7 +3918,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbCursorSync() throws Exception {
         test("IDBCursorSync");
     }
@@ -3945,7 +3945,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbDatabaseException() throws Exception {
         test("IDBDatabaseException");
     }
@@ -3954,7 +3954,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbDatabaseSync() throws Exception {
         test("IDBDatabaseSync");
     }
@@ -3963,7 +3963,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbEnvironment() throws Exception {
         test("IDBEnvironment");
     }
@@ -3972,7 +3972,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbEnvironmentSync() throws Exception {
         test("IDBEnvironmentSync");
     }
@@ -3992,7 +3992,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbFactorySync() throws Exception {
         test("IDBFactorySync");
     }
@@ -4010,7 +4010,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbIndexSync() throws Exception {
         test("IDBIndexSync");
     }
@@ -4028,7 +4028,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbLocaleAwareKeyRange() throws Exception {
         test("IDBLocaleAwareKeyRange");
     }
@@ -4037,7 +4037,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbMutableFile() throws Exception {
         test("IDBMutableFile");
     }
@@ -4055,7 +4055,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbObjectStoreSync() throws Exception {
         test("IDBObjectStoreSync");
     }
@@ -4091,7 +4091,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbTransactionSync() throws Exception {
         test("IDBTransactionSync");
     }
@@ -4109,7 +4109,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void idbVersionChangeRequest() throws Exception {
         test("IDBVersionChangeRequest");
     }
@@ -4118,7 +4118,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void identityManager() throws Exception {
         test("IdentityManager");
     }
@@ -4165,7 +4165,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void imageBitmapFactories() throws Exception {
         test("ImageBitmapFactories");
     }
@@ -4192,7 +4192,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void index() throws Exception {
         test("Index");
     }
@@ -4201,7 +4201,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void indexedDB() throws Exception {
         test("IndexedDB");
     }
@@ -4219,7 +4219,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function InputDeviceCapabilities() { [native code] }",
             EDGE = "function InputDeviceCapabilities() { [native code] }")
     public void inputDeviceCapabilities() throws Exception {
@@ -4239,7 +4239,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void inputMethodContext() throws Exception {
         test("InputMethodContext");
     }
@@ -4248,7 +4248,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void installEvent() throws Exception {
         test("InstallEvent");
     }
@@ -4257,7 +4257,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "null",
             FF_ESR = "null")
     public void installTrigger() throws Exception {
@@ -4268,7 +4268,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void installTriggerImpl() throws Exception {
         test("InstallTriggerImpl");
     }
@@ -4310,7 +4310,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function InternalError() { [native code] }",
             FF_ESR = "function InternalError() { [native code] }")
     @HtmlUnitNYI(CHROME = "function InternalError() { [native code] }",
@@ -4398,7 +4398,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Iterator() { [native code] }",
-            FF_ESR = "exception")
+            FF_ESR = "ReferenceError")
     public void iterator() throws Exception {
         test("Iterator");
     }
@@ -4436,7 +4436,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void keyframeEffectReadOnly() throws Exception {
         test("KeyframeEffectReadOnly");
     }
@@ -4445,7 +4445,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n() throws Exception {
         test("L10n");
     }
@@ -4454,7 +4454,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_formatValue() throws Exception {
         test("L10n.formatValue");
     }
@@ -4463,7 +4463,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_get() throws Exception {
         test("L10n.get");
     }
@@ -4472,7 +4472,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_language_code() throws Exception {
         test("L10n.language.code");
     }
@@ -4481,7 +4481,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_language_direction() throws Exception {
         test("L10n.language.direction");
     }
@@ -4490,7 +4490,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_once() throws Exception {
         test("L10n.once");
     }
@@ -4499,7 +4499,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_ready() throws Exception {
         test("L10n.ready");
     }
@@ -4508,7 +4508,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_readyState() throws Exception {
         test("L10n.readyState");
     }
@@ -4517,7 +4517,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_setAttributes() throws Exception {
         test("L10n.setAttributes");
     }
@@ -4526,7 +4526,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void linkStyle() throws Exception {
         test("LinkStyle");
     }
@@ -4535,7 +4535,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void localFileSystem() throws Exception {
         test("LocalFileSystem");
     }
@@ -4544,7 +4544,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void localFileSystemSync() throws Exception {
         test("LocalFileSystemSync");
     }
@@ -4555,7 +4555,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void localMediaStream() throws Exception {
         test("LocalMediaStream");
     }
@@ -4576,7 +4576,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void lockedFile() throws Exception {
         test("LockedFile");
     }
@@ -4585,7 +4585,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void longRange() throws Exception {
         test("LongRange");
     }
@@ -4657,7 +4657,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function MediaKeyError() { [native code] }",
             FF_ESR = "function MediaKeyError() { [native code] }")
     public void mediaKeyError() throws Exception {
@@ -4668,7 +4668,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mediaKeyEvent() throws Exception {
         test("MediaKeyEvent");
     }
@@ -4722,7 +4722,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mediaKeySystemConfiguration() throws Exception {
         test("MediaKeySystemConfiguration");
     }
@@ -4760,7 +4760,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mediaQueryListListener() throws Exception {
         test("MediaQueryListListener");
     }
@@ -4814,7 +4814,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mediaStreamConstraints() throws Exception {
         test("MediaStreamConstraints");
     }
@@ -4850,7 +4850,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mediaTrackConstraints() throws Exception {
         test("MediaTrackConstraints");
     }
@@ -4859,7 +4859,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mediaTrackSettings() throws Exception {
         test("MediaTrackSettings");
     }
@@ -4868,7 +4868,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mediaTrackSupportedConstraints() throws Exception {
         test("MediaTrackSupportedConstraints");
     }
@@ -4910,7 +4910,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void metadata() throws Exception {
         test("Metadata");
     }
@@ -5024,7 +5024,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function MouseScrollEvent() { [native code] }",
             FF_ESR = "function MouseScrollEvent() { [native code] }")
     public void mouseScrollEvent() throws Exception {
@@ -5035,7 +5035,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mouseWheelEvent() throws Exception {
         test("MouseWheelEvent");
     }
@@ -5044,7 +5044,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozActivity() throws Exception {
         test("MozActivity");
     }
@@ -5053,7 +5053,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozActivityOptions() throws Exception {
         test("MozActivityOptions");
     }
@@ -5062,7 +5062,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozActivityRequestHandler() throws Exception {
         test("MozActivityRequestHandler");
     }
@@ -5071,7 +5071,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozAlarmsManager() throws Exception {
         test("MozAlarmsManager");
     }
@@ -5080,7 +5080,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozContact() throws Exception {
         test("MozContact");
     }
@@ -5089,7 +5089,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozContactChangeEvent() throws Exception {
         test("MozContactChangeEvent");
     }
@@ -5098,7 +5098,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
     }
@@ -5107,7 +5107,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozIccManager() throws Exception {
         test("MozIccManager");
     }
@@ -5116,7 +5116,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMmsEvent() throws Exception {
         test("MozMmsEvent");
     }
@@ -5125,7 +5125,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMmsMessage() throws Exception {
         test("MozMmsMessage");
     }
@@ -5134,7 +5134,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMobileCellInfo() throws Exception {
         test("MozMobileCellInfo");
     }
@@ -5143,7 +5143,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMobileCFInfo() throws Exception {
         test("MozMobileCFInfo");
     }
@@ -5152,7 +5152,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMobileConnection() throws Exception {
         test("MozMobileConnection");
     }
@@ -5161,7 +5161,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMobileConnectionInfo() throws Exception {
         test("MozMobileConnectionInfo");
     }
@@ -5170,7 +5170,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMobileICCInfo() throws Exception {
         test("MozMobileICCInfo");
     }
@@ -5179,7 +5179,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMobileMessageManager() throws Exception {
         test("MozMobileMessageManager");
     }
@@ -5188,7 +5188,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread");
     }
@@ -5197,7 +5197,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozMobileNetworkInfo() throws Exception {
         test("MozMobileNetworkInfo");
     }
@@ -5206,7 +5206,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozNDEFRecord() throws Exception {
         test("MozNDEFRecord");
     }
@@ -5215,7 +5215,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozNetworkStats() throws Exception {
         test("MozNetworkStats");
     }
@@ -5224,7 +5224,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozNetworkStatsData() throws Exception {
         test("MozNetworkStatsData");
     }
@@ -5233,7 +5233,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozNetworkStatsManager() throws Exception {
         test("MozNetworkStatsManager");
     }
@@ -5242,7 +5242,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozNFC() throws Exception {
         test("MozNFC");
     }
@@ -5251,7 +5251,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozNFCPeer() throws Exception {
         test("MozNFCPeer");
     }
@@ -5260,7 +5260,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozNFCTag() throws Exception {
         test("MozNFCTag");
     }
@@ -5269,7 +5269,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozPowerManager() throws Exception {
         test("MozPowerManager");
     }
@@ -5278,7 +5278,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozRTCIceCandidate() throws Exception {
         test("mozRTCIceCandidate");
     }
@@ -5287,7 +5287,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozRTCPeerConnection() throws Exception {
         test("mozRTCPeerConnection");
     }
@@ -5296,7 +5296,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription");
     }
@@ -5305,7 +5305,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozSettingsEvent() throws Exception {
         test("MozSettingsEvent");
     }
@@ -5314,7 +5314,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozSmsEvent() throws Exception {
         test("MozSmsEvent");
     }
@@ -5323,7 +5323,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozSmsFilter() throws Exception {
         test("MozSmsFilter");
     }
@@ -5332,7 +5332,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozSmsManager() throws Exception {
         test("MozSmsManager");
     }
@@ -5341,7 +5341,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozSmsMessage() throws Exception {
         test("MozSmsMessage");
     }
@@ -5350,7 +5350,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozSmsSegmentInfo() throws Exception {
         test("MozSmsSegmentInfo");
     }
@@ -5359,7 +5359,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozSocial() throws Exception {
         test("MozSocial");
     }
@@ -5368,7 +5368,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozTimeManager() throws Exception {
         test("MozTimeManager");
     }
@@ -5377,7 +5377,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozVoicemail() throws Exception {
         test("MozVoicemail");
     }
@@ -5386,7 +5386,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozVoicemailEvent() throws Exception {
         test("MozVoicemailEvent");
     }
@@ -5395,7 +5395,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozVoicemailStatus() throws Exception {
         test("MozVoicemailStatus");
     }
@@ -5404,7 +5404,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozWifiConnectionInfoEvent() throws Exception {
         test("MozWifiConnectionInfoEvent");
     }
@@ -5413,7 +5413,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozWifiP2pGroupOwner() throws Exception {
         test("MozWifiP2pGroupOwner");
     }
@@ -5422,7 +5422,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozWifiP2pManager() throws Exception {
         test("MozWifiP2pManager");
     }
@@ -5431,7 +5431,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void mozWifiStatusChangeEvent() throws Exception {
         test("MozWifiStatusChangeEvent");
     }
@@ -5440,7 +5440,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void msCurrentStyleCSSProperties() throws Exception {
         test("MSCurrentStyleCSSProperties");
     }
@@ -5449,7 +5449,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void msGestureEvent() throws Exception {
         test("MSGestureEvent");
     }
@@ -5458,7 +5458,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void msStyleCSSProperties() throws Exception {
         test("MSStyleCSSProperties");
     }
@@ -5469,7 +5469,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function MutationEvent() { [native code] }",
             FF_ESR = "function MutationEvent() { [native code] }")
     public void mutationEvent() throws Exception {
@@ -5509,7 +5509,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void nameList() throws Exception {
         test("NameList");
     }
@@ -5520,7 +5520,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void namespace() throws Exception {
         test("Namespace");
     }
@@ -5531,7 +5531,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void namespaceCollection() throws Exception {
         test("NamespaceCollection");
     }
@@ -5551,7 +5551,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void nativeXPathNSResolver() throws Exception {
         test("NativeXPathNSResolver");
     }
@@ -5571,7 +5571,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void navigatorConcurrentHardware() throws Exception {
         test("NavigatorConcurrentHardware");
     }
@@ -5580,7 +5580,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void navigatorGeolocation() throws Exception {
         test("NavigatorGeolocation");
     }
@@ -5589,7 +5589,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void navigatorID() throws Exception {
         test("NavigatorID");
     }
@@ -5598,7 +5598,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void navigatorLanguage() throws Exception {
         test("NavigatorLanguage");
     }
@@ -5607,7 +5607,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void navigatorOnLine() throws Exception {
         test("NavigatorOnLine");
     }
@@ -5616,7 +5616,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void navigatorPlugins() throws Exception {
         test("NavigatorPlugins");
     }
@@ -5625,7 +5625,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void navigatorStorage() throws Exception {
         test("NavigatorStorage");
     }
@@ -5634,7 +5634,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function NetworkInformation() { [native code] }",
             EDGE = "function NetworkInformation() { [native code] }")
     public void networkInformation() throws Exception {
@@ -5687,7 +5687,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void nonDocumentTypeChildNode() throws Exception {
         test("NonDocumentTypeChildNode");
     }
@@ -5696,7 +5696,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void notation() throws Exception {
         test("Notation");
     }
@@ -5716,7 +5716,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void notificationEvent() throws Exception {
         test("NotificationEvent");
     }
@@ -5725,7 +5725,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void notifyAudioAvailableEvent() throws Exception {
         test("NotifyAudioAvailableEvent");
     }
@@ -5752,7 +5752,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void oes_element_index_uint() throws Exception {
         test("OES_element_index_uint");
     }
@@ -5761,7 +5761,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void oes_standard_derivatives() throws Exception {
         test("OES_standard_derivatives");
     }
@@ -5770,7 +5770,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void oes_texture_float() throws Exception {
         test("OES_texture_float");
     }
@@ -5779,7 +5779,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void oes_texture_float_linear() throws Exception {
         test("OES_texture_float_linear");
     }
@@ -5788,7 +5788,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void oes_texture_half_float() throws Exception {
         test("OES_texture_half_float");
     }
@@ -5797,7 +5797,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void oes_texture_half_float_linear() throws Exception {
         test("OES_texture_half_float_linear");
     }
@@ -5806,7 +5806,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void oes_vertex_array_object() throws Exception {
         test("OES_vertex_array_object");
     }
@@ -5833,7 +5833,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void offlineResourceList() throws Exception {
         test("OfflineResourceList");
     }
@@ -5843,10 +5843,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function OffscreenCanvas() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }
@@ -5875,7 +5875,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void overflowEvent() throws Exception {
         test("OverflowEvent");
     }
@@ -5902,7 +5902,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void parallelArray() throws Exception {
         test("ParallelArray");
     }
@@ -5911,7 +5911,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void parentNode() throws Exception {
         test("ParentNode");
     }
@@ -5938,7 +5938,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PasswordCredential() { [native code] }",
             EDGE = "function PasswordCredential() { [native code] }")
     public void passwordCredential() throws Exception {
@@ -5960,7 +5960,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PaymentAddress() { [native code] }",
             EDGE = "function PaymentAddress() { [native code] }")
     public void paymentAddress() throws Exception {
@@ -5971,7 +5971,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PaymentRequest() { [native code] }",
             EDGE = "function PaymentRequest() { [native code] }")
     public void paymentRequest() throws Exception {
@@ -5982,7 +5982,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PaymentResponse() { [native code] }",
             EDGE = "function PaymentResponse() { [native code] }")
     public void paymentResponse() throws Exception {
@@ -6011,7 +6011,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void performanceFrameTiming() throws Exception {
         test("PerformanceFrameTiming");
     }
@@ -6092,7 +6092,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void periodicSyncEvent() throws Exception {
         test("PeriodicSyncEvent");
     }
@@ -6101,7 +6101,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PeriodicSyncManager() { [native code] }",
             EDGE = "function PeriodicSyncManager() { [native code] }")
     public void periodicSyncManager() throws Exception {
@@ -6112,7 +6112,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void periodicSyncRegistration() throws Exception {
         test("PeriodicSyncRegistration");
     }
@@ -6139,7 +6139,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void permissionSettings() throws Exception {
         test("PermissionSettings");
     }
@@ -6179,7 +6179,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void point() throws Exception {
         test("Point");
     }
@@ -6208,7 +6208,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void popup() throws Exception {
         test("Popup");
     }
@@ -6217,7 +6217,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void portCollection() throws Exception {
         test("PortCollection");
     }
@@ -6228,7 +6228,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void position() throws Exception {
         test("Position");
     }
@@ -6237,7 +6237,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void positionError() throws Exception {
         test("PositionError");
     }
@@ -6246,7 +6246,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void positionOptions() throws Exception {
         test("PositionOptions");
     }
@@ -6255,7 +6255,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void positionSensorVRDevice() throws Exception {
         test("PositionSensorVRDevice");
     }
@@ -6264,7 +6264,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void powerManager() throws Exception {
         test("PowerManager");
     }
@@ -6273,7 +6273,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function Presentation() { [native code] }",
             EDGE = "function Presentation() { [native code] }")
     public void presentation() throws Exception {
@@ -6284,7 +6284,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PresentationAvailability() { [native code] }",
             EDGE = "function PresentationAvailability() { [native code] }")
     public void presentationAvailability() throws Exception {
@@ -6295,7 +6295,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PresentationConnection() { [native code] }",
             EDGE = "function PresentationConnection() { [native code] }")
     public void presentationConnection() throws Exception {
@@ -6306,7 +6306,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PresentationConnectionAvailableEvent() { [native code] }",
             EDGE = "function PresentationConnectionAvailableEvent() { [native code] }")
     public void presentationConnectionAvailableEvent() throws Exception {
@@ -6317,7 +6317,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void presentationConnectionClosedEvent() throws Exception {
         test("PresentationConnectionClosedEvent");
     }
@@ -6326,7 +6326,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PresentationConnectionCloseEvent() { [native code] }",
             EDGE = "function PresentationConnectionCloseEvent() { [native code] }")
     public void presentationConnectionCloseEvent() throws Exception {
@@ -6337,11 +6337,11 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PresentationConnectionList() { [native code] }",
             EDGE = "function PresentationConnectionList() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError",
+            EDGE = "ReferenceError")
     public void presentationConnectionList() throws Exception {
         test("PresentationConnectionList");
     }
@@ -6350,11 +6350,11 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PresentationReceiver() { [native code] }",
             EDGE = "function PresentationReceiver() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError",
+            EDGE = "ReferenceError")
     public void presentationReceiver() throws Exception {
         test("PresentationReceiver");
     }
@@ -6363,7 +6363,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function PresentationRequest() { [native code] }",
             EDGE = "function PresentationRequest() { [native code] }")
     public void presentationRequest() throws Exception {
@@ -6403,7 +6403,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void promiseRejection() throws Exception {
         test("PromiseRejection");
     }
@@ -6421,7 +6421,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void promiseResolver() throws Exception {
         test("PromiseResolver");
     }
@@ -6439,7 +6439,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void pushEvent() throws Exception {
         test("PushEvent");
     }
@@ -6457,7 +6457,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void pushMessageData() throws Exception {
         test("PushMessageData");
     }
@@ -6466,7 +6466,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void pushRegistrationManager() throws Exception {
         test("PushRegistrationManager");
     }
@@ -6502,7 +6502,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void randomSource() throws Exception {
         test("RandomSource");
     }
@@ -6531,7 +6531,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void readableByteStream() throws Exception {
         test("ReadableByteStream");
     }
@@ -6576,7 +6576,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function RemotePlayback() { [native code] }",
             EDGE = "function RemotePlayback() { [native code] }")
     public void remotePlayback() throws Exception {
@@ -6587,7 +6587,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void renderingContext() throws Exception {
         test("RenderingContext");
     }
@@ -6616,7 +6616,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void rowContainer() throws Exception {
         test("RowContainer");
     }
@@ -6634,7 +6634,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void rtcConfiguration() throws Exception {
         test("RTCConfiguration");
     }
@@ -6644,10 +6644,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function RTCDataChannel() { [native code] }")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }
@@ -6674,7 +6674,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void rtcIceServer() throws Exception {
         test("RTCIceServer");
     }
@@ -6683,7 +6683,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void rtcIdentityAssertion() throws Exception {
         test("RTCIdentityAssertion");
     }
@@ -6692,7 +6692,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void rtcIdentityErrorEvent() throws Exception {
         test("RTCIdentityErrorEvent");
     }
@@ -6701,7 +6701,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void rtcIdentityEvent() throws Exception {
         test("RTCIdentityEvent");
     }
@@ -6746,7 +6746,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void rtcSessionDescriptionCallback() throws Exception {
         test("RTCSessionDescriptionCallback");
     }
@@ -6831,7 +6831,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void serviceWorkerGlobalScope() throws Exception {
         test("ServiceWorkerGlobalScope");
     }
@@ -6840,7 +6840,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void serviceWorkerMessageEvent() throws Exception {
         test("ServiceWorkerMessageEvent");
     }
@@ -6858,7 +6858,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void serviceWorkerState() throws Exception {
         test("ServiceWorkerState");
     }
@@ -6876,7 +6876,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void settingsLock() throws Exception {
         test("SettingsLock");
     }
@@ -6885,7 +6885,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void settingsManager() throws Exception {
         test("SettingsManager");
     }
@@ -6905,7 +6905,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void sharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer");
     }
@@ -6914,7 +6914,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void sharedKeyframeList() throws Exception {
         test("SharedKeyframeList");
     }
@@ -6934,7 +6934,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void sharedWorkerGlobalScope() throws Exception {
         test("SharedWorkerGlobalScope");
     }
@@ -6943,7 +6943,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd() throws Exception {
         test("SIMD");
     }
@@ -6952,7 +6952,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool16x8() throws Exception {
         test("SIMD.Bool16x8");
     }
@@ -6961,7 +6961,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool32x4() throws Exception {
         test("SIMD.Bool32x4");
     }
@@ -6970,7 +6970,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool64x2() throws Exception {
         test("SIMD.Bool64x2");
     }
@@ -6979,7 +6979,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool8x16() throws Exception {
         test("SIMD.Bool8x16");
     }
@@ -6988,7 +6988,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_float32x4() throws Exception {
         test("SIMD.float32x4");
     }
@@ -6997,7 +6997,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Float32x4() throws Exception {
         test("SIMD.Float32x4");
     }
@@ -7006,7 +7006,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_float64x2() throws Exception {
         test("SIMD.float64x2");
     }
@@ -7015,7 +7015,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Float64x2() throws Exception {
         test("SIMD.Float64x2");
     }
@@ -7024,7 +7024,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int16x8() throws Exception {
         test("SIMD.int16x8");
     }
@@ -7033,7 +7033,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int16x8() throws Exception {
         test("SIMD.Int16x8");
     }
@@ -7042,7 +7042,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int32x4() throws Exception {
         test("SIMD.int32x4");
     }
@@ -7051,7 +7051,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int32x4() throws Exception {
         test("SIMD.Int32x4");
     }
@@ -7060,7 +7060,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int8x16() throws Exception {
         test("SIMD.int8x16");
     }
@@ -7069,7 +7069,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int8x16() throws Exception {
         test("SIMD.Int8x16");
     }
@@ -7078,7 +7078,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint16x8() throws Exception {
         test("SIMD.Uint16x8");
     }
@@ -7087,7 +7087,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint32x4() throws Exception {
         test("SIMD.Uint32x4");
     }
@@ -7096,7 +7096,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint8x16() throws Exception {
         test("SIMD.Uint8x16");
     }
@@ -7107,7 +7107,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simpleArray() throws Exception {
         test("SimpleArray");
     }
@@ -7116,7 +7116,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void siteBoundCredential() throws Exception {
         test("SiteBoundCredential");
     }
@@ -7143,7 +7143,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechGrammar() throws Exception {
         test("SpeechGrammar");
     }
@@ -7152,7 +7152,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechGrammarList() throws Exception {
         test("SpeechGrammarList");
     }
@@ -7161,7 +7161,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechRecognition() throws Exception {
         test("SpeechRecognition");
     }
@@ -7170,7 +7170,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechRecognitionAlternative() throws Exception {
         test("SpeechRecognitionAlternative");
     }
@@ -7179,7 +7179,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechRecognitionError() throws Exception {
         test("SpeechRecognitionError");
     }
@@ -7188,7 +7188,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechRecognitionErrorEvent() throws Exception {
         test("SpeechRecognitionErrorEvent");
     }
@@ -7197,7 +7197,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent");
     }
@@ -7206,7 +7206,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechRecognitionResult() throws Exception {
         test("SpeechRecognitionResult");
     }
@@ -7215,7 +7215,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void speechRecognitionResultList() throws Exception {
         test("SpeechRecognitionResultList");
     }
@@ -7269,7 +7269,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void staticNodeList() throws Exception {
         test("StaticNodeList");
     }
@@ -7289,7 +7289,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void stopIteration() throws Exception {
         test("StopIteration");
     }
@@ -7309,7 +7309,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void storageEstimate() throws Exception {
         test("StorageEstimate");
     }
@@ -7336,7 +7336,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void storageQuota() throws Exception {
         test("StorageQuota");
     }
@@ -7354,7 +7354,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void styleMedia() throws Exception {
         test("StyleMedia");
     }
@@ -7412,7 +7412,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgAltGlyphElement() throws Exception {
         test("SVGAltGlyphElement");
     }
@@ -7432,7 +7432,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgAnimateColorElement() throws Exception {
         test("SVGAnimateColorElement");
     }
@@ -7513,7 +7513,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgAnimatedPoints() throws Exception {
         test("SVGAnimatedPoints");
     }
@@ -7631,7 +7631,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgCursorElement() throws Exception {
         test("SVGCursorElement");
     }
@@ -7662,7 +7662,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgDiscardElement() throws Exception {
         test("SVGDiscardElement");
     }
@@ -7671,7 +7671,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgDocument() throws Exception {
         test("SVGDocument");
     }
@@ -7702,7 +7702,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgEvent() throws Exception {
         test("SVGEvent");
     }
@@ -7995,7 +7995,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgFontElement() throws Exception {
         test("SVGFontElement");
     }
@@ -8004,7 +8004,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgFontFaceElement() throws Exception {
         test("SVGFontFaceElement");
     }
@@ -8013,7 +8013,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgFontFaceFormatElement() throws Exception {
         test("SVGFontFaceFormatElement");
     }
@@ -8022,7 +8022,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgFontFaceNameElement() throws Exception {
         test("SVGFontFaceNameElement");
     }
@@ -8031,7 +8031,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgFontFaceSrcElement() throws Exception {
         test("SVGFontFaceSrcElement");
     }
@@ -8040,7 +8040,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgFontFaceUriElement() throws Exception {
         test("SVGFontFaceUriElement");
     }
@@ -8080,7 +8080,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgGlyphElement() throws Exception {
         test("SVGGlyphElement");
     }
@@ -8107,7 +8107,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgHKernElement() throws Exception {
         test("SVGHKernElement");
     }
@@ -8211,7 +8211,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgMissingGlyphElement() throws Exception {
         test("SVGMissingGlyphElement");
     }
@@ -8260,7 +8260,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSeg() throws Exception {
         test("SVGPathSeg");
     }
@@ -8269,7 +8269,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegArcAbs() throws Exception {
         test("SVGPathSegArcAbs");
     }
@@ -8278,7 +8278,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegArcRel() throws Exception {
         test("SVGPathSegArcRel");
     }
@@ -8287,7 +8287,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegClosePath() throws Exception {
         test("SVGPathSegClosePath");
     }
@@ -8296,7 +8296,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegCurvetoCubicAbs() throws Exception {
         test("SVGPathSegCurvetoCubicAbs");
     }
@@ -8305,7 +8305,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegCurvetoCubicRel() throws Exception {
         test("SVGPathSegCurvetoCubicRel");
     }
@@ -8314,7 +8314,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegCurvetoCubicSmoothAbs() throws Exception {
         test("SVGPathSegCurvetoCubicSmoothAbs");
     }
@@ -8323,7 +8323,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegCurvetoCubicSmoothRel() throws Exception {
         test("SVGPathSegCurvetoCubicSmoothRel");
     }
@@ -8332,7 +8332,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegCurvetoQuadraticAbs() throws Exception {
         test("SVGPathSegCurvetoQuadraticAbs");
     }
@@ -8341,7 +8341,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegCurvetoQuadraticRel() throws Exception {
         test("SVGPathSegCurvetoQuadraticRel");
     }
@@ -8350,7 +8350,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegCurvetoQuadraticSmoothAbs() throws Exception {
         test("SVGPathSegCurvetoQuadraticSmoothAbs");
     }
@@ -8359,7 +8359,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegCurvetoQuadraticSmoothRel() throws Exception {
         test("SVGPathSegCurvetoQuadraticSmoothRel");
     }
@@ -8368,7 +8368,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegLinetoAbs() throws Exception {
         test("SVGPathSegLinetoAbs");
     }
@@ -8377,7 +8377,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegLinetoHorizontalAbs() throws Exception {
         test("SVGPathSegLinetoHorizontalAbs");
     }
@@ -8386,7 +8386,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegLinetoHorizontalRel() throws Exception {
         test("SVGPathSegLinetoHorizontalRel");
     }
@@ -8395,7 +8395,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegLinetoRel() throws Exception {
         test("SVGPathSegLinetoRel");
     }
@@ -8404,7 +8404,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegLinetoVerticalAbs() throws Exception {
         test("SVGPathSegLinetoVerticalAbs");
     }
@@ -8413,7 +8413,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegLinetoVerticalRel() throws Exception {
         test("SVGPathSegLinetoVerticalRel");
     }
@@ -8422,7 +8422,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegList() throws Exception {
         test("SVGPathSegList");
     }
@@ -8431,7 +8431,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegMovetoAbs() throws Exception {
         test("SVGPathSegMovetoAbs");
     }
@@ -8440,7 +8440,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgPathSegMovetoRel() throws Exception {
         test("SVGPathSegMovetoRel");
     }
@@ -8542,7 +8542,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgRenderingIntent() throws Exception {
         test("SVGRenderingIntent");
     }
@@ -8593,7 +8593,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgStylable() throws Exception {
         test("SVGStylable");
     }
@@ -8646,7 +8646,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgTests() throws Exception {
         test("SVGTests");
     }
@@ -8715,7 +8715,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgTransformable() throws Exception {
         test("SVGTransformable");
     }
@@ -8733,7 +8733,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgTRefElement() throws Exception {
         test("SVGTRefElement");
     }
@@ -8784,7 +8784,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgViewSpec() throws Exception {
         test("SVGViewSpec");
     }
@@ -8793,7 +8793,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgVKernElement() throws Exception {
         test("SVGVKernElement");
     }
@@ -8802,7 +8802,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void svgZoomEvent() throws Exception {
         test("SVGZoomEvent");
     }
@@ -8820,7 +8820,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void syncEvent() throws Exception {
         test("SyncEvent");
     }
@@ -8829,7 +8829,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SyncManager() { [native code] }",
             EDGE = "function SyncManager() { [native code] }")
     public void syncManager() throws Exception {
@@ -8840,7 +8840,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void syncRegistration() throws Exception {
         test("SyncRegistration");
     }
@@ -8858,7 +8858,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void tcpServerSocket() throws Exception {
         test("TCPServerSocket");
     }
@@ -8867,7 +8867,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void tcpSocket() throws Exception {
         test("TCPSocket");
     }
@@ -8876,7 +8876,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void telephony() throws Exception {
         test("Telephony");
     }
@@ -8885,7 +8885,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void telephonyCall() throws Exception {
         test("TelephonyCall");
     }
@@ -8894,7 +8894,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void telephonyCallGroup() throws Exception {
         test("TelephonyCallGroup");
     }
@@ -8933,7 +8933,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function TextEvent() { [native code] }",
-            FF_ESR = "exception")
+            FF_ESR = "ReferenceError")
     public void textEvent() throws Exception {
         test("TextEvent");
     }
@@ -8953,7 +8953,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void textRange() throws Exception {
         test("TextRange");
     }
@@ -8998,7 +8998,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             FF = "function TimeEvent() { [native code] }",
             FF_ESR = "function TimeEvent() { [native code] }")
     public void timeEvent() throws Exception {
@@ -9018,7 +9018,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function Touch() { [native code] }",
             EDGE = "function Touch() { [native code] }")
     public void touch() throws Exception {
@@ -9029,7 +9029,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function TouchEvent() { [native code] }",
             EDGE = "function TouchEvent() { [native code] }")
     public void touchEvent() throws Exception {
@@ -9040,7 +9040,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function TouchList() { [native code] }",
             EDGE = "function TouchList() { [native code] }")
     public void touchList() throws Exception {
@@ -9051,7 +9051,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void trackDefault() throws Exception {
         test("TrackDefault");
     }
@@ -9060,7 +9060,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void trackDefaultList() throws Exception {
         test("TrackDefaultList");
     }
@@ -9078,7 +9078,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void transferable() throws Exception {
         test("Transferable");
     }
@@ -9107,7 +9107,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void typedArray() throws Exception {
         test("TypedArray");
     }
@@ -9125,7 +9125,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void typeInfo() throws Exception {
         test("TypeInfo");
     }
@@ -9134,7 +9134,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void uDPSocket() throws Exception {
         test("UDPSocket");
     }
@@ -9216,7 +9216,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void uneval() throws Exception {
         test("uneval");
     }
@@ -9254,7 +9254,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void urlUtils() throws Exception {
         test("URLUtils");
     }
@@ -9263,7 +9263,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void urlUtilsReadOnly() throws Exception {
         test("URLUtilsReadOnly");
     }
@@ -9272,7 +9272,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void userDataHandler() throws Exception {
         test("UserDataHandler");
     }
@@ -9281,7 +9281,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void userProximityEvent() throws Exception {
         test("UserProximityEvent");
     }
@@ -9290,7 +9290,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void uSVString() throws Exception {
         test("USVString");
     }
@@ -9317,7 +9317,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrDevice() throws Exception {
         test("VRDevice");
     }
@@ -9326,7 +9326,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrDisplay() throws Exception {
         test("VRDisplay");
     }
@@ -9335,7 +9335,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrDisplayCapabilities() throws Exception {
         test("VRDisplayCapabilities");
     }
@@ -9344,7 +9344,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrEyeParameters() throws Exception {
         test("VREyeParameters");
     }
@@ -9353,7 +9353,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrFieldOfView() throws Exception {
         test("VRFieldOfView");
     }
@@ -9362,7 +9362,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrFieldOfViewReadOnly() throws Exception {
         test("VRFieldOfViewReadOnly");
     }
@@ -9371,7 +9371,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrLayer() throws Exception {
         test("VRLayer");
     }
@@ -9380,7 +9380,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrPose() throws Exception {
         test("VRPose");
     }
@@ -9389,7 +9389,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrPositionState() throws Exception {
         test("VRPositionState");
     }
@@ -9398,7 +9398,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void vrStageParameters() throws Exception {
         test("VRStageParameters");
     }
@@ -9443,7 +9443,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL() throws Exception {
         test("WebGL");
     }
@@ -9452,7 +9452,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_color_buffer_float() throws Exception {
         test("WEBGL_color_buffer_float");
     }
@@ -9461,7 +9461,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_compressed_texture_atc() throws Exception {
         test("WEBGL_compressed_texture_atc");
     }
@@ -9470,7 +9470,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_compressed_texture_es3() throws Exception {
         test("WEBGL_compressed_texture_es3");
     }
@@ -9479,7 +9479,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void wEBGL_compressed_texture_etc() throws Exception {
         test("WEBGL_compressed_texture_etc");
     }
@@ -9488,7 +9488,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_compressed_texture_etc1() throws Exception {
         test("WEBGL_compressed_texture_etc1");
     }
@@ -9497,7 +9497,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_compressed_texture_pvrtc() throws Exception {
         test("WEBGL_compressed_texture_pvrtc");
     }
@@ -9506,7 +9506,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_compressed_texture_s3tc() throws Exception {
         test("WEBGL_compressed_texture_s3tc");
     }
@@ -9515,7 +9515,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_debug_renderer_info() throws Exception {
         test("WEBGL_debug_renderer_info");
     }
@@ -9524,7 +9524,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_debug_shaders() throws Exception {
         test("WEBGL_debug_shaders");
     }
@@ -9533,7 +9533,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_depth_texture() throws Exception {
         test("WEBGL_depth_texture");
     }
@@ -9542,7 +9542,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_draw_buffers() throws Exception {
         test("WEBGL_draw_buffers");
     }
@@ -9551,7 +9551,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGL_lose_context() throws Exception {
         test("WEBGL_lose_context");
     }
@@ -9688,7 +9688,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGLTimerQueryEXT() throws Exception {
         test("WebGLTimerQueryEXT");
     }
@@ -9724,7 +9724,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webGLVertexArrayObjectOES() throws Exception {
         test("WebGLVertexArrayObjectOES");
     }
@@ -9733,7 +9733,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
     }
@@ -9742,7 +9742,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitAudioContext() throws Exception {
         test("webkitAudioContext");
     }
@@ -9760,7 +9760,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitIDBCursor() throws Exception {
         test("webkitIDBCursor");
     }
@@ -9769,7 +9769,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitIDBDatabase() throws Exception {
         test("webkitIDBDatabase");
     }
@@ -9778,7 +9778,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitIDBFactory() throws Exception {
         test("webkitIDBFactory");
     }
@@ -9787,7 +9787,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitIDBIndex() throws Exception {
         test("webkitIDBIndex");
     }
@@ -9796,7 +9796,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitIDBKeyRange() throws Exception {
         test("webkitIDBKeyRange");
     }
@@ -9805,7 +9805,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitIDBObjectStore() throws Exception {
         test("webkitIDBObjectStore");
     }
@@ -9814,7 +9814,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitIDBRequest() throws Exception {
         test("webkitIDBRequest");
     }
@@ -9823,7 +9823,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitIDBTransaction() throws Exception {
         test("webkitIDBTransaction");
     }
@@ -9832,7 +9832,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function MediaStream() { [native code] }",
             EDGE = "function MediaStream() { [native code] }")
     public void webkitMediaStream() throws Exception {
@@ -9843,7 +9843,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function MutationObserver() { [native code] }",
             EDGE = "function MutationObserver() { [native code] }")
     public void webKitMutationObserver() throws Exception {
@@ -9854,7 +9854,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitOfflineAudioContext() throws Exception {
         test("webkitOfflineAudioContext");
     }
@@ -9863,7 +9863,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function RTCPeerConnection() { [native code] }",
             EDGE = "function RTCPeerConnection() { [native code] }")
     public void webkitRTCPeerConnection() throws Exception {
@@ -9874,7 +9874,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webkitRTCSessionDescription() throws Exception {
         test("webkitRTCSessionDescription");
     }
@@ -9883,7 +9883,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechGrammar() { [native code] }",
             EDGE = "function SpeechGrammar() { [native code] }")
     public void webkitSpeechGrammar() throws Exception {
@@ -9894,7 +9894,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechGrammarList() { [native code] }",
             EDGE = "function SpeechGrammarList() { [native code] }")
     public void webkitSpeechGrammarList() throws Exception {
@@ -9905,7 +9905,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognition() { [native code] }",
             EDGE = "function SpeechRecognition() { [native code] }")
     public void webkitSpeechRecognition() throws Exception {
@@ -9916,7 +9916,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognitionErrorEvent() { [native code] }",
             EDGE = "function SpeechRecognitionErrorEvent() { [native code] }")
     public void webkitSpeechRecognitionError() throws Exception {
@@ -9927,7 +9927,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognitionEvent() { [native code] }",
             EDGE = "function SpeechRecognitionEvent() { [native code] }")
     public void webkitSpeechRecognitionEvent() throws Exception {
@@ -9938,7 +9938,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webKitTransitionEvent() throws Exception {
         test("WebKitTransitionEvent");
     }
@@ -9956,7 +9956,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webSMS() throws Exception {
         test("WebSMS");
     }
@@ -9976,7 +9976,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webSockets() throws Exception {
         test("WebSockets");
     }
@@ -9985,7 +9985,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void webVTT() throws Exception {
         test("WebVTT");
     }
@@ -10003,7 +10003,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void wifiManager() throws Exception {
         test("WifiManager");
     }
@@ -10023,7 +10023,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowBase64() throws Exception {
         test("WindowBase64");
     }
@@ -10032,7 +10032,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowClient() throws Exception {
         test("WindowClient");
     }
@@ -10041,7 +10041,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowEventHandlers() throws Exception {
         test("WindowEventHandlers");
     }
@@ -10050,7 +10050,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowEventHandlers_onbeforeprint() throws Exception {
         test("WindowEventHandlers.onbeforeprint");
     }
@@ -10059,7 +10059,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowOrWorkerGlobalScope() throws Exception {
         test("WindowOrWorkerGlobalScope");
     }
@@ -10068,7 +10068,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowProperties() throws Exception {
         test("WindowProperties");
     }
@@ -10077,7 +10077,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowTimers() throws Exception {
         test("WindowTimers");
     }
@@ -10097,7 +10097,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void workerGlobalScope() throws Exception {
         test("WorkerGlobalScope");
     }
@@ -10106,7 +10106,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void workerLocation() throws Exception {
         test("WorkerLocation");
     }
@@ -10115,7 +10115,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void workerNavigator() throws Exception {
         test("WorkerNavigator");
     }
@@ -10124,7 +10124,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void xDomainRequest() throws Exception {
         test("XDomainRequest");
     }
@@ -10164,7 +10164,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void xmlHttpRequestProgressEvent() throws Exception {
         test("XMLHttpRequestProgressEvent");
     }
@@ -10215,7 +10215,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
     }
@@ -10235,7 +10235,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void xsltemplate() throws Exception {
         test("XSLTemplate");
     }

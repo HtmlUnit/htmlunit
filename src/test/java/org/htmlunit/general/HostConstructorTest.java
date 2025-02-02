@@ -94,7 +94,7 @@ public class HostConstructorTest extends WebDriverTestCase {
 
                 + "  try {\n"
                 + "    log(new " + className + "());\n"
-                + "  } catch(e) {log('exception')}\n"
+                + "  } catch(e) {log(e.name)}\n"
                 + "</script>\n"
                 + "</body></html>";
 
@@ -106,7 +106,7 @@ public class HostConstructorTest extends WebDriverTestCase {
             return "[object " + className_ + "]";
         }
 
-        return "exception";
+        return "ReferenceError";
     }
 
     /**

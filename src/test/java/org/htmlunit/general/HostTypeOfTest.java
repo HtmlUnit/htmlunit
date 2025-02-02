@@ -41,7 +41,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(typeof " + className + ");\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) {log(e.name)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -241,7 +241,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void apps_mgmt() throws Exception {
         test("Apps.mgmt");
     }
@@ -4422,7 +4422,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_formatValue() throws Exception {
         test("L10n.formatValue");
     }
@@ -4431,7 +4431,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_get() throws Exception {
         test("L10n.get");
     }
@@ -4440,7 +4440,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_language_code() throws Exception {
         test("L10n.language.code");
     }
@@ -4449,7 +4449,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_language_direction() throws Exception {
         test("L10n.language.direction");
     }
@@ -4458,7 +4458,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_once() throws Exception {
         test("L10n.once");
     }
@@ -4467,7 +4467,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_ready() throws Exception {
         test("L10n.ready");
     }
@@ -4476,7 +4476,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_readyState() throws Exception {
         test("L10n.readyState");
     }
@@ -4485,7 +4485,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_setAttributes() throws Exception {
         test("L10n.setAttributes");
     }
@@ -6927,7 +6927,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool16x8() throws Exception {
         test("SIMD.Bool16x8");
     }
@@ -6936,7 +6936,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool32x4() throws Exception {
         test("SIMD.Bool32x4");
     }
@@ -6945,7 +6945,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool64x2() throws Exception {
         test("SIMD.Bool64x2");
     }
@@ -6954,7 +6954,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool8x16() throws Exception {
         test("SIMD.Bool8x16");
     }
@@ -6963,7 +6963,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_float32x4() throws Exception {
         test("SIMD.float32x4");
     }
@@ -6972,7 +6972,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Float32x4() throws Exception {
         test("SIMD.Float32x4");
     }
@@ -6981,7 +6981,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_float64x2() throws Exception {
         test("SIMD.float64x2");
     }
@@ -6990,7 +6990,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Float64x2() throws Exception {
         test("SIMD.Float64x2");
     }
@@ -6999,7 +6999,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int16x8() throws Exception {
         test("SIMD.int16x8");
     }
@@ -7008,7 +7008,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int16x8() throws Exception {
         test("SIMD.Int16x8");
     }
@@ -7017,7 +7017,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int32x4() throws Exception {
         test("SIMD.int32x4");
     }
@@ -7026,7 +7026,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int32x4() throws Exception {
         test("SIMD.Int32x4");
     }
@@ -7035,7 +7035,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int8x16() throws Exception {
         test("SIMD.int8x16");
     }
@@ -7044,7 +7044,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int8x16() throws Exception {
         test("SIMD.Int8x16");
     }
@@ -7053,7 +7053,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint16x8() throws Exception {
         test("SIMD.Uint16x8");
     }
@@ -7062,7 +7062,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint32x4() throws Exception {
         test("SIMD.Uint32x4");
     }
@@ -7071,7 +7071,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint8x16() throws Exception {
         test("SIMD.Uint8x16");
     }
@@ -10023,7 +10023,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowEventHandlers_onbeforeprint() throws Exception {
         test("WindowEventHandlers.onbeforeprint");
     }
