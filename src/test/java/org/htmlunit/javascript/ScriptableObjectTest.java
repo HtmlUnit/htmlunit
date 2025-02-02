@@ -101,7 +101,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts({"exception", "true", "true"})
+    @Alerts({"TypeError", "true", "true"})
     public void ctorNotChangeableForPrimitives() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -109,7 +109,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "  let val = null;\n"
                 + "  try {\n"
                 + "    val.constructor = 1;\n"
-                + "  } catch (e) { log('exception'); }\n"
+                + "  } catch (e) { log(e.name); }\n"
 
                 + "  val = 'abc';\n"
                 + "  val.constructor = Number;"
@@ -133,7 +133,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts({"exception", "true", "true"})
+    @Alerts({"TypeError", "true", "true"})
     @NotYetImplemented
     public void ctorNotChangeableForPrimitivesStrict() throws Exception {
         final String html = "<html><body>\n"
@@ -145,7 +145,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "  let val = null;\n"
                 + "  try {\n"
                 + "    val.constructor = 1;\n"
-                + "  } catch (e) { log('exception'); }\n"
+                + "  } catch (e) { log(e.name); }\n"
 
                 + "  val = 'abc';\n"
                 + "  val.constructor = Number;"
@@ -185,7 +185,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "    log('ctor');\n"
                 + "    a.constructor = 'bar';\n"
                 + "    log(a.constructor === 'bar');\n"
-                + "  } catch (e) { log('exception') }\n"
+                + "  } catch (e) { log(e.name) }\n"
 
                 + "</script>\n"
                 + "</body>\n"
@@ -216,7 +216,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "    log('ctor');\n"
                 + "    a.constructor = 'bar';\n"
                 + "    log(a.constructor === 'bar');\n"
-                + "  } catch (e) { log('exception') }\n"
+                + "  } catch (e) { log(e.name) }\n"
 
                 + "</script>\n"
                 + "</body>\n"
@@ -266,7 +266,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "  try {\n"
                 + "    a.constructor = Number;\n"
                 + "    log(a.constructor === Object);\n"
-                + "  } catch (e) { log('exception') }\n"
+                + "  } catch (e) { log(e.name) }\n"
 
                 + "</script>\n"
                 + "</body>\n"

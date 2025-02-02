@@ -318,13 +318,13 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("RangeError")
     public void toLocaleStringHintertupfingen() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log((12345).toLocaleString('Hintertupfingen'));\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { log(e.name); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
