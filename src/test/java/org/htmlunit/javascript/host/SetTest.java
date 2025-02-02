@@ -294,7 +294,7 @@ public class SetTest extends WebDriverTestCase {
             + "    var mySet = new Set(myIterable);\n"
             + "    log(mySet.size);\n"
             + "    mySet.forEach(logElement);\n"
-            + "  } catch(e) { log('exception'); }"
+            + "  } catch(e) { log(e.name); }"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

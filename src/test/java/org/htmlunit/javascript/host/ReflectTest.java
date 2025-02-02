@@ -70,38 +70,38 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void applyMissingArgs() throws Exception {
         final String js =
                 "try {\n"
                 + "  Reflect.apply();\n"
                 + "} catch(e) {\n"
-                + "  log('exception');\n"
+                + "  log(e.name);\n"
                 + "}";
         test(js);
     }
 
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void applyTargetNotFunction() throws Exception {
         final String js =
                 "try {\n"
                 + "  Reflect.apply({}, undefined, [1.75]);\n"
                 + "} catch(e) {\n"
-                + "  log('exception');\n"
+                + "  log(e.name);\n"
                 + "}";
         test(js);
     }
 
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void applyArgumentsListNotFunction() throws Exception {
         final String js =
                 "var s1 = Symbol('1');"
                 + "try {\n"
                 + "  Reflect.apply(Math.floor, undefined, s1);\n"
                 + "} catch(e) {\n"
-                + "  log('exception');\n"
+                + "  log(e.name);\n"
                 + "}";
         test(js);
     }
