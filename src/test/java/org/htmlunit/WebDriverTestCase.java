@@ -147,10 +147,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final String LOG_EX_FUNCTION =
             "  function logEx(e) {\n"
-            + "  let rx = /\\[object (.*)\\]/;\n"
-            + "  let toStr = Object.prototype.toString.call(e);\n"
-            + "  let match = rx.exec(toStr);\n"
-            + "  if (match != null) { toStr = match[1]; }\n"
+            + "  let toStr = null;\n"
+            + "  if (toStr === null && e instanceof EvalError) { toStr = 'EvalError'; }\n"
+            + "  if (toStr === null && e instanceof RangeError) { toStr = 'RangeError'; }\n"
+            + "  if (toStr === null && e instanceof ReferenceError) { toStr = 'ReferenceError'; }\n"
+            + "  if (toStr === null && e instanceof SyntaxError) { toStr = 'SyntaxError'; }\n"
+            + "  if (toStr === null && e instanceof TypeError) { toStr = 'TypeError'; }\n"
+            + "  if (toStr === null && e instanceof URIError) { toStr = 'URIError'; }\n"
+            + "  if (toStr === null && e instanceof AggregateError) { toStr = 'AggregateError'; }\n"
+            + "  if (toStr === null && typeof InternalError == 'function' "
+                        + "&& e instanceof InternalError) { toStr = 'InternalError'; }\n"
+            + "  if (toStr === null) {\n"
+            + "    let rx = /\\[object (.*)\\]/;\n"
+            + "    toStr = Object.prototype.toString.call(e);\n"
+            + "    let match = rx.exec(toStr);\n"
+            + "    if (match != null) { toStr = match[1]; }\n"
+            + "  }"
             + "  log(e.name + '/' + toStr);\n"
             + "}\n";
 
