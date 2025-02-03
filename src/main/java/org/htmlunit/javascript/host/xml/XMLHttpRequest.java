@@ -908,7 +908,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Not allowed to load local resource: " + webRequest_.getUrl());
             }
-            throw JavaScriptEngine.networkError("Not allowed to load local resource: " + webRequest_.getUrl());
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "Not allowed to load local resource: " + webRequest_.getUrl(),
+                            DOMException.NETWORK_ERR));
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
@@ -960,7 +964,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
-                    throw JavaScriptEngine.networkError("No permitted \"Access-Control-Allow-Origin\" header.");
+                    throw JavaScriptEngine.asJavaScriptException(
+                            getWindow(),
+                            new DOMException(
+                                    "No permitted \"Access-Control-Allow-Origin\" header.",
+                                    DOMException.NETWORK_ERR));
                 }
             }
 
@@ -1081,7 +1089,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     fireJavascriptEvent(Event.TYPE_LOAD_END);
                 }
 
-                throw JavaScriptEngine.networkError(e.getMessage());
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        new DOMException(e.getMessage(), DOMException.NETWORK_ERR));
             }
         }
     }

@@ -99,8 +99,8 @@ public class CloseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CloseEvent]", "", "false", "false", "false", "0", "", "false"},
-            FF = "NotSupportedError",
-            FF_ESR = "NotSupportedError")
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -123,8 +123,8 @@ public class CloseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no initCloseEvent",
-            FF = "NotSupportedError",
-            FF_ESR = "NotSupportedError")
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void initCloseEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

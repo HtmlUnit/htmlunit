@@ -99,6 +99,7 @@ import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.css.MediaQueryList;
 import org.htmlunit.javascript.host.css.StyleMedia;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.dom.Selection;
 import org.htmlunit.javascript.host.event.Event;
@@ -1983,9 +1984,12 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                     targetURL = new URL(targetOrigin);
                 }
                 catch (final Exception e) {
-                    throw JavaScriptEngine.syntaxError(
-                            "Failed to execute 'postMessage' on 'Window': Invalid target origin '"
-                                    + targetOrigin + "' was specified (reason: " + e.getMessage() + ".");
+                    throw JavaScriptEngine.asJavaScriptException(
+                            (HtmlUnitScriptable) getTopLevelScope(thisObj),
+                            new DOMException(
+                                    "Failed to execute 'postMessage' on 'Window': Invalid target origin '"
+                                            + targetOrigin + "' was specified (reason: " + e.getMessage() + ".",
+                                    DOMException.SYNTAX_ERR));
                 }
             }
 

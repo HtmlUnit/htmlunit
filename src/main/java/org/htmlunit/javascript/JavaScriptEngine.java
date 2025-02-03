@@ -1175,16 +1175,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param message the error message to report
      * @return EcmaError
      */
-    public static EcmaError networkError(final String message) {
-        return ScriptRuntime.networkError(message);
-    }
-
-    /**
-     * Report a runtime error using the error reporter for the current thread.
-     *
-     * @param message the error message to report
-     * @return EcmaError
-     */
     public static EcmaError rangeError(final String message) {
         return ScriptRuntime.rangeError(message);
     }

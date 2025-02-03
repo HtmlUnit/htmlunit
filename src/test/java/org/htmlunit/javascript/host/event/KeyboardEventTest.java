@@ -446,10 +446,10 @@ public class KeyboardEventTest extends WebDriverTestCase {
             FF_ESR = {"NotSupportedError/DOMException",
                       "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
                       "keyup, false, false, , 7, false, false, false, false, 0, 0"})
-    @HtmlUnitNYI(CHROME = {"NotSupportedError",
+    @HtmlUnitNYI(CHROME = {"NotSupportedError/DOMException",
                            "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
                            "keyup, false, false, , 7, false, false, false, false, 0, 0"},
-                 EDGE = {"NotSupportedError",
+                 EDGE = {"NotSupportedError/DOMException",
                          "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
                          "keyup, false, false, , 7, false, false, false, false, 0, 0"})
     public void initKeyboardEvent() throws Exception {
