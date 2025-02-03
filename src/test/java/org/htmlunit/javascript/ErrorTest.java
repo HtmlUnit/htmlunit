@@ -67,11 +67,11 @@ public class ErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"EvalError", "Whoops!", "undefined", "undefined", "undefined",
-                       "undefined", "true", "true", "EvalError/EvalError"},
+                       "undefined", "true", "true", "EvalError"},
             FF = {"EvalError", "Whoops!", "undefined", "11", "undefined", "25",
-                  "true", "true", "EvalError/EvalError"},
+                  "true", "true", "EvalError"},
             FF_ESR = {"EvalError", "Whoops!", "undefined", "11", "undefined", "25",
-                      "true", "true", "EvalError/EvalError"})
+                      "true", "true", "EvalError"})
     public void evalError() throws Exception {
         final String html
             = "<html>\n"
@@ -104,11 +104,11 @@ public class ErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"RangeError", "Whoops!", "undefined", "undefined", "undefined",
-                       "undefined", "true", "true", "RangeError/RangeError"},
+                       "undefined", "true", "true", "RangeError"},
             FF = {"RangeError", "Whoops!", "undefined", "11", "undefined", "25",
-                  "true", "true", "RangeError/RangeError"},
+                  "true", "true", "RangeError"},
             FF_ESR = {"RangeError", "Whoops!", "undefined", "11", "undefined", "25",
-                      "true", "true", "RangeError/RangeError"})
+                      "true", "true", "RangeError"})
     public void rangeError() throws Exception {
         final String html
             = "<html>\n"
@@ -141,11 +141,11 @@ public class ErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",
-                       "undefined", "true", "true", "ReferenceError/ReferenceError"},
+                       "undefined", "true", "true", "ReferenceError"},
             FF = {"ReferenceError", "Whoops!", "undefined", "11", "undefined", "25",
-                  "true", "true", "ReferenceError/ReferenceError"},
+                  "true", "true", "ReferenceError"},
             FF_ESR = {"ReferenceError", "Whoops!", "undefined", "11", "undefined", "25",
-                      "true", "true", "ReferenceError/ReferenceError"})
+                      "true", "true", "ReferenceError"})
     public void referenceError() throws Exception {
         final String html
             = "<html>\n"
@@ -178,11 +178,11 @@ public class ErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"SyntaxError", "Whoops!", "undefined", "undefined", "undefined",
-                       "undefined", "true", "true", "SyntaxError/SyntaxError"},
+                       "undefined", "true", "true", "SyntaxError"},
             FF = {"SyntaxError", "Whoops!", "undefined", "11", "undefined", "25",
-                  "true", "true", "SyntaxError/SyntaxError"},
+                  "true", "true", "SyntaxError"},
             FF_ESR = {"SyntaxError", "Whoops!", "undefined", "11", "undefined", "25",
-                      "true", "true", "SyntaxError/SyntaxError"})
+                      "true", "true", "SyntaxError"})
     public void syntaxError() throws Exception {
         final String html
             = "<html>\n"
@@ -215,11 +215,11 @@ public class ErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"TypeError", "Whoops!", "undefined", "undefined", "undefined",
-                       "undefined", "true", "true", "TypeError/TypeError"},
+                       "undefined", "true", "true", "TypeError"},
             FF = {"TypeError", "Whoops!", "undefined", "11", "undefined", "25",
-                  "true", "true", "TypeError/TypeError"},
+                  "true", "true", "TypeError"},
             FF_ESR = {"TypeError", "Whoops!", "undefined", "11", "undefined", "25",
-                      "true", "true", "TypeError/TypeError"})
+                      "true", "true", "TypeError"})
     public void typeError() throws Exception {
         final String html
             = "<html>\n"
@@ -252,11 +252,11 @@ public class ErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"URIError", "Whoops!", "undefined", "undefined", "undefined",
-                       "undefined", "true", "true", "URIError/URIError"},
+                       "undefined", "true", "true", "URIError"},
             FF = {"URIError", "Whoops!", "undefined", "11", "undefined", "25",
-                  "true", "true", "URIError/URIError"},
+                  "true", "true", "URIError"},
             FF_ESR = {"URIError", "Whoops!", "undefined", "11", "undefined", "25",
-                      "true", "true", "URIError/URIError"})
+                      "true", "true", "URIError"})
     public void uriError() throws Exception {
         final String html
             = "<html>\n"
@@ -331,7 +331,7 @@ public class ErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"ReferenceError", "InternalError is not defined",
                        "undefined", "undefined", "undefined",
-                       "undefined", "true", "false", "ReferenceError/ReferenceError"},
+                       "undefined", "true", "false", "ReferenceError"},
             FF = {"InternalError", "Whoops!", "undefined", "11", "undefined", "25",
                   "true", "true", "InternalError/InternalError"},
             FF_ESR = {"InternalError", "Whoops!", "undefined", "11", "undefined", "25",
