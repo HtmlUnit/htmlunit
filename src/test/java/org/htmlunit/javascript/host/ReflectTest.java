@@ -70,7 +70,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("TypeError")
+    @Alerts("TypeError/Error")
     public void applyMissingArgs() throws Exception {
         final String js =
                 "try {\n"
@@ -82,7 +82,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("TypeError")
+    @Alerts("TypeError/Error")
     public void applyTargetNotFunction() throws Exception {
         final String js =
                 "try {\n"
@@ -94,7 +94,7 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("TypeError")
+    @Alerts("TypeError/Error")
     public void applyArgumentsListNotFunction() throws Exception {
         final String js =
                 "var s1 = Symbol('1');"

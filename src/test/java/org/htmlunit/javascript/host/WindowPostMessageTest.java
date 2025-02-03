@@ -122,7 +122,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts("TypeError/Error")
     public void postMessageMissingParameters() throws Exception {
         final String html
             = "<html>\n"
@@ -381,7 +381,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void postMessageTargetOriginNotUrl() throws Exception {
         postMessageInvalidTargetOrigin("abcd");
     }
@@ -390,7 +390,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void postMessageTargetOriginEmpty() throws Exception {
         postMessageInvalidTargetOrigin("");
     }
@@ -399,7 +399,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void postMessageTargetOriginSubpath() throws Exception {
         postMessageInvalidTargetOrigin("/abc");
     }

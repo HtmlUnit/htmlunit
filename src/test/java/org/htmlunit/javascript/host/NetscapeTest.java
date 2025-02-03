@@ -35,7 +35,7 @@ public class NetscapeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "TypeError"},
+    @Alerts(DEFAULT = {"undefined", "undefined", "TypeError/Error"},
             FF = {"[object Object]", "undefined", "[object Object]", "undefined"},
             FF_ESR = {"[object Object]", "undefined", "[object Object]", "undefined"})
     public void netscape() throws Exception {
@@ -58,7 +58,7 @@ public class NetscapeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
+    @Alerts(DEFAULT = "TypeError/Error",
             FF = {"true", "false", "true"},
             FF_ESR = {"true", "false", "true"})
     @HtmlUnitNYI(FF = {"undefined", "true", "true"},

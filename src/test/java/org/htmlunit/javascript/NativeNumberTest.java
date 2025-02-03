@@ -318,7 +318,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("RangeError")
+    @Alerts("RangeError/Error")
     public void toLocaleStringHintertupfingen() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

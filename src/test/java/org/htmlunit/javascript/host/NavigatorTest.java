@@ -270,8 +270,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "TypeError",
-            EDGE = "TypeError")
+            CHROME = "TypeError/Error",
+            EDGE = "TypeError/Error")
     public void taintEnabled() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

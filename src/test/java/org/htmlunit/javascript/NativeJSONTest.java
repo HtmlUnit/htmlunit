@@ -33,7 +33,7 @@ public class NativeJSONTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"x,y", "SyntaxError"})
+    @Alerts({"x,y", "SyntaxError/Error"})
     public void getArraySyntax() throws Exception {
         final String html
             = "<html>\n"

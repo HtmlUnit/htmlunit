@@ -57,7 +57,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object Window]", "ReferenceError", "undefined", "undefined", "hello", "hello", "world", "world"})
+    @Alerts({"[object Window]", "ReferenceError/Error", "undefined", "undefined", "hello", "hello", "world", "world"})
     public void thisIsWindow() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -185,7 +185,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"InvalidCharacterError", "InvalidCharacterError"})
+    @Alerts({"InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException"})
     public void atobUnicode() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -344,7 +344,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts("TypeError/Error")
     public void execScript2() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -364,7 +364,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts("TypeError/Error")
     public void execScript_returnValue() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -776,7 +776,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"ReferenceError", "ReferenceError", "ReferenceError", "ReferenceError"})
+    @Alerts({"ReferenceError/Error", "ReferenceError/Error", "ReferenceError/Error", "ReferenceError/Error"})
     public void IEScriptEngineXxx() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1122,7 +1122,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"ReferenceError", "ReferenceError", "Success"})
+    @Alerts({"ReferenceError/Error", "ReferenceError/Error", "Success"})
     public void eval() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"

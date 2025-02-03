@@ -62,7 +62,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ReferenceError")
+    @Alerts("ReferenceError/Error")
     public void xmlDocument() throws Exception {
         final String html = "<html>\n"
             + " <head>\n"
