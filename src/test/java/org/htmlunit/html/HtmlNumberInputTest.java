@@ -1379,7 +1379,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "  function getSelection(element) {\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1429,26 +1429,26 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
 
             + "  input.value = '12345678900';\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
 
             + "  try {\n"
             + "    input.selectionStart = " + selectionStart + ";\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
 
             + "  try {\n"
             + "    input.selectionEnd = " + selectionEnd + ";\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -1486,7 +1486,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
             + "    input.value = '7';\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

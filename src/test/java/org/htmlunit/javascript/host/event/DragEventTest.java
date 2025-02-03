@@ -53,7 +53,7 @@ public class DragEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DragEvent('drag');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -79,7 +79,7 @@ public class DragEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DragEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -101,7 +101,7 @@ public class DragEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DragEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -123,7 +123,7 @@ public class DragEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DragEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -145,7 +145,7 @@ public class DragEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DragEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -167,7 +167,7 @@ public class DragEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DragEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -191,7 +191,7 @@ public class DragEventTest extends WebDriverTestCase {
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -214,7 +214,7 @@ public class DragEventTest extends WebDriverTestCase {
             + "      var event = new DragEvent('drag', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -238,7 +238,7 @@ public class DragEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

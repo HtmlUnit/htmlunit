@@ -47,7 +47,7 @@ public class Int32ArrayTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      log(array2[i]);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -178,7 +178,7 @@ public class Int32ArrayTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var array = new Int32Array(null);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

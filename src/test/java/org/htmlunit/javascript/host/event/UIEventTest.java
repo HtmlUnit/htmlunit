@@ -57,7 +57,7 @@ public class UIEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new UIEvent('event');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -82,7 +82,7 @@ public class UIEventTest extends WebDriverTestCase {
             + "        'view': window\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -105,7 +105,7 @@ public class UIEventTest extends WebDriverTestCase {
             + "      var event = new UIEvent('event', {\n"
             + "        'view': {}\n"
             + "      });\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -152,7 +152,7 @@ public class UIEventTest extends WebDriverTestCase {
             + "  log(e.cancelable);\n"
             + "  log(e.view == window);\n"
             + "  log(e.detail);\n"
-            + "} catch(e) { log(e.name) }\n"
+            + "} catch(e) { logEx(e) }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }

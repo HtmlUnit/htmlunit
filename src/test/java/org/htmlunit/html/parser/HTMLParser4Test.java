@@ -743,7 +743,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "      document.getElementsByTagName('html')[0].innerHTML ="
             + "        '<html><head><title>Inner Html</title></head>"
             + "        <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
-            + "    } catch(e) { log(e.name) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  </script>\n"
             + "</body>\n"
             + "</html>\n";

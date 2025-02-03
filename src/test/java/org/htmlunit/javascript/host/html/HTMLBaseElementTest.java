@@ -72,7 +72,7 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(elem);\n"
             + "      log(HTMLBaseElement);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

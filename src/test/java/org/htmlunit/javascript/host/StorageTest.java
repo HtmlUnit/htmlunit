@@ -67,9 +67,9 @@ public class StorageTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try { log('local: ' + (window.localStorage === window.localStorage)); }"
-                        + " catch(e) { log(e.name); }\n"
+                        + " catch(e) { logEx(e); }\n"
             + "  try { log('session: ' + (window.sessionStorage === window.sessionStorage)); }"
-                        + " catch(e) { log(e.name); }\n"
+                        + " catch(e) { logEx(e); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -240,7 +240,7 @@ public class StorageTest extends WebDriverTestCase {
             + "try {\n"
             + "  localStorage.clear();\n"
             + "  localStorage.setItem('hello', 'I was here');\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
         final WebDriver driver = loadPage2(html1);
         final List<String> alerts = getCollectedAlerts(driver);
@@ -248,7 +248,7 @@ public class StorageTest extends WebDriverTestCase {
         final String html2 = "<html><body><script>\n"
             + "try {\n"
             + "  log(localStorage.getItem('hello'));\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
         releaseResources();
 
@@ -293,7 +293,7 @@ public class StorageTest extends WebDriverTestCase {
             + "    log('localStorage.extraMethod not callable');\n"
             + "  }\n"
             + "  log(localStorage.getItem('extraMethod'));\n"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -314,7 +314,7 @@ public class StorageTest extends WebDriverTestCase {
             + "  localStorage.setItem('hasOwnProperty', 'value');\n"
             + "  log(typeof localStorage.hasOwnProperty);\n"
             + "  log(localStorage.getItem('hasOwnProperty'));\n"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "  log(localStorage.length);\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -341,7 +341,7 @@ public class StorageTest extends WebDriverTestCase {
             + "  log(typeof localStorage.hasOwnProperty);\n"
             + "  log(localStorage.getItem('hasOwnProperty'));\n"
             + "  log(localStorage.length);\n"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }

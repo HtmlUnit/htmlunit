@@ -103,7 +103,7 @@ public class DataTransferItemTest extends WebDriverTestCase {
 
             + "    try {"
             + "      dt.items.add(undefined);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

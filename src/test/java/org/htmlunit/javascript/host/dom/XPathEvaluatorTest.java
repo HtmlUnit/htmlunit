@@ -182,7 +182,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "        var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
                                      + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
             + "        log(result.stringValue);\n"
-            + "      } catch(e) { log(e.name); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    } else {\n"
             + "      log('window.XPathEvaluator undefined');\n"
             + "    }\n"

@@ -71,7 +71,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    ctx.closePath();\n"
             + "    ctx.rotate(1.234);\n"
             + "    log('done');\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -112,7 +112,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "        log(methods[i]);\n"
             + "    }\n"
             + "    log(nbMethods + ' methods');\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -215,7 +215,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  log('rendering...');\n"
             + "  context.drawImage(img, 0, 0, 10, 10);\n"
             + "  log('...done');\n"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -247,7 +247,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  log('rendering...');\n"
             + "  context.drawImage(img, 0, 0, 10, 10);\n"
             + "  log('...done');\n"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -785,7 +785,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "          ctx = canvas.getContext('2d');\n"
             + "          try {\n"
             + "            log(ctx.measureText());\n"
-            + "          } catch(e) { log(e.name); }\n"
+            + "          } catch(e) { logEx(e); }\n"
 
             + "          var metrics = ctx.measureText('');\n"
             + "          log(metrics.width);\n"
@@ -936,7 +936,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = null;\n"
             + "    log(ctx.globalAlpha);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -970,7 +970,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = undefined;\n"
             + "    log(ctx.globalAlpha);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"

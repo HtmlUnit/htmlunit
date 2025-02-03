@@ -211,7 +211,7 @@ public class Console2Test extends SimpleWebTestCase {
                 + "<script async>\n"
                 + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
-                + "} catch(e) { log(e.name); }\n"
+                + "} catch(e) { logEx(e); }\n"
                 + "</script></body></html>\n";
 
         loadPage(html);

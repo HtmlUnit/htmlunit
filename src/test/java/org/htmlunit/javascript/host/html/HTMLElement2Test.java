@@ -1588,7 +1588,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "try {\n"
             + "  document.getElementById('it').querySelectorAll('" + selector + "');\n"
             + "  log('working: " + selector + "');\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -1611,7 +1611,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "try {\n"
             + "  document.getElementById('it').querySelector('" + selector + "');\n"
             + "  log('working " + selector + "');\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

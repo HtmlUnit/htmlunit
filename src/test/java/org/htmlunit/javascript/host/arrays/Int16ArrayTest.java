@@ -47,7 +47,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
             + "    log(array.buffer);\n"
             + "    log(array.byteLength);\n"
             + "    log(array.byteOffset);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -71,7 +71,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
             + "    log(array[0]);\n"
             + "    log(array[1]);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -92,7 +92,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    log(Int16Array.BYTES_PER_ELEMENT);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -116,7 +116,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      log(array2[i]);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -141,7 +141,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
             + "    array[1] = 12;\n"
             + "    array[2] = 13;\n"
             + "    log(array[2]);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -272,7 +272,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var array = new Int16Array(null);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

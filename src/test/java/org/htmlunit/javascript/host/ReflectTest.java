@@ -76,7 +76,7 @@ public class ReflectTest extends WebDriverTestCase {
                 "try {\n"
                 + "  Reflect.apply();\n"
                 + "} catch(e) {\n"
-                + "  log(e.name);\n"
+                + "  logEx(e);\n"
                 + "}";
         test(js);
     }
@@ -88,7 +88,7 @@ public class ReflectTest extends WebDriverTestCase {
                 "try {\n"
                 + "  Reflect.apply({}, undefined, [1.75]);\n"
                 + "} catch(e) {\n"
-                + "  log(e.name);\n"
+                + "  logEx(e);\n"
                 + "}";
         test(js);
     }
@@ -101,7 +101,7 @@ public class ReflectTest extends WebDriverTestCase {
                 + "try {\n"
                 + "  Reflect.apply(Math.floor, undefined, s1);\n"
                 + "} catch(e) {\n"
-                + "  log(e.name);\n"
+                + "  logEx(e);\n"
                 + "}";
         test(js);
     }

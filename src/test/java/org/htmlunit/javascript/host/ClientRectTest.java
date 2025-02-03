@@ -47,7 +47,7 @@ public class ClientRectTest extends WebDriverTestCase {
             + "    log(pos.right);\n"
             + "    log(pos.width);\n"
             + "    log(pos.height);\n"
-            + "    } catch (e) { log(e.name);}\n"
+            + "    } catch (e) { logEx(e);}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>\n"

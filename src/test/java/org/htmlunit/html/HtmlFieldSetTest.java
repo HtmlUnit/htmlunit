@@ -88,7 +88,7 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
             + "  function set(fs, value) {\n"
             + "    try {\n"
             + "      fs.align = value;\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + "  var fs1 = document.getElementById('fs1');\n"
             + "  var fs2 = document.getElementById('fs2');\n"

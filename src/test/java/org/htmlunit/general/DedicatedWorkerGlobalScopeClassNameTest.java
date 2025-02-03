@@ -45,7 +45,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
                 + "    log('' + e.data);\n"
                 + "  };\n"
                 + "  setTimeout(function() { myWorker.postMessage('test');}, 10);\n"
-                + "} catch(e) { log(e.name); }\n"
+                + "} catch(e) { logEx(e); }\n"
                 + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"

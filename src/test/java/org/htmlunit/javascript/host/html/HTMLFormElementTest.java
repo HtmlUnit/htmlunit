@@ -449,7 +449,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      document.forms[0].enctype = '" + enctype + "';\n"
             + "      log(document.forms[0].enctype);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(document.forms[0].encoding);\n"
             + "  }\n"
             + "  </script>\n"
@@ -491,7 +491,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      document.forms[0].encoding = '" + encoding + "';\n"
             + "      log(document.forms[0].encoding);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(document.forms[0].enctype);\n"
             + "  }\n"
             + "  </script>\n"
@@ -579,7 +579,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    document.forms[0]." + jsProperty + "='" + newValue + "';\n"
             + "    log(document.forms[0]." + jsProperty + ");\n"
             + "    log(document.forms[0].getAttribute('" + htmlProperty + "'));\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -1296,7 +1296,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      form.onsubmit = undefined;\n"
             + "      log(form.onsubmit);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"
@@ -1357,7 +1357,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      try {\n"
             + "        log(document.forms['myForm'].item('myRadio').type);\n"
-            + "      } catch(e) { log(e.name) }\n"
+            + "      } catch(e) { logEx(e) }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1384,7 +1384,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      try {\n"
             + "        log(document.forms['myForm'].item('myRadio').length);\n"
-            + "      } catch(e) { log(e.name) }\n"
+            + "      } catch(e) { logEx(e) }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1412,7 +1412,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      try {\n"
             + "        log(document.forms['myForm'].item('myRadio', 1).id);\n"
-            + "      } catch(e) { log(e.name) }\n"
+            + "      } catch(e) { logEx(e) }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1440,7 +1440,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      try {\n"
             + "        log(document.forms['myForm'].item(1).id);\n"
-            + "      } catch(e) { log(e.name) }\n"
+            + "      } catch(e) { logEx(e) }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -3210,7 +3210,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  for (var i = 0; i < a2.relList.length; i++) {\n"
             + "    log(a2.relList[i]);\n"
             + "  }\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -3247,7 +3247,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -3276,7 +3276,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -3313,7 +3313,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -3350,7 +3350,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);

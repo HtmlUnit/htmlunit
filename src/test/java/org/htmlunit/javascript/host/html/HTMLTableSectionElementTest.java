@@ -343,7 +343,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    var t = document.getElementById('myId');\n"
             + "    try {\n"
             + "      t.innerHTML = '<tr><td>world</td></tr>';\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(t.innerHTML.toLowerCase());\n"
             + "  }\n"
             + "</script>\n"

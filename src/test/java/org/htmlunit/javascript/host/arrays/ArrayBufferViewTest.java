@@ -139,7 +139,7 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
             + "    for(var i = 0; i < x.length; i++) {\n"
             + "      log(x[i]);\n"
             + "    }\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

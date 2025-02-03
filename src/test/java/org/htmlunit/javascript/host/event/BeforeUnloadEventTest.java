@@ -55,7 +55,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new BeforeUnloadEvent('beforeunload');\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -76,7 +76,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,7 +99,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      event.initEvent('beforeunload', true, false);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -122,7 +122,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      event.initEvent('beforeunload', true, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onbeforeunload  = dump;\n"
@@ -146,7 +146,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('Event');\n"
             + "      event.initEvent('beforeunload', true, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onbeforeunload = dump;\n"

@@ -197,7 +197,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "    rule.cssText = '@media screen { span { color: rgb(0, 0, 0); }}';\n"
             + "    log(rule.cssText);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -280,7 +280,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "    rule.parentRule = rule;\n"
             + "    log(rule.parentRule);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -335,7 +335,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "    rule.parentStyleSheet = null;\n"
             + "    log(rule.parentStyleSheet);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -540,7 +540,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -570,7 +570,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule(null);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -600,7 +600,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('');\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -630,7 +630,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('%ab');\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -667,7 +667,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -697,7 +697,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule(null, 1);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -733,7 +733,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -763,7 +763,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('%ab', 1);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -868,7 +868,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('span { color:#000000; }', 2);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -899,7 +899,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.insertRule('span { color:#000000; }', 2);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -934,7 +934,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).cssText);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -969,7 +969,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).cssText);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -1004,7 +1004,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).cssText);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -1035,7 +1035,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.deleteRule(-1);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -1066,7 +1066,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    rule.deleteRule(2);\n"
             + "  } catch(e) {\n"
-            + "    log(e.name);\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
 

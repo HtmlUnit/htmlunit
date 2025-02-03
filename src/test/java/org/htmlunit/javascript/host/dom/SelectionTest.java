@@ -58,7 +58,7 @@ public class SelectionTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(window.getSelection()==window.getSelection());\n"
-            + "} catch (e) {log(e.name)}\n"
+            + "} catch (e) {logEx(e)}\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -376,7 +376,7 @@ public class SelectionTest extends WebDriverTestCase {
             + "    var s3 = document.getElementById('s3');\n"
             + "    try {\n"
                         + jsSnippet
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
 
             + "  function alertSelection(s) {\n"

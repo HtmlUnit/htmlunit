@@ -46,7 +46,7 @@ public class NodeFilterTest extends WebDriverTestCase {
             + "    for (var i = 0; i < properties.length; i++) {\n"
             + "      log(NodeFilter[properties[i]]);\n"
             + "    }\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -64,7 +64,7 @@ public class NodeFilterTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log(NodeFilter.SHOW_ALL);\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 

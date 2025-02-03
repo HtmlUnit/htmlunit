@@ -73,8 +73,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "    tr.deleteCell(-1);\n"
             + "    log(tr.cells.length);\n"
             + "    log(tr.cells[tr.cells.length-1].id);\n"
-            + "    try { tr.deleteCell(25); } catch(e) { log(e.name); }\n"
-            + "    try { tr.deleteCell(-2); } catch(e) { log(e.name); }\n"
+            + "    try { tr.deleteCell(25); } catch(e) { logEx(e); }\n"
+            + "    try { tr.deleteCell(-2); } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -103,7 +103,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var tr = document.getElementById('myId');\n"
             + "    log(tr.cells.length);\n"
-            + "    try { tr.deleteCell(); } catch(e) { log(e.name); }\n"
+            + "    try { tr.deleteCell(); } catch(e) { logEx(e); }\n"
             + "    log(tr.cells.length);\n"
             + "  }\n"
             + "</script>\n"
@@ -426,7 +426,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "      var newCell = row.insertCell(" + cellIndex + ");\n"
             + "      log(row.cells.length);\n"
             + "      log(newCell.cellIndex);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  </script>\n"
             + "</body></html>";
 

@@ -324,7 +324,7 @@ public class NativeNumberTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log((12345).toLocaleString('Hintertupfingen'));\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);

@@ -51,7 +51,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent('storage');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -77,7 +77,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,7 +99,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,7 +121,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -143,7 +143,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,7 +165,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new StorageEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -194,7 +194,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "        'url': 'aUrl'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -217,7 +217,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "      var event = new StorageEvent('storage', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -245,7 +245,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "        'storageArea': 'wrong'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

@@ -44,7 +44,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "log(HTMLAudioElement.prototype == null);\n"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -67,7 +67,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(elem);\n"
             + "      log(HTMLAudioElement);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -93,7 +93,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  var audio = document.getElementById('a');\n"
             + "  log(audio.nodeType);"
             + "  log(audio.nodeName);"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -475,7 +475,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  audio.src = 'cow.mp3';\n"
             + "  log(audio.src);"
             + "  log(audio.outerHTML);"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -503,7 +503,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  audio.src = 'cow.mp3';\n"
             + "  log(audio.src);"
             + "  log(audio.outerHTML);"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -526,7 +526,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  var src = document.getElementById('a').src;\n"
             + "  log(typeof src);"
             + "  log(src);"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -548,7 +548,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('a').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -571,7 +571,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('a').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -594,7 +594,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('a').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 

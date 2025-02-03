@@ -253,7 +253,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
             + "    for(var i = 0; i < y.length; i++) {\n"
             + "      log(y[i]);\n"
             + "    }\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

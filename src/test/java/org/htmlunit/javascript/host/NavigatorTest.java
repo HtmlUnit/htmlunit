@@ -280,7 +280,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      log(window.navigator.taintEnabled());\n"
-                + "    } catch(e) { log(e.name); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"

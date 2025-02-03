@@ -47,7 +47,7 @@ public class IntlTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(" + string + ");\n"
-            + "    } catch(e) {log(e.name)}\n"
+            + "    } catch(e) {logEx(e)}\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"

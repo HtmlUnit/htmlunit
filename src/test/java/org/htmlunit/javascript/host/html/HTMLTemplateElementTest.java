@@ -40,7 +40,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log(HTMLTemplateElement.prototype == null);\n"
-            + "  } catch (e) { log(e.name); }\n"
+            + "  } catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -62,7 +62,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + "        try {\n"
             + "          var template = document.createElement('template');\n"
             + "          log('content' in template);\n"
-            + "        } catch (e) { log(e.name); }\n"
+            + "        } catch (e) { logEx(e); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

@@ -190,14 +190,14 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.value = 'HtmlUnit';\n"
-              + "    } catch(e) { log(e.name); }\n"
+              + "    } catch(e) { logEx(e); }\n"
               + "    log(input.value + '-' + input.defaultValue "
                           + "+ '-' + input.getAttribute('value') "
                           + "+ '-' + input.files.length);\n"
 
               + "    try{\n"
               + "      input.value = '';\n"
-              + "    } catch(e) { log(e.name); }\n"
+              + "    } catch(e) { logEx(e); }\n"
               + "    log(input.value + '-' + input.defaultValue "
                           + "+ '-' + input.getAttribute('value') "
                           + "+ '-' + input.files.length);\n"
@@ -234,14 +234,14 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.defaultValue = 'HtmlUnit';\n"
-              + "    } catch(e) { log(e.name); }\n"
+              + "    } catch(e) { logEx(e); }\n"
               + "    log(input.value + '-' + input.defaultValue "
                           + "+ '-' + input.getAttribute('value') "
                           + "+ '-' + input.files.length);\n"
 
               + "    try{\n"
               + "      input.defaultValue = '';\n"
-              + "    } catch(e) { log(e.name); }\n"
+              + "    } catch(e) { logEx(e); }\n"
               + "    log(input.value + '-' + input.defaultValue "
                           + "+ '-' + input.getAttribute('value') "
                           + "+ '-' + input.files.length);\n"
@@ -351,7 +351,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
@@ -394,7 +394,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
@@ -436,7 +436,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.setAttribute('value', 'attribValue');\n"
@@ -506,7 +506,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "    } catch(e) { log('ex end'); }\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -558,28 +558,28 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
 
             + "  try{\n"
             + "    input.value = '12345678900';\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
 
             + "  try {\n"
             + "    input.selectionStart = " + selectionStart + ";\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
 
             + "  try {\n"
             + "    input.selectionEnd = " + selectionEnd + ";\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  try {\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -617,7 +617,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
             + "    input.value = 'a';\n"
             + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

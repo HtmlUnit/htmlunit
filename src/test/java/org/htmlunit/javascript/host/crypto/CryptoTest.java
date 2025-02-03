@@ -79,7 +79,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "  log(res.length);\n"
             + "  log(res === array);\n"
             + "}\n"
-            + "catch(e) { log(e.name); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></head></html>";
 
         loadPageVerifyTitle2(html);
@@ -96,7 +96,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "try {\n"
             + "  log(window.crypto.randomUUID());\n"
             + "}\n"
-            + "catch(e) { log(e.name); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></head></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -117,7 +117,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "  var array = new Uint32Array(16385);\n"
             + "  window.crypto.getRandomValues(array);\n"
             + "}\n"
-            + "catch(e) { log(e.name); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></head></html>";
 
         loadPageVerifyTitle2(html);
@@ -134,7 +134,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "try {\n"
             + "  log(window.crypto.subtle);\n"
             + "}\n"
-            + "catch(e) { log(e.name); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></head></html>";
 
         loadPageVerifyTitle2(html);

@@ -145,11 +145,21 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
  */
 public abstract class WebDriverTestCase extends WebTestCase {
 
+    private static final String LOG_EX_FUNCTION =
+            "  function logEx(e) {\n"
+            + "  let rx = /\\[object (.*)\\]/;\n"
+            + "  let toStr = Object.prototype.toString.call(e);\n"
+            + "  let match = rx.exec(toStr);\n"
+            + "  if (match != null) { toStr = match[1]; }\n"
+            + "  log(e.name + '/' + toStr);\n"
+            + "}\n";
+
     /**
      * Function used in many tests.
      */
     public static final String LOG_TITLE_FUNCTION =
-            "  function log(msg) { window.document.title += msg + '\\u00a7'; }\n";
+            "  function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
+            + LOG_EX_FUNCTION;
 
     /**
      * Function used in many tests.
@@ -162,13 +172,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     + "msg = msg.replace(/\\r/g, '\\\\r'); "
                     + "msg = msg.replace(/\\t/g, '\\\\t'); "
                     + "msg = msg.replace(/\\u001e/g, '\\\\u001e'); "
-                    + "window.document.title += msg + '\u00A7';}\n";
+                    + "window.document.title += msg + '\u00A7';}\n"
+
+                    + LOG_EX_FUNCTION;
 
     /**
      * Function used in many tests.
      */
     public static final String LOG_WINDOW_NAME_FUNCTION =
-            "  function log(msg) { window.top.name += msg + '\\u00a7'; }\n  window.top.name = '';";
+            "  function log(msg) { window.top.name += msg + '\\u00a7'; }\n  window.top.name = '';"
+            + LOG_EX_FUNCTION;
 
     /**
      * Function used in many tests.
@@ -182,7 +195,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Function used in many tests.
      */
     public static final String LOG_TEXTAREA_FUNCTION = "  function log(msg) { "
-            + "document.getElementById('myLog').value += msg + '\u00A7';}\n";
+            + "document.getElementById('myLog').value += msg + '\u00A7';}\n"
+            + LOG_EX_FUNCTION;
 
     /**
      * HtmlSniped to insert text area used for logging.

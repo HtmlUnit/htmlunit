@@ -126,7 +126,7 @@ public class RadioNodeListTest extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    for (let e of form.first) {\n"
-                + "      log(e.name)\n"
+                + "      logEx(e)\n"
                 + "    }\n"
                 + "  }\n"
                 + "</script>\n"

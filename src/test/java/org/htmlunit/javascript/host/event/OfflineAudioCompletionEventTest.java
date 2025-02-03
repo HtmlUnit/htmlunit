@@ -52,7 +52,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new OfflineAudioCompletionEvent('oac');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -74,7 +74,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new OfflineAudioCompletionEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -96,7 +96,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new OfflineAudioCompletionEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -118,7 +118,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new OfflineAudioCompletionEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -140,7 +140,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new OfflineAudioCompletionEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -162,7 +162,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new OfflineAudioCompletionEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -186,7 +186,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -209,7 +209,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             + "      var event = new OfflineAudioCompletionEvent('oac', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -233,7 +233,7 @@ public class OfflineAudioCompletionEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

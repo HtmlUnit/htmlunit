@@ -325,7 +325,7 @@ public class History2Test extends WebDriverTestCase {
                 + "      var stateObj = { hi: 'there' };\n"
                 + "      window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
                 + "      log(location.href.indexOf('bar.html') > -1);\n"
-                + "    } catch(e) { log(e.name); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
 
                 + "  function test2() {\n"
@@ -334,7 +334,7 @@ public class History2Test extends WebDriverTestCase {
                 + "      var stateObj = { hi2: 'there2' };\n"
                 + "      window.history.pushState(stateObj, 'page 3', 'bar2.html');\n"
                 + "      log(location.href.indexOf('bar2.html') > -1);\n"
-                + "    } catch(e) { log(e.name); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
 
                 + "</script>\n"

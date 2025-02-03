@@ -72,7 +72,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
             + "    try {\n"
             + "      var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
             + "      log(typeof doc);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -98,7 +98,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
             + "      } else {\n"
             + "        log('ActiveXObject undefined');\n"
             + "      }\n"
-            + "    } catch(e) {log(e.name);}\n"
+            + "    } catch(e) {logEx(e);}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

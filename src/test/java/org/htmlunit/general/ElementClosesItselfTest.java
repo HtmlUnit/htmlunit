@@ -107,7 +107,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
                 + "  var e = document.getElementById('outer');\n"
                 + "  try {\n"
                 + "    log(e == null ? e : e.children.length);\n"
-                + "  } catch(e) { log(e.name); }"
+                + "  } catch(e) { logEx(e); }"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"

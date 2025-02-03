@@ -75,7 +75,7 @@ public class SvgTextTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(window.getComputedStyle(document.getElementById('myId'), null).fontSize);\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

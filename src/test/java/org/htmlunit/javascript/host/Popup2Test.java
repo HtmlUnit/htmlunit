@@ -47,7 +47,7 @@ public class Popup2Test extends WebDriverTestCase {
             + "    oPopupBody.innerHTML = 'bla bla';\n"
             + "    oPopup.show(100, 100, 200, 50, document.body);\n"
             + "    log('done');\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -70,7 +70,7 @@ public class Popup2Test extends WebDriverTestCase {
             + "    popupBody = popup.document.body;\n"
             + "    popupBody.style.backgroundColor = '#7f7fff';\n"
             + "    log('done');\n"
-            + "  } catch(e) { log(e.name); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 

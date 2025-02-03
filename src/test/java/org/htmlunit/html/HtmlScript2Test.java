@@ -91,7 +91,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "  log('created');\n"
             + "  element.parentNode.replaceChild(fragment, element);\n"
             + "  log('replaced');\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -462,7 +462,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "    script.appendChild(document.createTextNode('log(\"2\");'));\n"
             + "    script.text = 'log(\"3\");';\n"
             + "    document.body.appendChild(script);\n"
-            + "  } catch (e) {log(e.name);}\n"
+            + "  } catch (e) {logEx(e);}\n"
             + "</script>\n"
             + "</body></html>";
 

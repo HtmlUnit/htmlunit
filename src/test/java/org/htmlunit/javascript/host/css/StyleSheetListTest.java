@@ -85,7 +85,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "          log(window.getComputedStyle(div, null).color);\n"
             + "          var div2 = document.getElementById('myDiv2');\n"
             + "          log(window.getComputedStyle(div2, null).color);\n"
-            + "        } catch(e) { log(e.name); }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

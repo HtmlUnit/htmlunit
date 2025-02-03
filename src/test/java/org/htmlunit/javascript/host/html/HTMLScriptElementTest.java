@@ -328,7 +328,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log(e.name); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -353,7 +353,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log(e.name); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('middle');\n"
               + "  document.body.appendChild(script);\n"
               + "  log('end');\n"
@@ -476,7 +476,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log(e.name); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -549,7 +549,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log(e.name); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -574,7 +574,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log(e.name); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -601,7 +601,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log(e.name); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -829,7 +829,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  try {\n"
             + "    document.form1.txt.value = 'hello';\n"
             + "    log(document.form1.txt.value);\n"
-            + "  } catch(e) {log(e.name); }\n"
+            + "  } catch(e) {logEx(e); }\n"
             + "</script></head>\n"
             + "<body>\n"
             + "  <form name='form1'><input type='text' name='txt'></form>\n"
@@ -1152,7 +1152,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "    var div = document.getElementById('tester');\n"
             + "    try {\n"
             + "      div.innerHTML = div.innerHTML;\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "    log(div.innerHTML);\n"
             + "  </script>\n"
 

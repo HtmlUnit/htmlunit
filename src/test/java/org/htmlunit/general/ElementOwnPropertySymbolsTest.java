@@ -88,7 +88,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                 + "    try{\n"
                 + "      " + preparation + "\n"
                 + "      process(" + string + ");\n"
-                + "    } catch (e) {log(e.name);return;}\n"
+                + "    } catch (e) {logEx(e);return;}\n"
                 + "  }\n"
                 + "\n"
                 + "  /*\n"

@@ -91,7 +91,7 @@ public class ElementTest extends WebDriverTestCase {
             + "      var nodes = doc.documentElement.selectNodes('//title');\n"
             + "      log(nodes.length);\n"
             + "      log(nodes[0].tagName);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -199,7 +199,7 @@ public class ElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(child.selectNodes('/title').length);\n"
             + "      log(child.selectNodes('title').length);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -233,7 +233,7 @@ public class ElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(doc.documentElement.getElementsByTagNameNS('http://myNS', 'template').length);\n"
             + "      log(doc.documentElement.getElementsByTagNameNS(null, 'html').length);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -265,7 +265,7 @@ public class ElementTest extends WebDriverTestCase {
             + "      log(doc.documentElement.getElementsByTagNameNS('http://myNS', '*').length);\n"
             + "      log(doc.documentElement.getElementsByTagNameNS(null, '*').length);\n"
             + "      log(doc.documentElement.getElementsByTagNameNS('*', '*').length);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -794,7 +794,7 @@ public class ElementTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(typeof Element.prototype.getBoundingClientRect);\n"
-            + "} catch (e) { log(e.name);}\n"
+            + "} catch (e) { logEx(e);}\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -957,17 +957,17 @@ public class ElementTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var children = doc.documentElement.children;\n"
             + "    log(children + ' ' + children.length);\n"
-            + "  } catch (e) { log(e.name); }\n"
+            + "  } catch (e) { logEx(e); }\n"
 
             + "  try {\n"
             + "    children = document.documentElement.children;\n"
             + "    log(children + ' ' + children.length);\n"
-            + "  } catch (e) { log(e.name); }\n"
+            + "  } catch (e) { logEx(e); }\n"
 
             + "  try {\n"
             + "    children = document.getElementById('myId').children;\n"
             + "    log(children + ' ' + children.length);\n"
-            + "  } catch (e) { log(e.name); }\n"
+            + "  } catch (e) { logEx(e); }\n"
             + "}\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -1178,12 +1178,12 @@ public class ElementTest extends WebDriverTestCase {
             + "      process(Element);\n"
             + "      process(Element.prototype);\n"
             + "      process(Element.prototype.constructor);\n"
-            + "    } catch (e) {log(e.name)}\n"
+            + "    } catch (e) {logEx(e)}\n"
             + "  }\n"
             + "  function process(obj) {\n"
             + "    try {\n"
             + "      log(obj);\n"
-            + "    } catch (e) {log(e.name)}\n"
+            + "    } catch (e) {logEx(e)}\n"
             + "   }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1366,7 +1366,7 @@ public class ElementTest extends WebDriverTestCase {
             + "          log(birds[i].textContent);\n"
             + "        }\n"
             + "      }\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "    log('done');\n"
             + "  }\n"
             + "</script>\n"
@@ -1398,7 +1398,7 @@ public class ElementTest extends WebDriverTestCase {
             + "         || docElem.msMatchesSelector;\n"
             + "    try {\n"
             + "      matches.call(window, ':visible')\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "    log('done');\n"
             + "  }\n"
             + "</script>\n"

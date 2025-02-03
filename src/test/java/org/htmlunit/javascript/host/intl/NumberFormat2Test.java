@@ -44,7 +44,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
         }
         html.append(
             "      log(" + string[string.length - 1] + ");\n"
-            + "    } catch(e) {log(e.name)}\n"
+            + "    } catch(e) {logEx(e)}\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"

@@ -48,7 +48,7 @@ public class NativeJSONTest extends WebDriverTestCase {
             + "    text = '{\"name\": [, \"y\"]}';\n"
             + "    try {\n"
             + "      var obj = JSON.parse(text);"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

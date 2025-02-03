@@ -45,7 +45,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(new DOMParser());\n"
-            + "    } catch (e) {log(e.name);}\n"
+            + "    } catch (e) {logEx(e);}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -71,7 +71,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      log(doc);\n"
             + "      log(doc.body.innerHTML);\n"
             + "      log(doc.URL);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -98,7 +98,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      log(doc);\n"
             + "      log(doc.body.innerHTML);\n"
             + "      log(doc.URL);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -123,7 +123,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/xml');\n"
             + "      log(doc);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -147,7 +147,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'application/xml');\n"
             + "      log(doc);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -171,7 +171,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'application/xhtml+xml');\n"
             + "      log(doc);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -195,7 +195,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'image/svg+xml');\n"
             + "      log(doc);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -219,7 +219,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'unknown/type');\n"
             + "      log(doc);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -251,7 +251,7 @@ public class DOMParserTest extends WebDriverTestCase {
 
             + "      var x = doc.documentElement;\n"
             + "      log(x.childNodes.length);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -279,7 +279,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "        log('parsererror');\n"
             + "        return;\n"
             + "      }\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -307,7 +307,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "        return;\n"
             + "      }\n"
             + "      log(doc.childNodes.length);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -330,7 +330,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var parser=new DOMParser();\n"
             + "      parser.parseFromString(text);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -366,7 +366,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      for(var i = 0; i < doc.documentElement.childNodes.length; i++) {\n"
             + "        log(doc.documentElement.childNodes[i]);\n"
             + "      }\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'></body></html>";
 

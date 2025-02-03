@@ -130,7 +130,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  log(canvas.toDataURL());\n"
             + "}\n"
-            + "catch (e) { log(e.name); }\n"
+            + "catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -207,7 +207,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  log(canvas.toDataURL('image/png'));\n"
             + "}\n"
-            + "catch (e) { log(e.name); }\n"
+            + "catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

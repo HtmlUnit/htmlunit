@@ -41,7 +41,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(typeof " + className + ");\n"
-            + "    } catch(e) {log(e.name)}\n"
+            + "    } catch(e) {logEx(e)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

@@ -47,7 +47,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    for (var i = 0; i < properties.length; i++) {\n"
             + "      log(DOMException[properties[i]]);\n"
             + "    }\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -156,7 +156,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "      let ex = new DOMException('test', commonErrorNames[i]);"
             + "      log(commonErrorNames[i] + ' - ' + ex.code + ' ' + ex.name);\n"
             + "    }\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -176,7 +176,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    let ex = new DOMException('test', 'urlMismatchERRoR');"
             + "    log(ex.code);\n"
             + "    log(ex.name);\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -196,7 +196,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    let ex = new DOMException('test');"
             + "    log(ex.code);\n"
             + "    log(ex.name);\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -216,7 +216,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    let ex = new DOMException('test', null);"
             + "    log(ex.code);\n"
             + "    log(ex.name);\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -236,7 +236,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    let ex = new DOMException('test', undefined);"
             + "    log(ex.code);\n"
             + "    log(ex.name);\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -256,7 +256,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    let ex = new DOMException('test', 'unKnown');"
             + "    log(ex.code);\n"
             + "    log(ex.name);\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -276,7 +276,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    let ex = new DOMException('test', 7);"
             + "    log(ex.code);\n"
             + "    log(ex.name);\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -297,7 +297,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "    log(DOMException.filename);\n"
             + "    log(DOMException.lineNumber);\n"
             + "    log(DOMException.message);\n"
-            + "  } catch(e) { log(e.name);}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 

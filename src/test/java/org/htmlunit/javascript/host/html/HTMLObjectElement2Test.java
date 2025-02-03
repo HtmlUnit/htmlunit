@@ -72,7 +72,7 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
             + "    xhr.send('');\n"
             + "    try {\n"
             + "      log(xhr.responseXML);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

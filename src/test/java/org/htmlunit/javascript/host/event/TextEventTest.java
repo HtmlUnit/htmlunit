@@ -51,7 +51,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TextEvent('text');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -74,7 +74,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TextEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -97,7 +97,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TextEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -120,7 +120,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TextEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -142,7 +142,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TextEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,7 +165,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TextEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -191,7 +191,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "        'detail': 7\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -215,7 +215,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "      var event = new TextEvent('text', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -240,7 +240,7 @@ public class TextEventTest extends WebDriverTestCase {
             + "        'detail': 'ten'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

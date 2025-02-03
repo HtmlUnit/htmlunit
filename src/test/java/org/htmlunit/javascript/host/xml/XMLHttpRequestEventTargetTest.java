@@ -65,7 +65,7 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
                 + "  try {\n"
                 + "    var xhr = new XMLHttpRequestEventTarget();\n"
                 + "    log(xhr);\n"
-                + "  } catch(e) { log(e.name); }\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"

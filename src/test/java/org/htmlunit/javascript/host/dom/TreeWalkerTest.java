@@ -44,7 +44,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  try {\n";
 
-    private static final String CONTENT_END = "\n  } catch(e) { log(e.name) }\n"
+    private static final String CONTENT_END = "\n  } catch(e) { logEx(e) }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -68,7 +68,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  try {\n";
 
-    private static final String CONTENT_END2 = "\n  } catch(e) { log(e.name) }\n"
+    private static final String CONTENT_END2 = "\n  } catch(e) { logEx(e) }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -324,7 +324,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     public void nullRoot() throws Exception {
         final String script = "try {\n"
             + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, null, true);\n"
-            + "} catch(e) { log(e.name); }\n";
+            + "} catch(e) { logEx(e); }\n";
 
         test2(script);
     }
@@ -388,7 +388,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     public void emptyFilter() throws Exception {
         final String script = "try {\n"
             + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, {}, true);\n"
-            + "} catch(e) { log(e.name); }\n";
+            + "} catch(e) { logEx(e); }\n";
 
         test2(script);
     }

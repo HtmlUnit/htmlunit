@@ -72,7 +72,7 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
             + "      input.type = 'search';\n"
             + "      input = input.cloneNode(false);\n"
             + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
-            + "    } catch(e)  { log(e.name); }\n"
+            + "    } catch(e)  { logEx(e); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"search\">';\n"

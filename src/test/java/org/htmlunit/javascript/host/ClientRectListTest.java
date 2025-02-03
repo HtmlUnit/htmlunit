@@ -72,11 +72,11 @@ public class ClientRectListTest extends WebDriverTestCase {
 
             + "    try {\n"
             + "      log(rects.item(1));\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      log(rects.item(-1));\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -104,11 +104,11 @@ public class ClientRectListTest extends WebDriverTestCase {
 
             + "    try {\n"
             + "      log(rects[1]);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      log(rects[-1]);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -136,11 +136,11 @@ public class ClientRectListTest extends WebDriverTestCase {
 
             + "    try {\n"
             + "      log(rects[1]);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      log(rects[-1]);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

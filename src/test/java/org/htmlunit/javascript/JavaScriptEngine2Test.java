@@ -275,7 +275,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "try {\n"
             + "  log(" + object + ");\n"
             + "} catch (e) {\n"
-            + "  log(e.name);\n"
+            + "  logEx(e);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -1036,7 +1036,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 + "function test() {\n"
                 + "  try {\n"
                 + "    log(java.lang.Math.PI);\n"
-                + "  } catch (e) { log(e.name); }\n"
+                + "  } catch (e) { logEx(e); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"

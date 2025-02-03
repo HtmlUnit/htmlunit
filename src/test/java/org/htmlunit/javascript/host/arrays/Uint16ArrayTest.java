@@ -48,7 +48,7 @@ public class Uint16ArrayTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      log(array2[i]);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -179,7 +179,7 @@ public class Uint16ArrayTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var array = new Uint16Array(null);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

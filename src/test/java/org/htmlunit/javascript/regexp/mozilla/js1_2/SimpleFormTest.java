@@ -121,7 +121,7 @@ public class SimpleFormTest extends WebDriverTestCase {
             html += initialScript + ";\n";
         }
         html += "  log(" + script + ");\n"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);

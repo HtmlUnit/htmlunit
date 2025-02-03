@@ -144,7 +144,7 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
                 + "        document.getElementById('dir1').type = 'I';\n"
                 + "        log(document.getElementById('dir1').type);\n"
 
-                + "        try { document.getElementById('dir1').type = 'u' } catch(e) {log(e.name);}\n"
+                + "        try { document.getElementById('dir1').type = 'u' } catch(e) {logEx(e);}\n"
                 + "        log(document.getElementById('dir1').type);\n"
                 + "      }\n"
                 + "    </script>\n"

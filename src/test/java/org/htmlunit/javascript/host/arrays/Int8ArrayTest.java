@@ -48,7 +48,7 @@ public class Int8ArrayTest extends WebDriverTestCase {
             + "    log(array.buffer);\n"
             + "    log(array.byteLength);\n"
             + "    log(array.byteOffset);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -72,7 +72,7 @@ public class Int8ArrayTest extends WebDriverTestCase {
             + "    log(array[0]);\n"
             + "    log(array[1]);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -117,7 +117,7 @@ public class Int8ArrayTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    log(Int8Array.BYTES_PER_ELEMENT);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -248,7 +248,7 @@ public class Int8ArrayTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var array = new Int8Array(null);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {log(e.name);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

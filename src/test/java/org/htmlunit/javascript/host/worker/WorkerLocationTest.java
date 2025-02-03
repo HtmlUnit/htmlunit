@@ -176,7 +176,7 @@ public class WorkerLocationTest extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log(e.data);\n"
             + "  };\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"),

@@ -134,7 +134,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 //            + "    log(document.getElementsByClassName().length);\n" // exception in FF3
             + "    log(document.getElementsByClassName(null).length);\n"
             + "  }\n"
-            + "  catch (e) { log(e.name) }\n"
+            + "  catch (e) { logEx(e) }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div class='foo' id='div1'><span class='c2'>hello</span>\n"
@@ -340,7 +340,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  var elt = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
             + "  log(elt);\n"
-            + "} catch (e) { log(e.name); }\n"
+            + "} catch (e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -387,7 +387,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  document.body.appendChild(inner);\n"
             + "  log(document.body.lastChild.value);\n"
             + "}\n"
-            + "catch (e) { log(e.name); }\n"
+            + "catch (e) { logEx(e); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -460,7 +460,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    var theSpan = document.getElementById('s1');\n"
             + "    document.body.replaceChild(importedScript, theSpan);\n"
             + "    log('replaced');\n"
-            + "  } catch (e) { log(e.name) }\n"
+            + "  } catch (e) { logEx(e) }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <span id='s1'></span>\n"
@@ -495,7 +495,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    var theSpan = document.getElementById('s1');\n"
             + "    document.body.replaceChild(importedDiv, theSpan);\n"
             + "    log('replaced');\n"
-            + "  } catch (e) { log(e.name) }\n"
+            + "  } catch (e) { logEx(e) }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <span id='s1'></span>\n"
@@ -554,7 +554,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  log(ns['f'].urn);\n"
             + "  log(ns == document.namespaces);\n"
             + "}\n"
-            + "catch(e) { log(e.name) }\n"
+            + "catch(e) { logEx(e) }\n"
             + "</script></body>";
 
         loadPageVerifyTitle2(html);
@@ -574,12 +574,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  var i = document.getElementById;\n"
             + "  log(i('d').id);\n"
-            + "} catch(e) { log(e.name) }\n"
+            + "} catch(e) { logEx(e) }\n"
 
             + "try {\n"
             + "  var n = document.getElementsByName;\n"
             + "  log(n('d').length);\n"
-            + "} catch(e) { log(e.name) }\n"
+            + "} catch(e) { logEx(e) }\n"
             + "</script>";
         loadPageVerifyTitle2(html);
     }
@@ -704,7 +704,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    var s = window.getSelection();\n"
             + "    log(s.rangeCount);\n"
             + "    log(s.getRangeAt(0).startContainer);\n"
-            + "  } catch(e) {log(e.name); }\n"
+            + "  } catch(e) {logEx(e); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>" // no \n here!
@@ -1195,7 +1195,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    log(a === document.getBoxObjectFor(e));\n"
             + "    log(a.screenX > 0);\n"
             + "    log(a.screenY > 0);\n"
-            + "  } catch (e) { log(e.name) }\n"
+            + "  } catch (e) { logEx(e) }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='log'></div>\n"
@@ -1275,7 +1275,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      else\n"
             + "        cmdsNotSupported[cmdsNotSupported.length] = cmd;\n"
             + "    }\n"
-            + "  } catch (e) { log(e.name); }\n"
+            + "  } catch (e) { logEx(e); }\n"
             + "  log(nbSupported + ' commands supported');\n"
             + "  if (nbSupported != 0 && cmdsNotSupported.length > 0)\n"
             + "    log('not supported: ' + cmdsNotSupported.join(', '));\n"
@@ -1352,7 +1352,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  document.querySelectorAll('" + selector + "');\n"
             + "  log('working');\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -1375,7 +1375,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "try {\n"
             + "  document.querySelector('" + selector + "');\n"
             + "  log('working: " + selector + "');\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -1648,7 +1648,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  var t = document.createElement('<input name=x>');\n"
             + "  log(t.tagName);\n"
             + "} catch(e) {\n"
-            + "  log(e.name);\n"
+            + "  logEx(e);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -2301,7 +2301,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(document.setCapture);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2328,7 +2328,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document.releaseCapture());\n"
             + "      log('releaseCapture available');\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2356,7 +2356,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document);\n"
             + "      log(HTMLDocument);\n"
-            + "    } catch(e) { log(e.name); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2714,7 +2714,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(document.embeds(0));\n"
-            + "    } catch(e) {log(e.name); }\n"
+            + "    } catch(e) {logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2739,7 +2739,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document.plugins.length);\n"
             + "      log(document.plugins(0));\n"
-            + "    } catch(e) {log(e.name); }\n"
+            + "    } catch(e) {logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2763,7 +2763,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(document.images(0));\n"
-            + "    } catch(e) {log(e.name); }\n"
+            + "    } catch(e) {logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2831,7 +2831,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      newBody.id = 'newBody';\n"
             + "      document.body = newBody;\n"
             + "      log(document.body.id);\n"
-            + "    } catch(e) {log(e.name); }\n"
+            + "    } catch(e) {logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2859,7 +2859,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      newDiv.id = 'newDiv';\n"
             + "      document.body = newDiv;\n"
             + "      log(document.body.id);\n"
-            + "    } catch(e) {log(e.name); }\n"
+            + "    } catch(e) {logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2886,7 +2886,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      var newBody = '<body id=\"newBody\" onload=\"test()\"></body>';\n"
             + "      document.body = newBody;\n"
             + "      log(document.body.id);\n"
-            + "    } catch(e) {log(e.name); }\n"
+            + "    } catch(e) {logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2914,7 +2914,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      newBody.id = 'newFrameset';\n"
             + "      document.body = newBody;\n"
             + "      log(document.body.id);\n"
-            + "    } catch(e) {log(e.name); }\n"
+            + "    } catch(e) {logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

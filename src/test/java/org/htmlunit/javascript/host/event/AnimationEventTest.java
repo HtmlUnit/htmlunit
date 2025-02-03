@@ -53,7 +53,7 @@ public class AnimationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new AnimationEvent('animationstart');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name) }\n"
+            + "    } catch (e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -77,7 +77,7 @@ public class AnimationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('AnimationEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log(e.name); }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

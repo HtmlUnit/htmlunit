@@ -80,7 +80,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  m.e = 6;\n"
             + "  m.f = 7;\n"
             + "  alertFields(m);\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -114,7 +114,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  log(typeof m.skewX);\n"
             + "  log(typeof m.skewY);\n"
             + "  log(typeof m.translate);\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -178,7 +178,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
                 + "  m.f = 6;\n"
                 + "  m = m.inverse();\n"
                 + "  alertFields(m);\n"
-                + "} catch(e) { log(e.name); }\n"
+                + "} catch(e) { logEx(e); }\n"
                 + "</script>\n"
                 + "</body></html>";
 
@@ -332,7 +332,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  r = m." + transforamtion + ";\n"
             + "  log(m === r);\n"
             + "  alertFields(r);\n"
-            + "} catch(e) { log(e.name); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 

@@ -52,7 +52,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  log(rule.type);\n"
             + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { log(e.name); }\n"
+            + "catch (e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -78,7 +78,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { log(e.name); }\n"
+            + "catch (e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -104,7 +104,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { log(e.name); }\n"
+            + "catch (e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -130,7 +130,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { log(e.name); }\n"
+            + "catch (e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
