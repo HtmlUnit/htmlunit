@@ -875,9 +875,13 @@ public class Document extends Node {
             }
             return;
         }
-        throw JavaScriptEngine.reportRuntimeError("Failed to set the 'body' property on 'Document': "
-                + "The new body element is of type '" +  htmlElement.getTagName() + "'. "
-                + "It must be either a 'BODY' or 'FRAMESET' element.");
+        throw JavaScriptEngine.asJavaScriptException(
+                getWindow(),
+                new org.htmlunit.javascript.host.dom.DOMException(
+                        "Failed to set the 'body' property on 'Document': "
+                                + "The new body element is of type '" +  htmlElement.getTagName() + "'. "
+                                + "It must be either a 'BODY' or 'FRAMESET' element.",
+                        org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR));
     }
 
     /**
