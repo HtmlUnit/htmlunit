@@ -155,7 +155,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
                 final String token = JavaScriptEngine.toString(arg);
 
                 if (StringUtils.isEmpty(token)) {
-                    throw JavaScriptEngine.syntaxError("DOMTokenList: add() does not support empty tokens");
+                    throw JavaScriptEngine.asJavaScriptException(
+                            (HtmlUnitScriptable) getTopLevelScope(thisObj),
+                            new DOMException(
+                                    "DOMTokenList: add() does not support empty tokens",
+                                    DOMException.SYNTAX_ERR));
                 }
                 if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
                     throw JavaScriptEngine.asJavaScriptException(
@@ -199,7 +203,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
                 final String token = JavaScriptEngine.toString(arg);
 
                 if (StringUtils.isEmpty(token)) {
-                    throw JavaScriptEngine.syntaxError("DOMTokenList: remove() does not support empty tokens");
+                    throw JavaScriptEngine.asJavaScriptException(
+                            (HtmlUnitScriptable) getTopLevelScope(thisObj),
+                            new DOMException(
+                                    "DOMTokenList: remove() does not support empty tokens",
+                                    DOMException.SYNTAX_ERR));
                 }
                 if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
                     throw JavaScriptEngine.asJavaScriptException(
@@ -225,7 +233,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
     @JsxFunction
     public boolean replace(final String oldToken, final String newToken) {
         if (StringUtils.isEmpty(oldToken)) {
-            throw JavaScriptEngine.syntaxError("Empty oldToken not allowed");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "Empty oldToken not allowed",
+                            DOMException.SYNTAX_ERR));
         }
         if (StringUtils.containsAny(oldToken, WHITESPACE_CHARS)) {
             throw JavaScriptEngine.asJavaScriptException(
@@ -236,7 +248,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         if (StringUtils.isEmpty(newToken)) {
-            throw JavaScriptEngine.syntaxError("Empty newToken not allowed");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "Empty newToken not allowed",
+                            DOMException.SYNTAX_ERR));
         }
         if (StringUtils.containsAny(newToken, WHITESPACE_CHARS)) {
             throw JavaScriptEngine.asJavaScriptException(
@@ -269,7 +285,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
     @JsxFunction
     public boolean toggle(final String token) {
         if (StringUtils.isEmpty(token)) {
-            throw JavaScriptEngine.syntaxError("DOMTokenList: toggle() does not support empty tokens");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "DOMTokenList: toggle() does not support empty tokens",
+                            DOMException.SYNTAX_ERR));
         }
         if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
             throw JavaScriptEngine.asJavaScriptException(

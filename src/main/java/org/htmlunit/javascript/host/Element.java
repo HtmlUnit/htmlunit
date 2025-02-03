@@ -57,6 +57,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.Attr;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.NodeList;
@@ -508,8 +509,12 @@ public class Element extends Node {
             return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.syntaxError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "An invalid or illegal selector was specified (selector: '"
+                                    + selectors + "' error: " + e.getMessage() + ").",
+                            DOMException.SYNTAX_ERR));
         }
     }
 
@@ -528,8 +533,12 @@ public class Element extends Node {
             return null;
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.syntaxError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new DOMException(
+                            "An invalid or illegal selector was specified (selector: '"
+                                    + selectors + "' error: " + e.getMessage() + ").",
+                            DOMException.SYNTAX_ERR));
         }
     }
 
