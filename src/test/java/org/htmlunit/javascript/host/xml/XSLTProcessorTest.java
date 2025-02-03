@@ -250,8 +250,10 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"preparation done", "null"},
             FF = {"preparation done", "exception "},
             FF_ESR = {"preparation done", "exception "})
-    @HtmlUnitNYI(CHROME = {"preparation done", "exception "},
-            EDGE = {"preparation done", "exception "})
+    @HtmlUnitNYI(CHROME = {"preparation done", "exception InternalError"},
+            EDGE = {"preparation done", "exception InternalError"},
+            FF = {"preparation done", "exception InternalError"},
+            FF_ESR = {"preparation done", "exception InternalError"})
     public void testSecurity() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

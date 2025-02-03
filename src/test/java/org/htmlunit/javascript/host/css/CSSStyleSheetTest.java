@@ -256,7 +256,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("IndexSizeError/DOMException")
+    @Alerts("SyntaxError/DOMException")
     public void addInvalidRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -267,7 +267,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  var rules = s.cssRules || s.rules;\n"
             + "  try {\n"
             + "    if (s.addRule)\n"
-            + "      s.addRule('.testStyle1;', '', 1);\n"
+            + "      s.addRule('.testStyle1;', '', 0);\n"
             + "    log('added');\n"
             + "  } catch(e) { logEx(e); }\n"
             + "}</script>\n"
