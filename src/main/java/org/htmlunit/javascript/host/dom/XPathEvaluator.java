@@ -78,7 +78,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
         try {
             // contextNodeObj can be either a node or an array with the node as the first element.
             if (!(contextNodeObj instanceof Node)) {
-                throw JavaScriptEngine.reportRuntimeError("Illegal value for parameter 'context'");
+                throw JavaScriptEngine.typeError("Illegal value for parameter 'context'");
             }
 
             final Node contextNode = (Node) contextNodeObj;
@@ -105,7 +105,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
             return xPathResult;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.reportRuntimeError("Failed to execute 'evaluate': " + e.getMessage());
+            throw JavaScriptEngine.typeError("Failed to execute 'evaluate': " + e.getMessage());
         }
     }
 
