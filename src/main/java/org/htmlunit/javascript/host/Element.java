@@ -1535,9 +1535,12 @@ public class Element extends Node {
             return domNode != null && ((DomElement) domNode).matches(selectorString);
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.syntaxError(
-                    "An invalid or illegal selector was specified (selector: '"
-                    + selectorString + "' error: " + e.getMessage() + ").");
+            throw JavaScriptEngine.asJavaScriptException(
+                    (HtmlUnitScriptable) getTopLevelScope(thisObj),
+                    new DOMException(
+                            "An invalid or illegal selector was specified (selector: '"
+                                    + selectorString + "' error: " + e.getMessage() + ").",
+                            DOMException.SYNTAX_ERR));
         }
     }
 
