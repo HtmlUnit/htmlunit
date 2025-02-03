@@ -186,10 +186,18 @@ public class CSSStyleSheet extends StyleSheet {
                     return position;
                 }
                 catch (final DOMException ex) {
-                    throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);
+                    throw JavaScriptEngine.asJavaScriptException(
+                            getWindow(),
+                            new org.htmlunit.javascript.host.dom.DOMException(
+                                    ex.getMessage(),
+                                    ex.code));
                 }
             }
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            e.getMessage(),
+                            e.code));
         }
     }
 
@@ -247,7 +255,11 @@ public class CSSStyleSheet extends StyleSheet {
             refreshCssRules();
         }
         catch (final DOMException e) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            e.getMessage(),
+                            e.code));
         }
     }
 
