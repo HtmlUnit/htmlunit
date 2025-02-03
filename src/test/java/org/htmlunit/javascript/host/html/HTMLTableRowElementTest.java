@@ -57,7 +57,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "td1", "3", "td2", "td4", "2", "td3", "IndexSizeError", "IndexSizeError"})
+    @Alerts({"4", "td1", "3", "td2", "td4", "2", "td3",
+             "IndexSizeError/DOMException", "IndexSizeError/DOMException"})
     public void deleteCell() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -446,7 +447,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "IndexSizeError"})
+    @Alerts({"2", "IndexSizeError/DOMException"})
     public void insertCell_MinusTwo() throws Exception {
         insertCell("-2");
     }

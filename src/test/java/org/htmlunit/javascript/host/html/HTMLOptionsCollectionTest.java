@@ -284,7 +284,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "NotFoundError"})
+    @Alerts({"0", "NotFoundError/DOMException"})
     public void addBeforeUnknownEmpty() throws Exception {
         add(", new Option('foo', '123')", true, false);
     }
@@ -293,7 +293,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "NotFoundError"})
+    @Alerts({"0", "NotFoundError/DOMException"})
     public void addBeforeUnknownEmptyMulti() throws Exception {
         add(", new Option('foo', '123')", true, true);
     }
@@ -302,7 +302,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "NotFoundError"})
+    @Alerts({"3", "NotFoundError/DOMException"})
     public void addBeforeUnknown() throws Exception {
         add(", new Option('foo', '123')", false, false);
     }
@@ -311,7 +311,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "NotFoundError"})
+    @Alerts({"3", "NotFoundError/DOMException"})
     public void addBeforeUnknownMulti() throws Exception {
         add(", new Option('foo', '123')", false, true);
     }

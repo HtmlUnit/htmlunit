@@ -1568,7 +1568,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void querySelectorAll_badSelector() throws Exception {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelectorAll_badSelector(selector);
@@ -1598,7 +1598,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void querySelector_badSelector() throws Exception {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelector_badSelector(selector);

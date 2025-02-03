@@ -36,7 +36,7 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"HierarchyRequestError", "0"})
+    @Alerts({"HierarchyRequestError/DOMException", "0"})
     public void appendChild_recursive() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -61,7 +61,7 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"true", "HierarchyRequestError", "1", "0"})
+    @Alerts({"true", "HierarchyRequestError/DOMException", "1", "0"})
     public void appendChild_recursive_parent() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

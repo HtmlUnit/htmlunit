@@ -120,7 +120,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

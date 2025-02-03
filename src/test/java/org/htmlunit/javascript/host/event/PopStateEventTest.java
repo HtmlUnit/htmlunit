@@ -181,7 +181,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "InvalidStateError",
+    @Alerts(DEFAULT = "InvalidStateError/DOMException",
             FF = "ctor NotSupportedError",
             FF_ESR = "ctor NotSupportedError")
     @NotYetImplemented({CHROME, EDGE})

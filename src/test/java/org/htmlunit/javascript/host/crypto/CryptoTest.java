@@ -109,7 +109,7 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("QuotaExceededError")
+    @Alerts("QuotaExceededError/DOMException")
     public void getRandomValuesQuotaExceeded() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

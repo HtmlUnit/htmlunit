@@ -834,7 +834,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "NotFoundError"})
+    @Alerts({"0", "NotFoundError/DOMException"})
     public void addOptionMethodNewOptionEmptySelect() throws Exception {
         addOptionMethod(", new Option('foo', '123')", true, false);
     }
@@ -843,7 +843,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "NotFoundError"})
+    @Alerts({"0", "NotFoundError/DOMException"})
     public void addOptionMethodNewOptionEmptySelectMulti() throws Exception {
         addOptionMethod(", new Option('foo', '123')", true, true);
     }
@@ -870,7 +870,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "NotFoundError"})
+    @Alerts({"3", "NotFoundError/DOMException"})
     public void addOptionMethodNewOption() throws Exception {
         addOptionMethod(", new Option('foo', '123')", false, false);
     }
@@ -879,7 +879,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "NotFoundError"})
+    @Alerts({"3", "NotFoundError/DOMException"})
     public void addOptionMethodNewOptionMulti() throws Exception {
         addOptionMethod(", new Option('foo', '123')", false, true);
     }

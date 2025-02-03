@@ -154,7 +154,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "TypeError/Error"})
+    @Alerts({"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "TypeError"})
     public void string() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -298,7 +298,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"TypeError/Error", "TypeError/Error"})
+    @Alerts({"TypeError", "TypeError"})
     public void symbolNew() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -327,7 +327,7 @@ public class SymbolTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"TypeError/Error", "TypeError/Error"})
+    @Alerts({"TypeError", "TypeError"})
     public void globalSymbolRegistry() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -387,7 +387,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "IndexSizeError"})
+    @Alerts({"2", "IndexSizeError/DOMException"})
     public void insertRow_MinusTwo() throws Exception {
         insertRow("-2");
     }
@@ -432,7 +432,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "IndexSizeError"})
+    @Alerts({"2", "IndexSizeError/DOMException"})
     public void insertRow_Three() throws Exception {
         insertRow("3");
     }

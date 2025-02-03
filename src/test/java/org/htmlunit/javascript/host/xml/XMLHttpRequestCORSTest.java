@@ -200,7 +200,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("NetworkError")
+    @Alerts("NetworkError/DOMException")
     public void simplePut() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -277,7 +277,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"NetworkError", "4", "0", ""})
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
     public void noAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin(null);
     }
@@ -316,7 +316,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"NetworkError", "4", "0", ""})
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
     public void nonMatchingAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin("http://www.sourceforge.net");
     }
@@ -535,7 +535,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"NetworkError", "4", "0"})
+    @Alerts({"NetworkError/DOMException", "4", "0"})
     // unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));

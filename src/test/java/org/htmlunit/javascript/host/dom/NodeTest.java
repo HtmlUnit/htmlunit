@@ -162,7 +162,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotFoundError")
+    @Alerts("NotFoundError/DOMException")
     public void removeChildSibling() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -483,7 +483,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1", "HierarchyRequestError", "1", "HierarchyRequestError", "1", "HierarchyRequestError", "1"})
+    @Alerts({"1", "HierarchyRequestError/DOMException", "1",
+             "HierarchyRequestError/DOMException", "1", "HierarchyRequestError/DOMException", "1"})
     public void append_insert_html_node() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -839,7 +840,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotFoundError")
+    @Alerts("NotFoundError/DOMException")
     public void insertBefore_myself() throws Exception {
         insertBefore("aNode.insertBefore(newNode, newNode);");
     }
@@ -848,7 +849,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotFoundError")
+    @Alerts("NotFoundError/DOMException")
     public void insertBefore_sibling() throws Exception {
         insertBefore("aNode.insertBefore(newNode, siblingNode);");
     }
@@ -943,7 +944,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotFoundError")
+    @Alerts("NotFoundError/DOMException")
     public void insertBeforeFragment_myself() throws Exception {
         insertBeforeFragment("aNode.insertBefore(fragment, fragment);");
     }

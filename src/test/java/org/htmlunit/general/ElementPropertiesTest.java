@@ -3819,10 +3819,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "NotSupportedError",
-            EDGE = "NotSupportedError",
-            FF = "NotSupportedError",
-            FF_ESR = "NotSupportedError")
+    @Alerts(CHROME = "NotSupportedError/DOMException",
+            EDGE = "NotSupportedError/DOMException",
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent'), document.createEvent('MouseEvent')");
     }
@@ -4082,10 +4082,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "NotSupportedError",
-            EDGE = "NotSupportedError",
-            FF = "NotSupportedError",
-            FF_ESR = "NotSupportedError")
+    @Alerts(CHROME = "NotSupportedError/DOMException",
+            EDGE = "NotSupportedError/DOMException",
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -4096,7 +4096,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void svgZoomEvent() throws Exception {
         testString("", "document.createEvent('SVGZoomEvent')");
     }
@@ -5908,8 +5908,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "NotSupportedError",
-            EDGE = "NotSupportedError",
+    @Alerts(CHROME = "NotSupportedError/DOMException",
+            EDGE = "NotSupportedError/DOMException",
             FF = "ADDITION,ALT_MASK,AT_TARGET,attrChange,attrName,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
                 + "explicitOriginalTarget,initEvent(),initMutationEvent(),isTrusted,META_MASK,MODIFICATION,newValue,"
@@ -5938,7 +5938,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
     }

@@ -216,7 +216,8 @@ public class CharacterDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"IndexSizeError", "IndexSizeError", "IndexSizeError", "IndexSizeError"})
+    @Alerts({"IndexSizeError/DOMException", "IndexSizeError/DOMException",
+             "IndexSizeError/DOMException", "IndexSizeError/DOMException"})
     public void deleteDataInvalidStart() throws Exception {
         final String html
             = "<html><head>\n"

@@ -245,7 +245,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ReferenceError/Error")
+    @Alerts("ReferenceError")
     public void packages() throws Exception {
         object("Packages");
     }
@@ -254,7 +254,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ReferenceError/Error")
+    @Alerts("ReferenceError")
     public void java() throws Exception {
         object("java");
     }
@@ -1028,7 +1028,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ReferenceError/Error")
+    @Alerts("ReferenceError")
     public void javaNotAccessable() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

@@ -372,7 +372,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"NotSupportedError", "0-0", "undefined-undefined"})
+    @Alerts({"NotSupportedError/DOMException", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -399,7 +399,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"NotSupportedError", "TypeError"})
+    @Alerts({"NotSupportedError/DOMException", "TypeError"})
     public void initKeyEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -437,13 +437,13 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"NotSupportedError",
+    @Alerts(DEFAULT = {"NotSupportedError/DOMException",
                        "keydown, true, true, , 0, true, true, true, true, 0, 0",
                        "keyup, false, false, , 7, false, false, false, false, 0, 0"},
-            FF = {"NotSupportedError",
+            FF = {"NotSupportedError/DOMException",
                   "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
                   "keyup, false, false, , 7, false, false, false, false, 0, 0"},
-            FF_ESR = {"NotSupportedError",
+            FF_ESR = {"NotSupportedError/DOMException",
                       "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
                       "keyup, false, false, , 7, false, false, false, false, 0, 0"})
     @HtmlUnitNYI(CHROME = {"NotSupportedError",

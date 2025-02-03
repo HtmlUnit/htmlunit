@@ -673,7 +673,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "IndexSizeError"},
+    @Alerts(DEFAULT = {"0", "IndexSizeError/DOMException"},
             FF = {"1", "[object HTMLBodyElement]"},
             FF_ESR = {"1", "[object HTMLBodyElement]"})
     public void designMode_selectionRange_empty() throws Exception {
@@ -686,7 +686,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "IndexSizeError"},
+    @Alerts(DEFAULT = {"0", "IndexSizeError/DOMException"},
             FF = {"1", "[object Text]"},
             FF_ESR = {"1", "[object Text]"})
     public void designMode_selectionRange_text() throws Exception {
@@ -1339,7 +1339,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void querySelectorAll_badSelector() throws Exception {
         for (final String selector : JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelectorAll_badSelector(selector);
@@ -1362,7 +1362,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void querySelector_badSelector() throws Exception {
         for (final String selector : JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelector_badSelector(selector);
@@ -1639,7 +1639,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("InvalidCharacterError")
+    @Alerts("InvalidCharacterError/DOMException")
     public void createElement_notOnlyTagName() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -2845,7 +2845,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"myBody", "HierarchyRequestError"})
+    @Alerts({"myBody", "HierarchyRequestError/DOMException"})
     public void setBodyDiv() throws Exception {
         final String html = ""
             + "<html><head>\n"

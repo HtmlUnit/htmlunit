@@ -81,7 +81,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError/Error")
+    @Alerts("TypeError")
     public void selectNodes() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -188,7 +188,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"book", "TypeError/Error"})
+    @Alerts({"book", "TypeError"})
     public void selectNode_root() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1384,7 +1384,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"TypeError/Error", "done"})
+    @Alerts({"TypeError", "done"})
     public void matchesWindow() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

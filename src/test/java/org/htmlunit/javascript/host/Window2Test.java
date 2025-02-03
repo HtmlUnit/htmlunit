@@ -57,7 +57,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object Window]", "ReferenceError/Error", "undefined", "undefined", "hello", "hello", "world", "world"})
+    @Alerts({"[object Window]", "ReferenceError", "undefined", "undefined", "hello", "hello", "world", "world"})
     public void thisIsWindow() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -344,7 +344,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError/Error")
+    @Alerts("TypeError")
     public void execScript2() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -364,7 +364,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError/Error")
+    @Alerts("TypeError")
     public void execScript_returnValue() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -776,7 +776,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"ReferenceError/Error", "ReferenceError/Error", "ReferenceError/Error", "ReferenceError/Error"})
+    @Alerts({"ReferenceError", "ReferenceError", "ReferenceError", "ReferenceError"})
     public void IEScriptEngineXxx() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1122,7 +1122,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"ReferenceError/Error", "ReferenceError/Error", "Success"})
+    @Alerts({"ReferenceError", "ReferenceError", "Success"})
     public void eval() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1358,8 +1358,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"string string 8 number string",
-                "string string 9 number object"})
+    @Alerts({"string string 25 number string",
+                "string string 26 number object"})
     public void onErrorExceptionInstance() throws Exception {
         final String html
                 = "<html>\n"
@@ -1384,7 +1384,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"string string 8 number object", "string string 1 number object"})
+    @Alerts({"string string 25 number object", "string string 1 number object"})
     public void onErrorExceptionInstance2() throws Exception {
         final String html
                 = "<html>\n"

@@ -277,7 +277,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("RangeError/Error")
+    @Alerts("RangeError")
     public void encoding_iso_8859_15_ex() throws Exception {
         encoding("latin9");
     }
@@ -501,7 +501,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("RangeError/Error")
+    @Alerts("RangeError")
     public void encoding_hz_gb_2312() throws Exception {
         encoding("hz-gb-2312");
     }
@@ -577,7 +577,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("RangeError/Error")
+    @Alerts("RangeError")
     public void encoding_iso_2022_kr() throws Exception {
         encoding("csiso2022kr");
         encoding("iso-2022-kr");
@@ -615,7 +615,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("RangeError/Error")
+    @Alerts("RangeError")
     public void encoding_replacement() throws Exception {
         encoding("iso-2022-cn");
         encoding("iso-2022-cn-ext");
@@ -703,7 +703,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"", "TypeError/Error"})
+    @Alerts({"", "TypeError"})
     public void decode2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

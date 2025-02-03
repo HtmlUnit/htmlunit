@@ -574,10 +574,10 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object HTMLUnknownElement]",
-             "InvalidCharacterError", "InvalidCharacterError",
-             "InvalidCharacterError", "InvalidCharacterError",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
              "[object HTMLUnknownElement]",
-             "[object HTMLUnknownElement]", "InvalidCharacterError"})
+             "[object HTMLUnknownElement]", "InvalidCharacterError/DOMException"})
     public void documentCreateElementUnknown() throws Exception {
         final String html
             = "<html>\n"
@@ -1169,7 +1169,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "HierarchyRequestError"})
+    @Alerts({"1", "HierarchyRequestError/DOMException"})
     public void appendChildAtDocumentLevel() throws Exception {
         final String html =
               "<html>\n"
@@ -2634,7 +2634,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void createEvent_Bogus() throws Exception {
         createEvent("Bogus");
     }

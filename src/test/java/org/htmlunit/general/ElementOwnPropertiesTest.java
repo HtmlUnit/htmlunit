@@ -14969,10 +14969,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "NotSupportedError",
-            EDGE = "NotSupportedError",
-            FF = "NotSupportedError",
-            FF_ESR = "NotSupportedError")
+    @Alerts(CHROME = "NotSupportedError/DOMException",
+            EDGE = "NotSupportedError/DOMException",
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
     }
@@ -15107,10 +15107,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "NotSupportedError",
-            EDGE = "NotSupportedError",
-            FF = "NotSupportedError",
-            FF_ESR = "NotSupportedError")
+    @Alerts(CHROME = "NotSupportedError/DOMException",
+            EDGE = "NotSupportedError/DOMException",
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -15121,7 +15121,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void svgZoomEvent() throws Exception {
         testString("", "document.createEvent('SVGZoomEvent')");
     }
@@ -15910,8 +15910,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "NotSupportedError",
-            EDGE = "NotSupportedError",
+    @Alerts(CHROME = "NotSupportedError/DOMException",
+            EDGE = "NotSupportedError/DOMException",
             FF = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor(),initMutationEvent(),MODIFICATION[E],"
                 + "newValue[GCE],prevValue[GCE],relatedNode[GCE],"
                 + "REMOVAL[E]",
@@ -15930,7 +15930,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
     }

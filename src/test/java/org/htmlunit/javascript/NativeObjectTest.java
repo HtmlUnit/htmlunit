@@ -354,7 +354,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError/Error")
+    @Alerts("TypeError")
     public void getOwnPropertySymbolsEmpty() throws Exception {
         final String html = ""
             + "<html><head>\n"

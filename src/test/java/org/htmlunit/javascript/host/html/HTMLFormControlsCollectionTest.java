@@ -75,8 +75,8 @@ public class HTMLFormControlsCollectionTest extends WebDriverTestCase {
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    for (let e of document.form.elements) {\n"
-                + "      logEx(e)\n"
+                + "    for (let elem of document.form.elements) {\n"
+                + "      log(elem.name)\n"
                 + "    }\n"
                 + "  }\n"
                 + "</script>\n"

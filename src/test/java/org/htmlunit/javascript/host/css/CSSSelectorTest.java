@@ -67,7 +67,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"SyntaxError", "SyntaxError"})
+    @Alerts({"SyntaxError/DOMException", "SyntaxError/DOMException"})
     public void querySelectorAll_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -189,7 +189,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void nth_child_no_argument() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
@@ -251,7 +251,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void invalid() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -2134,7 +2134,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void invalidSelectors() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2517,7 +2517,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"SyntaxError", "SyntaxError"})
+    @Alerts({"SyntaxError/DOMException", "SyntaxError/DOMException"})
     public void querySelector_invalid() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -2257,7 +2257,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
     }
@@ -2327,7 +2327,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -2338,7 +2338,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void svgZoomEvent() throws Exception {
         testString("", "document.createEvent('SVGZoomEvent')");
     }
@@ -2586,7 +2586,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "NotSupportedError",
+    @Alerts(DEFAULT = "NotSupportedError/DOMException",
             FF = "Symbol(Symbol.toStringTag) [C] [MutationEvent]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [MutationEvent]")
     public void mutationEvent() throws Exception {
@@ -2599,7 +2599,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError")
+    @Alerts("NotSupportedError/DOMException")
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
     }

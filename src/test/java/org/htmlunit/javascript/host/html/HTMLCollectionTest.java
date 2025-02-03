@@ -77,7 +77,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "HierarchyRequestError"})
+    @Alerts({"4", "HierarchyRequestError/DOMException"})
     public void getElements() throws Exception {
         final String html
             = "<html><head>\n"

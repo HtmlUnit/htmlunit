@@ -1101,7 +1101,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "InvalidStateError"})
+    @Alerts({"true", "InvalidStateError/DOMException"})
     public void overrideMimeTypeAfterSend() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2751,9 +2751,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "InvalidAccessError", "InvalidAccessError", "InvalidAccessError",
-             "InvalidAccessError", "InvalidAccessError",
-             "", "", "", "", "InvalidAccessError"})
+    @Alerts({"", "InvalidAccessError/DOMException", "InvalidAccessError/DOMException",
+             "InvalidAccessError/DOMException", "InvalidAccessError/DOMException",
+             "InvalidAccessError/DOMException", "", "", "", "", "InvalidAccessError/DOMException"})
     public void responseTypeSetAfterOpenSync() throws Exception {
         final String html =
               "<html>\n"
@@ -2902,7 +2902,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"", "", "arraybuffer", "InvalidStateError", "send done", "ex InvalidStateError"},
+    @Alerts(DEFAULT = {"", "", "arraybuffer", "InvalidStateError/DOMException",
+                       "send done", "ex InvalidStateError"},
             FF = {"", "", "arraybuffer", "", "send done", "ex InvalidStateError"},
             FF_ESR = {"", "", "arraybuffer", "", "send done", "ex InvalidStateError"})
     public void responseTextInvalidResponseType() throws Exception {

@@ -256,7 +256,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("IndexSizeError")
+    @Alerts("IndexSizeError/DOMException")
     public void addInvalidRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -348,7 +348,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void insertInvalidRule() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -407,7 +407,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("IndexSizeError")
+    @Alerts("IndexSizeError/DOMException")
     public void deleteRuleInvalidParam() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

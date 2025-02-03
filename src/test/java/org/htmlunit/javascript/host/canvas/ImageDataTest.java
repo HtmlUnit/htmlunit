@@ -122,8 +122,9 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"TypeError", "IndexSizeError", "IndexSizeError", "IndexSizeError",
-             "IndexSizeError", "InvalidStateError", "IndexSizeError"})
+    @Alerts({"TypeError", "IndexSizeError/DOMException", "IndexSizeError/DOMException",
+             "IndexSizeError/DOMException", "IndexSizeError/DOMException",
+             "InvalidStateError/DOMException", "IndexSizeError/DOMException"})
     public void ctorArrayInvalid() throws Exception {
         final String html =
             "<html><head><script>\n"

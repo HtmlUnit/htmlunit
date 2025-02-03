@@ -553,7 +553,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void insertRuleNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -583,7 +583,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void insertRuleEmpty() throws Exception {
         final String html
             = "<html><body>\n"
@@ -613,7 +613,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void insertRuleInvalid() throws Exception {
         final String html
             = "<html><body>\n"
@@ -680,7 +680,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void insertRuleNullWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -710,7 +710,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "SyntaxError"})
+    @Alerts({"1", "SyntaxError/DOMException"})
     public void insertRuleEmptyWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -746,7 +746,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void insertRuleInvalidWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -850,7 +850,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "IndexSizeError"})
+    @Alerts({"1", "IndexSizeError/DOMException"})
     public void insertRuleWithIndexNegative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -881,7 +881,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "IndexSizeError"})
+    @Alerts({"1", "IndexSizeError/DOMException"})
     public void insertRuleWithIndexGreaterThanLength() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1017,7 +1017,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", "IndexSizeError"})
+    @Alerts({"2", "IndexSizeError/DOMException"})
     public void deleteRuleNegative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1048,7 +1048,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", "IndexSizeError"})
+    @Alerts({"2", "IndexSizeError/DOMException"})
     public void deleteRuleGreaterThanLength() throws Exception {
         final String html
             = "<html><body>\n"

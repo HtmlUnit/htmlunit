@@ -101,7 +101,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts({"TypeError/Error", "true", "true"})
+    @Alerts({"TypeError", "true", "true"})
     public void ctorNotChangeableForPrimitives() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -133,7 +133,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts({"TypeError/Error", "true", "true"})
+    @Alerts({"TypeError", "true", "true"})
     @NotYetImplemented
     public void ctorNotChangeableForPrimitivesStrict() throws Exception {
         final String html = "<html><body>\n"

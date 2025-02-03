@@ -152,7 +152,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("InvalidStateError")
+    @Alerts("InvalidStateError/DOMException")
     public void inverseNotPossible() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><body>\n"
@@ -226,7 +226,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("InvalidAccessError")
+    @Alerts("InvalidAccessError/DOMException")
     public void rotateFromVectorZeroX() throws Exception {
         transformTest("rotateFromVector(0, 74)");
     }
@@ -235,7 +235,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("InvalidAccessError")
+    @Alerts("InvalidAccessError/DOMException")
     public void rotateFromVectorZeroY() throws Exception {
         transformTest("rotateFromVector(17, 0)");
     }
@@ -244,7 +244,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("InvalidAccessError")
+    @Alerts("InvalidAccessError/DOMException")
     public void rotateFromVectorZeroXY() throws Exception {
         transformTest("rotateFromVector(0, 0)");
     }

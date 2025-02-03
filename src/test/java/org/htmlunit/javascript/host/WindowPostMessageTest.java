@@ -122,7 +122,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError/Error")
+    @Alerts("TypeError")
     public void postMessageMissingParameters() throws Exception {
         final String html
             = "<html>\n"

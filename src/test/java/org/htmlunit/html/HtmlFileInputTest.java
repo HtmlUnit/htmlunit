@@ -179,7 +179,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"InvalidStateError", "-Hello world-Hello world-0", "-Hello world-Hello world-0"})
+    @Alerts({"InvalidStateError/DOMException", "-Hello world-Hello world-0", "-Hello world-Hello world-0"})
     public void setValueOnChange() throws Exception {
         final String html =
               "<html>\n"
@@ -336,7 +336,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"-initial-initial", "-initial-initial",
-             "InvalidStateError", "-initial-initial", "-initial-initial",
+             "InvalidStateError/DOMException", "-initial-initial", "-initial-initial",
              "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head>\n"
@@ -379,7 +379,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"-initial-initial", "-initial-initial",
-             "InvalidStateError", "-initial-initial", "-initial-initial",
+             "InvalidStateError/DOMException", "-initial-initial", "-initial-initial",
              "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head>\n"
@@ -421,8 +421,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"-initial-initial", "-default-default",
-             "InvalidStateError", "-default-default", "-attribValue-attribValue",
-             "-newDefault-newDefault"})
+             "InvalidStateError/DOMException", "-default-default",
+             "-attribValue-attribValue", "-newDefault-newDefault"})
     public void value() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -519,9 +519,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "InvalidStateError", "null,null",
-             "InvalidStateError", "null,null",
-             "InvalidStateError", "null,null"})
+    @Alerts({"null,null", "InvalidStateError/DOMException", "null,null",
+             "InvalidStateError/DOMException", "null,null",
+             "InvalidStateError/DOMException", "null,null"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -530,9 +530,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "InvalidStateError", "null,null",
-             "InvalidStateError", "null,null",
-             "InvalidStateError", "null,null"})
+    @Alerts({"null,null", "InvalidStateError/DOMException", "null,null",
+             "InvalidStateError/DOMException", "null,null",
+             "InvalidStateError/DOMException", "null,null"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -541,9 +541,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "InvalidStateError", "null,null",
-             "InvalidStateError", "null,null",
-             "InvalidStateError", "null,null"})
+    @Alerts({"null,null", "InvalidStateError/DOMException", "null,null",
+             "InvalidStateError/DOMException", "null,null",
+             "InvalidStateError/DOMException", "null,null"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -591,7 +591,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "InvalidStateError"})
+    @Alerts({"null,null", "InvalidStateError/DOMException"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

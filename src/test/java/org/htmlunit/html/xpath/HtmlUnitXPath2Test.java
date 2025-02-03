@@ -426,7 +426,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void lowerCaseNotSupported() throws Exception {
         compareError("//*[lower-case(@id) = \"a\"]");
     }
@@ -435,7 +435,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void upperCaseNotSupported() throws Exception {
         compareError("//*[upper-case(@id) = \"A\"]");
     }
@@ -444,7 +444,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void endsWithNotSupported() throws Exception {
         compareError("ends-with(\"haystack\", \"haystack\")");
     }
