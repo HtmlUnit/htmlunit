@@ -121,7 +121,11 @@ public class CSSGroupingRule extends CSSRule {
                                     ex.code));
                 }
             }
-            throw JavaScriptEngine.syntaxError(e.getMessage());
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            e.getMessage(),
+                            org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR));
         }
     }
 

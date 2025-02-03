@@ -580,7 +580,11 @@ public class Document extends Node {
             return xPathResult;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.syntaxError("Failed to execute 'evaluate': " + e.getMessage());
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            "Failed to execute 'evaluate': " + e.getMessage(),
+                            org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR));
         }
     }
 
@@ -982,9 +986,12 @@ public class Document extends Node {
             return null;
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.syntaxError(
-                    "An invalid or illegal selector was specified (selector: '"
-                            + selectors + "' error: " + e.getMessage() + ").");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            "An invalid or illegal selector was specified (selector: '"
+                                    + selectors + "' error: " + e.getMessage() + ").",
+                            org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR));
         }
     }
 
@@ -1001,8 +1008,12 @@ public class Document extends Node {
             return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
-            throw JavaScriptEngine.syntaxError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    new org.htmlunit.javascript.host.dom.DOMException(
+                            "An invalid or illegal selector was specified (selector: '"
+                                    + selectors + "' error: " + e.getMessage() + ").",
+                            org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR));
         }
     }
 
