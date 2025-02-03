@@ -2190,7 +2190,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  if (Array.of) {\n"
-            + "    var arr = Array.of(1, 2, 3);;\n"
+            + "    var arr = Array.of(1, 2, 3);\n"
             + "    log(arr.length);\n"
             + "  } else {\n"
             + "    log('not supported');\n"
