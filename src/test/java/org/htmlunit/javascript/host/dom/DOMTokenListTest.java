@@ -1038,7 +1038,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
+    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException",
+             "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeBlank() throws Exception {
         remove("a b", "' '");
     }
@@ -1047,7 +1048,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
+    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException",
+             "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeTab() throws Exception {
         remove("a b", "'\t'");
     }
@@ -1056,7 +1058,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
+    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException",
+             "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeCr() throws Exception {
         remove("a b", "'\\r'");
     }
@@ -1065,7 +1068,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
+    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException",
+             "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void removeNl() throws Exception {
         remove("a b", "'\\n'");
     }
@@ -1320,7 +1324,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
+    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException",
+             "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void replaceOldTokenContainingWhiteSpace() throws Exception {
         replace("a b", " a x", "abc");
     }
@@ -1338,7 +1343,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException", "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
+    @Alerts({"a\\sb", "2", "InvalidCharacterError/DOMException",
+             "2", "a\\sb", "<div\\sid=\"d1\"\\sclass=\"a\\sb\"></div>"})
     public void replaceNewTokenContainingWhiteSpace() throws Exception {
         replace("a b", "abc", " a x");
     }
@@ -1504,7 +1510,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"InvalidCharacterError/DOMException", "SyntaxError/DOMException", "2", "true", "false", "1", "false", "true", "2", "true",
+    @Alerts({"InvalidCharacterError/DOMException", "SyntaxError/DOMException",
+             "2", "true", "false", "1", "false", "true", "2", "true",
              "class changed old: a e", "class changed old: a"})
     public void toggle() throws Exception {
         final String html

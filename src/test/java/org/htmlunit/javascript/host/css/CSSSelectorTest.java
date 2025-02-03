@@ -2000,10 +2000,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "[object HTMLHeadingElement]"})
-    @HtmlUnitNYI(CHROME = "SyntaxError",
-            EDGE = "SyntaxError",
-            FF = "SyntaxError",
-            FF_ESR = "SyntaxError")
+    @HtmlUnitNYI(CHROME = "SyntaxError/DOMException",
+            EDGE = "SyntaxError/DOMException",
+            FF = "SyntaxError/DOMException",
+            FF_ESR = "SyntaxError/DOMException")
     public void has() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"

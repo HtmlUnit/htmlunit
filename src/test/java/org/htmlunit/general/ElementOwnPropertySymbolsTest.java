@@ -2269,8 +2269,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [WheelEvent]",
-            FF = "NotSupportedError",
-            FF_ESR = "NotSupportedError")
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void wheelEvent() throws Exception {
         testString("", "document.createEvent('WheelEvent')");
     }
@@ -2394,10 +2394,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Document],"
                     + "Symbol(Symbol.unscopables) [C] [{\"fullscreen\":true,\"prepend\":true,"
                     + "\"append\":true,\"replaceChildren\":true}]")
-    @HtmlUnitNYI(CHROME = "InternalError",
-            EDGE = "InternalError",
-            FF = "InternalError",
-            FF_ESR = "InternalError")
+    @HtmlUnitNYI(CHROME = "InternalError/InternalError",
+            EDGE = "InternalError/InternalError",
+            FF = "InternalError/InternalError",
+            FF_ESR = "InternalError/InternalError")
     public void document() throws Exception {
         testString("", "new Document()");
     }

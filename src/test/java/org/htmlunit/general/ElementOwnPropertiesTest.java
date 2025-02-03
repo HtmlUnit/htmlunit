@@ -14989,8 +14989,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),deltaMode[GCE],deltaX[GCE],deltaY[GCE],deltaZ[GCE],DOM_DELTA_LINE[E],"
                 + "DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E],wheelDelta[GCE],wheelDeltaX[GCE],"
                 + "wheelDeltaY[GCE]",
-            FF = "NotSupportedError",
-            FF_ESR = "NotSupportedError")
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     @HtmlUnitNYI(CHROME = "constructor(),DOM_DELTA_LINE[E],DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E]",
             EDGE = "constructor(),DOM_DELTA_LINE[E],DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E]")
     public void wheelEvent() throws Exception {
@@ -15391,10 +15391,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scrollingElement[GCE],selectedStyleSheetSet[GSCE],styleSheets[GCE],styleSheetSets[GCE],"
                 + "timeline[GCE],title[GSCE],URL[GCE],visibilityState[GCE],vlinkColor[GSCE],write(),"
                 + "writeln()")
-    @HtmlUnitNYI(CHROME = "InternalError",
-            EDGE = "InternalError",
-            FF_ESR = "InternalError",
-            FF = "InternalError")
+    @HtmlUnitNYI(CHROME = "InternalError/InternalError",
+            EDGE = "InternalError/InternalError",
+            FF_ESR = "InternalError/InternalError",
+            FF = "InternalError/InternalError")
     public void document() throws Exception {
         testString("", "new Document()");
     }
