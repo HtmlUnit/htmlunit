@@ -68,7 +68,7 @@ class DoTypeProcessor implements Serializable {
         SPECIAL_KEYS_MAP_.put(DOM_VK_SUBTRACT, '-');
 
         for (int i = DOM_VK_NUMPAD0; i <= DOM_VK_NUMPAD9; i++) {
-            SPECIAL_KEYS_MAP_.put(i, (char) ('0' + (i - DOM_VK_NUMPAD0)));
+            SPECIAL_KEYS_MAP_.put(i, (char) ('0' + i - DOM_VK_NUMPAD0));
         }
     }
 

@@ -1220,7 +1220,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 parentWidth = getDomElement().getPage().getEnclosingWindow().getInnerWidth();
             }
             else if (parent instanceof Page) {
-                parentWidth = (((Page) parent).getEnclosingWindow()).getInnerWidth();
+                parentWidth = ((Page) parent).getEnclosingWindow().getInnerWidth();
             }
             else {
                 final ComputedCssStyleDeclaration parentStyle =

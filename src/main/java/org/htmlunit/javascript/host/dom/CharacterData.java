@@ -94,7 +94,7 @@ public class CharacterData extends Node {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
                     "Provided offset: " + offset + " is less than zero.",
-                    org.htmlunit.javascript.host.dom.DOMException.INDEX_SIZE_ERR);
+                    DOMException.INDEX_SIZE_ERR);
         }
 
         final DomCharacterData domCharacterData = getDomCharacterDataOrDie();
@@ -102,7 +102,7 @@ public class CharacterData extends Node {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
                     "Provided offset: " + offset + " is greater than length.",
-                    org.htmlunit.javascript.host.dom.DOMException.INDEX_SIZE_ERR);
+                    DOMException.INDEX_SIZE_ERR);
         }
 
         domCharacterData.deleteData(offset, count);

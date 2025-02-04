@@ -288,10 +288,10 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         DateTimeFormatHelper(final String locale, final BrowserVersion browserVersion, final String pattern) {
             locale_ = locale;
             if (locale.startsWith("ar")
-                    && (!"ar-DZ".equals(locale)
-                                    && !"ar-LY".equals(locale)
-                                    && !"ar-MA".equals(locale)
-                                    && !"ar-TN".equals(locale))) {
+                    && !"ar-DZ".equals(locale)
+                    && !"ar-LY".equals(locale)
+                    && !"ar-MA".equals(locale)
+                    && !"ar-TN".equals(locale)) {
                 final DecimalStyle decimalStyle = DecimalStyle.STANDARD.withZeroDigit('\u0660');
                 formatter_ = DateTimeFormatter.ofPattern(pattern).withDecimalStyle(decimalStyle);
             }
