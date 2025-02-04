@@ -211,7 +211,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + LOG_TITLE_FUNCTION
+            // do not use LOG_TITLE_FUNCTION here
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
             + "</script>\n"
             + "  <script>\n"
             + "    //<![CDATA[\n"
@@ -252,7 +253,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + LOG_TITLE_FUNCTION
+            // do not use LOG_TITLE_FUNCTION here
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
             + "</script>\n"
             + "  <script>\n"
             + "    //<![CDATA[\n"

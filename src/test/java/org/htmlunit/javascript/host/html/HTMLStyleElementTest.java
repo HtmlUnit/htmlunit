@@ -350,7 +350,9 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "    ]]>\n"
             + "  </style>\n"
             + "  <script>\n"
-            + LOG_TITLE_FUNCTION
+
+            // do not use LOG_TITLE_FUNCTION here
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
             + "    function doTest() {\n"
             + "      var div = document.getElementById('one');\n"
             + "      log(window.getComputedStyle(div, null).color);\n"
@@ -399,7 +401,9 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "    ]]>\n"
             + "  </style>\n"
             + "  <script>\n"
-            + LOG_TITLE_FUNCTION
+
+            // do not use LOG_TITLE_FUNCTION here
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
             + "    function doTest() {\n"
             + "      var div = document.getElementById('one');\n"
             + "      log(window.getComputedStyle(div, null).color);\n"

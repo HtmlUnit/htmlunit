@@ -115,7 +115,9 @@ public class XHtmlPage2Test extends WebDriverTestCase {
             + "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
             + "<head>"
             + "  <script>\n"
-            + LOG_TITLE_FUNCTION
+
+            // do not use LOG_TITLE_FUNCTION here
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
             + "    function test() {"
             + "      log(document.getElementById('tester').innerHTML);\n"
             + "      log(document.getElementById('tester').outerHTML);\n"
@@ -163,7 +165,9 @@ public class XHtmlPage2Test extends WebDriverTestCase {
             + "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
             + "<head>"
             + "  <script>\n"
-            + LOG_TITLE_FUNCTION
+
+            // do not use LOG_TITLE_FUNCTION here
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
             + "    function test() {"
             + "      log(document.getElementById('tester').innerHTML);\n"
             + "      log(document.getElementById('tester').outerHTML);\n"
