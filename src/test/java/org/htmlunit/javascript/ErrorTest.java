@@ -17,6 +17,7 @@ package org.htmlunit.javascript;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,6 +37,14 @@ public class ErrorTest extends WebDriverTestCase {
                        "undefined", "true", "Error/Error"},
             FF = {"Error", "Whoops!", "undefined", "11", "undefined", "25", "true", "Error/Error"},
             FF_ESR = {"Error", "Whoops!", "undefined", "11", "undefined", "25", "true", "Error/Error"})
+    @HtmlUnitNYI(CHROME = {"Error", "Whoops!", "undefined", "undefined", "undefined",
+                           "25", "true", "Error/Error"},
+            EDGE = {"Error", "Whoops!", "undefined", "undefined", "undefined",
+                    "25", "true", "Error/Error"},
+            FF = {"Error", "Whoops!", "undefined", "undefined", "undefined",
+                  "25", "true", "Error/Error"},
+            FF_ESR = {"Error", "Whoops!", "undefined", "undefined", "undefined",
+                      "25", "true", "Error/Error"})
     public void error() throws Exception {
         final String html
             = "<html>\n"
@@ -72,6 +81,14 @@ public class ErrorTest extends WebDriverTestCase {
                   "true", "true", "EvalError"},
             FF_ESR = {"EvalError", "Whoops!", "undefined", "11", "undefined", "25",
                       "true", "true", "EvalError"})
+    @HtmlUnitNYI(CHROME = {"EvalError", "Whoops!", "undefined", "undefined", "undefined",
+                           "25", "true", "true", "EvalError"},
+            EDGE = {"EvalError", "Whoops!", "undefined", "undefined", "undefined",
+                    "25", "true", "true", "EvalError"},
+            FF = {"EvalError", "Whoops!", "undefined", "undefined", "undefined",
+                  "25", "true", "true", "EvalError"},
+            FF_ESR = {"EvalError", "Whoops!", "undefined", "undefined", "undefined",
+                      "25", "true", "true", "EvalError"})
     public void evalError() throws Exception {
         final String html
             = "<html>\n"
@@ -109,6 +126,14 @@ public class ErrorTest extends WebDriverTestCase {
                   "true", "true", "RangeError"},
             FF_ESR = {"RangeError", "Whoops!", "undefined", "11", "undefined", "25",
                       "true", "true", "RangeError"})
+    @HtmlUnitNYI(CHROME = {"RangeError", "Whoops!", "undefined", "undefined", "undefined",
+                           "25", "true", "true", "RangeError"},
+            EDGE = {"RangeError", "Whoops!", "undefined", "undefined", "undefined",
+                    "25", "true", "true", "RangeError"},
+            FF = {"RangeError", "Whoops!", "undefined", "undefined", "undefined",
+                  "25", "true", "true", "RangeError"},
+            FF_ESR = {"RangeError", "Whoops!", "undefined", "undefined", "undefined",
+                      "25", "true", "true", "RangeError"})
     public void rangeError() throws Exception {
         final String html
             = "<html>\n"
@@ -146,6 +171,14 @@ public class ErrorTest extends WebDriverTestCase {
                   "true", "true", "ReferenceError"},
             FF_ESR = {"ReferenceError", "Whoops!", "undefined", "11", "undefined", "25",
                       "true", "true", "ReferenceError"})
+    @HtmlUnitNYI(CHROME = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",
+                       "25", "true", "true", "ReferenceError"},
+            EDGE = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",
+                    "25", "true", "true", "ReferenceError"},
+            FF = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",
+                  "25", "true", "true", "ReferenceError"},
+            FF_ESR = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",
+                      "25", "true", "true", "ReferenceError"})
     public void referenceError() throws Exception {
         final String html
             = "<html>\n"
@@ -183,6 +216,14 @@ public class ErrorTest extends WebDriverTestCase {
                   "true", "true", "SyntaxError"},
             FF_ESR = {"SyntaxError", "Whoops!", "undefined", "11", "undefined", "25",
                       "true", "true", "SyntaxError"})
+    @HtmlUnitNYI(CHROME = {"SyntaxError", "Whoops!", "undefined", "undefined", "undefined",
+                           "25", "true", "true", "SyntaxError"},
+            EDGE = {"SyntaxError", "Whoops!", "undefined", "undefined", "undefined",
+                    "25", "true", "true", "SyntaxError"},
+            FF = {"SyntaxError", "Whoops!", "undefined", "undefined", "undefined",
+                  "25", "true", "true", "SyntaxError"},
+            FF_ESR = {"SyntaxError", "Whoops!", "undefined", "undefined", "undefined",
+                      "25", "true", "true", "SyntaxError"})
     public void syntaxError() throws Exception {
         final String html
             = "<html>\n"
@@ -220,6 +261,14 @@ public class ErrorTest extends WebDriverTestCase {
                   "true", "true", "TypeError"},
             FF_ESR = {"TypeError", "Whoops!", "undefined", "11", "undefined", "25",
                       "true", "true", "TypeError"})
+    @HtmlUnitNYI(CHROME = {"TypeError", "Whoops!", "undefined", "undefined", "undefined",
+                           "25", "true", "true", "TypeError"},
+            EDGE = {"TypeError", "Whoops!", "undefined", "undefined", "undefined",
+                    "25", "true", "true", "TypeError"},
+            FF = {"TypeError", "Whoops!", "undefined", "undefined", "undefined",
+                  "25", "true", "true", "TypeError"},
+            FF_ESR = {"TypeError", "Whoops!", "undefined", "undefined", "undefined",
+                      "25", "true", "true", "TypeError"})
     public void typeError() throws Exception {
         final String html
             = "<html>\n"
@@ -257,6 +306,14 @@ public class ErrorTest extends WebDriverTestCase {
                   "true", "true", "URIError"},
             FF_ESR = {"URIError", "Whoops!", "undefined", "11", "undefined", "25",
                       "true", "true", "URIError"})
+    @HtmlUnitNYI(CHROME = {"URIError", "Whoops!", "undefined", "undefined", "undefined",
+                           "25", "true", "true", "URIError"},
+            EDGE = {"URIError", "Whoops!", "undefined", "undefined", "undefined",
+                    "25", "true", "true", "URIError"},
+            FF = {"URIError", "Whoops!", "undefined", "undefined", "undefined",
+                  "25", "true", "true", "URIError"},
+            FF_ESR = {"URIError", "Whoops!", "undefined", "undefined", "undefined",
+                      "25", "true", "true", "URIError"})
     public void uriError() throws Exception {
         final String html
             = "<html>\n"
@@ -297,6 +354,18 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"AggregateError", "Whoops!", "undefined", "Error: some error",
                       "11", "undefined", "25",
                       "true", "true", "AggregateError/AggregateError"})
+    @HtmlUnitNYI(CHROME = {"AggregateError", "Whoops!", "undefined", "Error: some error",
+                           "undefined", "undefined",
+                           "25", "true", "true", "AggregateError/AggregateError"},
+            EDGE = {"AggregateError", "Whoops!", "undefined", "Error: some error",
+                    "undefined", "undefined",
+                    "25", "true", "true", "AggregateError/AggregateError"},
+            FF = {"AggregateError", "Whoops!", "undefined", "Error: some error",
+                  "undefined", "undefined",
+                  "25", "true", "true", "AggregateError/AggregateError"},
+            FF_ESR = {"AggregateError", "Whoops!", "undefined", "Error: some error",
+                      "undefined", "undefined",
+                      "25", "true", "true", "AggregateError/AggregateError"})
     public void aggregateError() throws Exception {
         final String html
             = "<html>\n"
@@ -336,6 +405,14 @@ public class ErrorTest extends WebDriverTestCase {
                   "true", "true", "InternalError/InternalError"},
             FF_ESR = {"InternalError", "Whoops!", "undefined", "11", "undefined", "25",
                       "true", "true", "InternalError/InternalError"})
+    @HtmlUnitNYI(CHROME = {"InternalError", "Whoops!", "undefined", "undefined", "undefined", "25",
+                           "true", "true", "InternalError/InternalError"},
+            EDGE = {"InternalError", "Whoops!", "undefined", "undefined", "undefined", "25",
+                    "true", "true", "InternalError/InternalError"},
+            FF = {"InternalError", "Whoops!", "undefined", "undefined", "undefined", "25",
+                  "true", "true", "InternalError/InternalError"},
+            FF_ESR = {"InternalError", "Whoops!", "undefined", "undefined", "undefined", "25",
+                      "true", "true", "InternalError/InternalError"})
     public void internalError() throws Exception {
         final String html
             = "<html>\n"
@@ -356,6 +433,111 @@ public class ErrorTest extends WebDriverTestCase {
             + "    log(e instanceof Error);\n"
             + "    log(typeof InternalError == 'function' && e instanceof InternalError);\n"
             + "    logEx(e);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"Error", "", "undefined", "undefined", "undefined", "undefined"},
+            FF = {"Error", "", "undefined", "11", "undefined", "25"},
+            FF_ESR = {"Error", "", "undefined", "11", "undefined", "25"})
+    @HtmlUnitNYI(CHROME = {"Error", "", "undefined", "undefined", "undefined", "25"},
+            EDGE = {"Error", "", "undefined", "undefined", "undefined", "25"},
+            FF = {"Error", "", "undefined", "undefined", "undefined", "25"},
+            FF_ESR = {"Error", "", "undefined", "undefined", "undefined", "25"})
+    public void ctorWithoutParams() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>"
+            + "  try {\n"
+            + "    throw new Error();\n"
+            + "  } catch (e) {"
+            + "    log(e.name);\n"
+            + "    log(e.message);\n"
+            + "    log(e.cause);\n"
+            + "    log(e.columnNumber);\n"
+            + "    log(e.filename);\n"
+            + "    log(e.lineNumber);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"Error", "msg", "undefined", "undefined", "undefined", "undefined"},
+            FF = {"Error", "msg", "undefined", "11", "undefined", "25"},
+            FF_ESR = {"Error", "msg", "undefined", "11", "undefined", "25"})
+    @HtmlUnitNYI(CHROME = {"Error", "msg", "undefined", "undefined", "undefined", "25"},
+            EDGE = {"Error", "msg", "undefined", "undefined", "undefined", "25"},
+            FF = {"Error", "msg", "undefined", "undefined", "undefined", "25"},
+            FF_ESR = {"Error", "msg", "undefined", "undefined", "undefined", "25"})
+    public void ctorFilename() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>"
+            + "  try {\n"
+            + "    throw new Error('msg', 'file');\n"
+            + "  } catch (e) {"
+            + "    log(e.name);\n"
+            + "    log(e.message);\n"
+            + "    log(e.cause);\n"
+            + "    log(e.columnNumber);\n"
+            + "    log(e.filename);\n"
+            + "    log(e.lineNumber);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"Error", "test", "undefined", "undefined", "undefined", "undefined"},
+            FF = {"Error", "test", "undefined", "11", "undefined", "25"},
+            FF_ESR = {"Error", "test", "undefined", "11", "undefined", "25"})
+    @HtmlUnitNYI(CHROME = {"Error", "test", "undefined", "undefined", "undefined", "25"},
+            EDGE = {"Error", "test", "undefined", "undefined", "undefined", "25"},
+            FF = {"Error", "test", "undefined", "undefined", "undefined", "25"},
+            FF_ESR = {"Error", "test", "undefined", "undefined", "undefined", "25"})
+    public void ctorAsFunction() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>"
+            + "  try {\n"
+            + "    throw Error('test');\n"
+            + "  } catch (e) {"
+            + "    log(e.name);\n"
+            + "    log(e.message);\n"
+            + "    log(e.cause);\n"
+            + "    log(e.columnNumber);\n"
+            + "    log(e.filename);\n"
+            + "    log(e.lineNumber);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
