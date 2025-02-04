@@ -511,10 +511,9 @@ public class Element extends Node {
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "An invalid or illegal selector was specified (selector: '"
-                                    + selectors + "' error: " + e.getMessage() + ").",
-                            DOMException.SYNTAX_ERR));
+                    "An invalid or illegal selector was specified (selector: '"
+                            + selectors + "' error: " + e.getMessage() + ").",
+                    DOMException.SYNTAX_ERR);
         }
     }
 
@@ -535,10 +534,9 @@ public class Element extends Node {
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "An invalid or illegal selector was specified (selector: '"
-                                    + selectors + "' error: " + e.getMessage() + ").",
-                            DOMException.SYNTAX_ERR));
+                    "An invalid or illegal selector was specified (selector: '"
+                            + selectors + "' error: " + e.getMessage() + ").",
+                    DOMException.SYNTAX_ERR);
         }
     }
 
@@ -940,9 +938,8 @@ public class Element extends Node {
             if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROWS_FOR_DETACHED)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
-                        new org.htmlunit.javascript.host.dom.DOMException(
-                                "outerHTML is readonly for detached nodes",
-                                org.htmlunit.javascript.host.dom.DOMException.NO_MODIFICATION_ALLOWED_ERR));
+                        "outerHTML is readonly for detached nodes",
+                        DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
             return;
         }
@@ -1537,10 +1534,9 @@ public class Element extends Node {
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
                     (HtmlUnitScriptable) getTopLevelScope(thisObj),
-                    new DOMException(
-                            "An invalid or illegal selector was specified (selector: '"
-                                    + selectorString + "' error: " + e.getMessage() + ").",
-                            DOMException.SYNTAX_ERR));
+                    "An invalid or illegal selector was specified (selector: '"
+                            + selectorString + "' error: " + e.getMessage() + ").",
+                    DOMException.SYNTAX_ERR);
         }
     }
 

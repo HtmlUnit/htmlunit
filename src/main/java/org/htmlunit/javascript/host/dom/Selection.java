@@ -205,10 +205,7 @@ public class Selection extends HtmlUnitScriptable {
         final List<SimpleRange> ranges = getRanges();
         if (index < 0 || index >= ranges.size()) {
             throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    new DOMException(
-                            "Invalid range index: " + index,
-                            DOMException.INDEX_SIZE_ERR));
+                    getWindow(), "Invalid range index: " + index, DOMException.INDEX_SIZE_ERR);
         }
         final SimpleRange range = ranges.get(index);
         final Range jsRange = new Range(range);

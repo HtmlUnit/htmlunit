@@ -172,7 +172,7 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"ReferenceError", "Whoops!", "undefined", "11", "undefined", "25",
                       "true", "true", "ReferenceError"})
     @HtmlUnitNYI(CHROME = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",
-                       "25", "true", "true", "ReferenceError"},
+                           "25", "true", "true", "ReferenceError"},
             EDGE = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",
                     "25", "true", "true", "ReferenceError"},
             FF = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",

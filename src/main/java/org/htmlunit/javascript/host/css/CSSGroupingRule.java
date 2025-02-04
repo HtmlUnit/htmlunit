@@ -115,17 +115,13 @@ public class CSSGroupingRule extends CSSRule {
                 }
                 catch (final DOMException ex) {
                     throw JavaScriptEngine.asJavaScriptException(
-                            getWindow(),
-                            new org.htmlunit.javascript.host.dom.DOMException(
-                                    ex.getMessage(),
-                                    ex.code));
+                            getWindow(), ex.getMessage(), ex.code);
                 }
             }
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            e.getMessage(),
-                            org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR));
+                    e.getMessage(),
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
         }
     }
 
@@ -141,11 +137,7 @@ public class CSSGroupingRule extends CSSRule {
             refreshCssRules();
         }
         catch (final DOMException e) {
-            throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            e.getMessage(),
-                            e.code));
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
         }
     }
 

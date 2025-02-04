@@ -62,9 +62,8 @@ public final class WindowOrWorkerGlobalScopeMixin {
             if (encodedData.charAt(i) > 255) {
                 throw JavaScriptEngine.asJavaScriptException(
                         scriptable,
-                        new org.htmlunit.javascript.host.dom.DOMException(
-                                "Function atob supports only latin1 characters",
-                                org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR));
+                        "Function atob supports only latin1 characters",
+                        org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
             }
         }
         final byte[] bytes = encodedData.getBytes(StandardCharsets.ISO_8859_1);
@@ -83,9 +82,8 @@ public final class WindowOrWorkerGlobalScopeMixin {
             if (stringToEncode.charAt(i) > 255) {
                 throw JavaScriptEngine.asJavaScriptException(
                         scriptable,
-                        new org.htmlunit.javascript.host.dom.DOMException(
-                                "Function btoa supports only latin1 characters",
-                                org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR));
+                        "Function btoa supports only latin1 characters",
+                        org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
             }
         }
         final byte[] bytes = stringToEncode.getBytes(StandardCharsets.ISO_8859_1);

@@ -281,9 +281,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (state_ == OPENED && !async_) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
-                        new DOMException(
-                                "synchronous XMLHttpRequests do not support responseType",
-                                DOMException.INVALID_ACCESS_ERR));
+                        "synchronous XMLHttpRequests do not support responseType",
+                        DOMException.INVALID_ACCESS_ERR);
             }
 
             responseType_ = responseType;
@@ -456,11 +455,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (!RESPONSE_TYPE_DEFAULT.equals(responseType_) && !RESPONSE_TYPE_TEXT.equals(responseType_)) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': "
-                                    + "The value is only accessible if the object's 'responseType' is '' or 'text' "
-                                    + "(was '" + getResponseType() + "').",
-                            DOMException.INVALID_STATE_ERR));
+                    "InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': "
+                            + "The value is only accessible if the object's 'responseType' is '' or 'text' "
+                            + "(was '" + getResponseType() + "').",
+                    DOMException.INVALID_STATE_ERR);
         }
 
         if (state_ == UNSENT || state_ == OPENED) {
@@ -910,9 +908,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "Not allowed to load local resource: " + webRequest_.getUrl(),
-                            DOMException.NETWORK_ERR));
+                    "Not allowed to load local resource: " + webRequest_.getUrl(),
+                    DOMException.NETWORK_ERR);
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
@@ -966,9 +963,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     }
                     throw JavaScriptEngine.asJavaScriptException(
                             getWindow(),
-                            new DOMException(
-                                    "No permitted \"Access-Control-Allow-Origin\" header.",
-                                    DOMException.NETWORK_ERR));
+                            "No permitted \"Access-Control-Allow-Origin\" header.",
+                            DOMException.NETWORK_ERR);
                 }
             }
 
@@ -1089,9 +1085,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     fireJavascriptEvent(Event.TYPE_LOAD_END);
                 }
 
-                throw JavaScriptEngine.asJavaScriptException(
-                        getWindow(),
-                        new DOMException(e.getMessage(), DOMException.NETWORK_ERR));
+                throw JavaScriptEngine.asJavaScriptException(getWindow(),
+                        e.getMessage(), DOMException.NETWORK_ERR);
             }
         }
     }
@@ -1220,9 +1215,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (state_ != UNSENT && state_ != OPENED) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "Property 'overrideMimeType' not writable after sent.",
-                            DOMException.INVALID_STATE_ERR));
+                    "Property 'overrideMimeType' not writable after sent.",
+                    DOMException.INVALID_STATE_ERR);
         }
         overriddenMimeType_ = mimeType;
     }

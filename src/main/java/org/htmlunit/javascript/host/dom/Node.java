@@ -199,8 +199,8 @@ public class Node extends EventTarget {
             if (!isNodeInsertable(childNode)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
-                        new DOMException("Node cannot be inserted at the specified point in the hierarchy",
-                            DOMException.HIERARCHY_REQUEST_ERR));
+                        "Node cannot be inserted at the specified point in the hierarchy",
+                        DOMException.HIERARCHY_REQUEST_ERR);
             }
 
             // Get XML node for the DOM node passed in
@@ -214,9 +214,7 @@ public class Node extends EventTarget {
                 parentNode.appendChild(childDomNode);
             }
             catch (final org.w3c.dom.DOMException e) {
-                throw JavaScriptEngine.asJavaScriptException(
-                        getWindow(),
-                        new DOMException(e.getMessage(), e.code));
+                throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
             }
 
             initInlineFrameIfNeeded(childDomNode);
@@ -286,8 +284,8 @@ public class Node extends EventTarget {
             if (!isNodeInsertable(newChild)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
-                        new DOMException("Node cannot be inserted at the specified point in the hierarchy",
-                            DOMException.HIERARCHY_REQUEST_ERR));
+                        "Node cannot be inserted at the specified point in the hierarchy",
+                        DOMException.HIERARCHY_REQUEST_ERR);
             }
 
             final DomNode newChildNode = newChild.getDomNodeOrDie();
@@ -297,8 +295,8 @@ public class Node extends EventTarget {
                     if (!isNodeInsertable(child.getScriptableObject())) {
                         throw JavaScriptEngine.asJavaScriptException(
                                 getWindow(),
-                                new DOMException("Node cannot be inserted at the specified point in the hierarchy",
-                                    DOMException.HIERARCHY_REQUEST_ERR));
+                                "Node cannot be inserted at the specified point in the hierarchy",
+                                DOMException.HIERARCHY_REQUEST_ERR);
                     }
                 }
             }
@@ -327,10 +325,7 @@ public class Node extends EventTarget {
                 domNode.insertBefore(newChildNode, refChildNode);
             }
             catch (final org.w3c.dom.DOMException e) {
-                throw JavaScriptEngine.asJavaScriptException(
-                        getWindow(),
-                        new org.htmlunit.javascript.host.dom.DOMException(e.getMessage(),
-                                org.htmlunit.javascript.host.dom.DOMException.NOT_FOUND_ERR));
+                throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), DOMException.NOT_FOUND_ERR);
             }
             return newChild;
         }
@@ -376,10 +371,9 @@ public class Node extends EventTarget {
         if (!getDomNodeOrDie().isAncestorOf(childDomNode)) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            "Failed to execute 'removeChild' on '"
-                                    + this + "': The node to be removed is not a child of this node.",
-                            org.htmlunit.javascript.host.dom.DOMException.NOT_FOUND_ERR));
+                    "Failed to execute 'removeChild' on '"
+                            + this + "': The node to be removed is not a child of this node.",
+                    DOMException.NOT_FOUND_ERR);
         }
         // Remove the child from the parent node
         childDomNode.remove();
@@ -423,9 +417,8 @@ public class Node extends EventTarget {
             if (!isNodeInsertable(newChild)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
-                        new org.htmlunit.javascript.host.dom.DOMException(
-                                "Node cannot be inserted at the specified point in the hierarchy",
-                                org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR));
+                        "Node cannot be inserted at the specified point in the hierarchy",
+                        DOMException.HIERARCHY_REQUEST_ERR);
             }
 
             // Get XML nodes for the DOM nodes passed in

@@ -78,12 +78,11 @@ public class Crypto extends HtmlUnitScriptable {
         if (array.getByteLength() > 65_536) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "Error: Failed to execute 'getRandomValues' on 'Crypto': "
-                                    + "The ArrayBufferView's byte length "
-                                    + "(" + array.getByteLength() + ") exceeds the number of bytes "
-                                    + "of entropy available via this API (65536).",
-                            DOMException.QUOTA_EXCEEDED_ERR));
+                    "Error: Failed to execute 'getRandomValues' on 'Crypto': "
+                            + "The ArrayBufferView's byte length "
+                            + "(" + array.getByteLength() + ") exceeds the number of bytes "
+                            + "of entropy available via this API (65536).",
+                    DOMException.QUOTA_EXCEEDED_ERR);
         }
 
         for (int i = 0; i < array.getByteLength() / array.getBytesPerElement(); i++) {

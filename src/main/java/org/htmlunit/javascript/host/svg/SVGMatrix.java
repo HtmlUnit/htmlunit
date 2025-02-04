@@ -225,9 +225,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
         if (Math.abs(determinant) < 1E-10) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.",
-                            DOMException.INVALID_STATE_ERR));
+                    "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.",
+                    DOMException.INVALID_STATE_ERR);
         }
 
         final SVGMatrix result = new SVGMatrix(getWindow());
@@ -294,9 +293,8 @@ public class SVGMatrix extends HtmlUnitScriptable {
         if (x == 0 || y == 0) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "Failed to execute 'rotateFromVector' on 'SVGMatrix': Arguments cannot be zero.",
-                            DOMException.INVALID_ACCESS_ERR));
+                    "Failed to execute 'rotateFromVector' on 'SVGMatrix': Arguments cannot be zero.",
+                    DOMException.INVALID_ACCESS_ERR);
         }
 
         final double theta = Math.atan2(y, x);

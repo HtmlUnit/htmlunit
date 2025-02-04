@@ -503,9 +503,8 @@ public class HTMLDocument extends Document {
     public Node appendChild(final Object childObject) {
         throw JavaScriptEngine.asJavaScriptException(
                 getWindow(),
-                new org.htmlunit.javascript.host.dom.DOMException(
-                        "Node cannot be inserted at the specified point in the hierarchy.",
-                        org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR));
+                "Node cannot be inserted at the specified point in the hierarchy.",
+                org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR);
     }
 
     /**

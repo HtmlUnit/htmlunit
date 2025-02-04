@@ -1986,10 +1986,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 catch (final Exception e) {
                     throw JavaScriptEngine.asJavaScriptException(
                             (HtmlUnitScriptable) getTopLevelScope(thisObj),
-                            new DOMException(
-                                    "Failed to execute 'postMessage' on 'Window': Invalid target origin '"
-                                            + targetOrigin + "' was specified (reason: " + e.getMessage() + ".",
-                                    DOMException.SYNTAX_ERR));
+                            "Failed to execute 'postMessage' on 'Window': Invalid target origin '"
+                                    + targetOrigin + "' was specified (reason: " + e.getMessage() + ".",
+                            DOMException.SYNTAX_ERR);
                 }
             }
 

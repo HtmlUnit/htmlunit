@@ -156,9 +156,8 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         }
         throw JavaScriptEngine.asJavaScriptException(
                 getWindow(),
-                new DOMException(
-                        "Index or size is negative or greater than the allowed amount",
-                        DOMException.INDEX_SIZE_ERR));
+                "Index or size is negative or greater than the allowed amount",
+                DOMException.INDEX_SIZE_ERR);
     }
 
     /**
@@ -185,9 +184,8 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         if (!indexValid) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "Index or size is negative or greater than the allowed amount",
-                            DOMException.INDEX_SIZE_ERR));
+                    "Index or size is negative or greater than the allowed amount",
+                    DOMException.INDEX_SIZE_ERR);
         }
 
         htmlRow.getCell(position).remove();

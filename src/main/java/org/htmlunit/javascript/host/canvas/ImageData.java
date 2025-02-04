@@ -73,9 +73,8 @@ public class ImageData extends HtmlUnitScriptable {
             if (data.getArrayLength() % 4 != 0) {
                 throw JavaScriptEngine.asJavaScriptException(
                         (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
-                        new DOMException(
-                                "ImageData ctor - data length mod 4 not zero",
-                                DOMException.INVALID_STATE_ERR));
+                        "ImageData ctor - data length mod 4 not zero",
+                        DOMException.INVALID_STATE_ERR);
             }
 
             width = (int) JavaScriptEngine.toInteger(args[1]);
@@ -85,9 +84,8 @@ public class ImageData extends HtmlUnitScriptable {
                 if (data.getArrayLength() != 4 * width * height) {
                     throw JavaScriptEngine.asJavaScriptException(
                             (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
-                            new DOMException(
-                                    "ImageData ctor - width not correct",
-                                    DOMException.INDEX_SIZE_ERR));
+                            "ImageData ctor - width not correct",
+                            DOMException.INDEX_SIZE_ERR);
                 }
             }
             else {
@@ -97,9 +95,8 @@ public class ImageData extends HtmlUnitScriptable {
             if (data.getArrayLength() != 4 * width * height) {
                 throw JavaScriptEngine.asJavaScriptException(
                         (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
-                        new DOMException(
-                                "ImageData ctor - width/height not correct",
-                                DOMException.INDEX_SIZE_ERR));
+                        "ImageData ctor - width/height not correct",
+                        DOMException.INDEX_SIZE_ERR);
             }
         }
         else {
@@ -110,16 +107,14 @@ public class ImageData extends HtmlUnitScriptable {
         if (width < 0) {
             throw JavaScriptEngine.asJavaScriptException(
                     (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
-                    new DOMException(
-                            "ImageData ctor - width negative",
-                            DOMException.INDEX_SIZE_ERR));
+                    "ImageData ctor - width negative",
+                    DOMException.INDEX_SIZE_ERR);
         }
         if (height < 0) {
             throw JavaScriptEngine.asJavaScriptException(
                     (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),
-                    new DOMException(
-                            "ImageData ctor - height negative",
-                            DOMException.INDEX_SIZE_ERR));
+                    "ImageData ctor - height negative",
+                    DOMException.INDEX_SIZE_ERR);
         }
 
         final ImageData result = new ImageData(null, 0, 0, width, height);

@@ -110,10 +110,9 @@ public class RowContainer extends HTMLElement {
         if (r < 0 || r > rowCount) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new DOMException(
-                            "Index or size is negative or greater than the allowed amount "
-                                    + "(index: " + rowIndex + ", " + rowCount + " rows)",
-                            DOMException.INDEX_SIZE_ERR));
+                    "Index or size is negative or greater than the allowed amount "
+                            + "(index: " + rowIndex + ", " + rowCount + " rows)",
+                    DOMException.INDEX_SIZE_ERR);
         }
 
         return insertRow(r);

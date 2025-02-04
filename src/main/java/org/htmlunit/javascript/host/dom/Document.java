@@ -582,9 +582,8 @@ public class Document extends Node {
         catch (final Exception e) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            "Failed to execute 'evaluate': " + e.getMessage(),
-                            org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR));
+                    "Failed to execute 'evaluate': " + e.getMessage(),
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
         }
     }
 
@@ -622,9 +621,8 @@ public class Document extends Node {
                 }
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
-                        new org.htmlunit.javascript.host.dom.DOMException(
-                                "createElement: Provided string '" + tagNameString + "' contains an invalid character",
-                                org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR));
+                        "createElement: Provided string '" + tagNameString + "' contains an invalid character",
+                        org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
             }
             for (int i = 1; i < tagNameString.length(); i++) {
                 final int c = tagNameString.charAt(i);
@@ -639,10 +637,9 @@ public class Document extends Node {
                     }
                     throw JavaScriptEngine.asJavaScriptException(
                             getWindow(),
-                            new org.htmlunit.javascript.host.dom.DOMException(
-                                    "createElement: Provided string '" + tagNameString
-                                    + "' contains an invalid character",
-                                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR));
+                            "createElement: Provided string '" + tagNameString
+                                + "' contains an invalid character",
+                            org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
                 }
             }
         }
@@ -881,11 +878,10 @@ public class Document extends Node {
         }
         throw JavaScriptEngine.asJavaScriptException(
                 getWindow(),
-                new org.htmlunit.javascript.host.dom.DOMException(
-                        "Failed to set the 'body' property on 'Document': "
-                                + "The new body element is of type '" +  htmlElement.getTagName() + "'. "
-                                + "It must be either a 'BODY' or 'FRAMESET' element.",
-                        org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR));
+                "Failed to set the 'body' property on 'Document': "
+                        + "The new body element is of type '" +  htmlElement.getTagName() + "'. "
+                        + "It must be either a 'BODY' or 'FRAMESET' element.",
+                org.htmlunit.javascript.host.dom.DOMException.HIERARCHY_REQUEST_ERR);
     }
 
     /**
@@ -988,10 +984,9 @@ public class Document extends Node {
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            "An invalid or illegal selector was specified (selector: '"
-                                    + selectors + "' error: " + e.getMessage() + ").",
-                            org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR));
+                    "An invalid or illegal selector was specified (selector: '"
+                            + selectors + "' error: " + e.getMessage() + ").",
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
         }
     }
 
@@ -1010,10 +1005,9 @@ public class Document extends Node {
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            "An invalid or illegal selector was specified (selector: '"
-                                    + selectors + "' error: " + e.getMessage() + ").",
-                            org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR));
+                    "An invalid or illegal selector was specified (selector: '"
+                            + selectors + "' error: " + e.getMessage() + ").",
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
         }
     }
 
@@ -1185,9 +1179,8 @@ public class Document extends Node {
         if (clazz == null) {
             throw JavaScriptEngine.asJavaScriptException(
                     this,
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            "Event Type '" + eventType + "' is not supported.",
-                            org.htmlunit.javascript.host.dom.DOMException.NOT_SUPPORTED_ERR));
+                    "Event Type '" + eventType + "' is not supported.",
+                    org.htmlunit.javascript.host.dom.DOMException.NOT_SUPPORTED_ERR);
         }
 
         try {

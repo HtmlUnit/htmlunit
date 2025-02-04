@@ -259,9 +259,8 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
             if (beforeOption.getParentNode() != htmlSelect_) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
-                        new DOMException(
-                                "Unknown option.",
-                                DOMException.NOT_FOUND_ERR));
+                        "Unknown option.",
+                        DOMException.NOT_FOUND_ERR);
 
             }
         }

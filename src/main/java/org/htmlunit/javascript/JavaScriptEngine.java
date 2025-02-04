@@ -1191,21 +1191,23 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Encapsulates the given {@link DOMException} into a Rhino-compatible exception.
+     * Creates a {@link DOMException} and encapsulates it into a Rhino-compatible exception.
      *
      * @param scope the parent scope
-     * @param exception the exception to encapsulate
+     * @param message the exception message
+     * @param type the exception type
      * @return the created exception
      */
-    public static RhinoException asJavaScriptException(final HtmlUnitScriptable scope, final DOMException exception) {
-        exception.setParentScope(scope);
-        exception.setPrototype(scope.getPrototype(exception.getClass()));
+    public static RhinoException asJavaScriptException(final HtmlUnitScriptable scope, final String message, final int type) {
+        final DOMException domException = new DOMException(message, type);
+        domException.setParentScope(scope);
+        domException.setPrototype(scope.getPrototype(DOMException.class));
 
         final EcmaError helper = ScriptRuntime.syntaxError("helper");
         final String fileName = helper.sourceName().replaceFirst("script in (.*) from .*", "$1");
-        exception.setLocation(fileName, helper.lineNumber());
+        domException.setLocation(fileName, helper.lineNumber());
 
-        return new JavaScriptException(exception, fileName, helper.lineNumber());
+        return new JavaScriptException(domException, fileName, helper.lineNumber());
     }
 
     /**

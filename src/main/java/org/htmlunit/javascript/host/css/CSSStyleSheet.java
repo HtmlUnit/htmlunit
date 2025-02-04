@@ -186,18 +186,10 @@ public class CSSStyleSheet extends StyleSheet {
                     return position;
                 }
                 catch (final DOMException ex) {
-                    throw JavaScriptEngine.asJavaScriptException(
-                            getWindow(),
-                            new org.htmlunit.javascript.host.dom.DOMException(
-                                    ex.getMessage(),
-                                    ex.code));
+                    throw JavaScriptEngine.asJavaScriptException(getWindow(), ex.getMessage(), ex.code);
                 }
             }
-            throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            e.getMessage(),
-                            e.code));
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
         }
     }
 
@@ -255,11 +247,7 @@ public class CSSStyleSheet extends StyleSheet {
             refreshCssRules();
         }
         catch (final DOMException e) {
-            throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    new org.htmlunit.javascript.host.dom.DOMException(
-                            e.getMessage(),
-                            e.code));
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
         }
     }
 
@@ -288,11 +276,7 @@ public class CSSStyleSheet extends StyleSheet {
                 refreshCssRules();
             }
             catch (final DOMException ex) {
-                throw JavaScriptEngine.asJavaScriptException(
-                        getWindow(),
-                        new org.htmlunit.javascript.host.dom.DOMException(
-                                ex.getMessage(),
-                                ex.code));
+                throw JavaScriptEngine.asJavaScriptException(getWindow(), ex.getMessage(), ex.code);
             }
         }
         return -1;
