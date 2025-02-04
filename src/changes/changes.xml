@@ -8,6 +8,18 @@
 
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: Function hoisting inside blocks is no a core Rhino feature, our own hack is gone.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Map and Set converted to use lambdas.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: lambda-based classes serializable are serializable.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: bunch of changes to make the SlotMap handling faster.
+            </action>
             <action type="fix" dev="rbri">
                 CSSStyleSheet - several fixes to throw the correct error.
             </action>
