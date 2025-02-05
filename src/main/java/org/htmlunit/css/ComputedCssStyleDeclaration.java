@@ -18,6 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_18;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_10;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_14;
+import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_154;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_14;
@@ -1555,7 +1556,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
                     return 173;
                 }
-                width = 154; // FF
+                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_154)) {
+                    return 154;
+                }
+                width = 161; // FF
             }
             else if (element instanceof HtmlRadioButtonInput || element instanceof HtmlCheckBoxInput) {
                 final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();

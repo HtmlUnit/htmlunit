@@ -265,6 +265,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     JS_CLIENTHEIGHT_RADIO_CHECKBOX_14,
 
+    /** ClientWidth for text/password input is 154. */
+    @BrowserFeature(FF_ESR)
+    JS_CLIENTWIDTH_INPUT_TEXT_154,
+
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,

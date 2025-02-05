@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.10.0" date="February xx, 2025" description="Bugfixes">
+        <release version="4.10.0" date="February xx, 2025" description="Firefox 135, Javascript Errors, Bugfixes">
             <action type="update" dev="RhinoTeam">
                 core-js: Function hoisting inside blocks is no a core Rhino feature, our own hack is gone.
             </action>
