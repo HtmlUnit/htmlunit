@@ -160,7 +160,6 @@ public class NumberFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "31,415.927",
-            FF = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667",
             FF_ESR = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667")
     public void format_ar() throws Exception {
         test("new Intl.NumberFormat('ar').format(number)");

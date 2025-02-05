@@ -42,7 +42,6 @@
 -moz-transform-origin=:
 -moz-transform-style=:
 -moz-transform=:
--moz-user-input=:
 -moz-user-select=:
 -moz-window-dragging=:
 -webkit-align-content=:
@@ -160,7 +159,6 @@ MozTextSizeAdjust=:
 MozTransform=:
 MozTransformOrigin=:
 MozTransformStyle=:
-MozUserInput=:
 MozUserSelect=:
 MozWindowDragging=:
 WebkitAlignContent=:

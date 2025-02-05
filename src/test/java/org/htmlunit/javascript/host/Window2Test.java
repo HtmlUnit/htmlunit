@@ -797,7 +797,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"true", "true", "147", "true", "true", "16"},
             EDGE = {"true", "true", "136", "true", "true", "24"},
-            FF = {"true", "true", "91", "true", "true", "12"},
+            FF = {"true", "true", "93", "true", "true", "16"},
             FF_ESR = {"true", "true", "91", "true", "true", "12"})
     public void heightsAndWidths() throws Exception {
         final String html
@@ -899,7 +899,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"621", "1256", "604", "1239"},
             EDGE = {"632", "1248", "617", "1233"},
-            FF = {"677", "1260", "660", "1243"},
+            FF = {"675", "1256", "658", "1239"},
             FF_ESR = {"677", "1260", "660", "1243"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -1086,7 +1086,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF = {"10", "89"},
+            FF = {"12", "89"},
             FF_ESR = {"10", "89"})
     public void mozInnerScreen() throws Exception {
         final String html

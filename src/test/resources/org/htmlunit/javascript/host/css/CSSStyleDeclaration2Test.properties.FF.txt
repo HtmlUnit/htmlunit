@@ -42,7 +42,6 @@ MozTextSizeAdjust
 MozTransform
 MozTransformOrigin
 MozTransformStyle
-MozUserInput
 MozUserSelect
 MozWindowDragging
 WebkitAlignContent

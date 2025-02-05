@@ -371,8 +371,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "TypeError",
-            FF = "NS_ERROR_NOT_AVAILABLE",
-            FF_ESR = "NS_ERROR_NOT_AVAILABLE")
+            FF = "NS_ERROR_NOT_AVAILABLE/Exception",
+            FF_ESR = "NS_ERROR_NOT_AVAILABLE/Exception")
     @HtmlUnitNYI(FF = "TypeError",
             FF_ESR = "TypeError")
     public void createDocumentNS_xul() throws Exception {
