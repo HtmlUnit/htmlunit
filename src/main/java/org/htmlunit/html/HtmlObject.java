@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR;
-
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -314,10 +312,6 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     @Override
     public boolean isCustomErrorValidityState() {
-        if (hasFeature(JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR)) {
-            return false;
-        }
-
         return !StringUtils.isEmpty(customValidity_);
     }
 

@@ -102,15 +102,9 @@ public class HtmlObject2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "false"},
-            CHROME = {"true",
-                      "false-false-false-false-false-false-false-false-false-true-false",
-                      "false"},
-            EDGE = {"true",
-                    "false-false-false-false-false-false-false-false-false-true-false",
-                    "false"})
+    @Alerts({"true",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "false"})
     public void validationCustomValidity() throws Exception {
         validation("<object id='e1'>o1</object>\n", "elem.setCustomValidity('Invalid');");
     }
@@ -119,15 +113,9 @@ public class HtmlObject2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
-                       "false-true-false-false-false-false-false-false-false-false-false",
-                       "false"},
-            CHROME = {"true",
-                      "false-false-false-false-false-false-false-false-false-true-false",
-                      "false"},
-            EDGE = {"true",
-                    "false-false-false-false-false-false-false-false-false-true-false",
-                    "false"})
+    @Alerts({"true",
+             "false-true-false-false-false-false-false-false-false-false-false",
+             "false"})
     public void validationBlankCustomValidity() throws Exception {
         validation("<object id='e1'>o1</object>\n", "elem.setCustomValidity(' ');\n");
     }

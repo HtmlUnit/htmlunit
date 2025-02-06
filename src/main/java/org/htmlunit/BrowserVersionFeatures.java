@@ -318,10 +318,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,
 
-    /** HTMLObject Validity isValid ignores custom error property. */
-    @BrowserFeature({CHROME, EDGE})
-    JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR,
-
     /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
     @BrowserFeature({FF, FF_ESR})
     JS_IFRAME_ALWAYS_EXECUTE_ONLOAD,
