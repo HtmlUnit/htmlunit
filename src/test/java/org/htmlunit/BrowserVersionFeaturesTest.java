@@ -39,7 +39,7 @@ import org.junit.Test;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class BrowserVersionFeaturesTest  {
+public class BrowserVersionFeaturesTest {
 
     /**
      * Test of alphabetical order.
