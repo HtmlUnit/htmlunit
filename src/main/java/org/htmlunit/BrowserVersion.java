@@ -113,7 +113,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.SEC_FETCH_SITE,
             HttpHeader.SEC_FETCH_USER,
             HttpHeader.PRIORITY};
-        FIREFOX_ESR.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8";
+        FIREFOX_ESR.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX_ESR.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX_ESR.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX_ESR.imgAcceptHeader_ = "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5";
@@ -195,9 +195,18 @@ public final class BrowserVersion implements Serializable {
         CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
-        CHROME.secClientHintUserAgentHeader_ = "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\""
-                        + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
-                        + CHROME.getBrowserVersionNumeric() + "\"";
+
+        if (CHROME.getBrowserVersionNumeric() % 2 == 0) {
+            CHROME.secClientHintUserAgentHeader_ = "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\""
+                            + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
+                            + CHROME.getBrowserVersionNumeric() + "\"";
+        }
+        else {
+            CHROME.secClientHintUserAgentHeader_ = "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\""
+                    + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
+                    + CHROME.getBrowserVersionNumeric() + "\"";
+        }
+
         CHROME.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
             27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,

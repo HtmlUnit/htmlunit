@@ -8,8 +8,8 @@
 
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
-            <action type="update" dev="RhinoTeam">
-                Validity isValid no longer ignores custom error property in Chrome/Edge.
+            <action type="update" dev="rbri">
+                Firefox ESR accept header no longer contains 'image/avif,image/webp,image/png,image/svg+xml'.
             </action>
             <action type="update" dev="RhinoTeam">
                 core-js: BigInt, Boolean and Number converted to use lambdas.
