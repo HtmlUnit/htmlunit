@@ -15698,6 +15698,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "append(),childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
                 + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
                 + "replaceChildren()")
+    @HtmlUnitNYI(CHROME = "append(),childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
+                + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
+                + "replaceChildren()")
     public void documentFragment() throws Exception {
         testString("", "document.createDocumentFragment()");
     }

@@ -397,8 +397,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,"
                     + "image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            FF_ESR = "text/html,application/xhtml+xml,application/xml;q=0.9,"
-                    + "image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8")
+            FF_ESR = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
