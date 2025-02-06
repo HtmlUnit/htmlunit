@@ -2544,6 +2544,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code scroll-behavior}. */
         SCROLL_BEHAVIOR_("scroll-behavior", "scroll-behavior", ff("auto")),
 
+        /** The style property {@code scrollInitialTarget}. */
+        SCROLL_INITIAL_TARGET("scrollInitialTarget", "scroll-initial-target", chromeAndEdgeNone()),
+
         /** The style property {@code scrollMargin}. */
         SCROLL_MARGIN("scrollMargin", "scroll-margin", chromeAndEdge("0px"), ff("0px")),
 
@@ -2867,6 +2870,15 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code textAnchor}. */
         TEXT_ANCHOR("textAnchor", "text-anchor", ff("start"), chromeAndEdge("start")),
+
+        /** The style property {@code textBox}. */
+        TEXT_BOX("textBox", "text-box", chromeAndEdgeNormal()),
+
+        /** The style property {@code textBoxEdge}. */
+        TEXT_BOX_EDGE("textBoxEdge", "text-box-edge", chromeAndEdgeAuto()),
+
+        /** The style property {@code textBoxTrim}. */
+        TEXT_BOX_TRIM("textBoxTrim", "text-box-trim", chromeAndEdgeNone()),
 
         /** The style property {@code text-anchor}. */
         TEXT_ANCHOR_("text-anchor", "text-anchor", ff("start")),
