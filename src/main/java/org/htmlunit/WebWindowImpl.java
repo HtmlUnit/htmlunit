@@ -18,6 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_COMPUTED_STYLE_PSEUD
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_147;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_93;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -87,6 +88,10 @@ public abstract class WebWindowImpl implements WebWindow {
         if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91)) {
             outerHeight_ = innerHeight_ + 91;
             outerWidth_ = innerWidth_ + 12;
+        }
+        else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_93)) {
+            outerHeight_ = innerHeight_ + 93;
+            outerWidth_ = innerWidth_ + 16;
         }
         else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136)) {
             outerHeight_ = innerHeight_ + 136;

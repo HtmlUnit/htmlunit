@@ -447,8 +447,14 @@ public enum BrowserVersionFeatures {
     /**
      * Difference of window.outer/inner height is 91.
      */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature(FF_ESR)
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91,
+
+    /**
+     * Difference of window.outer/inner height is 93.
+     */
+    @BrowserFeature(FF)
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_93,
 
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature({FF, FF_ESR})

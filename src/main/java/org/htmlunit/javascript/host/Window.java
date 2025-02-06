@@ -1785,8 +1785,17 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the value of {@code mozInnerScreenX} property.
      * @return the value of {@code mozInnerScreenX} property
      */
-    @JsxGetter({FF, FF_ESR})
+    @JsxGetter(FF)
     public int getMozInnerScreenX() {
+        return 12;
+    }
+
+    /**
+     * Returns the value of {@code mozInnerScreenX} property.
+     * @return the value of {@code mozInnerScreenX} property
+     */
+    @JsxGetter(value = FF_ESR, propertyName = "mozInnerScreenX")
+    public int getMozInnerScreenXFFesr() {
         return 10;
     }
 
