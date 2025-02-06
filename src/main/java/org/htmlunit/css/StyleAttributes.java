@@ -2871,6 +2871,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code textAnchor}. */
         TEXT_ANCHOR("textAnchor", "text-anchor", ff("start"), chromeAndEdge("start")),
 
+        /** The style property {@code text-anchor}. */
+        TEXT_ANCHOR_("text-anchor", "text-anchor", ff("start")),
+
         /** The style property {@code textBox}. */
         TEXT_BOX("textBox", "text-box", chromeAndEdgeNormal()),
 
@@ -2879,9 +2882,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code textBoxTrim}. */
         TEXT_BOX_TRIM("textBoxTrim", "text-box-trim", chromeAndEdgeNone()),
-
-        /** The style property {@code text-anchor}. */
-        TEXT_ANCHOR_("text-anchor", "text-anchor", ff("start")),
 
         /** The style property {@code textCombineUpright}. */
         TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chromeAndEdgeNone(), ffNone()),
