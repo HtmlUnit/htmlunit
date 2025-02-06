@@ -87,9 +87,11 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
             anchor.click();
             files = FileUtils.listFiles(downloadFolder, null, false);
             assertEquals(2, files.size());
-            final Iterator<File> filesIter = files.iterator();
-            assertEquals("download", filesIter.next().getName());
-            assertEquals("download(1)", filesIter.next().getName());
+
+            // be order agnostic
+            assertTrue(files.removeIf(f -> f.getName().equals("download")));
+            assertTrue(files.removeIf(f -> f.getName().equals("download(1)")));
+            assertEquals(0, files.size());
         }
         finally {
             FileUtils.deleteDirectory(downloadFolder);
@@ -140,9 +142,11 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
             anchor.click();
             files = FileUtils.listFiles(downloadFolder, null, false);
             assertEquals(2, files.size());
-            final Iterator<File> filesIter = files.iterator();
-            assertEquals("test(1).txt", filesIter.next().getName());
-            assertEquals("test.txt", filesIter.next().getName());
+
+            // be order agnostic
+            assertTrue(files.removeIf(f -> f.getName().equals("test.txt")));
+            assertTrue(files.removeIf(f -> f.getName().equals("test(1).txt")));
+            assertEquals(0, files.size());
         }
         finally {
             FileUtils.deleteDirectory(downloadFolder);
@@ -194,9 +198,11 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
             anchor.click();
             files = FileUtils.listFiles(downloadFolder, null, false);
             assertEquals(2, files.size());
-            final Iterator<File> filesIter = files.iterator();
-            assertEquals("sample(1).pdf", filesIter.next().getName());
-            assertEquals("sample.pdf", filesIter.next().getName());
+
+            // be order agnostic
+            assertTrue(files.removeIf(f -> f.getName().equals("sample.pdf")));
+            assertTrue(files.removeIf(f -> f.getName().equals("sample(1).pdf")));
+            assertEquals(0, files.size());
         }
         finally {
             FileUtils.deleteDirectory(downloadFolder);
