@@ -522,11 +522,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "elementTiming[GSCE],firstElementChild[GCE],getAnimations(),getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
-                + "getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),"
-                + "id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
-                + "lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],nextElementSibling[GCE],"
-                + "onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onfullscreenchange[GSCE],"
-                + "onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
+                + "getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id[GSCE],"
+                + "innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
+                + "lastElementChild[GCE],localName[GCE],matches(),moveBefore(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
+                + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
                 + "onwebkitfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
@@ -707,11 +707,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "elementTiming[GSCE],firstElementChild[GCE],getAnimations(),getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
-                + "getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),"
-                + "id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
-                + "lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],nextElementSibling[GCE],"
-                + "onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onfullscreenchange[GSCE],"
-                + "onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
+                + "getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id[GSCE],"
+                + "innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
+                + "lastElementChild[GCE],localName[GCE],matches(),moveBefore(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
+                + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
                 + "onwebkitfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
@@ -1821,9 +1821,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "alt[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],"
-                + "href[GSCE],noHref[GSCE],origin[GCE],password[GSCE],pathname[GSCE],ping[GSCE],port[GSCE],"
-                + "protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],search[GSCE],shape[GSCE],"
+    @Alerts(CHROME = "alt[GSCE],attributionSrc[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],"
+                + "hostname[GSCE],href[GSCE],noHref[GSCE],origin[GCE],password[GSCE],pathname[GSCE],ping[GSCE],"
+                + "port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],search[GSCE],shape[GSCE],"
                 + "target[GSCE],toString(),"
                 + "username[GSCE]",
             EDGE = "alt[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],"
@@ -6640,11 +6640,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "align[GSCE],alt[GSCE],attributionSrc[GSCE],border[GSCE],complete[GCE],constructor(),"
-                + "crossOrigin[GSCE],currentSrc[GCE],decode(),decoding[GSCE],fetchPriority[GSCE],height[GSCE],"
-                + "hspace[GSCE],isMap[GSCE],loading[GSCE],longDesc[GSCE],lowsrc[GSCE],name[GSCE],naturalHeight[GCE],"
-                + "naturalWidth[GCE],referrerPolicy[GSCE],sharedStorageWritable[GSCE],sizes[GSCE],src[GSCE],"
-                + "srcset[GSCE],useMap[GSCE],vspace[GSCE],width[GSCE],x[GCE],"
+    @Alerts(CHROME = "align[GSCE],alt[GSCE],attributionSrc[GSCE],border[GSCE],browsingTopics[GSCE],complete[GCE],"
+                + "constructor(),crossOrigin[GSCE],currentSrc[GCE],decode(),decoding[GSCE],fetchPriority[GSCE],"
+                + "height[GSCE],hspace[GSCE],isMap[GSCE],loading[GSCE],longDesc[GSCE],lowsrc[GSCE],name[GSCE],"
+                + "naturalHeight[GCE],naturalWidth[GCE],referrerPolicy[GSCE],sharedStorageWritable[GSCE],"
+                + "sizes[GSCE],src[GSCE],srcset[GSCE],useMap[GSCE],vspace[GSCE],width[GSCE],x[GCE],"
                 + "y[GCE]",
             EDGE = "align[GSCE],alt[GSCE],attributionSrc[GSCE],border[GSCE],complete[GCE],constructor(),"
                 + "crossOrigin[GSCE],currentSrc[GCE],decode(),decoding[GSCE],fetchPriority[GSCE],height[GSCE],"
@@ -15204,7 +15204,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementsByName(),getElementsByTagName(),getElementsByTagNameNS(),getSelection(),hasFocus(),"
                 + "hasPrivateToken(),hasRedemptionRecord(),hasStorageAccess(),hasUnpartitionedCookieAccess(),"
                 + "head[GCE],hidden[GCE],images[GCE],implementation[GCE],importNode(),inputEncoding[GCE],"
-                + "lastElementChild[GCE],lastModified[GCE],linkColor[GSCE],links[GCE],onabort[GSCE],"
+                + "lastElementChild[GCE],lastModified[GCE],linkColor[GSCE],links[GCE],moveBefore(),onabort[GSCE],"
                 + "onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],onauxclick[GSCE],"
                 + "onbeforecopy[GSCE],onbeforecut[GSCE],onbeforeinput[GSCE],onbeforematch[GSCE],onbeforepaste[GSCE],"
                 + "onbeforetoggle[GSCE],onbeforexrselect[GSCE],onblur[GSCE],oncancel[GSCE],oncanplay[GSCE],"
@@ -15687,7 +15687,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "append(),childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
-                + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
+                + "getElementById(),lastElementChild[GCE],moveBefore(),prepend(),querySelector(),querySelectorAll(),"
                 + "replaceChildren()",
             EDGE = "append(),childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
                 + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
