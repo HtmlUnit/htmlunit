@@ -138,9 +138,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.align = value;\n"
-            + "    } catch(e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  var tr1 = document.getElementById('tr1');\n"
             + "  var tr2 = document.getElementById('tr2');\n"
@@ -241,9 +239,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.vAlign = value;\n"
-            + "    } catch(e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  var tr1 = document.getElementById('tr1');\n"
             + "  var tr2 = document.getElementById('tr2');\n"
@@ -370,11 +366,11 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "</script></body></html>";
 
@@ -398,11 +394,11 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "</script></body></html>";
 

@@ -1621,9 +1621,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  try {\n"
             + "    window.stop();\n"
             + "    log(true);\n"
-            + "  } catch(e) {\n"
-            + "    log('error');\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

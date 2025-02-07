@@ -373,11 +373,11 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "</script></body></html>";
 
@@ -401,11 +401,11 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = 'abc'; } catch(e) { log(e); }\n"
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "</script></body></html>";
 
@@ -429,11 +429,11 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "</script></body></html>";
 
@@ -457,11 +457,11 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "</script></body></html>";
 
@@ -485,11 +485,11 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "</script></body></html>";
 
@@ -513,11 +513,11 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "</script></body></html>";
 

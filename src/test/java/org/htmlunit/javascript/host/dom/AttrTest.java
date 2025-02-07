@@ -37,7 +37,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "exception thrown"})
+    @Alerts({"true", "TypeError"})
     public void specified() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -49,9 +49,7 @@ public class AttrTest extends WebDriverTestCase {
             + "    log(o1.getAttributeNode('value').specified);\n"
             + "    var o2 = s.options[1];\n"
             + "    log(o2.getAttributeNode('value').specified);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception thrown');\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'>\n"

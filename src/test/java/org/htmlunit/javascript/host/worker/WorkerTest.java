@@ -231,7 +231,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception catched")
+    @Alerts("TypeError")
     public void createFromPrototypeAndDefineProperty() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
@@ -240,7 +240,7 @@ public class WorkerTest extends WebDriverTestCase {
             + "try {\n"
             + "  f.prototype['onmessage'] = function() {};\n"
             + "  log('no exception');\n"
-            + "} catch(e) { log('exception catched'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

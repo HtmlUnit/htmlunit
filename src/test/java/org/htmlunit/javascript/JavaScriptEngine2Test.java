@@ -1060,7 +1060,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception' + e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "var pi = 'from worker';\n"

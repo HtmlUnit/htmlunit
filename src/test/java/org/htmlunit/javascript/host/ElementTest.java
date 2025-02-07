@@ -313,7 +313,7 @@ public class ElementTest extends WebDriverTestCase {
 
             + "    res = de.getElementsByTagName('rEsulT');\n"
             + "    log(res.length);\n"
-            + "  } catch(e) {log('exception ' + e)}\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

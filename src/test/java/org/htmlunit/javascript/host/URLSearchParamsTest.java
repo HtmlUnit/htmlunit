@@ -349,7 +349,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception param")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = "noValue=undefined",
             EDGE = "noValue=undefined",
             FF = "noValue=undefined",
@@ -366,7 +366,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "          searchParams = new URLSearchParams();\n"
             + "          searchParams.append('noValue');\n"
             + "          log(searchParams);\n"
-            + "        } catch(e) { log('exception param'); }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"

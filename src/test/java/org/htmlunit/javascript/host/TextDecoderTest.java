@@ -754,7 +754,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"", "ex-null", "\uf7cf!"})
+    @Alerts({"", "ex-null", "TypeError", "\uf7cf!"})
     public void decodeXuserDefined() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -765,16 +765,16 @@ public class TextDecoderTest extends WebDriverTestCase {
 
             + "      try {\n"
             + "        log(dec.decode(undefined));\n"
-            + "      } catch(e) { log('ex-undefined'); }\n"
+            + "      } catch(e) { log('ex-undefined'); logEx(e); }\n"
 
             + "      try {\n"
             + "        log(dec.decode(null));\n"
-            + "      } catch(e) { log('ex-null'); }\n"
+            + "      } catch(e) { log('ex-null'); logEx(e); }\n"
 
             + "      try {\n"
             + "        var bytes = new Uint8Array([ 207, 33]);"
             + "        log(dec.decode(bytes));\n"
-            + "      } catch(e) { log('exception' + e); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

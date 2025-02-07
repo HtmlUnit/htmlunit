@@ -149,7 +149,7 @@ public class FunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"error", "1"})
+    @Alerts({"ReferenceError", "1"})
     public void conditionallyCreatedFunctionStrict() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -159,7 +159,7 @@ public class FunctionsTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log('foo = ' + foo);\n"
-            + "  } catch(e) { log('error'); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  if (true) {\n"
             + "    log(foo());\n"
             + "    function foo() { return 1; }\n"

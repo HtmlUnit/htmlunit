@@ -69,7 +69,7 @@ public class MediaDevicesTest extends WebDriverTestCase {
             + "    if (md) {\n"
             + "      md.getUserMedia({})\n"
             + "           .then(function(stream) { log(stream); })\n"
-            + "           .catch(function(err) { log('err'); });"
+            + "           .catch(function(e) { logEx(e); });"
             + "    }\n"
             + "  }\n"
             + "</script>\n"

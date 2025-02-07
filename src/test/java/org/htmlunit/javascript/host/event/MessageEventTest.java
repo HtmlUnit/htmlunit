@@ -200,7 +200,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "  try {\n"
             + "    e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, []);\n"
             + "    dump(e);\n"
-            + "  } catch(e) { log('exception ' + e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "} else {\n"
             + "  log('no initMessageEvent');\n"
             + "}\n"

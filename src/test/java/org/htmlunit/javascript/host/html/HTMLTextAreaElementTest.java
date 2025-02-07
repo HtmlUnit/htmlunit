@@ -376,9 +376,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  function setCols(e, value) {\n"
             + "    try {\n"
             + "      e.cols = value;\n"
-            + "    } catch(e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -427,9 +425,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  function setRows(e, value) {\n"
             + "    try {\n"
             + "      e.rows = value;\n"
-            + "    } catch(e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -667,7 +663,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"10", "10", "error", "10", "10", "0", "0"})
+    @Alerts({"10", "10", "IndexSizeError/DOMException", "10", "10", "0", "0"})
     public void setMaxLength() throws Exception {
         final String html
             = "<html>\n"
@@ -677,7 +673,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "    function setMaxLength(length){\n"
             + "      try {\n"
             + "        document.form1.textarea1.maxLength = length;\n"
-            + "      } catch(e) { log('error'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

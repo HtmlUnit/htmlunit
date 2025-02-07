@@ -2325,7 +2325,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(new Window());\n"
-            + "    } catch(e) {log('exception ' + (e instanceof TypeError));}\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

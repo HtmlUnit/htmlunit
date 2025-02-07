@@ -796,7 +796,7 @@ public class EventTest extends WebDriverTestCase {
             + "      log(e.type);\n"
             + "      log(e.bubbles);\n"
             + "      log(e.cancelable);\n"
-            + "    } catch(e) { log('e-' + '" + eventType + "'); }\n"
+            + "    } catch(e) { log('e-' + '" + eventType + "'); logEx(e); }\n"
 
             + "    var e = document.createEvent('Event');\n"
             + "    try {\n"
@@ -804,7 +804,7 @@ public class EventTest extends WebDriverTestCase {
             + "      log(e.type);\n"
             + "      log(e.bubbles);\n"
             + "      log(e.cancelable);\n"
-            + "    } catch(e) { log('e2-' + '" + eventType + "'); }\n"
+            + "    } catch(e) { log('e2-' + '" + eventType + "'); logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";

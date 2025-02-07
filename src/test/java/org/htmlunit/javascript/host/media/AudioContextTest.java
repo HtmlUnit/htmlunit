@@ -72,7 +72,7 @@ public class AudioContextTest extends WebDriverTestCase {
             + "      try {\n"
             + "        log(typeof AudioContext);\n"
             + "        log(new AudioContext());\n"
-            + "      } catch(e) { log('error'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

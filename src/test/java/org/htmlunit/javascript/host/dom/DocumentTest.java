@@ -2459,8 +2459,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "    log(document.scripts);\n"
             + "    try {\n"
             + "      log(document.scripts.length);\n" // This line used to blow up
-            + "    }\n"
-            + "    catch(e) { log('exception occured') }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head><body onload='doTest();'>\n"
             + "<script>var scriptTwo = 1;</script>\n"
