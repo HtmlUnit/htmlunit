@@ -44,6 +44,6 @@ public class GeolocationPositionError extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.typeError("Illegal constructor.");
     }
 }
