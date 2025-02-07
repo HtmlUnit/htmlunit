@@ -358,7 +358,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts({"Error", "true"})
+    @Alerts({"TypeError", "true"})
     public void startsWithRegExpMatch() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -370,9 +370,7 @@ public class NativeStringTest extends WebDriverTestCase {
             + "      var res = '';\n"
             + "      try {\n"
             + "        log('/./'.startsWith(regExp));\n"
-            + "      } catch(e) {\n"
-            + "        log('Error');\n"
-            + "      }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "      regExp[Symbol.match] = false;\n"
             + "      log('/./'.startsWith(regExp));\n"
             + "    }\n"
@@ -388,7 +386,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts({"Error", "true"})
+    @Alerts({"TypeError", "true"})
     public void endsWithRegExpMatch() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -400,9 +398,7 @@ public class NativeStringTest extends WebDriverTestCase {
             + "      var res = '';\n"
             + "      try {\n"
             + "        log('/./'.endsWith(regExp));\n"
-            + "      } catch(e) {\n"
-            + "        log('Error');\n"
-            + "      }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "      regExp[Symbol.match] = false;\n"
             + "      log('/./'.endsWith(regExp));\n"
             + "    }\n"

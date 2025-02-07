@@ -1182,7 +1182,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             webRequest_.setAdditionalHeader(name, value);
         }
         else {
-            throw JavaScriptEngine.reportRuntimeError("The open() method must be called before setRequestHeader().");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "The open() method must be called before setRequestHeader().",
+                    DOMException.INVALID_STATE_ERR);
         }
     }
 

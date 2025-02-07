@@ -430,9 +430,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "    try {\n"
             + "      recurse(c++);\n"
-            + "    } catch(e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='recurse(1)'>\n"

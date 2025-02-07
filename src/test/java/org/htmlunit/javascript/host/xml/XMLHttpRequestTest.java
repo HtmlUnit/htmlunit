@@ -2294,9 +2294,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send(blob);\n"
             + "    log('done');\n"
-            + "  } catch(e) {\n"
-            + "    log('error: ' + e.message);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -2339,9 +2337,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send(typedArray);\n"
             + "    log('done');\n"
-            + "  } catch(e) {\n"
-            + "    log('error: ' + e.message);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -2381,17 +2377,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    searchParams.append('q', 'HtmlUnit');\n"
             + "    searchParams.append('u', '\u043B\u0189');\n"
             + "    log(searchParams);\n"
-            + "  } catch(e) {\n"
-            + "    log('error: URLSearchParams');\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
+
             + "  try {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send(searchParams);\n"
             + "    log('done');\n"
-            + "  } catch(e) {\n"
-            + "    log('error: ' + e.message);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -2435,9 +2428,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    log('done');\n"
-            + "  } catch(e) {\n"
-            + "    log('error: ' + e.message);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -2478,9 +2469,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send('HtmlUnit \u043B\u0189');\n"
             + "    log('done');\n"
-            + "  } catch(e) {\n"
-            + "    log('error: ' + e.message);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -2519,9 +2508,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    xhr.setRequestHeader('Content-Type', 'text/jpeg');\n"
             + "    xhr.send('HtmlUnit \u043B\u0189');\n"
             + "    log('done');\n"
-            + "  } catch(e) {\n"
-            + "    log('error: ' + e.message);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -2545,7 +2532,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("error")
+    @Alerts("InvalidStateError/DOMException")
     public void setRequestHeaderNotOpend() throws Exception {
         final String html
             = "<html>\n"
@@ -2557,9 +2544,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.setRequestHeader('Content-Type', 'text/jpeg');\n"
             + "    log('done');\n"
-            + "  } catch(e) {\n"
-            + "    log('error');\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -2903,9 +2888,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
     @Test
     @Alerts(DEFAULT = {"", "", "arraybuffer", "InvalidStateError/DOMException",
-                       "send done", "ex InvalidStateError"},
-            FF = {"", "", "arraybuffer", "", "send done", "ex InvalidStateError"},
-            FF_ESR = {"", "", "arraybuffer", "", "send done", "ex InvalidStateError"})
+                       "send done", "InvalidStateError/DOMException"},
+            FF = {"", "", "arraybuffer", "", "send done", "InvalidStateError/DOMException"},
+            FF_ESR = {"", "", "arraybuffer", "", "send done", "InvalidStateError/DOMException"})
     public void responseTextInvalidResponseType() throws Exception {
         final String html =
               "<html>\n"
@@ -2943,7 +2928,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        if (xhr.readyState == 4) {\n"
             + "          try {\n"
             + "            log(xhr.responseText);\n"
-            + "          } catch(e) { log('ex ' + e.name); }\n"
+            + "          } catch(e) { logEx(e); }\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -3363,7 +3348,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "            log(xhr.response);\n"
             + "            log(xhr.response.Html);\n"
             + "            log(JSON.stringify(xhr.response));\n"
-            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "          } catch(e) { logEx(e); }\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -3404,7 +3389,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        if (xhr.readyState == 4) {\n"
             + "          try {\n"
             + "            log(xhr.response);\n"
-            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "          } catch(e) { logEx(e); }\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -3445,7 +3430,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        if (xhr.readyState == 4) {\n"
             + "          try {\n"
             + "            log(xhr.response);\n"
-            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "          } catch(e) { logEx(e); }\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -3489,7 +3474,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        if (xhr.readyState == 4) {\n"
             + "          try {\n"
             + "            log(xhr.response);\n"
-            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "          } catch(e) { logEx(e); }\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -3533,7 +3518,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        if (xhr.readyState == 4) {\n"
             + "          try {\n"
             + "            log(xhr.response);\n"
-            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "          } catch(e) { logEx(e); }\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
