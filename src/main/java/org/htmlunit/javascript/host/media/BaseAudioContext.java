@@ -120,6 +120,6 @@ public class BaseAudioContext extends EventTarget {
             return null;
         }
 
-        return setupRejectedPromise(() -> null);
+        return setupRejectedPromise(() -> domException);
     }
 }
