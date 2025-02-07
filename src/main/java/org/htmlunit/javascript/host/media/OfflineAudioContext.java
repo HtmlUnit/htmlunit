@@ -36,7 +36,7 @@ public class OfflineAudioContext extends BaseAudioContext {
     @JsxConstructor
     public void jsConstructor(final ScriptableObject optionsOrNumberOfChannels) {
         if (optionsOrNumberOfChannels == null) {
-            throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
+            throw JavaScriptEngine.typeError("Illegal constructor.");
         }
     }
 

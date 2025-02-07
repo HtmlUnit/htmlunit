@@ -2317,7 +2317,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception true")
+    @Alerts("TypeError")
     public void constructor() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

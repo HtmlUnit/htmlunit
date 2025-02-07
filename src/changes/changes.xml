@@ -9,6 +9,12 @@
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
             <action type="fix" dev="rbri">
+                HtmlTextArea - several fixes to throw the correct error.
+            </action>
+            <action type="fix" dev="rbri">
+                AudioContext/OfflineAudioContext - several fixes to throw the correct error.
+            </action>
+            <action type="fix" dev="rbri">
                 'Illegal constructor' is a type error.
             </action>
             <action type="update" dev="rbri">

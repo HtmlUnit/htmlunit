@@ -21,6 +21,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.NodeList;
 
 /**
@@ -288,8 +289,9 @@ public class HTMLTextAreaElement extends HTMLElement {
             final int i = Integer.parseInt(maxLength);
 
             if (i < 0) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(
-                    new NumberFormatException("New value for maxLength '" + maxLength + "' is smaller than zero."));
+                throw JavaScriptEngine.asJavaScriptException(getWindow(),
+                        "New value for maxLength '" + maxLength + "' is smaller than zero.",
+                        DOMException.INDEX_SIZE_ERR);
             }
             getDomNodeOrDie().setAttribute("maxLength", maxLength);
         }

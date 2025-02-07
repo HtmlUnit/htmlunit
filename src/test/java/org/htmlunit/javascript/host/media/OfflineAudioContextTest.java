@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.media;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -120,6 +121,14 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"OfflineAudioContext prep done", "Error with decoding audio data", "EncodingError/DOMException"})
+    @HtmlUnitNYI(CHROME = {"OfflineAudioContext prep done", "Error with decoding audio data",
+                           "NotSupportedError/DOMException"},
+            EDGE = {"OfflineAudioContext prep done", "Error with decoding audio data",
+                    "NotSupportedError/DOMException"},
+            FF = {"OfflineAudioContext prep done", "Error with decoding audio data",
+                  "NotSupportedError/DOMException"},
+            FF_ESR = {"OfflineAudioContext prep done", "Error with decoding audio data",
+                      "NotSupportedError/DOMException"})
     public void decodeAudioData() throws Exception {
         final String html
             = "<html>\n"
@@ -156,6 +165,14 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"OfflineAudioContext prep done", "Error with decoding audio data", "EncodingError/DOMException"})
+    @HtmlUnitNYI(CHROME = {"OfflineAudioContext prep done", "Error with decoding audio data",
+                           "NotSupportedError/DOMException"},
+            EDGE = {"OfflineAudioContext prep done", "Error with decoding audio data",
+                    "NotSupportedError/DOMException"},
+            FF = {"OfflineAudioContext prep done", "Error with decoding audio data",
+                  "NotSupportedError/DOMException"},
+            FF_ESR = {"OfflineAudioContext prep done", "Error with decoding audio data",
+                      "NotSupportedError/DOMException"})
     public void decodeAudioData2() throws Exception {
         final String html
             = "<html>\n"

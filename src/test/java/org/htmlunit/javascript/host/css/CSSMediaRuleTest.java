@@ -49,6 +49,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
 
         loadPageVerifyTextArea2(html);
     }
+
     /**
      * @throws Exception if an error occurs
      */
