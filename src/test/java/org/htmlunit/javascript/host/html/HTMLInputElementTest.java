@@ -1574,7 +1574,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  try {\n"
             + "    f.type = 'CHECKBOX';\n"
             + "    log(f.type + ' ' + f.getAttribute('type'));\n"
-            + "  } catch(e) { log('error');}\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1729,7 +1729,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch(e) { log('error'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(elem.align);\n"
             + "  }\n"
 

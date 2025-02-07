@@ -394,7 +394,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"book", "exception /title", "exception title"})
+    @Alerts({"book", "exception /title", "TypeError", "exception title", "TypeError"})
     public void selectNodes_fromRoot() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -407,11 +407,11 @@ public class XMLDocumentTest extends WebDriverTestCase {
 
             + "      try {\n"
             + "        log(child.selectNodes('/title').length);\n"
-            + "      } catch(e) { log('exception /title'); }\n"
+            + "      } catch(e) { log('exception /title'); logEx(e); }\n"
 
             + "      try {\n"
             + "        log(child.selectNodes('title').length);\n"
-            + "      } catch(e) { log('exception title'); }\n"
+            + "      } catch(e) { log('exception title'); logEx(e); }\n"
             + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION

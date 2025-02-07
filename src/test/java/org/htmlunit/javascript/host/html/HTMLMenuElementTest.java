@@ -132,22 +132,22 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "        log(document.getElementById('menu4').getAttribute('type'));\n"
                 + "        log(document.getElementById('menu5').getAttribute('type'));\n"
 
-                + "        try { document.getElementById('menu1').type = 'list' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'list' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'context' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'context' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = '' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = '' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
                 + "      }\n"
                 + "    </script>\n"

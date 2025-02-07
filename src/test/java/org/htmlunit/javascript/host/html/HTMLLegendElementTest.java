@@ -119,7 +119,7 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch(e) { log('error'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(elem.align);\n"
             + "  }\n"
 

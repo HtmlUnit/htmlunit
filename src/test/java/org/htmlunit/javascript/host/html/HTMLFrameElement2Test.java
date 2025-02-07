@@ -726,7 +726,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "    function check() {\n"
             + "      try {\n"
             + "        log(document.getElementById(\"frame1\").contentDocument);\n"
-            + "      } catch(e) { log('error'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

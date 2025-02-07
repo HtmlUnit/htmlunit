@@ -653,9 +653,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "      } else {\n"
             + "        log('no refresh function');\n"
             + "      }\n"
-            + "    } catch(e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<table id='myTable'></table>\n"
@@ -689,9 +687,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "      function set(e, value) {\n"
             + "        try {\n"
             + "          e.align = value;\n"
-            + "        } catch(e) {\n"
-            + "          log('error');\n"
-            + "        }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -753,11 +749,11 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "</script></body></html>";
 
@@ -781,11 +777,11 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "</script></body></html>";
 
@@ -974,7 +970,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  function setRules(elem, value) {\n"
             + "    try {\n"
             + "      elem.rules = value;\n"
-            + "    } catch(e) { log('error'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(elem.rules);\n"
             + "  }\n"
 

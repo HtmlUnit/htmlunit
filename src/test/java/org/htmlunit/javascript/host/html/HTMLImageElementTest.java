@@ -390,7 +390,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch(e) { log('error'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(elem.align);\n"
             + "  }\n"
 
@@ -1161,7 +1161,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("error")
+    @Alerts("TypeError")
     public void ctorHTMLImageElement() throws Exception {
         final String html
             = "<html>\n"
@@ -1172,7 +1172,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "        try {\n"
             + "          var htmlImageElement = new HTMLImageElement(1, 1);"
             + "          log('' + htmlImageElement);\n"
-            + "        } catch(e) { log('error'); }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
