@@ -34,7 +34,7 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "error"})
+    @Alerts({"function", "TypeError"})
     public void ctor() throws Exception {
         final String html
             = "<html>\n"
@@ -46,7 +46,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "      try {\n"
             + "        log(typeof Crypto);\n"
             + "        new Crypto();\n"
-            + "      } catch(e) { log('error'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

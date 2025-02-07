@@ -731,7 +731,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("ex")
+    @Alerts("RangeError")
     public void decodeReplacement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -740,7 +740,7 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "    function doTest() {\n"
             + "      try {\n"
             + "        var dec = new TextDecoder('iso-2022-kr');\n"
-            + "      } catch(e) { log('ex'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

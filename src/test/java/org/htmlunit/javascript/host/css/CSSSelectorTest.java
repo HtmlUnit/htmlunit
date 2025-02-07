@@ -2124,7 +2124,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
             + "  log(document.querySelectorAll('#silly\\\\~id')[0].id);\n"
             + "  log(document.querySelectorAll(\"#silly\\\\~id\")[0].id);\n"
-            + "} catch(e) {log('exception ' + e)}\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -2453,7 +2453,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
             + "    res = de.querySelectorAll('rEsulT');\n"
             + "    log(res.length);\n"
-            + "  } catch(e) {log('exception ' + e)}\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -2507,7 +2507,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    log(res.length);\n"
             + "    log(res[0].innerHTML);\n"
 
-            + "  } catch(e) {log('exception ' + e)}\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);

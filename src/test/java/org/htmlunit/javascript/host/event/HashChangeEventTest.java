@@ -131,7 +131,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('HashChangeEvent');\n"
             + "      log(event);\n"
-            + "    } catch(e) { log('exception createEvent'); return; }\n"
+            + "    } catch(e) { log('exception createEvent'); logEx(e); return; }\n"
 
             + "    if (!event.initHashChangeEvent) {log('missing initHashChangeEvent'); return;}\n"
 
@@ -139,7 +139,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "      event.initHashChangeEvent('hashchange', true, false, '" + URL_FIRST + "', '"
             + URL_FIRST + "#1');\n"
             + "      dump(event);\n"
-            + "    } catch(e) { log('exception initHashChangeEvent') }\n"
+            + "    } catch(e) { log('exception initHashChangeEvent'); logEx(e); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

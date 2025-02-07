@@ -818,9 +818,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).cssText);\n"
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
-            + "  } catch(e) {\n"
-            + "    log('exception'+e);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -855,9 +853,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).cssText);\n"
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
-            + "  } catch(e) {\n"
-            + "    log('exception'+e);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
 
             + "</body></html>";

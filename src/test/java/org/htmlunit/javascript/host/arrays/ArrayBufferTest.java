@@ -54,7 +54,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception true")
+    @Alerts("RangeError")
     public void ctorLengthNegative() throws Exception {
         final String html
             = "<html><head>\n"
@@ -64,7 +64,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var buff = new ArrayBuffer(-1);\n"
             + "    log(buff.byteLength);\n"
-            + "  } catch(e) { log('exception ' + (e instanceof RangeError)); }"
+            + "  } catch(e) { logEx(e); }"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

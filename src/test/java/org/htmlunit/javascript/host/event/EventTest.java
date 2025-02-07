@@ -462,9 +462,7 @@ public class EventTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  window.addEventListener('mousedown', null, true);\n"
-            + "} catch (err) {\n"
-            + "  log('error');\n"
-            + "}\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(content);

@@ -35,7 +35,7 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "error"})
+    @Alerts({"function", "TypeError"})
     public void ctor() throws Exception {
         final String html
             = "<html>\n"
@@ -52,7 +52,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "      try {\n"
             + "        log(typeof XPathResult);\n"
             + "        new XPathResult();\n"
-            + "      } catch(e) { log('error'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

@@ -439,8 +439,8 @@ public class Document2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "function x() {\n"
             + "  var d = window.frames['f'].document;\n"
-            + "  try { log(d.queryCommandEnabled('SelectAll')); } catch(e) { log('error'); }\n"
-            + "  try { log(d.queryCommandEnabled('sElectaLL')); } catch(e) { log('error'); }\n"
+            + "  try { log(d.queryCommandEnabled('SelectAll')); } catch(e) { logEx(e); }\n"
+            + "  try { log(d.queryCommandEnabled('sElectaLL')); } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></body></html>";
 

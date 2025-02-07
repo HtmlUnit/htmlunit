@@ -3522,7 +3522,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception true")
+    @Alerts("TypeError")
     public void ctor() throws Exception {
         final String html =
                 "<html>\n"
@@ -3536,9 +3536,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                 + "    try {"
                 + "      var c = new CSSStyleDeclaration();\n"
                 + "      log(c);\n"
-                + "    } catch(e) {\n"
-                + "      log('exception ' + (e instanceof TypeError));\n"
-                + "    }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  </script>\n"
                 + "</body></html>";
 
@@ -3573,9 +3571,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  try {\n"
             + "    log(decl.item(-1));\n"
             + "    log(typeof decl.item(-1));\n"
-            + "  } catch(e) {\n"
-            + "    log('exception ');\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
 
             + "</body></html>";
