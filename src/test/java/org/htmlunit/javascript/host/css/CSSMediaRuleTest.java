@@ -34,6 +34,25 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("TypeError")
+    public void ctor() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "try {\n"
+            + "  var rule = new CSSMediaRule();\n"
+            + "  log(rule);\n"
+            + "} catch(e) { logEx(e); }\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"[object CSSMediaRule]", "[object CSSMediaRule]"})
     public void scriptableToString() throws Exception {
         final String html

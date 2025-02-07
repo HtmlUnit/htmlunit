@@ -33,6 +33,26 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("TypeError")
+    public void ctor() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "try {\n"
+            + "  var rule = new CSSFontFaceRule();\n"
+            + "  log(rule);\n"
+            + "} catch(e) { logEx(e); }\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"[object CSSFontFaceRule]", "5",
              "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"})
     public void simple() throws Exception {
@@ -52,7 +72,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  log(rule.type);\n"
             + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { logEx(e); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -78,7 +98,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { logEx(e); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -104,7 +124,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { logEx(e); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
@@ -130,7 +150,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { logEx(e); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTextArea2(html);
