@@ -1154,7 +1154,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "    var div = document.getElementById('tester');\n"
             + "    try {\n"
             + "      div.innerHTML = div.innerHTML;\n"
-            + "    } catch (e) { logEx(e); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(div.innerHTML);\n"
             + "  </script>\n"
 

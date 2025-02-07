@@ -203,7 +203,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "  alert(frameDoc.domain);\n"
             + "  try {\n"
             + "    frameDoc.domain = domain;\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"

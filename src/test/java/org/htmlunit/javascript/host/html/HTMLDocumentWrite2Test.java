@@ -421,7 +421,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "  var t = document.createTextNode(\"document.write('in inline script'); document.title = 'done';\");\n"
             + "  s.appendChild(t);\n"
             + "  document.body.appendChild(s);\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></div></body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -798,7 +798,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "  function foo() { log('foo called'); var d = document.write; d(4); }\n"
             + "  try {\n"
             + "    foo();\n"
-            + "  } catch (e) { log('exception occurred'); document.write(7); }\n"
+            + "  } catch(e) { log('exception occurred'); document.write(7); }\n"
             + "</script>\n"
             + "</body></html>";
 

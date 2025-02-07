@@ -51,7 +51,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new WheelEvent('wheel');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -77,7 +77,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new WheelEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,7 +99,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new WheelEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,7 +121,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new WheelEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -143,7 +143,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new WheelEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,7 +165,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new WheelEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -193,7 +193,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "        'deltaMode': 1\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -216,7 +216,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "      var event = new WheelEvent('wheel', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -244,7 +244,7 @@ public class WheelEventTest extends WebDriverTestCase {
             + "        'deltaX': 'ten'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

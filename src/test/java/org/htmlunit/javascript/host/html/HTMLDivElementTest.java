@@ -107,7 +107,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { log('error'); }\n"
+            + "    } catch(e) { log('error'); }\n"
             + "    log(elem.align);\n"
             + "  }\n"
 

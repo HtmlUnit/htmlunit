@@ -1726,7 +1726,7 @@ public final class XMLHttpRequestLifeCycleTest {
             htmlBuilder.append("           xhr.abort();\n");
             htmlBuilder.append("           logText('abort-done: ' + xhr.readyState + '_' + xhr.status);\n");
         }
-        htmlBuilder.append("        } catch (e) { logText('ExceptionThrown'); }\n");
+        htmlBuilder.append("        } catch(e) { logText('ExceptionThrown'); }\n");
         htmlBuilder.append("      }\n");
 
         htmlBuilder.append("      function alertEventState(event) {\n");
@@ -1739,7 +1739,7 @@ public final class XMLHttpRequestLifeCycleTest {
             htmlBuilder.append("            logText('abort-done: ' + xhr.readyState + '_' + xhr.status);");
             htmlBuilder.append("          }\n");
         }
-        htmlBuilder.append("        } catch (e) { logText('ExceptionThrown abort'); }\n");
+        htmlBuilder.append("        } catch(e) { logText('ExceptionThrown abort'); }\n");
         htmlBuilder.append("      }\n");
 
         htmlBuilder.append("      function logText(txt) {\n");

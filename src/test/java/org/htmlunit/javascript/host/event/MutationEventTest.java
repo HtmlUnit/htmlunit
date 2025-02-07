@@ -56,7 +56,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new MutationEvent('mutant');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -80,7 +80,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new MutationEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -104,7 +104,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new MutationEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -128,7 +128,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new MutationEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -150,7 +150,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new MutationEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -174,7 +174,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new MutationEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -200,7 +200,7 @@ public class MutationEventTest extends WebDriverTestCase {
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -225,7 +225,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "      var event = new MutationEvent('mutant', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -251,7 +251,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

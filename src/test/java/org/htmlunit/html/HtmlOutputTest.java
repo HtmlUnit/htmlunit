@@ -77,7 +77,7 @@ public class HtmlOutputTest extends WebDriverTestCase {
             + "  function set(fs, value) {\n"
             + "    try {\n"
             + "      fs.align = value;\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      log('error');\n"
             + "    }\n"
             + "  }\n"

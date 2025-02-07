@@ -138,7 +138,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.align = value;\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      log('error');\n"
             + "    }\n"
             + "  }\n"
@@ -241,7 +241,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.vAlign = value;\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      log('error');\n"
             + "    }\n"
             + "  }\n"
@@ -427,7 +427,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "      var newCell = row.insertCell(" + cellIndex + ");\n"
             + "      log(row.cells.length);\n"
             + "      log(newCell.cellIndex);\n"
-            + "    } catch (e) { logEx(e); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  </script>\n"
             + "</body></html>";
 

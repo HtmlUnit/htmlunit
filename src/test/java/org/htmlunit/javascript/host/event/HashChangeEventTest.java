@@ -60,7 +60,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new HashChangeEvent('hashchange');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -86,7 +86,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "        'newURL': '" + URL_FIRST + "#1'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -109,7 +109,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('HashChangeEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -131,7 +131,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('HashChangeEvent');\n"
             + "      log(event);\n"
-            + "    } catch (e) { log('exception createEvent'); return; }\n"
+            + "    } catch(e) { log('exception createEvent'); return; }\n"
 
             + "    if (!event.initHashChangeEvent) {log('missing initHashChangeEvent'); return;}\n"
 
@@ -139,7 +139,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "      event.initHashChangeEvent('hashchange', true, false, '" + URL_FIRST + "', '"
             + URL_FIRST + "#1');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception initHashChangeEvent') }\n"
+            + "    } catch(e) { log('exception initHashChangeEvent') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -164,7 +164,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "      event.initHashChangeEvent('hashchange', true, false, '" + URL_FIRST + "', '"
             + URL_FIRST + "#1');\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onhashchange = dump;\n"
@@ -189,7 +189,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('Event');\n"
             + "      event.initEvent('hashchange', true, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onhashchange = dump;\n"

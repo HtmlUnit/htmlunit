@@ -53,7 +53,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent('before');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -79,7 +79,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -103,7 +103,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -127,7 +127,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -149,7 +149,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -173,7 +173,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BeforeInstallPromptEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -198,7 +198,7 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             + "      var event = new BeforeInstallPromptEvent('click', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

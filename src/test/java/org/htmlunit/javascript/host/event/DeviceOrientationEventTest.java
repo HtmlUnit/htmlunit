@@ -58,7 +58,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent('orientation');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -84,7 +84,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -106,7 +106,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -128,7 +128,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -150,7 +150,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -172,7 +172,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -196,7 +196,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -219,7 +219,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "      var event = new DeviceOrientationEvent('orientation', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -243,7 +243,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

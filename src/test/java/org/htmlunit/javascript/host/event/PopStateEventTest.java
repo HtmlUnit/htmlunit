@@ -62,7 +62,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new PopStateEvent('popstate');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -87,7 +87,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "        'state': 2,\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -111,7 +111,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -136,7 +136,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('PopStateEvent');\n"
             + "      event.state = 'test';\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -160,17 +160,17 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
             + "      event.initEvent('', true, true);\n"
-            + "    } catch (e) { log('exception ctor'); return; }\n"
+            + "    } catch(e) { log('exception ctor'); return; }\n"
 
             + "    try {\n"
             + "      dispatchEvent(event);\n"
             + "      log('dispatched');\n"
-            + "    } catch (e) { log('exception' + e) }\n"
+            + "    } catch(e) { log('exception' + e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  try {\n"
             + "    window.addEventListener('popstate',dump);\n"
-            + "  } catch (e) { }\n"
+            + "  } catch(e) { }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -192,17 +192,17 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
-            + "    } catch (e) { log('ctor ' + e.name); return; }\n"
+            + "    } catch(e) { log('ctor ' + e.name); return; }\n"
 
             + "    try {\n"
             + "      dispatchEvent(event);\n"
             + "      log('dispatched');\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  try {\n"
             + "    window.addEventListener('popstate',dump);\n"
-            + "  } catch (e) { }\n"
+            + "  } catch(e) { }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -223,7 +223,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
-            + "    } catch (e) { log('exception ctor'); return }\n"
+            + "    } catch(e) { log('exception ctor'); return }\n"
 
             + "    if (event.initPopStateEvent) {\n"
             + "      event.initPopStateEvent('PopState', true, false, 'html');\n"

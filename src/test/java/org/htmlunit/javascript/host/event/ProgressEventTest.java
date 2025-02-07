@@ -58,7 +58,7 @@ public class ProgressEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new ProgressEvent('progress');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -85,7 +85,7 @@ public class ProgressEventTest extends WebDriverTestCase {
             + "        'total': 666\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -107,7 +107,7 @@ public class ProgressEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('ProgressEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

@@ -494,7 +494,7 @@ public class Window3Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  window.scrollByLines(2);\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -515,7 +515,7 @@ public class Window3Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  window.scrollByPages(2);\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -1023,13 +1023,13 @@ public class Window3Test extends WebDriverTestCase {
             + "      window.execScript('log(\"JScript\")',    'JScript');\n"
             + "      try {\n"
             + "        window.execScript('log(\"VBScript\")', 'VBScript');\n"
-            + "      } catch (e) { log('exception1'); }\n"
+            + "      } catch(e) { log('exception1'); }\n"
             + "      try {\n"
             + "        window.execScript('log(\"BadLanguage\")', 'BadLanguage');\n"
-            + "      } catch (e) {\n"
+            + "      } catch(e) {\n"
             + "        log('exception2: ' + e.message.substr(0, 20)); // msg now contains info on error location\n"
             + "      }\n"
-            + "    } catch (e) { logEx(e); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1141,7 +1141,7 @@ public class Window3Test extends WebDriverTestCase {
             + "    window.attachEvent('onload', test2);\n"
             + "    window.attachEvent('onload', test3);\n"
             + "    window.detachEvent('onload', test3);\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></head>\n"
             + "<body onload='log(\"onload\")'></body></html>";
 
@@ -1165,7 +1165,7 @@ public class Window3Test extends WebDriverTestCase {
             + "}\n"
             + "try {\n"
             + "  window.attachEvent('onload', test);\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -1621,7 +1621,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  try {\n"
             + "    window.stop();\n"
             + "    log(true);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('error');\n"
             + "  }\n"
             + "}\n"
@@ -1728,7 +1728,7 @@ public class Window3Test extends WebDriverTestCase {
             + "    try {\n"
             + "      getComputedStyle(void 0);\n"
             + "      log('no exception');\n"
-            + "    } catch (e) {logEx(e)}\n"
+            + "    } catch(e) {logEx(e)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

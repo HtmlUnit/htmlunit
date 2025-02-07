@@ -52,7 +52,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TimeEvent('time');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -76,7 +76,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TimeEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -100,7 +100,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TimeEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -124,7 +124,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TimeEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -146,7 +146,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TimeEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -170,7 +170,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TimeEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -197,7 +197,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "        'detail': 7\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -222,7 +222,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "      var event = new TimeEvent('time', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -248,7 +248,7 @@ public class TimeEventTest extends WebDriverTestCase {
             + "        'detail': 'ten'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

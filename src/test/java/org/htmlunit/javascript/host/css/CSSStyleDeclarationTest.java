@@ -888,7 +888,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "      try{\n"
             + "        var p = span.style.getPropertyValue(prop);\n"
             + "        log(p);\n"
-            + "      } catch (e) { logEx(e); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
 
             + "    function test() {\n"
@@ -1276,7 +1276,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    style.zIndex = un_defined;\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  log(style.zIndex);\n"
 
             + "  style.zIndex = 1;\n"
@@ -1284,7 +1284,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    style.zIndex = un_defined;\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  log(style.zIndex);\n"
 
             + "}\n"
@@ -1311,7 +1311,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    style.zIndex = null;\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  log(style.zIndex);\n"
 
             + "  style.zIndex = 1;\n"
@@ -1319,7 +1319,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    style.zIndex = null;\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  log(style.zIndex);\n"
 
             + "}\n"
@@ -1357,13 +1357,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  style.zIndex = '4';\n"
             + "  try {\n"
             + "    style.zIndex = '   ';\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  log(style.zIndex);\n"
 
             + "  style.zIndex = '1';\n"
             + "  try {\n"
             + "    style.zIndex = 'NAN';\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  log(style.zIndex);\n"
 
             + "}\n"
@@ -1389,14 +1389,14 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  log(style.zIndex);\n"
             + "  try {\n"
             + "    style.zIndex = 'hallo';\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  log(style.zIndex);\n"
 
             + "  style.zIndex = 1;\n"
             + "  log(style.zIndex);\n"
             + "  try {\n"
             + "    style.zIndex = 'hallo';\n"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  log(style.zIndex);\n"
             + "}\n"
 
@@ -3114,12 +3114,12 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  log(div1.style.border);\n"
             + "  try {\n"
             + "    div1.style.border = null;\n"
-            + "  } catch (e) {logEx(e);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "  log(div1.style.border);\n"
             + "  log(div1.style.display);\n"
             + "  try {\n"
             + "    div1.style.display = null;\n"
-            + "  } catch (e) {logEx(e);}\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "  log(div1.style.display);\n"
             + "}\n"
             + "</script></head>\n"

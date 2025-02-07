@@ -105,7 +105,7 @@ public class HtmlHeading2Test extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      log('error');\n"
             + "    }\n"
             + "  }\n"

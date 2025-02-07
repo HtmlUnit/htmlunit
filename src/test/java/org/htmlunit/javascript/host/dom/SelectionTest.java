@@ -58,7 +58,7 @@ public class SelectionTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(window.getSelection()==window.getSelection());\n"
-            + "} catch (e) {logEx(e)}\n"
+            + "} catch(e) {logEx(e)}\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);

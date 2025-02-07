@@ -367,7 +367,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "      var newRow = table.insertRow(" + rowIndex + ");\n"
             + "      log(table.rows.length);\n"
             + "      log(newRow.rowIndex);\n"
-            + "    } catch (e) { logEx(e); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  </script>\n"
             + "</body></html>";
 
@@ -653,7 +653,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "      } else {\n"
             + "        log('no refresh function');\n"
             + "      }\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      log('error');\n"
             + "    }\n"
             + "  }\n"
@@ -689,7 +689,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "      function set(e, value) {\n"
             + "        try {\n"
             + "          e.align = value;\n"
-            + "        } catch (e) {\n"
+            + "        } catch(e) {\n"
             + "          log('error');\n"
             + "        }\n"
             + "      }\n"
@@ -974,7 +974,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  function setRules(elem, value) {\n"
             + "    try {\n"
             + "      elem.rules = value;\n"
-            + "    } catch (e) { log('error'); }\n"
+            + "    } catch(e) { log('error'); }\n"
             + "    log(elem.rules);\n"
             + "  }\n"
 

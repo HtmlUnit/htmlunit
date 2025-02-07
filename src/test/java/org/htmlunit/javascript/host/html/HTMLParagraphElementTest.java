@@ -83,7 +83,7 @@ public class HTMLParagraphElementTest extends WebDriverTestCase {
             + "      function set(e, value) {\n"
             + "        try {\n"
             + "          e.align = value;\n"
-            + "        } catch (e) {\n"
+            + "        } catch(e) {\n"
             + "          log('error');\n"
             + "        }\n"
             + "      }\n"

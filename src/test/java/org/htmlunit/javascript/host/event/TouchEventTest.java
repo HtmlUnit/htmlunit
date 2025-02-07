@@ -53,7 +53,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TouchEvent('touch');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -79,7 +79,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TouchEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -103,7 +103,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TouchEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -127,7 +127,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TouchEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -149,7 +149,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TouchEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -173,7 +173,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TouchEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -206,7 +206,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "        'metaKey': true\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -231,7 +231,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "      var event = new TouchEvent('touch', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -259,7 +259,7 @@ public class TouchEventTest extends WebDriverTestCase {
             + "        'touches': 'abc',\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

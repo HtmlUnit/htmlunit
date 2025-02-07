@@ -41,7 +41,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "log(HTMLVideoElement.prototype == null);\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -89,7 +89,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var video = document.getElementById('v');\n"
             + "  log(video.nodeType);"
             + "  log(video.nodeName);"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -116,7 +116,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  video.src = 'tree.mp4';\n"
             + "  log(video.src);"
             + "  log(video.outerHTML);"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -144,7 +144,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  video.src = 'tree.mp4';\n"
             + "  log(video.src);"
             + "  log(video.outerHTML);"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -167,7 +167,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var src = document.getElementById('v').src;\n"
             + "  log(typeof src);"
             + "  log(src);"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -189,7 +189,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('v').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -212,7 +212,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('v').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -235,7 +235,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('v').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 

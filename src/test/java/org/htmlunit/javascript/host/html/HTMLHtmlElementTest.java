@@ -70,7 +70,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document.getElementById('myId'));\n"
             + "      log(HTMLHtmlElement);\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      logEx(e);\n"
             + "    }\n"
             + "  }\n"

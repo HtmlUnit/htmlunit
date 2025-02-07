@@ -367,7 +367,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "    try {\n"
             + "      div = document.createElementNS('http://www.appcelerator.org', 'app:script');\n"
             + "      debug(div);\n"
-            + "    } catch (e) {log('createElementNS() is not defined')}\n"
+            + "    } catch(e) {log('createElementNS() is not defined')}\n"
             + "    debug(document.getElementById('script1'));\n"
             + "    debug(document.getElementById('script2'));\n"
             + "  }\n"

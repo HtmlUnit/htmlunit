@@ -109,7 +109,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "  let val = null;\n"
                 + "  try {\n"
                 + "    val.constructor = 1;\n"
-                + "  } catch (e) { logEx(e); }\n"
+                + "  } catch(e) { logEx(e); }\n"
 
                 + "  val = 'abc';\n"
                 + "  val.constructor = Number;"
@@ -145,7 +145,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "  let val = null;\n"
                 + "  try {\n"
                 + "    val.constructor = 1;\n"
-                + "  } catch (e) { logEx(e); }\n"
+                + "  } catch(e) { logEx(e); }\n"
 
                 + "  val = 'abc';\n"
                 + "  val.constructor = Number;"
@@ -185,7 +185,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "    log('ctor');\n"
                 + "    a.constructor = 'bar';\n"
                 + "    log(a.constructor === 'bar');\n"
-                + "  } catch (e) { logEx(e) }\n"
+                + "  } catch(e) { logEx(e) }\n"
 
                 + "</script>\n"
                 + "</body>\n"
@@ -216,7 +216,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "    log('ctor');\n"
                 + "    a.constructor = 'bar';\n"
                 + "    log(a.constructor === 'bar');\n"
-                + "  } catch (e) { logEx(e) }\n"
+                + "  } catch(e) { logEx(e) }\n"
 
                 + "</script>\n"
                 + "</body>\n"
@@ -266,7 +266,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "  try {\n"
                 + "    a.constructor = Number;\n"
                 + "    log(a.constructor === Object);\n"
-                + "  } catch (e) { logEx(e) }\n"
+                + "  } catch(e) { logEx(e) }\n"
 
                 + "</script>\n"
                 + "</body>\n"

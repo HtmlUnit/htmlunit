@@ -52,7 +52,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -85,7 +85,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "        'playbackTime': 4,\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + DUMP_EVENT_FUNCTION
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -107,7 +107,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + DUMP_EVENT_FUNCTION
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -129,7 +129,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('AudioProcessingEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

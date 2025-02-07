@@ -133,34 +133,34 @@ public class ImageDataTest extends WebDriverTestCase {
 
             + "  try {\n"
             + "    var imageData = new ImageData();\n"
-            + "  } catch (e) { logEx(e);}\n"
+            + "  } catch(e) { logEx(e);}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(-2, 1);\n"
-            + "  } catch (e) { logEx(e);}\n"
+            + "  } catch(e) { logEx(e);}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(2, -1);\n"
-            + "  } catch (e) { logEx(e);}\n"
+            + "  } catch(e) { logEx(e);}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(-2, -1);\n"
-            + "  } catch (e) { logEx(e);}\n"
+            + "  } catch(e) { logEx(e);}\n"
 
             + "  var arr = new Uint8ClampedArray(8);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 3);\n"
-            + "  } catch (e) { logEx(e);}\n"
+            + "  } catch(e) { logEx(e);}\n"
 
             + "  arr = new Uint8ClampedArray(11);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 2);\n"
-            + "  } catch (e) { logEx(e);}\n"
+            + "  } catch(e) { logEx(e);}\n"
 
             + "  arr = new Uint8ClampedArray(8);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 2, 2);\n"
-            + "  } catch (e) { logEx(e);}\n"
+            + "  } catch(e) { logEx(e);}\n"
 
             + "}\n"
             + "</script>\n"

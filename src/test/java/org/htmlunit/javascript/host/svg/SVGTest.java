@@ -45,7 +45,7 @@ public class SVGTest extends WebDriverTestCase {
             + "  svg.setAttribute('id', 'svgElem');\n"
             + "  document.body.appendChild(svg);\n"
             + "  log(document.getElementById('svgElem').getAttribute('id'));\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -71,7 +71,7 @@ public class SVGTest extends WebDriverTestCase {
                 + "      var e = document.createEvent('MouseEvents');\n"
                 + "      e.initEvent('click', true, false);\n"
                 + "      document.getElementById('rect').dispatchEvent(e);\n"
-                + "    } catch (e) { logEx(e); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"

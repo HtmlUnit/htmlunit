@@ -58,7 +58,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new CloseEvent('type-close');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -85,7 +85,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "        'wasClean': true\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -109,7 +109,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('CloseEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -136,7 +136,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "        event.initCloseEvent('close', true, false, true, 42, 'time to close');\n"
             + "        dump(event);\n"
             + "      } else { log('no initCloseEvent'); }\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

@@ -55,7 +55,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             + "      log(elem.onchange);\n"
             + "      elem.onchange();\n"
             + "      log('onchange called');\n"
-            + "    } catch (e) {logEx(e)}\n"
+            + "    } catch(e) {logEx(e)}\n"
 
             + "    elem.onchange = handler;\n"
             + "    elem.onchange();\n"
@@ -65,7 +65,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             + "      log(elem.onchange);\n"
             + "      elem.onchange();\n"
             + "      log('onchange called');\n"
-            + "    } catch (e) {logEx(e)}\n"
+            + "    } catch(e) {logEx(e)}\n"
 
             + "  }\n"
             + "</script>\n"

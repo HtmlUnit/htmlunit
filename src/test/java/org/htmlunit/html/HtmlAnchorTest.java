@@ -430,7 +430,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             + "      log(anchor.text + ' ' + anchor.children.length);\n"
             + "      anchor.text = 'Hello';\n"
             + "      log(anchor.text + ' ' + anchor.children.length);\n"
-            + "    } catch (e) { log('exception' + e) }\n"
+            + "    } catch(e) { log('exception' + e) }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload=test()>\n"

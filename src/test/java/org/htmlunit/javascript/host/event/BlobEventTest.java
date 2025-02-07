@@ -51,7 +51,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BlobEvent('blob');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -73,7 +73,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BlobEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -95,7 +95,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BlobEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -117,7 +117,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BlobEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -139,7 +139,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BlobEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -161,7 +161,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new BlobEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -187,7 +187,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "        'data': blob\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -210,7 +210,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "      var event = new BlobEvent('blob', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -234,7 +234,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "        'data': 'blob'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

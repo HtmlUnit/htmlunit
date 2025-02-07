@@ -225,7 +225,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      logEx(e);\n"
             + "      return;\n"
             + "    }\n"

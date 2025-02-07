@@ -40,7 +40,7 @@ public class AbstractRangeTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(typeof AbstractRange === 'function');\n"
-            + "    } catch (e) { log('exception' + e) }\n"
+            + "    } catch(e) { log('exception' + e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -60,7 +60,7 @@ public class AbstractRangeTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      new AbstractRange();\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

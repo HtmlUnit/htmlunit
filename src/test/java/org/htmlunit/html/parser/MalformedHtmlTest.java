@@ -406,7 +406,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(document.body.childNodes[2]);\n"
             + "      dump(document.body.childNodes[3]);\n"
             + "      log(document.getElementsByTagName('a').length);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
 
             + "    try {\n"
             + "      log(innerDiv.id);\n"
@@ -415,7 +415,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(innerDiv.childNodes[0]);\n"
             + "      dump(innerDiv.childNodes[1]);\n"
             + "      dump(innerDiv.childNodes[2]);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
 
             + "    try {\n"
             + "      log(anchors[0].id);\n"
@@ -424,7 +424,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(anchors[0].childNodes[0]);\n"
             + "      log(anchors[0] == outerA);\n"
             + "      log(anchors[0] == innerA);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
 
             + "    try {\n"
             + "      log(anchors[1].id);\n"
@@ -433,7 +433,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(anchors[1].childNodes[0]);\n"
             + "      log(anchors[1] == outerA);\n"
             + "      log(anchors[1] == innerA);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
 
             + "    try {\n"
             + "      log(anchors[2].id);\n"
@@ -442,7 +442,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "      dump(anchors[2].childNodes[0]);\n"
             + "      log(anchors[2] == outerA);\n"
             + "      log(anchors[2] == innerA);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "  function dump(e) {\n"
             + "    log(e.nodeName + ':' + e.nodeValue);\n"

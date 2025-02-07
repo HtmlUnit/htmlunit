@@ -43,7 +43,7 @@ public class CSSTest extends WebDriverTestCase {
             + "  try {\n"
             + "    log(CSS);"
             + "    log(CSS.prototype);"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -64,7 +64,7 @@ public class CSSTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var o = Object.create(CSS.prototype);\n"
             + "    log(o);"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -85,7 +85,7 @@ public class CSSTest extends WebDriverTestCase {
             + "    log(CSS.supports('display', 'flex'));"
             + "    log(CSS.supports('display', 'grid'));"
             + "    log(CSS.supports('color', 'red'));"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -105,7 +105,7 @@ public class CSSTest extends WebDriverTestCase {
             + "  try {\n"
             + "    log(CSS.supports('display: flex'));"
             + "    log(CSS.supports('color: red'));"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -129,7 +129,7 @@ public class CSSTest extends WebDriverTestCase {
             + "  try {\n"
             + "    log(CSS.supports('selector(div)'));"
             + "    log(CSS.supports('selector(div, span)'));"
-            + "  } catch (e) { logEx(e); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 

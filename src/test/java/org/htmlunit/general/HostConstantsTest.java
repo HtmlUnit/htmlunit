@@ -103,7 +103,7 @@ public class HostConstantsTest extends WebDriverTestCase {
                 + "      var x = all[i];\n"
                 + "      log(x + ':' + " + host_ + "[x]);\n"
                 + "    }\n"
-                + "  } catch (e) {}\n"
+                + "  } catch(e) {}\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"

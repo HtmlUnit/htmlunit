@@ -75,7 +75,7 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { log('error'); }\n"
+            + "    } catch(e) { log('error'); }\n"
             + "    log(elem.align);\n"
             + "  }\n"
 
@@ -117,7 +117,7 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.vAlign = value;\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      log('error');\n"
             + "    }\n"
             + "  }\n"

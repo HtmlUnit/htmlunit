@@ -56,7 +56,7 @@ public class Document2Test extends WebDriverTestCase {
             + "      var select = document.createElement('<select>');\n"
             + "      log(select.add == undefined);\n"
             + "    }\n"
-            + "    catch (e) { logEx(e) }\n"
+            + "    catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -85,7 +85,7 @@ public class Document2Test extends WebDriverTestCase {
             + "      log(option.id);\n"
             + "      log(option.childNodes.length);\n"
             + "    }\n"
-            + "    catch (e) { logEx(e) }\n"
+            + "    catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

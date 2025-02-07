@@ -390,7 +390,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { log('error'); }\n"
+            + "    } catch(e) { log('error'); }\n"
             + "    log(elem.align);\n"
             + "  }\n"
 
@@ -1172,7 +1172,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "        try {\n"
             + "          var htmlImageElement = new HTMLImageElement(1, 1);"
             + "          log('' + htmlImageElement);\n"
-            + "        } catch (e) { log('error'); }\n"
+            + "        } catch(e) { log('error'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

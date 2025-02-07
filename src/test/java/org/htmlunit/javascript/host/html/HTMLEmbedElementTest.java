@@ -91,7 +91,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { log('error'); }\n"
+            + "    } catch(e) { log('error'); }\n"
             + "    log(elem.align);\n"
             + "  }\n"
 
@@ -157,7 +157,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  function setHeight(elem, value) {\n"
             + "    try {\n"
             + "      elem.height = value;\n"
-            + "    } catch (e) { log('error'); }\n"
+            + "    } catch(e) { log('error'); }\n"
             + "    log(elem.height);\n"
             + "  }\n"
 
@@ -214,7 +214,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  function setWidth(elem, value) {\n"
             + "    try {\n"
             + "      elem.width = value;\n"
-            + "    } catch (e) { log('error'); }\n"
+            + "    } catch(e) { log('error'); }\n"
             + "    log(elem.width);\n"
             + "  }\n"
 

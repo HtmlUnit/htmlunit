@@ -524,7 +524,7 @@ public class RegExpTest extends WebDriverTestCase {
                 + "function test() {\n"
                 + "  try {\n"
                 + "    log(" + script + ");\n"
-                + "  } catch (e) { log(e); }\n"
+                + "  } catch(e) { log(e); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"

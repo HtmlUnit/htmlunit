@@ -51,7 +51,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent('track');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -77,7 +77,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,7 +99,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,7 +121,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -143,7 +143,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,7 +165,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TrackEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -190,7 +190,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "        'track ': null\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -213,7 +213,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "      var event = new TrackEvent('track', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -241,7 +241,7 @@ public class TrackEventTest extends WebDriverTestCase {
             + "        'track': 'ten'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

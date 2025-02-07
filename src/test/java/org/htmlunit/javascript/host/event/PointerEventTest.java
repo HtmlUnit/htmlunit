@@ -69,7 +69,7 @@ public class PointerEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new PointerEvent('click');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -98,7 +98,7 @@ public class PointerEventTest extends WebDriverTestCase {
             + "        'pointerType': 'mouse'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -120,7 +120,7 @@ public class PointerEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('PointerEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -144,7 +144,7 @@ public class PointerEventTest extends WebDriverTestCase {
             + "      event.initPointerEvent('click', true, false, window, 3, 10, 11, 12, 13, true, true, true, false, "
             + "0, null, 14, 15, 4, 5, 6, 16, 17, 18, 123, 'mouse', 987, false);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -168,12 +168,12 @@ public class PointerEventTest extends WebDriverTestCase {
             + "      event.initPointerEvent('click', true, false, window, 3, 10, 11, 12, 13, true, true, true, false, "
             + "0, null, 14, 15, 4, 5, 6, 16, 17, 18, 123, 'mouse', 987, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  try {\n"
             + "    window.addEventListener('click',dump);\n"
-            + "  } catch (e) { }\n"
+            + "  } catch(e) { }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 

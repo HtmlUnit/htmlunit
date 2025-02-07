@@ -293,7 +293,7 @@ public class StorageTest extends WebDriverTestCase {
             + "    log('localStorage.extraMethod not callable');\n"
             + "  }\n"
             + "  log(localStorage.getItem('extraMethod'));\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -314,7 +314,7 @@ public class StorageTest extends WebDriverTestCase {
             + "  localStorage.setItem('hasOwnProperty', 'value');\n"
             + "  log(typeof localStorage.hasOwnProperty);\n"
             + "  log(localStorage.getItem('hasOwnProperty'));\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "  log(localStorage.length);\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -341,7 +341,7 @@ public class StorageTest extends WebDriverTestCase {
             + "  log(typeof localStorage.hasOwnProperty);\n"
             + "  log(localStorage.getItem('hasOwnProperty'));\n"
             + "  log(localStorage.length);\n"
-            + "} catch (e) { logEx(e); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }

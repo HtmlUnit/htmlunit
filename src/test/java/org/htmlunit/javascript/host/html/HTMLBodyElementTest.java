@@ -315,7 +315,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             + "      for (var i in HTMLBodyElement)\n"
             + "        str += i + ', ';\n"
             + "      log(str);\n"
-            + "    } catch (e) { logEx(e)}\n"
+            + "    } catch(e) { logEx(e)}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

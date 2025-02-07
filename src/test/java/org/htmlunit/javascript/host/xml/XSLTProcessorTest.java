@@ -201,7 +201,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      log(typeof XSLTProcessor);\n"
             + "      log(XSLTProcessor);\n"
             + "      log(new XSLTProcessor());\n"
-            + "    } catch (e) {logEx(e)}\n"
+            + "    } catch(e) {logEx(e)}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

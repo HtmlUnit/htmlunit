@@ -61,7 +61,7 @@ public class EventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new Event('event');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -85,7 +85,7 @@ public class EventTest extends WebDriverTestCase {
             + "        'bubbles': true\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -109,7 +109,7 @@ public class EventTest extends WebDriverTestCase {
             + "        'bubbles': 'true'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -133,7 +133,7 @@ public class EventTest extends WebDriverTestCase {
             + "        'bubbles': 1\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -157,7 +157,7 @@ public class EventTest extends WebDriverTestCase {
             + "        'bubbles': {}\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -181,7 +181,7 @@ public class EventTest extends WebDriverTestCase {
             + "        'bubbles': undefined\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -205,7 +205,7 @@ public class EventTest extends WebDriverTestCase {
             + "        'bubbles': null\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -227,7 +227,7 @@ public class EventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -276,7 +276,7 @@ public class EventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('Event');\n"
             + "      event.initEvent('event', true, false);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -1206,7 +1206,7 @@ public class EventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('Event');\n"
             + "      log(event.defaultPrevented);\n"
             + "      log(typeof event.defaultPrevented);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -1228,7 +1228,7 @@ public class EventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('Event');\n"
             + "      log(event.returnValue);\n"
             + "      log(typeof event.returnValue);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -1272,7 +1272,7 @@ public class EventTest extends WebDriverTestCase {
             + "      event.preventDefault();\n"
             + "      log(event.returnValue);\n"
             + "      log(typeof event.returnValue);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -1424,7 +1424,7 @@ public class EventTest extends WebDriverTestCase {
 
             + "          event.returnValue = !event.returnValue;\n"
             + "          log(event.returnValue);\n"
-            + "        } catch (e) { logEx(e) }\n"
+            + "        } catch(e) { logEx(e) }\n"
             + "      }\n"
 
             + "      triggerClick.addEventListener('click', function (event) {\n"
@@ -1488,7 +1488,7 @@ public class EventTest extends WebDriverTestCase {
 
             + "          event.initEvent('click', 'true', 'true');\n"
             + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
-            + "        } catch (e) { logEx(e) }\n"
+            + "        } catch(e) { logEx(e) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

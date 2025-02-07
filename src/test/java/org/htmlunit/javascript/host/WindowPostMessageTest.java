@@ -132,7 +132,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    window.postMessage();\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
@@ -413,7 +413,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    window.postMessage('hello', '" + targetOrigin + "');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"

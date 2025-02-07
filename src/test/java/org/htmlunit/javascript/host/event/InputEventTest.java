@@ -54,7 +54,7 @@ public class InputEventTest extends WebDriverTestCase {
                 + "    try {\n"
                 + "      var event = new InputEvent('type');\n"
                 + "      dump(event);\n"
-                + "    } catch (e) { logEx(e) }\n"
+                + "    } catch(e) { logEx(e) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"
@@ -84,7 +84,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new InputEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -106,7 +106,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new InputEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -128,7 +128,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new InputEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -150,7 +150,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new InputEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -172,7 +172,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new InputEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -200,7 +200,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "      var event = new InputEvent('input', "
                              + "{ inputType: 'inputType', data: 'data', isComposing: true });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -223,7 +223,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "      var event = new InputEvent('input', "
                              + "{ isComposing: true });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -246,7 +246,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "      var event = new InputEvent('input', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -268,7 +268,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new InputEvent('input', null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -290,7 +290,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new InputEvent('input', undefined);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -314,7 +314,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

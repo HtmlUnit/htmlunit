@@ -51,7 +51,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent('transition');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -77,7 +77,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,7 +99,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,7 +121,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -143,7 +143,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,7 +165,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new TransitionEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -192,7 +192,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "        'pseudoElement': 'aPseudoElementName'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -215,7 +215,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "      var event = new TransitionEvent('transition', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -243,7 +243,7 @@ public class TransitionEventTest extends WebDriverTestCase {
             + "        'elapsedTime': 'ten'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

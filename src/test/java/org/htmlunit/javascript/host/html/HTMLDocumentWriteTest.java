@@ -49,7 +49,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "var d = document.writeln;\n"
             + "try {\n"
             + "  d('foo');\n"
-            + "} catch (e) { alert('exception occurred') }\n"
+            + "} catch(e) { alert('exception occurred') }\n"
             + "  document.writeln('foo');\n"
             + "}\n"
             + "</script></head><body onload='doTheFoo()'>\n"

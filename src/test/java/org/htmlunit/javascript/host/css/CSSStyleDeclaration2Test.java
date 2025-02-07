@@ -91,7 +91,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
         buffer += ',' + node.style[prop];
         node.style[prop] = '42';
         buffer += ',' + node.style[prop];
-      } catch (e) {
+      } catch(e) {
           buffer += ',' + 'error';
       }
       ta.value += buffer + '\n';

@@ -88,7 +88,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "  try {\n"
             + "    document.appendChild(document.createElement('div'));\n"
             + "    log(document.all.length);\n"
-            + "  } catch (e) { logEx(e) }\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -198,7 +198,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "    log(col[1]);\n"
             + "    try {\n"
             + "      log(col(1));\n"
-            + "    } catch (e) { logEx(e) }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

@@ -197,7 +197,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('li:nth-child()'));\n"
-            + "  } catch (e) {logEx(e)}\n"
+            + "  } catch(e) {logEx(e)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

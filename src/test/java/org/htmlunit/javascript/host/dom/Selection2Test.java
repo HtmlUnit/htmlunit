@@ -262,7 +262,7 @@ public class Selection2Test extends SimpleWebTestCase {
             + "    try {\n"
             + "      var x = " + x + ";\n"
             + "      alert(" + alert + ");\n"
-            + "    } catch (e) {\n"
+            + "    } catch(e) {\n"
             + "      alert('unsupported action');\n"
             + "    }\n"
             + "  }\n"

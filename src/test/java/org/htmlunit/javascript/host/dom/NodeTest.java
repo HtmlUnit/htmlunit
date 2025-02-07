@@ -128,7 +128,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  div1.remove();\n"
             + "  log(document.body.childNodes.length);\n"
             + "}\n"
-            + "catch (e) { logEx(e); }\n"
+            + "catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -917,7 +917,7 @@ public class NodeTest extends WebDriverTestCase {
             + "        log(aNode.childNodes.length);\n"
             + "        log(aNode.childNodes[2].nodeName);\n"
             + "      }\n"
-            + "      catch (e) { logEx(e); }\n"
+            + "      catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -986,7 +986,7 @@ public class NodeTest extends WebDriverTestCase {
             + "        log(aNode.childNodes.length);\n"
             + "        log(aNode.childNodes[2].nodeName);\n"
             + "      }\n"
-            + "      catch (e) { logEx(e); }\n"
+            + "      catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
