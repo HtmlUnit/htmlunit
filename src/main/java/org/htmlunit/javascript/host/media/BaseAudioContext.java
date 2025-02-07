@@ -42,7 +42,7 @@ public class BaseAudioContext extends EventTarget {
     @Override
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.typeError("Illegal constructor.");
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 
     /**

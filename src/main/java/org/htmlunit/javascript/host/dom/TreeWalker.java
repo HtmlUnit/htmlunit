@@ -52,7 +52,7 @@ public class TreeWalker extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 
     /**

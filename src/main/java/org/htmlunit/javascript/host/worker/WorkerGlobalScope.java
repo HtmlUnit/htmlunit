@@ -43,7 +43,7 @@ public class WorkerGlobalScope extends EventTarget implements WindowOrWorkerGlob
     @Override
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 
     /**

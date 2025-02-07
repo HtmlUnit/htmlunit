@@ -1170,6 +1170,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Report a TypeError with the message "Illegal constructor.".
+     *
+     * @return EcmaError
+     */
+    public static EcmaError typeErrorIllegalConstructor() {
+        throw JavaScriptEngine.typeError("Illegal constructor.");
+    }
+
+    /**
      * Report a runtime error using the error reporter for the current thread.
      *
      * @param message the error message to report
