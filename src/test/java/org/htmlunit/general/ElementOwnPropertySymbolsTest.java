@@ -2394,10 +2394,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Document],"
                     + "Symbol(Symbol.unscopables) [C] [{\"fullscreen\":true,\"prepend\":true,"
                     + "\"append\":true,\"replaceChildren\":true}]")
-    @HtmlUnitNYI(CHROME = "InternalError/InternalError",
-            EDGE = "InternalError/InternalError",
-            FF = "InternalError/InternalError",
-            FF_ESR = "InternalError/InternalError")
+    @HtmlUnitNYI(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void document() throws Exception {
         testString("", "new Document()");
     }
