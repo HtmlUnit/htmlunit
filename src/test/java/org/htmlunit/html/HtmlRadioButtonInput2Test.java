@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import java.util.Arrays;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
@@ -542,62 +540,56 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("foo,change,")
+    @Alerts({"foo", "change"})
     public void onchangeFires() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "  function debug(string) {\n"
-            + "    document.getElementById('myTextarea').value += string + ',';\n"
-            + "  }\n"
+            + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
             + "</head><body>\n"
             + "<form>\n"
             + "<input type='radio' name='radioGroup' id='radio'"
-            + " onchange='debug(\"foo\");debug(event.type);'>Check me</input>\n"
+            + " onchange='log(\"foo\");log(event.type);'>Check me</input>\n"
             + "</form>\n"
-            + "<textarea id='myTextarea'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("radio")).click();
 
-        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("foo,change,boo,blur,")
+    @Alerts({"foo", "change", "boo", "blur"})
     public void onchangeFires2() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "  function debug(string) {\n"
-            + "    document.getElementById('myTextarea').value += string + ',';\n"
-            + "  }\n"
+            + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
             + "</head><body>\n"
             + "<form>\n"
             + "<input type='radio' name='radioGroup' id='radio1'"
-            + " onChange='debug(\"foo\");debug(event.type);'"
-            + " onBlur='debug(\"boo\");debug(event.type);'"
+                        + " onChange='log(\"foo\");log(event.type);'"
+                        + " onBlur='log(\"boo\");log(event.type);'"
             + ">Check Me</input>\n"
             + "<input type='radio' name='radioGroup' id='radio2'>Or Check Me</input>\n"
             + "</form>\n"
-            + "<textarea id='myTextarea'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("radio1")).click();
         driver.findElement(By.id("radio2")).click();
 
-        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**

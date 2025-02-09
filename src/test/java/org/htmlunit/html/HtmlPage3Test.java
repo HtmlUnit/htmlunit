@@ -195,10 +195,10 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         final WebElement form = driver.findElement(By.id("form1"));
         final WebElement input = form.findElement(By.name("textInput1"));
-        assertEquals("name", "textInput1", input.getAttribute("name"));
+        assertEquals("name", "textInput1", input.getDomAttribute("name"));
 
-        assertEquals("value", "textInput1", input.getAttribute("value"));
-        assertEquals("type", "text", input.getAttribute("type"));
+        assertEquals("value", "textInput1", input.getDomAttribute("value"));
+        assertEquals("type", "text", input.getDomAttribute("type"));
     }
 
     /**

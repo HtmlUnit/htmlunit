@@ -324,7 +324,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("50")
+    @Alerts({"42", "50"})
     public void clearInput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -336,9 +336,13 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final WebElement element = driver.findElement(By.id("tester"));
-        element.clear();
 
-        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomProperty("value"));
+
+        element.clear();
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], element.getDomProperty("value"));
     }
 
     /**
