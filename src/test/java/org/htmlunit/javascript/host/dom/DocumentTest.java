@@ -2581,25 +2581,24 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("#document-fragment_null_11_null_0_")
+    @Alerts({"#document-fragment", "null", "11", "null", "0"})
     public void createDocumentFragment() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<title>foo</title><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    var fragment = document.createDocumentFragment();\n"
-            + "    var textarea = document.getElementById('myTextarea');\n"
-            + "    textarea.value += fragment.nodeName + '_';\n"
-            + "    textarea.value += fragment.nodeValue + '_';\n"
-            + "    textarea.value += fragment.nodeType + '_';\n"
-            + "    textarea.value += fragment.parentNode + '_';\n"
-            + "    textarea.value += fragment.childNodes.length + '_';\n"
+            + "    log(fragment.nodeName);\n"
+            + "    log(fragment.nodeValue);\n"
+            + "    log(fragment.nodeType);\n"
+            + "    log(fragment.parentNode);\n"
+            + "    log(fragment.childNodes.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + "<textarea id='myTextarea' cols='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        final String expected = getExpectedAlerts()[0];
-        assertEquals(expected, driver.findElement(By.id("myTextarea")).getAttribute("value"));
+        loadPageVerifyTextArea2(html);
     }
 
     /**

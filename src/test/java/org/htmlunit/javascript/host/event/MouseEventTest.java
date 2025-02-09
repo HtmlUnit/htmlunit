@@ -439,7 +439,7 @@ public class MouseEventTest extends WebDriverTestCase {
         assertEquals("", textarea.getText());
 
         driver.findElement(By.id(id)).click();
-        assertEquals(expected[0], textarea.getAttribute("value").trim());
+        assertEquals(expected[0], textarea.getDomProperty("value").trim());
     }
 
     /**

@@ -258,13 +258,19 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
 
         final WebElement textfield = webDriver.findElement(By.id("textfield"));
-        assertEquals(getExpectedAlerts()[0], textfield.getAttribute("value"));
+
+        assertEquals(getExpectedAlerts()[0], textfield.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], textfield.getDomProperty("value"));
+
         textfield.sendKeys("newValue");
-        assertEquals(getExpectedAlerts()[1], textfield.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], textfield.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], textfield.getDomProperty("value"));
 
         final WebElement reset = webDriver.findElement(By.name("resetBtn"));
         reset.click();
-        assertEquals(getExpectedAlerts()[2], textfield.getAttribute("value"));
+
+        assertEquals(getExpectedAlerts()[0], textfield.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], textfield.getDomProperty("value"));
     }
 
     /**
@@ -291,13 +297,17 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
 
         final WebElement textfield = webDriver.findElement(By.id("textfield"));
-        assertEquals(getExpectedAlerts()[0], textfield.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], textfield.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], textfield.getDomProperty("value"));
+
         textfield.sendKeys("newValue");
-        assertEquals(getExpectedAlerts()[1], textfield.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], textfield.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], textfield.getDomProperty("value"));
 
         final WebElement reset = webDriver.findElement(By.name("resetBtn"));
         reset.click();
-        assertEquals(getExpectedAlerts()[2], textfield.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], textfield.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], textfield.getDomProperty("value"));
     }
 
     /**

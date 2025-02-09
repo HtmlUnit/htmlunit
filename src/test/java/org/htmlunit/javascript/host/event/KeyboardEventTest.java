@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import java.util.Arrays;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -489,46 +487,41 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
+    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keyup() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "function handleKey(e) {\n"
-            + "  document.getElementById('log').value += e.keyCode + ', ';\n"
-            + "}\n"
+            + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <input id='t' onkeyup='handleKey(event)'/>\n"
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "  <input id='t' onkeyup='log(event.keyCode)'/>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys(" 0123456789");
-
-        final String log = driver.findElement(By.id("log")).getAttribute("value");
-        assertEquals(getExpectedAlerts()[0], log);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, "
-        + "82, 83, 84, 85, 86, 87, 88, 89, 90, ")
+    @Alerts({"65", "66", "67", "68", "69",
+             "70", "71", "72", "73", "74", "75", "76", "77", "78", "79",
+             "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90"})
     public void keyCodes2_keyup() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "function handleKey(e) {\n"
-            + "  document.getElementById('log').value += e.keyCode + ', ';\n"
-            + "}\n"
+            + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <input id='t' onkeyup='handleKey(event)'/>\n"
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "  <input id='t' onkeyup='log(event.keyCode)'/>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -536,26 +529,23 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        final String log = driver.findElement(By.id("log")).getAttribute("value");
-        assertEquals(getExpectedAlerts()[0], log);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
+    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keydown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "function handleKey(e) {\n"
-            + "  document.getElementById('log').value += e.keyCode + ', ';\n"
-            + "}\n"
+            + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <input id='t' onkeydown='handleKey(event)'/>\n"
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "  <input id='t' onkeydown='log(event.keyCode)'/>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -563,27 +553,25 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys(" 0123456789");
 
-        final String log = driver.findElement(By.id("log")).getAttribute("value");
-        assertEquals(getExpectedAlerts()[0], log);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, "
-                + "80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, ")
+    @Alerts({"65", "66", "67", "68", "69",
+             "70", "71", "72", "73", "74", "75", "76", "77", "78", "79",
+             "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90"})
     public void keyCodes2_keydown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "function handleKey(e) {\n"
-            + "  document.getElementById('log').value += e.keyCode + ', ';\n"
-            + "}\n"
+            + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <input id='t' onkeydown='handleKey(event)'/>\n"
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "  <input id='t' onkeydown='log(event.keyCode)'/>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -591,26 +579,23 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        final String log = driver.findElement(By.id("log")).getAttribute("value");
-        assertEquals(getExpectedAlerts()[0], log);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
+    @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keypress() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "function handleKey(e) {\n"
-            + "  document.getElementById('log').value += e.charCode + ', ';\n"
-            + "}\n"
+            + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <input id='t' onkeypress='handleKey(event)'/>\n"
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "  <input id='t' onkeypress='log(event.charCode)'/>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -618,29 +603,26 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys(" 0123456789");
 
-        final String log = driver.findElement(By.id("log")).getAttribute("value");
-        assertEquals(getExpectedAlerts()[0], log);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("97, 98, 99, "
-            + "100, 101, 102, 103, 104, 105, 106, 107, 108, 109, "
-            + "110, 111, 112, 113, 114, 115, 116, 117, 118, 119, "
-            + "120, 121, 122, ")
+    @Alerts({"97", "98", "99",
+             "100", "101", "102", "103", "104", "105", "106", "107", "108", "109",
+             "110", "111", "112", "113", "114", "115", "116", "117", "118", "119",
+             "120", "121", "122"})
     public void keyCodes2_keypress() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "function handleKey(e) {\n"
-            + "  document.getElementById('log').value += e.charCode + ', ';\n"
-            + "}\n"
+            + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <input id='t' onkeypress='handleKey(event)'/>\n"
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "  <input id='t' onkeypress='log(event.charCode)'/>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -648,8 +630,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
 
         field.sendKeys("abcdefghijklmnopqrstuvwxyz");
 
-        final String log = driver.findElement(By.id("log")).getAttribute("value");
-        assertEquals(getExpectedAlerts()[0], log);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -758,26 +739,26 @@ public class KeyboardEventTest extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<input type='text' id='keyId'>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function handler(e) {\n"
             + "  e = e ? e : window.event;\n"
-            + "  var log = e.type + ':' + e.keyCode + ',' + e.charCode + ',' + e.which + ',' "
+            + "  var msg = e.type + ':' + e.keyCode + ',' + e.charCode + ',' + e.which + ',' "
                             + "+ e.key + ',' + e.char + ',' + e.code + ',' + e.shiftKey;\n"
-            + "  log = log.replace(/\\r/g, '\\\\r');\n"
-            + "  log = log.replace(/\\n/g, '\\\\n');\n"
-            + "  document.getElementById('myTextarea').value += log + '\\n';"
+            + "  msg = msg.replace(/\\r/g, '\\\\r');\n"
+            + "  msg = msg.replace(/\\n/g, '\\\\n');\n"
+            + "  log(msg);"
             + "}\n"
             + "document.getElementById('keyId').onkeyup = handler;\n"
             + "document.getElementById('keyId').onkeydown = handler;\n"
             + "document.getElementById('keyId').onkeypress = handler;\n"
             + "</script>\n"
-            + "<textarea id='myTextarea' cols=80 rows=20></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final String keysToSend = "Aa." + Keys.RETURN;
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("keyId")).sendKeys(keysToSend);
 
-        final String[] actual = driver.findElement(By.id("myTextarea")).getAttribute("value").split("\n");
-        assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(actual).toString());
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 }

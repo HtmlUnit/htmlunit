@@ -394,28 +394,26 @@ public class MutationObserverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLHeadingElement]-attributes")
-    @BuggyWebDriver(FF = "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLHeadingElement]-attributes",
-            FF_ESR = "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLHeadingElement]-attributes")
+    @BuggyWebDriver(
+            FF = {"[object HTMLInputElement]-attributesn",
+                  "[object HTMLInputElement]-attributes",
+                  "[object HTMLInputElement]-attributes",
+                  "[object HTMLInputElement]-attributes",
+                  "[object HTMLHeadingElement]-attributes"},
+            FF_ESR = {"[object HTMLInputElement]-attributes",
+                      "[object HTMLInputElement]-attributes",
+                      "[object HTMLInputElement]-attributes",
+                      "[object HTMLInputElement]-attributes",
+                      "[object HTMLHeadingElement]-attributes"})
     public void attributeValue2() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function makeRed() {\n"
             + "    document.getElementById('headline').setAttribute('style', 'color: red');\n"
             + "  }\n"
 
             + "  function print(mutation) {\n"
             + "    log(mutation.target + '-' + mutation.type);\n"
-            + "  }\n"
-
-            + "  function log(x) {\n"
-            + "    document.getElementById('log').value += x + '\\n';\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -439,13 +437,12 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "    <h1 id='headline' style='font-style: italic'>Some headline</h1>\n"
             + "    <input id='id1' type='button' onclick='makeRed()' value='Make Red'>\n"
             + "  </div>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>\n";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("id1")).click();
 
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
