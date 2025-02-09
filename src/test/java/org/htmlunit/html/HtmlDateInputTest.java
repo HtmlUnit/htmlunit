@@ -166,7 +166,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("")
+    @Alerts({"2018-03-22", ""})
     public void clearInput() throws Exception {
         final String html =
               "<html>\n"
@@ -177,10 +177,12 @@ public class HtmlDateInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement input = driver.findElement(By.id("input"));
 
-        assertEquals("2018-03-22", input.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
 
         input.clear();
-        assertEquals("", input.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], input.getDomProperty("value"));
     }
 
     /**

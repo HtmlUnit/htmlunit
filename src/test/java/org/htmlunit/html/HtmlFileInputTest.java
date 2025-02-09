@@ -766,10 +766,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("C:\\fakepath\\pom.xml")
-    // since 2.28
-    // there is an option for IE, for local and trusted sites IE includes the file path
-    // because we do not support any IE specific setting we do not send the filename as
-    // done by the other browsers
     public void getAttribute() throws Exception {
         final String html =
               "<html><body>\n"
@@ -781,7 +777,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement e = driver.findElement(By.id("f"));
         e.sendKeys(absolutePath);
-        assertEquals(getExpectedAlerts()[0], e.getAttribute("value"));
+        assertNull(e.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], e.getDomProperty("value"));
     }
 
     /**

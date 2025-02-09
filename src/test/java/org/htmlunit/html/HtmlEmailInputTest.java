@@ -137,7 +137,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts({"dave@aol.com", ""})
     public void clearInput() throws Exception {
         final String htmlContent
                 = "<html>\n"
@@ -151,14 +151,19 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
         final WebElement element = driver.findElement(By.id("tester"));
 
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomProperty("value"));
+
         element.clear();
-        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], element.getDomProperty("value"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("hello")
     public void typing() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -170,7 +175,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
 
         final WebElement input = driver.findElement(By.id("foo"));
         input.sendKeys("hello");
-        assertEquals("hello", input.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
+        assertNull(input.getDomAttribute("value"));
     }
 
     /**
@@ -577,7 +583,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
         if (sendKeys != null) {
             foo.sendKeys(sendKeys);
         }
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], foo.getDomProperty("value"));
 
         driver.findElement(By.id("myTest")).click();
         verifyTitle2(driver, getExpectedAlerts()[1], getExpectedAlerts()[2], getExpectedAlerts()[3]);
