@@ -212,7 +212,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
 
                 // construct alternative response
                 final String content = "<html><html>";
-                final WebResponseData data = new WebResponseData(content.getBytes(Charsets.UTF_8),
+                final WebResponseData data = new WebResponseData(content.getBytes(StandardCharsets.UTF_8),
                         200, "blocked", Collections.emptyList());
                 final WebResponse blocked = new WebResponse(data, request, 0L);
                 // if you like to check later on for blocked responses
@@ -271,7 +271,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
   
                 // construct alternative response
                 final String content = "<html><html>";
-                final WebResponseData data = new WebResponseData(content.getBytes(Charsets.UTF_8),
+                final WebResponseData data = new WebResponseData(content.getBytes(StandardCharsets.UTF_8),
                         200, "blocked", Collections.emptyList());
                 final WebResponse blocked = new WebResponse(data, webRequest, 0L);
                 // if you like to check later on for blocked responses

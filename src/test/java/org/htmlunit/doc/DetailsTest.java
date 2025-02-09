@@ -16,6 +16,7 @@ package org.htmlunit.doc;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,8 +40,6 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebConnectionWrapper;
 import org.junit.Test;
-
-import com.google.common.base.Charsets;
 
 /**
  * Tests for the sample code from the documentation to make sure
@@ -76,7 +75,7 @@ public class DetailsTest extends WebServerTestCase {
 
                     // construct alternative response
                     final String content = "<html><html>";
-                    final WebResponseData data = new WebResponseData(content.getBytes(Charsets.UTF_8),
+                    final WebResponseData data = new WebResponseData(content.getBytes(StandardCharsets.UTF_8),
                             HttpStatus.OK_200, "blocked", Collections.emptyList());
                     final WebResponse blocked = new WebResponse(data, request, 0L);
                     // if you like to check later on for blocked responses
@@ -134,7 +133,8 @@ public class DetailsTest extends WebServerTestCase {
 
                     // construct alternative response
                     final String alternativeContent = "<html><html>";
-                    final WebResponseData data = new WebResponseData(alternativeContent.getBytes(Charsets.UTF_8),
+                    final WebResponseData data = new WebResponseData(
+                            alternativeContent.getBytes(StandardCharsets.UTF_8),
                             HttpStatus.OK_200, "blocked", Collections.emptyList());
                     final WebResponse blocked = new WebResponse(data, webRequest, 0L);
                     // if you like to check later on for blocked responses
