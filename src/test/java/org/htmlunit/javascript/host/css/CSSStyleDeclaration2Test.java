@@ -335,7 +335,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "    } catch(e) {}\n" // ignore strange properties like '@@iterator'
             + "  }\n"
             + "  array.sort();\n"
-            + "  document.getElementById('myTextarea').value = array.join('\\n');\n"
+            + "  document.getElementById('myLog').value = array.join('\\n');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
