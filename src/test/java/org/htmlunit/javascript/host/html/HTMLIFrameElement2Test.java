@@ -944,10 +944,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final String html =
                 "<html>\n"
                 + "<head><script>\n"
-                + "  function log(msg) {\n"
-                + "    var ta = document.getElementById('myTextArea');\n"
-                + "    ta.value += msg + '; ';\n"
-                + "  }\n"
+                + LOG_TEXTAREA_FUNCTION
 
                 + "  function test() {\n"
                 + "    var myFrame = document.getElementById('i');\n"
@@ -967,7 +964,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  <body>\n"
                 + "    <iframe id='i' onload='log(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
 
-                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + LOG_TEXTAREA
                 + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
                 + "    <button id='clickMe2' onclick='test2()'>Click Me</button>\n"
                 + "  </body>\n"
@@ -981,8 +978,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("clickMe2")).click();
 
         expandExpectedAlertsVariables(URL_SECOND);
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -996,10 +992,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final String html =
                 "<html>\n"
                 + "<head><script>\n"
-                + "  function log(msg) {\n"
-                + "    var ta = document.getElementById('myTextArea');\n"
-                + "    ta.value += msg + '; ';\n"
-                + "  }\n"
+                + LOG_TEXTAREA_FUNCTION
 
                 + "  function test() {\n"
                 + "    var myFrame = document.getElementById('i');\n"
@@ -1023,7 +1016,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  <body>\n"
                 + "    <iframe id='i' onload='log(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
 
-                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + LOG_TEXTAREA
                 + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
                 + "  </body>\n"
                 + "</html>";
@@ -1036,8 +1029,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         Thread.sleep(200);
 
         expandExpectedAlertsVariables(URL_SECOND);
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1058,10 +1050,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final String html =
                 "<html>\n"
                 + "<head><script>\n"
-                + "  function log(msg) {\n"
-                + "    var ta = document.getElementById('myTextArea');\n"
-                + "    ta.value += msg + '; ';\n"
-                + "  }\n"
+                + LOG_TEXTAREA_FUNCTION
 
                 + "  function test() {\n"
                 + "    var myFrame = document.getElementById('i');\n"
@@ -1079,7 +1068,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  <body>\n"
                 + "    <iframe id='i' onload='log(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
 
-                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + LOG_TEXTAREA
                 + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
                 + "  </body>\n"
                 + "</html>";
@@ -1097,8 +1086,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         assertEquals(1, getMockWebConnection().getRequestCount() - start);
 
         expandExpectedAlertsVariables(URL_SECOND);
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1119,10 +1107,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final String html =
                 "<html>\n"
                 + "<head><script>\n"
-                + "  function log(msg) {\n"
-                + "    var ta = document.getElementById('myTextArea');\n"
-                + "    ta.value += msg + '; ';\n"
-                + "  }\n"
+                + LOG_TEXTAREA_FUNCTION
 
                 + "  function test() {\n"
                 + "    var myFrame = document.getElementById('i');\n"
@@ -1140,7 +1125,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  <body>\n"
                 + "    <iframe id='i' onload='log(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
 
-                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + LOG_TEXTAREA
                 + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
                 + "  </body>\n"
                 + "</html>";
@@ -1161,7 +1146,6 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount() - start);
 
         expandExpectedAlertsVariables(URL_SECOND);
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 }

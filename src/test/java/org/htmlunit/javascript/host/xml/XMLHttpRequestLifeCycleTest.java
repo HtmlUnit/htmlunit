@@ -1631,7 +1631,7 @@ public final class XMLHttpRequestLifeCycleTest {
     }
 
     static String extractLog(final WebDriver driver) {
-        return driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        return driver.findElement(By.id("log")).getDomProperty("value").trim().replaceAll("\r", "");
     }
 
     /**

@@ -469,7 +469,7 @@ public class WebSocketTest extends WebDriverTestCase {
             do {
                 Thread.sleep(100);
 
-                text = logElement.getAttribute("value").trim().replaceAll("\r", "");
+                text = logElement.getDomProperty("value").trim().replaceAll("\r", "");
             }
             while (text.length() <= expected.length() && System.currentTimeMillis() < maxWait);
 
@@ -541,7 +541,7 @@ public class WebSocketTest extends WebDriverTestCase {
             do {
                 Thread.sleep(100);
 
-                text = logElement.getAttribute("value").trim().replaceAll("\r", "");
+                text = logElement.getDomProperty("value").trim().replaceAll("\r", "");
             }
             while (text.length() <= expected.length() && System.currentTimeMillis() < maxWait);
 
@@ -571,7 +571,7 @@ public class WebSocketTest extends WebDriverTestCase {
             do {
                 Thread.sleep(DEFAULT_WAIT_TIME);
 
-                text = logElement.getAttribute("value").trim().replaceAll("\r", "");
+                text = logElement.getDomProperty("value").trim().replaceAll("\r", "");
             }
             while (text.length() > 0 && counter++ < 10);
 

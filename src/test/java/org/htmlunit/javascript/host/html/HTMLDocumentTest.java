@@ -2674,7 +2674,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         Thread.sleep(200);
 
         final List<String> actual = new LinkedList<>();
-        actual.add(driver.findElement(By.id("myTextarea")).getAttribute("value"));
+        actual.add(driver.findElement(By.id("myTextarea")).getDomProperty("value"));
 
         assertEquals(getExpectedAlerts(), actual);
     }
@@ -3171,7 +3171,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<input id='i'></input></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        final String lastModified = driver.findElement(By.id("i")).getAttribute("value");
+        final String lastModified = driver.findElement(By.id("i")).getDomProperty("value");
 
         try {
             new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.ROOT).parse(lastModified);

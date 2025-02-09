@@ -17,9 +17,6 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.junit.annotation.TestedBrowser.FF;
 import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -31,7 +28,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 /**
@@ -49,17 +45,17 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SELECT;")
-    @BuggyWebDriver(CHROME = "",
-            EDGE = "")
+    @Alerts("SELECT")
+    @BuggyWebDriver(CHROME = {},
+            EDGE = {})
     //https://bugs.chromium.org/p/chromedriver/issues/detail?id=1352
     public void clickSelect() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><head><title>foo</title><script>\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log_').value += x + '; ';\n"
-                + "  }\n"
+                + "<html><head>\n"
+                + "<title>foo</title>\n"
+                + "<script>\n"
+                + LOG_TEXTAREA_FUNCTION
 
                 + "  function init() {\n"
                 + "    var s = document.getElementById('s');\n"
@@ -77,7 +73,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
                 + "<body onload='init()'>\n"
                 + "<form>\n"
-                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + LOG_TEXTAREA
                 + "  <select id='s' size='7'>\n"
                 + "    <option value='opt-a'>A</option>\n"
                 + "    <option id='opt-b' value='b'>B</option>\n"
@@ -89,19 +85,16 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("s")).click();
 
-        final List<String> alerts = new LinkedList<>();
-        final WebElement log = driver.findElement(By.id("log_"));
-        alerts.add(log.getAttribute("value").trim());
-        assertEquals(getExpectedAlerts(), alerts);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "opt-a; opt-b",
+    @Alerts(DEFAULT = {"opt-a", "opt-b"},
             CHROME = "opt-b")
-    @BuggyWebDriver("opt-a; b;")
+    @BuggyWebDriver({"opt-a", "b"})
     @NotYetImplemented
     //TODO: Needs further investigation of clicking an option without clicking the select
     // See the first comment in http://code.google.com/p/selenium/issues/detail?id=2131#c1
@@ -110,10 +103,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     public void click2() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><head><title>foo</title><script>\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log_').value += x + '; ';\n"
-                + "  }\n"
+                + "<html><head>\n"
+                + "<title>foo</title>\n"
+                + "<script>\n"
+                + LOG_TEXTAREA_FUNCTION
 
                 + "  function init() {\n"
                 + "    s = document.getElementById('s');\n"
@@ -127,7 +120,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
                 + "<body onload='init()'>\n"
                 + "<form>\n"
-                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + LOG_TEXTAREA
                 + "  <select id='s'>\n"
                 + "    <option value='opt-a'>A</option>\n"
                 + "    <option id='opt-b' value='b'>B</option>\n"
@@ -140,10 +133,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("s")).click();
         driver.findElement(By.id("opt-b")).click();
 
-        final List<String> alerts = new LinkedList<>();
-        final WebElement log = driver.findElement(By.id("log_"));
-        alerts.add(log.getAttribute("value").trim());
-        assertEquals(getExpectedAlerts(), alerts);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -152,24 +142,22 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("onchange-select; onclick-option; onclick-select;")
-    @BuggyWebDriver(CHROME = "onchange-select; onclick-select;",
-            EDGE = "onchange-select; onclick-select;",
-            FF = "onchange-select; onclick-select;",
-            FF_ESR = "onchange-select; onclick-select;")
+    @Alerts({"onchange-select", "onclick-option", "onclick-select"})
+    @BuggyWebDriver(CHROME = {"onchange-select", "onclick-select"},
+            EDGE = {"onchange-select", "onclick-select"},
+            FF = {"onchange-select", "onclick-select"},
+            FF_ESR = {"onchange-select", "onclick-select"})
     public void clickOptionEventSequence1() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
                 + "<script>\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log_').value += x + '; ';\n"
-                + "  }\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "</script></head>\n"
 
                 + "<body>\n"
                 + "<form>\n"
-                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + LOG_TEXTAREA
                 + "  <select id='s' size='2' onclick=\"log('onclick-select')\""
                         + " onchange=\"log('onchange-select')\">\n"
                 + "    <option id='clickId' value='a' onclick=\"log('onclick-option')\""
@@ -183,10 +171,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("clickId")).click();
 
-        final List<String> alerts = new LinkedList<>();
-        final WebElement log = driver.findElement(By.id("log_"));
-        alerts.add(log.getAttribute("value").trim());
-        assertEquals(getExpectedAlerts(), alerts);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -195,19 +180,17 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("change-SELECT; click-OPTION; click-OPTION;")
-    @BuggyWebDriver(CHROME = "change-SELECT; click-SELECT;",
-            EDGE = "change-SELECT; click-SELECT;",
-            FF = "change-SELECT; click-SELECT;",
-            FF_ESR = "change-SELECT; click-SELECT;")
+    @Alerts({"change-SELECT", "click-OPTION", "click-OPTION"})
+    @BuggyWebDriver(CHROME = {"change-SELECT", "click-SELECT"},
+            EDGE = {"change-SELECT", "click-SELECT"},
+            FF = {"change-SELECT", "click-SELECT"},
+            FF_ESR = {"change-SELECT", "click-SELECT"})
     public void clickOptionEventSequence2() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
                 + "<script>\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log_').value += x + '; ';\n"
-                + "  }\n"
+                + LOG_TEXTAREA_FUNCTION
 
                 + "  function init() {\n"
                 + "    var s = document.getElementById('s');\n"
@@ -229,7 +212,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
                 + "<body onload='init()'>\n"
                 + "<form>\n"
-                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + LOG_TEXTAREA
                 + "  <select id='s' size='2' >\n"
                 + "    <option id='clickId' value='a' >A</option>\n"
                 + "  </select>\n"
@@ -241,10 +224,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("clickId")).click();
 
-        final List<String> alerts = new LinkedList<>();
-        final WebElement log = driver.findElement(By.id("log_"));
-        alerts.add(log.getAttribute("value").trim());
-        assertEquals(getExpectedAlerts(), alerts);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -253,19 +233,17 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;")
-    @BuggyWebDriver(CHROME = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
-            EDGE = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
-            FF = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
-            FF_ESR = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
+    @Alerts({"onchange-select", "change-SELECT", "onclick-option", "click-OPTION", "onclick-select", "click-OPTION"})
+    @BuggyWebDriver(CHROME = {"onchange-select", "change-SELECT", "onclick-select", "click-SELECT"},
+            EDGE = {"onchange-select", "change-SELECT", "onclick-select", "click-SELECT"},
+            FF = {"onchange-select", "change-SELECT", "onclick-select", "click-SELECT"},
+            FF_ESR = {"onchange-select", "change-SELECT", "onclick-select", "click-SELECT"})
     public void clickOptionEventSequence3() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
                 + "<script>\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log_').value += x + '; ';\n"
-                + "  }\n"
+                + LOG_TEXTAREA_FUNCTION
 
                 + "  function init() {\n"
                 + "    var s = document.getElementById('s');\n"
@@ -287,7 +265,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
                 + "<body onload='init()'>\n"
                 + "<form>\n"
-                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + LOG_TEXTAREA
                 + "  <select id='s' size='2' onclick=\"log('onclick-select')\""
                         + " onchange=\"log('onchange-select')\">\n"
                 + "    <option id='clickId' value='a' onclick=\"log('onclick-option')\""
@@ -301,10 +279,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("clickId")).click();
 
-        final List<String> alerts = new LinkedList<>();
-        final WebElement log = driver.findElement(By.id("log_"));
-        alerts.add(log.getAttribute("value").trim());
-        assertEquals(getExpectedAlerts(), alerts);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
