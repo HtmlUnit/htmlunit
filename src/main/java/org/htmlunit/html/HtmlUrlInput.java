@@ -38,18 +38,8 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
      */
     HtmlUrlInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(qualifiedName, page, trimValueAttribute(page, attributes));
-    }
-
-    private static Map<String, DomAttr> trimValueAttribute(final SgmlPage page, final Map<String, DomAttr> attributes) {
-        for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-            if (VALUE_ATTRIBUTE.equalsIgnoreCase(entry.getKey())) {
-                entry.getValue().setValue(entry.getValue().getValue().trim());
-                break;
-            }
-        }
-
-        return attributes;
+        super(qualifiedName, page, attributes);
+        setValue(getValue().trim());
     }
 
     /**

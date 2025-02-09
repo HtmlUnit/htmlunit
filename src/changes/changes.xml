@@ -9,6 +9,9 @@
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
             <action type="update" dev="rbri">
+                HtmlUrlInput value trimming fixed.
+            </action>
+            <action type="update" dev="rbri">
                 Replace the deprecated WebElement.getAttribute(String) with getDomAttribute(String) and getDomProperty(String)
                 at many places in the test suite.
             </action>
