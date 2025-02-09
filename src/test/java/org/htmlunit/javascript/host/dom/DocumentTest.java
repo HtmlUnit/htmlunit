@@ -3692,10 +3692,10 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"about:blank", "about:blank", "undefined", "null", "null"})
-    @HtmlUnitNYI(CHROME = "InternalError/InternalError",
-            EDGE = "InternalError/InternalError",
-            FF = "InternalError/InternalError",
-            FF_ESR = "InternalError/InternalError")
+    @HtmlUnitNYI(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void newDoc() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
