@@ -9,6 +9,10 @@
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
             <action type="update" dev="rbri">
+                Replace the deprecated WebElement.getAttribute(String) with getDomAttribute(String) and getDomProperty(String)
+                at many places in the test suite.
+            </action>
+            <action type="update" dev="rbri">
                 Use StandardCharsets.UTF_8 instead of Charsets.UTF_8 for the sample code.
             </action>
             <action type="fix" dev="rbri">

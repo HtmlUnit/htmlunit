@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -341,17 +340,13 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'><br></div>\n"
-            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
 
         final WebDriver driver = loadPage2(html);
-
-        String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
-        actual = StringUtils.replace(actual, "\r\n", "\n");
-
-        assertEquals(expected, actual);
+        verify(() -> driver.findElement(By.id("myLog")).getDomProperty("value"), expected);
     }
 
     /**
@@ -373,21 +368,18 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "    } catch(e) {}\n" // ignore strange properties like '@@iterator'
             + "  }\n"
             + "  array.sort();\n"
-            + "  document.getElementById('myTextarea').value = array.join('\\n');\n"
+            + "  document.getElementById('myLog').value = array.join('\\n');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'><br></div>\n"
-            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 
         final WebDriver driver = loadPage2(html);
-
-        String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
-        actual = StringUtils.replace(actual, "\r\n", "\n");
-        assertEquals(expected, actual);
+        verify(() -> driver.findElement(By.id("myLog")).getDomProperty("value"), expected);
     }
 
     /**

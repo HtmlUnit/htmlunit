@@ -58,21 +58,22 @@ public class ClickableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("click click dblclick ")
+    @Alerts({"click", "click", "dblclick"})
     public void dblClick() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function clickMe() {\n"
-            + "    document.getElementById('myTextarea').value+='click ';\n"
+            + "    log('click');\n"
             + "  }\n"
             + "  function dblClickMe() {\n"
-            + "    document.getElementById('myTextarea').value+='dblclick ';\n"
+            + "    log('dblclick');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body id='myBody' onclick='clickMe()' ondblclick='dblClickMe()'>\n"
-            + "<textarea id='myTextarea'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(content);
@@ -81,6 +82,6 @@ public class ClickableElement2Test extends WebDriverTestCase {
         action.doubleClick(driver.findElement(By.id("myBody")));
         action.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("myTextarea")).getAttribute("value"));
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 }

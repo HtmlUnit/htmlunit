@@ -599,22 +599,26 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("click href click doubleClick href ")
-    @BuggyWebDriver(
-            FF_ESR = "click click doubleClick href href ")
-    @HtmlUnitNYI(CHROME = "click href click href doubleClick ",
-            EDGE = "click href click href doubleClick ",
-            FF = "click href click href doubleClick ",
-            FF_ESR = "click href click href doubleClick ")
+    @Alerts({"click", "href", "click", "doubleClick", "href"})
+    @BuggyWebDriver(FF_ESR = {"click", "click", "doubleClick", "href", "href"})
+    @HtmlUnitNYI(CHROME = {"click", "href", "click", "href", "doubleClick"},
+            EDGE = {"click", "href", "click", "href", "doubleClick"},
+            FF = {"click", "href", "click", "href", "doubleClick"},
+            FF_ESR = {"click", "href", "click", "href", "doubleClick"})
     public void doubleClick() throws Exception {
         final String html =
               "<html>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + LOG_TEXTAREA_FUNCTION
+              + "</script>\n"
+              + "</head>\n"
             + "<body>\n"
             + "  <a id='myAnchor' "
-            +       "href=\"javascript:document.getElementById('myTextarea').value+='href ';void(0);\" "
-            +       "onClick=\"document.getElementById('myTextarea').value+='click ';\" "
-            +       "onDblClick=\"document.getElementById('myTextarea').value+='doubleClick ';\">foo</a>\n"
-            + "  <textarea id='myTextarea'></textarea>\n"
+            +       "href=\"javascript:log('href');void(0);\" "
+            +       "onClick=\"log('click');\" "
+            +       "onDblClick=\"log('doubleClick');\">foo</a>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -623,7 +627,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         action.doubleClick(driver.findElement(By.id("myAnchor")));
         action.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("myTextarea")).getAttribute("value"));
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**

@@ -46,6 +46,7 @@ public class TypingTest extends SeleniumTest {
         keyReporter.sendKeys("tet", Keys.ARROW_LEFT, "s");
 
         assertEquals("test", keyReporter.getAttribute("value"));
+        assertNull(keyReporter.getDomAttribute("value"));
         assertEquals("test", keyReporter.getDomProperty("value"));
     }
 
@@ -78,6 +79,7 @@ public class TypingTest extends SeleniumTest {
 
         // And leave no rubbish/printable keys in the "keyReporter"
         assertEquals("", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("", element.getDomProperty("value"));
     }
 
@@ -109,6 +111,7 @@ public class TypingTest extends SeleniumTest {
 
         // And leave no rubbish/printable keys in the "keyReporter"
         assertEquals("", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("", element.getDomProperty("value"));
     }
 
@@ -126,6 +129,7 @@ public class TypingTest extends SeleniumTest {
         element.sendKeys(numericShiftsEtc);
 
         assertEquals(numericShiftsEtc, element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals(numericShiftsEtc, element.getDomProperty("value"));
 
         assertTrue(result.getText(), result.getText().trim().contains(" up: 16"));
@@ -145,6 +149,7 @@ public class TypingTest extends SeleniumTest {
         element.sendKeys(upperAlphas);
 
         assertEquals(upperAlphas, element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals(upperAlphas, element.getDomProperty("value"));
 
         assertTrue(result.getText(), result.getText().trim().contains(" up: 16"));
@@ -166,6 +171,7 @@ public class TypingTest extends SeleniumTest {
         element.sendKeys(allPrintable);
 
         assertEquals(allPrintable, element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals(allPrintable, element.getDomProperty("value"));
 
         assertTrue(result.getText(), result.getText().trim().contains(" up: 16"));
@@ -184,6 +190,7 @@ public class TypingTest extends SeleniumTest {
                 + Keys.UP + Keys.DOWN + Keys.PAGE_UP + Keys.PAGE_DOWN + "1");
 
         assertEquals("ba1", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("ba1", element.getDomProperty("value"));
     }
 
@@ -201,6 +208,7 @@ public class TypingTest extends SeleniumTest {
                 + "0" + Keys.PAGE_UP + Keys.END + "111" + Keys.HOME + "00");
 
         assertEquals("0000abc1111", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("0000abc1111", element.getDomProperty("value"));
     }
 
@@ -215,14 +223,17 @@ public class TypingTest extends SeleniumTest {
 
         element.sendKeys("abcdefghi");
         assertEquals("abcdefghi", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("abcdefghi", element.getDomProperty("value"));
 
         element.sendKeys(Keys.LEFT, Keys.LEFT, Keys.DELETE);
         assertEquals("abcdefgi", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("abcdefgi", element.getDomProperty("value"));
 
         element.sendKeys(Keys.LEFT, Keys.LEFT, Keys.BACK_SPACE);
         assertEquals("abcdfgi", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("abcdfgi", element.getDomProperty("value"));
     }
 
@@ -237,6 +248,7 @@ public class TypingTest extends SeleniumTest {
 
         element.sendKeys("abcd" + Keys.SPACE + "fgh" + Keys.SPACE + "ij");
         assertEquals("abcd fgh ij", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("abcd fgh ij", element.getDomProperty("value"));
     }
 
@@ -254,6 +266,7 @@ public class TypingTest extends SeleniumTest {
                 + Keys.ADD + Keys.SEMICOLON + Keys.EQUALS + Keys.DIVIDE
                 + Keys.NUMPAD3 + "abcd");
         assertEquals("abcd*-+.,09+;=/3abcd", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("abcd*-+.,09+;=/3abcd", element.getDomProperty("value"));
     }
 
@@ -268,11 +281,13 @@ public class TypingTest extends SeleniumTest {
 
         element.sendKeys("abcd efgh");
         assertEquals("abcd efgh", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("abcd efgh", element.getDomProperty("value"));
 
         element.sendKeys(Keys.SHIFT, Keys.LEFT, Keys.LEFT, Keys.LEFT);
         element.sendKeys(Keys.DELETE);
         assertEquals("abcd e", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("abcd e", element.getDomProperty("value"));
     }
 
@@ -294,6 +309,7 @@ public class TypingTest extends SeleniumTest {
 
         element.sendKeys(Keys.DELETE);
         assertEquals("", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("", element.getDomProperty("value"));
     }
 
@@ -309,24 +325,29 @@ public class TypingTest extends SeleniumTest {
 
         element.sendKeys("done" + Keys.HOME);
         assertEquals("done", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("done", element.getDomProperty("value"));
 
         element.sendKeys("" + Keys.SHIFT + "ALL " + Keys.HOME);
         assertEquals("ALL done", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("ALL done", element.getDomProperty("value"));
 
         element.sendKeys(Keys.DELETE);
         assertEquals("done", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("done", element.getDomProperty("value"));
 
         element.sendKeys("" + Keys.END + Keys.SHIFT + Keys.HOME);
         assertEquals("done", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("done", element.getDomProperty("value"));
         // Note: trailing SHIFT up here
         assertTrue(result.getText(), result.getText().trim().contains(" up: 16"));
 
         element.sendKeys("" + Keys.DELETE);
         assertEquals("", element.getAttribute("value"));
+        assertNull(element.getDomAttribute("value"));
         assertEquals("", element.getDomProperty("value"));
     }
 
@@ -372,19 +393,40 @@ public class TypingTest extends SeleniumTest {
         final WebElement log = driver.findElement(By.id("log"));
 
         assertEquals("", log.getAttribute("value"));
+        assertNull(log.getDomAttribute("value"));
+        assertEquals("", log.getDomProperty("value"));
 
         input.sendKeys("b");
         assertEquals(getExpectedAlerts()[0], getValueText(log).replace('\n', ' '));
+        assertNull(getValueDomAttributeText(log));
+        assertEquals(getExpectedAlerts()[0], getValueDomPropertyText(log).replace('\n', ' '));
         log.clear();
 
         input.sendKeys("a");
 
         assertEquals(getExpectedAlerts()[1], getValueText(log).replace('\n', ' '));
+        assertNull(getValueDomAttributeText(log));
+        assertEquals(getExpectedAlerts()[1], getValueDomPropertyText(log).replace('\n', ' '));
     }
 
     private static String getValueText(final WebElement el) {
         // Standardize on \n and strip any trailing whitespace.
         return el.getAttribute("value").replace("\r\n", "\n").trim();
+    }
+
+    private static String getValueDomAttributeText(final WebElement el) {
+        final String attrib = el.getDomAttribute("value");
+        if (attrib == null) {
+            return attrib;
+        }
+
+        // Standardize on \n and strip any trailing whitespace.
+        return attrib.replace("\r\n", "\n").trim();
+    }
+
+    private static String getValueDomPropertyText(final WebElement el) {
+        // Standardize on \n and strip any trailing whitespace.
+        return el.getDomProperty("value").replace("\r\n", "\n").trim();
     }
 
     /**
@@ -416,5 +458,7 @@ public class TypingTest extends SeleniumTest {
         input.sendKeys("World");
 
         assertEquals("'World' should be appended.", "HelloWorld", input.getAttribute("value"));
+        assertEquals("'World' should not be appended.", "Hello", input.getDomAttribute("value"));
+        assertEquals("'World' should be appended.", "HelloWorld", input.getDomProperty("value"));
     }
 }
