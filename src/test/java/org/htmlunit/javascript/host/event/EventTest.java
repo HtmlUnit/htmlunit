@@ -988,6 +988,8 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"focus INPUT", "focus INPUT"})
+    @HtmlUnitNYI(FF = {"focus undefined", "focus INPUT", "focus INPUT"},
+            FF_ESR = {"focus undefined", "focus INPUT", "focus INPUT"})
     public void document_input_focus() throws Exception {
         document_input("focus");
     }
