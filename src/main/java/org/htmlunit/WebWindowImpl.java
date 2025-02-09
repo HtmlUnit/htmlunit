@@ -15,7 +15,7 @@
 package org.htmlunit;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON;
-import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136;
+import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_138;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_147;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_93;
@@ -93,8 +93,8 @@ public abstract class WebWindowImpl implements WebWindow {
             outerHeight_ = innerHeight_ + 93;
             outerWidth_ = innerWidth_ + 16;
         }
-        else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136)) {
-            outerHeight_ = innerHeight_ + 136;
+        else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_138)) {
+            outerHeight_ = innerHeight_ + 138;
             outerWidth_ = innerWidth_ + 24;
         }
         else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_147)) {
