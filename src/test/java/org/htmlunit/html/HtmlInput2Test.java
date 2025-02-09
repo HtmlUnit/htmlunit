@@ -225,12 +225,12 @@ public final class HtmlInput2Test extends WebDriverTestCase {
         final WebElement log = driver.findElement(By.id("log_"));
 
         driver.findElement(By.id(TEST_ID)).click();
-        alerts.add(log.getAttribute("value").trim());
+        alerts.add(log.getDomProperty("value").trim());
 
         log.clear();
         driver.findElement(By.id("next")).click();
 
-        alerts.add(log.getAttribute("value").trim());
+        alerts.add(log.getDomProperty("value").trim());
         assertEquals(getExpectedAlerts(), alerts);
     }
 

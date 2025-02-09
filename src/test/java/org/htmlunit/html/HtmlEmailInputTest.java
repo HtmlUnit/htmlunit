@@ -210,6 +210,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"abc@eemail.com",
+             "abc@eemail.com",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -224,6 +225,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"abc@email.com",
+             "abc@email.com",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -238,6 +240,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -250,7 +253,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({" ",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -263,7 +267,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"  \t",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -276,7 +281,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abc@email.com",
+    @Alerts({" abc@email.com ",
+             "abc@email.com",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -289,27 +295,32 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"abc@email.com",
+    @Alerts(DEFAULT = {"null",
+                       "abc@email.com",
                        "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
                        "true",
                        "§§URL§§?k=abc%40email.com", "2"},
-            FF = {"abc@email.com",
+            FF = {"null",
+                  "abc@email.com",
                   "false",
                   "false-false-false-false-false-false-false-false-true-false-false",
                   "true",
                   "§§URL§§", "1"},
-            FF_ESR = {"abc@email.com",
+            FF_ESR = {"null",
+                      "abc@email.com",
                       "false",
                       "false-false-false-false-false-false-false-false-true-false-false",
                       "true",
                       "§§URL§§", "1"})
-    @HtmlUnitNYI(FF = {"abc@email.com",
+    @HtmlUnitNYI(FF = {"null",
+                       "abc@email.com",
                        "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
                        "true",
                        "§§URL§§?k=abc%40email.com", "2"},
-                 FF_ESR = {"abc@email.com",
+                 FF_ESR = {"null",
+                           "abc@email.com",
                            "true",
                            "false-false-false-false-false-false-false-false-false-true-false",
                            "true",
@@ -322,7 +333,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"a@b.com",
+    @Alerts({"null",
+             "a@b.com",
              "false",
              "false-false-false-false-false-false-false-true-false-false-false",
              "true",
@@ -336,6 +348,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a@b.com",
+             "a@b.com",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -348,7 +361,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -361,7 +375,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"a@b.com",
+    @Alerts({"null",
+             "a@b.com",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -374,7 +389,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"a@b.c",
+    @Alerts({"null",
+             "a@b.c",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -387,7 +403,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"a@ema",
+    @Alerts({"null",
+             "a@ema",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -401,6 +418,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a@email.com",
+             "a@email.com",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -445,7 +463,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -458,7 +477,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-true-false-false-false-false-false-false-false-false-false",
              "true",
@@ -471,7 +491,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-true-false-false-false-false-false-false-false-false-false",
              "true",
@@ -484,7 +505,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -498,7 +520,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-false-false-false-false-false-false-false-false-false-true",
              "true",
@@ -511,7 +534,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -524,7 +548,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -583,13 +608,14 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
         if (sendKeys != null) {
             foo.sendKeys(sendKeys);
         }
-        assertEquals(getExpectedAlerts()[0], foo.getDomProperty("value"));
+        assertEquals(getExpectedAlerts()[0], "" + foo.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], foo.getDomProperty("value"));
 
         driver.findElement(By.id("myTest")).click();
-        verifyTitle2(driver, getExpectedAlerts()[1], getExpectedAlerts()[2], getExpectedAlerts()[3]);
+        verifyTitle2(driver, getExpectedAlerts()[2], getExpectedAlerts()[3], getExpectedAlerts()[4]);
 
         driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest().getUrl());
-        assertEquals(Integer.parseInt(getExpectedAlerts()[5]), getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[5], getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[6]), getMockWebConnection().getRequestCount());
     }
 }

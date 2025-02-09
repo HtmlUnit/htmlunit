@@ -128,11 +128,14 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
 
         final WebElement input = driver.findElement(By.id("foo"));
+
         input.sendKeys("0804");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
 
         input.sendKeys("PM");
-        assertEquals(getExpectedAlerts()[1], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], input.getDomProperty("value"));
     }
 
     /**
@@ -146,13 +149,13 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         final WebElement p = driver.findElement(By.id("p"));
         try {
             p.sendKeys("804PM");
-            assertEquals(getExpectedAlerts()[0], "no ex: " + p.getAttribute("value"));
+            assertEquals(getExpectedAlerts()[0], "no ex: " + p.getDomProperty("value"));
             return;
         }
         catch (final InvalidElementStateException e) {
             // as expected
         }
-        assertEquals(getExpectedAlerts()[0], "ex: " + p.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], "ex: " + p.getDomProperty("value"));
     }
 
     /**
@@ -238,7 +241,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts({"11:55", ""})
     public void clearInput() throws Exception {
         final String htmlContent
                 = "<html>\n"
@@ -252,8 +255,12 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
         final WebElement element = driver.findElement(By.id("tester"));
 
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomProperty("value"));
+
         element.clear();
-        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], element.getDomProperty("value"));
     }
 
     /**
