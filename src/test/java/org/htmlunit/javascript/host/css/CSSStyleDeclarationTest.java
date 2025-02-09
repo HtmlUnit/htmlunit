@@ -1824,7 +1824,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
 
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(expectedValue + "; ", textArea.getAttribute("value"));
+        assertEquals(expectedValue + "; ", textArea.getDomProperty("value"));
     }
 
     /**

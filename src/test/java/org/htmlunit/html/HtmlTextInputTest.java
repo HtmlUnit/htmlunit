@@ -87,16 +87,26 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         final String html = "<html><head></head><body><input type='text' id='t'/></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement t = driver.findElement(By.id("t"));
+
         t.sendKeys("abc");
-        assertEquals("abc", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("abc", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("ab", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("ab", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("a", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("a", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("", t.getDomProperty("value"));
     }
 
     /**
@@ -114,7 +124,9 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         catch (final InvalidElementStateException e) {
             // as expected
         }
-        assertEquals("", p.getAttribute("value"));
+
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("", p.getDomProperty("value"));
     }
 
     /**
@@ -200,8 +212,10 @@ public class HtmlTextInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
+
         p.sendKeys("abcd");
-        assertEquals("abc", p.getAttribute("value"));
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("abc", p.getDomProperty("value"));
     }
 
     /**
@@ -227,8 +241,10 @@ public class HtmlTextInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
+
         p.sendKeys("abcd");
-        assertEquals("abc", p.getAttribute("value"));
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("abc", p.getDomProperty("value"));
     }
 
     /**
@@ -729,6 +745,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0987654321!",
+             "0987654321!",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -743,6 +760,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"68746d6c756e69742072756c657a21",
+             "68746d6c756e69742072756c657a21",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -757,6 +775,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -770,6 +789,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({" ",
+             " ",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -783,6 +803,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"  \t",
+             "  \t",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -796,6 +817,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({" 210 ",
+             " 210 ",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -808,7 +830,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({" 210 ",
+    @Alerts({"null",
+             " 210 ",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -821,7 +844,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abcd",
+    @Alerts({"null",
+             "abcd",
              "false",
              "false-false-false-false-false-false-false-true-false-false-false",
              "true",
@@ -835,6 +859,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"ab",
+             "ab",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -847,7 +872,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -860,7 +886,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abcdefghi",
+    @Alerts({"null",
+             "abcdefghi",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -873,7 +900,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abcd",
+    @Alerts({"null",
+             "abcd",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -886,7 +914,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abcde",
+    @Alerts({"null",
+             "abcde",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -900,6 +929,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"abcdefghi",
+             "abcdefghi",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -944,7 +974,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -957,7 +988,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-true-false-false-false-false-false-false-false-false-false",
              "true",
@@ -970,7 +1002,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-true-false-false-false-false-false-false-false-false-false",
              "true",
@@ -983,7 +1016,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -997,7 +1031,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-false-false-false-false-false-false-false-false-false-true",
              "true",
@@ -1010,7 +1045,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -1023,7 +1059,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -1081,14 +1118,15 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         if (sendKeys != null) {
             foo.sendKeys(sendKeys);
         }
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], "" + foo.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], foo.getDomProperty("value"));
 
         driver.findElement(By.id("myTest")).click();
-        verifyTitle2(driver, getExpectedAlerts()[1], getExpectedAlerts()[2], getExpectedAlerts()[3]);
+        verifyTitle2(driver, getExpectedAlerts()[2], getExpectedAlerts()[3], getExpectedAlerts()[4]);
 
         driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest().getUrl());
-        assertEquals(Integer.parseInt(getExpectedAlerts()[5]), getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[5], getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[6]), getMockWebConnection().getRequestCount());
     }
 
     /**

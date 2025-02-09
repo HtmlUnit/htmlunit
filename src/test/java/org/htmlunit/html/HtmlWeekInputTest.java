@@ -126,8 +126,10 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
 
         final WebElement input = driver.findElement(By.id("foo"));
+
         input.sendKeys("36");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
     }
 
     /**
@@ -161,7 +163,7 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts({"2018-W20", ""})
     public void clearInput() throws Exception {
         final String htmlContent
                 = "<html>\n"
@@ -175,8 +177,12 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
         final WebElement element = driver.findElement(By.id("tester"));
 
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomProperty("value"));
+
         element.clear();
-        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], element.getDomProperty("value"));
     }
 
     /**

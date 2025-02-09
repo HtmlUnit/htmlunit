@@ -17,6 +17,7 @@ package org.htmlunit.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -299,6 +300,31 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
              "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"})
+    @HtmlUnitNYI(
+            CHROME = {"null",
+                      "http://test.com",
+                      "true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true",
+                      "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"},
+            EDGE = {"null",
+                    "http://test.com",
+                    "true",
+                    "false-false-false-false-false-false-false-false-false-true-false",
+                    "true",
+                    "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"},
+            FF = {"null",
+                  "http://test.com",
+                  "true",
+                  "false-false-false-false-false-false-false-false-false-true-false",
+                  "true",
+                  "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"},
+            FF_ESR = {"null",
+                      "http://test.com",
+                      "true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true",
+                      "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k'>\n", "", " http://test.com ");
     }

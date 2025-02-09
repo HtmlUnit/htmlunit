@@ -56,7 +56,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final String expected = loadExpectation("ElementOffsetHeightTest.properties", ".txt");
-        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
         assertEquals(expected, actual);
     }
 
@@ -91,7 +91,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
         assertEquals(getExpectedAlerts()[0], actual);
     }
 
@@ -126,7 +126,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
         assertEquals(getExpectedAlerts()[0], actual);
     }
 
@@ -165,7 +165,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
         assertEquals(getExpectedAlerts()[0], actual);
     }
 

@@ -169,7 +169,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final String expected = loadExpectation("ComputedCSSStyleDeclarationTest.properties.notAttached", ".txt");
-        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
         assertEquals(expected, actual);
     }
 

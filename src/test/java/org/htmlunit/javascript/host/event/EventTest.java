@@ -959,6 +959,7 @@ public class EventTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "  function test() {\n"
                 + "    handle(document);\n"
                 + "    log('activeElement ' + document.activeElement.nodeName);\n"
@@ -973,18 +974,13 @@ public class EventTest extends WebDriverTestCase {
                 + "    log(e.type + ' ' + src.nodeName);\n"
                 + "    log('handler: activeElement ' + document.activeElement.nodeName);\n"
                 + "  }\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log').value += x + '\\n';\n"
-                + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1009,6 +1005,7 @@ public class EventTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "  function test() {\n"
                 + "    handle(document);\n"
                 + "  }\n"
@@ -1021,9 +1018,6 @@ public class EventTest extends WebDriverTestCase {
                 + "      src = e.target;\n"
                 + "    log(e.type + ' ' + src.nodeName);\n"
                 + "  }\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log').value += x + '\\n';\n"
-                + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
@@ -1031,17 +1025,15 @@ public class EventTest extends WebDriverTestCase {
                 + "    <input id=\"input1\" type=\"text\">\n"
                 + "    <input id=\"input2\" type=\"text\">\n"
                 + "  </div>\n"
-                + "<textarea id='log' cols='80' rows='40'></textarea>\n"
+                + LOG_TEXTAREA
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final WebElement logElement = driver.findElement(By.id("log"));
-        final String initialValue = logElement.getAttribute("value");
+
         driver.findElement(By.id("input1")).click();
         driver.findElement(By.id("input2")).click();
-        final String addedValue = logElement.getAttribute("value").substring(initialValue.length());
-        final String text = addedValue.trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
