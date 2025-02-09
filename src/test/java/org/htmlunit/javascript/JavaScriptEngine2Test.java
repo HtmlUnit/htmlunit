@@ -423,7 +423,11 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("error")
+    @Alerts("RangeError")
+    @HtmlUnitNYI(CHROME = "InternalError/InternalError",
+            EDGE = "InternalError/InternalError",
+            FF = "InternalError/InternalError",
+            FF_ESR = "InternalError/InternalError")
     public void recursion() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function recurse(c) {\n"
