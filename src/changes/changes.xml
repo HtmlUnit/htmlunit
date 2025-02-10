@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: load more classes lazily.
+            </action>
             <action type="update" dev="rbri">
                 HtmlUrlInput value trimming fixed.
             </action>
