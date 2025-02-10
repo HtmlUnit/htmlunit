@@ -232,7 +232,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
         while (true) {
             try {
-                final String text = driver.findElement(By.id("log")).getDomProperty("value").trim().replaceAll("\r", "");
+                final String text = driver
+                                        .findElement(By.id("log"))
+                                        .getDomProperty("value")
+                                        .trim()
+                                        .replaceAll("\r", "");
                 assertEquals(expected, text);
                 return;
             }
