@@ -137,7 +137,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
             return element1.getValue();
         }
         if (element1 != null) {
-            if (element1.compareTo(element2) > 0) {
+            if (StyleElement.compareToByImportanceAndSpecificity(element1, element2) > 0) {
                 return element1.getValue();
             }
         }
