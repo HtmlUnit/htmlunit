@@ -39,7 +39,7 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
     HtmlUrlInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        setValue(getValue().trim());
+        setRawValue(getValue().trim());
     }
 
     /**
