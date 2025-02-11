@@ -45,14 +45,18 @@
         <selenium.devtools.artifactId>selenium-devtools-v132</selenium.devtools.artifactId>
 
         <jetty.version>9.4.57.v20241219</jetty.version>
+        <quercus.version>4.0.66</quercus.version>
         <log4j.version>2.24.3</log4j.version>
         <slf4j.version>2.0.16</slf4j.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
+        <image-comparison.version>4.4.0</image-comparison.version>
+        <jfreechart.version>1.5.5</jfreechart.version>
 
         <checkstyle.version>10.21.2</checkstyle.version>
         <spotbugs.version>4.9.1</spotbugs.version>
         <pmd.version>7.10.0</pmd.version>
         <junit.version>4.13.2</junit.version>
-        <archunit.version>1.3.0</archunit.version>
+        <archunit.version>1.4.0</archunit.version>
         <dependencycheck.version>10.0.4</dependencycheck.version>
     </properties>
 
@@ -1386,7 +1390,7 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-            <version>1.5</version>
+            <version>${commons-fileupload.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1402,13 +1406,13 @@
         <dependency>
             <groupId>com.github.romankh3</groupId>
             <artifactId>image-comparison</artifactId>
-            <version>4.4.0</version>
+            <version>${image-comparison.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jfreechart</artifactId>
-            <version>1.5.5</version>
+            <version>${jfreechart.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- Jetty -->
@@ -1427,7 +1431,7 @@
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>quercus</artifactId>
-            <version>4.0.66</version>
+            <version>${quercus.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
