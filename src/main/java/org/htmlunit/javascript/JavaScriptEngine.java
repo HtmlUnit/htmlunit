@@ -1213,7 +1213,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         domException.setPrototype(scope.getPrototype(DOMException.class));
 
         final EcmaError helper = ScriptRuntime.syntaxError("helper");
-        final String fileName = helper.sourceName().replaceFirst("script in (.*) from .*", "$1");
+        String fileName = helper.sourceName();
+        if (fileName != null) {
+            fileName = fileName.replaceFirst("script in (.*) from .*", "$1");
+        }
         domException.setLocation(fileName, helper.lineNumber());
 
         return new JavaScriptException(domException, fileName, helper.lineNumber());
