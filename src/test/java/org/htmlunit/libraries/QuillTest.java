@@ -17,6 +17,7 @@ package org.htmlunit.libraries;
 import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.BrowserRunner;
@@ -28,6 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Tests for https://github.com/slab/quill.
@@ -80,6 +82,11 @@ public class QuillTest extends WebDriverTestCase {
 
     private void doTest(final String filename) throws Exception {
         final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            final WebClient webClient = ((HtmlUnitDriver) driver).getWebClient();
+            webClient.getOptions().setThrowExceptionOnScriptError(false);
+        }
+
         driver.get(getBaseUrl() + filename);
 
         String content = driver.findElement(By.tagName("body")).getText();
