@@ -3941,6 +3941,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -3971,6 +3972,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4004,7 +4006,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -4615,7 +4618,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("executed")
+    @Alerts({"replaceChild start", "executed", "replaceChild done"})
     public void replaceChildExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4625,7 +4628,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('replaceChild start');\n"
             + "      outernode.replaceChild(newnode, document.getElementById('inner'));\n"
+            + "      log('replaceChild done');\n"
             + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
@@ -4634,6 +4639,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'><div id='inner'></div></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4641,7 +4647,39 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("executed")
+    @Alerts({"replaceChild start", "replaceChild done", "executed"})
+    public void replaceChildExecuteExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.setAttribute('src', 'script.js');\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('replaceChild start');\n"
+            + "      outernode.replaceChild(newnode, document.getElementById('inner'));\n"
+            + "      log('replaceChild done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"replaceChild start", "executed", "replaceChild done"})
     public void replaceChildExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4653,7 +4691,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      newscript.appendChild(document.createTextNode('alerter();'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('replaceChild start');\n"
             + "      outernode.replaceChild(newnode, document.getElementById('inner'));\n"
+            + "      log('replaceChild done');\n"
             + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
@@ -4662,6 +4702,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'><div id='inner'></div></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4669,9 +4710,43 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"executed", "replaceChild done"},
-            FF = "replaceChild done",
-            FF_ESR = "replaceChild done")
+    @Alerts({"replaceChild start", "replaceChild done", "executed"})
+    public void replaceChildExecuteNestedExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('div');\n"
+            + "    var newscript = document.createElement('script');\n"
+            + "    newnode.appendChild(newscript);\n"
+            + "    try {\n"
+            + "      newscript.setAttribute('src', 'script.js');\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('replaceChild start');\n"
+            + "      outernode.replaceChild(newnode, document.getElementById('inner'));\n"
+            + "      log('replaceChild done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"replaceChild start", "executed", "replaceChild done"},
+            FF = {"replaceChild start", "replaceChild done"},
+            FF_ESR = {"replaceChild start", "replaceChild done"})
     public void replaceChildExecuteTemplateChildJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4685,6 +4760,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    var scriptElem = template.content.firstChild;\n"
             + "    try {\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('replaceChild start');\n"
             + "      outernode.replaceChild(scriptElem, document.getElementById('inner'));\n"
             + "      log('replaceChild done');\n"
             + "    } catch(e) { logEx(e); }\n"
@@ -4696,6 +4772,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myNode'><div id='inner'></div></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4703,9 +4780,49 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"executed", "replaceChild done1", "replaceChild done2"},
-            FF = {"replaceChild done1", "replaceChild done2"},
-            FF_ESR = {"replaceChild done1", "replaceChild done2"})
+    @Alerts(DEFAULT = {"replaceChild start", "replaceChild done", "executed"},
+            FF = {"replaceChild start", "replaceChild done"},
+            FF_ESR = {"replaceChild start", "replaceChild done"})
+    public void replaceChildExecuteTemplateChildExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script src=\"script.js\"><' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var template = responseBody.querySelector('template');\n"
+            + "    var scriptElem = template.content.firstChild;\n"
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('replaceChild start');\n"
+            + "      outernode.replaceChild(scriptElem, document.getElementById('inner'));\n"
+            + "      log('replaceChild done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"replaceChild start1", "executed", "replaceChild done1",
+                       "replaceChild start2", "replaceChild done2"},
+            FF = {"replaceChild start1", "replaceChild done1", "replaceChild start2", "replaceChild done2"},
+            FF_ESR = {"replaceChild start1", "replaceChild done1", "replaceChild start2", "replaceChild done2"})
     public void replaceChildExecuteTemplateFragmentJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4720,12 +4837,14 @@ public class HTMLElementTest extends WebDriverTestCase {
 
             + "    try {\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('replaceChild start1');\n"
             + "      outernode.replaceChild(scriptElem, document.getElementById('inner'));\n"
             + "      log('replaceChild done1');\n"
             + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      var outernode = document.getElementById('secondNode');\n"
+            + "      log('replaceChild start2');\n"
             + "      outernode.replaceChild(scriptElem, document.getElementById('inner2'));\n"
             + "      log('replaceChild done2');\n"
             + "    } catch(e) { logEx(e); }\n"
@@ -4739,6 +4858,55 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='secondNode'><div id='inner2'></div></div>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"replaceChild start1", "replaceChild done1",
+                       "replaceChild start2", "replaceChild done2", "executed"},
+            FF = {"replaceChild start1", "replaceChild done1", "replaceChild start2", "replaceChild done2"},
+            FF_ESR = {"replaceChild start1", "replaceChild done1", "replaceChild start2", "replaceChild done2"})
+    public void replaceChildExecuteTemplateFragmentExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script src=\"script.js\"><' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var templateContent = responseBody.querySelector('template').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('replaceChild start1');\n"
+            + "      outernode.replaceChild(scriptElem, document.getElementById('inner'));\n"
+            + "      log('replaceChild done1');\n"
+            + "    } catch(e) { logEx(e); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      log('replaceChild start2');\n"
+            + "      outernode.replaceChild(scriptElem, document.getElementById('inner2'));\n"
+            + "      log('replaceChild done2');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "  <div id='secondNode'><div id='inner2'></div></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
