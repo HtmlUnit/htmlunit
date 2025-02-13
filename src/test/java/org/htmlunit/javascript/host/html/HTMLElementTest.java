@@ -1346,7 +1346,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      try {\n"
             + "        myNode.outerHTML = 'test';\n"
             + "        log('-' + i);\n"
-            + "      } catch(e) {log(i); }\n"
+            + "      } catch(e) { log(i); }\n"
             + "    }\n"
             + "  }\n"
             + "  </script>\n"
@@ -1515,7 +1515,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = null;\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {logEx(e); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1548,7 +1548,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = undefined;\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {logEx(e); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1581,7 +1581,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = '';\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {logEx(e); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1614,7 +1614,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = '';\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {logEx(e); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1647,7 +1647,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "      myNode.outerHTML = '<p>test</p>';\n"
                 + "      log('New = ' + myNode.innerHTML);\n"
                 + "      log('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {logEx(e); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -3378,9 +3378,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  try {\n"
             + "    document.documentElement.doScroll('left');\n"
             + "    log('success');\n"
-            + "  } catch(e) {\n"
-            + "    logEx(e);\n"
-            + "  }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "test();\n"
             + "</script></head><body onload='test()'>\n"
@@ -3561,19 +3559,19 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception call", "exception set"})
+    @Alerts({"TypeError", "TypeError"})
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(HTMLElement.prototype.innerHTML);\n"
-            + "} catch(e) { log('exception call') }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "try {\n"
             + "  var myFunc = function() {};\n"
             + "  HTMLElement.prototype.innerHTML = myFunc;\n"
             + "  log(HTMLElement.prototype.innerHTML == myFunc);\n"
-            + "} catch(e) { log('exception set') }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -3650,7 +3648,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      log(e.hasAttributeNS('bar', 'type'));\n"
             + "      e.removeAttributeNS('bar', 'type');\n"
             + "      log(e.hasAttribute('type'));\n"
-            + "    } catch(e) {log('getAttributeNS() not supported')}\n"
+            + "    } catch(e) { log('getAttributeNS() not supported') }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -3935,7 +3933,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
             + "      outernode.appendChild(newnode);\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -3950,7 +3948,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("executed")
+    @Alerts({"appendChild start", "executed", "appendChild done"})
     public void appendChildExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -3962,8 +3960,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      newscript.appendChild(document.createTextNode('alerter();'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('appendChild start');\n"
             + "      outernode.appendChild(newnode);\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "      log('appendChild done');\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -3978,9 +3978,42 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"executed", "appendChild done"},
-            FF = "appendChild done",
-            FF_ESR = "appendChild done")
+    @Alerts({"appendChild start", "appendChild done", "executed"})
+    public void appendChildExecuteNestedExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('div');\n"
+            + "    var newscript = document.createElement('script');\n"
+            + "    newscript.setAttribute('src', 'script.js');\n"
+            + "    newnode.appendChild(newscript);\n"
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('appendChild start');\n"
+            + "      outernode.appendChild(newnode);\n"
+            + "      log('appendChild done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"parseFromString done", "appendChild start", "executed", "appendChild done"},
+            FF = {"parseFromString done", "appendChild start", "appendChild done"},
+            FF_ESR = {"parseFromString done", "appendChild start", "appendChild done"})
     public void appendChildExecuteTemplateChildJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -3989,14 +4022,16 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
             + "    var parser = new DOMParser();\n"
             + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    log('parseFromString done');\n"
             + "    var responseBody = responseDoc.body;\n"
             + "    var template = responseBody.querySelector('template');\n"
             + "    var scriptElem = template.content.firstChild;\n"
             + "    try {\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('appendChild start');\n"
             + "      outernode.appendChild(scriptElem);\n"
             + "      log('appendChild done');\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4005,6 +4040,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4012,9 +4048,51 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"executed", "appendChild done1", "appendChild done2"},
-            FF = {"appendChild done1", "appendChild done2"},
-            FF_ESR = {"appendChild done1", "appendChild done2"})
+    @Alerts(DEFAULT = {"parseFromString done", "appendChild start", "appendChild done", "executed"},
+            FF = {"parseFromString done", "appendChild start", "appendChild done"},
+            FF_ESR = {"parseFromString done", "appendChild start", "appendChild done"})
+    public void appendChildExecuteTemplateChildExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script src=\"script.js\"><' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    log('parseFromString done');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var template = responseBody.querySelector('template');\n"
+            + "    var scriptElem = template.content.firstChild;\n"
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('appendChild start');\n"
+            + "      outernode.appendChild(scriptElem);\n"
+            + "      log('appendChild done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"parseFromString done", "appendChild start1", "executed",
+                       "appendChild done1", "appendChild start2", "appendChild done2"},
+            FF = {"parseFromString done", "appendChild start1", "appendChild done1",
+                  "appendChild start2", "appendChild done2"},
+            FF_ESR = {"parseFromString done", "appendChild start1", "appendChild done1",
+                      "appendChild start2", "appendChild done2"})
     public void appendChildExecuteTemplateFragmentJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4023,21 +4101,24 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    var html = '<body><template><script>alerter();<' + '/script></template></body>';\n"
             + "    var parser = new DOMParser();\n"
             + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    log('parseFromString done');\n"
             + "    var responseBody = responseDoc.body;\n"
             + "    var templateContent = responseBody.querySelector('template').content;\n"
             + "    var scriptElem = templateContent.firstChild;\n"
 
             + "    try {\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('appendChild start1');\n"
             + "      outernode.appendChild(scriptElem);\n"
             + "      log('appendChild done1');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      var outernode = document.getElementById('secondNode');\n"
+            + "      log('appendChild start2');\n"
             + "      outernode.appendChild(scriptElem);\n"
             + "      log('appendChild done2');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4047,6 +4128,58 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='myNode'></div>\n"
             + "  <div id='secondNode'></div>\n"
             + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"parseFromString done", "appendChild start1",
+                       "appendChild done1", "appendChild start2", "appendChild done2", "executed"},
+            FF = {"parseFromString done", "appendChild start1", "appendChild done1",
+                  "appendChild start2", "appendChild done2"},
+            FF_ESR = {"parseFromString done", "appendChild start1", "appendChild done1",
+                      "appendChild start2", "appendChild done2"})
+    public void appendChildExecuteTemplateFragmentExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script src=\"script.js\"><' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    log('parseFromString done');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var templateContent = responseBody.querySelector('template').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('appendChild start1');\n"
+            + "      outernode.appendChild(scriptElem);\n"
+            + "      log('appendChild done1');\n"
+            + "    } catch(e) { logEx(e); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      log('appendChild start2');\n"
+            + "      outernode.appendChild(scriptElem);\n"
+            + "      log('appendChild done2');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "  <div id='secondNode'></div>\n"
+            + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4072,6 +4205,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4079,7 +4213,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("executed")
+    @Alerts({"insertBefore start", "executed", "insertBefore done"})
     public void insertBeforeExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4089,8 +4223,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start');\n"
             + "      outernode.insertBefore(newnode, null);\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4098,6 +4234,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4105,7 +4242,39 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("executed")
+    @Alerts({"insertBefore start", "insertBefore done", "executed"})
+    public void insertBeforeExecuteExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.setAttribute('src', 'script.js');\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start');\n"
+            + "      outernode.insertBefore(newnode, null);\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"insertBefore start", "executed", "insertBefore done"})
     public void insertBeforeExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4117,8 +4286,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      newscript.appendChild(document.createTextNode('alerter();'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start');\n"
             + "      outernode.insertBefore(newnode, null);\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4126,6 +4297,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4133,9 +4305,43 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"executed", "insertBefore done"},
-            FF = "insertBefore done",
-            FF_ESR = "insertBefore done")
+    @Alerts({"insertBefore start", "insertBefore done", "executed"})
+    public void insertBeforeExecuteNestedExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('div');\n"
+            + "    var newscript = document.createElement('script');\n"
+            + "    newnode.appendChild(newscript);\n"
+            + "    try {\n"
+            + "      newscript.setAttribute('src', 'script.js');\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start');\n"
+            + "      outernode.insertBefore(newnode, null);\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"insertBefore start", "executed", "insertBefore done"},
+            FF = {"insertBefore start", "insertBefore done"},
+            FF_ESR = {"insertBefore start", "insertBefore done"})
     public void insertBeforeExecuteTemplateChildJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4149,9 +4355,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    var scriptElem = template.content.firstChild;\n"
             + "    try {\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start');\n"
             + "      outernode.insertBefore(scriptElem, null);\n"
             + "      log('insertBefore done');\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4167,9 +4374,49 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"executed", "insertBefore done1", "insertBefore done2"},
-            FF = {"insertBefore done1", "insertBefore done2"},
-            FF_ESR = {"insertBefore done1", "insertBefore done2"})
+    @Alerts(DEFAULT = {"insertBefore start", "insertBefore done", "executed"},
+            FF = {"insertBefore start", "insertBefore done"},
+            FF_ESR = {"insertBefore start", "insertBefore done"})
+    public void insertBeforeExecuteTemplateChildExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script src=\"script.js\"><' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var template = responseBody.querySelector('template');\n"
+            + "    var scriptElem = template.content.firstChild;\n"
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"insertBefore start1", "executed", "insertBefore done1",
+                       "insertBefore start2", "insertBefore done2"},
+            FF = {"insertBefore start1", "insertBefore done1", "insertBefore start2", "insertBefore done2"},
+            FF_ESR = {"insertBefore start1", "insertBefore done1", "insertBefore start2", "insertBefore done2"})
     public void insertBeforeExecuteTemplateFragmentJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -4184,15 +4431,17 @@ public class HTMLElementTest extends WebDriverTestCase {
 
             + "    try {\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start1');\n"
             + "      outernode.insertBefore(scriptElem, null);\n"
             + "      log('insertBefore done1');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      var outernode = document.getElementById('secondNode');\n"
+            + "      log('insertBefore start2');\n"
             + "      outernode.insertBefore(scriptElem, null);\n"
             + "      log('insertBefore done2');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4202,6 +4451,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='myNode'></div>\n"
             + "  <div id='secondNode'></div>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -4209,27 +4459,77 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"before", "executed", "insertBefore done1", "insertBefore done2"})
+    @Alerts(DEFAULT = {"insertBefore start1", "insertBefore done1",
+                       "insertBefore start2", "insertBefore done2", "executed"},
+            FF = {"insertBefore start1", "insertBefore done1", "insertBefore start2", "insertBefore done2"},
+            FF_ESR = {"insertBefore start1", "insertBefore done1", "insertBefore start2", "insertBefore done2"})
+    public void insertBeforeExecuteTemplateFragmentExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var html = '<body><template><script src=\"script.js\"><' + '/script></template></body>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var responseDoc = parser.parseFromString(html, 'text/html');\n"
+            + "    var responseBody = responseDoc.body;\n"
+            + "    var templateContent = responseBody.querySelector('template').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start1');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done1');\n"
+            + "    } catch(e) { logEx(e); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      log('insertBefore start2');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done2');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "  <div id='secondNode'></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"insertBefore start1", "executed", "insertBefore done1", "insertBefore start2", "insertBefore done2"})
     public void insertBeforeExecuteTemplateFragmentDom() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    log('before');\n"
             + "    var templateContent = document.getElementById('myTemplate').content;\n"
             + "    var scriptElem = templateContent.firstChild;\n"
 
             + "    try {\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start1');\n"
             + "      outernode.insertBefore(scriptElem, null);\n"
             + "      log('insertBefore done1');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      var outernode = document.getElementById('secondNode');\n"
+            + "      log('insertBefore start2');\n"
             + "      outernode.insertBefore(scriptElem, null);\n"
             + "      log('insertBefore done2');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4241,6 +4541,49 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='secondNode'></div>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"insertBefore start1", "insertBefore done1", "insertBefore start2", "insertBefore done2", "executed"})
+    public void insertBeforeExecuteTemplateFragmentDomExternal() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var templateContent = document.getElementById('myTemplate').content;\n"
+            + "    var scriptElem = templateContent.firstChild;\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start1');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done1');\n"
+            + "    } catch(e) { logEx(e); }\n"
+
+            + "    try {\n"
+            + "      var outernode = document.getElementById('secondNode');\n"
+            + "      log('insertBefore start2');\n"
+            + "      outernode.insertBefore(scriptElem, null);\n"
+            + "      log('insertBefore done2');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <template id='myTemplate'><script src=\"script.js\"></script></template>\n"
+            + "  <div id='myNode'></div>\n"
+            + "  <div id='secondNode'></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -4283,7 +4626,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
             + "      outernode.replaceChild(newnode, document.getElementById('inner'));\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4311,7 +4654,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      newscript.appendChild(document.createTextNode('alerter();'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
             + "      outernode.replaceChild(newnode, document.getElementById('inner'));\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4344,7 +4687,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      var outernode = document.getElementById('myNode');\n"
             + "      outernode.replaceChild(scriptElem, document.getElementById('inner'));\n"
             + "      log('replaceChild done');\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4379,13 +4722,13 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      var outernode = document.getElementById('myNode');\n"
             + "      outernode.replaceChild(scriptElem, document.getElementById('inner'));\n"
             + "      log('replaceChild done1');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      var outernode = document.getElementById('secondNode');\n"
             + "      outernode.replaceChild(scriptElem, document.getElementById('inner2'));\n"
             + "      log('replaceChild done2');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4700,7 +5043,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      var outernode = document.getElementById('myNode');\n"
             + "      outernode.insertAdjacentElement('afterend', scriptElem);\n"
             + "      log('insertAdjacentElement done');\n"
-            + "    } catch(e) { log('exception-append'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
@@ -4735,13 +5078,13 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      var outernode = document.getElementById('myNode');\n"
             + "      outernode.insertAdjacentElement('afterend', scriptElem);\n"
             + "      log('insertAdjacentElement done1');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
 
             + "    try {\n"
             + "      var outernode = document.getElementById('secondNode');\n"
             + "      outernode.insertAdjacentElement('afterend', scriptElem);\n"
             + "      log('insertAdjacentElement done2');\n"
-            + "    } catch(e) { log('exception-append2'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('executed');\n"
