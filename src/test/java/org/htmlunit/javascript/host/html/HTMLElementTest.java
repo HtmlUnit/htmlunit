@@ -4593,6 +4593,76 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"insertBefore start", "executed", "insertBefore done"})
+    public void insertBeforeDomFragmentJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let fragment = new DocumentFragment();\n"
+            + "    var newscript = document.createElement('script');\n"
+            + "    fragment.appendChild(newscript);\n"
+
+            + "    try {\n"
+            + "      newscript.appendChild(document.createTextNode('alerter();'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start');\n"
+            + "      outernode.insertBefore(fragment, null);\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"insertBefore start", "insertBefore done", "executed"})
+    public void insertBeforeDomFragmentExternalJavaScript() throws Exception {
+        getMockWebConnection().setDefaultResponse("alerter();", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    let fragment = new DocumentFragment();\n"
+            + "    var newscript = document.createElement('script');\n"
+            + "    fragment.appendChild(newscript);\n"
+
+            + "    try {\n"
+            + "      newscript.setAttribute('src', 'script.js');\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      log('insertBefore start');\n"
+            + "      outernode.insertBefore(fragment, null);\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    log('executed');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("declared")
     public void insertBeforeDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
