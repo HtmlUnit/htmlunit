@@ -119,6 +119,7 @@ HtmlUnit is used by many projects for automated web testing
  * [JakartaEE TCK](https://github.com/jakartaee/platform-tck)
  * [OpenXava](https://github.com/openxava/openxava)
  * [Cargo](https://github.com/codehaus-cargo/cargo)
+ * [piranha cloud](https://github.com/piranhacloud/piranha)
  * ...
 
 ## Getting Started
