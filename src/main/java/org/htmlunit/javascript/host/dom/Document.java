@@ -3520,7 +3520,7 @@ public class Document extends Node {
     public HtmlUnitScriptable getElementById(final String id) {
         final DomNode domNode = getDomNodeOrDie();
         for (final DomElement descendant : domNode.getDomElementDescendants()) {
-            if (descendant instanceof HtmlElement && id.equals(((HtmlElement) descendant).getId())) {
+            if (id.equals(descendant.getId())) {
                 return descendant.getScriptableObject();
             }
         }
