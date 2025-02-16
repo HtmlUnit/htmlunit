@@ -605,10 +605,12 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
-            if (submit != null) {
-                return submit.click();
+            for (final DomElement descendant : form.getDomElementDescendants()) {
+                if (descendant instanceof HtmlSubmitInput) {
+                    return descendant.click();
+                }
             }
+
             form.submit((SubmittableElement) this);
             webClient.getJavaScriptEngine().processPostponedActions();
         }
