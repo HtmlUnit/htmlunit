@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.10.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
+            <action type="update" dev="rbri">
+                Avoid using XPath for implementing form submit on enter key pressed.
+            </action>
+            <action type="update" dev="rbri">
+                Implement Document.getElementById() without using XPath.
+            </action>
             <action type="fix" dev="rbri">
                 NPE in org.htmlunit.javascript.JavaScriptEngine.asJavaScriptException().
             </action>
