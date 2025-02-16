@@ -3519,9 +3519,10 @@ public class Document extends Node {
     @JsxFunction
     public HtmlUnitScriptable getElementById(final String id) {
         final DomNode domNode = getDomNodeOrDie();
-        final Object domElement = domNode.getFirstByXPath("//*[@id = \"" + id + "\"]");
-        if (domElement != null) {
-            return ((DomElement) domElement).getScriptableObject();
+        for (final DomElement descendant : domNode.getDomElementDescendants()) {
+            if (descendant instanceof HtmlElement && id.equals(((HtmlElement) descendant).getId())) {
+                return descendant.getScriptableObject();
+            }
         }
         return null;
     }

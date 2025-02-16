@@ -496,6 +496,32 @@ public class Document2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"zero", "udef"})
+    public void getElementByIdNull() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  log(top.document.getElementById(null).name);\n"
+            + "  log(top.document.getElementById(undefined).name);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form id='form1'>\n"
+            + "<input id='undefined' name='udef' type='text' value='u' />\n"
+            + "<input id='null' name='zero' type='text' value='n' />\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */
