@@ -62,7 +62,7 @@ public final class ScriptElementSupport {
      * Support method that is called from the (html or svg) script and the link tag.
      *
      * @param script the ScriptElement to work for
-     * @param postponed whether to use {@link org.htmlunit.javascript.PostponedAction} or no
+     * @param postponed whether to use {@link org.htmlunit.javascript.PostponedAction} or not
      */
     public static void onAllChildrenAddedToPage(final ScriptElement script, final boolean postponed) {
         final DomElement element = (DomElement) script;
