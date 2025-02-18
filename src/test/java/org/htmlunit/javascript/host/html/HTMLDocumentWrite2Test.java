@@ -230,13 +230,14 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Hello", "HelloHello"})
+    @Alerts({" after-write Hello", " after-write Hello after-write Hello"})
     public void writeExternalScriptAfterClick() throws Exception {
         shutDownAll();
 
         final String html = "<html><head>\n"
             + "<script>\n"
             + "document.write('<scr'+'ipt src=\"script.js\"></scr'+'ipt>');\n"
+            + "window.name += ' after-write ';\n"
             + "</script>\n"
             + "<script>\n"
             + "window.name += window.foo;\n"
