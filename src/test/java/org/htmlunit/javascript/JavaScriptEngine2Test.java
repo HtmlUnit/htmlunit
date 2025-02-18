@@ -423,11 +423,11 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("RangeError")
-    @HtmlUnitNYI(CHROME = "InternalError/InternalError",
-            EDGE = "InternalError/InternalError",
+    @Alerts(DEFAULT = "RangeError",
             FF = "InternalError/InternalError",
             FF_ESR = "InternalError/InternalError")
+    @HtmlUnitNYI(CHROME = "InternalError/InternalError",
+            EDGE = "InternalError/InternalError")
     public void recursion() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function recurse(c) {\n"
@@ -688,14 +688,17 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void comment() throws Exception {
         final String html =
             "<html><head>\n"
-            + "<script><!-- alert(1);\n"
-            + " alert(2);\n"
-            + "alert(3)//--></script>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    </script>\n"
+            + "<script><!-- log(1);\n"
+            + " log(2);\n"
+            + "log(3)//--></script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
