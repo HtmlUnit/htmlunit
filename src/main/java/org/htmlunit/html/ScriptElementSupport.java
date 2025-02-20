@@ -23,6 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
@@ -73,7 +74,8 @@ public final class ScriptElementSupport {
             LOG.debug("Script node added: " + element.asXml());
         }
 
-        if (!element.getPage().getWebClient().isJavaScriptEngineEnabled()) {
+        final WebClient webClient = element.getPage().getWebClient();
+        if (!webClient.isJavaScriptEngineEnabled()) {
             LOG.debug("Script found but not executed because javascript engine is disabled");
             return;
         }
@@ -116,23 +118,19 @@ public final class ScriptElementSupport {
                 }
             };
 
-            final AbstractJavaScriptEngine<?> engine = element.getPage().getWebClient().getJavaScriptEngine();
-            if (engine != null
-                    && element.hasAttribute("async") && !engine.isScriptRunning()) {
+            final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
+            if (element.hasAttribute("async") && !engine.isScriptRunning()) {
                 final HtmlPage owningPage = element.getHtmlPageOrNull();
                 owningPage.addAfterLoadAction(action);
             }
-            else if (engine != null
-                    && (element.hasAttribute("async")
-                            || postponed && StringUtils.isBlank(element.getTextContent()))) {
+            else if (element.hasAttribute("async")
+                            || postponed && StringUtils.isBlank(element.getTextContent())) {
                 engine.addPostponedAction(action);
             }
             else {
                 try {
                     action.execute();
-                    if (engine != null) {
-                        engine.processPostponedActions();
-                    }
+                    engine.processPostponedActions();
                 }
                 catch (final RuntimeException e) {
                     throw e;
