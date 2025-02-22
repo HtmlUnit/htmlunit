@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.10.0" date="February xx, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
+        <release version="4.10.0" date="February 22, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
             <action type="update" dev="RhinoTeam">
                 NativeGlobal now based on lambda functions.
             </action>
@@ -54,8 +54,9 @@
             </action>
             <action type="update" dev="RhinoTeam">
                 core-js: BigInt, Boolean and Number converted to use lambdas.
+            </action>
             <action type="update" dev="RhinoTeam">
-                core-js: Function hoisting inside blocks is no a core Rhino feature, our own hack is gone.
+                core-js: Function hoisting inside blocks is now a core Rhino feature, our own hack is gone.
             </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Map and Set converted to use lambdas.

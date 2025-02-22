@@ -1,6 +1,6 @@
 # ![HtmlUnit Logo](https://github.com/HtmlUnit/htmlunit/blob/master/src/site/resources/images/htmlunit.png)
 
-Version 4.9.0 / January 22, 2025
+Version 4.10.0 / February 22, 2025
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -51,7 +51,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.9.0</version>
+    <version>4.10.0</version>
 </dependency>
 ```
 
@@ -60,7 +60,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.9.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.10.0'
 ```
 
 ## Vulnerabilities
@@ -168,7 +168,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>org.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>4.10.0-SNAPSHOT</version>
+          <version>4.11.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -187,7 +187,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.9.0-SNAPSHOT'
+    implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.11.0-SNAPSHOT'
   // ...
 }
 ```
