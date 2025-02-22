@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.10.0" date="February 22, 2025" description="Chrome/Edge 132, Firefox 135, Javascript Errors, Bugfixes">
+        <release version="4.10.0" date="February 22, 2025" description="Chrome/Edge 133, Firefox 135, Javascript Errors, Bugfixes">
             <action type="update" dev="RhinoTeam">
                 NativeGlobal now based on lambda functions.
             </action>
