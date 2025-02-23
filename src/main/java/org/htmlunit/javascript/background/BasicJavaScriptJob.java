@@ -55,7 +55,7 @@ public abstract class BasicJavaScriptJob implements JavaScriptJob {
     BasicJavaScriptJob(final int initialDelay, final Integer period) {
         initialDelay_ = initialDelay;
         period_ = period;
-        setTargetExecutionTime(initialDelay + System.currentTimeMillis());
+        targetExecutionTime_ = initialDelay + System.currentTimeMillis();
         executeAsap_ = initialDelay == 0; // XHR are currently run as jobs and should have priority
     }
 

@@ -299,9 +299,9 @@ public class Blob extends HtmlUnitScriptable {
             nativeBits = null;
         }
 
-        setBackend(InMemoryBackend.create(nativeBits, null,
+        backend_ = InMemoryBackend.create(nativeBits, null,
                             extractFileTypeOrDefault(properties),
-                            extractLastModifiedOrDefault(properties)));
+                            extractLastModifiedOrDefault(properties));
     }
 
     /**
