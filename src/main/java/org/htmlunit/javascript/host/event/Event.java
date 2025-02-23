@@ -538,11 +538,11 @@ public class Event extends HtmlUnitScriptable {
      * @param type the event type
      */
     public Event(final EventTarget target, final String type) {
-        super();
+        this(type);
+
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
-        type_ = type;
 
         setParentScope(target);
         setPrototype(getPrototype(getClass()));
@@ -567,6 +567,15 @@ public class Event extends HtmlUnitScriptable {
             bubbles_ = false;
             cancelable_ = false;
         }
+    }
+
+    /**
+     * Creates a new event instance.
+     * @param type the event type
+     */
+    public Event(final String type) {
+        super();
+        type_ = type;
     }
 
     /**
