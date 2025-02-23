@@ -1038,9 +1038,10 @@ public class DomElement extends DomNamespaceNode implements Element {
                 mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
 
+            AbstractJavaScriptEngine.PostponedActionsBlocker blocker = null;
             final AbstractJavaScriptEngine<?> jsEngine = webClient.getJavaScriptEngine();
             if (webClient.isJavaScriptEnabled()) {
-                jsEngine.holdPosponedActions();
+                blocker = jsEngine.blockPostponedActions();
             }
             try {
                 if (handleFocus) {
@@ -1090,7 +1091,8 @@ public class DomElement extends DomNamespaceNode implements Element {
                 click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
             }
             finally {
-                if (webClient.isJavaScriptEnabled()) {
+                if (blocker != null) {
+                    blocker.release();
                     jsEngine.processPostponedActions();
                 }
             }

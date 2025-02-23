@@ -917,8 +917,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     private void doProcessPostponedActions() {
-        holdPostponedActions_ = false;
-
         final WebClient webClient = getWebClient();
         if (webClient == null) {
             // shutdown was already called
@@ -1032,11 +1030,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * Indicates that no postponed action should be executed.
-     */
+    * {@inheritDoc}
+    */
     @Override
-    public void holdPosponedActions() {
+    public PostponedActionsBlocker blockPostponedActions() {
+        if (holdPostponedActions_) {
+            return new LeafPostponedActionsBlocker();
+        }
+
         holdPostponedActions_ = true;
+        return new RootPostponedActionsBlocker(this);
     }
 
     /**
@@ -1383,6 +1386,35 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final NativeFunction f = (NativeFunction) scope.get("FindProxyForURL", scope);
             final Object result = f.call(cx, scope, scope, functionArgs);
             return toString(result);
+        }
+    }
+
+    /**
+     * {@link PostponedActionsBlocker} - the first requested in the current context.
+     */
+    private final class RootPostponedActionsBlocker implements PostponedActionsBlocker {
+        private final JavaScriptEngine jsEngine_;
+
+        private RootPostponedActionsBlocker(final JavaScriptEngine jsEngine) {
+            jsEngine_ = jsEngine;
+        }
+
+        @Override
+        public void release() {
+            jsEngine_.holdPostponedActions_ = false;
+        }
+    }
+
+    /**
+     * {@link PostponedActionsBlocker} - noop blocker.
+     */
+    private final class LeafPostponedActionsBlocker implements PostponedActionsBlocker {
+
+        private LeafPostponedActionsBlocker() {
+        }
+
+        @Override
+        public void release() {
         }
     }
 }
