@@ -306,6 +306,10 @@ public final class ScriptElementSupport {
     private static void executeEvent(final DomElement element, final String type) {
         final EventTarget eventTarget = element.getScriptableObject();
         final Event event = new Event(element, type);
+
+        event.setParentScope(eventTarget);
+        event.setPrototype(eventTarget.getPrototype(event.getClass()));
+
         eventTarget.executeEventLocally(event);
     }
 
