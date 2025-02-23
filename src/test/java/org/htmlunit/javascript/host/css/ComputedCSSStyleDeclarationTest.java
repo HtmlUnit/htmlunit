@@ -2997,4 +2997,27 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0s")
+    public void animationDuration() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<div id='myDiv'>HtmlUnit</div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var decl = window.getComputedStyle(div, null);\n"
+            + "  log(decl.animationDuration);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
