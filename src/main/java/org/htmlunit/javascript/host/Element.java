@@ -36,6 +36,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSException;
@@ -139,8 +140,11 @@ public class Element extends Node {
      */
     protected void createEventHandler(final String eventName, final String attrValue) {
         final DomElement htmlElt = getDomNodeOrDie();
+
         // TODO: check that it is an "allowed" event for the browser, and take care to the case
         final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
+        eventHandler.setPrototype(ScriptableObject.getClassPrototype(htmlElt.getScriptableObject(), "Function"));
+
         setEventHandler(eventName, eventHandler);
     }
 

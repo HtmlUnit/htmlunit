@@ -37,6 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomElement;
@@ -359,7 +360,9 @@ public class HTMLElement extends Element {
                 try {
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                     final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
-                    method.invoke(this, new EventHandler(getDomNodeOrDie(), name.substring(2), value));
+                    final EventHandler eventHandler = new EventHandler(getDomNodeOrDie(), name.substring(2), value);
+                    eventHandler.setPrototype(ScriptableObject.getClassPrototype(this, "Function"));
+                    method.invoke(this, eventHandler);
                 }
                 catch (final NoSuchMethodException | IllegalAccessException ignored) {
                     // silently ignore
