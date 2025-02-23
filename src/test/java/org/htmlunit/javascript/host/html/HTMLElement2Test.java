@@ -2121,4 +2121,26 @@ public class HTMLElement2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"onclick", "listener", "clicked"})
+    public void clickJs() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<div id='tester' onclick='log(\"onclick\")'></div>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "let elem = document.getElementById('tester');"
+            + "elem.addEventListener('click', (e) => { log('listener'); });"
+            + "document.getElementById('tester').click();\n"
+            + "log('clicked');"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
 }

@@ -121,7 +121,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
-    private transient boolean holdPostponedActions_;
+    private transient RootPostponedActionsBlocker postponedActionsBlocker_;
     private transient boolean shutdownPending_;
 
     /** The JavaScriptExecutor corresponding to all windows of this Web client */
@@ -702,7 +702,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (javaScriptRunning_ != null) {
             javaScriptRunning_.remove();
         }
-        holdPostponedActions_ = false;
+        postponedActionsBlocker_ = null;
     }
 
     /**
@@ -893,8 +893,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
-                if (!holdPostponedActions_) {
+                if (postponedActionsBlocker_ == null) {
                     doProcessPostponedActions();
+                }
+                else {
+                    postponedActionsBlocker_.postponedActionExecutionBlocked();
                 }
                 return response;
             }
@@ -1034,12 +1037,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     */
     @Override
     public PostponedActionsBlocker blockPostponedActions() {
-        if (holdPostponedActions_) {
-            return new LeafPostponedActionsBlocker();
+        if (postponedActionsBlocker_ == null) {
+            postponedActionsBlocker_ = new RootPostponedActionsBlocker(this);
+            return postponedActionsBlocker_;
         }
 
-        holdPostponedActions_ = true;
-        return new RootPostponedActionsBlocker(this);
+        return new ChildPostponedActionsBlocker(postponedActionsBlocker_);
     }
 
     /**
@@ -1048,7 +1051,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public void processPostponedActions() {
-        doProcessPostponedActions();
+        if (postponedActionsBlocker_ == null) {
+            doProcessPostponedActions();
+        }
+        else {
+            postponedActionsBlocker_.postponedActionExecutionBlocked();
+        }
     }
 
     /**
@@ -1062,7 +1070,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private void initTransientFields() {
         javaScriptRunning_ = new ThreadLocal<>();
         postponedActions_ = new ThreadLocal<>();
-        holdPostponedActions_ = false;
+        postponedActionsBlocker_ = null;
         shutdownPending_ = false;
     }
 
@@ -1394,6 +1402,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     private final class RootPostponedActionsBlocker implements PostponedActionsBlocker {
         private final JavaScriptEngine jsEngine_;
+        private boolean postponedActionExecutionBlocked_;
 
         private RootPostponedActionsBlocker(final JavaScriptEngine jsEngine) {
             jsEngine_ = jsEngine;
@@ -1401,20 +1410,35 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         @Override
         public void release() {
-            jsEngine_.holdPostponedActions_ = false;
+            jsEngine_.postponedActionsBlocker_ = null;
+            if (postponedActionExecutionBlocked_) {
+                jsEngine_.processPostponedActions();
+            }
+        }
+
+        @Override
+        public void postponedActionExecutionBlocked() {
+            postponedActionExecutionBlocked_ = true;
         }
     }
 
     /**
      * {@link PostponedActionsBlocker} - noop blocker.
      */
-    private final class LeafPostponedActionsBlocker implements PostponedActionsBlocker {
+    private final class ChildPostponedActionsBlocker implements PostponedActionsBlocker {
+        private final RootPostponedActionsBlocker rootBlocker_;
 
-        private LeafPostponedActionsBlocker() {
+        private ChildPostponedActionsBlocker(final RootPostponedActionsBlocker blocker) {
+            rootBlocker_ = blocker;
         }
 
         @Override
         public void release() {
+        }
+
+        @Override
+        public void postponedActionExecutionBlocked() {
+            rootBlocker_.postponedActionExecutionBlocked();
         }
     }
 }

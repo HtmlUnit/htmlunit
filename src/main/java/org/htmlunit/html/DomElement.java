@@ -1093,7 +1093,6 @@ public class DomElement extends DomNamespaceNode implements Element {
             finally {
                 if (blocker != null) {
                     blocker.release();
-                    jsEngine.processPostponedActions();
                 }
             }
 
