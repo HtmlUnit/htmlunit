@@ -896,9 +896,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 if (postponedActionsBlocker_ == null) {
                     doProcessPostponedActions();
                 }
-                else {
-                    postponedActionsBlocker_.postponedActionExecutionBlocked();
-                }
                 return response;
             }
             catch (final Exception e) {
@@ -1042,7 +1039,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             return postponedActionsBlocker_;
         }
 
-        return new ChildPostponedActionsBlocker(postponedActionsBlocker_);
+        return new ChildPostponedActionsBlocker();
     }
 
     /**
@@ -1053,9 +1050,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public void processPostponedActions() {
         if (postponedActionsBlocker_ == null) {
             doProcessPostponedActions();
-        }
-        else {
-            postponedActionsBlocker_.postponedActionExecutionBlocked();
         }
     }
 
@@ -1402,7 +1396,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     private final class RootPostponedActionsBlocker implements PostponedActionsBlocker {
         private final JavaScriptEngine jsEngine_;
-        private boolean postponedActionExecutionBlocked_;
 
         private RootPostponedActionsBlocker(final JavaScriptEngine jsEngine) {
             jsEngine_ = jsEngine;
@@ -1411,14 +1404,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         @Override
         public void release() {
             jsEngine_.postponedActionsBlocker_ = null;
-            if (postponedActionExecutionBlocked_) {
-                jsEngine_.processPostponedActions();
-            }
-        }
-
-        @Override
-        public void postponedActionExecutionBlocked() {
-            postponedActionExecutionBlocked_ = true;
+            jsEngine_.processPostponedActions();
         }
     }
 
@@ -1426,19 +1412,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * {@link PostponedActionsBlocker} - noop blocker.
      */
     private final class ChildPostponedActionsBlocker implements PostponedActionsBlocker {
-        private final RootPostponedActionsBlocker rootBlocker_;
 
-        private ChildPostponedActionsBlocker(final RootPostponedActionsBlocker blocker) {
-            rootBlocker_ = blocker;
+        private ChildPostponedActionsBlocker() {
+            super();
         }
 
         @Override
         public void release() {
-        }
-
-        @Override
-        public void postponedActionExecutionBlocked() {
-            rootBlocker_.postponedActionExecutionBlocked();
         }
     }
 }

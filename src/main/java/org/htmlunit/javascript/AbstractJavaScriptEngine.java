@@ -160,7 +160,5 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
      */
     interface PostponedActionsBlocker {
         void release();
-
-        void postponedActionExecutionBlocked();
     }
 }
