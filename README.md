@@ -125,6 +125,7 @@ HtmlUnit is used by many projects for automated web testing
 ## Getting Started
 You can start here:
 * [Getting Started][7]
+* [Introduction to HtmlUnit - Baeldung](https://www.baeldung.com/htmlunit)
 * [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
 * [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
 * [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
