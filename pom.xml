@@ -52,7 +52,7 @@
         <image-comparison.version>4.4.0</image-comparison.version>
         <jfreechart.version>1.5.5</jfreechart.version>
 
-        <checkstyle.version>10.21.2</checkstyle.version>
+        <checkstyle.version>10.21.3</checkstyle.version>
         <spotbugs.version>4.9.1</spotbugs.version>
         <pmd.version>7.10.0</pmd.version>
         <junit.version>4.13.2</junit.version>
