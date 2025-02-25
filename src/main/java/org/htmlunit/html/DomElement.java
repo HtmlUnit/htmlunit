@@ -1041,7 +1041,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             AbstractJavaScriptEngine.PostponedActionsBlocker blocker = null;
             final AbstractJavaScriptEngine<?> jsEngine = webClient.getJavaScriptEngine();
             if (webClient.isJavaScriptEnabled()) {
-                blocker = jsEngine.blockPostponedActions();
+                blocker = jsEngine.blockPostponedActions(page);
             }
             try {
                 if (handleFocus) {

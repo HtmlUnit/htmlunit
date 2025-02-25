@@ -945,7 +945,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                     // verify that the page that registered this PostponedAction is still alive
                     if (action.isStillAlive()) {
-                        action.execute();
+                        if (postponedActionsBlocker_ == null
+                                || !postponedActionsBlocker_.blocks(action)) {
+                            action.execute();
+                        }
+                        else {
+                            addPostponedAction(action);
+                        }
                     }
                 }
             }
@@ -1033,13 +1039,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     * {@inheritDoc}
     */
     @Override
-    public PostponedActionsBlocker blockPostponedActions() {
+    public PostponedActionsBlocker blockPostponedActions(final Page page) {
         if (postponedActionsBlocker_ == null) {
-            postponedActionsBlocker_ = new RootPostponedActionsBlocker(this);
+            postponedActionsBlocker_ = new RootPostponedActionsBlocker(this, page);
             return postponedActionsBlocker_;
         }
 
-        return new ChildPostponedActionsBlocker();
+        return new ChildPostponedActionsBlocker(postponedActionsBlocker_);
     }
 
     /**
@@ -1048,9 +1054,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public void processPostponedActions() {
-        if (postponedActionsBlocker_ == null) {
-            doProcessPostponedActions();
-        }
+        doProcessPostponedActions();
     }
 
     /**
@@ -1396,9 +1400,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     private final class RootPostponedActionsBlocker implements PostponedActionsBlocker {
         private final JavaScriptEngine jsEngine_;
+        private final Page owningPage_;
 
-        private RootPostponedActionsBlocker(final JavaScriptEngine jsEngine) {
+        private RootPostponedActionsBlocker(final JavaScriptEngine jsEngine, final Page owningPage) {
             jsEngine_ = jsEngine;
+            owningPage_ = owningPage;
+        }
+
+        @Override
+        public boolean blocks(final PostponedAction postponedAction) {
+            return owningPage_ == postponedAction.getOwningPage();
         }
 
         @Override
@@ -1412,9 +1423,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * {@link PostponedActionsBlocker} - noop blocker.
      */
     private final class ChildPostponedActionsBlocker implements PostponedActionsBlocker {
+        private final RootPostponedActionsBlocker root_;
 
-        private ChildPostponedActionsBlocker() {
+        private ChildPostponedActionsBlocker(final RootPostponedActionsBlocker root) {
             super();
+            root_ = root;
+        }
+
+        @Override
+        public boolean blocks(final PostponedAction postponedAction) {
+            return root_.blocks(postponedAction);
         }
 
         @Override

@@ -108,9 +108,10 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Indicates that no postponed action should be executed.
      *
+     * @param page only block actions for this page
      * @return {@link PostponedActionsBlocker}
      */
-    PostponedActionsBlocker blockPostponedActions();
+    PostponedActionsBlocker blockPostponedActions(Page page);
 
     /**
      * Compiles the specified JavaScript code in the context of a given scope.
@@ -159,6 +160,7 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
      * Helper for blocking the execution of postponed actions for some time.
      */
     interface PostponedActionsBlocker {
+        boolean blocks(PostponedAction postponedAction);
         void release();
     }
 }
