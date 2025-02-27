@@ -156,8 +156,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             ((HTMLConfiguration) parserConfiguration_).evaluateInputSource(in);
         }
         finally {
-            page_.registerParsingEnd();
             page_.registerInlineSnippetParsingEnd();
+            page_.registerParsingEnd();
         }
     }
 
