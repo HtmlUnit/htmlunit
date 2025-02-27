@@ -994,8 +994,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
-     * Adds an action that should be executed first when the script currently being executed has finished.
-     * @param action the action
+     * {@inheritDoc}
      */
     @Override
     public void addPostponedAction(final PostponedAction action) {
@@ -1009,6 +1008,19 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             postponedActions_.set(actions);
         }
         actions.add(action);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean postponedActionPending() {
+        if (shutdownPending_) {
+            return false;
+        }
+
+        final List<PostponedAction> actions = postponedActions_.get();
+        return actions != null && actions.size() > 0;
     }
 
     /**
@@ -1073,6 +1085,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     @Override
     public PostponedActionsBlocker blockPostponedActions(final Page page) {
         if (postponedActionsBlocker_ == null) {
+            postponedActionsBlocker_ = new RootPostponedActionsBlocker(this, page);
+            return postponedActionsBlocker_;
+        }
+
+        if (postponedActionsBlocker_.owningPage_ != page) {
+            postponedActionsBlocker_.release();
             postponedActionsBlocker_ = new RootPostponedActionsBlocker(this, page);
             return postponedActionsBlocker_;
         }

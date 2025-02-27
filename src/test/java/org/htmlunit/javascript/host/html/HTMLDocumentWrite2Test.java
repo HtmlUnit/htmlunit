@@ -896,7 +896,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "  document.write('<script>log(\"foo1\");</' + 'script>');\n"
 
             + "  log('1');\n"
-            + "  document.write('<script src=\"scriptA.js\">;</' + 'script>');\n"
+            + "  document.write('<script src=\"scriptA.js\"></' + 'script>');\n"
             + "  log('2');\n"
 
             + "  document.write('<script src=\"scriptB.js\">');\n"
@@ -906,6 +906,83 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "  document.write('<script>log(\"foo3\");</' + 'script>');\n"
             + "  log('5');\n"
             + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final URL scriptUrlA = new URL(URL_FIRST, "scriptA.js");
+        final URL scriptUrlB = new URL(URL_FIRST, "scriptB.js");
+
+        getMockWebConnection().setDefaultResponse(html);
+        getMockWebConnection().setResponse(scriptUrlA, "log('A');\n", MimeType.TEXT_JAVASCRIPT);
+        getMockWebConnection().setResponse(scriptUrlB, "log('B');\n", MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "foo1", "1", "foo2", "2", "3", "4", "A", "foo3"})
+    public void writeScriptPostponed() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('0');\n"
+            + "</script>\n"
+
+            + "<script>log(\"foo1\");</script>'\n"
+
+            + "<script>\n"
+            + "  log('1');\n"
+            + "  document.write('<script>log(\"foo2\");</' + 'script>');\n"
+            + "  log('2');\n"
+            + "  document.write('<script src=\"scriptA.js\"></' + 'script>');\n"
+            + "  log('3');\n"
+            + "  document.write('<script>log(\"foo3\");</' + 'script>');\n"
+            + "  log('4');\n"
+            + "</script>\n"
+
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final URL scriptUrlA = new URL(URL_FIRST, "scriptA.js");
+        final URL scriptUrlB = new URL(URL_FIRST, "scriptB.js");
+
+        getMockWebConnection().setDefaultResponse(html);
+        getMockWebConnection().setResponse(scriptUrlA, "log('A');\n", MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "A", "1", "foo2", "2", "3", "4", "B", "foo3"})
+    public void writeScriptPostponedBeforeWrite() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('0');\n"
+            + "</script>\n"
+
+            + "<script src='scriptA.js'></script>'\n"
+
+            + "<script>\n"
+            + "  log('1');\n"
+            + "  document.write('<script>log(\"foo2\");</' + 'script>');\n"
+            + "  log('2');\n"
+            + "  document.write('<script src=\"scriptB.js\"></' + 'script>');\n"
+            + "  log('3');\n"
+            + "  document.write('<script>log(\"foo3\");</' + 'script>');\n"
+            + "  log('4');\n"
+            + "</script>\n"
+
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";

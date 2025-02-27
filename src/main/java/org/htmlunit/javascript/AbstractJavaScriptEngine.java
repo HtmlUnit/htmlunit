@@ -53,6 +53,11 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
     void addPostponedAction(PostponedAction action);
 
     /**
+     * @return true it postponed actions available
+     */
+    boolean postponedActionPending();
+
+    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * Process postponed actions, if any.
      */
