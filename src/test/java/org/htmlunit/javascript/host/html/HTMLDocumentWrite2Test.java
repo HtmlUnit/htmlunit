@@ -886,24 +886,36 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"foo", "foo2"})
+    @Alerts({"0", "foo1", "1", "2", "3", "4", "5", "A", "B", "foo3"})
     public void writeScriptInManyTimes() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "document.write('<script src=\"script.js\">');\n"
-            + "document.write('<' + '/script>');\n"
-            + "document.write('<script>log(\"foo2\");</' + 'script>');\n"
+            + "  log('0');\n"
+            + "  document.write('<script>log(\"foo1\");</' + 'script>');\n"
+
+            + "  log('1');\n"
+            + "  document.write('<script src=\"scriptA.js\">;</' + 'script>');\n"
+            + "  log('2');\n"
+
+            + "  document.write('<script src=\"scriptB.js\">');\n"
+            + "  log('3');\n"
+            + "  document.write('<' + '/script>');\n"
+            + "  log('4');\n"
+            + "  document.write('<script>log(\"foo3\");</' + 'script>');\n"
+            + "  log('5');\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        final URL scriptUrl = new URL(URL_FIRST, "script.js");
+        final URL scriptUrlA = new URL(URL_FIRST, "scriptA.js");
+        final URL scriptUrlB = new URL(URL_FIRST, "scriptB.js");
 
         getMockWebConnection().setDefaultResponse(html);
-        getMockWebConnection().setResponse(scriptUrl, "log('foo');\n", MimeType.TEXT_JAVASCRIPT);
+        getMockWebConnection().setResponse(scriptUrlA, "log('A');\n", MimeType.TEXT_JAVASCRIPT);
+        getMockWebConnection().setResponse(scriptUrlB, "log('B');\n", MimeType.TEXT_JAVASCRIPT);
 
         loadPageVerifyTitle2(html);
     }
