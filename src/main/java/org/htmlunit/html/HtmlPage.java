@@ -65,6 +65,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.html.FrameWindow.PageDenied;
@@ -1005,9 +1006,11 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.NOOP;
         }
 
+        final AbstractJavaScriptEngine<Object> engine = (AbstractJavaScriptEngine<Object>) client.getJavaScriptEngine();
+        final ScriptableObject scope = getEnclosingWindow().getScriptableObject();
         final Object script;
         try {
-            script = loadJavaScriptFromUrl(scriptURL, scriptCharset);
+            script = loadJavaScriptFromUrl(scriptURL, scriptCharset, engine, scope);
         }
         catch (final IOException e) {
             client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
@@ -1025,9 +1028,7 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.COMPILATION_ERROR;
         }
 
-        @SuppressWarnings("unchecked")
-        final AbstractJavaScriptEngine<Object> engine = (AbstractJavaScriptEngine<Object>) client.getJavaScriptEngine();
-        engine.execute(this, getEnclosingWindow().getScriptableObject(), script);
+        engine.execute(this, scope, script);
         return JavaScriptLoadResult.SUCCESS;
     }
 
@@ -1037,13 +1038,16 @@ public class HtmlPage extends SgmlPage {
      *
      * @param url the URL of the script
      * @param scriptCharset the charset from the script tag
+     * @param engine the js engine
+     * @param scope the scope
      * @return the content of the file, or {@code null} if we ran into a compile error
      * @throws IOException if there is a problem downloading the JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    private Object loadJavaScriptFromUrl(final URL url, final Charset scriptCharset) throws IOException,
+    private Object loadJavaScriptFromUrl(final URL url, final Charset scriptCharset,
+            final AbstractJavaScriptEngine<?> engine, final Scriptable scope) throws IOException,
         FailingHttpStatusCodeException {
 
         final WebRequest referringRequest = getWebResponse().getWebRequest();
@@ -1099,12 +1103,12 @@ public class HtmlPage extends SgmlPage {
         final String contentType = response.getContentType();
         if (contentType != null) {
             if (MimeType.isObsoleteJavascriptMimeType(contentType)) {
-                getWebClient().getIncorrectnessListener().notify(
+                client.getIncorrectnessListener().notify(
                         "Obsolete content type encountered: '" + contentType + "' "
                                 + "for remotely loaded JavaScript element at '" + url + "'.", this);
             }
             else if (!MimeType.isJavascriptMimeType(contentType)) {
-                getWebClient().getIncorrectnessListener().notify(
+                client.getIncorrectnessListener().notify(
                         "Expect content type of '" + MimeType.TEXT_JAVASCRIPT + "' "
                                 + "for remotely loaded JavaScript element at '" + url + "', "
                                 + "but got '" + contentType + "'.", this);
@@ -1114,9 +1118,7 @@ public class HtmlPage extends SgmlPage {
         final Charset scriptEncoding = response.getContentCharset();
         final String scriptCode = response.getContentAsString(scriptEncoding);
         if (null != scriptCode) {
-            final AbstractJavaScriptEngine<?> javaScriptEngine = client.getJavaScriptEngine();
-            final Scriptable scope = getEnclosingWindow().getScriptableObject();
-            final Object script = javaScriptEngine.compile(this, scope, scriptCode, url.toExternalForm(), 1);
+            final Object script = engine.compile(this, scope, scriptCode, url.toExternalForm(), 1);
             if (script != null && cache.cacheIfPossible(request, response, script)) {
                 // no cleanup if the response is stored inside the cache
                 return script;
