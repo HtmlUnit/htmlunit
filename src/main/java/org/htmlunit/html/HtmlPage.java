@@ -73,6 +73,7 @@ import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
+import org.htmlunit.javascript.AbstractJavaScriptEngine.PostponedActionsBlocker;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
@@ -2552,9 +2553,14 @@ public class HtmlPage extends SgmlPage {
             final Object[] args, final DomNode htmlElementScope) {
 
         final JavaScriptEngine engine = (JavaScriptEngine) getWebClient().getJavaScriptEngine();
-        final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
-
-        return new ScriptResult(result);
+        final PostponedActionsBlocker blocker = engine.blockPostponedActions(this);
+        try {
+            final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
+            return new ScriptResult(result);
+        }
+        finally {
+            blocker.release();
+        }
     }
 
     private void writeObject(final ObjectOutputStream oos) throws IOException {
