@@ -612,7 +612,6 @@ public abstract class HtmlElement extends DomElement {
             }
 
             form.submit((SubmittableElement) this);
-            webClient.getJavaScriptEngine().processPostponedActions();
         }
         return webClient.getCurrentWindow().getEnclosedPage();
     }
