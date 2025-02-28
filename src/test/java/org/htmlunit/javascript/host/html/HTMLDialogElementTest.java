@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -759,18 +758,6 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false",
              "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
-    @HtmlUnitNYI(CHROME = {"false", "true",
-                           "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
-                           "false"},
-            EDGE = {"false", "true",
-                    "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
-                    "false"},
-            FF = {"false", "true",
-                  "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
-                  "false"},
-            FF_ESR = {"false", "true",
-                      "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
-                      "false"})
     public void formClosesDialog() throws Exception {
         final String html =
             "<html>\n"
@@ -815,18 +802,6 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false",
              "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
-    @HtmlUnitNYI(CHROME = {"false", "true",
-                           "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
-                           "false"},
-            EDGE = {"false", "true",
-                    "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
-                    "false"},
-            FF = {"false", "true",
-                  "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
-                  "false"},
-            FF_ESR = {"false", "true",
-                      "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
-                      "false"})
     public void formClosesDialogWithoutJs() throws Exception {
         final String html =
             "<html>\n"
