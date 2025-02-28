@@ -218,6 +218,8 @@ public class HtmlScriptTest extends SimpleWebTestCase {
             + "</html>";
         final WebClient client = getWebClient();
         client.getOptions().setThrowExceptionOnFailingStatusCode(throwOnFailingStatusCode);
+        client.getOptions().setThrowExceptionOnScriptError(false);
+
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, "var foo;", MimeType.TEXT_JAVASCRIPT);
@@ -226,7 +228,6 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         client.setWebConnection(conn);
         final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
-        client.getOptions().setThrowExceptionOnScriptError(false);
         client.getPage(URL_FIRST);
         assertEquals(getExpectedAlerts(), actual);
     }
