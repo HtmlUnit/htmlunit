@@ -120,8 +120,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private JavaScriptConfiguration jsConfig_;
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;
-    private transient ThreadLocal<List<PostponedAction>> postponedActions_;
-    private transient ThreadLocal<RootPostponedActionsBlocker> postponedActionsBlocker_;
+    private transient ThreadLocal<PostponedActionsManager> postponedActionsManager_;
     private transient boolean shutdownPending_;
 
     /** The JavaScriptExecutor corresponding to all windows of this Web client */
@@ -696,14 +695,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             javaScriptExecutor_.shutdown();
             javaScriptExecutor_ = null;
         }
-        if (postponedActions_ != null) {
-            postponedActions_.remove();
+        if (postponedActionsManager_ != null) {
+            postponedActionsManager_.remove();
         }
         if (javaScriptRunning_ != null) {
             javaScriptRunning_.remove();
-        }
-        if (postponedActionsBlocker_ != null) {
-            postponedActionsBlocker_.remove();
         }
     }
 
@@ -926,9 +922,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
-                if (postponedActionsBlocker_ == null) {
-                    doProcessPostponedActions();
-                }
+                doProcessPostponedActions();
 
                 return response;
             }
@@ -950,12 +944,27 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         protected abstract String getSourceCode(Context cx);
     }
 
+    private PostponedActionsManager getPostponedActionsManager() {
+        PostponedActionsManager manager = postponedActionsManager_.get();
+        if (manager != null) {
+            return manager;
+        }
+
+        manager = new PostponedActionsManager();
+        postponedActionsManager_.set(manager);
+        return manager;
+    }
+
     private void doProcessPostponedActions() {
+        final PostponedActionsManager postponedActionsManager = getPostponedActionsManager();
+        if (postponedActionsManager.postponedActionsBlocker_ != null) {
+            return;
+        }
+
         final WebClient webClient = getWebClient();
         if (webClient == null) {
             // shutdown was already called
-            postponedActions_.set(null);
-            postponedActionsBlocker_.set(null);
+            postponedActionsManager_.remove();
             return;
         }
 
@@ -969,11 +978,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             throw new RuntimeException(e);
         }
 
-        final List<PostponedAction> actions = postponedActions_.get();
-        final PostponedActionsBlocker postponedActionsBlocker = postponedActionsBlocker_.get();
+        final List<PostponedAction> actions = postponedActionsManager.postponedActions_;
+        final PostponedActionsBlocker postponedActionsBlocker = postponedActionsManager.postponedActionsBlocker_;
         if (actions != null) {
-            postponedActions_.set(null);
             try {
+                postponedActionsManager.postponedActions_ = null;
+
                 for (final PostponedAction action : actions) {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("Processing PostponedAction " + action);
@@ -1009,12 +1019,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             return;
         }
 
-        List<PostponedAction> actions = postponedActions_.get();
-        if (actions == null) {
-            actions = new ArrayList<>();
-            postponedActions_.set(actions);
-        }
-        actions.add(action);
+        getPostponedActionsManager().addPostponedAction(action);
     }
 
     /**
@@ -1026,7 +1031,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             return false;
         }
 
-        final List<PostponedAction> actions = postponedActions_.get();
+        final PostponedActionsManager postponedActionsManager = getPostponedActionsManager();
+        final List<PostponedAction> actions = postponedActionsManager.postponedActions_;
         return actions != null && actions.size() > 0;
     }
 
@@ -1091,21 +1097,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     */
     @Override
     public PostponedActionsBlocker blockPostponedActions(final Page page) {
-        RootPostponedActionsBlocker blocker = postponedActionsBlocker_.get();
-        if (blocker == null) {
-            blocker = new RootPostponedActionsBlocker(this, page);
-            postponedActionsBlocker_.set(blocker);
-            return blocker;
-        }
-
-        if (blocker.owningPage_ != page) {
-            blocker.release();
-            blocker = new RootPostponedActionsBlocker(this, page);
-            postponedActionsBlocker_.set(blocker);
-            return blocker;
-        }
-
-        return new ChildPostponedActionsBlocker(blocker);
+        return getPostponedActionsManager().blockPostponedActions(this, page);
     }
 
     /**
@@ -1127,8 +1119,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private void initTransientFields() {
         javaScriptRunning_ = new ThreadLocal<>();
-        postponedActions_ = new ThreadLocal<>();
-        postponedActionsBlocker_ = new ThreadLocal<>();
+        postponedActionsManager_ = new ThreadLocal<>();
         shutdownPending_ = false;
     }
 
@@ -1455,10 +1446,43 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
     }
 
+    private static final class PostponedActionsManager {
+        private List<PostponedAction> postponedActions_;
+        private RootPostponedActionsBlocker postponedActionsBlocker_;
+
+        PostponedActionsManager() {
+            super();
+        }
+
+        PostponedActionsBlocker blockPostponedActions(final JavaScriptEngine engine, final Page page) {
+            if (postponedActionsBlocker_ == null) {
+                postponedActionsBlocker_ = new RootPostponedActionsBlocker(engine, page);
+                return postponedActionsBlocker_;
+            }
+
+            if (postponedActionsBlocker_.owningPage_ != page) {
+                postponedActionsBlocker_.release();
+                postponedActionsBlocker_ = new RootPostponedActionsBlocker(engine, page);
+                return postponedActionsBlocker_;
+            }
+
+            return new ChildPostponedActionsBlocker(postponedActionsBlocker_);
+        }
+
+        public void addPostponedAction(final PostponedAction action) {
+            if (postponedActions_ == null) {
+                postponedActions_ = new ArrayList<>();
+                postponedActions_.add(action);
+                return;
+            }
+            postponedActions_.add(action);
+        }
+    }
+
     /**
      * {@link PostponedActionsBlocker} - the first requested in the current context.
      */
-    private final class RootPostponedActionsBlocker implements PostponedActionsBlocker {
+    private static final class RootPostponedActionsBlocker implements PostponedActionsBlocker {
         private final JavaScriptEngine jsEngine_;
         private final Page owningPage_;
 
@@ -1474,7 +1498,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         @Override
         public void release() {
-            jsEngine_.postponedActionsBlocker_.set(null);
+            jsEngine_.getPostponedActionsManager().postponedActionsBlocker_ = null;
             jsEngine_.processPostponedActions();
         }
     }
@@ -1482,7 +1506,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     /**
      * {@link PostponedActionsBlocker} - noop blocker.
      */
-    private final class ChildPostponedActionsBlocker implements PostponedActionsBlocker {
+    private static final class ChildPostponedActionsBlocker implements PostponedActionsBlocker {
         private final RootPostponedActionsBlocker root_;
 
         private ChildPostponedActionsBlocker(final RootPostponedActionsBlocker root) {
