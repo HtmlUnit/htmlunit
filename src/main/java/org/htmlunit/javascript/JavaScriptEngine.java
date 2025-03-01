@@ -121,7 +121,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
-    private transient RootPostponedActionsBlocker postponedActionsBlocker_;
+    private transient ThreadLocal<RootPostponedActionsBlocker> postponedActionsBlocker_;
     private transient boolean shutdownPending_;
 
     /** The JavaScriptExecutor corresponding to all windows of this Web client */
@@ -702,7 +702,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (javaScriptRunning_ != null) {
             javaScriptRunning_.remove();
         }
-        postponedActionsBlocker_ = null;
+        if (postponedActionsBlocker_ != null) {
+            postponedActionsBlocker_.remove();
+        }
     }
 
     /**
@@ -953,6 +955,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (webClient == null) {
             // shutdown was already called
             postponedActions_.set(null);
+            postponedActionsBlocker_.set(null);
             return;
         }
 
@@ -967,6 +970,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         final List<PostponedAction> actions = postponedActions_.get();
+        final PostponedActionsBlocker postponedActionsBlocker = postponedActionsBlocker_.get();
         if (actions != null) {
             postponedActions_.set(null);
             try {
@@ -977,8 +981,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                     // verify that the page that registered this PostponedAction is still alive
                     if (action.isStillAlive()) {
-                        if (postponedActionsBlocker_ == null
-                                || !postponedActionsBlocker_.blocks(action)) {
+                        if (postponedActionsBlocker == null
+                                || !postponedActionsBlocker.blocks(action)) {
                             action.execute();
                         }
                         else {
@@ -1087,18 +1091,21 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     */
     @Override
     public PostponedActionsBlocker blockPostponedActions(final Page page) {
-        if (postponedActionsBlocker_ == null) {
-            postponedActionsBlocker_ = new RootPostponedActionsBlocker(this, page);
-            return postponedActionsBlocker_;
+        RootPostponedActionsBlocker blocker = postponedActionsBlocker_.get();
+        if (blocker == null) {
+            blocker = new RootPostponedActionsBlocker(this, page);
+            postponedActionsBlocker_.set(blocker);
+            return blocker;
         }
 
-        if (postponedActionsBlocker_.owningPage_ != page) {
-            postponedActionsBlocker_.release();
-            postponedActionsBlocker_ = new RootPostponedActionsBlocker(this, page);
-            return postponedActionsBlocker_;
+        if (blocker.owningPage_ != page) {
+            blocker.release();
+            blocker = new RootPostponedActionsBlocker(this, page);
+            postponedActionsBlocker_.set(blocker);
+            return blocker;
         }
 
-        return new ChildPostponedActionsBlocker(postponedActionsBlocker_);
+        return new ChildPostponedActionsBlocker(blocker);
     }
 
     /**
@@ -1121,7 +1128,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private void initTransientFields() {
         javaScriptRunning_ = new ThreadLocal<>();
         postponedActions_ = new ThreadLocal<>();
-        postponedActionsBlocker_ = null;
+        postponedActionsBlocker_ = new ThreadLocal<>();
         shutdownPending_ = false;
     }
 
@@ -1467,7 +1474,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         @Override
         public void release() {
-            jsEngine_.postponedActionsBlocker_ = null;
+            jsEngine_.postponedActionsBlocker_.set(null);
             jsEngine_.processPostponedActions();
         }
     }
