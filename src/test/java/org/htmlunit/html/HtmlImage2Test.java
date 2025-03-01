@@ -23,6 +23,7 @@ import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.NotYetImplemented;
@@ -449,5 +450,372 @@ public class HtmlImage2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("myImg")), 0, 0).click().build().perform();
 
         verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_NoContent() throws Exception {
+        addEventListener(HttpStatus.NO_CONTENT_204);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_BadRequest() throws Exception {
+        addEventListener(HttpStatus.BAD_REQUEST_400);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_Forbidden() throws Exception {
+        addEventListener(HttpStatus.FORBIDDEN_403);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_NotFound() throws Exception {
+        addEventListener(HttpStatus.NOT_FOUND_404);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_MethodNotAllowed() throws Exception {
+        addEventListener(HttpStatus.METHOD_NOT_ALLOWED_405);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_NotAcceptable() throws Exception {
+        addEventListener(HttpStatus.NOT_ACCEPTABLE_406);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_ProxyAuthRequired() throws Exception {
+        addEventListener(HttpStatus.PROXY_AUTHENTICATION_REQUIRED_407);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_RequestTimeout() throws Exception {
+        addEventListener(HttpStatus.REQUEST_TIMEOUT_408);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_Conflict() throws Exception {
+        addEventListener(HttpStatus.CONFLICT_409);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_Gone() throws Exception {
+        addEventListener(HttpStatus.GONE_410);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_LengthRequired() throws Exception {
+        addEventListener(HttpStatus.LENGTH_REQUIRED_411);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_PreconditionFailed() throws Exception {
+        addEventListener(HttpStatus.PRECONDITION_FAILED_412);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_PayloadTooLarge() throws Exception {
+        addEventListener(HttpStatus.PAYLOAD_TOO_LARGE_413);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_UriTooLong() throws Exception {
+        addEventListener(HttpStatus.URI_TOO_LONG_414);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_UnsupportedMediaType() throws Exception {
+        addEventListener(HttpStatus.UNSUPPORTED_MEDIA_TYPE_415);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_RangeNotSatisfiable() throws Exception {
+        addEventListener(HttpStatus.RANGE_NOT_SATISFIABLE_416);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_ExpectationFailed() throws Exception {
+        addEventListener(HttpStatus.EXPECTATION_FAILED_417);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_ImaTeapot() throws Exception {
+        addEventListener(HttpStatus.IM_A_TEAPOT_418);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_EnhanceYourCalm() throws Exception {
+        addEventListener(HttpStatus.ENHANCE_YOUR_CALM_420);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_MisdirectedRequest() throws Exception {
+        addEventListener(HttpStatus.MISDIRECTED_REQUEST_421);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_UnprocessableEntity() throws Exception {
+        addEventListener(HttpStatus.UNPROCESSABLE_ENTITY_422);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_Locked() throws Exception {
+        addEventListener(HttpStatus.LOCKED_423);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_FailedDependency() throws Exception {
+        addEventListener(HttpStatus.FAILED_DEPENDENCY_424);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_UpgradeRequired() throws Exception {
+        addEventListener(HttpStatus.UPGRADE_REQUIRED_426);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_PreconditionRequired() throws Exception {
+        addEventListener(HttpStatus.PRECONDITION_REQUIRED_428);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_TooManyRedirects() throws Exception {
+        addEventListener(HttpStatus.TOO_MANY_REQUESTS_429);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_RequestHeaderFieldsTooLarge() throws Exception {
+        addEventListener(HttpStatus.REQUEST_HEADER_FIELDS_TOO_LARGE_431);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_UnavailableForLegalReasons() throws Exception {
+        addEventListener(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS_451);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_InternalServerError() throws Exception {
+        addEventListener(HttpStatus.INTERNAL_SERVER_ERROR_500);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_NotImplemented() throws Exception {
+        addEventListener(HttpStatus.NOT_IMPLEMENTED_501);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_BadGateway() throws Exception {
+        addEventListener(HttpStatus.BAD_GATEWAY_502);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_ServiceUnavailable() throws Exception {
+        addEventListener(HttpStatus.SERVICE_UNAVAILABLE_503);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_GatewayTimeout() throws Exception {
+        addEventListener(HttpStatus.GATEWAY_TIMEOUT_504);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_HttpVersionNotSupported() throws Exception {
+        addEventListener(HttpStatus.HTTP_VERSION_NOT_SUPPORTED_505);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_InsufficientStrorage() throws Exception {
+        addEventListener(HttpStatus.INSUFFICIENT_STORAGE_507);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_LoopDetected() throws Exception {
+        addEventListener(HttpStatus.LOOP_DETECTED_508);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_NotExtended() throws Exception {
+        addEventListener(HttpStatus.NOT_EXTENDED_510);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("error [object HTMLImageElement]")
+    public void addEventListener_NetworkAuthenticationRequired() throws Exception {
+        addEventListener(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED_511);
+    }
+
+    private void addEventListener(final int statusCode) throws Exception {
+        // use always a different url to avoid caching effects
+        final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".png");
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s1 = document.createElement('img');\n"
+            + "    s1.src = '" + scriptUrl + "';\n"
+            + "    s1.addEventListener('load', function() { log('load'); }, false);\n"
+            + "    s1.addEventListener('error', function(event) { log(event.type + ' ' + event.target); }, false);\n"
+            + "    document.body.insertBefore(s1, document.body.firstChild);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(scriptUrl, (String) null,
+                statusCode, "test", MimeType.TEXT_JAVASCRIPT, null);
+        loadPageVerifyTitle2(html);
     }
 }

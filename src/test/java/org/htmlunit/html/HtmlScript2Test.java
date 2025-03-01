@@ -550,28 +550,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     @Alerts("load")
     public void addEventListener_NoContent() throws Exception {
-        // use always a different url to avoid caching effects
-        final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
-
-        final String html
-            = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var s1 = document.createElement('script');\n"
-            + "    s1.src = '" + scriptUrl + "';\n"
-            + "    s1.addEventListener('load', function() { log('load'); }, false);\n"
-            + "    s1.addEventListener('error', function(event) { log(event.type + ' ' + event.target); }, false);\n"
-            + "    document.body.insertBefore(s1, document.body.firstChild);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'></body>\n"
-            + "</html>";
-
-        getMockWebConnection().setResponse(scriptUrl, (String) null,
-                HttpStatus.NO_CONTENT_204, HttpStatus.NO_CONTENT_204_MSG, MimeType.TEXT_JAVASCRIPT, null);
-        loadPageVerifyTitle2(html);
+        addEventListener(HttpStatus.NO_CONTENT_204);
     }
 
     /**

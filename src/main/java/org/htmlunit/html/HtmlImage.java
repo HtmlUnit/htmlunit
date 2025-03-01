@@ -41,6 +41,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
+import org.htmlunit.http.HttpStatus;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.dom.Document;
@@ -278,7 +279,9 @@ public class HtmlImage extends HtmlElement {
                     downloadImageIfNeeded();
                     // if the download was a success
                     if (imageWebResponse_.isSuccess()) {
-                        loadSuccessful = true; // Trigger the onload handler
+                        if (imageWebResponse_.getStatusCode() != HttpStatus.NO_CONTENT_204) {
+                            loadSuccessful = true; // Trigger the onload handler
+                        }
                     }
                 }
                 catch (final IOException e) {
