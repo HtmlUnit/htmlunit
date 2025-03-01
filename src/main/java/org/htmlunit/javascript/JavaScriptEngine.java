@@ -978,36 +978,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             throw new RuntimeException(e);
         }
 
-        final List<PostponedAction> actions = postponedActionsManager.postponedActions_;
-        final PostponedActionsBlocker postponedActionsBlocker = postponedActionsManager.postponedActionsBlocker_;
-        if (actions != null) {
-            try {
-                postponedActionsManager.postponedActions_ = null;
-
-                for (final PostponedAction action : actions) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Processing PostponedAction " + action);
-                    }
-
-                    // verify that the page that registered this PostponedAction is still alive
-                    if (action.isStillAlive()) {
-                        if (postponedActionsBlocker == null
-                                || !postponedActionsBlocker.blocks(action)) {
-                            action.execute();
-                        }
-                        else {
-                            addPostponedAction(action);
-                        }
-                    }
-                }
-            }
-            catch (final RuntimeException e) {
-                throw e;
-            }
-            catch (final Exception e) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
-            }
-        }
+        postponedActionsManager.processActions();
     }
 
     /**
@@ -1452,6 +1423,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         PostponedActionsManager() {
             super();
+            postponedActions_ = new ArrayList<>(4);
         }
 
         PostponedActionsBlocker blockPostponedActions(final JavaScriptEngine engine, final Page page) {
@@ -1470,12 +1442,40 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         public void addPostponedAction(final PostponedAction action) {
-            if (postponedActions_ == null) {
-                postponedActions_ = new ArrayList<>();
-                postponedActions_.add(action);
-                return;
-            }
             postponedActions_.add(action);
+        }
+
+        public void processActions() {
+            if (postponedActions_.size() > 0) {
+                try {
+                    final List<PostponedAction> ignoredActions = new ArrayList<>(postponedActions_.size());
+
+                    for (final PostponedAction action : postponedActions_) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug("Processing PostponedAction " + action);
+                        }
+
+                        // verify that the page that registered this PostponedAction is still alive
+                        if (action.isStillAlive()) {
+                            if (postponedActionsBlocker_ == null
+                                    || !postponedActionsBlocker_.blocks(action)) {
+                                action.execute();
+                            }
+                            else {
+                                ignoredActions.add(action);
+                            }
+                        }
+                    }
+
+                    postponedActions_ = ignoredActions;
+                }
+                catch (final RuntimeException e) {
+                    throw e;
+                }
+                catch (final Exception e) {
+                    throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+                }
+            }
         }
     }
 
