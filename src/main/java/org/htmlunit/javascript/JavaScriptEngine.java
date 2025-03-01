@@ -718,18 +718,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
         }
 
-        final HtmlUnitContextAction action = new HtmlUnitContextAction(owningPage) {
-            @Override
-            public Object doRun(final Context cx) {
-                return cx.compileString(sourceCode, sourceName, startLine, null);
-            }
-
-            @Override
-            protected String getSourceCode(final Context cx) {
-                return sourceCode;
-            }
-        };
-
+        final HtmlUnitCompileContextAction action = new HtmlUnitCompileContextAction(owningPage, sourceCode, sourceName, startLine);
         return (Script) getContextFactory().callSecured(action, owningPage);
     }
 
@@ -863,6 +852,49 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Special ContextAction only for compiling. This reduces some code and avoid
+     * some calls.
+     */
+    private final class HtmlUnitCompileContextAction implements ContextAction<Object> {
+        private final HtmlPage page_;
+        private final String sourceCode_;
+        private final String sourceName_;
+        private final int startLine_;
+
+        HtmlUnitCompileContextAction(final HtmlPage page, final String sourceCode, final String sourceName, final int startLine) {
+            page_ = page;
+            sourceCode_ = sourceCode;
+            sourceName_ = sourceName;
+            startLine_ = startLine;
+        }
+
+        @Override
+        public Object run(final Context cx) {
+            try {
+                final Object response;
+                cx.putThreadLocal(KEY_STARTING_PAGE, page_);
+                synchronized (page_) { // 2 scripts can't be executed in parallel for one page
+                    if (page_ != page_.getEnclosingWindow().getEnclosedPage()) {
+                        return null; // page has been unloaded
+                    }
+                    response = cx.compileString(sourceCode_, sourceName_, startLine_, null);
+
+                }
+
+                return response;
+            }
+            catch (final Exception e) {
+                handleJavaScriptException(new ScriptException(page_, e, sourceCode_), true);
+                return null;
+            }
+            catch (final TimeoutError e) {
+                handleJavaScriptTimeoutError(page_, e);
+                return null;
+            }
+        }
+    }
+
+    /**
      * Facility for ContextAction usage.
      * ContextAction should be preferred because according to Rhino doc it
      * "guarantees proper association of Context instances with the current thread and is faster".
@@ -881,7 +913,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
             try {
                 final Object response;
-                cx.putThreadLocal(KEY_STARTING_PAGE, page_);
                 synchronized (page_) { // 2 scripts can't be executed in parallel for one page
                     if (page_ != page_.getEnclosingWindow().getEnclosedPage()) {
                         return null; // page has been unloaded
@@ -896,6 +927,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 if (!holdPostponedActions_) {
                     doProcessPostponedActions();
                 }
+
                 return response;
             }
             catch (final Exception e) {
