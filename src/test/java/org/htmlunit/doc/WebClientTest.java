@@ -32,6 +32,9 @@ import org.junit.Test;
  */
 public class WebClientTest extends WebServerTestCase {
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void homePage_Firefox() throws Exception {
         try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
@@ -45,6 +48,9 @@ public class WebClientTest extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void homePage_Firefox2() throws Exception {
         try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
@@ -56,6 +62,9 @@ public class WebClientTest extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void changeBrowserLanguage() throws Exception {
         final BrowserVersion.BrowserVersionBuilder builder =
@@ -72,6 +81,9 @@ public class WebClientTest extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void changeUserAgent() throws Exception {
         final BrowserVersion.BrowserVersionBuilder builder =

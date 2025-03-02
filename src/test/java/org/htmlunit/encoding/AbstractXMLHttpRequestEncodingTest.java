@@ -41,6 +41,9 @@ public abstract class AbstractXMLHttpRequestEncodingTest extends WebDriverTestCa
     /** "BOMUTF8". */
     protected static final String BOM_UTF_8 = "BOMUTF8";
 
+    /**
+     * Enum for data driven tests.
+     */
     public enum TestCharset {
         /** utf 8. */
         UTF8("UTF8", UTF_8),
@@ -64,11 +67,17 @@ public abstract class AbstractXMLHttpRequestEncodingTest extends WebDriverTestCa
             return label_;
         }
 
+        /**
+         * @return the {@link Charset}
+         */
         public Charset getCharset() {
             return charset_;
         }
     }
 
+    /**
+     * Enum for data driven tests.
+     */
     public enum TestMimeType {
         /** empty. */
         EMPTY("EMPTY", ""),
@@ -90,6 +99,9 @@ public abstract class AbstractXMLHttpRequestEncodingTest extends WebDriverTestCa
             return label_;
         }
 
+        /**
+         * @return the mime type
+         */
         public String getMimeType() {
             return mimeType_;
         }

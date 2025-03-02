@@ -46,12 +46,20 @@ import com.tngtech.archunit.lang.SimpleConditionEvent;
 @AnalyzeClasses(packages = "org.htmlunit")
 public class Architecture2Test {
 
+    /**
+     * All property test should test the same objects.
+     * @param classes all classes
+     */
     @ArchTest
     public static void allPropertyTestShouldTestTheSameObjects(final JavaClasses classes) {
         compare(classes, "ElementPropertiesTest", "ElementOwnPropertiesTest");
         compare(classes, "ElementPropertiesTest", "ElementOwnPropertySymbolsTest");
     }
 
+    /**
+     * All element test should test the same objects.
+     * @param classes all classes
+     */
     @ArchTest
     public static void allElementTestShouldTestTheSameObjects(final JavaClasses classes) {
         compare(classes, "ElementChildNodesTest", "ElementClosesItselfTest");
@@ -60,6 +68,10 @@ public class Architecture2Test {
         compare(classes, "ElementChildNodesTest", "ElementOuterHtmlTest");
     }
 
+    /**
+     * All host test should test the same objects.
+     * @param classes all classes
+     */
     @ArchTest
     public static void allHostTestShouldTestTheSameObjects(final JavaClasses classes) {
         compare(classes, "HostClassNameTest", "HostTypeOfTest");

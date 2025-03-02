@@ -58,19 +58,35 @@ public class MiniServer extends Thread implements Closeable {
     private static final Set<URL> DROP_REQUESTS = new HashSet<>();
     private static final Set<URL> DROP_GET_REQUESTS = new HashSet<>();
 
+    /**
+     * Resets the drop and drop-get request counters.
+     */
     public static void resetDropRequests() {
         DROP_REQUESTS.clear();
         DROP_GET_REQUESTS.clear();
     }
 
+    /**
+     * Add the given url to the list of drop requests.
+     * @param url to url to add
+     */
     public static void configureDropRequest(final URL url) {
         DROP_REQUESTS.add(url);
     }
 
+    /**
+     * Add the given url to the list of drop-get requests.
+     * @param url to url to add
+     */
     public static void configureDropGetRequest(final URL url) {
         DROP_GET_REQUESTS.add(url);
     }
 
+    /**
+     * Ctor.
+     * @param port the port to listen on
+     * @param mockWebConnection the {@link MockWebConnection} to get the responses from
+     */
     public MiniServer(final int port, final MockWebConnection mockWebConnection) {
         port_ = port;
         mockWebConnection_ = mockWebConnection;
@@ -211,6 +227,9 @@ public class MiniServer extends Thread implements Closeable {
         }
     }
 
+    /**
+     * @return the last received request
+     */
     public String getLastRequest() {
         return lastRequest_;
     }

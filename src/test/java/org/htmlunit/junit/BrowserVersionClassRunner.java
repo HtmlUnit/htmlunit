@@ -184,6 +184,11 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return NO_ALERTS_DEFINED;
     }
 
+    /**
+     * @param given the default
+     * @param variants variants
+     * @return a string array containing the first defined value or the provided one
+     */
     public static String[] firstDefinedOrGiven(final String[] given, final String[]... variants) {
         for (final String[] var : variants) {
             if (isDefined(var)) {
@@ -258,6 +263,10 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return false;
     }
 
+    /**
+     * @param alerts the alerst to check
+     * @return true if there is exactly one alert defined
+     */
     public static boolean isDefined(final String[] alerts) {
         return alerts.length != 1 || !alerts[0].equals(BrowserRunner.EMPTY_DEFAULT);
     }
