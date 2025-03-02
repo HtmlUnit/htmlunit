@@ -969,8 +969,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         final List<PostponedAction> actions = postponedActions_.get();
-        if (actions != null) {
-            postponedActions_.set(null);
+        if (actions != null && actions.size() > 0) {
+            postponedActions_.set(new ArrayList<>());
             try {
                 for (final PostponedAction action : actions) {
                     if (LOG.isDebugEnabled()) {
