@@ -12,6 +12,12 @@
                 HtmlImage onerror event is triggerd for 204 responses.
             </action>
             <action type="fix" dev="rbri">
+                Some minor code improvements found by spotbugs.
+            </action>
+            <action type="fix" dev="rbri">
+                Some more  event initialization fixes.
+            </action>
+            <action type="fix" dev="rbri">
                 Fix various event initialization when working with WebSocket's.
             </action>
         </release>
