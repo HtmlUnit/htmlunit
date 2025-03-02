@@ -53,7 +53,7 @@
         <jfreechart.version>1.5.5</jfreechart.version>
 
         <checkstyle.version>10.21.3</checkstyle.version>
-        <spotbugs.version>4.9.1</spotbugs.version>
+        <spotbugs.version>4.9.2</spotbugs.version>
         <pmd.version>7.11.0</pmd.version>
         <junit.version>4.13.2</junit.version>
         <archunit.version>1.4.0</archunit.version>

@@ -38,6 +38,10 @@ public class Polyfill {
     private String source_;
     private Script script_;
 
+    /**
+     * @return the build in fetch polyfill
+     * @throws IOException in case of error
+     */
     public static Polyfill getFetchPolyfill() throws IOException {
         return getPolyfill("fetch/fetch.umd.js");
     }

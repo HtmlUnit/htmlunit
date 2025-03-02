@@ -125,7 +125,7 @@
         <module name="MissingJavadocMethod"/>
         <module name="MissingJavadocPackage"/>
         <module name="MissingJavadocType"/>
-        
+
         <module name="JavadocMethod">
             <property name="accessModifiers" value="public, protected"/>
         </module>
