@@ -138,6 +138,7 @@
             <property name="checkEmptyJavadoc" value="false"/>
             <property name="checkHtml" value="true"/>
         </module>
+        <module name="InvalidJavadocPosition"/>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->

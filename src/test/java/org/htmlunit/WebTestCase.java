@@ -79,9 +79,7 @@ public abstract class WebTestCase {
     @Rule
     public final RetryRule retryRule_ = new RetryRule(4);
 
-
-
-    /** Logging support. */
+    // /** Logging support. */
     // private static final Log LOG = LogFactory.getLog(WebTestCase.class);
 
     /** save the environment */

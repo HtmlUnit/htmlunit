@@ -26,206 +26,206 @@ import org.junit.Test;
  */
 public class AnnotationUtilsTest {
 
+    /**
+     * @throws Exception if something goes wrong
+     */
     @Test
     @Alerts(DEFAULT = "default",
             CHROME = "chrome",
             EDGE = "edge",
             FF = "ff",
             FF_ESR = "ff esr")
-    /**
-     * @throws Exception if something goes wrong
-     */
     public void obsoleteDefaultBecauseAllBrowserExpectationsDefinedIndividually() throws Exception {
         testFail("Obsolete DEFAULT because all browser expectations defined individually",
                 "obsoleteDefaultBecauseAllBrowserExpectationsDefinedIndividually");
     }
 
-    @Test
-    @Alerts(DEFAULT = "redundant",
-            CHROME = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts(DEFAULT = "redundant",
+            CHROME = "redundant")
     public void redundantAlertChrome() throws Exception {
         testFail("Redundant @Alerts for Chrome in AnnotationUtilsTest.redundantAlertChrome()",
                 "redundantAlertChrome");
     }
 
-    @Test
-    @Alerts(DEFAULT = "redundant",
-            EDGE = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts(DEFAULT = "redundant",
+            EDGE = "redundant")
     public void redundantAlertEdge() throws Exception {
         testFail("Redundant @Alerts for Edge in AnnotationUtilsTest.redundantAlertEdge()",
                 "redundantAlertEdge");
     }
 
-    @Test
-    @Alerts(DEFAULT = "redundant",
-            FF = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts(DEFAULT = "redundant",
+            FF = "redundant")
     public void redundantAlertFf() throws Exception {
         testFail("Redundant @Alerts for FF in AnnotationUtilsTest.redundantAlertFf()",
                 "redundantAlertFf");
     }
 
-    @Test
-    @Alerts(DEFAULT = "redundant",
-            FF_ESR = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts(DEFAULT = "redundant",
+            FF_ESR = "redundant")
     public void redundantAlertFfEsr() throws Exception {
         testFail("Redundant @Alerts for FF-ESR in AnnotationUtilsTest.redundantAlertFfEsr()",
                 "redundantAlertFfEsr");
     }
 
-    @Test
-    @Alerts("redundant")
-    @HtmlUnitNYI("redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts("redundant")
+    @HtmlUnitNYI("redundant")
     public void redundantHtmlUnitNYI() throws Exception {
         testFail("Redundant @HtmlUnitNYI for DEFAULT in AnnotationUtilsTest.redundantHtmlUnitNYI()",
                 "redundantHtmlUnitNYI");
     }
 
-    @Test
-    @Alerts("redundant")
-    @HtmlUnitNYI(CHROME = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts("redundant")
+    @HtmlUnitNYI(CHROME = "redundant")
     public void redundantHtmlUnitNYIChrome() throws Exception {
         testFail("Redundant @HtmlUnitNYI for Chrome in AnnotationUtilsTest.redundantHtmlUnitNYIChrome()",
                 "redundantHtmlUnitNYIChrome");
     }
 
-    @Test
-    @Alerts("redundant")
-    @HtmlUnitNYI(EDGE = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts("redundant")
+    @HtmlUnitNYI(EDGE = "redundant")
     public void redundantHtmlUnitNYIEdge() throws Exception {
         testFail("Redundant @HtmlUnitNYI for Edge in AnnotationUtilsTest.redundantHtmlUnitNYIEdge()",
                 "redundantHtmlUnitNYIEdge");
     }
 
-    @Test
-    @Alerts("redundant")
-    @HtmlUnitNYI(FF = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts("redundant")
+    @HtmlUnitNYI(FF = "redundant")
     public void redundantHtmlUnitNYIFf() throws Exception {
         testFail("Redundant @HtmlUnitNYI for FF in AnnotationUtilsTest.redundantHtmlUnitNYIFf()",
                 "redundantHtmlUnitNYIFf");
     }
 
-    @Test
-    @Alerts("redundant")
-    @HtmlUnitNYI(FF_ESR = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts("redundant")
+    @HtmlUnitNYI(FF_ESR = "redundant")
     public void redundantHtmlUnitNYIFfEsr() throws Exception {
         testFail("Redundant @HtmlUnitNYI for FF-ESR in AnnotationUtilsTest.redundantHtmlUnitNYIFfEsr()",
                 "redundantHtmlUnitNYIFfEsr");
     }
 
+    /**
+     * @throws Exception if something goes wrong
+     */
     @Test
     @Alerts(DEFAULT = "",
             CHROME = "redundant")
     @HtmlUnitNYI(CHROME = "redundant")
-    /**
-     * @throws Exception if something goes wrong
-     */
     public void redundantChromeHtmlUnitNYIChrome() throws Exception {
         testFail("Redundant @HtmlUnitNYI for Chrome in AnnotationUtilsTest.redundantChromeHtmlUnitNYIChrome()",
                 "redundantChromeHtmlUnitNYIChrome");
     }
 
+    /**
+     * @throws Exception if something goes wrong
+     */
     @Test
     @Alerts(DEFAULT = "",
             EDGE = "redundant")
     @HtmlUnitNYI(EDGE = "redundant")
-    /**
-     * @throws Exception if something goes wrong
-     */
     public void redundantEdgeHtmlUnitNYIEdge() throws Exception {
         testFail("Redundant @HtmlUnitNYI for Edge in AnnotationUtilsTest.redundantEdgeHtmlUnitNYIEdge()",
                 "redundantEdgeHtmlUnitNYIEdge");
     }
 
+    /**
+     * @throws Exception if something goes wrong
+     */
     @Test
     @Alerts(DEFAULT = "",
             FF = "redundant")
     @HtmlUnitNYI(FF = "redundant")
-    /**
-     * @throws Exception if something goes wrong
-     */
     public void redundantFfHtmlUnitNYIFf() throws Exception {
         testFail("Redundant @HtmlUnitNYI for FF in AnnotationUtilsTest.redundantFfHtmlUnitNYIFf()",
                 "redundantFfHtmlUnitNYIFf");
     }
 
+    /**
+     * @throws Exception if something goes wrong
+     */
     @Test
     @Alerts(DEFAULT = "",
             FF_ESR = "redundant")
     @HtmlUnitNYI(FF_ESR = "redundant")
-    /**
-     * @throws Exception if something goes wrong
-     */
     public void redundantFfEsrHtmlUnitNYIFfEsr() throws Exception {
         testFail("Redundant @HtmlUnitNYI for FF-ESR in AnnotationUtilsTest.redundantFfEsrHtmlUnitNYIFfEsr()",
                 "redundantFfEsrHtmlUnitNYIFfEsr");
     }
 
-    @Test
-    @Alerts(CHROME = "redundant")
-    @HtmlUnitNYI(CHROME = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts(CHROME = "redundant")
+    @HtmlUnitNYI(CHROME = "redundant")
     public void redundantChrome2HtmlUnitNYIChrome() throws Exception {
         testFail("Redundant @HtmlUnitNYI for Chrome in AnnotationUtilsTest.redundantChrome2HtmlUnitNYIChrome()",
                 "redundantChrome2HtmlUnitNYIChrome");
     }
 
-    @Test
-    @Alerts(EDGE = "redundant")
-    @HtmlUnitNYI(EDGE = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts(EDGE = "redundant")
+    @HtmlUnitNYI(EDGE = "redundant")
     public void redundantEdge2HtmlUnitNYIEdge() throws Exception {
         testFail("Redundant @HtmlUnitNYI for Edge in AnnotationUtilsTest.redundantEdge2HtmlUnitNYIEdge()",
                 "redundantEdge2HtmlUnitNYIEdge");
     }
 
-    @Test
-    @Alerts(FF = "redundant")
-    @HtmlUnitNYI(FF = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts(FF = "redundant")
+    @HtmlUnitNYI(FF = "redundant")
     public void redundantFf2HtmlUnitNYIFf() throws Exception {
         testFail("Redundant @HtmlUnitNYI for FF in AnnotationUtilsTest.redundantFf2HtmlUnitNYIFf()",
                 "redundantFf2HtmlUnitNYIFf");
     }
 
-    @Test
-    @Alerts(FF_ESR = "redundant")
-    @HtmlUnitNYI(FF_ESR = "redundant")
     /**
      * @throws Exception if something goes wrong
      */
+    @Test
+    @Alerts(FF_ESR = "redundant")
+    @HtmlUnitNYI(FF_ESR = "redundant")
     public void redundantFfEsr2HtmlUnitNYIFfEsr() throws Exception {
         testFail("Redundant @HtmlUnitNYI for FF-ESR in AnnotationUtilsTest.redundantFfEsr2HtmlUnitNYIFfEsr()",
                 "redundantFfEsr2HtmlUnitNYIFfEsr");
