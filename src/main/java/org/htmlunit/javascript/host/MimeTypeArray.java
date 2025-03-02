@@ -138,6 +138,9 @@ public class MimeTypeArray extends HtmlUnitScriptable {
         elements_.add(element);
     }
 
+    /**
+     * @return the Iterator symbol
+     */
     @JsxSymbol
     public Scriptable iterator() {
         return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);

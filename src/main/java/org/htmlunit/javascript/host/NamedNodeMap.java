@@ -225,6 +225,9 @@ public class NamedNodeMap extends HtmlUnitScriptable {
         return index >= 0 && index < getLength();
     }
 
+    /**
+     * @return the Iterator symbol
+     */
     @JsxSymbol
     public Scriptable iterator() {
         return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);

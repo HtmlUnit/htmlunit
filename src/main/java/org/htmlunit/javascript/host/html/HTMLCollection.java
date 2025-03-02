@@ -111,6 +111,9 @@ public class HTMLCollection extends AbstractList implements Callable {
         return new HTMLCollection(parentScope, initialElements);
     }
 
+    /**
+     * @return the Iterator symbol
+     */
     @JsxSymbol
     public Scriptable iterator() {
         return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);

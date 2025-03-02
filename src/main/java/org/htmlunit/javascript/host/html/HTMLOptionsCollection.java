@@ -310,6 +310,9 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
         htmlSelect_.setSelectedIndex(index);
     }
 
+    /**
+     * @return the Iterator symbol
+     */
     @JsxSymbol
     public Scriptable iterator() {
         return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);

@@ -131,6 +131,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
         return elements;
     }
 
+    /**
+     * @return the Iterator symbol
+     */
     @JsxSymbol
     public Scriptable iterator() {
         return getElements().iterator();

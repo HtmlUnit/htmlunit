@@ -188,6 +188,9 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return domElement_.getStyleMap();
     }
 
+    /**
+     * @return the {@link DomElement} associated with this
+     */
     public DomElement getDomElement() {
         return domElement_;
     }

@@ -39,6 +39,10 @@ public class MediaDevices extends EventTarget {
         super.jsConstructor();
     }
 
+    /**
+     * @return a {@link NativePromise} that resolves to a {@link DOMException} because HtmlUnit
+     * does not support media streaming
+     */
     @JsxFunction
     public NativePromise getUserMedia() {
         return setupRejectedPromise(() ->

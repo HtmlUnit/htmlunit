@@ -409,6 +409,9 @@ public class HTMLSelectElement extends HTMLElement {
         getDomNodeOrDie().setCustomValidity(message);
     }
 
+    /**
+     * @return the Iterator symbol
+     */
     @JsxSymbol
     public Scriptable iterator() {
         return getOptions().iterator();

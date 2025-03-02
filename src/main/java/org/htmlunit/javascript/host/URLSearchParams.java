@@ -66,6 +66,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
 
     private URL url_;
 
+    /**
+     * {@link ES6Iterator} implementation for js support.
+     */
     public static final class NativeParamsIterator extends ES6Iterator {
         enum Type { KEYS, VALUES, BOTH }
 
@@ -73,10 +76,19 @@ public class URLSearchParams extends HtmlUnitScriptable {
         private final String className_;
         private final transient Iterator<NameValuePair> iterator_;
 
+        /**
+         * Init.
+         * @param scope the scope
+         * @param className the class name
+         */
         public static void init(final ScriptableObject scope, final String className) {
             ES6Iterator.init(scope, false, new NativeParamsIterator(className), URL_SEARCH_PARMS_TAG);
         }
 
+        /**
+         * Ctor.
+         * @param className the class name
+         */
         public NativeParamsIterator(final String className) {
             super();
             iterator_ = Collections.emptyIterator();
@@ -84,6 +96,13 @@ public class URLSearchParams extends HtmlUnitScriptable {
             className_ = className;
         }
 
+        /**
+         * Ctor.
+         * @param scope the scope
+         * @param className the class name
+         * @param type the type
+         * @param iterator the backing iterator
+         */
         public NativeParamsIterator(final Scriptable scope, final String className, final Type type,
                                         final Iterator<NameValuePair> iterator) {
             super(scope, URL_SEARCH_PARMS_TAG);

@@ -170,6 +170,9 @@ public class Plugin extends HtmlUnitScriptable {
         return name_;
     }
 
+    /**
+     * @return the Iterator symbol
+     */
     @JsxSymbol
     public Scriptable iterator() {
         return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
