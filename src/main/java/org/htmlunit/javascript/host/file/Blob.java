@@ -104,7 +104,7 @@ public class Blob extends HtmlUnitScriptable {
         }
 
         /**
-         * Returns the KeyDataPare for this Blob/File.
+         * Returns the KeyDataPair for this Blob/File.
          *
          * @param name the name
          * @param fileName the file name

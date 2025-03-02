@@ -61,10 +61,19 @@ public class DataTransferItem extends HtmlUnitScriptable {
         data_ = data;
     }
 
+    /**
+     * @param data the data
+     * @param type the type
+     * @return a new {@link DataTransferItem}
+     */
     public static DataTransferItem buildStringItem(final CharSequence data, final String type) {
         return new DataTransferItem(KIND_STRING, type, data);
     }
 
+    /**
+     * @param file the file
+     * @return a new {@link DataTransferItem}
+     */
     public static DataTransferItem buildFileItem(final File file) {
         return new DataTransferItem(KIND_FILE, file.getType(), file);
     }

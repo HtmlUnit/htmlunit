@@ -25,10 +25,17 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
  */
 public class HttpOptions extends HttpEntityEnclosingRequestBase {
 
+    /**
+     * Ctor.
+     */
     public HttpOptions() {
         super();
     }
 
+    /**
+     * Ctor.
+     * @param uri the uri
+     */
     public HttpOptions(final URI uri) {
         super();
         setURI(uri);

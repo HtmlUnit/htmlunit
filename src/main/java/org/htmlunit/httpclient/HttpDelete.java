@@ -25,10 +25,17 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
  */
 public class HttpDelete extends HttpEntityEnclosingRequestBase {
 
+    /**
+     * Ctor.
+     */
     public HttpDelete() {
         super();
     }
 
+    /**
+     * Ctor.
+     * @param uri the uri
+     */
     public HttpDelete(final URI uri) {
         super();
         setURI(uri);

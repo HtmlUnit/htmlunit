@@ -158,6 +158,11 @@ public final class Platform {
         }
     }
 
+    /**
+     * @param inputStream the {@link InputStream} to read from
+     * @return a new {@link ImageData} object constructed from the given inputStream
+     * @throws IOException in case of error
+     */
     public static ImageData buildImageData(final InputStream inputStream) throws IOException {
         try {
             final Class<?> backendClass = Class.forName(
