@@ -163,7 +163,7 @@ public class HtmlImage extends HtmlElement {
                             doOnLoad();
                         }
                     };
-                    htmlPage.addAfterLoadAction(action);
+                    htmlPage.getWebClient().getJavaScriptEngine().addPostponedAction(action);
                     return;
                 }
                 doOnLoad();
@@ -313,7 +313,7 @@ public class HtmlImage extends HtmlElement {
                         HtmlImage.this.fireEvent(event);
                     }
                 };
-                htmlPage.addAfterLoadAction(action);
+                htmlPage.getWebClient().getJavaScriptEngine().addPostponedAction(action);
             }
             else {
                 final AbstractJavaScriptEngine<?> jsEngine = client.getJavaScriptEngine();

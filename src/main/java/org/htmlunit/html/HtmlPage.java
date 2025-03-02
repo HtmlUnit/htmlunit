@@ -74,7 +74,6 @@ import org.htmlunit.http.HttpStatus;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import org.htmlunit.javascript.host.event.Event;
@@ -159,7 +158,6 @@ public class HtmlPage extends SgmlPage {
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
-    private List<PostponedAction> afterLoadActions_ = Collections.synchronizedList(new ArrayList<>());
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
@@ -316,28 +314,6 @@ public class HtmlPage extends SgmlPage {
                 }
             }
         }
-
-        try {
-            while (!afterLoadActions_.isEmpty()) {
-                final PostponedAction action = afterLoadActions_.remove(0);
-                action.execute();
-            }
-        }
-        catch (final IOException e) {
-            throw e;
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
-        executeRefreshIfNeeded();
-    }
-
-    /**
-     * Adds an action that should be executed once the page has been loaded.
-     * @param action the action
-     */
-    void addAfterLoadAction(final PostponedAction action) {
-        afterLoadActions_.add(action);
     }
 
     /**
@@ -1977,8 +1953,6 @@ public class HtmlPage extends SgmlPage {
             result.attributeListeners_ = null;
 
             result.selectionRanges_ = new ArrayList<>(3);
-            // the original one is synchronized so we should do that here too, shouldn't we?
-            result.afterLoadActions_ = Collections.synchronizedList(new ArrayList<>());
             result.frameElements_ = new ArrayList<>();
             for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
                 result.appendChild(child.cloneNode(true));

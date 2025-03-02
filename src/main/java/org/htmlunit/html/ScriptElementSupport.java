@@ -120,8 +120,7 @@ public final class ScriptElementSupport {
 
             final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
             if (element.hasAttribute("async") && !engine.isScriptRunning()) {
-                final HtmlPage owningPage = element.getHtmlPageOrNull();
-                owningPage.addAfterLoadAction(action);
+                engine.addPostponedAction(action);
             }
             else if (element.hasAttribute("async")
                             || postponed && StringUtils.isBlank(element.getTextContent())) {
