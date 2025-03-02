@@ -726,7 +726,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
         transform("");
     }
 
-    public void transform(final String xslOutput) throws Exception {
+    private void transform(final String xslOutput) throws Exception {
         final String xml
                 = "<?xml version='1.0' encoding='ISO-8859-1'?>"
                 + "<catalog><cd><title>Empire Burlesque</title>"

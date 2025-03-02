@@ -95,7 +95,9 @@ public class ThreadTest extends TestCase {
             super(name);
         }
 
-        /** @see Thread#run() */
+        /**
+         * @see Thread#run()
+         */
         @Override
         public void run() {
             try {
@@ -109,7 +111,9 @@ public class ThreadTest extends TestCase {
             }
         }
 
-        /** @return true if the test was successful */
+        /**
+         * @return true if the test was successful
+         */
         public boolean isSuccessful() {
             return successful_;
         }

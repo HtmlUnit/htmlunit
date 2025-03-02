@@ -71,7 +71,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * @param htmlContent HTML fragment for body of page with clickable element identified by clickId ID attribute
      * @param numClicks number of times to click element
      * @param expectedAlerts array of expected popup values
-     * @param exceptionOnError
+     * @param exceptionOnError indicate to throw on error
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent, final int numClicks,

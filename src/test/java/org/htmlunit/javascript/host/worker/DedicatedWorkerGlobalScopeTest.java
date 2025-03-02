@@ -170,6 +170,9 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("Received: func=function addEventListener() { [native code] }")
     public void functionDefaultValue() throws Exception {

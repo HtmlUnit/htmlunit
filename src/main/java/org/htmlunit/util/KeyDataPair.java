@@ -80,9 +80,9 @@ public class KeyDataPair extends NameValuePair {
      * @param name will passed as name to the super constructor
      * @param value will be passed as value to the super constructor
      * @param file the file, may be null
-     * @param fileName, the filename, may be null
-     * @param mimeType, the mimetype, may be null
-     * @param charset, the charset, may be null
+     * @param fileName the filename, may be null
+     * @param mimeType the mimetype, may be null
+     * @param charset the charset, may be null
      */
     private KeyDataPair(final String name, final String value, final File file,
               final String fileName, final String mimeType, final Charset charset,

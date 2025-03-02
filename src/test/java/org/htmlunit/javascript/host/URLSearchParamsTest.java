@@ -57,6 +57,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"",
              "Failed to construct 'URLSearchParams': The provided value cannot be converted to a sequence",
@@ -122,6 +125,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"foo=1&bar=2", "foo=%5Bobject+Object%5D&bar=3"})
     public void ctorObject() throws Exception {
@@ -155,6 +161,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"foo=1&bar=%5Bobject+Object%5D&foobar=4%2C5%2C6",
              "foo=1&bar=2", "foo=1&bar=2",

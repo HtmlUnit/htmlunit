@@ -379,7 +379,9 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
         compareStringValue("substring(\"HtmlUnit\", 2, -1)");
     }
 
-    /** @throws Exception in case of problems */
+    /**
+     * @throws Exception in case of problems
+     */
     @Test
     @Alerts("''")
     public void substringNegativeStartWithLength() throws Exception {

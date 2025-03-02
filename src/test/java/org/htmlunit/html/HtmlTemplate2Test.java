@@ -28,6 +28,9 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class HtmlTemplate2Test extends SimpleWebTestCase {
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void asXmlWithChildren() throws Exception {
         final String html = "<html>\n"
@@ -49,6 +52,9 @@ public class HtmlTemplate2Test extends SimpleWebTestCase {
                 + "</body>\r\n");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void asXmlWithoutChildren() throws Exception {
         final String html = "<html>\n"

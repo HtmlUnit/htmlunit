@@ -59,6 +59,9 @@ public class HtmlTable2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("true")
     public void cellWidth() throws Exception {

@@ -38,6 +38,9 @@ public class JQueryUsage3x7x1Test extends JQueryTestBase {
         return "3.7.1";
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("hello")
     public void test() throws Exception {

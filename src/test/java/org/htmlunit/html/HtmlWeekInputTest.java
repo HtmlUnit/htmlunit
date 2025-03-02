@@ -212,6 +212,9 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts(DEFAULT = "true-true",
             CHROME = "false-true",
@@ -237,6 +240,9 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts(DEFAULT = "true-true",
             CHROME = "false-true",

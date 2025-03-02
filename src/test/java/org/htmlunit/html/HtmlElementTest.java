@@ -1248,6 +1248,9 @@ public class HtmlElementTest extends SimpleWebTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void acceptChar() throws Exception {
         final String html = "<html><body><input></body></html>";

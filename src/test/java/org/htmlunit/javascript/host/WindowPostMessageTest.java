@@ -422,6 +422,9 @@ public class WindowPostMessageTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("data: 2")
     public void postMessage_jsonPayload() throws Exception {
@@ -448,6 +451,9 @@ public class WindowPostMessageTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("data: innerProperty")
     public void postMessage_jsonPayloadWithNestedObjects() throws Exception {

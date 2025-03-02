@@ -51,6 +51,9 @@ public class HttpUtilsTest extends WebTestCase {
         Assert.assertEquals(expected, HttpUtils.parseDate("Sat, 13 Nov 2004 00:00:00 GMT"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testMalformedDate() {
         Assert.assertNull(HttpUtils.parseDate("Sat, 13 Nov 2004 00:00:00 GMD"));
@@ -58,16 +61,25 @@ public class HttpUtilsTest extends WebTestCase {
         Assert.assertNull(HttpUtils.parseDate("Thu Feb 22 17:20;18 2024"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testParseInvalid() {
         Assert.assertNull(HttpUtils.parseDate("Friday, 13-Nov-04 00:00:00 GMT"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testParseNull() {
         Assert.assertNull(HttpUtils.parseDate(null));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testTwoDigitYearDateParse() {
         Assert.assertEquals(createDate(2004, Month.NOVEMBER, 13),
@@ -77,12 +89,18 @@ public class HttpUtilsTest extends WebTestCase {
                 HttpUtils.parseDate("Tuesday, 13-Nov-74 00:00:00 GMT"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testParseQuotedDate() {
         Assert.assertEquals(createDate(2004, Month.NOVEMBER, 13),
                 HttpUtils.parseDate("'Sat, 13 Nov 2004 00:00:00 GMT'"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testFormatDate() {
         Assert.assertEquals("Sat, 13 Nov 2004 00:00:00 GMT",
@@ -94,6 +112,9 @@ public class HttpUtilsTest extends WebTestCase {
         return new Date(instant.toEpochMilli());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testParseURLCodedContent() throws Exception {
         List<NameValuePair> result;
@@ -154,6 +175,9 @@ public class HttpUtilsTest extends WebTestCase {
         assertNameValuePair(result.get(1), "d", "e");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testParseInvalidURLCodedContent() throws Exception {
         List<NameValuePair> result;
@@ -179,6 +203,9 @@ public class HttpUtilsTest extends WebTestCase {
         Assert.assertEquals(parameter.getValue(), expectedValue);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void toQueryFormFields() {
         final List<NameValuePair> params = new ArrayList<>();

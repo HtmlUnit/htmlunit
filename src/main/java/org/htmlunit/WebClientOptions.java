@@ -853,6 +853,9 @@ public class WebClientOptions implements Serializable {
         geolocation_ = geolocation;
     }
 
+    /**
+     * Support class for Geolocation.
+     */
     public static class Geolocation implements Serializable {
         private final double accuracy_;
         private final double latitude_;

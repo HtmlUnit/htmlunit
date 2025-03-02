@@ -373,6 +373,9 @@ public class DOMParserTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("[object HTMLDocument]")
     public void parseFromString_doNotExecuteScripts() throws Exception {
@@ -394,6 +397,9 @@ public class DOMParserTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("[object HTMLDocument]")
     public void parseFromString_doNotExecuteSvgScripts() throws Exception {

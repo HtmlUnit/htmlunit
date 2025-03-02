@@ -36,6 +36,9 @@ import org.openqa.selenium.WebElement;
 @RunWith(BrowserRunner.class)
 public abstract class MochiKitTest extends WebDriverTestCase {
 
+    /**
+     * @return the src folder containing mochikit sources
+     */
     public abstract String srcFolder();
 
     /**

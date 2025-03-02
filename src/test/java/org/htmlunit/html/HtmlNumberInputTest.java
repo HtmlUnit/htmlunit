@@ -649,6 +649,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"8-8-8-true", "-abc-abc-true", "---true",
              "99999999999999999999999999999-99999999999999999999999999999"
@@ -696,6 +699,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"8-8-8-true", "-\\s\\s-\\s\\s-true",
              "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
@@ -743,6 +749,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"8-8-8-true", "7-7-7-false", "6-6-6-false"})
     public void defaultValuesIntegerValueOutside() throws Exception {
@@ -781,6 +790,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"8-8-8-true", "7-7-7-false", "7.13-7.13-7.13-false"})
     public void defaultValuesInvalid() throws Exception {
@@ -1632,6 +1644,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[1], element.getDomProperty("value"));
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("false-true")
     public void maxValidation() throws Exception {
@@ -1655,6 +1670,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("false-true")
     public void minValidation() throws Exception {

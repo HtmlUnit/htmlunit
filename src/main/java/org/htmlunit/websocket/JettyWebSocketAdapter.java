@@ -38,6 +38,10 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
     private volatile Session incomingSession_;
     private Session outgoingSession_;
 
+    /**
+     * Ctor.
+     * @param webClient the {@link WebClient}
+     */
     public JettyWebSocketAdapter(final WebClient webClient) {
         super();
         final WebClientOptions options = webClient.getOptions();

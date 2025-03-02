@@ -66,6 +66,9 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
         assertEquals("", input.getDomProperty("value"));
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {

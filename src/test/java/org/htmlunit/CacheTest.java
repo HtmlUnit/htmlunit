@@ -627,6 +627,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertEquals(4, connection.getRequestCount());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void testNoCacheCacheControl() throws Exception {
         final String html = "<html><head><title>page 1</title>\n"

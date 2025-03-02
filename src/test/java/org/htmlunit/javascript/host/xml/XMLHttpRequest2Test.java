@@ -1214,6 +1214,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("4")
     public void onreadystatechange_eventListener() throws Exception {
@@ -1248,12 +1251,18 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("3")
     public void sendPostWithRedirect307() throws Exception {
         postRedirect(307, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("3")
     public void sendPostWithRedirect308() throws Exception {

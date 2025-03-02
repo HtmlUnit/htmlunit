@@ -36,6 +36,10 @@ import org.openqa.selenium.WebDriver;
 @RunWith(BrowserRunner.class)
 public final class XMLHttpRequestSentContentTest extends WebDriverTestCase {
 
+    /**
+     * Shuts down all browsers and resets the {@link MiniServer}.
+     * @throws Exception in case of error
+     */
     @Before
     public void before() throws Exception {
         // Chrome seems to cache preflight results
@@ -43,6 +47,10 @@ public final class XMLHttpRequestSentContentTest extends WebDriverTestCase {
         MiniServer.resetDropRequests();
     }
 
+    /**
+     * Resets the {@link MiniServer}.
+     * @throws Exception in case of error
+     */
     @After
     public void after() throws Exception {
         MiniServer.resetDropRequests();

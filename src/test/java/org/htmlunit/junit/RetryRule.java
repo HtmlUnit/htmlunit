@@ -30,6 +30,10 @@ import org.junit.runners.model.Statement;
 public class RetryRule implements TestRule {
     private AtomicInteger retryCount_;
 
+    /**
+     * Ctor.
+     * @param retryCount the retry count to be used
+     */
     public RetryRule(final int retryCount) {
         retryCount_ = new AtomicInteger(retryCount);
     }

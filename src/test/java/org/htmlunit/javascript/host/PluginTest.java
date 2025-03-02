@@ -28,6 +28,9 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class PluginTest extends WebDriverTestCase {
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"5",
         "PDF Viewer", "Portable Document Format", "internal-pdf-viewer", "undefined",

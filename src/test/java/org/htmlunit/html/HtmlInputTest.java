@@ -242,6 +242,9 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         assertFalse(input.isValid());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void changeType_javascriptEngineDisabled() throws Exception {
         final String htmlContent
@@ -261,6 +264,9 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void changeType_javascriptDisabled() throws Exception {
         final String htmlContent

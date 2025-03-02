@@ -60,6 +60,11 @@ public class NoHttpResponseTest {
     @RunWith(BrowserRunner.class)
     public static class WithWebDriverTest extends WebDriverTestCase {
 
+        /**
+         * Resets the {@link MiniServer}.
+         *
+         * @throws Exception in case of error
+         */
         @After
         public void after() throws Exception {
             MiniServer.resetDropRequests();
@@ -126,6 +131,11 @@ public class NoHttpResponseTest {
     @RunWith(BrowserRunner.class)
     public static class WithWebClientTest extends SimpleWebTestCase {
 
+        /**
+         * Resets the {@link MiniServer}.
+         *
+         * @throws Exception in case of error
+         */
         @After
         public void after() throws Exception {
             MiniServer.resetDropRequests();

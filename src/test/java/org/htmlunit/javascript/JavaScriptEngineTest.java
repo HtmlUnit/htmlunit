@@ -883,22 +883,30 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             return super.callFunction(page, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
-        /** @return the number of times that this engine has called functions */
+        /**
+         * @return the number of times that this engine has called functions
+         */
         public int getCallCount() {
             return scriptCallCount_;
         }
 
-        /** @return the number of times that this engine has executed code */
+        /**
+         * @return the number of times that this engine has executed code
+         */
         public int getExecutionCount() {
             return scriptExecutionCount_;
         }
 
-        /** @return the number of times that this engine has compiled code */
+        /**
+         * @return the number of times that this engine has compiled code
+         */
         public int getCompileCount() {
             return scriptCompileCount_;
         }
 
-        /** @return the number of times that this engine has executed a compiled script */
+        /**
+         * @return the number of times that this engine has executed a compiled script
+         */
         public int getExecuteScriptCount() {
             return scriptExecuteScriptCount_;
         }

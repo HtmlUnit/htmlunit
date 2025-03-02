@@ -290,6 +290,9 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("true-false-true-true-true-true")
     public void minValidation() throws Exception {
@@ -320,6 +323,9 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("true-true-true-false-true-true")
     public void maxValidation() throws Exception {

@@ -312,6 +312,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"1", "", "-1"})
     public void unselectResetToFirstOption1() throws Exception {

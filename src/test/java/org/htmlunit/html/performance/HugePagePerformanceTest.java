@@ -30,6 +30,11 @@ public final class HugePagePerformanceTest {
     private HugePagePerformanceTest() {
     }
 
+    /**
+     * Simple main for the moment.
+     * @param args ignored
+     * @throws IOException in case of error
+     */
     public static void main(final String[] args) throws IOException {
 //        final URL fileURL = WebClient.class.getClassLoader()
 //                .getResource("testfiles/huge-pages/html-standard-2024-10-17.html");

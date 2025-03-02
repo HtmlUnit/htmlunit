@@ -62,7 +62,7 @@ public class CodeStyleTest {
 
     /**
      * After.
-     * @throws IOException
+     * @throws IOException in case of error
      */
     @After
     public void after() throws IOException {

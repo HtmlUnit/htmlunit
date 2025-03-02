@@ -67,7 +67,9 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
             // ignore key
         }
 
-        /** @see Object#toString() */
+        /**
+         * @see Object#toString()
+         */
         @Override
         public String toString() {
             return message_ + " (" + url_ + " " + line_ + ":" + column_ + ")";

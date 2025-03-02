@@ -185,6 +185,9 @@ public class HtmlDateTimeInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("true-true")
     public void maxValidation() throws Exception {
@@ -208,6 +211,9 @@ public class HtmlDateTimeInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("true-true")
     public void minValidation() throws Exception {

@@ -1146,6 +1146,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("https://developer.mozilla.org/")
     public void testToJSON() throws Exception {

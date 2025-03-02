@@ -371,6 +371,9 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"true-true-true-true-true-true", "55-10-10-100-0-0"})
     public void minValidation() throws Exception {
@@ -407,6 +410,9 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"true-true-true-true-true-true", "5-1-10-10-0-0"})
     public void maxValidation() throws Exception {

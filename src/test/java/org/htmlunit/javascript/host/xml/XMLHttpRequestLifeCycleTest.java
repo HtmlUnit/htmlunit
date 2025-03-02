@@ -298,6 +298,9 @@ public final class XMLHttpRequestLifeCycleTest {
 
         private final Map<String, Class<? extends Servlet>> servlets_ = new HashMap<>();
 
+        /**
+         * Setup our servlets.
+         */
         @Before
         public void prepareTestingServlets() {
             servlets_.put(SUCCESS_URL, Xml200Servlet.class);
@@ -1218,6 +1221,10 @@ public final class XMLHttpRequestLifeCycleTest {
     @RunWith(BrowserRunner.class)
     public static class MiniServerTest extends WebDriverTestCase {
 
+        /**
+         * Shoutdown all web browsers and reset the {@link MiniServer}.
+         * @throws Exception in case of error
+         */
         @Before
         public void before() throws Exception {
             // Chrome seems to cache preflight results
@@ -1225,6 +1232,10 @@ public final class XMLHttpRequestLifeCycleTest {
             MiniServer.resetDropRequests();
         }
 
+        /**
+         * Reset the {@link MiniServer}.
+         * @throws Exception in case of error.
+         */
         @After
         public void after() throws Exception {
             MiniServer.resetDropRequests();
@@ -1651,19 +1662,16 @@ public final class XMLHttpRequestLifeCycleTest {
         }
     }
 
-    static String extractLog(final WebDriver driver) {
+    private static String extractLog(final WebDriver driver) {
         return driver.findElement(By.id("log")).getDomProperty("value").trim().replaceAll("\r", "");
     }
 
     /**
-     * Alerts each State that has been triggered in the form of:
-     * event.type_(isUndefined?)
-     * @param mode
-     * @param execution
-     * @param statesParam
-     * @return
+     * @param mode the {@link Mode}
+     * @param execution the {@link Execution}
+     * @return the generated test html
      */
-    static String buildHtml(final Mode mode, final Execution execution) {
+    private static String buildHtml(final Mode mode, final Execution execution) {
         final StringBuffer htmlBuilder = new StringBuffer();
         htmlBuilder.append("<html>\n");
         htmlBuilder.append("  <head>\n");

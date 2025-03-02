@@ -43,6 +43,9 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class CookieManager5Test extends WebServerTestCase {
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void sameDomainWithClientCookie() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
@@ -64,6 +67,9 @@ public class CookieManager5Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void unqualifiedHostWithClientCookie() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
@@ -85,6 +91,9 @@ public class CookieManager5Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void subdomainWithClientCookie() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
@@ -106,6 +115,9 @@ public class CookieManager5Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void differentSubdomainWithClientCookie() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
