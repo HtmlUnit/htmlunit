@@ -859,13 +859,17 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
         }
 
-        /** @return is there a next one ? */
+        /**
+         * @return is there a next one ?
+         */
         @Override
         public boolean hasNext() {
             return nextElement_ != null;
         }
 
-        /** @return the next one */
+        /**
+         * @return the next one
+         */
         @Override
         public DomElement next() {
             if (nextElement_ != null) {

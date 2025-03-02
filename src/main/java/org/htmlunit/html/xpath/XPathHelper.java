@@ -92,6 +92,14 @@ public final class XPathHelper {
         }
     }
 
+    /**
+     * @param <T> the type of nodes expected
+     * @param node the start node
+     * @param xpath the {@link XPathAdapter} to search for
+     * @param prefixResolver the {@link PrefixResolver} to be used
+     * @return a list of nodes matching the given xpath
+     * @throws TransformerException in case of error
+     */
     public static <T> List<T> getByXPath(final Node node, final XPathAdapter xpath,
             final PrefixResolver prefixResolver) throws TransformerException {
         final List<T> list = new ArrayList<>();

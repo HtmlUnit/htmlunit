@@ -166,7 +166,9 @@ public class HtmlTableRow extends HtmlElement {
             setNextCell(getFirstChild());
         }
 
-        /** @return whether there is another cell available */
+        /**
+         * @return whether there is another cell available
+         */
         @Override
         public boolean hasNext() {
             return nextCell_ != null;

@@ -54,6 +54,12 @@ public class XmlSerializer {
     private final StringBuilder indent_ = new StringBuilder();
     private File outputDir_;
 
+    /**
+     * Saves the given {@link SgmlPage} to the file.
+     * @param page the page to save
+     * @param file the destination
+     * @throws IOException in case of error
+     */
     public void save(final SgmlPage page, final File file) throws IOException {
         save(page, file, false);
     }

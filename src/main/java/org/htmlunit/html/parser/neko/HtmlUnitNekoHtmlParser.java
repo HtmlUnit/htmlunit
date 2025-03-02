@@ -315,7 +315,9 @@ class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
         html_ = htmlContent;
     }
 
-    /** @see DefaultErrorHandler#error(String,String,XMLParseException) */
+    /**
+     * @see DefaultErrorHandler#error(String,String,XMLParseException)
+     */
     @Override
     public void error(final String domain, final String key,
             final XMLParseException exception) throws XNIException {
@@ -327,7 +329,9 @@ class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
                 key);
     }
 
-    /** @see DefaultErrorHandler#warning(String,String,XMLParseException) */
+    /**
+     * @see DefaultErrorHandler#warning(String,String,XMLParseException)
+     */
     @Override
     public void warning(final String domain, final String key,
             final XMLParseException exception) throws XNIException {

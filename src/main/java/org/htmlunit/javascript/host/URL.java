@@ -125,6 +125,10 @@ public class URL extends HtmlUnitScriptable {
         return ref == null ? "" : "#" + ref;
     }
 
+    /**
+     * Sets the {@code hash} property.
+     * @param fragment the {@code hash} property
+     */
     @JsxSetter
     public void setHash(final String fragment) throws MalformedURLException {
         if (url_ == null) {
@@ -146,6 +150,10 @@ public class URL extends HtmlUnitScriptable {
         return url_.getHost() + (port > 0 ? ":" + port : "");
     }
 
+    /**
+     * Sets the {@code host} property.
+     * @param host the {@code host} property
+     */
     @JsxSetter
     public void setHost(final String host) throws MalformedURLException {
         if (url_ == null) {
@@ -210,6 +218,10 @@ public class URL extends HtmlUnitScriptable {
         return UrlUtils.encodeAnchor(url_.getHost());
     }
 
+    /**
+     * Sets the {@code hostname} property.
+     * @param hostname the {@code hostname} property
+     */
     @JsxSetter
     public void setHostname(final String hostname) throws MalformedURLException {
         if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
@@ -234,6 +246,10 @@ public class URL extends HtmlUnitScriptable {
         return jsToString();
     }
 
+    /**
+     * Sets the {@code href} property.
+     * @param href the {@code href} property
+     */
     @JsxSetter
     public void setHref(final String href) throws MalformedURLException {
         if (url_ == null) {
@@ -289,6 +305,10 @@ public class URL extends HtmlUnitScriptable {
         return idx == -1 ? "" : userInfo.substring(idx + 1);
     }
 
+    /**
+     * Sets the {@code password} property.
+     * @param password the {@code password} property
+     */
     @JsxSetter
     public void setPassword(final String password) throws MalformedURLException {
         if (url_ == null) {
@@ -311,6 +331,10 @@ public class URL extends HtmlUnitScriptable {
         return path.isEmpty() ? "/" : path;
     }
 
+    /**
+     * Sets the {@code path} property.
+     * @param path the {@code path} property
+     */
     @JsxSetter
     public void setPathname(final String path) throws MalformedURLException {
         if (url_ == null) {
@@ -334,6 +358,10 @@ public class URL extends HtmlUnitScriptable {
         return port == -1 ? "" : Integer.toString(port);
     }
 
+    /**
+     * Sets the {@code port} property.
+     * @param port the {@code port} property
+     */
     @JsxSetter
     public void setPort(final String port) throws MalformedURLException {
         if (url_ == null) {
@@ -356,6 +384,10 @@ public class URL extends HtmlUnitScriptable {
         return protocol.isEmpty() ? "" : (protocol + ":");
     }
 
+    /**
+     * Sets the {@code protocol} property.
+     * @param protocol the {@code protocol} property
+     */
     @JsxSetter
     public void setProtocol(final String protocol) throws MalformedURLException {
         if (url_ == null || protocol.isEmpty()) {
@@ -391,6 +423,10 @@ public class URL extends HtmlUnitScriptable {
         return search == null ? "" : "?" + search;
     }
 
+    /**
+     * Sets the {@code search} property.
+     * @param search the {@code search} property
+     */
     @JsxSetter
     public void setSearch(final String search) throws MalformedURLException {
         if (url_ == null) {
@@ -416,6 +452,11 @@ public class URL extends HtmlUnitScriptable {
         url_ = UrlUtils.getUrlWithNewQuery(url_, query);
     }
 
+    /**
+     * Sets the {@code search} property based on {@link NameValuePair}'s.
+     * @param nameValuePairs the pairs
+     * @throws MalformedURLException in case of error
+     */
     public void setSearch(final List<NameValuePair> nameValuePairs) throws MalformedURLException {
         final StringBuilder newSearch = new StringBuilder();
         for (final NameValuePair nameValuePair : nameValuePairs) {
@@ -448,6 +489,10 @@ public class URL extends HtmlUnitScriptable {
         return StringUtils.substringBefore(userInfo, ':');
     }
 
+    /**
+     * Sets the {@code username} property.
+     * @param username the {@code username} property
+     */
     @JsxSetter
     public void setUsername(final String username) throws MalformedURLException {
         if (url_ == null) {

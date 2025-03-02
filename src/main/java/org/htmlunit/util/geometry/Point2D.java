@@ -23,15 +23,26 @@ public class Point2D {
     private final double myX_;
     private final double myY_;
 
+    /**
+     * Ctor.
+     * @param x x value
+     * @param y y value
+     */
     public Point2D(final double x, final double y) {
         myX_ = x;
         myY_ = y;
     }
 
+    /**
+     * @return the x value
+     */
     public double getX() {
         return myX_;
     }
 
+    /**
+     * @return the y value
+     */
     public double getY() {
         return myY_;
     }

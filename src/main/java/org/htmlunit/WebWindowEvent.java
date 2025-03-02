@@ -169,7 +169,9 @@ public final class WebWindowEvent extends EventObject {
         return builder.toString();
     }
 
-    /** @return the event type */
+    /**
+     * @return the event type
+     */
     public int getEventType() {
         return type_;
     }

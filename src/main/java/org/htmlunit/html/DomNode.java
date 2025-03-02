@@ -1434,7 +1434,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             current.remove();
         }
 
-        /** @return the next node, if there is one */
+        /**
+         * @return the next node, if there is one
+         */
         @SuppressWarnings("unchecked")
         public T nextNode() {
             currentNode_ = nextNode_;
@@ -1537,7 +1539,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             current.remove();
         }
 
-        /** @return the next node, if there is one */
+        /**
+         * @return the next node, if there is one
+         */
         @SuppressWarnings("unchecked")
         public DomNode nextNode() {
             currentNode_ = nextNode_;
@@ -1638,7 +1642,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             current.remove();
         }
 
-        /** @return the next node, if there is one */
+        /**
+         * @return the next node, if there is one
+         */
         @SuppressWarnings("unchecked")
         public DomElement nextNode() {
             currentNode_ = nextNode_;
@@ -1739,7 +1745,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             current.remove();
         }
 
-        /** @return the next node, if there is one */
+        /**
+         * @return the next node, if there is one
+         */
         @SuppressWarnings("unchecked")
         public HtmlElement nextNode() {
             currentNode_ = nextNode_;
