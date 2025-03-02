@@ -218,9 +218,9 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
     }
 
     /**
-    * As of HtmlUnit-2.9, escaped double quote \" was altered.
-    * @throws Exception if the test fails
-    */
+     * As of HtmlUnit-2.9, escaped double quote \" was altered.
+     * @throws Exception if the test fails
+     */
     @Test
     public void escapedDoubleQuote() throws Exception {
         final String script =

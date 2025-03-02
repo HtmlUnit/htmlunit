@@ -208,7 +208,7 @@
                 <configuration>
                     <quiet>true</quiet>
                     <show>protected</show>
-                    <doclint>html,missing,reference,syntax</doclint>
+                    <doclint>html,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
                     <excludePackageNames>org.htmlunit.platform.util</excludePackageNames>
@@ -691,7 +691,7 @@
                 <configuration>
                     <quiet>true</quiet>
                     <show>protected</show>
-                    <doclint>html,missing,reference,syntax</doclint>
+                    <doclint>html,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
                     <excludePackageNames>org.htmlunit.platform.util</excludePackageNames>

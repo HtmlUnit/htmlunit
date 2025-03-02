@@ -41,9 +41,9 @@ public class DomCommentTest extends SimpleWebTestCase {
     }
 
      /**
-     * Test the comment correctness.
-     * @throws Exception if the test fails
-     */
+      * Test the comment correctness.
+      * @throws Exception if the test fails
+      */
     @Test
     public void asXml() throws Exception {
         final String comment = "<!-- a comment -->";
@@ -55,9 +55,9 @@ public class DomCommentTest extends SimpleWebTestCase {
     }
 
      /**
-     * Test comment and character data sibling correctness.
-     * @throws Exception if the test fails
-     */
+      * Test comment and character data sibling correctness.
+      * @throws Exception if the test fails
+      */
     @Test
     public void textSibling() throws Exception {
         final String content = "<html><body id='body'><!-- c1 -->text<!-- c2 --></body></html>";

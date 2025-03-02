@@ -29,7 +29,7 @@ import org.htmlunit.util.NameValuePair;
  * Simple mock for {@link WebResponse}.
  *
  * @author Ronald Brill
-*/
+ */
 public class WebResponseMock extends WebResponse {
     private Map<String, String> headers_;
 

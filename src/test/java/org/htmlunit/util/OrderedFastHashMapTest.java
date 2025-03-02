@@ -48,7 +48,7 @@ import org.junit.Test;
 /**
  * Unit tests for {@link OrderedFastHashMap}.
  *
-* @author Ren&eacute; Schwietzke
+ * @author Ren&eacute; Schwietzke
  */
 public class OrderedFastHashMapTest {
 

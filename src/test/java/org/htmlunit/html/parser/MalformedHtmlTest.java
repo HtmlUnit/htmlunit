@@ -184,9 +184,9 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug #889.
-    * @throws Exception if an error occurs
-    */
+     * Regression test for bug #889.
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("0")
     public void missingSingleQuote() throws Exception {
@@ -207,9 +207,9 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug #889.
-    * @throws Exception if an error occurs
-    */
+     * Regression test for bug #889.
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("0")
     public void missingDoubleQuote() throws Exception {
@@ -230,9 +230,9 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug #1192.
-    * @throws Exception if an error occurs
-    */
+     * Regression test for bug #1192.
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"submit", "button"})
     public void brokenInputSingleQuote() throws Exception {
@@ -253,9 +253,9 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug #1192.
-    * @throws Exception if an error occurs
-    */
+     * Regression test for bug #1192.
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"submit", "button"})
     public void brokenInputDoubleQuote() throws Exception {
@@ -320,7 +320,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug 1564.
+     * Regression test for bug 1564.
      * @throws Exception if an error occurs
      */
     @Test
@@ -339,7 +339,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug 1562.
+     * Regression test for bug 1562.
      * @throws Exception if an error occurs
      */
     @Test
@@ -456,7 +456,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-    * Regression test for bug 1598.
+     * Regression test for bug 1598.
      * @throws Exception if an error occurs
      */
     @Test

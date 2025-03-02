@@ -1329,9 +1329,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
      /**
-     * Sets the value of the window's {@code name} property.
-     * @param name the value of the window's {@code name} property
-     */
+      * Sets the value of the window's {@code name} property.
+      * @param name the value of the window's {@code name} property
+      */
     @JsxSetter
     public void setName(final String name) {
         getWebWindow().setName(name);

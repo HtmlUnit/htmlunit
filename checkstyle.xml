@@ -122,6 +122,10 @@
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
+        <module name="MissingJavadocMethod"/>
+        <module name="MissingJavadocPackage"/>
+        <module name="MissingJavadocType"/>
+        
         <module name="JavadocMethod">
             <property name="accessModifiers" value="public, protected"/>
         </module>
@@ -140,6 +144,14 @@
         </module>
         <module name="InvalidJavadocPosition"/>
         <module name="JavadocContentLocation"/>
+        <module name="JavadocLeadingAsteriskAlign" />
+        <!--module name="JavadocMissingLeadingAsterisk"/-->
+        <!--module name="JavadocMissingWhitespaceAfterAsterisk"/-->
+        <!--module name="JavadocParagraph"/-->
+        <!--module name="JavadocTagContinuationIndentation"/-->
+        <module name="NonEmptyAtclauseDescription"/>
+        <!--module name="RequireEmptyLineBeforeBlockTagGroup"/-->
+        <module name="SingleLineJavadoc"/>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->

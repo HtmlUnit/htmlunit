@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class HTMLQuoteElementTest extends WebDriverTestCase {
 
-     /**
+    /**
      * @throws Exception if the test fails
      */
     @Test

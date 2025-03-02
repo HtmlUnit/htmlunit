@@ -187,8 +187,8 @@ public interface WebWindow extends Serializable {
     Screen getScreen();
 
     /**
-    * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-    *
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns computed style of the element. Computed style represents the final computed values
      * of all CSS properties for the element. This method's return value is of the same type as
      * that of <code>element.style</code>, but the value returned by this method is read-only.

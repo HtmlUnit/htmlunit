@@ -244,12 +244,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
     }
 
     /**
-      * Simulates a bug report where using JavaScript to submit a form that contains a
-      * JavaScript action causes a an "IllegalArgumentException: JavaScript URLs can only
-      * be used to load content into frames and iframes".
-      *
-      * @throws Exception if the test fails
-      */
+     * Simulates a bug report where using JavaScript to submit a form that contains a
+     * JavaScript action causes a an "IllegalArgumentException: JavaScript URLs can only
+     * be used to load content into frames and iframes".
+     *
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("clicked")
     public void jSSubmit_JavaScriptAction() throws Exception {

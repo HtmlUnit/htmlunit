@@ -81,9 +81,9 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
         loadPageWithAlerts(html, new URL("http://localhost"), -1);
     }
 
-  /**
-    * @throws Exception if the test fails
-    */
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domainMixedCaseNetscape() throws Exception {

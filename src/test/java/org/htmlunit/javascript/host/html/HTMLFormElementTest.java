@@ -741,8 +741,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
     /**
      * Test that the elements collection is live.
-    * @throws Exception if the test fails
-    */
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"0", "1", "1", "true"})
     public void elementsLive() throws Exception {
@@ -768,8 +768,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-    * @throws Exception if the test fails
-    */
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"1", "[object HTMLInputElement]/txt"})
     public void elementsInputImage() throws Exception {
@@ -793,8 +793,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-    * @throws Exception if the test fails
-    */
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("0")
     public void elementsImage() throws Exception {
@@ -816,8 +816,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-    * @throws Exception if the test fails
-    */
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"1", "[object HTMLOutputElement]"})
     public void elementsOutput() throws Exception {
@@ -840,8 +840,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-    * @throws Exception if the test fails
-    */
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"2", "[object HTMLFieldSetElement]", "[object HTMLInputElement]"})
     public void elementsFieldSet() throws Exception {
@@ -868,8 +868,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-    * @throws Exception if the test fails
-    */
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"2", "[object HTMLFieldSetElement]", "[object HTMLInputElement]"})
     public void elementsFieldSetEmpty() throws Exception {
@@ -895,8 +895,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-    * @throws Exception if the test fails
-    */
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"4", "[object HTMLFieldSetElement]/fs_outer",
              "[object HTMLInputElement]/foo",

@@ -247,8 +247,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
     }
 
     /**
-    * @throws Exception if the test fails
-    */
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("hi!")
     public void lostFunction() throws Exception {

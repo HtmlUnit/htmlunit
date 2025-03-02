@@ -52,7 +52,7 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Ashley Frieze
  * @author Lai Quang Duong
-*/
+ */
 @RunWith(BrowserRunner.class)
 public class CacheTest extends SimpleWebTestCase {
 

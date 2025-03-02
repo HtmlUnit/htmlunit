@@ -104,6 +104,9 @@ public class Crypto extends HtmlUnitScriptable {
         return stuble;
     }
 
+    /**
+     * @return a v4 UUID generated using a cryptographically secure random number generator
+     */
     @JsxFunction
     public String randomUUID() {
         // Let bytes be a byte sequence of length 16.

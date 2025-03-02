@@ -2447,8 +2447,8 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
      /**
-     * @throws Exception if the test fails
-     */
+      * @throws Exception if the test fails
+      */
     @Test
     @Alerts({"[object HTMLCollection]", "2"})
     public void scriptsArray() throws Exception {

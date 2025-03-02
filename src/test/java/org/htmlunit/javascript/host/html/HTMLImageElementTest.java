@@ -489,9 +489,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     }
 
     /**
-      * Test that image's width and height are numbers.
-      * @throws Exception if the test fails
-      */
+     * Test that image's width and height are numbers.
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"})
     public void widthHeightEmptySource() throws Exception {
@@ -528,9 +528,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     }
 
     /**
-      * Test that image's width and height are numbers.
-      * @throws Exception if the test fails
-      */
+     * Test that image's width and height are numbers.
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24"},
             CHROME = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},

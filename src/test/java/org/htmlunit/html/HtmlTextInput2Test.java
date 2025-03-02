@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Anton Demydenko
-*/
+ */
 @RunWith(BrowserRunner.class)
 public class HtmlTextInput2Test extends SimpleWebTestCase {
 

@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
-*/
+ */
 @RunWith(BrowserRunner.class)
 public class HTMLOptionElementTest extends SimpleWebTestCase {
 

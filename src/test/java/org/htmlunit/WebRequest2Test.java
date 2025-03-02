@@ -186,6 +186,9 @@ public class WebRequest2Test extends WebServerTestCase {
         assertEquals("d", parameters.get(1).getValue());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void getParametersFromQueryAndUrlEncodedBodyPostWhenEncodingTypeIsMultipart() throws Exception {
         final URL url = new URL(URL_FIRST, "?a=b");
@@ -206,6 +209,9 @@ public class WebRequest2Test extends WebServerTestCase {
         assertEquals("d", parameters.get(1).getValue());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void getParametersUrlEncodedPostNoBody() throws Exception {
         final URL url = new URL(URL_FIRST, "?a=b");
@@ -223,6 +229,9 @@ public class WebRequest2Test extends WebServerTestCase {
         assertEquals("b", parameters.get(0).getValue());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void getParametersTextEncodedPostNoBody() throws Exception {
         final URL url = new URL(URL_FIRST, "?a=b");
@@ -240,6 +249,9 @@ public class WebRequest2Test extends WebServerTestCase {
         assertEquals("b", parameters.get(0).getValue());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void getParametersTextEncodedPostBody() throws Exception {
         final URL url = new URL(URL_FIRST, "?a=b");

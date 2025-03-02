@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  * @author Michael Rimov
-*/
+ */
 @RunWith(BrowserRunner.class)
 public class Int32ArrayTest extends WebDriverTestCase {
 

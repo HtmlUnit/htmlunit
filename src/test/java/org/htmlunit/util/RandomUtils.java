@@ -19,7 +19,7 @@ import java.util.Random;
 /**
  * Unit tests helper.
  *
-* @author Ren&eacute; Schwietzke
+ * @author Ren&eacute; Schwietzke
  */
 public final class RandomUtils {
     private static final String LOWERCHARS = "abcdefghijklmnopqrstuvwxyz";

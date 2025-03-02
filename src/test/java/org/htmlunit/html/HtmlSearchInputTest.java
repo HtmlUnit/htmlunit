@@ -31,7 +31,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Marc Guillemot
  * @author Anton Demydenko
  * @author Ronald Brill
-*/
+ */
 @RunWith(BrowserRunner.class)
 public class HtmlSearchInputTest extends WebDriverTestCase {
 

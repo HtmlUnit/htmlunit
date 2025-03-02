@@ -292,9 +292,9 @@ public final class EncodingSniffer {
     }
 
    /**
-     * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
-     * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
-     * instead
+    * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
+    * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
+    * instead
     */
     @Deprecated
     private static Charset sniffCssEncoding(final List<NameValuePair> headers, final InputStream content)
