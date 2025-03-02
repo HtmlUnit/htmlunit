@@ -220,7 +220,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF_ESR)
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
 
-    /** The anchor pathname detects url's starting with one letter as file url's
+    /**
+     * The anchor pathname detects url's starting with one letter as file url's
      * and replaces them with the file protocol. */
     @BrowserFeature({CHROME, EDGE})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE,
@@ -309,7 +310,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_EVENT_KEYBOARD_CTOR_WHICH,
 
-    /** do not trigger the onload event if the frame content
+    /**
+     * Do not trigger the onload event if the frame content
      * was not shown because of the csp. */
     @BrowserFeature(FF_ESR)
     JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY,

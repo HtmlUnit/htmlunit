@@ -43,7 +43,8 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(DefaultJavaScriptExecutor.class);
 
-    /** Creates an EventLoop for the webClient.
+    /**
+     * Creates an EventLoop for the webClient.
      *
      * @param webClient the provided webClient
      */

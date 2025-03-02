@@ -58,7 +58,8 @@ public class NodeFilter extends HtmlUnitScriptable {
     @JsxConstant
     public static final int SHOW_ELEMENT = org.w3c.dom.traversal.NodeFilter.SHOW_ELEMENT;
 
-    /** Show Attr nodes. Only useful when creating a TreeWalker with an
+    /**
+     * Show Attr nodes. Only useful when creating a TreeWalker with an
      * attribute node as its root. */
     @JsxConstant
     public static final int SHOW_ATTRIBUTE = org.w3c.dom.traversal.NodeFilter.SHOW_ATTRIBUTE;

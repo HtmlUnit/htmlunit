@@ -822,7 +822,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     private static class ChildElementsIterable implements Iterable<DomElement> {
         private final Iterator<DomElement> iterator_;
 
-        /** Constructor.
+        /**
+         * Constructor.
          * @param domNode the parent
          */
         protected ChildElementsIterable(final DomNode domNode) {
@@ -842,7 +843,8 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         private DomElement nextElement_;
 
-        /** Constructor.
+        /**
+         * Constructor.
          * @param domNode the parent
          */
         protected ChildElementsIterator(final DomNode domNode) {
