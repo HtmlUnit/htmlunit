@@ -60,6 +60,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n";
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("[object HTMLInputElement]")
     public void placeholderShown() throws Exception {
@@ -72,6 +75,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("[object HTMLInputElement]")
     public void placeholderShown_number() throws Exception {
@@ -84,6 +90,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("[object HTMLInputElement]")
     public void placeholderShown_displayNone() throws Exception {
@@ -95,6 +104,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("null")
     public void placeholderShown_hasValue() throws Exception {
@@ -106,6 +118,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("null")
     public void placeholderShown_noInput() throws Exception {
@@ -117,6 +132,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("SyntaxError")
     public void msPlaceholder() throws Exception {
@@ -129,6 +147,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("SyntaxError")
     public void msPlaceholder_number() throws Exception {
@@ -141,6 +162,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("SyntaxError")
     public void msPlaceholder_displayNone() throws Exception {
@@ -152,6 +176,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("SyntaxError")
     public void msPlaceholder_hasValue() throws Exception {
@@ -163,6 +190,9 @@ public class CSSSelector2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("SyntaxError")
     public void msPlaceholder_noInput() throws Exception {

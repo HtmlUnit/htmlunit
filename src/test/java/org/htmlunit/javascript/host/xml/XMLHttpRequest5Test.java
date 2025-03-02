@@ -41,6 +41,9 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest5Test extends WebDriverTestCase {
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"multipart/form-data; boundary=----formdata123456", "Html\r\nUnit\r\n"})
     public void sendBlob() throws Exception {
@@ -48,6 +51,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"null", "Html\r\nUnit\r\n"})
     public void sendBlob_emptyMimeType() throws Exception {
@@ -55,6 +61,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"doesnt/exist", "Html\r\nUnit\r\n"})
     public void sendBlob_badMimeType() throws Exception {
@@ -106,6 +115,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         Assert.assertEquals(expectedBody, requestBody == null ? "null" : requestBody);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"text/plain", "HtmlUnit"})
     public void sendBlob307() throws Exception {
@@ -153,6 +165,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         Assert.assertEquals(getExpectedAlerts()[1], requestBody == null ? "null" : requestBody);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"0", "127", "128", "255"})
     public void sendXUserDefined() throws Exception {
@@ -186,6 +201,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"onreadystatechange [object Event]", "readystatechange", "1",
              "NetworkError"})
@@ -228,6 +246,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"onreadystatechange [object Event]", "readystatechange", "1",
              "onreadystatechange [object Event]", "readystatechange", "4",
@@ -272,6 +293,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"application/xml;charset=UTF-8", "null"})
     public void sendXMLDocumentEmpty() throws Exception {
@@ -280,6 +304,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         sendXMLDocument(createXmlDoc, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"application/xml;charset=UTF-8", "<root/>"})
     public void sendXMLDocumentRoot() throws Exception {
@@ -290,6 +317,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         sendXMLDocument(createXmlDoc, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"application/xml;charset=UTF-8",
              "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"></body></html>"})
@@ -310,6 +340,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         sendXMLDocument(createXmlDoc, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(DEFAULT = {"text/html;charset=UTF-8",
                        "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"

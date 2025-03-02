@@ -104,11 +104,17 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(cache.isCacheableContent(response));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithNoHeadersIsNotCached() {
         assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, null), now_, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithExpiryDateIsCached() {
         final Map<String, String> headers = new HashMap<>();
@@ -117,6 +123,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithExpiryDateInFutureButShortMaxAgeIsNotInCacheWindow() {
         final Map<String, String> headers = new HashMap<>();
@@ -127,6 +136,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithExpiryDateInFutureButShortSMaxAgeIsNotInCacheWindow() {
         final Map<String, String> headers = new HashMap<>();
@@ -137,6 +149,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithBothMaxAgeAndSMaxUsesSMaxAsPriority() {
         final Map<String, String> headers = new HashMap<>();
@@ -145,6 +160,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithMaxAgeInFutureWillBeCached() {
         final Map<String, String> headers = new HashMap<>();
@@ -158,6 +176,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithLongLastModifiedTimeComparedToNowIsCachedOnDownload() {
         final Map<String, String> headers = new HashMap<>();
@@ -166,6 +187,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithLastModifiedTimeIsCachedAfterAFewPercentOfCreationAge() {
         final Map<String, String> headers = new HashMap<>();
@@ -174,6 +198,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_HOUR, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithLastModifiedTimeIsNotCachedAfterALongerPeriod() {
         final Map<String, String> headers = new HashMap<>();

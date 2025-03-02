@@ -28,6 +28,9 @@ import org.junit.Test;
  */
 public class Polygon2DTest {
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testSimplePolygon() {
         final Polygon2D polygon =
@@ -48,6 +51,9 @@ public class Polygon2DTest {
         assertFalse(polygon.contains(100, 200));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testPolygonFigure6() {
         // example 1
@@ -131,6 +137,9 @@ public class Polygon2DTest {
         assertTrue(polygon.contains(3, 3.9));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testBorders() {
         /*

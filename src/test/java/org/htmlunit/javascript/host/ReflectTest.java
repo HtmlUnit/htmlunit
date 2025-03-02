@@ -29,18 +29,27 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class ReflectTest extends WebDriverTestCase {
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("[object Reflect]")
     public void testToString() throws Exception {
         test("log(Reflect.toString())");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("1")
     public void apply() throws Exception {
         test("log(Reflect.apply(Math.floor, undefined, [1.75]))");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"1", "true", "4", "arg1", "2", "undefined", "null"})
     public void applyDetails() throws Exception {
@@ -69,6 +78,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("TypeError")
     public void applyMissingArgs() throws Exception {
@@ -81,6 +93,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("TypeError")
     public void applyTargetNotFunction() throws Exception {
@@ -93,6 +108,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("TypeError")
     public void applyArgumentsListNotFunction() throws Exception {
@@ -106,6 +124,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "1776"})
     public void construct() throws Exception {
@@ -116,6 +137,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "42"})
     public void defineProperty() throws Exception {
@@ -127,6 +151,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "true", "undefined"})
     public void definePropertyWithoutValue() throws Exception {
@@ -140,6 +167,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"false", "undefined"})
     public void definePropertyFreezed() throws Exception {
@@ -152,6 +182,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"[get,set,enumerable,configurable]", "false", "true", "true", "true"})
     public void getOwnPropertyDescriptor() throws Exception {
@@ -173,6 +206,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "false", "false"})
     public void isExtensible() throws Exception {
@@ -190,6 +226,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"p1,p2", "length"})
     public void ownKeys() throws Exception {
@@ -235,6 +274,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("0")
     public void ownKeysEmptyObj() throws Exception {
@@ -243,6 +285,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("0")
     public void ownKeysDeleteObj() throws Exception {
@@ -253,6 +298,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("length")
     public void ownKeysEmptyArray() throws Exception {
@@ -261,6 +309,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2,length")
     public void ownKeysArray() throws Exception {
@@ -269,6 +320,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("p1,p2")
     public void ownKeysNotEnumerable() throws Exception {
@@ -281,6 +335,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "false", "true"})
     public void has() throws Exception {
@@ -310,6 +367,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "false"})
     public void hasSymbol() throws Exception {
@@ -324,6 +384,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("function")
     public void hasProto() throws Exception {
@@ -333,6 +396,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"42", "true", "true", "true"})
     public void getOwnPropertyDescriptorSymbol() throws Exception {
@@ -350,6 +416,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("true")
     public void getOwnPropertyDescriptorUndefinedProperty() throws Exception {
@@ -359,6 +428,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("one")
     public void getPropertyByInt() throws Exception {
@@ -369,6 +441,9 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"value 1", "undefined", "foo", "42", "undefined"})
     public void getProperty() throws Exception {
@@ -392,6 +467,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "true", "false"})
     public void setPrototypeOf() throws Exception {
@@ -407,6 +485,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("false")
     public void setPrototypeOfCycle() throws Exception {
@@ -416,6 +497,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "true", "false"})
     public void setPrototypeOfCycleComplex() throws Exception {
@@ -430,6 +514,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "true", "true"})
     public void setPrototypeOfSame() throws Exception {

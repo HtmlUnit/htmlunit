@@ -2890,6 +2890,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(DEFAULT = {"", "", "arraybuffer", "InvalidStateError/DOMException",
                        "send done", "InvalidStateError/DOMException"},
@@ -2951,6 +2954,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "", "<xml>\\n<content>blah</content>\\n</xml>"})
     public void responseResponseTypeDefault() throws Exception {
@@ -2994,6 +3000,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "text", "<xml>\\n<content>blah</content>\\n</xml>"})
     public void responseResponseTypeText() throws Exception {
@@ -3038,6 +3047,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "36"})
     public void responseResponseTypeArrayBuffer() throws Exception {
@@ -3083,6 +3095,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "36"})
     public void responseResponseTypeArrayBufferGzipIncrease() throws Exception {
@@ -3139,6 +3154,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "72"})
     public void responseResponseTypeArrayBufferGzipDecrease() throws Exception {
@@ -3195,6 +3213,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "0"})
     public void responseResponseTypeArrayBufferEmpty() throws Exception {
@@ -3237,6 +3258,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "blob", "[object Blob]", "36", "text/xml"})
     public void responseResponseTypeBlob() throws Exception {
@@ -3283,6 +3307,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "blob", "[object Blob]", "0"})
     public void responseResponseTypeBlobEmpty() throws Exception {
@@ -3325,6 +3352,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "json", "[object Object]", "Unit", "{\"Html\":\"Unit\"}"})
     public void responseResponseTypeJson() throws Exception {
@@ -3368,6 +3398,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "json", "null"})
     public void responseResponseTypeJsonEmpty() throws Exception {
@@ -3409,6 +3442,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "document", "[object XMLDocument]"})
     public void responseResponseTypeDocumentXml() throws Exception {
@@ -3453,6 +3489,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "document", "[object HTMLDocument]"})
     public void responseResponseTypeDocumentHtml() throws Exception {
@@ -3497,6 +3536,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "document", "null"})
     public void responseResponseTypeDocumentJs() throws Exception {

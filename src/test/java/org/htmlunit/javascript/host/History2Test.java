@@ -600,6 +600,9 @@ public class History2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"href=§§URL§§", "href=§§URL§§"})
     public void replaceStateNull() throws Exception {
@@ -621,6 +624,9 @@ public class History2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"href=§§URL§§", "href=§§URL§§"})
     public void replaceStateUndefined() throws Exception {
@@ -642,6 +648,9 @@ public class History2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"href=§§URL§§", "href=§§URL§§undefined"})
     public void replaceStateUndefinedString() throws Exception {
@@ -663,6 +672,9 @@ public class History2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"href=§§URL§§", "href=§§URL§§[object%20Object]"})
     @HtmlUnitNYI(CHROME = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},
@@ -689,6 +701,9 @@ public class History2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"href=§§URL§§", "href=§§URL§§"})
     public void pushStateNull() throws Exception {
@@ -710,6 +725,9 @@ public class History2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"href=§§URL§§", "href=§§URL§§"})
     public void pushStateUndefined() throws Exception {
@@ -731,6 +749,9 @@ public class History2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"href=§§URL§§", "href=§§URL§§undefined"})
     public void pushStateUndefinedString() throws Exception {
@@ -752,6 +773,9 @@ public class History2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"href=§§URL§§", "href=§§URL§§[object%20Object]"})
     @HtmlUnitNYI(CHROME = {"href=§§URL§§", "href=§§URL§§%5Bobject%20Object%5D"},

@@ -74,6 +74,9 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         assertEquals("about:blank", window.getEnclosedPage().getUrl());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void setLocation_addEventListener() throws Exception {
         final String content =
@@ -175,6 +178,9 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         loadPageWithAlerts(html, URL_FIRST, 1000);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("onreadystatechange [object Event]§readystatechange§1§"
             + "onreadystatechange [object Event]§readystatechange§4§")
@@ -193,6 +199,9 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("onreadystatechange [object Event]§readystatechange§1§"
             + "onreadystatechange [object Event]§readystatechange§4§")

@@ -35,6 +35,11 @@ public class WebResponseMock extends WebResponse {
 
     private Map<String, Integer> callCounts_ = new HashMap<>();
 
+    /**
+     * Ctor.
+     * @param request the request
+     * @param headers the headers
+     */
     public WebResponseMock(final WebRequest request, final Map<String, String> headers) {
         super(null, request, 0);
 
@@ -114,6 +119,10 @@ public class WebResponseMock extends WebResponse {
         super.cleanUp();
     }
 
+    /**
+     * @param method the method name
+     * @return the number of call for the given method name
+     */
     public int getCallCount(final String method) {
         return callCounts_.getOrDefault(method, 0);
     }

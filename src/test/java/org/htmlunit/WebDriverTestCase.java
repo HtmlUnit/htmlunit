@@ -282,6 +282,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return false;
     }
 
+    /**
+     * @return the browser properties (and initializes them lazy)
+     */
     public static Set<String> getBrowsersProperties() {
         if (BROWSERS_PROPERTIES_ == null) {
             try {

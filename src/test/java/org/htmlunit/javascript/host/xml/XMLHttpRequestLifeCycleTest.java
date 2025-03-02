@@ -135,6 +135,9 @@ public final class XMLHttpRequestLifeCycleTest {
     @RunWith(BrowserRunner.class)
     public static class JettyServerTest extends WebDriverTestCase {
 
+        /**
+         * Helper servlet.
+         */
         public static class Xml200Servlet extends HttpServlet {
 
             @Override
@@ -161,6 +164,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * Helper servlet.
+         */
         public static class Xml200ServletWithoutOriginHeader extends HttpServlet {
 
             @Override
@@ -183,6 +189,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * Helper servlet.
+         */
         public static class Xml403Servlet extends HttpServlet {
 
             @Override
@@ -209,6 +218,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * Helper servlet.
+         */
         public static class Xml500Servlet extends HttpServlet {
 
             @Override
@@ -235,6 +247,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * Helper servlet.
+         */
         public static class Preflight403Servlet extends HttpServlet {
 
             @Override
@@ -243,6 +258,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * Helper servlet.
+         */
         public static class Preflight500Servlet extends HttpServlet {
 
             @Override
@@ -251,6 +269,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * Helper servlet.
+         */
         public static class XmlTimeoutServlet extends HttpServlet {
 
             @Override

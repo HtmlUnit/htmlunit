@@ -30,6 +30,9 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class PolyfillTest extends SimpleWebTestCase {
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Content fetched")
     public void fetch() throws Exception {
@@ -53,6 +56,9 @@ public class PolyfillTest extends SimpleWebTestCase {
         loadPageWithAlerts(html, URL_FIRST, (int) DEFAULT_WAIT_TIME);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("false")
     public void fetchPolyfillDisabled() throws Exception {

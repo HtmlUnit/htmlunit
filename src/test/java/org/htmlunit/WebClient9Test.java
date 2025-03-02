@@ -141,6 +141,9 @@ public class WebClient9Test extends SimpleWebTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void multithreading() throws InterruptedException {
         final String css = "body { background-color: green; }";

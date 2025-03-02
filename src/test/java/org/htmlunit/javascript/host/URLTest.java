@@ -285,6 +285,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"/", "/en-US/docs", "/en-US/docs"})
     public void getPathName() throws Exception {
@@ -311,6 +314,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"/path", "/path",
              "http://developer.mozilla.org/new/path?a=u&x",
@@ -343,6 +349,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "#abcd", "#bcd",
              "#hash", "http://developer.mozilla.org/?a=b#hash",
@@ -393,6 +402,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"developer.mozilla.org", "developer.mozilla.org",
              "new.host", "new.host:1234", "new.host:1234", "0.0.91.160:80",
@@ -457,6 +469,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(DEFAULT = {"developer.mozilla.org",
                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
@@ -510,6 +525,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
              "http://new.com/href", "http://new.com/hrefWithPort"})
@@ -539,6 +557,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"flabada",
              "", "https://anonymous@developer.mozilla.org/",
@@ -586,6 +607,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"80", "123", "", "https://mydomain.com/svn/Repos/",
              "", "http://mydomain.com/svn/Repos/"})
@@ -618,6 +642,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"https:",
              "http:", "http://mydomain.com/svn/Repos/",
@@ -689,6 +716,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"https:",
              "http:", "http://mydomain.com/svn/Repos/",
@@ -755,6 +785,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"https:",
              "http:", "http://mydomain.com/svn/Repos/",
@@ -821,6 +854,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(DEFAULT = {"https:",
                        "http:", "http://mydomain.com/svn/Repos/",
@@ -911,6 +947,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"?q=123",
              "?a=b&c=d", "https://developer.mozilla.org/search?a=b&c=d",
@@ -979,6 +1018,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"https://developer.mozilla.org/search?q%20a=1%202%203", "?q%20a=1%202%203"})
     @HtmlUnitNYI(CHROME = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
@@ -1006,6 +1048,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"anonymous",
              "user", "https://user:flabada@developer.mozilla.org/",

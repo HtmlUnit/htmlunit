@@ -440,7 +440,9 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         }
     }
 
-    /** @throws Exception if the test fails */
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void removeOptionsFromSelect() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
@@ -489,7 +491,9 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         assertEquals(0, theSelect.getOptions().size());
     }
 
-    /** @throws Exception if the test fails */
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void editOptions() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"

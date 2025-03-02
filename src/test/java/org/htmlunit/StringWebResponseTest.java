@@ -43,6 +43,9 @@ public class StringWebResponseTest extends SimpleWebTestCase {
         assertSame(UTF_8, webResponse.getContentCharset());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void charsetImplicit() {
         final StringWebResponse webResponse = new StringWebResponse("hello", URL_FIRST);
@@ -63,6 +66,9 @@ public class StringWebResponseTest extends SimpleWebTestCase {
         assertEquals(content, webResponse.getContentAsString());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void charsetInContentImplicit() {
         final String content = "<html><head>\n"
@@ -75,7 +81,7 @@ public class StringWebResponseTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws IOException
+     * @throws IOException in case of error
      */
     @Test
     public void inputStream() throws IOException {
