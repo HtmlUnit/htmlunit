@@ -207,7 +207,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns the line number in the source page where the DOM node ends.
      * @return 0 if no information on the line number is available (for instance for nodes dynamically added),
-     * -1 if the end tag has not yet been parsed (during page loading)
+     *         -1 if the end tag has not yet been parsed (during page loading)
      */
     public int getEndLineNumber() {
         return endLineNumber_;
@@ -216,7 +216,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns the column number in the source page where the DOM node ends.
      * @return 0 if no information on the line number is available (for instance for nodes dynamically added),
-     * -1 if the end tag has not yet been parsed (during page loading)
+     *         -1 if the end tag has not yet been parsed (during page loading)
      */
     public int getEndColumnNumber() {
         return endColumnNumber_;
@@ -1244,11 +1244,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param newChild the new child node that is being inserted below this node
      * @throws DOMException HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does
-     * not allow children of the type of the newChild node, or if the node to insert is one of
-     * this node's ancestors or this node itself, or if this node is of type Document and the
-     * DOM application attempts to insert a second DocumentType or Element node.
-     * WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the
-     * one that created this node.
+     *         not allow children of the type of the newChild node, or if the node to insert is one of
+     *         this node's ancestors or this node itself, or if this node is of type Document and the
+     *         DOM application attempts to insert a second DocumentType or Element node.
+     *         WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the
+     *         one that created this node.
      */
     protected void checkChildHierarchy(final Node newChild) throws DOMException {
         Node parentNode = this;
@@ -1391,7 +1391,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param <T> the type of nodes over which to iterate
      *
      * @deprecated as of version 4.7.0; use {@link DescendantDomNodesIterator},
-     * {@link DescendantDomElementsIterator}, or {@link DescendantHtmlElementsIterator} instead.
+     *     {@link DescendantDomElementsIterator}, or {@link DescendantHtmlElementsIterator} instead.
      */
     @Deprecated
     protected class DescendantElementsIterator<T extends DomNode> implements Iterator<T> {
@@ -2235,7 +2235,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the previous sibling element node of this element.
      * null if this element has no element sibling nodes that come before this one in the document tree.
      * @return the previous sibling element node of this element.
-     * null if this element has no element sibling nodes that come before this one in the document tree
+     *         null if this element has no element sibling nodes that come before this one in the document tree
      */
     public DomElement getPreviousElementSibling() {
         DomNode node = getPreviousSibling();
@@ -2249,7 +2249,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the next sibling element node of this element.
      * null if this element has no element sibling nodes that come after this one in the document tree.
      * @return the next sibling element node of this element.
-     * null if this element has no element sibling nodes that come after this one in the document tree
+     *         null if this element has no element sibling nodes that come after this one in the document tree
      */
     public DomElement getNextElementSibling() {
         DomNode node = getNextSibling();

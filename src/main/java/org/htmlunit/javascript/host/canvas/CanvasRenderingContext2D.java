@@ -593,13 +593,13 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @param dx horizontal position (x coordinate) at which to place the image data in the destination canvas
      * @param dy vertical position (y coordinate) at which to place the image data in the destination canvas
      * @param dirtyX horizontal position (x coordinate) of the top-left corner
-     *  from which the image data will be extracted. Defaults to 0.
+     *        from which the image data will be extracted. Defaults to 0.
      * @param dirtyY vertical position (y coordinate) of the top-left corner
-     *  from which the image data will be extracted. Defaults to 0.
+     *        from which the image data will be extracted. Defaults to 0.
      * @param dirtyWidth width of the rectangle to be painted.
-     *  Defaults to the width of the image data.
+     *        Defaults to the width of the image data.
      * @param dirtyHeight height of the rectangle to be painted.
-     *  Defaults to the height of the image data.
+     *        Defaults to the height of the image data.
      */
     @JsxFunction
     public void putImageData(final ImageData imageData,

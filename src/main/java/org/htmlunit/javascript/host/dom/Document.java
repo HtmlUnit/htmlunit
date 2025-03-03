@@ -1202,7 +1202,7 @@ public class Document extends Node {
      *
      * @param root The root node at which to begin the NodeIterator's traversal.
      * @param whatToShow an optional long representing a bitmask created by combining
-     * the constant properties of {@link NodeFilter}
+     *        the constant properties of {@link NodeFilter}
      * @param filter an object implementing the {@link NodeFilter} interface
      * @return a new NodeIterator object
      */
@@ -3571,8 +3571,7 @@ public class Document extends Node {
     /**
      * Generate and return the URL for the given blob.
      * @param blob the Blob containing the data
-     * @return the URL
-     * {@link org.htmlunit.javascript.host.URL#createObjectURL(Object)}
+     * @return the URL {@link org.htmlunit.javascript.host.URL#createObjectURL(Object)}
      */
     public String generateBlobUrl(final Blob blob) {
         final URL url = getPage().getUrl();
@@ -3597,8 +3596,7 @@ public class Document extends Node {
 
     /**
      * Revokes the URL for the given blob.
-     * @param url the url to revoke
-     * {@link org.htmlunit.javascript.host.URL#revokeObjectURL(Scriptable)}
+     * @param url the url to revoke {@link org.htmlunit.javascript.host.URL#revokeObjectURL(Scriptable)}
      */
     public void revokeBlobUrl(final String url) {
         blobUrl2Blobs_.remove(url);

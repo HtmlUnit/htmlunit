@@ -71,7 +71,7 @@ public interface WebWindow extends Serializable {
      * is a top level window, then return this window.
      *
      * @return the top level window that contains this window or this
-     * window if there is no parent.
+     *         window if there is no parent.
      */
     WebWindow getTopWindow();
 
@@ -195,7 +195,7 @@ public interface WebWindow extends Serializable {
      *
      * @param element the element
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null});
-     * e.g. ':before'
+     *        e.g. ':before'
      * @return the computed style
      */
     ComputedCssStyleDeclaration getComputedStyle(DomElement element, String pseudoElement);

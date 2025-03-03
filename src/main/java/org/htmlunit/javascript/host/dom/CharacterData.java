@@ -111,7 +111,7 @@ public class CharacterData extends Node {
     /**
      * Insert a string into character data.
      * @param offset the position within the first character at which
-     * the string is to be inserted.
+     *        the string is to be inserted.
      * @param arg the string to insert
      */
     @JsxFunction
@@ -122,10 +122,10 @@ public class CharacterData extends Node {
     /**
      * Replace characters of character data with a string.
      * @param offset the position within the first character at which
-     * the string is to be replaced.
+     *        the string is to be replaced.
      * @param count the number of characters to be replaced
      * @param arg the string that replaces the count characters beginning at
-     * the character at offset.
+     *        the character at offset.
      */
     @JsxFunction
     public void replaceData(final int offset, final int count, final String arg) {

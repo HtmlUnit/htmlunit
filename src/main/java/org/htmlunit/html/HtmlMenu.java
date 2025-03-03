@@ -50,7 +50,7 @@ public class HtmlMenu extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code compact}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCompactAttribute() {
         return getAttributeDirect("compact");

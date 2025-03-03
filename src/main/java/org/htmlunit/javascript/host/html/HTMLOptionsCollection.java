@@ -233,8 +233,8 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      *
      * @param newOptionObject the DomNode to insert in the collection
      * @param beforeOptionObject An optional parameter which specifies the index position in the
-     * collection where the element is placed. If no value is given, the method places
-     * the element at the end of the collection.
+     *        collection where the element is placed. If no value is given, the method places
+     *        the element at the end of the collection.
      *
      * @see #put(int, Scriptable, Object)
      */

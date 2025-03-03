@@ -96,7 +96,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      *
      * @param isChecked true if this element is to be selected
      * @return the page that occupies this window after setting checked status
-     * It may be the same window or it may be a freshly loaded one.
+     *         It may be the same window or it may be a freshly loaded one.
      */
     @Override
     public Page setChecked(final boolean isChecked) {

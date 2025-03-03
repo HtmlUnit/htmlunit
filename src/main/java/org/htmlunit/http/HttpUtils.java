@@ -293,7 +293,7 @@ public final class HttpUtils {
      * @param buf buffer with the sequence of chars to be parsed
      * @param range defines the bounds and current position of the buffer
      * @param delimiters set of delimiting characters. Can be {@code null} if the token
-     *  is not delimited by any character.
+     *        is not delimited by any character.
      */
     private static String parseToken(final String buf, final ParseRange range, final BitSet delimiters) {
         final StringBuilder dst = new StringBuilder();
@@ -345,7 +345,7 @@ public final class HttpUtils {
      * @param buf buffer with the sequence of chars to be parsed
      * @param range defines the bounds and current position of the buffer
      * @param delimiters set of delimiting characters. Can be {@code null} if the value
-     *  is delimited by a whitespace only.
+     *        is delimited by a whitespace only.
      * @param dst destination buffer
      */
     private static void copyContent(final String buf, final ParseRange range,

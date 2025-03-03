@@ -232,8 +232,8 @@ public class HtmlPage extends SgmlPage {
      * Initialize this page.
      * @throws IOException if an IO problem occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link org.htmlunit.WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set
-     * to true.
+     *         {@link org.htmlunit.WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set
+     *         to true.
      */
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
@@ -908,7 +908,7 @@ public class HtmlPage extends SgmlPage {
      * (see {@link org.htmlunit.WebClient#isJavaScriptEnabled()}.</p>
      * @param sourceCode the JavaScript code to execute
      * @return a ScriptResult which will contain both the current page (which may be different than
-     * the previous page) and a JavaScript result object
+     *         the previous page) and a JavaScript result object
      */
     public ScriptResult executeJavaScript(final String sourceCode) {
         return executeJavaScript(sourceCode, "injected script", 1);
@@ -932,7 +932,7 @@ public class HtmlPage extends SgmlPage {
      * @param sourceName the name for this chunk of code (will be displayed in error messages)
      * @param startLine the line at which the script source starts
      * @return a ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a JavaScript result object.
+     *         the previous page and a JavaScript result object.
      */
     public ScriptResult executeJavaScript(String sourceCode, final String sourceName, final int startLine) {
         if (!getWebClient().isJavaScriptEnabled()) {
@@ -1531,7 +1531,7 @@ public class HtmlPage extends SgmlPage {
      *
      * @param accessKey the key that will be pressed
      * @return the element that has the focus after pressing this access key or null if no element
-     * has the focus.
+     *         has the focus.
      * @throws IOException if an IO error occurs during the processing of this access key (this
      *         would only happen if the access key triggered a button which in turn caused a page load)
      */
@@ -2649,7 +2649,7 @@ public class HtmlPage extends SgmlPage {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @return a list of all styles from this page (&lt;style&gt; and &lt;link rel=stylesheet&gt;).
-     * This returns an empty list if css support is disabled in the web client options.
+     *         This returns an empty list if css support is disabled in the web client options.
      */
     public List<CssStyleSheet> getStyleSheets() {
         final List<CssStyleSheet> styles = new ArrayList<>();

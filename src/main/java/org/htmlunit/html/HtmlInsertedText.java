@@ -51,7 +51,7 @@ public class HtmlInsertedText extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code cite}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCiteAttribute() {
         return getAttributeDirect("cite");
@@ -63,7 +63,7 @@ public class HtmlInsertedText extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code datetime}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getDateTimeAttribute() {
         return getAttributeDirect("datetime");

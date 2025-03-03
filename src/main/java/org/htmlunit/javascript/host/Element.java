@@ -1455,7 +1455,7 @@ public class Element extends Node {
     /**
      * Mock for the moment.
      * @param retargetToElement if true, all events are targeted directly to this element;
-     * if false, events can also fire at descendants of this element
+     *        if false, events can also fire at descendants of this element
      */
     @JsxFunction({FF, FF_ESR})
     public void setCapture(final boolean retargetToElement) {
@@ -1618,8 +1618,8 @@ public class Element extends Node {
      * removes attribute with <code>name</code>.
      *
      * @param name the name of the attribute to be toggled.
-     * The attribute name is automatically converted to all lower-case when toggleAttribute()
-     * is called on an HTML element in an HTML document.
+     *        The attribute name is automatically converted to all lower-case when toggleAttribute()
+     *        is called on an HTML element in an HTML document.
      * @param force if true, the toggleAttribute method adds an attribute named name
      * @return true if attribute name is eventually present, and false otherwise
      * @see <a href=

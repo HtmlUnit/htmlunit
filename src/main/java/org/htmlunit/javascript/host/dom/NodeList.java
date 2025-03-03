@@ -71,7 +71,7 @@ public class NodeList extends AbstractList implements Callable {
      *
      * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     * of a descendant node of parentScope changes (attribute added, modified or removed)
+     *        of a descendant node of parentScope changes (attribute added, modified or removed)
      */
     public NodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
         super(domNode, attributeChangeSensitive, null);

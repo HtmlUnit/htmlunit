@@ -164,7 +164,7 @@ public class UIEvent extends Event {
 
     /**
      * @return a number that indicates which button was pressed on the mouse,
-     * or the numeric keyCode or the character code (charCode) of the key pressed on the keyboard
+     *         or the numeric keyCode or the character code (charCode) of the key pressed on the keyboard
      */
     @JsxGetter
     public int getWhich() {

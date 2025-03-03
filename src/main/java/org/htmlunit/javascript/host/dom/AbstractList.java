@@ -103,7 +103,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      *
      * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     * of a descendant node of parentScope changes (attribute added, modified or removed)
+     *        of a descendant node of parentScope changes (attribute added, modified or removed)
      * @param initialElements the initial content for the cache
      */
     protected AbstractList(final DomNode domNode, final boolean attributeChangeSensitive,

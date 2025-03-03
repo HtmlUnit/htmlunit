@@ -115,7 +115,7 @@ public class TopLevelWindow extends WebWindowImpl {
      *
      * Closes this window.
      * @param ignoreOnbeforeunloadAccepted if true the result of triggering the OnbeforeunloadAccepted event
-     * will be ignored
+     *        will be ignored
      */
     public void close(final boolean ignoreOnbeforeunloadAccepted) {
         final Page page = getEnclosedPage();

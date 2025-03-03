@@ -59,7 +59,7 @@ public class RadioNodeList extends NodeList {
      *
      * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     * of a descendant node of parentScope changes (attribute added, modified or removed)
+     *        of a descendant node of parentScope changes (attribute added, modified or removed)
      */
     public RadioNodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
         super(domNode, attributeChangeSensitive);
@@ -86,7 +86,7 @@ public class RadioNodeList extends NodeList {
     /**
      * Returns the value of the first checked radio button represented by radioNodeList.
      * @return the value of the first checked radio button represented by radioNodeList ("on" if value attribute
-     * is not defined) or an empty string if no radio button is checked.
+     *         is not defined) or an empty string if no radio button is checked.
      * @see <a href="https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#the-htmlformcontrolscollection-interface">HTML Standard</a>
      */
     @JsxGetter

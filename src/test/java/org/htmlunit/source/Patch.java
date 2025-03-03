@@ -37,7 +37,7 @@ public final class Patch {
      * Checks the @author tag in the files touched by the specified patch.
      *
      * @param baseDir the root folder of HtmlUnit, this can be '.' if you are calling this methods from HtmlUnit code
-     * base. If you are calling this method from another project, this specifies HtmlUnit home folder.
+     *        base. If you are calling this method from another project, this specifies HtmlUnit home folder.
      * @param patchPath the path to the patch
      * @param authorName the author name, e.g. "John Smith"
      * @throws IOException if an exception occurs

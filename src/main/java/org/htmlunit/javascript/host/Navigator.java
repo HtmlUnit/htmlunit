@@ -299,7 +299,7 @@ public class Navigator extends HtmlUnitScriptable {
 
     /**
      * @return true whether the browser supports inline display
-     * of PDF files when navigating to them
+     *         of PDF files when navigating to them
      */
     @JsxGetter
     public boolean getPdfViewerEnabled() {

@@ -78,7 +78,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charset}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
         return getAttributeDirect("charset");
@@ -90,7 +90,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code href}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHrefAttribute() {
         return getAttributeDirect("href");
@@ -102,7 +102,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code hreflang}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHrefLangAttribute() {
         return getAttributeDirect("hreflang");
@@ -114,7 +114,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
         return getAttributeDirect(TYPE_ATTRIBUTE);
@@ -126,7 +126,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rel}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getRelAttribute() {
         return getAttributeDirect("rel");
@@ -138,7 +138,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rev}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getRevAttribute() {
         return getAttributeDirect("rev");
@@ -150,7 +150,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code media}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getMediaAttribute() {
         return getAttributeDirect("media");
@@ -162,7 +162,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code target}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getTargetAttribute() {
         return getAttributeDirect("target");
@@ -175,7 +175,7 @@ public class HtmlLink extends HtmlElement {
      *
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
      * @return {@code null} if no download should be performed and when this wasn't already done; the response
-     * received when performing a request for the content referenced by this tag otherwise
+     *         received when performing a request for the content referenced by this tag otherwise
      * @throws IOException if an error occurs while downloading the content
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
@@ -191,7 +191,7 @@ public class HtmlLink extends HtmlElement {
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
      * @param request the request; if null getWebRequest() is called to create one
      * @return {@code null} if no download should be performed and when this wasn't already done; the response
-     * received when performing a request for the content referenced by this tag otherwise
+     *         received when performing a request for the content referenced by this tag otherwise
      * @throws IOException if an error occurs while downloading the content
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request) throws IOException {

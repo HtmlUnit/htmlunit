@@ -1716,7 +1716,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      *
      * @param element the element
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null});
-     * e.g. ':before'
+     *        e.g. ':before'
      * @return the computed style
      */
     @JsxFunction

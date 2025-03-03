@@ -640,8 +640,8 @@ public class WebClientOptions implements Serializable {
      * entries in the history. For older entries only the url is saved; the page
      * will be (re)retrieved on demand.
      * @param historyPageCacheLimit maximum number of pages to cache in history
-     * default is Integer.MAX_VALUE; negative values are having the same effect
-     * as setting this to zero.
+     *        default is Integer.MAX_VALUE; negative values are having the same effect
+     *        as setting this to zero.
      */
     public void setHistoryPageCacheLimit(final int historyPageCacheLimit) {
         historyPageCacheLimit_ = historyPageCacheLimit;

@@ -52,8 +52,8 @@ public class ScriptException extends RuntimeException {
      * @param page the page in which the script causing this exception was executed
      * @param throwable the exception that was thrown from the script engine
      * @param scriptSourceCode the code that was being executed when this exception
-     * was thrown. This may be null if the exception was not caused by execution
-     * of JavaScript.
+     *        was thrown. This may be null if the exception was not caused by execution
+     *        of JavaScript.
      */
     public ScriptException(final HtmlPage page, final Throwable throwable,
             final String scriptSourceCode) {
@@ -192,7 +192,7 @@ public class ScriptException extends RuntimeException {
      * thrown.
      *
      * @return the line of source or an empty string if the exception was not thrown
-     * due to the execution of a script.
+     *         due to the execution of a script.
      */
     public String getFailingLine() {
         final int lineNumber = getFailingLineNumber();
@@ -218,7 +218,7 @@ public class ScriptException extends RuntimeException {
      * Returns the line number of the source that was executing at the time of the exception.
      *
      * @return the line number or -1 if the exception was not thrown due to the
-     * execution of a script.
+     *         execution of a script.
      */
     public int getFailingLineNumber() {
         if (getCause() instanceof RhinoException) {
@@ -233,7 +233,7 @@ public class ScriptException extends RuntimeException {
      * Returns the column number of the source that was executing at the time of the exception.
      *
      * @return the column number or -1 if the exception was not thrown due to the
-     * execution of a script.
+     *         execution of a script.
      */
     public int getFailingColumnNumber() {
         if (getCause() instanceof RhinoException) {

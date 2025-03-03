@@ -39,9 +39,9 @@ public class CanvasGradient extends HtmlUnitScriptable {
     /**
      * Adds a new stop, defined by an offset and a color, to the gradient.
      * @param offset A number between 0 and 1. An INDEX_SIZE_ERR is raised,
-     * if the number is not in that range.
+     *        if the number is not in that range.
      * @param color A CSS color. A SYNTAX_ERR is raised, if the value
-     * can not be parsed as a CSS color value.
+     *        can not be parsed as a CSS color value.
      */
     @JsxFunction
     public void addColorStop(final double offset, final String color) {

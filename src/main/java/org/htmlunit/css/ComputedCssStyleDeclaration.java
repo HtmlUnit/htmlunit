@@ -500,7 +500,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     /**
      * @return the {@link DomElement} the backing {@link ElementCssStyleDeclaration}
-     * is associated with
+     *         is associated with
      */
     public DomElement getDomElement() {
         return elementStyleDeclaration_.getDomElement();

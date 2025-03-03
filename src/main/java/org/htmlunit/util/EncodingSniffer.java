@@ -138,8 +138,8 @@ public final class EncodingSniffer {
      * @throws IOException if an IO error occurs
      *
      * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
-     * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
-     * instead
+     *     {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
+     *     instead
      */
     @Deprecated
     public static Charset sniffEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -231,8 +231,8 @@ public final class EncodingSniffer {
      * @throws IOException if an IO error occurs
      *
      * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
-     * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
-     * instead
+     *     {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
+     *     instead
      */
     @Deprecated
     public static Charset sniffHtmlEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -268,8 +268,8 @@ public final class EncodingSniffer {
      * @throws IOException if an IO error occurs
      *
      * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
-     * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
-     * instead
+     *     {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
+     *     instead
      */
     @Deprecated
     public static Charset sniffXmlEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -293,8 +293,8 @@ public final class EncodingSniffer {
 
    /**
     * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
-    * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
-    * instead
+    *     {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
+    *     instead
     */
     @Deprecated
     private static Charset sniffCssEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -331,8 +331,8 @@ public final class EncodingSniffer {
      * @throws IOException if an IO error occurs
      *
      * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
-     * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
-     * instead
+     *     {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
+     *     instead
      */
     @Deprecated
     public static Charset sniffUnknownContentTypeEncoding(final List<NameValuePair> headers, final InputStream content)
@@ -766,11 +766,11 @@ public final class EncodingSniffer {
      * @param bytes the input bytes to sniff the encoding from
      * @return the charset declaration at the start of a css file if any, otherwise returns {@code null}.
      *
-     * <p>e.g. <pre>@charset "UTF-8"</pre>
+     *     <p>e.g. <pre>@charset "UTF-8"</pre>
      *
      * @deprecated as of version 4.0.0; depending on the content use {@link #sniffEncodingFromMetaTag(InputStream)},
-     * {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
-     * instead
+     *     {@link #sniffEncodingFromXmlDeclaration(InputStream)}, or {@link #sniffEncodingFromCssDeclaration(InputStream) }
+     *     instead
      */
     @Deprecated
     static Charset sniffEncodingFromCssDeclaration(final byte[] bytes) throws IOException {

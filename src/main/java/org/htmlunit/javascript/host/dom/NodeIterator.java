@@ -53,7 +53,7 @@ public class NodeIterator extends HtmlUnitScriptable {
      *
      * @param root The root node at which to begin the {@link NodeIterator}'s traversal
      * @param whatToShow an optional long representing a bitmask created by combining
-     * the constant properties of {@link NodeFilter}
+     *        the constant properties of {@link NodeFilter}
      * @param filter an object implementing the {@link NodeFilter} interface
      */
     public NodeIterator(final Node root, final int whatToShow,

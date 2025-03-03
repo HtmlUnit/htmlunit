@@ -156,7 +156,7 @@ public class ProxyConfig implements Serializable {
      * configured proxy.
      * @param hostname the name of the host to check
      * @return {@code true} if the host with the specified hostname should be accessed bypassing the
-     * configured proxy, {@code false} otherwise.
+     *         configured proxy, {@code false} otherwise.
      */
     protected boolean shouldBypassProxy(final String hostname) {
         boolean bypass = false;

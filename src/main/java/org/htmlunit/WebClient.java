@@ -589,7 +589,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
      * @param forceAttachmentWithFilename if not {@code null}, handle this as an attachment with the specified name
-     * or if an empty string ("") use the filename provided in the response
+     *        or if an empty string ("") use the filename provided in the response
      * @throws IOException if an IO error occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
@@ -2080,7 +2080,7 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * Returns the current {@link PrintHandler}.
      * @return the current {@link PrintHandler} or null if print
-     * requests are ignored
+     *         requests are ignored
      */
     public PrintHandler getPrintHandler() {
         return printHandler_;
@@ -2091,7 +2091,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * (<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#printing">Printing Spec</a>).
      *
      * @param handler the new {@link PrintHandler} or null if you like to
-     * ignore print requests (default is null)
+     *        ignore print requests (default is null)
      */
     public void setPrintHandler(final PrintHandler handler) {
         printHandler_ = handler;
@@ -2591,7 +2591,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param checkHash if true check for hashChenage
      * @param forceLoad if true always load the request even if there is already the same in the queue
      * @param forceAttachmentWithFilename if not {@code null} the AttachmentHandler isAttachment() method is not called,
-     * the response has to be handled as attachment in any case
+     *        the response has to be handled as attachment in any case
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
@@ -2892,7 +2892,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @return a CSS3Parser that will return to an internal pool for reuse if closed using the
-     * try-with-resource concept
+     *         try-with-resource concept
      */
     public PooledCSS3Parser getCSS3Parser() {
         return this.css3ParserPool_.get();

@@ -291,7 +291,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * @return returns the response's body content as an ArrayBuffer, Blob, Document, JavaScript Object,
-     * or DOMString, depending on the value of the request's responseType property.
+     *         or DOMString, depending on the value of the request's responseType property.
      */
     @JsxGetter
     public Object getResponse() {
@@ -1274,7 +1274,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * @return the number of milliseconds a request can take before automatically being terminated.
-     * The default value is 0, which means there is no timeout.
+     *         The default value is 0, which means there is no timeout.
      */
     @JsxGetter
     public int getTimeout() {

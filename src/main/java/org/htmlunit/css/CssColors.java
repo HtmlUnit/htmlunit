@@ -63,7 +63,7 @@ public final class CssColors {
      * Gets the RGB equivalent of a CSS color if the provided color is recognized.
      * @param color the color
      * @return the provided color if this is not a recognized color keyword, the RGB value
-     * in the form "rgb(x, y, z)" otherwise
+     *         in the form "rgb(x, y, z)" otherwise
      */
     public static String toRGBColor(final String color) {
         final String rgbValue = CSS_COLORS.get(color.toLowerCase(Locale.ROOT));

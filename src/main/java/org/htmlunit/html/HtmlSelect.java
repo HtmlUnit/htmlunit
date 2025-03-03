@@ -275,7 +275,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param optionValue the value of the option that is to change
      * @param <P> the page type
      * @return the page contained in the current window as returned
-     * by {@link org.htmlunit.WebClient#getCurrentWindow()}
+     *         by {@link org.htmlunit.WebClient#getCurrentWindow()}
      */
     public <P extends Page> P setSelectedAttribute(final String optionValue, final boolean isSelected) {
         return setSelectedAttribute(optionValue, isSelected, true);
@@ -294,7 +294,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param invokeOnFocus whether to set focus or not.
      * @param <P> the page type
      * @return the page contained in the current window as returned
-     * by {@link org.htmlunit.WebClient#getCurrentWindow()}
+     *         by {@link org.htmlunit.WebClient#getCurrentWindow()}
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final String optionValue,
@@ -321,7 +321,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param selectedOption the value of the option that is to change
      * @param <P> the page type
      * @return the page contained in the current window as returned
-     * by {@link org.htmlunit.WebClient#getCurrentWindow()}
+     *         by {@link org.htmlunit.WebClient#getCurrentWindow()}
      */
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         return setSelectedAttribute(selectedOption, isSelected, true, true, false, true);
@@ -343,7 +343,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param isClick is mouse clicked
      * @param <P> the page type
      * @return the page contained in the current window as returned
-     * by {@link org.htmlunit.WebClient#getCurrentWindow()}
+     *         by {@link org.htmlunit.WebClient#getCurrentWindow()}
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected,

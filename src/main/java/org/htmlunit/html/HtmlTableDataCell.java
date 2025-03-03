@@ -50,7 +50,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code abbr}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAbbrAttribute() {
         return getAttributeDirect("abbr");
@@ -62,7 +62,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code axis}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAxisAttribute() {
         return getAttributeDirect("axis");
@@ -74,7 +74,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code headers}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHeadersAttribute() {
         return getAttributeDirect("headers");
@@ -86,7 +86,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code scope}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getScopeAttribute() {
         return getAttributeDirect("scope");
@@ -98,7 +98,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rowspan}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getRowSpanAttribute() {
         return getAttributeDirect("rowspan");
@@ -110,7 +110,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code colspan}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getColumnSpanAttribute() {
         return getAttributeDirect("colspan");
@@ -122,7 +122,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
         return getAttributeDirect("align");
@@ -134,7 +134,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code char}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
         return getAttributeDirect("char");
@@ -146,7 +146,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charoff}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
         return getAttributeDirect("charoff");
@@ -158,7 +158,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code valign}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
         return getAttributeDirect("valign");
@@ -170,7 +170,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code nowrap}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getNoWrapAttribute() {
         return getAttributeDirect("nowrap");
@@ -182,7 +182,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code bgcolor}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
         return getAttributeDirect("bgcolor");
@@ -194,7 +194,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
         return getAttributeDirect("width");
@@ -206,7 +206,7 @@ public class HtmlTableDataCell extends HtmlTableCell {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code height}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {
         return getAttributeDirect("height");

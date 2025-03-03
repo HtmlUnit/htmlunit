@@ -130,7 +130,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
-     * {@code null}. The map will be stored as is, not copied.
+     *        {@code null}. The map will be stored as is, not copied.
      */
     public DomElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
@@ -195,7 +195,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @param attributeName the name of the attribute
      * @return true if an attribute with the given name is specified on this element or has a
-     * default value, false otherwise.
+     *        default value, false otherwise.
      */
     @Override
     public boolean hasAttribute(final String attributeName) {
@@ -477,7 +477,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param namespaceURI the URI that identifies an XML namespace
      * @param localName the name within the namespace
      * @return true if an attribute with the given name is specified on this element or has a
-     * default value, false otherwise.
+     *         default value, false otherwise.
      */
     @Override
     public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
@@ -1185,7 +1185,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param ctrlKey {@code true} if CTRL is pressed
      *
      * @return true if doClickFireEvent method has to be called later on (to signal,
-     * that the value was changed)
+     *         that the value was changed)
      * @throws IOException if an IO error occurs
      */
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
@@ -1203,11 +1203,9 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * @see #doClickStateUpdate(boolean, boolean)
-     * Usually the click is propagated to the parent. Overwrite if you
-     * like to disable this.
-     *
+     * Usually the click is propagated to the parent. Overwrite if you like to disable this.
      * @return true or false
+     * @see #doClickStateUpdate(boolean, boolean)
      */
     protected boolean propagateClickStateUpdateToParent() {
         return true;

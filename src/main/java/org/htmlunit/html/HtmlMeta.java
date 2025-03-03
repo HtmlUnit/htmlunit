@@ -68,7 +68,7 @@ public class HtmlMeta extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code http-equiv}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHttpEquivAttribute() {
         return getAttribute("http-equiv");
@@ -80,7 +80,7 @@ public class HtmlMeta extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
         return getAttributeDirect(NAME_ATTRIBUTE);
@@ -92,7 +92,7 @@ public class HtmlMeta extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code content}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getContentAttribute() {
         return getAttributeDirect("content");
@@ -104,7 +104,7 @@ public class HtmlMeta extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code scheme}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getSchemeAttribute() {
         return getAttributeDirect("scheme");

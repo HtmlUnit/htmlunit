@@ -183,9 +183,9 @@ public class DOMException extends HtmlUnitScriptable {
      * JavaScript constructor.
      * @param message a description of the exception. If not present, the empty string '' is used
      * @param error If the specified name is a standard error name,
-     * then getting the code property of the DOMException object will return the
-     * code number corresponding to the specified name.
-     * If not present, the string 'Error' is used.
+     *        then getting the code property of the DOMException object will return the
+     *        code number corresponding to the specified name.
+     *        If not present, the string 'Error' is used.
      */
     @JsxConstructor
     public void jsConstructor(final String message, final Object error) {

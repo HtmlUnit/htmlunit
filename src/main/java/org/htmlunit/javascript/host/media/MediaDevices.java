@@ -41,7 +41,7 @@ public class MediaDevices extends EventTarget {
 
     /**
      * @return a {@link NativePromise} that resolves to a {@link DOMException} because HtmlUnit
-     * does not support media streaming
+     *         does not support media streaming
      */
     @JsxFunction
     public NativePromise getUserMedia() {

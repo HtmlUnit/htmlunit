@@ -37,7 +37,7 @@ public interface WebWindowListener {
      * This usually takes place AFTER the event was processed</p>
      *
      * @param event the event (the oldPage and newPage properties will be {@code null}
-     * because the event is generated after the window is opened but before the content is loaded)
+     *        because the event is generated after the window is opened but before the content is loaded)
      */
     void webWindowOpened(WebWindowEvent event);
 

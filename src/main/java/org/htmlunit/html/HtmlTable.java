@@ -235,7 +235,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code summary}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getSummaryAttribute() {
         return getAttributeDirect("summary");
@@ -247,7 +247,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
         return getAttributeDirect("width");
@@ -259,7 +259,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code border}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
         return getAttributeDirect("border");
@@ -271,7 +271,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code frame}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getFrameAttribute() {
         return getAttributeDirect("frame");
@@ -283,7 +283,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rules}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getRulesAttribute() {
         return getAttributeDirect("rules");
@@ -295,7 +295,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code cellspacing}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCellSpacingAttribute() {
         return getAttributeDirect("cellspacing");
@@ -307,7 +307,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code cellpadding}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCellPaddingAttribute() {
         return getAttributeDirect("cellpadding");
@@ -319,7 +319,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
         return getAttributeDirect("align");
@@ -331,7 +331,7 @@ public class HtmlTable extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code bgcolor}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
         return getAttributeDirect("bgcolor");

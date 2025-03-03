@@ -36,7 +36,7 @@ public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolve
     /**
      * Sets the element to start lookup from.
      * @param element {@link org.htmlunit.javascript.host.html.HTMLElement}
-     * or {@link org.htmlunit.javascript.host.Element} to start lookup from
+     *        or {@link org.htmlunit.javascript.host.Element} to start lookup from
      */
     public void setElement(final Node element) {
         element_ = element;

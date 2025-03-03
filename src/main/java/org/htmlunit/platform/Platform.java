@@ -123,7 +123,7 @@ public final class Platform {
      * @param imageWidth the width of the image this backend is for
      * @param imageHeight the height of the image this backend is for
      * @return a new {@link RenderingBackend}. If the {@link AwtRenderingBackend} can't be used a
-     * {@link NoOpRenderingBackend} is used instead.
+     *         {@link NoOpRenderingBackend} is used instead.
      */
     public static RenderingBackend getRenderingBackend(final int imageWidth, final int imageHeight) {
         // for Android
@@ -139,7 +139,7 @@ public final class Platform {
 
     /**
      * @return a new {@link FontUtil}. If the {@link AwtFontUtil} can't be used a
-     * {@link NoOpFontUtil} is used instead.
+     *         {@link NoOpFontUtil} is used instead.
      */
     public static FontUtil getFontUtil() {
         // for Android

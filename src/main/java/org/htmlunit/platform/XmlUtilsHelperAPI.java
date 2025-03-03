@@ -37,7 +37,7 @@ public interface XmlUtilsHelperAPI {
      * is the array of ordered attributes names.
      * @param document the document
      * @return the map of an element index with its ordered attribute names or null if the
-     * provided document is not supported
+     *         provided document is not supported
      */
     Map<Integer, List<String>> getAttributesOrderMap(Document document);
 

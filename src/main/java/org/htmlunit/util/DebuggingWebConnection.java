@@ -80,7 +80,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * Wraps a web connection to have a report generated of the received responses.
      * @param webConnection the webConnection that do the real work
      * @param dirName the name of the directory to create in the tmp folder to save received responses.
-     * If this folder already exists, it will be deleted first.
+     *        If this folder already exists, it will be deleted first.
      * @throws IOException in case of problems writing the files
      */
     public DebuggingWebConnection(final WebConnection webConnection,

@@ -69,7 +69,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code src}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
         return getSrcAttributeNormalized();
@@ -87,7 +87,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      * Helper for src retrieval and normalization.
      *
      * @return the value of the attribute {@code src} with all line breaks removed
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     protected final String getSrcAttributeNormalized() {
         // at the moment StringUtils.replaceChars returns the org string
@@ -107,7 +107,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charset}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
         return getAttributeDirect("charset");
@@ -127,7 +127,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code defer}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getDeferAttribute() {
         return getAttributeDirect("defer");

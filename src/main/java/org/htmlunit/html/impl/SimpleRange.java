@@ -291,7 +291,7 @@ public class SimpleRange implements Serializable {
 
     /**
      * @return true if startContainer equals endContainer and
-     * startOffset equals endOffset
+     *         startOffset equals endOffset
      * @throws DOMException in case of error
      */
     public boolean isCollapsed() throws DOMException {
@@ -300,7 +300,7 @@ public class SimpleRange implements Serializable {
 
     /**
      * @return the deepest common ancestor container of this range's two
-     * boundary-points.
+     *         boundary-points.
      * @throws DOMException in case of error
      */
     public DomNode getCommonAncestorContainer() throws DOMException {

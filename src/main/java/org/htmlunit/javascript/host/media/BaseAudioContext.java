@@ -47,7 +47,7 @@ public class BaseAudioContext extends EventTarget {
 
     /**
      * @return a new AudioBufferSourceNode, which can be used to
-     * play audio data contained within an AudioBuffer object.
+     *         play audio data contained within an AudioBuffer object.
      */
     @JsxFunction
     public AudioBufferSourceNode createBufferSource() {
@@ -59,7 +59,7 @@ public class BaseAudioContext extends EventTarget {
 
     /**
      * @return new, empty AudioBuffer object, which can then be
-     * populated by data, and played via an AudioBufferSourceNode.
+     *         populated by data, and played via an AudioBufferSourceNode.
      */
     @JsxFunction
     public AudioBuffer createBuffer() {
@@ -88,13 +88,13 @@ public class BaseAudioContext extends EventTarget {
      * The decoded AudioBuffer is resampled to the AudioContext's sampling rate,
      * then passed to a callback or promise.
      * @param buffer An ArrayBuffer containing the audio data to be decoded, usually grabbed
-     * from XMLHttpRequest, WindowOrWorkerGlobalScope.fetch() or FileReader
+     *        from XMLHttpRequest, WindowOrWorkerGlobalScope.fetch() or FileReader
      * @param success A callback function to be invoked when the decoding successfully finishes.
-     * The single argument to this callback is an AudioBuffer representing the decodedData
-     * (the decoded PCM audio data). Usually you'll want to put the decoded data into
-     * an AudioBufferSourceNode, from which it can be played and manipulated how you want.
+     *        The single argument to this callback is an AudioBuffer representing the decodedData
+     *        (the decoded PCM audio data). Usually you'll want to put the decoded data into
+     *        an AudioBufferSourceNode, from which it can be played and manipulated how you want.
      * @param error An optional error callback, to be invoked if an error occurs
-     * when the audio data is being decoded.
+     *        when the audio data is being decoded.
      * @return the promise or null
      */
     @JsxFunction

@@ -194,7 +194,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     /**
      * Returns the JavaScriptExecutor.
      * @return the JavaScriptExecutor or null if javascript is disabled
-     *  or no executor was required so far.
+     *         or no executor was required so far.
      */
     public JavaScriptExecutor getJavaScriptExecutor() {
         return javaScriptExecutor_;

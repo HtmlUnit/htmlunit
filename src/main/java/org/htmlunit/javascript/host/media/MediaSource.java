@@ -43,7 +43,7 @@ public class MediaSource extends EventTarget {
      *
      * @param mimeType the mimeType to check
      * @return indicating if the given MIME type is supported by the
-     * current user agent — this is, if it can successfully create SourceBuffer objects for that MIME type
+     *         current user agent — this is, if it can successfully create SourceBuffer objects for that MIME type
      */
     @JsxStaticFunction
     public static boolean isTypeSupported(final String mimeType) {

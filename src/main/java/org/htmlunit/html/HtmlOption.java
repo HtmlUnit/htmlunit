@@ -151,7 +151,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code selected}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getSelectedAttribute() {
         return getAttributeDirect("selected");

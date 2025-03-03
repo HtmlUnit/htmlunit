@@ -108,7 +108,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * Gets the context.
      * @param contextId the context id
      * @return Returns an object that exposes an API for drawing on the canvas,
-     * or null if the given context ID is not supported
+     *         or null if the given context ID is not supported
      */
     @JsxFunction
     public HtmlUnitScriptable getContext(final String contextId) {

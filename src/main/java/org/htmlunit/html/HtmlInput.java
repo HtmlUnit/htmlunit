@@ -222,7 +222,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code readonly}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getReadOnlyAttribute() {
         return getAttributeDirect("readonly");
@@ -234,7 +234,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code size}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getSizeAttribute() {
         return getAttributeDirect("size");
@@ -246,7 +246,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code maxlength}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getMaxLengthAttribute() {
         return getAttribute("maxLength");
@@ -276,7 +276,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code minlength}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getMinLengthAttribute() {
         return getAttribute("minLength");
@@ -306,7 +306,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code src}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public String getSrcAttribute() {
         return getSrcAttributeNormalized();
@@ -352,7 +352,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code alt}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAltAttribute() {
         return getAttributeDirect("alt");
@@ -364,7 +364,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code usemap}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
         return getAttributeDirect("usemap");
@@ -376,7 +376,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex}
-     * or an empty string if that attribute isn't defined.
+     *        or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
         return getAttributeDirect("tabindex");
@@ -388,7 +388,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accesskey}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
         return getAttributeDirect("accesskey");
@@ -400,7 +400,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
         return getAttributeDirect("onfocus");
@@ -412,7 +412,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
         return getAttributeDirect("onblur");
@@ -424,7 +424,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onselect}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getOnSelectAttribute() {
         return getAttributeDirect("onselect");
@@ -436,7 +436,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onchange}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getOnChangeAttribute() {
         return getAttributeDirect("onchange");
@@ -448,7 +448,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accept}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAcceptAttribute() {
         return getAttribute(HttpHeader.ACCEPT_LC);
@@ -460,7 +460,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
         return getAttributeDirect("align");

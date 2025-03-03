@@ -374,7 +374,7 @@ public final class UrlUtils {
      * string that is not followed by two hexadecimal characters.
      * @param input the input bytes
      * @return the given input string where every occurrence of <code>%</code> in
-     * invalid escape sequences has been replace by <code>%25</code>
+     *         invalid escape sequences has been replace by <code>%25</code>
      */
     private static String encodePercentSign(final byte[] input) {
         if (input == null) {

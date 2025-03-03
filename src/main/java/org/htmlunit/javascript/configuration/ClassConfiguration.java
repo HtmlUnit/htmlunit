@@ -278,7 +278,7 @@ public final class ClassConfiguration {
 
     /**
      * @return the JavaScript constructor method alias
-     * or null if there is nothing.
+     *         or null if there is nothing.
      */
     public String getJsConstructorAlias() {
         return jsConstructorAlias_;

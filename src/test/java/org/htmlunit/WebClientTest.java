@@ -436,7 +436,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @param statusCode the code to return from the initial request
      * @param initialRequestMethod the initial request
      * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
-     * If a redirect is not expected to happen then this must be null
+     *        If a redirect is not expected to happen then this must be null
      * @param newLocation the Location set in the redirection header
      * @throws Exception if the test fails
      */
@@ -539,7 +539,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @param statusCode the code to return from the initial request
      * @param initialRequestMethod the initial request
      * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
-     * If a redirect is not expected to happen then this must be null
+     *        If a redirect is not expected to happen then this must be null
      * @param newLocation the Location set in the redirection header
      * @param useProxy indicates if the test should be performed with a proxy
      * @throws Exception if the test fails

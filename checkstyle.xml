@@ -148,7 +148,7 @@
         <!--module name="JavadocMissingLeadingAsterisk"/-->
         <!--module name="JavadocMissingWhitespaceAfterAsterisk"/-->
         <!--module name="JavadocParagraph"/-->
-        <!--module name="JavadocTagContinuationIndentation"/-->
+        <module name="JavadocTagContinuationIndentation"/>
         <module name="NonEmptyAtclauseDescription"/>
         <!--module name="RequireEmptyLineBeforeBlockTagGroup"/-->
         <module name="SingleLineJavadoc"/>

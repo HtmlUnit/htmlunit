@@ -257,7 +257,7 @@ public class WebResponse implements Serializable {
      * For example, HTML meta-tag sniffing can be fooled by text that looks-like-a-meta-tag inside
      * JavaScript code (false positive) or if the meta-tag is after the first 1024 bytes (false negative).
      * @return {@code true} if the charset of the previous call to {@link #getContentCharset()} was
-     * "tentative".
+     *         "tentative".
      * @see <a href="https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence">
      * https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence</a>
      */
@@ -268,7 +268,7 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as a string, using the charset/encoding specified in the server response.
      * @return the response content as a string, using the charset/encoding specified in the server response
-     * or null if the content retrieval was failing
+     *         or null if the content retrieval was failing
      */
     public String getContentAsString() {
         return getContentAsString(getContentCharset());

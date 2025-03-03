@@ -182,13 +182,13 @@ public interface RenderingBackend {
      * @param dx horizontal position (x coordinate) at which to place the image data in the destination canvas
      * @param dy vertical position (y coordinate) at which to place the image data in the destination canvas
      * @param dirtyX horizontal position (x coordinate) of the top-left corner
-     *  from which the image data will be extracted. Defaults to 0.
+     *        from which the image data will be extracted. Defaults to 0.
      * @param dirtyY vertical position (y coordinate) of the top-left corner
-     *  from which the image data will be extracted. Defaults to 0.
+     *        from which the image data will be extracted. Defaults to 0.
      * @param dirtyWidth width of the rectangle to be painted.
-     *  Defaults to the width of the image data.
+     *        Defaults to the width of the image data.
      * @param dirtyHeight height of the rectangle to be painted.
-     *  Defaults to the height of the image data.
+     *        Defaults to the height of the image data.
      */
     void putImageData(byte[] imageDataBytes, int imageDataHeight, int imageDataWidth,
             int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight);
@@ -309,7 +309,7 @@ public interface RenderingBackend {
      * Turns the current or given path into the current clipping region.
      * It replaces any previous clipping region.
      * @param windingRule the RenderingBackend.WindingRule {@link WindingRule}
-     * to be used
+     *        to be used
      * @param path the path or null if the current path should be used
      */
     void clip(RenderingBackend.WindingRule windingRule, Path2D path);
@@ -322,7 +322,7 @@ public interface RenderingBackend {
 
     /**
      * @return the alpha (transparency) value that is applied to shapes and images
-     * before they are drawn onto the canvas.
+     *         before they are drawn onto the canvas.
      */
     double getGlobalAlpha();
 

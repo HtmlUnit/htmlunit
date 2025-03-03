@@ -631,8 +631,8 @@ public class Node extends EventTarget {
     /**
      * @param namespace string containing the namespace to look the prefix up
      * @return a string containing the prefix for a given namespace URI,
-     * if present, and null if not. When multiple prefixes are possible,
-     * the first prefix is returned.
+     *         if present, and null if not. When multiple prefixes are possible,
+     *         the first prefix is returned.
      */
     @JsxFunction
     public String lookupPrefix(final String namespace) {
@@ -684,7 +684,7 @@ public class Node extends EventTarget {
      * Gets the JavaScript property {@code nextSibling} for the node that
      * contains the current node.
      * @return the next sibling node or null if the current node has
-     * no next sibling.
+     *         no next sibling.
      */
     @JsxGetter
     public Node getNextSibling() {
@@ -695,7 +695,7 @@ public class Node extends EventTarget {
      * Gets the JavaScript property {@code previousSibling} for the node that
      * contains the current node.
      * @return the previous sibling node or null if the current node has
-     * no previous sibling.
+     *         no previous sibling.
      */
     @JsxGetter
     public Node getPreviousSibling() {
@@ -706,7 +706,7 @@ public class Node extends EventTarget {
      * Gets the JavaScript property {@code firstChild} for the node that
      * contains the current node.
      * @return the first child node or null if the current node has
-     * no children.
+     *         no children.
      */
     @JsxGetter
     public Node getFirstChild() {
@@ -717,7 +717,7 @@ public class Node extends EventTarget {
      * Gets the JavaScript property {@code lastChild} for the node that
      * contains the current node.
      * @return the last child node or null if the current node has
-     * no children.
+     *         no children.
      */
     @JsxGetter
     public Node getLastChild() {

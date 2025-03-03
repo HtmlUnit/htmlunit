@@ -289,7 +289,7 @@ public class Range extends AbstractRange {
      * @param how a constant describing the comparison method
      * @param sourceRange the Range to compare boundary points with this range
      * @return -1, 0, or 1, indicating whether the corresponding boundary-point of range is respectively before,
-     * equal to, or after the corresponding boundary-point of sourceRange.
+     *         equal to, or after the corresponding boundary-point of sourceRange.
      */
     @JsxFunction
     public int compareBoundaryPoints(final int how, final Range sourceRange) {

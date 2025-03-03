@@ -567,10 +567,11 @@ public class HtmlForm extends HtmlElement {
 
     /**
      * @return A List containing all form controls in the form.
-     * The form controls in the returned collection are in the same order
-     * in which they appear in the form by following a preorder,
-     * depth-first traversal of the tree. This is called tree order. Only the following elements are returned:
-     * button, fieldset, input, object, output, select, textarea.
+     *         The form controls in the returned collection are in the same order
+     *         in which they appear in the form by following a preorder,
+     *         depth-first traversal of the tree. This is called tree order.
+     *         Only the following elements are returned:
+     *         button, fieldset, input, object, output, select, textarea.
      */
     public List<HtmlElement> getFormElements() {
         return getElements(htmlElement -> {
@@ -590,12 +591,13 @@ public class HtmlForm extends HtmlElement {
      * see https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements
      *
      * @return A List containing all non-image controls in the form.
-     * The form controls in the returned collection are in the same order
-     * in which they appear in the form by following a preorder,
-     * depth-first traversal of the tree. This is called tree order. Only the following elements are returned:
-     * button, fieldset,
-     * input (with the exception that any whose type is "image" are omitted for historical reasons),
-     * object, output, select, textarea.
+     *         The form controls in the returned collection are in the same order
+     *         in which they appear in the form by following a preorder,
+     *         depth-first traversal of the tree. This is called tree order.
+     *         Only the following elements are returned:
+     *         button, fieldset,
+     *         input (with the exception that any whose type is "image" are omitted for historical reasons),
+     *         object, output, select, textarea.
      */
     public List<HtmlElement> getElementsJS() {
         return getElements(htmlElement -> {

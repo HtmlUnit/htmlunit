@@ -459,7 +459,7 @@ public class WebRequest implements Serializable {
      * Other request types result in {@link RuntimeException}.
      * Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
      * @param requestBody the body content to be submitted if this is a {@code POST}, {@code PUT}
-     * or {@code PATCH} request
+     *        or {@code PATCH} request
      * @throws RuntimeException if the request parameters have already been set
      *                          or this is not a {@code POST}, {@code PUT} or {@code PATCH} request.
      */

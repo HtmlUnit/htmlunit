@@ -91,7 +91,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
         return getAttributeDirect("align");
@@ -103,7 +103,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code char}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
         return getAttributeDirect("char");
@@ -115,7 +115,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charoff}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
         return getAttributeDirect("charoff");
@@ -127,7 +127,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code valign}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
         return getAttributeDirect("valign");
@@ -147,7 +147,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code bgcolor}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
         return getAttributeDirect("bgcolor");

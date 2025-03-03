@@ -138,7 +138,7 @@ public class DataTransferItemList extends HtmlUnitScriptable {
      * Removes the DataTransferItem at the specified index from the list. If the index is less
      * than zero or greater than one less than the length of the list, the list will not be changed.
      * @param index the zero-based index number of the item in the drag data list to remove.
-     * If the index doesn't correspond to an existing item in the list, the list is left unchanged.
+     *        If the index doesn't correspond to an existing item in the list, the list is left unchanged.
      */
     @JsxFunction
     public void remove(final int index) {

@@ -187,8 +187,8 @@ public class XPathResult extends HtmlUnitScriptable {
 
     /**
      * @return signifies that the iterator has become invalid.
-     * It is true if XPathResult.resultType is UNORDERED_NODE_ITERATOR_TYPE or
-     * ORDERED_NODE_ITERATOR_TYPE and the document has been modified since this result was returned.
+     *         It is true if XPathResult.resultType is UNORDERED_NODE_ITERATOR_TYPE or
+     *         ORDERED_NODE_ITERATOR_TYPE and the document has been modified since this result was returned.
      */
     @JsxGetter
     public boolean getInvalidIteratorState() {

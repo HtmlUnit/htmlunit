@@ -69,7 +69,7 @@ public class DataUrlDecoder {
      * @param url the string representation of the URL to decode
      * @return the {@link DataUrlDecoder} holding decoded information
      * @throws UnsupportedEncodingException if the encoding specified by the data URL is invalid or not
-     * available on the JVM
+     *         available on the JVM
      */
     public static DataUrlDecoder decodeDataURL(final String url) throws UnsupportedEncodingException {
         if (!url.startsWith(DATA_PREFIX)) {

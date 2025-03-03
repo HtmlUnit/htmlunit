@@ -52,7 +52,7 @@ public class ValidityState extends HtmlUnitScriptable {
 
     /**
      * @return a boolean value that is true if the user has provided
-     * input that the browser is unable to convert.
+     *         input that the browser is unable to convert.
      */
     @JsxGetter
     public boolean isBadInput() {

@@ -52,10 +52,10 @@ public class URL extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      * @param url a string representing an absolute or relative URL.
-     * If url is a relative URL, base is required, and will be used
-     * as the base URL. If url is an absolute URL, a given base will be ignored.
+     *        If url is a relative URL, base is required, and will be used
+     *        as the base URL. If url is an absolute URL, a given base will be ignored.
      * @param base a string representing the base URL to use in case url
-     * is a relative URL. If not specified, it defaults to ''.
+     *        is a relative URL. If not specified, it defaults to ''.
      */
     @JsxConstructor
     @JsxConstructorAlias(alias = "webkitURL")
@@ -139,7 +139,7 @@ public class URL extends HtmlUnitScriptable {
 
     /**
      * @return the host, that is the hostname, and then, if the port of the URL is nonempty,
-     * a ':', followed by the port of the URL.
+     *         a ':', followed by the port of the URL.
      */
     @JsxGetter
     public String getHost() {
@@ -207,7 +207,7 @@ public class URL extends HtmlUnitScriptable {
 
     /**
      * @return the host, that is the hostname, and then, if the port of the URL is nonempty,
-     * a ':', followed by the port of the URL.
+     *         a ':', followed by the port of the URL.
      */
     @JsxGetter
     public String getHostname() {
@@ -346,7 +346,7 @@ public class URL extends HtmlUnitScriptable {
 
     /**
      * @return the port number of the URL. If the URL does not contain an explicit port number,
-     * it will be set to ''
+     *         it will be set to ''
      */
     @JsxGetter
     public String getPort() {
@@ -521,7 +521,7 @@ public class URL extends HtmlUnitScriptable {
 
     /**
      * @return a serialized version of the URL,
-     * although in practice it seems to have the same effect as URL.toString().
+     *         although in practice it seems to have the same effect as URL.toString().
      */
     @JsxFunction
     public String toJSON() {

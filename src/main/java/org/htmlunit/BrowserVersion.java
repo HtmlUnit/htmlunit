@@ -1023,7 +1023,7 @@ public final class BrowserVersion implements Serializable {
 
         /**
          * @param xmlHttpRequestAcceptHeader the {@code Accept} header to be used when
-         * performing XMLHttpRequests
+         *        performing XMLHttpRequests
          * @return this for fluent use
          */
         public BrowserVersionBuilder setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {

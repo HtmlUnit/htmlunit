@@ -162,7 +162,7 @@ public abstract class HtmlElement extends DomElement {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
-     * {@code null}. The map will be stored as is, not copied.
+     *        {@code null}. The map will be stored as is, not copied.
      */
     protected HtmlElement(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
@@ -176,7 +176,7 @@ public abstract class HtmlElement extends DomElement {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
-     * {@code null}. The map will be stored as is, not copied.
+     *        {@code null}. The map will be stored as is, not copied.
      */
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
@@ -1277,7 +1277,7 @@ public abstract class HtmlElement extends DomElement {
      * Helper for src retrieval and normalization.
      *
      * @return the value of the attribute {@code src} with all line breaks removed
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     protected final String getSrcAttributeNormalized() {
         // at the moment StringUtils.replaceChars returns the org string

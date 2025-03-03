@@ -43,8 +43,8 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * Full page driver for onClick tests.
      *
      * @param htmlContent HTML fragment for body of page with clickable element
-     * identified by clickId ID attribute. Must have onClick that raises
-     * an alert of "foo".
+     *        identified by clickId ID attribute. Must have onClick that raises
+     *        an alert of "foo".
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent) throws Exception {
@@ -56,7 +56,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * Full page driver for onClick tests.
      *
      * @param htmlContent HTML fragment for body of page with clickable element
-     * identified by clickId ID attribute.
+     *        identified by clickId ID attribute.
      * @param numClicks number of times to click element
      * @param expectedAlerts array of expected popup values
      * @throws Exception if the test fails
