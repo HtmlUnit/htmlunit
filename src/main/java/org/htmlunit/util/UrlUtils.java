@@ -1379,8 +1379,15 @@ public final class UrlUtils {
         return url;
     }
 
-    // adapted from apache commons codec
+    /**
+     * Decodes an array of URL safe 7-bit characters into an array of original bytes.
+     * Escaped characters are converted back to their original representation.
+     * @param bytes array of URL safe characters
+     * @return array of original bytes
+     * @throws IllegalArgumentException in case of error
+     */
     public static byte[] decodeDataUrl(final byte[] bytes) throws IllegalArgumentException  {
+        // adapted from apache commons codec
         if (bytes == null) {
             return null;
         }
@@ -1404,7 +1411,15 @@ public final class UrlUtils {
         return buffer.toByteArray();
     }
 
+    /**
+     * Decodes an array of URL safe 7-bit characters into an array of original bytes.
+     * Escaped characters are converted back to their original representation.
+     * @param bytes array of URL safe characters
+     * @return array of original bytes
+     * @throws IllegalArgumentException in case of error
+     */
     public static byte[] decodeUrl(final byte[] bytes) throws IllegalArgumentException {
+        // adapted from apache commons codec
         if (bytes == null) {
             return null;
         }
@@ -1439,8 +1454,14 @@ public final class UrlUtils {
         return i;
     }
 
-    // adapted from apache commons codec
+    /**
+     * Encodes an array of bytes into an array of URL safe 7-bit characters. Unsafe characters are escaped.
+     * @param urlsafe bitset of characters deemed URL safe
+     * @param bytes  array of bytes to convert to URL safe characters
+     * @return array of bytes containing URL safe characters
+     */
     public static byte[] encodeUrl(final BitSet urlsafe, final byte[] bytes) {
+        // adapted from apache commons codec
         if (bytes == null) {
             return null;
         }

@@ -59,6 +59,10 @@ public class StyleSheet extends HtmlUnitScriptable {
         // nothing to do
     }
 
+    /**
+     * Ctor.
+     * @param ownerNode the owner node
+     */
     public StyleSheet(final HTMLElement ownerNode) {
         super();
         ownerNode_ = ownerNode;

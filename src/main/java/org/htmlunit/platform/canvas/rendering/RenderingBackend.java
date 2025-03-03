@@ -26,6 +26,9 @@ import org.htmlunit.javascript.host.canvas.Path2D;
  */
 public interface RenderingBackend {
 
+    /**
+     * WindingRule to be used while rendering.
+     */
     enum WindingRule {
         /** WindingRule.NON_ZERO. */
         NON_ZERO,

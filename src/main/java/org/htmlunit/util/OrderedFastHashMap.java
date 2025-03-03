@@ -544,26 +544,54 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
         return this.put(key, value, Position.LAST);
     }
 
+    /**
+     * Insert at the beginning.
+     * @param key the key
+     * @param value the value
+     * @return the inserted value
+     */
     public V addFirst(final K key, final V value) {
         return this.put(key, value, Position.FIRST);
     }
 
+    /**
+     * Append at the end.
+     * @param key the key
+     * @param value the value
+     * @return the appended value
+     */
     public V add(final K key, final V value) {
         return this.put(key, value, Position.LAST);
     }
 
+    /**
+     * Append at the end.
+     * @param key the key
+     * @param value the value
+     * @return the appended value
+     */
     public V addLast(final K key, final V value) {
         return this.put(key, value, Position.LAST);
     }
 
+    /**
+     * @return the first value.
+     */
     public V getFirst() {
         return getValue(0);
     }
 
+    /**
+     * @return the last value.
+     */
     public V getLast() {
         return getValue(this.orderedListSize_ - 1);
     }
 
+    /**
+     * Removes the first entry.
+     * @return the removed value or null if the map was empty.
+     */
     public V removeFirst() {
         if (this.orderedListSize_ > 0) {
             final int pos = this.orderedList_[0];
@@ -573,6 +601,10 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
         return null;
     }
 
+    /**
+     * Removes the last entry.
+     * @return the removed value or null if the map was empty.
+     */
     public V removeLast() {
         if (this.orderedListSize_ > 0) {
             final int pos = this.orderedList_[this.orderedListSize_ - 1];

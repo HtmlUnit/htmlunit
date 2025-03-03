@@ -1574,6 +1574,16 @@ public class Element extends Node {
         return matches(context, scope, thisObj, args, function);
     }
 
+    /**
+     * Traverses the element and its parents (heading toward the document root) until it finds a node
+     * that matches the specified CSS selector.
+     * @param context the context
+     * @param scope the scope
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     * @return the found element or null
+     */
     @JsxFunction
     public static Element closest(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {

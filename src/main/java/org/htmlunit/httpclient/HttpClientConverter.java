@@ -267,6 +267,13 @@ public final class HttpClientConverter {
         return url;
     }
 
+    /**
+     * @param cookieString the string to parse
+     * @param pageUrl the page url as root
+     * @param browserVersion the {@link BrowserVersion}
+     * @return a list of {@link org.htmlunit.util.Cookie}'s
+     * @throws MalformedCookieException in case the cookie does not conform to the spec
+     */
     public static List<org.htmlunit.util.Cookie> parseCookie(final String cookieString, final URL pageUrl,
             final BrowserVersion browserVersion)
             throws MalformedCookieException {
@@ -311,6 +318,13 @@ public final class HttpClientConverter {
         return list;
     }
 
+    /**
+     * Adds all matching cookies to the provided set.
+     * @param cookies the cookies to select from
+     * @param normalizedUrl the url to match against
+     * @param browserVersion the {@link BrowserVersion}
+     * @param matches the set to add
+     */
     public static void addMatching(final Set<org.htmlunit.util.Cookie> cookies,
             final URL normalizedUrl, final BrowserVersion browserVersion,
             final Set<org.htmlunit.util.Cookie> matches) {

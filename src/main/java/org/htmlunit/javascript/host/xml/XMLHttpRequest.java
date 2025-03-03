@@ -1272,11 +1272,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         super.setOnreadystatechange(readyStateChangeHandler);
     }
 
+    /**
+     * @return the number of milliseconds a request can take before automatically being terminated.
+     * The default value is 0, which means there is no timeout.
+     */
     @JsxGetter
     public int getTimeout() {
         return timeout_;
     }
 
+    /**
+     * Sets the number of milliseconds a request can take before automatically being terminated.
+     * @param timeout the timeout in milliseconds
+     */
     @JsxSetter
     public void setTimeout(final int timeout) {
         timeout_ = timeout;

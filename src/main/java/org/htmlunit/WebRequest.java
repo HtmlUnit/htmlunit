@@ -56,6 +56,9 @@ import org.htmlunit.util.UrlUtils;
  */
 public class WebRequest implements Serializable {
 
+    /**
+     * Enum to configure request creation.
+     */
     public enum HttpHint {
         /** Force to include the charset. */
         IncludeCharsetInContentTypeHeader,
@@ -655,6 +658,10 @@ public class WebRequest implements Serializable {
         this.defaultResponseContentCharset_ = Objects.requireNonNull(defaultResponseContentCharset);
     }
 
+    /**
+     * @param hint the hint to check for
+     * @return true if the hint is enabled
+     */
     public boolean hasHint(final HttpHint hint) {
         if (httpHints_ == null) {
             return false;
@@ -662,6 +669,10 @@ public class WebRequest implements Serializable {
         return httpHints_.contains(hint);
     }
 
+    /**
+     * Enables the hint.
+     * @param hint the hint to add
+     */
     public void addHint(final HttpHint hint) {
         if (httpHints_ == null) {
             httpHints_ = EnumSet.noneOf(HttpHint.class);

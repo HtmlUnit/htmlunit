@@ -442,6 +442,12 @@ public class Blob extends HtmlUnitScriptable {
         }
     }
 
+    /**
+     * Delegates the KeyDataPair construction to the backend.
+     * @param name the name
+     * @param fileName the filename
+     * @return the constructed {@link KeyDataPair}
+     */
     public KeyDataPair getKeyDataPair(final String name, final String fileName) {
         String contentType = getType();
         if (StringUtils.isEmpty(contentType)) {

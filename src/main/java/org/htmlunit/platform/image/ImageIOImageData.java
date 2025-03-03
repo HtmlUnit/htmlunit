@@ -49,6 +49,11 @@ public class ImageIOImageData implements ImageData {
 
     private final ImageReader imageReader_;
 
+    /**
+     * Ctor.
+     * @param inputStream the {@link InputStream} to read from
+     * @throws IOException in case of error
+     */
     public ImageIOImageData(final InputStream inputStream) throws IOException {
         final ImageInputStream iis = ImageIO.createImageInputStream(inputStream);
         final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
