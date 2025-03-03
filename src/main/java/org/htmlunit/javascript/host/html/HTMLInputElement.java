@@ -145,7 +145,7 @@ public class HTMLInputElement extends HTMLElement {
      * checkbox and radio. This implementation does nothing. The
      * implementations in Checkbox and Radio actually do the work.
      *
-     *@return the checked property
+     * @return the checked property
      */
     @JsxGetter
     public boolean isChecked() {

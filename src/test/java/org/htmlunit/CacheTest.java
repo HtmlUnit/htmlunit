@@ -210,7 +210,7 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void usage() throws Exception {
@@ -262,7 +262,7 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void jsUrlEncoded() throws Exception {
@@ -319,7 +319,7 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void cssUrlEncoded() throws Exception {
@@ -389,7 +389,7 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void maxSizeMaintained() throws Exception {

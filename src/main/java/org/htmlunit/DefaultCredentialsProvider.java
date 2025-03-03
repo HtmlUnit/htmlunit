@@ -47,7 +47,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /** The {@code null} value represents any host. */
     public static final String ANY_HOST = null;
 
-    /**The {@code -1} value represents any port. */
+    /** The {@code -1} value represents any port. */
     public static final int ANY_PORT = -1;
 
     /** The {@code null} value represents any realm. */

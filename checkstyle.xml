@@ -146,7 +146,7 @@
         <module name="JavadocContentLocation"/>
         <module name="JavadocLeadingAsteriskAlign" />
         <!--module name="JavadocMissingLeadingAsterisk"/-->
-        <!--module name="JavadocMissingWhitespaceAfterAsterisk"/-->
+        <module name="JavadocMissingWhitespaceAfterAsterisk"/>
         <!--module name="JavadocParagraph"/-->
         <module name="JavadocTagContinuationIndentation"/>
         <module name="NonEmptyAtclauseDescription"/>
