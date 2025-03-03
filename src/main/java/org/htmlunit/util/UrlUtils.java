@@ -952,9 +952,8 @@ public final class UrlUtils {
 
     /**
      * Returns true if specified string is a special scheme.
-     * <p>
-     * https://url.spec.whatwg.org/#special-scheme
-     * <p>
+     * see <a href='https://url.spec.whatwg.org/#special-scheme'>
+     * https://url.spec.whatwg.org/#special-scheme</a>
      *
      * @param scheme the scheme string to check
      * @return true if special

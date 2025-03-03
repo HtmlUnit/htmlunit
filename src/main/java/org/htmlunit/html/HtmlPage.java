@@ -785,8 +785,8 @@ public class HtmlPage extends SgmlPage {
      * Additionally, the value of tabindex must be within 0 and 32767. Any
      * values outside this range will be ignored.<p>
      *
-     * The following elements support the <code>tabindex</code> attribute: A, AREA, BUTTON,
-     * INPUT, OBJECT, SELECT, and TEXTAREA.<p>
+     * The following elements support the <code>tabindex</code> attribute:
+     * A, AREA, BUTTON, INPUT, OBJECT, SELECT, and TEXTAREA.
      *
      * @return all the tabbable elements in proper tab order
      */
