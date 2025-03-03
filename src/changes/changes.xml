@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.11.0" date="March xx, 2025" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                The script async attribute is ignored if the src attribute is absent.
+            </action>
             <action type="update" dev="rbri">
                 Many more checkstyle jdoc rules enabled and all violations fixed.
             </action>

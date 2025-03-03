@@ -74,7 +74,8 @@ public final class ScriptElementSupport {
             LOG.debug("Script node added: " + element.asXml());
         }
 
-        final WebClient webClient = element.getPage().getWebClient();
+        final SgmlPage page = element.getPage();
+        final WebClient webClient = page.getWebClient();
         if (!webClient.isJavaScriptEngineEnabled()) {
             LOG.debug("Script found but not executed because javascript engine is disabled");
             return;
@@ -86,7 +87,7 @@ public final class ScriptElementSupport {
             return;
         }
 
-        final WebWindow webWindow = element.getPage().getEnclosingWindow();
+        final WebWindow webWindow = page.getEnclosingWindow();
         if (webWindow != null) {
             final StringBuilder description = new StringBuilder()
                     .append("Execution of ")
@@ -96,7 +97,7 @@ public final class ScriptElementSupport {
                 description.append(" (").append(srcAttrib).append(')');
             }
 
-            final PostponedAction action = new PostponedAction(element.getPage(), description.toString()) {
+            final PostponedAction action = new PostponedAction(page, description.toString()) {
                 @Override
                 public void execute() {
                     // see HTMLDocument.setExecutingDynamicExternalPosponed(boolean)
@@ -105,7 +106,7 @@ public final class ScriptElementSupport {
                     if (window != null) {
                         jsDoc = (HTMLDocument) window.getDocument();
                         jsDoc.setExecutingDynamicExternalPosponed(element.getStartLineNumber() == -1
-                                && ATTRIBUTE_NOT_DEFINED != srcAttrib);
+                                && !hasNoSrcAttrib);
                     }
                     try {
                         executeScriptIfNeeded(script, false, false);
@@ -119,12 +120,13 @@ public final class ScriptElementSupport {
             };
 
             final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
-            if (element.hasAttribute("async") && !engine.isScriptRunning()) {
+            if (element.hasAttribute("async") && !hasNoSrcAttrib
+                    && !engine.isScriptRunning()) {
                 final HtmlPage owningPage = element.getHtmlPageOrNull();
                 owningPage.addAfterLoadAction(action);
             }
-            else if (element.hasAttribute("async")
-                            || postponed && StringUtils.isBlank(element.getTextContent())) {
+            else if (element.hasAttribute("async") && !hasNoSrcAttrib
+                        || postponed && !hasNoSrcAttrib) {
                 engine.addPostponedAction(action);
             }
             else {

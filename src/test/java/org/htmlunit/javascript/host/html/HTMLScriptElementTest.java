@@ -76,7 +76,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("log('4');", MimeType.TEXT_JAVASCRIPT);
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -1185,6 +1186,32 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
+     * The async attribute must not be used if the src attribute is absent (i.e. for inline scripts)
+     * for classic scripts, in this case it would have no effect.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1 two 3 5 4")
+    public void asyncWithoutSrc() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script src='js1.js'></script>\n"
+            + "<script async>document.title += ' two';</script>\n"
+            + "<script src='js3.js'></script>\n"
+            + "<script src='js4.js' async>document.title += ' four';</script>\n"
+            + "<script src='js5.js'></script>\n"
+            + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "document.title += ' 1';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js3.js"), "document.title += ' 3';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js4.js"), "document.title += ' 4';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js5.js"), "document.title += ' 5';");
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1212,17 +1239,48 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2 1")
-    public void asyncLoadsAsync() throws Exception {
+    @Alerts("0 3 2 1")
+    public void syncLoadsAsync() throws Exception {
         final String html = "<html><body>\n"
-            + "<script async>\n"
+            + "<script>\n"
+            + "  document.title += ' 0';"
             + "  var s1 = document.createElement('script');\n"
             + "  s1.src = 'js1.js';\n"
             + "  s1.async = true;\n"
             + "  document.body.appendChild(s1);\n"
+            + "  document.title += ' 3';"
             + "</script>\n"
             + "<script src='js2.js'></script>\n"
             + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "document.title += ' 1';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "document.title += ' 2';");
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2 0 3 1",
+            FF_ESR = "0 3 2 1")
+    public void asyncLoadsAsync() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script src='script.js' async></script>\n"
+            + "<script src='js2.js'></script>\n"
+            + "</body></html>\n";
+
+        final String script =
+                "  document.title += ' 0';"
+                + "  var s1 = document.createElement('script');\n"
+                + "  s1.src = 'js1.js';\n"
+                + "  s1.async = true;\n"
+                + "  document.body.appendChild(s1);\n"
+                + "  document.title += ' 3';\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script.js"), script);
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "document.title += ' 1';");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "document.title += ' 2';");
