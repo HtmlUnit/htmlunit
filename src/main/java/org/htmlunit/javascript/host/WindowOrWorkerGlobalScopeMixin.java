@@ -67,7 +67,15 @@ public final class WindowOrWorkerGlobalScopeMixin {
             }
         }
         final byte[] bytes = encodedData.getBytes(StandardCharsets.ISO_8859_1);
-        return new String(Base64.getDecoder().decode(bytes), StandardCharsets.ISO_8859_1);
+        try {
+            return new String(Base64.getDecoder().decode(bytes), StandardCharsets.ISO_8859_1);
+        }
+        catch (final IllegalArgumentException e) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    scriptable,
+                    "Failed to execute atob(): " + e.getMessage(),
+                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
+        }
     }
 
     /**

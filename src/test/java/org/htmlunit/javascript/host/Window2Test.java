@@ -49,6 +49,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Frank Danek
  * @author Carsten Steul
  * @author Colin Alworth
+ * @author Christoph Burgmer
  */
 @RunWith(BrowserRunner.class)
 public class Window2Test extends WebDriverTestCase {
@@ -66,7 +67,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  log(this);\n"
             + "  try {\n"
             + "    log(abc);\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "  log(this.abc);\n"
             + "  log(this.def);\n"
             + "  this.abc = 'hello';\n"
@@ -185,7 +186,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"InvalidCharacterError/DOMException"})
+    @Alerts("InvalidCharacterError/DOMException")
     public void atobMalformedInput() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -193,7 +194,7 @@ public class Window2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    window.atob('b');\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -211,10 +212,10 @@ public class Window2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    window.btoa('I \\u2661 Unicode!');\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "  try {\n"
             + "    window.atob('I \\u2661 Unicode!');\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -1150,13 +1151,13 @@ public class Window2Test extends WebDriverTestCase {
             + "  x.a = 'Success';\n"
             + "  try {\n"
             + "    log(window['eval']('x.a'));\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "  try {\n"
             + "    log(window.eval('x.a'));\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "  try {\n"
             + "    log(eval('x.a'));\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -2369,7 +2370,7 @@ public class Window2Test extends WebDriverTestCase {
             + "      var divs = document.querySelectorAll('div');\n"
             + "      var a = Array.from.call(window, divs);\n"
             + "      log(a.length);\n"
-            + "    } catch(e) {logEx(e)}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2433,7 +2434,7 @@ public class Window2Test extends WebDriverTestCase {
             + "      for (var p = this.__proto__; p != null; p = p.__proto__) {\n"
             + "        log(p);\n"
             + "      }\n"
-            + "    } catch(e) {logEx(e)}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
