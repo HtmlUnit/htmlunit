@@ -1300,6 +1300,30 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "2", "3"})
+    public void syncFromAsyncTask() throws Exception {
+        final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function addScript() {\n"
+            + "  var script = document.createElement('script');\n"
+            + "  script.src = 'js.js';\n"
+            + "  document.head.appendChild(script);\n"
+            + "  log('2');\n"
+            + "}\n"
+            + "setTimeout(addScript, 5);\n"
+            + "  log('1');\n"
+            + "</script></body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "log('3')");
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "2", "3"})
     public void asyncFromAsyncTask() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
