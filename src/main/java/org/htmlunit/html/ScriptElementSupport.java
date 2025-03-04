@@ -120,13 +120,10 @@ public final class ScriptElementSupport {
             };
 
             final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
-            if (element.hasAttribute("async") && !hasNoSrcAttrib
-                    && !engine.isScriptRunning()) {
-                final HtmlPage owningPage = element.getHtmlPageOrNull();
-                owningPage.addAfterLoadAction(action);
+            if (element.hasAttribute("async") && !hasNoSrcAttrib) {
+                engine.addPostponedAction(action);
             }
-            else if (element.hasAttribute("async") && !hasNoSrcAttrib
-                        || postponed && !hasNoSrcAttrib) {
+            else if (postponed && !hasNoSrcAttrib) {
                 engine.addPostponedAction(action);
             }
             else {

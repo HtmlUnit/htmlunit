@@ -20,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
@@ -1240,6 +1241,10 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0 3 2 1")
+    @HtmlUnitNYI(CHROME = "0 3 1 2",
+            EDGE = "0 3 1 2",
+            FF = "0 3 1 2",
+            FF_ESR = "0 3 1 2")
     public void syncLoadsAsync() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -1266,6 +1271,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2 0 3 1",
             FF_ESR = "0 3 2 1")
+    @HtmlUnitNYI(FF_ESR = "2 0 3 1")
     public void asyncLoadsAsync() throws Exception {
         final String html = "<html><body>\n"
             + "<script src='script.js' async></script>\n"
@@ -1293,24 +1299,25 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1 2 3")
+    @Alerts({"1", "2", "3"})
     public void asyncFromAsyncTask() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function addAsyncScript() {\n"
             + "  var script = document.createElement('script');\n"
             + "  script.src = 'js.js';\n"
             + "  script.async = true;\n"
             + "  document.head.appendChild(script);\n"
-            + "  document.title += ' 2';\n"
+            + "  log('2');\n"
             + "}\n"
             + "setTimeout(addAsyncScript, 5);\n"
-            + "document.title += ' 1';\n"
+            + "  log('1');\n"
             + "</script></body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "document.title += ' 3';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "log('3')");
 
         final WebDriver driver = loadPage2(html);
-        assertTitle(driver, getExpectedAlerts()[0]);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
