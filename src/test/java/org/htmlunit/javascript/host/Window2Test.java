@@ -185,6 +185,24 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"InvalidCharacterError/DOMException"})
+    public void atobMalformedInput() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    window.atob('b');\n"
+            + "  } catch(e) {logEx(e)}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException"})
     public void atobUnicode() throws Exception {
         final String html
