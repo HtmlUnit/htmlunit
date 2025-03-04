@@ -1205,6 +1205,9 @@
         <contributor>
             <name>Markus Winter</name>
         </contributor>
+        <contributor>
+            <name>Christoph Burgmer</name>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as depencency -->
