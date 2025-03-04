@@ -1726,7 +1726,7 @@ public class Window3Test extends WebDriverTestCase {
             + "    try {\n"
             + "      getComputedStyle(void 0);\n"
             + "      log('no exception');\n"
-            + "    } catch(e) {logEx(e)}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

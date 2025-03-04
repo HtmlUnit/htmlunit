@@ -140,7 +140,7 @@ public class ConsoleTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var x = Object.getOwnPropertyNames(window).indexOf('console');\n"
             + "    log(x >= 0);\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -162,7 +162,7 @@ public class ConsoleTest extends WebDriverTestCase {
             + "    var x = console.error;\n"
             + "    x('hello');\n"
             + "    log('success');\n"
-            + "  } catch(e) {logEx(e)}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "</script>\n"
             + "</body></html>";
 

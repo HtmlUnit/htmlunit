@@ -81,7 +81,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "    log(b.type);\n"
             + "    try {\n"
             + "      b.type = 'button';\n"
-            + "    } catch(e) {logEx(e)}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "    log(b.type);\n"
             + "    b.removeAttribute('type');\n"
             + "    log(b.type);\n"

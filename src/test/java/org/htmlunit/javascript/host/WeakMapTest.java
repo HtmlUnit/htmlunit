@@ -180,7 +180,7 @@ public class WeakMapTest extends WebDriverTestCase {
             + "      var myMap = new WeakMap(kvArray);\n"
             + "      try {\n"
             + "        myMap.set(1, 2);\n"
-            + "      } catch(e) {logEx(e)}\n"
+            + "      } catch(e) { logEx(e) }\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

@@ -212,7 +212,7 @@ public class CustomEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var e = document.createEvent('CustomEvent');\n"
             + "      log(typeof e.initCustomEvent);\n"
-            + "    } catch(e) {logEx(e)}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

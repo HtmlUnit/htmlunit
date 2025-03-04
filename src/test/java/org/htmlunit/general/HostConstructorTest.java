@@ -94,7 +94,7 @@ public class HostConstructorTest extends WebDriverTestCase {
 
                 + "  try {\n"
                 + "    log(new " + className + "());\n"
-                + "  } catch(e) {logEx(e)}\n"
+                + "  } catch(e) { logEx(e) }\n"
                 + "</script>\n"
                 + "</body></html>";
 

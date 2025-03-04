@@ -617,7 +617,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    var x = " + callLoadXMLDocumentFromString("'<x/>'") + ";\n"
             + "    try {\n"
             + "      log(x instanceof XMLDocument);\n"
-            + "    }catch(e) {logEx(e)}\n"
+            + "    }catch(e) { logEx(e) }\n"
             + "  }\n"
             + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script>\n"

@@ -59,7 +59,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             // normalize FF output
             + "      clsName = clsName.replace('{\\n    [native code]\\n}', '{ [native code] }');\n"
             + "      log(clsName);\n"
-            + "    } catch(e) {logEx(e)}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
