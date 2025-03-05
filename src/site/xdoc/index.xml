@@ -26,12 +26,10 @@
                 HtmlUnit is a "GUI-Less browser for Java programs".
                 It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc...
                 just like you do in your "normal" browser.
-            </p>
-            <p>
+            <br/>
                 It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries,
                 simulating Chrome, Firefox or Edge depending on the configuration used.
-            </p> 
-            <p>
+            <br/>
                 It is typically used for testing purposes or to retrieve information from websites.
             </p>
             <p>
@@ -43,31 +41,43 @@
             </p>
             <p>
                 HtmlUnit is used as the underlying "browser" by different Open Source tools like
-                <a href="https://github.com/SeleniumHQ/selenium">WebDriver</a>,
-                <a href="https://arquillian.org/arquillian-extension-drone">Arquillian Drone</a>,
-                <a href="https://serenity-bdd.info">Serenity BDD</a>,
-                <a href="https://github.com/FluentLenium/FluentLenium">FluentLenium</a>,
-                <a href="https://www.wetator.org/">WETATOR</a>,
-                <a href="https://github.com/sbabcoc/Selenium-Foundation">Selenium Foundation</a>,
-                <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit">Spring Testing</a>
-                <a href="https://jwebunit.github.io/jwebunit/">JWebUnit</a>,
-                <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>, ...
+                <ul>
+                  <li><a href="https://github.com/SeleniumHQ/selenium">WebDriver</a>,</li>
+                  <li><a href="https://arquillian.org/arquillian-extension-drone">Arquillian Drone</a>,</li>
+                  <li><a href="https://serenity-bdd.info">Serenity BDD</a>,</li>
+                  <li><a href="https://github.com/FluentLenium/FluentLenium">FluentLenium</a>,</li>
+                  <li><a href="https://www.xceptance.com/en/products/xlt/">XLT</a>,</li>
+                  <li><a href="https://www.wetator.org/">WETATOR</a>,</li>
+                  <li><a href="https://github.com/sbabcoc/Selenium-Foundation">Selenium Foundation</a>,</li>
+                  <li><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit">Spring Testing</a></li>
+                  <li><a href="https://selenide.org/">Selenide</a>,</li>
+                  <li><a href="https://jwebunit.github.io/jwebunit/">JWebUnit</a>,</li>
+                  <li><a href="http://www.jboss.org/jsfunit/">JSFUnit</a>,</li>
+                  <li>...</li>
+                </ul>
             </p>
             <p>
                 HtmlUnit is used by many projects for automated web testing
-                <a href="https://github.com/jenkinsci/jenkins-test-harness">jenkins-test-harness</a>,
-                <a href="https://shiro.apache.org/">Apache Shiro</a>,
-                <a href="https://struts.apache.org/">Apache Struts</a>,
-                <a href="https://quarkus.io/">Quarkus</a>,
-                <a href="https://www.togglz.org/">Togglz</a>,
-                <a href="https://dataverse.org/">Dataverse</a>,
-                <a href="https://github.com/JanssenProject/jans">Janssen Project</a>,
-                <a href="https://github.com/apache/tomee">Apache TomEE</a>,
-                <a href="https://maven.apache.org/surefire/">Apache Maven Surefire</a>,
-                <a href="http://tntim96.github.io/JSCover/">JSCover</a>,
-                <a href="https://jackrabbit.apache.org/jcr/index.html">Apache Jackrabbit</a>,
-                <a href="https://github.com/openxava/openxava">OpenXava</a>
-                <a href="https://github.com/codehaus-cargo/cargo">Cargo</a>, ...
+                <ul>
+                  <li><a href="https://github.com/jenkinsci/jenkins-test-harness">jenkins-test-harness</a>,</li>
+                  <li><a href="https://shiro.apache.org/">Apache Shiro</a>,</li>
+                  <li><a href="https://struts.apache.org/">Apache Struts</a>,</li>
+                  <li><a href="https://quarkus.io/">Quarkus</a>,</li>
+                  <li><a href="https://www.togglz.org/">Togglz</a>,</li>
+                  <li><a href="https://dataverse.org/">Dataverse</a>,</li>
+                  <li><a href="https://github.com/JanssenProject/jans">Janssen Project</a>,</li>
+                  <li><a href="https://github.com/apache/tomee">Apache TomEE</a>,</li>
+                  <li><a href="https://maven.apache.org/surefire/">Apache Maven Surefire</a>,</li>
+                  <li><a href="http://tntim96.github.io/JSCover/">JSCover</a>,</li>
+                  <li><a href="https://jackrabbit.apache.org/jcr/index.html">Apache Jackrabbit</a>,</li>
+                  <li><a href="https://myfaces.apache.org/">Apache MyFaces</a>,</li>
+                  <li><a href="https://github.com/jakartaee/platform-tck">JakartaEE TCK</a>,</li>
+                  <li><a href="https://github.com/jakartaee/security">Jakarta Security</a>,</li>
+                  <li><a href="https://github.com/openxava/openxava">OpenXava</a>,</li>
+                  <li><a href="https://github.com/codehaus-cargo/cargo">Cargo</a>,</li>
+                  <li><a href="https://github.com/piranhacloud/piranha">piranha cloud</a>,</li>
+                  <li>...</li>
+                </ul>
             </p>
             <p>
                 HtmlUnit was originally written by
@@ -75,8 +85,7 @@
                 <a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
                 and is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2 license</a>.
                 Since then, it has received many contributions from <a href="team.html">
-                other developers</a>, and would not be where it is today without their
-                assistance.
+                other developers</a>, and would not be where it is today without their assistance.
             </p>
         </section>
 
@@ -96,8 +105,9 @@
                     <dt>News</dt>
                     <dd>
                         <p>
-                          <a href="https://fosstodon.org/@HtmlUnit"><img src="./images/logos/mastodon.png" alt="Twitter" height="40" width="37"></img></a>
-                          <a href="https://twitter.com/HtmlUnit"><img src="./images/logos/twitter.png" alt="Twitter" height="50" width="68"></img></a>
+                          <a href="https://fosstodon.org/@HtmlUnit"><img src="./images/logos/mastodon.png" alt="Mastodon" height="20" width="19"></img></a>
+                          <a href="https://bsky.app/profile/htmlunit.bsky.social"><img src="./images/logos/bsky.png" alt="Bluesky" height="20" width="23"></img></a>
+                          <a href="https://twitter.com/HtmlUnit"><img src="./images/logos/twitter.png" alt="Twitter" height="20" width="24"></img></a>
                         </p>
                     </dd>
 
