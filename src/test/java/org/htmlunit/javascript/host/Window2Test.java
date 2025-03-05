@@ -176,7 +176,87 @@ public class Window2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  var data = window.btoa('Hello World!');\n"
             + "  log(data);\n"
-            + "  log(atob(data));\n"
+            + "  log(window.atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SGVsbG8gV29ybGQh", "Hello World!"})
+    public void atobTrailingWhitespace() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var data = window.btoa('Hello World!');\n"
+            + "  log(data);\n"
+            + "  try {\n"
+            + "    log(window.atob(data + ' \\t\\r\\n\\x0C'));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SGVsbG8gV29ybGQh", "Hello World!"})
+    public void atobLeadingWhitespace() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var data = window.btoa('Hello World!');\n"
+            + "  log(data);\n"
+            + "  try {\n"
+            + "    log(window.atob(' \\t\\r\\n\\x0C' + data));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SGVsbG8gV29ybGQh", "Hello World!"})
+    public void atobWhitespace() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var data = window.btoa('Hello World!');\n"
+            + "  log(data);\n"
+            + "  try {\n"
+            + "    log(window.atob(data.substr(0, 2) + '  ' + data.substr(2)));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SGVsbG8gV29ybGQh", "InvalidCharacterError/DOMException"})
+    public void atobInvalid() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var data = window.btoa('Hello World!');\n"
+            + "  log(data);\n"
+            + "  try {\n"
+            + "    log(window.atob(data.substr(0, 2) + '!' + data.substr(2)));\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -249,7 +329,7 @@ public class Window2Test extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<script>\n"
             + "  var data = window.btoa('3\u00C3\u00AE\u00C2\u00A6');\n"
-            + "  var dataAtob = atob(data);\n"
+            + "  var dataAtob = window.atob(data);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -269,7 +349,7 @@ public class Window2Test extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<script>\n"
             + "  var data = window.btoa('\\t \\u001e');\n"
-            + "  var dataAtob = atob(data);\n"
+            + "  var dataAtob = window.atob(data);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -291,7 +371,7 @@ public class Window2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  var data = window.btoa(null);\n"
             + "  log(data);\n"
-            + "  log(atob(data));\n"
+            + "  log(window.atob(data));\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -309,7 +389,7 @@ public class Window2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  var data = window.btoa(undefined);\n"
             + "  log(data);\n"
-            + "  log(atob(data));\n"
+            + "  log(window.atob(data));\n"
             + "</script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);

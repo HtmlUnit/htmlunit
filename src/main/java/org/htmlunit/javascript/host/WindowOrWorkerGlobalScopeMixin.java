@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
 
+import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
@@ -57,16 +58,8 @@ public final class WindowOrWorkerGlobalScopeMixin {
      * @return the decoded value
      */
     public static String atob(final String encodedData, final HtmlUnitScriptable scriptable) {
-        final int l = encodedData.length();
-        for (int i = 0; i < l; i++) {
-            if (encodedData.charAt(i) > 255) {
-                throw JavaScriptEngine.asJavaScriptException(
-                        scriptable,
-                        "Function atob supports only latin1 characters",
-                        org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
-            }
-        }
-        final byte[] bytes = encodedData.getBytes(StandardCharsets.ISO_8859_1);
+        final String withoutWhitespace = StringUtils.replaceChars(encodedData, " \t\r\n\u000c", "");
+        final byte[] bytes = withoutWhitespace.getBytes(StandardCharsets.ISO_8859_1);
         try {
             return new String(Base64.getDecoder().decode(bytes), StandardCharsets.ISO_8859_1);
         }
