@@ -175,25 +175,6 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * Returns the content charset specified explicitly in the header or in the content,
-     * or {@code null} if none was specified.
-     * @return the content charset specified explicitly in the header or in the content,
-     *         or {@code null} if none was specified
-     *
-     * @deprecated as of version 4.0.0; use {@link #getContentCharset()} instead
-     */
-    @Deprecated
-    public Charset getContentCharsetOrNull() {
-        try (InputStream is = getContentAsStream()) {
-            return EncodingSniffer.sniffEncoding(getResponseHeaders(), is);
-        }
-        catch (final IOException e) {
-            LOG.warn("Error trying to sniff encoding.", e);
-            return null;
-        }
-    }
-
-    /**
      * Returns the content charset for this response, even if no charset was specified explicitly.
      * <p>
      * This method always returns a valid charset. This method first checks the {@code Content-Type}
@@ -360,15 +341,6 @@ public class WebResponse implements Serializable {
         if (responseData_ != null) {
             responseData_.cleanUp();
         }
-    }
-
-    /**
-     * Mark this response for using UTF-8 as default charset.
-     * @deprecated as of version 4.0.0; use {@link WebRequest#setDefaultResponseContentCharset(Charset)} instead
-     */
-    @Deprecated
-    public void defaultCharsetUtf8() {
-        getWebRequest().setDefaultResponseContentCharset(UTF_8);
     }
 
     /**

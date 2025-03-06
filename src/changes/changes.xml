@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.11.0" date="March xx, 2025" description="less dependencies, Bugfixes">
+            <action type="remove" dev="rbri">
+                Deprecated methods removed from EncodingSniffer, HttpClientConverter, WebResponse, and WebResponseWrapper.
+            </action>
             <action type="update" dev="rbri">
                 Apache commons-codec is no longer a runtime dependency.
             </action>
