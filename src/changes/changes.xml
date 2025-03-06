@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="4.11.0" date="March xx, 2025" description="Bugfixes">
+        <release version="4.11.0" date="March xx, 2025" description="less dependencies, Bugfixes">
+            <action type="update" dev="rbri">
+                Apache commons-codec is no longer a runtime dependency.
+            </action>
             <action type="fix" dev="rbri">
                 atob() has to remove all whitespace from the provided string.
             </action>
