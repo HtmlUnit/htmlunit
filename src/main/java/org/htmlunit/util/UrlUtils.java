@@ -1384,28 +1384,47 @@ public final class UrlUtils {
      * @param bytes array of URL safe characters
      * @return array of original bytes
      * @throws IllegalArgumentException in case of error
+     *
+     * @deprecated as of version 4.11.0; use {@link #decodeDataUrl(byte[], boolean)} instead
      */
+    @Deprecated
     public static byte[] decodeDataUrl(final byte[] bytes) throws IllegalArgumentException  {
+        return decodeDataUrl(bytes, false);
+    }
+
+    /**
+     * Decodes an array of URL safe 7-bit characters into an array of original bytes.
+     * Escaped characters are converted back to their original representation.
+     * @param bytes array of URL safe characters
+     * @param removeWhitespace if true don't add whitespace chars to the output
+     * @return array of original bytes
+     * @throws IllegalArgumentException in case of error
+     */
+    public static byte[] decodeDataUrl(final byte[] bytes, final boolean removeWhitespace)
+                            throws IllegalArgumentException  {
         // adapted from apache commons codec
         if (bytes == null) {
             return null;
         }
         final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         for (int i = 0; i < bytes.length; i++) {
-            final int b = bytes[i];
+            int b = bytes[i];
             if (b == '%') {
                 try {
                     final int u = digit16(bytes[++i]);
                     final int l = digit16(bytes[++i]);
-                    buffer.write((char) ((u << 4) + l));
+                    b = (u << 4) + l;
                 }
                 catch (final ArrayIndexOutOfBoundsException e) {
                     throw new IllegalArgumentException("Invalid URL encoding: ", e);
                 }
             }
-            else {
-                buffer.write(b);
+            if (removeWhitespace
+                    && (b == 9 || b == 10 || b == 12 || b == 13 || b == 32)) {
+                continue;
             }
+
+            buffer.write(b);
         }
         return buffer.toByteArray();
     }

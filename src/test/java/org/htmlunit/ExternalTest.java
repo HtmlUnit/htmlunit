@@ -327,12 +327,6 @@ public class ExternalTest {
             return true;
         }
 
-        if ("commons-codec".equals(groupId)
-                && "commons-codec".equals(artifactId)
-                && "20041127.091804".equals(version)) {
-            return true;
-        }
-
         // version > 3.12.0 does not work with our site.xml and also not with a refactored one
         if ("maven-site-plugin".equals(artifactId)
                 && (version.startsWith("3.12.1") || version.startsWith("3.20.") || version.startsWith("3.21."))) {

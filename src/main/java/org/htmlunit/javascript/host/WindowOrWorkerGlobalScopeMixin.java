@@ -87,8 +87,17 @@ public final class WindowOrWorkerGlobalScopeMixin {
                         org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
             }
         }
+
         final byte[] bytes = stringToEncode.getBytes(StandardCharsets.ISO_8859_1);
-        return new String(Base64.getEncoder().encode(bytes), StandardCharsets.UTF_8);
+        try {
+            return new String(Base64.getEncoder().encode(bytes), StandardCharsets.UTF_8);
+        }
+        catch (final IllegalArgumentException e) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    scriptable,
+                    "Failed to execute btoa(): " + e.getMessage(),
+                    org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
+        }
     }
 
     /**

@@ -246,6 +246,33 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"SGVsbG8gV29ybGQh", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException"})
+    public void atobNbsp() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var data = window.btoa('Hello World!');\n"
+            + "  log(data);\n"
+            + "  try {\n"
+            + "    log(window.atob('\\xA0' + data));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "  try {\n"
+            + "    log(window.atob(data + '\\xA0'));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "  try {\n"
+            + "    log(window.atob(data.substr(0, 2) + '\\xA0' + data.substr(2)));\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"SGVsbG8gV29ybGQh", "InvalidCharacterError/DOMException"})
     public void atobInvalid() throws Exception {
         final String html
