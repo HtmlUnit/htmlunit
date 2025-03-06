@@ -26,7 +26,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -261,7 +260,11 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @Alerts("#1")
+    @HtmlUnitNYI(CHROME = "#0",
+            EDGE = "#0",
+            FF = "#0",
+            FF_ESR = "#0")
     public void writeInNewWindowAndReadFormCollection() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -275,8 +278,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "#1");
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -950,7 +953,6 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final URL scriptUrlA = new URL(URL_FIRST, "scriptA.js");
-        final URL scriptUrlB = new URL(URL_FIRST, "scriptB.js");
 
         getMockWebConnection().setDefaultResponse(html);
         getMockWebConnection().setResponse(scriptUrlA, "log('A');\n", MimeType.TEXT_JAVASCRIPT);
