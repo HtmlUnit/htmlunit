@@ -1346,11 +1346,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         @Override
-        public Charset getContentCharsetOrNull() {
-            return null;
-        }
-
-        @Override
         public WebRequest getWebRequest() {
             return request_;
         }

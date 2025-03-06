@@ -67,11 +67,6 @@ public class WebResponseMock extends WebResponse {
     }
 
     @Override
-    public Charset getContentCharsetOrNull() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
     public String getContentType() {
         throw new RuntimeException("not implemented");
     }

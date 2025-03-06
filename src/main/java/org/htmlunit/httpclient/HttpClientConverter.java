@@ -16,16 +16,12 @@ package org.htmlunit.httpclient;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.http.NoHttpResponseException;
-import org.apache.http.client.utils.DateUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
@@ -35,8 +31,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.http.HttpStatus;
-import org.htmlunit.http.HttpUtils;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
