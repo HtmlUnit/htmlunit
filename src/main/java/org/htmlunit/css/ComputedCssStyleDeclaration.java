@@ -136,7 +136,6 @@ import org.htmlunit.html.HtmlUnderlined;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
-import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.platform.Platform;
 
 /**
@@ -758,8 +757,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 .pixelString(elem, new CssPixelValueConverter.CssValue(0, windowHeight) {
                     @Override
                     public String get(final ComputedCssStyleDeclaration style) {
-                        // TODO don't reach out to the js peer
-                        final String offsetHeight = ((HTMLElement) elem.getScriptableObject()).getOffsetHeight() + "px";
+                        final String offsetHeight = style.getCalculatedHeight(true, true) + "px";
                         return defaultIfEmpty(style.getStyleAttribute(Definition.HEIGHT, true), offsetHeight, AUTO);
                     }
                 });
