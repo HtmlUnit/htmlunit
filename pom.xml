@@ -288,11 +288,10 @@
                     </instructions>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.18.2</version>
+                <version>1.19.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -301,7 +300,6 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
         </plugins>
     </build>
     <profiles>
