@@ -12,24 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.libraries;
+package org.htmlunit.javascript.host.svg;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.runner.RunWith;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
+
+import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * Tests for compatibility with <a href="http://mochikit.com">MochiKit</a>.
+ * A JavaScript object for {@code SVGDiscardElement}.
  *
- * @author Marc Guillemot
- * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
-public class MochiKitTest1x4x1 extends MochiKitTest {
+@JsxClass(FF)
+public class SVGDiscardElement extends SVGAnimationElement {
 
+    /**
+     * Creates an instance.
+     */
     @Override
-    public String srcFolder() {
-        return "1.4.1";
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
-
 }

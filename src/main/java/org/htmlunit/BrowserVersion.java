@@ -64,7 +64,7 @@ import org.htmlunit.util.MimeType;
 public final class BrowserVersion implements Serializable {
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(135, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(136, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 128;
 
@@ -366,7 +366,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX.registerUploadMimeType("mp3", "audio/mpeg");
         FIREFOX.registerUploadMimeType("ogv", "video/ogg");
         FIREFOX.registerUploadMimeType("ogm", "video/ogg");
-        FIREFOX.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX.registerUploadMimeType("ogg", "application/ogg");
         FIREFOX.registerUploadMimeType("oga", "audio/ogg");
         FIREFOX.registerUploadMimeType("opus", "audio/ogg");
         FIREFOX.registerUploadMimeType("webm", "video/webm");

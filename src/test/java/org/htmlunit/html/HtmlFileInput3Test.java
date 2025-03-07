@@ -204,7 +204,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CONTENT_TYPE:audio/ogg", "charset"},
-            FF = {"CONTENT_TYPE:video/ogg", "charset"},
+            FF = {"CONTENT_TYPE:application/ogg", "charset"},
             FF_ESR = {"CONTENT_TYPE:video/ogg", "charset"})
     public void contentTypeOgg() throws Exception {
         contentType("ogg");
