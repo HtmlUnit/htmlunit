@@ -62,6 +62,9 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.name("button")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
@@ -83,6 +86,9 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.name("button")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());

@@ -153,6 +153,9 @@ public final class DomElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myText")).sendKeys(Keys.ENTER);
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -176,6 +179,9 @@ public final class DomElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myText")).sendKeys(Keys.ENTER);
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());

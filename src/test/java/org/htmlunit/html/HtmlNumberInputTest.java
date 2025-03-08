@@ -1554,6 +1554,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys(Keys.ENTER);
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
@@ -2118,6 +2121,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         verifyTitle2(driver, getExpectedAlerts()[2], getExpectedAlerts()[3], getExpectedAlerts()[4]);
 
         driver.findElement(By.id("myButton")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         assertEquals(getExpectedAlerts()[5], getMockWebConnection().getLastWebRequest().getUrl());
         assertEquals(Integer.parseInt(getExpectedAlerts()[6]), getMockWebConnection().getRequestCount());
     }

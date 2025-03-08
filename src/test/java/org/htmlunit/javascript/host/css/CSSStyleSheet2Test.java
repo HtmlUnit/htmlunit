@@ -271,5 +271,4 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final ComputedCssStyleDeclaration style = htmlPage.getEnclosingWindow().getComputedStyle(element, null);
         assertEquals(getExpectedAlerts()[0], style.toString());
     }
-
 }

@@ -4844,8 +4844,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
-            EDGE = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
+    @Alerts(CHROME = "close(),closedBy[GSCE],constructor(),open[GSCE],requestClose(),returnValue[GSCE],show(),"
+                + "showModal()",
+            EDGE = "close(),closedBy[GSCE],constructor(),open[GSCE],requestClose(),returnValue[GSCE],show(),"
+                + "showModal()",
             FF = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
             FF_ESR = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()")
     public void dialog() throws Exception {

@@ -587,6 +587,9 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
         verifyTitle2(driver, getExpectedAlerts()[2], getExpectedAlerts()[3], getExpectedAlerts()[4]);
 
         driver.findElement(By.id("myButton")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         assertEquals(getExpectedAlerts()[5], getMockWebConnection().getLastWebRequest().getUrl());
         assertEquals(Integer.parseInt(getExpectedAlerts()[6]), getMockWebConnection().getRequestCount());
     }

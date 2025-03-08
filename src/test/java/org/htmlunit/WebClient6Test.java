@@ -397,6 +397,9 @@ public class WebClient6Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         assertEquals(getExpectedAlerts()[0], getMockWebConnection().getLastWebRequest().getUrl().toString());
         assertEquals(reqCount + Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
@@ -424,6 +427,9 @@ public class WebClient6Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("postBtn")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         assertEquals(reqCount + Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
         assertEquals(httpMethod, getMockWebConnection().getLastWebRequest().getHttpMethod());

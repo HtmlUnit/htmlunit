@@ -116,6 +116,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         verifyTitle2(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("link")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         verifyTitle2(driver, getExpectedAlerts());
     }
 

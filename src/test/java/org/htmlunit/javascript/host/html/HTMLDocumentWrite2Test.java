@@ -309,6 +309,9 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.switchTo().window("myPopup");
         driver.findElement(By.id("it")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]),
                 getMockWebConnection().getRequestCount() - startCount);

@@ -63,11 +63,17 @@ public class HistoryTest extends WebDriverTestCase {
         driver.get(URL_FIRST + "post1");
 
         driver.findElement(By.id("mySubmit")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         assertEquals(URL_FIRST + "post2", driver.getCurrentUrl());
         assertTrue(driver.getPageSource().contains("POST"));
         assertTrue(driver.getPageSource().contains("para1=value1"));
 
         driver.findElement(By.linkText("Go to GET")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         assertEquals(URL_FIRST + "post3", driver.getCurrentUrl());
         assertTrue(driver.getPageSource().contains("GET"));
 

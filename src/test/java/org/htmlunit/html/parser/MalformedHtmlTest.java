@@ -300,6 +300,9 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         assertTitle(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("button")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         assertEquals(URL_FIRST + "?FromDate=inFirst", driver.getCurrentUrl());
     }
 

@@ -1043,25 +1043,25 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "clearTimeout(),clientInformation,close(),closed,confirm(),cookieStore,createImageBitmap(),"
                 + "credentialless,crossOriginIsolated,crypto,customElements,devicePixelRatio,dispatchEvent(),"
                 + "document,documentPictureInPicture,event,external,fence,fetch(),find(),focus(),frameElement,"
-                + "frames,getComputedStyle(),getScreenDetails(),getSelection(),history,indexedDB,innerHeight,"
-                + "innerWidth,isSecureContext,launchQueue,length,localStorage,location,locationbar,log(),logEx(),"
-                + "matchMedia(),menubar,moveBy(),moveTo(),name,navigation,navigator,onabort,onafterprint,"
-                + "onanimationend,onanimationiteration,onanimationstart,onappinstalled,onauxclick,onbeforeinput,"
-                + "onbeforeinstallprompt,onbeforematch,onbeforeprint,onbeforetoggle,onbeforeunload,onbeforexrselect,"
-                + "onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
-                + "oncontentvisibilityautostatechange,oncontextlost,oncontextmenu,oncontextrestored,oncuechange,"
-                + "ondblclick,ondevicemotion,ondeviceorientation,ondeviceorientationabsolute,ondrag,ondragend,"
-                + "ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,"
-                + "onfocus,onformdata,ongotpointercapture,onhashchange,oninput,oninvalid,onkeydown,onkeypress,"
-                + "onkeyup,onlanguagechange,onload(),onloadeddata,onloadedmetadata,onloadstart,onlostpointercapture,"
-                + "onmessage,onmessageerror,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
-                + "onmouseover,onmouseup,onmousewheel,onoffline,ononline,onpagehide,onpagereveal,onpageshow,"
-                + "onpageswap,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
-                + "onpointermove,onpointerout,onpointerover,onpointerrawupdate,onpointerup,onpopstate,onprogress,"
-                + "onratechange,onrejectionhandled,onreset,onresize,onscroll,onscrollend,onscrollsnapchange,"
-                + "onscrollsnapchanging,onsearch,onsecuritypolicyviolation,onseeked,onseeking,onselect,"
-                + "onselectionchange,onselectstart,onslotchange,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,"
-                + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
+                + "frames,getComputedStyle(),getDigitalGoodsService(),getScreenDetails(),getSelection(),history,"
+                + "indexedDB,innerHeight,innerWidth,isSecureContext,launchQueue,length,localStorage,location,"
+                + "locationbar,log(),logEx(),matchMedia(),menubar,moveBy(),moveTo(),name,navigation,navigator,"
+                + "onabort,onafterprint,onanimationend,onanimationiteration,onanimationstart,onappinstalled,"
+                + "onauxclick,onbeforeinput,onbeforeinstallprompt,onbeforematch,onbeforeprint,onbeforetoggle,"
+                + "onbeforeunload,onbeforexrselect,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
+                + "onclose,oncontentvisibilityautostatechange,oncontextlost,oncontextmenu,oncontextrestored,"
+                + "oncuechange,ondblclick,ondevicemotion,ondeviceorientation,ondeviceorientationabsolute,ondrag,"
+                + "ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,"
+                + "onended,onerror,onfocus,onformdata,ongotpointercapture,onhashchange,oninput,oninvalid,onkeydown,"
+                + "onkeypress,onkeyup,onlanguagechange,onload(),onloadeddata,onloadedmetadata,onloadstart,"
+                + "onlostpointercapture,onmessage,onmessageerror,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmousewheel,onoffline,ononline,onpagehide,onpagereveal,"
+                + "onpageshow,onpageswap,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
+                + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerrawupdate,onpointerup,"
+                + "onpopstate,onprogress,onratechange,onrejectionhandled,onreset,onresize,onscroll,onscrollend,"
+                + "onscrollsnapchange,onscrollsnapchanging,onsearch,onsecuritypolicyviolation,onseeked,onseeking,"
+                + "onselect,onselectionchange,onselectstart,onslotchange,onstalled,onstorage,onsubmit,onsuspend,"
+                + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onunhandledrejection,onunload,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,open(),opener,"
                 + "origin,originAgentCluster,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,performance,"
@@ -1736,7 +1736,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("close(),open,returnValue,show(),showModal()")
+    @Alerts(DEFAULT = "close(),open,returnValue,show(),showModal()",
+            CHROME = "close(),closedBy,open,requestClose(),returnValue,show(),showModal()",
+            EDGE = "close(),closedBy,open,requestClose(),returnValue,show(),showModal()")
     public void dialog() throws Exception {
         test("dialog");
     }

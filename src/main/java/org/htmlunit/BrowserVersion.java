@@ -197,8 +197,8 @@ public final class BrowserVersion implements Serializable {
         CHROME.scriptAcceptHeader_ = "*/*";
 
         if (CHROME.getBrowserVersionNumeric() % 2 == 0) {
-            CHROME.secClientHintUserAgentHeader_ = "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\""
-                            + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
+            CHROME.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
+                            + CHROME.getBrowserVersionNumeric() + "\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\""
                             + CHROME.getBrowserVersionNumeric() + "\"";
         }
         else {
@@ -250,9 +250,9 @@ public final class BrowserVersion implements Serializable {
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
         if (CHROME.getBrowserVersionNumeric() % 2 == 0) {
-            EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\""
-                    + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                    + EDGE.getBrowserVersionNumeric() + "\", \"Not_A Brand\";v=\"24\"";
+            EDGE.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
+                    + EDGE.getBrowserVersionNumeric() + "\", \"Not:A-Brand\";v=\"24\", \"Microsoft Edge\";v=\""
+                    + EDGE.getBrowserVersionNumeric() + "\"";
         }
         else {
             EDGE.secClientHintUserAgentHeader_ = "\"Not(A:Brand\";v=\"99\", \"Microsoft Edge\";v=\""
