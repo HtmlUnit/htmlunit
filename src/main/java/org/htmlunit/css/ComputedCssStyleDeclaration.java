@@ -201,7 +201,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
      * <b>not</b> taking child elements into account.
      */
-    private Integer height2_;
+    private Integer emptyHeight_;
 
     /** The computed, cached horizontal padding (left + right) of the element to which this computed style belongs. */
     private Integer paddingHorizontal_;
@@ -1638,33 +1638,30 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     }
 
     /**
-     * Returns the element's calculated height taking relevant CSS into account, but <b>not</b> the element's child
-     * elements.
-     *
      * @return the element's calculated height taking relevant CSS into account, but <b>not</b> the element's child
      *         elements
      */
     private int getEmptyHeight() {
-        final Integer cachedHeight2 = getCachedHeight2();
+        final Integer cachedHeight2 = getCachedEmptyHeight();
         if (cachedHeight2 != null) {
             return cachedHeight2.intValue();
         }
 
         final DomElement element = getDomElement();
         if (!element.mayBeDisplayed()) {
-            return updateCachedHeight2(0);
+            return updateCachedEmptyHeight(0);
         }
 
         final String display = getDisplay();
         if (NONE.equals(display)) {
-            return updateCachedHeight2(0);
+            return updateCachedEmptyHeight(0);
         }
 
         final WebWindow webWindow = element.getPage().getEnclosingWindow();
         final int windowHeight = webWindow.getInnerHeight();
 
         if (element instanceof HtmlBody) {
-            return updateCachedHeight2(windowHeight);
+            return updateCachedEmptyHeight(windowHeight);
         }
 
         final boolean isInline = INLINE.equals(display) && !(element instanceof HtmlInlineFrame);
@@ -1837,7 +1834,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             height = defaultHeight;
         }
 
-        return updateCachedHeight2(height);
+        return updateCachedEmptyHeight(height);
     }
 
     /**
@@ -2088,20 +2085,20 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
-     * @return the cached height2
+     * @return the cached emptyHeight
      */
-    public Integer getCachedHeight2() {
-        return height2_;
+    public Integer getCachedEmptyHeight() {
+        return emptyHeight_;
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
-     * @param height the new value
-     * @return the param height2
+     * @param emptyHeight the new value
+     * @return the param emptyHeight
      */
-    public int updateCachedHeight2(final int height) {
-        height2_ = Integer.valueOf(height);
-        return height;
+    public int updateCachedEmptyHeight(final int emptyHeight) {
+        emptyHeight_ = Integer.valueOf(emptyHeight);
+        return emptyHeight;
     }
 
     /**
