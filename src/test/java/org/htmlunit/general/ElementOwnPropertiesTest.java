@@ -4850,6 +4850,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "showModal()",
             FF = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
             FF_ESR = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()")
+    @HtmlUnitNYI(CHROME = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
+            EDGE = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()")
     public void dialog() throws Exception {
         test("dialog");
     }

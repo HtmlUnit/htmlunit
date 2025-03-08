@@ -1736,9 +1736,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "close(),open,returnValue,show(),showModal()",
-            CHROME = "close(),closedBy,open,requestClose(),returnValue,show(),showModal()",
-            EDGE = "close(),closedBy,open,requestClose(),returnValue,show(),showModal()")
+    @Alerts(CHROME = "close(),closedBy,open,requestClose(),returnValue,show(),showModal()",
+            EDGE = "close(),closedBy,open,requestClose(),returnValue,show(),showModal()",
+            FF = "close(),open,returnValue,show(),showModal()",
+            FF_ESR = "close(),open,returnValue,show(),showModal()")
+    @HtmlUnitNYI(CHROME = "close(),open,returnValue,show(),showModal()",
+            EDGE = "close(),open,returnValue,show(),showModal()")
     public void dialog() throws Exception {
         test("dialog");
     }
