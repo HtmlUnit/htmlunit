@@ -768,16 +768,24 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getLeft() {
+        if (NONE.equals(getDisplay())) {
+            return AUTO;
+        }
+
+        final DomElement elem = getDomElement();
+        if (!elem.isAttachedToPage()) {
+            return "";
+        }
+
         final String superLeft = super.getLeft();
         if (!superLeft.endsWith("%")) {
             return defaultIfEmpty(superLeft, AUTO, null);
         }
 
-        final DomElement element = getDomElement();
-        return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
+        return CssPixelValueConverter.pixelString(elem, new CssPixelValueConverter.CssValue(0, 0) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getDomElement() == element) {
+                if (style.getDomElement() == elem) {
                     return style.getStyleAttribute(Definition.LEFT, true);
                 }
                 return style.getStyleAttribute(Definition.WIDTH, true);
@@ -972,19 +980,24 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getTop() {
-        final DomElement element = getDomElement();
-        if (!element.isAttachedToPage()) {
+        if (NONE.equals(getDisplay())) {
+            return AUTO;
+        }
+
+        final DomElement elem = getDomElement();
+        if (!elem.isAttachedToPage()) {
             return "";
         }
+
         final String superTop = super.getTop();
         if (!superTop.endsWith("%")) {
             return defaultIfEmpty(superTop, Definition.TOP);
         }
 
-        return CssPixelValueConverter.pixelString(element, new CssPixelValueConverter.CssValue(0, 0) {
+        return CssPixelValueConverter.pixelString(elem, new CssPixelValueConverter.CssValue(0, 0) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getDomElement() == element) {
+                if (style.getDomElement() == elem) {
                     return style.getStyleAttribute(Definition.TOP, true);
                 }
                 return style.getStyleAttribute(Definition.HEIGHT, true);
