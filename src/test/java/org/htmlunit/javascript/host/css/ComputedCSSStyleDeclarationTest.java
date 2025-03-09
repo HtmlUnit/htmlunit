@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.FF;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -27,7 +24,6 @@ import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -119,7 +115,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  for (var i in e.style) {\n"
             + "    var s1 = e.style[i];\n"
             + "    var s2 = window.getComputedStyle(e, null)[i];\n"
-            + "    if ('height' == i || 'width' == i || 'cssText' == i) {\n"
+            + "    if ('cssText' == i) {\n"
             + "      s2 = 'skipped';\n"
             + "    }\n"
             + "    if(typeof s1 == 'string')\n"
@@ -137,12 +133,47 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
+     * Compares all {@code style} and {@code getComputedStyle}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void stringPropertiesDisplayNone() throws Exception {
+        final String html
+            = "<html><head><body>\n"
+            + "  <div id='myDiv' style='display: none'><br>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + "var e = document.getElementById('myDiv');\n"
+            + "var array = [];\n"
+            + "try {\n"
+            + "  for (var i in e.style) {\n"
+            + "    var s1 = e.style[i];\n"
+            + "    var s2 = window.getComputedStyle(e, null)[i];\n"
+            + "    if ('cssText' == i) {\n"
+            + "      s2 = 'skipped';\n"
+            + "    }\n"
+            + "    if(typeof s1 == 'string')\n"
+            + "      array.push(i + '=' + s1 + ':' + s2);\n"
+            + "  }\n"
+            + "} catch(e) { array[array.length] = e.name; }\n"
+            + "array.sort();\n"
+            + "document.getElementById('myTextarea').value = array.join('\\n');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String expected = loadExpectation("ComputedCSSStyleDeclarationTest.properties.displayNone", ".txt");
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(expected, actual);
+    }
+
+    /**
      * Compares all {@code style} and {@code getComputedStyle}, for not-attached elements.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void stringPropertiesNotAttached() throws Exception {
         // to fix Chrome, look into ComputedCSSStyleDeclaration.defaultIfEmpty first condition
         final String html
@@ -156,7 +187,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  for (var i in e.style) {\n"
             + "    var s1 = e.style[i];\n"
             + "    var s2 = window.getComputedStyle(e, null)[i];\n"
-            + "    if ('height' == i || 'width' == i || 'cssText' == i) {\n"
+            + "    if ('cssText' == i) {\n"
             + "      s2 = 'skipped';\n"
             + "    }\n"
             + "    if(typeof s1 == 'string')\n"
@@ -1194,7 +1225,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"111px", "auto"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"1256px", "auto"},
+            EDGE = {"1256px", "auto"},
+            FF = {"1256px", "auto"},
+            FF_ESR = {"1256px", "auto"})
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1251,7 +1285,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             EDGE = { "underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"},
             FF = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"},
             FF_ESR = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = { "underline", "none solid rgb(0, 0, 0)", "underline"},
+            EDGE = { "underline", "none solid rgb(0, 0, 0)", "underline"},
+            FF = { "underline", "rgb(0, 0, 0)", "underline"},
+            FF_ESR = { "underline", "rgb(0, 0, 0)", "underline"})
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1614,7 +1651,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "rgb(0, 0, 255)"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"red", "rgb(0, 0, 255)"},
+            EDGE = {"red", "rgb(0, 0, 255)"},
+            FF = {"red", "rgb(0, 0, 255)"},
+            FF_ESR = {"red", "rgb(0, 0, 255)"})
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1764,7 +1804,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("81")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "18",
+            EDGE = "18",
+            FF = "18",
+            FF_ESR = "18")
     public void offsetHeight_with_childHeight() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2145,7 +2188,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "0px", "20%", "80px", "25%", "100px"},
             FF = {"", "0px", "20%", "360px", "25%", "100px"},
             FF_ESR = {"", "0px", "20%", "360px", "25%", "100px"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"", "0px", "20%", "80px", "25%", "100px"},
+            FF_ESR = {"", "0px", "20%", "80px", "25%", "100px"})
     public void marginLeftRight() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2184,7 +2228,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "0px", "", "0px", "50%", "100px", "50%", "100px"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"", "auto", "", "auto", "50%", "100px", "50%", "100px"},
+            EDGE = {"", "auto", "", "auto", "50%", "100px", "50%", "100px"},
+            FF = {"", "auto", "", "auto", "50%", "100px", "50%", "100px"},
+            FF_ESR = {"", "auto", "", "auto", "50%", "100px", "50%", "100px"})
     public void topLeft() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2397,7 +2444,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0", "24"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"0", "18"},
+            EDGE = {"0", "18"},
+            FF = {"0", "18"},
+            FF_ESR = {"0", "18"})
     public void offsetHeightTable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
