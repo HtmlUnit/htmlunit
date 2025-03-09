@@ -1979,10 +1979,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "0", "0", "0", "", "", "", "", "", "", "", "",
-             "104", "104", "104", "104", "auto", "100px", "100px",
-             "3px", "block", "content-box", "0px", "0px"})
-    public void offsetWidth() throws Exception {
+    @Alerts({"0", "0", "0", "0", "", "", "", "", "", "", "", ""})
+    public void measureNotAttached() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1992,11 +1990,13 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    div.style.height = '100px';\n"
             + "    div.style.padding = '2px';\n"
             + "    div.style.margin = '3px';\n"
-            + "    var style = window.getComputedStyle(div, null);\n"
+
             + "    log(div.offsetWidth);\n"
             + "    log(div.offsetHeight);\n"
             + "    log(div.clientWidth);\n"
             + "    log(div.clientHeight);\n"
+
+            + "    var style = window.getComputedStyle(div, null);\n"
             + "    log(style.top);\n"
             + "    log(style.width);\n"
             + "    log(style.height);\n"
@@ -2005,11 +2005,38 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    log(style.boxSizing);\n"
             + "    log(style.borderRightWidth);\n"
             + "    log(style.borderLeftWidth);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"104", "104", "104", "104", "auto", "100px", "100px",
+             "3px", "block", "content-box", "0px", "0px"})
+    public void measureAttached() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var div = document.createElement('div');\n"
             + "    document.body.appendChild(div);\n"
+            + "    div.style.width = '100px';\n"
+            + "    div.style.height = '100px';\n"
+            + "    div.style.padding = '2px';\n"
+            + "    div.style.margin = '3px';\n"
+
             + "    log(div.offsetWidth);\n"
             + "    log(div.offsetHeight);\n"
             + "    log(div.clientWidth);\n"
             + "    log(div.clientHeight);\n"
+
+            + "    var style = window.getComputedStyle(div, null);\n"
             + "    log(style.top);\n"
             + "    log(style.width);\n"
             + "    log(style.height);\n"
