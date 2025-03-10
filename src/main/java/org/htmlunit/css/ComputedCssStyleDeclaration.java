@@ -752,15 +752,20 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (!elem.isAttachedToPage()) {
             return "";
         }
-        final int windowHeight = elem.getPage().getEnclosingWindow().getInnerHeight();
-        return CssPixelValueConverter
-                .pixelString(elem, new CssPixelValueConverter.CssValue(0, windowHeight) {
-                    @Override
-                    public String get(final ComputedCssStyleDeclaration style) {
-                        final String offsetHeight = style.getCalculatedHeight(true, true) + "px";
-                        return defaultIfEmpty(style.getStyleAttribute(Definition.HEIGHT, true), offsetHeight, AUTO);
-                    }
-                });
+
+        final ComputedCssStyleDeclaration style = elem.getPage().getEnclosingWindow().getComputedStyle(elem, null);
+        final String styleValue = style.getStyleAttribute(Definition.HEIGHT, true);
+
+        if (styleValue == null || styleValue.isEmpty() || AUTO.equals(styleValue) || styleValue.endsWith("%")) {
+            final String calculatedHeight = style.getCalculatedHeight(false, false) + "px";
+            return calculatedHeight;
+        }
+
+        if (styleValue.endsWith("px")) {
+            return styleValue;
+        }
+
+        return CssPixelValueConverter.pixelValue(styleValue) + "px";
     }
 
     /**

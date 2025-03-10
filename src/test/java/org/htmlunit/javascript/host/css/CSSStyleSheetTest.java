@@ -2003,4 +2003,34 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, "body { font-weight: 900\\9; }");
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Test for #941.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void widthHeightPercent() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>"
+            + "    <style>#testDiv { width: 50%; height: 50%; background-color: blue; }</style>\n"
+            + "  </head>"
+            + "  <body>\n"
+            + "    <div id='testDiv'>Test Div</div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let elem = document.getElementById('testDiv');\n"
+            + "  let sty = window.getComputedStyle(elem, null);\n"
+            + "  let w = (window.innerWidth / 2) - parseInt(sty.width, 10);\n"
+            + "  log(10 > w);\n"
+            + "  let h = (window.innerHeight / 2) - parseInt(sty.height, 10);\n"
+            + "  log(10 > h);\n"
+            + "</script>\n"
+
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

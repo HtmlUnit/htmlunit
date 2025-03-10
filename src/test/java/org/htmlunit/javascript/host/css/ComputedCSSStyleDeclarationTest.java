@@ -328,6 +328,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "var d = document.getElementById('d');\n"
             + "var cs = window.getComputedStyle(d, null);\n"
+
             + "log(d.style.width + ' ' + cs.width);\n"
             + "log(d.style.height + ' ' + cs.height);\n"
             + "log(d.style.borderBottomWidth + ' ' + cs.borderBottomWidth);\n"
@@ -2503,7 +2504,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"false", "false"})
+    @Alerts({"18px", "18px"})
     public void height() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2517,9 +2518,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    log(style.height == '0px');\n"
+            + "    log(style.height);\n"
             + "    div.className = 'autoheight';\n"
-            + "    log(style.height == '0px');\n"
+            + "    log(style.height);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"

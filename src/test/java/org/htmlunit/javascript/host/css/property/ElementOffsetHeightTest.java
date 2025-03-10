@@ -175,11 +175,11 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"549", "273"})
-    @HtmlUnitNYI(CHROME = {"552", "294"},
-            EDGE = {"552", "294"},
-            FF = {"552", "294"},
-            FF_ESR = {"552", "294"})
+    @Alerts({"300", "549", "945", "60", "273", "938", "35"})
+    @HtmlUnitNYI(CHROME = {"300", "552", "9690", "60", "294", "6885", "43"},
+            EDGE = {"300", "552", "9690", "60", "294", "6885", "43"},
+            FF = {"300", "552", "9690", "60", "294", "6885", "43"},
+            FF_ESR = {"300", "552", "9690", "60", "294", "6885", "43"})
     public void issue124() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -215,10 +215,14 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "    var titleSizer = document.querySelector('.title-sizer');\n"
             + "    var title = document.querySelector('.title');\n"
             + "    var titleHeight = titleSizer.offsetHeight;\n"
-            + "    var titleFontSize = getAttributeValue(titleSizer, 'fontSize');\n"
             + "    var titleHeightGoal = getAttributeValue(titleSizer, 'height');\n"
+            + "    var titleFontSize = getAttributeValue(titleSizer, 'fontSize');\n"
 
-            + "    log(titleHeight);\r\n"
+            + "    log(titleHeightGoal);\n"
+
+            + "    log(titleHeight);\n"
+            + "    log(titleSizer.offsetWidth);\n"
+            + "    log(titleFontSize);\n"
 
             + "    while (titleHeight > titleHeightGoal) {\n"
             + "      titleFontSize -= 1;\n"
@@ -227,6 +231,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "    }\n"
 
             + "    log(titleHeight);\n"
+            + "    log(titleSizer.offsetWidth);\n"
+            + "    log(titleFontSize);\n"
             + "  </script>\n"
             + "</html>";
 
