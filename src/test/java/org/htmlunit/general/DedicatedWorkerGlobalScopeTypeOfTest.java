@@ -36,7 +36,8 @@ import org.junit.runner.RunWith;
 public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
 
     private void test(final String className) throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "try {\n"

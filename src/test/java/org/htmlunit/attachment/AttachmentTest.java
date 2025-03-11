@@ -53,7 +53,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void basic() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -99,7 +100,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void contentDispositionCaseInsensitive() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -133,7 +135,7 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void filename() throws Exception {
-        final String content = "<html>But is it really?</html>";
+        final String content = DOCTYPE_HTML + "<html>But is it really?</html>";
 
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
@@ -191,7 +193,8 @@ public class AttachmentTest extends SimpleWebTestCase {
         final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "var blob = new Blob(['foo'], {type: 'text/plain'}),\n"
@@ -222,7 +225,8 @@ public class AttachmentTest extends SimpleWebTestCase {
         final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
@@ -255,7 +259,8 @@ public class AttachmentTest extends SimpleWebTestCase {
         final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
@@ -282,7 +287,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void jsChangeLocationAfterReceptionOfAttachment() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form action='action'>\n"
             + "<input type='submit' onclick='window.location=\"foo\"; return false'>\n"
             + "</form>\n"
@@ -315,7 +321,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void handleResponseFromHandler() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -375,7 +382,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void handleResponseFromHandlerWithFileName() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -435,7 +443,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void handleResponseOnlyApplicationOctetstream() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"

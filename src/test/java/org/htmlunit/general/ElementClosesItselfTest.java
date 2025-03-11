@@ -40,7 +40,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
         if ("title".equals(tagName)) {
             // title is a bit special, we have to provide at least
             // one closing tab otherwise title spans to the end of the file
-            loadPageWithAlerts2("<html><head>\n"
+            loadPageWithAlerts2(DOCTYPE_HTML + "<html><head>\n"
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
@@ -54,7 +54,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
         }
 
         if ("frame".equals(tagName)) {
-            loadPageVerifyTitle2("<html><head>\n"
+            loadPageVerifyTitle2(DOCTYPE_HTML + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -70,7 +70,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
         }
 
         if ("script".equals(tagName)) {
-            loadPageVerifyTitle2("<html><head>\n"
+            loadPageVerifyTitle2(DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -86,7 +87,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
         }
 
         if ("frameset".equals(tagName)) {
-            loadPageWithAlerts2("<html><head>\n"
+            loadPageWithAlerts2(DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
@@ -100,7 +102,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
             return;
         }
 
-        loadPageVerifyTitle2("<html><head>\n"
+        loadPageVerifyTitle2(DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -116,7 +119,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     private static String headElementClosesItself(final String tagName) {
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<" + tagName + " id='outer'><" + tagName + ">\n"
                 + "<script>\n"
                 + "function test() {\n"

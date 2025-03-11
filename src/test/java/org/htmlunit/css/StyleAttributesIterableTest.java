@@ -88,8 +88,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
             ServerRestartCount_ = 0;
         }
 
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"

@@ -138,7 +138,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             html = "<" + parent + " id='outer'><" + child + ">\n";
         }
 
-        String pageHtml = "<html><head>\n"
+        String pageHtml = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<title>-</title>\n"
                 + "</head>\n"
                 + bodyStart
@@ -149,18 +150,21 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         if ("basefont".equals(parent)
                 || "base".equals(parent)
                 || "isindex".equals(parent)) {
-            pageHtml = "<html><head>\n"
+            pageHtml = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<" + parent + " id='outer'><" + child + ">\n"
                 + "</head><body>\n"
                 + "</body></html>";
         }
         else if ("head".equals(parent)) {
-            pageHtml = "<html><head id='outer'><" + child + ">\n"
+            pageHtml = DOCTYPE_HTML
+                + "<html><head id='outer'><" + child + ">\n"
                 + "</head><body>\n"
                 + "</body></html>";
         }
         else if ("title".equals(parent)) {
-            pageHtml = "<html><head>\n"
+            pageHtml = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<title id='outer'><" + child + ">\n"
                 + "</head><body>\n"
                 + "</body></html>";

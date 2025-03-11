@@ -30,7 +30,8 @@ import org.junit.runner.RunWith;
 public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
 
     private void test(final String tagName) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"

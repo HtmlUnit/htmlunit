@@ -87,7 +87,8 @@ public class HostConstructorTest extends WebDriverTestCase {
     }
 
     private void test(final String className) throws Exception {
-        final String html = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
                 + "<body>"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION

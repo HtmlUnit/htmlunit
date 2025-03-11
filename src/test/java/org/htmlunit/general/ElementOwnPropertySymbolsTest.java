@@ -32,7 +32,6 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.javascript.host.Location;
 import org.htmlunit.javascript.host.Screen;
 import org.htmlunit.javascript.host.crypto.Crypto;
@@ -45,9 +44,9 @@ import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.performance.Performance;
 import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserVersionClassRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserVersionClassRunner;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
@@ -76,7 +75,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     private void testString(final String preparation, final String string) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
                 + LOG_TEXTAREA_FUNCTION
                 + "  function test(event) {\n"
@@ -315,6 +314,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
 
     private static StringBuilder htmlHeader() {
         final StringBuilder html = new StringBuilder();
+        html.append(DOCTYPE_HTML);
         html.append("<html><head>\n");
         html.append("<style type=\"text/css\">\n");
         html.append("table.bottomBorder { border-collapse:collapse; }\n");

@@ -80,7 +80,8 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
     }
 
     private void test(final String className, final String[] expectedAlerts) throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "try {\n"

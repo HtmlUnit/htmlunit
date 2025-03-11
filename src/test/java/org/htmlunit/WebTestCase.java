@@ -67,6 +67,9 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
  */
 public abstract class WebTestCase {
 
+    /** The html5 doctype. */
+    public static final String DOCTYPE_HTML = "<!DOCTYPE html>\n";
+
     /**
      * Make the test method name available to the tests.
      */

@@ -35,8 +35,8 @@ import org.junit.runner.RunWith;
 public class HostTypeOfTest extends WebDriverTestCase {
 
     private void test(final String className) throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"

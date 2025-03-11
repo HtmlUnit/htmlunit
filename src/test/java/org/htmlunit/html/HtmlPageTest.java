@@ -75,9 +75,6 @@ import org.w3c.dom.NodeList;
 @RunWith(BrowserRunner.class)
 public class HtmlPageTest extends SimpleWebTestCase {
 
-    /** The html5 doctype. */
-    public static final String DOCTYPE_HTML = "<!DOCTYPE html>";
-
     /** The doctype prefix for standards mode. */
     public static final String STANDARDS_MODE_PREFIX_
         = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n";

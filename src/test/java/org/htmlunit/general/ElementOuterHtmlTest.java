@@ -30,7 +30,8 @@ import org.junit.runner.RunWith;
 public class ElementOuterHtmlTest extends WebDriverTestCase {
 
     private void test(final String elementName) throws Exception {
-        final String html = "<!DOCTYPE html><html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"

@@ -53,8 +53,8 @@ public class StyleAttributesIterable2Test extends WebDriverTestCase {
     }
 
     private void styleVsComputed(final String property) throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

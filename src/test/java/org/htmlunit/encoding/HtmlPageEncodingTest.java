@@ -165,8 +165,8 @@ public class HtmlPageEncodingTest extends WebDriverTestCase {
             meta = "<meta charset='" + charsetMeta.getCharset().name().toLowerCase() + "' />\n";
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + meta
             + "  <title>a ä أهلاً мир 房间</title>\n"
             + "</head>\n"

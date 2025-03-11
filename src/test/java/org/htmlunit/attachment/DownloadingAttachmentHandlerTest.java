@@ -47,7 +47,8 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
      */
     @Test
     public void basic() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -102,7 +103,8 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
      */
     @Test
     public void basicFileNameFromUrl() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "test.txt'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -157,7 +159,8 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
      */
     @Test
     public void basicFileNameFromHeader() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "test.txt'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"

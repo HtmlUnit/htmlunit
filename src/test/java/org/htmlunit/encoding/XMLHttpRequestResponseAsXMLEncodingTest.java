@@ -135,8 +135,8 @@ public class XMLHttpRequestResponseAsXMLEncodingTest extends AbstractXMLHttpRequ
             xmlEnc = "encoding=\"utf-8\"";
         }
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TEXTAREA_FUNCTION

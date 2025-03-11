@@ -22,7 +22,6 @@ import java.util.function.Predicate;
 
 import org.htmlunit.TestCaseTest;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.After;
@@ -91,7 +90,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     protected void test(final String parent, final String child) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<title>-</title>\n"

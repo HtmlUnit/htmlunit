@@ -76,7 +76,8 @@ public class HostConstantsTest extends WebDriverTestCase {
     public void test() throws Exception {
         setExpectedAlerts(getExpectedString());
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TEXTAREA_FUNCTION
                 + "function test() {\n"

@@ -172,8 +172,8 @@ public class ScriptEncodingTest extends WebDriverTestCase {
         // use always a different url to avoid caching effects
         final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
 
-        String html
-            = "<html><head>\n"
+        String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>var logMsg = ''; function log(msg) { logMsg += msg + '\\xA7\\xA7'; }</script>\n"
             + "  <script type='text/javascript'>window.onerror=function(msg) { log(msg); }</script>"
             + "  <script src='" + scriptUrl + "'";

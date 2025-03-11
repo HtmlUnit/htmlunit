@@ -32,7 +32,8 @@ import org.junit.runner.RunWith;
 public class ElementChildNodesTest extends WebDriverTestCase {
 
     private static String test(final String tagName) {
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
