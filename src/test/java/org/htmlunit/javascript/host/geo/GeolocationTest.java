@@ -45,8 +45,8 @@ public class GeolocationTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void ctor() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -65,8 +65,8 @@ public class GeolocationTest extends WebDriverTestCase {
     @Test
     @Alerts("[object Geolocation]")
     public void navigatorGeolocation() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -87,8 +87,8 @@ public class GeolocationTest extends WebDriverTestCase {
              "Longitude: 7.654321",
              "Accuracy: 0.1234"})
     public void getCurrentPosition() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function success(pos) {\n"
             + "    const crd = pos.coords;\n"
