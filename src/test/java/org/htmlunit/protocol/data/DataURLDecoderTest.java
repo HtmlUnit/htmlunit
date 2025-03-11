@@ -83,7 +83,8 @@ public class DataURLDecoderTest extends WebDriverTestCase {
                 + "INHtYwAtUvHjHcCNiBqpegB4dugD5gcrgHzbldCpWmczjOQdA6YFz8TBnDYoHQ9/IAevAQzRxoY88LLwJUhmErXuXSKnIH0B"
                 + "7K5a/QKe8pnRes1vRwAAAABJRU5ErkJggg==")
     public void base64WithPlus() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"

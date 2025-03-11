@@ -15,7 +15,6 @@
 package org.htmlunit.svg;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Assert;
@@ -39,7 +38,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts("function SVGMatrix() { [native code] }")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -56,7 +55,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts({"1, 0, 0, 1, 0, 0", "2, 3, 4, 5, 6, 7"})
     public void fields() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
@@ -94,7 +93,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Alerts({"function", "function", "function", "function", "function", "function", "function", "function",
              "function", "function", "function"})
     public void methods() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
@@ -154,7 +153,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts("InvalidStateError/DOMException")
     public void inverseNotPossible() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><body>\n"
                 + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
                 + "  </svg>\n"
@@ -299,7 +298,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     }
 
     private void transformTest(final String transforamtion) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
