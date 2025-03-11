@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.intl;
 
 import org.apache.commons.lang3.CharUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.ComparisonFailure;
@@ -32,7 +31,7 @@ import org.junit.runner.RunWith;
 public class NumberFormat2Test extends WebDriverTestCase {
 
     private void test(final String... string) throws Exception {
-        final StringBuilder html = new StringBuilder(HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final StringBuilder html = new StringBuilder(DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION

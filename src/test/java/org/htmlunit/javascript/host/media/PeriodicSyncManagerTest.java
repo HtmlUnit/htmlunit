@@ -36,8 +36,8 @@ public class PeriodicSyncManagerTest extends WebDriverTestCase {
             CHROME = "true",
             EDGE = "true")
     public void inWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

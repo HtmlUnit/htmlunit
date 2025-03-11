@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.intl;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -35,7 +34,7 @@ public class CollatorTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void collator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION

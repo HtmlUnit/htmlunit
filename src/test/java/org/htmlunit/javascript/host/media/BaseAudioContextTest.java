@@ -34,8 +34,8 @@ public class BaseAudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void inWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -57,8 +57,8 @@ public class BaseAudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "TypeError"})
     public void ctor() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION

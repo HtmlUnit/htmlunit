@@ -35,8 +35,8 @@ public class MediaSourceTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void inWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -64,8 +64,8 @@ public class MediaSourceTest extends WebDriverTestCase {
             FF = { "false", "false", "false" },
             FF_ESR = { "false", "false", "false" })
     public void isTypeSypported() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

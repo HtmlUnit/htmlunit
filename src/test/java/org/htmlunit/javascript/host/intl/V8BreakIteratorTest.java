@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.intl;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -45,7 +44,7 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
             CHROME = "true",
             EDGE = "true")
     public void v8BreakIterator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -129,7 +128,7 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      * @param type can be null
      */
     private void test(final String language, final String type, final String text) throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -174,7 +173,7 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
             CHROME = "en-US",
             EDGE = "en-US")
     public void defaultLocale() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

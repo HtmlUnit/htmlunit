@@ -36,8 +36,8 @@ public class CryptoTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "TypeError"})
     public void ctor() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -64,7 +64,8 @@ public class CryptoTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "false", "false", "false", "10", "true"})
     public void getRandomValues() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var array = new Uint32Array(10);\n"
@@ -91,7 +92,8 @@ public class CryptoTest extends WebDriverTestCase {
     @Test
     @Alerts("[0-9a-f]{8}\\-[0-9a-f]{4}\\-[0-9a-f]{4}\\-[0-9a-f]{4}\\-[0-9a-f]{12}§")
     public void randomUUID() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(window.crypto.randomUUID());\n"
@@ -111,7 +113,8 @@ public class CryptoTest extends WebDriverTestCase {
     @Test
     @Alerts("QuotaExceededError/DOMException")
     public void getRandomValuesQuotaExceeded() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var array = new Uint32Array(16385);\n"
@@ -129,7 +132,8 @@ public class CryptoTest extends WebDriverTestCase {
     @Test
     @Alerts("[object SubtleCrypto]")
     public void subtle() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(window.crypto.subtle);\n"

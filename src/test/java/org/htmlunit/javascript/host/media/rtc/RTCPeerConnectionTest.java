@@ -34,8 +34,8 @@ public class RTCPeerConnectionTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void inWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -59,8 +59,8 @@ public class RTCPeerConnectionTest extends WebDriverTestCase {
             CHROME = {"[object RTCPeerConnection]", "[object RTCPeerConnection]", "true"},
             EDGE = {"[object RTCPeerConnection]", "[object RTCPeerConnection]", "true"})
     public void webkitRTCPeerConnection() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

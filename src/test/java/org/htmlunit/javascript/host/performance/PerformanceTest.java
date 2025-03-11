@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.performance;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -36,8 +35,7 @@ public class PerformanceTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void same() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -60,8 +58,7 @@ public class PerformanceTest extends WebDriverTestCase {
      */
     @Test
     public void now() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -96,8 +93,7 @@ public class PerformanceTest extends WebDriverTestCase {
     @Test
     @Alerts("[object PerformanceTiming]")
     public void timing() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -121,8 +117,8 @@ public class PerformanceTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "function", "function", "function"})
     public void methods() throws Exception {
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION

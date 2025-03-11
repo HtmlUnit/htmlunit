@@ -34,8 +34,8 @@ public class AudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void inWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -57,8 +57,8 @@ public class AudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object AudioContext]"})
     public void ctor() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -90,8 +90,8 @@ public class AudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts("[object AudioBufferSourceNode]")
     public void createBufferSource() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -120,8 +120,8 @@ public class AudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts({"AudioContext prep done", "Error with decoding audio data"})
     public void decodeAudioData() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -156,8 +156,8 @@ public class AudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts({"AudioContext prep done", "Error with decoding audio data"})
     public void decodeAudioData2() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -192,8 +192,8 @@ public class AudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "-3.4028234663852886e+38", "3.4028234663852886e+38", "1", "0.5"})
     public void createGain() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
