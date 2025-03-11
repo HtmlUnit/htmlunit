@@ -16,7 +16,6 @@ package org.htmlunit.general;
 
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.annotations.StandardsMode;
 import org.htmlunit.javascript.host.css.CSSFontFaceRule;
 import org.htmlunit.javascript.host.css.CSSImportRule;
 import org.htmlunit.javascript.host.css.CSSMediaRule;
@@ -31,7 +30,6 @@ import org.htmlunit.javascript.host.css.MediaList;
 import org.htmlunit.javascript.host.css.StyleSheetList;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.AlertsStandards;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +44,6 @@ import org.w3c.dom.css.CSS2Properties;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web API Interfaces</a>
  */
 @RunWith(BrowserRunner.class)
-@StandardsMode
 public class HostClassNameTest extends WebDriverTestCase {
 
     private void test(final String className) throws Exception {
@@ -1377,7 +1374,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function CSSStyleRule() { [native code] }")
-    @AlertsStandards("function CSSStyleRule() { [native code] }")
     public void cssStyleRule() throws Exception {
         test("CSSStyleRule");
     }
@@ -4567,7 +4563,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function Location() { [native code] }")
-    @AlertsStandards("function Location() { [native code] }")
     public void location() throws Exception {
         test("Location");
     }

@@ -15,10 +15,8 @@
 package org.htmlunit.general;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.annotations.StandardsMode;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.AlertsStandards;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,7 +27,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-@StandardsMode
 public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
 
     private void test(final String tagName) throws Exception {
@@ -378,7 +375,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "block"})
-    @AlertsStandards(DEFAULT = {"", "block"})
     public void dd() throws Exception {
         test("dd");
     }

@@ -25,9 +25,7 @@ import org.apache.commons.lang3.SystemUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
-import org.htmlunit.annotations.StandardsMode;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.AlertsStandards;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.junit.annotation.NotYetImplemented;
@@ -43,7 +41,6 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
-import org.junit.runners.model.TestClass;
 
 /**
  * The runner for test methods that run with a specific browser ({@link TestedBrowser}).
@@ -145,34 +142,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         }
 
         testCase.setExpectedAlerts(expectedAlerts);
-    }
-
-    private void setAlertsStandards(final WebTestCase testCase, final Method method) {
-        final AlertsStandards alerts = method.getAnnotation(AlertsStandards.class);
-        if (alerts != null) {
-            String[] expectedAlerts = NO_ALERTS_DEFINED;
-            if (isDefined(alerts.value())) {
-                expectedAlerts = alerts.value();
-            }
-            else {
-                if (browserVersion_ == BrowserVersion.EDGE) {
-                    expectedAlerts = firstDefined(alerts.EDGE(), alerts.DEFAULT());
-                }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_ESR) {
-                    expectedAlerts = firstDefined(alerts.FF_ESR(), alerts.DEFAULT());
-                }
-                else if (browserVersion_ == BrowserVersion.FIREFOX) {
-                    expectedAlerts = firstDefined(alerts.FF(), alerts.DEFAULT());
-                }
-                else if (browserVersion_ == BrowserVersion.CHROME) {
-                    expectedAlerts = firstDefined(alerts.CHROME(), alerts.DEFAULT());
-                }
-            }
-            testCase.setExpectedAlerts(expectedAlerts);
-        }
-        else {
-            setAlerts(testCase, method);
-        }
     }
 
     private static String[] firstDefined(final String[]... variants) {
@@ -362,12 +331,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             notYetImplemented = isNotYetImplemented(method);
             tries = getTries(method);
         }
-        if (method instanceof StandardsFrameworkMethod && ((StandardsFrameworkMethod) method).isStandards()) {
-            setAlertsStandards(testCase, method.getMethod());
-        }
-        else {
-            setAlerts(testCase, method.getMethod());
-        }
+        setAlerts(testCase, method.getMethod());
         statement = new BrowserStatement(statement, method, realBrowser_,
                 notYetImplemented, tries, browserVersion_);
         return statement;
@@ -437,16 +401,5 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
      */
     protected boolean isRealBrowser() {
         return realBrowser_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected TestClass createTestClass(final Class<?> testClass) {
-        if (testClass.getAnnotation(StandardsMode.class) != null) {
-            return new StandardsTestClass(testClass);
-        }
-        return super.createTestClass(testClass);
     }
 }

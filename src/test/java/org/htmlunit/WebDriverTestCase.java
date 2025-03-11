@@ -16,7 +16,6 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -67,7 +66,6 @@ import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.html.HtmlElement;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.util.NameValuePair;
 import org.junit.After;
@@ -267,7 +265,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static final Executor EXECUTOR_POOL = Executors.newFixedThreadPool(4);
 
     private boolean useRealBrowser_;
-    private Boolean useStandards_;
 
     /**
      * The HtmlUnitDriver.
@@ -504,14 +501,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     public void setUseRealBrowser(final boolean useRealBrowser) {
         useRealBrowser_ = useRealBrowser;
-    }
-
-    /**
-     * Sets whether to use {@code Standards Mode} or not.
-     * @param useStandards whether to use {@code Standards Mode} or not
-     */
-    public void setUseStandards(final boolean useStandards) {
-        useStandards_ = useStandards;
     }
 
     /**
@@ -970,18 +959,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the web driver
      * @throws Exception if something goes wrong
      */
-    protected final WebDriver loadPage2(String html, final URL url,
+    protected final WebDriver loadPage2(final String html, final URL url,
             final String contentType, final Charset charset, final Charset serverCharset) throws Exception {
-        if (useStandards_ != null) {
-            if (html.startsWith(HtmlPageTest.STANDARDS_MODE_PREFIX_)) {
-                fail("HTML must not be prefixed with Standards Mode.");
-            }
-            if (useStandards_) {
-                html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + html;
-            }
-        }
         getMockWebConnection().setResponse(url, html, contentType, charset);
-
         return loadPage2(url, serverCharset);
     }
 

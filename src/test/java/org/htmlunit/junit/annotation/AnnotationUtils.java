@@ -138,24 +138,6 @@ public final class AnnotationUtils {
                 }
             }
         }
-
-        final AlertsStandards alerts2 = method.getAnnotation(AlertsStandards.class);
-        if (alerts2 != null) {
-            if (!BrowserVersionClassRunner.isDefined(alerts2.value())) {
-                assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
-                        BrowserVersionClassRunner.isDefined(alerts2.DEFAULT())
-                        && BrowserVersionClassRunner.isDefined(alerts2.CHROME())
-                        && BrowserVersionClassRunner.isDefined(alerts2.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts2.FF_ESR())
-                        && BrowserVersionClassRunner.isDefined(alerts2.EDGE()));
-
-                assertNotEquals("@AlertsStandards", method, BrowserVersion.EDGE, alerts2.EDGE(), alerts2.DEFAULT());
-                assertNotEquals("@AlertsStandards", method, BrowserVersion.CHROME, alerts2.CHROME(), alerts2.DEFAULT());
-                assertNotEquals("@AlertsStandards", method, BrowserVersion.FIREFOX, alerts2.FF(), alerts2.DEFAULT());
-                assertNotEquals("@AlertsStandards",
-                        method, BrowserVersion.FIREFOX_ESR, alerts2.FF_ESR(), alerts2.DEFAULT());
-            }
-        }
     }
 
     private static void assertNotEquals(final String annotation, final Method method, final BrowserVersion browser,
