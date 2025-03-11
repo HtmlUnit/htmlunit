@@ -66,7 +66,8 @@ public class MemoryLeakTest extends SimpleWebTestCase {
             detector.register("w", client.getCurrentWindow());
 
             final MockWebConnection conn = new MockWebConnection();
-            conn.setResponse(URL_FIRST, "<html><body><script>setInterval('alert(1)',5000)</script></body></html>");
+            conn.setResponse(URL_FIRST,
+                    DOCTYPE_HTML + "<html><body><script>setInterval('alert(1)',5000)</script></body></html>");
             client.setWebConnection(conn);
 
             client.getPage(URL_FIRST);

@@ -41,8 +41,8 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = "5")
     public void byteLength() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -64,8 +64,8 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
             CHROME = {"1234", "1234", "6789", "1234"})
     @NotYetImplemented({CHROME, EDGE})
     public void slice() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -229,8 +229,8 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     }
 
     private void sliceInvalidIndex(final String index) throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -260,8 +260,8 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = "0")
     public void nullConstructor() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

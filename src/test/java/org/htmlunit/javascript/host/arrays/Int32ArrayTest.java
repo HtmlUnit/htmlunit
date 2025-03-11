@@ -37,8 +37,8 @@ public class Int32ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"-121", "-42", "18", "0", "-78", "-98", "67", "-1"})
     public void bufferConstructor() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -61,8 +61,8 @@ public class Int32ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "815", "undefined", "undefined"})
     public void index() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -84,8 +84,8 @@ public class Int32ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "false"})
     public void in() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -107,8 +107,8 @@ public class Int32ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "6", "0", "0", "0", "0", "0", "4", "undefined"})
     public void undefinedValueInArray() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -142,8 +142,8 @@ public class Int32ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "0", "17"})
     public void specialValueInArray() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -170,8 +170,8 @@ public class Int32ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void nullConstructor() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -192,8 +192,8 @@ public class Int32ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "0", "1", "1,3", "1,3,4,7,11,0,123"})
     public void asString() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -224,8 +224,8 @@ public class Int32ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("Int32Array")
     public void name() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

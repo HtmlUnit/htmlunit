@@ -58,7 +58,8 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      */
     @Test
     public void setClearTimeoutUsesManager() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -95,7 +96,8 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      */
     @Test
     public void setClearIntervalUsesManager() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -138,7 +140,8 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      */
     @Test
     public void navigationStopThreadsInChildWindows() throws Exception {
-        final String firstContent = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
             + URL_SECOND
             + "'></iframe>\n"
@@ -146,12 +149,14 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + URL_THIRD.toExternalForm()
             + "' id='clickme'>click me</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body>\n"
             + "<script>\n"
             + "setInterval('', 30000);\n"
             + "</script>\n"
             + "</body></html>";
-        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML
+            + "<html><head><title>Third</title></head><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_SECOND, secondContent);
@@ -179,7 +184,8 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      */
     @Test
     public void interruptAllWithRecursiveSetTimeout() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"

@@ -95,7 +95,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             "getImageData", "getLineDash", "isPointInPath", "lineTo", "measureText", "moveTo", "putImageData",
             "quadraticCurveTo", "rect", "removeHitRegion", "restore", "rotate", "save", "scale", "scrollPathIntoView",
             "setLineDash", "setTransform", "stroke", "strokeRect", "strokeText", "transform", "translate" };
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<canvas id='myCanvas'></canvas>\n"
             + LOG_TEXTAREA
             + "<script>\n"
@@ -126,7 +127,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             getMockWebConnection().setDefaultResponse("Test");
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
@@ -202,7 +204,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts({"rendering...", "...done"})
     public void drawImage_noImage() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<img id='myImage'>\n"
             + "<canvas id='myCanvas'></canvas>\n"
             + LOG_TEXTAREA
@@ -234,7 +237,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             getMockWebConnection().setDefaultResponse("Test");
         }
 
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<img id='myImage'>\n"
             + "<canvas id='myCanvas'></canvas>\n"
             + LOG_TEXTAREA
@@ -691,7 +695,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "EnlALArEi4CSE3EpfAuU4Abiv0B8GajQAkMh0DQboOBKqGm/gfRFIPYBKn4HUoxudTVQLBSIzwFxCUwRhkJ8IUB+8OAyFQDU"
                 + "0xILsSkm0QAAAABJRU5ErkJggg==")
     public void drawImageDataUrlPng() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
@@ -741,7 +746,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "QXkB4cePBbisYbKBShBCKwozByJen2JwPkHR1L5S2BRP7S6Iw/fTgH0PUkEUmhC2hLBjQqoU/tyyWsooC/bSeyljWUrVRJ3C"
                 + "uLGJ69jYKjbqYSCxSd83rGJzDEro4n8WbFMBvjjXsi/QFPAnNJ3UZ9x/ht/P8AqUpzEVnisiKgAAAABJRU5ErkJggg==")
     public void drawImageDataUrlSvg() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
@@ -774,8 +780,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts({"TypeError", "0", "true", "true"})
     public void measureText() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -809,7 +815,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     }
 
     private void draw(final String canvasSetup, final String drawJS) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
@@ -865,8 +872,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts("[object CanvasGradient]")
     public void createLinearGradient() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
@@ -891,8 +898,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts("[object CanvasGradient]")
     public void createRadialGradient() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
@@ -920,8 +927,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             EDGE = {"1", "0.5", "0", "0.7", "0"})
     @NotYetImplemented({CHROME, EDGE})
     public void globalAlpha() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
@@ -955,8 +962,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts({"0.5", "0.5", "0.5", "0.5"})
     public void globalAlphaInvalid() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
@@ -2178,7 +2185,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "QXkB4cePBbisYbKBShBCKwozByJen2JwPkHR1L5S2BRP7S6Iw/fTgH0PUkEUmhC2hLBjQqoU/tyyWsooC/bSeyljWUrVRJ3C"
                 + "uLGJ69jYKjbqYSCxSd83rGJzDEro4n8WbFMBvjjXsi/QFPAnNJ3UZ9x/ht/P8AqUpzEVnisiKgAAAABJRU5ErkJggg==")
     public void imageOnLoad() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"

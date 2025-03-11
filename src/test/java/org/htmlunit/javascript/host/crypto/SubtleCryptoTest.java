@@ -38,8 +38,8 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "TypeError"})
     public void ctor() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -71,8 +71,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             FF = "TypeError false",
             FF_ESR = "TypeError false")
     public void unsupportedCall() throws Exception {
-        final String html
-            = ""
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -104,8 +103,8 @@ public class SubtleCryptoTest extends WebDriverTestCase {
              "publicExponent 1,0,1"})
     @NotYetImplemented
     public void rsassa() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(window.crypto);\n"

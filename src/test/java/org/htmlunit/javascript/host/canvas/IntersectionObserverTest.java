@@ -35,8 +35,8 @@ public class IntersectionObserverTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void inWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -58,8 +58,8 @@ public class IntersectionObserverTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "function", "function", "function"})
     public void functions() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.IntersectionObserver) {\n"

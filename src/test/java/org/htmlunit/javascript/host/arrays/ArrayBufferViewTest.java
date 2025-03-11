@@ -36,8 +36,8 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Test
     @Alerts({"18", "93", "42"})
     public void set_int8() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -59,8 +59,8 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Test
     @Alerts("10")
     public void set_empty() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -80,8 +80,8 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "3", "-1"})
     public void subarray_int8() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -105,8 +105,8 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Test
     @Alerts({"8", "0", "0", "0", "10", "1", "2", "2", "2"})
     public void ctorInvalidValuesInt() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -128,8 +128,8 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Test
     @Alerts({"7", "0", "NaN", "NaN", "10", "1", "2.5", "2.75"})
     public void ctorInvalidValuesFloat() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

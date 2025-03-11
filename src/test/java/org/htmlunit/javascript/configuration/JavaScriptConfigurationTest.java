@@ -317,7 +317,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     private static void test(final BrowserVersion browserVersion) throws IOException {
         try (WebClient webClient = new WebClient(browserVersion)) {
             final MockWebConnection conn = new MockWebConnection();
-            conn.setDefaultResponse("<html><body onload='document.body.firstChild'></body></html>");
+            conn.setDefaultResponse(DOCTYPE_HTML + "<html><body onload='document.body.firstChild'></body></html>");
             webClient.setWebConnection(conn);
 
             webClient.getPage("http://localhost/");

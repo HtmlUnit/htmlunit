@@ -34,8 +34,8 @@ public class CanvasGradientTest extends WebDriverTestCase {
     @Test
     @Alerts("function")
     public void functions() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
@@ -56,8 +56,8 @@ public class CanvasGradientTest extends WebDriverTestCase {
     @Test
     @Alerts("[object CanvasGradient]")
     public void addColorStop() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"

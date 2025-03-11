@@ -44,8 +44,8 @@ public class LibraryDependencyTest extends WebDriverTestCase {
     @Alerts("2")
     @Test
     public void contextFactory_Browser() throws Exception {
-        final String firstHtml =
-            "<html>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>1</title>\n"
             + "  <script src='" + URL_THIRD + "' type='text/javascript'></script>\n"
@@ -60,8 +60,8 @@ public class LibraryDependencyTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        final String secondHtml =
-            "<html>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>2</title>\n"
             + "  <script src='" + URL_THIRD + "' type='text/javascript'></script>\n"
