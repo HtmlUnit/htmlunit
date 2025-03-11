@@ -1620,17 +1620,14 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "true", "true", "true", "false", "false", "true", "true", "true", "false"})
-    public void widthAuto() throws Exception {
+    @Alerts({"true", "true", "true", "true", "false"})
+    public void widthAutoBody() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
-                + "      tester(document.body);\n"
-                + "      tester(document.getElementById('div'));\n"
-                + "    }\n"
-                + "    function tester(el) {\n"
+                + "      let el = document.body;\n"
                 + "      log(el.style.width == 'auto');\n"
                 + "      log(el.clientWidth > 100);\n"
                 + "      log(el.offsetWidth > 100);\n"
@@ -1642,7 +1639,35 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body style='width: auto' onload='test();'>\n"
-                + "<div id='div'></div>\n"
+                + "  <div id='div'></div>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true", "true", "true", "false"})
+    public void widthAutoDiv() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      let el = document.getElementById('div');\n"
+                + "      log(el.style.width == 'auto');\n"
+                + "      log(el.clientWidth > 100);\n"
+                + "      log(el.offsetWidth > 100);\n"
+
+                + "      var style = window.getComputedStyle(el, null);\n"
+                + "      log(/\\d+px/.test(style.width));\n"
+                + "      log(style.width == 'auto');\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body style='width: auto' onload='test();'>\n"
+                + "  <div id='div'></div>\n"
                 + "</body></html>";
         loadPageVerifyTitle2(html);
     }
