@@ -1294,6 +1294,18 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false",
+            EDGE = "false",
+            FF_ESR = "false")
+    public void _Element_SVGDiscardElement() throws Exception {
+        test("Element", "SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Element_SVGElement() throws Exception {
         test("Element", "SVGElement");
@@ -3996,11 +4008,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false")
+    @Alerts("false")
     public void _EventTarget_StorageManager() throws Exception {
         test("EventTarget", "StorageManager");
     }
@@ -4093,6 +4101,18 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts("true")
     public void _EventTarget_SVGDescElement() throws Exception {
         test("EventTarget", "SVGDescElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false",
+            EDGE = "false",
+            FF_ESR = "false")
+    public void _EventTarget_SVGDiscardElement() throws Exception {
+        test("EventTarget", "SVGDiscardElement");
     }
 
     /**
