@@ -2033,4 +2033,40 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Test for #942.
+     * @throws Exception if the test fails
+     */
+    // @Test
+    @Alerts({"0 622 / 722", "1 622 / 722", "2 622 / 722", "3 622 / 722",
+             "4 622 / 722", "5 622 / 722", "6 622 / 722"})
+    public void endlessLoop() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>"
+            + "  </head>"
+            + "  <body>\n"
+            + "    <h1>Scroll me</h1>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  for (let i = 0; i < 70; i++) {\n"
+            + "    let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;\n"
+            + "    let stop = document.documentElement.clientHeight + 100;"
+            + "    if (windowRelativeBottom > stop) {\n"
+            + "      log('break at: ' + i + ' ' + windowRelativeBottom + ' / ' + stop);\n"
+            + "      break;\n"
+            + "    }\n"
+            + "    log(i + ' ' + windowRelativeBottom + ' / ' + stop);\n"
+
+            + "    document.body.insertAdjacentHTML('beforeend', `<p>Date: ${new Date()}</p>`);\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
