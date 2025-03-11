@@ -438,7 +438,8 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     public void typePreventedCharacterFirst() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function stopEnterKey(evt) {\n"
             + "    var evt = evt || window.event;\n"

@@ -40,7 +40,8 @@ public final class DomTreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     public void firstChild() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + "function test() {\n"
                 + "}\n"
                 + "</script></head>\n"

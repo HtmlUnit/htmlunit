@@ -34,7 +34,8 @@ public class SimpleRangeTest extends SimpleWebTestCase {
      */
     @Test
     public void toStringOneNode() throws Exception {
-        final String content = "<html><head><title>Test page</title></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>Test page</title></head>\n"
             + "<body>\n"
             + "  <input type='text' id='myInput' value='abcd'>\n"
             + "</body>\n"

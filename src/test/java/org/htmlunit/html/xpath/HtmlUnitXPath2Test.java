@@ -44,7 +44,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts({"4", "null"})
     public void xPathNull() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -71,7 +72,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts({"4", "null"})
     public void xPathUndefined() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -98,7 +100,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts({"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"})
     public void optionText() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -125,7 +128,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLParagraphElement][object HTMLDivElement]")
     public void pipe() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -155,7 +159,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts("a")
     public void math() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -452,7 +457,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     }
 
     private void compare(final String xpath) throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -479,7 +485,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     }
 
     private void compareStringValue(final String xpath) throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -503,7 +510,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     }
 
     private void compareBooleanValue(final String xpath) throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -527,7 +535,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     }
 
     private void compareError(final String xpath) throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -551,7 +560,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts("mySpan")
     public void minimalParameters() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -580,7 +590,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts("mySpan")
     public void undefinedResult() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -610,7 +621,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void stringResult() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -640,7 +652,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts("mySpan")
     public void objectResult() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -672,7 +685,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             FF = "mySpan - myDiv - ",
             FF_ESR = "mySpan - myDiv - ")
     public void reuseResult() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -715,7 +729,8 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Test
     @Alerts("myDiv1")
     public void documentEvaluateFirst() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
