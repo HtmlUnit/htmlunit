@@ -241,10 +241,10 @@ public class DOMImplementation extends HtmlUnitScriptable {
             final WebWindow webWindow = getWindow().getWebWindow();
             final String html;
             if (JavaScriptEngine.isUndefined(titleObj)) {
-                html = "<html><head></head><body></body></html>";
+                html = "<!DOCTYPE html><html><head></head><body></body></html>";
             }
             else {
-                html = "<html><head><title>"
+                html = "<!DOCTYPE html><html><head><title>"
                         + JavaScriptEngine.toString(titleObj)
                         + "</title></head><body></body></html>";
             }

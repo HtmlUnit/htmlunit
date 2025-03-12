@@ -113,7 +113,7 @@ public class WebResponseData implements Serializable {
                     LOG.error("Reading gzip encodec content failed.", e);
                     stream.close();
                     stream = IOUtils.toInputStream(
-                                "<html>\n"
+                                "<!DOCTYPE html><html>\n"
                                  + "<head><title>Problem loading page</title></head>\n"
                                  + "<body>\n"
                                  + "<h1>Content Encoding Error</h1>\n"
@@ -136,7 +136,7 @@ public class WebResponseData implements Serializable {
                     LOG.error("Reading Brotli encodec content failed.", e);
                     stream.close();
                     stream = IOUtils.toInputStream(
-                                "<html>\n"
+                                "<!DOCTYPE html><html>\n"
                                  + "<head><title>Problem loading page</title></head>\n"
                                  + "<body>\n"
                                  + "<h1>Content Encoding Error</h1>\n"
