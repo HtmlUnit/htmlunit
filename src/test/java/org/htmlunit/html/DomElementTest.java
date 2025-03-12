@@ -41,7 +41,8 @@ public final class DomElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "2"})
     public void getElementsByTagName() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -69,7 +70,8 @@ public final class DomElementTest extends WebDriverTestCase {
      */
     @Test(expected = ElementNotInteractableException.class)
     public void clickInvisible() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <a id='link' style='display: none'>Click me</a>\n"
                 + "</body></html>";
@@ -111,7 +113,8 @@ public final class DomElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickDisabled() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <button id='id1' disabled>Click Me</button>\n"
                 + "</body></html>";
@@ -125,7 +128,8 @@ public final class DomElementTest extends WebDriverTestCase {
      */
     @Test(expected = InvalidElementStateException.class)
     public void sendKeysToDisabled() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <input id='id1' disabled>\n"
                 + "</body></html>";
@@ -139,7 +143,7 @@ public final class DomElementTest extends WebDriverTestCase {
      */
     @Test
     public void sendEnterKeyWithHiddenSubmit() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
@@ -166,7 +170,7 @@ public final class DomElementTest extends WebDriverTestCase {
      */
     @Test
     public void sendEnterKey() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
@@ -192,7 +196,7 @@ public final class DomElementTest extends WebDriverTestCase {
      */
     @Test(expected = ElementNotInteractableException.class)
     public void clickHiddenSubmit() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <form id='myForm' action='" + URL_SECOND + "'>\n"

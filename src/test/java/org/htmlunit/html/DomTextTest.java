@@ -115,7 +115,7 @@ public class DomTextTest extends SimpleWebTestCase {
     @Test
     public void asText_table_elements() throws Exception {
         final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>\n";
-        final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
+        final String content = DOCTYPE_HTML + "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);
 
@@ -125,7 +125,7 @@ public class DomTextTest extends SimpleWebTestCase {
     }
 
     private void testPlainText(final String html, final String expectedText) throws Exception {
-        final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
+        final String content = DOCTYPE_HTML + "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);
         assertEquals(expectedText, page.asNormalizedText());
@@ -138,7 +138,7 @@ public class DomTextTest extends SimpleWebTestCase {
     }
 
     private void testAsText(final String html, final String expectedText) throws Exception {
-        final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
+        final String content = DOCTYPE_HTML + "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
@@ -151,7 +151,8 @@ public class DomTextTest extends SimpleWebTestCase {
     @Test
     public void asXml() throws Exception {
         final String unicodeString = "\u064A\u0627 \u0644\u064A\u064A\u0644";
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head>\n"
             + "<body><span id='foo'>" + unicodeString + "</span></body></html>";
 
@@ -177,8 +178,8 @@ public class DomTextTest extends SimpleWebTestCase {
      */
     @Test
     public void splitText() throws Exception {
-        final String html
-            = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -211,8 +212,8 @@ public class DomTextTest extends SimpleWebTestCase {
      */
     @Test
     public void splitLastDomText() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -262,7 +263,8 @@ public class DomTextTest extends SimpleWebTestCase {
      */
     @Test
     public void splitText2() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    div.appendChild(document.createElement('a'));\n"
@@ -288,7 +290,7 @@ public class DomTextTest extends SimpleWebTestCase {
      */
     @Test
     public void setTextContent() throws Exception {
-        final String html = "<html><body><span id='s'>abc</span></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><span id='s'>abc</span></body></html>";
         final HtmlPage page = loadPage(html);
         final DomText text = (DomText) page.getElementById("s").getFirstChild();
         assertEquals("abc", text.getTextContent());
@@ -303,7 +305,7 @@ public class DomTextTest extends SimpleWebTestCase {
      */
     @Test
     public void getTextContentWhitespace() throws Exception {
-        final String html = "<html><body><div id='s'><b>Hello</b> <b>World</b>!</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='s'><b>Hello</b> <b>World</b>!</div></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlElement text = page.getHtmlElementById("s");
         assertEquals("Hello World!", text.getTextContent());
@@ -316,7 +318,7 @@ public class DomTextTest extends SimpleWebTestCase {
      */
     @Test
     public void getCanonicalXPath_withoutTextSiblings() throws Exception {
-        final String html = "<html><body><span id='s'>abc</span></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><span id='s'>abc</span></body></html>";
         final HtmlPage page = loadPage(html);
         final DomText text = (DomText) page.getElementById("s").getFirstChild();
         assertEquals("/html/body/span/text()", text.getCanonicalXPath());
@@ -330,7 +332,7 @@ public class DomTextTest extends SimpleWebTestCase {
      */
     @Test
     public void getCanonicalXPath_withTextSiblings() throws Exception {
-        final String html = "<html><body><span id='s'>abc<br/>def</span></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><span id='s'>abc<br/>def</span></body></html>";
         final HtmlPage page = loadPage(html);
 
         final DomText text1 = (DomText) page.getElementById("s").getFirstChild();

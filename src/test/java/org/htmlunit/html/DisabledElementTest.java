@@ -71,7 +71,7 @@ public class DisabledElementTest extends SimpleWebTestCase {
      * @param elementHtml the HTML representing the element to test with attribute <code>id='element1'</code>
      */
     public DisabledElementTest(final String elementHtml) {
-        final String htmlContent = "<html><body><form id='form1'>{0}</form></body></html>";
+        final String htmlContent = DOCTYPE_HTML + "<html><body><form id='form1'>{0}</form></body></html>";
         htmlContent_ = MessageFormat.format(htmlContent, new Object[]{elementHtml});
     }
 

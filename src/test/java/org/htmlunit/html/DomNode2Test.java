@@ -38,7 +38,8 @@ public class DomNode2Test extends WebDriverTestCase {
     @Test
     @Alerts({"HierarchyRequestError/DOMException", "0"})
     public void appendChild_recursive() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -63,7 +64,8 @@ public class DomNode2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "HierarchyRequestError/DOMException", "1", "0"})
     public void appendChild_recursive_parent() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -89,7 +91,8 @@ public class DomNode2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true"})
     public void ownerDocument() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -117,7 +120,8 @@ public class DomNode2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true"})
     public void getRootNode() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -148,7 +152,8 @@ public class DomNode2Test extends WebDriverTestCase {
     @Test
     @Alerts("beforeafter")
     public void textContentCdata() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

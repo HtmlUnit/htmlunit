@@ -41,8 +41,8 @@ public class ClickableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void clickOnFocus() throws Exception {
-        final String html
-            = "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<form>\n"
             + "  <input type='button' id='textfield1' onfocus='log(1)'>\n"
             + "</form>\n"
@@ -60,7 +60,8 @@ public class ClickableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"click", "click", "dblclick"})
     public void dblClick() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION

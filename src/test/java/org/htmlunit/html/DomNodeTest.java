@@ -47,7 +47,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void elementHasAttributesWith() throws Exception {
-        final String content = "<html><head></head><body id='tag'>text</body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
@@ -60,7 +60,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void elementHasAttributesNone() throws Exception {
-        final String content = "<html><head></head><body id='tag'>text</body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
@@ -74,7 +74,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void nonElementHasAttributes() throws Exception {
-        final String content = "<html><head></head><body id='tag'>text</body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
@@ -88,7 +88,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void nonElementGetPrefix() throws Exception {
-        final String content = "<html><head></head><body id='tag'>text</body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
@@ -102,7 +102,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void nonElementGetNamespaceURI() throws Exception {
-        final String content = "<html><head></head><body id='tag'>text</body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
@@ -116,7 +116,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void nonElementGetLocalName() throws Exception {
-        final String content = "<html><head></head><body id='tag'>text</body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
@@ -130,7 +130,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void nonElementSetPrefix() throws Exception {
-        final String content = "<html><head></head><body id='tag'>text</body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getElementById("tag");
@@ -144,8 +144,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void removeAllChildren() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<p id='tag'><table>\n"
             + "<tr><td>row 1</td></tr>\n"
             + "<tr><td>row 2</td></tr>\n"
@@ -162,8 +162,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void replace() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br><div id='tag2'/></body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -202,8 +202,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getNewNodeById() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<br><div id='tag'/></body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -242,8 +242,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void appendChild() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<br><div><div id='tag'></div></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -272,8 +272,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void insertBefore() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
@@ -320,8 +320,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getByXPath() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>my title</title>\n"
             + "  </head>"
@@ -362,8 +362,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getByXPathSelectedNode() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>my title</title>\n"
             + "  </head>"
@@ -388,7 +388,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getByXPath_trim_namespace() throws Exception {
-        final String html = "<html xmlns=' http://www.w3.org/1999/xhtml'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html xmlns=' http://www.w3.org/1999/xhtml'>\n"
             + "<body>\n"
             + "<div><span>bla</span></div>\n"
             + "</body></html>";
@@ -404,8 +405,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getFirstByXPathDisplayNone() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>my title</title>\n"
             + "  </head>"
@@ -429,8 +430,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getFirstByXPath() throws Exception {
-        final String htmlContent
-            = "<html><head><title>my title</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>my title</title></head><body>\n"
             + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></ul></div>\n"
             + "<div><span>bla</span></div>\n"
             + "</body></html>";
@@ -459,7 +460,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getHtmlElementDescendantsOrder() throws Exception {
-        final String html = "<html><body id='0'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body id='0'>\n"
             + "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>\n"
             + "<span id='I.2'><span id='I.2.a'/></span></span>\n"
             + "<span id='II'/>\n"
@@ -489,8 +491,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getDescendants_remove() throws Exception {
-        final String html =
-              "<html><body id='body'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body id='body'>\n"
             + "<div id='a'>a<div id='b'>b</div>a<div id='c'>c</div>a</div><div id='d'>d</div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
@@ -528,8 +530,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void domChangeListenerTestImpl_insertBefore() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -561,8 +563,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void domChangeListenerTestImpl_appendChild() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -594,8 +596,8 @@ public class DomNodeTest extends SimpleWebTestCase {
     @Test
     @Alerts({"nodeDeleted: div,p", "nodeDeleted: div,p"})
     public void domChangeListenerTestImpl_removeChild() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -625,8 +627,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void domChangeListenerRegisterNewListener() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -697,7 +699,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getCanonicalXPath() throws Exception {
-        final String content = "<html><head></head><body><div id='div1'/><div id='div2'/></body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body><div id='div1'/><div id='div2'/></body></html>";
         final HtmlPage page = loadPage(content);
         for (final HtmlElement element : page.getHtmlElementDescendants()) {
             final List<?> foundElements = page.getByXPath(element.getCanonicalXPath());
@@ -711,7 +713,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void getChildNodes_remove() throws Exception {
-        final String content = "<html><body id='b'><div id='d1'></div><div id='d2'></div></body></html>";
+        final String content = DOCTYPE_HTML + "<html><body id='b'><div id='d1'></div><div id='d2'></div></body></html>";
         final HtmlPage page = loadPage(content);
         final DomNodeList<DomNode> children = page.getElementById("b").getChildNodes();
         assertEquals(2, children.getLength());
@@ -727,7 +729,7 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void serialization() throws Exception {
-        final String html = "<html><head></head><body></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body></body></html>";
         final DomChangeListenerTestImpl listener = new DomChangeListenerTestImpl();
         HtmlPage page = loadPage(html);
         page.addDomChangeListener(listener);
@@ -740,7 +742,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void isDisplayed() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "#d2 { display: none; }\n"
             + "#d3 { visibility: hidden; }\n"
@@ -769,7 +772,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void isDisplayedMouseOver() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "#d2:hover { display: none; }\n"
             + "#d3:hover { visibility: hidden; }\n"
@@ -803,7 +807,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void isDisplayedMouseOverParent() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "#d1:hover { display: none; }\n"
             + "#d2:hover { visibility: hidden; }\n"
@@ -833,7 +838,8 @@ public class DomNodeTest extends SimpleWebTestCase {
      */
     @Test
     public void isDisplayedMousePath() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "#d1:hover #d2 { display: none; }\n"
             + "</style>\n"

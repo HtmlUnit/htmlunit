@@ -32,7 +32,7 @@ public class DomAttrTest extends SimpleWebTestCase {
      */
     @Test
     public void getCanonicalXPath() throws Exception {
-        final String html = "<html id='foo'><body></body></html>";
+        final String html = DOCTYPE_HTML + "<html id='foo'><body></body></html>";
         final HtmlPage page = loadPage(html);
         final DomAttr attr = page.getHtmlElementById("foo").getAttributeNode("id");
 
@@ -44,7 +44,7 @@ public class DomAttrTest extends SimpleWebTestCase {
      */
     @Test
     public void textContent() throws Exception {
-        final String html = "<html id='foo'><body></body></html>";
+        final String html = DOCTYPE_HTML + "<html id='foo'><body></body></html>";
         final HtmlPage page = loadPage(html);
         final DomAttr attr = page.getDocumentElement().getAttributeNode("id");
 

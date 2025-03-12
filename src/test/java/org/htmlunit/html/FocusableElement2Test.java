@@ -57,8 +57,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
             FF_ESR = {"body", "active: body", "onload", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodyLoad() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -90,8 +90,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
             FF_ESR = {"before", "active: focusId", "after", "active: focusId"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void body() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -125,8 +125,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
             FF_ESR = {"before", "active: body", "after", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodySwitchFromBodyToNotFocusable() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -184,8 +184,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
                       "after", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodySwitchFromBodyToFocusable() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -253,8 +253,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     }
 
     private void testBodySwitchWithCallFocusAndBlur(final String snippet) throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -776,8 +776,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     private void testWithCallFocusAndBlur(String snippet) throws Exception {
         snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -893,8 +893,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
         snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
         snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -962,8 +962,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     private void testWithCallClick(String snippet) throws Exception {
         snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -1059,8 +1059,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     private void testWithClick(String snippet) throws Exception {
         snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -1123,8 +1123,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
         snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
         snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()

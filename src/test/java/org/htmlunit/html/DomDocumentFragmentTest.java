@@ -35,7 +35,8 @@ public class DomDocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined"})
     public void xml() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"

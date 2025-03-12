@@ -32,7 +32,8 @@ public class BaseFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     public void removeIFrameAndAddAgain() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var frag1 = document.createDocumentFragment();\n"

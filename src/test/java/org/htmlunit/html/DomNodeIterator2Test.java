@@ -37,8 +37,8 @@ public final class DomNodeIterator2Test extends SimpleWebTestCase {
      */
     @Test
     public void subroot() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "</head>\n"
             + "<body>\n"

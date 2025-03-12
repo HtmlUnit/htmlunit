@@ -36,8 +36,8 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("posted called")
     public void windowEventListenersContainer() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -66,8 +66,8 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     public void doNotLoopEndless() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "</head>\n"
             + "<body>\n"

@@ -36,7 +36,8 @@ public final class DomElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void isMouseOver() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <div id='d1'>\n"
