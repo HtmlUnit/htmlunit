@@ -36,8 +36,8 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
      */
     @Test
     public void reset() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='text' name='textfield1' id='textfield1' value='foo'/>\n"
             + "<input type='password' name='password1' id='password1' value='foo'/>\n"
@@ -108,8 +108,8 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
      */
     @Test
     public void resetClick_onClick() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "  <button type='reset' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
@@ -131,8 +131,8 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
      */
     @Test
     public void outsideForm() throws Exception {
-        final String html =
-            "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<input id='myInput' type='reset' onclick='alert(1)'>\n"
             + "</body></html>";

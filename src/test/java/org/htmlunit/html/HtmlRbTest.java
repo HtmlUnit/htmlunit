@@ -36,7 +36,8 @@ public class HtmlRbTest extends WebDriverTestCase {
             FF = {"", "ruby-base", "ruby-base"},
             FF_ESR = {"", "ruby-base", "ruby-base"})
     public void defaultStyle() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
