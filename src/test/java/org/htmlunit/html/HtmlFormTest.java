@@ -58,8 +58,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void setSelectedRadioButton_ValueExists() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='radio' name='foo' value='1' selected='selected' id='input1'/>\n"
             + "<input type='radio' name='foo' value='2' id='input2'/>\n"
@@ -92,8 +92,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void setSelectedRadioButton_ValueDoesNotExist_DoNotForceSelection() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='radio' name='foo' value='1' selected='selected'/>\n"
             + "<input type='radio' name='foo' value='2'/>\n"
@@ -115,8 +115,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_String() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input id='submitButton' type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
@@ -133,8 +133,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_ExtraParameters() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "  <input type='text' name='textfield' value='*'/>\n"
             + "  <input type='submit' name='button' value='foo'/>\n"
@@ -160,8 +160,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_BadSubmitMethod() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='put'>\n"
             + "  <input type='text' name='textfield' value='*'/>\n"
             + "  <input type='submit' name='button' id='button' value='foo'/>\n"
@@ -177,12 +177,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_onSubmitHandler() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -207,13 +207,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_onSubmitHandler_returnFalse() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' "
             + "onSubmit='alert(\"clicked\");return false;'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -241,8 +241,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
     @Test
     @Alerts("clicked")
     public void submit_onSubmitHandler_preventDefaultOnly() throws Exception {
-        final String firstHtml
-            = "<html><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='post' action='/foo' >\n"
             + "<input type='submit' id='button'/>\n"
             + "</form>\n"
@@ -282,12 +282,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_onSubmitHandler_fails() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='return null'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final MockWebConnection webConnection = getMockWebConnection();
@@ -305,12 +305,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_onSubmitHandler_javascriptDisabled() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         client.getOptions().setJavaScriptEnabled(false);
@@ -338,12 +338,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_javascriptAction() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -368,12 +368,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_javascriptActionMixedCase() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='jaVAscrIpt:alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -398,12 +398,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_javascriptActionLeadingWhitespace() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action=' javascript:alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -428,8 +428,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_javascriptAction_javascriptDisabled() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
@@ -457,8 +457,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitRadioButton() throws Exception {
-        final String html
-            = "<html><body><form method='POST' action='" + URL_FIRST + "'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><form method='POST' action='" + URL_FIRST + "'>\n"
             + "<table><tr> <td ><input type='radio' name='name1' value='foo'> "
             + "Option 1</td> </tr>\n"
             + "<tr> <td ><input type='radio' name='name1' value='bar' checked >\n"
@@ -478,8 +478,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void reset_onResetHandler() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' "
             + "onReset='alert(\"clicked\");alert(event.type)'>\n"
             + "<input name='button' type='reset' value='PushMe' id='button'/></form>\n"
@@ -509,15 +509,15 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_AnchorCausesSubmit_onSubmitHandler_returnFalse() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<script>function doalert(message){alert(message);}</script>\n"
             + "<body><form name='form1' method='get' action='" + URL_SECOND + "' "
             + "onSubmit='doalert(\"clicked\");return false;'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "<a id='link1' href='javascript:document.form1.submit()'>Click me</a>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -542,8 +542,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_CheckboxClicked() throws Exception {
-        final String html
-            = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script language='javascript'>\n"
             + "function setFormat() {\n"
             + "  if (document.form1.Format.checked) {\n"
@@ -591,8 +591,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void getInputByValue() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='submit' name='button' value='xxx'/>\n"
             + "  <input type='text' name='textfield' value='foo'/>\n"
@@ -629,8 +629,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void getInputByValueValueChanged() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='submit' name='button' value='xxx'/>\n"
             + "  <input type='text' name='textfield' value='foo'/>\n"
@@ -688,8 +688,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void getTextAreaByName() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <textarea id='ta1_1' name='ta1'>hello</textarea>\n"
             + "  <textarea id='ta1_2' name='ta1'>world</textarea>\n"
@@ -721,8 +721,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void getButtonByName() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <button id='b1_1' name='b1' value='hello' type='button'/>\n"
             + "  <button id='b1_2' name='b1' value='world' type='button'/>\n"
@@ -752,8 +752,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitToTargetWindow() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head><body>\n"
             + "<form id='form1' target='window2' action='" + URL_SECOND + "' method='post'>\n"
             + "  <input type='submit' name='button' value='push me'/>\n"
             + "</form></body></html>";
@@ -781,8 +781,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_SelectHasNoOptions() throws Exception {
-        final String html
-            = "<html><body><form name='form' method='GET' action='action.html'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "  <select name='select'>\n"
             + "  </select>\n"
             + "  <input type='submit' id='clickMe'>\n"
@@ -801,8 +801,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_SelectOptionWithoutValueAttribute() throws Exception {
-        final String html
-            = "<html><body><form name='form' action='action.html'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><form name='form' action='action.html'>\n"
             + "<select name='select'>\n"
             + "  <option>first value</option>\n"
             + "  <option selected>second value</option>\n"
@@ -822,8 +822,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_DeepInputs() throws Exception {
-        final String html
-            = "<html><form method='post' action=''>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><form method='post' action=''>\n"
             + "<table><tr><td>\n"
             + "<input value='NOT_SUBMITTED' name='data' type='text'/>\n"
             + "</td></tr></table>\n"
@@ -849,8 +849,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submit_FormElementOrder() throws Exception {
-        final String html
-            = "<html><head></head><body><form method='post' action=''>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body><form method='post' action=''>\n"
             + "<input type='submit' name='dispatch' value='Save' id='submitButton'>\n"
             + "<input type='hidden' name='dispatch' value='TAB'>\n"
             + "</form></body></html>";
@@ -914,8 +914,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     private void urlAfterSubmit(final URL url, final String method, final String action,
             final String expectedUrl) throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='" + method + "' action='" + action + "'>\n"
             + "<input type='text' name='textField' value='foo'/>\n"
             + "<input type='text' name='nonAscii' value='Flo\u00DFfahrt'/>\n"
@@ -983,7 +983,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
                 + metaCharset + "'>\n";
         }
 
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + metaContentType
             + "</head><body>\n"
             + "<form name='form1' method='post' action='foo'"
@@ -1010,8 +1011,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void sumbit_submitInputValue() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "<form action='" + URL_SECOND + "'>\n"
@@ -1031,12 +1032,14 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitWithOnClickThatReturnsFalse() throws Exception {
-        final String firstHtml = "<html><head><title>foo</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "' method='post'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
             + "</form></body></html>";
 
-        final String secondHtml = "<html><head><title>foo</title><script>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "  Number.prototype.gn = false;\n"
             + "  function test() {\n"
             + "    var v = 0;\n"
@@ -1069,12 +1072,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitURLWithoutParameters() throws Exception {
-        final String firstHtml = "<html><head><title>foo</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
             + "</form></body></html>";
 
-        final String secondHtml = "<html><head><title>second</title></head></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
         final WebClient client = getWebClientWithMockWebConnection();
@@ -1098,8 +1102,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void malformedHtml_fieldGetters() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<div>\n"
             + "<form id='form1' method='get' action='foo'>\n"
             + "  <input name='field1' value='val1'/>\n"
@@ -1133,8 +1137,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void malformedHtml_formAndTables() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "\n"
             + "<table id='table1'>\n"
             + "<tr>\n"
@@ -1209,8 +1213,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml_emptyTag() throws Exception {
-        final String html =
-            "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form></form>\n"
             + "<div>test</div>\n"
             + "</body></html>";
@@ -1238,7 +1242,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
     @Test
     @Alerts("second/?hiddenName=hiddenValue")
     public void inputHiddenAdded() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"

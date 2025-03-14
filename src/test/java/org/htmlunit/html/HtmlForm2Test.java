@@ -69,8 +69,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"myForm", "TypeError"})
     public void formsAccessor_FormsAsFunction() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -97,8 +97,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"myForm", "TypeError"})
     public void formsAccessor_FormsAsFunction2() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -125,8 +125,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"TypeError", "TypeError", "TypeError"})
     public void asFunction() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -152,8 +152,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void asFunctionFormsFunction() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -180,15 +180,15 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void base() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <base href='" + URL_SECOND + "'>\n"
             + "</head><body>\n"
             + "<form action='two.html'>\n"
             + "  <input type='submit'>\n"
             + "</form></body></html>";
 
-        getMockWebConnection().setDefaultResponse("<html><head></head><body>foo</body></html>");
+        getMockWebConnection().setDefaultResponse(DOCTYPE_HTML + "<html><head></head><body>foo</body></html>");
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ByTagName("input")).click();
@@ -206,15 +206,15 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void emptyActionWithBase() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <base href='" + URL_SECOND + "'>\n"
             + "</head><body>\n"
             + "<form>\n"
             + "  <input type='submit'>\n"
             + "</form></body></html>";
 
-        getMockWebConnection().setDefaultResponse("<html><head></head><body>foo</body></html>");
+        getMockWebConnection().setDefaultResponse(DOCTYPE_HTML + "<html><head></head><body>foo</body></html>");
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ByTagName("input")).click();
@@ -228,8 +228,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void emptyActionWithBase2() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <base href='" + URL_SECOND + "'>\n"
             + "</head><body>\n"
             + "<form>\n"
@@ -237,7 +237,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  <input type='submit'>\n"
             + "</form></body></html>";
 
-        getMockWebConnection().setDefaultResponse("<html><head></head><body>foo</body></html>");
+        getMockWebConnection().setDefaultResponse(DOCTYPE_HTML + "<html><head></head><body>foo</body></html>");
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ByTagName("input")).click();
@@ -256,8 +256,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("clicked")
     public void jSSubmit_JavaScriptAction() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body onload='document.getElementById(\"aForm\").submit()'>\n"
             + "<form id='aForm' action='javascript:alert(\"clicked\")'"
             + "</form>\n"
@@ -272,8 +272,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "val2", "3", "3"})
     public void malformedHtml_nestedForms() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -302,8 +302,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts({"§§URL§§?par%F6m=Hello+G%FCnter", "par\u00F6m", "Hello G\u00FCnter"})
     public void encodingSubmit() throws Exception {
         stopWebServers();
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
             + "</head>\n"
@@ -337,8 +337,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"null", "§§URL§§path?query"})
     public void originRefererHeaderGet() throws Exception {
-        final String firstHtml
-            = "<html>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <form method='get' action='" + URL_SECOND + "'>\n"
@@ -346,7 +346,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondHtml = "<html><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
         final URL requestUrl = new URL(URL_FIRST, "/path?query");
@@ -372,8 +372,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§", "§§URL§§/path?query"})
     public void originRefererHeaderPost() throws Exception {
-        final String firstHtml
-            = "<html>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <form method='post' action='" + URL_SECOND + "'>\n"
@@ -381,7 +381,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondHtml = "<html><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
         final URL requestUrl = new URL(URL_FIRST, "/path?query");
@@ -411,8 +411,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             FF_ESR = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeader() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head></head><body>\n"
             + "  <form action='test2'>\n"
             + "    <input type=submit id='mySubmit'>\n"
@@ -441,7 +440,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
             request.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
-            final String html = "<html><head><script>\n"
+            final String html = DOCTYPE_HTML
+                    + "<html><head><script>\n"
                     + "function test() {\n"
                     + "  alert('" + request.getHeader(HttpHeader.ACCEPT) + "');\n"
                     + "}\n"
@@ -461,8 +461,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             FF = "gzip, deflate, br",
             FF_ESR = "gzip, deflate, br")
     public void acceptEncodingHeader() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head></head><body>\n"
             + "  <form action='test2'>\n"
             + "    <input type=submit id='mySubmit'>\n"
@@ -482,7 +481,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void formMultipartEncodingTypeTest() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -494,8 +493,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "    <button id='myButton' type='submit'>Submit</button>\n"
             + "  </form>\n"
             + "</body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>second</title></head><body>\n"
             + "  <p>hello world</p>\n"
             + "</body></html>";
 
@@ -517,7 +516,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void formUrlEncodedEncodingTypeTest() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -529,8 +528,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>second</title></head><body>\n"
             + "  <p>hello world</p>\n"
             + "</body></html>";
 
@@ -553,7 +552,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "third"})
     public void buttonWithFormAction() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head><title>first</title></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -563,15 +562,17 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final String secondContent = "<html><head><title>second</title></head>\n"
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>second</title></head>\n"
                 + "<body>\n"
                 + "  <p>hello world</p>\n"
                 + "</body></html>";
 
-        final String thirdContent = "<html><head><title>third</title></head>\n"
-            + "<body>\n"
-            + "  <p>hello world</p>\n"
-            + "</body></html>";
+        final String thirdContent = DOCTYPE_HTML
+                + "<html><head><title>third</title></head>\n"
+                + "<body>\n"
+                + "  <p>hello world</p>\n"
+                + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         getMockWebConnection().setResponse(URL_THIRD, thirdContent);
@@ -592,7 +593,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "third"})
     public void buttonWithFormActionWithoutType() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head><title>first</title></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -602,15 +603,17 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final String secondContent = "<html><head><title>second</title></head>\n"
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>second</title></head>\n"
                 + "<body>\n"
                 + "  <p>hello world</p>\n"
                 + "</body></html>";
 
-        final String thirdContent = "<html><head><title>third</title></head>\n"
-            + "<body>\n"
-            + "  <p>hello world</p>\n"
-            + "</body></html>";
+        final String thirdContent = DOCTYPE_HTML
+                + "<html><head><title>third</title></head>\n"
+                + "<body>\n"
+                + "  <p>hello world</p>\n"
+                + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         getMockWebConnection().setResponse(URL_THIRD, thirdContent);
@@ -630,7 +633,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void buttonWithFormActionNegative() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -654,7 +657,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "third/"})
     public void inputTypeSubmitWithFormAction() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -685,7 +688,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("third content")
     public void inputTypeImageWithFormAction() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -714,7 +717,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void buttonSubmitWithFormMethod() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -744,7 +747,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void inputTypeSubmitWithFormMethod() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -774,7 +777,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("GET")
     public void inputTypeImageWithFormMethod() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -804,7 +807,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void buttonWithFormEnctype() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -836,7 +839,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void inputTypeSubmitWithFormEnctype() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -869,7 +872,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("application/x-www-form-urlencoded")
     public void inputTypeImageWithFormEnctype() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -899,7 +902,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     public void buttonWithFormTarget() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -941,7 +944,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("second content")
     public void inputTypeSubmitWithFormTarget() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -982,7 +985,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void inputTypeImageWithFormTarget() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -1032,7 +1035,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
             request.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
-            final String html = "<html><head><script>\n"
+            final String html = DOCTYPE_HTML
+                    + "<html><head><script>\n"
                     + "function test() {\n"
                     + "  alert('" + request.getHeader(HttpHeader.ACCEPT_ENCODING) + "');\n"
                     + "}\n"
@@ -1048,7 +1052,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("second")
     public void novalidate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>first</title></head>\n"
             + "<body>\n"
             + "  <form name='testForm' action='\" + URL_SECOND + \"' novalidate>\n"
@@ -1078,7 +1083,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("second")
     public void submitFormnovalidate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>first</title></head>\n"
             + "<body>\n"
             + "  <form name='testForm' action='\" + URL_SECOND + \"'>\n"
@@ -1108,7 +1114,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("second")
     public void submitButtonFormnovalidate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>first</title></head>\n"
             + "<body>\n"
             + "  <form name='testForm' action='\" + URL_SECOND + \"'>\n"
@@ -1138,7 +1145,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("second")
     public void defaultButtonFormnovalidate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>first</title></head>\n"
             + "<body>\n"
             + "  <form name='testForm' action='\" + URL_SECOND + \"'>\n"
@@ -1169,8 +1177,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts({"radioParam2#radioValue2", "selectParam#selectValue", "textParam#textValue",
              "textareaParam#textarea value"})
     public void submitUsingFormAttribute() throws Exception {
-        final String html =
-            "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "</head>\n"
@@ -1224,8 +1231,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts({"radioParam2#radioValue2", "selectParam#selectValue", "textParam#textValue",
              "textareaParam#textarea value"})
     public void submitUsingFormAttributeElementsDeclaredBeforeForm() throws Exception {
-        final String html =
-            "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "</head>\n"
@@ -1280,8 +1286,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("textParam#textValue")
     public void submitUsingFormAttributeElementsDeeplyNested() throws Exception {
-        final String html =
-            "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "</head>\n"
@@ -1322,8 +1327,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("hiddenParam#form1")
     public void submitFromInsideAnother() throws Exception {
-        final String html =
-            "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "</head>\n"
@@ -1363,8 +1367,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({})
     public void submitFromInsideAnotherInvalidFormRef() throws Exception {
-        final String html =
-            "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "</head>\n"
@@ -1514,7 +1517,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     }
 
     private void submitParams(final String controls) throws Exception {
-        final String html = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + controls
             + "</form></body></html>";
@@ -1544,12 +1548,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§index.html?test")
     public void submit_refererHeader() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='post' action='" + URL_SECOND + "'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
 
@@ -1577,12 +1581,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
             FF = "null",
             FF_ESR = "null")
     public void submit_refererHeaderNoreferrer() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='post' action='" + URL_SECOND + "' rel='noreferrer'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
 
@@ -1610,12 +1614,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
             FF = "null",
             FF_ESR = "null")
     public void submit_refererHeaderNoreferrerCaseSensitive() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='post' action='" + URL_SECOND + "' rel='NoReferrer'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
 
@@ -1643,12 +1647,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
             FF = "null",
             FF_ESR = "null")
     public void submit_refererHeaderNoreferrerGet() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' rel='NoReferrer'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
 
@@ -1673,8 +1677,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("NoReferrer")
     public void relAttribute() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<form method='get' action='" + URL_SECOND + "' rel='NoReferrer'>\n"
             + "  <input name='button' type='submit' value='PushMe' id='button'/>\n"
@@ -1695,8 +1699,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts({"[object HTMLFormElement]", "[object HTMLInputElement]", "true",
              "[object HTMLInputElement]", "true"})
     public void inputNameProperty() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <form id='testForm' name='testForm' action='/dosomething\' method='POST'>\n"
@@ -1723,8 +1727,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Alerts({"[object HTMLFormElement]", "[object HTMLInputElement]", "true",
              "[object HTMLInputElement]", "true"})
     public void inputHasOwnProperty() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <form id='testForm' name='testForm' action='/dosomething\' method='POST'>\n"
@@ -1753,8 +1757,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
              "undefined", "undefined", "[object HTMLInputElement]", "true", "false", "false",
              "undefined", "undefined", "[object HTMLInputElement]", "true", "false", "false"})
     public void inputGetOwnPropertyDescriptor() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <form id='testForm' name='testForm' action='/dosomething\' method='POST'>\n"
@@ -1794,7 +1798,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts("second/?hiddenName=hiddenValue")
     public void inputHiddenAdded() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -1832,8 +1836,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "inp", "submitButton"})
     public void elements() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1859,8 +1863,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLInputElement]"})
     public void elementsDetached() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1884,8 +1888,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "inpt1", "inpt2", "1", "inpt1"})
     public void elementsDetachedFormAttribute() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1989,7 +1993,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
                 + metaCharset + "'>\n";
         }
 
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + metaContentType
             + "</head><body>\n"
             + "<form name='form1' method='post' action='foo'" + formAcceptCharset + formEnc + ">\n"

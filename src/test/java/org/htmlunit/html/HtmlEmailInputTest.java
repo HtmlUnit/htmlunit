@@ -41,7 +41,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -75,7 +76,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -113,8 +115,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -139,8 +141,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"dave@aol.com", ""})
     public void clearInput() throws Exception {
-        final String htmlContent
-                = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
@@ -165,8 +167,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     @Test
     @Alerts("hello")
     public void typing() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='email' id='foo'>\n"
             + "</form></body></html>";
@@ -185,7 +187,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -433,8 +436,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -560,8 +563,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart, final String sendKeys) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"
@@ -594,8 +597,8 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                 + "  </form>\n"
                 + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>second</title></head><body>\n"
                 + "  <p>hello world</p>\n"
                 + "</body></html>";
 

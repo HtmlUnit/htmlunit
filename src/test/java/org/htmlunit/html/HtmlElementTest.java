@@ -48,7 +48,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void hasAttributeWith() throws Exception {
-        final String html = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -61,7 +61,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void hasAttributeWithMissingValue() throws Exception {
-        final String html = "<html><head></head><body id='tag' attrib>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag' attrib>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -74,7 +74,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void hasAttributeNone() throws Exception {
-        final String html = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -87,8 +87,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void hasAttributeNSWith() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -101,7 +101,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void hasAttributeNSNone() throws Exception {
-        final String html = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -114,7 +114,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getAttributeWith() throws Exception {
-        final String html = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -127,7 +127,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getAttributeWithMissingValue() throws Exception {
-        final String html = "<html><head></head><body id='tag' attrib>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag' attrib>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -141,7 +141,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getAttributeWithEmptyValue() throws Exception {
-        final String html = "<html><head></head><body id='tag' attrib=''>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag' attrib=''>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -155,7 +155,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getAttributeNone() throws Exception {
-        final String html = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -168,8 +168,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getAttributeNSWith() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -182,7 +182,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getAttributeNSNone() throws Exception {
-        final String html = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -195,8 +195,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getNamespaceURIWith() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -215,8 +215,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getNamespaceURINone() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -235,8 +235,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getLocalNameWith() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -255,8 +255,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getLocalNameNone() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -276,8 +276,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getPrefixWith() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -296,8 +296,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getPrefixNone() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -316,8 +316,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void setPrefix() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -338,8 +338,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void setAttributeWith() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -353,8 +353,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void setAttributeNone() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -368,8 +368,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void setAttributeNSWith() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -383,8 +383,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void setAttributeNSNone() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -398,8 +398,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void removeAttributeWith() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -413,8 +413,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void removeAttributeNone() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -428,8 +428,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void removeAttributeNSWith() throws Exception {
-        final String html
-            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -444,8 +444,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void removeAttributeNSNone() throws Exception {
-        final String html
-            = "<html><head></head><body id='tag'>text</body></html>";
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getHtmlElementById("tag");
@@ -458,8 +458,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getEnclosingForm() throws Exception {
-        final String htmlContent =
-            "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<table><tr><td><input type='text' id='foo'/></td></tr></table>\n"
             + "</form></body></html>";
@@ -475,8 +475,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getEnclosing() throws Exception {
-        final String htmlContent =
-            "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<table id='table1'>\n"
             + "<tr id='tr1'><td id='td1'>foo</td></tr>\n"
@@ -503,8 +503,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedTextWithComments() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<p id='p1'>foo<!--bar--></p>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
@@ -554,8 +554,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_AddAttribute() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -591,8 +591,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_ReplaceAttribute() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -628,8 +628,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_RemoveAttribute() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -665,8 +665,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_RemoveListener() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -698,7 +698,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void mouseOver() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseOverMe() {\n"
@@ -721,7 +722,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void mouseMove() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseMoveMe() {\n"
@@ -744,7 +746,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void mouseOut() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseOutMe() {\n"
@@ -768,7 +771,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
     @Test
     @Alerts("mousedown-0")
     public void mouseDown() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseDownMe(e) {\n"
@@ -792,7 +796,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void mouseUp() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function mouseUpMe() {\n"
@@ -816,7 +821,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
     @Test
     @Alerts("mousedown-2-mouseup-2-contextmenu-2-")
     public void rightClick() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function divMouseEvent(e) {\n"
@@ -853,7 +859,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
     @Test
     @Alerts("mousedown-0-mouseup-0-")
     public void mouse_Down_Up() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function divMouseEvent(e) {\n"
@@ -887,7 +894,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml_separateLineforEmptyElements() throws Exception {
-        final String html = "<html><head><title>foo</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>\n"
             + "<body><table><tr><td></tr></table>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
@@ -899,7 +907,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void type() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myInput').value);\n"
             + "  }\n"
@@ -926,8 +935,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void typeOnFocus() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
             + "  <input type='text' id='textfield1' onfocus='alert(1)'>\n"
             + "</form>\n"
@@ -945,7 +954,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "</head>\n"
@@ -966,7 +976,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedTextOverridingVisibility() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "</head>\n"
@@ -986,7 +997,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedTextVisibilityCollapse() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "</head>\n"
@@ -1032,8 +1044,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
     @Test
     @Alerts({"1", "2"})
     public void getElementsByTagName() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1060,8 +1072,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsByTagName2() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "<div>a</div> <div>b</div> <div>c</div>\n"
@@ -1099,8 +1111,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsByAttribute() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='myForm'>\n"
@@ -1149,7 +1161,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void serialization() throws Exception {
-        final String html = "<html><body><div id='d' a='b'></div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='d' a='b'></div></body></html>";
         HtmlPage page = loadPage(html);
         assertEquals("b", page.getElementById("d").getAttribute("a"));
         page = clone(page);
@@ -1162,7 +1174,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "</head>\n"
@@ -1189,7 +1202,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "false", "false"})
     public void isDisplayedJsDisabled() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "</body>\n"
             + "<div id='d1'>hello</div>\n"
@@ -1210,7 +1224,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "false", "false"})
     public void isDisplayedJsEngineDisabled() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "</body>\n"
             + "<div id='d1'>hello</div>\n"
@@ -1234,7 +1249,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "false", "false"})
     public void clickJsEngineDisabled() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "</body>\n"
             + "<div id='d1'>hello</div>\n"
@@ -1253,7 +1269,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     public void acceptChar() throws Exception {
-        final String html = "<html><body><input></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><input></body></html>";
         final HtmlPage page = loadPage(html);
         final String value = "abc[ ][\t][　][\u2006]123あいう漢字[!@#$%^&*()-=_+]{}<>?/\\";
         final HtmlInput input = page.getFirstByXPath("//input");

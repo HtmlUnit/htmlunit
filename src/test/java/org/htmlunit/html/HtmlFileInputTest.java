@@ -48,8 +48,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     public void contentTypeHeader() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
@@ -79,8 +79,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Retry
     @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"\"")
     public void empty() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
@@ -108,8 +108,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     // because we do not support any IE specific setting we do not send the filename as
     // done by the other browsers
     public void realFile() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
@@ -138,8 +138,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Retry
     public void chunked() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
@@ -163,8 +163,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     public void getText() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='file' name='foo' id='foo' value='bla'>\n"
             + "</form></body></html>";
@@ -181,8 +181,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"InvalidStateError/DOMException", "-Hello world-Hello world-0", "-Hello world-Hello world-0"})
     public void setValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -225,8 +225,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"-HtmlUnit-HtmlUnit-0", "---0"})
     public void setDefaultValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -270,7 +270,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -302,7 +303,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -339,7 +341,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
              "InvalidStateError/DOMException", "-initial-initial", "-initial-initial",
              "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -382,7 +385,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
              "InvalidStateError/DOMException", "-initial-initial", "-initial-initial",
              "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -424,7 +428,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
              "InvalidStateError/DOMException", "-default-default",
              "-attribValue-attribValue", "-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -461,7 +466,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts("textLength not available")
     public void textLength() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -488,8 +494,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null", "0"})
     public void selection() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var s = getSelection(document.getElementById('text1'));\n"
@@ -549,7 +555,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     }
 
     private void selection2(final int selectionStart, final int selectionEnd) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<input id='myTextInput' value='Bonjour' type='file'>\n"
             + "<script>\n"
@@ -593,7 +600,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"null,null", "InvalidStateError/DOMException"})
     public void selectionOnUpdate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<input id='myTextInput' value='Hello' type='file'>\n"
             + "<script>\n"
@@ -631,7 +639,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"changed2", "changed"})
     public void firingOnchange() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -657,7 +666,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void nonZeroWidthHeight() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -685,8 +695,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     // because we do not support any IE specific setting we do not send the filename as
     // done by the other browsers
     public void value2() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -716,8 +726,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--"})
     public void setAttribute() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -741,8 +751,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "change"})
     public void onchange() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -767,8 +777,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts("C:\\fakepath\\pom.xml")
     public void getAttribute() throws Exception {
-        final String html =
-              "<html><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><body>\n"
               + "  <input type='file' id='f'>\n"
               + "</body></html>";
 
@@ -787,7 +797,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -813,8 +824,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -896,8 +907,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"
@@ -937,8 +948,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void clear() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -965,8 +976,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts({"C:\\fakepath\\pom.xml-Hello world-Hello world",
              "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
     public void valueFakepath() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -996,8 +1007,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts({"C:\\fakepath\\index.html-Hello world-Hello world",
              "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\" webkitdirectory=\"\">"})
     public void valueWebkitdirectory() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION

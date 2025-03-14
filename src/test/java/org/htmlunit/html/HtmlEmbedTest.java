@@ -40,7 +40,8 @@ public class HtmlEmbedTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLEmbedElement]", "[object HTMLCollection]", "1", "[object HTMLEmbedElement]"})
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -67,7 +68,8 @@ public class HtmlEmbedTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLEmbedElement]")
     public void saveAs() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

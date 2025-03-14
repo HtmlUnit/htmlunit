@@ -95,14 +95,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
     }
 
     private void testFileInput(final File file) throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image'>\n"
             + "  <input type='submit' id='clickMe'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -127,14 +128,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void setValueAttributeAndSetDataDummyFile() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image'>\n"
             + "  <input type='submit' id='mySubmit'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -169,14 +171,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void setValueAndSetDataDummyFile() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image'>\n"
             + "  <input type='submit' id='mySubmit'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -212,14 +215,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void setValueAttributeAndSetDataRealFile() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image'>\n"
             + "  <input type='submit' id='mySubmit'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -255,14 +259,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void setValueAndSetDataRealFile() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image'>\n"
             + "  <input type='submit' id='mySubmit'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -299,14 +304,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void setDataOnly() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image'>\n"
             + "  <input type='submit' id='mySubmit'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -362,14 +368,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void emptyField() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
             + "  <input type='submit' id='clickMe'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -390,14 +397,15 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void contentType() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
             + "  <input type='submit' name='mysubmit'/>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -675,8 +683,8 @@ public class HtmlFileInput2Test extends WebServerTestCase {
     @Test
     @Alerts("foo, change")
     public void onchangeMultiple() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "</head>\n"
               + "<body>\n"
@@ -699,8 +707,8 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void clear() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + "    function test() {\n"
                 + "      var f =  document.createElement('input');\n"
@@ -725,8 +733,8 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void clearFromJava() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + "    function test() {\n"
                 + "      var f =  document.createElement('input');\n"
