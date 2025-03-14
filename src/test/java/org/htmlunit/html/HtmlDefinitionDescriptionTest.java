@@ -32,7 +32,8 @@ public class HtmlDefinitionDescriptionTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml_emptyTag() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<dd id='foo'></dd>\n"
             + "</body></html>";
 

@@ -38,7 +38,8 @@ public class HtmlBaseTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLBaseElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<base id='myId' target='MyNewWindow'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

@@ -38,7 +38,8 @@ public class HtmlBreakTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLBRElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -61,7 +62,8 @@ public class HtmlBreakTest extends WebDriverTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "Hello<br/>world\n"
             + "</body></html>";

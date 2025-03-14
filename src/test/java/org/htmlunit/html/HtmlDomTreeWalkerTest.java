@@ -34,7 +34,8 @@ public class HtmlDomTreeWalkerTest extends SimpleWebTestCase {
      */
     @Test
     public void serialization() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<div style='display:inline'>1</div><div style='display:inline'>2</div>\n"
                 + "</body></html>";
 

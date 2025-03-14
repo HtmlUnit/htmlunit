@@ -40,7 +40,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -74,7 +75,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -111,8 +113,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"text-datetime", "date-Date"})
     public void type() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -140,8 +142,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @BuggyWebDriver(CHROME = "80322-02-01",
                     EDGE = "80322-02-01")
     public void typeInto() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + "  function test() {\n"
@@ -168,8 +170,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"2018-03-22", ""})
     public void clearInput() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<body>\n"
               + "  <input id='input' type='date' value='2018-03-22'>\n"
               + "</body></html>";
@@ -191,7 +193,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -217,7 +220,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts("false-true")
     public void minValidation() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -243,7 +247,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts("false-true")
     public void maxValidation() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -269,8 +274,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -364,8 +369,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"

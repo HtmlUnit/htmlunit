@@ -35,8 +35,8 @@ public class HtmlColorInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts("#ff0000")
     public void asNormalizedText() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"

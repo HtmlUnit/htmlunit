@@ -37,8 +37,8 @@ public class HtmlButtonInputTest extends SimpleWebTestCase {
     @Test
     @Alerts("foo")
     public void click_onClick() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")'>\n"

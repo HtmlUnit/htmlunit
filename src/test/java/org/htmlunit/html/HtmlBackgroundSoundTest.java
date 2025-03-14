@@ -38,7 +38,8 @@ public class HtmlBackgroundSoundTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLUnknownElement]")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ +  "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

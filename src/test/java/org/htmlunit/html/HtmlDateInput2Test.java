@@ -32,7 +32,8 @@ public class HtmlDateInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void minValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
@@ -71,7 +72,9 @@ public class HtmlDateInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void maxValidation() throws Exception {
-        final String htmlContent = "<html>\n" + "<head></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
                 + "  <input type='date' id='first' max='2018-12-01'>\n"

@@ -42,8 +42,8 @@ public class HtmlButtonTest extends SimpleWebTestCase {
      */
     @Test
     public void buttonClick_onClick() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "  <button type='button' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
@@ -66,8 +66,8 @@ public class HtmlButtonTest extends SimpleWebTestCase {
      */
     @Test
     public void submitClick_onClick() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "  <button type='submit' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
@@ -89,8 +89,8 @@ public class HtmlButtonTest extends SimpleWebTestCase {
      */
     @Test
     public void buttonTypeSubmit() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "  <button type='submit' name='button' id='button' value='foo'"
             + "    >Push me</button>\n"
@@ -119,8 +119,8 @@ public class HtmlButtonTest extends SimpleWebTestCase {
     @Test
     @Alerts("")
     public void defaultButtonTypeNotSet() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
             + "  <button name='button' id='button' value='pushme'>PushMe</button>\n"
             + "</form></body></html>";
@@ -137,8 +137,8 @@ public class HtmlButtonTest extends SimpleWebTestCase {
     @Test
     @Alerts("Submit")
     public void defaultButtonTypeSubmit() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
             + "  <button name='button' id='button' type='Submit' value='pushme'>PushMe</button>\n"
             + "</form></body></html>";
@@ -155,8 +155,8 @@ public class HtmlButtonTest extends SimpleWebTestCase {
     @Test
     @Alerts("invalid")
     public void defaultButtonTypeInvalid() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
             + "  <button name='button' id='button' type='invalid' value='pushme'>PushMe</button>\n"
             + "</form></body></html>";
@@ -172,8 +172,8 @@ public class HtmlButtonTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html
-            = "<html><body><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><title>foo</title>\n"
             + "<button></button>\n"
             + "</body></html>";
 
