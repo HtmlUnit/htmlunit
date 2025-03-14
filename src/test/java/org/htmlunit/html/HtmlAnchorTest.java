@@ -58,8 +58,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts({"hi", "%28%29"})
     public void href_js_escaping() throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function sayHello(text) {\n"
@@ -86,8 +86,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts({"(*%a", "%28%A"})
     public void href_js_escaping2() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function sayHello(text) {\n"
             + "    alert(text);\n"
             + "  }\n"
@@ -109,8 +109,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void clickNestedElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <span id='theSpan'>My Link</span>\n"
@@ -131,8 +131,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§page2.html")
     public void clickNestedButtonElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <button id='theButton'></button>\n"
@@ -154,8 +154,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void clickNestedCheckboxElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <input type='checkbox' id='theCheckbox' name='myCheckbox' value='Milk'>\n"
@@ -182,8 +182,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <img id='theImage' src='" + urlImage + "' />\n"
@@ -204,8 +204,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("page2.html")
     public void clickNestedInputImageElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <input type='image' id='theInput' />\n"
@@ -226,8 +226,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("page2.html")
     public void clickNestedInputTextElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <input type='text' id='theInput' />\n"
@@ -248,8 +248,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("page2.html")
     public void clickNestedInputPasswordElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <input type='password' id='theInput' />\n"
@@ -272,8 +272,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @BuggyWebDriver(FF = "§§URL§§",
                     FF_ESR = "§§URL§§")
     public void clickNestedOptionElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <select size=2>\n"
@@ -298,8 +298,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void clickNestedRadioElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <input type='radio' id='theRadio' name='myRadio' value='Milk'>\n"
@@ -320,8 +320,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("page2.html")
     public void clickNestedResetElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <input type='reset' id='theInput' />\n"
@@ -342,8 +342,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("page2.html")
     public void clickNestedSubmitElement() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
             + "    <input type='submit' id='theInput' />\n"
@@ -363,8 +363,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void clickBlankTargetHashOnly() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<a id='a' target='_blank' href='#'>Foo</a>\n"
@@ -386,8 +386,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts({"My Link", "", "abcd"})
     public void getText() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('myAnchor').text);\n"
@@ -411,8 +411,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts({"My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0"})
     public void setText() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -450,7 +450,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("<a\\sid=\"a\"\\shref=\"#x\">foo</a>")
     public void innerHtmlHrefQuotedEvenInIE() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "</script></head>\n"
@@ -465,16 +466,16 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void click() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(secondContent);
@@ -497,8 +498,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void clickAnchorName() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "  <a href='#clickedAnchor' id='a1'>link to foo1</a>\n"
@@ -519,8 +520,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#anchor", "#!bang"})
     public void dontReloadHashBang() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_FIRST + "test' id='a1'>link1</a>\n"
@@ -560,8 +561,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts({"#!board/WebDev", "#!article/WebDev/35", "#!article/WebDev/35"})
     public void dontReloadHashBang2() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_FIRST + "test/#!board/WebDev' id='a1'>link1</a>\n"
@@ -606,8 +607,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             FF = {"click", "href", "click", "href", "doubleClick"},
             FF_ESR = {"click", "href", "click", "href", "doubleClick"})
     public void doubleClick() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TEXTAREA_FUNCTION
@@ -638,8 +639,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     public void encoding() throws Exception {
         final String href = "bug.html?" + URLEncoder.encode("h\u00F6", "UTF-8")
                 + '=' + URLEncoder.encode("G\u00FCnter", "UTF-8");
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
             + "</head>\n"
@@ -667,8 +668,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void javascriptWithReturn() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "  <a id='myLink' href='javascript:return true'>hi</a>\n"
             + "</body></html>";
         final WebDriver webDriver = loadPage2(html);
@@ -680,8 +681,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void javascriptWithReturnWhitespace() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "  <a id='myLink' href='javascript: return true'>hi</a>\n"
             + "</body></html>";
         final WebDriver webDriver = loadPage2(html);
@@ -694,7 +695,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "First"})
     public void shiftClick() throws Exception {
-        final String html = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>Click Me</a>\n"
             + "</form></body></html>";
 
@@ -724,7 +726,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "First"})
     public void ctrlClick() throws Exception {
-        final String html = "<html><head><title>First</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>Click Me</a>\n"
             + "</form></body></html>";
 
@@ -755,12 +758,12 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§index.html?test")
     public void click_refererHeader() throws Exception {
-        final String firstContent
-            = "<html><head><title>Page A</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>Page A</title></head>\n"
             + "<body><a href='" + URL_SECOND + "' id='link'>link</a></body>\n"
             + "</html>";
-        final String secondContent
-            = "<html><head><title>Page B</title></head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Page B</title></head>\n"
             + "<body></body>\n"
             + "</html>";
 
@@ -786,12 +789,12 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void click_refererHeaderNoReferrer() throws Exception {
-        final String firstContent
-            = "<html><head><title>Page A</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>Page A</title></head>\n"
             + "<body><a href='" + URL_SECOND + "' id='link' rel='noreferrer'>link</a></body>\n"
             + "</html>";
-        final String secondContent
-            = "<html><head><title>Page B</title></head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Page B</title></head>\n"
             + "<body></body>\n"
             + "</html>";
 
@@ -815,12 +818,12 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void click_refererHeaderNoReferrerCaseSensitive() throws Exception {
-        final String firstContent
-            = "<html><head><title>Page A</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>Page A</title></head>\n"
             + "<body><a href='" + URL_SECOND + "' id='link' rel='NoReferrer'>link</a></body>\n"
             + "</html>";
-        final String secondContent
-            = "<html><head><title>Page B</title></head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Page B</title></head>\n"
             + "<body></body>\n"
             + "</html>";
 
@@ -844,14 +847,14 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§index.html?test")
     public void controlClick_refererHeader() throws Exception {
-        final String firstContent
-            = "<html><head><title>Page A</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>Page A</title></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
             + "</body>\n"
             + "</html>";
-        final String secondContent
-            = "<html><head><title>Page B</title></head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Page B</title></head>\n"
             + "<body></body>\n"
             + "</html>";
 

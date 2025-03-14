@@ -49,8 +49,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String firstContent
-            = "<html><head><title>first</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<body>\n"
             + "  <img src='" + urlImage + "' width='145' height='126' usemap='#planetmap'>\n"
             + "  <map id='planetmap' name='planetmap'>\n"
@@ -59,8 +59,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
             + "    <area shape='circle' coords='90,58,3' id='third' href='" + URL_THIRD + "'>\n"
             + "  </map>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>third</title></head><body></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         getMockWebConnection().setResponse(URL_THIRD, thirdContent);
@@ -97,7 +97,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     public void isDisplayedRect() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
@@ -124,7 +125,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     public void isDisplayedCircle() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
@@ -151,7 +153,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     public void isDisplayedPolygon() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
@@ -178,7 +181,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     public void isDisplayedHiddenImage() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap' style='display: none'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
@@ -205,7 +209,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     public void isDisplayedHiddenMap() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
@@ -233,7 +238,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "false", "false", "false", "true"})
     public void isDisplayedEmptyRect() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
@@ -278,7 +284,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true"})
     public void isDisplayedEmptyCircle() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
@@ -312,7 +319,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "true"})
     public void isDisplayedEmptyPolygon() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
@@ -348,7 +356,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     public void isDisplayedMissingImage() throws Exception {
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <map id='myMap' name='imgmap' style='display: none'>\n"
                 + "    <area id='myArea' shape='rect' coords='0,0,1,1'>\n"
@@ -375,8 +384,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html
-            = "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
             + "  <area href='javascript:log(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
@@ -415,8 +424,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html
-            = "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
             + "  <area href='javasCRIpT:log(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
@@ -456,8 +465,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html
-            = "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
             + "  <area href='    javascript:log(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
@@ -497,8 +506,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html
-            = "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
             + "  <area href='javascript:log(this == window)' id='a2' shape='rect' coords='0,0,30,30'/>\n"

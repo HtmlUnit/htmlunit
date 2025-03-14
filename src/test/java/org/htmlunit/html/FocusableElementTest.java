@@ -36,8 +36,8 @@ public class FocusableElementTest extends SimpleWebTestCase {
      */
     @Test
     public void onBlurWith2Pages() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  var bCalled = false;\n"
@@ -64,8 +64,8 @@ public class FocusableElementTest extends SimpleWebTestCase {
      */
     @Test
     public void focusin() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function handler(_e) {\n"

@@ -128,7 +128,8 @@ public class HtmlAttrTest extends SimpleWebTestCase {
      */
     @Test
     public void nodeType() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var attr = document.createAttribute('myAttrib');\n"
             + "    alert(attr.nodeType);\n"

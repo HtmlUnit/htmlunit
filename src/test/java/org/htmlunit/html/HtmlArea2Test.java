@@ -50,16 +50,16 @@ public class HtmlArea2Test extends SimpleWebTestCase {
             webConnection.setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String firstContent
-            = "<html><head><title>first</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title></head><body>\n"
             + "<img src='" + urlImage + "' width='145' height='126' usemap='#planetmap'>\n"
             + "<map id='planetmap' name='planetmap'>\n"
             + "<area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' "
             + "href='" + URL_SECOND + "'>\n"
             + "<area shape='circle' coords='90,58,3' id='third' href='" + URL_THIRD + "'>\n"
             + "</map></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>third</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
@@ -126,8 +126,8 @@ public class HtmlArea2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrl_javascriptDisabled() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
         final WebClient client = getWebClient();
