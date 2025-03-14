@@ -52,7 +52,8 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      */
     @Test
     public void badExternalScriptReference() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title>\n"
                 + "<script src='inexistent.js'></script>\n"
                 + "</head><body></body></html>";
 

@@ -43,7 +43,8 @@ public class HtmlSelect2Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "false", "true"})
     public void select() throws Exception {
-        final String html = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
             + "  <option value='option1'>Option1</option>\n"
             + "  <option value='option2'>Option2</option>\n"
@@ -77,7 +78,8 @@ public class HtmlSelect2Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "true", "true"})
     public void shiftClick() throws Exception {
-        final String html = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
             + "  <option value='option1'>Option1</option>\n"
             + "  <option value='option2'>Option2</option>\n"
@@ -112,7 +114,8 @@ public class HtmlSelect2Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "true"})
     public void controlClick() throws Exception {
-        final String html = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
             + "  <option value='option1'>Option1</option>\n"
             + "  <option value='option2'>Option2</option>\n"
@@ -149,8 +152,8 @@ public class HtmlSelect2Test extends WebDriverTestCase {
             FF = {"true", "false", "true", "true", "true"},
             FF_ESR = {"true", "false", "true", "true", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -267,8 +270,8 @@ public class HtmlSelect2Test extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"

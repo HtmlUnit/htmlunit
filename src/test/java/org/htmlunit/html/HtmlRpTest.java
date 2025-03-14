@@ -35,7 +35,8 @@ public class HtmlRpTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "none", "none"})
     public void defaultStyle() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

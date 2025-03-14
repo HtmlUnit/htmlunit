@@ -34,8 +34,8 @@ public class HtmlSearchInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void patternValidation() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -64,7 +64,8 @@ public class HtmlSearchInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "true", "true", "", "foo"})
     public void maxLengthValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -91,7 +92,8 @@ public class HtmlSearchInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "false", "true", "", "foobar"})
     public void minLengthValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"

@@ -38,7 +38,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -70,7 +71,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -106,7 +108,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -146,7 +149,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -184,7 +188,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault"})
     public void defaultValue() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -215,7 +220,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -241,7 +247,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "foonewValue", "foo"})
     public void reset() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script type='text/javascript'>\n"
             + "    function submitForm() {\n"
             + "    }\n"
@@ -279,7 +286,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "foonewValue", "foonewValue"})
     public void onclickDisables() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script type='text/javascript'>\n"
             + "    function submitForm() {\n"
             + "      document.deliveryChannelForm.resetBtn.disabled = true;\n"
@@ -316,8 +324,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "false", "false", "false"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -399,8 +407,8 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"

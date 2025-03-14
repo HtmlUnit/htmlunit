@@ -37,7 +37,8 @@ public class HtmlRtTest extends WebDriverTestCase {
             FF = {"", "ruby-text", "ruby-text"},
             FF_ESR = {"", "ruby-text", "ruby-text"})
     public void defaultStyle() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -71,7 +72,7 @@ public class HtmlRtTest extends WebDriverTestCase {
             FF = {"", "ruby-text", "ruby-text"},
             FF_ESR = {"", "ruby-text", "ruby-text"})
     public void defaultStyleStandards() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
