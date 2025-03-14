@@ -40,7 +40,8 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLUnknownElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

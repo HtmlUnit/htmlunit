@@ -40,7 +40,8 @@ public class HtmlMenuTest extends WebDriverTestCase {
     @Test
     @Alerts("First Item\nSecond Item")
     public void getVisibleText() throws Exception {
-        final String html = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
                 + "<body>\n"
                 + "  <menu id='tester'>\n"
                 + "    <li>First Item</li>\n"
@@ -64,7 +65,8 @@ public class HtmlMenuTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLMenuElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

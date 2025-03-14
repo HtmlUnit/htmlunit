@@ -39,8 +39,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      */
     @Test
     public void getText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -58,8 +58,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
      */
     @Test
     public void setValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -118,7 +118,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -150,7 +151,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -187,7 +189,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "newValue-newValue-newValue",
                 "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -228,7 +231,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "newValue-newValue-newValue",
                 "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -268,7 +272,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "attribValue-attribValue-attribValue",
                 "newDefault-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -305,7 +310,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             FF = "7",
             FF_ESR = "7")
     public void textLength() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -332,7 +338,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -358,8 +365,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "false", "false", "false"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -452,8 +459,8 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"

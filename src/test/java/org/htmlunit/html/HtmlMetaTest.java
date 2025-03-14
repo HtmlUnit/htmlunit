@@ -39,7 +39,8 @@ public class HtmlMetaTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLMetaElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<meta id='m' http-equiv='content-type' content='text/html'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -62,7 +63,8 @@ public class HtmlMetaTest extends WebDriverTestCase {
      */
     @Test
     public void getText() throws Exception {
-        final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
         final String text = driver.findElement(By.id("m")).getText();
@@ -74,7 +76,8 @@ public class HtmlMetaTest extends WebDriverTestCase {
      */
     @Test
     public void isDisplayed() throws Exception {
-        final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
         final boolean displayed = driver.findElement(By.id("m")).isDisplayed();

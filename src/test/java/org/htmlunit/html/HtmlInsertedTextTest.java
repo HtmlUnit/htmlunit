@@ -35,7 +35,8 @@ public class HtmlInsertedTextTest extends WebDriverTestCase {
     @Test
     @Alerts({"abcdef", "abcdef"})
     public void simple() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='foo' id='it'>ab<ins>cd</ins>ef</a>\n"
             + "  <script>\n"

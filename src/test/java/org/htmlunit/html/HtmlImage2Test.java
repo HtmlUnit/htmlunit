@@ -175,7 +175,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var img = document.getElementById('myImage');\n"
@@ -201,7 +202,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var tester = document.getElementById('tester');\n"
@@ -233,7 +235,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var tester = document.getElementById('tester');\n"
@@ -339,7 +342,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
             getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         }
 
-        final String html = "<html><head><title>Page A</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' " + src + " >\n"
                 + "</body></html>";
@@ -356,8 +360,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§img.gif")
     public void src() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -388,8 +392,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
                                                 MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -425,8 +429,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
                                         MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function clickImage(event) {\n"
@@ -798,8 +802,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
         // use always a different url to avoid caching effects
         final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".png");
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

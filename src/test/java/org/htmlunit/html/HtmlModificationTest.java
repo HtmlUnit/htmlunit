@@ -39,7 +39,8 @@ public class HtmlModificationTest extends WebDriverTestCase {
     @Test
     @Alerts("Some text is inserted or deleted")
     public void getVisibleText() throws Exception {
-        final String html = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
                 + "<body id='tester'>\n"
                 + "  Some text is <ins id='myId1'>inserted</ins> or <del id='myId2'>deleted</del>\n"
                 + "</body></html>";
@@ -60,7 +61,8 @@ public class HtmlModificationTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLModElement]", "[object HTMLModElement]"})
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

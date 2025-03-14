@@ -54,7 +54,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLLinkElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link id='myId' href='file1.css'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -79,8 +80,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <link id='tester' href='file1.css'>\n"
             + "</head>\n"
@@ -102,8 +103,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
      */
     @Test
     public void isDisplayed() throws Exception {
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <link id='l' href='file1.css'>\n"
                 + "</head>\n"
@@ -205,8 +206,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     }
 
     private void onLoadOnError(final String attribs) throws Exception {
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -232,8 +233,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.js"), "var x=1;");
 
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -256,8 +257,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Alerts("onLoad [object Event]")
     public void onLoadDynamic() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -287,8 +288,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Alerts("onError [object Event]")
     public void onLoadDynamicUnknown() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -319,8 +320,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§sample?string=a&int=1", "/sample?string=a&int=1"})
     public void testEntityRefWithoutSemicolon() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <a id='target' href='/sample?string=a&int=1'>/sample?string=a&int=1</a>\n"
@@ -342,8 +343,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§sample?string=a&iexcl=1", "/sample?string=a\u00A1=1"})
     public void testEntityRefWithoutSemicolonReplaceInAttrib() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <a id='target' href='/sample?string=a&iexcl=1'>/sample?string=a&iexcl=1</a>\n"
@@ -385,7 +386,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"),
                 bigContent,  200, "OK", MimeType.TEXT_CSS, headers);
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link id='myId' href='simple.css'></link>\n"
             + "</head><body>\n"
             + "</body></html>";
@@ -418,7 +420,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void polymerImportCheck() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -438,7 +441,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§index.html?test")
     public void getResponse_referer() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link rel='stylesheet' href='" + URL_SECOND + "'></link>\n"
             + "</head><body>\n"
             + "</body></html>";

@@ -53,8 +53,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             EDGE = "§§URL§§?button.x=16&button.y=8")
     @NotYetImplemented({CHROME, EDGE})
     public void click_NoPosition() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='image' name='aButton' value='foo'/>\n"
             + "  <input type='image' name='button' value='foo'/>\n"
@@ -79,8 +79,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             EDGE = "§§URL§§?button.x=28&button.y=8")
     @NotYetImplemented({CHROME, EDGE})
     public void click_NoPosition_NoValue() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='image' name='button'>\n"
             + "</form></body></html>";
@@ -100,7 +100,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -132,7 +133,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -169,7 +171,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "newValue-newValue-newValue",
                 "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -210,7 +213,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "newValue-newValue-newValue",
                 "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -250,7 +254,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "attribValue-attribValue-attribValue",
                 "newDefault-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -287,7 +292,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             FF = "7",
             FF_ESR = "7")
     public void textLength() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -314,7 +320,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§?imageInput.x=0&imageInput.y=0")
     public void javascriptClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title>\n"
                 + "</head><body>\n"
                 + "<form>\n"
                 + "  <input type='image' name='imageInput'>\n"
@@ -337,7 +344,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void clickFiresOnMouseDown() throws Exception {
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+                + "<html>"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -360,7 +368,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void clickFiresOnMouseUp() throws Exception {
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+                + "<html>"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -382,8 +391,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void outsideForm() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -418,8 +427,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                     MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -460,8 +469,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                     MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -498,8 +507,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                     MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -536,8 +545,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                     MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -574,8 +583,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                     MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -599,8 +608,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "§§URL§§abcd/img.gif"})
     public void setSrc() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -637,8 +646,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                     MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -681,7 +690,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -709,7 +719,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             CHROME = {"true", "true", "true", "true", "true"},
             EDGE = {"true", "true", "true", "true", "true"})
     public void checkValidity() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

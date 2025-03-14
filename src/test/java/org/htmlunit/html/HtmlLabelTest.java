@@ -40,7 +40,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLLabelElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -63,7 +64,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementNone() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item</label>\n"
             + "  <input type='text' id='text1'>\n"
@@ -82,7 +84,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForEmpty() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for=''>Item</label>\n"
             + "  <input type='text' id='text1'>\n"
@@ -101,7 +104,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForUnknown() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='unknown'>Item</label>\n"
             + "  <input type='text' id='text1'>\n"
@@ -120,7 +124,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForNotLabelable() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='div1'>Item</label>\n"
             + "  <div id='div1'></div>\n"
@@ -139,7 +144,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForButton() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='button1'>Item</label>\n"
             + "  <button id='button1'></button>\n"
@@ -158,7 +164,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForInput() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text1'>Item</label>\n"
             + "  <input type='text' id='text1'>\n"
@@ -177,7 +184,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForInputHidden() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='hidden1'>Item</label>\n"
             + "  <input type='hidden' id='hidden1'>\n"
@@ -197,7 +205,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts("meter1")
     public void getLabeledElementForMeter() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='meter1'>Item</label>\n"
             + "  <meter id='meter1'></meter>\n"
@@ -225,7 +234,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts("output1")
     public void getLabeledElementForOutput() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='output1'>Item</label>\n"
             + "  <output id='output1'></output>\n"
@@ -252,7 +262,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForProgress() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='progress1'>Item</label>\n"
             + "  <progress id='progress1'></progress>\n"
@@ -271,7 +282,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForSelect() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='select1'>Item</label>\n"
             + "  <select id='select1'><option>Option</option></select>\n"
@@ -290,7 +302,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForTextArea() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text1'>Item</label>\n"
             + "  <textarea id='text1'></textarea>\n"
@@ -309,7 +322,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementNestedNotLabelable() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <div id='div1'></div>\n"
@@ -329,7 +343,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementNestedButton() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <button id='button1'></button>\n"
@@ -350,7 +365,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementNestedInput() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <input type='text' id='text1'>\n"
@@ -371,7 +387,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementNestedInputHidden() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <input type='hidden' id='hidden1'>\n"
@@ -393,7 +410,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts("meter1")
     public void getLabeledElementNestedMeter() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <meter id='meter1'></meter>\n"
@@ -423,7 +441,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts("output1")
     public void getLabeledElementNestedOutput() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <output id='output1'></output>\n"
@@ -452,7 +471,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementNestedProgress() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <progress id='progress1'></progress>\n"
@@ -473,7 +493,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementNestedSelect() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <select id='select1'><option>Option</option></select>\n"
@@ -494,7 +515,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementNestedTextArea() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
             + "    <textarea id='text1'></textarea>\n"
@@ -515,7 +537,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForVersusNested() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text2'>Item\n"
             + "    <input type='text' id='text1'>\n"
@@ -536,7 +559,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForUnknownVersusNested() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='unknown'>Item\n"
             + "    <input type='text' id='text1'>\n"
@@ -557,7 +581,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     public void getLabeledElementForNotLabelableVersusNested() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='div1'>Item\n"
             + "    <input type='text' id='text1'>\n"
@@ -1871,7 +1896,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
     }
 
     private static String generatePage(final String snippet) {
-        return "<html>\n"
+        return DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

@@ -59,8 +59,8 @@ public class HtmlImageTest extends SimpleWebTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "  <a href='http://server/foo'>\n"
@@ -109,8 +109,8 @@ public class HtmlImageTest extends SimpleWebTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "  <img id='myImg' src='" + urlImage + "' usemap='#map1'>\n"
@@ -133,8 +133,8 @@ public class HtmlImageTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<img id='img1' src='foo.png'>\n"
             + "<img id='img2' name='testName' src='foo.png' alt='young'>\n"
             + "<img id='img3' src='foo.png' width='11' height='17px'>\n"
@@ -174,7 +174,8 @@ public class HtmlImageTest extends SimpleWebTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <img id='myImage' src='img.jpg' >\n"
@@ -206,7 +207,8 @@ public class HtmlImageTest extends SimpleWebTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <img id='myImage' src='4x7.jpg' >\n"
@@ -232,8 +234,8 @@ public class HtmlImageTest extends SimpleWebTestCase {
             FF = {"24", "24", "2"},
             FF_ESR = {"24", "24", "2"})
     public void retrieveImagePerDefault() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <img id='myImage' src='4x7.jpg' >\n"
@@ -255,8 +257,8 @@ public class HtmlImageTest extends SimpleWebTestCase {
     @Test
     @Alerts({"4x7.jpg", "§§URL§§4x7.jpg"})
     public void src() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <img id='myImage' src='4x7.jpg' >\n"
@@ -283,8 +285,8 @@ public class HtmlImageTest extends SimpleWebTestCase {
                     MimeType.IMAGE_GIF, Collections.emptyList());
         }
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) { window.document.title += msg + '-';}\n"
             + "  function clickImage(event) {\n"

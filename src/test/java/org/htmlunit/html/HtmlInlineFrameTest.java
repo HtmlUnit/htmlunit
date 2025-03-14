@@ -42,12 +42,12 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void setSrcAttribute() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = getWebClientWithMockWebConnection();
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -72,12 +72,12 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void setSrcAttributeWithWhiteSpaces() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='\n" + URL_SECOND + "\n'>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = getWebClientWithMockWebConnection();
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -105,7 +105,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void recursiveSrcAttribute() throws Exception {
-        final String html = "<html><body><iframe id='a' src='#abc'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><iframe id='a' src='#abc'></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlInlineFrame iframe = page.getHtmlElementById("a");
         assertNotNull(iframe.getEnclosedPage());
@@ -117,11 +117,12 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void recursiveNestedFrames() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head>\n"
             + "<body><iframe id='iframe2_1' src='" + URL_FIRST + "'></iframe></body></html>";
         final WebClient client = getWebClientWithMockWebConnection();
 
@@ -157,7 +158,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void invalidSrcAttribute() throws Exception {
-        final String html = "<html><body><iframe id='a' src='foo://bar'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><iframe id='a' src='foo://bar'></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlInlineFrame iframe = page.getHtmlElementById("a");
         assertNotNull(iframe.getEnclosedPage());
@@ -168,13 +169,13 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void setSrcAttribute_ViaJavaScript() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='" + URL_SECOND + "'></iframe>\n"
             + "<script type='text/javascript'>document.getElementById('iframe1').src = '" + URL_THIRD + "';\n"
             + "</script></body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = getWebClientWithMockWebConnection();
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -196,8 +197,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameCloneDoesNotReloadFrame() throws Exception {
-        final String html1 = "<html><body><iframe src='" + URL_SECOND + "'></iframe></body></html>";
-        final String html2 = "<html><body>abc</body></html>";
+        final String html1 = DOCTYPE_HTML + "<html><body><iframe src='" + URL_SECOND + "'></iframe></body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>abc</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
 
@@ -218,11 +219,11 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameWriteDoesNotReloadFrame() throws Exception {
-        final String html1 =
-              "<html><body>\n"
+        final String html1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>document.write('<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>')</script>\n"
             + "</body></html>";
-        final String html2 = "<html><body>iframe content</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>iframe content</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
 
@@ -247,8 +248,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameSetInnerHtmlDoesLoadFrame() throws Exception {
-        final String html1 =
-              "<html><body>\n"
+        final String html1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<iframe id='myFrame' src='" + URL_THIRD + "'></iframe>';\n"
             + "<span id='A'></span>\n"
             + "<script>\n"
@@ -256,8 +257,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "  document.getElementById('A').innerHTML = frame;\n"
             + "</script>\n"
             + "</body></html>";
-        final String html2 = "<html><body>iframe content</body></html>";
-        final String html3 = "<html><head></head><body>Third content</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>iframe content</body></html>";
+        final String html3 = DOCTYPE_HTML + "<html><head></head><body>Third content</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
 
@@ -289,8 +290,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameSetInnerHtmlDoesLoadFrameContentTimeout() throws Exception {
-        final String html1 =
-              "<html><body>\n"
+        final String html1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<iframe id='myFrame' src='" + URL_THIRD + "'></iframe>';\n"
             + "<span id='A'></span>\n"
             + "<script>\n"
@@ -301,8 +302,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "  setTimeout('createIframe()', 100);\n"
             + "</script>\n"
             + "</body></html>";
-        final String html2 = "<html><body>iframe content</body></html>";
-        final String html3 = "<html><head></head><body>Third content</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>iframe content</body></html>";
+        final String html3 = DOCTYPE_HTML + "<html><head></head><body>Third content</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
 
@@ -339,8 +340,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameContentCreationViaJavascript() throws Exception {
-        final String html =
-            "<html><head><title>frames</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>frames</title></head>\n"
             + "<body>\n"
             + "<iframe name='foo'></iframe>\n"
             + "<script type='text/javascript'>\n"
@@ -371,8 +372,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameContentCreationViaJavascriptUnicode() throws Exception {
-        final String html =
-            "<html><head><title>frames</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>frames</title></head>\n"
             + "<body>\n"
             + "<iframe name='foo'></iframe>\n"
             + "<script type='text/javascript'>\n"
@@ -403,8 +404,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameContentCreationViaJavascriptISO_8859_1() throws Exception {
-        final String html =
-            "<html><head><title>frames</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>frames</title></head>\n"
             + "<body>\n"
             + "<iframe name='foo'></iframe>\n"
             + "<script type='text/javascript'>\n"
@@ -436,8 +437,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameContentCreationViaJavascriptBeforeFrameResolved() throws Exception {
-        final String html =
-            "<html><head><title>frames</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>frames</title></head>\n"
             + "<body>\n"
             + "<iframe name='foo' src='" + URL_SECOND + "'></iframe>\n"
             + "<script type='text/javascript'>\n"
@@ -449,8 +450,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "<body>\n"
             + "</html>";
 
-        final String frameHtml =
-            "<html><head><title>inside frame</title></head>\n"
+        final String frameHtml = DOCTYPE_HTML
+            + "<html><head><title>inside frame</title></head>\n"
             + "<body>\n"
             + "<div id=\"myContent\">inside frame</div>\n"
             + "<body>\n"
@@ -475,11 +476,11 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "before<iframe id='iframe1' src='" + URL_SECOND + "'></iframe>after\n"
             + "</body></html>";
-        final String secondContent = "<html><head></head><body>Second content</body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head></head><body>Second content</body></html>";
         final WebClient client = getWebClientWithMockWebConnection();
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -496,7 +497,8 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void brokenIframe() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>"
                 + "1<div>2<iframe/>3</div>4"

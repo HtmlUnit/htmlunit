@@ -39,8 +39,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void test_click() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='checkbox' name='checkbox' id='testCheckbox' onclick='alert(\"checkbox\")'/>\n"
             + "  <label for='testCheckbox' id='testLabel' onclick='alert(\"label\")'>Check me</label>\n"
@@ -64,7 +64,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void triggerRadio() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "  <li>\n"
@@ -88,7 +89,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void triggerRadioComplexCase() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "  <li>\n"
@@ -116,7 +118,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void triggerCheckbox() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "  <li>\n"
@@ -140,7 +143,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void triggerCheckboxComplexCase() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "  <li>\n"

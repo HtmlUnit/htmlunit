@@ -51,8 +51,8 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
             FF = {"button.x#100", "button.y#200"},
             FF_ESR = {"button.x#100", "button.y#200"})
     public void click_WithPosition() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "<input type='image' name='aButton' value='foo'/>\n"
             + "<input type='image' name='button' value='foo'/>\n"
@@ -81,8 +81,8 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void noNameClick_WithPosition() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "<input type='image' value='foo'/>\n"
             + "</form></body></html>";
@@ -115,7 +115,8 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <input type='image' src='img.jpg' >\n"
@@ -135,8 +136,8 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"4x7.jpg", "§§URL§§4x7.jpg"})
     public void src() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <input type='image' id='myImage' src='4x7.jpg' >\n"

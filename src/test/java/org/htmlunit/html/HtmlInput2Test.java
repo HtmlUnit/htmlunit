@@ -44,8 +44,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"null", "TypeError", "handler", "null", "TypeError"})
     public void onchangeDirectCall() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function handler() { log('handler');}\n"
@@ -82,8 +82,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"function handler() {}", "null"})
     public void onchangeNull() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function handler() {}\n"
@@ -203,7 +203,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             tag = StringUtils.replaceOnce(tag, "onclick')", "onclick');return false;");
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + "  function log(x) {\n"
                 + "    document.getElementById('log_').value += x + '; ';\n"
@@ -240,8 +241,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("something")
     public void placeholder() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -262,8 +263,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("text")
     public void badInputType() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -284,8 +285,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined"})
     public void select() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

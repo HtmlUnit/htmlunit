@@ -40,8 +40,8 @@ public class HtmlLinkTest extends SimpleWebTestCase {
         getWebClientWithMockWebConnection().getOptions().setCssEnabled(false);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
 
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <link rel='stylesheet' href='simple.css' "
                         + "onload='alert(\"onLoad\")' onerror='alert(\"onError\")'>\n"
@@ -62,8 +62,8 @@ public class HtmlLinkTest extends SimpleWebTestCase {
         getWebClientWithMockWebConnection().getOptions().setCssEnabled(false);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
 
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + "    function test() {\n"

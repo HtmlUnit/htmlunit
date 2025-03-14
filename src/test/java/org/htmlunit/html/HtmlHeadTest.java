@@ -41,7 +41,8 @@ public class HtmlHeadTest extends WebDriverTestCase {
     @Test
     @Alerts("HEAD")
     public void addedWhenMissing() throws Exception {
-        final String htmlContent = "<html><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log(document.firstChild.firstChild.tagName);\n"
@@ -57,7 +58,8 @@ public class HtmlHeadTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLHeadElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head id='myId'><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head id='myId'><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('myId'));\n"

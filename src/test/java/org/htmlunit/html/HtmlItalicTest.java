@@ -32,8 +32,8 @@ public class HtmlItalicTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html
-            = "<html><body><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><title>foo</title>\n"
             + "<i class='fa fa-reorder'></i>\n"
             + "</body></html>";
 

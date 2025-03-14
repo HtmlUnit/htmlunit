@@ -44,12 +44,14 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void crossFrameJavascript() throws Exception {
-        final String firstHtml = "<html><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>function render() { window.bar.real_render(); }</script>\n"
             + "<iframe src='" + URL_SECOND + "' onload='render();' name='bar'></iframe>\n"
             + "</body></html>";
 
-        final String secondHtml = "<html><body>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>"
             + LOG_WINDOW_NAME_FUNCTION
             + "function real_render() { log(2); }</script>\n"
@@ -73,7 +75,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1")
     public void iframeOnloadCalledOnlyOnce() throws Exception {
-        final String firstHtml = "<html><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<iframe src='" + URL_SECOND + "' onload='window.top.name += \"1\\u00a7\"'></iframe>\n"
             + "</body></html>";
 
@@ -90,7 +93,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void iframeOnloadAboutBlank() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<iframe src='about:blank' onload='window.top.name += \"1\\u00a7\"'></iframe>\n"
             + "</body></html>";
 
@@ -114,12 +118,14 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "  <FRAME name='third' frameborder='0' src='third.html'>\n"
             + "</FRAMESET>";
 
-        final String secondHtml = "<html>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"top.document.title += ' second ' + window.parent.frames['third'].document.frm\">\n"
             + "  <h1>second</h1>\n"
             + "</body></html>";
 
-        final String thirdHtml = "<html>\n"
+        final String thirdHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"top.document.title += ' third ' + window.parent.frames['third'].document.frm\">\n"
             + "  <form name='frm' id='frm'>\n"
             + "    <input type='text' id='one' name='one' value='something'>\n"
@@ -145,12 +151,14 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "  <FRAME name='third' src='third.html'>\n"
             + "</FRAMESET>";
 
-        final String secondHtml = "<html>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"top.document.title += ' second'\">\n"
             + "  <h1>second</h1>\n"
             + "</body></html>";
 
-        final String thirdHtml = "<html>\n"
+        final String thirdHtml = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body onload=\"top.document.title += ' third'\">\n"
                 + "  <h1>third</h1>\n"
                 + "</body></html>";
@@ -175,7 +183,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "  <FRAME name='third' src='third.html'>\n"
             + "</FRAMESET>";
 
-        final String secondHtml = "<html>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"top.document.title += ' second'\">\n"
             + "  <h1>second</h1>\n"
             + "</body></html>";
@@ -184,7 +193,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
                 + "  <FRAME name='fourth' src='fourth.html'>\n"
                 + "</FRAMESET>";
 
-        final String fourthHtml = "<html>\n"
+        final String fourthHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"top.document.title += ' fourth'\">\n"
             + "  <h1>fourth</h1>\n"
             + "</body></html>";
@@ -207,7 +217,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("myInputName")
     public void iframeContentNotLoaded() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>FooBar</title></head>\n"
             + "<body>\n"
             + "<iframe id='myFrame' name='myFrame'></iframe>\n"
@@ -248,16 +259,18 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("foo")
     public void onloadInNavigatedFrame() throws Exception {
-        final String html = "<html><head><title>first</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frame src='frame1.html' id='frame1'>\n"
             + "</frameset></html>";
 
-        final String firstHtml = "<html><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<a id='a1' href='frame2.html'>hello</a>\n"
                 + "</body></html>";
 
-        final String secondHtml = "<html><body onload='alert(\"foo\")'></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><body onload='alert(\"foo\")'></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(new URL(URL_FIRST, "frame1.html"), firstHtml);
@@ -277,8 +290,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("loaded")
     public void lineBreaksInUrl() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body onload='alert(\"loaded\");'>Test</body>\n"
             + "</html>";
@@ -286,8 +299,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_SECOND, "abcd"), html);
         expandExpectedAlertsVariables(URL_SECOND);
 
-        final String frame
-            = "<html>\n"
+        final String frame = DOCTYPE_HTML
+            + "<html>\n"
             + "  <frameset cols='100%'>\n"
             + "    <frame src='" + URL_SECOND + "a\rb\nc\r\nd' id='myFrame'>\n"
             + "  </frameset></html>";
@@ -302,8 +315,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("loaded")
     public void lineBreaksInUrlIFrame() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body onload='alert(\"loaded\");'>Test</body>\n"
             + "</html>";
@@ -311,8 +324,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_SECOND, "abcd"), html);
         expandExpectedAlertsVariables(URL_SECOND);
 
-        final String frame
-            = "<html>\n"
+        final String frame = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <iframe src='" + URL_SECOND + "a\rb\nc\r\nd' id='myFrame'></iframe>\n"
             + "  </body>\n"

@@ -33,7 +33,8 @@ public class HtmlHeadingTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "begin"
             + "<h1>in h1</h1>after h1\n"

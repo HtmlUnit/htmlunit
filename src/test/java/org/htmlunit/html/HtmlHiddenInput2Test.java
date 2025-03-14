@@ -33,7 +33,8 @@ public class HtmlHiddenInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void isDisplayed() throws Exception {
-        final String html = "<html><head><title>Page A</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head><body>\n"
                 + "<form id='theForm'>\n"
                 + "  <input type='hidden' id='myHiddenInput' value='HiddenValue'/>\n"
                 + "</form>\n"

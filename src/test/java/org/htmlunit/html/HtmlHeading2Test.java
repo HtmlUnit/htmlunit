@@ -39,7 +39,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLHeadingElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -63,8 +64,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "center", "justify", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form>\n"
             + "  <h1 id='e1' align='left'>Header1</h1>\n"
             + "  <h2 id='e2' align='right'>Header2</h2>\n"
@@ -94,8 +95,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo"})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form>\n"
             + "  <h1 id='e1' align='left'>Header1</h1>\n"
             + "</form>\n"
@@ -128,8 +129,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
              "undefined", "left", "none", "right", "all", "2", "abc", "8"})
     public void clear() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<h1 id='h1'>h1</h1>\n"
             + "<h2 id='h2' clear='left'>h2</h2>\n"
             + "<h3 id='h3' clear='all'>h3</h3>\n"
