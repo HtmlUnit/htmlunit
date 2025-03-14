@@ -7637,8 +7637,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
+    @Alerts("undefined")
     public void svgDiscardElement() throws Exception {
         test("SVGDiscardElement");
     }

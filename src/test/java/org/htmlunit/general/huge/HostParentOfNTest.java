@@ -1165,19 +1165,6 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            EDGE = "false",
-            FF_ESR = "false")
-    public void _Node_SVGDiscardElement() throws Exception {
-        test("Node", "SVGDiscardElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Node_SVGElement() throws Exception {
         test("Node", "SVGElement");
